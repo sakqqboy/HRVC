@@ -103,6 +103,26 @@ class CompanyController extends Controller
 
 	public function actionIndex()
 	{
+		$role = UserRole::userRight();
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+		}
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
 		if (!isset($group) && !empty($group)) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
@@ -204,7 +224,8 @@ class CompanyController extends Controller
 			"groupId" => $groupId,
 			"countries" => $countries,
 			"numPage" => $numPage,
-			"countryId" => 0
+			"countryId" => 0,
+			"role" => $role
 		]);
 	}
 
@@ -214,6 +235,26 @@ class CompanyController extends Controller
 		$countryId = $param["countryId"];
 		$nextPage = $param["nextPage"];
 
+		$role = UserRole::userRight();
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+		}
 		// throw new exception(print_r($nextPage, true));
 
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
@@ -317,7 +358,8 @@ class CompanyController extends Controller
 			"groupId" => $groupId,
 			"countries" => $countries,
 			"numPage" => $numPage,
-			"countryId" => $countryId
+			"countryId" => $countryId,
+			"role" => $role
 		]);
 	}
 	

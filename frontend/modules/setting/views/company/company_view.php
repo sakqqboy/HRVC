@@ -105,13 +105,17 @@ $this->title = 'company profile';
                             <div class="col-lg-8 col-md-6 col-12 name-head0 mt-5">
                                 <!-- <i class="fa fa-map-marker location" aria-hidden="true"></i> <span
                             class="text-primary address-box">Shinjuku-ku, Tokyo</span> -->
+                                <?php if (!empty($company["directorId"]) && !empty($director)): ?>
                                 <a class="col-lg-7 col-md-6 col-12 name-director text-wrap"
                                     href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => $company["directorId"]]) ?>">
                                     <img src="<?= Yii::$app->homeUrl ?><?= $director["picture"] ?>"
                                         style="width: 20px; height: 20px;">
-                                    <span
-                                        class="d-inline-block ml-10"><?= $director["employeeFirstname"] .' '. $director["employeeSurename"] ?></span>
+                                    <span class="d-inline-block ml-10">
+                                        <?= $director["employeeFirstname"] . ' ' . $director["employeeSurename"] ?>
+                                    </span>
                                 </a>
+                                <?php endif; ?>
+
                             </div>
                             <div class="col-lg-2">
                             </div>
@@ -279,18 +283,19 @@ $this->title = 'company profile';
                                         <div class="row align-items-center">
                                             <div class="col-8">
                                                 <div class="circle-container-img">
-                                                    <div class="cycle-image mr-3">
-                                                        <img src="<?= Yii::$app->homeUrl ?><?php echo $employees[0]['picture'] ?>"
+                                                    <?php for ($i = 0; $i < 3; $i++): ?>
+                                                    <?php if (!empty($employees[$i]['picture'])): ?>
+                                                    <div class="cycle-image <?= $i == 2 ? 'mr-10' : 'mr-3' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl . $employees[$i]['picture'] ?>"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-image mr-3">
-                                                        <img src="<?= Yii::$app->homeUrl ?><?php echo $employees[1]['picture'] ?>"
+                                                    <?php else: ?>
+                                                    <div class="cycle-current-gray <?= $i == 2 ? 'mr-10' : 'mr-3' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/employees-black.svg"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-image mr-10">
-                                                        <img src="<?= Yii::$app->homeUrl ?><?php echo $employees[2]['picture'] ?>"
-                                                            alt="icon">
-                                                    </div>
+                                                    <?php endif; ?>
+                                                    <?php endfor; ?>
                                                     <div class="number-current"><?= $totalEmployee?>
                                                     </div>
                                                 </div>

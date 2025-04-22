@@ -275,18 +275,19 @@ $this->title = 'Group profile';
                                         <div class="row align-items-center">
                                             <div class="col-8">
                                                 <div class="circle-container-img">
-                                                    <div class="cycle-image mr-3">
-                                                        <img src="<?= Yii::$app->homeUrl ?><?php echo $employees[0]['picture'] ?>"
+                                                    <?php for ($i = 0; $i < 3; $i++): ?>
+                                                    <?php if (!empty($employees[$i]['picture'])): ?>
+                                                    <div class="cycle-image <?= $i == 2 ? 'mr-10' : 'mr-3' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl . $employees[$i]['picture'] ?>"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-image mr-3">
-                                                        <img src="<?= Yii::$app->homeUrl ?><?php echo $employees[1]['picture'] ?>"
+                                                    <?php else: ?>
+                                                    <div class="cycle-current-gray <?= $i == 2 ? 'mr-10' : 'mr-3' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/employees-black.svg"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-image mr-10">
-                                                        <img src="<?= Yii::$app->homeUrl ?><?php echo $employees[2]['picture'] ?>"
-                                                            alt="icon">
-                                                    </div>
+                                                    <?php endif; ?>
+                                                    <?php endfor; ?>
                                                     <div class="number-current"><?= $totalEmployees ?></div>
                                                 </div>
 
