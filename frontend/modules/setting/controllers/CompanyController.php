@@ -714,7 +714,17 @@ class CompanyController extends Controller
 		$totalTeam = 0;
 		$branch = Branch::find()->select('branchId')->where(["companyId" => $companyId, "status" => 1])->asArray()->all();
 
-		$employee = Employee::find()->select('employeeId')->where(["companyId" => $companyId])->all();
+		$employees = Employee::find()->where(["companyId" => $companyId])->all();
+		$filteredEmployees = array_filter($employees, function($employee) {
+            return !empty($employee['picture']);
+        });
+
+        // จัดเรียงผลลัพธ์ให้อยู่ในอาเรย์ที่มีแค่ 3 ตัวแรก
+        $filteredEmployees = array_values($filteredEmployees); // ใช้ array_values เพื่อรีเซ็ต index ของอาเรย์
+
+        // เลือกแค่ 3 ตัวแรก
+        $filteredEmployees = array_slice($filteredEmployees, 0, 3);
+		
 		if (isset($branch) && count($branch) > 0) {
 			foreach ($branch as $b) :
 				$departments = Department::find()->select('departmentId')->where(["branchId" => $b["branchId"], "status" => 1])->asArray()->all();
@@ -728,15 +738,16 @@ class CompanyController extends Controller
 			endforeach;
 		}
 		$totalBranch = count($branch);
-		$totalEmployee = count($employee);
+		$totalEmployee = count($employees);
 		return $this->render('company_view', [
 			"company" => $company,
 			"totalBranch" => $totalBranch,
-			"totalEmployee" => $totalEmployee,
 			"totalDepartment" => $totalDepartment,
+			"totalEmployee" => $totalEmployee,
 			"totalTeam" => $totalTeam,
 			"director" => $director,
-			"role" => $role 
+			"role" => $role,
+			"employees" => $filteredEmployees
 		]);
 	}
 	public function actionUpdateCompany($hash)

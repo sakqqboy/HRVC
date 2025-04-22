@@ -302,8 +302,8 @@ $this->title = 'Group profile';
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
 
             </div>
