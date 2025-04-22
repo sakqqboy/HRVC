@@ -83,7 +83,7 @@ class CompanyController extends Controller
 		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nextPage' => $nextPage]);
 	
 		if($page == 'grid') {
-			// return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-grid-filter/'. $url );
+			return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-grid-filter/'. $url );
 		}else if($page == 'list') {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/company/index-filter/'. $url );
 		}else{
@@ -110,12 +110,12 @@ class CompanyController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1' . '&limit=7');
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 		//throw new exception(print_r($companies, true));
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=1' . '&countryId=');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=1' . '&countryId=' . '&limit=7');
 		$numPage = curl_exec($api);
 		$numPage = json_decode($numPage, true);
 		// throw new exception(print_r($numPage, true));
@@ -223,12 +223,12 @@ class CompanyController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId . '&page=' . $nextPage);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId . '&page=' . $nextPage . '&limit=7');
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 		//throw new exception(print_r($companies, true));
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=' . $nextPage . '&countryId=' . $countryId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=' . $nextPage . '&countryId=' . $countryId . '&limit=7');
 		$numPage = curl_exec($api);
 		$numPage = json_decode($numPage, true);
 		// throw new exception(print_r($numPage, true));
@@ -342,8 +342,14 @@ class CompanyController extends Controller
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1' . '&limit=6');
 		$companies = curl_exec($api);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=1' . '&countryId=' . '&limit=6');
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+		// throw new exception(print_r($numPage, true));
+		// throw new exception(print_r($numPage, true));
 
 		if ($companies === false) {
 			throw new Exception('API Error: ' . curl_error($api));
@@ -424,7 +430,9 @@ class CompanyController extends Controller
 			"companies" => $data,
 			"role" => $role,
 			"groupId" => $groupId,
-			"countries" => $countries
+			"countries" => $countries,
+			"numPage" => $numPage,
+			"countryId" => 0
 		]);
 	}
 
@@ -435,6 +443,7 @@ class CompanyController extends Controller
 			// $countryId = Yii::$app->request->post('countryId');
 			$param = ModelMaster::decodeParams($hash);
 			$countryId = $param["countryId"];
+			$nextPage = $param["nextPage"];
 
 		// if (Yii::$app->request->isPost && Yii::$app->request->post('countryId') !== null) {
 		// 	$countryId = Yii::$app->request->post('countryId');
@@ -469,8 +478,13 @@ class CompanyController extends Controller
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId . '&page=' . $nextPage . '&limit=6');
 		$companies = curl_exec($api);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=' . $nextPage . '&countryId=' . $countryId. '&limit=6');
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+		// throw new exception(print_r($numPage, true));
 
 		if ($companies === false) {
 			throw new Exception('API Error: ' . curl_error($api));
@@ -551,7 +565,9 @@ class CompanyController extends Controller
 			"companies" => $data,
 			"role" => $role,
 			"groupId" => $groupId,
-			"countries" => $countries
+			"countries" => $countries,
+			"numPage" => $numPage,
+			"countryId" => $countryId
 		]);
 	}
 	

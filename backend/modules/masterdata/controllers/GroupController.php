@@ -32,10 +32,10 @@ class GroupController extends Controller
         $group = Group::find()->where(["groupId" => $id])->asArray()->one();
         return json_encode($group);
     }
-    public function actionCompanyGroup($id,$page)
+    public function actionCompanyGroup($id,$page,$limit)
     {
         // $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-        $limit = 7;
+        // $limit = 6;
         $offset = ($page - 1) * $limit;
         $company = [];
         $company = Company::find()
@@ -52,9 +52,16 @@ class GroupController extends Controller
         return json_encode($company);
     }
 
-    public function actionCompanyGroupFilter($id, $countryId, $page)
+    public function actionCompanyGroupFilter($id, $countryId, $page,$limit)
 {
-    $limit = 7;
+    // if($page == 'list'){
+    //     $limit = 7;
+    // }else{
+    //     $limit = 6;
+    // }
+
+    $limit = 6;
+
     $offset = ($page - 1) * $limit;
 
     $query = Company::find()
@@ -80,10 +87,16 @@ class GroupController extends Controller
 }
 
     
-    public function actionCompanyPage($id,$page,$countryId)
+    public function actionCompanyPage($id,$page,$countryId ,$limit)
     {
-        $limit = 7;
-    
+        // $limit = 6;
+
+        // if($page == 'list'){
+        //     $limit = 7;
+        // }else{
+        //     $limit = 6;
+        // }    
+        
         $query = Company::find()
             ->where(["company.groupId" => $id, "company.status" => 1]);
     

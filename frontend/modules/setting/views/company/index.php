@@ -234,8 +234,3 @@ $page = "list"
 
     </div>
 </div>
-
-
-<script>
-let sortDirection = {}; // เก็บทิศทางการ sort ของแต่ละคอลัมน์
-</script>

@@ -5,6 +5,7 @@ if (window.location.host == 'localhost') {
     $baseUrl = window.location.protocol + "//" + window.location.host + '/';
 }
 $url = $baseUrl;
+let sortDirection = {}; // เก็บทิศทางการ sort ของแต่ละคอลัมน์
 
 function deleteCompany(companyId) {
     if (confirm("Are you sure to delete this company?")) {
@@ -131,7 +132,9 @@ function filterCountryCompany(page) {
 
 
 function goToPageCompany(nextPage, page, countryId) {
-
+    // alert(page);
+    // alert(nextPage);
+    // alert(countryId);
     var url = $url + 'setting/company/encode-params-page';
     $.ajax({
         type: "POST",
@@ -152,6 +155,7 @@ function goToPageCompany(nextPage, page, countryId) {
     });
 }
 
+// window.sortDirection = {};
 
 function sortCompany(column) {
 
