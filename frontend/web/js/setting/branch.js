@@ -7,31 +7,40 @@ if (window.location.host == 'localhost') {
 $url = $baseUrl;
 $("#create-branch").click(function (e) {
     var url = $url + 'setting/branch/save-create-branch';
-    var branchName = $("#branchName").val();
-    var companyId = $("#company").val();
-    var description = $("#description").val();
-    if ($.trim(branchName) == '') {
-        alert("Branch name can not be null");
-    } else if (companyId == '') {
-        alert('Please select company');
-    } else {
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: url,
-            data: { branchName: branchName, companyId: companyId, description: description },
-            success: function (data) {
-                if (data.status) {
-                    $("#branchName").val('');
-                    $("#description").val('');
-                    $("#company-branch").prepend(data.newBranch);
-                } else {
-                    alert("Can't create duplicate branch name.");
-                }
 
-            }
-        });
-    }
+    const branchName = $.trim($("#branchName").val());
+    const companyId = $("#company").val();
+    const description = $("#description").val();
+
+    // if (!branchName) {
+    //     alert("Branch name cannot be empty.");
+    // } else if (!companyId) {
+    //     alert("Please select a company.");
+    // } else {
+    //     $.ajax({
+    //         type: "POST",
+    //         dataType: "json",
+    //         url: url,
+    //         data: {
+    //             branchName: branchName,
+    //             companyId: companyId,
+    //             description: description
+    //         },
+    //         success: function (data) {
+    //             if (data.status) {
+    //                 $("#branchName").val('');
+    //                 $("#description").val('');
+    //                 $("#company-branch").prepend(data.newBranch);
+    //             } else {
+    //                 alert("Cannot create a duplicate branch name.");
+    //             }
+    //         },
+    //         error: function (xhr, status, error) {
+    //             alert("An error occurred: " + error);
+    //         }
+    //     });
+    // }
+
 });
 
 

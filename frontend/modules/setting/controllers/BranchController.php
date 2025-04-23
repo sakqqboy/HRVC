@@ -14,6 +14,7 @@ use frontend\models\hrvc\Team;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 
 /**
  * Default controller for the `setting` module
@@ -81,7 +82,7 @@ class BranchController extends Controller
         }
         //  throw new Exception(print_r($companies, true));
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $group["groupId"]);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $group["groupId"] . '&page=1' . '&limit=0');
         $companyJson = curl_exec($api);
         $companyGroup = json_decode($companyJson, true);
 
@@ -178,7 +179,7 @@ class BranchController extends Controller
         }
         //  throw new Exception(print_r($companies, true));
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $group["groupId"]);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $group["groupId"]. '&page=1' . '&limit=0');
         $companyJson = curl_exec($api);
         $companyGroup = json_decode($companyJson, true);
 
@@ -222,6 +223,8 @@ class BranchController extends Controller
     }
     public function actionSaveCreateBranch()
     {
+        // throw new Exception('POST DATA: ' . print_r($_POST, true));
+
         $check = Branch::find()->where(["branchName" => $_POST["branchName"], "companyId" => $_POST["companyId"]])->one();
         if (isset($check) && !empty($check)) {
             $res["status"] = false;
@@ -235,31 +238,64 @@ class BranchController extends Controller
             $branch->createDateTime = new Expression('NOW()');
             $branch->updateDateTime = new Expression('NOW()');
             if ($branch->save(false)) {
-                $branchId = Yii::$app->db->lastInsertID + 543;
-                $api = curl_init();
-                curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-                curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $_POST["companyId"]);
-                $company = curl_exec($api);
-                $company = json_decode($company, true);
+                $branchId = Yii::$app->db->lastInsertID;
+                $branch = Branch::find()->where(["branchId" => $branchId])->one();
 
-                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $company["countryId"]);
-                $resultCountryDetail = curl_exec($api);
-                $companyCountry = json_decode($resultCountryDetail, true);
-                curl_close($api);
+                $fileImage = UploadedFile::getInstanceByName("image");
+                if (isset($fileImage) && !empty($fileImage)) {
+                    $path = Path::getHost() . 'images/branch/profile/';
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
+                    // $oldPathPicture = Path::getHost() . $oldImage;
+                    // if (file_exists($oldPathPicture)) {
+                    //     unlink($oldPathPicture);
+                    // }
+                    $file = $fileImage->name;
+                    $filenameArray = explode('.', $file);
+                    $countArrayFile = count($filenameArray);
+                    $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+                    $pathSave = $path . $fileName;
+                    $fileImage->saveAs($pathSave);
+                    $branch->branchImage = 'images/branch/profile/' . $fileName;
+                    $branch->save(false);
+                    // $group->picture = 'images/group/profile/' . $fileName;
+                }
+                
+                return $this->redirect(Yii::$app->homeUrl . 'setting/branch/index/' . ModelMaster::encodeParams(['companyId' => '']));
+                
+                // $branchId = Yii::$app->db->lastInsertID + 543;
+                // $api = curl_init();
+                // curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+                // curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+                // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $_POST["companyId"]);
+                // $company = curl_exec($api);
+                // $company = json_decode($company, true);
 
-                $newBranch = $this->renderAjax('new_branch', [
-                    "branchName" => $_POST["branchName"],
-                    "company" => $company,
-                    "description" => $_POST["description"],
-                    "country" => $companyCountry,
-                    "branchId" => $branchId
-                ]);
-                $res["status"] = true;
-                $res["newBranch"] = $newBranch;
+                // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $company["countryId"]);
+                // $resultCountryDetail = curl_exec($api);
+                // $companyCountry = json_decode($resultCountryDetail, true);
+                // curl_close($api);
+
+                // $group = Branch::find()->where(["branchId" => $_POST["branchId"]])->one();
+                // $oldBanner = $group->banner;
+                // $oldImage = $group->picture;
+
+                // $newBranch = $this->renderAjax('new_branch', [
+                //     "branchName" => $_POST["branchName"],
+                //     "company" => $company,
+                //     "description" => $_POST["description"],
+                //     "country" => $companyCountry,
+                //     "branchId" => $branchId
+                // ]);
+                // $res["status"] = true;
+                // $res["newBranch"] = $newBranch;
             }
         }
-        return json_encode($res);
+
+        // 
+
+        // return json_encode($res);
     }
     public function actionDeleteBranch()
     {

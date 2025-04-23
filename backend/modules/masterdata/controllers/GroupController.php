@@ -34,24 +34,37 @@ class GroupController extends Controller
     }
     public function actionCompanyGroup($id,$page,$limit)
     {
-        // $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-        // $limit = 6;
-        $offset = ($page - 1) * $limit;
-        $company = [];
+
+        // $offset = ($page - 1) * $limit;
+        // $company = [];
             
-        $company = Company::find()
+        // $company = Company::find()
+        //     ->select('company.companyName,company.companyId,company.city,c.countryName,
+        //     company.picture,company.headQuaterId,company.industries,g.groupName,c.flag,company.about')
+        //     ->JOIN("LEFT JOIN", "country c", "c.countryId=company.countryId")
+        //     ->JOIN("LEFT JOIN", "group g", "g.groupId=company.groupId")
+        //     ->where(["company.groupId" => $id, "company.status" => 1])
+        //     ->offset($offset)
+        //     ->limit($limit)
+        //     ->orderBy('company.companyName')
+        //     ->asArray()
+        //     ->all();
+
+        $offset = ($page - 1) * $limit;
+        $companyQuery = Company::find()
             ->select('company.companyName,company.companyId,company.city,c.countryName,
-            company.picture,company.headQuaterId,company.industries,g.groupName,c.flag,company.about')
-            ->JOIN("LEFT JOIN", "country c", "c.countryId=company.countryId")
-            ->JOIN("LEFT JOIN", "group g", "g.groupId=company.groupId")
+                company.picture,company.headQuaterId,company.industries,g.groupName,c.flag,company.about')
+            ->join("LEFT JOIN", "country c", "c.countryId=company.countryId")
+            ->join("LEFT JOIN", "`group` g", "g.groupId=company.groupId") // escape 'group' because it's a reserved word
             ->where(["company.groupId" => $id, "company.status" => 1])
-            ->offset($offset)
-            ->limit($limit)
-            ->orderBy('company.companyName')
-            ->asArray()
-            ->all();
-
-
+            ->orderBy('company.companyName');
+        
+        if ($limit > 0) {
+            $companyQuery->offset($offset)->limit($limit);
+        }
+        
+        $company = $companyQuery->asArray()->all();
+        
         return json_encode($company);
     }
 

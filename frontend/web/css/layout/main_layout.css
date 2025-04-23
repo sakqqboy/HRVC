@@ -133,6 +133,11 @@
     height: 25px;
 }
 
+.center-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .mid-center {
     display: flex;

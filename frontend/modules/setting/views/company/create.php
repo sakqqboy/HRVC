@@ -261,7 +261,8 @@ $this->title = 'New Company';
                         <div>
                             <div class="alert alert-secondary" role="alert"
                                 style="font-size: 14px; background-color: transparent; border: 0; ">
-                                <textarea style="height: 527px;" name="about" class="form-control"></textarea>
+                                <textarea style="height: 527px;" name="about"
+                                    placeholder="Write the description of the Company" class="form-control"></textarea>
 
                             </div>
                             <div class="col-12 text-end mt-10 pr-13">
