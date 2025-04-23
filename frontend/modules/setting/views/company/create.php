@@ -87,14 +87,15 @@ $this->title = 'New Company';
                                         <?= Yii::t('app', 'Registered Company Name') ?>
                                     </label>
                                     <input type="text" class="form-control mt-12" id="colFormLabel" name="companyName"
-                                        placeholder="Write the name of Group" required>
+                                        placeholder="<?= Yii::t('app', 'Write the name of Group') ?>" required>
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update" for="groupName">
                                         <?= Yii::t('app', 'Display Name/Brand Name') ?>
                                     </label>
                                     <input type="text" class="form-control mt-12" name="displayName"
-                                        placeholder="The name you want to show (example,. Google)" required>
+                                        placeholder="<?= Yii::t('app', 'The name you want to show (example,. Google)') ?>"
+                                        required>
                                 </div>
                                 <!-- <div class="form-group mb-30">
                                     <span class="text-danger">* </span><label class="name-text-update"
@@ -125,7 +126,8 @@ $this->title = 'New Company';
                                                 style="width: 20px; height: 20px;">
                                         </span>
                                         <input type="text" id="founded" name="founded"
-                                            class="form-control mt-12 text-center" placeholder="Select date" required
+                                            class="form-control mt-12 text-center"
+                                            placeholder="<?= Yii::t('app', 'Select date') ?>" required
                                             style="text-align: center;">
                                     </div>
                                 </div>
@@ -134,7 +136,7 @@ $this->title = 'New Company';
                                         <?= Yii::t('app', 'Industry') ?>
                                     </label>
                                     <input type="text" class="form-control mt-12" name="industries"
-                                        placeholder="Write the industry name" required>
+                                        placeholder="<?= Yii::t('app', 'Write the industry name') ?>" required>
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update"
@@ -179,8 +181,8 @@ $this->title = 'New Company';
                                         <?= Yii::t('app', 'Contact/Phone Number') ?>
                                     </label>
                                     <input type="text" class="form-control mt-12" name="phone"
-                                        placeholder="Write the phonenumber" required pattern="[0-9+\-]+"
-                                        title="กรุณากรอกเฉพาะตัวเลข, + และ -"
+                                        placeholder="<?= Yii::t('app', 'Write the phonenumber') ?>" required
+                                        pattern="[0-9+\-]+" title="กรุณากรอกเฉพาะตัวเลข, + และ -"
                                         oninput="this.value = this.value.replace(/[^0-9+\-]/g, '');">
                                 </div>
                                 <div class="form-group mb-30">
@@ -188,14 +190,15 @@ $this->title = 'New Company';
                                         <?= Yii::t('app', 'Company’s General Email') ?>
                                     </label>
                                     <input type="email" class="form-control mt-12" name="email"
-                                        placeholder="e.g., jp_paris_cs@tokyoconsultinggroup.com" required>
+                                        placeholder="<?= Yii::t('app', 'e.g., jp_paris_cs@tokyoconsultinggroup.com') ?>"
+                                        required>
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update">
                                         <?= Yii::t('app', 'Company’s Address') ?>
                                     </label>
                                     <input type="text" class="form-control mt-12" name="location"
-                                        placeholder="Please input the address here" required>
+                                        placeholder="<?= Yii::t('app', 'Please input the address here') ?>" required>
                                 </div>
 
                                 <div class="form-group mb-30">

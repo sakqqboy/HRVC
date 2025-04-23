@@ -118,7 +118,6 @@ $page = "grid"
                                             data-bs-toggle="dropdown" style="align-self: flex-start;">
                                             <img src="<?= Yii::$app->homeUrl ?>image/3-dot.svg" alt="icon"
                                                 style="cursor: pointer;">
-
                                         </span>
                                         <div class="menu-dot ">
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
@@ -144,16 +143,6 @@ $page = "grid"
                                                         <?= Yii::t('app', 'edit') ?>
                                                     </a>
                                                 </li>
-                                                <?php if($company['totalBranch'] == 0) { ?>
-                                                <!-- <li class="pl-4 pr-4">
-                                                    <a class="dropdown-itemNEW pl-4 pr-25"
-                                                        href="javascript:deleteCompany(<?= $company['companyId'] ?>)">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
-                                                            alt="Delete" class="pim-icon mr-10"
-                                                            style="margin-top: -2px;">
-                                                        Delete </a>
-                                                </li> -->
-                                                <?php } ?>
                                             </ul>
                                         </div>
                                     </div>

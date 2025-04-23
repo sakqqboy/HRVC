@@ -232,3 +232,18 @@
     /* สีไอคอนอ่อนๆ */
     vertical-align: middle;
 }
+
+.see-all-company {
+    color: var(--Primary-Blue---HRVC, #2580D3);
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 14.464px;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: auto;
+    text-underline-offset: 13.5%;
+    text-underline-position: from-font;
+}

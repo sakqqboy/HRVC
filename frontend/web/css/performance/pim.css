@@ -2463,6 +2463,9 @@ input:checked+.slider:before {
 		height: calc(100% / 0.80);
 	}
 
+	.site-erro {
+		margin-top: 50px;
+	}
 
 	.menu-dot {
 		transform: scale(0.90);
@@ -2517,6 +2520,10 @@ input:checked+.slider:before {
 
 	}
 
+	.site-erro {
+		margin-top: 50px;
+	}
+
 	.menu-dot {
 		transform: scale(0.90);
 		z-index: 1001;
@@ -2556,6 +2563,10 @@ input:checked+.slider:before {
 		width: calc(100% / 0.60);
 		height: calc(100% / 0.60);
 		margin-top: 30px;
+	}
+
+	.site-erro {
+		margin-top: 50px;
 	}
 
 	.menu-dot {
@@ -2618,6 +2629,10 @@ input:checked+.slider:before {
 		width: calc(100% / 0.50);
 		height: calc(100% / 0.50);
 		margin-top: 30px;
+	}
+
+	.site-erro {
+		margin-top: 50px;
 	}
 
 	.menu-dot {

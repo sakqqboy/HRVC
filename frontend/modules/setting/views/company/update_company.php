@@ -98,8 +98,8 @@ $this->title = 'New Company';
                                         <?= Yii::t('app', 'Registered Company Name') ?>
                                     </label>
                                     <input type="text" class="form-control mt-12" id="colFormLabel" name="companyName"
-                                        value="<?= $company['companyName'] ?>" placeholder="Write the name of Group"
-                                        required>
+                                        value="<?= $company['companyName'] ?>"
+                                        placeholder="<?= Yii::t('app', 'Write the name of Group') ?>" required>
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update" for="groupName">
@@ -107,26 +107,12 @@ $this->title = 'New Company';
                                     </label>
                                     <input type="text" class="form-control mt-12" name="displayName"
                                         value="<?= $company['displayName'] ?>"
-                                        placeholder="The name you want to show (example,. Google)" required>
+                                        placeholder="<?= Yii::t('app', 'The name you want to show (example,. Google)') ?>"
+                                        required>
                                 </div>
-                                <!-- <div class="form-group mb-30">
-                                    <span class="text-danger">* </span><label class="name-text-update"
-                                        for="tagLine">Slogan/Tagline</label>
-                                    <input type="text" class="form-control mt-12" name="tagLine"
-                                        placeholder="Write the Tagline of the group" required>
-                                </div> -->
+
                                 <div class="form-group mb-30">
-                                    <!-- <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="founded">Founded</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text mt-12"
-                                            style="background-color: #BEDAFF; border-right: none;">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/calendar-blue.svg" alt="Founded"
-                                                style="width: 20px; height: 20px;">
-                                        </span>
-                                        <input type="text" style="border-left: none;" class="form-control mt-12"
-                                            name="founded" placeholder="" required>
-                                    </div> -->
+
                                     <span class="text-danger">* </span>
                                     <label class="name-text-update"
                                         for="founded"><?= Yii::t('app', 'Founded') ?></label>
@@ -139,7 +125,8 @@ $this->title = 'New Company';
                                         </span>
                                         <input type="text" id="founded" name="founded"
                                             value="<?= $company['founded'] ?>" class="form-control mt-12 text-center"
-                                            placeholder="Select date" required style="text-align: center;">
+                                            placeholder="<?= Yii::t('app', 'Select date') ?>" required
+                                            style="text-align: center;">
                                     </div>
                                 </div>
                                 <div class="form-group mb-30">
@@ -147,8 +134,8 @@ $this->title = 'New Company';
                                         <?= Yii::t('app', 'Industry') ?>
                                     </label>
                                     <input type="text" class="form-control mt-12" name="industries"
-                                        value="<?= $company['industries'] ?>" placeholder="Write the industry name"
-                                        required>
+                                        value="<?= $company['industries'] ?>"
+                                        placeholder="<?= Yii::t('app', 'Write the industry name') ?>" required>
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update" for="director">
@@ -183,19 +170,14 @@ $this->title = 'New Company';
 
                             <!-- Right Column -->
                             <div class="col-md-6">
-                                <!-- <div class="form-group mb-30">
-                                    <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="email">Group
-                                        Email </label>
-                                    <input type="email" class="form-control mt-12" name="email"
-                                        placeholder="Write the email" required>
-                                </div> -->
+
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update" for="phone">
                                         <?= Yii::t('app', 'Contact/Phone Number') ?>
                                     </label>
                                     <input type="text" class="form-control mt-12" name="phone"
-                                        value="<?= $company['contact'] ?>" placeholder="Write the phonenumber" required
+                                        value="<?= $company['contact'] ?>"
+                                        placeholder="<?= Yii::t('app', 'Write the phonenumber') ?>" required
                                         pattern="[0-9+\-]+" title="กรุณากรอกเฉพาะตัวเลข, + และ -"
                                         oninput="this.value = this.value.replace(/[^0-9+\-]/g, '');">
                                 </div>
@@ -205,31 +187,30 @@ $this->title = 'New Company';
                                     </label>
                                     <input type="email" class="form-control mt-12" name="email"
                                         value="<?= $company['email'] ?>"
-                                        placeholder="e.g., jp_paris_cs@tokyoconsultinggroup.com" required>
+                                        placeholder="<?= Yii::t('app', 'e.g., jp_paris_cs@tokyoconsultinggroup.com') ?>"
+                                        required>
                                 </div>
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update">
                                         <?= Yii::t('app', 'Company’s Address') ?>
                                     </label>
                                     <input type="text" class="form-control mt-12" name="location"
-                                        value="<?= $company['location'] ?>" placeholder="Please input the address here"
-                                        required>
+                                        value="<?= $company['location'] ?>"
+                                        placeholder="<?= Yii::t('app', 'Please input the address here') ?>" required>
                                 </div>
 
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update">
                                         <?= Yii::t('app', 'Head of Company') ?>
                                     </label>
-                                    <!-- <input type="email" class="form-control mt-12" name="email"
-                                        placeholder="Select from employees" required> -->
+
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
                                             style="background-color: #ffff; border-right: none;">
                                             <img src="<?= Yii::$app->homeUrl ?>image/employee-black.svg" alt="Founded"
                                                 style="width: 20px; height: 20px;">
                                         </span>
-                                        <!-- <input type="text" class="form-select mt-12" placeholder="Select from employees"
-                                            readonly style="border-left: none; background-color: #C3C3C3; color: #000;"> -->
+
                                         <select class="form-select mt-12" style="border-left: none;" name="directorId"
                                             required>
                                             <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A);

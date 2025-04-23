@@ -69,13 +69,31 @@ class CompanyController extends Controller
 	}
 	public function actionCompanyBranch($id)
 	{
-		$branches = [];
+		// $branches = [];
+		// $branches = Branch::find()
+		// 	->select('branchId,branchName')
+		// 	->where(["companyId" => $id, "status" => 1])
+		// 	->orderBy('branchName')
+		// 	->asArray()
+		// 	->all();
+
 		$branches = Branch::find()
-			->select('branchId,branchName')
-			->where(["companyId" => $id, "status" => 1])
-			->orderBy('branchName')
-			->asArray()
-			->all();
+		->select([
+			'branch.*',
+			'co.countryName',
+			'c.companyName',
+			'c.picture',
+			'co.flag',
+			'c.city'
+		])
+		->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId')
+		->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
+		->where(['branch.companyId' => $id])
+		->orderBy(['c.companyName' => SORT_ASC])
+		->limit(6)
+		->asArray()
+		->all();
+
 		return json_encode($branches);
 	}
 }

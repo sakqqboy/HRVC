@@ -750,6 +750,13 @@ class CompanyController extends Controller
 		$groupJson = curl_exec($apiCompany);
 		$director = json_decode($groupJson, true);
 
+		// curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/group/company-branch?id=' . $companyId . '&page=1' . '&limit=7');
+		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId );
+        $companyJson = curl_exec($apiCompany);
+        $companyBranch = json_decode($companyJson, true);
+
+		// throw new Exception("companyBranch DATA: " . print_r($companyBranch, true));
+
 		curl_close($apiCompany);
 
 		$totalDepartment = 0;
@@ -789,7 +796,8 @@ class CompanyController extends Controller
 			"totalEmployee" => $totalEmployee,
 			"director" => $director,
 			"role" => $role,
-			"employees" => $filteredEmployees
+			"employees" => $filteredEmployees,
+			"companyBranch" => $companyBranch
 		]);
 	}
 	public function actionUpdateCompany($hash)

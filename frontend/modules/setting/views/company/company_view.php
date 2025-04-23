@@ -347,17 +347,105 @@ $this->title = 'company profile';
                 </div>
             </div>
 
-            <div class="col-3">
+            <div class="col-lg-3 col-md-4 col-12  home-tokyo">
                 <div class="row mt-40">
-                    <!--  -->
-                    <div class="col-12 Group-Information">
+                    <!-- <div class="col-12 Group-Information">
                         <img src="<?= Yii::$app->homeUrl ?>image/branch-icon-black.svg"
                             style="width: 14px; height: 14px; margin-bottom: 3px; margin-right: 5px; ">
                         Affiliated Branches
                         <hr class="hr-group">
+                    </div> -->
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-12"
+                            style="width: 15px; height: 15px; padding-right : 0px; padding-left: 0px; bottom: 5px; ">
+                            <img src="<?= Yii::$app->homeUrl ?>image/branch-icon-black.svg"
+                                style="width: 15px; height: 15px;">
+                        </div>
+                        <div class="col-lg-10 col-md-7 col-12 Affiliated0">
+                            <?= Yii::t('app', 'Affiliated Companies') ?>
+                        </div>
                     </div>
                     <div class="col-12 detail-tokyo  mt-10">
+                        <?php
+                        if (isset($companyBranch) && count($companyBranch) > 0) {
+                            $i = 0;
+                            foreach ($companyBranch as $branch) :
+                        ?>
 
+                        <div class="row <?= $i > 0 ? 'mt-10' : '' ?> ">
+                            <div class="col-lg-3 col-md-4 col-4">
+                                <?php
+									if ($branch['branchImage'] != "") {
+									?>
+                                <img src="<?= Yii::$app->homeUrl . $branch['branchImage'] ?>" class="width-TCF-BD"
+                                    style="border-radius: 100%;">
+                                <?php
+									} else {
+									?>
+                                <img src="<?= Yii::$app->homeUrl . $branch['picture'] ?>" class="width-TCF-BD"
+                                    style="border-radius: 100%;">
+                                <?php
+									}
+									?>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-7">
+                                <div class="tokyoconsultinggroup">
+                                    <?= $branch['branchName'] ?>
+                                </div>
+                                <div class="city-group">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/plus-red.svg"
+                                        style="width: 10.5px; height: 10.5px; ">
+                                    <?= $branch["city"] ?>
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-1 d-flex justify-content-center ">
+                                <a href="<?= Yii::$app->homeUrl . 'setting/branch/branch-view/' . ModelMaster::encodeParams([
+									'branchId' => $branch['branchId']
+								]) ?>" class="no-underline" style="color:black;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/btn-view.svg" alt="View Button">
+                                </a>
+
+                            </div>
+                            <div class="col-lg-1 col-md-1 col-1 d-flex justify-content-center ">
+
+                                <span class="dropdown" href="#" id="dropdownMenuLink-1" data-bs-toggle="dropdown"
+                                    style="align-self: flex-start;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/3-dot.svg" alt="icon"
+                                        style="cursor: pointer;">
+                                </span>
+                                <div class="menu-dot">
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
+                                        <!-- <li class="px-4">
+                                            <a href="" style="padding: 15px;"
+                                                class="dropdown-itemNEWS d-flex align-items-center justify-content-center text-center">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
+                                                    alt="History" class="pim-icon">
+                                                <?= Yii::t('app', 'View') ?>
+                                            </a>
+                                        </li> -->
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <?php
+						$i++;
+                        endforeach;
+                        }
+                        if (count($companyBranch) > 5) {
+                        ?>
+                        <div class="col-12 text-end">
+                            <a class="see-all-company"
+                                href="<?= Yii::$app->homeUrl ?>setting/branch/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>">
+                                <?= Yii::t('app', 'See All') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
+                                    style="cursor: pointer;">
+                                </span>
+                            </a>
+                        </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="col-12">
