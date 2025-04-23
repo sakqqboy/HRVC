@@ -19,7 +19,7 @@ $page = "list"
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
                     style="width: 24px; height: 24px;">
                 <div class="pim-name-title ml-10">
-                    Company
+                    <?= Yii::t('app', 'Company') ?>
                 </div>
                 <?php if($role >= 5 ) { ?>
                 <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
@@ -55,18 +55,30 @@ $page = "list"
             <table id="myTable" class="table align-middle table-spacing">
                 <thead class="table-light">
                     <tr class="table-border-weight">
-                        <th class="text-start" onclick="sortCompany('companyName')">Company Name <img
-                                src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;"></th>
-                        <th class="text-start" onclick="sortCompany('country')">Country <img
-                                src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;"></th>
-                        <th class="text-start" onclick="sortCompany('branch')">Branch <img
-                                src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;"></th>
-                        <th class="text-start" onclick="sortCompany('department')">Department <img
-                                src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;"></th>
-                        <th class="text-start" onclick="sortCompany('team')">Team <img
-                                src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;"></th>
-                        <th class="text-start" onclick="sortCompany('employee')">Employee <img
-                                src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;"></th>
+                        <th class="text-start" onclick="sortCompany('companyName')">
+                            <?= Yii::t('app', 'Company Name') ?>
+                            <img src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;">
+                        </th>
+                        <th class="text-start" onclick="sortCompany('country')">
+                            <?= Yii::t('app', 'Country') ?>
+                            <img src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;">
+                        </th>
+                        <th class="text-start" onclick="sortCompany('branch')">
+                            <?= Yii::t('app', 'Branch') ?>
+                            <img src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;">
+                        </th>
+                        <th class="text-start" onclick="sortCompany('department')">
+                            <?= Yii::t('app', 'Department') ?>
+                            <img src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;">
+                        </th>
+                        <th class="text-start" onclick="sortCompany('team')">
+                            <?= Yii::t('app', 'Team') ?>
+                            <img src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;">
+                        </th>
+                        <th class="text-start" onclick="sortCompany('employee')">
+                            <?= Yii::t('app', 'Employee') ?>
+                            <img src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;">
+                        </th>
                         <th></th>
                     </tr>
                 </thead>
@@ -78,7 +90,7 @@ $page = "list"
                         $i = 1;
                         foreach ($companies as $company) :
                             $maxLength = 200;
-                            $about = substr($company['about'], 0, $maxLength);
+                            $about = substr(Yii::t('app', $company['about']), 0, $maxLength);
                             $countrow++;
                     ?>
 
@@ -97,7 +109,7 @@ $page = "list"
                         </td>
                         <td>
                             <img src="<?= Yii::$app->homeUrl ?><?= $company['flag'] ?>" class="bangladresh-hrvc mr-10"">
-                            <?= $company['countryName'] ?>
+                            <?= Yii::t('app', $company['countryName']) ?>
                         </td>
                         <td>
                             <div class=" circle-container ml-15 ml-15">
@@ -207,7 +219,8 @@ $page = "list"
                                             class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -1px; ">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
                                                 alt="History" class="pim-icon mr-10" style="margin-top: -2px;">
-                                            edit </a>
+                                            <?= Yii::t('app', 'edit') ?>
+                                        </a>
                                     </li>
                                     <?php if($company['totalBranch'] == 0) { ?>
                                     <li class="pl-4 pr-4">
@@ -215,7 +228,8 @@ $page = "list"
                                             href="javascript:deleteCompany(<?= $company['companyId'] ?>)">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
                                                 alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
-                                            Delete </a>
+                                            <?= Yii::t('app', 'Delete') ?>
+                                        </a>
                                     </li>
                                     <?php } ?>
                                 </ul>

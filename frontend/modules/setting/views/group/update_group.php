@@ -182,8 +182,13 @@ $this->title = 'Update Group';
                                         placeholder="<?= Yii::t('app', 'Write the email') ?>" required>
                                 </div>
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="country"><?= Yii::t('app', 'Country in Operation') ?></label>
+                                    <span class="text-danger">* </span> <label class="name-text-update" for="country">
+                                        <?= Yii::t('app', 'Country in Operation') ?>
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                            data-toggle="tooltip" data-placement="top"
+                                            aria-label="<?= Yii::t('app', 'select to country') ?>"
+                                            data-bs-original-title="<?= Yii::t('app', 'select to country') ?>">
+                                    </label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
                                             style="background-color: white; border-right: none;">
@@ -392,5 +397,13 @@ flatpickr("#founded", {
             instance.altInput.value = formatted;
         }
     }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll(
+        '[data-toggle="tooltip"], [data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(function(tooltipTriggerEl) {
+        new bootstrap.Tooltip(tooltipTriggerEl);
+    });
 });
 </script>

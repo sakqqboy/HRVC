@@ -785,8 +785,8 @@ class CompanyController extends Controller
 			"company" => $company,
 			"totalBranch" => $totalBranch,
 			"totalDepartment" => $totalDepartment,
-			"totalEmployee" => $totalEmployee,
 			"totalTeam" => $totalTeam,
+			"totalEmployee" => $totalEmployee,
 			"director" => $director,
 			"role" => $role,
 			"employees" => $filteredEmployees

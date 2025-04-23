@@ -155,8 +155,13 @@ $this->title = 'Create Group';
                                         placeholder="<?= Yii::t('app', 'Write the email') ?>" required>
                                 </div>
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="director"><?= Yii::t('app', 'Country in Operation') ?></label>
+                                    <span class="text-danger">* </span> <label class="name-text-update" for="director">
+                                        <?= Yii::t('app', 'Country in Operation') ?>
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                            data-toggle="tooltip" data-placement="top"
+                                            aria-label="<?= Yii::t('app', 'select to country') ?>"
+                                            data-bs-original-title="<?= Yii::t('app', 'select to country') ?>">
+                                    </label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
                                             style="background-color: white; border-right: none;">
@@ -332,37 +337,11 @@ $this->title = 'Create Group';
 <?php ActiveForm::end(); ?>
 
 <script>
-// function getOrdinalSuffix(day) {
-//     if (day > 3 && day < 21) return 'th';
-//     switch (day % 10) {
-//         case 1:
-//             return 'st';
-//         case 2:
-//             return 'nd';
-//         case 3:
-//             return 'rd';
-//         default:
-//             return 'th';
-//     }
-// }
-
-// flatpickr("#founded", {
-//     dateFormat: "Y-m-d", // format ที่ส่งไป server
-//     altInput: true,
-//     altFormat: "F Y", // ชั่วคราว จะเปลี่ยนทีหลัง
-//     onChange: function(selectedDates, dateStr, instance) {
-//         if (selectedDates.length > 0) {
-//             const d = selectedDates[0];
-//             const day = d.getDate();
-//             const month = d.toLocaleString('default', {
-//                 month: 'long'
-//             });
-//             const year = d.getFullYear();
-//             const suffix = getOrdinalSuffix(day);
-
-//             const formatted = `${suffix} ${month} ${year}`;
-//             instance.altInput.value = formatted;
-//         }
-//     }
-// });
+document.addEventListener('DOMContentLoaded', function() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll(
+        '[data-toggle="tooltip"], [data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(function(tooltipTriggerEl) {
+        new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
 </script>

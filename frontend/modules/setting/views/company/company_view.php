@@ -223,7 +223,7 @@ $this->title = 'company profile';
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
-                                                    <div class="cycle-current-red">
+                                                    <!-- <div class="cycle-current-red">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
                                                             alt="icon">
                                                     </div>
@@ -234,8 +234,23 @@ $this->title = 'company profile';
                                                     <div class="cycle-current-red">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
                                                             alt="icon">
+                                                    </div> -->
+                                                    <div
+                                                        class="cycle-current-<?= $totalDepartment >= 1 ? 'red' : 'gray' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $totalDepartment >= 1 ? '' : '-black' ?>.svg"
+                                                            alt="icon">
                                                     </div>
-                                                    <div class="number-current"><?= $totalBranch?></div>
+                                                    <div
+                                                        class="cycle-current-<?= $totalDepartment >= 2 ? 'red' : 'gray' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $totalDepartment >= 2 ? '' : '-black' ?>.svg"
+                                                            alt="icon">
+                                                    </div>
+                                                    <div
+                                                        class="cycle-current-<?= $totalDepartment >= 3 ? 'red' : 'gray' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $totalDepartment >= 3 ? '' : '-black' ?>.svg"
+                                                            alt="icon">
+                                                    </div>
+                                                    <div class="number-current"><?= $totalDepartment?></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-4 text-right">
@@ -253,7 +268,7 @@ $this->title = 'company profile';
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
-                                                    <div class="cycle-current-green">
+                                                    <!-- <div class="cycle-current-green">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon"
                                                             style="margin-right: 1px;">
                                                     </div>
@@ -264,8 +279,23 @@ $this->title = 'company profile';
                                                     <div class="cycle-current-green">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon"
                                                             style="margin-right: 1px;">
+                                                    </div> -->
+                                                    <div
+                                                        class="cycle-current-<?= $totalTeam >= 1 ? 'green' : 'gray' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $totalTeam >= 1 ? '' : '-black' ?>.svg"
+                                                            alt="icon">
                                                     </div>
-                                                    <div class="number-current"><?= $totalDepartment?></div>
+                                                    <div
+                                                        class="cycle-current-<?= $totalTeam >= 2 ? 'green' : 'gray' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $totalTeam >= 2 ? '' : '-black' ?>.svg"
+                                                            alt="icon">
+                                                    </div>
+                                                    <div
+                                                        class="cycle-current-<?= $totalTeam >= 3 ? 'green' : 'gray' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $totalTeam >= 3 ? '' : '-black' ?>.svg"
+                                                            alt="icon">
+                                                    </div>
+                                                    <div class="number-current"><?= $totalTeam?></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-4 text-right">
