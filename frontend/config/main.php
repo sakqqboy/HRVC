@@ -95,6 +95,7 @@ return [
                 'setting/company/display_company/<hash>' => 'setting/company/display_company',
                 'setting/branch/index/<hash>' => 'setting/branch/index',
                 'setting/branch/create/<hash>' => 'setting/branch/create',
+                'setting/branch/branch-grid/<hash>' => 'setting/branch/branch-grid',
                 'setting/department/create/<hash>' => 'setting/department/create',
                 'setting/department/search-result/<hash>' => 'setting/department/search-result',
                 'setting/employee/employee-profile/<hash>' => 'setting/employee/employee-profile',

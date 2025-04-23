@@ -3,6 +3,7 @@
 namespace frontend\modules\setting\controllers;
 
 use common\helpers\Path;
+use common\models\hrvc\Company;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
@@ -11,6 +12,7 @@ use frontend\models\hrvc\DepartmentTitle;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Team;
+use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -45,6 +47,17 @@ class BranchController extends Controller
         if (!isset($group) && !empty($group)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
         }
+
+        $company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
+        if (!isset($company) && !empty($company)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-grid/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
+        }
+
+        $branch = Branch::find()->select('branchId')->where(["status" => 1])->asArray()->one();
+        if (isset($company) && !empty($company)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-grid/' . ModelMaster::encodeParams(["companyId" => $company["companyId"]]));
+        }
+        
         $company = [];
         $totalEmployees = 0;
         $totalDepartment = 0;
@@ -134,6 +147,40 @@ class BranchController extends Controller
             ]);
         }
     }
+
+    function actionBranchGrid($hash)
+    {
+        $param = ModelMaster::decodeParams($hash);
+        $companyId = $param["companyId"];
+
+        $role = UserRole::userRight();
+        if ($role == 7) {
+            $adminId = Yii::$app->user->id;
+        }
+        if ($role == 6) {
+            $gmId = Yii::$app->user->id;
+        }
+        if ($role == 5) {
+            $managerId = Yii::$app->user->id;
+        }
+        if ($role == 4) {
+            $supervisorId = Yii::$app->user->id;
+        }
+        if ($role == 3) {
+            $teamLeaderId = Yii::$app->user->id;
+        }
+        if ($role == 1 || $role == 2) {
+            $staffId = Yii::$app->user->id;
+            //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+        }
+        
+        return $this->render('branch_grid', [
+            "companyId" => $companyId,
+            "role" => $role
+        ]);
+    }
+
+
     public function actionCreate($hash)
     {
         $param = ModelMaster::decodeParams($hash);
