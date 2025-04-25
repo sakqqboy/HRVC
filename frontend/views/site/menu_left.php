@@ -67,7 +67,7 @@ $session = Yii::$app->session;
                 </a>
             </div>
             <div class="col-12 first-layer-manu">
-                <a href="<?= Yii::$app->homeUrl ?>setting/branch/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
+                <a href="<?= Yii::$app->homeUrl ?>setting/branch/no-branch/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
                     class="no-underline">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/branch.svg"
                         class="first-layer-icon" style="margin-top: -3px;">

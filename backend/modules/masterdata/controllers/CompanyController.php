@@ -90,10 +90,74 @@ class CompanyController extends Controller
 		->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
 		->where(['branch.companyId' => $id])
 		->orderBy(['c.companyName' => SORT_ASC])
-		->limit(6)
 		->asArray()
 		->all();
 
 		return json_encode($branches);
 	}
+
+	public function actionCompanyBranchFilter($id)
+	{
+		// $branches = [];
+		// $branches = Branch::find()
+		// 	->select('branchId,branchName')
+		// 	->where(["companyId" => $id, "status" => 1])
+		// 	->orderBy('branchName')
+		// 	->asArray()
+		// 	->all();
+
+		$branches = Branch::find()
+		->select([
+			'branch.*',
+			'co.countryName',
+			'c.companyName',
+			'c.picture',
+			'co.flag',
+			'c.city'
+		])
+		->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId')
+		->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
+		->where(['branch.companyId' => $id])
+		->orderBy(['c.companyName' => SORT_ASC])
+		->asArray()
+		->all();
+
+		return json_encode($branches);
+	}
+
+
+
+	// public function actionCompanyGroupFilter($id, $countryId, $page,$limit)
+	// {
+	// 	// if($page == 'list'){
+	// 	//     $limit = 7;
+	// 	// }else{
+	// 	//     $limit = 6;
+	// 	// }
+	
+	// 	// $limit = 6;
+	
+	// 	$offset = ($page - 1) * $limit;
+	
+	// 	$query = Company::find()
+	// 		->select('company.companyName, company.companyId, company.city, c.countryName,
+	// 				  company.picture, company.headQuaterId, company.industries, g.groupName, 
+	// 				  c.flag, company.about')
+	// 		->join("LEFT JOIN", "country c", "c.countryId = company.countryId")
+	// 		->join("LEFT JOIN", "`group` g", "g.groupId = company.groupId")
+	// 		->where(["company.groupId" => $id, "company.status" => 1]);
+	
+	// 	if (!empty($countryId)) {
+	// 		$query->andWhere(["company.countryId" => $countryId]);
+	// 	}
+	
+	// 	$company = $query
+	// 		->offset($offset)
+	// 		->limit($limit)
+	// 		->orderBy('company.companyName')
+	// 		->asArray()
+	// 		->all();
+	
+	// 	return json_encode($company);
+	// }
 }

@@ -2,26 +2,24 @@
 
 use common\models\ModelMaster;
 
-$this->title = 'company';
+$this->title = 'Branch';
 $page = "grid"
 // echo $countries;
 ?>
-
 <div class="contrainer-body mt-10">
 
     <div class="between-center mt-20" style="width: 100%;">
         <div class="col-9">
             <div class=" d-flex align-items-center gap-2">
-                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
-                    style="width: 24px; height: 24px;">
+                <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" style="width: 24px; height: 24px;">
                 <div class="pim-name-title ml-10">
-                    <?= Yii::t('app', 'Company') ?>
+                    <?= Yii::t('app', 'Branch') ?>
                 </div>
                 <?php if($role >= 5 ) { ?>
-                <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
+                <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
                     style="text-decoration: none;">
                     <button type="button" class="btn-create" style="padding: 3px 9px;"
-                        action="<?= Yii::$app->homeUrl ?>setting/group/create-group"><?= Yii::t('app', 'Create New') ?>
+                        action="<?= Yii::$app->homeUrl ?>setting/branch/create-branch"><?= Yii::t('app', 'Create New') ?>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
                             style="width:18px; height:18px; margin-top:-3px;">
                     </button>
@@ -37,7 +35,7 @@ $page = "grid"
                 <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg" style="cursor: pointer;">
                 </a>
-                <a href="<?= Yii::$app->homeUrl . 'setting/company/index' ?>"
+                <a href="<?= Yii::$app->homeUrl . 'setting/branch/index' ?>"
                     class="btn btn-outline-primary font-size-12 pim-change-modes">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg" style="cursor: pointer;">
                 </a>
@@ -49,64 +47,64 @@ $page = "grid"
         <div class="alert alert-branch-body" role="alert">
             <div class="row" id="company-branch">
                 <?php
-				if (isset($companies) && count($companies) > 0) {
+				if (isset($branches) && count($branches) > 0) {
 					$i = 1;
-					foreach ($companies as $company) :
+					foreach ($branches as $branch) :
 						$maxLength = 200;
-						$about = substr(Yii::t('app', $company['about']), 0, $maxLength);
+						// $about = substr(Yii::t('app', $branch['about']), 0, $maxLength);
 				?>
                 <div class="col-lg-6 col-md-5 col-sm-3 col-12">
-                    <div class="card-comany">
-                        <div class="card-body" style="background: #F9FBFF;  border-radius: 5px;">
-                            <div style="display: flex;
-                            height: 100%;
-                            flex-direction: column;
-                            justify-content: space-between;
-                            align-items: center;
-                            flex-shrink: 0;
-                            align-self: stretch;">
+                    <div class="card-comany" style="height: auto;">
+                        <div class="card-body" style=" background: #F9FBFF;  border-radius: 5px;">
+                            <div class="between-center"
+                                style="flex-direction: column;  gap: 20px;  align-self: stretch;">
                                 <!-- ส่วนบน -->
-                                <div class="between-center" style="
-                                        height: 60px;
-                                        gap: 17px;
-                                        width: 100%;">
+                                <div class="between-center" style=" gap: 17px; width: 100%;">
                                     <div style="display: flex; align-items: center; gap: 17px;">
                                         <div class="mid-center"
-                                            style="height: 60px; padding: 20.944px 4.189px; gap: 10.472px;">
+                                            style="height: 60px; padding: 20.944px 4.189px; gap: 10px;">
                                             <?php
-                                                    if ($company["picture"] != null) { ?>
-                                            <img src="<?= Yii::$app->homeUrl ?><?= $company['picture'] ?>"
+                                                    if ($branch["branchImage"] != null) { ?>
+                                            <img src="<?= Yii::$app->homeUrl ?><?= $branch['branchImage'] ?>"
                                                 class="card-tcf">
                                             <?php
                                                     } else { ?>
-                                            <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>"
-                                                class="card-tcf">
+                                            <img src="<?= Yii::$app->homeUrl . $branch['picture'] ?>" class="card-tcf">
                                             <?php
                                                     }
                                                 ?>
                                         </div>
                                         <div class="header-crad-company">
                                             <div class="name-crad-company">
-                                                <?= $company['companyName'] ?>
+                                                <?= $branch['branchName'] ?>
                                             </div>
                                             <div class="city-crad-company">
-                                                <img src="<?= Yii::$app->homeUrl ?><?= $company['flag'] ?>"
+                                                <img src="<?= Yii::$app->homeUrl ?><?= $branch['picture'] ?>"
                                                     class="bangladresh-hrvc">
-                                                <?= $company['city'] ?>, <?= Yii::t('app', $company['countryName']) ?>
+                                                <?= Yii::t('app', $branch['companyName']) ?>
+                                            </div>
+                                            <div class="city-crad-company">
+                                                <img src="<?= Yii::$app->homeUrl ?><?= $branch['flag'] ?>"
+                                                    class="bangladresh-hrvc">
+                                                <?= $branch['city'] ?>, <?= Yii::t('app', $branch['countryName']) ?>
                                             </div>
                                         </div>
                                     </div>
                                     <div style="margin-bottom: 30px;">
-                                        <?php if($company['totalBranch'] > 0) { ?>
+                                        <?php if($branch['totalDepartment'] > 0) { ?>
                                         <a href="
-                                        <?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                        <?= Yii::$app->homeUrl ?>setting/branch/branch-view/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>"
                                             class="btn btn-bg-white-xs mr-5" style="margin-top: 3px; ">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
                                                 alt="History" class="pim-icon" style="margin-top: -1px;">
                                         </a>
                                         <?php }else { ?>
+                                        <!-- <a href="javascript:deleteBranch(<?= $branch['branchId'] + 543 ?>)"
+                                            class="btn btn-sm btn-outline-danger font-size-12">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a> -->
                                         <a class="btn btn-bg-red-xs mr-5"
-                                            href="javascript:deleteCompany(<?= $company['companyId'] ?>)"
+                                            href="javascript:deleteBranch(<?= $branch['branchId'] + 543 ?>)"
                                             style="margin-top: 3px;"
                                             onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                             onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
@@ -121,9 +119,9 @@ $page = "grid"
                                         </span>
                                         <div class="menu-dot ">
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
-                                                <?php if($company['totalBranch'] == 0) { ?>
+                                                <?php if($branch['totalDepartment'] == 0) { ?>
                                                 <li class="pl-4 pr-4">
-                                                    <a href="<?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                                    <a href="<?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>"
                                                         class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                         style="margin-top: -3px;">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
@@ -134,7 +132,7 @@ $page = "grid"
                                                 </li>
                                                 <?php } ?>
                                                 <li class="pl-4 pr-4">
-                                                    <a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                                    <a href="javascript:updateBranch(<?= $branch['branchId'] + 543 ?>)"
                                                         class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                         style="margin-top: -1px; ">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
@@ -142,6 +140,10 @@ $page = "grid"
                                                             style="margin-top: -2px;">
                                                         <?= Yii::t('app', 'edit') ?>
                                                     </a>
+                                                    <!-- <a href="javascript:updateBranch(<?= $branch['branchId'] + 543 ?>)"
+                                            class="btn btn-sm btn-outline-secondary font-size-12 mr-5">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </a> -->
                                                 </li>
                                             </ul>
                                         </div>
@@ -149,74 +151,44 @@ $page = "grid"
                                 </div>
 
                                 <!-- ส่วนล่าง -->
-                                <?php if($company['totalBranch'] > 0) { ?>
+                                <?php
+                                // echo $branch['totalDepartment']; 
+                                if($branch['totalDepartment'] > 0) { 
+                                    ?>
                                 <div style="align-self: stretch; ">
                                     <span class="detailname-crad-company">
                                         <?= Yii::t('app', 'Quick Details') ?>
                                     </span>
                                     <div style=" margin-left: 20px; margin-top: 10px; ">
-
                                         <div
                                             style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; width: 100%;">
-                                            <div class="row align-items-center">
-                                                <div class="col-12 text-left">
-                                                    <div class="circle-container">
-                                                        <div
-                                                            class="cycle-current-<?= $company['totalBranch'] >= 1 ? 'yellow' : 'gray' ?>">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
-                                                                alt="icon">
-                                                        </div>
-                                                        <div
-                                                            class="cycle-current-<?= $company['totalBranch'] >= 2 ? 'yellow' : 'gray' ?>">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
-                                                                alt="icon">
-                                                        </div>
-                                                        <div
-                                                            class="cycle-current-<?= $company['totalBranch'] >= 3 ? 'yellow' : 'gray' ?>">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
-                                                                alt="icon">
-                                                        </div>
-                                                        <div class="number-current-cycle ">
-                                                            <?= $company['totalBranch'] ?></div>
-                                                        <div class="bodyname-company">
-                                                            <span class="bodyname-crad-company">
-                                                                <?= Yii::t('app', 'Branch') ?>
-                                                            </span>
-                                                            <a class="text-see-all"
-                                                                href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
-                                                                <?= Yii::t('app', 'see all') ?>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
 
                                             <div class="row align-items-center">
                                                 <div class="col-12 text-left">
                                                     <div class="circle-container">
                                                         <div
-                                                            class="cycle-current-<?= $company['totalDepartment'] >= 1 ? 'red' : 'gray' ?>">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $company['totalDepartment'] >= 1 ? '' : '-black' ?>.svg"
+                                                            class="cycle-current-<?= $branch['totalDepartment'] >= 1 ? 'red' : 'gray' ?>">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $branch['totalDepartment'] >= 1 ? '' : '-black' ?>.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div
-                                                            class="cycle-current-<?= $company['totalDepartment'] >= 2 ? 'red' : 'gray' ?>">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $company['totalDepartment'] >= 2 ? '' : '-black' ?>.svg"
+                                                            class="cycle-current-<?= $branch['totalDepartment'] >= 2 ? 'red' : 'gray' ?>">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $branch['totalDepartment'] >= 2 ? '' : '-black' ?>.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div
-                                                            class="cycle-current-<?= $company['totalDepartment'] >= 3 ? 'red' : 'gray' ?>">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $company['totalDepartment'] >= 3 ? '' : '-black' ?>.svg"
+                                                            class="cycle-current-<?= $branch['totalDepartment'] >= 3 ? 'red' : 'gray' ?>">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $branch['totalDepartment'] >= 3 ? '' : '-black' ?>.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div class="number-current-cycle ">
-                                                            <?= $company['totalDepartment'] ?>
+                                                            <?= $branch['totalDepartment'] ?>
                                                         </div>
                                                         <div class="bodyname-company">
                                                             <span class="bodyname-crad-company">
                                                                 <?= Yii::t('app', 'Departments') ?>
                                                             </span>
-                                                            <?php if($company['totalBranch'] == 0) { ?>
+                                                            <?php if($branch['totalDepartment'] == 0) { ?>
                                                             <button type="button" class="btn-disble-small"
                                                                 action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
@@ -224,9 +196,9 @@ $page = "grid"
                                                                 <?= Yii::t('app', 'Create') ?>
                                                             </button>
                                                             <?php } ?>
-                                                            <?php if($company['totalBranch'] > 0 && $company['totalDepartment'] == 0) { ?>
+                                                            <?php if($branch['totalDepartment'] > 0 && $branch['totalDepartment'] == 0) { ?>
                                                             <a
-                                                                href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
+                                                                href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>">
                                                                 style="text-decoration: none;">
                                                                 <button type="button" class="btn-create-small"
                                                                     action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
@@ -236,9 +208,9 @@ $page = "grid"
                                                                 </button>
                                                             </a>
                                                             <?php } ?>
-                                                            <?php if($company['totalDepartment'] > 0) { ?>
+                                                            <?php if($branch['totalDepartment'] > 0) { ?>
                                                             <a class="text-see-all"
-                                                                href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
+                                                                href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>">
                                                                 <?= Yii::t('app', 'see all') ?>
                                                             </a>
                                                             <?php } ?>
@@ -251,27 +223,27 @@ $page = "grid"
                                                 <div class="col-12 text-left">
                                                     <div class="circle-container">
                                                         <div
-                                                            class="cycle-current-<?= $company['totalTeam'] >= 1 ? 'green' : 'gray' ?>">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $company['totalTeam'] >= 1 ? '' : '-black' ?>.svg"
+                                                            class="cycle-current-<?= $branch['totalTeam'] >= 1 ? 'green' : 'gray' ?>">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $branch['totalTeam'] >= 1 ? '' : '-black' ?>.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div
-                                                            class="cycle-current-<?= $company['totalTeam'] >= 2 ? 'green' : 'gray' ?>">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $company['totalTeam'] >= 2 ? '' : '-black' ?>.svg"
+                                                            class="cycle-current-<?= $branch['totalTeam'] >= 2 ? 'green' : 'gray' ?>">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $branch['totalTeam'] >= 2 ? '' : '-black' ?>.svg"
                                                                 alt="icon">
                                                         </div>
                                                         <div
-                                                            class="cycle-current-<?= $company['totalTeam'] >= 3 ? 'green' : 'gray' ?>">
-                                                            <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $company['totalTeam'] >= 3 ? '' : '-black' ?>.svg"
+                                                            class="cycle-current-<?= $branch['totalTeam'] >= 3 ? 'green' : 'gray' ?>">
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $branch['totalTeam'] >= 3 ? '' : '-black' ?>.svg"
                                                                 alt="icon">
                                                         </div>
-                                                        <div class="number-current-cycle "><?= $company['totalTeam'] ?>
+                                                        <div class="number-current-cycle "><?= $branch['totalTeam'] ?>
                                                         </div>
                                                         <div class="bodyname-company">
                                                             <span class="bodyname-crad-company">
                                                                 <?= Yii::t('app', 'Teams') ?>
                                                             </span>
-                                                            <?php if($company['totalDepartment'] == 0) { ?>
+                                                            <?php if($branch['totalDepartment'] == 0) { ?>
                                                             <button type="button" class="btn-disble-small"
                                                                 action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
@@ -279,8 +251,8 @@ $page = "grid"
                                                                 <?= Yii::t('app', 'Create') ?>
                                                             </button>
                                                             <?php } ?>
-                                                            <?php if($company['totalDepartment'] > 0 && $company['totalTeam'] == 0) { ?>
-                                                            <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                                            <?php if($branch['totalDepartment'] > 0 && $branch['totalTeam'] == 0) { ?>
+                                                            <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>"
                                                                 style="text-decoration: none;">
                                                                 <button type="button" class="btn-create-small"
                                                                     action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
@@ -290,9 +262,9 @@ $page = "grid"
                                                                 </button>
                                                             </a>
                                                             <?php } ?>
-                                                            <?php if($company['totalTeam'] > 0) { ?>
+                                                            <?php if($branch['totalTeam'] > 0) { ?>
                                                             <a class="text-see-all"
-                                                                href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
+                                                                href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>">
                                                                 <?= Yii::t('app', 'see all') ?>
                                                             </a>
                                                             <?php } ?>
@@ -305,9 +277,9 @@ $page = "grid"
                                             <div class="row align-items-center">
                                                 <div class="col-12 text-left">
                                                     <div class="circle-container">
-                                                        <?php if($company['totalEmployee'] >= 1) { ?>
+                                                        <?php if(count($branch['employees']) >= 1) { ?>
                                                         <div class="cycle-image mr-3">
-                                                            <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][0]['picture'] ?>"
+                                                            <img src="<?= Yii::$app->homeUrl ?><?php echo $branch['employees'][0]['picture'] ?>"
                                                                 alt="icon">
                                                         </div>
                                                         <?php }else{ ?>
@@ -316,9 +288,9 @@ $page = "grid"
                                                                 alt="icon">
                                                         </div>
                                                         <?php } ?>
-                                                        <?php if($company['totalEmployee'] >= 2) { ?>
+                                                        <?php if(count($branch['employees']) >= 2) { ?>
                                                         <div class="cycle-image mr-3">
-                                                            <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][1]['picture'] ?>"
+                                                            <img src="<?= Yii::$app->homeUrl ?><?php echo $branch['employees'][1]['picture'] ?>"
                                                                 alt="icon">
                                                         </div>
                                                         <?php }else{ ?>
@@ -327,9 +299,9 @@ $page = "grid"
                                                                 alt="icon">
                                                         </div>
                                                         <?php } ?>
-                                                        <?php if($company['totalEmployee'] >= 3) { ?>
+                                                        <?php if(count($branch['employees']) >= 3) { ?>
                                                         <div class="cycle-image mr-3">
-                                                            <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][2]['picture'] ?>"
+                                                            <img src="<?= Yii::$app->homeUrl ?><?php echo $branch['employees'][2]['picture'] ?>"
                                                                 alt="icon">
                                                         </div>
                                                         <?php }else{ ?>
@@ -339,13 +311,13 @@ $page = "grid"
                                                         </div>
                                                         <?php } ?>
                                                         <div class="number-current-cycle ">
-                                                            <?= $company['totalEmployee'] ?>
+                                                            <?= $branch['totalEmployee'] ?>
                                                         </div>
                                                         <div class="bodyname-company">
                                                             <span class="bodyname-crad-company">
                                                                 <?= Yii::t('app', 'Employees') ?>
                                                             </span>
-                                                            <?php if($company['totalTeam'] == 0) { ?>
+                                                            <?php if($branch['totalTeam'] == 0) { ?>
                                                             <button type="button" class="btn-disble-small"
                                                                 action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
@@ -353,8 +325,8 @@ $page = "grid"
                                                                 <?= Yii::t('app', 'Create') ?>
                                                             </button>
                                                             <?php } ?>
-                                                            <?php if($company['totalTeam'] > 0 && $company['totalEmployee'] == 0) { ?>
-                                                            <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                                            <?php if($branch['totalTeam'] > 0 && $branch['totalEmployee'] == 0) { ?>
+                                                            <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>"
                                                                 style="text-decoration: none;"></a>
                                                             <button type="button" class="btn-create-small"
                                                                 action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
@@ -364,9 +336,9 @@ $page = "grid"
                                                             </button>
                                                             </a>
                                                             <?php } ?>
-                                                            <?php if($company['totalEmployee'] > 0) { ?>
+                                                            <?php if($branch['totalEmployee'] > 0) { ?>
                                                             <a class="text-see-all" style="font-size: 10.5px; "
-                                                                href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
+                                                                href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>">
                                                                 <?= Yii::t('app', 'see all') ?>
                                                             </a>
                                                             <?php } ?>
@@ -380,13 +352,13 @@ $page = "grid"
                                 <?php } else{ ?>
                                 <div class="create-crad-company ">
                                     <span class="text-create-crad">
-                                        <?= Yii::t('app', 'No associated branch, department, team, or employee found!') ?>
+                                        <?= Yii::t('app', 'No associated department, team, or employee found!') ?>
                                     </span>
-                                    <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId'], 'companyId' => $branch['companyId']]) ?>"
                                         style="text-decoration: none;">
                                         <button type="button" class="btn-create" style="padding: 3px 9px;"
-                                            action="<?= Yii::$app->homeUrl ?>setting/group/create-group"><?= Yii::t('app', 'Create Branch') ?>
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
+                                            action="<?= Yii::$app->homeUrl ?>setting/group/create-group"><?= Yii::t('app', 'Create Department') ?>
+                                            <img src="<?= Yii::$app->homeUrl ?>image/arrow-top-r.svg"
                                                 style="width:18px; height:18px; margin-top:-3px;">
                                         </button>
                                     </a>

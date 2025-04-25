@@ -401,7 +401,6 @@ class CompanyController extends Controller
 		$numPage = curl_exec($api);
 		$numPage = json_decode($numPage, true);
 		// throw new exception(print_r($numPage, true));
-		// throw new exception(print_r($numPage, true));
 
 		if ($companies === false) {
 			throw new Exception('API Error: ' . curl_error($api));
@@ -413,38 +412,29 @@ class CompanyController extends Controller
 
 		$companies = json_decode($companies, true);
 		curl_close($api);
-				// throw new Exception(print_r($companies, true)); // Debug: ดูข้อมูลทั้งหมด
+		// throw new Exception(print_r($companies, true)); // Debug: ดูข้อมูลทั้งหมด
 
 		$data = [];
 		if (!empty($companies)) {
 			foreach ($companies as $company) :
 				$companyId = $company['companyId'];
-
 				$employees = Employee::find()
 				->where(["companyId" => $companyId])
 				->asArray()
 				->all();
-
-				// throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
-
 				// กรองเฉพาะที่มี picture
 				$filteredEmployees = array_filter($employees, function($employee) {
 					return !empty($employee['picture']);
 				});
-
 				// รีเซ็ต index และเลือกแค่ 3 คนแรก
 				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+				$totalEmployee = Employee::find()->where(["companyId" => $companyId, "status" => 1])->count();
 
-				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
-
-
+				//นับจำนวน
 				$branchIds = Branch::find()->select('branchId')
 					->where(["companyId" => $companyId, "status" => 1])
 					->asArray()->column();  // คืนค่าเป็น array แทน all()
-
 				$totalBranch = count($branchIds);
-				$totalEmployee = Employee::find()->where(["companyId" => $companyId, "status" => 1])->count();
-
 				$departments = [];
 				$teams = [];
 				if (!empty($branchIds)) {
@@ -461,6 +451,7 @@ class CompanyController extends Controller
 					}
 				}
 
+				//เก็บค่า
 				$data[] = [
 					"about" => $company['about'],
 					"picture" => $company["picture"],
@@ -469,9 +460,9 @@ class CompanyController extends Controller
 					"city" => $company['city'],
 					"countryName" => $company['countryName'],
 					"companyId" => $company['companyId'],
+					"totalBranch" => $totalBranch,
 					"totalDepartment" => count($departments),
 					"totalTeam" => count($teams),
-					"totalBranch" => $totalBranch,
 					"totalEmployee" => $totalEmployee,
 					"employees" => $filteredEmployees
 				];

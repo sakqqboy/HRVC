@@ -3,47 +3,121 @@
 use common\models\ModelMaster;
 
 $this->title = 'Branch';
-$page = "list"
-// echo $countries;
 ?>
-<div class="contrainer-body mt-10">
+<div class="col-12 branch-one mt-50">
+    <div class="row all-row">
+        <div class="d-flex align-items-center gap-2">
+            <img src="<?= Yii::$app->homeUrl ?>image/branch-icon-black.svg" style="width: 24px; height: 24px;">
+            <div class="col-12 branch-title pt-5">
+                Branch
+            </div>
+        </div>
 
-    <div class="between-center mt-20" style="width: 100%;">
-        <div class="col-9">
-            <div class=" d-flex align-items-center gap-2">
-                <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" style="width: 24px; height: 24px;">
-                <div class="pim-name-title ml-10">
-                    <?= Yii::t('app', 'Branch') ?>
-                </div>
-                <?php if($role >= 5 ) { ?>
-                <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
-                    style="text-decoration: none;">
-                    <button type="button" class="btn-create" style="padding: 3px 9px;"
-                        action="<?= Yii::$app->homeUrl ?>setting/branch/create-branch"><?= Yii::t('app', 'Create New') ?>
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
-                            style="width:18px; height:18px; margin-top:-3px;">
-                    </button>
-                </a>
-                <?php }?>
+        <!-- <div class="col-lg-1 col-md-3 col-2 text-end pt-10">
+            <button type="button" class="btn btn-outline-primary"> <i class="fa fa-filter"
+                    aria-hidden="true"></i></button>
+        </div>
+        <div class="col-lg-3 col-md-3 col-7 bt-togg pt-10">
+            <div class="input-group">
+                <select id="filter-branch" class="form-control font-size-18 text-black-50"
+                    onchange="javascript:filterBranchCompany()">
+                    <?php
+			if (isset($company['companyName']) && $company['companyName'] != '') {
+			?>
+                    <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+                    <?php
+			}
+			?>
+                    <option value="">Filter by Company</option>
+                    <?php
+			if (isset($companies) && count($companies) > 0) {
+				foreach ($companies as $com) : ?>
+                    <option value="<?= $com['companyId'] ?>"><?= $com['companyName'] ?></option>
+                    <?php
+				endforeach;
+			}
+			?>
+                </select>
             </div>
-        </div>
-        <div class="col-2" style="text-align: right;">
-            <?= $this->render('filter_list', ['countries' => $countries,'page' => $page,'countryIdOld' => $countryId]) ?>
-        </div>
-        <div class="col-1 pr-0 text-end">
-            <div class="btn-group" role="group">
-                <a href="<?= Yii::$app->homeUrl . 'setting/branch/branch-grid' ?>"
-                    class="btn btn-outline-primary font-size-12 pim-change-modes">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg" style="cursor: pointer;">
-                </a>
-                <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg" style="cursor: pointer;">
-                </a>
-            </div>
-        </div>
+        </div> -->
     </div>
-
     <div class="col-12 mt-30">
+        <div class="alert alert-secondary-branch" role="alert">
+            <div class="head-filter-branch">
+                <div class="text-quick-register">
+                    <img src="<?= Yii::$app->homeUrl ?>image/icon-quick-registe.svg" style="height: 28px;">
+                    Quick Register
+                </div>
+
+                <input type="hidden" id="branchId" value="">
+                <button class="btn-create-branch" id="create-branch">
+                    Create <img src="<?= Yii::$app->homeUrl ?>image/create-plus.svg" style="width: 18px; height: 18px;">
+                </button>
+                <a class="btn btn-sm btn-warning" id="update-branch" style="display:none;">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn-sm btn-danger" id="reset-branch" style="display:none;">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="body-filter-branch">
+                <div class="col-lg-3 col-md-6">
+                    <div style="display: flex;
+							width: 399px;
+							flex-direction: column;
+							align-items: flex-start;
+							gap: 14px;">
+                        <label class="form-label font-size-12 font-b"> <span class="text-danger">* </span>Company
+                        </label>
+                        <div class="col-12 font-b">
+                            <?php
+							if (isset($companyId) && $companyId != '') {
+							?>
+                            <input type="hidden" id="company" value="<?= $company['companyId'] ?>">
+                            <?= $company['companyName'] ?>
+                            <?php
+							} else { ?>
+                            <select class="form-select" id="company">
+                                <option value="">Select Company</option>
+                                <?php
+									if (isset($companies) && count($companies) > 0) {
+										foreach ($companies as $c) : ?>
+                                <option value="<?= $c['companyId'] ?>"><?= $c['companyName'] ?></option>
+                                <?php
+										endforeach;
+									}
+									?>
+
+                            </select>
+                            <?php
+							}
+							?>
+                        </div>
+
+                    </div>
+                </div>
+                <div style="display: flex;
+							width: 309px;
+							flex-direction: column;
+							align-items: flex-start;
+							gap: 14px;">
+                    <label for="exampleFormControlInput1" class="form-label font-size-12 font-b">
+                        <span class="text-danger">* </span>
+                        Select Country</label>
+                    <input type="text" class="form-control" id="branchName">
+                </div>
+                <div style="display: flex;
+							width: 734px;
+							flex-direction: column;
+							align-items: flex-start;
+							gap: 12px;">
+                    <label for="exampleFormControlInput1" class="form-label font-size-12 font-b">
+                        <span class="text-danger">* </span>
+                        Branch Name</label>
+                    <input type="text" class="form-control" id="description" placeholder="Write the name of the branch">
+                </div>
+            </div>
+        </div>
         <div class="alert alert-branch-body" role="alert">
             <div class="row" id="company-branch">
                 <?php

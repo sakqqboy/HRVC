@@ -34,9 +34,6 @@ class GroupController extends Controller
     }
     public function actionCompanyGroup($id,$page,$limit)
     {
-
-        // $offset = ($page - 1) * $limit;
-        // $company = [];
             
         // $company = Company::find()
         //     ->select('company.companyName,company.companyId,company.city,c.countryName,
@@ -70,13 +67,6 @@ class GroupController extends Controller
 
     public function actionCompanyGroupFilter($id, $countryId, $page,$limit)
 {
-    // if($page == 'list'){
-    //     $limit = 7;
-    // }else{
-    //     $limit = 6;
-    // }
-
-    // $limit = 6;
 
     $offset = ($page - 1) * $limit;
 

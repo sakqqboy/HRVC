@@ -224,6 +224,14 @@ $page = "list"
                                     </li>
                                     <?php if($company['totalBranch'] == 0) { ?>
                                     <li class="pl-4 pr-4">
+                                        <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                            class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -1px; ">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                                alt="History" class="pim-icon mr-10" style="margin-top: -2px;">
+                                            <?= Yii::t('app', 'Create') ?>
+                                        </a>
+                                    </li>
+                                    <li class="pl-4 pr-4">
                                         <a class="dropdown-itemNEW pl-4 pr-25"
                                             href="javascript:deleteCompany(<?= $company['companyId'] ?>)">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"

@@ -183,7 +183,7 @@ $page = "grid"
                                                                 <?= Yii::t('app', 'Branch') ?>
                                                             </span>
                                                             <a class="text-see-all"
-                                                                href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
+                                                                href="<?= Yii::$app->homeUrl ?>setting/branch/no-branch/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
                                                                 <?= Yii::t('app', 'see all') ?>
                                                             </a>
                                                         </div>
@@ -225,8 +225,7 @@ $page = "grid"
                                                             </button>
                                                             <?php } ?>
                                                             <?php if($company['totalBranch'] > 0 && $company['totalDepartment'] == 0) { ?>
-                                                            <a
-                                                                href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
+                                                            <a href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
                                                                 style="text-decoration: none;">
                                                                 <button type="button" class="btn-create-small"
                                                                     action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
@@ -292,7 +291,7 @@ $page = "grid"
                                                             <?php } ?>
                                                             <?php if($company['totalTeam'] > 0) { ?>
                                                             <a class="text-see-all"
-                                                                href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
+                                                                href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
                                                                 <?= Yii::t('app', 'see all') ?>
                                                             </a>
                                                             <?php } ?>
@@ -305,7 +304,7 @@ $page = "grid"
                                             <div class="row align-items-center">
                                                 <div class="col-12 text-left">
                                                     <div class="circle-container">
-                                                        <?php if($company['totalEmployee'] >= 1) { ?>
+                                                        <?php if(count($company['employees']) >= 1) { ?>
                                                         <div class="cycle-image mr-3">
                                                             <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][0]['picture'] ?>"
                                                                 alt="icon">
@@ -316,7 +315,7 @@ $page = "grid"
                                                                 alt="icon">
                                                         </div>
                                                         <?php } ?>
-                                                        <?php if($company['totalEmployee'] >= 2) { ?>
+                                                        <?php if(count($company['employees']) >= 2) { ?>
                                                         <div class="cycle-image mr-3">
                                                             <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][1]['picture'] ?>"
                                                                 alt="icon">
@@ -327,7 +326,7 @@ $page = "grid"
                                                                 alt="icon">
                                                         </div>
                                                         <?php } ?>
-                                                        <?php if($company['totalEmployee'] >= 3) { ?>
+                                                        <?php if(count($company['employees']) >= 3) { ?>
                                                         <div class="cycle-image mr-3">
                                                             <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][2]['picture'] ?>"
                                                                 alt="icon">
@@ -366,7 +365,7 @@ $page = "grid"
                                                             <?php } ?>
                                                             <?php if($company['totalEmployee'] > 0) { ?>
                                                             <a class="text-see-all" style="font-size: 10.5px; "
-                                                                href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
+                                                                href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
                                                                 <?= Yii::t('app', 'see all') ?>
                                                             </a>
                                                             <?php } ?>
@@ -382,7 +381,7 @@ $page = "grid"
                                     <span class="text-create-crad">
                                         <?= Yii::t('app', 'No associated branch, department, team, or employee found!') ?>
                                     </span>
-                                    <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
                                         style="text-decoration: none;">
                                         <button type="button" class="btn-create" style="padding: 3px 9px;"
                                             action="<?= Yii::$app->homeUrl ?>setting/group/create-group"><?= Yii::t('app', 'Create Branch') ?>

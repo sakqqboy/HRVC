@@ -43,6 +43,30 @@ $("#create-branch").click(function (e) {
 
 });
 
+function filterCountryBranch(page) {
+    // console.log("Page:", page); // Add this line to check the value of `page`
+
+    const countryId = document.getElementById('countrySelect').value;
+    var url = $url + 'setting/branch/encode-params-country';
+    // alert(page);
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: {
+            countryId: countryId,
+            page: page
+        },
+        success: function (data) {
+            // window.location.href = "company-grid-filter/" + data.url;
+            alert(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX request failed: " + error);
+        }
+    });
+}
+
 
 function deleteBranch(branchId) {
     if (confirm("Are you sure to delete this branch")) {
