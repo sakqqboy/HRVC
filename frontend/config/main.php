@@ -100,6 +100,7 @@ return [
                 'setting/branch/create/<hash>' => 'setting/branch/create',
                 'setting/branch/update-branch/<hash>' => 'setting/branch/update-branch',
                 'setting/branch/no-branch/<hash>' => 'setting/branch/no-branch',
+                'setting/branch/branch-view/<hash>' => 'setting/branch/branch-view',
                 'setting/department/create/<hash>' => 'setting/department/create',
                 'setting/department/search-result/<hash>' => 'setting/department/search-result',
                 'setting/employee/employee-profile/<hash>' => 'setting/employee/employee-profile',

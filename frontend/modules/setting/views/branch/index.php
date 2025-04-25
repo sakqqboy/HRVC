@@ -173,7 +173,7 @@ $page = "list"
         </td>
         <td class="text-center">
             <a href="
-                <?= Yii::$app->homeUrl ?>setting/branch/branch-view/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>"
+                <?= Yii::$app->homeUrl ?>setting/branch/branch-view/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
                 class="mr-10" style="margin-top: 5px; ">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History" class="pim-icon"
                     style="margin-top: -1px;">

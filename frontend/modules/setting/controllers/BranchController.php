@@ -809,6 +809,53 @@ class BranchController extends Controller
 
         // return json_encode($res);
     }
+
+    public function actionBranchView($hash){
+
+        $param = ModelMaster::decodeParams($hash);
+
+        // throw new Exception('POST DATA: ' . print_r($param, true));
+
+        $branchId = $param["branchId"];
+
+        // $branchId = $_POST["branchId"] - 543;
+        // $branch = Branch::find()->where(["branchId" => $branchId])->asArray()->one();
+        // $res["branchId"] = $branch["branchId"];
+        // $res["branchName"] = $branch["branchName"];
+        // $res["description"] = $branch["description"];
+        // $res["companyId"] = $branch["companyId"];
+        // throw new Exception("branch: " . print_r($branchId, true));
+
+        $api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
+		$resultCountry = curl_exec($api);
+		$countries = json_decode($resultCountry, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' .  $branchId );
+		$branch = curl_exec($api);
+		$branch = json_decode($branch, true);
+        // throw new Exception("branch: " . print_r($branch, true));
+
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $branch["companyId"]);
+        $company = curl_exec($api);
+        $company = json_decode($company, true);
+
+		curl_close($api);
+		 
+		// throw new Exception("branch: " . print_r($branch, true));
+
+		return $this->render('branch_view', [
+            "company" => $company,
+			"countries" => $countries,
+            "branches" => $branch
+		]);
+        
+    }
     
     public function actionDeleteBranch()
     {

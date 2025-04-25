@@ -93,7 +93,7 @@ $page = "grid"
                                     <div style="margin-bottom: 30px;">
                                         <?php if($branch['totalDepartment'] > 0) { ?>
                                         <a href="
-                                        <?= Yii::$app->homeUrl ?>setting/branch/branch-view/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>"
+                                        <?= Yii::$app->homeUrl ?>setting/branch/branch-view/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
                                             class="btn btn-bg-white-xs mr-5" style="margin-top: 3px; ">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
                                                 alt="History" class="pim-icon" style="margin-top: -1px;">
@@ -121,7 +121,7 @@ $page = "grid"
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
                                                 <?php if($branch['totalDepartment'] == 0) { ?>
                                                 <li class="pl-4 pr-4">
-                                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/branch-view/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>"
+                                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/branch-view/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
                                                         class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                         style="margin-top: -3px;">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
