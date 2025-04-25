@@ -43,6 +43,30 @@ $("#create-branch").click(function (e) {
 
 });
 
+function goToPageBranch(nextPage, page, countryId) {
+    // alert(page);
+    // alert(nextPage);
+    // alert(countryId);
+    var url = $url + 'setting/branch/encode-params-page';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: {
+            countryId: countryId,
+            page: page,
+            nextPage: nextPage
+        },
+        success: function (data) {
+            // window.location.href = "company-grid-filter/" + data.url;
+            alert(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX request failed: " + error);
+        }
+    });
+}
+
 function filterCountryBranch(page) {
     // console.log("Page:", page); // Add this line to check the value of `page`
 
@@ -69,6 +93,7 @@ function filterCountryBranch(page) {
 
 
 function deleteBranch(branchId) {
+    // alert(branchId);
     if (confirm("Are you sure to delete this branch")) {
         var url = $url + 'setting/branch/delete-branch';
         $.ajax({
@@ -78,7 +103,8 @@ function deleteBranch(branchId) {
             data: { branchId: branchId },
             success: function (data) {
                 if (data.status) {
-                    $("#branch-" + branchId).hide(200);
+                    $("#branch-" + (branchId - 543)).css("display", "none");
+                    // $("#branch-" + branchId).hide(200);
                 } else {
                     alert("Can not delete this branch.");
                 }

@@ -55,7 +55,7 @@ $page = "grid"
 						$maxLength = 200;
 						$about = substr(Yii::t('app', $company['about']), 0, $maxLength);
 				?>
-                <div class="col-lg-6 col-md-5 col-sm-3 col-12">
+                <div class="col-lg-6 col-md-5 col-sm-3 col-12" id="company-<?php echo $company['companyId'] ?>">
                     <div class="card-comany">
                         <div class="card-body" style="background: #F9FBFF;  border-radius: 5px;">
                             <div style="display: flex;

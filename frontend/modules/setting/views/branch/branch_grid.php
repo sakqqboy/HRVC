@@ -53,7 +53,7 @@ $page = "grid"
 						$maxLength = 200;
 						// $about = substr(Yii::t('app', $branch['about']), 0, $maxLength);
 				?>
-                <div class="col-lg-6 col-md-5 col-sm-3 col-12">
+                <div class="col-lg-6 col-md-5 col-sm-3 col-12" id="branch-<?php echo $branch['branchId'] ?>">
                     <div class="card-comany" style="height: auto;">
                         <div class="card-body" style=" background: #F9FBFF;  border-radius: 5px;">
                             <div class="between-center"
@@ -121,7 +121,7 @@ $page = "grid"
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
                                                 <?php if($branch['totalDepartment'] == 0) { ?>
                                                 <li class="pl-4 pr-4">
-                                                    <a href="<?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>"
+                                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/branch-view/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>"
                                                         class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                         style="margin-top: -3px;">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
@@ -132,7 +132,7 @@ $page = "grid"
                                                 </li>
                                                 <?php } ?>
                                                 <li class="pl-4 pr-4">
-                                                    <a href="javascript:updateBranch(<?= $branch['branchId'] + 543 ?>)"
+                                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId'] + 543]) ?>"
                                                         class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                         style="margin-top: -1px; ">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
@@ -141,9 +141,9 @@ $page = "grid"
                                                         <?= Yii::t('app', 'edit') ?>
                                                     </a>
                                                     <!-- <a href="javascript:updateBranch(<?= $branch['branchId'] + 543 ?>)"
-                                            class="btn btn-sm btn-outline-secondary font-size-12 mr-5">
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        </a> -->
+                                                        class="btn btn-sm btn-outline-secondary font-size-12 mr-5">
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    </a> -->
                                                 </li>
                                             </ul>
                                         </div>
@@ -155,7 +155,7 @@ $page = "grid"
                                 // echo $branch['totalDepartment']; 
                                 if($branch['totalDepartment'] > 0) { 
                                     ?>
-                                <div style="align-self: stretch; ">
+                                <div style="align-self: stretch;  height: 147px ">
                                     <span class="detailname-crad-company">
                                         <?= Yii::t('app', 'Quick Details') ?>
                                     </span>

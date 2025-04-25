@@ -37,16 +37,37 @@ class BranchController extends Controller
 		return json_encode($branch);
 	}
 	
-	public function actionActiveBranch()
+	public function actionActiveBranch($page,$limit)
 	{
 		$branch = [];
-		$branch = Branch::find()
-			->select('branch.*,co.countryName,c.companyName,c.picture,co.flag,c.city')
-			->JOIN("LEFT JOIN", "company c", "branch.companyId=c.companyId")
-			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
-			->where(["branch.status" => 1])
-			->orderBy('c.companyName')
-			->asArray()->all();
+		// $branch = Branch::find()
+		// 	->select('branch.*,co.countryName,c.companyName,c.picture,co.flag,c.city')
+		// 	->JOIN("LEFT JOIN", "company c", "branch.companyId=c.companyId")
+		// 	->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
+		// 	->where(["branch.status" => 1])
+		// 	->orderBy('c.companyName')
+		// 	->asArray()->all();
+
+			$offset = ($page - 1) * $limit;
+
+			$branch = [];
+			
+			$query = Branch::find()
+				->select('branch.*, co.countryName, c.companyName, c.picture, co.flag, c.city')
+				->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId')
+				->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
+				->where(['branch.status' => 1]);
+	
+			if ($limit > 0) {
+				$query ->offset($offset)
+				->limit($limit);
+			}
+	
+			$branch = $query
+				->orderBy('c.companyName')
+				->asArray()
+				->all();
+
 		return json_encode($branch);
 	}
 
@@ -92,10 +113,13 @@ class BranchController extends Controller
     {
         
         $query = Branch::find()
-            ->where(["branch.status" => 1]);
-    
+			->select('branch.*, co.countryName, c.companyName, c.picture, co.flag, c.city')
+			->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId')
+			->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
+			->where(['branch.status' => 1]);
+
         if ($countryId != 0) {
-            $query->andWhere(["branch.countryId" => $countryId]);
+            $query->andWhere(["c.countryId" => $countryId]);
         }
     
         $totalRows = $query->count(); // นับหลังจากใส่เงื่อนไขทั้งหมดแล้ว
