@@ -11,7 +11,7 @@ $this->title = 'company profile';
         <div class=" d-flex align-items-center gap-2">
             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" style="width: 24px; height: 24px;">
             <div class="pim-name-title ml-10">
-                Company in Details
+                Branch in Details
             </div>
         </div>
     </div>
@@ -35,11 +35,11 @@ $this->title = 'company profile';
                 <div class="mid-center" style="width: 20px; height: 20px;">
                     <text class="squeezer-text mr-3"> / </text>
                 </div>
-                <span class="pim-unit-text"> //</span>
+                <span class="pim-unit-text"><?= $branches['branchName'] ?></span>
             </div>
         </div>
 
-        <div class="row group-details mt-10">
+        <div class="row group-details mt-40">
             <div style="display: flex;
                     align-items: center;
                     gap: 29px;
@@ -51,6 +51,27 @@ $this->title = 'company profile';
                     <?php } else { ?>
                     <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="cycle-big-image">
                     <?php } ?>
+                </div>
+                <div class="column">
+                    <span class="font-size-20" style="font-weight: 600;">
+                        <?= $branches['branchName'] ?>
+                    </span>
+                    <div class="column">
+                        <span class="font-size-16 text-gray-back"
+                            style="font-weight: 500; display: flex; align-items: center; gap: 12px;">
+                            Associated Company
+                            <div class="city-crad-company">
+                                <?= $company['companyName'] ?>
+                            </div>
+                        </span>
+                        <span class=" font-size-16 text-gray-back"
+                            style="font-weight: 500; display: flex; align-items: center; gap: 12px;">
+                            Located in
+                            <div class="city-crad-company">
+                                <?= $company['city'] ?>
+                            </div>
+                        </span>
+                    </div>
                 </div>
             </div>
 

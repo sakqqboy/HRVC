@@ -9,7 +9,7 @@
         onclick="goToPageCompany(<?= $numPage['nowPage'] - 1 ?>, '<?php echo $page ?>', <?php echo $countryId; ?>)">
         <img src="<?= Yii::$app->homeUrl ?>image/btn-previous<?= ($numPage['nowPage'] == 1 ? '-disable' : '') ?>.svg"
             style="width: 4.958px; height: 8.5px; vertical-align: middle;">
-        <span style="margin-left: 5px;">Previous</span>
+        <span style="margin-left: 5px;"><?= Yii::t('app', 'Previous') ?></span>
     </button>
     <!-- Page Numbers -->
     <a href="javascript:void(0);" onclick="goToPageCompany(1, '<?php echo $page ?>', <?php echo $countryId; ?>)"
@@ -128,7 +128,7 @@
         onclick="goToPageCompany(<?php echo $numPage['nowPage'] + 1 ?>, '<?php echo $page ?>', <?php echo $countryId; ?>)"
         style="text-decoration: none; ">
         <!-- <button class="btn-next"> -->
-        <span style="margin-right: 5px;">Next</span>
+        <span style="margin-right: 5px;"><?= Yii::t('app', 'Next') ?></span>
         <img src="<?= Yii::$app->homeUrl ?>image/btn-next<?= ($numPage['nowPage'] == $numPage['totalPages'] ? '-disable' : '') ?>.svg"
             style="width: 4.958px; height: 8.5px; vertical-align: middle;">
     </button>

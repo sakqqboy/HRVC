@@ -11,7 +11,7 @@ $this->title = 'company profile';
         <div class=" d-flex align-items-center gap-2">
             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" style="width: 24px; height: 24px;">
             <div class="pim-name-title ml-10">
-                Company in Details
+                <?= Yii::t('app', 'Company in Details') ?>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@ $this->title = 'company profile';
                 style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg"
                     style="width:18px; height:18px; margin-top:-3px;">
-                Back
+                <?= Yii::t('app', 'Back') ?>
             </a>
 
             <div style="display: flex; align-items: center;">
@@ -81,7 +81,7 @@ $this->title = 'company profile';
                 <a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
                     class="btn-update-group" style="width: 60%;">
                     <img src="<?= Yii::$app->homeUrl ?>image/refresh-white.svg">
-                    Update Information
+                    <?= Yii::t('app', 'Update Information') ?>
                 </a>
                 <?php } ?>
             </div>
@@ -93,14 +93,14 @@ $this->title = 'company profile';
                     <!-- Left Column -->
                     <div class="col-lg-6 col-md-6 col-12 in-for">
                         <div class="col-12 Group-Information">
-                            Company Details
+                            <?= Yii::t('app', 'Company Details') ?>
                             <hr class="hr-group">
                         </div>
                         <div class="row mt-20">
                             <div class="col-lg-2">
                             </div>
                             <div class="col-lg-2 col-md-6 col-12 name-head">
-                                Head of Company
+                                <?= Yii::t('app', 'Head of Company') ?>
                             </div>
                             <div class="col-lg-8 col-md-6 col-12 name-head0 mt-5">
                                 <!-- <i class="fa fa-map-marker location" aria-hidden="true"></i> <span
@@ -120,7 +120,7 @@ $this->title = 'company profile';
                             <div class="col-lg-2">
                             </div>
                             <div class="col-lg-2 col-md-6 col-12 name-head mt-10">
-                                Headquarter Address
+                                <?= Yii::t('app', 'Headquarter Address') ?>
                             </div>
                             <div
                                 class="col-lg-8 col-md-6 col-12 name-head0 mt-5 d-flex justify-content-center align-items-center">
@@ -137,7 +137,7 @@ $this->title = 'company profile';
                             <div class="col-lg-2">
                             </div>
                             <div class="col-lg-2 col-md-6 col-12 name-head mt-10">
-                                Founded
+                                <?= Yii::t('app', 'Founded') ?>
                             </div>
                             <div class="col-lg-8 col-md-6 col-12 name-head0 mt-7">
                                 <?= $company["founded"] ?>
@@ -145,21 +145,21 @@ $this->title = 'company profile';
                             <div class="col-lg-2">
                             </div>
                             <div class="col-lg-2 col-md-6 col-12 name-head mt-10">
-                                Industry
+                                <?= Yii::t('app', 'Industry') ?>
                             </div>
                             <div class="col-lg-8 col-md-6 col-12 name-head0 mt-7">
                                 <?= $company["industries"] ?>
                             </div>
                         </div>
                         <div class="col-12 Group-Information mt-36">
-                            Contact Information
+                            <?= Yii::t('app', 'Contact Information') ?>
                             <hr class="hr-group">
                         </div>
                         <div class="row mt-30">
                             <div class="col-lg-2">
                             </div>
                             <div class="col-lg-2 col-md-6 col-12 name-head mt-3">
-                                Email
+                                <?= Yii::t('app', 'Email') ?>
                             </div>
                             <div class="col-lg-8 col-md-6 col-12 name-head0 d-flex align-items-center">
                                 <span class="address-box0 pr-5"
@@ -173,7 +173,7 @@ $this->title = 'company profile';
                             <div class="col-lg-2">
                             </div>
                             <div class="col-lg-2 col-md-6 col-12  name-head mt-10">
-                                Phone
+                                <?= Yii::t('app', 'Phone') ?>
                             </div>
                             <div class="col-lg-8 col-md-6 col-12 name-head0 mt-7 d-flex align-items-center">
                                 <span class="address-box0  pr-5">
@@ -186,7 +186,7 @@ $this->title = 'company profile';
                             <div class="col-lg-2">
                             </div>
                             <div class="col-lg-2 col-md-6 col-12  name-head mt-10">
-                                Website
+                                <?= Yii::t('app', 'Website') ?>
                             </div>
                             <div class="col-lg-8 col-md-6 col-12 name-head0 mt-7">
                                 <span class="address-box0 pr-5"
@@ -198,7 +198,7 @@ $this->title = 'company profile';
                     </div>
                     <div class="col-lg-6 col-md-6 col-12 in-for">
                         <div class="col-12 Group-Information">
-                            Company Description
+                            <?= Yii::t('app', 'Company Description') ?>
                             <hr class="hr-group">
                         </div>
                         <div class="col-12 detail-tokyo mt-10">
@@ -223,18 +223,6 @@ $this->title = 'company profile';
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
-                                                    <!-- <div class="cycle-current-red">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
-                                                            alt="icon">
-                                                    </div>
-                                                    <div class="cycle-current-red">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
-                                                            alt="icon">
-                                                    </div>
-                                                    <div class="cycle-current-red">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
-                                                            alt="icon">
-                                                    </div> -->
                                                     <div
                                                         class="cycle-current-<?= $totalDepartment >= 1 ? 'red' : 'gray' ?>">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $totalDepartment >= 1 ? '' : '-black' ?>.svg"
@@ -268,18 +256,6 @@ $this->title = 'company profile';
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
-                                                    <!-- <div class="cycle-current-green">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon"
-                                                            style="margin-right: 1px;">
-                                                    </div>
-                                                    <div class="cycle-current-green">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon"
-                                                            style="margin-right: 1px;">
-                                                    </div>
-                                                    <div class="cycle-current-green">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon"
-                                                            style="margin-right: 1px;">
-                                                    </div> -->
                                                     <div
                                                         class="cycle-current-<?= $totalTeam >= 1 ? 'green' : 'gray' ?>">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $totalTeam >= 1 ? '' : '-black' ?>.svg"
@@ -404,7 +380,6 @@ $this->title = 'company profile';
 								]) ?>" class="no-underline" style="color:black;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/btn-view.svg" alt="View Button">
                                 </a>
-
                             </div>
                             <div class="col-lg-1 col-md-1 col-1 d-flex justify-content-center ">
 

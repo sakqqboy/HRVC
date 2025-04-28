@@ -847,7 +847,7 @@ class BranchController extends Controller
 
 		curl_close($api);
 		 
-		// throw new Exception("branch: " . print_r($branch, true));
+		// throw new Exception("company: " . print_r($company, true));
 
 		return $this->render('branch_view', [
             "company" => $company,
