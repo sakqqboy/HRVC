@@ -900,8 +900,6 @@ class BranchController extends Controller
 		 
 		// throw new Exception("company: " . print_r($company, true));
 
-
-
 		return $this->render('branch_view', [
             "company" => $company,
 			"countries" => $countries,
