@@ -52,7 +52,7 @@ $this->title = 'Create Branch';
                                 <span>
                                     <?= Yii::t('app', 'Upload') ?>
                                     <span style="font-size: 13px; color: #666;">
-                                        or Drop
+                                        <?= Yii::t('app', 'or Drop') ?>
                                     </span>
                                 </span>
                                 <br>
@@ -74,6 +74,9 @@ $this->title = 'Create Branch';
                         <label class="form-label font-size-12 font-b">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Company') ?>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                data-placement="top" aria-label="<?= Yii::t('app', 'select to country') ?>"
+                                data-bs-original-title="<?= Yii::t('app', 'Select to Company') ?>">
                         </label>
                         <div class="col-12 font-b" style="width: 330px;">
                             <?php if (isset($companyId) && $companyId != ''): ?>

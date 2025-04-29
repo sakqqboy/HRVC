@@ -396,7 +396,8 @@ class CompanyController extends Controller
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1' . '&limit=6');
 		$companies = curl_exec($api);
-
+		$companies = json_decode($companies, true);
+		
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=1' . '&countryId=' . '&limit=6');
 		$numPage = curl_exec($api);
 		$numPage = json_decode($numPage, true);
@@ -409,8 +410,7 @@ class CompanyController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
 		$result1 = curl_exec($api);
 		$countries = json_decode($result1, true);
-
-		$companies = json_decode($companies, true);
+		
 		curl_close($api);
 		// throw new Exception(print_r($companies, true)); // Debug: ดูข้อมูลทั้งหมด
 

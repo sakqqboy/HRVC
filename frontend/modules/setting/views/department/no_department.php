@@ -11,13 +11,12 @@ padding: 30px; gap: 7.721px; flex-shrink: 0;border-radius: 7.721px;border: 1.544
         <img src="<?= Yii::$app->homeUrl . 'image/no-group.svg' ?>">
         <span class="name-sub-tokyo">
             <?= Yii::t('app', 'No Department has been Created yet') ?></span>
-        <span class="name-full-tokyo text-center">
-            <?= Yii::t('app', 'Get started by creating your first branch, Branches help you manage different') ?><br>
-            <?= Yii::t('app', 'locations or offices within your organization.') ?>
+        <span class="name-full-tokyo text-center" style="width: 513px;">
+            <?= Yii::t('app', 'Departments help you categorize and manage your team members effectively, Start organizing your team by adding a department.') ?><br>
         </span>
-        <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(["companyId" => $companyId]) ?>"
+        <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(["branchId" => $branchId]) ?>"
             class="btn-create-branch" style="text-decoration: none;">
-            <?= Yii::t('app', 'Create a Branch') ?>
+            <?= Yii::t('app', 'Create a Department') ?>
             <img src="<?= Yii::$app->homeUrl ?>image/create-plus.svg" class="ml-3" style="width: 18px; height: 18px;">
         </a>
     </div>

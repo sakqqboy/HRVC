@@ -21,7 +21,7 @@ header("Pragma: no-cache");
  */
 class DepartmentController extends Controller
 {
-
+	
 	public function actionIndex()
 	{
 		// return $this->render('index');

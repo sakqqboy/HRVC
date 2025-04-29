@@ -289,13 +289,3 @@ $this->title = 'New Company';
 <input type="hidden" name="groupId" value="<?= $groupId + 543 ?>">
 
 <?php ActiveForm::end(); ?>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll(
-        '[data-toggle="tooltip"], [data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.forEach(function(tooltipTriggerEl) {
-        new bootstrap.Tooltip(tooltipTriggerEl);
-    });
-});
-</script>

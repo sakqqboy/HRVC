@@ -71,10 +71,11 @@ $session = Yii::$app->session;
                     class="no-underline">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/branch.svg"
                         class="first-layer-icon" style="margin-top: -3px;">
-                    <?= Yii::t('app', 'Branch') ?> </a>
+                    <?= Yii::t('app', 'Branch') ?>
+                </a>
             </div>
             <div class="col-12 first-layer-manu">
-                <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
+                <a href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['branchId' => '']) ?>"
                     class="no-underline">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/department.svg"
                         class="first-layer-icon" style="margin-top: -3px;">

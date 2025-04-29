@@ -81,13 +81,13 @@ class BranchController extends Controller
 			return "eror";
 		}
 	}
-
-
     
     function actionNoBranch($hash)
     {
         $param = ModelMaster::decodeParams($hash);
         $companyId = $param["companyId"];
+
+        		// throw new exception(print_r($companyId, true));
 
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
         if (!isset($group) && !empty($group)) {
@@ -105,46 +105,27 @@ class BranchController extends Controller
         }
         
 
-        $role = UserRole::userRight();
-        if ($role == 7) {
-            $adminId = Yii::$app->user->id;
-        }
-        if ($role == 6) {
-            $gmId = Yii::$app->user->id;
-        }
-        if ($role == 5) {
-            $managerId = Yii::$app->user->id;
-        }
-        if ($role == 4) {
-            $supervisorId = Yii::$app->user->id;
-        }
-        if ($role == 3) {
-            $teamLeaderId = Yii::$app->user->id;
-        }
-        if ($role == 1 || $role == 2) {
-            $staffId = Yii::$app->user->id;
-            //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
-        }
+        // $role = UserRole::userRight();
 
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        // $api = curl_init();
+        // curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        // curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
-		$result1 = curl_exec($api);
-		$countries = json_decode($result1, true);
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
+		// $result1 = curl_exec($api);
+		// $countries = json_decode($result1, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?id='  . '&page=1' . '&countryId=' . '&limit=6');
-		$numPage = curl_exec($api);
-		$numPage = json_decode($numPage, true);
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?id='  . '&page=1' . '&countryId=' . '&limit=6');
+		// $numPage = curl_exec($api);
+		// $numPage = json_decode($numPage, true);
         
-        curl_close($api);
+        // curl_close($api);
 
         return $this->render('no_branch', [
             "companyId" => $companyId,
-            "role" => $role,
-            "countries" => $countries,
-            "countryId" => 0
+            // "role" => $role,
+            // "countries" => $countries,
+            // "countryId" => 0
             // "numPage" => $numPage
 
         ]);
