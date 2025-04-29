@@ -50,13 +50,14 @@ $this->title = 'Create Branch';
                                 <img src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"
                                     style="width: 50px; height: auto;" alt="Upload Icon"> <br><br>
                                 <span>
-                                    Upload
+                                    <?= Yii::t('app', 'Upload') ?>
                                     <span style="font-size: 13px; color: #666;">
                                         or Drop
                                     </span>
                                 </span>
                                 <br>
-                                <span style="font-size: 13px; color: #666;">Branch Picture here</span>
+                                <span
+                                    style="font-size: 13px; color: #666;"><?= Yii::t('app', 'Branch Picture here') ?></span>
 
                             </label>
                             <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
@@ -66,13 +67,13 @@ $this->title = 'Create Branch';
                     <div class="start-center">
                         <label for="exampleFormControlInput1" class="form-label font-size-12 font-b">
                             <span class="text-danger">* </span>
-                            Branch Name
+                            <?= Yii::t('app', 'Branch Name') ?>
                         </label>
                         <input type="text" class="form-control" name="branchName" style="width: 330px;"
                             placeholder="Write the name of the branch">
                         <label class="form-label font-size-12 font-b">
                             <span class="text-danger">* </span>
-                            Company
+                            <?= Yii::t('app', 'Company') ?>
                         </label>
                         <div class="col-12 font-b" style="width: 330px;">
                             <?php if (isset($companyId) && $companyId != ''): ?>
@@ -80,7 +81,7 @@ $this->title = 'Create Branch';
                             <?= $company['companyName'] ?>
                             <?php else: ?>
                             <select class="form-select" id="company" name="companyId">
-                                <option value="">Select Company</option>
+                                <option value=""><?= Yii::t('app', 'Select Company') ?></option>
                                 <?php if (isset($companies) && count($companies) > 0): ?>
                                 <?php foreach ($companies as $c): ?>
                                 <option value="<?= $c['companyId'] ?>"><?= $c['companyName'] ?></option>
@@ -94,7 +95,8 @@ $this->title = 'Create Branch';
                 <div class="between-column">
                     <label for="exampleFormControlInput1" class="form-label font-size-12 font-b">
                         <span class="text-danger">* </span>
-                        Branch Description</label>
+                        <?= Yii::t('app', 'Branch Description') ?>
+                    </label>
                     <textarea style="height: 390px; width: 398px;" class="form-control" name="description"
                         id="description" placeholder="Write the description of the Branch"></textarea>
                 </div>
@@ -103,11 +105,14 @@ $this->title = 'Create Branch';
                 <input type="hidden" id="branchId" value="">
                 <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
                     <button type="button" class="btn-cancel-group"
-                        action="<?= Yii::$app->homeUrl ?>setting/group/create-group">Cancel</button>
+                        action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
+                        <?= Yii::t('app', 'Cancel') ?>
+                    </button>
                 </a>
 
                 <button type="submit" class="btn-save-group">
-                    Create <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="LinkedIn"
+                    <?= Yii::t('app', 'Create') ?>
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="LinkedIn"
                         style="width: 20px; height: 20px;">
                 </button>
             </div>

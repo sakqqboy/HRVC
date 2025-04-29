@@ -13,7 +13,7 @@ $page = 'view';
         <div class=" d-flex align-items-center gap-2">
             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" style="width: 24px; height: 24px;">
             <div class="pim-name-title ml-10">
-                Branch in Details
+                <?= Yii::t('app', 'Branch in Details') ?>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@ $page = 'view';
                 style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg"
                     style="width:18px; height:18px; margin-top:-3px;">
-                Back
+                <?= Yii::t('app', 'Back') ?>
             </a>
 
             <div style="display: flex; align-items: center;">
@@ -61,7 +61,7 @@ $page = 'view';
                     <div class="column">
                         <span class="font-size-16 text-gray-back"
                             style="font-weight: 500; display: flex; align-items: center; gap: 12px;">
-                            Associated Company
+                            <?= Yii::t('app', 'Associated Company') ?>
                             <div class="city-crad-company">
                                 <img src="<?= Yii::$app->homeUrl ?><?= $branches['picture'] ?>"
                                     class="bangladresh-hrvc">
@@ -70,7 +70,7 @@ $page = 'view';
                         </span>
                         <span class=" font-size-16 text-gray-back"
                             style="font-weight: 500; display: flex; align-items: center; gap: 12px;">
-                            Located in
+                            <?= Yii::t('app', 'Located in') ?>
                             <div class="city-crad-company">
                                 <img src="<?= Yii::$app->homeUrl ?>" class="bangladresh-hrvc">
                                 <?= $branches['city'] ?>,<?= $branches['countryName'] ?>
@@ -82,23 +82,23 @@ $page = 'view';
             <div class="between-start mt-40">
                 <div class="col-7">
                     <span class="font-size-16 text-gray-back" style="font-weight: 500;">
-                        Associated Entities
+                        <?= Yii::t('app', 'Associated Entities') ?>
                         <hr class="hr-group">
                     </span>
                     <table id="myTable" class="table align-middle table-spacing">
                         <thead class="table-light">
                             <tr class="table-border-weight">
                                 <th class="text-start" onclick="sortCompany('companyName')" style="width: 314px;">
-                                    Associated Department <img src="/HRVC/frontend/web/image/sorting.svg"
-                                        style="cursor: pointer;">
+                                    <?= Yii::t('app', 'Associated Department') ?>
+                                    <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
                                 </th>
                                 <th class="text-start" onclick="sortCompany('country')" style="width: 230px;">
-                                    Associated Teams<img src="/HRVC/frontend/web/image/sorting.svg"
-                                        style="cursor: pointer;">
+                                    <?= Yii::t('app', 'Associated Teams') ?>
+                                    <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
                                 </th>
                                 <th class="text-start" onclick="sortCompany('branch')" style="width: 230px;">
-                                    Associated Employees<img src="/HRVC/frontend/web/image/sorting.svg"
-                                        style="cursor: pointer;">
+                                    <?= Yii::t('app', 'Associated Employees') ?>
+                                    <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
                                 </th>
                             </tr>
                         </thead>
@@ -243,7 +243,7 @@ $page = 'view';
                 <div class="col-1"></div>
                 <div class="col-4">
                     <span class="font-size-16 text-gray-back" style="font-weight: 500;">
-                        Branch Details
+                        <?= Yii::t('app', 'Branch Details') ?>
                         <hr class="hr-group">
                     </span>
                     <text>
