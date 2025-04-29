@@ -62,8 +62,8 @@ class BranchController extends Controller
     public function actionEncodeParamsPage() {
 		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 	
+        $page = Yii::$app->request->post('page');
 		$countryId = Yii::$app->request->post('countryId');
-		$page = Yii::$app->request->post('page');
 		$nextPage = Yii::$app->request->post('nextPage');
 
 		// throw new exception(print_r($nextPage, true));
@@ -75,6 +75,9 @@ class BranchController extends Controller
 		}else if($page == 'list') {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/branch/index-filter/'. $url );
 		}else{
+            if($page == 'view'){
+				return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-view-filter/'. $url );
+			}
 			return "eror";
 		}
 	}
@@ -814,17 +817,9 @@ class BranchController extends Controller
 
         $param = ModelMaster::decodeParams($hash);
 
-        // throw new Exception('POST DATA: ' . print_r($param, true));
-
         $branchId = $param["branchId"];
-
-        // $branchId = $_POST["branchId"] - 543;
-        // $branch = Branch::find()->where(["branchId" => $branchId])->asArray()->one();
-        // $res["branchId"] = $branch["branchId"];
-        // $res["branchName"] = $branch["branchName"];
-        // $res["description"] = $branch["description"];
-        // $res["companyId"] = $branch["companyId"];
-        // throw new Exception("branch: " . print_r($branchId, true));
+        
+		// throw new Exception(print_r($param, true)); // Debug: ดูข้อมูลทั้งหมด
 
         $api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -840,6 +835,165 @@ class BranchController extends Controller
 		$branch = json_decode($branch, true);
         // throw new Exception("branch: " . print_r($branch, true));
 
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-page?id=' . $branchId .'&page=1' . '&countryId=0' . '&limit=5');
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+        // throw new Exception("numPage: " . print_r($numPage, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' .  $branchId . '&page=1' . '&limit=5');
+		$departments = curl_exec($api);
+		$departments = json_decode($departments, true);
+        // throw new Exception("department: " . print_r($departments, true));
+
+        $data = [];
+		if (!empty($departments)) {
+            foreach ($departments as $department) :
+				$departmentId = $department['departmentId'];
+
+				$employees = Employee::find()
+				->where(["departmentId" => $departmentId])
+				->asArray()
+				->all();
+
+				// throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
+
+				// กรองเฉพาะที่มี picture
+				$filteredEmployees = array_filter($employees, function($employee) {
+					return !empty($employee['picture']);
+				});
+
+				// รีเซ็ต index และเลือกแค่ 3 คนแรก
+				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+
+				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
+
+				$totalEmployee = Employee::find()->where(["departmentId" => $departmentId, "status" => 1])->count();
+				$teams = [];
+					if (!empty($department)) {
+						$teams = Team::find()->select('teamId')
+							->where(["status" => 1])
+							->andWhere(['IN', 'departmentId', $department['departmentId']])
+							->asArray()->column();
+					}
+
+				$data[] = [
+					"departmentId" => $department['departmentId'],
+					"departmentName" => $department["departmentName"],
+					"branchId" => $department['branchId'],
+					"status" => $department['status'],
+					"createDateTime" => $department['createDateTime'],    
+					"updateDateTime" => $department['updateDateTime'],
+					"totalTeam" => count($teams),
+					"totalEmployee" => $totalEmployee,
+					"employees" => $filteredEmployees
+				];
+			endforeach;
+		}
+
+        // throw new Exception("data: " . print_r($data, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $branch["companyId"]);
+        $company = curl_exec($api);
+        $company = json_decode($company, true);
+
+		curl_close($api);
+		 
+		// throw new Exception("company: " . print_r($company, true));
+
+
+
+		return $this->render('branch_view', [
+            "company" => $company,
+			"countries" => $countries,
+            "branches" => $branch,
+            "departments" => $data,
+            "numPage" => $numPage,
+            "countryId" => 0
+		]);
+        
+    }
+
+    public function actionBranchViewFilter($hash){
+
+        $param = ModelMaster::decodeParams($hash);
+
+        if (!empty($param['branchId'])) {
+            $branchId = $param['branchId'];
+        } else {
+            $branchId = $param['countryId'];
+            $nextPage = $param['nextPage'];
+        }
+        
+        $api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
+		$resultCountry = curl_exec($api);
+		$countries = json_decode($resultCountry, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' .  $branchId );
+		$branch = curl_exec($api);
+		$branch = json_decode($branch, true);
+        // throw new Exception("branch: " . print_r($branch, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-page?id=' . $branchId .'&page=' . $nextPage . '&countryId=0' . '&limit=5');
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+        // throw new Exception("numPage: " . print_r($numPage, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department-filter?id=' .  $branchId . '&companyId=' . $branch["companyId"] . '&page=' . $nextPage  . '&limit=5');
+		$departments = curl_exec($api);
+		$departments = json_decode($departments, true);
+        // throw new Exception("department: " . print_r($departments, true));
+
+        $data = [];
+		if (!empty($departments)) {
+            foreach ($departments as $department) :
+				$departmentId = $department['departmentId'];
+
+				$employees = Employee::find()
+				->where(["departmentId" => $departmentId])
+				->asArray()
+				->all();
+
+				// throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
+
+				// กรองเฉพาะที่มี picture
+				$filteredEmployees = array_filter($employees, function($employee) {
+					return !empty($employee['picture']);
+				});
+
+				// รีเซ็ต index และเลือกแค่ 3 คนแรก
+				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+
+				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
+
+				$totalEmployee = Employee::find()->where(["departmentId" => $departmentId, "status" => 1])->count();
+				$teams = [];
+					if (!empty($department)) {
+						$teams = Team::find()->select('teamId')
+							->where(["status" => 1])
+							->andWhere(['IN', 'departmentId', $department['departmentId']])
+							->asArray()->column();
+					}
+
+				$data[] = [
+					"departmentId" => $department['departmentId'],
+					"departmentName" => $department["departmentName"],
+					"branchId" => $department['branchId'],
+					"status" => $department['status'],
+					"createDateTime" => $department['createDateTime'],    
+					"updateDateTime" => $department['updateDateTime'],
+					"totalTeam" => count($teams),
+					"totalEmployee" => $totalEmployee,
+					"employees" => $filteredEmployees
+				];
+			endforeach;
+		}
+
+        // throw new Exception("data: " . print_r($data, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $branch["companyId"]);
         $company = curl_exec($api);
@@ -852,7 +1006,10 @@ class BranchController extends Controller
 		return $this->render('branch_view', [
             "company" => $company,
 			"countries" => $countries,
-            "branches" => $branch
+            "branches" => $branch,
+            "departments" => $data,
+            "numPage" => $numPage,
+            "countryId" => 0
 		]);
         
     }

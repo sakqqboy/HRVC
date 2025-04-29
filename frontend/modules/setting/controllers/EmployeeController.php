@@ -369,7 +369,7 @@ class EmployeeController extends Controller
         $branches = curl_exec($api);
         $branches = json_decode($branches, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $employee['branchId']);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $employee['branchId'] . '&&page=1' . '&limit=7');
         $departments = curl_exec($api);
         $departments = json_decode($departments, true);
 

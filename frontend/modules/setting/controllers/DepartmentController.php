@@ -428,7 +428,7 @@ class DepartmentController extends Controller
             //throw new Exception(2);
         }
         //throw new Exception($branchId . '==' . $companyId);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department-filter?branchId=' . $branchIdSearch . '&&companyId=' . $companyIdSearch);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department-filter?branchId=' . $branchIdSearch . '&&companyId=' . $companyIdSearch . '&&page=1' . '&limit=7' );
         $departments = curl_exec($api);
         $departments = json_decode($departments, true);
 

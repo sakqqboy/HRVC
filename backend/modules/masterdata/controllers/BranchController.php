@@ -39,7 +39,6 @@ class BranchController extends Controller
 	
 	public function actionActiveBranch($page,$limit)
 	{
-		$branch = [];
 		// $branch = Branch::find()
 		// 	->select('branch.*,co.countryName,c.companyName,c.picture,co.flag,c.city')
 		// 	->JOIN("LEFT JOIN", "company c", "branch.companyId=c.companyId")
@@ -136,13 +135,16 @@ class BranchController extends Controller
 
 	public function actionBranchDetail($id)
 	{
-
 		$branch = [];
 		$branch = Branch::find()
-			->where(["branchId" => $id])
-			->asArray()
-			->orderBy('branchName')
-			->one();
+		->select('branch.*, co.countryName, c.companyName, c.picture, co.flag, c.city')
+		->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId') // join กับตาราง company
+		->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId') // join กับตาราง country ผ่าน company
+		->where(["branchId" => $id]) // หา branch ตาม id
+		->asArray() // เอาผลลัพธ์มาแบบ array (ไม่ใช่ object)
+		->orderBy('branchName') // เรียงตาม branchName (แต่จริงๆมัน .one() เลยไม่มีผล)
+		->one(); // เอามาแค่ 1 record
+
 		return json_encode($branch);
 	}
 	

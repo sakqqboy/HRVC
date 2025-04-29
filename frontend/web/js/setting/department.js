@@ -55,6 +55,30 @@ function createDepartment() {
     }
 }
 
+function goToPageDepartment(nextPage, page, countryId) {
+    // alert(page);
+    // alert(nextPage);
+    // alert(countryId);
+    var url = $url + 'setting/department/encode-params-page';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: {
+            countryId: countryId,
+            page: page,
+            nextPage: nextPage
+        },
+        success: function (data) {
+            // window.location.href = "company-grid-filter/" + data.url;
+            alert(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX request failed: " + error);
+        }
+    });
+}
+
 function updateDepartment(departmentId) {
     var url = $url + 'setting/department/update-department';
     $("#departmentId").val(departmentId);

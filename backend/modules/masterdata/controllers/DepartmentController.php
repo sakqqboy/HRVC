@@ -5,6 +5,7 @@ namespace backend\modules\masterdata\controllers;
 
 use backend\models\hrvc\Department;
 use backend\models\hrvc\Title;
+use common\models\ModelMaster;
 use Exception;
 use Yii;
 use yii\web\Controller;
@@ -24,6 +25,28 @@ class DepartmentController extends Controller
 	public function actionIndex()
 	{
 		// return $this->render('index');
+	}
+	public function actionEncodeParamsPage() {
+		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+	
+		$countryId = Yii::$app->request->post('countryId');
+		$page = Yii::$app->request->post('page');
+		$nextPage = Yii::$app->request->post('nextPage');
+
+		// throw new exception(print_r($nextPage, true));
+
+		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nextPage' => $nextPage]);
+	
+		if($page == 'grid') {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/branch/company-grid-filter/'. $url );
+		}else if($page == 'list') {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/branch/index-filter/'. $url );
+		}else{
+			if($page == 'view'){
+				return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-view/'. $url );
+			}
+			return "eror";
+		}
 	}
 	public function actionAllDepartment()
 	{
@@ -49,17 +72,38 @@ class DepartmentController extends Controller
 		//throw  new Exception(print_r($department, true));
 		return json_encode($department);
 	}
-	public function actionBranchDepartment($id)
+	public function actionBranchDepartment($id,$page,$limit)
 	{
-		$department = [];
-		$department = Department::find()
-			->where(["status" => 1, "branchId" => $id])
-			->asArray()
-			->orderBy('departmentName')
-			->all();
+		// $department = Department::find()
+		// 	->where(["status" => 1, "branchId" => $id])
+		// 	->asArray()
+		// 	->orderBy('departmentName')
+		// 	->all();
+
+			$offset = ($page - 1) * $limit;
+
+			$department = [];
+		
+	
+			$query = Department::find()
+			->select('department.*')
+			->join('LEFT JOIN', 'branch b', 'b.branchId = department.branchId')
+			->join('LEFT JOIN', 'company c', 'c.companyId = b.companyId')
+			->where(['department.status' => 1, 'department.branchId' => $id]);
+			
+			if ($limit > 0) {
+				$query ->offset($offset)
+				->limit($limit);
+			}
+	
+			$department = $query
+				->asArray()
+				->orderBy('departmentName')
+				->all();
+
 		return json_encode($department);
 	}
-	public function actionBranchDepartmentFilter($branchId, $companyId)
+	public function actionBranchDepartmentFilter($id,$companyId,$page,$limit)
 	{
 		$department = [];
 		$department = Department::find()
@@ -67,14 +111,47 @@ class DepartmentController extends Controller
 			->JOIN("LEFT JOIN", "branch b", "b.branchId=department.branchId")
 			->JOIN("LEFT JOIN", "company c", "c.companyId=b.companyId")
 			->where(["department.status" => 1])
-			->andFilterWhere([
-				"department.branchId" => $branchId,
-				"b.companyId" => $companyId
-			])
 			->asArray()
 			->orderBy('department.departmentName')
 			->all();
+		
+		$offset = ($page - 1) * $limit;
+
+		$department = [];
+
+		$query = Department::find()
+			->select('department.*')
+			->join('LEFT JOIN', 'branch b', 'b.branchId = department.branchId')
+			->join('LEFT JOIN', 'company c', 'c.companyId = b.companyId')
+			->where(['department.status' => 1]);
+
+		if ($id > 0) {
+			$query->andFilterWhere([
+				'department.branchId' => $id
+			]);
+		}
+
+		if ($companyId > 0) {
+			$query->andFilterWhere([
+				'b.companyId' => $companyId
+			]);
+		}
+
+		if ($limit > 0) {
+			$query->offset($offset)
+				->limit($limit);
+		}
+
+		$department = $query
+			->asArray()
+			->orderBy('department.departmentName')
+			->all();
+
 		return json_encode($department);
+
+		// return json_encode($limit);
+		
+
 	}
 	public function actionCompanyDepartment($id)
 	{
@@ -90,6 +167,39 @@ class DepartmentController extends Controller
 		//throw  new Exception(print_r($department, true));
 		return json_encode($department);
 	}
+
+	public function actionDepartmentPage($id,$page,$countryId ,$limit)
+    {
+        
+        $query =  Department::find()
+		->select('department.*')
+		->join('LEFT JOIN', 'branch b', 'b.branchId = department.branchId')
+		->join('LEFT JOIN', 'company c', 'c.companyId = b.companyId')
+		->where(['department.status' => 1]);
+		
+		if ($id != 0) {
+            $query->andWhere(["department.branchId" => $id]);
+        }
+    
+
+        if ($countryId != 0) {
+            $query->andWhere(["c.countryId" => $countryId]);
+        }
+    
+        $totalRows = $query->count(); // นับหลังจากใส่เงื่อนไขทั้งหมดแล้ว
+    
+        $totalPages = ceil($totalRows / $limit);
+    
+        return json_encode([
+            'totalPages' => $totalPages,
+            'totalRows' => $totalRows,
+            'perPage' => $limit,
+            'nowPage' => $page
+        ]);
+
+		// return json_encode($id);
+    }
+	
 	public function actionDepartmentTitle($id)
 	{
 		$title = Title::find()

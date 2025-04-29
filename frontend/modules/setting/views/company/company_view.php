@@ -346,6 +346,9 @@ $this->title = 'company profile';
                         if (isset($companyBranch) && count($companyBranch) > 0) {
                             $i = 0;
                             foreach ($companyBranch as $branch) :
+                                if ($i >= 6) {
+                                    break;
+                                }
                         ?>
 
                         <div class="row <?= $i > 0 ? 'mt-10' : '' ?> ">
