@@ -235,6 +235,11 @@ class KpiTeamController extends Controller
 	}
 	public function actionAllTeamKpi($userId, $role)
 	{
+		$data = [];
+		$data1 = [];
+		$data2 = [];
+		$data3 = [];
+		$data4 = [];
 		$employeeId = Employee::employeeId($userId);
 		$employee = Employee::EmployeeDetail($employeeId);
 		$teamId = $employee["teamId"];
@@ -266,6 +271,7 @@ class KpiTeamController extends Controller
 
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $kpiTeam) :
+				$commonData = [];
 				$kpiTeamHistory = KpiTeamHistory::find()
 					->where(["kpiTeamId" => $kpiTeam["kpiTeamId"], "status" => [1, 2, 4]])
 					->asArray()
@@ -312,7 +318,9 @@ class KpiTeamController extends Controller
 				} else {
 					$kpiName = $kpiTeam["kpiName"];
 				}
-				$data[$kpiTeam["kpiTeamId"]] = [
+				$isOver = ModelMaster::isOverDuedate($kpiTeamHistory['nextCheckDate']);
+				$kpiTeamId = $kpiTeam["kpiTeamId"];
+				$commonData = [
 					"kpiName" => $kpiName,
 					"kpiId" => $kpiTeam["kpiId"],
 					"teamId" => $kpiTeam["teamId"],
@@ -339,7 +347,7 @@ class KpiTeamController extends Controller
 					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
 					"ratio" => number_format($ratio, 2),
 					// "isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeamHistory['kpiTeamId'])),
-					"isOver" => ModelMaster::isOverDuedate($kpiTeamHistory['nextCheckDate']),
+					"isOver" => $isOver,
 					"employee" => KpiTeam::kpiTeamEmployee($kpiTeam['kpiId'], $teamId),
 					"countTeam" => KpiTeam::kpiTeam($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
 					"amountType" => $kpiTeam["amountType"],
@@ -350,8 +358,18 @@ class KpiTeamController extends Controller
 					"lastestUpdate" => ModelMaster::engDate($kpiTeam["updateDateTime"], 2)
 
 				];
+				if ($kpiTeamHistory["fromDate"] == "" || $kpiTeamHistory["toDate"] == "") {
+					$data1[$kpiTeamId] = $commonData;
+				} elseif ($isOver == 1 && $kpiTeamHistory["status"] == 1) {
+					$data2[$kpiTeamId] = $commonData;
+				} elseif ($kpiTeamHistory["status"] == 2) {
+					$data4[$kpiTeamId] = $commonData;
+				} else {
+					$data3[$kpiTeamId] = $commonData;
+				}
 			endforeach;
 		}
+		$data = $data1 + $data2 + $data3 + $data4;
 		return json_encode($data);
 	}
 
@@ -830,6 +848,11 @@ class KpiTeamController extends Controller
 	}
 	public function actionKpiTeamFilter($companyId, $branchId, $teamId, $month, $status, $year)
 	{
+		$data = [];
+		$data1 = [];
+		$data2 = [];
+		$data3 = [];
+		$data4 = [];
 		$kpiTeams = KpiTeam::find()
 			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,kpi_team.updateDateTime,kpi_team.month,kpi_team.year,
 			kpi_team.teamId,kpi_team.target')
@@ -840,8 +863,8 @@ class KpiTeamController extends Controller
 			->andFilterWhere([
 				"kb.branchId" => $branchId,
 				"kpi_team.teamId" => $teamId,
-				"kpi_team.month" => $month,
-				"kpi_team.year" => $year,
+				//"kpi_team.month" => $month,
+				//"kpi_team.year" => $year,
 				"kpi_team.status" => $status,
 			])
 			->orderBy("k.createDateTime DESC,t.teamName ASC")
@@ -851,6 +874,7 @@ class KpiTeamController extends Controller
 		$ratio = 0;
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $kpiTeam) :
+				$commonData = [];
 				$kpiTeamHistory = KpiTeamHistory::find()
 					->select('kpi_team_history.*')
 					->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiTeamId=kpi_team_history.kpiTeamId")
@@ -912,7 +936,9 @@ class KpiTeamController extends Controller
 				} else {
 					$kpiName = $kpiTeam["kpiName"];
 				}
-				$data[$kpiTeam["kpiTeamId"]] = [
+				$isOver = ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeam['kpiTeamId']));
+				$kpiTeamId = $kpiTeam["kpiTeamId"];
+				$commonData = [
 					"kpiName" => $kpiName,
 					"kpiId" => $kpiTeam["kpiId"],
 					"teamId" => $kpiTeam["teamId"],
@@ -948,8 +974,18 @@ class KpiTeamController extends Controller
 					"kpiEmployeeSelect" => $selectPic,
 					"lastestUpdate" => ModelMaster::engDate($kpiTeam["updateDateTime"], 2)
 				];
+				if ($kpiTeamHistory["fromDate"] == "" || $kpiTeamHistory["toDate"] == "") {
+					$data1[$kpiTeamId] = $commonData;
+				} elseif ($isOver == 1 && $kpiTeamHistory["status"] == 1) {
+					$data2[$kpiTeamId] = $commonData;
+				} elseif ($kpiTeamHistory["status"] == 2) {
+					$data4[$kpiTeamId] = $commonData;
+				} else {
+					$data3[$kpiTeamId] = $commonData;
+				}
 			endforeach;
 		}
+		$data = $data1 + $data2 + $data3 + $data4;
 		return json_encode($data);
 	}
 	public function actionKpiTeamEmployee($kpiId, $month, $year)

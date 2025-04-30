@@ -67,6 +67,11 @@ class KpiPersonalController extends Controller
 	public function actionEmployeeKpi($userId, $role)
 	{
 		$employeeId = Employee::employeeId($userId);
+		$data = [];
+		$data1 = [];
+		$data2 = [];
+		$data3 = [];
+		$data4 = [];
 		if ($role <= 3) {
 			$kpiEmployee = KpiEmployee::find()
 				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,kpi_employee.updateDateTime,kpi_employee.month,kpi_employee.year,
@@ -90,10 +95,9 @@ class KpiPersonalController extends Controller
 				->asArray()
 				->all();
 		}
-		//throw new exception(print_r($kpiEmployee, true));
-		$data = [];
 		if (count($kpiEmployee) > 0) {
 			foreach ($kpiEmployee as $kpi) :
+				$commonData = [];
 				$kpiEmployeeHistory = KpiEmployeeHistory::find()
 					->where(["kpiEmployeeId" => $kpi["kpiEmployeeId"], "status" => [1, 2, 4]])
 					->asArray()
@@ -140,7 +144,10 @@ class KpiPersonalController extends Controller
 				} else {
 					$kpiName = $kpi["kpiName"];
 				}
-				$data[$kpi["kpiEmployeeId"]] = [
+				$picture = Employee::employeeImage($kpi["employeeId"]);
+				$isOver = ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployeeHistory['kpiEmployeeId']));
+				$kpiEmployeeId = $kpi["kpiEmployeeId"];
+				$commonData = [
 					"kpiId" => $kpi["kpiId"],
 					"teamId" => $kpi["teamId"],
 					"kpiName" => $kpiName,
@@ -150,7 +157,7 @@ class KpiPersonalController extends Controller
 					"picture" => $picture,
 					"companyName" => Company::companyName($kpi["companyId"]),
 					"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
-					"employee" => KpiEmployee::kpiEmployee($kpi["kpiId"],$kpi["month"],$kpi["year"]),
+					"employee" => KpiEmployee::kpiEmployee($kpi["kpiId"], $kpi["month"], $kpi["year"]),
 					"quantRatio" => $kpi["quantRatio"],
 					"targetAmount" => $kpi["target"],
 					"code" => $kpi["code"],
@@ -171,7 +178,7 @@ class KpiPersonalController extends Controller
 					"solution" => KpiIssue::lastestIssue($kpi["kpiId"])["solution"],
 					"fromDate" => ModelMaster::engDate($kpiEmployeeHistory["fromDate"], 2),
 					"toDate" => ModelMaster::engDate($kpiEmployeeHistory["toDate"], 2),
-					"isOver" => ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployeeHistory['kpiEmployeeId'])),
+					"isOver" => $isOver,
 					"amountType" => $kpi["amountType"],
 					"teamName" => Team::teamName($kpi["teamId"]),
 					"canEdit" => 1,
@@ -179,8 +186,18 @@ class KpiPersonalController extends Controller
 					"countTeamEmployee" => $countTeamEmployee,
 					"lastestUpdate" => ModelMaster::engDate($kpi["updateDateTime"], 2)
 				];
+				if ($kpiEmployeeHistory["fromDate"] == "" || $kpiEmployeeHistory["toDate"] == "") {
+					$data1[$kpiEmployeeId] = $commonData;
+				} elseif ($isOver == 1 && $kpiEmployeeHistory["status"] == 1) {
+					$data2[$kpiEmployeeId] = $commonData;
+				} elseif ($kpiEmployeeHistory["status"] == 2) {
+					$data4[$kpiEmployeeId] = $commonData;
+				} else {
+					$data3[$kpiEmployeeId] = $commonData;
+				}
 			endforeach;
 		}
+		$data = $data1 + $data2 + $data3 + $data4;
 		return json_encode($data);
 	}
 
@@ -231,10 +248,10 @@ class KpiPersonalController extends Controller
 		}
 		return json_encode($data);
 	}
-	
 
-	
-	public function actionKpiHistoryEmployee($kpiId, $month, $year,$kpiEmployeeId)
+
+
+	public function actionKpiHistoryEmployee($kpiId, $month, $year, $kpiEmployeeId)
 	{
 		$data = [];
 
@@ -280,7 +297,7 @@ class KpiPersonalController extends Controller
 			->andWhere(['e.status' => 1])
 			->groupBy([
 				'keh.kpiEmployeeHistoryId',
-				'keh.kpiEmployeeId',	
+				'keh.kpiEmployeeId',
 				'keh.result',
 				'keh.target',
 				'keh.createDateTime',
@@ -355,7 +372,7 @@ class KpiPersonalController extends Controller
 					// "remark" => $teamhistory["remark"],
 					//"result" => $history["result"],
 					"picture" => Employee::employeeImage($employeehistory),
-					"createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),	
+					"createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
 					"time" => ModelMaster::timeText($time[1]),
 					"status" => $employeehistory["status"],
 					"target" => $employeehistory["target"],
@@ -400,17 +417,17 @@ class KpiPersonalController extends Controller
 			$kpiId = $kpiEmployee["kpiId"];
 			$employeeId = $kpiEmployee["employeeId"];
 		} else {
-			
+
 			$kpiE = kpiEmployee::find()
 				->select('kpiId,employeeId')
 				->where(["kpiEmployeeId" => $kpiEmployee["kpiEmployeeId"]])
 				->asArray()
-				->one();	
+				->one();
 
 			$kpiId = $kpiE["kpiId"];
 			$employeeId = $kpiE["employeeId"];
 		}
-		
+
 		$data = [];
 		$ratio = 0;
 		$kpiDetail = kpi::find()
@@ -463,7 +480,7 @@ class KpiPersonalController extends Controller
 				"remark" => $kpiEmployee["remark"],
 				"picture" => $employee["picture"],
 				"teamName" => Team::teamName($employee["teamId"]),
-				"kpiEmployee" => KpiEmployee::kpiEmployee($kpiId,$kpiEmployee["month"],$kpiEmployee["year"]),
+				"kpiEmployee" => KpiEmployee::kpiEmployee($kpiId, $kpiEmployee["month"], $kpiEmployee["year"]),
 				// "teamName" => Team::teamName($kpiEmployee["teamId"]),
 				"isOver" => ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployee['kpiEmployeeId']))
 			];
@@ -510,6 +527,11 @@ class KpiPersonalController extends Controller
 	}
 	public function actionKpiPersonalFilter($companyId, $branchId, $teamId, $month, $status, $year, $userId)
 	{
+		$data = [];
+		$data1 = [];
+		$data2 = [];
+		$data3 = [];
+		$data4 = [];
 		$employeeId = Employee::employeeId2($userId);
 		$kpiEmployees = KpiEmployee::find()
 			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_employee.kpiEmployeeId,k.companyId,kpi_employee.updateDateTime,kpi_employee.month,kpi_employee.year,
@@ -522,6 +544,7 @@ class KpiPersonalController extends Controller
 				"kb.branchId" => $branchId,
 				"e.teamId" => $teamId,
 				"kpi_employee.employeeId" => $employeeId,
+				"k.companyId" => $companyId
 				//"kpi_employee.month" => $month,
 				//"kpi_employee.year" => $year,
 				//"kpi_employee.status" => $status,
@@ -532,6 +555,7 @@ class KpiPersonalController extends Controller
 		$data = [];
 		if (isset($kpiEmployees) && count($kpiEmployees) > 0) {
 			foreach ($kpiEmployees as $kpiEmployee) :
+				$commonData = [];
 				$kpiEmployeeHistory = KpiEmployeeHistory::find()
 					->select('kpi_employee_history.*')
 					->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=kpi_employee_history.kpiEmployeeId")
@@ -599,11 +623,13 @@ class KpiPersonalController extends Controller
 				} else {
 					$kpiName = $kpiEmployee["kpiName"];
 				}
-				$data[$kpiEmployee["kpiEmployeeId"]] = [
+				$isOver = ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployeeHistory['kpiEmployeeId']));
+				$kpiEmployeeId = $kpiEmployeeHistory["kpiEmployeeId"];
+				$commonData = [
 					"kpiName" => $kpiName,
 					"kpiId" => $kpiEmployee["kpiId"],
 					"companyName" => Company::companyName($kpiEmployee["companyId"]),
-					"employee" => KpiEmployee::kpiEmployee($kpiEmployee["kpiId"],$kpiEmployee["month"],$kpiEmployee["year"]),
+					"employee" => KpiEmployee::kpiEmployee($kpiEmployee["kpiId"], $kpiEmployee["month"], $kpiEmployee["year"]),
 					"employeeName" => $kpiEmployee["employeeFirstname"] . ' ' . $kpiEmployee["employeeSurename"],
 					"picture" => $picture,
 					"branch" => KpiBranch::kpiBranch($kpiEmployee["kpiId"]),
@@ -624,9 +650,9 @@ class KpiPersonalController extends Controller
 					"kpiEmployeeHistoryId" => $kpiEmployeeHistory["kpiEmployeeHistoryId"] ?? 0,
 					"flag" => Country::countryFlagBycompany($kpiEmployee["companyId"]),
 					"countryName" => Country::countryNameBycompany($kpiEmployee['companyId']),
-					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiEmployee["kpiId"],$kpiEmployee["month"],$kpiEmployee["year"]),
+					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiEmployee["kpiId"], $kpiEmployee["month"], $kpiEmployee["year"]),
 					"ratio" => number_format($ratio, 2),
-					"isOver" => ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployeeHistory['kpiEmployeeId'])),
+					"isOver" => $isOver,
 					"amountType" => $kpiEmployee["amountType"],
 					"issue" => KpiIssue::lastestIssue($kpiEmployee["kpiId"])["issue"],
 					"solution" => KpiIssue::lastestIssue($kpiEmployee["kpiId"])["solution"],
@@ -637,8 +663,18 @@ class KpiPersonalController extends Controller
 					"canEdit" => 1,
 					"lastestUpdate" => ModelMaster::engDate($kpiEmployee["updateDateTime"], 2)
 				];
+				if ($kpiEmployeeHistory["fromDate"] == "" || $kpiEmployeeHistory["toDate"] == "") {
+					$data1[$kpiEmployeeId] = $commonData;
+				} elseif ($isOver == 1 && $kpiEmployeeHistory["status"] == 1) {
+					$data2[$kpiEmployeeId] = $commonData;
+				} elseif ($kpiEmployeeHistory["status"] == 2) {
+					$data4[$kpiEmployeeId] = $commonData;
+				} else {
+					$data3[$kpiEmployeeId] = $commonData;
+				}
 			endforeach;
 		}
+		$data = $data1 + $data2 + $data3 + $data4;
 		return json_encode($data);
 	}
 	public function actionKpiIndividualSummarize($kpiEmployeeId)
@@ -673,23 +709,23 @@ class KpiPersonalController extends Controller
 					}
 				}
 				if (!isset($data[$history["year"]][$history["month"]])) {
-				$data[$history["year"]][$history["month"]] = [
-					"kpiEmployeeHistoryId" => $history["kpiEmployeeHistoryId"],
-					"target" => $history['target'],
-					"unit" => Unit::unitName($history['unitId']),
-					"month" => ModelMaster::monthEng($history['month'], 1),
-					"year" => $history["year"],
-					"status" => $history['status'],
-					"quantRatio" => $history["quantRatio"],
-					"code" =>  $history["code"],
-					"result" => $history["result"],
-					"ratio" => number_format($ratio, 2),
-					"amountType" => $history["amountType"],
-					"isOver" => ModelMaster::isOverDuedate($history["nextCheckDate"]),
-					"fromDate" => ModelMaster::engDate($history["fromDate"], 2),
-					"toDate" => ModelMaster::engDate($history["toDate"], 2),
-				];
-			}
+					$data[$history["year"]][$history["month"]] = [
+						"kpiEmployeeHistoryId" => $history["kpiEmployeeHistoryId"],
+						"target" => $history['target'],
+						"unit" => Unit::unitName($history['unitId']),
+						"month" => ModelMaster::monthEng($history['month'], 1),
+						"year" => $history["year"],
+						"status" => $history['status'],
+						"quantRatio" => $history["quantRatio"],
+						"code" =>  $history["code"],
+						"result" => $history["result"],
+						"ratio" => number_format($ratio, 2),
+						"amountType" => $history["amountType"],
+						"isOver" => ModelMaster::isOverDuedate($history["nextCheckDate"]),
+						"fromDate" => ModelMaster::engDate($history["fromDate"], 2),
+						"toDate" => ModelMaster::engDate($history["toDate"], 2),
+					];
+				}
 			endforeach;
 		}
 		return json_encode($data);

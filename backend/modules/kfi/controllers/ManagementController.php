@@ -35,6 +35,11 @@ class ManagementController extends Controller
 {
 	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
 	{
+		$data = [];
+		$data1 = [];
+		$data2 = [];
+		$data3 = [];
+		$data4 = [];
 		if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
 			$kfis = Kfi::find()
 				->where(["status" => [1, 2, 4]])
@@ -63,9 +68,9 @@ class ManagementController extends Controller
 				->orderBy('updateDateTime DESC')
 				->all();
 		}
-		$data = [];
 		if (isset($kfis) && count($kfis) > 0) {
 			foreach ($kfis as $kfi) :
+				$commonData = [];
 				$allEmployee = KfiEmployee::kfiEmployee($kfi["kfiId"]);
 				$selectPic = [];
 				if (count($allEmployee) >= 3) {
@@ -84,43 +89,51 @@ class ManagementController extends Controller
 				} else {
 					$kfiname = $kfi["kfiName"];
 				}
-				$data[$kfi["kfiId"]] = [
-					"kfiName" => $kfiname,
-					"companyName" => Company::companyName($kfi['companyId']),
-					"companyId" => $kfi['companyId'],
-					"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
-					"kfiBranch" => KfiBranch::kfiBranch($kfi["kfiId"]),
-					//"kfiEmployee" => KfiEmployee::kfiEmployee($kfi["kfiId"]),
-					"quantRatio" => "",
-					"creater" => User::employeeNameByuserId($kfi["createrId"]),
-					"target" => $kfi['targetAmount'],
-					"code" => "",
-					"result" => "",
-					"ratio" => 0,
-					"unit" => Unit::unitName($kfi['unitId']),
-					"month" => ModelMaster::monthEng($kfi['month'], 1),
-					"amountType" => "",
-					"status" => $kfi['status'],
-					"nextCheck" => "",
-					"checkDate" => "",
-					"countryName" => Country::countryNameBycompany($kfi['companyId']),
-					"flag" => Country::countryFlagBycompany($kfi['companyId']),
-					"isOver" => 0,
-					"fromDate" => "",
-					"toDate" => "",
-					"active" => $kfi["active"],
-					"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"]),
-					"kfiEmployee" => $selectPic,
-					//"countEmployee" => count($allEmployee),
+				$isOver = ModelMaster::isOverDuedate(Kfi::nextCheckDate($kfi['kfiId']));
+				$kfiId = $kfi["kfiId"];
+				// $commonData = [
+				// 	"kfiName" => $kfiname,
+				// 	"companyName" => Company::companyName($kfi['companyId']),
+				// 	"companyId" => $kfi['companyId'],
+				// 	"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
+				// 	"kfiBranch" => KfiBranch::kfiBranch($kfi["kfiId"]),
+				// 	//"kfiEmployee" => KfiEmployee::kfiEmployee($kfi["kfiId"]),
+				// 	"quantRatio" => "",
+				// 	"creater" => User::employeeNameByuserId($kfi["createrId"]),
+				// 	"target" => $kfi['targetAmount'],
+				// 	"code" => "",
+				// 	"result" => "",
+				// 	"ratio" => 0,
+				// 	"unit" => Unit::unitName($kfi['unitId']),
+				// 	"month" => ModelMaster::monthEng($kfi['month'], 1),
+				// 	"amountType" => "",
+				// 	"status" => $kfi['status'],
+				// 	"nextCheck" => "",
+				// 	"checkDate" => "",
+				// 	"countryName" => Country::countryNameBycompany($kfi['companyId']),
+				// 	"flag" => Country::countryFlagBycompany($kfi['companyId']),
+				// 	"isOver" => 0,
+				// 	"fromDate" => "",
+				// 	"toDate" => "",
+				// 	"active" => $kfi["active"],
+				// 	"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"]),
+				// 	"kfiEmployee" => $selectPic,
+				// 	//"countEmployee" => count($allEmployee),
 
-					"countEmployee" => count(KfiEmployee::kfiEmployeeByMonth($kfi["kfiId"], $kfi["month"], $kfi["year"])),
+				// 	"countEmployee" => count(KfiEmployee::kfiEmployeeByMonth($kfi["kfiId"], $kfi["month"], $kfi["year"])),
 
-				];
+				// ];
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2]])
 					->orderBy('year DESC,month DESC,kfiHistoryId DESC')
 					->asArray()
 					->one();
+				if (!isset($kfiHistory) || empty($kfiHistory)) {
+					$kfiHistory = Kfi::find()
+						->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2]])
+						->asArray()
+						->one();
+				}
 				if (isset($kfiHistory) && !empty($kfiHistory)) {
 					if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
 						$ratio = 0;
@@ -136,7 +149,7 @@ class ManagementController extends Controller
 							}
 						}
 					}
-					$data[$kfi["kfiId"]] = [
+					$commonData = [
 						"kfiName" => $kfiname,
 						"companyName" => Company::companyName($kfi['companyId']),
 						"companyId" => $kfi['companyId'],
@@ -158,7 +171,7 @@ class ManagementController extends Controller
 						"amountType" => $kfiHistory["amountType"],
 						"countryName" => Country::countryNameBycompany($kfi['companyId']),
 						"flag" => Country::countryFlagBycompany($kfi['companyId']),
-						"isOver" => ModelMaster::isOverDuedate($kfiHistory["nextCheckDate"]),
+						"isOver" => $isOver,
 						"fromDate" => ModelMaster::engDate($kfiHistory["fromDate"], 2),
 						"toDate" => ModelMaster::engDate($kfiHistory["toDate"], 2),
 						"active" => $kfi["active"],
@@ -169,11 +182,20 @@ class ManagementController extends Controller
 						"aa" => $kfiHistory['kfiHistoryId'],
 						"lastestUpdate" => ModelMaster::engDate($kfi["updateDateTime"], 2)
 					];
+					if ($kfiHistory["fromDate"] == "" || $kfiHistory["toDate"] == "") {
+						$data1[$kfiId] = $commonData;
+					} elseif ($isOver == 1 && $kfi["status"] == 1) {
+						$data2[$kfiId] = $commonData;
+					} elseif ($kfi["status"] == 2) {
+						$data4[$kfiId] = $commonData;
+					} else {
+						$data3[$kfiId] = $commonData;
+					}
 				}
 
 			endforeach;
 		}
-		//throw new Exception(print_r($data, true));
+		$data = $data1 + $data2 + $data3 + $data4;
 		return json_encode($data);
 	}
 	public function actionKfiDetail($kfiId, $kfiHistoryId)
@@ -485,6 +507,10 @@ class ManagementController extends Controller
 	public function actionKfiFilter($companyId, $branchId, $month, $status, $year, $active, $adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
 	{
 		$data = [];
+		$data1 = [];
+		$data2 = [];
+		$data3 = [];
+		$data4 = [];
 		$kfis = Kfi::find()
 			->select('kfi.*')
 			->JOIN("LEFT JOIN", "kfi_branch kb", "kb.kfiId=kfi.kfiId")
@@ -523,37 +549,37 @@ class ManagementController extends Controller
 				} else {
 					$kfiname = $kfi["kfiName"];
 				}
-				$data[$kfi["kfiId"]] = [
-					"kfiName" => $kfiname,
-					"companyName" => Company::companyName($kfi['companyId']),
-					//"companyName" => $kfi['companyName'],
-					"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
-					"companyId" => $kfi['companyId'],
-					"kfiBranch" => KfiBranch::kfiBranch($kfi["kfiId"]),
-					//"kfiEmployee" => KfiEmployee::kfiEmployee($kfi["kfiId"]),
-					"creater" => User::employeeNameByuserId($kfi["createrId"]),
-					"quantRatio" => "",
-					"target" => $kfi['targetAmount'],
-					"code" => "",
-					"result" => "",
-					"ratio" => 0,
-					"unit" => Unit::unitName($kfi['unitId']),
-					"month" => ModelMaster::monthEng($kfi['month'], 1),
-					"amountType" => "",
-					"status" => $kfi['status'],
-					"nextCheck" => "",
-					"checkDate" => "",
-					"countryName" => Country::countryNameBycompany($kfi['companyId']),
-					"flag" => Country::countryFlagBycompany($kfi['companyId']),
-					"year" => $year,
-					"fromDate" => "",
-					"isOver" => 0,
-					"toDate" => "",
-					"active" => $kfi["active"],
-					"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"]),
-					"kfiEmployee" => $selectPic,
-					"countEmployee" => count($allEmployee),
-				];
+				// $data[$kfi["kfiId"]] = [
+				// 	"kfiName" => $kfiname,
+				// 	"companyName" => Company::companyName($kfi['companyId']),
+				// 	//"companyName" => $kfi['companyName'],
+				// 	"branchName" => Branch::kfiBranchName($kfi["kfiId"]),
+				// 	"companyId" => $kfi['companyId'],
+				// 	"kfiBranch" => KfiBranch::kfiBranch($kfi["kfiId"]),
+				// 	//"kfiEmployee" => KfiEmployee::kfiEmployee($kfi["kfiId"]),
+				// 	"creater" => User::employeeNameByuserId($kfi["createrId"]),
+				// 	"quantRatio" => "",
+				// 	"target" => $kfi['targetAmount'],
+				// 	"code" => "",
+				// 	"result" => "",
+				// 	"ratio" => 0,
+				// 	"unit" => Unit::unitName($kfi['unitId']),
+				// 	"month" => ModelMaster::monthEng($kfi['month'], 1),
+				// 	"amountType" => "",
+				// 	"status" => $kfi['status'],
+				// 	"nextCheck" => "",
+				// 	"checkDate" => "",
+				// 	"countryName" => Country::countryNameBycompany($kfi['companyId']),
+				// 	"flag" => Country::countryFlagBycompany($kfi['companyId']),
+				// 	"year" => $year,
+				// 	"fromDate" => "",
+				// 	"isOver" => 0,
+				// 	"toDate" => "",
+				// 	"active" => $kfi["active"],
+				// 	"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"]),
+				// 	"kfiEmployee" => $selectPic,
+				// 	"countEmployee" => count($allEmployee),
+				// ];
 				// $kfiHistory = KfiHistory::find()
 				// 	->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2]])
 				// 	->orderBy('kfiHistoryId DESC')
@@ -561,15 +587,23 @@ class ManagementController extends Controller
 				$kfiHistory = KfiHistory::find()
 					->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2]])
 					->andFilterWhere([
-						//"kfi.companyId" => $companyId,
-						//"kb.branchId" => $branchId,
 						"month" => $month,
 						"status" => $status,
 						"year" => $year,
-						//"kfi.active" => isset($active) ? $active : null
 					])
 					->orderBy('year DESC,kfiHistoryId DESC')
 					->one();
+				if (!isset($kfiHistory) || empty($kfiHistory)) {
+					$kfiHistory = Kfi::find()
+						->where(["kfiId" => $kfi["kfiId"], "status" => [1, 2]])
+						->andFilterWhere([
+							"month" => $month,
+							"status" => $status,
+							"year" => $year,
+						])
+						->asArray()
+						->one();
+				}
 				if (isset($kfiHistory) && !empty($kfiHistory)) {
 					if ($kfi["targetAmount"] == null || $kfi["targetAmount"] == '' || $kfi["targetAmount"] == 0) {
 						$ratio = 0;
@@ -585,7 +619,9 @@ class ManagementController extends Controller
 							//$ratio = ((int)$kfi["targetAmount"] / (int)$kfiHistory['result']) * 100;
 						}
 					}
-					$data[$kfi["kfiId"]] = [
+					$isOver = ModelMaster::isOverDuedate(Kfi::nextCheckDate($kfi['kfiId']));
+					$kfiId = $kfi["kfiId"];
+					$commonData = [
 						"kfiName" => $kfiname,
 						"companyName" => Company::companyName($kfi['companyId']),
 						//"companyName" => $kfi['companyName'],
@@ -610,18 +646,27 @@ class ManagementController extends Controller
 						"year" => $year,
 						"fromDate" => ModelMaster::engDate($kfiHistory["fromDate"], 2),
 						"toDate" => ModelMaster::engDate($kfiHistory["toDate"], 2),
-						"isOver" => ModelMaster::isOverDuedate($kfiHistory["nextCheckDate"]),
+						"isOver" => $isOver,
 						"active" => $kfi["active"],
 						"countKfiHasKgi" => KfiHasKgi::countKgiInkfi($kfi["kfiId"]),
 						"kfiEmployee" => $selectPic,
 						"countEmployee" => count($allEmployee),
 						"lastestUpdate" => ModelMaster::engDate($kfi["updateDateTime"], 2)
 					];
+					if ($kfiHistory["fromDate"] == "" || $kfiHistory["toDate"] == "") {
+						$data1[$kfiId] = $commonData;
+					} elseif ($isOver == 1 && $kfi["status"] == 1) {
+						$data2[$kfiId] = $commonData;
+					} elseif ($kfi["status"] == 2) {
+						$data4[$kfiId] = $commonData;
+					} else {
+						$data3[$kfiId] = $commonData;
+					}
 				}
 
 			endforeach;
 		}
-		//throw new Exception(print_r($data, true));
+		$data = $data1 + $data2 + $data3 + $data4;
 		return json_encode($data);
 	}
 	public function actionKfiHasKgi($kfiId)

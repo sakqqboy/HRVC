@@ -68,6 +68,11 @@ class KgiPersonalController extends Controller
 	}
 	public function actionEmployeeKgi($userId, $role)
 	{
+		$data = [];
+		$data1 = [];
+		$data2 = [];
+		$data3 = [];
+		$data4 = [];
 		$employeeId = Employee::employeeId($userId);
 		if ($role <= 3) {
 			$kgiEmployee = KgiEmployee::find()
@@ -92,9 +97,9 @@ class KgiPersonalController extends Controller
 				->asArray()
 				->all();
 		}
-		$data = [];
 		if (count($kgiEmployee) > 0) {
 			foreach ($kgiEmployee as $kgi) :
+				$commonData = [];
 				$kgiEmployeeHistory = KgiEmployeeHistory::find()
 					->where(["kgiEmployeeId" => $kgi["kgiEmployeeId"], "status" => [1, 2, 4], "month" => $kgi["month"], "year" => $kgi["year"]])
 					->asArray()
@@ -141,7 +146,9 @@ class KgiPersonalController extends Controller
 					$kginame = $kgi["kgiName"];
 				}
 				$picture = Employee::employeeImage($kgi["employeeId"]);
-				$data[$kgi["kgiEmployeeId"]] = [
+				$isOver = ModelMaster::isOverDuedate(KgiEmployee::nextCheckDate($kgiEmployeeHistory['kgiEmployeeId']));
+				$kgiEmployeeId = $kgi["kgiEmployeeId"];
+				$commonData = [
 					"kgiId" => $kgi["kgiId"],
 					"kgiName" => $kginame,
 					"companyId" => $kgi['companyId'],
@@ -170,7 +177,7 @@ class KgiPersonalController extends Controller
 					"fromDate" => ModelMaster::engDate($kgiEmployeeHistory["fromDate"], 2),
 					"toDate" => ModelMaster::engDate($kgiEmployeeHistory["toDate"], 2),
 					//"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
-					"isOver" => ModelMaster::isOverDuedate(KgiEmployee::nextCheckDate($kgiEmployeeHistory['kgiEmployeeId'])),
+					"isOver" => $isOver,
 					"amountType" => $kgi["amountType"],
 					"teamName" => Team::teamName($kgi["teamId"]),
 					"teamMate" =>  $selectPic,
@@ -178,8 +185,18 @@ class KgiPersonalController extends Controller
 					"canEdit" => 1,
 					"lastestUpdate" => ModelMaster::engDate($kgi["updateDateTime"], 2)
 				];
+				if ($kgiEmployeeHistory["fromDate"] == "" || $kgiEmployeeHistory["toDate"] == "") {
+					$data1[$kgiEmployeeId] = $commonData;
+				} elseif ($isOver == 1 && $kgiEmployeeHistory["status"] == 1) {
+					$data2[$kgiEmployeeId] = $commonData;
+				} elseif ($kgiEmployeeHistory["status"] == 2) {
+					$data4[$kgiEmployeeId] = $commonData;
+				} else {
+					$data3[$kgiEmployeeId] = $commonData;
+				}
 			endforeach;
 		}
+		$data = $data1 + $data2 + $data3 + $data4;
 		return json_encode($data);
 	}
 	public function actionKgiEmployeeDetail($kgiEmployeeId, $kgiEmployeeHistoryId)
@@ -312,6 +329,11 @@ class KgiPersonalController extends Controller
 	}
 	public function actionKgiPersonalFilter($companyId, $branchId, $teamId, $month, $status, $year, $userId)
 	{
+		$data = [];
+		$data1 = [];
+		$data2 = [];
+		$data3 = [];
+		$data4 = [];
 		$employeeId = Employee::employeeId2($userId);
 		$kgiEmployees = KgiEmployee::find()
 			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_employee.kgiEmployeeId,k.companyId,kgi_employee.updateDateTime,
@@ -325,6 +347,7 @@ class KgiPersonalController extends Controller
 				"e.teamId" => $teamId,
 				"e.branchId" => $branchId,
 				"kgi_employee.employeeId" => $employeeId,
+				"k.companyId" => $companyId
 				//"kgi_employee.month" => $month,
 				//"kgi_employee.year" => $year,
 				//"kgi_employee.status" => $status,
@@ -335,8 +358,9 @@ class KgiPersonalController extends Controller
 		$data = [];
 		if (isset($kgiEmployees) && count($kgiEmployees) > 0) {
 			foreach ($kgiEmployees as $kgiEmployee) :
+				$commonData = [];
 				$kgiEmployeeHistory = KgiEmployeeHistory::find()
-					->select('kgi_employee_history.*')
+					->select('kgi_employee_history.*,ke.employeeId')
 					->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiEmployeeId=kgi_employee_history.kgiEmployeeId")
 					->JOIN("LEFT JOIN", "employee e", "e.employeeId=ke.employeeId")
 					->where([
@@ -404,7 +428,10 @@ class KgiPersonalController extends Controller
 				} else {
 					$kginame = $kgiEmployee["kgiName"];
 				}
-				$data[$kgiEmployee["kgiEmployeeId"]] = [
+				$picture = Employee::employeeImage($kgiEmployeeHistory["employeeId"]);
+				$isOver = ModelMaster::isOverDuedate(KgiEmployee::nextCheckDate($kgiEmployeeHistory['kgiEmployeeId']));
+				$kgiEmployeeId = $kgiEmployeeHistory["kgiEmployeeId"];
+				$commonData = [
 					"kgiName" => $kginame,
 					"kgiId" => $kgiEmployee["kgiId"],
 					"companyName" => Company::companyName($kgiEmployee["companyId"]),
@@ -430,7 +457,7 @@ class KgiPersonalController extends Controller
 					"countryName" => Country::countryNameBycompany($kgiEmployee['companyId']),
 					"kgiEmployee" => KgiEmployee::kgiEmployee($kgiEmployee["kgiId"], $kgiEmployeeHistory["month"], $kgiEmployeeHistory["year"]),
 					"ratio" => number_format($ratio, 2),
-					"isOver" => ModelMaster::isOverDuedate(KgiEmployee::nextCheckDate($kgiEmployeeHistory['kgiEmployeeId'])),
+					"isOver" => $isOver,
 					"amountType" => $kgiEmployee["amountType"],
 					"issue" => KgiIssue::lastestIssue($kgiEmployee["kgiId"])["issue"],
 					"solution" => KgiIssue::lastestIssue($kgiEmployee["kgiId"])["solution"],
@@ -440,8 +467,18 @@ class KgiPersonalController extends Controller
 					"countTeamEmployee" => $countTeamEmployee,
 					"lastestUpdate" => ModelMaster::engDate($kgiEmployee["updateDateTime"], 2)
 				];
+				if ($kgiEmployeeHistory["fromDate"] == "" || $kgiEmployeeHistory["toDate"] == "") {
+					$data1[$kgiEmployeeId] = $commonData;
+				} elseif ($isOver == 1 && $kgiEmployeeHistory["status"] == 1) {
+					$data2[$kgiEmployeeId] = $commonData;
+				} elseif ($kgiEmployeeHistory["status"] == 2) {
+					$data4[$kgiEmployeeId] = $commonData;
+				} else {
+					$data3[$kgiEmployeeId] = $commonData;
+				}
 			endforeach;
 		}
+		$data = $data1 + $data2 + $data3 + $data4;
 		return json_encode($data);
 	}
 	public function actionKgiIndividualSummarize($kgiEmployeeId)

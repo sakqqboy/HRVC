@@ -338,7 +338,6 @@ class KgiTeamController extends Controller
 				} else {
 					$data3[$kgiTeamId] = $commonData;
 				}
-
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
@@ -458,6 +457,11 @@ class KgiTeamController extends Controller
 	}
 	public function actionKgiTeamFilter($companyId, $branchId, $teamId, $month, $status, $year)
 	{
+		$data = [];
+		$data1 = [];
+		$data2 = [];
+		$data3 = [];
+		$data4 = [];
 		$kgiTeams = KgiTeam::find()
 			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,kgi_team.updateDateTime,kgi_team.month,kgi_team.year,
 			kgi_team.teamId,kgi_team.target')
@@ -468,8 +472,8 @@ class KgiTeamController extends Controller
 			->andFilterWhere([
 				"kb.branchId" => $branchId,
 				"kgi_team.teamId" => $teamId,
-				"kgi_team.month" => $month,
-				"kgi_team.year" => $year,
+				//"kgi_team.month" => $month,
+				//"kgi_team.year" => $year,
 				"kgi_team.status" => $status,
 				"k.companyId" => $companyId
 			])
@@ -479,6 +483,7 @@ class KgiTeamController extends Controller
 		$data = [];
 		if (isset($kgiTeams) && count($kgiTeams) > 0) {
 			foreach ($kgiTeams as $kgiTeam) :
+				$commonData = [];
 				$kgiTeamHistory = KgiTeamHistory::find()
 					->select('kgi_team_history.*')
 					->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiTeamId=kgi_team_history.kgiTeamId")
@@ -542,7 +547,9 @@ class KgiTeamController extends Controller
 				} else {
 					$kginame = $kgiTeam["kgiName"];
 				}
-				$data[$kgiTeam["kgiTeamId"]] = [
+				$isOver = ModelMaster::isOverDuedate(KgiTeam::nextCheckDate($kgiTeam['kgiTeamId']));
+				$kgiTeamId = $kgiTeam["kgiTeamId"];
+				$commonData = [
 					"kgiName" => $kginame,
 					"kgiId" => $kgiTeam["kgiId"],
 					"teamId" => $kgiTeam["teamId"],
@@ -578,8 +585,18 @@ class KgiTeamController extends Controller
 					"kgiEmployeeSelect" => $selectPic,
 					"lastestUpdate" => ModelMaster::engDate($kgiTeam["updateDateTime"], 2),
 				];
+				if ($kgiTeamHistory["fromDate"] == "" || $kgiTeamHistory["toDate"] == "") {
+					$data1[$kgiTeamId] = $commonData;
+				} elseif ($isOver == 1 && $kgiTeamHistory["status"] == 1) {
+					$data2[$kgiTeamId] = $commonData;
+				} elseif ($kgiTeamHistory["status"] == 2) {
+					$data4[$kgiTeamId] = $commonData;
+				} else {
+					$data3[$kgiTeamId] = $commonData;
+				}
 			endforeach;
 		}
+		$data = $data1 + $data2 + $data3 + $data4;
 		return json_encode($data);
 	}
 	public function actionEachTeamEmployeeKgi($teamId, $kgiId)

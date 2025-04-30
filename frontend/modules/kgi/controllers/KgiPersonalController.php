@@ -644,9 +644,6 @@ class KgiPersonalController extends Controller
 		}
 
 		curl_close($api);
-		// throw new Exception(print_r($kgis, true));	
-
-		//throw new exception($paramText, true);
 		if ($type == "list") {
 			$file = "index";
 		} else {

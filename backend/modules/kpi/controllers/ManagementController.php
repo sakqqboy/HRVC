@@ -735,9 +735,7 @@ class ManagementController extends Controller
 			->andFilterWhere([
 				"kpi.companyId" => $companyId,
 				"kb.branchId" => $branchId,
-				"kpi.month" => $month,
 				"kpi.status" => $status,
-				"kpi.year" => $year,
 			])
 			->orderBy('kpi.createDateTime ASC')
 			->all();
@@ -748,37 +746,36 @@ class ManagementController extends Controller
 		$data4 = [];
 		if (count($kpis) > 0) {
 			foreach ($kpis as $kpi) :
-				$commondata = [];
-				// $kpiHistory = KpiHistory::find()
-				// 	->select('kpi_history.*')
-				// 	->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_history.kpiId")
-				// 	->where(["kpi_history.kpiId" => $kpi["kpiId"], "kpi_history.status" => [1, 2, 4]])
-				// 	->andFilterWhere([
-				// 		"k.month" => $month,
-				// 		"k.status" => $status,
-				// 		"k.year" => $year,
-				// 	])
-				// 	->asArray()
-				// 	->orderBy('createDateTime DESC')
-				// 	->one();
+				$commonData = [];
+				$kpiHistory = KpiHistory::find()
+					->select('kpi_history.*')
+					->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_history.kpiId")
+					->where(["kpi_history.kpiId" => $kpi["kpiId"], "kpi_history.status" => [1, 2, 4]])
+					->andFilterWhere([
+						"k.month" => $month,
+						"k.status" => $status,
+						"k.year" => $year,
+					])
+					->asArray()
+					->orderBy('createDateTime DESC')
+					->one();
 				if (strlen($kpi["kpiName"]) > 34) {
 					$kpiName = substr($kpi["kpiName"], 0, 34) . '. . .';
 				} else {
 					$kpiName = $kpi["kpiName"];
 				}
-				// if (!isset($kpiHistory) || empty($kpiHistory)) {
-				// 	$kpiHistory = Kpi::find()
-				// 		->where(["kpiId" => $kpi["kpiId"], "status" => [1, 2, 4]])
-				// 		->andFilterWhere([
-				// 			"month" => $month,
-				// 			"status" => $status,
-				// 			"year" => $year,
-				// 		])
-				// 		->asArray()
-				// 		->orderBy('createDateTime DESC')
-				// 		->one();
-				// }
-				//if (isset($kpi) && !empty($kpi)) {
+				if (!isset($kpiHistory) || empty($kpiHistory)) {
+					$kpiHistory = Kpi::find()
+						->where(["kpiId" => $kpi["kpiId"], "status" => [1, 2, 4]])
+						->andFilterWhere([
+							"month" => $month,
+							"year" => $year,
+							"status" => $status,
+
+						])
+						->asArray()
+						->one();
+				}
 				$ratio = 0;
 				if ($kpi["targetAmount"] != '' && $kpi["targetAmount"] != 0 && $kpi["targetAmount"] != null) {
 					if ($kpi["code"] == '<' || $kpi["code"] == '=') {
