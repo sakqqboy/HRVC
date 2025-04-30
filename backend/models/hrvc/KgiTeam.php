@@ -51,6 +51,45 @@ class KgiTeam extends \backend\models\hrvc\master\KgiTeamMaster
             ->all();
         return count($kgiTeams);
     }
+    public static function kgiTeam2($kgiId, $month, $year)
+    {
+        /*$kgiTeam = KgiTeam::find()
+            ->select('t.teamName,kgi_team.teamId')
+            ->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
+            ->where(["t.status" => 1, "kgi_team.status" => [1, 2, 4], "kgi_team.kgiId" => $kgiId])
+            ->asArray()
+            ->all();*/
+        $kgiTeamHistory = KgiTeamHistory::find()
+            ->select('kgi_team_history.month,kgi_team_history.year,kgi_team_history.kgiTeamId')
+            ->JOIN("LEFT JOIN", "kgi_team kt", "kt.kgiTeamId=kgi_team_history.kgiTeamId")
+            ->where(["kt.kgiId" => $kgiId, "kgi_team_history.month" => $month, "kgi_team_history.year" => $year])
+            ->andWhere("kgi_team_history.status!=99")
+            ->asArray()
+            ->all();
+        if (!isset($kgiTeamHistory) || count($kgiTeamHistory) == 0) {
+            $kgiTeamHistory = KgiTeam::find()
+                ->where(["kgiId" => $kgiId, "month" => $month, "year" => $year])
+                ->andWhere("status!=99")
+                ->asArray()
+                ->all();
+        }
+        //throw new exception(print_r($kgiTeamHistory, true));
+        $team = [];
+        if (isset($kgiTeamHistory) && count($kgiTeamHistory) > 0) {
+            foreach ($kgiTeamHistory as $kgh):
+                if (!isset($team[$kgh["kgiTeamId"]])) {
+                    $team[$kgh["kgiTeamId"]] = 1;
+                }
+            endforeach;
+        }
+        return count($team);
+        // $kgiTeams = KgiTeam::find()
+        //     ->where(["kgiId" => $kgiId, "month" => $month, "year" => $year])
+        //     ->andWhere("status!=99")
+        //     ->asArray()
+        //     ->all();
+        //return count($kgiTeams);
+    }
     public static function employeeTeam($kgiId)
     {
         $kgiTeam = KgiTeam::find()->select('teamId')->where(["kgiId" => $kgiId])->asArray()->all();

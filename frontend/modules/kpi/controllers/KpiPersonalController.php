@@ -119,6 +119,29 @@ class KpiPersonalController extends Controller
 		}
 		$role = UserRole::userRight();
 		$teams = [];
+
+		$session = Yii::$app->session;
+		if ($session->has('kpiEmployee')) {
+			$filter = $session->get('kpiEmployee');
+			$companyId = isset($filter["companyId"]) && $filter["companyId"] != null ? $filter["companyId"] : null;
+			$branchId = isset($filter["branchId"]) && $filter["branchId"] != null ? $filter["branchId"] : null;
+			$teamId = isset($filter["teamId"]) && $filter["teamId"] != null ? $filter["teamId"] : null;
+			$employeeId = isset($filter["employeeId"]) && $filter["employeeId"] != null ? $filter["employeeId"] : null;
+			$month = isset($filter["month"]) && $filter["month"] != null ? $filter["month"] : null;
+			$status = isset($filter["status"]) && $filter["status"] != null ? $filter["status"] : null;
+			$year = isset($filter["year"]) && $filter["year"] != null ? $filter["year"] : null;
+			$type = "grid";
+			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/kpi-personal-search-result/' . ModelMaster::encodeParams([
+				"companyId" => $companyId,
+				"branchId" => $branchId,
+				"employeeId" => $employeeId,
+				"teamId" => $teamId,
+				"month" => $month,
+				"status" => $status,
+				"year" => $year,
+				"type" => $type
+			]));
+		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -181,6 +204,28 @@ class KpiPersonalController extends Controller
 
 		$role = UserRole::userRight();
 		$teams = [];
+		$session = Yii::$app->session;
+		if ($session->has('kpiEmployee')) {
+			$filter = $session->get('kpiEmployee');
+			$companyId = isset($filter["companyId"]) && $filter["companyId"] != null ? $filter["companyId"] : null;
+			$branchId = isset($filter["branchId"]) && $filter["branchId"] != null ? $filter["branchId"] : null;
+			$teamId = isset($filter["teamId"]) && $filter["teamId"] != null ? $filter["teamId"] : null;
+			$employeeId = isset($filter["employeeId"]) && $filter["employeeId"] != null ? $filter["employeeId"] : null;
+			$month = isset($filter["month"]) && $filter["month"] != null ? $filter["month"] : null;
+			$status = isset($filter["status"]) && $filter["status"] != null ? $filter["status"] : null;
+			$year = isset($filter["year"]) && $filter["year"] != null ? $filter["year"] : null;
+			$type = "grid";
+			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/kpi-personal-search-result/' . ModelMaster::encodeParams([
+				"companyId" => $companyId,
+				"branchId" => $branchId,
+				"employeeId" => $employeeId,
+				"teamId" => $teamId,
+				"month" => $month,
+				"status" => $status,
+				"year" => $year,
+				"type" => $type
+			]));
+		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -210,7 +255,7 @@ class KpiPersonalController extends Controller
 			}
 			//throw new Exception(print_r($teams, true));
 		}
-			// throw new Exception(print_r($kpis, true));
+		// throw new Exception(print_r($kpis, true));
 
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
@@ -254,7 +299,7 @@ class KpiPersonalController extends Controller
 		// ->where(["kpiEmployeeId" => $kpiEmployeeId])
 		// ->orderBy('kpiEmployeeHistoryId DESC')
 		// ->asArray()->one();
-		
+
 		// if(isset($kpiEmployeeHistoryId) && !empty($kpiEmployeeHistoryId)) {
 		// 	$kpiEmployeeHistoryId = $kpiEmployeeHistoryId['kpiEmployeeHistoryId'];
 		// }
@@ -576,11 +621,11 @@ class KpiPersonalController extends Controller
 
 		curl_close($api);
 		$companyId = $kpi["companyId"];
-			$company= [
-				"companyId" => $kpi["companyId"],
-				"companyName" => Company::companyName($kpi["companyId"]),
-				"companyImg" => Company::companyImage($kpi["companyId"]),
-			];		
+		$company = [
+			"companyId" => $kpi["companyId"],
+			"companyName" => Company::companyName($kpi["companyId"]),
+			"companyImg" => Company::companyImage($kpi["companyId"]),
+		];
 
 		$unit = Unit::find()->where(["unitId" => $kpi["unitId"]])->asArray()->one();
 		$months = ModelMaster::monthFull(1);
@@ -589,13 +634,13 @@ class KpiPersonalController extends Controller
 			"kpiEmployeeId" => $kpiEmployeeId,
 			"data" => $kpiEmployeeDetail,
 			"months" => $months,
-			"company" => $company ?? [],  
-			"kpiBranch" => $kpiBranch ?? [],  
+			"company" => $company ?? [],
+			"kpiBranch" => $kpiBranch ?? [],
 			"kpiDepartment" => $kpiDepartment ?? [],
 			"kpiTeam" => $kpiTeam ?? [],
 			"role" => $role,
-			"unit"  => $unit ,
-			"lastUrl" => Yii::$app->request->referrer,	
+			"unit"  => $unit,
+			"lastUrl" => Yii::$app->request->referrer,
 			"statusform" =>  "update"
 		]);
 	}
@@ -603,17 +648,17 @@ class KpiPersonalController extends Controller
 	{
 
 		$data = [
-            'kpiEmployeeId' => $_POST["kpiEmployeeId"],
-			'targetAmount' => $_POST["amount"], 
-			'status' => $_POST["status"],   
+			'kpiEmployeeId' => $_POST["kpiEmployeeId"],
+			'targetAmount' => $_POST["amount"],
+			'status' => $_POST["status"],
 			'result' => $_POST["result"],
-			'month' => $_POST["month"],      
-			'year' => $_POST["year"],      
+			'month' => $_POST["month"],
+			'year' => $_POST["year"],
 			'toDate' => $_POST["toDate"],
 			'fromDate' => $_POST["fromDate"],
-			'nextCheckDate' => $_POST["nextCheckDate"],            
-      
-        ];
+			'nextCheckDate' => $_POST["nextCheckDate"],
+
+		];
 
 		// throw new exception(print_r($data	, true));	
 		//เมื่อกดอัพเดต 
@@ -651,7 +696,7 @@ class KpiPersonalController extends Controller
 
 				$lastCheck = $history->nextCheckDate;
 				if ($history->target == str_replace(",", "", $_POST["amount"]) && $history->result == str_replace(",", "", $_POST["result"]) && $nextCheckDate == $_POST["nextCheckDate"] && $history->fromDate == $_POST["fromDate"] && $history->toDate == $_POST["toDate"] && $history->month == $_POST["month"] && $history->year == $_POST["year"]) {
-				// if ($history->target == str_replace(",", "", $_POST["amount"]) && $history->result == str_replace(",", "", $_POST["result"]) && $nextCheckDate == $_POST["nextCheckDate"] && $history->toDate == $_POST["toDate"] && $history->fromDate == $_POST["fromDate"]) {
+					// if ($history->target == str_replace(",", "", $_POST["amount"]) && $history->result == str_replace(",", "", $_POST["result"]) && $nextCheckDate == $_POST["nextCheckDate"] && $history->toDate == $_POST["toDate"] && $history->fromDate == $_POST["fromDate"]) {
 					$history->status = $_POST["status"];
 					$history->updateDateTime = new Expression('NOW()');
 				} else {
@@ -680,7 +725,6 @@ class KpiPersonalController extends Controller
 					$history->status = $status;
 					$history->createDateTime = new Expression('NOW()');
 					$history->updateDateTime = new Expression('NOW()');
-
 				}
 			} else {
 				$history = new KpiEmployeeHistory();
@@ -715,19 +759,18 @@ class KpiPersonalController extends Controller
 			$kpiEmployee->save(false);
 			$history->createrId = Yii::$app->user->id;
 			if ($history->save(false)) {
-			//check ว่า มีอันนี้ที่เป็นสเตตัส 5 ในเดือนที่มากกว่า ที่ส่งมา +1 และปีปัจจุบัน รึยัง ถ้ามีแล้วให้อัพเดต 5 เป็น 1
+				//check ว่า มีอันนี้ที่เป็นสเตตัส 5 ในเดือนที่มากกว่า ที่ส่งมา +1 และปีปัจจุบัน รึยัง ถ้ามีแล้วให้อัพเดต 5 เป็น 1
 				$KpiEmployeeHistory = KpiEmployeeHistory::find()
-				->where(["kpiEmployeeId" => $_POST["kpiEmployeeId"], "status" => 5 , "month" => $nextMonth, "year" => $nextYear])
-				->one(); // ไม่ใช้ asArray() เพื่อให้เป็น object				
+					->where(["kpiEmployeeId" => $_POST["kpiEmployeeId"], "status" => 5, "month" => $nextMonth, "year" => $nextYear])
+					->one(); // ไม่ใช้ asArray() เพื่อให้เป็น object				
 				if ($KpiEmployeeHistory !== null && $status == 2) {
-					$kpiEmployee->month = $KpiEmployeeHistory -> month;
-					$kpiEmployee->year = $KpiEmployeeHistory -> year;
+					$kpiEmployee->month = $KpiEmployeeHistory->month;
+					$kpiEmployee->year = $KpiEmployeeHistory->year;
 					$kpiEmployee->status = 1;
-					$kpiEmployee ->save(false);
+					$kpiEmployee->save(false);
 					$KpiEmployeeHistory->status = 1;
 					$KpiEmployeeHistory->updateDateTime = new Expression('NOW()');
 					$KpiEmployeeHistory->save(false);
-
 				}
 
 				return $this->redirect($_POST["lastUrl"]);
@@ -738,17 +781,17 @@ class KpiPersonalController extends Controller
 	}
 
 	public function actionModalHistory()
-    {	
-        $percentage = $_POST["percentage"];
-        $result = $_POST["result"];
-        $sumvalue = $_POST["sumvalue"];
-        $targetAmount = $_POST["targetAmount"];
-        $kpiId = $_POST["kpiId"];
+	{
+		$percentage = $_POST["percentage"];
+		$result = $_POST["result"];
+		$sumvalue = $_POST["sumvalue"];
+		$targetAmount = $_POST["targetAmount"];
+		$kpiId = $_POST["kpiId"];
 		$month = $_POST["month"];
-        $monthName = $_POST["monthName"];
-        $year = $_POST["year"];
-        $formattedRange = $_POST["formattedRange"];
-        $kpiEmployeeId = $_POST["kpiEmployeeId"];
+		$monthName = $_POST["monthName"];
+		$year = $_POST["year"];
+		$formattedRange = $_POST["formattedRange"];
+		$kpiEmployeeId = $_POST["kpiEmployeeId"];
 		$kpiEmployeeHistoryId = $_POST["kpiEmployeeHistoryId"];
 
 		$role = UserRole::userRight();
@@ -761,38 +804,38 @@ class KpiPersonalController extends Controller
 			curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-employee?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year);
 			$history = curl_exec($api);
 			$history = json_decode($history, true);
-		}else{
+		} else {
 			curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-history-employee?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year . '&kpiEmployeeId=' . $kpiEmployeeId);
 			$history = curl_exec($api);
 			$history = json_decode($history, true);
 		}
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-team?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-team?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year);
 		$historyTeam = curl_exec($api);
 		$historyTeam = json_decode($historyTeam, true);
 
 		curl_close($api);
-        // throw new Exception(print_r($history,true));
+		// throw new Exception(print_r($history,true));
 
-        $data = [
-            "percentage" => $percentage,
-            "result" => $result,
-            "sumvalue" => $sumvalue,
-            "targetAmount" => $targetAmount,
-            "kpiId" => $kpiId,
-            "month" => $monthName,
-            "year" => $year,
-            "formattedRange" => $formattedRange,
-            "history" => $history,
-            "historyTeam" => $historyTeam
-        ];
+		$data = [
+			"percentage" => $percentage,
+			"result" => $result,
+			"sumvalue" => $sumvalue,
+			"targetAmount" => $targetAmount,
+			"kpiId" => $kpiId,
+			"month" => $monthName,
+			"year" => $year,
+			"formattedRange" => $formattedRange,
+			"history" => $history,
+			"historyTeam" => $historyTeam
+		];
 
-        // throw new Exception(print_r($data,true));
+		// throw new Exception(print_r($data,true));
 
-        header("Content-Type: application/json");
-        echo json_encode($data);
-        exit;
-    }
+		header("Content-Type: application/json");
+		echo json_encode($data);
+		exit;
+	}
 	public function actionViewPersonalKpi($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
@@ -878,7 +921,22 @@ class KpiPersonalController extends Controller
 		$employees = [];
 		$teams = [];
 		$role = UserRole::userRight();
+		$session = Yii::$app->session;
+		$session->open();
+		$session->set('kpiEmployee', [
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			"teamId" => $teamId,
+			"employeeId" => $employeeId,
+			"month" => $month,
+			"year" => $year,
+			"status" => $status,
+			"type" => $type
+		]);
 		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
+			if ($session->has('kpiEmployee')) {
+				$session->remove('kpiEmployee');
+			}
 			if ($type == "list") {
 				return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
 			} else {
@@ -924,7 +982,7 @@ class KpiPersonalController extends Controller
 				$teams = curl_exec($api);
 				$teams = json_decode($teams, true);
 			}
-		//throw new Exception(print_r($teams, true));
+			//throw new Exception(print_r($teams, true));
 		}
 		curl_close($api);
 		//throw new exception(print_r($teamKpis, true));
@@ -991,6 +1049,5 @@ class KpiPersonalController extends Controller
 		}
 		// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
 		return $this->redirect(Yii::$app->request->referrer);
-
 	}
 }

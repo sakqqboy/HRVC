@@ -31,8 +31,6 @@ class ViewController extends Controller
 	{
 		// $testparam = '2kuTjYKCc-NOCkEIOKgdoVOPLb_M7zajc1FJprQi-g0=';
 		$param = ModelMaster::decodeParams($hash);
-		// throw new Exception(print_r($param,true));
-// 
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
@@ -91,7 +89,7 @@ class ViewController extends Controller
 		$kgis = json_decode($kgis, true);
 		curl_close($api);
 		// throw new Exception(Yii::$app->user->id);
-		//throw new Exception(print_r($kgiDetail, true));
+		//throw new Exception(print_r($kgis, true));
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
 		// throw new Exception(print_r($kgis,true));
@@ -130,10 +128,11 @@ class ViewController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=0');
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
-		
+
 		curl_close($api);
 		$kgiHistoryData = [];
 
+		//throw new Exception(print_r($kgiTeamsHistory, true));
 		if (!empty($kgiTeamsHistory)) {
 			foreach ($kgiTeamsHistory as $year => $months) {
 				if (!is_array($months)) {
@@ -155,14 +154,15 @@ class ViewController extends Controller
 						"kgiId" => $kgiId,
 						"status" => $history['status'] ?? null,
 						"quantRatio" => $history["quantRatio"] ?? null,
-						"code" => $history["code"] ?? null,	
+						"code" => $history["code"] ?? null,
 						"result" => $history['result'] ?? null,
 						"ratio" => $history['ratio'] ?? null,
 						"amountType" => $history["amountType"] ?? null,
 						"isOver" => $history['isOver'] ?? null,
 						"fromDate" => $history['fromDate'] ?? null,
 						"toDate" => $history['toDate'] ?? null,
-						"kgiEmployee" => KgiEmployee::countKgiEmployeeInTeam($teamId, $kgiId, $month, $year)
+						"kgiEmployee" => KgiEmployee::countKgiEmployeeInTeam($teamId, $kgiId, $month, $year),
+						"countTeam" => $history["countTeam"] ?? 0
 					];
 				}
 			}

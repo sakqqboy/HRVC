@@ -66,14 +66,15 @@ class ManagementController extends Controller
 				->orderBy('updateDateTime DESC')
 				->all();
 		}
-		$data = [];
-		// $kgis = Kgi::find()
-		// 	->where(["status" => [1, 2, 4]])
-		// 	->asArray()
-		// 	->orderBy('updateDateTime DESC')
-		// 	->all();
+		//throw new exception(print_r($kgis, true));
+		//$data = [];
+		$data1 = [];
+		$data2 = [];
+		$data3 = [];
+		$data4 = [];
 		if (count($kgis) > 0) {
 			foreach ($kgis as $kgi) :
+				$commonData = [];
 				$ratio = 0;
 				if ($kgi["targetAmount"] != '' && $kgi["targetAmount"] != 0) {
 					if ($kgi["code"] == '<' || $kgi["code"] == '=') {
@@ -106,8 +107,11 @@ class ManagementController extends Controller
 				} else {
 					$kginame = $kgi["kgiName"];
 				}
-				$data[$kgi["kgiId"]] = [
+				$isOver = ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId']));
+				$kgiId = $kgi["kgiId"];
+				$commonData = [
 					"kgiName" => $kginame,
+					"kgiId" => $kgiId,
 					"companyId" => $kgi['companyId'],
 					"companyName" => Company::companyName($kgi["companyId"]),
 					"branch" => KgiBranch::kgiBranch($kgi["kgiId"]),
@@ -139,14 +143,25 @@ class ManagementController extends Controller
 					//"employee" => KgiTeam::employeeTeam($kgi['kgiId']),
 					"fromDate" => ModelMaster::engDate($kgi["fromDate"], 2),
 					"toDate" => ModelMaster::engDate($kgi["toDate"], 2),
-					"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
+					"isOver" => $isOver,
 					"countKgiHasKfi" => KfiHasKgi::countKfiWithKgi($kgi['kgiId']),
 					"countKgiHasKpi" => KgiHasKpi::countKgiHasKpi($kgi['kgiId']),
 					"amountType" => $kgi["amountType"],
 					"lastestUpdate" => ModelMaster::engDate($kgi["updateDateTime"], 2)
 				];
+				if ($kgi["fromDate"] == "" || $kgi["toDate"] == "") {
+					$data1[$kgiId] = $commonData;
+				} elseif ($isOver == 1 && $kgi["status"] == 1) {
+					$data2[$kgiId] = $commonData;
+				} elseif ($kgi["status"] == 2) {
+					$data4[$kgiId] = $commonData;
+				} else {
+					$data3[$kgiId] = $commonData;
+				}
 			endforeach;
 		}
+
+		$data = $data1 + $data2 + $data3 + $data4;
 		return json_encode($data);
 	}
 	public function actionKgiDetail($id, $kgiHistoryId)
@@ -161,7 +176,6 @@ class ManagementController extends Controller
 				->one();
 		} else {
 			$kgiHistory = KgiHistory::find()->where(["kgiHistoryId" => $kgiHistoryId])
-				->orderBy('kgiHistoryId DESC')
 				->asArray()
 				->one();
 		}
@@ -593,7 +607,8 @@ class ManagementController extends Controller
 						"countKgiHasKfi" => KfiHasKgi::countKfiWithKgi($kgi['kgiId']),
 						"countKgiHasKpi" => KgiHasKpi::countKgiHasKpi($kgi['kgiId']),
 						"amountType" => $kgi["amountType"],
-						"lastestUpdate" => ModelMaster::engDate($kgi["updateDateTime"], 2)
+						"lastestUpdate" => ModelMaster::engDate($kgi["updateDateTime"], 2),
+						"monthNumber" => $kgiHistory["month"],
 					];
 				} else {
 					$ratio = 0;
@@ -643,7 +658,8 @@ class ManagementController extends Controller
 						"countKgiHasKfi" => KfiHasKgi::countKfiWithKgi($kgi['kgiId']),
 						"countKgiHasKpi" => KgiHasKpi::countKgiHasKpi($kgi['kgiId']),
 						"amountType" => $kgi["amountType"],
-						"lastestUpdate" => ModelMaster::engDate($kgi["updateDateTime"], 2)
+						"lastestUpdate" => ModelMaster::engDate($kgi["updateDateTime"], 2),
+						"monthNumber" => $kgi["month"],
 					];
 				}
 			endforeach;
@@ -769,8 +785,7 @@ class ManagementController extends Controller
 		if (isset($kgiHistory) && count($kgiHistory) > 0) {
 
 			foreach ($kgiHistory as $history):
-
-				$allEmployee = KgiEmployee::kgiEmployee($kgiId, $history["month"], $history["year"]);
+				$allEmployee = KgiEmployee::kgiEmployee2($kgiId, $history["month"], $history["year"]);
 				$selectPic = [];
 				if (count($allEmployee) >= 3) {
 					$randomEmpployee = array_rand($allEmployee, 3);
@@ -819,7 +834,8 @@ class ManagementController extends Controller
 						"active" => $history["active"],
 						"employee" => count($allEmployee),
 						"kgiEmployee" => $selectPic,
-						"countTeam" => KgiTeam::kgiTeam($history["kgiId"], $history["month"], $history["year"]),
+						//"countTeam" => KgiTeam::kgiTeam($history["kgiId"], $history["month"], $history["year"]),
+						"countTeam" => KgiTeam::kgiTeam2($history["kgiId"], $history["month"], $history["year"]),
 					];
 				}
 

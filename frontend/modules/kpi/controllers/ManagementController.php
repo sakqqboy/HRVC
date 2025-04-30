@@ -86,6 +86,28 @@ class ManagementController extends Controller
             $staffId = Yii::$app->user->id;
             //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
         }
+
+        $session = Yii::$app->session;
+        if ($session->has('kpi')) {
+            $filter = $session->get('kpi');
+            $companyId = isset($filter["companyId"]) && $filter["companyId"] != null ? $filter["companyId"] : null;
+            $branchId = isset($filter["branchId"]) && $filter["branchId"] != null ? $filter["branchId"] : null;
+            $teamId = isset($filter["teamId"]) && $filter["teamId"] != null ? $filter["teamId"] : null;
+            $month = isset($filter["month"]) && $filter["month"] != null ? $filter["month"] : null;
+            $status = isset($filter["status"]) && $filter["status"] != null ? $filter["status"] : null;
+            $year = isset($filter["year"]) && $filter["year"] != null ? $filter["year"] : null;
+            $type = "list";
+            return $this->redirect(Yii::$app->homeUrl . 'kpi/management/kpi-search-result/' . ModelMaster::encodeParams([
+                "companyId" => $companyId,
+                "branchId" => $branchId,
+                "teamId" => $teamId,
+                "month" => $month,
+                "status" => $status,
+                "year" => $year,
+                "type" => $type
+            ]));
+        }
+
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -151,6 +173,26 @@ class ManagementController extends Controller
         if ($role == 1 || $role == 2) {
             $staffId = Yii::$app->user->id;
             //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+        }
+        $session = Yii::$app->session;
+        if ($session->has('kpi')) {
+            $filter = $session->get('kpi');
+            $companyId = isset($filter["companyId"]) && $filter["companyId"] != null ? $filter["companyId"] : null;
+            $branchId = isset($filter["branchId"]) && $filter["branchId"] != null ? $filter["branchId"] : null;
+            $teamId = isset($filter["teamId"]) && $filter["teamId"] != null ? $filter["teamId"] : null;
+            $month = isset($filter["month"]) && $filter["month"] != null ? $filter["month"] : null;
+            $status = isset($filter["status"]) && $filter["status"] != null ? $filter["status"] : null;
+            $year = isset($filter["year"]) && $filter["year"] != null ? $filter["year"] : null;
+            $type = "grid";
+            return $this->redirect(Yii::$app->homeUrl . 'kpi/management/kpi-search-result/' . ModelMaster::encodeParams([
+                "companyId" => $companyId,
+                "branchId" => $branchId,
+                "teamId" => $teamId,
+                "month" => $month,
+                "status" => $status,
+                "year" => $year,
+                "type" => $type
+            ]));
         }
 
         $api = curl_init();
@@ -388,7 +430,7 @@ class ManagementController extends Controller
         }
         if (count($team) > 0) {
             foreach ($team as $t) :
-                $old = KpiTeam::find()->where(["kpiId" => $kpiId, "teamId" => $t, "status" => 1])->one();
+                $old = KpiTeam::find()->where(["kpiId" => $kpiId, "teamId" => $t, "status" => [1, 2, 4]])->one();
                 if (!isset($old) || empty($old)) {
                     $kpiTeam = new KpiTeam();
                     $kpiTeam->kpiId = $kpiId;
@@ -921,14 +963,27 @@ class ManagementController extends Controller
         $type = $param["type"];
         $branches = [];
         $teams = [];
+        $session = Yii::$app->session;
+        $session->open();
+        $session->set('kpi', [
+            "companyId" => $companyId,
+            "branchId" => $branchId,
+            "month" => $month,
+            "year" => $year,
+            "status" => $status,
+            "type" => $type
+        ]);
         if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
+            if ($session->has('kpi')) {
+                $session->remove('kpi');
+            }
             if ($type == "list") {
                 return $this->redirect(Yii::$app->homeUrl . 'kpi/management/index');
             } else {
                 return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
             }
         }
-        $paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year;
+        $paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year;
         $role = UserRole::userRight();
         $adminId = '';
         $gmId = '';
@@ -1985,6 +2040,7 @@ class ManagementController extends Controller
         $kpiHistory->kpiId = $currentHistory["kpiId"];
         $kpiHistory->createrId = Yii::$app->user->id;
         $kpiHistory->titleProcess = 'New target';
+        $kpiHistory->description = $currentHistory["description"];
         $kpiHistory->nextCheckDate = null;
         $kpiHistory->amountType = $currentHistory["amountType"];
         $kpiHistory->code = $currentHistory["code"];

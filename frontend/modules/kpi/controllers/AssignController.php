@@ -13,6 +13,7 @@ use frontend\models\hrvc\KpiBranch;
 use frontend\models\hrvc\KpiDepartment;
 use frontend\models\hrvc\KpiEmployee;
 use frontend\models\hrvc\KpiEmployeeHistory;
+use frontend\models\hrvc\KpiHistory;
 use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\KpiTeamHistory;
 use frontend\models\hrvc\Team;
@@ -69,6 +70,15 @@ class AssignController extends Controller
 		}
 		$kpiId = $param["kpiId"];
 		$companyId = $param["companyId"];
+		if (isset($param["kpiHistoryId"])) {
+			$kpiHistoryId = $param["kpiHistoryId"];
+		} else {
+			$kpiHistoryId = 0;
+		}
+		if (isset($param["kpiTeamHistoryId"])) {
+			$kpiHistoryId = KpiHistory::findKpiHistoryFromTeam($param["kpiTeamHistoryId"]);
+		}
+
 		$role = UserRole::userRight();
 		$teamId = Team::userTeam(Yii::$app->user->id);
 		$url = $param["url"] ?? Yii::$app->request->referrer;
@@ -80,15 +90,16 @@ class AssignController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=' . $kpiHistoryId);
 		$kpiDetail = curl_exec($api);
 		$kpiDetail = json_decode($kpiDetail, true);
 		$text = '';
-		// throw new Exception(print_r($kpiDetail, true));	
+		//throw new Exception(print_r($kpiDetail, true));
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team?kpiId=' . $kpiId . '&&month=' . $kpiDetail["month"] . '&&year=' . $kpiDetail["year"]);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-each-unit?kpiId=' . $kpiId . '&&month=' . $kpiDetail["month"] . '&&year=' . $kpiDetail["year"]);
 		$kpiTeams = curl_exec($api);
 		$kpiTeams = json_decode($kpiTeams, true);
+		//throw new Exception(print_r($kpiTeams, true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/company-team?id=' . $companyId);
 		$teams = curl_exec($api);
@@ -176,7 +187,6 @@ class AssignController extends Controller
 	}
 	public function actionUpdateTeamKpi()
 	{
-		
 		if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
 			foreach ($_POST["team"] as $teamId => $team):
 				$kpiTeam = KpiTeam::find()
@@ -185,13 +195,21 @@ class AssignController extends Controller
 					->one();
 				$targetTeam = str_replace(",", "", $_POST["teamTarget"][$teamId]);
 				if (isset($kpiTeam) && !empty($kpiTeam)) {
-					//มีอยู่แล้ว
 					if ($kpiTeam->target != $targetTeam) {
 						$kpiTeam->target = $targetTeam;
-						// $kpiTeam->month = $_POST["month"];
-						// $kpiTeam->year = $_POST["year"];
 						$kpiTeam->updateDateTime = new Expression('NOW()');
 						$kpiTeam->save(false);
+						$kpiTeamHistory = new KpiTeamHistory();
+						$kpiTeamHistory->kpiTeamId = $kpiTeam->kpiTeamId;
+						$kpiTeamHistory->target = $targetTeam;
+						$kpiTeamHistory->month = $_POST["month"];
+						$kpiTeamHistory->year = $_POST["year"];
+						$kpiTeamHistory->result = 0;
+						$kpiTeamHistory->status = 1;
+						$kpiTeamHistory->detail = "Change Target";
+						$kpiTeamHistory->createDateTime = new Expression('NOW()');
+						$kpiTeamHistory->updateDateTime = new Expression('NOW()');
+						$kpiTeamHistory->save(false);
 					}
 				} else {
 					//ยังไม่มีเพิ่มเดือนละปี
@@ -205,7 +223,7 @@ class AssignController extends Controller
 					$kpiTeam->status = 1;
 					$kpiTeam->createDateTime = new Expression('NOW()');
 					$kpiTeam->updateDateTime = new Expression('NOW()');
-					if ($kpiTeam->save(false)){
+					if ($kpiTeam->save(false)) {
 						$kpiTeamHistory = new KpiTeamHistory();
 						$kpiTeamId = Yii::$app->db->lastInsertID;
 						$kpiTeamHistory->kpiTeamId = $kpiTeamId;
@@ -221,30 +239,29 @@ class AssignController extends Controller
 					//ล่าสุด
 				}
 
-				$departmentId = Team::find() ->select('departmentId') ->where(['teamId' => $teamId]) ->andWhere("status!=99")->one();
-						// $KpiDepartmentId = departmentId
-						$department = KpiDepartment::find() ->where([ 'kpiId' => $_POST["kpiId"],'departmentId' => $departmentId-> departmentId]) ->andWhere("status!=99") ->one();
-						if (empty($department)) {
-							$KpiDepartment = new KpiDepartment();
-							$KpiDepartment->kpiId = $_POST["kpiId"];
-							$KpiDepartment->departmentId = $departmentId ->departmentId;
-							$KpiDepartment->status = 1;
-							$KpiDepartment->createDateTime = new Expression('NOW()');
-							$KpiDepartment->updateDateTime = new Expression('NOW()');
-							$KpiDepartment->save(false);
-						}
+				$departmentId = Team::find()->select('departmentId')->where(['teamId' => $teamId])->andWhere("status!=99")->one();
+				$department = KpiDepartment::find()->where(['kpiId' => $_POST["kpiId"], 'departmentId' => $departmentId->departmentId])->andWhere("status!=99")->one();
+				if (empty($department)) {
+					$KpiDepartment = new KpiDepartment();
+					$KpiDepartment->kpiId = $_POST["kpiId"];
+					$KpiDepartment->departmentId = $departmentId->departmentId;
+					$KpiDepartment->status = 1;
+					$KpiDepartment->createDateTime = new Expression('NOW()');
+					$KpiDepartment->updateDateTime = new Expression('NOW()');
+					$KpiDepartment->save(false);
+				}
 
-						$branchId = Department::find() ->select('branchId') ->where(['departmentId' => $departmentId->departmentId]) ->andWhere("status!=99")->one();
-						$branch = KpiBranch::find() ->where([ 'kpiId' => $_POST["kpiId"],'branchId' => $branchId-> branchId]) ->andWhere("status!=99") ->one();
-						if (empty($branch)) {
-							$KpiBranch = new KpiBranch();
-							$KpiBranch->kpiId = $_POST["kpiId"];
-							$KpiBranch->branchId = $branchId ->branchId;
-							$KpiBranch->status = 1;
-							$KpiBranch->createDateTime = new Expression('NOW()');
-							$KpiBranch->updateDateTime = new Expression('NOW()');
-							$KpiBranch->save(false);
-						}
+				$branchId = Department::find()->select('branchId')->where(['departmentId' => $departmentId->departmentId])->andWhere("status!=99")->one();
+				$branch = KpiBranch::find()->where(['kpiId' => $_POST["kpiId"], 'branchId' => $branchId->branchId])->andWhere("status!=99")->one();
+				if (empty($branch)) {
+					$KpiBranch = new KpiBranch();
+					$KpiBranch->kpiId = $_POST["kpiId"];
+					$KpiBranch->branchId = $branchId->branchId;
+					$KpiBranch->status = 1;
+					$KpiBranch->createDateTime = new Expression('NOW()');
+					$KpiBranch->updateDateTime = new Expression('NOW()');
+					$KpiBranch->save(false);
+				}
 
 			endforeach;
 		}
@@ -256,9 +273,9 @@ class AssignController extends Controller
 			foreach ($deleteTeamKpi as $delKpi):
 				$delKpi->status = 99;
 				$delKpi->createrId = Yii::$app->user->id;
-				$delKpi->updateDateTime = new Expression('NOW()');		
+				$delKpi->updateDateTime = new Expression('NOW()');
 				$delKpi->save(false);
-			
+
 			endforeach;
 		}
 		$employeeIds = [];
@@ -298,7 +315,7 @@ class AssignController extends Controller
 						$kpiEmployee->status = 1;
 						$kpiEmployee->createDateTime = new Expression('NOW()');
 						$kpiEmployee->updateDateTime = new Expression('NOW()');
-						if($kpiEmployee->save(false)){
+						if ($kpiEmployee->save(false)) {
 							$kpiEmployeeHistory = new KpiEmployeeHistory();
 							$kpiEmployeeId = Yii::$app->db->lastInsertID;
 							$kpiEmployeeHistory->kpiEmployeeId = $kpiEmployeeId;
@@ -340,7 +357,7 @@ class AssignController extends Controller
 					// $delKpi->delete();
 					$delKpi->status = 99;
 					$delKpi->createrId = Yii::$app->user->id;
-					$delKpi->updateDateTime = new Expression('NOW()');		
+					$delKpi->updateDateTime = new Expression('NOW()');
 					$delKpi->save(false);
 				endforeach;
 			}

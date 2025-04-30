@@ -30,7 +30,7 @@ class Path
 		if ($_SERVER['HTTP_HOST'] == "localhost") {
 			$url = 'http://localhost/HRVC/frontend/web/';
 		} else {
-			$url = 'https://tcg-hrvc-system.com/';
+			$url = 'https://tcghrvc.com/';
 		}
 		return $url;
 	}
@@ -39,7 +39,7 @@ class Path
 		if ($_SERVER['HTTP_HOST'] == "localhost") {
 			$url = 'http://localhost/HRVC/backend/web/';
 		} else {
-			$url = 'https://api.tcg-hrvc-system.com/';
+			$url = 'https://api.tcghrvc.com/';
 		}
 		return $url;
 	}
@@ -48,7 +48,7 @@ class Path
 		if ($_SERVER['HTTP_HOST'] == "localhost") {
 			$url = 'http://localhost/financial/financial/';
 		} else {
-			$url = 'https://fs.tcg-hrvc-system.com/financial/index';
+			$url = 'https://fs.tcghrvc.com/financial/index';
 		}
 		return $url;
 	}

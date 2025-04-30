@@ -5,6 +5,7 @@ namespace backend\models\hrvc;
 use Yii;
 use \backend\models\hrvc\master\KgiEmployeeMaster;
 use common\models\ModelMaster;
+use Exception;
 
 /**
  * This is the model class for table "kgi_employee".
@@ -39,7 +40,7 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
         $kgiEmployee = KgiEmployee::find()
             ->select('e.picture,e.employeeId,e.gender,kgi_employee.month,kgi_employee.year')
             ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-            ->where(["kgi_employee.status" => [1, 2, 4], "kgi_employee.kgiId" => $kgiId, "e.status" => 1, "kgi_employee.month" => $month, "kgi_employee.year" => $year])
+            ->where(["kgi_employee.status" => [1, 2, 4, 5], "kgi_employee.kgiId" => $kgiId, "kgi_employee.month" => $month, "kgi_employee.year" => $year])
             ->andWhere("kgi_employee.employeeId is not null")
             ->asArray()
             ->all();
@@ -57,6 +58,45 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
 
                     //     $employee[$ke["employeeId"]] = 'image/lady.jpg';
                     // }
+                }
+            endforeach;
+        }
+        return $employee;
+    }
+    public static function kgiEmployee2($kgiId, $month, $year)
+    {
+        /*    $kgiEmployee = KgiEmployee::find()
+            ->select('e.picture,e.employeeId,e.gender,kgi_employee.month,kgi_employee.year')
+            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+            ->where(["kgi_employee.status" => [1, 2, 4, 5], "kgi_employee.kgiId" => $kgiId, "e.status" => 1, "kgi_employee.month" => $month, "kgi_employee.year" => $year])
+            ->andWhere("kgi_employee.employeeId is not null")
+            ->asArray()
+            ->all();*/
+        $kgiEmployee = KgiEmployeeHistory::find()
+            ->select('e.picture,e.employeeId,e.gender,kgi_employee_history.month,kgi_employee_history.year,kgi_employee_history.kgiEmployeeId')
+            ->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiEmployeeId=kgi_employee_history.kgiEmployeeId")
+            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=ke.employeeId")
+            ->where(["ke.kgiId" => $kgiId, "kgi_employee_history.month" => $month, "kgi_employee_history.year" => $year])
+            ->andWhere("kgi_employee_history.status!=99")
+            ->asArray()
+            ->all();
+        if (!isset($kgiEmployee) || count($kgiEmployee) == 0) {
+            $kgiEmployee = KgiEmployee::find()
+                ->select('e.picture,e.employeeId,e.gender,kgi_employee.month,kgi_employee.year')
+                ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+                ->where(["kgi_employee.status" => [1, 2, 4, 5], "kgi_employee.kgiId" => $kgiId, "kgi_employee.month" => $month, "kgi_employee.year" => $year])
+                ->andWhere("kgi_employee.employeeId is not null")
+                ->asArray()
+                ->all();
+        }
+        $employee = [];
+        if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+            foreach ($kgiEmployee as $ke) :
+                if ($ke["picture"] != "") {
+                    $employee[$ke["employeeId"]] = $ke["picture"];
+                } else {
+
+                    $employee[$ke["employeeId"]] = 'image/user.svg';
                 }
             endforeach;
         }

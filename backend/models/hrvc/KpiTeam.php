@@ -34,16 +34,40 @@ class KpiTeam extends \backend\models\hrvc\master\KpiTeamMaster
     {
         return array_merge(parent::attributeLabels(), []);
     }
-    public static function kpiTeam($kpiId,$month,$year)
+    public static function kpiTeam($kpiId, $month, $year)
     {
         $kpiTeam = KpiTeam::find()
-            ->select('t.teamName,kpi_team.teamId')
-            ->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
-            ->where(["t.status" => 1, "kpi_team.kpiId" => $kpiId, "kpi_team.month" => $month, "kpi_team.year" => $year])
-            ->andWhere("kpi_team.status!=99")
+            ->where(["kpiId" => $kpiId, "month" => $month, "year" => $year])
+            ->andWhere("status!=99")
             ->asArray()
             ->all();
         return count($kpiTeam);
+    }
+    public static function kpiTeam2($kpiId, $month, $year)
+    {
+        $kpiTeamHistory = KpiTeamHistory::find()
+            ->select('kpi_team_history.month,kpi_team_history.year,kpi_team_history.kpiTeamId')
+            ->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiTeamId=kpi_team_history.kpiTeamId")
+            ->where(["kt.kpiId" => $kpiId, "kpi_team_history.month" => $month, "kpi_team_history.year" => $year])
+            ->andWhere("kpi_team_history.status!=99")
+            ->asArray()
+            ->all();
+        if (!isset($kpiTeamHistory) || count($kpiTeamHistory) == 0) {
+            $kpiTeamHistory = KpiTeam::find()
+                ->where(["kpiId" => $kpiId, "month" => $month, "year" => $year])
+                ->andWhere("status!=99")
+                ->asArray()
+                ->all();
+        }
+        $team = [];
+        if (isset($kpiTeamHistory) && count($kpiTeamHistory) > 0) {
+            foreach ($kpiTeamHistory as $kgh):
+                if (!isset($team[$kgh["kpiTeamId"]])) {
+                    $team[$kgh["kpiTeamId"]] = 1;
+                }
+            endforeach;
+        }
+        return count($team);
     }
     public static function employeeTeam($kpiId)
     {

@@ -34,12 +34,12 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
     {
         return array_merge(parent::attributeLabels(), []);
     }
-    public static function kpiEmployee($kpiId,$month,$year)
+    public static function kpiEmployee($kpiId, $month, $year)
     {
         $kpiEmployee = Employee::find()
-            ->select('employee.picture,employee.employeeId,employee.gender,ke.`month`, ke.`year`')
+            ->select('employee.picture,employee.employeeId,employee.gender,ke.month, ke.year')
             ->JOIN("LEFT JOIN", "kpi_employee ke", "employee.employeeId=ke.employeeId")
-            ->where(["ke.kpiId" => $kpiId, "ke.status" => [1,2,4],"ke.month" => $month,"ke.year" => $year])
+            ->where(["ke.kpiId" => $kpiId, "ke.status" => [1, 2, 4], "ke.month" => $month, "ke.year" => $year])
             ->asArray()
             ->all();
         // $employee = ["ke.kpiId" => $kpiId, "ke.status" => 1,"ke.month" => $month,"ke.year" => $year];
@@ -60,8 +60,40 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         }
         return $employee;
     }
+    public static function kpiEmployee2($kpiId, $month, $year)
+    {
 
-    public static function kpiTeamEmployee($kpiId,$month,$year, $teamId)
+        $kpiEmployee = KpiEmployeeHistory::find()
+            ->select('e.picture,e.employeeId,e.gender,kpi_employee_history.month,kpi_employee_history.year,kpi_employee_history.kpiEmployeeId')
+            ->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=kpi_employee_history.kpiEmployeeId")
+            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=ke.employeeId")
+            ->where(["ke.kpiId" => $kpiId, "kpi_employee_history.month" => $month, "kpi_employee_history.year" => $year])
+            ->andWhere("kpi_employee_history.status!=99")
+            ->asArray()
+            ->all();
+        if (!isset($kpiEmployee) || count($kpiEmployee) == 0) {
+            $kpiEmployee = KpiEmployee::find()
+                ->select('e.picture,e.employeeId,e.gender,kpi_employee.month,kpi_employee.year')
+                ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+                ->where(["kpi_employee.status" => [1, 2, 4, 5], "kpi_employee.kpiId" => $kpiId, "kpi_employee.month" => $month, "kpi_employee.year" => $year])
+                ->andWhere("kpi_employee.employeeId is not null")
+                ->asArray()
+                ->all();
+        }
+        $employee = [];
+        if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+            foreach ($kpiEmployee as $ke) :
+                if ($ke["picture"] != "") {
+                    $employee[$ke["employeeId"]] = $ke["picture"];
+                } else {
+
+                    $employee[$ke["employeeId"]] = 'image/user.svg';
+                }
+            endforeach;
+        }
+        return $employee;
+    }
+    public static function kpiTeamEmployee($kpiId, $month, $year, $teamId)
     {
         $kpiEmployee = Employee::find()
             ->select('employee.picture, employee.employeeId, employee.gender, employee.teamId, ke.month, ke.year')
@@ -264,7 +296,7 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         }
         return $percent;
     }
-    public static function countKpiFromTeam($kpiId, $teamId,$month,$year)
+    public static function countKpiFromTeam($kpiId, $teamId, $month, $year)
     {
         $kpiEmployee = KpiEmployee::find()
             ->select('e.picture,e.employeeId,e.gender,kpi_employee.year,kpi_employee.month')
@@ -319,11 +351,11 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
             ->select('teamId')
             ->where(['kpiTeamId' => $kpiTeamId])
             ->scalar(); // ดึงค่าเดียวแทนที่จะเป็น query object
-    
+
         if (!$teamId) {
             return 0; // หากไม่มีทีมให้คืนค่า 0 ทันที
         }
-    
+
         // คำนวณผลรวมของ result
         $sumResult = KpiEmployee::find()
             ->join("LEFT JOIN", "employee e", "e.employeeId = kpi_employee.employeeId")
@@ -336,8 +368,7 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
                 'e.teamId' => $teamId
             ])
             ->sum('result');
-    
+
         return $sumResult ?? 0;
     }
-    
 }

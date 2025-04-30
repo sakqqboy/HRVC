@@ -42,6 +42,37 @@ class KpiTeamController extends Controller
 			->all();
 		return json_encode($kpiTeams);
 	}
+	public function actionKpiTeamEachUnit($kpiId, $month, $year)
+	{
+		$kpiTeamHistory = KpiTeamHistory::find()
+			->select('kpi_team_history.month,kpi_team_history.year,kpi_team_history.kpiTeamId,kt.teamId,kpi_team_history.target')
+			->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiTeamId=kpi_team_history.kpiTeamId")
+			->where(["kt.kpiId" => $kpiId, "kpi_team_history.month" => $month, "kpi_team_history.year" => $year])
+			->andWhere("kpi_team_history.status!=99")
+			->orderBy('kpi_team_history.status DESC,kpi_team_history.updateDateTime DESC')
+			->asArray()
+			->all();
+		if (!isset($kpiTeamHistory) || count($kpiTeamHistory) == 0) {
+			$kpiTeamHistory = KpiTeam::find()
+				->where(["kpiId" => $kpiId, "month" => $month, "year" => $year])
+				->andWhere("status!=99")
+				->asArray()
+				->all();
+		}
+		$team = [];
+		if (isset($kpiTeamHistory) || count($kpiTeamHistory) == 0) {
+			foreach ($kpiTeamHistory as $kgh):
+				if (!isset($team[$kgh["teamId"]])) {
+					$team[$kgh["teamId"]] = [
+						"target" => $kgh["target"],
+						"teamId" => $kgh["teamId"]
+					];
+				}
+			endforeach;
+		}
+		return json_encode($team);
+		//return json_encode($kgiTeams);
+	}
 	public function actionKpiTeamSummarize($kpiId)
 	{
 		$kpiTeams = KpiTeam::find()
@@ -64,13 +95,13 @@ class KpiTeamController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionKpiOneTeamSummarize($kpiId,$kpiTeamId)
+	public function actionKpiOneTeamSummarize($kpiId, $kpiTeamId)
 	{
 		$kpiTeams = KpiTeam::find()
 			->select('kpi_team.teamId,kpi_team.kpiTeamId,t.teamName,t.departmentId')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
 			->where(["kpi_team.status" => [1, 2, 4], "t.status" => [1, 2, 4]])
-			->andWhere(["kpi_team.kpiId" => $kpiId,"kpi_team.kpiTeamId" => $kpiTeamId])
+			->andWhere(["kpi_team.kpiId" => $kpiId, "kpi_team.kpiTeamId" => $kpiTeamId])
 			->orderBy('t.teamName')
 			->asArray()
 			->all();
@@ -126,7 +157,7 @@ class KpiTeamController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiTeam["kpiId"], $kpiTeam["teamId"],$kpiTeam["month"],$kpiTeam["year"]);
+				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiTeam["kpiId"], $kpiTeam["teamId"], $kpiTeam["month"], $kpiTeam["year"]);
 				$countTeamEmployee = count($teamEmployee);
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
@@ -236,7 +267,7 @@ class KpiTeamController extends Controller
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $kpiTeam) :
 				$kpiTeamHistory = KpiTeamHistory::find()
-					->where(["kpiTeamId" => $kpiTeam["kpiTeamId"] , "status" => [1, 2, 4]])
+					->where(["kpiTeamId" => $kpiTeam["kpiTeamId"], "status" => [1, 2, 4]])
 					->asArray()
 					->orderBy('year DESC, month DESC,updateDateTime DESC')
 					->one();
@@ -262,7 +293,7 @@ class KpiTeamController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiTeam["kpiId"], $kpiTeam["teamId"],$kpiTeam["month"],$kpiTeam["year"]);
+				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiTeam["kpiId"], $kpiTeam["teamId"], $kpiTeam["month"], $kpiTeam["year"]);
 				$countTeamEmployee = count($teamEmployee);
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
@@ -305,7 +336,7 @@ class KpiTeamController extends Controller
 					"kpiTeamHistoryId" => $kpiTeamHistory["kpiTeamHistoryId"] ?? 0,
 					"flag" => Country::countryFlagBycompany($kpiTeam["companyId"]),
 					"countryName" => Country::countryNameBycompany($kpiTeam['companyId']),
-					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"],$kpiTeam["month"],$kpiTeam["year"]),
+					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
 					"ratio" => number_format($ratio, 2),
 					// "isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeamHistory['kpiTeamId'])),
 					"isOver" => ModelMaster::isOverDuedate($kpiTeamHistory['nextCheckDate']),
@@ -502,7 +533,7 @@ class KpiTeamController extends Controller
 			->andWhere(['e.status' => 1])
 			->groupBy([
 				'keh.kpiEmployeeHistoryId',
-				'keh.kpiEmployeeId',	
+				'keh.kpiEmployeeId',
 				'keh.result',
 				'keh.target',
 				'keh.createDateTime',
@@ -543,7 +574,7 @@ class KpiTeamController extends Controller
 		return json_encode($data);
 	}
 
-	public function actionKpiHistoryTeam($kpiId, $month , $year, $teamId)
+	public function actionKpiHistoryTeam($kpiId, $month, $year, $teamId)
 	{
 
 		$kpiTeam = kpiTeam::find()
@@ -720,7 +751,7 @@ class KpiTeamController extends Controller
 				"nextCheckDate" =>  $kpiTeamHistory["nextCheckDate"],
 				"nextCheckText" => ModelMaster::engDate($kpiTeamHistory["nextCheckDate"], 2),
 				"status" => $kpiTeamHistory["status"],
-				"kpiEmployee" => kpiEmployee::kpiEmployee($kpiTeamHistory["kpiId"],$kpiTeamHistory["month"],$kpiTeamHistory["year"]),
+				"kpiEmployee" => kpiEmployee::kpiEmployee($kpiTeamHistory["kpiId"], $kpiTeamHistory["month"], $kpiTeamHistory["year"]),
 				// "kpiTeamEmployee" => kpiEmployee::kpiTeamEmployee($kpiTeamHistory["kpiId"],$kpiTeamHistory["month"],$kpiTeamHistory["year"],$kpiTeamHistory["teamId"]),
 				"ratio" => number_format($ratio, 2),
 				"kpiDetail" => $kpiTeamHistory["kpiDetail"],
@@ -862,7 +893,7 @@ class KpiTeamController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiTeam["kpiId"], $kpiTeam["teamId"],$kpiTeam["month"],$kpiTeam["year"]);
+				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiTeam["kpiId"], $kpiTeam["teamId"], $kpiTeam["month"], $kpiTeam["year"]);
 				$countTeamEmployee = count($teamEmployee);
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
@@ -905,7 +936,7 @@ class KpiTeamController extends Controller
 					"kpiTeamHistoryId" => $kpiTeamHistory["kpiTeamHistoryId"] ?? 0,
 					"flag" => Country::countryFlagBycompany($kpiTeam["companyId"]),
 					"countryName" => Country::countryNameBycompany($kpiTeam['companyId']),
-					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"],$kpiTeam["month"],$kpiTeam["year"]),
+					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
 					"ratio" => number_format($ratio, 2),
 					"isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeam['kpiTeamId'])),
 					"employee" => KpiTeam::kpiTeamEmployee($kpiTeam['kpiId'], $kpiTeam["kpiTeamId"]),
@@ -963,10 +994,10 @@ class KpiTeamController extends Controller
 
 					if (isset($kpiEmployee) && !empty($kpiEmployee)) {
 
-							$employeeTarget = $kpiEmployee["target"];
-							$totalTeamTarget += $employeeTarget;
-							$totalEmployee++;
-					
+						$employeeTarget = $kpiEmployee["target"];
+						$totalTeamTarget += $employeeTarget;
+						$totalEmployee++;
+
 						$data[$kpiTeam["teamId"]]["employee"][$employee["employeeId"]] = [
 							"employeeFirstname" => $employee["employeeFirstname"],
 							"employeeSurename" => $employee["employeeSurename"],
@@ -1025,7 +1056,7 @@ class KpiTeamController extends Controller
 	public function actionKpiTeamHistorySummarize($kpiTeamId)
 	{
 		$kpiTeamHistory = KpiTeamHistory::find()
-			->select('kpi_team_history.*,k.unitId,k.quantRatio,k.code,k.amountType')
+			->select('kpi_team_history.*,k.unitId,k.quantRatio,k.code,k.amountType,k.kpiId')
 			->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiTeamId=kpi_team_history.kpiTeamId")
 			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kt.kpiId")
 			->where([
@@ -1054,37 +1085,29 @@ class KpiTeamController extends Controller
 					}
 				}
 				if (!isset($data[$history["year"]][$history["month"]])) {
-				$data[$history["year"]][$history["month"]] = [
-					"kpiTeamHistoryId" => $history["kpiTeamHistoryId"],
-					"target" => (float)$history['target'],
-					"unit" => Unit::unitName($history['unitId']),
-					"month" => ModelMaster::monthEng($history['month'], 1),
-					"year" => $history["year"],
-					"status" => $history['status'],
-					"quantRatio" => $history["quantRatio"],
-					"code" =>  $history["code"],
-					"result" => (float)$history["result"],
-					"ratio" => number_format($ratio, 2),
-					"amountType" => $history["amountType"],
-					"isOver" => ModelMaster::isOverDuedate($history["nextCheckDate"]),
-					"fromDate" => ModelMaster::engDate($history["fromDate"], 2),
-					"toDate" => ModelMaster::engDate($history["toDate"], 2),
-				];
-			}
+					$data[$history["year"]][$history["month"]] = [
+						"kpiTeamHistoryId" => $history["kpiTeamHistoryId"],
+						"target" => (float)$history['target'],
+						"unit" => Unit::unitName($history['unitId']),
+						"month" => ModelMaster::monthEng($history['month'], 1),
+						"year" => $history["year"],
+						"status" => $history['status'],
+						"quantRatio" => $history["quantRatio"],
+						"code" =>  $history["code"],
+						"result" => (float)$history["result"],
+						"ratio" => number_format($ratio, 2),
+						"amountType" => $history["amountType"],
+						"isOver" => ModelMaster::isOverDuedate($history["nextCheckDate"]),
+						"fromDate" => ModelMaster::engDate($history["fromDate"], 2),
+						"toDate" => ModelMaster::engDate($history["toDate"], 2),
+						"countTeam" => KpiTeam::kpiTeam2($history["kpiId"], $history["month"], $history["year"]),
+						"kpiId" => $history["kpiId"]
+					];
+				}
 			endforeach;
 		}
-		return json_encode($data	);
+		return json_encode($data);
 	}
-	// public function actionWaitForApprove()
-	// {
-	// 	$kpiTeam = KpiTeamHistory::find()
-	// 		->where(["status" => 88])
-	// 		->asArray()
-	// 		->all();
-	// 	$res["totalRqeuest"] = count($kpiTeam);
-	// 	return json_encode($res);
-	// }
-
 	public function actionWaitForApprove($branchId, $isAdmin)
 	{
 		if ($isAdmin == 1) {

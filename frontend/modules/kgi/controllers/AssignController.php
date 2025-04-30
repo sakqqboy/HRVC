@@ -12,6 +12,7 @@ use frontend\models\hrvc\KgiBranch;
 use frontend\models\hrvc\KgiDepartment;
 use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\KgiEmployeeHistory;
+use frontend\models\hrvc\KgiHistory;
 use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\KgiTeamHistory;
 use frontend\models\hrvc\Team;
@@ -48,7 +49,6 @@ class AssignController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$role = UserRole::userRight();
-		// throw new Exception(print_r($param, true));
 		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
 		}
@@ -69,8 +69,14 @@ class AssignController extends Controller
 		}
 		$kgiId = $param["kgiId"];
 		$companyId = $param["companyId"];
-		// $month = $param["month"];
-		// $year = $param["year"];
+		if (isset($param["kgiHistoryId"])) {
+			$kgiHistoryId = $param["kgiHistoryId"];
+		} else {
+			$kgiHistoryId = 0;
+		}
+		if (isset($param["kgiTeamHistoryId"])) {
+			$kgiHistoryId = KgiHistory::findKgiHistoryFromTeam($param["kgiTeamHistoryId"]);
+		}
 
 		$teamId = Team::userTeam(Yii::$app->user->id);
 		$url = $param["url"] ?? Yii::$app->request->referrer;
@@ -84,15 +90,16 @@ class AssignController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=0");
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=" . $kgiHistoryId);
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
+		//throw new Exception(print_r($kgiDetail, true));
 
 		//throw new Exception($kgiDetail["month"] . '=' . $kgiDetail["year"] . $kgiId);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-each-unit?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
 		$kgiTeams = curl_exec($api);
 		$kgiTeams = json_decode($kgiTeams, true);
-
+		//throw new Exception(print_r($kgiTeams, true));
 
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/company-team?id=' . $companyId);
@@ -107,6 +114,7 @@ class AssignController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-employee?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
 		$kgiTeamEmployee = curl_exec($api);
 		$kgiTeamEmployee = json_decode($kgiTeamEmployee, true);
+		//throw new Exception(print_r($kgiTeamEmployee, true));
 
 		curl_close($api);
 		return $this->render('assign', [
@@ -162,12 +170,6 @@ class AssignController extends Controller
 	}
 	public function actionUpdateTeamKgi()
 	{
-
-		// throw new Exception(print_r($_POST, true));
-
-		// throw new Exception(print_r(count($_POST["employeeTarget"]), true));
-		// exit;
-
 		if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
 			foreach ($_POST["team"] as $teamId => $team):
 				$kgiTeam = KgiTeam::find()
@@ -180,6 +182,17 @@ class AssignController extends Controller
 						$kgiTeam->target = $targetTeam;
 						$kgiTeam->updateDateTime = new Expression('NOW()');
 						$kgiTeam->save(false);
+						$KgiTeamHistory = new KgiTeamHistory();
+						$KgiTeamHistory->kgiTeamId = $kgiTeam->kgiTeamId;
+						$KgiTeamHistory->target = $targetTeam;
+						$KgiTeamHistory->month = $_POST["month"];
+						$KgiTeamHistory->year = $_POST["year"];
+						$KgiTeamHistory->result = 0;
+						$KgiTeamHistory->status = 1;
+						$KgiTeamHistory->detail = "Change Target";
+						$KgiTeamHistory->createDateTime = new Expression('NOW()');
+						$KgiTeamHistory->updateDateTime = new Expression('NOW()');
+						$KgiTeamHistory->save(false);
 					}
 				} else {
 					$kgiTeam = new KgiTeam();

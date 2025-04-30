@@ -58,6 +58,7 @@ class ManagementController extends Controller
 		$managerId = '';
 		$supervisorId = '';
 		$staffId = '';
+		$session = Yii::$app->session;
 		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
 		}
@@ -76,6 +77,25 @@ class ManagementController extends Controller
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
 			//return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
+		}
+		if ($session->has('kgi')) {
+			$filter = $session->get('kgi');
+			$companyId = isset($filter["companyId"]) && $filter["companyId"] != null ? $filter["companyId"] : null;
+			$branchId = isset($filter["branchId"]) && $filter["branchId"] != null ? $filter["branchId"] : null;
+			$teamId = isset($filter["teamId"]) && $filter["teamId"] != null ? $filter["teamId"] : null;
+			$month = isset($filter["month"]) && $filter["month"] != null ? $filter["month"] : null;
+			$status = isset($filter["status"]) && $filter["status"] != null ? $filter["status"] : null;
+			$year = isset($filter["year"]) && $filter["year"] != null ? $filter["year"] : null;
+			$type = "list";
+			return $this->redirect(Yii::$app->homeUrl . 'kgi/management/kgi-search-result/' . ModelMaster::encodeParams([
+				"companyId" => $companyId,
+				"branchId" => $branchId,
+				"teamId" => $teamId,
+				"month" => $month,
+				"status" => $status,
+				"year" => $year,
+				"type" => $type
+			]));
 		}
 
 		$api = curl_init();
@@ -101,7 +121,7 @@ class ManagementController extends Controller
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$companyId = $employee["companyId"];
 		//$branchId = Branch::userBranchId(Yii::$app->user->id);
-		//throw new exception($role);
+
 		return $this->render('index', [
 			"units" => $units,
 			"companies" => $companies,
@@ -127,6 +147,7 @@ class ManagementController extends Controller
 		$managerId = '';
 		$supervisorId = '';
 		$staffId = '';
+
 		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
 		}
@@ -145,6 +166,26 @@ class ManagementController extends Controller
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
 		}
+		$session = Yii::$app->session;
+		if ($session->has('kgi')) {
+			$filter = $session->get('kgi');
+			$companyId = isset($filter["companyId"]) && $filter["companyId"] != null ? $filter["companyId"] : null;
+			$branchId = isset($filter["branchId"]) && $filter["branchId"] != null ? $filter["branchId"] : null;
+			$teamId = isset($filter["teamId"]) && $filter["teamId"] != null ? $filter["teamId"] : null;
+			$month = isset($filter["month"]) && $filter["month"] != null ? $filter["month"] : null;
+			$status = isset($filter["status"]) && $filter["status"] != null ? $filter["status"] : null;
+			$year = isset($filter["year"]) && $filter["year"] != null ? $filter["year"] : null;
+			$type = "grid";
+			return $this->redirect(Yii::$app->homeUrl . 'kgi/management/kgi-search-result/' . ModelMaster::encodeParams([
+				"companyId" => $companyId,
+				"branchId" => $branchId,
+				"teamId" => $teamId,
+				"month" => $month,
+				"status" => $status,
+				"year" => $year,
+				"type" => $type
+			]));
+		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -160,7 +201,8 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		$kgis = curl_exec($api);
 		$kgis = json_decode($kgis, true);
-
+		//throw new exception('kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		//throw new exception(print_r($kgis, true));
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
@@ -468,7 +510,7 @@ class ManagementController extends Controller
 			endforeach;
 		}
 	}
-	public function saveKgiTeam($team, $kgiId , $month, $year)
+	public function saveKgiTeam($team, $kgiId, $month, $year)
 	{
 		$kgiTeam = KgiTeam::find()->where(["kgiId" => $kgiId, "status" => 1])->all();
 		if (isset($kgiTeam) && count($kgiTeam) > 0) {
@@ -489,7 +531,7 @@ class ManagementController extends Controller
 		}
 		if (count($team) > 0) {
 			foreach ($team as $t) :
-				$old = KgiTeam::find()->where(["kgiId" => $kgiId, "teamId" => $t, "status" => 1])->one();
+				$old = KgiTeam::find()->where(["kgiId" => $kgiId, "teamId" => $t, "status" => [1, 2, 4]])->one();
 				if (!isset($old) || empty($old)) {
 					$kgiTeam = new KgiTeam();
 					$kgiTeam->kgiId = $kgiId;
@@ -1011,13 +1053,28 @@ class ManagementController extends Controller
 		$type = $param["type"];
 		$branches = [];
 		$teams = [];
+		$session = Yii::$app->session;
+		$session->open();
+		$session->set('kgi', [
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			"month" => $month,
+			"year" => $year,
+			"status" => $status,
+			"type" => $type
+		]);
 		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
+			if ($session->has('kgi')) {
+				$session->remove('kgi');
+			}
 			if ($type == "list") {
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/management/index');
 			} else {
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
 			}
 		}
+
+
 		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year;
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
@@ -2121,6 +2178,7 @@ class ManagementController extends Controller
 		$kgiHistory->kgiId = $currentHistory["kgiId"];
 		$kgiHistory->createrId = Yii::$app->user->id;
 		$kgiHistory->titleProcess = 'New target';
+		$kgiHistory->description =  $currentHistory["description"];
 		$kgiHistory->nextCheckDate = null;
 		$kgiHistory->amountType = $currentHistory["amountType"];
 		$kgiHistory->code = $currentHistory["code"];
@@ -2141,7 +2199,7 @@ class ManagementController extends Controller
 			$kgi->year = $nextYear;
 			$kgi->updateDateTime = new Expression('NOW()');
 			if ($kgi->save(false)) {
-				
+
 				$oldKgiTeams = KgiTeam::find()->where([
 					"kgiId" => $kgiId,
 					"month" => $currentHistory["month"],
@@ -2191,42 +2249,40 @@ class ManagementController extends Controller
 								$newHistory->status = $status;
 								$newHistory->createDateTime = new Expression('NOW()');
 								$newHistory->updateDateTime = new Expression('NOW()');
-								if($newHistory->save(false)){
+								if ($newHistory->save(false)) {
 									//เพิ่ม employee ทั้งหมดใน  kgiTeamId นี้
 									$KgiEmployee = KgiEmployee::find()
-									->leftJoin("employee" , "employee.employeeId = kgi_employee.employeeId")
-									->where(["kgi_employee.kgiId" => $team->kgiId,"employee.teamId" => $team->teamId,"kgi_employee.status" => [1,2,4]])
-									->all();
-							
-									foreach($KgiEmployee as $empoyee) :
-										if($empoyee -> month  == $nextMonth && $empoyee -> year  == $nextYear){
+										->leftJoin("employee", "employee.employeeId = kgi_employee.employeeId")
+										->where(["kgi_employee.kgiId" => $team->kgiId, "employee.teamId" => $team->teamId, "kgi_employee.status" => [1, 2, 4]])
+										->all();
 
-										}else{
-											if($empoyee -> status == 1){
+									foreach ($KgiEmployee as $empoyee) :
+										if ($empoyee->month  == $nextMonth && $empoyee->year  == $nextYear) {
+										} else {
+											if ($empoyee->status == 1) {
 												$status = 5;
 											}
-											if($empoyee -> status == 2){
+											if ($empoyee->status == 2) {
 												$status = 1;
-												$empoyee -> status = 1;
-												$empoyee -> month = $nextMonth;
-												$empoyee -> year = $nextYear;
+												$empoyee->status = 1;
+												$empoyee->month = $nextMonth;
+												$empoyee->year = $nextYear;
 											}
 											$KgiEmployeeHistory = new KgiEmployeeHistory();
-											$KgiEmployeeHistory->kgiEmployeeId = $empoyee -> kgiEmployeeId;
+											$KgiEmployeeHistory->kgiEmployeeId = $empoyee->kgiEmployeeId;
 											$KgiEmployeeHistory->createrId = Yii::$app->user->id;
 											$KgiEmployeeHistory->month = $nextMonth;
 											$KgiEmployeeHistory->year = $nextYear;
 											$KgiEmployeeHistory->createDateTime = new Expression('NOW()');
 											$KgiEmployeeHistory->updateDateTime = new Expression('NOW()');
-											$KgiEmployeeHistory-> detail = "auto set from company kpi";
+											$KgiEmployeeHistory->detail = "auto set from company kpi";
 											$KgiEmployeeHistory->status = $status;
 											$KgiEmployeeHistory->save(false);
-											$empoyee -> save(false);
+											$empoyee->save(false);
 										}
 									endforeach;
-								} 
+								}
 								$team->save(false);
-
 							}
 						} else {
 							// if ($kgiTeam->status == 5) {

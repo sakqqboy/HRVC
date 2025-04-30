@@ -143,6 +143,7 @@ class KgiTeamController extends Controller
 	}
 	public function actionTeamKgi()
 	{
+
 		$role = UserRole::userRight();
 		if ($role < 3) {
 			//return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
@@ -157,6 +158,28 @@ class KgiTeamController extends Controller
 		$userTeamId = Team::userTeam($userId);
 		$userBranchId = User::userBranchId();
 		$userTeamId = Team::userTeam($userId);
+
+		$session = Yii::$app->session;
+		if ($session->has('kgiTeam')) {
+			$filter = $session->get('kgiTeam');
+			$companyId = isset($filter["companyId"]) && $filter["companyId"] != null ? $filter["companyId"] : null;
+			$branchId = isset($filter["branchId"]) && $filter["branchId"] != null ? $filter["branchId"] : null;
+			$teamId = isset($filter["teamId"]) && $filter["teamId"] != null ? $filter["teamId"] : null;
+			$month = isset($filter["month"]) && $filter["month"] != null ? $filter["month"] : null;
+			$status = isset($filter["status"]) && $filter["status"] != null ? $filter["status"] : null;
+			$year = isset($filter["year"]) && $filter["year"] != null ? $filter["year"] : null;
+			$type = "list";
+			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-team/kgi-team-search-result/' . ModelMaster::encodeParams([
+				"companyId" => $companyId,
+				"branchId" => $branchId,
+				"teamId" => $teamId,
+				"month" => $month,
+				"status" => $status,
+				"year" => $year,
+				"type" => $type
+			]));
+		}
+
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -215,6 +238,28 @@ class KgiTeamController extends Controller
 		$userId = Yii::$app->user->id;
 		$userTeamId = Team::userTeam($userId);
 		$userBranchId = User::userBranchId();
+
+		$session = Yii::$app->session;
+		if ($session->has('kgiTeam')) {
+			$filter = $session->get('kgiTeam');
+			$companyId = isset($filter["companyId"]) && $filter["companyId"] != null ? $filter["companyId"] : null;
+			$branchId = isset($filter["branchId"]) && $filter["branchId"] != null ? $filter["branchId"] : null;
+			$teamId = isset($filter["teamId"]) && $filter["teamId"] != null ? $filter["teamId"] : null;
+			$month = isset($filter["month"]) && $filter["month"] != null ? $filter["month"] : null;
+			$status = isset($filter["status"]) && $filter["status"] != null ? $filter["status"] : null;
+			$year = isset($filter["year"]) && $filter["year"] != null ? $filter["year"] : null;
+			$type = "grid";
+			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-team/kgi-team-search-result/' . ModelMaster::encodeParams([
+				"companyId" => $companyId,
+				"branchId" => $branchId,
+				"teamId" => $teamId,
+				"month" => $month,
+				"status" => $status,
+				"year" => $year,
+				"type" => $type
+			]));
+		}
+
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -291,7 +336,21 @@ class KgiTeamController extends Controller
 		$status = $param["status"];
 		$year = $param["year"];
 		$type = $param["type"];
+		$session = Yii::$app->session;
+		$session->open();
+		$session->set('kgiTeam', [
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			"teamId" => $teamId,
+			"month" => $month,
+			"year" => $year,
+			"status" => $status,
+			"type" => $type
+		]);
 		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
+			if ($session->has('kgiTeam')) {
+				$session->remove('kgiTeam');
+			}
 			if ($type == "list") {
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi');
 			} else {
@@ -696,6 +755,7 @@ class KgiTeamController extends Controller
 					if ($empoyee->month  == $nextMonth && $empoyee->year  == $nextYear) {
 						//ปัญหาคือ พอก็อปหน้าคอมปานีมา มันไม่มีในเอ็มพรอยี่ด้วย 
 						//สามารถข้ามเดือนได้ 
+						//มี employee kgiอยู่แล้วของ next month, year อยู่แล้ว
 
 					} else {
 						if ($empoyee->status == 1) {
@@ -715,7 +775,7 @@ class KgiTeamController extends Controller
 						$KgiEmployeeHistory->year = $nextYear;
 						$KgiEmployeeHistory->createDateTime = new Expression('NOW()');
 						$KgiEmployeeHistory->updateDateTime = new Expression('NOW()');
-						$KgiEmployeeHistory->detail = "auto set from company kpi";
+						$KgiEmployeeHistory->detail = "auto set from company kgi";
 						$KgiEmployeeHistory->status = $status;
 						$KgiEmployeeHistory->save(false);
 						$empoyee->save(false);
