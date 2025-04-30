@@ -1045,4 +1045,28 @@ class CompanyController extends Controller
 		}
 		return json_encode($res);
 	}
+
+	public function actionCompanyBranchList()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+    
+        // รับ JSON body โดยตรง
+        $data = json_decode(file_get_contents("php://input"), true);
+        $companyId = isset($data['companyId']) ? $data['companyId'] : null;
+    
+        if (!$companyId) {
+            return ['error' => 'Missing companyId'];
+        }
+    
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false); // ปิดเฉพาะใน dev/localhost
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
+    
+        $response = curl_exec($api);
+        curl_close($api);
+    
+        $branches = json_decode($response, true);
+        return $branches;
+    }
 }

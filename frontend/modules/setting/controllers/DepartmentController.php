@@ -102,153 +102,34 @@ class DepartmentController extends Controller
             return $this->redirect(Yii::$app->homeUrl . 'setting/branch/create-branch/' . ModelMaster::encodeParams(["companyId" => '']));
         }
 
-        $branch = Department::find()->select('departmentId')->where(["status" => 0])->asArray()->one();
+        $branch = Department::find()->select('departmentId')->where(["status" => 1])->asArray()->one();
         if (isset($branch) && !empty($branch)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/department/index/' . ModelMaster::encodeParams(["branchId" => '']));
+            return $this->redirect(Yii::$app->homeUrl . 'setting/department/index/');
         }
 
         return $this->render('no_department', [
-            "branchId" => $branchId
+            "branchId" => $branchId,
+            "group" =>  $group
         ]);
 	}
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/index?id=' . '&&page=1' . '&limit=6');
+        $companyDepartment = curl_exec($api);
+        $companyDepartment = json_decode($companyDepartment, true);
+        curl_close($api);
+        // throw new exception(print_r($companyDepartment, true));
+
+        return $this->render('index',[
+            "companyDepartment" => $companyDepartment
+        ]);
     }
     
-    // public function actionCreateOld($hash)
-    // {
-
-    //     $param = ModelMaster::decodeParams($hash);
-
-    //     $branches = [];
-    //     $branch = [];
-    //     $company = [];
-    //     $companies = [];
-    //     $branchId = null;
-    //     $titleList = [];
-    //     $departments = [];
-    //     $departmentList = [];
-    //     $totalEmployees = 0;
-    //     $totalBranches = 0;
-    //     $totalTeam = 0;
-    //     $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
-    //     if (!isset($group) && !empty($group)) {
-    //         return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
-    //     }
-    //     if (isset($param["branchId"])) {
-    //         $branchId = $param["branchId"];
-    //     }
-
-    //     $api = curl_init();
-    //     curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-    //     curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-
-    //     if (isset($param["companyId"])) {
-    //         $companyId = $param["companyId"];
-    //         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
-    //         $company = curl_exec($api);
-    //         $company = json_decode($company, true);
-
-    //         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/company-department?id=' . $companyId);
-    //         $departments = curl_exec($api);
-    //         $departments = json_decode($departments, true);
-    //         //throw new Exception(1);
-    //     } else {
-    //         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' .  $group["groupId"]);
-    //         $companies = curl_exec($api);
-    //         $companies = json_decode($companies, true);
-    //         $companyId = null;
-
-    //         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/all-department');
-    //         $departments = curl_exec($api);
-    //         $departments = json_decode($departments, true);
-    //         //throw new Exception(2);
-    //     }
-    //     //throw new Exception(print_r($departments, true));
-        
-    //     if (count($departments) > 0) {
-    //         foreach ($departments as $department) :
-    //             $departmentList[$department["departmentId"]] = [
-    //                 "departmentName" => $department["departmentName"],
-    //                 "companyName" => Branch::companyName($department['branchId']),
-    //                 "branchName" => Branch::BranchName($department['branchId']),
-    //                 "flag" => Country::flagBranch($department['branchId']),
-    //                 "titleDepartments" => DepartmentTitle::departmentTitle($department["departmentId"])
-    //             ];
-    //         endforeach;
-    //     }
-    //     //throw new Exception(print_r($departmentList, true));
-
-    //     curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-list');
-    //     $titleList = curl_exec($api);
-    //     $titleList = json_decode($titleList, true);
-
-    //     if ($companyId == null) {
-    //         $branches = [];
-    //         $branchess = Branch::find()
-    //             ->where(["status" => 1])
-    //             ->asArray()
-    //             ->all();
-    //     } else {
-    //         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
-    //         $branches = curl_exec($api);
-    //         $branches = json_decode($branches, true);
-    //         $branchess = Branch::find()
-    //             ->where(["status" => 1, "companyId" => $companyId])
-    //             ->asArray()
-    //             ->all();
-    //     }
-
-    //     if ($branchId == null) {
-    //     } else {
-    //         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' . $branchId);
-    //         $branch = curl_exec($api);
-    //         $branch = json_decode($branch, true);
-    //     }
-    //     curl_close($api);
-
-    //     if (isset($branchess) && count($branchess) > 0) {
-    //         foreach ($branchess as $branch) :
-    //             $departments = Department::find()
-    //                 ->where(["branchId" => $branch["branchId"], "status" => 1])
-    //                 ->asArray()
-    //                 ->all();
-    //             foreach ($departments as $department) :
-    //                 $teams = Team::find()
-    //                     ->where(["departmentId" => $department["departmentId"], "status" => 1])
-    //                     ->asArray()
-    //                     ->all();
-    //                 if (isset($teams) && count($teams) > 0) {
-    //                     foreach ($teams as $team) :
-    //                         $employees = Employee::find()
-    //                             ->where(["status" => 1, "teamId" => $team["teamId"]])
-    //                             ->asArray()
-    //                             ->all();
-    //                         $totalEmployees += count($employees);
-    //                     endforeach;
-    //                 }
-    //                 $totalTeam += count($teams);
-    //             endforeach;
-    //         endforeach;
-    //     }
-    //     $totalBranches += count($branchess);
-    //     return $this->render('create', [
-    //         "departmentList" => $departmentList,
-    //         "branches" => $branches,
-    //         "branch" => $branch,
-    //         "company" => $company,
-    //         "companies" => $companies,
-    //         "branchId" => $branchId,
-    //         "companyId" => $companyId,
-    //         "titleList" => $titleList,
-    //         "totalEmployees" => $totalEmployees,
-    //         "totalBranches" => $totalBranches,
-    //         "totalTeam" => $totalTeam
-    //     ]);
-    // }
 
     public function actionCreate($hash)
     {
@@ -256,10 +137,13 @@ class DepartmentController extends Controller
         $branchId = $param["branchId"];
         $companyId = $param["companyId"] ?? null;
         $companyName = '';
+        $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+
         $api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
+        //เช็คว่ามีคอมปานีรึยัง
         if (!empty($companyId)) {
             curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId );
             $companies = curl_exec($api);
@@ -270,7 +154,12 @@ class DepartmentController extends Controller
             $companies = curl_exec($api);
             $companies = json_decode($companies, true);
         }
-        // throw new exception(print_r($companies, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $group["groupId"]);
+        $group = curl_exec($api);
+        $group = json_decode($group, true);
+
+        // throw new exception(print_r($group, true));
 
         // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1'. '&limit=6');
         // $branchJson = curl_exec($api);
@@ -283,84 +172,65 @@ class DepartmentController extends Controller
             // "branchId" => $branchId,
             // "companyId" => '',
             "companies" => $companies,
-            "companyName" => $companyName
+            "companyName" => $companyName,
+            "branchId" => $branchId,
+            "companyId" => $companyId,
+            "group" => $group
         ]);
 
     }
     
-    public function actionCompanyBranchList()
-    {
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $companyId = Yii::$app->request->post('companyId');
 
-        $companies = [];
-        $api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch');
-        $companies = curl_exec($api);
-        $companies = json_decode($companies, true);
-
-		curl_close($api);
-
-        throw new exception(print_r($companies, true));
-
-        // if ($companyId) {
-        //     $branches = Branch::find()
-        //         ->where(['companyId' => $companyId])
-        //         ->select(['branchId', 'branchName'])
-        //         ->asArray()
-        //         ->all();
-
-        //     return $branches;
-        // }
-
-        return $companies;
-    }
-
-
+        
     public function actionSaveCreateDepartment()
     {
-        $department = Department::find()
-            ->where([
-                "branchId" => $_POST["branchId"],
-                "departmentName" => $_POST["departmentName"],
-                "status" => 1
-            ])
-            ->one();
-        if (isset($department) && !empty($department)) {
-            $res["status"] = false;
-            $res["errorText"] = 'Can not create dupplicate department name "' . $_POST["departmentName"] . '"';
-        } else {
-            $department = new Department();
-            $department->departmentName = $_POST["departmentName"];
-            $department->branchId = $_POST["branchId"];
-            $department->status = 1;
-            $department->createDateTime = new Expression('NOW()');
-            $department->updateDateTime = new Expression('NOW()');
-            if ($department->save(false)) {
-                $departmentId = Yii::$app->db->lastInsertID;
-                //$this->saveDefaultTitle($departmentId);
-                // $titleDepartments = DepartmentTitle::find()
-                //     ->select('t.titleName')
-                //     ->JOIN("LEFT JOIN", "title t", "t.titleId=department_title.titleId")
-                //     ->where(["department_title.departmentId" => $departmentId])
-                //     ->asArray()
-                //     ->orderBy('department_title.titleId')
-                //     ->all();
-                $res["newDepartment"] = $this->renderAjax('new_department', [
-                    "departmentName" => $_POST["departmentName"],
-                    "companyName" => Branch::companyName($_POST['branchId']),
-                    "branchName" => Branch::BranchName($_POST['branchId']),
-                    "flag" => Country::flagBranch($_POST['branchId']),
-                    "departmentId" => $departmentId,
-                    //"titleDepartments" => $titleDepartments
-                ]);
-                $res["status"] = true;
+        if (isset($_POST["branchId"]) && isset($_POST["branchName"])) {
+            $branchId = $_POST["branchId"];
+            $names = $_POST["branchName"]; // ควรเป็น array เช่นจาก <input name="branchName[]">
+        
+            $errors = [];
+            $successCount = 0;
+        
+            foreach ($names as $name) {
+                $name = trim($name);
+                if ($name === '') {
+                    continue;
+                }
+        
+                $existing = Department::find()->where([
+                    "branchId" => $branchId,
+                    "departmentName" => $name,
+                    "status" => 1
+                ])->one();
+
+                if (!empty($existing)) {
+                    $errors[] = 'Cannot create duplicate department name "' . $name . '"';
+                    // continue;
+                }
+
+                $department = new Department();
+                $department->departmentName = $name;
+                $department->branchId = $branchId;
+                $department->status = 1;
+                $department->createDateTime = new Expression('NOW()');
+                $department->updateDateTime = new Expression('NOW()');
+
+                if (!empty($errors)) {
+                    Yii::$app->session->setFlash('error', implode('<br>', $errors));
+                    // throw new exception(print_r($errors, true));
+                    return $this->redirect(Yii::$app->request->referrer);
+                } else if ($department->save(false)) {
+                    $successCount++;
+                }
             }
+        
+            if ($successCount > 0) {
+                Yii::$app->session->setFlash('success', "$successCount department(s) created successfully.");
+            }
+        
+            return $this->redirect(Yii::$app->homeUrl . 'setting/department/no-department/' . ModelMaster::encodeParams(["branchId" => '']));
         }
-        return json_encode($res);
+        
     }
     public function actionUpdateDepartment()
     {

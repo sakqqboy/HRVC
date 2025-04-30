@@ -186,7 +186,7 @@ $page = "list"
             <div class="menu-dot ">
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
                     <li class="pl-4 pr-4">
-                        <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branchId]) ?>"
+                        <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
                             class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -1px; ">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg" alt="History"
                                 class="pim-icon mr-10" style="margin-top: -2px;">
@@ -195,7 +195,7 @@ $page = "list"
                     </li>
                     <?php if($branch['totalDepartment'] == 0) { ?>
                     <li class="pl-4 pr-4">
-                        <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
+                        <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'], 'branchId' => $branch['branchId']]) ?>"
                             class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -1px; ">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg" alt="History"
                                 class="pim-icon mr-10" style="margin-top: -2px;">

@@ -6,18 +6,24 @@ use frontend\models\hrvc\Company;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Create Department';
-
-?>
-
-<?php $form = ActiveForm::begin([
+$form = ActiveForm::begin([
 	'id' => 'create-branch',
 	'method' => 'post',
 	'options' => [
 		'enctype' => 'multipart/form-data',
 	],
-	'action' => Yii::$app->homeUrl . 'setting/branch/save-create-branch'
+	'action' => Yii::$app->homeUrl . 'setting/department/save-create-department'
 
-]); ?>
+]); 
+
+if (Yii::$app->session->hasFlash('error')) {
+    $error = Yii::$app->session->getFlash('error');
+    $escapedError = str_replace(["\r", "\n"], '', strip_tags($error)); // ป้องกัน break line HTML
+    $escapedError = addslashes($escapedError); // escape เครื่องหมายพิเศษ
+    $this->registerJs("alert('$escapedError');");
+}
+
+?>
 
 <div class="container-body submain-background mid-center">
     <div class="col-12 pim-name-title" style="display: flex; align-items: center; gap: 14px;">
@@ -47,18 +53,17 @@ $this->title = 'Create Department';
                             </span>
                             <div class="mt-19" style="display: flex;">
                                 <div class="avatar-preview mr-24">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/branch/profile/Tp-bPC6u8a.png"
-                                        class="cycle-big-image">
+                                    <img src="<?= Yii::$app->homeUrl ?><?=$group['picture'] ?>" class="cycle-big-image">
                                 </div>
                                 <div class="mid-center">
                                     <div class="col-12 name-tokyo">
                                         <span class="name-sub-tokyo" style="font-size: 20px;">
-                                            TCGF
+                                            <?=$group['groupName'] ?>
                                         </span>
                                     </div>
                                     <div class="col-12 tokyo-small">
                                         <img src="<?= Yii::$app->homeUrl ?>image/hyphen.svg">
-                                        What we give is What we get.
+                                        <?=$group['tagLine'] ?>
                                     </div>
                                 </div>
                             </div>
@@ -87,9 +92,9 @@ $this->title = 'Create Department';
                                     <?= $companyName ?>
                                 </div>
                                 <?php }else{?>
-                                <select id="companySelect" class="form-select mt-12"
+                                <select id="companySelectId" class="form-select mt-12"
                                     style="border-right: none; width: 239px; appearance: none; background-image: none;"
-                                    name="companyId">
+                                    name="companyId" data-company-branch="company" required>
                                     <option value="" disabled selected hidden
                                         style="color: var(--Helper-Text, #8A8A8A); ">
                                         <?= Yii::t('app', 'Select from a Company') ?>
@@ -104,7 +109,7 @@ $this->title = 'Create Department';
                                 </select>
                                 <span class="input-group-text mt-12"
                                     style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
-                                    onclick="document.getElementById('companySelect').focus();">
+                                    onclick="document.getElementById('companySelectId').focus();">
                                     <!-- <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="Founded"
                                         style="width: 20px; height: 20px;"> -->
                                     <div class="cycle-current-gray" style="width: 20px; height: 20px;">
@@ -119,20 +124,26 @@ $this->title = 'Create Department';
                             </div>
                         </div>
                         <div>
+                            <label for="exampleFormControlInput1" class="form-label font-size-12 font-b">
+                                <span class="text-danger">* </span>
+                                <?= Yii::t('app', 'Select Branch') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" aria-label="<?= Yii::t('app', 'Select to Branch') ?>"
+                                    data-bs-original-title="<?= Yii::t('app', 'Select to Branch') ?>">
+                            </label>
                             <div class="input-group" style="width: 330px;">
-                                <select id="" brancSelect" class="form-select mt-12"
+                                <select id="branchSelectId" brancSelect" class="form-select mt-12"
                                     style="border-right: none; width: 239px; appearance: none; background-image: none;"
-                                    name="branchId">
+                                    name="branchId" data-company-branch="branch" required>
                                     <option value="" disabled selected hidden
                                         style="color: var(--Helper-Text, #8A8A8A); ">
                                         <?= Yii::t('app', 'Select from a Branch') ?>
                                     </option>
-
                                 </select>
 
                                 <span class="input-group-text mt-12"
                                     style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
-                                    onclick="document.getElementById('companySelect').focus();">
+                                    onclick="document.getElementById('companySelectId').focus();">
                                     <div class="cycle-current-gray" style="width: 20px; height: 20px;">
                                         <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon"
                                             style="width: 10px; height: 10px;">
@@ -149,11 +160,15 @@ $this->title = 'Create Department';
                         <span class="text-danger">* </span>
                         <?= Yii::t('app', 'Department Name') ?>
                     </label>
-                    <input type="text" class="form-control" name="branchName" style="width: 330px;"
-                        placeholder="Write the name of the branch">
 
-                    <button type="" class="center-center bg-white" " style=" padding: 13px 20px; height: 40px; width:
-                        100%; border-radius: 5px; border: 0.5px solid #CBD5E1;">
+                    <!-- Container for all dynamic inputs -->
+                    <div id="branchInputsContainer">
+                        <input type="text" class="form-control mb-2" name="branchName[]" style="width: 330px;"
+                            placeholder="Write the name of the Department" required>
+                    </div>
+
+                    <button type="button" id="addBranchBtn" class="center-center bg-white"
+                        style="padding: 13px 20px; height: 40px; width: 100%; border-radius: 5px; border: 0.5px solid #CBD5E1;">
                         <span class="text-blue mr-6" style="font-weight: 600; font-size: 14px;"> Add More </span>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-blue.svg" alt="LinkedIn"
                             style="width: 20px; height: 20px;">
@@ -161,7 +176,6 @@ $this->title = 'Create Department';
                 </div>
             </div>
             <div class="col-12 text-end mt-10">
-                <input type="hidden" id="branchId" value="">
                 <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
                     <button type="button" class="btn-cancel-group"
                         action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
@@ -178,12 +192,12 @@ $this->title = 'Create Department';
         </div>
     </div>
 </div>
-<script>
-document.getElementById('companySelect').addEventListener('change', function() {
-    const companyId = this.value;
-    console.log('Selected companyId:', companyId); // ✅ ตรวจค่าที่เลือก
 
-    fetch('<?= Yii::$app->homeUrl ?>setting/department/company-branch-list', {
+<script>
+document.getElementById('companySelectId').addEventListener('change', function() {
+    const companyId = this.value;
+
+    fetch('<?= Yii::$app->homeUrl ?>setting/company/company-branch-list', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -193,26 +207,34 @@ document.getElementById('companySelect').addEventListener('change', function() {
                 companyId: companyId
             })
         })
-        .then(response => {
-            console.log('Fetch response:', response);
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            console.log('Fetched data:', data); // ✅ ตรวจค่าที่ได้กลับมา
+            console.log("Fetched data:", data);
             const branchSelect = document.querySelector('[name="branchId"]');
             branchSelect.innerHTML =
                 '<option value="" disabled selected hidden><?= Yii::t("app", "Select from a Branch") ?></option>';
 
-            data.forEach(branch => {
-                const option = document.createElement('option');
-                option.value = branch.branchId;
-                option.text = branch.branchName;
-                branchSelect.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.error('Fetch error:', error); // ✅ ตรวจ error ถ้ามี
+            if (Array.isArray(data)) {
+                data.forEach(branch => {
+                    const option = document.createElement('option');
+                    option.value = branch.branchId;
+                    option.text = branch.branchName;
+                    branchSelect.appendChild(option);
+                });
+            }
         });
+});
+document.getElementById('addBranchBtn').addEventListener('click', function() {
+    const container = document.getElementById('branchInputsContainer');
+
+    const newInput = document.createElement('input');
+    newInput.type = 'text';
+    newInput.name = 'branchName[]';
+    newInput.className = 'form-control mb-2';
+    newInput.style.width = '330px';
+    newInput.placeholder = 'Write the name of the Department ';
+
+    container.appendChild(newInput);
 });
 </script>
 

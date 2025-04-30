@@ -354,7 +354,7 @@ $page = "grid"
                                     <span class="text-create-crad">
                                         <?= Yii::t('app', 'No associated department, team, or employee found!') ?>
                                     </span>
-                                    <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId'], 'companyId' => $branch['companyId']]) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'], 'branchId' => $branch['branchId']]) ?>"
                                         style="text-decoration: none;">
                                         <button type="button" class="btn-create" style="padding: 3px 9px;"
                                             action="<?= Yii::$app->homeUrl ?>setting/group/create-group"><?= Yii::t('app', 'Create Department') ?>

@@ -9,6 +9,7 @@ use common\models\ModelMaster;
 use Exception;
 use Yii;
 use yii\web\Controller;
+use yii\web\Response;
 
 header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
@@ -22,12 +23,46 @@ header("Pragma: no-cache");
 class DepartmentController extends Controller
 {
 	
-	public function actionIndex()
-	{
-		// return $this->render('index');
-	}
+	public function actionIndex($id,$page,$limit)
+{
+
+	$offset = ($page - 1) * $limit;
+	$indexGrid = [];
+
+    $query = Department::find()
+        ->select([
+            'd.departmentId',
+            'd.departmentName',
+            'd.branchId',
+            'b.branchName',
+            'b.companyId',
+            'c.companyName',
+            'c.picture',
+            'c.city',
+            'c.countryId',
+            'cu.countryName',
+            'cu.flag'
+        ])
+        ->alias('d')
+        ->leftJoin('branch b', 'b.branchId = d.branchId')
+        ->leftJoin('company c', 'c.companyId = b.companyId')
+        ->leftJoin('country cu', 'cu.countryId = c.countryId')
+        ->where(['d.status' => 1]);
+
+		if ($limit > 0) {
+			$query ->offset($offset)
+			->limit($limit);
+		}
+
+        $indexGrid = $query
+		->asArray()
+		->all();
+
+    return json_encode($indexGrid);
+}
+
 	public function actionEncodeParamsPage() {
-		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+		Yii::$app->response->format = Response::FORMAT_JSON;
 	
 		$countryId = Yii::$app->request->post('countryId');
 		$page = Yii::$app->request->post('page');
