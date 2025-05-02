@@ -29,6 +29,7 @@ $page = "grid";
         </div>
         <div class="col-2" style="text-align: right;">
             <!-- filter -->
+            <?= $this->render('filter_list', ['countries' => $countries,'page' => $page,'countryIdOld' => $countryId]) ?>
         </div>
         <!-- <div class="col-1 pr-0 text-end">
             <div class="btn-group" role="group">
@@ -84,12 +85,14 @@ $page = "grid";
                                     </div>
 
                                     <div style="margin-bottom: 30px;">
+                                        <?php if(count($branch['departments']) > 0) { ?>
                                         <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'], 'branchId' => $branch['branchId']]) ?>"
                                             class="btn btn-bg-white-xs mr-5" style="margin-top: 3px; ">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
                                                 alt="History" class="pim-icon"
                                                 style="margin-top: -1px; width: 14px; height: 14px;">
                                         </a>
+                                        <?php }?>
                                         <a href="
                                         <?= Yii::$app->homeUrl ?>setting/department/departments-view/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
                                             class="btn btn-bg-white-xs mr-5" style="margin-top: 3px; ">
@@ -112,7 +115,7 @@ $page = "grid";
                                 </div>
                                 <?php
                                 // echo $branch['totalDepartment']; 
-                                if($role > 0) { 
+                                if(count($branch['departments']) > 0) { 
                                 ?>
                                 <div style="align-self: stretch; height: 147px">
                                     <div class="between-start">
