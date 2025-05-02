@@ -87,8 +87,7 @@ if (Yii::$app->session->hasFlash('error')) {
                             <div class="input-group" style="width: 330px;">
                                 <?php if($companyName) {?>
                                 <div class="col-12 font-b" style="width: 330px;">
-                                    <input type="hidden" id="company" name="companyId"
-                                        value="<?= $companies['companyId']?>">
+                                    <input type="hidden" id="company" name="companyId" value="<?= $companyId?>">
                                     <?= $companyName ?>
                                 </div>
                                 <?php }else{?>
@@ -132,6 +131,12 @@ if (Yii::$app->session->hasFlash('error')) {
                                     data-bs-original-title="<?= Yii::t('app', 'Select to Branch') ?>">
                             </label>
                             <div class="input-group" style="width: 330px;">
+                                <?php if($branchName) {?>
+                                <div class="col-12 font-b" style="width: 330px;">
+                                    <input type="hidden" id="branch" name="branchId" value="<?= $branchId?>">
+                                    <?= $branchName ?>
+                                </div>
+                                <?php }else{?>
                                 <select id="branchSelectId" brancSelect" class="form-select mt-12"
                                     style="border-right: none; width: 239px; appearance: none; background-image: none;"
                                     name="branchId" data-company-branch="branch" required>
@@ -151,6 +156,8 @@ if (Yii::$app->session->hasFlash('error')) {
                                     <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
                                         style="width: 10px; height: 10px;">
                                 </span>
+                                <?php }?>
+
                             </div>
                         </div>
                     </div>
@@ -167,8 +174,9 @@ if (Yii::$app->session->hasFlash('error')) {
                             placeholder="Write the name of the Department" required>
                     </div>
 
-                    <button type="button" id="addBranchBtn" class="center-center bg-white"
-                        style="padding: 13px 20px; height: 40px; width: 100%; border-radius: 5px; border: 0.5px solid #CBD5E1;">
+                    <button type="button" class="center-center bg-white"
+                        style="padding: 13px 20px; height: 40px; width: 100%; border-radius: 5px; border: 0.5px solid #CBD5E1;"
+                        onclick="addBranchInput()">
                         <span class="text-blue mr-6" style="font-weight: 600; font-size: 14px;"> Add More </span>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-blue.svg" alt="LinkedIn"
                             style="width: 20px; height: 20px;">
@@ -224,18 +232,19 @@ document.getElementById('companySelectId').addEventListener('change', function()
             }
         });
 });
-document.getElementById('addBranchBtn').addEventListener('click', function() {
-    const container = document.getElementById('branchInputsContainer');
+// document.getElementById('addBranchBtn').addEventListener('click', function() {
+//     alert('Button clicked!');
+//     const container = document.getElementById('branchInputsContainer');
 
-    const newInput = document.createElement('input');
-    newInput.type = 'text';
-    newInput.name = 'branchName[]';
-    newInput.className = 'form-control mb-2';
-    newInput.style.width = '330px';
-    newInput.placeholder = 'Write the name of the Department ';
+//     const newInput = document.createElement('input');
+//     newInput.type = 'text';
+//     newInput.name = 'branchName[]';
+//     newInput.className = 'form-control mb-2';
+//     newInput.style.width = '330px';
+//     newInput.placeholder = 'Write the name of the Department ';
 
-    container.appendChild(newInput);
-});
+//     container.appendChild(newInput);
+// });
 </script>
 
 <?php ActiveForm::end(); ?>

@@ -2,7 +2,7 @@
 
 namespace backend\modules\masterdata\controllers;
 
-
+use backend\models\hrvc\Branch;
 use backend\models\hrvc\Department;
 use backend\models\hrvc\Title;
 use common\models\ModelMaster;
@@ -29,25 +29,22 @@ class DepartmentController extends Controller
 	$offset = ($page - 1) * $limit;
 	$indexGrid = [];
 
-    $query = Department::find()
-        ->select([
-            'd.departmentId',
-            'd.departmentName',
-            'd.branchId',
-            'b.branchName',
-            'b.companyId',
-            'c.companyName',
-            'c.picture',
-            'c.city',
-            'c.countryId',
-            'cu.countryName',
-            'cu.flag'
-        ])
-        ->alias('d')
-        ->leftJoin('branch b', 'b.branchId = d.branchId')
-        ->leftJoin('company c', 'c.companyId = b.companyId')
-        ->leftJoin('country cu', 'cu.countryId = c.countryId')
-        ->where(['d.status' => 1]);
+    $query = Branch::find()
+    ->select([
+        'b.branchId',
+        'b.branchName',
+        'b.companyId',
+        'c.companyName',
+        'c.picture',
+        'c.city',
+        'c.countryId',
+        'cu.countryName',
+        'cu.flag',
+    ])
+	->alias('b')
+    ->leftJoin('company c', 'c.companyId = b.companyId')
+    ->leftJoin('country cu', 'cu.countryId = c.countryId')
+    ->where(['b.status' => 1]);
 
 		if ($limit > 0) {
 			$query ->offset($offset)

@@ -154,7 +154,7 @@ $page = "grid"
                                 <?php
                                 // echo $branch['totalDepartment']; 
                                 if($branch['totalDepartment'] > 0) { 
-                                    ?>
+                                ?>
                                 <div style="align-self: stretch;  height: 147px ">
                                     <span class="detailname-crad-company">
                                         <?= Yii::t('app', 'Quick Details') ?>
