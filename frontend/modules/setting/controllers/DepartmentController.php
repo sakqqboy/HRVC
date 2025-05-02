@@ -45,24 +45,26 @@ class DepartmentController extends Controller
 		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 	
 		$countryId = Yii::$app->request->post('countryId');
+        $companyId = Yii::$app->request->post('companyId');
+        $branchId = Yii::$app->request->post('branchId');
 		$page = Yii::$app->request->post('page');
 
 		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nextPage' => 1]);
 	
 		if($page == 'grid') {
-			return $this->redirect(Yii::$app->homeUrl . 'setting/department/department-grid-filter/'. $url );
-		}else if($page == 'list') {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/department/index-filter/'. $url );
-		}else{
-			return "eror";
+		}else if($page == 'view') {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/department/department-view/'. $url );
 		}
 	}
 
 	public function actionEncodeParamsPage() {
 		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 	
-		$countryId = Yii::$app->request->post('countryId');
-		$page = Yii::$app->request->post('page');
+        $countryId = Yii::$app->request->post('countryId');
+        $companyId = Yii::$app->request->post('companyId');
+        $branchId = Yii::$app->request->post('branchId');
+        $page = Yii::$app->request->post('page');
 		$nextPage = Yii::$app->request->post('nextPage');
 
 		// throw new exception(print_r($nextPage, true));
@@ -70,15 +72,10 @@ class DepartmentController extends Controller
 		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nextPage' => $nextPage]);
 	
 		if($page == 'grid') {
-			return $this->redirect(Yii::$app->homeUrl . 'setting/department/department-grid-filter/'. $url );
-		}else if($page == 'list') {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/department/index-filter/'. $url );
-		}else{
-			if($page == 'view'){
-				return $this->redirect(Yii::$app->homeUrl . 'setting/department/department-view/'. $url );
-			}
-			return "eror";
-		}
+		}else if($page == 'view') {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/department/department-view/'. $url );
+        }
 	}
 
 	public function actionNoDepartment($hash)
@@ -113,7 +110,82 @@ class DepartmentController extends Controller
         ]);
 	}
 
-    public function actionIndex()
+    public function actionIndex($hash)
+    {
+        //ทำวันจันทร์
+        $role = UserRole::userRight();
+        $data =[];
+        $api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
+		$countries = curl_exec($api);
+		$countries = json_decode($countries, true);
+        
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$company = curl_exec($api);
+		$company = json_decode($company, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1'. '&limit=0');
+        $branch = curl_exec($api);
+        $branch = json_decode($branch, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page=1' . '&countryId='. '&companyId=' . '&limit=6');
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/index?id=' . '&&page=1' . '&limit=6');
+        $branches = curl_exec($api);
+        $branches = json_decode($branches, true);
+
+        // throw new Exception("branch: " . print_r($branch, true));
+
+        if (isset($branches) && count($branches) > 0) {
+            foreach ($branches as $row) :
+                $branchId = $row['branchId'];
+
+                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' .  $branchId . '&page=1' . '&limit=0');
+                $departments = curl_exec($api);
+                $departments = json_decode($departments, true);
+
+                // throw new Exception("departments: " . print_r($branchId, true));
+
+            if (!isset($data[$branchId])) {
+                // ตั้งค่าข้อมูล branch ครั้งแรก
+                $data[$branchId] = [
+                    'branchId' => $row['branchId'],
+                    'branchName' => $row['branchName'],
+                    'companyId' => $row['companyId'],
+                    'companyName' => $row['companyName'],
+                    'picture' => $row['picture'],
+                    'city' => $row['city'],
+                    'countryId' => $row['countryId'],
+                    'countryName' => $row['countryName'],
+                    'flag' => $row['flag'],
+                    'departments' => $departments
+                ];
+            }
+
+            endforeach;
+        }
+
+        curl_close($api);
+
+        // throw new exception(print_r($data, true));
+
+        return $this->render('index',[
+            "data" => $data,
+            "role" => $role,
+            "numPage" => $numPage,
+            "countries" => $countries,
+            "companies" => $company,
+            "branches" => $branch,
+            "countryId" => 0
+        ]);
+    }
+
+    public function actionIndexFilter()
     {
         $role = UserRole::userRight();
         $data =[];

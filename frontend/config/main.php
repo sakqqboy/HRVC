@@ -103,6 +103,7 @@ return [
                 'setting/branch/branch-view/<hash>' => 'setting/branch/branch-view',
                 'setting/branch/branch-view-filter/<hash>' => 'setting/branch/branch-view-filter',
                 'setting/department/no-department/<hash>' => 'setting/department/no-department',
+                'setting/department/index-filter/<hash>' => 'setting/department/index-filter',
                 'setting/department/departments-view/<hash>' => 'setting/department/departments-view',
                 'setting/department/create/<hash>' => 'setting/department/create',
                 'setting/department/search-result/<hash>' => 'setting/department/search-result',

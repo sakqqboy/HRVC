@@ -171,7 +171,7 @@ function filterCountryDepartment(page) {
     const companyId = document.getElementById('companySelect').value;
     const branchId = document.getElementById('branchSelect').value;
 
-    alert(companyId);
+    // alert(companyId);
     var url = $url + 'setting/department/encode-params-country';
     // alert(page);
     $.ajax({
@@ -181,6 +181,7 @@ function filterCountryDepartment(page) {
         data: {
             countryId: countryId,
             companyId: companyId,
+            branchId: branchId,
             page: page
         },
         success: function (data) {

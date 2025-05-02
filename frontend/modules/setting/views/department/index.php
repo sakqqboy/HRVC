@@ -31,17 +31,6 @@ $page = "grid";
             <!-- filter -->
             <?= $this->render('filter_list', ['countries' => $countries,'companies' => $companies, 'branches' => $branches, 'page' => $page,'countryIdOld' => $countryId]) ?>
         </div>
-        <!-- <div class="col-1 pr-0 text-end">
-            <div class="btn-group" role="group">
-                <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg" style="cursor: pointer;">
-                </a>
-                <a href="<?= Yii::$app->homeUrl . 'setting/branch/index' ?>"
-                    class="btn btn-outline-primary font-size-12 pim-change-modes">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg" style="cursor: pointer;">
-                </a>
-            </div>
-        </div> -->
     </div>
 
     <div class="pim-body company-group-edit bg-white mt-10">
