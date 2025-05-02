@@ -29,7 +29,7 @@ $page = "list"
             </div>
         </div>
         <div class="col-2" style="text-align: right;">
-            <?= $this->render('filter_list', ['countries' => $countries,'page' => $page,'countryIdOld' => $countryId]) ?>
+            <?= $this->render('filter_list', ['countries' => $countries,'companies' => $company,'page' => $page,'countryIdOld' => $countryId]) ?>
         </div>
         <div class="col-1 pr-0 text-end">
             <div class="btn-group" role="group">

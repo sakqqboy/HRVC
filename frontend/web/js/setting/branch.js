@@ -71,6 +71,8 @@ function filterCountryBranch(page) {
     // console.log("Page:", page); // Add this line to check the value of `page`
 
     const countryId = document.getElementById('countrySelect').value;
+    const companyId = document.getElementById('companySelect').value;
+    // alert(companyId);
     var url = $url + 'setting/branch/encode-params-country';
     // alert(page);
     $.ajax({
@@ -79,6 +81,7 @@ function filterCountryBranch(page) {
         url: url,
         data: {
             countryId: countryId,
+            companyId: companyId,
             page: page
         },
         success: function (data) {

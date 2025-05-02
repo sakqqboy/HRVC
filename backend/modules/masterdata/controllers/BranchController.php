@@ -69,8 +69,8 @@ class BranchController extends Controller
 
 		return json_encode($branch);
 	}
-
-	public function actionActiveBranchFilter($id, $countryId, $page,$limit)
+	
+	public function actionActiveBranchFilter($id, $countryId,$companyId, $page,$limit)
 	{
 
 		$offset = ($page - 1) * $limit;
@@ -94,6 +94,10 @@ class BranchController extends Controller
 			$query->andWhere(['c.countryId' => $countryId]);
 		}
 
+		if (!empty($companyId)) {
+			$query->andWhere(['branch.companyId' => $companyId]);
+		}
+
 		$branch = $query
 			->offset($offset)
 			->limit($limit)
@@ -108,7 +112,7 @@ class BranchController extends Controller
 
 
 		
-    public function actionBranchPage($page,$countryId ,$limit)
+    public function actionBranchPage($page,$countryId,$companyId ,$limit)
     {
         
         $query = Branch::find()
@@ -117,8 +121,12 @@ class BranchController extends Controller
 			->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
 			->where(['branch.status' => 1]);
 
-        if ($countryId != 0) {
-            $query->andWhere(["c.countryId" => $countryId]);
+		if (!empty($countryId)) {
+				$query->andWhere(["c.countryId" => $countryId]);
+        }
+
+		if (!empty($companyId)) {
+            $query->andWhere(["branch.companyId" => $companyId]);
         }
     
         $totalRows = $query->count(); // นับหลังจากใส่เงื่อนไขทั้งหมดแล้ว

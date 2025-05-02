@@ -46,9 +46,10 @@ class BranchController extends Controller
 		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 	
 		$countryId = Yii::$app->request->post('countryId');
+        $companyId = Yii::$app->request->post('companyId');
 		$page = Yii::$app->request->post('page');
 
-		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nextPage' => 1]);
+		$url =  ModelMaster::encodeParams(['countryId' => $countryId,'companyId' => $companyId, 'nextPage' => 1]);
 	
 		if($page == 'grid') {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-grid-filter/'. $url );
@@ -149,8 +150,13 @@ class BranchController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
 		$result1 = curl_exec($api);
 		$countries = json_decode($result1, true);
+        
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$company = curl_exec($api);
+		$company = json_decode($company, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page=1' . '&countryId=0' . '&limit=7');
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page=1' . '&countryId=0'. '&companyId=0' . '&limit=7');
 		$numPage = curl_exec($api);
 		$numPage = json_decode($numPage, true);
         //throw new Exception(print_r($numPage, true));
@@ -257,7 +263,7 @@ class BranchController extends Controller
 
         if (count($branches) > 0) {
             return $this->render('index', [
-                // "company" => $company,
+                "company" => $company,
                 // "companies" => $companyGroup,
                 "branches" => $data,
                 // "country" => $companyCountry,
@@ -277,6 +283,7 @@ class BranchController extends Controller
     public function actionIndexFilter($hash)
     {
         $param = ModelMaster::decodeParams($hash);
+        $companyId = $param["companyId"];
         $countryId = $param["countryId"];
         $nextPage = $param["nextPage"];
 
@@ -293,11 +300,16 @@ class BranchController extends Controller
 		$result1 = curl_exec($api);
 		$countries = json_decode($result1, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page=' . $nextPage . '&countryId=' . $countryId . '&limit=7');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$company = curl_exec($api);
+		$company = json_decode($company, true);
+
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page=' . $nextPage . '&countryId=' . $countryId . '&companyId=' . $companyId . '&limit=7');
 		$numPage = curl_exec($api);
 		$numPage = json_decode($numPage, true);
         //throw new Exception(print_r($numPage, true));
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch-filter?id=1' . '&page=' . $nextPage . '&countryId='. $countryId . '&limit=6');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch-filter?id=1' . '&page=' . $nextPage . '&countryId='. $countryId . '&companyId=' . $companyId . '&limit=6');
         $branchJson = curl_exec($api);
         $branches = json_decode($branchJson, true);
         
@@ -378,17 +390,17 @@ class BranchController extends Controller
 
         // if (count($branches) > 0) {
             return $this->render('index', [
-                // "company" => $company,
+                "company" => $company,
                 // "companies" => $companyGroup,
                 "branches" => $data,
                 // "country" => $companyCountry,
-                // "companyId" => $companyId,
+                "companyId" => $companyId,
                 // "totalEmployees" => $totalEmployees,
                 // "totalDepartment" => count($departments),
                 // "totalTeam" => $totalTeam,
                 "role" => $role,
                 "countries" => $countries,
-                "countryId" => 0,
+                "countryId" => $companyId,
                 "numPage" => $numPage
             ]);
         // }
@@ -411,10 +423,14 @@ class BranchController extends Controller
 		$result1 = curl_exec($api);
 		$countries = json_decode($result1, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page=1' . '&countryId=0' . '&limit=6');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$company = curl_exec($api);
+		$company = json_decode($company, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page=1' . '&countryId=0' . '&companyId=0' . '&limit=6');
 		$numPage = curl_exec($api);
 		$numPage = json_decode($numPage, true);
-        //throw new Exception(print_r($numPage, true));
+        // throw new Exception(print_r($company, true));
         
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1'. '&limit=6');
         $branchJson = curl_exec($api);
@@ -502,6 +518,7 @@ class BranchController extends Controller
             // "employees" => $filteredEmployees,
             "role" => $role,
             "countries" => $countries,
+            "company" => $company,
             "countryId" => 0,
             "numPage" => $numPage
 
@@ -512,6 +529,7 @@ class BranchController extends Controller
     function actionBranchGridFilter($hash)
     {
         $param = ModelMaster::decodeParams($hash);
+        $companyId = $param["companyId"];
         $countryId = $param["countryId"];
         $nextPage = $param["nextPage"];
 
@@ -532,12 +550,17 @@ class BranchController extends Controller
 		$result1 = curl_exec($api);
 		$countries = json_decode($result1, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page='. $nextPage  . '&countryId=' . $countryId . '&limit=7');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$company = curl_exec($api);
+		$company = json_decode($company, true);
+
+        
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page='. $nextPage  . '&countryId=' . $countryId . '&companyId=' . $companyId . '&limit=7');
 		$numPage = curl_exec($api);
 		$numPage = json_decode($numPage, true);
         // throw new Exception(print_r($numPage, true));
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch-filter?id=1' . '&page=' . $nextPage . '&countryId='. $countryId . '&limit=6');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch-filter?id=1' . '&page=' . $nextPage . '&countryId='. $countryId . '&companyId=' . $companyId . '&limit=6');
         $branchJson = curl_exec($api);
         $branches = json_decode($branchJson, true);
 
@@ -621,6 +644,7 @@ class BranchController extends Controller
             // "employees" => $filteredEmployees,
             "role" => $role,
             "countries" => $countries,
+            "company" => $company,
             "countryId" => $countryId,
             "numPage" => $numPage
 
