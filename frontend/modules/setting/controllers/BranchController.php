@@ -305,7 +305,6 @@ class BranchController extends Controller
 		$company = curl_exec($api);
 		$company = json_decode($company, true);
 
-
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page=' . $nextPage . '&countryId=' . $countryId . '&companyId=' . $companyId . '&limit=7');
 		$numPage = curl_exec($api);
 		$numPage = json_decode($numPage, true);
@@ -391,17 +390,17 @@ class BranchController extends Controller
 
         // if (count($branches) > 0) {
             return $this->render('index', [
-                "company" => $company,
                 // "companies" => $companyGroup,
                 "branches" => $data,
                 // "country" => $companyCountry,
-                "companyId" => $companyId,
                 // "totalEmployees" => $totalEmployees,
                 // "totalDepartment" => count($departments),
                 // "totalTeam" => $totalTeam,
                 "role" => $role,
                 "countries" => $countries,
-                "countryId" => $companyId,
+                "countryId" => $countryId,
+                "company" => $company,
+                "companyId" => $companyId,
                 "numPage" => $numPage
             ]);
         // }
