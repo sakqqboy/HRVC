@@ -89,8 +89,6 @@ class BranchController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $companyId = $param["companyId"];
 
-        		// throw new exception(print_r($companyId, true));
-
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
         if (!isset($group) && !empty($group)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
@@ -107,28 +105,8 @@ class BranchController extends Controller
         }
         
 
-        // $role = UserRole::userRight();
-
-        // $api = curl_init();
-        // curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        // curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
-		// $result1 = curl_exec($api);
-		// $countries = json_decode($result1, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?id='  . '&page=1' . '&countryId=' . '&limit=6');
-		// $numPage = curl_exec($api);
-		// $numPage = json_decode($numPage, true);
-        
-        // curl_close($api);
-
         return $this->render('no_branch', [
             "companyId" => $companyId,
-            // "role" => $role,
-            // "countries" => $countries,
-            // "countryId" => 0
-            // "numPage" => $numPage
 
         ]);
     }
@@ -159,39 +137,10 @@ class BranchController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page=1' . '&countryId=0'. '&companyId=0' . '&limit=7');
 		$numPage = curl_exec($api);
 		$numPage = json_decode($numPage, true);
-        //throw new Exception(print_r($numPage, true));
-        // if ($companyId != '') {
-        //     curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
-        //     $company = curl_exec($api);
-        //     $company = json_decode($company, true);
 
-        //     curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
-        //     $branchJson = curl_exec($api);
-        //     $branches = json_decode($branchJson, true);
-
-        //     $branchess = Branch::find()
-        //         ->where(["status" => 1, "companyId" => $companyId])
-        //         ->asArray()
-        //         ->all();
-
-        //     // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $company["countryId"]);
-        //     // $resultCountryDetail = curl_exec($api);
-        //     // $companyCountry = json_decode($resultCountryDetail, true);
-        // } else {
-            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1'. '&limit=7');
-            $branchJson = curl_exec($api);
-            $branches = json_decode($branchJson, true);
-
-            // $branchess = Branch::find()
-            //     ->where(["status" => 1])
-            //     ->asArray()
-            //     ->all();
-        // }
-        //  throw new Exception(print_r($companies, true));
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $group["groupId"] . '&page=1' . '&limit=0');
-        // $companyJson = curl_exec($api);
-        // $companyGroup = json_decode($companyJson, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1'. '&limit=7');
+        $branchJson = curl_exec($api);
+        $branches = json_decode($branchJson, true);
 
         curl_close($api);
 
@@ -263,13 +212,7 @@ class BranchController extends Controller
 
         if (count($branches) > 0) {
             return $this->render('index', [
-                // "companies" => $companyGroup,
                 "branches" => $data,
-                // "country" => $companyCountry,
-                // "companyId" => $companyId,
-                // "totalDepartment" => count($departments),
-                // "totalTeam" => $totalTeam,
-                // "totalEmployees" => $totalEmployees,
                 "role" => $role,
                 "countries" => $countries,
                 "company" => $company,
@@ -308,17 +251,10 @@ class BranchController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page=' . $nextPage . '&countryId=' . $countryId . '&companyId=' . $companyId . '&limit=7');
 		$numPage = curl_exec($api);
 		$numPage = json_decode($numPage, true);
-        //throw new Exception(print_r($numPage, true));
+
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch-filter?id=1' . '&page=' . $nextPage . '&countryId='. $countryId . '&companyId=' . $companyId . '&limit=6');
         $branchJson = curl_exec($api);
         $branches = json_decode($branchJson, true);
-        
-        //  throw new Exception(print_r($branches, true));
-
-        // $branchess = Branch::find()
-        //         ->where(["status" => 1])
-        //         ->asArray()
-        //         ->all();
 
         curl_close($api);
 
@@ -359,7 +295,6 @@ class BranchController extends Controller
                     }
                     $totalTeam += count($teams);
                 endforeach;
-                // $totalDepartment += count($departments);
 
                 //เก็บค่า
                 $data[$branch["branchId"]] = [
@@ -388,14 +323,8 @@ class BranchController extends Controller
 
         //  throw new Exception(print_r($branches, true));
 
-        // if (count($branches) > 0) {
             return $this->render('index', [
-                // "companies" => $companyGroup,
                 "branches" => $data,
-                // "country" => $companyCountry,
-                // "totalEmployees" => $totalEmployees,
-                // "totalDepartment" => count($departments),
-                // "totalTeam" => $totalTeam,
                 "role" => $role,
                 "countries" => $countries,
                 "countryId" => $countryId,
@@ -403,13 +332,11 @@ class BranchController extends Controller
                 "companyId" => $companyId,
                 "numPage" => $numPage
             ]);
-        // }
     }
 
     function actionBranchGrid()
     {
-        // $param = ModelMaster::decodeParams($hash);
-        // $companyId = $param["companyId"];
+
         $totalEmployees = 0;
         $totalDepartment = 0;
         $totalTeam = 0;
@@ -435,11 +362,6 @@ class BranchController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1'. '&limit=6');
         $branchJson = curl_exec($api);
         $branches = json_decode($branchJson, true);
-
-        // $branchess = Branch::find()
-        //     ->where(["status" => 1])
-        //     ->asArray()
-        //     ->all();
         
         curl_close($api);
 
@@ -511,10 +433,6 @@ class BranchController extends Controller
 
         return $this->render('branch_grid', [
             "branches" => $data,
-            // "totalDepartment" => count($departments),
-			// "totalTeam" => count($teams),
-			// "totalEmployee" => $totalEmployee,
-            // "employees" => $filteredEmployees,
             "role" => $role,
             "countries" => $countries,
             "company" => $company,
@@ -638,10 +556,6 @@ class BranchController extends Controller
         return $this->render('branch_grid', [
             "companyId" => $companyId,
             "branches" => $data,
-            // "totalDepartment" => count($departments),
-			// "totalTeam" => count($teams),
-			// "totalEmployee" => $totalEmployee,
-            // "employees" => $filteredEmployees,
             "role" => $role,
             "countries" => $countries,
             "company" => $company,
@@ -682,9 +596,6 @@ class BranchController extends Controller
                 ->asArray()
                 ->all();
 
-            // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $company["countryId"]);
-            // $resultCountryDetail = curl_exec($api);
-            // $companyCountry = json_decode($resultCountryDetail, true);
         } else {
             curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1' . '&limit=0');
             $branchJson = curl_exec($api);
@@ -784,38 +695,10 @@ class BranchController extends Controller
                 
                 return $this->redirect(Yii::$app->homeUrl . 'setting/branch/index/' . ModelMaster::encodeParams(['companyId' => '']));
                 
-                // $branchId = Yii::$app->db->lastInsertID + 543;
-                // $api = curl_init();
-                // curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-                // curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-                // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $_POST["companyId"]);
-                // $company = curl_exec($api);
-                // $company = json_decode($company, true);
-
-                // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $company["countryId"]);
-                // $resultCountryDetail = curl_exec($api);
-                // $companyCountry = json_decode($resultCountryDetail, true);
-                // curl_close($api);
-
-                // $group = Branch::find()->where(["branchId" => $_POST["branchId"]])->one();
-                // $oldBanner = $group->banner;
-                // $oldImage = $group->picture;
-
-                // $newBranch = $this->renderAjax('new_branch', [
-                //     "branchName" => $_POST["branchName"],
-                //     "company" => $company,
-                //     "description" => $_POST["description"],
-                //     "country" => $companyCountry,
-                //     "branchId" => $branchId
-                // ]);
-                // $res["status"] = true;
-                // $res["newBranch"] = $newBranch;
+             
             }
         }
 
-        // 
-
-        // return json_encode($res);
     }
 
     public function actionBranchView($hash){
@@ -1052,14 +935,6 @@ class BranchController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $branchId = $param["branchId"] - 543;
 
-        // $branchId = $_POST["branchId"] - 543;
-        // $branch = Branch::find()->where(["branchId" => $branchId])->asArray()->one();
-        // $res["branchId"] = $branch["branchId"];
-        // $res["branchName"] = $branch["branchName"];
-        // $res["description"] = $branch["description"];
-        // $res["companyId"] = $branch["companyId"];
-        // throw new Exception("branch: " . print_r($branchId, true));
-
         $api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -1093,47 +968,6 @@ class BranchController extends Controller
     }
     public function actionSaveUpdateBranch()
     {
-        // $companyId = $_POST["companyId"] - 543;
-
-        // $check = Branch::find()
-        //     ->where(["branchName" => $_POST["branchName"], "companyId" => $_POST["companyId"]])
-        //     ->andWhere("branchId!=$branchId")
-        //     ->one();
-        // if (isset($check) && !empty($check)) {
-        //     $res["status"] = false;
-        // } else {
-        //     $branch = Branch::find()->where(["branchId" => $branchId])->one();
-        //     $branch->branchName = $_POST["branchName"];
-        //     $branch->description = $_POST["description"];
-        //     $branch->status = 1;
-        //     $branch->updateDateTime = new Expression('NOW()');
-        //     $companyId = $branch->companyId;
-        //     if ($branch->save(false)) {
-        //         $api = curl_init();
-        //         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        //         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-        //         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
-        //         $company = curl_exec($api);
-        //         $company = json_decode($company, true);
-
-        //         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $company["countryId"]);
-        //         $resultCountryDetail = curl_exec($api);
-        //         $companyCountry = json_decode($resultCountryDetail, true);
-        //         curl_close($api);
-
-        //         $newBranch = $this->renderAjax('update', [
-        //             "branchName" => $_POST["branchName"],
-        //             "company" => $company,
-        //             "description" => $_POST["description"],
-        //             "country" => $companyCountry,
-        //             "branchId" => $_POST["branchId"]
-        //         ]);
-        //         $res["status"] = true;
-        //         $res["updateBranch"] = $newBranch;
-        //     }
-        // }
-        // return json_encode($res);
         $branchId = $_POST["branchId"] - 543;
 
         $branch = Branch::find()->where([
