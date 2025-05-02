@@ -225,7 +225,7 @@ $page = "list"
         </table>
     </div>
 
-    <?= $this->render('pagination_page', ['countryId' => $countryId,'page' => $page,'numPage' => $numPage]) ?>
+    <?= $this->render('pagination_page', ['countryId' => $countryId,'companyId' => $companyId,'page' => $page,'numPage' => $numPage]) ?>
 
 
 </div>

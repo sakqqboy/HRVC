@@ -7,13 +7,14 @@
     <!-- Previous Button -->
     <button type="button" class="btn-previous<?= ($numPage['nowPage'] == 1 ? '-disable' : '') ?>"
         <?= ($numPage['nowPage'] == 1 ? 'disabled' : '') ?>
-        onclick="goToPageBranch(<?= $numPage['nowPage'] - 1 ?>, '<?php echo $page ?>', <?php echo $countryId; ?>)">
+        onclick="goToPageBranch(<?= $numPage['nowPage'] - 1 ?>, '<?php echo $page ?>', <?php echo $countryId ?> , <?php echo $companyId ?>)">
         <img src="<?= Yii::$app->homeUrl ?>image/btn-previous<?= ($numPage['nowPage'] == 1 ? '-disable' : '') ?>.svg"
             style="width: 4.958px; height: 8.5px; vertical-align: middle;">
         <span style="margin-left: 5px;"><?= Yii::t('app', 'Previous') ?></span>
     </button>
     <!-- Page Numbers -->
-    <a href="javascript:void(0);" onclick="goToPageBranch(1, '<?php echo $page ?>', <?php echo $countryId; ?>)"
+    <a href="javascript:void(0);"
+        onclick="goToPageBranch(1, '<?php echo $page ?>', <?php echo $countryId ?> , <?php echo $companyId ?>)"
         class=" <?= ($numPage['nowPage'] == 1 ? 'btn btn-bg-blue-xs pt-7' : '') ?>"
         style=" <?= ($numPage['nowPage'] == 1 ? 'border: none; padding: 5px 10px; border-radius: 5px;' : 'text-decoration: none;') ?>">
         <!-- Page Numbers 1 และหน้าปัจจุบัน-->
@@ -37,7 +38,8 @@
             if ($numPage['nowPage'] <= 3 ) { 
                 if ($numPage['totalPages'] >= 2) { 
                 ?>
-    <a href="javascript:void(0);" onclick="goToPageBranch(2, '<?php echo $page ?>', <?php echo $countryId; ?>)"
+    <a href="javascript:void(0);"
+        onclick="goToPageBranch(2, '<?php echo $page ?>', <?php echo $countryId ?> , <?php echo $companyId ?>)"
         class=" <?= ($numPage['nowPage'] == 2 ? 'btn btn-bg-blue-xs pt-7' : '') ?>"
         style=" <?= ($numPage['nowPage'] == 2 ? 'border: none; padding: 5px 10px; border-radius: 5px;' : 'text-decoration: none;') ?>">
         <span
@@ -47,7 +49,8 @@
                 } 
             if ($numPage['totalPages'] >= 3) {
             ?>
-    <a href="javascript:void(0);" onclick="goToPageBranch(3, '<?php echo $page ?>', <?php echo $countryId; ?>)"
+    <a href="javascript:void(0);"
+        onclick="goToPageBranch(3, '<?php echo $page ?>', <?php echo $countryId ?> , <?php echo $companyId ?>)"
         class=" <?= ($numPage['nowPage'] == 3 ? 'btn btn-bg-blue-xs pt-7' : '') ?>"
         style=" <?= ($numPage['nowPage'] == 3 ? 'border: none; padding: 5px 10px; border-radius: 5px;' : 'text-decoration: none;') ?>">
         <span
@@ -58,12 +61,12 @@
             }else if( $numPage['nowPage'] > 3 && $numPage['nowPage'] < $numPage['totalPages'] - 2) {
             ?>
     <a href="javascript:void(0);"
-        onclick="goToPageBranch(<?php echo $numPage['nowPage']; ?>, '<?php echo $page ?>', <?php echo $countryId; ?>)"
+        onclick="goToPageBranch(<?php echo $numPage['nowPage']; ?>, '<?php echo $page ?>', <?php echo $countryId ?> , <?php echo $companyId ?>)"
         class="btn btn-bg-blue-xs pt-7" style="border: none; padding: 5px 10px; border-radius: 5px;">
         <span style="color: white; font-weight: 700;"><?php echo $numPage['nowPage']; ?></span>
     </a>
     <a href="javascript:void(0);"
-        onclick="goToPageBranch(<?php echo $numPage['nowPage'] + 1 ?>, '<?php echo $page ?>', <?php echo $countryId; ?>)"
+        onclick="goToPageBranch(<?php echo $numPage['nowPage'] + 1 ?>, '<?php echo $page ?>', <?php echo $countryId ?> , <?php echo $companyId ?>)"
         style="text-decoration: none;">
         <span style="color: black; font-weight: 500;"><?php echo $numPage['nowPage'] + 1; ?></span>
     </a>
@@ -91,7 +94,7 @@
                     ?>
 
     <a href="javascript:void(0);"
-        onclick="goToPageBranch(<?php echo $numPage['totalPages'] - 2 ?>, '<?php echo $page ?>', <?php echo $countryId; ?>)"
+        onclick="goToPageBranch(<?php echo $numPage['totalPages'] - 2 ?>, '<?php echo $page ?>', <?php echo $countryId ?> , <?php echo $companyId ?>)"
         class="<?= ($numPage['nowPage'] ==   $numPage['totalPages'] - 2 ? 'btn btn-bg-blue-xs pt-7' : '') ?>"
         style="<?= ($numPage['nowPage'] ==  $numPage['totalPages'] - 2 ? 'border: none; padding: 5px 10px; border-radius: 5px;' : 'text-decoration: none;') ?>">
         <span
@@ -101,7 +104,7 @@
     </a>
 
     <a href="javascript:void(0);"
-        onclick="goToPageBranch(<?php echo $numPage['totalPages'] - 1 ?>, '<?php echo $page ?>', <?php echo $countryId; ?>)"
+        onclick="goToPageBranch(<?php echo $numPage['totalPages'] - 1 ?>, '<?php echo $page ?>', <?php echo $countryId ?> , <?php echo $companyId ?>)"
         class="<?= ($numPage['nowPage'] ==   $numPage['totalPages'] - 1 ? 'btn btn-bg-blue-xs pt-7' : '') ?>"
         style="<?= ($numPage['nowPage'] ==  $numPage['totalPages'] - 1 ? 'border: none; padding: 5px 10px; border-radius: 5px;' : 'text-decoration: none;') ?>">
         <span
@@ -112,7 +115,7 @@
     <?php } ?>
 
     <a href="javascript:void(0);"
-        onclick="goToPageBranch(<?php echo $numPage['totalPages'] ?>, '<?php echo $page ?>', <?php echo $countryId; ?>)"
+        onclick="goToPageBranch(<?php echo $numPage['totalPages'] ?>, '<?php echo $page ?>', <?php echo $countryId ?> , <?php echo $companyId ?>)"
         class=" <?= ($numPage['nowPage'] ==  $numPage['totalPages'] ? 'btn btn-bg-blue-xs pt-7' : '') ?>"
         style=" <?= ($numPage['nowPage'] ==  $numPage['totalPages'] ? 'border: none; padding: 5px 10px; border-radius: 5px;' : 'text-decoration: none;') ?>">
         <!-- Page Numbers สุดท้าย -->
@@ -126,7 +129,7 @@
     <!-- Next Button -->
     <button type="button" class="pt-3 btn-next<?= ($numPage['nowPage'] == $numPage['totalPages'] ? '-disable' : '') ?>"
         <?= ($numPage['nowPage'] == $numPage['totalPages'] ? 'disabled' : '') ?>
-        onclick="goToPageBranch(<?php echo $numPage['nowPage'] + 1 ?>, '<?php echo $page ?>', <?php echo $countryId; ?>)"
+        onclick="goToPageBranch(<?php echo $numPage['nowPage'] + 1 ?>, '<?php echo $page ?>', <?php echo $countryId ?> , <?php echo $companyId ?>)"
         style="text-decoration: none; ">
         <!-- <button class="btn-next"> -->
         <span style="margin-right: 5px;"><?= Yii::t('app', 'Next') ?></span>
@@ -161,7 +164,8 @@ document.addEventListener('DOMContentLoaded', function() {
             ellipsis.style.display = "inline";
 
             if (nextPage) {
-                goToPageBranch(nextPage, '<?php echo $page ?>', <?php echo $countryId; ?>);
+                goToPageBranch(nextPage, '<?php echo $page ?>', <?php echo $countryId ?>,
+                    <?php echo $companyId ?>);
             }
         }
 
@@ -180,7 +184,8 @@ document.addEventListener('DOMContentLoaded', function() {
     gotoPage.addEventListener("submit", function(event) {
         event.preventDefault(); // ป้องกันการ submit จริง
         const nextPage = gotoPage.querySelector("input[name='pageInput']").value;
-        goToPageBranch(nextPage, '<?php echo $page ?>', <?php echo $countryId; ?>);
+        goToPageBranch(nextPage, '<?php echo $page ?>', <?php echo $countryId ?>,
+            <?php echo $companyId ?>);
     });
 });
 </script>

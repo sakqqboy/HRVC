@@ -163,6 +163,36 @@ function deleteDepartment(departmentId) {
     }
 }
 
+
+function filterCountryDepartment(page) {
+    // console.log("Page:", page); // Add this line to check the value of `page`
+
+    const countryId = document.getElementById('countrySelect').value;
+    const companyId = document.getElementById('companySelect').value;
+    const branchId = document.getElementById('branchSelect').value;
+
+    alert(companyId);
+    var url = $url + 'setting/department/encode-params-country';
+    // alert(page);
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: {
+            countryId: countryId,
+            companyId: companyId,
+            page: page
+        },
+        success: function (data) {
+            // window.location.href = "company-grid-filter/" + data.url;
+            alert(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX request failed: " + error);
+        }
+    });
+}
+
 function savetitleList(departmentId, titleId) {
     if ($("#title-" + titleId + "-" + departmentId).prop("checked") == true) {
         var check = 1;

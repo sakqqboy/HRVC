@@ -43,10 +43,11 @@ $("#create-branch").click(function (e) {
 
 });
 
-function goToPageBranch(nextPage, page, countryId) {
+function goToPageBranch(nextPage, page, countryId, companyId) {
     // alert(page);
     // alert(nextPage);
     // alert(countryId);
+    // alert(companyId);
     var url = $url + 'setting/branch/encode-params-page';
     $.ajax({
         type: "POST",
@@ -54,6 +55,7 @@ function goToPageBranch(nextPage, page, countryId) {
         url: url,
         data: {
             countryId: countryId,
+            companyId: companyId,
             page: page,
             nextPage: nextPage
         },

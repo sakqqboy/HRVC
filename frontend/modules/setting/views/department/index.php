@@ -9,7 +9,7 @@ $page = "grid";
 <div class="contrainer-body mt-10">
 
     <div class="between-center mt-20" style="width: 100%;">
-        <div class="col-9">
+        <div class="col-8">
             <div class=" d-flex align-items-center gap-2">
                 <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" style="width: 24px; height: 24px;">
                 <div class="pim-name-title ml-10">
@@ -27,9 +27,9 @@ $page = "grid";
                 <?php }?>
             </div>
         </div>
-        <div class="col-2" style="text-align: right;">
+        <div class="col-4" style="text-align: right;">
             <!-- filter -->
-            <?= $this->render('filter_list', ['countries' => $countries,'page' => $page,'countryIdOld' => $countryId]) ?>
+            <?= $this->render('filter_list', ['countries' => $countries,'companies' => $companies, 'branches' => $branches, 'page' => $page,'countryIdOld' => $countryId]) ?>
         </div>
         <!-- <div class="col-1 pr-0 text-end">
             <div class="btn-group" role="group">
@@ -183,7 +183,7 @@ $page = "grid";
         </div>
 
         <!-- pagination_page -->
-        <!-- <?= $this->render('pagination_page', ['countryId' => $countryId,'page' => $page,'numPage' => $numPage]) ?> -->
+        <?= $this->render('pagination_page', ['countryId' => $countryId,'page' => $page,'numPage' => $numPage]) ?>
 
     </div>
 </div>

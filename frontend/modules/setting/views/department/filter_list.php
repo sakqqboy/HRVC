@@ -24,8 +24,20 @@
         <?php endforeach; ?>
     </select>
 
+    <select id="branchSelect" class="form-select font-size-12 select-pim" style="border-left: none;" required>
+        <option value="" disabled <?= empty($selectedCountryId) ? 'selected' : '' ?> hidden
+            style="color: var(--Helper-Text, #8A8A8A);">
+            <?= Yii::t('app', 'Branch') ?>
+        </option>
+        <?php foreach ($branches as $branchId => $branch) : ?>
+        <option value="<?= $branch['branchId'] ?>">
+            <?= $branch['branchName'] ?>
+        </option>
+        <?php endforeach; ?>
+    </select>
+
     <span class="btn font-size-12 justify-content-center d-flex align-items-center custom-button-select"
-        onclick="filterCountryBranch('<?=$page?>')" style="flex: 1; text-align: center; cursor: pointer;">
+        onclick="filterCountryDepartment('<?=$page?>')" style="flex: 1; text-align: center; cursor: pointer;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-2">
         <?= Yii::t('app', 'Filter') ?>
     </span>

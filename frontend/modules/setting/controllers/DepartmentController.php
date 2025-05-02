@@ -121,19 +121,30 @@ class DepartmentController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-page?id=' .'&page=1' . '&countryId=0' . '&limit=5');
-		$numPage = curl_exec($api);
-		$numPage = json_decode($numPage, true);
-        // throw new Exception("numPage: " . print_r($numPage, true));
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
+		$countries = curl_exec($api);
+		$countries = json_decode($countries, true);
         
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/index?id=' . '&&page=1' . '&limit=6');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$company = curl_exec($api);
+		$company = json_decode($company, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1'. '&limit=0');
         $branch = curl_exec($api);
         $branch = json_decode($branch, true);
 
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page=1' . '&countryId='. '&companyId=' . '&limit=6');
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/index?id=' . '&&page=1' . '&limit=6');
+        $branches = curl_exec($api);
+        $branches = json_decode($branches, true);
+
         // throw new Exception("branch: " . print_r($branch, true));
 
-        if (isset($branch) && count($branch) > 0) {
-            foreach ($branch as $row) :
+        if (isset($branches) && count($branches) > 0) {
+            foreach ($branches as $row) :
                 $branchId = $row['branchId'];
 
                 curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' .  $branchId . '&page=1' . '&limit=0');
@@ -158,14 +169,6 @@ class DepartmentController extends Controller
                 ];
             }
 
-            // เพิ่ม department ลงในหมวดหมู่ของ branch นี้
-            // if (count($data[$branchId]['departments']) < 0) {
-            //     $data[$branchId]['departments'][] = [
-            //         'departmentId' => $departments['departmentId'],
-            //         'departmentName' => $rdepartmentsow['departmentName']
-            //     ];
-            // }
-            //}
             endforeach;
         }
 
@@ -177,6 +180,9 @@ class DepartmentController extends Controller
             "data" => $data,
             "role" => $role,
             "numPage" => $numPage,
+            "countries" => $countries,
+            "companies" => $company,
+            "branches" => $branch,
             "countryId" => 0
         ]);
     }

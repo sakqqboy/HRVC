@@ -63,13 +63,14 @@ class BranchController extends Controller
     public function actionEncodeParamsPage() {
 		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 	
+        $countryId = Yii::$app->request->post('countryId');
+        $companyId = Yii::$app->request->post('companyId');
         $page = Yii::$app->request->post('page');
-		$countryId = Yii::$app->request->post('countryId');
 		$nextPage = Yii::$app->request->post('nextPage');
 
 		// throw new exception(print_r($nextPage, true));
 
-		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nextPage' => $nextPage]);
+		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nextPage' => $nextPage , 'companyId' => $companyId]);
 	
 		if($page == 'grid') {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-grid-filter/'. $url );
@@ -154,7 +155,6 @@ class BranchController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
 		$company = curl_exec($api);
 		$company = json_decode($company, true);
-
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page=1' . '&countryId=0'. '&companyId=0' . '&limit=7');
 		$numPage = curl_exec($api);
@@ -263,7 +263,6 @@ class BranchController extends Controller
 
         if (count($branches) > 0) {
             return $this->render('index', [
-                "company" => $company,
                 // "companies" => $companyGroup,
                 "branches" => $data,
                 // "country" => $companyCountry,
@@ -273,7 +272,9 @@ class BranchController extends Controller
                 // "totalEmployees" => $totalEmployees,
                 "role" => $role,
                 "countries" => $countries,
+                "company" => $company,
                 "countryId" => 0,
+                "companyId" => 0,
                 "numPage" => $numPage
             ]);
         }
@@ -510,7 +511,6 @@ class BranchController extends Controller
         // throw new Exception(print_r($data, true)); // Debug: ดูข้อมูลทั้งหมด
 
         return $this->render('branch_grid', [
-            // "companyId" => $companyId,
             "branches" => $data,
             // "totalDepartment" => count($departments),
 			// "totalTeam" => count($teams),
@@ -520,6 +520,7 @@ class BranchController extends Controller
             "countries" => $countries,
             "company" => $company,
             "countryId" => 0,
+            "companyId" => 0,
             "numPage" => $numPage
 
         ]);
@@ -636,7 +637,7 @@ class BranchController extends Controller
         // throw new Exception(print_r($data, true)); // Debug: ดูข้อมูลทั้งหมด
 
         return $this->render('branch_grid', [
-            // "companyId" => $companyId,
+            "companyId" => $companyId,
             "branches" => $data,
             // "totalDepartment" => count($departments),
 			// "totalTeam" => count($teams),
