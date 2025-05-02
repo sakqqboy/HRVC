@@ -97,18 +97,21 @@ $this->title = 'KGI Grid View';
                     <?php
                     if (isset($kgis) && count($kgis) > 0) {
                         foreach ($kgis as $kgiId => $kgi) :
-                            // throw new exception(print_r($kgi, true));
                             if ($kgi["isOver"] == 1 && $kgi["status"] != 2) {
                                 $colorFormat = 'over';
+                                $statusText = 'Due Passed';
                             } else {
                                 if ($kgi["status"] == 1) {
                                     if ($kgi["isOver"] == 2) {
                                         $colorFormat = 'disable';
+                                        $statusText = 'Not Set';
                                     } else {
                                         $colorFormat = 'inprogress';
+                                        $statusText = 'In-Progress';
                                     }
                                 } else {
                                     $colorFormat = 'complete';
+                                    $statusText = 'Completed';
                                 }
                             }
                     ?>
@@ -124,7 +127,7 @@ $this->title = 'KGI Grid View';
                                                 <?= Yii::t('app', 'Not set') ?>
                                             <?php
                                             } else { ?>
-                                                <?= $kgi['status'] == 1 ?  Yii::t('app', 'In process') :  Yii::t('app', 'Completed') ?>
+                                                <?= $statusText ?>
                                             <?php
                                             }
                                             ?>

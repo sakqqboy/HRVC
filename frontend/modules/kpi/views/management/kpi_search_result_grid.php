@@ -98,15 +98,19 @@ $this->title = 'KPI Grid View';
                         foreach ($kpis as $kpiId => $kpi) :
                             if ($kpi["isOver"] == 1 && $kpi["status"] != 2) {
                                 $colorFormat = 'over';
+                                $statusText = 'Due Passed';
                             } else {
                                 if ($kpi["status"] == 1) {
                                     if ($kpi["isOver"] == 2) {
                                         $colorFormat = 'disable';
+                                        $statusText = 'Not Set';
                                     } else {
                                         $colorFormat = 'inprogress';
+                                        $statusText = 'In-Progress';
                                     }
                                 } else {
                                     $colorFormat = 'complete';
+                                    $statusText = 'Completed';
                                 }
                             }
                     ?>
@@ -122,7 +126,7 @@ $this->title = 'KPI Grid View';
                                                 <?= Yii::t('app', 'Not set') ?>
                                             <?php
                                             } else { ?>
-                                                <?= $kpi['status'] == 1 ?  Yii::t('app', 'In process') :  Yii::t('app', 'Completed') ?>
+                                                <?= $statusText ?>
                                             <?php
                                             }
                                             ?>

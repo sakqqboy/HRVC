@@ -45,9 +45,10 @@
     /* ระยะห่างด้านซ้าย */
     padding-right: 10px;
     /* ระยะห่างด้านขวา */
-    position: relative !important;
+    /* position: relative !important;
     box-sizing: border-box;
-    flex: 1;
+    flex: 1; */
+    /* position: fixed; */
 }
 
 .small-content {
