@@ -46,6 +46,10 @@ class DepartmentController extends Controller
     ->leftJoin('country cu', 'cu.countryId = c.countryId')
     ->where(['b.status' => 1]);
 
+		if ($id > 0) {
+			$query->andWhere(["b.companyId" => $id]);
+		}
+
 		if ($limit > 0) {
 			$query ->offset($offset)
 			->limit($limit);
@@ -58,16 +62,66 @@ class DepartmentController extends Controller
     return json_encode($indexGrid);
 }
 
+public function actionIndexFilter($countryId,$companyId,$branchId,$page,$limit)
+{
+
+	$offset = ($page - 1) * $limit;
+	$indexGrid = [];
+
+    $query = Branch::find()
+    ->select([
+        'b.branchId',
+        'b.branchName',
+        'b.companyId',
+        'c.companyName',
+        'c.picture',
+        'c.city',
+        'c.countryId',
+        'cu.countryName',
+        'cu.flag',
+    ])
+	->alias('b')
+    ->leftJoin('company c', 'c.companyId = b.companyId')
+    ->leftJoin('country cu', 'cu.countryId = c.countryId')
+    ->where(['b.status' => 1]);
+	
+		if ($countryId > 0) {
+			$query->andWhere(["c.countryId" => $countryId]);
+		}
+		if ($companyId > 0) {
+			$query->andWhere(["b.companyId" => $companyId]);
+		}
+		if ($branchId > 0) {
+			$query->andWhere(["b.branchId" => $branchId]);
+		}
+		
+		if ($limit > 0) {
+			$query ->offset($offset)
+			->limit($limit);
+		}
+
+        $indexGrid = $query
+		->asArray()
+		->all();
+
+    return json_encode($indexGrid);
+}
+
+
+
+
 	public function actionEncodeParamsPage() {
 		Yii::$app->response->format = Response::FORMAT_JSON;
 	
 		$countryId = Yii::$app->request->post('countryId');
+		$companyId = Yii::$app->request->post('companyId');
+		$branchId = Yii::$app->request->post('branchId');
 		$page = Yii::$app->request->post('page');
 		$nextPage = Yii::$app->request->post('nextPage');
 
 		// throw new exception(print_r($nextPage, true));
 
-		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nextPage' => $nextPage]);
+		$url =  ModelMaster::encodeParams(['countryId' => $countryId,'companyId' => $companyId, 'branchId' => $branchId,  'nextPage' => $nextPage]);
 	
 		if($page == 'grid') {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/branch/company-grid-filter/'. $url );

@@ -369,3 +369,70 @@
 .font-bb {
     font-weight: bolder;
 }
+
+.font-b-100 {
+    font-weight: 100;
+}
+
+.font-b-200 {
+    font-weight: 200;
+}
+
+.font-b-300 {
+    font-weight: 300;
+}
+
+.font-b-400 {
+    font-weight: 400;
+}
+
+.font-b-500 {
+    font-weight: 500;
+}
+
+.font-b-600 {
+    font-weight: 600;
+}
+
+.font-i {
+    font-weight: 100;
+}
+
+.font-u {
+    text-decoration: underline;
+}
+
+.font-ui {
+    text-decoration: underline;
+    font-style: italic;
+}
+
+.font-ub {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.font-ubb {
+    text-decoration: underline;
+    font-weight: bolder;
+}
+
+.font-ubbi {
+    text-decoration: underline;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.font-ubbb {
+    text-decoration: underline;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+.font-blue {
+    color: #2580D3;
+}
+
+.font-red {
+    color: #EC1D42;
+}

@@ -49,7 +49,7 @@ class DepartmentController extends Controller
         $branchId = Yii::$app->request->post('branchId');
 		$page = Yii::$app->request->post('page');
 
-		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nextPage' => 1]);
+		$url =  ModelMaster::encodeParams(['countryId' => $countryId,'companyId' => $companyId, 'branchId' => $branchId,  'nextPage' => 1]);
 	
 		if($page == 'grid') {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/department/index-filter/'. $url );
@@ -69,7 +69,7 @@ class DepartmentController extends Controller
 
 		// throw new exception(print_r($nextPage, true));
 
-		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nextPage' => $nextPage]);
+		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'companyId' => $companyId, 'branchId' => $branchId , 'nextPage' => $nextPage]);
 	
 		if($page == 'grid') {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/department/index-filter/'. $url );
@@ -110,7 +110,7 @@ class DepartmentController extends Controller
         ]);
 	}
 
-    public function actionIndex($hash)
+    public function actionIndex()
     {
         //ทำวันจันทร์
         $role = UserRole::userRight();
@@ -181,12 +181,22 @@ class DepartmentController extends Controller
             "countries" => $countries,
             "companies" => $company,
             "branches" => $branch,
-            "countryId" => 0
+            "countryId" => 0,
+            "companyId" => 0,
+            "branchId" => 0,
+            "nextPage" => 1
         ]);
     }
 
-    public function actionIndexFilter()
+    public function actionIndexFilter($hash)
     {
+        $param = ModelMaster::decodeParams($hash);
+        // throw new exception(print_r($param, true));
+        $countryId = !empty($param["countryId"]) ? $param["countryId"] : 0;
+        $companyId = !empty($param["companyId"]) ? $param["companyId"] : 0;
+        $branchId = !empty($param["branchId"]) ? $param["branchId"] : 0;
+        $nextPage = !empty($param["nextPage"]) ? $param["nextPage"] : 0;
+        
         $role = UserRole::userRight();
         $data =[];
         $api = curl_init();
@@ -205,11 +215,11 @@ class DepartmentController extends Controller
         $branch = curl_exec($api);
         $branch = json_decode($branch, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page=1' . '&countryId='. '&companyId=' . '&limit=6');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page-filter?page='. $nextPage . '&countryId='. $countryId . '&companyId='. $companyId . '&branchId='. $branchId . '&limit=6');
 		$numPage = curl_exec($api);
 		$numPage = json_decode($numPage, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/index?id=' . '&&page=1' . '&limit=6');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/index-filter?countryId='. $countryId . '&&companyId='. $companyId . '&&branchId='. $branchId . '&&page=' . $nextPage . '&limit=6');
         $branches = curl_exec($api);
         $branches = json_decode($branches, true);
 
@@ -217,17 +227,17 @@ class DepartmentController extends Controller
 
         if (isset($branches) && count($branches) > 0) {
             foreach ($branches as $row) :
-                $branchId = $row['branchId'];
+                $branchesId = $row['branchId'];
 
-                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' .  $branchId . '&page=1' . '&limit=0');
+                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' .  $branchesId . '&page=1' . '&limit=0');
                 $departments = curl_exec($api);
                 $departments = json_decode($departments, true);
 
                 // throw new Exception("departments: " . print_r($branchId, true));
 
-            if (!isset($data[$branchId])) {
+            if (!isset($data[$branchesId])) {
                 // ตั้งค่าข้อมูล branch ครั้งแรก
-                $data[$branchId] = [
+                $data[$branchesId] = [
                     'branchId' => $row['branchId'],
                     'branchName' => $row['branchName'],
                     'companyId' => $row['companyId'],
@@ -255,8 +265,107 @@ class DepartmentController extends Controller
             "countries" => $countries,
             "companies" => $company,
             "branches" => $branch,
-            "countryId" => 0
+            "countryId" => $countryId,
+            "companyId" => $companyId,
+            "branchId" => $branchId,
+            "nextPage" => $nextPage
         ]);
+    }
+
+    public function actionModalDepartment($hash)
+    {
+        $param = ModelMaster::decodeParams($hash);
+
+        $branchId = $param["branchId"];
+        
+		// throw new Exception(print_r($param, true)); // Debug: ดูข้อมูลทั้งหมด
+
+        $api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
+		$resultCountry = curl_exec($api);
+		$countries = json_decode($resultCountry, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' .  $branchId );
+		$branch = curl_exec($api);
+		$branch = json_decode($branch, true);
+        // throw new Exception("branch: " . print_r($branch, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-page?id=' . $branchId .'&page=1' . '&countryId=0' . '&limit=5');
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+        // throw new Exception("numPage: " . print_r($numPage, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' .  $branchId . '&page=1' . '&limit=5');
+		$departments = curl_exec($api);
+		$departments = json_decode($departments, true);
+        // throw new Exception("department: " . print_r($departments, true));
+
+        $data = [];
+		if (!empty($departments)) {
+            foreach ($departments as $department) :
+				$departmentId = $department['departmentId'];
+
+				$employees = Employee::find()
+				->where(["departmentId" => $departmentId])
+				->asArray()
+				->all();
+
+
+				// กรองเฉพาะที่มี picture
+				$filteredEmployees = array_filter($employees, function($employee) {
+					return !empty($employee['picture']);
+				});
+
+				// รีเซ็ต index และเลือกแค่ 3 คนแรก
+				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+
+				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
+
+				$totalEmployee = Employee::find()->where(["departmentId" => $departmentId, "status" => 1])->count();
+				$teams = [];
+					if (!empty($department)) {
+						$teams = Team::find()->select('teamId')
+							->where(["status" => 1])
+							->andWhere(['IN', 'departmentId', $department['departmentId']])
+							->asArray()->column();
+					}
+
+				$data[] = [
+					"departmentId" => $department['departmentId'],
+					"departmentName" => $department["departmentName"],
+					"branchId" => $department['branchId'],
+					"status" => $department['status'],
+					"createDateTime" => $department['createDateTime'],    
+					"updateDateTime" => $department['updateDateTime'],
+					"totalTeam" => count($teams),
+					"totalEmployee" => $totalEmployee,
+					"employees" => $filteredEmployees
+				];
+			endforeach;
+		}
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $branch["companyId"]);
+        $company = curl_exec($api);
+        $company = json_decode($company, true);
+        
+		curl_close($api);
+
+        return $this->renderPartial('modal_department', [
+            "company" => $company,
+			"countries" => $countries,
+            "branches" => $branch,
+            "departments" => $data,
+            "numPage" => $numPage,
+            "countryId" => 0
+        ]); 
+        // ไฟล์ `views/setting/model_department.php`
+
+        // return $this->render('modal_department', [
+		// ]);
     }
 
     

@@ -170,7 +170,10 @@ function filterCountryDepartment(page) {
     const countryId = document.getElementById('countrySelect').value;
     const companyId = document.getElementById('companySelect').value;
     const branchId = document.getElementById('branchSelect').value;
-
+    // nextPage = 1;
+    // alert(page);
+    // alert(nextPage);
+    // alert(countryId);
     // alert(companyId);
     var url = $url + 'setting/department/encode-params-country';
     // alert(page);
@@ -193,6 +196,53 @@ function filterCountryDepartment(page) {
         }
     });
 }
+
+
+function openPopupModalDepartment(url) {
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (response) {
+            $('#departmentModalBody').html(response);
+            $('#departmentModal').modal('show');
+        },
+        error: function () {
+            $('#departmentModalBody').html('<p class="text-danger">Failed to load content.</p>');
+            $('#departmentModal').modal('show');
+        }
+    });
+}
+
+
+
+function goToPageDepartment(nextPage, page, countryId, companyId, branchId) {
+    // alert(page);
+    // alert(nextPage);
+    // alert(countryId);
+    // alert(companyId);
+    // alert(branchId);
+    var url = $url + 'setting/department/encode-params-page';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: {
+            countryId: countryId,
+            companyId: companyId,
+            branchId: branchId,
+            page: page,
+            nextPage: nextPage
+        },
+        success: function (data) {
+            // window.location.href = "company-grid-filter/" + data.url;
+            alert(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX request failed: " + error);
+        }
+    });
+}
+
 
 function savetitleList(departmentId, titleId) {
     if ($("#title-" + titleId + "-" + departmentId).prop("checked") == true) {

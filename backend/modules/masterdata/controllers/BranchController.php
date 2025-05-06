@@ -141,6 +141,39 @@ class BranchController extends Controller
         ]);
     }
 
+	public function actionBranchPageFilter($page,$countryId,$companyId,$branchId ,$limit)
+    {
+        
+        $query = Branch::find()
+			->select('branch.*, co.countryName, c.companyName, c.picture, co.flag, c.city')
+			->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId')
+			->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
+			->where(['branch.status' => 1]);
+
+		if (!empty($countryId)) {
+				$query->andWhere(["c.countryId" => $countryId]);
+        }
+
+		if (!empty($companyId)) {
+            $query->andWhere(["branch.companyId" => $companyId]);
+        }
+
+		if (!empty($branchId)) {
+            $query->andWhere(["branch.branchId" => $branchId]);
+        }
+    
+        $totalRows = $query->count(); // นับหลังจากใส่เงื่อนไขทั้งหมดแล้ว
+    
+        $totalPages = ceil($totalRows / $limit);
+    
+        return json_encode([
+            'totalPages' => $totalPages,
+            'totalRows' => $totalRows,
+            'perPage' => $limit,
+            'nowPage' => $page
+        ]);
+    }
+
 	public function actionBranchDetail($id)
 	{
 		$branch = [];

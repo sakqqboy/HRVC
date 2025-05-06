@@ -99,6 +99,17 @@
     height: 99px;
 }
 
+.modal-content {
+    display: inline-flex;
+    /* height: 765.946px;
+    padding: 50px; */
+    flex-direction: column;
+    align-items: center;
+    /* gap: 30px; */
+    flex-shrink: 0;
+    border: none;
+}
+
 .header-name {
     text-align: right !important;
     font-size: 22px;

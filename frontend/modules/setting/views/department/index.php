@@ -29,7 +29,8 @@ $page = "grid";
         </div>
         <div class="col-4" style="text-align: right;">
             <!-- filter -->
-            <?= $this->render('filter_list', ['countries' => $countries,'companies' => $companies, 'branches' => $branches, 'page' => $page,'countryIdOld' => $countryId]) ?>
+            <!-- <?= $countryId . $companyId . $branchId ?> -->
+            <?= $this->render('filter_list', ['countries' => $countries,'companies' => $companies, 'branches' => $branches, 'page' => $page,'countryIdOld' => $countryId,'companyIdOld' => $companyId,'branchIdOld' => $branchId]) ?>
         </div>
     </div>
 
@@ -40,7 +41,7 @@ $page = "grid";
                 <?php
 				if (isset($data) && count($data) > 0) {
 					$i = 1;
-                    foreach ($data as $branchId => $branch):
+                    foreach ($data as $branchesId => $branch):
                         ?>
                 <div class="col-lg-6 col-md-5 col-sm-3 col-12" id="department">
                     <div class="card-comany" style="height: auto;">
@@ -75,12 +76,19 @@ $page = "grid";
 
                                     <div style="margin-bottom: 30px;">
                                         <?php if(count($branch['departments']) > 0) { ?>
-                                        <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'], 'branchId' => $branch['branchId']]) ?>"
+                                        <!-- <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'], 'branchId' => $branch['branchId']]) ?>"
                                             class="btn btn-bg-white-xs mr-5" style="margin-top: 3px; ">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
                                                 alt="History" class="pim-icon"
                                                 style="margin-top: -1px; width: 14px; height: 14px;">
+                                        </a> -->
+                                        <a class="btn btn-bg-white-xs mr-5" style="margin-top: 3px;"
+                                            onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>')">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
+                                                alt="History" class="pim-icon"
+                                                style="margin-top: -1px; width: 14px; height: 14px;">
                                         </a>
+
                                         <?php }?>
                                         <a href="
                                         <?= Yii::$app->homeUrl ?>setting/department/departments-view/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
@@ -148,14 +156,23 @@ $page = "grid";
                                     <span class="text-create-crad">
                                         <?= Yii::t('app', 'No associated department, team, or employee found!') ?>
                                     </span>
-                                    <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'], 'branchId' => $branch['branchId']]) ?>"
+                                    <!-- <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'], 'branchId' => $branch['branchId']]) ?>"
                                         style="text-decoration: none;">
                                         <button type="button" class="btn-create" style="padding: 3px 9px;"
                                             action="<?= Yii::$app->homeUrl ?>setting/group/create-group"><?= Yii::t('app', 'Create Department') ?>
                                             <img src="<?= Yii::$app->homeUrl ?>image/arrow-top-r.svg"
                                                 style="width:18px; height:18px; margin-top:-3px;">
                                         </button>
+                                    </a> -->
+                                    <a style="text-decoration: none;"
+                                        onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department')">
+                                        <button type="button" class="btn-create"
+                                            style="padding: 3px 9px;"><?= Yii::t('app', 'Create Department') ?>
+                                            <img src="<?= Yii::$app->homeUrl ?>image/arrow-top-r.svg"
+                                                style="width:18px; height:18px; margin-top:-3px;">
+                                        </button>
                                     </a>
+
                                 </div>
                                 <?php } ?>
                             </div>
@@ -172,7 +189,17 @@ $page = "grid";
         </div>
 
         <!-- pagination_page -->
-        <?= $this->render('pagination_page', ['countryId' => $countryId,'page' => $page,'numPage' => $numPage]) ?>
+        <?= $this->render('pagination_page', ['countryId' => $countryId, 'companyId' => $companyId, 'branchId' => $branchId,'page' => $page,'numPage' => $numPage]) ?>
 
+    </div>
+</div>
+
+<div class="modal fade" id="departmentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="row" id="departmentModalBody" style="width: 100%; padding: 50px; gap: 30px;">
+                <!-- AJAX content will be injected here -->
+            </div>
+        </div>
     </div>
 </div>

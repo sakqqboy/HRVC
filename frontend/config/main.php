@@ -106,6 +106,7 @@ return [
                 'setting/department/index-filter/<hash>' => 'setting/department/index-filter',
                 'setting/department/departments-view/<hash>' => 'setting/department/departments-view',
                 'setting/department/create/<hash>' => 'setting/department/create',
+                'setting/department/modal-department/<hash>' => 'setting/department/modal-department',
                 'setting/department/search-result/<hash>' => 'setting/department/search-result',
                 'setting/employee/employee-profile/<hash>' => 'setting/employee/employee-profile',
                 'setting/employee/update/<hash>' => 'setting/employee/update',
