@@ -60,8 +60,10 @@
     <div class="col-2 pr-1 pl-1">
         <select class="form-select font-size-12 select-pim" id="status-filter" onchange="applySelectStyle(this)">
             <option value=""><?= Yii::t('app', 'Status') ?></option>
-            <option value="1"><?= Yii::t('app', 'Active') ?></option>
-            <option value="2"><?= Yii::t('app', 'Finished') ?></option>
+            <option value="1"><?= Yii::t('app', 'In Progress') ?></option>
+            <option value="3"><?= Yii::t('app', 'Due Passed') ?></option>
+            <option value="4"><?= Yii::t('app', 'Not Set') ?></option>
+            <option value="2"><?= Yii::t('app', 'Completed') ?></option>
         </select>
     </div>
 

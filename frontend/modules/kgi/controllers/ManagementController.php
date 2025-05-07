@@ -3,6 +3,7 @@
 namespace frontend\modules\kgi\controllers;
 
 use common\helpers\Path;
+use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
@@ -1053,28 +1054,14 @@ class ManagementController extends Controller
 		$type = $param["type"];
 		$branches = [];
 		$teams = [];
-		$session = Yii::$app->session;
-		$session->open();
-		$session->set('kgi', [
-			"companyId" => $companyId,
-			"branchId" => $branchId,
-			"month" => $month,
-			"year" => $year,
-			"status" => $status,
-			"type" => $type
-		]);
-		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
-			if ($session->has('kgi')) {
-				$session->remove('kgi');
-			}
+		Session::PimFilter($companyId, $branchId, $month, $year, $status, $type);
+		if ($companyId == "" && $branchId == "" && $month == "" && $status == "" && $year == "") {
 			if ($type == "list") {
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/management/index');
 			} else {
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
 			}
 		}
-
-
 		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year;
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {

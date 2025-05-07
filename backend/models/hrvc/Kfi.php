@@ -5,6 +5,7 @@ namespace backend\models\hrvc;
 use Yii;
 use \backend\models\hrvc\master\KfiMaster;
 use common\models\ModelMaster;
+use Exception;
 
 /**
  * This is the model class for table "kfi".
@@ -48,6 +49,46 @@ class Kfi extends \backend\models\hrvc\master\KfiMaster
         if (isset($kfiHistory) && !empty($kfiHistory) && $kfiHistory["nextCheckDate"] != '') {
             $date = ModelMaster::engDate($kfiHistory["nextCheckDate"], 2);
         }
+        //throw new Exception(print_r($kfiHistory, true));
         return $date;
+    }
+    public static function checkComplete($kfiId, $month, $year, $currentMonth, $currentYear)
+    {
+        if ($month != '' && $year != '') {
+            $kfiHistory = KfiHistory::find()
+                ->where([
+                    "kfiId" => $kfiId,
+                    "status" => 2,
+                    "month" => $month,
+                    "year" => $year
+                ])
+                ->one();
+        }
+        if ($month == '' && $year != '') {
+            if ($year != $currentYear) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+        if ($month != '' && $year == '') {
+            $kfiHistory = KfiHistory::find()
+                ->where([
+                    "kfiId" => $kfiId,
+                    "status" => 2,
+                    "month" => $month,
+                    "year" => $currentYear
+                ])
+                ->one();
+        }
+        if ($month == '' && $year == '') {
+            return 0;
+        }
+
+        if (isset($kfiHistory) && !empty($kfiHistory)) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

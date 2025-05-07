@@ -3,6 +3,7 @@
 namespace frontend\modules\kfi\controllers;
 
 use common\helpers\Path;
+use common\helpers\Session;
 use common\models\ModelMaster;
 use DateTime;
 use Exception;
@@ -799,6 +800,7 @@ class ManagementController extends Controller
 		$type = $param["type"];
 		$branches = [];
 		$teams = [];
+		Session::PimFilter($companyId, $branchId, $month, $year, $status, $type);
 		if ($companyId == "" && $branchId == "" && $month == "" && $status == "" && $year == "") {
 			if ($type == "list") {
 				return $this->redirect(Yii::$app->homeUrl . 'kfi/management/index');
@@ -840,7 +842,7 @@ class ManagementController extends Controller
 			//return $this->redirect(Yii::$app->homeUrl);
 		}
 		$paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
-		//throw new Exception($paramText);
+		throw new Exception($paramText);
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -848,6 +850,7 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-filter?' . $paramText);
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
+		//throw new exception($paramText);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
