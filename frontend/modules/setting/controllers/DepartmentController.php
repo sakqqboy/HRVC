@@ -294,12 +294,12 @@ class DepartmentController extends Controller
 		$branch = json_decode($branch, true);
         // throw new Exception("branch: " . print_r($branch, true));
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-page?id=' . $branchId .'&page=1' . '&countryId=0' . '&limit=5');
-		$numPage = curl_exec($api);
-		$numPage = json_decode($numPage, true);
-        // throw new Exception("numPage: " . print_r($numPage, true));
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-page?id=' . $branchId .'&page=1' . '&countryId=0' . '&limit=0');
+		// $numPage = curl_exec($api);
+		// $numPage = json_decode($numPage, true);
+        // // throw new Exception("numPage: " . print_r($numPage, true));
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' .  $branchId . '&page=1' . '&limit=5');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' .  $branchId . '&page=1' . '&limit=0');
 		$departments = curl_exec($api);
 		$departments = json_decode($departments, true);
         // throw new Exception("department: " . print_r($departments, true));
@@ -354,12 +354,14 @@ class DepartmentController extends Controller
         
 		curl_close($api);
 
+        // throw new Exception("department: " . print_r($data, true));
+
         return $this->renderPartial('modal_department', [
             "company" => $company,
 			"countries" => $countries,
             "branches" => $branch,
             "departments" => $data,
-            "numPage" => $numPage,
+            // "numPage" => $numPage,
             "countryId" => 0
         ]); 
         // ไฟล์ `views/setting/model_department.php`
@@ -579,40 +581,127 @@ class DepartmentController extends Controller
         
             return $this->redirect(Yii::$app->homeUrl . 'setting/department/no-department/' . ModelMaster::encodeParams(["branchId" => '']));
         }
-        
     }
+
+
+    public function actionSaveDepartment()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+    
+        // $rawData = file_get_contents("php://input");
+        // $data = json_decode($rawData, true);
+
+        // throw new exception(print_r($_POST["deptName"], true));
+    
+        if (isset($_POST["branchId"]) && isset($_POST["deptName"])) {
+            $branchId = $_POST["branchId"];
+            $departmentName = $_POST["deptName"];
+
+            $existing = Department::find()->where([
+                "branchId" => $branchId,
+                "departmentName" => $departmentName,
+                "status" => 1
+            ])->one();
+            
+            // return ['success' => false, 'message' => $existing];
+
+            if (!empty($existing)) {
+                $errors[] = 'Cannot create duplicate department name "' . $departmentName . '"';
+                // continue;
+                return ['errors' => false, 'message' =>  $errors];
+            }else{
+                $department = new Department();
+                $department->departmentName = $departmentName;
+                $department->branchId = $branchId;
+                $department->status = '1';
+                $department->createDateTime = new Expression('NOW()');
+                $department->updateDateTime = new Expression('NOW()');
+    
+                if ($department->save()) {
+                    $api = curl_init();
+                    curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+                    curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' .  $branchId . '&page=1&limit=0');
+                    $departments = curl_exec($api);
+                    $departments = json_decode($departments, true);
+                    curl_close($api);
+
+                    return [
+                        'success' => true,
+                        'departments' => $departments // ส่งค่ากลับ
+                    ];
+                } else {
+                    return ['success' => false, 'errors' => $department->getErrors()];
+                }
+            }            
+        }
+    
+        return ['success' => false, 'message' => 'no branchId'];
+    }
+    
 
     
     public function actionUpdateDepartment()
-    {
-        $department = Department::find()
-            ->where(["departmentId" => $_POST["departmentId"] - 543])
-            ->asArray()
-            ->one();
-        $branch = Branch::find()->select('companyId')->where(["branchId" => $department["branchId"]])->one();
+{
+    Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        $res["branchId"] = $department["branchId"];
-        $res["departmentId"] = $department["departmentId"] + 543;
-        $res["departmentName"] = $department["departmentName"];
-        $res["companyId"] = $branch["companyId"];
-        $text = "<option value=''>Select Branch</option>";
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $branch["companyId"]);
-        $branch = curl_exec($api);
-        $branch = json_decode($branch, true);
-        curl_close($api);
-        $res["status"] = false;
-        if (isset($branch) && count($branch) > 0) {
-            $res["status"] = true;
-            foreach ($branch as $b) :
-                $text .= "<option value='" . $b['branchId'] . "'>" . $b['branchName'] . "</option>";
-            endforeach;
+    if (isset($_POST["departmentId"]) && isset($_POST["departmentName"])) {
+        $departmentId = $_POST["departmentId"];
+        $departmentName = $_POST["departmentName"];
+
+        $update = Department::find()->where([
+            "departmentId" => $departmentId,
+            "status" => '1'
+        ])->one();
+
+        // return ['success' => false, 'message' => $update];
+
+        if ($update) {
+            $update->departmentName = $departmentName;
+            $update->updateDateTime =  new Expression('NOW()');
+
+			if ($update->save(false)) {
+                // ดึง branchId จาก model (ถ้ามี)
+                // return ['success' => false, 'message' =>  ' 2 '];
+
+                $branchId = $update->branchId;
+
+                $api = curl_init();
+                curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+                curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $branchId . '&page=1&limit=0');
+                $departments = curl_exec($api);
+                $departments = json_decode($departments, true);
+                curl_close($api);
+
+                return [
+                    'success' => true,
+                    'departments' => $departments
+                ];
+            } else {
+                // return ['success' => false, 'message' =>  ' 1 '];
+                // return ['success' => false, 'errors' => $update->getErrors()];
+                if (!$update->save()) {
+                    $errorText = [];
+                    foreach ($update->getErrors() as $field => $errors) {
+                        $errorText[] = implode(', ', $errors);
+                    }
+                    return ['success' => false, 'message' => implode("\n", $errorText)];
+                }                
+            }
+
+            // return ['success' => false, 'message' => $departmentName . ' '. $departmentId];
+
+
+        } else {
+            return ['success' => false, 'message' => 'Department not found'];
         }
-        $res["branchText"] = $text;
-        return json_encode($res);
     }
+
+    return ['success' => false, 'message' => 'Missing required POST parameters'];
+}
+
+    
     public function actionDeleteDepartment()
     {
         $departmentId = $_POST["departmentId"] - 543;

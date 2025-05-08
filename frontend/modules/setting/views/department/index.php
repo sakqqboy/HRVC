@@ -116,7 +116,7 @@ $page = "grid";
                                 ?>
                                 <div style="align-self: stretch; height: 147px">
                                     <div class="between-start">
-                                        <span class="detailname-crad-company">
+                                        <span class="detailname-crad-company mb-14">
                                             Registered Departments
                                         </span>
                                         <a class="see-all-company"
@@ -142,7 +142,7 @@ $page = "grid";
                                                         alt="icon">
                                                 </div>
                                                 <?= $dept['departmentName'] ?>
-                                                </spanแ>
+                                            </span>
                                         </div>
                                         <?php endforeach; ?>
                                     </div>
@@ -165,13 +165,19 @@ $page = "grid";
                                         </button>
                                     </a> -->
                                     <a style="text-decoration: none;"
-                                        onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department')">
+                                        onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>')">
                                         <button type="button" class="btn-create"
                                             style="padding: 3px 9px;"><?= Yii::t('app', 'Create Department') ?>
                                             <img src="<?= Yii::$app->homeUrl ?>image/arrow-top-r.svg"
                                                 style="width:18px; height:18px; margin-top:-3px;">
                                         </button>
                                     </a>
+                                    <!-- <a class="btn btn-bg-white-xs mr-5" style="margin-top: 3px;"
+                                            onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>')">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
+                                                alt="History" class="pim-icon"
+                                                style="margin-top: -1px; width: 14px; height: 14px;">
+                                        </a> -->
 
                                 </div>
                                 <?php } ?>
@@ -199,6 +205,19 @@ $page = "grid";
         <div class="modal-content">
             <div class="row" id="departmentModalBody" style="width: 100%; padding: 50px; gap: 30px;">
                 <!-- AJAX content will be injected here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ป็อปอัพยืนยันลบ -->
+<div class="modal fade" id="confirmModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>คุณแน่ใจหรือไม่ว่าต้องการลบ?</p>
+                <button class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                <button class="btn btn-danger" onclick="confirmDelete()">ยืนยัน</button>
             </div>
         </div>
     </div>

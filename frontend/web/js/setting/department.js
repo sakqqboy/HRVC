@@ -99,6 +99,8 @@ function updateDepartment(departmentId) {
         }
     });
 }
+
+
 $("#update-department").click(function (e) {
     var url = $url + 'setting/department/save-update-department';
     var departmentName = $("#departmentName").val();
@@ -213,7 +215,115 @@ function openPopupModalDepartment(url) {
     });
 }
 
+function actionSaveDepartment(branchId, deptName) {
+    // alert(branchId);
+    // alert(deptName);
+    var url = $url + 'setting/department/save-department';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { branchId: branchId, deptName: deptName },
+        success: function (data) {
+            if (data.success && data.departments) {
+                renderDepartmentList(data.departments); // เรียกฟังก์ชันวาด HTML ใหม่
+            } else {
+                alert('ไม่สามารถบันทึกได้');
+            }
+        }
+    });
 
+}
+
+function updateDepartmentName(departmentId, departmentName) {
+    // $("#departmentId").val(departmentId);
+    // alert(departmentId);
+    // alert(departmentName);
+    var url = $url + 'setting/department/update-department';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { departmentId: departmentId, departmentName: departmentName },
+        success: function (data) {
+            if (data.success && data.departments) {
+                // alert('บันทึกสำเร็จ');
+                renderDepartmentList(data.departments); // เรียกฟังก์ชันวาด HTML ใหม่
+            } else {
+                // alert('ไม่สามารถบันทึกได้');
+                alert(data.message);
+            }
+        }
+    });
+}
+
+function renderDepartmentList(departments) {
+    // alert(departments);
+    const container = document.getElementById('schedule-list');
+    container.innerHTML = '';
+
+    departments.forEach(dept => {
+        const html = `
+        <li class="schedule-item" data-id="${dept.departmentId}" style="padding: 13px 20px; background-color: #FFFFFF;">
+            <div class="row align-items-center dept-name">
+                <div class="col-10 dept-label" style="font-weight: 600; font-size: 16px;">
+                    ${dept.departmentName}
+                </div>
+                <div class="col-2 text-end">
+                    <a  data-bs-toggle="modal" data-bs-target="#staticBackdrop4Label" onclick="openConfirmModal()" class="no-underline icon-delete">
+                        <img src="/HRVC/frontend/web/images/icons/Settings/binred.svg" alt="Delete"
+                            class="pim-icon bin-icon transition-icon">
+                    </a>
+                    <a href="#" class="no-underline icon-edit">
+                        <img src="/HRVC/frontend/web/image/edit-blue.svg" alt="Edit"
+                            class="pim-icon edit-icon transition-icon" style="margin-top: -3px;">
+                        <span class="text-blue edit-label transition-label" style="font-weight: 500;">Edit</span>
+                    </a>
+                </div>
+            </div>
+        </li>`;
+        container.insertAdjacentHTML('beforeend', html);
+    });
+}
+
+function openConfirmModal() {
+    // ทำให้ modal แรก fade หรือ blur
+    // document.getElementById('departmentModalBody').style.opacity = '0.3';
+    // document.getElementById('departmentModalBody').style.pointerEvents = 'none';
+
+    // เปิด modal ที่สอง
+    const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+    confirmModal.show();
+
+    // เมื่อ modal ยืนยันถูกปิด ให้คืนค่าป็อปอัพแรกกลับมา
+    document.getElementById('confirmModal').addEventListener('hidden.bs.modal', function () {
+        document.getElementById('mainModalContent').style.opacity = '1';
+        document.getElementById('mainModalContent').style.pointerEvents = 'auto';
+    }, { once: true });
+}
+
+
+function cancelEdit(newValue) {
+    if (currentEditingId) {
+        // เปลี่ยนข้อความใน li เดิม
+        const label = originalLi.querySelector('.dept-label');
+        label.textContent = newValue || label.textContent;
+        // ลบ input และคืน li
+        const inputLi = document.querySelector('.edit-temp-item');
+        if (inputLi) inputLi.remove();
+        if (originalLi) originalLi.style.display = '';
+        currentEditingId = null;
+        originalLi = null;
+    }
+}
+
+function saveEdit(newValue) {
+    if (!currentEditingId || !originalLi) return;
+    // cancelEdit(newValue);
+    // 🟡 ส่งข้อมูลกลับเซิร์ฟเวอร์ได้ตรงนี้ ถ้าต้องการ update จริง
+    // alert(newValue);
+    updateDepartmentName(currentEditingId, newValue);
+}
 
 function goToPageDepartment(nextPage, page, countryId, companyId, branchId) {
     // alert(page);
