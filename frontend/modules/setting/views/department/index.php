@@ -211,14 +211,15 @@ $page = "grid";
 </div>
 
 <!-- ป็อปอัพยืนยันลบ -->
-<div class="modal fade" id="confirmModal" tabindex="-1">
+<!-- <div class="modal fade" id="confirmDeleteModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-body">
-                <p>คุณแน่ใจหรือไม่ว่าต้องการลบ?</p>
-                <button class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-                <button class="btn btn-danger" onclick="confirmDelete()">ยืนยัน</button>
+            <div class="row" id="departmentDeleteModal">
+                <div class="mt-2">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                    <button class="btn btn-danger" onclick="confirmDelete()">ยืนยัน</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</div> -->

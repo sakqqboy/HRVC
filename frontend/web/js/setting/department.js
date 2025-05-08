@@ -199,7 +199,6 @@ function filterCountryDepartment(page) {
     });
 }
 
-
 function openPopupModalDepartment(url) {
     $.ajax({
         url: url,
@@ -213,6 +212,40 @@ function openPopupModalDepartment(url) {
             $('#departmentModal').modal('show');
         }
     });
+}
+
+
+
+function openModalDeleteDepartment(url) {
+    // $('#departmentDeleteModal').html(url);
+    // $('#departmentDeleteModal').modal('show');
+    // alert(url);
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (response) {
+            // alert(response);
+            $('#departmentDeleteModal').html(response);
+            $('#departmentDeleteModal').modal('show');
+        },
+        error: function () {
+            $('#departmentDeleteModal').html('<p class="text-danger">Failed to load content.</p>');
+            $('#departmentDeleteModal').modal('show');
+        }
+    });
+
+    // $.ajax({
+    //     url: url,
+    //     type: 'GET',
+    //     success: function (response) {
+    //         $('#departmentModalBody').html(response);
+    //         $('#departmentModal').modal('show');
+    //     },
+    //     error: function () {
+    //         $('#departmentModalBody').html('<p class="text-danger">Failed to load content.</p>');
+    //         $('#departmentModal').modal('show');
+    //     }
+    // });
 }
 
 function actionSaveDepartment(branchId, deptName) {
@@ -261,7 +294,8 @@ function renderDepartmentList(departments) {
     // alert(departments);
     const container = document.getElementById('schedule-list');
     container.innerHTML = '';
-
+    var modalurl = $url + 'setting/department/modal-delete';
+    // alert(modalurl);
     departments.forEach(dept => {
         const html = `
         <li class="schedule-item" data-id="${dept.departmentId}" style="padding: 13px 20px; background-color: #FFFFFF;">
@@ -270,7 +304,7 @@ function renderDepartmentList(departments) {
                     ${dept.departmentName}
                 </div>
                 <div class="col-2 text-end">
-                    <a  data-bs-toggle="modal" data-bs-target="#staticBackdrop4Label" onclick="openConfirmModal()" class="no-underline icon-delete">
+                    <a  onclick="openModalDeleteDepartment('${modalurl}')" class="no-underline icon-delete">
                         <img src="/HRVC/frontend/web/images/icons/Settings/binred.svg" alt="Delete"
                             class="pim-icon bin-icon transition-icon">
                     </a>

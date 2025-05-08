@@ -701,6 +701,11 @@ class DepartmentController extends Controller
     return ['success' => false, 'message' => 'Missing required POST parameters'];
 }
 
+public function actionModalDelete(){
+
+    return $this -> renderPartial('modal_delete');
+}
+
     
     public function actionDeleteDepartment()
     {

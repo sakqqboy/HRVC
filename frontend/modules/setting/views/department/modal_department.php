@@ -11,8 +11,6 @@
     </div>
 
     <div class="row" style=" gap: 30px; ">
-        <!-- body modal -->
-        <!-- name logo -->
         <div style="display: flex; align-items: center; gap: 17px;">
             <div class="mid-center" style="height: 60px; padding: 20.944px 4.189px; gap: 10px;">
                 <?php if ($branches["branchImage"] != null) { ?>
@@ -114,6 +112,10 @@
 
     <div>
         <!-- footer modal -->
+    </div>
+
+    <div class="modal fade" id="departmentDeleteModal" tabindex="-1" aria-labelledby="departmentDeleteModal"
+        aria-hidden="true">
     </div>
 
     <script>
