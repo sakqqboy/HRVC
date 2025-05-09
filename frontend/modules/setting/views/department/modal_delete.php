@@ -1,36 +1,26 @@
-<!-- <div class="modal fade" id="departmentDeleteModal" tabindex="-1" aria-labelledby="departmentDeleteModal"
-    aria-hidden="true"> -->
 <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" style="border-radius: 8px; padding: 20px;">
+    <div class="modal-content" style="border-radius: 8px; padding: 20px; align-items: normal; ">
         <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
-            <h3 class="modal-title" id="staticBackdrop4Label" style="display: flex; align-items: center;">
+            <h3 class="modal-title" id="staticBackdrop4Label">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/warning.svg" alt="Warning"
                     style="width: 24px; height: 24px; margin-right: 8px;">
-                <?= Yii::t('app', 'Deletion Warning') ?>
+                <?= Yii::t('app', 'Unable to Delete') ?>
             </h3>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <a type="button" onclick="openCloseModal()" class="btn-close">
+            </a>
         </div>
         <div class="modal-body text-start" style="font-size: 14px; color: #6c757d; padding-top: 10px;">
-            <?= Yii::t('app', "Deleting this KGI will remove all assigned employee teams and their history. You can recover this
-                data within 7 working days. To restore it, please contact the system administrator") ?>.
+            <?= Yii::t('app', "To delete a department, it must be empty. Please detach all employees and teams from the department in the Teams and Employees sections first.") ?>.
         </div>
         <div class="modal-footer justify-content-end" style="border-top: none; padding-top: 20px;">
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                style="width: 100px; display: flex; align-items: center; justify-content: center;">
-                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/cancle.svg" alt="Cancel"
+            <!-- ปุ่ม Continue -->
+            <button type="button" class="btn btn-primary"
+                style="width: 100px; display: flex; align-items: center; justify-content: center; background: #2580D3; border: none; color: white;"
+                onclick="updateModalContent(<?= $departmentId ?>)">
+                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/check-circle.svg" alt="Cancel"
                     style="width: 14px; height: 14px; margin-right: 5px;">
-                <?= Yii::t('app', 'Cancel') ?>
+                <?= Yii::t('app', 'Continue') ?>
             </button>
-            <input type="hidden" id="kgiId-modal" value="">
-            <a href="javascript:deleteKgi()" class="btn btn-outline-danger"
-                style="width: 100px; display: flex; align-items: center; justify-content: center; margin-left: 10px;"
-                onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="Delete" class="pim-icon"
-                    style="width: 14px; height: 14px; margin-right: 5px;">
-                <?= Yii::t('app', 'Delete') ?>
-            </a>
         </div>
     </div>
 </div>
-<!-- </div> -->

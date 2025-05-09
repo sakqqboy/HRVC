@@ -146,23 +146,60 @@ $("#reset-department").click(function (e) {
 });
 
 function deleteDepartment(departmentId) {
-    if (confirm("Are you sure to delete this department?")) {
-        var url = $url + 'setting/department/delete-department';
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: url,
-            data: { departmentId: departmentId },
-            success: function (data) {
-                if (data.status) {
-                    $("#department-" + departmentId).hide(200);
-                } else {
-                    alert("Can not delete this branch.");
-                }
-
+    var url = $url + 'setting/department/delete-department';
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: { departmentId: departmentId },
+        success: function (response) {
+            // สมมุติว่า server ส่ง JSON กลับมา
+            // เช่น { success: true, departments: [...] }
+            if (response.success && response.departments) {
+                openCloseModal();
+                renderDepartmentList(response.departments); // อัปเดตรายการ department
+            } else {
+                alert(response.message || 'ไม่สามารถลบได้');
             }
-        });
+        }
+    });
+}
+
+function sortDepartment(column) {
+
+    const table = document.getElementById('myTable');
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    const getCellValue = (row, column) => {
+        switch (column) {
+            case 'brachName':
+                return parseInt(row.cells[2].innerText.trim()) || 0;
+            case 'team':
+                return parseInt(row.cells[4].innerText.trim()) || 0;
+            case 'employee':
+                return parseInt(row.cells[5].innerText.trim()) || 0;
+            default:
+                return '';
+        }
     }
+
+    // toggle direction
+    sortDirection[column] = !sortDirection[column];
+
+    rows.sort((a, b) => {
+        const valA = getCellValue(a, column);
+        const valB = getCellValue(b, column);
+
+        if (typeof valA === 'number' && typeof valB === 'number') {
+            return sortDirection[column] ? valA - valB : valB - valA;
+        }
+
+        return sortDirection[column] ?
+            valA.localeCompare(valB) :
+            valB.localeCompare(valA);
+    });
+
+    rows.forEach(row => tbody.appendChild(row)); // update order
 }
 
 
@@ -205,6 +242,8 @@ function openPopupModalDepartment(url) {
         type: 'GET',
         success: function (response) {
             $('#departmentModalBody').html(response);
+
+            $('#departmentDeleteModal').html('');
             $('#departmentModal').modal('show');
         },
         error: function () {
@@ -216,15 +255,17 @@ function openPopupModalDepartment(url) {
 
 
 
-function openModalDeleteDepartment(url) {
-    // $('#departmentDeleteModal').html(url);
-    // $('#departmentDeleteModal').modal('show');
-    // alert(url);
+function openModalDeleteDepartment(departmentId) {
+    var url = $url + 'setting/department/modal-delete';
+    // alert(modalurl);
     $.ajax({
         url: url,
         type: 'GET',
+        data: { departmentId: departmentId },
         success: function (response) {
             // alert(response);
+            document.getElementById('departmentModal').style.opacity = '0.1';
+            document.getElementById('departmentModal').style.pointerEvents = 'none';
             $('#departmentDeleteModal').html(response);
             $('#departmentDeleteModal').modal('show');
         },
@@ -233,20 +274,19 @@ function openModalDeleteDepartment(url) {
             $('#departmentDeleteModal').modal('show');
         }
     });
-
-    // $.ajax({
-    //     url: url,
-    //     type: 'GET',
-    //     success: function (response) {
-    //         $('#departmentModalBody').html(response);
-    //         $('#departmentModal').modal('show');
-    //     },
-    //     error: function () {
-    //         $('#departmentModalBody').html('<p class="text-danger">Failed to load content.</p>');
-    //         $('#departmentModal').modal('show');
-    //     }
-    // });
 }
+
+function openCloseModal() {
+    document.getElementById('departmentModal').style.opacity = '1';
+    document.getElementById('departmentModal').style.pointerEvents = 'auto';
+    // $('#departmentDeleteModal').html(response);
+    $('#departmentDeleteModal').modal('hide');
+}
+
+$('#departmentDeleteModal').on('hidden.bs.modal', function () {
+    openCloseModal();
+});
+
 
 function actionSaveDepartment(branchId, deptName) {
     // alert(branchId);
@@ -267,6 +307,47 @@ function actionSaveDepartment(branchId, deptName) {
     });
 
 }
+
+function updateModalContent(departmentId) {
+    // เปลี่ยน title
+    const modalTitle = document.querySelector('#staticBackdrop4Label');
+    if (modalTitle) {
+        modalTitle.innerHTML = `
+            <img src="${$url}images/icons/Settings/warning.svg" alt="Warning"
+                style="width: 24px; height: 24px; margin-right: 8px;">
+            Deletion Warning
+        `;
+    }
+
+    // เปลี่ยน body
+    const modalBody = document.querySelector('.modal-body');
+    if (modalBody) {
+        modalBody.innerHTML = `Are you sure you want to delete this department? Once deleted, it cannot be restored. However, you can always create a new department if needed.`;
+    }
+
+    // เปลี่ยน footer
+    const modalFooter = document.querySelector('.modal-footer');
+    if (modalFooter) {
+        modalFooter.innerHTML = `
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                style="width: 100px; display: flex; align-items: center; justify-content: center; background: #2580D3; border: none; color: white;"
+                onclick="openCloseModal()">
+                <img src="${$url}images/icons/Settings/cancle.svg" alt="Cancel"
+                    style="width: 14px; height: 14px; margin-right: 5px;">
+                Cancel
+            </button>
+            <a href="javascript:deleteDepartment('${departmentId}')" class="btn btn-outline-danger"
+                style="width: 100px; display: flex; align-items: center; justify-content: center; margin-left: 10px;"
+                onmouseover="this.querySelector('.pim-icon').src='${$url}images/icons/Settings/binwhite.svg'"
+                onmouseout="this.querySelector('.pim-icon').src='${$url}images/icons/Settings/binred.svg'">
+                <img src="${$url}images/icons/Settings/binred.svg" alt="Delete" class="pim-icon"
+                    style="width: 14px; height: 14px; margin-right: 5px;">
+                Delete
+            </a>
+        `;
+    }
+}
+
 
 function updateDepartmentName(departmentId, departmentName) {
     // $("#departmentId").val(departmentId);
@@ -293,9 +374,8 @@ function updateDepartmentName(departmentId, departmentName) {
 function renderDepartmentList(departments) {
     // alert(departments);
     const container = document.getElementById('schedule-list');
+
     container.innerHTML = '';
-    var modalurl = $url + 'setting/department/modal-delete';
-    // alert(modalurl);
     departments.forEach(dept => {
         const html = `
         <li class="schedule-item" data-id="${dept.departmentId}" style="padding: 13px 20px; background-color: #FFFFFF;">
@@ -304,11 +384,11 @@ function renderDepartmentList(departments) {
                     ${dept.departmentName}
                 </div>
                 <div class="col-2 text-end">
-                    <a  onclick="openModalDeleteDepartment('${modalurl}')" class="no-underline icon-delete">
+                    <a  onclick="openModalDeleteDepartment('${dept.departmentId}')" class="no-underline icon-delete">
                         <img src="/HRVC/frontend/web/images/icons/Settings/binred.svg" alt="Delete"
                             class="pim-icon bin-icon transition-icon">
                     </a>
-                    <a href="#" class="no-underline icon-edit">
+                    <a href="#" class="no-underline icon-edit" onclick="handleEditClick(event, this)">
                         <img src="/HRVC/frontend/web/image/edit-blue.svg" alt="Edit"
                             class="pim-icon edit-icon transition-icon" style="margin-top: -3px;">
                         <span class="text-blue edit-label transition-label" style="font-weight: 500;">Edit</span>
@@ -318,7 +398,92 @@ function renderDepartmentList(departments) {
         </li>`;
         container.insertAdjacentHTML('beforeend', html);
     });
+
+
+    // ดึงเฉพาะ li ที่ต้องการให้ทำงานอัตโนมัติ
+    const targetDeptId = document.getElementById('departmentId')?.value;
+    const targetLi = container.querySelector(`li[data-id="${targetDeptId}"]`);
+
+    if (targetLi) {
+        const editBtn = targetLi.querySelector('.icon-edit');
+        handleEditClick(null, editBtn); // ส่ง null แทน event, แล้วให้ handleEditClick จัดการเอง
+    }
+
 }
+
+
+function handleEditClick(e, element) {
+    if (e) e.preventDefault();
+
+    const li = element.closest('li');
+    const deptId = li.getAttribute('data-id');
+    const deptName = li.querySelector('.dept-label').textContent.trim();
+
+    li.style.display = 'none';
+    originalLi = li;
+    currentEditingId = deptId;
+
+    const inputHTML = `
+        <li class="edit-temp-item mt-30" data-id="${deptId}">
+            <div class="input-group">
+                <input type="text" name="departmentNameList" id="editDeptInputlist" value="${deptName}" class="form-control dep-${deptId}"
+                    placeholder="Write department name" autofocus >
+                <span class="input-group-text" id="enterHintlist" style="background-color: #ffff; border-left: none;">
+                    <div class="city-crad-company" id="hintTextlist" style="color: #ffffff; background-color: #2580D3;">
+                        <img src="/HRVC/frontend/web/image/enter-white.svg" style="width: 24px; height: 24px;">
+                        Enter to Save
+                    </div>
+                </span>
+            </div>
+        </li>`;
+
+    // alert(deptId);
+    // $(".dep-" + deptId).first().focus();
+    // document.querySelector('.dep-' + deptId).focus();
+
+    li.insertAdjacentHTML('afterend', inputHTML);
+    setTimeout(() => {
+        const input = document.querySelector('.dep-' + deptId);
+        input?.focus();
+        input?.setSelectionRange(input.value.length, input.value.length);
+    }, 10);
+
+    const input = document.getElementById('editDeptInputlist');
+    // input.focus(); 
+    // setTimeout(() => {
+    //     input.focus();
+    //     input.setSelectionRange(input.value.length, input.value.length); // ให้เคอร์เซอร์อยู่ท้ายข้อความ
+    // }, 10);
+
+
+
+    input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            saveEdit(input.value.trim());
+        }
+    });
+
+    input.addEventListener('blur', function () {
+        cancelEdit(input.value.trim());
+    });
+}
+
+function initDepartmentSearch(inputId = 'Search', listSelector = '#schedule-list .schedule-item') {
+    const searchInput = document.getElementById(inputId);
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', function () {
+        const keyword = this.value.toLowerCase();
+        const items = document.querySelectorAll(listSelector);
+
+        items.forEach(item => {
+            const name = item.querySelector('.col-10')?.textContent.toLowerCase() || '';
+            item.style.display = name.includes(keyword) ? 'block' : 'none';
+        });
+    });
+}
+
+
 
 function openConfirmModal() {
     // ทำให้ modal แรก fade หรือ blur
@@ -379,7 +544,7 @@ function goToPageDepartment(nextPage, page, countryId, companyId, branchId) {
         },
         success: function (data) {
             // window.location.href = "company-grid-filter/" + data.url;
-            alert(data);
+            // alert(data);
         },
         error: function (xhr, status, error) {
             console.error("AJAX request failed: " + error);

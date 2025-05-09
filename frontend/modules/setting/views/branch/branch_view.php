@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 
-$this->title = 'company profile';
+$this->title = 'Branch Profile';
 $page = 'view';
 
 ?>
@@ -88,15 +88,15 @@ $page = 'view';
                     <table id="myTable" class="table align-middle table-spacing">
                         <thead class="table-light">
                             <tr class="table-border-weight">
-                                <th class="text-start" onclick="sortCompany('companyName')" style="width: 314px;">
+                                <th class="text-start" onclick="sortBranch('brachName')" style="width: 314px;">
                                     <?= Yii::t('app', 'Associated Department') ?>
                                     <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
                                 </th>
-                                <th class="text-start" onclick="sortCompany('country')" style="width: 230px;">
+                                <th class="text-start" onclick="sortBranch('team')" style="width: 230px;">
                                     <?= Yii::t('app', 'Associated Teams') ?>
                                     <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
                                 </th>
-                                <th class="text-start" onclick="sortCompany('branch')" style="width: 230px;">
+                                <th class="text-start" onclick="sortBranch('employee')" style="width: 230px;">
                                     <?= Yii::t('app', 'Associated Employees') ?>
                                     <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
                                 </th>

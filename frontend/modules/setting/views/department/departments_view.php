@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 
-$this->title = 'company profile';
+$this->title = 'Department Profile';
 $page = 'view';
 
 ?>
@@ -33,11 +33,11 @@ $page = 'view';
                     <text class="squeezer-text mr-3"> / </text>
                 </div>
                 <a class="part-text mr-3"
-                    href="<?= Yii::$app->homeUrl ?>setting/branch/no-branch/<?= ModelMaster::encodeParams(['companyId' => '']) ?>">Branch</a>
+                    href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['branchId' => '']) ?>">Departments</a>
                 <div class="mid-center" style="width: 20px; height: 20px;">
                     <text class="squeezer-text mr-3"> / </text>
                 </div>
-                <span class="pim-unit-text"><?= $branches['branchName'] ?></span>
+                <span class="pim-unit-text"><?= $branches['companyName'] ?></span>
             </div>
         </div>
 
@@ -49,23 +49,25 @@ $page = 'view';
                     ">
                 <div class="avatar-preview">
                     <?php if ($branches["branchImage"] != null) { ?>
-                    <img src="<?= Yii::$app->homeUrl . $branches['branchImage'] ?>" class="cycle-big-image">
+                    <img src="<?= Yii::$app->homeUrl . $branches['picture'] ?>" class="cycle-big-image">
                     <?php } else { ?>
                     <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="cycle-big-image">
                     <?php } ?>
                 </div>
                 <div class=" column">
                     <span class="font-size-20" style="font-weight: 600;">
-                        <?= $branches['branchName'] ?>
+                        <?= $branches['companyName'] ?>
                     </span>
                     <div class="column">
                         <span class="font-size-16 text-gray-back"
                             style="font-weight: 500; display: flex; align-items: center; gap: 12px;">
-                            <?= Yii::t('app', 'Associated Company') ?>
+                            <?= Yii::t('app', 'Branch') ?>
                             <div class="city-crad-company">
-                                <img src="<?= Yii::$app->homeUrl ?><?= $branches['picture'] ?>"
-                                    class="bangladresh-hrvc">
-                                <?= $branches['companyName'] ?>
+                                <div class="cycle-current-yellow" style="width: 20px; height: 20px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon"
+                                        style="width: 10px; height: 10px;">
+                                </div>
+                                <?= $branches['branchName'] ?>
                             </div>
                         </span>
                         <span class=" font-size-16 text-gray-back"
@@ -82,23 +84,25 @@ $page = 'view';
             <div class="between-start mt-40">
                 <div class="col-7">
                     <span class="font-size-16 text-gray-back" style="font-weight: 500;">
-                        <?= Yii::t('app', 'Associated Entities') ?>
+                        <?= Yii::t('app', 'Departments (' . count($departments) .')') ?>
                         <hr class="hr-group">
                     </span>
                     <table id="myTable" class="table align-middle table-spacing">
                         <thead class="table-light">
                             <tr class="table-border-weight">
-                                <th class="text-start" onclick="sortCompany('companyName')" style="width: 314px;">
+                                <th class="text-start" onclick="sortDepartment('departmentName')" style="width: 314px;">
                                     <?= Yii::t('app', 'Associated Department') ?>
                                     <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
                                 </th>
-                                <th class="text-start" onclick="sortCompany('country')" style="width: 230px;">
+                                <th class="text-start" onclick="sortDepartment('team')" style="width: 230px;">
                                     <?= Yii::t('app', 'Associated Teams') ?>
                                     <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
                                 </th>
-                                <th class="text-start" onclick="sortCompany('branch')" style="width: 230px;">
+                                <th class="text-start" onclick="sortDepartment('employee')" style="width: 230px;">
                                     <?= Yii::t('app', 'Associated Employees') ?>
                                     <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
+                                </th>
+                                <th class="text-start" style="width: 30px;">
                                 </th>
                             </tr>
                         </thead>
@@ -230,6 +234,13 @@ $page = 'view';
                                         </div>
                                     </div>
                                 </td>
+                                <td>
+                                    <a onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $department['branchId'], 'departmentId' => $department['departmentId']]) ?>')"
+                                        class="btn btn-bg-white-xs mr-5" style="margin-top: 3px;">
+                                        <img src="/HRVC/frontend/web/images/icons/Settings/editblack.svg" alt="edit"
+                                            class="pim-icon">
+                                    </a>
+                                </td>
                             </tr>
                             <?php
                                     $i++;
@@ -238,7 +249,7 @@ $page = 'view';
                             ?>
                         </tbody>
                     </table>
-                    <?= $this->render('pagination_department', ['countryId' => $branches['branchId'],'page' => $page,'numPage' => $numPage]) ?>
+                    <?= $this->render('pagination_department', ['countryId' => $branches['branchId'],'companyId' => $branches['companyId'],'branchId' => $branches['branchId'],'page' => $page,'numPage' => $numPage]) ?>
                 </div>
                 <div class="col-1"></div>
                 <div class="col-4">
@@ -254,4 +265,16 @@ $page = 'view';
         </div>
     </div>
 
+</div>
+
+
+
+<div class="modal fade" id="departmentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="row" id="departmentModalBody" style="width: 100%; padding: 50px; gap: 30px;">
+                <!-- AJAX content will be injected here -->
+            </div>
+        </div>
+    </div>
 </div>

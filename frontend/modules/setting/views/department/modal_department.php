@@ -14,7 +14,7 @@
         <div style="display: flex; align-items: center; gap: 17px;">
             <div class="mid-center" style="height: 60px; padding: 20.944px 4.189px; gap: 10px;">
                 <?php if ($branches["branchImage"] != null) { ?>
-                <img src="<?= Yii::$app->homeUrl . $branches['branchImage'] ?>" class="cycle-big-image">
+                <img src="<?= Yii::$app->homeUrl . $branches['picture'] ?>" class="cycle-big-image">
                 <?php } else { ?>
                 <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="cycle-big-image">
                 <?php } ?>
@@ -25,8 +25,8 @@
                     <?= $branches['companyName'] ?>
                 </div>
                 <div class="city-crad-company">
-                    <img src="<?= Yii::$app->homeUrl ?><?= $branches['picture'] ?>" class="bangladresh-hrvc">
-                    <?= $branches['companyName'] ?>
+                    <img src="<?= Yii::$app->homeUrl ?><?= $branches['branchImage'] ?>" class="bangladresh-hrvc">
+                    <?= $branches['branchName'] ?>
                 </div>
                 <span class=" font-size-16 text-gray-back"
                     style="font-weight: 500; display: flex; align-items: center; gap: 12px;">
@@ -37,7 +37,7 @@
                 </span>
             </div>
         </div>
-        <div class="mt-30">
+        <div class="mt-30" style=" height: 765.946px; ">
             <!-- content -->
             <div class="row d-flex align-items-center gap-2 mb-3">
                 <span class="mb-14 font-size-16 " style=" font-weight: 600; padding: 0;">
@@ -65,6 +65,8 @@
                 </span>
                 <!-- ถ้ามีให้แสดงผล -->
                 <?php
+                // echo $departmentId;
+
                             if (isset($departments) && count($departments) > 0) {
                                 $countrow = 0;
                                 $i = 1;
@@ -112,10 +114,7 @@
 
     <div>
         <!-- footer modal -->
-    </div>
-
-    <div class="modal fade" id="departmentDeleteModal" tabindex="-1" aria-labelledby="departmentDeleteModal"
-        aria-hidden="true">
+        <input type="hidden" name="departmentId" id="departmentId" value="<?= $departmentId ?>">
     </div>
 
     <script>
@@ -163,7 +162,6 @@ document.getElementById('departmentName').addEventListener('keydown', function(e
 
 
 document.getElementById('departmentName').addEventListener('focus', function() {
-    // alert('Search');
     const hint = document.getElementById('hintText');
     hint.style.backgroundColor = '#2580D3';
     hint.style.color = 'white';
@@ -207,75 +205,6 @@ document.getElementById('departmentName').addEventListener('blur', function() {
     enableLinks(); // ✅ ทำให้ <a> กดได้
 });
 
-// alert('1');
-
-document.getElementById('Search').addEventListener('input', function() {
-    // alert('1');
-    const keyword = this.value.toLowerCase();
-    const items = document.querySelectorAll('#schedule-list .schedule-item');
-
-    items.forEach(item => {
-        const name = item.querySelector('.col-10').textContent.toLowerCase();
-        if (name.includes(keyword)) {
-            item.style.display = 'block';
-        } else {
-            item.style.display = 'none';
-        }
-    });
-});
-
-document.getElementById('schedule-list').addEventListener('click', function(e) {
-
-    const editBtn = e.target.closest('.icon-edit');
-    if (editBtn) {
-        e.preventDefault();
-
-        const li = editBtn.closest('li');
-        const deptId = li.getAttribute('data-id');
-        const deptName = li.querySelector('.dept-label').textContent.trim();
-
-        // ถ้ามีอันที่กำลังแก้อยู่ ให้ลบก่อน
-        // cancelEdit();
-
-        // ซ่อน li เดิม
-        li.style.display = 'none';
-        originalLi = li;
-        currentEditingId = deptId;
-
-        // เพิ่ม input ชั่วคราวต่อท้าย li
-        const inputHTML = `
-            <li class="edit-temp-item mt-30" data-id="${deptId}">
-                <div class="input-group">
-                    <input type="text" name="departmentNameList" id="editDeptInputlist" value="${deptName}" class="form-control"
-                        placeholder="Write department name">
-                    <span class="input-group-text" id="enterHintlist" style="background-color: #ffff; border-left: none;">
-                        <div class="city-crad-company" id="hintTextlist" style="color: #ffffff; background-color: #2580D3;">
-                            <img src="<?= Yii::$app->homeUrl . 'image/enter-white.svg' ?>"
-                                style="width: 24px; height: 24px;">
-                            Enter to Save
-                        </div>
-                    </span>
-                </div>
-            </li>`;
-        li.insertAdjacentHTML('afterend', inputHTML);
-
-        // focus และใส่ event
-        const input = document.getElementById('editDeptInputlist');
-        input.focus();
-
-        input.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                saveEdit(input.value.trim());
-            }
-        });
-
-        input.addEventListener('blur', function() {
-            cancelEdit(input.value.trim());
-            // const label = originalLi.querySelector('.dept-label');
-            // label.textContent = newValue || label.textContent;
-        });
-    }
-});
 
 requestAnimationFrame(() => {
     const input = document.getElementById('editDeptInputlist');
@@ -283,7 +212,7 @@ requestAnimationFrame(() => {
         input.focus();
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
-                alert('Save');
+                // alert('Save');
                 e.preventDefault();
                 saveEdit(input.value.trim());
             }
@@ -292,12 +221,83 @@ requestAnimationFrame(() => {
         input.addEventListener('blur', function() {
             saveEdit(input.value.trim());
             // ลบ input และคืน li
-            alert('d');
+            // alert('d');
             const inputLi = document.querySelector('.edit-temp-item');
             if (inputLi) inputLi.remove();
         });
     }
 });
 
+initDepartmentSearch();
+
 renderDepartmentList(departments);
+
+// document.getElementById('Search').addEventListener('input', function() {
+//     const keyword = this.value.toLowerCase();
+//     const items = document.querySelectorAll('#schedule-list .schedule-item');
+
+//     items.forEach(item => {
+//         const name = item.querySelector('.col-10').textContent.toLowerCase();
+//         if (name.includes(keyword)) {
+//             item.style.display = 'block';
+//         } else {
+//             item.style.display = 'none';
+//         }
+//     });
+// });
+
+
+
+// document.getElementById('schedule-list').addEventListener('click', function(e) {
+
+//     const editBtn = e.target.closest('.icon-edit');
+//     if (editBtn) {
+//         e.preventDefault();
+
+//         const li = editBtn.closest('li');
+//         const deptId = li.getAttribute('data-id');
+//         const deptName = li.querySelector('.dept-label').textContent.trim();
+
+//         // ถ้ามีอันที่กำลังแก้อยู่ ให้ลบก่อน
+//         // cancelEdit();
+
+//         // ซ่อน li เดิม
+//         li.style.display = 'none';
+//         originalLi = li;
+//         currentEditingId = deptId;
+
+//         // เพิ่ม input ชั่วคราวต่อท้าย li
+//         const inputHTML = `
+//             <li class="edit-temp-item mt-30" data-id="${deptId}">
+//                 <div class="input-group">
+//                     <input type="text" name="departmentNameList" id="editDeptInputlist" value="${deptName}" class="form-control"
+//                         placeholder="Write department name">
+//                     <span class="input-group-text" id="enterHintlist" style="background-color: #ffff; border-left: none;">
+//                         <div class="city-crad-company" id="hintTextlist" style="color: #ffffff; background-color: #2580D3;">
+//                             <img src="<?= Yii::$app->homeUrl . 'image/enter-white.svg' ?>"
+//                                 style="width: 24px; height: 24px;">
+//                             Enter to Save
+//                         </div>
+//                     </span>
+//                 </div>
+//             </li>`;
+//         li.insertAdjacentHTML('afterend', inputHTML);
+
+//         // focus และใส่ event
+//         const input = document.getElementById('editDeptInputlist');
+//         input.focus();
+
+//         input.addEventListener('keydown', function(e) {
+//             if (e.key === 'Enter') {
+//                 saveEdit(input.value.trim());
+//             }
+//         });
+
+//         input.addEventListener('blur', function() {
+//             cancelEdit(input.value.trim());
+//             // const label = originalLi.querySelector('.dept-label');
+//             // label.textContent = newValue || label.textContent;
+//         });
+//     }
+// });
     </script>

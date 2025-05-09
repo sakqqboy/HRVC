@@ -210,16 +210,6 @@ $page = "grid";
     </div>
 </div>
 
-<!-- ป็อปอัพยืนยันลบ -->
-<!-- <div class="modal fade" id="confirmDeleteModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="row" id="departmentDeleteModal">
-                <div class="mt-2">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-                    <button class="btn btn-danger" onclick="confirmDelete()">ยืนยัน</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
+<div class="modal fade" id="departmentDeleteModal" tabindex="-2" aria-labelledby="departmentDeleteModal"
+    aria-hidden="true">
+</div>

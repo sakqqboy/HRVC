@@ -69,6 +69,44 @@ function goToPageBranch(nextPage, page, countryId, companyId) {
     });
 }
 
+function sortBranch(column) {
+
+    const table = document.getElementById('myTable');
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    const getCellValue = (row, column) => {
+        switch (column) {
+            case 'departmentName':
+                return parseInt(row.cells[2].innerText.trim()) || 0;
+            case 'team':
+                return parseInt(row.cells[4].innerText.trim()) || 0;
+            case 'employee':
+                return parseInt(row.cells[5].innerText.trim()) || 0;
+            default:
+                return '';
+        }
+    }
+
+    // toggle direction
+    sortDirection[column] = !sortDirection[column];
+
+    rows.sort((a, b) => {
+        const valA = getCellValue(a, column);
+        const valB = getCellValue(b, column);
+
+        if (typeof valA === 'number' && typeof valB === 'number') {
+            return sortDirection[column] ? valA - valB : valB - valA;
+        }
+
+        return sortDirection[column] ?
+            valA.localeCompare(valB) :
+            valB.localeCompare(valA);
+    });
+
+    rows.forEach(row => tbody.appendChild(row)); // update order
+}
+
 function filterCountryBranch(page) {
     // console.log("Page:", page); // Add this line to check the value of `page`
 
