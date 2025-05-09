@@ -5,6 +5,7 @@ if (window.location.host == 'localhost') {
     $baseUrl = window.location.protocol + "//" + window.location.host + '/';
 }
 $url = $baseUrl;
+let modalTestCallCount = 0;
 
 function showTitleList(departmentId) {
     var url = $url + 'setting/department/title-list';
@@ -164,6 +165,22 @@ function deleteDepartment(departmentId) {
     });
 }
 
+function modalTest(departmentId) {
+    var url = $url + 'setting/department/modal-test';
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: { departmentId: departmentId },
+        success: function (response) {
+            if (response.success && response.departments) {
+                renderDepartmentList(response.departments); // อัปเดตรายการ department
+            } else {
+                alert(response.message || 'ไม่สามารถลบได้');
+            }
+        }
+    });
+}
+
 function sortDepartment(column) {
 
     const table = document.getElementById('myTable');
@@ -252,8 +269,6 @@ function openPopupModalDepartment(url) {
         }
     });
 }
-
-
 
 function openModalDeleteDepartment(departmentId) {
     var url = $url + 'setting/department/modal-delete';
@@ -404,7 +419,7 @@ function renderDepartmentList(departments) {
     const targetDeptId = document.getElementById('departmentId')?.value;
     const targetLi = container.querySelector(`li[data-id="${targetDeptId}"]`);
 
-    if (targetLi) {
+    if (targetDeptId) {
         const editBtn = targetLi.querySelector('.icon-edit');
         handleEditClick(null, editBtn); // ส่ง null แทน event, แล้วให้ handleEditClick จัดการเอง
     }
@@ -427,7 +442,7 @@ function handleEditClick(e, element) {
         <li class="edit-temp-item mt-30" data-id="${deptId}">
             <div class="input-group">
                 <input type="text" name="departmentNameList" id="editDeptInputlist" value="${deptName}" class="form-control dep-${deptId}"
-                    placeholder="Write department name" autofocus >
+                    placeholder="Write department name">
                 <span class="input-group-text" id="enterHintlist" style="background-color: #ffff; border-left: none;">
                     <div class="city-crad-company" id="hintTextlist" style="color: #ffffff; background-color: #2580D3;">
                         <img src="/HRVC/frontend/web/image/enter-white.svg" style="width: 24px; height: 24px;">
@@ -442,30 +457,35 @@ function handleEditClick(e, element) {
     // document.querySelector('.dep-' + deptId).focus();
 
     li.insertAdjacentHTML('afterend', inputHTML);
-    setTimeout(() => {
-        const input = document.querySelector('.dep-' + deptId);
-        input?.focus();
-        input?.setSelectionRange(input.value.length, input.value.length);
-    }, 10);
 
     const input = document.getElementById('editDeptInputlist');
-    // input.focus(); 
-    // setTimeout(() => {
-    //     input.focus();
-    //     input.setSelectionRange(input.value.length, input.value.length); // ให้เคอร์เซอร์อยู่ท้ายข้อความ
-    // }, 10);
-
-
+    // input.focus();
+    setTimeout(() => {
+        input.focus();
+        input.setSelectionRange(input.value.length, input.value.length); // ให้เคอร์เซอร์อยู่ท้ายข้อความ
+    }, 500);
 
     input.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
+            $('#departmentModal').modal('hide');
             saveEdit(input.value.trim());
+            location.reload(); // รีเฟรชหน้าทันทีหลังจากกด Enter
         }
     });
 
     input.addEventListener('blur', function () {
         cancelEdit(input.value.trim());
     });
+    const targetDeptIdInput = document.getElementById('departmentId');
+    const targetDeptId = targetDeptIdInput?.value;
+
+    // if (targetDeptId) {
+    //     if (modalTestCallCount <= 2) {
+    //         modalTest(targetDeptId);
+    //         modalTestCallCount++; // เพิ่มจำนวนครั้งที่เรียก modalTest
+    //         console.log('modalTest called ' + modalTestCallCount + ' times');
+    //     }
+    // }
 }
 
 function initDepartmentSearch(inputId = 'Search', listSelector = '#schedule-list .schedule-item') {

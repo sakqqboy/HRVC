@@ -13,7 +13,11 @@
     <div class="row" style=" gap: 30px; ">
         <div style="display: flex; align-items: center; gap: 17px;">
             <div class="mid-center" style="height: 60px; padding: 20.944px 4.189px; gap: 10px;">
-                <?php if ($branches["branchImage"] != null) { ?>
+                <?php
+
+                            use common\models\ModelMaster;
+
+ if ($branches["branchImage"] != null) { ?>
                 <img src="<?= Yii::$app->homeUrl . $branches['picture'] ?>" class="cycle-big-image">
                 <?php } else { ?>
                 <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="cycle-big-image">
@@ -115,6 +119,8 @@
     <div>
         <!-- footer modal -->
         <input type="hidden" name="departmentId" id="departmentId" value="<?= $departmentId ?>">
+        <input type="hidden" name="url" id="url"
+            value="<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $branches['branchId']]) ?>">
     </div>
 
     <script>
@@ -205,32 +211,35 @@ document.getElementById('departmentName').addEventListener('blur', function() {
     enableLinks(); // ✅ ทำให้ <a> กดได้
 });
 
-
-requestAnimationFrame(() => {
-    const input = document.getElementById('editDeptInputlist');
-    if (input) {
-        input.focus();
-        input.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                // alert('Save');
-                e.preventDefault();
-                saveEdit(input.value.trim());
-            }
-        });
-
-        input.addEventListener('blur', function() {
-            saveEdit(input.value.trim());
-            // ลบ input และคืน li
-            // alert('d');
-            const inputLi = document.querySelector('.edit-temp-item');
-            if (inputLi) inputLi.remove();
-        });
-    }
-});
-
 initDepartmentSearch();
 
 renderDepartmentList(departments);
+
+// var departmentId = <?=$departmentId ?>;
+// modalTest(departmentId);
+
+// requestAnimationFrame(() => {
+//     const input = document.getElementById('editDeptInputlist');
+//     if (input) {
+//         input.focus();
+//         input.addEventListener('keydown', function(e) {
+//             if (e.key === 'Enter') {
+//                 // alert('Save');
+//                 e.preventDefault();
+//                 saveEdit(input.value.trim());
+//             }
+//         });
+
+//         input.addEventListener('blur', function() {
+//             saveEdit(input.value.trim());
+//             // ลบ input และคืน li
+//             // alert('d');
+//             const inputLi = document.querySelector('.edit-temp-item');
+//             if (inputLi) inputLi.remove();
+//         });
+//     }
+// });
+
 
 // document.getElementById('Search').addEventListener('input', function() {
 //     const keyword = this.value.toLowerCase();

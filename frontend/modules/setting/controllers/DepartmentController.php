@@ -18,6 +18,7 @@ use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
+use yii\web\Response;
 
 /**
  * Default controller for the `setting` module
@@ -715,6 +716,53 @@ class DepartmentController extends Controller
             "departmentId" => $departmentId
         ]);
     }  
+
+    public function actionModalTest()
+{
+    Yii::$app->response->format = Response::FORMAT_JSON;
+
+    $departmentId = Yii::$app->request->post("departmentId");
+
+    $test = Department::find()->where([
+        "departmentId" => $departmentId,
+        "status" => '1'
+    ])->one();
+
+    // throw new Exception(var_export($test->attributes, true));
+
+    if (!$test) {
+        return [
+            'success' => false,
+            'message' => 'Department not found'
+        ];
+    }
+
+    $branchId = $test->branchId;
+
+    $api = curl_init();
+    curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $branchId . '&page=1&limit=0');
+    $departments = curl_exec($api);
+    curl_close($api);
+
+    $departments = json_decode($departments, true);
+        // throw new exception(print_r($departments, true));
+
+    if (!isset($departments)) {
+        return [
+            'success' => false,
+            'message' => 'Unable to retrieve department list'
+        ];
+    }
+
+    return [
+        'success' => true,
+        'departments' => $departments,
+    ];
+}
+    
+    
     public function actionDeleteDepartment()
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON; // ← สำคัญ!

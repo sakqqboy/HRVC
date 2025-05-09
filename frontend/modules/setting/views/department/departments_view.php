@@ -278,3 +278,7 @@ $page = 'view';
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="departmentDeleteModal" tabindex="-2" aria-labelledby="departmentDeleteModal"
+    aria-hidden="true">
+</div>
