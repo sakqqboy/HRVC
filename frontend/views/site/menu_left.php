@@ -83,7 +83,7 @@ $session = Yii::$app->session;
                 </a>
             </div>
             <div class="col-12 first-layer-manu">
-                <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
+                <a href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>"
                     class="no-underline">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/team.svg"
                         class="first-layer-icon" style="margin-top: -3px;">

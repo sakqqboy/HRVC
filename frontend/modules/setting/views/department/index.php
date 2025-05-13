@@ -156,14 +156,6 @@ $page = "grid";
                                     <span class="text-create-crad">
                                         <?= Yii::t('app', 'No associated department, team, or employee found!') ?>
                                     </span>
-                                    <!-- <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'], 'branchId' => $branch['branchId']]) ?>"
-                                        style="text-decoration: none;">
-                                        <button type="button" class="btn-create" style="padding: 3px 9px;"
-                                            action="<?= Yii::$app->homeUrl ?>setting/group/create-group"><?= Yii::t('app', 'Create Department') ?>
-                                            <img src="<?= Yii::$app->homeUrl ?>image/arrow-top-r.svg"
-                                                style="width:18px; height:18px; margin-top:-3px;">
-                                        </button>
-                                    </a> -->
                                     <a style="text-decoration: none;"
                                         onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>')">
                                         <button type="button" class="btn-create"
@@ -172,13 +164,6 @@ $page = "grid";
                                                 style="width:18px; height:18px; margin-top:-3px;">
                                         </button>
                                     </a>
-                                    <!-- <a class="btn btn-bg-white-xs mr-5" style="margin-top: 3px;"
-                                            onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>')">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
-                                                alt="History" class="pim-icon"
-                                                style="margin-top: -1px; width: 14px; height: 14px;">
-                                        </a> -->
-
                                 </div>
                                 <?php } ?>
                             </div>

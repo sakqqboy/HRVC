@@ -1044,4 +1044,28 @@ class BranchController extends Controller
         $res["branch"] = $text;
         return json_encode($res);
     }
+
+    	public function actionBranchDepartmentList()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+    
+        // รับ JSON body โดยตรง
+        $data = json_decode(file_get_contents("php://input"), true);
+        $beanchId = isset($data['beanchId']) ? $data['beanchId'] : null;
+    
+        if (!$beanchId) {
+            return ['error' => 'Missing companyId'];
+        }
+    
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false); // ปิดเฉพาะใน dev/localhost
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $beanchId . '&page=1' . '&limit=0');
+    
+        $response = curl_exec($api);
+        curl_close($api);
+    
+        $branches = json_decode($response, true);
+        return $branches;
+    }
 }

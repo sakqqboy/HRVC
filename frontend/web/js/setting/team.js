@@ -276,3 +276,17 @@ function filterTeam() {
         }
     });
 }
+
+function addTeamInput() {
+    // alert('Button clicked!');
+    const container = document.getElementById('teamInputsContainer');
+
+    const newInput = document.createElement('input');
+    newInput.type = 'text';
+    newInput.name = 'teamName[]';
+    newInput.className = 'form-control mb-2';
+    newInput.style.width = '330px';
+    newInput.placeholder = 'Write the name of the Team ';
+
+    container.appendChild(newInput);
+}

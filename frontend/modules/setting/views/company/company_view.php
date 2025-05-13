@@ -218,7 +218,7 @@ $this->title = 'company profile';
 
                             <div class="col-lg-4 col-md-6 col-12 mb-3">
                                 <div class="alert alert-secondary-background" style="width: 100%;">
-                                    <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['branchId' => '']) ?>"
                                         class="text-decoration-none" style="width: 60%;">
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
@@ -251,7 +251,7 @@ $this->title = 'company profile';
                             </div>
                             <div class="col-lg-4 col-md-6 col-12 mb-3">
                                 <div class="alert alert-secondary-background" style="width: 100%;">
-                                    <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>"
                                         class="text-decoration-none" style="width: 60%;">
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
@@ -338,7 +338,7 @@ $this->title = 'company profile';
                                 style="width: 15px; height: 15px;">
                         </div>
                         <div class="col-lg-10 col-md-7 col-12 Affiliated0">
-                            <?= Yii::t('app', 'Affiliated Companies') ?>
+                            <?= Yii::t('app', 'Affiliated Branches') ?>
                         </div>
                     </div>
                     <div class="col-12 detail-tokyo  mt-10">

@@ -142,7 +142,7 @@ $page = 'view';
                                         <div class="bodyname-company">
                                             <?php if($department['totalTeam'] > 0) { ?>
                                             <a class="see-all-company" style="font-size: 10.5px; "
-                                                href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
+                                                href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>">
                                                 <?= Yii::t('app', 'Teams') ?>
                                                 <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
                                                     style="cursor: pointer;">
@@ -153,7 +153,7 @@ $page = 'view';
                                             <span class="bodyname-crad-company">
                                                 <?= Yii::t('app', 'No Teams Yet') ?>
                                             </span>
-                                            <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId'] ]) ?>"
+                                            <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(["companyId" => '' , "branchId" => '', "departmentId" => $department['departmentId']  ]) ?>"
                                                 style="text-decoration: none;">
                                                 <button class="btn-create-small"
                                                     action="<?= Yii::$app->homeUrl ?>setting/group/create-group">

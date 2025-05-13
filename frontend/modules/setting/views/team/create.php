@@ -1,265 +1,313 @@
 <?php
 
 use common\models\ModelMaster;
-use frontend\models\hrvc\Team;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Company;
+use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Team';
+$this->title = 'Create Department';
+$form = ActiveForm::begin([
+	'id' => 'create-branch',
+	'method' => 'post',
+	'options' => [
+		'enctype' => 'multipart/form-data',
+	],
+	'action' => Yii::$app->homeUrl . 'setting/team/save-create-team'
+
+]); 
+
+if (Yii::$app->session->hasFlash('error')) {
+    $error = Yii::$app->session->getFlash('error');
+    $escapedError = str_replace(["\r", "\n"], '', strip_tags($error)); // ป้องกัน break line HTML
+    $escapedError = addslashes($escapedError); // escape เครื่องหมายพิเศษ
+    $this->registerJs("alert('$escapedError');");
+}
+
 ?>
 
-<div class="col-12 team-one" style="margin-top: 90px;">
-	<div class="row">
-		<div class="col-lg-3 col-md-6 col-12">
-			<div class="col-12 branch-title">
-				Team
-				<a href="<?= Yii::$app->homeUrl ?>setting/team/import" class="btn btn-secondary  pull-right mt-10">
-					<i class="fa fa-upload mr-5" aria-hidden="true"></i> Import
-				</a>
-			</div>
-		</div>
-		<!-- <div class="col-lg-2 col-md-6 col-12 mt-10">
-			<button type="button" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Create</button>
-		</div> -->
-		<div class="col-lg-3 col-md-4 col-12 mt-10">
-			<div class="input-group">
-				<button class="btn btn-outline-secondary" type="button">Company</button>
-				<select class="form-control font-size-14" id="company-team-filter" onchange="javascript:branchCompanyFilter()">
-					<option value="">Select Company</option>
-					<?php
-					if (isset($companies) && count($companies) > 0) {
-					?>
-						<?php
-						foreach ($companies as $company) : ?>
-							<option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-						<?php
-						endforeach; ?>
 
-					<?php
-					}
-					?>
-				</select>
-			</div>
-		</div>
-		<div class="col-lg-3 col-md-4 col-12 mt-10">
-			<div class="input-group">
-				<button class="btn btn-outline-secondary" type="button">Branch</button>
-				<select class="form-control font-size-14" id="branch-team-filter" onchange="javascript:departmentBranchFilter()" disabled></select>
-			</div>
-		</div>
-		<div class="col-lg-3 col-md-4 col-12 mt-10">
-			<div class="input-group">
-				<button class="btn btn-outline-secondary" type="button">Department</button>
-				<select class="form-control font-size-14" id="department-team-filter" disabled></select>
-				<button type="button" class="btn btn-outline-dark" onclick="javascrip:filterTeam()">
-					<i class="fa fa-filter" aria-hidden="true"></i>
-				</button>
-			</div>
-		</div>
-	</div>
-	<div class="col-12 mt-20">
-		<div class="alert alert-secondary" role="alert">
-			<div class="row">
-				<div class="col-lg-3 col-md-6 col-12">
-					<div class="col-12">
-						<label class="form-label font-size-12 font-b"> Select Associate Company </label>
-						<?php
-						if ($companyId == '') {
-						?>
-							<select class="form-select Company-select" aria-label="Default select example" id="company-team" onchange="javascript:branchCompany()">
-								<option value="">Select Company</option>
-								<?php
-								if (isset($companies) && count($companies) > 0) {
-									foreach ($companies as $company) :
-								?>
-										<option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-								<?php
-									endforeach;
-								}
-								?>
-							</select>
-						<?php
-						} else { ?>
-							<input type="hidden" id="company-team" value="<?= $companyId ?>">
-							<div class="col-12 font-size-14 font-b"><?= $companyName ?></div>
-						<?php
-						}
-						?>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-12">
-					<div class="col-12">
-						<label class="form-label font-size-12 font-b"> Select Associate Branch</label>
-						<select class="form-select Company-select" aria-label="Default select example" id="branch-team" <?= $companyId != '' ? '' : 'disabled' ?> onchange="javascript:departmentBranch()">
 
-							<option value="">Select Branch</option>
-							<?php
-							if ($companyId != '') {
-								if (isset($branches) && count($branches) > 0) {
-									foreach ($branches as $b) : ?>
-										<option value="<?= $b['branchId'] ?>"><?= $b['branchName'] ?></option>
-							<?php
+<div class="container-body submain-background mid-center">
+    <div class="col-12 pim-name-title" style="display: flex; align-items: center; gap: 14px;">
+        <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl ?>"
+            style="text-decoration: none;width:66px;height:26px;" class="btn-create-branch">
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg"
+                style="width:18px; height:18px; margin-top:-3px;">
+            <?= Yii::t('app', 'Back') ?>
+        </a>
+        <?= Yii::t('app', 'Create New Department') ?>
+    </div>
 
-									endforeach;
-								}
-							}
-							?>
-						</select>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-12">
-					<div class="col-12">
-						<label class="form-label font-size-12 font-b"> Select Associate Department</label>
-						<select class="form-select Company-select" aria-label="Default select example" id="department-team" disabled>
-							<option value="">Select Department</option>
-						</select>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-6 col-12">
-					<div class="mb-3">
-						<label class="form-label font-size-12 font-b"> Team Name</label>
-						<input type="text" class="form-control Company-select" id="teamName" placeholder="">
-					</div>
-				</div>
-				<div class="col-lg-1 col-md-2 col-12 team-create0 mt-10 pr-0 pl-0 text-end">
-					<a href="javascript:saveCreateTeam()" class="btn btn-success" id="create-team"><i class="fa fa-plus" aria-hidden="true"></i> Create</a>
-					<a class="btn btn-sm btn-warning font-size-12 mr-5 " id="update-team" style="display:none;">
-						<i class="fa fa-check" aria-hidden="true"></i>
-					</a>
-					<a class="btn btn-sm btn-danger font-size-12 " id="reset-team" style="display:none;">
-						<i class="fa fa-times" aria-hidden="true"></i>
-					</a>
-					<input type="hidden" value="" id="teamId">
-				</div>
-			</div>
-		</div>
-		<div class="col-12 mt-10">
-			<div class="alert alert-branch" role="alert">
-				<div class="row" id="show-team">
-					<?php
-					if (isset($allTeams) && count($allTeams) > 0) {
-						foreach ($allTeams as $team) :
-					?>
-							<div class="col-lg-3 col-md-5 col-sm-3 col-12" id="team-<?= $team['teamId'] + 543 ?>">
-								<div class="card" style="border: none;">
-									<div class="card-body">
-										<div class="row">
-											<div class="col-8 font-size-14 font-b ">
-												<?= $team['teamName'] ?>
-											</div>
-											<div class="col-4  pl-0 pr-0 text-end">
-												<a href="javascript:updateTeam(<?= $team['teamId'] + 543 ?>)" class="btn btn-outline-dark mr-5 font-size-10">
-													<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-												</a>
-												<a href="javascript:deleteTeam(<?= $team['teamId'] + 543 ?>)" class="btn btn-outline-danger font-size-10">
-													<i class="fa fa-trash" aria-hidden="true"></i>
-												</a>
-											</div>
-										</div>
-										<div class="col-12 mt-5 font-size-12">
-											<?= $team["companyName"] ?>
-										</div>
-										<div class="col-12 mt-5 bangladresh-hrvc2">
-											Branch: <img src="<?= Yii::$app->homeUrl ?><?= $team['flag'] ?>" class="bangladresh-hrvc1 mr-5"> <?= $team["branchName"] ?>, <?= $team["countryName"] ?>
-										</div>
-										<div class="col-12 mt-5 font-size-12">
-											Department: <?= $team["departmentName"] ?>
-										</div>
-										<div class="row mt-20">
+    <div class="mid-center max-background mt-18" style="height: 780px;
+        padding: 23.209px 25.53px;
+        gap: 7.721px; 
+        flex-shrink: 0; 
+        border-radius: 7.721px;
+        background: #F4F6F9;
+        ">
+        <div class="mid-center" style="gap: 23.209px;">
+            <div class="" style="display: flex; gap: 54px; flex-shrink: 0;">
+                <div class="mid-center" style="gap: 50px; flex-shrink: 0;">
+                    <div class="start-center" style="gap: 20px;">
+                        <div>
+                            <span class="font-size-18" style="font-weight: 600;">
+                                Associated Group
+                            </span>
+                            <div class="mt-19" style="display: flex;">
+                                <div class="avatar-preview mr-24">
+                                    <img src="<?= Yii::$app->homeUrl ?><?=$group['picture'] ?>" class="cycle-big-image">
+                                </div>
+                                <div class="mid-center">
+                                    <div class="col-12 name-tokyo">
+                                        <span class="name-sub-tokyo" style="font-size: 20px;">
+                                            <?=$group['groupName'] ?>
+                                        </span>
+                                    </div>
+                                    <div class="col-12 tokyo-small">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/hyphen.svg">
+                                        <?=$group['tagLine'] ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="name-full-tokyo" style="font-size: 14px; width: 369px; ">
+                            Departments are created here will be associated with the Tokyo
+                            Consulting Group
+                        </span>
+                    </div>
 
-											<div class="col-3 show-height text-center">
-												<i class="fa fa-users share-big mt-40" aria-hidden="true"></i>
-											</div>
-											<div class="col-9 ">
-												<div class="col-12 font-size-12 font-b"> LEADER</div>
-												<div class="font-size-11 mt-5 pl-15"> <?= Team::teamLeader($team['teamId'], 1) ?></div>
-												<div class="font-size-12 mt-10 font-b"> SUB LEADER</div>
-												<div class="font-size-11 mt-5 pl-15"><?= Team::teamLeader($team['teamId'], 2) ?></div>
-												<div class="row mt-10">
-													<div class="col-8 text-start font-size-12 font-b">
-														Employees
-													</div>
-													<div class="col-4 text-end font-size-12 font-b">
-														<?= Team::employeeInTeam($team['teamId']) ?>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						<?php
-						endforeach;
-					} else { ?>
-						<div class="col-12 text-center font-b font-size-16"> Team not found.</div>
-					<?php
-					}
-					?>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-3 col-md-4 col-6">
-				<div class="alert alert-secondary-background" role="alert">
-					<div class="row">
-						<div class="col-4">
-							<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
-						</div>
-						<div class="col-2">
-							<a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
-								<div class="col-12 text-primary">
-									Branch
-								</div>
-								<div class="col-2 number-bold text-black">
-									<?= $totalBranch
+                    <!-- Associated  Group -->
+                    <div class="start-center" style="width: 368px; gap: 22px;">
+                        <div>
+                            <label for="exampleFormControlInput1" class="form-label font-size-12 font-b">
+                                <span class="text-danger">* </span>
+                                <?= Yii::t('app', 'Select Company') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" aria-label="<?= Yii::t('app', 'Select to Company') ?>"
+                                    data-bs-original-title="<?= Yii::t('app', 'Select to Company') ?>">
+                            </label>
+                            <div class="input-group" style="width: 330px;">
+                                <?php if($companyName) {?>
+                                <div class="col-12 font-b" style="width: 330px;">
+                                    <input type="hidden" id="company" name="companyId" value="<?= $companyId?>">
+                                    <?= $companyName ?>
+                                </div>
+                                <?php }else{?>
+                                <select id="companySelectId" class="form-select mt-12"
+                                    style="border-right: none; width: 239px; appearance: none; background-image: none;"
+                                    name="companyId" data-company-branch="company" required>
+                                    <option value="" disabled selected hidden
+                                        style="color: var(--Helper-Text, #8A8A8A); ">
+                                        <?= Yii::t('app', 'Select from a Company') ?>
+                                    </option>
+                                    <?php
+									if (!empty($companies)) {
+										foreach ($companies as $company) {
+											echo '<option value="' . $company['companyId'] . '">' . $company['companyName'] . '</option>';
+										}
+									}
 									?>
-								</div>
-							</a>
-						</div>
+                                </select>
+                                <span class="input-group-text mt-12"
+                                    style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
+                                    onclick="document.getElementById('companySelectId').focus();">
+                                    <!-- <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="Founded"
+                                        style="width: 20px; height: 20px;"> -->
+                                    <div class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
+                                            alt="icon" style="width: 10px; height: 10px;">
+                                    </div>
+                                    <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
+                                        style="width: 10px; height: 10px;">
+                                </span>
+                                <?php }?>
 
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-4 col-6">
-				<div class="alert alert-secondary-background" role="alert">
-					<div class="row">
-						<div class="col-4">
-							<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
-						</div>
-						<div class="col-2">
-							<a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
-								<div class="col-12 text-primary">
-									Department
-								</div>
-								<div class="col-2 number-bold text-black">
-									<?= $totalDepartment
-									?>
-								</div>
-							</a>
-						</div>
+                            </div>
+                        </div>
 
-					</div>
-				</div>
-			</div>
+                        <div>
+                            <label for="exampleFormControlInput1" class="form-label font-size-12 font-b">
+                                <span class="text-danger">* </span>
+                                <?= Yii::t('app', 'Select Branch') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" aria-label="<?= Yii::t('app', 'Select to Branch') ?>"
+                                    data-bs-original-title="<?= Yii::t('app', 'Select to Branch') ?>">
+                            </label>
+                            <div class="input-group" style="width: 330px;">
+                                <?php if($branchName) {?>
+                                <div class="col-12 font-b" style="width: 330px;">
+                                    <input type="hidden" id="branch" name="branchId" value="<?= $branchId?>">
+                                    <?= $branchName ?>
+                                </div>
+                                <?php }else{?>
+                                <select id="branchSelectId" brancSelect" class="form-select mt-12"
+                                    style="border-right: none; width: 239px; appearance: none; background-image: none;"
+                                    name="branchId" data-company-branch="branch" required>
+                                    <option value="" disabled selected hidden
+                                        style="color: var(--Helper-Text, #8A8A8A); ">
+                                        <?= Yii::t('app', 'Select from a Branch') ?>
+                                    </option>
+                                </select>
 
-			<div class="col-lg-3 col-md-4 col-6">
-				<div class="alert alert-secondary-background" role="alert">
-					<div class="row">
-						<div class="col-4">
-							<i class="fa fa-users" aria-hidden="true" style="font-size: 25px;padding-top: 18px;"></i>
-						</div>
-						<div class="col-2">
-							<a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" style="text-decoration: none;">
-								<div class="col-12 text-primary">
-									Employee
-								</div>
-								<div class="col-2 number-bold text-black">
-									<?= $totalEmployee
-									?>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                <span class="input-group-text mt-12"
+                                    style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
+                                    onclick="document.getElementById('companySelectId').focus();">
+                                    <div class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon"
+                                            style="width: 10px; height: 10px;">
+                                    </div>
+                                    <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
+                                        style="width: 10px; height: 10px;">
+                                </span>
+                                <?php }?>
+
+                            </div>
+                        </div>
+                        <div>
+                            <label for="exampleFormControlInput1" class="form-label font-size-12 font-b">
+                                <span class="text-danger">* </span>
+                                <?= Yii::t('app', 'Select Department') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" aria-label="<?= Yii::t('app', 'Select to Branch') ?>"
+                                    data-bs-original-title="<?= Yii::t('app', 'Select to Branch') ?>">
+                            </label>
+                            <div class="input-group" style="width: 330px;">
+                                <?php if($departmentName) {?>
+                                <div class="col-12 font-b" style="width: 330px;">
+                                    <input type="hidden" id="branch" name="departmentId" value="<?= $departmentId?>">
+                                    <?= $departmentName ?>
+                                </div>
+                                <?php }else{?>
+                                <select id="departmentSelectId" brancSelect" class="form-select mt-12"
+                                    style="border-right: none; width: 239px; appearance: none; background-image: none;"
+                                    name="departmentId" data-company-branch="department" required>
+                                    <option value="" disabled selected hidden
+                                        style="color: var(--Helper-Text, #8A8A8A); ">
+                                        <?= Yii::t('app', 'Select from a Department') ?>
+                                    </option>
+                                </select>
+
+                                <span class="input-group-text mt-12"
+                                    style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
+                                    onclick="document.getElementById('companySelectId').focus();">
+                                    <div class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon"
+                                            style="width: 10px; height: 10px;">
+                                    </div>
+                                    <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
+                                        style="width: 10px; height: 10px;">
+                                </span>
+                                <?php }?>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-start d-flex flex-column" style="gap: 12px;">
+                    <label for="exampleFormControlInput1" class="form-label font-size-12 font-b">
+                        <span class="text-danger">* </span>
+                        <?= Yii::t('app', 'Team Name') ?>
+                    </label>
+
+                    <!-- Container for all dynamic inputs -->
+                    <div id="teamInputsContainer">
+                        <input type="text" class="form-control mb-2" name="teamName[]" style="width: 330px;"
+                            placeholder="Write the name of the Team" required>
+                    </div>
+
+                    <button type="button" class="center-center bg-white"
+                        style="padding: 13px 20px; height: 40px; width: 100%; border-radius: 5px; border: 0.5px solid #CBD5E1;"
+                        onclick="addTeamInput()">
+                        <span class="text-blue mr-6" style="font-weight: 600; font-size: 14px;"> Add More </span>
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-blue.svg" alt="LinkedIn"
+                            style="width: 20px; height: 20px;">
+                    </button>
+                </div>
+            </div>
+            <div class="col-12 text-end mt-10">
+                <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
+                    <button type="button" class="btn-cancel-group"
+                        action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
+                        <?= Yii::t('app', 'Cancel') ?>
+                    </button>
+                </a>
+
+                <button type="submit" class="btn-save-group">
+                    <?= Yii::t('app', 'Create') ?>
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="LinkedIn"
+                        style="width: 20px; height: 20px;">
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<script>
+document.getElementById('companySelectId').addEventListener('change', function() {
+    const companyId = this.value;
+
+    fetch('<?= Yii::$app->homeUrl ?>setting/company/company-branch-list', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
+            },
+            body: JSON.stringify({
+                companyId: companyId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Fetched data:", data);
+            const branchSelect = document.querySelector('[name="branchId"]');
+            branchSelect.innerHTML =
+                '<option value="" disabled selected hidden><?= Yii::t("app", "Select from a Branch") ?></option>';
+
+            if (Array.isArray(data)) {
+                data.forEach(branch => {
+                    const option = document.createElement('option');
+                    option.value = branch.branchId;
+                    option.text = branch.branchName;
+                    branchSelect.appendChild(option);
+                });
+            }
+        });
+});
+
+
+document.getElementById('branchSelectId').addEventListener('change', function() {
+    const beanchId = this.value;
+
+    // alert(beanchId);
+
+    fetch('<?= Yii::$app->homeUrl ?>setting/branch/branch-department-list', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
+            },
+            body: JSON.stringify({
+                beanchId: beanchId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Fetched data:", data);
+            const branchSelect = document.querySelector('[name="departmentId"]');
+            branchSelect.innerHTML =
+                '<option value="" disabled selected hidden><?= Yii::t("app", "Select from the departments") ?></option>';
+
+            if (Array.isArray(data)) {
+                data.forEach(branch => {
+                    const option = document.createElement('option');
+                    option.value = branch.departmentId;
+                    option.text = branch.departmentName;
+                    branchSelect.appendChild(option);
+                });
+            }
+        });
+});
+</script>
+
+<?php ActiveForm::end(); ?>

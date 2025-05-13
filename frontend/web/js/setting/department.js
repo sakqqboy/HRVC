@@ -604,3 +604,18 @@ function filterDepartment() {
         }
     });
 }
+
+
+function addDepartmentInput() {
+    // alert('Button clicked!');
+    const container = document.getElementById('departmentInputsContainer');
+
+    const newInput = document.createElement('input');
+    newInput.type = 'text';
+    newInput.name = 'departmentName[]';
+    newInput.className = 'form-control mb-2';
+    newInput.style.width = '330px';
+    newInput.placeholder = 'Write the name of the Department ';
+
+    container.appendChild(newInput);
+}

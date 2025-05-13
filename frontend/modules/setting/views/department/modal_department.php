@@ -14,10 +14,8 @@
         <div style="display: flex; align-items: center; gap: 17px;">
             <div class="mid-center" style="height: 60px; padding: 20.944px 4.189px; gap: 10px;">
                 <?php
-
-                            use common\models\ModelMaster;
-
- if ($branches["branchImage"] != null) { ?>
+                use common\models\ModelMaster;
+                if ($branches["branchImage"] != null) { ?>
                 <img src="<?= Yii::$app->homeUrl . $branches['picture'] ?>" class="cycle-big-image">
                 <?php } else { ?>
                 <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="cycle-big-image">

@@ -225,7 +225,7 @@ $page = "grid"
                                                             </button>
                                                             <?php } ?>
                                                             <?php if($company['totalBranch'] > 0 && $company['totalDepartment'] == 0) { ?>
-                                                            <a href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                                            <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
                                                                 style="text-decoration: none;">
                                                                 <button type="button" class="btn-create-small"
                                                                     action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
@@ -237,7 +237,7 @@ $page = "grid"
                                                             <?php } ?>
                                                             <?php if($company['totalDepartment'] > 0) { ?>
                                                             <a class="text-see-all"
-                                                                href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
+                                                                href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['branchId' => '']) ?>">
                                                                 <?= Yii::t('app', 'see all') ?>
                                                             </a>
                                                             <?php } ?>
@@ -291,7 +291,7 @@ $page = "grid"
                                                             <?php } ?>
                                                             <?php if($company['totalTeam'] > 0) { ?>
                                                             <a class="text-see-all"
-                                                                href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
+                                                                href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>">
                                                                 <?= Yii::t('app', 'see all') ?>
                                                             </a>
                                                             <?php } ?>

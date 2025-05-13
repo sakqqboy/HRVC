@@ -210,7 +210,7 @@ $page = "grid"
                                                             <?php } ?>
                                                             <?php if($branch['totalDepartment'] > 0) { ?>
                                                             <a class="text-see-all"
-                                                                href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>">
+                                                                href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['branchId' => '']) ?>">
                                                                 <?= Yii::t('app', 'see all') ?>
                                                             </a>
                                                             <?php } ?>
@@ -264,7 +264,7 @@ $page = "grid"
                                                             <?php } ?>
                                                             <?php if($branch['totalTeam'] > 0) { ?>
                                                             <a class="text-see-all"
-                                                                href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>">
+                                                                href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>">
                                                                 <?= Yii::t('app', 'see all') ?>
                                                             </a>
                                                             <?php } ?>

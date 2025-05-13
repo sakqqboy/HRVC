@@ -100,8 +100,8 @@ class DepartmentController extends Controller
             return $this->redirect(Yii::$app->homeUrl . 'setting/branch/create-branch/' . ModelMaster::encodeParams(["companyId" => '']));
         }
 
-        $branch = Department::find()->select('departmentId')->where(["status" => 1])->asArray()->one();
-        if (isset($branch) && !empty($branch)) {
+        $department = Department::find()->select('departmentId')->where(["status" => 1])->asArray()->one();
+        if (isset($department) && !empty($department)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/department/index/');
         }
 
@@ -508,9 +508,7 @@ class DepartmentController extends Controller
             $branchJson = curl_exec($api);
             $branches = json_decode($branchJson, true);
             $branchName = $branches["branchName"];
-        } else {
-            
-        }
+        } 
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $group["groupId"]);
         $group = curl_exec($api);
@@ -542,9 +540,9 @@ class DepartmentController extends Controller
         
     public function actionSaveCreateDepartment()
     {
-        if (isset($_POST["branchId"]) && isset($_POST["branchName"])) {
+        if (isset($_POST["branchId"]) && isset($_POST["departmentName"])) {
             $branchId = $_POST["branchId"];
-            $names = $_POST["branchName"]; // ควรเป็น array เช่นจาก <input name="branchName[]">
+            $names = $_POST["departmentName"]; // ควรเป็น array เช่นจาก <input name="departmentName[]">
         
             $errors = [];
             $successCount = 0;

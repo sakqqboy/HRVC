@@ -169,14 +169,14 @@ if (Yii::$app->session->hasFlash('error')) {
                     </label>
 
                     <!-- Container for all dynamic inputs -->
-                    <div id="branchInputsContainer">
-                        <input type="text" class="form-control mb-2" name="branchName[]" style="width: 330px;"
+                    <div id="departmentInputsContainer">
+                        <input type="text" class="form-control mb-2" name="departmentName[]" style="width: 330px;"
                             placeholder="Write the name of the Department" required>
                     </div>
 
                     <button type="button" class="center-center bg-white"
                         style="padding: 13px 20px; height: 40px; width: 100%; border-radius: 5px; border: 0.5px solid #CBD5E1;"
-                        onclick="addBranchInput()">
+                        onclick="addDepartmentInput()">
                         <span class="text-blue mr-6" style="font-weight: 600; font-size: 14px;"> Add More </span>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-blue.svg" alt="LinkedIn"
                             style="width: 20px; height: 20px;">
@@ -232,19 +232,6 @@ document.getElementById('companySelectId').addEventListener('change', function()
             }
         });
 });
-// document.getElementById('addBranchBtn').addEventListener('click', function() {
-//     alert('Button clicked!');
-//     const container = document.getElementById('branchInputsContainer');
-
-//     const newInput = document.createElement('input');
-//     newInput.type = 'text';
-//     newInput.name = 'branchName[]';
-//     newInput.className = 'form-control mb-2';
-//     newInput.style.width = '330px';
-//     newInput.placeholder = 'Write the name of the Department ';
-
-//     container.appendChild(newInput);
-// });
 </script>
 
 <?php ActiveForm::end(); ?>

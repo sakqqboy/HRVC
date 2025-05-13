@@ -56,17 +56,3 @@ document.addEventListener('DOMContentLoaded', function () {
         new bootstrap.Tooltip(tooltipTriggerEl);
     });
 });
-
-function addBranchInput() {
-    // alert('Button clicked!');
-    const container = document.getElementById('branchInputsContainer');
-
-    const newInput = document.createElement('input');
-    newInput.type = 'text';
-    newInput.name = 'branchName[]';
-    newInput.className = 'form-control mb-2';
-    newInput.style.width = '330px';
-    newInput.placeholder = 'Write the name of the Department ';
-
-    container.appendChild(newInput);
-}
