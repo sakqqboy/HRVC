@@ -27,7 +27,8 @@ $page = "grid";
         </div>
         <div class="col-4" style="text-align: right;">
             <!-- filter -->
-
+            <!-- <?= $companyId .'/'. $branchId  .'/'. $departmentId  ?> -->
+            <?= $this->render('filter_list', ['companies' => $companies, 'branches' => $branches, 'departments' => $departments, 'page' => $page,'companyIdOld' => $companyId,'branchIdOld' => $branchId,'departmentIdOld' => $departmentId]) ?>
         </div>
     </div>
 
@@ -38,7 +39,7 @@ $page = "grid";
                 <?php
 				if (isset($data) && count($data) > 0) {
 					$i = 1;
-                    foreach ($data as $departmentId => $department):
+                    foreach ($data as $departmentsId => $department):
                         ?>
                 <div class="col-lg-6 col-md-5 col-sm-3 col-12" id="department">
                     <div class="card-comany" style="height: auto;">
@@ -48,8 +49,7 @@ $page = "grid";
                                 <!-- ส่วนบน -->
                                 <div class="between-center" style=" gap: 17px; width: 100%;">
                                     <div style="display: flex; align-items: center; gap: 17px;">
-                                        <div class="mid-center"
-                                            style="height: 60px; padding: 20.944px 4.189px; gap: 10px;">
+                                        <div class="mid-center" style="">
                                             <img src="<?= Yii::$app->homeUrl . $department['picture'] ?>"
                                                 class="card-tcf">
                                         </div>
@@ -183,8 +183,10 @@ $page = "grid";
                 <!-- endforeach -->
             </div>
         </div>
+        <!-- <?= $companyId .'/'. $branchId  .'/'. $departmentId  ?> -->
 
         <!-- pagination_page -->
+        <?= $this->render('pagination_page', [ 'companyId' => $companyId, 'branchId' => $branchId, 'departmentId' => $departmentId,'page' => $page,'numPage' => $numPage]) ?>
 
     </div>
 </div>

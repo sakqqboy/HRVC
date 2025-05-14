@@ -46,10 +46,10 @@ class TeamController extends Controller
 		->leftJoin('country cu', 'cu.countryId = c.countryId')
 		->where(['d.status' => 1]);
 			
-			// if (!empty($id)) {
-			// // if ($id > 0) {
-			// 	$query->andWhere(["d.companyId" => $id]);
-			// }
+			if (!empty($id)) {
+			// if ($id > 0) {
+				$query->andWhere(["d.departmentId" => $id]);
+			}
 
 			if (!empty($limit)) {
 			// if ($limit > 0) {
@@ -64,7 +64,7 @@ class TeamController extends Controller
 		return json_encode($indexGrid);
 	}
 
-	public function actionIndexFilter($companyId,$branchId,$departmentId,$page,$limit)
+	public function actionIndexFilter($departmentId,$branchId,$companyId,$page,$limit)
 	{
 
 		$offset = ($page - 1) * $limit;

@@ -312,6 +312,44 @@ class DepartmentController extends Controller
 
 		// return json_encode($id);
     }
+
+	public function actionDepartmentPageFilter($departmentId,$companyId,$branchId,$page ,$limit)
+    {
+        
+        $query =  Department::find()
+		->select('department.*')
+		->join('LEFT JOIN', 'branch b', 'b.branchId = department.branchId')
+		->join('LEFT JOIN', 'company c', 'c.companyId = b.companyId')
+		->where(['department.status' => 1]);
+		
+	
+		if (!empty($departmentId)) {
+			$query->andWhere(["c.countryId" => $departmentId]);
+		}
+		
+		if (!empty($branchId)) {
+			$query->andWhere(["department.branchId" => $branchId]);
+		}
+
+		if (!empty($companyId)) {
+			$query->andWhere(["c.countryId" => $companyId]);
+		}
+
+    
+    
+        $totalRows = $query->count(); // นับหลังจากใส่เงื่อนไขทั้งหมดแล้ว
+    
+        $totalPages = ceil($totalRows / $limit);
+    
+        return json_encode([
+            'totalPages' => $totalPages,
+            'totalRows' => $totalRows,
+            'perPage' => $limit,
+            'nowPage' => $page
+        ]);
+
+		// return json_encode($id);
+    }
 	
 	public function actionDepartmentTitle($id)
 	{

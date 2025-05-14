@@ -51,8 +51,7 @@ $page = "grid";
                                 <!-- ส่วนบน -->
                                 <div class="between-center" style=" gap: 17px; width: 100%;">
                                     <div style="display: flex; align-items: center; gap: 17px;">
-                                        <div class="mid-center"
-                                            style="height: 60px; padding: 20.944px 4.189px; gap: 10px;">
+                                        <div class="mid-center">
                                             <img src="<?= Yii::$app->homeUrl . $branch['picture'] ?>" class="card-tcf">
                                         </div>
                                         <div class="header-crad-company">

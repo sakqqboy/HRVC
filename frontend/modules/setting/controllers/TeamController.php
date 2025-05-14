@@ -36,20 +36,20 @@ class TeamController extends Controller
     }
 
     
-    public function actionEncodeParamsCountry() {
+    public function actionEncodeParamsFilter() {
 		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 	
-		$countryId = Yii::$app->request->post('countryId');
         $companyId = Yii::$app->request->post('companyId');
         $branchId = Yii::$app->request->post('branchId');
+        $departmentId = Yii::$app->request->post('departmentId');
 		$page = Yii::$app->request->post('page');
 
-		$url =  ModelMaster::encodeParams(['countryId' => $countryId,'companyId' => $companyId, 'branchId' => $branchId,  'nextPage' => 1]);
+		$url =  ModelMaster::encodeParams(['companyId' => $companyId, 'branchId' => $branchId, 'departmentId' => $departmentId,  'nextPage' => 1]);
 	
 		if($page == 'grid') {
-			return $this->redirect(Yii::$app->homeUrl . 'setting/department/index-filter/'. $url );
+			return $this->redirect(Yii::$app->homeUrl . 'setting/team/index-filter/'. $url );
 		}else if($page == 'view') {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/department/department-view/'. $url );
+            return $this->redirect(Yii::$app->homeUrl . 'setting/team/department-view/'. $url );
 		}
 	}
 
@@ -120,9 +120,9 @@ class TeamController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         // api
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
-		$countries = curl_exec($api);
-		$countries = json_decode($countries, true);
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
+		// $countries = curl_exec($api);
+		// $countries = json_decode($countries, true);
         
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
 		$company = curl_exec($api);
@@ -136,7 +136,7 @@ class TeamController extends Controller
         $department = curl_exec($api);
         $department = json_decode($department, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-page?id=0'. '&page=1' . '&countryId=0' . '&limit=5');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-page?id=0'. '&page=1' . '&countryId=0' . '&limit=6');
 		$numPage = curl_exec($api);
 		$numPage = json_decode($numPage, true);
         
@@ -180,19 +180,115 @@ class TeamController extends Controller
 
         curl_close($api);
 
-        // throw new exception(print_r($data, true));
+        // throw new exception(print_r($countries, true));
 
         return $this->render('index',[
             "data" => $data,
             "role" => $role,
             "numPage" => $numPage,
-            "countries" => $countries,
+            // "countries" => $countries,
             "companies" => $company,
             "branches" => $branch,
+            "departments" => $department,
             "countryId" => 0,
             "companyId" => 0,
             "branchId" => 0,
+            "departmentId" => 0,
             "nextPage" => 1
+        ]);
+    }
+
+
+    public function actionIndexFilter($hash)
+    {
+        $param = ModelMaster::decodeParams($hash);
+        $companyId = !empty($param["companyId"]) ? $param["companyId"] : 0;
+        $branchId = !empty($param["branchId"]) ? $param["branchId"] : 0;
+        $departmentId = !empty($param["departmentId"]) ? $param["departmentId"] : 0;
+        $nextPage = !empty($param["nextPage"]) ? $param["nextPage"] : 0;
+        //  throw new Exception("teams: " . print_r($param, true));
+
+        $role = UserRole::userRight();
+        $data =[];
+        $api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        // api
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
+		// $countries = curl_exec($api);
+		// $countries = json_decode($countries, true);
+        
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$company = curl_exec($api);
+		$company = json_decode($company, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1' . '&limit=0');
+        $branch = curl_exec($api);
+        $branch = json_decode($branch, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/active-department?page=1'. '&limit=0');
+        $department = curl_exec($api);
+        $department = json_decode($department, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-page-filter?departmentId=' . $departmentId . '&branchId=' . $branchId . '&companyId=' . $companyId . '&page=' . $nextPage . '&limit=6');
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+                        // throw new Exception("teams: " . print_r($numPage, true));
+
+        //ข้อมูลทีมdeparmentเป็นหลัก
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/index-filter?departmentId=' . $departmentId . '&&branchId='. $branchId . '&&companyId='. $companyId .   '&&page=' . $nextPage  . '&limit=6');
+        $departments = curl_exec($api);
+        $departments = json_decode($departments, true);
+
+        //หลุปดาต้า
+        if (isset($departments) && count($departments) > 0) {
+            foreach ($departments as $row) :
+                $departmentsId = $row['departmentId'];
+                        //ข้อมูลทีมteamรอง
+                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' .  $departmentsId . '&page=1' . '&limit=0');
+                $teams = curl_exec($api);
+                $teams = json_decode($teams, true);
+
+                // throw new Exception("teams: " . print_r($teams, true));
+
+            if (!isset($data[$departmentsId])) {
+                // ตั้งค่าข้อมูล branch ครั้งแรก
+                $data[$departmentsId] = [
+                    'departmentId' => $row['departmentId'],
+                    'departmentName' => $row['departmentName'],
+                    'branchId' => $row['branchId'],
+                    'branchName' => $row['branchName'],
+                    'companyId' => $row['companyId'],
+                    'companyName' => $row['companyName'],
+                    'picture' => $row['picture'],
+                    'city' => $row['city'],
+                    'countryId' => $row['countryId'],
+                    'countryName' => $row['countryName'],
+                    'flag' => $row['flag'],
+                    'teams' => $teams
+                ];
+            }
+
+            endforeach;
+        }
+
+
+        curl_close($api);
+
+        // throw new exception(print_r($departmentId, true));
+
+        return $this->render('index',[
+            "data" => $data,
+            "role" => $role,
+            "numPage" => $numPage,
+            // "countries" => $countries,
+            "companies" => $company,
+            "branches" => $branch,
+            "departments" => $department,
+            "companyId" => $companyId,
+            "branchId" => $branchId,
+            "departmentId" => $departmentId,
+            "nextPage" => $nextPage
         ]);
     }
 

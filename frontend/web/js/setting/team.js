@@ -290,3 +290,68 @@ function addTeamInput() {
 
     container.appendChild(newInput);
 }
+
+
+function filterTeam(page) {
+    // console.log("Page:", page); // Add this line to check the value of `page`
+
+    const companyId = document.getElementById('companySelect').value;
+    const branchId = document.getElementById('branchSelect').value;
+    const departmentId = document.getElementById('departmentSelect').value;
+
+    // nextPage = 1;
+    // alert(page);
+    // alert(nextPage);
+    // alert(companyId);
+    // alert(branchId);
+    // alert(departmentId);
+
+    var url = $url + 'setting/team/encode-params-filter';
+    // alert(page);
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: {
+            companyId: companyId,
+            branchId: branchId,
+            departmentId: departmentId,
+            page: page
+        },
+        success: function (data) {
+            // window.location.href = "company-grid-filter/" + data.url;
+            alert(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX request failed: " + error);
+        }
+    });
+}
+
+
+
+function goToPageTeam(nextPage, page, companyId, branchId, departmentId) {
+    // alert(page);
+    // alert(nextPage);
+    // alert(departmentId);
+    var url = $url + 'setting/team/encode-params-page';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: {
+            companyId: companyId,
+            branchId: branchId,
+            departmentId: departmentId,
+            page: page,
+            nextPage: nextPage
+        },
+        success: function (data) {
+            // window.location.href = "company-grid-filter/" + data.url;
+            alert(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX request failed: " + error);
+        }
+    });
+}

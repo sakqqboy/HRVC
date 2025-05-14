@@ -112,6 +112,7 @@ return [
                 'setting/employee/update/<hash>' => 'setting/employee/update',
                 'setting/employee/export-employee/<hash>' => 'setting/employee/export-employee',
                 'setting/employee/index/<hash>' => 'setting/employee/index',
+                'setting/team/index-filter/<hash>' => 'setting/team/index-filter',
                 'setting/team/no-team/<hash>' => 'setting/team/no-team',
                 'setting/team/create/<hash>' => 'setting/team/create',
                 'setting/team/team-result/<hash>' => 'setting/team/team-result',
