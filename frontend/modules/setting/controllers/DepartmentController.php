@@ -113,7 +113,7 @@ class DepartmentController extends Controller
 
     public function actionIndex()
     {
-        //ทำวันจันทร์
+        
         $role = UserRole::userRight();
         $data =[];
         $api = curl_init();
@@ -136,6 +136,8 @@ class DepartmentController extends Controller
 		$numPage = curl_exec($api);
 		$numPage = json_decode($numPage, true);
 
+
+        //ข้อมูลbranchเป็นหลัก
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/index?id=' . '&&page=1' . '&limit=6');
         $branches = curl_exec($api);
         $branches = json_decode($branches, true);
@@ -145,7 +147,7 @@ class DepartmentController extends Controller
         if (isset($branches) && count($branches) > 0) {
             foreach ($branches as $row) :
                 $branchId = $row['branchId'];
-
+                //ข้อมูลทีมdeparmentเป็นหลัก
                 curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' .  $branchId . '&page=1' . '&limit=0');
                 $departments = curl_exec($api);
                 $departments = json_decode($departments, true);

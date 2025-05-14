@@ -11,6 +11,7 @@ use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Team;
+use frontend\models\hrvc\UserRole;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Html;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
@@ -113,7 +114,85 @@ class TeamController extends Controller
     
     public function actionIndex()
     {
+        $role = UserRole::userRight();
+        $data =[];
+        $api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        // api
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
+		$countries = curl_exec($api);
+		$countries = json_decode($countries, true);
+        
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$company = curl_exec($api);
+		$company = json_decode($company, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1'. '&limit=0');
+        $branch = curl_exec($api);
+        $branch = json_decode($branch, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/active-department?page=1'. '&limit=0');
+        $department = curl_exec($api);
+        $department = json_decode($department, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-page?id=0'. '&page=1' . '&countryId=0' . '&limit=5');
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+        
+        //ข้อมูลทีมdeparmentเป็นหลัก
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/index?id=' . '&&page=1' . '&limit=6');
+        $departments = curl_exec($api);
+        $departments = json_decode($departments, true);
+
+        //หลุปดาต้า
+        if (isset($departments) && count($departments) > 0) {
+            foreach ($departments as $row) :
+                $departmentId = $row['departmentId'];
+                        //ข้อมูลทีมteamรอง
+                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' .  $departmentId . '&page=1' . '&limit=0');
+                $teams = curl_exec($api);
+                $teams = json_decode($teams, true);
+
+                // throw new Exception("teams: " . print_r($teams, true));
+
+            if (!isset($data[$departmentId])) {
+                // ตั้งค่าข้อมูล branch ครั้งแรก
+                $data[$departmentId] = [
+                    'departmentId' => $row['departmentId'],
+                    'departmentName' => $row['departmentName'],
+                    'branchId' => $row['branchId'],
+                    'branchName' => $row['branchName'],
+                    'companyId' => $row['companyId'],
+                    'companyName' => $row['companyName'],
+                    'picture' => $row['picture'],
+                    'city' => $row['city'],
+                    'countryId' => $row['countryId'],
+                    'countryName' => $row['countryName'],
+                    'flag' => $row['flag'],
+                    'teams' => $teams
+                ];
+            }
+
+            endforeach;
+        }
+
+
+        curl_close($api);
+
+        // throw new exception(print_r($data, true));
+
         return $this->render('index',[
+            "data" => $data,
+            "role" => $role,
+            "numPage" => $numPage,
+            "countries" => $countries,
+            "companies" => $company,
+            "branches" => $branch,
+            "countryId" => 0,
+            "companyId" => 0,
+            "branchId" => 0,
+            "nextPage" => 1
         ]);
     }
 
@@ -127,7 +206,7 @@ class TeamController extends Controller
         // $allTeams = [];
         $companyName = '';
         $branchName = '';
-        $departmenName = '';
+        $departmentName = '';
         // $branches = [];
         // $totalEmployee = 0;
         // $totalDepartment = 0;

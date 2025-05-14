@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 
-$this->title = 'Branch';
+$this->title = 'Department';
 $page = "grid";
 // echo $data;
 ?>
@@ -43,7 +43,7 @@ $page = "grid";
 					$i = 1;
                     foreach ($data as $branchesId => $branch):
                         ?>
-                <div class="col-lg-6 col-md-5 col-sm-3 col-12" id="department">
+                <div class="col-lg-6 col-md-5 col-sm-3 col-12" id="branch">
                     <div class="card-comany" style="height: auto;">
                         <div class="card-body" style=" background: #F9FBFF;  border-radius: 5px;">
                             <div class="between-center"
@@ -61,8 +61,8 @@ $page = "grid";
                                             </div>
                                             <div class="city-crad-company">
                                                 <div class="cycle-current-yellow" style="width: 20px; height: 20px;">
-                                                    <img src="/HRVC/frontend/web/image/branches-black.svg" alt="icon"
-                                                        style="width: 10px; height: 10px;">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
+                                                        alt="icon" style="width: 10px; height: 10px;">
                                                 </div>
                                                 <?= Yii::t('app', $branch['branchName']) ?>
                                             </div>
@@ -76,12 +76,7 @@ $page = "grid";
 
                                     <div style="margin-bottom: 30px;">
                                         <?php if(count($branch['departments']) > 0) { ?>
-                                        <!-- <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'], 'branchId' => $branch['branchId']]) ?>"
-                                            class="btn btn-bg-white-xs mr-5" style="margin-top: 3px; ">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
-                                                alt="History" class="pim-icon"
-                                                style="margin-top: -1px; width: 14px; height: 14px;">
-                                        </a> -->
+
                                         <a class="btn btn-bg-white-xs mr-5" style="margin-top: 3px;"
                                             onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>')">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
@@ -123,7 +118,7 @@ $page = "grid";
                                             href="
                                         <?= Yii::$app->homeUrl ?>setting/department/departments-view/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>">
                                             See All
-                                            <img src="/HRVC/frontend/web/image/see-all.svg" alt="icon"
+                                            <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
                                                 style="cursor: pointer;">
                                         </a>
                                     </div>

@@ -57,7 +57,8 @@ class BranchController extends Controller
 				->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
 				->where(['branch.status' => 1]);
 	
-			if ($limit > 0) {
+			// if ($limit > 0) {
+			if (!empty($limit)) {
 				$query ->offset($offset)
 				->limit($limit);
 			}

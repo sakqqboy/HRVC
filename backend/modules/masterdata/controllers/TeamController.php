@@ -3,6 +3,7 @@
 namespace backend\modules\masterdata\controllers;
 
 use backend\models\hrvc\Branch;
+use backend\models\hrvc\Department;
 use backend\models\hrvc\Team;
 use Exception;
 use yii\web\Controller;
@@ -18,10 +19,104 @@ header("Pragma: no-cache");
 class TeamController extends Controller
 {
 
-	public function actionIndex()
+	
+	public function actionIndex($id,$page,$limit)
 	{
-		// return $this->render('index');
+
+		$offset = ($page - 1) * $limit;
+		$indexGrid = [];
+
+		$query = Department::find()
+		->select([
+			'd.departmentId',
+			'd.departmentName',
+			'd.branchId',
+			'b.branchName',
+			'b.companyId',
+			'c.companyName',
+			'c.picture',
+			'c.city',
+			'c.countryId',
+			'cu.countryName',
+			'cu.flag',
+		])
+		->alias('d')
+		->leftJoin('branch b', 'b.branchId = d.branchId')
+		->leftJoin('company c', 'c.companyId = b.companyId')
+		->leftJoin('country cu', 'cu.countryId = c.countryId')
+		->where(['d.status' => 1]);
+			
+			// if (!empty($id)) {
+			// // if ($id > 0) {
+			// 	$query->andWhere(["d.companyId" => $id]);
+			// }
+
+			if (!empty($limit)) {
+			// if ($limit > 0) {
+				$query ->offset($offset)
+				->limit($limit);
+			}
+
+			$indexGrid = $query
+			->asArray()
+			->all();
+
+		return json_encode($indexGrid);
 	}
+
+	public function actionIndexFilter($companyId,$branchId,$departmentId,$page,$limit)
+	{
+
+		$offset = ($page - 1) * $limit;
+		$indexGrid = [];
+
+		$query = Department::find()
+		->select([
+			'd.departmentId',
+			'd.departmentName',
+			'd.branchId',
+			'b.branchName',
+			'b.companyId',
+			'c.companyName',
+			'c.picture',
+			'c.city',
+			'c.countryId',
+			'cu.countryName',
+			'cu.flag',
+		])
+		->alias('d')
+		->leftJoin('branch b', 'b.branchId = d.branchId')
+		->leftJoin('company c', 'c.companyId = b.companyId')
+		->leftJoin('country cu', 'cu.countryId = c.countryId')
+		->where(['d.status' => 1]);
+
+		
+			if (!empty($companyId)) {
+			// if ($companyId > 0) {
+				$query->andWhere(["b.companyId" => $companyId]);
+			}
+			if (!empty($branchId)) {
+			// if ($branchId > 0) {
+				$query->andWhere(["d.branchId" => $branchId]);
+			}
+			if (!empty($departmentId)) {
+			// if ($departmentId > 0) {
+				$query->andWhere(["d.departmentId" => $departmentId]);
+			}
+
+			if (!empty($limit)) {
+			// if ($limit > 0) {
+				$query ->offset($offset)
+				->limit($limit);
+			}
+
+			$indexGrid = $query
+			->asArray()
+			->all();
+
+		return json_encode($indexGrid);
+	}
+
 	public function actionAllTeamsDetail()
 	{
 		$teams = [];
@@ -72,7 +167,7 @@ class TeamController extends Controller
 			->one();
 		return json_encode($teams);
 	}
-	public function actionDepartmentTeam($id)
+	public function actionDepartmentTeam($id,$page,$limit)
 	{
 		$teams = [];
 		$teams = Team::find()

@@ -24,91 +24,94 @@ class DepartmentController extends Controller
 {
 	
 	public function actionIndex($id,$page,$limit)
-{
+	{
 
-	$offset = ($page - 1) * $limit;
-	$indexGrid = [];
+		$offset = ($page - 1) * $limit;
+		$indexGrid = [];
 
-    $query = Branch::find()
-    ->select([
-        'b.branchId',
-        'b.branchName',
-        'b.companyId',
-        'c.companyName',
-        'c.picture',
-        'c.city',
-        'c.countryId',
-        'cu.countryName',
-        'cu.flag',
-    ])
-	->alias('b')
-    ->leftJoin('company c', 'c.companyId = b.companyId')
-    ->leftJoin('country cu', 'cu.countryId = c.countryId')
-    ->where(['b.status' => 1]);
+		$query = Branch::find()
+		->select([
+			'b.branchId',
+			'b.branchName',
+			'b.companyId',
+			'c.companyName',
+			'c.picture',
+			'c.city',
+			'c.countryId',
+			'cu.countryName',
+			'cu.flag',
+		])
+		->alias('b')
+		->leftJoin('company c', 'c.companyId = b.companyId')
+		->leftJoin('country cu', 'cu.countryId = c.countryId')
+		->where(['b.status' => 1]);
 
-		if ($id > 0) {
-			$query->andWhere(["b.companyId" => $id]);
-		}
+			// if ($id > 0) {
+			if (!empty($id)) {	
+				$query->andWhere(["b.companyId" => $id]);
+			}
 
-		if ($limit > 0) {
-			$query ->offset($offset)
-			->limit($limit);
-		}
+			// if ($limit > 0) {
+			if (!empty($limit)) {	
+				$query ->offset($offset)
+				->limit($limit);
+			}
 
-        $indexGrid = $query
-		->asArray()
-		->all();
+			$indexGrid = $query
+			->asArray()
+			->all();
 
-    return json_encode($indexGrid);
-}
+		return json_encode($indexGrid);
+	}
 
-public function actionIndexFilter($countryId,$companyId,$branchId,$page,$limit)
-{
+	public function actionIndexFilter($countryId,$companyId,$branchId,$page,$limit)
+	{
 
-	$offset = ($page - 1) * $limit;
-	$indexGrid = [];
+		$offset = ($page - 1) * $limit;
+		$indexGrid = [];
 
-    $query = Branch::find()
-    ->select([
-        'b.branchId',
-        'b.branchName',
-        'b.companyId',
-        'c.companyName',
-        'c.picture',
-        'c.city',
-        'c.countryId',
-        'cu.countryName',
-        'cu.flag',
-    ])
-	->alias('b')
-    ->leftJoin('company c', 'c.companyId = b.companyId')
-    ->leftJoin('country cu', 'cu.countryId = c.countryId')
-    ->where(['b.status' => 1]);
-	
-		if ($countryId > 0) {
-			$query->andWhere(["c.countryId" => $countryId]);
-		}
-		if ($companyId > 0) {
-			$query->andWhere(["b.companyId" => $companyId]);
-		}
-		if ($branchId > 0) {
-			$query->andWhere(["b.branchId" => $branchId]);
-		}
+		$query = Branch::find()
+		->select([
+			'b.branchId',
+			'b.branchName',
+			'b.companyId',
+			'c.companyName',
+			'c.picture',
+			'c.city',
+			'c.countryId',
+			'cu.countryName',
+			'cu.flag',
+		])
+		->alias('b')
+		->leftJoin('company c', 'c.companyId = b.companyId')
+		->leftJoin('country cu', 'cu.countryId = c.countryId')
+		->where(['b.status' => 1]);
 		
-		if ($limit > 0) {
-			$query ->offset($offset)
-			->limit($limit);
-		}
+			if (!empty($countryId)) {
+			// if ($countryId > 0) {
+				$query->andWhere(["c.countryId" => $countryId]);
+			}
+			if (!empty($companyId)) {
+			// if ($companyId > 0) {
+				$query->andWhere(["b.companyId" => $companyId]);
+			}
+			if (!empty($branchId)) {
+			// if ($branchId > 0) {
+				$query->andWhere(["b.branchId" => $branchId]);
+			}
+			
+			// if ($limit > 0) {
+			if (!empty($limit)) {
+				$query ->offset($offset)
+				->limit($limit);
+			}
 
-        $indexGrid = $query
-		->asArray()
-		->all();
+			$indexGrid = $query
+			->asArray()
+			->all();
 
-    return json_encode($indexGrid);
-}
-
-
-
+		return json_encode($indexGrid);
+	}
 
 	public function actionEncodeParamsPage() {
 		Yii::$app->response->format = Response::FORMAT_JSON;
@@ -146,6 +149,27 @@ public function actionIndexFilter($countryId,$companyId,$branchId,$page,$limit)
 		//throw  new Exception(print_r($department, true));
 		return json_encode($department);
 	}
+	public function actionActiveDepartment($page,$limit)
+	{
+		$offset = ($page - 1) * $limit;
+		$department = [];
+		$query = Department::find()
+			->where(["status" => 1]);
+
+			// if ($limit > 0) {
+			if (!empty($limit)) {
+				$query ->offset($offset)
+				->limit($limit);
+			}
+			
+			$department = $query
+				->orderBy('departmentName')
+				->asArray()
+				->all();
+
+		//throw  new Exception(print_r($department, true));
+		return json_encode($department);
+	}
 	public function actionDepartmentDetail($id)
 	{
 
@@ -177,7 +201,8 @@ public function actionIndexFilter($countryId,$companyId,$branchId,$page,$limit)
 			->join('LEFT JOIN', 'company c', 'c.companyId = b.companyId')
 			->where(['department.status' => 1, 'department.branchId' => $id]);
 			
-			if ($limit > 0) {
+			// if ($limit > 0) {
+			if (!empty($limit)) {
 				$query ->offset($offset)
 				->limit($limit);
 			}
@@ -211,19 +236,22 @@ public function actionIndexFilter($countryId,$companyId,$branchId,$page,$limit)
 			->join('LEFT JOIN', 'company c', 'c.companyId = b.companyId')
 			->where(['department.status' => 1]);
 
-		if ($id > 0) {
+		if (!empty($id)) {
+		// if ($id > 0) {
 			$query->andFilterWhere([
 				'department.branchId' => $id
 			]);
 		}
 
-		if ($companyId > 0) {
+		// if ($companyId > 0) {
+		if (!empty($companyId)) {
 			$query->andFilterWhere([
 				'b.companyId' => $companyId
 			]);
 		}
 
-		if ($limit > 0) {
+		// if ($limit > 0) {
+		if (!empty($limit)) {
 			$query->offset($offset)
 				->limit($limit);
 		}
@@ -263,14 +291,13 @@ public function actionIndexFilter($countryId,$companyId,$branchId,$page,$limit)
 		->join('LEFT JOIN', 'company c', 'c.companyId = b.companyId')
 		->where(['department.status' => 1]);
 		
-		if ($id != 0) {
-            $query->andWhere(["department.branchId" => $id]);
-        }
-    
+		if (!empty($id)) {
+			$query->andWhere(["department.branchId" => $id]);
+		}
 
-        if ($countryId != 0) {
-            $query->andWhere(["c.countryId" => $countryId]);
-        }
+		if (!empty($countryId)) {
+			$query->andWhere(["c.countryId" => $countryId]);
+		}
     
         $totalRows = $query->count(); // นับหลังจากใส่เงื่อนไขทั้งหมดแล้ว
     

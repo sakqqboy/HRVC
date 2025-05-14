@@ -11,7 +11,7 @@ $page = "grid";
     <div class="between-center mt-20" style="width: 100%;">
         <div class="col-8">
             <div class=" d-flex align-items-center gap-2">
-                <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" style="width: 24px; height: 24px;">
+                <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" style="width: 24px; height: 24px;">
                 <div class="pim-name-title ml-10">
                     <?= Yii::t('app', 'Teams') ?>
                 </div>
@@ -34,7 +34,152 @@ $page = "grid";
     <div class="pim-body company-group-edit bg-white mt-10">
         <div class="alert alert-branch-body" role="alert">
             <div class="row">
+                <!-- วนหลูป -->
+                <?php
+				if (isset($data) && count($data) > 0) {
+					$i = 1;
+                    foreach ($data as $departmentId => $department):
+                        ?>
+                <div class="col-lg-6 col-md-5 col-sm-3 col-12" id="department">
+                    <div class="card-comany" style="height: auto;">
+                        <div class="card-body" style=" background: #F9FBFF;  border-radius: 5px;">
+                            <div class="between-center"
+                                style="flex-direction: column;  gap: 20px;  align-self: stretch;">
+                                <!-- ส่วนบน -->
+                                <div class="between-center" style=" gap: 17px; width: 100%;">
+                                    <div style="display: flex; align-items: center; gap: 17px;">
+                                        <div class="mid-center"
+                                            style="height: 60px; padding: 20.944px 4.189px; gap: 10px;">
+                                            <img src="<?= Yii::$app->homeUrl . $department['picture'] ?>"
+                                                class="card-tcf">
+                                        </div>
+                                        <div class="header-crad-company">
+                                            <div class="name-crad-company">
+                                                <?= $department['companyName'] ?>
+                                            </div>
+                                            <div class="city-crad-company">
+                                                <div class="cycle-current-yellow" style="width: 20px; height: 20px;">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
+                                                        alt="icon" style="width: 10px; height: 10px;">
+                                                </div>
+                                                <?= Yii::t('app', $department['branchName']) ?>
+                                            </div>
+                                            <div style="display: flex; gap: 20px; align-items: center;">
+                                                <div class="city-crad-company"
+                                                    style="display: flex; align-items: center; gap: 5px;">
+                                                    <div class="cycle-current-red" style="width: 20px; height: 20px;">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
+                                                            alt="icon" style="width: 10px; height: 10px;">
+                                                    </div>
+                                                    <?= $department['departmentName'] ?>,
+                                                </div>
 
+                                                <div class="city-crad-company"
+                                                    style="display: flex; align-items: center; gap: 5px;">
+                                                    <img src="<?= Yii::$app->homeUrl ?><?= $department['flag'] ?>"
+                                                        class="bangladresh-hrvc" style="width: 16px; height: 12px;">
+                                                    <?= $department['city'] ?>,
+                                                    <?= Yii::t('app', $department['countryName']) ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div style="margin-bottom: 30px;">
+                                        <?php if(count($department['teams']) > 0) { ?>
+
+                                        <a class="btn btn-bg-white-xs mr-5" style="margin-top: 3px;"
+                                            onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $department['branchId']]) ?>')">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
+                                                alt="History" class="pim-icon"
+                                                style="margin-top: -1px; width: 14px; height: 14px;">
+                                        </a>
+
+                                        <?php }?>
+                                        <a href="
+                                        <?= Yii::$app->homeUrl ?>setting/department/departments-view/<?= ModelMaster::encodeParams(['branchId' => $department['branchId']]) ?>"
+                                            class="btn btn-bg-white-xs mr-5" style="margin-top: 3px; ">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
+                                                alt="History" class="pim-icon" style="margin-top: -1px;">
+                                        </a>
+                                        <span class="dropdown" href="#" id="dropdownMenuLink-1"
+                                            data-bs-toggle="dropdown" style="align-self: flex-start;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/3-dot.svg" alt="icon"
+                                                style="cursor: pointer;">
+                                        </span>
+                                        <div class="menu-dot ">
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
+                                                <li class="pl-4 pr-4">
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                                // echo $department['totalDepartment']; 
+                                if(count($department['teams']) > 0) { 
+                                ?>
+                                <div style="align-self: stretch; height: 147px">
+                                    <div class="between-start">
+                                        <span class="detailname-crad-company mb-14">
+                                            Registered Teams
+                                        </span>
+                                        <a class="see-all-company"
+                                            href="
+                                        <?= Yii::$app->homeUrl ?>setting/department/teams-view/<?= ModelMaster::encodeParams(['branchId' => $department['branchId']]) ?>">
+                                            See All
+                                            <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
+                                                style="cursor: pointer;">
+                                        </a>
+                                    </div>
+
+                                    <?php if (!empty($department['teams'])): ?>
+                                    <div class="row mt-2">
+                                        <?php
+                                        $limitedDepartments = array_slice($department['teams'], 0, 6);
+                                        foreach ($limitedDepartments as $index => $dept):
+                                        ?>
+                                        <div class="col-6 mb-1">
+                                            <span class="d-flex align-items-center mb-12"
+                                                style="font-size: 13px; color: #333;">
+                                                <div class="cycle-current-green mr-5">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                                </div>
+                                                <?= $dept['teamName'] ?>
+                                            </span>
+                                        </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <?php endif; ?>
+                                </div>
+
+                                <?php } else{ ?>
+                                <!-- ส่วนล่าง -->
+                                <div class="create-crad-company ">
+                                    <!-- <?=  $department['branchId'] ?> -->
+                                    <span class="text-create-crad">
+                                        <?= Yii::t('app', 'No associated department, team, or employee found!') ?>
+                                    </span>
+                                    <a style="text-decoration: none;"
+                                        onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $department['branchId']]) ?>')">
+                                        <button type="button" class="btn-create"
+                                            style="padding: 3px 9px;"><?= Yii::t('app', 'Create Teams') ?>
+                                            <img src="<?= Yii::$app->homeUrl ?>image/arrow-top-r.svg"
+                                                style="width:18px; height:18px; margin-top:-3px;">
+                                        </button>
+                                    </a>
+                                </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+						$i++;
+					endforeach;
+				}
+				?>
                 <!-- endforeach -->
             </div>
         </div>
