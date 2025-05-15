@@ -340,40 +340,6 @@ class TeamController extends Controller
             $companies = json_decode($companies, true);
         }
 
-        // throw new Exception(print_r($param, true));
-        // if ($companyId != "") {
-        //     curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
-        //     $company = curl_exec($api);
-        //     $company = json_decode($company, true);
-        //     $companyName = $company["companyName"];
-
-        //     curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
-        //     $branches = curl_exec($api);
-        //     $branches = json_decode($branches, true);
-
-        //     curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/company-team?id=' . $companyId);
-        //     $allTeams = curl_exec($api);
-        //     $allTeams = json_decode($allTeams, true);
-
-        //     $branchess = Branch::find()
-        //         ->where(["status" => 1, "companyId" => $companyId])
-        //         ->asArray()
-        //         ->all();
-
-        //     //  throw new Exception(1);
-        // } else {
-            // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/all-teams-detail');
-            // $allTeams = curl_exec($api);
-            // $allTeams = json_decode($allTeams, true);
-
-
-            // $branchess = Branch::find()
-            //     ->where(["status" => 1])
-            //     ->asArray()
-            //     ->all();
-
-            //  throw new Exception(2);
-        // }
         
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
@@ -381,32 +347,7 @@ class TeamController extends Controller
         $group = json_decode($group, true);
 
         curl_close($api);
-        
-        // if (isset($branchess) && count($branchess) > 0) {
-        //     foreach ($branchess as $branch) :
-        //         $departments = Department::find()
-        //             ->where(["branchId" => $branch["branchId"], "status" => 1])
-        //             ->asArray()
-        //             ->all();
-        //         foreach ($departments as $department) :
-        //             $teams = Team::find()
-        //                 ->where(["departmentId" => $department["departmentId"], "status" => 1])
-        //                 ->asArray()
-        //                 ->all();
-        //             if (isset($teams) && count($teams) > 0) {
-        //                 foreach ($teams as $team) :
-        //                     $employees = Employee::find()
-        //                         ->where(["status" => 1, "teamId" => $team["teamId"]])
-        //                         ->asArray()
-        //                         ->all();
-        //                     $totalEmployee += count($employees);
-        //                 endforeach;
-        //             }
-        //         endforeach;
-        //         $totalDepartment += count($departments);
-        //     endforeach;
-        // }
-        // $totalBranch = count($branchess);
+       
         return $this->render('create', [
             "group" => $group,
             "companies" => $companies,
@@ -422,6 +363,71 @@ class TeamController extends Controller
             // "totalDepartment" => $totalDepartment,
             // "totalEmployee" => $totalEmployee,
         ]);
+    }
+
+    public function actionModalTeam($hash)
+    {
+        $param = ModelMaster::decodeParams($hash);
+
+        $departmentId = $param["departmentId"];
+        $countTeam = 0;
+        $role = UserRole::userRight();
+        $data =[];
+        $api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        // api
+        
+
+        //ข้อมูลทีมdeparmentเป็นหลัก
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/index-filter?departmentId=' . $departmentId . '&&branchId=0' . '&&companyId=0' .   '&&page=1'  . '&limit=0');
+        $departments = curl_exec($api);
+        $departments = json_decode($departments, true);
+
+        //หลุปดาต้า
+        if (isset($departments) && count($departments) > 0) {
+            foreach ($departments as $row) :
+                $departmentsId = $row['departmentId'];
+                //ข้อมูลทีมteamรอง
+                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' .  $departmentsId . '&page=1' . '&limit=0');
+                $teams = curl_exec($api);
+                $teams = json_decode($teams, true);
+
+                // throw new Exception("teams: " . print_r($teams, true));
+
+            if (!isset($data[$departmentsId])) {
+                // ตั้งค่าข้อมูล branch ครั้งแรก
+                $data = [
+                    'departmentId' => $row['departmentId'],
+                    'departmentName' => $row['departmentName'],
+                    'branchId' => $row['branchId'],
+                    'branchName' => $row['branchName'],
+                    'companyId' => $row['companyId'],
+                    'companyName' => $row['companyName'],
+                    'picture' => $row['picture'],
+                    'city' => $row['city'],
+                    'countryId' => $row['countryId'],
+                    'countryName' => $row['countryName'],
+                    'flag' => $row['flag'],
+                    'teams' => $teams
+                ];
+            }
+            $countTeam = count($teams);
+            endforeach;
+        }
+
+
+        curl_close($api);
+        
+        // throw new Exception("department: " . print_r($data, true));
+        return $this->renderPartial('modal_team', [
+            "teams" => $data,
+            "role" => $role,
+            "countTeam" => $countTeam,
+            "nextPage" => 1
+        ]); 
+
+        // return $this->renderPartial('modal_team');
     }
     
     public function actionCompanyBranch()
@@ -549,75 +555,175 @@ class TeamController extends Controller
         }
 
     }
+    public function actionSaveTeam()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        // throw new exception(print_r($_POST, true));
+    
+        if (isset($_POST["departmentId"]) && isset($_POST["teamName"])) {
+            $departmentId = $_POST["departmentId"];
+            $teamName = $_POST["teamName"];
+
+            $existing = Team::find()->where([
+                "departmentId" => $departmentId,
+                "teamName" => $teamName,
+                "status" => 1
+            ])->one();
+            
+            // return ['success' => false, 'message' => $existing];
+
+            if (!empty($existing)) {
+                $errors[] = 'Cannot create duplicate department name "' . $teamName . '"';
+                // continue;
+                return ['errors' => false, 'message' =>  $errors];
+            }else{
+                $team = new Team();
+                $team->teamName = $teamName;
+                $team->departmentId = $departmentId;
+                $team->status = '1';
+                $team->createDateTime = new Expression('NOW()');
+                $team->updateDateTime = new Expression('NOW()');
+    
+                if ($team->save()) {
+                    $api = curl_init();
+                    curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+                    curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' .  $departmentId . '&page=1' . '&limit=0');
+                    $teams = curl_exec($api);
+                    $teams = json_decode($teams, true);
+                    curl_close($api);
+
+                    return [
+                        'success' => true,
+                        'teams' => $teams // ส่งค่ากลับ
+                    ];
+                } else {
+                    return ['success' => false, 'errors' => $team->getErrors()];
+                }
+            }            
+        }
+    
+        return ['success' => false, 'message' => 'no branchId'];
+    }
+
     public function actionUpdateTeam()
     {
-        $groupId = Group::currentGroupId();
-        $teamId = $_POST["teamId"] - 543;
-        $team = Team::find()->where(["teamId" => $teamId])->asArray()->one();
+         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        $department = Department::find()
-            ->select('departmentId,departmentName,branchId')
-            ->where(["departmentId" => $team["departmentId"]])
-            ->asArray()
-            ->one();
-        $branch = Branch::find()
-            ->select('branchId,branchName,companyId')
-            ->where(["branchId" => $department["branchId"]])
-            ->asArray()
-            ->one();
-        $company = Company::find()
-            ->select('companyId,companyName')
-            ->where(["companyId" => $branch["companyId"]])
-            ->asArray()
-            ->one();
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        $companies = curl_exec($api);
-        $companies = json_decode($companies, true);
-        curl_close($api);
+            if (isset( $_POST["teamName"], $_POST["teamId"])) {
+                $teamName = $_POST["teamName"];
+                $teamId = $_POST["teamId"];
+            // throw new Exception(json_encode($_POST));
 
-        $textAllCompany = "<option value='" . $company['companyId'] . "'>" . $company['companyName'] . "</option>";
-        $textAllCompany .= "<option value=''>Select Company</option>";
-        if (count($companies) > 0) {
-            foreach ($companies as $com) :
-                $textAllCompany .= "<option value='" . $com['companyId'] . "'>" . $com['companyName'] . "</option>";
-            endforeach;
-        }
+                $team = Team::find()->where(['teamId' => $teamId, 'status' => 1])->one();
 
-        $branches = Branch::find()
-            ->select('branchId,branchName')
-            ->where(["companyId" => $company["companyId"], "status" => 1])
-            ->asArray()
-            ->orderBy('branchName')
-            ->all();
-        $textAllBranch = "<option value='" . $branch['branchId'] . "'>" . $branch['branchName'] . "</option>";
-        $textAllBranch .= "<option value=''>Select Branch</option>";
-        if (count($branches) > 0) {
-            foreach ($branches as $br) :
-                $textAllBranch .= "<option value='" . $br['branchId'] . "'>" . $br['branchName'] . "</option>";
-            endforeach;
-        }
+                if (!$team) {
+                    return ['success' => false, 'message' => 'Team not found'];
+                }
 
-        $departments = Department::find()
-            ->select('departmentId,departmentName')
-            ->where(["branchId" => $branch["branchId"], "status" => 1])
-            ->asArray()
-            ->orderBy('departmentName')
-            ->all();
-        $textAllDepartment = "<option value='" . $department['departmentId'] . "'>" . $department['departmentName'] . "</option>";
-        $textAllDepartment .= "<option value=''>Select Department</option>";
-        if (count($departments) > 0) {
-            foreach ($departments as $de) :
-                $textAllDepartment .= "<option value='" . $de['departmentId'] . "'>" . $de['departmentName'] . "</option>";
-            endforeach;
-        }
-        $res["textAllCompany"] = $textAllCompany;
-        $res["textAllBranch"] = $textAllBranch;
-        $res["textAllDepartment"] = $textAllDepartment;
-        $res["teamName"] = $team["teamName"];
-        return json_encode($res);
+                // เช็กชื่อซ้ำ (ยกเว้นทีมตัวเอง)
+                $duplicate = Team::find()
+                    ->where(['teamName' => $teamName, 'status' => '1'])
+                    ->andWhere(['<>', 'teamId', $teamId])
+                    ->one();
+
+                if ($duplicate) {
+                    return ['success' => false, 'message' => 'Team name "' . $teamName . '" already exists in this department'];
+                }
+
+                // อัปเดตข้อมูล
+                $team->teamName = $teamName;
+                $team->updateDateTime = new \yii\db\Expression('NOW()');
+                $departmentId = $team->departmentId;
+
+                if ($team->save(false)) {
+                    // ดึงข้อมูล teams ล่าสุดกลับมา
+                    $api = curl_init();
+                    curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+                    curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' .  $departmentId . '&page=1'. '&limit=0');
+                    $teams = curl_exec($api);
+                    $teams = json_decode($teams, true);
+                    curl_close($api);
+
+                    return [
+                        'success' => true,
+                        'teams' => $teams
+                    ];
+                } else {
+                    return ['success' => false, 'errors' => $team->getErrors()];
+                }
+            }
+
+            return ['success' => false, 'message' => 'Missing teamId, departmentId, or teamName'];
+            
+        // $groupId = Group::currentGroupId();
+        // $teamId = $_POST["teamId"] - 543;
+        // $team = Team::find()->where(["teamId" => $teamId])->asArray()->one();
+
+        // $department = Department::find()
+        //     ->select('departmentId,departmentName,branchId')
+        //     ->where(["departmentId" => $team["departmentId"]])
+        //     ->asArray()
+        //     ->one();
+        // $branch = Branch::find()
+        //     ->select('branchId,branchName,companyId')
+        //     ->where(["branchId" => $department["branchId"]])
+        //     ->asArray()
+        //     ->one();
+        // $company = Company::find()
+        //     ->select('companyId,companyName')
+        //     ->where(["companyId" => $branch["companyId"]])
+        //     ->asArray()
+        //     ->one();
+        // $api = curl_init();
+        // curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        // curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        // $companies = curl_exec($api);
+        // $companies = json_decode($companies, true);
+        // curl_close($api);
+
+        // $textAllCompany = "<option value='" . $company['companyId'] . "'>" . $company['companyName'] . "</option>";
+        // $textAllCompany .= "<option value=''>Select Company</option>";
+        // if (count($companies) > 0) {
+        //     foreach ($companies as $com) :
+        //         $textAllCompany .= "<option value='" . $com['companyId'] . "'>" . $com['companyName'] . "</option>";
+        //     endforeach;
+        // }
+
+        // $branches = Branch::find()
+        //     ->select('branchId,branchName')
+        //     ->where(["companyId" => $company["companyId"], "status" => 1])
+        //     ->asArray()
+        //     ->orderBy('branchName')
+        //     ->all();
+        // $textAllBranch = "<option value='" . $branch['branchId'] . "'>" . $branch['branchName'] . "</option>";
+        // $textAllBranch .= "<option value=''>Select Branch</option>";
+        // if (count($branches) > 0) {
+        //     foreach ($branches as $br) :
+        //         $textAllBranch .= "<option value='" . $br['branchId'] . "'>" . $br['branchName'] . "</option>";
+        //     endforeach;
+        // }
+
+        // $departments = Department::find()
+        //     ->select('departmentId,departmentName')
+        //     ->where(["branchId" => $branch["branchId"], "status" => 1])
+        //     ->asArray()
+        //     ->orderBy('departmentName')
+        //     ->all();
+        // $textAllDepartment = "<option value='" . $department['departmentId'] . "'>" . $department['departmentName'] . "</option>";
+        // $textAllDepartment .= "<option value=''>Select Department</option>";
+        // if (count($departments) > 0) {
+        //     foreach ($departments as $de) :
+        //         $textAllDepartment .= "<option value='" . $de['departmentId'] . "'>" . $de['departmentName'] . "</option>";
+        //     endforeach;
+        // }
+        // $res["textAllCompany"] = $textAllCompany;
+        // $res["textAllBranch"] = $textAllBranch;
+        // $res["textAllDepartment"] = $textAllDepartment;
+        // $res["teamName"] = $team["teamName"];
+        // return json_encode($res);
     }
     public function actionSaveUpdateTeam()
     {

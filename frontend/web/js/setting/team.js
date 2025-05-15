@@ -277,6 +277,24 @@ function filterTeam() {
     });
 }
 
+function openPopupModalTeam(url) {
+    // alert(url);
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (response) {
+            $('#teamModalBody').html(response);
+
+            $('#teamDeleteModal').html('');
+            $('#teamModal').modal('show');
+        },
+        error: function () {
+            $('#teamModalBody').html('<p class="text-danger">Failed to load content.</p>');
+            $('#teamModal').modal('show');
+        }
+    });
+}
+
 function addTeamInput() {
     // alert('Button clicked!');
     const container = document.getElementById('teamInputsContainer');
@@ -352,6 +370,191 @@ function goToPageTeam(nextPage, page, companyId, branchId, departmentId) {
         },
         error: function (xhr, status, error) {
             console.error("AJAX request failed: " + error);
+        }
+    });
+}
+
+
+function renderTeamList(teams) {
+    const container = document.getElementById('schedule-list');
+    container.innerHTML = '';
+
+    if (!Array.isArray(teams)) {
+        console.error('teams is not an array:', teams);
+        return;
+    }
+
+    teams.forEach(team => {
+        const html = `
+        <li class="schedule-item" data-id="${team.teamId}" style="padding: 13px 20px; background-color: #FFFFFF;">
+            <div class="row align-items-center dept-name">
+                <div class="col-10 dept-label" style="font-weight: 600; font-size: 16px;">
+                    ${team.teamName}
+                </div>
+                <div class="col-2 text-end">
+                    <a onclick="openModalDeleteTeam('${team.teamId}')" class="no-underline icon-delete">
+                        <img src="/HRVC/frontend/web/images/icons/Settings/binred.svg" alt="Delete"
+                            class="pim-icon bin-icon transition-icon">
+                    </a>
+                    <a href="#" class="no-underline icon-edit" onclick="handleTeamEditClick(event, this)">
+                        <img src="/HRVC/frontend/web/image/edit-blue.svg" alt="Edit"
+                            class="pim-icon edit-icon transition-icon" style="margin-top: -3px;">
+                        <span class="text-blue edit-label transition-label" style="font-weight: 500;">Edit</span>
+                    </a>
+                </div>
+            </div>
+        </li>`;
+        container.insertAdjacentHTML('beforeend', html);
+    });
+
+    const targetTeamId = document.getElementById('teamId')?.value;
+    const targetLi = container.querySelector(`li[data-id="${targetTeamId}"]`);
+
+    if (targetTeamId && targetLi) {
+        const editBtn = targetLi.querySelector('.icon-edit');
+        handleTeamEditClick(null, editBtn);
+    }
+}
+
+
+function initTeamSearch(inputId = 'Search', listSelector = '#schedule-list .schedule-item') {
+    // alert('initTeamSearch');
+    const searchInput = document.getElementById(inputId);
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', function () {
+        const keyword = this.value.toLowerCase();
+        const items = document.querySelectorAll(listSelector);
+
+        items.forEach(item => {
+            const name = item.querySelector('.col-10')?.textContent.toLowerCase() || '';
+            item.style.display = name.includes(keyword) ? 'block' : 'none';
+        });
+    });
+}
+
+function actionSaveTeam(departmentId, teamName) {
+    // alert(branchId);
+    // alert(deptName);
+    var url = $url + 'setting/team/save-team';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { departmentId: departmentId, teamName: teamName },
+        success: function (data) {
+            if (data.success && data.teams) {
+                renderTeamList(data.teams); // เรียกฟังก์ชันวาด HTML ใหม่
+            } else {
+                alert('ไม่สามารถบันทึกได้');
+            }
+        }
+    });
+
+}
+
+
+function openModalDeleteTeam(departmentId) {
+    var url = $url + 'setting/team/modal-delete';
+    // alert(modalurl);
+    $.ajax({
+        url: url,
+        type: 'GET',
+        data: { departmentId: departmentId },
+        success: function (response) {
+            // alert(response);
+            document.getElementById('teamModal').style.opacity = '0.1';
+            document.getElementById('teamModal').style.pointerEvents = 'none';
+            $('#teamDeleteModal').html(response);
+            $('#teamDeleteModal').modal('show');
+        },
+        error: function () {
+            $('#teamDeleteModal').html('<p class="text-danger">Failed to load content.</p>');
+            $('#teamDeleteModal').modal('show');
+        }
+    });
+}
+
+
+function handleTeamEditClick(e, element) {
+    if (e) e.preventDefault();
+
+    const li = element.closest('li');
+    const teamId = li.getAttribute('data-id');
+    const teamName = li.querySelector('.dept-label').textContent.trim();
+
+    li.style.display = 'none';
+    originalLi = li;
+    currentEditingId = teamId;
+
+    const inputHTML = `
+        <li class="edit-temp-item mt-30" data-id="${teamId}">
+            <div class="input-group">
+                <input type="text" name="teamNameList" id="editTeamInputlist" value="${teamName}" class="form-control dep-${teamId}"
+                    placeholder="Write team name">
+                <span class="input-group-text" id="enterHintlist" style="background-color: #ffff; border-left: none;">
+                    <div class="city-crad-company" id="hintTextlist" style="color: #ffffff; background-color: #2580D3;">
+                        <img src="/HRVC/frontend/web/image/enter-white.svg" style="width: 24px; height: 24px;">
+                        Enter to Save
+                    </div>
+                </span>
+            </div>
+        </li>`;
+
+    li.insertAdjacentHTML('afterend', inputHTML);
+
+    const input = document.getElementById('editTeamInputlist');
+    // input.focus();
+    setTimeout(() => {
+        input.focus();
+        input.setSelectionRange(input.value.length, input.value.length); // ให้เคอร์เซอร์อยู่ท้ายข้อความ
+    }, 500);
+
+    input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            $('#teamModal').modal('hide');
+            saveTeamEdit(input.value.trim());
+            location.reload(); // รีเฟรชหน้าทันทีหลังจากกด Enter
+        }
+    });
+
+    input.addEventListener('blur', function () {
+        cancelEdit(input.value.trim());
+    });
+    const targetDeptIdInput = document.getElementById('departmentId');
+    const targetDeptId = targetDeptIdInput?.value;
+
+}
+
+
+function saveTeamEdit(newValue) {
+    if (!currentEditingId || !originalLi) return;
+    // alert(newValue);
+    updateteamName(currentEditingId, newValue);
+}
+
+
+function updateteamName(teamId, teamName) {
+    // $("#departmentId").val(departmentId);
+    // alert(teamId);
+    // alert(teamName);
+    var url = $url + 'setting/team/update-team';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { teamId: teamId, teamName: teamName },
+        success: function (data) {
+            if (data.success && data.teams) {
+                // alert('บันทึกสำเร็จ');
+                renderDepartmentList(data.teams); // เรียกฟังก์ชันวาด HTML ใหม่
+            } else {
+                alert(data.message || 'ไม่สามารถบันทึกได้');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+            // alert('เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์');
         }
     });
 }

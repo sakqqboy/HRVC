@@ -403,7 +403,7 @@ function renderDepartmentList(departments) {
                         <img src="/HRVC/frontend/web/images/icons/Settings/binred.svg" alt="Delete"
                             class="pim-icon bin-icon transition-icon">
                     </a>
-                    <a href="#" class="no-underline icon-edit" onclick="handleEditClick(event, this)">
+                    <a href="#" class="no-underline icon-edit" onclick="handleDepEditClick(event, this)">
                         <img src="/HRVC/frontend/web/image/edit-blue.svg" alt="Edit"
                             class="pim-icon edit-icon transition-icon" style="margin-top: -3px;">
                         <span class="text-blue edit-label transition-label" style="font-weight: 500;">Edit</span>
@@ -421,13 +421,13 @@ function renderDepartmentList(departments) {
 
     if (targetDeptId) {
         const editBtn = targetLi.querySelector('.icon-edit');
-        handleEditClick(null, editBtn); // ส่ง null แทน event, แล้วให้ handleEditClick จัดการเอง
+        handleDepEditClick(null, editBtn);
     }
 
 }
 
 
-function handleEditClick(e, element) {
+function handleDepEditClick(e, element) {
     if (e) e.preventDefault();
 
     const li = element.closest('li');
@@ -468,7 +468,7 @@ function handleEditClick(e, element) {
     input.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
             $('#departmentModal').modal('hide');
-            saveEdit(input.value.trim());
+            saveDeptEdit(input.value.trim());
             location.reload(); // รีเฟรชหน้าทันทีหลังจากกด Enter
         }
     });
@@ -536,7 +536,7 @@ function cancelEdit(newValue) {
     }
 }
 
-function saveEdit(newValue) {
+function saveDeptEdit(newValue) {
     if (!currentEditingId || !originalLi) return;
     // cancelEdit(newValue);
     // 🟡 ส่งข้อมูลกลับเซิร์ฟเวอร์ได้ตรงนี้ ถ้าต้องการ update จริง

@@ -89,7 +89,7 @@ $page = "grid";
                                         <?php if(count($department['teams']) > 0) { ?>
 
                                         <a class="btn btn-bg-white-xs mr-5" style="margin-top: 3px;"
-                                            onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $department['branchId']]) ?>')">
+                                            onclick="openPopupModalTeam('<?= Yii::$app->homeUrl ?>setting/team/modal-team/<?= ModelMaster::encodeParams(['departmentId' => $department['departmentId']]) ?>')">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
                                                 alt="History" class="pim-icon"
                                                 style="margin-top: -1px; width: 14px; height: 14px;">
@@ -97,7 +97,7 @@ $page = "grid";
 
                                         <?php }?>
                                         <a href="
-                                        <?= Yii::$app->homeUrl ?>setting/department/departments-view/<?= ModelMaster::encodeParams(['branchId' => $department['branchId']]) ?>"
+                                        <?= Yii::$app->homeUrl ?>setting/team/teams-view/<?= ModelMaster::encodeParams(['departmentId' => $department['departmentId']]) ?>"
                                             class="btn btn-bg-white-xs mr-5" style="margin-top: 3px; ">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
                                                 alt="History" class="pim-icon" style="margin-top: -1px;">
@@ -111,7 +111,7 @@ $page = "grid";
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
                                                 <li class="pl-4 pr-4" data-bs-toggle="modal"
                                                     data-bs-target="#staticBackdrop4"
-                                                    onclick="javascript:prepareDeleteBranch('<?=$department['departmentId']?>')"
+                                                    onclick="javascript:prepareDeleteDepartment('<?=$department['departmentId']?>')"
                                                     title="Delete">
                                                     <a class="dropdown-itemNEW pl-4 pr-25" href="#">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
@@ -169,7 +169,7 @@ $page = "grid";
                                         <?= Yii::t('app', 'No associated department, team, or employee found!') ?>
                                     </span>
                                     <a style="text-decoration: none;"
-                                        onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $department['branchId']]) ?>')">
+                                        onclick="openPopupModalTeam('<?= Yii::$app->homeUrl ?>setting/team/modal-team/<?= ModelMaster::encodeParams(['departmentId' => $department['departmentId']]) ?>')">
                                         <button type="button" class="btn-create"
                                             style="padding: 3px 9px;"><?= Yii::t('app', 'Create Teams') ?>
                                             <img src="<?= Yii::$app->homeUrl ?>image/arrow-top-r.svg"
@@ -198,16 +198,15 @@ $page = "grid";
     </div>
 </div>
 
-<div class="modal fade" id="departmentModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="teamModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="row" id="departmentModalBody" style="width: 100%; padding: 50px; gap: 30px;">
+            <div class="row" id="teamModalBody" style="width: 100%; padding: 50px; gap: 30px;">
                 <!-- AJAX content will be injected here -->
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="departmentDeleteModal" tabindex="-2" aria-labelledby="departmentDeleteModal"
-    aria-hidden="true">
+<div class="modal fade" id="teamDeleteModal" tabindex="-2" aria-labelledby="teamDeleteModal" aria-hidden="true">
 </div>
