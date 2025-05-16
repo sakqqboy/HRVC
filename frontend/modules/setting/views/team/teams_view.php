@@ -33,7 +33,7 @@ $page = 'view';
                     <text class="squeezer-text mr-3"> / </text>
                 </div>
                 <a class="part-text mr-3"
-                    href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['branchId' => '']) ?>">Departments</a>
+                    href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['branchId' => '']) ?>">Teams</a>
                 <div class="mid-center" style="width: 20px; height: 20px;">
                     <text class="squeezer-text mr-3"> / </text>
                 </div>

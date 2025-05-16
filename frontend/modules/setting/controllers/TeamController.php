@@ -78,7 +78,7 @@ class TeamController extends Controller
 	public function actionNoTeam($hash)
 	{
         $param = ModelMaster::decodeParams($hash);
-        $departmentId = $param["departmentId"];
+        $departmentId = $param["departmentId"]??0;
         // throw new exception(print_r($branchId, true));
 
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
