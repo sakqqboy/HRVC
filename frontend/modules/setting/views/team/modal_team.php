@@ -56,12 +56,11 @@ use common\models\ModelMaster;
         <!-- content -->
         <div class="row d-flex align-items-center gap-2 mb-3">
             <span class="mb-14 font-size-16 " style=" font-weight: 600; padding: 0;">
-                Add Another Department
+                Add Another Team
             </span>
 
             <div class="input-group">
-                <input type="text" name="teamName" id="teamName" class="form-control"
-                    placeholder="Write department name">
+                <input type="text" name="teamName" id="teamName" class="form-control" placeholder="Write team name">
                 <span class="input-group-text" id="enterHint" style="background-color: #ffff; border-left: none;">
                     <div class="city-crad-company" id="hintText">
                         <img src="<?= Yii::$app->homeUrl . 'image/enter-black.svg' ?>"
@@ -75,12 +74,12 @@ use common\models\ModelMaster;
         <div class="row d-flex align-items-center gap-2 mb-3 mt-30" style="gap: 30px;">
             <span class="mb-14 font-size-16 " style=" font-weight: 600; padding: 0;">
                 <!-- นับจำนวน -->
-                Existing Departments (<?= $countTeam ?>)
+                Existing Teams (<?= $countTeam ?>)
                 <hr class="hr-group">
             </span>
             <!-- ถ้ามีให้แสดงผล -->
             <?php
-                // echo $departmentId;
+                // echo $TeamId;
 
                             if (isset($teams['teams']) && count($teams['teams']) > 0) {
                                 $countrow = 0;
@@ -92,7 +91,7 @@ use common\models\ModelMaster;
                     <img src="<?= Yii::$app->homeUrl ?>image/search.svg" alt="Search"
                         style="width: 20px; height: 20px;">
                 </span>
-                <input class="form-control" type="text" name="Search" id="Search" placeholder="Search Departments"
+                <input class="form-control" type="text" name="Search" id="Search" placeholder="Search Teams"
                     style="border: none; box-shadow: none;">
             </div>
 
@@ -111,10 +110,10 @@ use common\models\ModelMaster;
                     endforeach;
                 }else{
                 ?>
-            <!-- ถ้าไม่มี Departments ให้แสดงเป็น 0 -->
+            <!-- ถ้าไม่มี Teams ให้แสดงเป็น 0 -->
             <div class="create-crad-company " style="background-color: #F9F9F9;">
                 <span class="text-create-crad">
-                    No Existing Departments Yet!
+                    No Existing Teams Yet!
                 </span>
             </div>
             <input type="hidden" name="Search" id="Search">
@@ -131,7 +130,7 @@ use common\models\ModelMaster;
     <!-- footer modal -->
     <!-- <input type="hidden" name="teamId" id="teamId" value=""> -->
     <input type="hidden" name="url" id="url"
-        value="<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => '' ]) ?>">
+        value="<?= Yii::$app->homeUrl ?>setting/Team/modal-Team/<?= ModelMaster::encodeParams(['branchId' => '' ]) ?>">
 </div>
 
 <script>

@@ -134,7 +134,7 @@ $page = "grid";
                                         </span>
                                         <a class="see-all-company"
                                             href="
-                                        <?= Yii::$app->homeUrl ?>setting/department/teams-view/<?= ModelMaster::encodeParams(['branchId' => $department['branchId']]) ?>">
+                                        <?= Yii::$app->homeUrl ?>setting/team/teams-view/<?= ModelMaster::encodeParams(['departmentId' => $department['departmentId']]) ?>">
                                             See All
                                             <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
                                                 style="cursor: pointer;">

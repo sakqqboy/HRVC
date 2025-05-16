@@ -49,7 +49,7 @@ class TeamController extends Controller
 		if($page == 'grid') {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/team/index-filter/'. $url );
 		}else if($page == 'view') {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/team/department-view/'. $url );
+            return $this->redirect(Yii::$app->homeUrl . 'setting/team/teams-view/'. $url );
 		}
 	}
 
@@ -71,7 +71,7 @@ class TeamController extends Controller
 		if($page == 'grid') {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/team/index-filter/'. $url );
 		}else if($page == 'view') {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/team/team-view/'. $url );
+            return $this->redirect(Yii::$app->homeUrl . 'setting/team/teams-view/'. $url );
         }
 	}
 
@@ -470,6 +470,126 @@ class TeamController extends Controller
         $res["textSelect"] = $textSelect;
         return json_encode($res);
     }
+
+    public function actionTeamsView($hash){
+        
+        $param = ModelMaster::decodeParams($hash);
+
+        $companyId = $param["companyId"] ?? 0;
+        $branchId = $param["branchId"] ?? 0;
+        $departmentId = $param["departmentId"] ?? 0;
+        $nextPage = $param["nextPage"] ?? 1;
+
+        // throw new Exception("param: " . print_r($param, true));
+
+        $countTeam = 0;
+        $role = UserRole::userRight();
+        $data =[];
+        $api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        // api
+
+        //ข้อมูลทีมdeparmentเป็นหลัก
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-detail?id=' . $departmentId);
+        $department = curl_exec($api);
+        $department = json_decode($department, true);
+        // throw new Exception("departments: " . print_r($department, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' . $department['branchId']);
+        $branch = curl_exec($api);
+        $branch = json_decode($branch, true);
+        // throw new Exception("branch: " . print_r($branch, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $branch['companyId']);
+        $company = curl_exec($api);
+        $company = json_decode($company, true);
+        // throw new Exception("company: " . print_r($company, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $company['countryId']);
+        $country = curl_exec($api);
+        $country = json_decode($country, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/team-page?id=' . $departmentId . '&page='. $nextPage . '&limit=5');
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+        // throw new Exception("teams: " . print_r($numPage, true));
+
+       
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' .  $departmentId . '&page=' . $nextPage . '&limit=5');
+        $teams = curl_exec($api);
+        $teams = json_decode($teams, true);
+        // throw new Exception("departments: " . print_r($teams, true));
+
+        //หลุปดาต้า
+        $dataTeam = [];
+		if (!empty($teams)) {
+            foreach ($teams as $team) :
+
+				$employees = Employee::find()
+				->where(["teamId" => $team['teamId']])
+				->asArray()
+				->all();
+
+				// throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
+
+				// กรองเฉพาะที่มี picture
+				$filteredEmployees = array_filter($employees, function($employee) {
+					return !empty($employee['picture']);
+				});
+
+				// รีเซ็ต index และเลือกแค่ 3 คนแรก
+				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+
+				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
+
+				$totalEmployee = Employee::find()->where(["teamId" => $team['teamId'], "status" => 1])->count();
+
+				$dataTeam[] = [
+                    "teamId" => $team['teamId'],
+                    "teamName" => $team['teamName'],
+					// "status" => $team['status'],
+					// "createDateTime" => $team['createDateTime'],    
+					// "updateDateTime" => $team['updateDateTime'],
+					"totalEmployee" => $totalEmployee,
+					"employees" => $filteredEmployees
+				];
+                $countTeam++;
+			endforeach;
+		}
+
+
+        curl_close($api);
+
+        $data = [
+                    "departmentId" => $department['departmentId'],
+                    "departmentName" => $department["departmentName"],
+                    "branchId" => $branch['branchId'],
+                    "branchName" => $branch['branchName'],  
+                    "description" => $branch['description'],
+                    "companyId" => $company['companyId'],
+                    "companyName" => $company['companyName'],
+                    "picture" => $company['picture'],
+                    "city" => $company['city'],
+                    "countryId" => $company['countryId'],
+                    "countryName" => $country['countryName'],
+                    "flag" => $country['flag'],
+                    // "teams" => $dataTeam
+				];
+        
+        // throw new Exception("department: " . print_r($data, true));
+        
+        return $this->render('teams_view', [
+            "data" => $data,
+            "teams" => $dataTeam,
+            "role" => $role,
+            "countTeam" => $countTeam,
+            "numPage" => $numPage,
+            "nextPage" => 1,
+            "countryId" => 0
+        ]); 
+    }
+    
     public function actionDepartmentTeam()
     {
         $departmentId = $_POST["departmentId"];
@@ -657,73 +777,6 @@ class TeamController extends Controller
 
             return ['success' => false, 'message' => 'Missing teamId, departmentId, or teamName'];
             
-        // $groupId = Group::currentGroupId();
-        // $teamId = $_POST["teamId"] - 543;
-        // $team = Team::find()->where(["teamId" => $teamId])->asArray()->one();
-
-        // $department = Department::find()
-        //     ->select('departmentId,departmentName,branchId')
-        //     ->where(["departmentId" => $team["departmentId"]])
-        //     ->asArray()
-        //     ->one();
-        // $branch = Branch::find()
-        //     ->select('branchId,branchName,companyId')
-        //     ->where(["branchId" => $department["branchId"]])
-        //     ->asArray()
-        //     ->one();
-        // $company = Company::find()
-        //     ->select('companyId,companyName')
-        //     ->where(["companyId" => $branch["companyId"]])
-        //     ->asArray()
-        //     ->one();
-        // $api = curl_init();
-        // curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        // curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        // $companies = curl_exec($api);
-        // $companies = json_decode($companies, true);
-        // curl_close($api);
-
-        // $textAllCompany = "<option value='" . $company['companyId'] . "'>" . $company['companyName'] . "</option>";
-        // $textAllCompany .= "<option value=''>Select Company</option>";
-        // if (count($companies) > 0) {
-        //     foreach ($companies as $com) :
-        //         $textAllCompany .= "<option value='" . $com['companyId'] . "'>" . $com['companyName'] . "</option>";
-        //     endforeach;
-        // }
-
-        // $branches = Branch::find()
-        //     ->select('branchId,branchName')
-        //     ->where(["companyId" => $company["companyId"], "status" => 1])
-        //     ->asArray()
-        //     ->orderBy('branchName')
-        //     ->all();
-        // $textAllBranch = "<option value='" . $branch['branchId'] . "'>" . $branch['branchName'] . "</option>";
-        // $textAllBranch .= "<option value=''>Select Branch</option>";
-        // if (count($branches) > 0) {
-        //     foreach ($branches as $br) :
-        //         $textAllBranch .= "<option value='" . $br['branchId'] . "'>" . $br['branchName'] . "</option>";
-        //     endforeach;
-        // }
-
-        // $departments = Department::find()
-        //     ->select('departmentId,departmentName')
-        //     ->where(["branchId" => $branch["branchId"], "status" => 1])
-        //     ->asArray()
-        //     ->orderBy('departmentName')
-        //     ->all();
-        // $textAllDepartment = "<option value='" . $department['departmentId'] . "'>" . $department['departmentName'] . "</option>";
-        // $textAllDepartment .= "<option value=''>Select Department</option>";
-        // if (count($departments) > 0) {
-        //     foreach ($departments as $de) :
-        //         $textAllDepartment .= "<option value='" . $de['departmentId'] . "'>" . $de['departmentName'] . "</option>";
-        //     endforeach;
-        // }
-        // $res["textAllCompany"] = $textAllCompany;
-        // $res["textAllBranch"] = $textAllBranch;
-        // $res["textAllDepartment"] = $textAllDepartment;
-        // $res["teamName"] = $team["teamName"];
-        // return json_encode($res);
     }
     public function actionSaveUpdateTeam()
     {

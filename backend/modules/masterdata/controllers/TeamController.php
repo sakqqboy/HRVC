@@ -32,6 +32,7 @@ class TeamController extends Controller
 			'd.departmentName',
 			'd.branchId',
 			'b.branchName',
+			'b.description',
 			'b.companyId',
 			'c.companyName',
 			'c.picture',
@@ -76,6 +77,7 @@ class TeamController extends Controller
 			'd.departmentName',
 			'd.branchId',
 			'b.branchName',
+			'b.description',
 			'b.companyId',
 			'c.companyName',
 			'c.picture',
@@ -169,12 +171,85 @@ class TeamController extends Controller
 	}
 	public function actionDepartmentTeam($id,$page,$limit)
 	{
-		$teams = [];
-		$teams = Team::find()
+		// $teams = [];
+		// $teams = Team::find()
+		// 	->select("teamName,teamId")
+		// 	->where(["departmentId" => $id, "status" => 1])
+		// 	->asArray()
+		// 	->all();
+
+		$offset = ($page - 1) * $limit;
+
+			$teams = [];
+		
+	
+			$query = Team::find()
 			->select("teamName,teamId")
-			->where(["departmentId" => $id, "status" => 1])
-			->asArray()
-			->all();
+			->where(["departmentId" => $id, "status" => 1]);
+			
+			// if ($limit > 0) {
+			if (!empty($limit)) {
+				$query ->offset($offset)
+				->limit($limit);
+			}
+	
+			$teams = $query
+				->asArray()
+				->all();
+
 		return json_encode($teams);
 	}
+	
+	public function actionTeamPage($id,$page ,$limit)
+    {
+        
+      $query = Team::find()
+		->select('team.*')
+		->join('LEFT JOIN', 'department d', 'd.departmentId = team.departmentId')
+		->where(['team.status' => 1]);
+
+		if (!empty($id)) {
+			$query->andWhere(['team.departmentId' => $id]);
+		}
+		$totalRows = $query->count(); // นับจำนวนแถวทั้งหมดตามเงื่อนไข
+		$totalPages = ceil($totalRows / $limit);
+
+		// ดึงข้อมูลตามเงื่อนไข พร้อมใส่ limit/offset ถ้าจำเป็น
+		// $data = $query->asArray()->all();
+
+		return json_encode([
+            'totalPages' => $totalPages,
+            'totalRows' => $totalRows,
+            'perPage' => $limit,
+            'nowPage' => $page
+        ]);
+
+	}
+
+	public function actionTeamPageFilter($id,$page ,$limit)
+    {
+        
+        $query =  Team::find()
+		->select('team.*')	
+		->join('LEFT JOIN', 'department d', 'd.departmentId = team.departmentId')
+		->where(['team.status' => 1]);
+
+		if (!empty($id)) {
+			$query->andWhere(["team.departmentId" => $id]);
+		}
+
+        $totalRows = $query->count(); // นับหลังจากใส่เงื่อนไขทั้งหมดแล้ว
+
+        $totalPages = ceil($totalRows / $limit);
+		
+		return json_encode([
+            'totalPages' => $totalPages,
+            'totalRows' => $totalRows,
+            'perPage' => $limit,
+            'nowPage' => $page
+        ]);
+
+		// return json_encode($id);	
+	}
+
 }

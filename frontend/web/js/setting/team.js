@@ -348,7 +348,7 @@ function filterTeam(page) {
 
 
 
-function goToPageTeam(nextPage, page, companyId, branchId, departmentId) {
+function goToPageTeam(nextPage, page, departmentId, companyId, branchId) {
     // alert(page);
     // alert(nextPage);
     // alert(departmentId);
@@ -373,6 +373,51 @@ function goToPageTeam(nextPage, page, companyId, branchId, departmentId) {
         }
     });
 }
+
+let sortDirection = {
+    teamName: true,
+    employee: true
+};
+
+function sortTeam(column) {
+    const table = document.getElementById('myTable');
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    const getCellValue = (row, column) => {
+        switch (column) {
+            case 'teamName':
+                // ดึงชื่อทีมจาก .circle-container ด้านใน <td> แรก
+                return row.querySelector('td:nth-child(1) .circle-container').textContent.trim().toLowerCase();
+            case 'employee':
+                // ดึงจำนวนพนักงานจาก .number-current-cycle
+                const empCount = row.querySelector('.number-current-cycle');
+                return empCount ? parseInt(empCount.textContent.trim()) : 0;
+            default:
+                return '';
+        }
+    };
+
+    // toggle direction
+    sortDirection[column] = !sortDirection[column];
+
+    rows.sort((a, b) => {
+        const valA = getCellValue(a, column);
+        const valB = getCellValue(b, column);
+
+        if (typeof valA === 'number' && typeof valB === 'number') {
+            return sortDirection[column] ? valA - valB : valB - valA;
+        }
+
+        return sortDirection[column]
+            ? valA.localeCompare(valB)
+            : valB.localeCompare(valA);
+    });
+
+    rows.forEach(row => tbody.appendChild(row)); // update order
+}
+
+
 
 
 function renderTeamList(teams) {

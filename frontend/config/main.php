@@ -117,6 +117,7 @@ return [
                 'setting/team/create/<hash>' => 'setting/team/create',
                 'setting/team/team-result/<hash>' => 'setting/team/team-result',
                 'setting/team/modal-team/<hash>' => 'setting/team/modal-team',
+                'setting/team/teams-view/<hash>' => 'setting/team/teams-view',
                 'setting/layer/result-layer-title/<hash>' => 'setting/layer/result-layer-title',
                 'setting/employee/employee-result/<hash>' => 'setting/employee/employee-result',
                 'setting/title/search-result/<hash>' => 'setting/title/search-result',
