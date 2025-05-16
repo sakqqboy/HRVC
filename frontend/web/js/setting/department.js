@@ -156,7 +156,7 @@ function deleteDepartment(departmentId) {
             // สมมุติว่า server ส่ง JSON กลับมา
             // เช่น { success: true, departments: [...] }
             if (response.success && response.departments) {
-                openCloseModal();
+                openCloseDeptModal();
                 renderDepartmentList(response.departments); // อัปเดตรายการ department
             } else {
                 alert(response.message || 'ไม่สามารถลบได้');
@@ -291,7 +291,7 @@ function openModalDeleteDepartment(departmentId) {
     });
 }
 
-function openCloseModal() {
+function openCloseDeptModal() {
     document.getElementById('departmentModal').style.opacity = '1';
     document.getElementById('departmentModal').style.pointerEvents = 'auto';
     // $('#departmentDeleteModal').html(response);
@@ -299,7 +299,7 @@ function openCloseModal() {
 }
 
 $('#departmentDeleteModal').on('hidden.bs.modal', function () {
-    openCloseModal();
+    openCloseDeptModal();
 });
 
 
@@ -323,7 +323,7 @@ function actionSaveDepartment(branchId, deptName) {
 
 }
 
-function updateModalContent(departmentId) {
+function updateDeptModalContent(departmentId) {
     // เปลี่ยน title
     const modalTitle = document.querySelector('#staticBackdrop4Label');
     if (modalTitle) {
@@ -346,7 +346,7 @@ function updateModalContent(departmentId) {
         modalFooter.innerHTML = `
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
                 style="width: 100px; display: flex; align-items: center; justify-content: center; background: #2580D3; border: none; color: white;"
-                onclick="openCloseModal()">
+                onclick="openCloseDeptModal()">
                 <img src="${$url}images/icons/Settings/cancle.svg" alt="Cancel"
                     style="width: 14px; height: 14px; margin-right: 5px;">
                 Cancel
@@ -399,7 +399,8 @@ function renderDepartmentList(departments) {
                     ${dept.departmentName}
                 </div>
                 <div class="col-2 text-end">
-                    <a  onclick="openModalDeleteDepartment('${dept.departmentId}')" class="no-underline icon-delete">
+                    <a href="#" style="cursor: pointer;"
+                     onclick="openModalDeleteDepartment('${dept.departmentId}')" class="no-underline icon-delete">
                         <img src="/HRVC/frontend/web/images/icons/Settings/binred.svg" alt="Delete"
                             class="pim-icon bin-icon transition-icon">
                     </a>

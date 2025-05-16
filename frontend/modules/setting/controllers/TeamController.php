@@ -370,6 +370,7 @@ class TeamController extends Controller
         $param = ModelMaster::decodeParams($hash);
 
         $departmentId = $param["departmentId"];
+        $teamId = $param["teamId"] ?? 0;
         $countTeam = 0;
         $role = UserRole::userRight();
         $data =[];
@@ -424,11 +425,22 @@ class TeamController extends Controller
             "teams" => $data,
             "role" => $role,
             "countTeam" => $countTeam,
+            "teamId" => $teamId,
             "nextPage" => 1
         ]); 
 
         // return $this->renderPartial('modal_team');
     }
+
+    
+    public function actionModalDelete(){
+        $teamId = Yii::$app->request->get("teamId");
+        // throw new exception(print_r($teamId, true));
+
+        return $this -> renderPartial('modal_delete', [
+            "teamId" => $teamId
+        ]);
+    }  
     
     public function actionCompanyBranch()
     {
@@ -818,16 +830,56 @@ class TeamController extends Controller
     }
     public function actionDeleteTeam()
     {
-        $teamId = $_POST["teamId"] - 543;
-        $team = Team::find()->where(["teamId" => $teamId])->one();
-        $team->status = 99;
+        // $teamId = $_POST["teamId"] - 543;
+        // $team = Team::find()->where(["teamId" => $teamId])->one();
+        // $team->status = 99;
 
-        if ($team->save(false)) {
-            $res["status"] = true;
-        } else {
-            $res["status"] = false;
+        // if ($team->save(false)) {
+        //     $res["status"] = true;
+        // } else {
+        //     $res["status"] = false;
+        // }
+        // return json_encode($res);
+         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON; // ← สำคัญ!
+
+        if (isset($_POST["teamId"])) {
+            $teamId = $_POST["teamId"];
+
+            $update = Team::find()->where([
+                "teamId" => $teamId,
+                "status" => '1'
+            ])->one();
+
+            if ($update) {
+                $update->status = '99';
+                $update->updateDateTime = new Expression('NOW()');
+
+                if ($update->save(false)) {
+                    $departmentId = $update->departmentId;
+                    $api = curl_init();
+                    curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+                    curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' .  $departmentId . '&page=1'. '&limit=0');
+                    $teams = curl_exec($api);
+                    $teams = json_decode($teams, true);
+                    curl_close($api);
+
+                    return [
+                        'success' => true,
+                        'departments' => $teams
+                    ];
+                } else {
+                    $errorText = [];
+                    foreach ($update->getErrors() as $field => $errors) {
+                        $errorText[] = implode(', ', $errors);
+                    }
+                    return ['success' => false, 'message' => implode("\n", $errorText)];
+                }
+            } else {
+                return ['success' => false, 'message' => 'Team not found'];
+            }
         }
-        return json_encode($res);
+        return ['success' => false, 'message' => 'Missing required POST parameters'];
     }
     public function actionFilterTeam()
     {

@@ -241,25 +241,25 @@ $("#reset-team").click(function (e) {
     $("#create-team").show();
 });
 
-function deleteTeam(teamId) {
-    if (confirm("Are you sure to delete this Team")) {
-        var url = $url + 'setting/team/delete-team';
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: url,
-            data: { teamId: teamId },
-            success: function (data) {
-                if (data.status) {
-                    $("#team-" + teamId).hide(200);
-                } else {
-                    alert("Can not delete this team.");
-                }
+// function deleteTeam(teamId) {
+//     if (confirm("Are you sure to delete this Team")) {
+//         var url = $url + 'setting/team/delete-team';
+//         $.ajax({
+//             type: "POST",
+//             dataType: 'json',
+//             url: url,
+//             data: { teamId: teamId },
+//             success: function (data) {
+//                 if (data.status) {
+//                     $("#team-" + teamId).hide(200);
+//                 } else {
+//                     alert("Can not delete this team.");
+//                 }
 
-            }
-        });
-    }
-}
+//             }
+//         });
+//     }
+// }
 function filterTeam() {
     var companyId = $("#company-team-filter").val();
     var branchId = $("#branch-team-filter").val();
@@ -437,7 +437,8 @@ function renderTeamList(teams) {
                     ${team.teamName}
                 </div>
                 <div class="col-2 text-end">
-                    <a onclick="openModalDeleteTeam('${team.teamId}')" class="no-underline icon-delete">
+                    <a href="#" style="cursor: pointer;"
+                    onclick="openModalDeleteTeam('${team.teamId}')" class="no-underline icon-delete">
                         <img src="/HRVC/frontend/web/images/icons/Settings/binred.svg" alt="Delete"
                             class="pim-icon bin-icon transition-icon">
                     </a>
@@ -499,13 +500,14 @@ function actionSaveTeam(departmentId, teamName) {
 }
 
 
-function openModalDeleteTeam(departmentId) {
+function openModalDeleteTeam(teamId) {
+    // alert(teamId);
     var url = $url + 'setting/team/modal-delete';
-    // alert(modalurl);
+    // alert(url);
     $.ajax({
         url: url,
         type: 'GET',
-        data: { departmentId: departmentId },
+        data: { teamId: teamId },
         success: function (response) {
             // alert(response);
             document.getElementById('teamModal').style.opacity = '0.1';
@@ -592,7 +594,7 @@ function updateteamName(teamId, teamName) {
         success: function (data) {
             if (data.success && data.teams) {
                 // alert('บันทึกสำเร็จ');
-                renderDepartmentList(data.teams); // เรียกฟังก์ชันวาด HTML ใหม่
+                renderTeamList(data.teams); // เรียกฟังก์ชันวาด HTML ใหม่
             } else {
                 alert(data.message || 'ไม่สามารถบันทึกได้');
             }
@@ -603,3 +605,79 @@ function updateteamName(teamId, teamName) {
         }
     });
 }
+
+
+function openCloseTeamModal() {
+    document.getElementById('teamModal').style.opacity = '1';
+    document.getElementById('teamModal').style.pointerEvents = 'auto';
+    // $('#departmentDeleteModal').html(response);
+    $('#teamDeleteModal').modal('hide');
+}
+
+$('#teamDeleteModal').on('hidden.bs.modal', function () {
+    openCloseTeamModal();
+});
+
+function updateTeamModalContent(teamId) {
+    // เปลี่ยน title
+    const modalTitle = document.querySelector('#staticBackdrop4Label');
+    if (modalTitle) {
+        modalTitle.innerHTML = `
+            <img src="${$url}images/icons/Settings/warning.svg" alt="Warning"
+                style="width: 24px; height: 24px; margin-right: 8px;">
+            Deletion Warning
+        `;
+    }
+
+    // เปลี่ยน body
+    const modalBody = document.querySelector('.modal-body');
+    if (modalBody) {
+        modalBody.innerHTML = `Are you sure you want to delete this team? Once deleted, it cannot be restored. However, you can always create a new team if needed`;
+    }
+
+    // เปลี่ยน footer
+    const modalFooter = document.querySelector('.modal-footer');
+    if (modalFooter) {
+        modalFooter.innerHTML = `
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                style="width: 100px; display: flex; align-items: center; justify-content: center; background: #2580D3; border: none; color: white;"
+                onclick="openCloseTeamModal()">
+                <img src="${$url}images/icons/Settings/cancle.svg" alt="Cancel"
+                    style="width: 14px; height: 14px; margin-right: 5px;">
+                Cancel
+            </button>
+            <a href="javascript:deleteTeam('${teamId}')" class="btn btn-outline-danger"
+                style="width: 100px; display: flex; align-items: center; justify-content: center; margin-left: 10px;"
+                onmouseover="this.querySelector('.pim-icon').src='${$url}images/icons/Settings/binwhite.svg'"
+                onmouseout="this.querySelector('.pim-icon').src='${$url}images/icons/Settings/binred.svg'">
+                <img src="${$url}images/icons/Settings/binred.svg" alt="Delete" class="pim-icon"
+                    style="width: 14px; height: 14px; margin-right: 5px;">
+                Delete
+            </a>
+        `;
+    }
+}
+
+
+function deleteTeam(teamId) {
+    // alert(teamId);
+    // updateTeamModalContent(teamId);
+    var url = $url + 'setting/team/delete-team';
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: { teamId: teamId },
+        success: function (response) {
+            // สมมุติว่า server ส่ง JSON กลับมา
+            // เช่น { success: true, departments: [...] }
+            if (response.success && response.departments) {
+                openCloseTeamModal();
+                renderDepartmentList(response.departments); // อัปเดตรายการ department
+            } else {
+                alert(response.message || 'ไม่สามารถลบได้');
+            }
+        }
+    });
+}
+
+

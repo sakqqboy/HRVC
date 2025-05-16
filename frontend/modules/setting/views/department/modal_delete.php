@@ -6,7 +6,7 @@
                     style="width: 24px; height: 24px; margin-right: 8px;">
                 <?= Yii::t('app', 'Unable to Delete') ?>
             </h3>
-            <a type="button" onclick="openCloseModal()" class="btn-close">
+            <a type="button" onclick="openCloseDeptModal()" class="btn-close">
             </a>
         </div>
         <div class="modal-body text-start" style="font-size: 14px; color: #6c757d; padding-top: 10px;">
@@ -16,7 +16,7 @@
             <!-- ปุ่ม Continue -->
             <button type="button" class="btn btn-primary"
                 style="width: 100px; display: flex; align-items: center; justify-content: center; background: #2580D3; border: none; color: white;"
-                onclick="updateModalContent(<?= $departmentId ?>)">
+                onclick="updateDeptModalContent(<?= $departmentId ?>)">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/check-circle.svg" alt="Cancel"
                     style="width: 14px; height: 14px; margin-right: 5px;">
                 <?= Yii::t('app', 'Continue') ?>

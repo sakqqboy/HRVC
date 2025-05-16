@@ -128,7 +128,7 @@ use common\models\ModelMaster;
 
 <div>
     <!-- footer modal -->
-    <!-- <input type="hidden" name="teamId" id="teamId" value=""> -->
+    <input type="hidden" name="teamId" id="teamId" value="<?php echo $teamId ?>">
     <input type="hidden" name="url" id="url"
         value="<?= Yii::$app->homeUrl ?>setting/Team/modal-Team/<?= ModelMaster::encodeParams(['branchId' => '' ]) ?>">
 </div>

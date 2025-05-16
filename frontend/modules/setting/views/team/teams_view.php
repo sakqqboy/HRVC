@@ -196,7 +196,7 @@ $page = 'view';
                                     </div>
                                 </td>
                                 <td>
-                                    <a onclick="openPopupModalTeam('<?= Yii::$app->homeUrl ?>setting/team/modal-team/<?= ModelMaster::encodeParams(['departmentId' => $data['departmentId']]) ?>')"
+                                    <a onclick="openPopupModalTeam('<?= Yii::$app->homeUrl ?>setting/team/modal-team/<?= ModelMaster::encodeParams(['departmentId' => $data['departmentId'],'teamId' => $team['teamId']]) ?>')"
                                         class="btn btn-bg-white-xs mr-5" style="margin-top: 3px;">
                                         <img src="/HRVC/frontend/web/images/icons/Settings/editblack.svg" alt="edit"
                                             class="pim-icon">
