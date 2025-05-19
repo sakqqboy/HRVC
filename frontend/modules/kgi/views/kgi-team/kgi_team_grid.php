@@ -7,8 +7,7 @@ $this->title = "TEAM KGI";
 ?>
 <div class="contrainer-body">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
-            style="margin-top: -3px;">
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5" style="margin-top: -3px;">
         <strong class="pim-head-text"><?= Yii::t('app', ' Team Key Goal Indicators') ?></strong>
     </div>
     <div class="col-12 mt-10">
@@ -16,7 +15,7 @@ $this->title = "TEAM KGI";
             "role" => $role
         ]) ?>
         <div class="alert mt-10 pim-body bg-white">
-            <div class="row sticky-section">
+            <div class="row">
                 <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">
                     <div class="row">
                         <div class="col-8">

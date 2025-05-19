@@ -7,9 +7,7 @@ $this->title = 'KGI Grid View';
 ?>
 <div class="contrainer-body">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg"
-            class="home-icon mr-5" style="margin-top: -3px;">
-
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="home-icon mr-5" style="margin-top: -3px;">
         <span class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
     </div>
     <div class="col-12 mt-10">
@@ -17,7 +15,7 @@ $this->title = 'KGI Grid View';
             "role" => $role
         ]) ?>
         <div class="alert mt-10 pim-body bg-white">
-            <div class="row sticky-section">
+            <div class="row">
                 <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">
                     <div class="row">
                         <div class="col-8">
@@ -49,14 +47,6 @@ $this->title = 'KGI Grid View';
                             <?php
                             if ($role >= 3) {
                             ?>
-                                <!-- <button type="button" class="btn-createnew font-size-11" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop5" style="position:absolute;">
-                                    <?php // Yii::t('app', 'Create New') 
-                                    ?>
-                                    <img src="<?php // Yii::$app->homeUrl 
-                                                ?>images/icons/Settings/plus.svg" alt="History"
-                                        class="pim-icon ml-3" style="margin-top: -1px;">
-                                </button> -->
                                 <a href="<?= Yii::$app->homeUrl ?>kgi/management/create-kgi"
                                     class="btn-createnew font-size-11" style="position:absolute;text-decoration:none;">
                                     <?= Yii::t('app', 'Create New') ?>
@@ -146,25 +136,25 @@ $this->title = 'KGI Grid View';
                                     </div>
                                     <div class="col-lg-5 col-md-2 col-4 text-end pr-20" style="margin-top: -5px;">
                                         <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
-                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs ' ?> mr-5"
+                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
                                             style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
                                                 class="pim-icon" style="margin-top: -1px;">
                                         </a>
                                         <a href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 2]) ?>"
-                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs ' ?> mr-5"
+                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
                                             style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg" alt="History"
                                                 class="pim-icon mr-3" style="margin-top: -2px;"><?= Yii::t('app', 'History') ?>
                                         </a>
                                         <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 3]) ?>"
-                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs ' ?> mr-5"
+                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
                                             style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="Chats"
                                                 class="pim-icon mr-3" style="margin-top: -2px;"><?= Yii::t('app', 'Chats') ?>
                                         </a>
                                         <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 4]) ?>"
-                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs ' ?> mr-5"
+                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
                                             style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
                                                 class="pim-icon mr-3" style="margin-top: -2px;"><?= Yii::t('app', 'Chart') ?>
@@ -176,7 +166,7 @@ $this->title = 'KGI Grid View';
                                                 onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" style="margin-top: -5px;"
                                                 onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                                 onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
                                                     class="pim-icon" style="margin-top: -2px;">
                                             </a>
                                         <?php
@@ -194,7 +184,8 @@ $this->title = 'KGI Grid View';
                                                         <div class="col-4 pr-2 pl-13">
                                                             <div class="row d-flex align-items-center"
                                                                 style="min-height: 24px;">
-                                                                <?php if ($kgi["countEmployee"] != 0) { ?>
+                                                                <?php if ($kgi["countEmployee"] != 0) {
+                                                                ?>
                                                                     <div class="col-2">
                                                                         <?php if (isset($kgi['kgiEmployee'][0])): ?>
                                                                             <img src="<?= Yii::$app->homeUrl . $kgi['kgiEmployee'][0] ?>"

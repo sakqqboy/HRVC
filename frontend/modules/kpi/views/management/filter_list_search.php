@@ -104,14 +104,29 @@ use frontend\models\hrvc\Company;
         <select class="font-size-12 <?= $status != "" ? 'select-pimselect' : 'select-pim' ?> form-select" id="status-filter"
             onchange="applySelectStyle(this)">
             <?php
-            if (isset($status) && $status != "") { ?>
-                <option value="<?= $status ?>"><?= $status == 1 ? Yii::t('app', 'Active') :  Yii::t('app', 'Finished') ?></option>
+            if (isset($status) && $status != "") {
+                if ($status == 1) {
+                    $text = 'In Progress';
+                }
+                if ($status == 2) {
+                    $text = 'Completed';
+                }
+                if ($status == 3) {
+                    $text = 'Due Passed';
+                }
+                if ($status == 4) {
+                    $text = 'Not Set';
+                }
+            ?>
+                <option value="<?= $status ?>"><?= $text ?></option>
             <?php
             }
             ?>
             <option value=""><?= Yii::t('app', 'Status') ?></option>
-            <option value="1"><?= Yii::t('app', 'Active') ?></option>
-            <option value="2"><?= Yii::t('app', 'Finished') ?></option>
+            <option value="1"><?= Yii::t('app', 'In Progress') ?></option>
+            <option value="3"><?= Yii::t('app', 'Due Passed') ?></option>
+            <option value="4"><?= Yii::t('app', 'Not Set') ?></option>
+            <option value="2"><?= Yii::t('app', 'Completed') ?></option>
         </select>
     </div>
     <div class="col-2 pr-0 text-start">

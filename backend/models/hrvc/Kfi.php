@@ -45,11 +45,13 @@ class Kfi extends \backend\models\hrvc\master\KfiMaster
         $date = '';
         $kfiHistory = KfiHistory::find()
             ->select('nextCheckDate')
-            ->where(["kfiId" => $kfiId, "status" => [1, 2, 4]])->orderBy('kfiHistoryId DESC')->asArray()->one();
+            ->where(["kfiId" => $kfiId, "status" => [1, 2, 4]])
+            ->orderBy('year DESC,month DESC,status DESC,createDateTime DESC')
+            ->asArray()
+            ->one();
         if (isset($kfiHistory) && !empty($kfiHistory) && $kfiHistory["nextCheckDate"] != '') {
             $date = ModelMaster::engDate($kfiHistory["nextCheckDate"], 2);
         }
-        //throw new Exception(print_r($kfiHistory, true));
         return $date;
     }
     public static function checkComplete($kfiId, $month, $year, $currentMonth, $currentYear)

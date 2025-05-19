@@ -47,8 +47,8 @@ class ManagementController extends Controller
 		if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
 			$kpis = Kpi::find()
 				->where(["status" => [1, 2, 4]])
+				->orderBy('createDateTime DESC')
 				->asArray()
-				->orderBy('updateDateTime DESC')
 				->all();
 		}
 		if (!empty($supervisorId) || !empty($teamLeaderId) || !empty($staffId)) {
@@ -68,8 +68,8 @@ class ManagementController extends Controller
 					"status" => [1, 2, 4],
 					"companyId" => $companyId
 				])
+				->orderBy('createDateTime DESC')
 				->asArray()
-				->orderBy('updateDateTime DESC')
 				->all();
 		}
 		$data = [];
@@ -119,12 +119,11 @@ class ManagementController extends Controller
 					"creater" => User::employeeNameByuserId($kpi["createrId"]),
 					"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
 					"kpiBranch" => KpiBranch::kpiBranches($kpi["kpiId"]),
-					//"kpiEmployee" => KpiEmployee::kpiEmployee($kpi["kpiId"]),
 					"kpiEmployee" => $selectPic,
 					"quantRatio" => $kpi["quantRatio"],
 					"targetAmount" => number_format($kpi["targetAmount"], 2),
 					"code" => $kpi["code"],
-					"result" => $kpi["result"],
+					"result" => number_format($kpi["result"], 2),
 					"unit" => Unit::unitName($kpi["unitId"]),
 					"month" => ModelMaster::monthEng($kpi['month'], 1),
 					"monthNumber" => $kpi["month"],
@@ -141,21 +140,22 @@ class ManagementController extends Controller
 					"countryName" => Country::countryNameBycompany($kpi['companyId']),
 					"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
 					"solution" => KpiIssue::lastestIssue($kpi["kpiId"])["solution"],
-					//"employee" => KpiTeam::employeeTeam($kpi['kpiId']),
 					"fromDate" => ModelMaster::engDate($kpi["fromDate"], 2),
 					"toDate" => ModelMaster::engDate($kpi["toDate"], 2),
 					"countKgiInKpi" => KgiHasKpi::countKgiWithKpi($kpi['kpiId']),
 					"amountType" => $kpi["amountType"],
 					"lastestUpdate" => ModelMaster::engDate($kpi["updateDateTime"], 2)
 				];
-				if ($kpi["fromDate"] == "" || $kpi["toDate"] == "") {
-					$data1[$kpiId] = $commonData;
-				} elseif ($isOver == 1 && $kpi["status"] == 1) {
-					$data2[$kpiId] = $commonData;
-				} elseif ($kpi["status"] == 2) {
-					$data4[$kpiId] = $commonData;
-				} else {
-					$data3[$kpiId] = $commonData;
+				if (!empty($commonData)) {
+					if (($kpi["fromDate"] == "" || $kpi["toDate"] == "") && $isOver == 2) {
+						$data1[$kpiId] = $commonData;
+					} elseif ($isOver == 1 && $kpi["status"] == 1) {
+						$data2[$kpiId] = $commonData;
+					} elseif ($kpi["status"] == 2) {
+						$data4[$kpiId] = $commonData;
+					} else {
+						$data3[$kpiId] = $commonData;
+					}
 				}
 			endforeach;
 		}
@@ -728,22 +728,55 @@ class ManagementController extends Controller
 	}
 	public function actionKpiFilter($companyId, $branchId,  $month, $status, $year, $adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
 	{
-		$kpis = Kpi::find()
-			->select('kpi.*')
-			->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kpi.kpiId")
-			->where(["kpi.status" => [1, 2, 4]])
-			->andFilterWhere([
-				"kpi.companyId" => $companyId,
-				"kb.branchId" => $branchId,
-				"kpi.status" => $status,
-			])
-			->orderBy('kpi.createDateTime ASC')
-			->all();
 		$data = [];
 		$data1 = [];
 		$data2 = [];
 		$data3 = [];
 		$data4 = [];
+		$searchStatus = '';
+		if ($status == 1 || $status == 3 || $status == 4) {
+			$searchStatus = 1;
+		}
+		if ($status == 2) {
+			$searchStatus = 2;
+		}
+
+		if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
+			$kpis = Kpi::find()
+				->select('kpi.*')
+				->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kpi.kpiId")
+				->where(["kpi.status" => [1, 2, 4]])
+				->andFilterWhere([
+					"kpi.companyId" => $companyId,
+					"kb.branchId" => $branchId,
+				])
+				->orderBy('kpi.createDateTime DESC')
+				->asArray()
+				->all();
+		}
+		if (!empty($supervisorId) || !empty($teamLeaderId) || !empty($staffId)) {
+			if ($supervisorId != '') {
+				$userId = $supervisorId;
+			}
+			if ($teamLeaderId != '') {
+				$userId = $teamLeaderId;
+			}
+			if ($staffId != '') {
+				$userId = $staffId;
+			}
+			$employeeId = Employee::employeeId($userId);
+			$companyId = Employee::EmployeeDetail($employeeId)["companyId"];
+			$kpis = Kpi::find()
+				->select('kpi.*')
+				->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=kpi.kpiId")
+				->where(["kpi.status" => [1, 2, 4], "kpi.companyId" => $companyId])
+				->andFilterWhere([
+					"kb.branchId" => $branchId,
+				])
+				->orderBy('kpi.createDateTime DESC')
+				->asArray()
+				->all();
+		}
 		if (count($kpis) > 0) {
 			foreach ($kpis as $kpi) :
 				$commonData = [];
@@ -752,147 +785,121 @@ class ManagementController extends Controller
 					->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_history.kpiId")
 					->where(["kpi_history.kpiId" => $kpi["kpiId"], "kpi_history.status" => [1, 2, 4]])
 					->andFilterWhere([
-						"k.month" => $month,
-						"k.status" => $status,
-						"k.year" => $year,
+						"kpi_history.month" => $month,
+						"kpi_history.status" => $searchStatus,
+						"kpi_history.year" => $year,
 					])
 					->asArray()
-					->orderBy('createDateTime DESC')
+					->orderBy('kpi_history.year DESC,kpi_history.month DESC,kpi_history.status DESC,kpi_history.createDateTime DESC')
 					->one();
-				if (strlen($kpi["kpiName"]) > 34) {
-					$kpiName = substr($kpi["kpiName"], 0, 34) . '. . .';
-				} else {
-					$kpiName = $kpi["kpiName"];
-				}
-				if (!isset($kpiHistory) || empty($kpiHistory)) {
-					$kpiHistory = Kpi::find()
-						->where(["kpiId" => $kpi["kpiId"], "status" => [1, 2, 4]])
-						->andFilterWhere([
-							"month" => $month,
-							"year" => $year,
-							"status" => $status,
+				$checkComplete = 0;
 
-						])
-						->asArray()
-						->one();
+				if ($status == 1) {
+					$checkComplete = Kpi::checkComplete($kpi["kpi"], $month, $year, $kpi["year"]);
 				}
 				$ratio = 0;
-				if ($kpi["targetAmount"] != '' && $kpi["targetAmount"] != 0 && $kpi["targetAmount"] != null) {
-					if ($kpi["code"] == '<' || $kpi["code"] == '=') {
-						$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+				if (isset($kpiHistory) && !empty($kpiHistory)  && $checkComplete == 0) {
+					$allEmployee = KpiEmployee::kpiEmployee($kpi["kpiId"], $kpiHistory["month"], $kpiHistory["year"]);
+					$selectPic = [];
+					if (count($allEmployee) >= 3) {
+						$randomEmpployee = array_rand($allEmployee, 3);
+						$selectPic[0] = $allEmployee[$randomEmpployee[0]];
+						$selectPic[1] = $allEmployee[$randomEmpployee[1]];
+						$selectPic[2] = $allEmployee[$randomEmpployee[2]];
 					} else {
-						if ($kpi["result"] != '' && $kpi["result"] != 0) {
-							$ratio = ($kpi["targetAmount"] / $kpi["result"]) * 100;
+						if (count($allEmployee) > 0) {
+							$selectPic = $allEmployee;
+							sort($selectPic);
+						}
+					}
+					if (strlen($kpi["kpiName"]) > 34) {
+						$kpiName = substr($kpi["kpiName"], 0, 34) . '. . .';
+					} else {
+						$kpiName = $kpi["kpiName"];
+					}
+
+					if ($kpiHistory["targetAmount"] != '' && $kpiHistory["targetAmount"] != 0 && $kpiHistory["targetAmount"] != null) {
+						if ($kpiHistory["code"] == '<' || $kpiHistory["code"] == '=') {
+							$ratio = ($kpiHistory["result"] / $kpiHistory["targetAmount"]) * 100;
 						} else {
-							$ratio = 0;
+							if ($kpiHistory["result"] != '' && $kpiHistory["result"] != 0) {
+								$ratio = ($kpiHistory["targetAmount"] / $kpiHistory["result"]) * 100;
+							} else {
+								$ratio = 0;
+							}
+						}
+					}
+					if ($kpi["status"] == 2) {
+						$isOver = 0;
+					} else {
+						if ($kpi["status"] == 1 && $kpi["year"] > $year && $year != '') {
+							$isOver = 0;
+						} else {
+							$isOver = ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpi['kpiId']));
+						}
+					}
+					$kpiId = $kpi["kpiId"];
+					if ($status == 1 && $isOver == 0 && $kpi["status"] == 1) {
+						$show = 1;
+					} else if ($status == 3 && $isOver == 1) {
+						$show = 1;
+					} else if ($status == 4 && $isOver == 2) {
+						$show = 1;
+					} else if ($status == 2 && $kpiHistory["status"] == 2) {
+						$show = 1;
+					} elseif ($status == '') {
+						$show = 1;
+					}
+					if ($show == 1) {
+						$commonData = [
+							"kpiName" => $kpiName,
+							"kpiHistoryId" => $kpiHistory["kpiHistoryId"],
+							"companyName" => Company::companyName($kpi["companyId"]),
+							"companyId" => $kpi["companyId"],
+							"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
+							"kpiBranch" => KpiBranch::kpiBranches($kpi["kpiId"]),
+							"kpiEmployee" => $selectPic,
+							"countEmployee" => count($allEmployee),
+							"quantRatio" => $kpi["quantRatio"],
+							"targetAmount" => $kpiHistory["targetAmount"],
+							"code" => $kpi["code"],
+							"result" => $kpiHistory["result"],
+							"unit" => Unit::unitName($kpi["unitId"]),
+							"month" => ModelMaster::monthEng($kpiHistory['month'], 1),
+							"monthNumber" => $kpiHistory['month'],
+							"priority" => $kpi["priority"],
+							"ratio" => number_format($ratio, 2),
+							"periodCheck" => ModelMaster::engDate($kpi["periodDate"], 2),
+							"nextCheck" => Kpi::nextCheckDate($kpi['kpiId']),
+							"isOver" => $isOver,
+							"countTeam" => KpiTeam::kpiTeam($kpi["kpiId"], $kpiHistory["month"], $kpiHistory["year"]),
+							"flag" => Country::countryFlagBycompany($kpi["companyId"]),
+							"status" => $kpi["status"],
+							"countryName" => Country::countryNameBycompany($kpi['companyId']),
+							"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
+							"solution" => KpiIssue::lastestIssue($kpi["kpiId"])["solution"],
+							"employee" => KpiTeam::employeeTeam($kpi['kpiId']),
+							"fromDate" => ModelMaster::engDate($kpiHistory["fromDate"], 2),
+							"toDate" => ModelMaster::engDate($kpiHistory["toDate"], 2),
+							"year" => $kpi["year"],
+							"countKgiInKpi" => KgiHasKpi::countKgiWithKpi($kpi['kpiId']),
+							"amountType" => $kpi["amountType"],
+							"lastestUpdate" => ModelMaster::engDate($kpiHistory["updateDateTime"], 2)
+						];
+					}
+					if (!empty($commonData)) {
+						if (($kpi["fromDate"] == "" || $kpi["toDate"] == "") && $isOver == 2) {
+							$data1[$kpiId] = $commonData;
+						} elseif ($isOver == 1 && $kpi["status"] == 1) {
+							$data2[$kpiId] = $commonData;
+						} elseif ($kpi["status"] == 2) {
+							$data4[$kpiId] = $commonData;
+						} else {
+							$data3[$kpiId] = $commonData;
 						}
 					}
 				}
-				$allEmployee = KpiEmployee::kpiEmployee($kpi["kpiId"], $kpi["month"], $kpi["year"]);
-				$selectPic = [];
-				if (count($allEmployee) >= 3) {
-					$randomEmpployee = array_rand($allEmployee, 3);
-					$selectPic[0] = $allEmployee[$randomEmpployee[0]];
-					$selectPic[1] = $allEmployee[$randomEmpployee[1]];
-					$selectPic[2] = $allEmployee[$randomEmpployee[2]];
-				} else {
-					if (count($allEmployee) > 0) {
-						$selectPic = $allEmployee;
-						sort($selectPic);
-					}
-				}
-				$isOver = ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpi['kpiId']));
-				$kpiId = $kpi["kpiId"];
-				$commonData = [
-					"kpiName" => $kpiName,
-					"companyName" => Company::companyName($kpi["companyId"]),
-					"companyId" => $kpi["companyId"],
-					"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
-					"kpiBranch" => KpiBranch::kpiBranches($kpi["kpiId"]),
-					"kpiEmployee" => $selectPic,
-					"countEmployee" => count($allEmployee),
-					"quantRatio" => $kpi["quantRatio"],
-					"targetAmount" => $kpi["targetAmount"],
-					"code" => $kpi["code"],
-					"result" => $kpi["result"],
-					"unit" => Unit::unitName($kpi["unitId"]),
-					"month" => ModelMaster::monthEng($kpi['month'], 1),
-					"monthNumber" => $kpi['month'],
-					"priority" => $kpi["priority"],
-					"ratio" => number_format($ratio, 2),
-					"periodCheck" => ModelMaster::engDate($kpi["periodDate"], 2),
-					"nextCheck" => Kpi::nextCheckDate($kpi['kpiId']),
-					"isOver" => $isOver,
-					"countTeam" => KpiTeam::kpiTeam($kpi["kpiId"], $kpi["month"], $kpi["year"]),
-					"flag" => Country::countryFlagBycompany($kpi["companyId"]),
-					"status" => $kpi["status"],
-					"countryName" => Country::countryNameBycompany($kpi['companyId']),
-					"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
-					"solution" => KpiIssue::lastestIssue($kpi["kpiId"])["solution"],
-					"employee" => KpiTeam::employeeTeam($kpi['kpiId']),
-					"fromDate" => ModelMaster::engDate($kpi["fromDate"], 2),
-					"toDate" => ModelMaster::engDate($kpi["toDate"], 2),
-					"year" => $kpi["year"],
-					"countKgiInKpi" => KgiHasKpi::countKgiWithKpi($kpi['kpiId']),
-					"amountType" => $kpi["amountType"],
-					"lastestUpdate" => ModelMaster::engDate($kpi["updateDateTime"], 2)
-				];
-				if ($kpi["fromDate"] == "" || $kpi["toDate"] == "") {
-					$data1[$kpiId] = $commonData;
-				} elseif ($isOver == 1 && $kpi["status"] == 1) {
-					$data2[$kpiId] = $commonData;
-				} elseif ($kpi["status"] == 2) {
-					$data4[$kpiId] = $commonData;
-				} else {
-					$data3[$kpiId] = $commonData;
-				}
-			//}
-			// else {
-			// 	$ratio = 0;
-			// 	if ($kpi["targetAmount"] != '' && $kpi["targetAmount"] != 0 && $kpi["targetAmount"] != null) {
-			// 		if ($kpi["code"] == '<' || $kpi["code"] == '=') {
-			// 			$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
-			// 		} else {
-			// 			if ($kpi["result"] != '' && $kpi["result"] != 0) {
-			// 				$ratio = ($kpi["targetAmount"] / $kpi["result"]) * 100;
-			// 			} else {
-			// 				$ratio = 0;
-			// 			}
-			// 		}
-			// 	}
-			// 	$data[$kpi["kpiId"]] = [
-			// 		"kpiName" => $kpiName,
-			// 		"companyName" => Company::companyName($kpi["companyId"]),
-			// 		"companyId" => $kpi["companyId"],
-			// 		"branch" => KpiBranch::kpiBranch($kpi["kpiId"]),
-			// 		"kpiBranch" => KpiBranch::kpiBranches($kpi["kpiId"]),
-			// 		"kpiEmployee" => KpiEmployee::kpiEmployee($kpi["kpiId"], $kpi["month"], $kpi["year"]),
-			// 		"quantRatio" => $kpi["quantRatio"],
-			// 		"targetAmount" => $kpi["targetAmount"],
-			// 		"code" => $kpi["code"],
-			// 		"result" => $kpi["result"],
-			// 		"unit" => Unit::unitName($kpi["unitId"]),
-			// 		"month" => ModelMaster::monthEng($kpi['month'], 1),
-			// 		"priority" => $kpi["priority"],
-			// 		"ratio" => number_format($ratio, 2),
-			// 		"periodCheck" => ModelMaster::engDate($kpi["periodDate"], 2),
-			// 		"nextCheck" => Kpi::nextCheckDate($kpi['kpiId']),
-			// 		"isOver" => ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpi['kpiId'])),
-			// 		"countTeam" => KpiTeam::kpiTeam($kpi["kpiId"], $kpi["month"], $kpi["year"]),
-			// 		"flag" => Country::countryFlagBycompany($kpi["companyId"]),
-			// 		"status" => $kpi["status"],
-			// 		"countryName" => Country::countryNameBycompany($kpi['companyId']),
-			// 		"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
-			// 		"solution" => KpiIssue::lastestIssue($kpi["kpiId"])["solution"],
-			// 		"employee" => KpiTeam::employeeTeam($kpi['kpiId']),
-			// 		"fromDate" => ModelMaster::engDate($kpi["fromDate"], 2),
-			// 		"toDate" => ModelMaster::engDate($kpi["toDate"], 2),
-			// 		"year" => $kpi["year"],
-			// 		"countKgiInKpi" => KgiHasKpi::countKgiWithKpi($kpi['kpiId']),
-			// 		"amountType" => $kpi["amountType"],
-			// 		"lastestUpdate" => ModelMaster::engDate($kpi["updateDateTime"], 2)
-			// 	];
-			// }
+
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
@@ -929,7 +936,7 @@ class ManagementController extends Controller
 			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_history.kpiId")
 			->where(["kpi_history.kpiId" => $kpiId])
 			->andWhere("kpi_history.status!=99")
-			->orderBy("kpi_history.year DESC,kpi_history.month DESC,kpi_history.kpiHistoryId DESC")
+			->orderBy("kpi_history.year DESC,kpi_history.month DESC,kpi_history.status DESC,kpi_history.kpiHistoryId DESC")
 			->asArray()
 			->all();
 		$data = [];
@@ -985,14 +992,12 @@ class ManagementController extends Controller
 						"active" => $history["active"],
 						"employee" => count($allEmployee),
 						"kpiEmployee" => $selectPic,
-						//"countTeam" => KpiTeam::kpiTeam($history["kpiId"], $history["month"], $history["year"]),
 						"countTeam" => KpiTeam::kpiTeam2($history["kpiId"], $history["month"], $history["year"]),
 					];
 				}
 
 			endforeach;
 		}
-		//throw new exception(print_r($data, true));
 		return json_encode($data);
 	}
 }

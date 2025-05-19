@@ -50,7 +50,10 @@ class Kgi extends \backend\models\hrvc\master\KgiMaster
         $date = '';
         $kgiHistory = KgiHistory::find()
             ->select('nextCheckDate')
-            ->where(["kgiId" => $kgiId, "status" => [1, 2, 4]])->orderBy('kgiHistoryId DESC')->asArray()->one();
+            ->where(["kgiId" => $kgiId, "status" => [1, 2, 4]])
+            ->orderBy('year DESC,month DESC,status DESC,createDateTime DESC')
+            ->asArray()
+            ->one();
         if (isset($kgiHistory) && !empty($kgiHistory) && $kgiHistory["nextCheckDate"] != '') {
             $date = ModelMaster::engDate($kgiHistory["nextCheckDate"], 2);
         }
@@ -74,5 +77,44 @@ class Kgi extends \backend\models\hrvc\master\KgiMaster
     {
         $kgi = Kgi::find()->select('kgiName')->where(["kgiId" => $kgiId])->asArray()->one();
         return $kgi["kgiName"];
+    }
+    public static function checkComplete($kgiId, $month, $year, $currentYear)
+    {
+        if ($month != '' && $year != '') {
+            $kgiHistory = KgiHistory::find()
+                ->where([
+                    "kgiId" => $kgiId,
+                    "status" => 2,
+                    "month" => $month,
+                    "year" => $year
+                ])
+                ->one();
+        }
+        if ($month == '' && $year != '') {
+            if ($year != $currentYear) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+        if ($month != '' && $year == '') {
+            $kgiHistory = KgiHistory::find()
+                ->where([
+                    "kgiId" => $kgiId,
+                    "status" => 2,
+                    "month" => $month,
+                    "year" => $currentYear
+                ])
+                ->one();
+        }
+        if ($month == '' && $year == '') {
+            return 0;
+        }
+
+        if (isset($kgiHistory) && !empty($kgiHistory)) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

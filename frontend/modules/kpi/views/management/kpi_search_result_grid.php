@@ -16,7 +16,7 @@ $this->title = 'KPI Grid View';
             "role" => $role
         ]) ?>
         <div class="alert mt-10 pim-body bg-white">
-            <div class="row sticky-section">
+            <div class="row">
                 <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">
                     <div class="row">
                         <div class="col-8">
@@ -176,7 +176,7 @@ $this->title = 'KPI Grid View';
                                                 onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                                 onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
-                                                    class="pim-icon mr-3" style="margin-top: -2px;">
+                                                    class="pim-icon" style="margin-top: -2px;">
                                             </a>
                                         <?php
                                         }

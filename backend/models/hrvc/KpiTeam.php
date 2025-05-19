@@ -183,4 +183,44 @@ class KpiTeam extends \backend\models\hrvc\master\KpiTeamMaster
 
         return $sumResult ?? 0; // คืนค่า 0 หากไม่มีผลลัพธ์
     }
+    public static function checkComplete($kpiTeamId, $month, $year, $currentYear)
+    {
+        if ($month != '' && $year != '') {
+            $kpiTeamHistory = KpiTeamHistory::find()
+                ->where([
+                    "kpiTeamId" => $kpiTeamId,
+                    "status" => 2,
+                    "month" => $month,
+                    "year" => $year
+                ])
+                ->one();
+        }
+        if ($month == '' && $year != '') {
+            if ($year != $currentYear) {
+                return 1;
+            } else {
+
+                return 0;
+            }
+        }
+        if ($month != '' && $year == '') {
+            $kpiTeamHistory = KpiTeamHistory::find()
+                ->where([
+                    "kpiTeamId" => $kpiTeamId,
+                    "status" => 2,
+                    "month" => $month,
+                    "year" => $currentYear
+                ])
+                ->one();
+        }
+        if ($month == '' && $year == '') {
+            return 0;
+        }
+
+        if (isset($kpiTeamHistory) && !empty($kpiTeamHistory)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

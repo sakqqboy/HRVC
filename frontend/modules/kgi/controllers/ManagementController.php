@@ -1063,6 +1063,7 @@ class ManagementController extends Controller
 			}
 		}
 		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year;
+
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
@@ -1095,7 +1096,7 @@ class ManagementController extends Controller
 		}
 		//$paramText .= '&&adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
 		$paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
-
+		//throw new exception($paramText);
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -2184,6 +2185,9 @@ class ManagementController extends Controller
 			$kgi->status = 1;
 			$kgi->month = $nextMonth;
 			$kgi->year = $nextYear;
+			$kgi->result = 0.00;
+			$kgi->toDate = null;
+			$kgi->fromDate = null;
 			$kgi->updateDateTime = new Expression('NOW()');
 			if ($kgi->save(false)) {
 
@@ -2223,6 +2227,10 @@ class ManagementController extends Controller
 									$team->status = 1;
 									$team->month = $nextMonth;
 									$team->year = $nextYear;
+									$team->fromDate = null;
+									$team->toDate = null;
+									$team->NextCheckDate = null;
+									$team->result = 0.00;
 									$status = 1;
 								}
 
@@ -2254,6 +2262,10 @@ class ManagementController extends Controller
 												$empoyee->status = 1;
 												$empoyee->month = $nextMonth;
 												$empoyee->year = $nextYear;
+												$empoyee->fromDate = null;
+												$empoyee->toDate = null;
+												$empoyee->NextCheckDate = null;
+												$empoyee->result = 0.00;
 											}
 											$KgiEmployeeHistory = new KgiEmployeeHistory();
 											$KgiEmployeeHistory->kgiEmployeeId = $empoyee->kgiEmployeeId;

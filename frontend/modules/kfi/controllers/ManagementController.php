@@ -65,6 +65,7 @@ class ManagementController extends Controller
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
 		$role = UserRole::userRight();
+		$session = Yii::$app->session;
 		$adminId = '';
 		$gmId = '';
 		$teamLeaderId = '';
@@ -89,6 +90,25 @@ class ManagementController extends Controller
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
 			//return $this->redirect(Yii::$app->homeUrl);
+		}
+		if ($session->has('kfi')) {
+			$filter = $session->get('kfi');
+			$companyId = isset($filter["companyId"]) && $filter["companyId"] != null ? $filter["companyId"] : null;
+			$branchId = isset($filter["branchId"]) && $filter["branchId"] != null ? $filter["branchId"] : null;
+			$teamId = isset($filter["teamId"]) && $filter["teamId"] != null ? $filter["teamId"] : null;
+			$month = isset($filter["month"]) && $filter["month"] != null ? $filter["month"] : null;
+			$status = isset($filter["status"]) && $filter["status"] != null ? $filter["status"] : null;
+			$year = isset($filter["year"]) && $filter["year"] != null ? $filter["year"] : null;
+			$type = "list";
+			return $this->redirect(Yii::$app->homeUrl . 'kfi/management/kfi-search-result/' . ModelMaster::encodeParams([
+				"companyId" => $companyId,
+				"branchId" => $branchId,
+				"teamId" => $teamId,
+				"month" => $month,
+				"status" => $status,
+				"year" => $year,
+				"type" => $type
+			]));
 		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -133,6 +153,7 @@ class ManagementController extends Controller
 	{
 		$groupId = Group::currentGroupId();
 		$role = UserRole::userRight();
+		$session = Yii::$app->session;
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
@@ -160,6 +181,25 @@ class ManagementController extends Controller
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
 			//return $this->redirect(Yii::$app->homeUrl);
+		}
+		if ($session->has('kfi')) {
+			$filter = $session->get('kfi');
+			$companyId = isset($filter["companyId"]) && $filter["companyId"] != null ? $filter["companyId"] : null;
+			$branchId = isset($filter["branchId"]) && $filter["branchId"] != null ? $filter["branchId"] : null;
+			$teamId = isset($filter["teamId"]) && $filter["teamId"] != null ? $filter["teamId"] : null;
+			$month = isset($filter["month"]) && $filter["month"] != null ? $filter["month"] : null;
+			$status = isset($filter["status"]) && $filter["status"] != null ? $filter["status"] : null;
+			$year = isset($filter["year"]) && $filter["year"] != null ? $filter["year"] : null;
+			$type = "grid";
+			return $this->redirect(Yii::$app->homeUrl . 'kfi/management/kfi-search-result/' . ModelMaster::encodeParams([
+				"companyId" => $companyId,
+				"branchId" => $branchId,
+				"teamId" => $teamId,
+				"month" => $month,
+				"status" => $status,
+				"year" => $year,
+				"type" => $type
+			]));
 		}
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -1651,6 +1691,8 @@ class ManagementController extends Controller
 			$kfi->status = 1;
 			$kfi->month = $nextMonth;
 			$kfi->year = $nextYear;
+			$kfi->fromDate = null;
+			$kfi->toDate = null;
 			$kfi->updateDateTime = new Expression('NOW()');
 			$kfi->save(false);
 			$kfiEmployee = KfiEmployee::find()->where(["kfiId" => $currentHistory["kfiId"], "status" => [1, 2, 4]])->all();

@@ -3,6 +3,7 @@
 namespace frontend\modules\kpi\controllers;
 
 use common\helpers\Path;
+use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
 use FFI\Exception as FFIException;
@@ -922,22 +923,9 @@ class KpiPersonalController extends Controller
 		$employees = [];
 		$teams = [];
 		$role = UserRole::userRight();
-		$session = Yii::$app->session;
-		$session->open();
-		$session->set('kpiEmployee', [
-			"companyId" => $companyId,
-			"branchId" => $branchId,
-			"teamId" => $teamId,
-			"employeeId" => $employeeId,
-			"month" => $month,
-			"year" => $year,
-			"status" => $status,
-			"type" => $type
-		]);
+		Session::PimEmployeeFilter($companyId, $branchId, $teamId, $employeeId, $month, $year, $status, $type);
 		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
-			if ($session->has('kpiEmployee')) {
-				$session->remove('kpiEmployee');
-			}
+
 			if ($type == "list") {
 				return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
 			} else {
@@ -1045,6 +1033,10 @@ class KpiPersonalController extends Controller
 			$kpiEmployee->status = 1;
 			$kpiEmployee->month = $nextMonth;
 			$kpiEmployee->year = $nextYear;
+			$kpiEmployee->fromDate = null;
+			$kpiEmployee->toDate = null;
+			$kpiEmployee->nextCheckDate = null;
+			$kpiEmployee->result = 0.00;
 			$kpiEmployee->updateDateTime = new Expression('NOW()');
 			$kpiEmployee->save(false);
 		}

@@ -212,13 +212,18 @@ class KgiTeamController extends Controller
 	}
 	public function actionAllTeamKgi($userId, $role)
 	{
+		$data = [];
+		$data1 = [];
+		$data2 = [];
+		$data3 = [];
+		$data4 = [];
 		$employeeId = Employee::employeeId($userId);
 		$employee = Employee::EmployeeDetail($employeeId);
 		$teamId = $employee["teamId"];
 		if ($role <= 3) {
 			$kgiTeams = KgiTeam::find()
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,kgi_team.month,kgi_team.year,
-			kgi_team.teamId,kgi_team.target,kgi_team.updateDateTime')
+			kgi_team.teamId,kgi_team.target,kgi_team.result,kgi_team.updateDateTime,kgi_team.fromDate,kgi_team.toDate,kgi_team.nextCheckDate,kgi_team.status')
 				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
 				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
@@ -229,7 +234,7 @@ class KgiTeamController extends Controller
 		} else {
 			$kgiTeams = KgiTeam::find()
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,kgi_team.month,kgi_team.year,
-			kgi_team.teamId,kgi_team.target,kgi_team.updateDateTime')
+			kgi_team.teamId,kgi_team.target,kgi_team.result,kgi_team.updateDateTime,kgi_team.fromDate,kgi_team.toDate,kgi_team.nextCheckDate,kgi_team.status')
 				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
 				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
@@ -237,42 +242,34 @@ class KgiTeamController extends Controller
 				->asArray()
 				->all();
 		}
-		//}
-		$data = [];
-		$data1 = [];
-		$data2 = [];
-		$data3 = [];
-		$data4 = [];
 		if (isset($kgiTeams) && count($kgiTeams) > 0) {
 			foreach ($kgiTeams as $kgiTeam) :
 				$commonData = [];
-				$kgiTeamHistory = KgiTeamHistory::find()
-					->where(["kgiTeamId" => $kgiTeam["kgiTeamId"], "status" => [1, 2, 4]])
-					->asArray()
-					->orderBy('createDateTime DESC')
-					->one();
-				if (!isset($kgiTeamHistory) || empty($kgiTeamHistory)) {
-					$kgiTeamHistory = KgiTeam::find()
-						->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
-						->asArray()
-						->orderBy('createDateTime DESC')
-						->one();
-				}
+				// $kgiTeamHistory = KgiTeamHistory::find()
+				// 	->where(["kgiTeamId" => $kgiTeam["kgiTeamId"], "status" => [1, 2, 4]])
+				// 	->asArray()
+				// 	->orderBy('createDateTime DESC')
+				// 	->one();
+				// if (!isset($kgiTeamHistory) || empty($kgiTeamHistory)) {
+				// 	$kgiTeamHistory = KgiTeam::find()
+				// 		->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
+				// 		->asArray()
+				// 		->orderBy('createDateTime DESC')
+				// 		->one();
+				// }
 				$ratio = 0;
-				if ($kgiTeamHistory["target"] != '' && $kgiTeamHistory["target"] != 0 && $kgiTeamHistory["target"] != null) {
+				if ($kgiTeam["target"] != '' && $kgiTeam["target"] != 0 && $kgiTeam["target"] != null) {
 					if ($kgiTeam["code"] == '<' || $kgiTeam["code"] == '=') {
-						$ratio = ($kgiTeamHistory["result"] / $kgiTeamHistory["target"]) * 100;
+						$ratio = ($kgiTeam["result"] / $kgiTeam["target"]) * 100;
 					} else {
-						if ($kgiTeamHistory["result"] != '' && $kgiTeamHistory["result"] != 0) {
-							$ratio = ($kgiTeamHistory["target"] / $kgiTeamHistory["result"]) * 100;
+						if ($kgiTeam["result"] != '' && $kgiTeam["result"] != 0) {
+							$ratio = ($kgiTeam["target"] / $kgiTeam["result"]) * 100;
 						} else {
 							$ratio = 0;
 						}
 					}
-				} else {
-					$ratio = 0;
 				}
-				$teamEmployee = KgiEmployee::countKgiFromTeam($kgiTeam["kgiId"], $kgiTeam["teamId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]);
+				$teamEmployee = KgiEmployee::countKgiFromTeam($kgiTeam["kgiId"], $kgiTeam["teamId"], $kgiTeam["month"], $kgiTeam["year"]);
 				$countTeamEmployee = count($teamEmployee);
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
@@ -291,7 +288,8 @@ class KgiTeamController extends Controller
 				} else {
 					$kginame = $kgiTeam["kgiName"];
 				}
-				$isOver = ModelMaster::isOverDuedate(KgiTeam::nextCheckDate($kgiTeam['kgiTeamId']));
+				//$isOver = ModelMaster::isOverDuedate(KgiTeam::nextCheckDate($kgiTeam['kgiTeamId']));
+				$isOver = ModelMaster::isOverDuedate($kgiTeam['nextCheckDate']);
 				$kgiTeamId = $kgiTeam["kgiTeamId"];
 				$commonData = [
 					"kgiName" => $kginame,
@@ -304,17 +302,18 @@ class KgiTeamController extends Controller
 					"unit" => Unit::unitName($kgiTeam["unitId"]),
 					"teamName" => Team::teamName($kgiTeam["teamId"]),
 					"quantRatio" => $kgiTeam["quantRatio"],
-					"target" => $kgiTeamHistory["target"],
-					"result" => $kgiTeamHistory["result"],
+					"target" => $kgiTeam["target"],
+					"result" => $kgiTeam["result"],
 					"code" => $kgiTeam["code"],
-					"month" =>  ModelMaster::monthEng($kgiTeamHistory['month'], 1),
-					"year" => $kgiTeamHistory['year'],
-					"fromDate" => ModelMaster::engDate($kgiTeamHistory["fromDate"], 2),
-					"toDate" => ModelMaster::engDate($kgiTeamHistory["toDate"], 2),
+					"month" =>  ModelMaster::monthEng($kgiTeam['month'], 1),
+					"year" => $kgiTeam['year'],
+					"fromDate" => ModelMaster::engDate($kgiTeam["fromDate"], 2),
+					"toDate" => ModelMaster::engDate($kgiTeam["toDate"], 2),
 					"periodCheck" => ModelMaster::engDate(KgiTeam::lastestCheckDate($kgiTeam["kgiTeamId"]), 2), //lastest check date
-					"nextCheckDate" =>  ModelMaster::engDate($kgiTeamHistory["nextCheckDate"], 2),
-					"status" => $kgiTeamHistory["status"],
-					"kgiTeamHistoryId" => $kgiTeamHistory["kgiTeamHistoryId"] ?? 0,
+					"nextCheckDate" =>  ModelMaster::engDate($kgiTeam["nextCheckDate"], 2),
+					"status" => $kgiTeam["status"],
+					// "kgiTeamHistoryId" => $kgiTeamHistory["kgiTeamHistoryId"] ?? 0,
+					"kgiTeamHistoryId" => 0,
 					"flag" => Country::countryFlagBycompany($kgiTeam["companyId"]),
 					"countryName" => Country::countryNameBycompany($kgiTeam['companyId']),
 					// "kgiEmployee" =>  KgiEmployee::kgiEmployee($kgiTeamHistory["kgiId"],$kgiTeamHistory["month"],$kgiTeamHistory["year"]),
@@ -329,14 +328,16 @@ class KgiTeamController extends Controller
 					"kgiEmployeeSelect" => $selectPic,
 					"lastestUpdate" => ModelMaster::engDate($kgiTeam["updateDateTime"], 2),
 				];
-				if ($kgiTeamHistory["fromDate"] == "" || $kgiTeamHistory["toDate"] == "") {
-					$data1[$kgiTeamId] = $commonData;
-				} elseif ($isOver == 1 && $kgiTeamHistory["status"] == 1) {
-					$data2[$kgiTeamId] = $commonData;
-				} elseif ($kgiTeamHistory["status"] == 2) {
-					$data4[$kgiTeamId] = $commonData;
-				} else {
-					$data3[$kgiTeamId] = $commonData;
+				if (!empty($commonData)) {
+					if (($kgiTeam["fromDate"] == "" || $kgiTeam["toDate"] == "") && $isOver == 2) {
+						$data1[$kgiTeamId] = $commonData;
+					} elseif ($isOver == 1 && $kgiTeam["status"] == 1) {
+						$data2[$kgiTeamId] = $commonData;
+					} elseif ($kgiTeam["status"] == 2) {
+						$data4[$kgiTeamId] = $commonData;
+					} else {
+						$data3[$kgiTeamId] = $commonData;
+					}
 				}
 			endforeach;
 		}
@@ -462,30 +463,28 @@ class KgiTeamController extends Controller
 		$data2 = [];
 		$data3 = [];
 		$data4 = [];
+		$searchStatus = '';
 		if ($status == 1 || $status == 3 || $status == 4) {
 			$searchStatus = 1;
-		} else {
+		}
+		if ($status == 2) {
 			$searchStatus = 2;
 		}
 		$kgiTeams = KgiTeam::find()
 			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,kgi_team.updateDateTime,kgi_team.month,kgi_team.year,
-			kgi_team.teamId,kgi_team.target')
+			kgi_team.teamId,kgi_team.target,kgi_team.status,kgi_team.fromDate,kgi_team.toDate,kgi_team.nextCheckDate')
 			->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
 			->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=k.kgiId")
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
 			->where("kgi_team.status!=99 and k.status!=99")
 			->andFilterWhere([
+				"k.companyId" => $companyId,
 				"kb.branchId" => $branchId,
-				"kgi_team.teamId" => $teamId,
-				//"kgi_team.month" => $month,
-				//"kgi_team.year" => $year,
-				"kgi_team.status" => $searchStatus,
-				"k.companyId" => $companyId
+				"kgi_team.teamId" => $teamId
 			])
 			->orderBy("k.createDateTime DESC,t.teamName ASC")
 			->asArray()
 			->all();
-		$data = [];
 		if (isset($kgiTeams) && count($kgiTeams) > 0) {
 			foreach ($kgiTeams as $kgiTeam) :
 				$commonData = [];
@@ -498,121 +497,118 @@ class KgiTeamController extends Controller
 						"kgi_team_history.status" => [1, 2]
 					])
 					->andFilterWhere([
-						//"kb.branchId" => $branchId,
-						"kt.teamId" => $teamId,
 						"kgi_team_history.month" => $month,
 						"kgi_team_history.year" => $year,
-						//"kgi_team_history.status" => $status,
+						"kgi_team_history.status" => $searchStatus,
 					])
+					->orderBy('kgi_team_history.year DESC,kgi_team_history.month DESC,kgi_team_history.status DESC,kgi_team_history.createDateTime DESC')
 					->asArray()
-					->orderBy('kgi_team_history.createDateTime DESC')
 					->one();
-				if (!isset($kgiTeamHistory) || empty($kgiTeamHistory)) {
-					$kgiTeamHistory = KgiTeam::find()
-						->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
-						->andFilterWhere([
-							"teamId" => $teamId,
-							"month" => $month,
-							"year" => $year,
-							//"status" => $status,
-						])
-						->asArray()
-						->orderBy('createDateTime DESC')
-						->one();
-				}
 				$ratio = 0;
-				if ($kgiTeamHistory["target"] != '' && $kgiTeamHistory["target"] != 0 && $kgiTeamHistory["target"] != null) {
-					if ($kgiTeam["code"] == '<' || $kgiTeam["code"] == '=') {
-						$ratio = ($kgiTeamHistory["result"] / $kgiTeamHistory["target"]) * 100;
-					} else {
-						if ($kgiTeamHistory["result"] != '' && $kgiTeamHistory["result"] != 0) {
-							$ratio = ($kgiTeamHistory["target"] / $kgiTeamHistory["result"]) * 100;
+				$checkComplete = 0;
+				if ($status == 1) {
+					$checkComplete = KgiTeam::checkComplete($kgiTeam["kgiTeamId"], $month, $year, $kgiTeam["year"]);
+				}
+				if (isset($kgiTeamHistory) && !empty($kgiTeamHistory)  && $checkComplete == 0) {
+					if ($kgiTeamHistory["target"] != '' && $kgiTeamHistory["target"] != 0 && $kgiTeamHistory["target"] != null) {
+						if ($kgiTeam["code"] == '<' || $kgiTeam["code"] == '=') {
+							$ratio = ($kgiTeamHistory["result"] / $kgiTeamHistory["target"]) * 100;
 						} else {
-							$ratio = 0;
+							if ($kgiTeamHistory["result"] != '' && $kgiTeamHistory["result"] != 0) {
+								$ratio = ($kgiTeamHistory["target"] / $kgiTeamHistory["result"]) * 100;
+							} else {
+								$ratio = 0;
+							}
 						}
 					}
-				} else {
-					$ratio = 0;
-				}
-				$teamEmployee = KgiEmployee::countKgiFromTeam($kgiTeam["kgiId"], $kgiTeam["teamId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]);
-				$countTeamEmployee = count($teamEmployee);
-				$selectPic = [];
-				if ($countTeamEmployee >= 3) {
-					$randomEmpployee = array_rand($teamEmployee, 3);
-					$selectPic[0] = $teamEmployee[$randomEmpployee[0]];
-					$selectPic[1] = $teamEmployee[$randomEmpployee[1]];
-					$selectPic[2] = $teamEmployee[$randomEmpployee[2]];
-				} else {
-					if ($countTeamEmployee > 0) {
-						$selectPic = $teamEmployee;
-						sort($selectPic);
-					}
-				}
-				if (strlen($kgiTeam["kgiName"]) > 34) {
-					$kginame = substr($kgiTeam["kgiName"], 0, 34) . '. . .';
-				} else {
-					$kginame = $kgiTeam["kgiName"];
-				}
-				$isOver = ModelMaster::isOverDuedate(KgiTeam::nextCheckDate($kgiTeam['kgiTeamId']));
-				$kgiTeamId = $kgiTeam["kgiTeamId"];
-				if ($status == 1 && $isOver == 0) {
-					$show = 1;
-				} else if ($status == 3 && $isOver == 1) {
-					$show = 1;
-				} else if ($status == 4 && $isOver == 2) {
-					$show = 1;
-				} else if ($status == 2 && $kgiTeamHistory["status"] == 2) {
-					$show = 1;
-				} elseif ($status == '') {
-					$show = 1;
-				}
-				if ($show == 1) {
-					$commonData = [
-						"kgiName" => $kginame,
-						"kgiId" => $kgiTeam["kgiId"],
-						"teamId" => $kgiTeam["teamId"],
-						"companyName" => Company::companyName($kgiTeam["companyId"]),
-						"companyId" => $kgiTeam["companyId"],
-						"branch" => KgiBranch::kgiBranch($kgiTeam["kgiId"]),
-						"priority" => $kgiTeam["priority"],
-						"unit" => Unit::unitName($kgiTeam["unitId"]),
-						"teamName" => Team::teamName($kgiTeam["teamId"]),
-						"quantRatio" => $kgiTeam["quantRatio"],
-						"target" => $kgiTeamHistory["target"],
-						"result" => $kgiTeamHistory["result"],
-						"code" => $kgiTeam["code"],
-						"month" =>  ModelMaster::monthEng($kgiTeamHistory['month'], 1),
-						"year" => $kgiTeamHistory['year'],
-						"fromDate" => ModelMaster::engDate($kgiTeamHistory["fromDate"], 2),
-						"toDate" => ModelMaster::engDate($kgiTeamHistory["toDate"], 2),
-						"periodCheck" => ModelMaster::engDate(KgiTeam::lastestCheckDate($kgiTeam["kgiTeamId"]), 2),
-						"nextCheckDate" =>  ModelMaster::engDate($kgiTeamHistory["nextCheckDate"], 2),
-						"status" => $kgiTeamHistory["status"],
-						"kgiTeamHistoryId" => $kgiTeamHistory["kgiTeamHistoryId"] ?? 0,
-						"flag" => Country::countryFlagBycompany($kgiTeam["companyId"]),
-						"countryName" => Country::countryNameBycompany($kgiTeam['companyId']),
-						"kgiEmployee" => KgiEmployee::kgiEmployee($kgiTeam["kgiId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]),
-						"ratio" => number_format($ratio, 2),
-						"isOver" => ModelMaster::isOverDuedate(KgiTeam::nextCheckDate($kgiTeam['kgiTeamId'])),
-						"employee" => KgiTeam::kgiTeamEmployee($kgiTeam['kgiId'], $kgiTeam["teamId"]),
-						"amountType" => $kgiTeam["amountType"],
-						"issue" => KgiIssue::lastestIssue($kgiTeam["kgiId"])["issue"],
-						"countTeam" => KgiTeam::kgiTeam($kgiTeam["kgiId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]),
-						"solution" => KgiIssue::lastestIssue($kgiTeam["kgiId"])["solution"],
-						"countTeamEmployee" => $countTeamEmployee,
-						"kgiEmployeeSelect" => $selectPic,
-						"lastestUpdate" => ModelMaster::engDate($kgiTeam["updateDateTime"], 2),
-					];
-				}
-				if (!empty($commonData)) {
-					if ($kgiTeamHistory["fromDate"] == "" || $kgiTeamHistory["toDate"] == "") {
-						$data1[$kgiTeamId] = $commonData;
-					} elseif ($isOver == 1 && $kgiTeamHistory["status"] == 1) {
-						$data2[$kgiTeamId] = $commonData;
-					} elseif ($kgiTeamHistory["status"] == 2) {
-						$data4[$kgiTeamId] = $commonData;
+					$teamEmployee = KgiEmployee::countKgiFromTeam($kgiTeam["kgiId"], $kgiTeam["teamId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]);
+					$countTeamEmployee = count($teamEmployee);
+					$selectPic = [];
+					if ($countTeamEmployee >= 3) {
+						$randomEmpployee = array_rand($teamEmployee, 3);
+						$selectPic[0] = $teamEmployee[$randomEmpployee[0]];
+						$selectPic[1] = $teamEmployee[$randomEmpployee[1]];
+						$selectPic[2] = $teamEmployee[$randomEmpployee[2]];
 					} else {
-						$data3[$kgiTeamId] = $commonData;
+						if ($countTeamEmployee > 0) {
+							$selectPic = $teamEmployee;
+							sort($selectPic);
+						}
+					}
+					if (strlen($kgiTeam["kgiName"]) > 34) {
+						$kginame = substr($kgiTeam["kgiName"], 0, 34) . '. . .';
+					} else {
+						$kginame = $kgiTeam["kgiName"];
+					}
+					if ($kgiTeam["status"] == 2) {
+						$isOver = 0;
+					} else {
+						if ($kgiTeam["status"] == 1 && $kgiTeam["year"] > $year && $year != '') {
+							$isOver = 0;
+						} else {
+							$isOver = ModelMaster::isOverDuedate($kgiTeam["nextCheckDate"]);
+						}
+					}
+					if ($status == 1 && $isOver == 0 && $kgiTeam["status"] == 1) {
+						$show = 1;
+					} else if ($status == 3 && $isOver == 1) {
+						$show = 1;
+					} else if ($status == 4 && $isOver == 2) {
+						$show = 1;
+					} else if ($status == 2 && $kgiTeamHistory["status"] == 2) {
+						$show = 1;
+					} elseif ($status == '') {
+						$show = 1;
+					}
+					$kgiTeamId = $kgiTeam["kgiTeamId"];
+					if ($show == 1) {
+						$commonData = [
+							"kgiName" => $kginame,
+							"kgiId" => $kgiTeam["kgiId"],
+							"teamId" => $kgiTeam["teamId"],
+							"companyName" => Company::companyName($kgiTeam["companyId"]),
+							"companyId" => $kgiTeam["companyId"],
+							"branch" => KgiBranch::kgiBranch($kgiTeam["kgiId"]),
+							"priority" => $kgiTeam["priority"],
+							"unit" => Unit::unitName($kgiTeam["unitId"]),
+							"teamName" => Team::teamName($kgiTeam["teamId"]),
+							"quantRatio" => $kgiTeam["quantRatio"],
+							"target" => $kgiTeamHistory["target"],
+							"result" => $kgiTeamHistory["result"],
+							"code" => $kgiTeam["code"],
+							"month" =>  ModelMaster::monthEng($kgiTeamHistory['month'], 1),
+							"year" => $kgiTeamHistory['year'],
+							"fromDate" => ModelMaster::engDate($kgiTeamHistory["fromDate"], 2),
+							"toDate" => ModelMaster::engDate($kgiTeamHistory["toDate"], 2),
+							"periodCheck" => ModelMaster::engDate(KgiTeam::lastestCheckDate($kgiTeam["kgiTeamId"]), 2),
+							"nextCheckDate" =>  ModelMaster::engDate($kgiTeamHistory["nextCheckDate"], 2),
+							"status" => $kgiTeamHistory["status"],
+							"kgiTeamHistoryId" => $kgiTeamHistory["kgiTeamHistoryId"] ?? 0,
+							"flag" => Country::countryFlagBycompany($kgiTeam["companyId"]),
+							"countryName" => Country::countryNameBycompany($kgiTeam['companyId']),
+							"kgiEmployee" => KgiEmployee::kgiEmployee($kgiTeam["kgiId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]),
+							"ratio" => number_format($ratio, 2),
+							"isOver" => $isOver,
+							"employee" => KgiTeam::kgiTeamEmployee($kgiTeam['kgiId'], $kgiTeam["teamId"]),
+							"amountType" => $kgiTeam["amountType"],
+							"issue" => KgiIssue::lastestIssue($kgiTeam["kgiId"])["issue"],
+							"countTeam" => KgiTeam::kgiTeam($kgiTeam["kgiId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]),
+							"solution" => KgiIssue::lastestIssue($kgiTeam["kgiId"])["solution"],
+							"countTeamEmployee" => $countTeamEmployee,
+							"kgiEmployeeSelect" => $selectPic,
+							"lastestUpdate" => ModelMaster::engDate($kgiTeamHistory["updateDateTime"], 2),
+						];
+					}
+					if (!empty($commonData)) {
+						if (($kgiTeamHistory["fromDate"] == "" || $kgiTeamHistory["toDate"] == "") && $isOver == 2) {
+							$data1[$kgiTeamId] = $commonData;
+						} elseif ($isOver == 1 && $kgiTeamHistory["status"] == 1) {
+							$data2[$kgiTeamId] = $commonData;
+						} elseif ($kgiTeamHistory["status"] == 2) {
+							$data4[$kgiTeamId] = $commonData;
+						} else {
+							$data3[$kgiTeamId] = $commonData;
+						}
 					}
 				}
 			endforeach;

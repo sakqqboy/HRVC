@@ -50,7 +50,10 @@ class Kpi extends \backend\models\hrvc\master\KpiMaster
         $date = '';
         $kpiHistory = KpiHistory::find()
             ->select('nextCheckDate')
-            ->where(["kpiId" => $kpiId, "status" => [1, 2, 4]])->orderBy('kpiHistoryId DESC')->asArray()->one();
+            ->where(["kpiId" => $kpiId, "status" => [1, 2, 4]])
+            ->orderBy('year DESC,month DESC,status DESC,createDateTime DESC')
+            ->asArray()
+            ->one();
         if (isset($kpiHistory) && !empty($kpiHistory) && $kpiHistory["nextCheckDate"] != '') {
             $date = ModelMaster::engDate($kpiHistory["nextCheckDate"], 2);
         }
@@ -60,5 +63,44 @@ class Kpi extends \backend\models\hrvc\master\KpiMaster
     {
         $kpi = Kpi::find()->select('kpiName')->where(["kpiId" => $kpiId])->asArray()->one();
         return $kpi["kgiName"];
+    }
+    public static function checkComplete($kpiId, $month, $year, $currentYear)
+    {
+        if ($month != '' && $year != '') {
+            $kpiHistory = KpiHistory::find()
+                ->where([
+                    "kpiId" => $kpiId,
+                    "status" => 2,
+                    "month" => $month,
+                    "year" => $year
+                ])
+                ->one();
+        }
+        if ($month == '' && $year != '') {
+            if ($year != $currentYear) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+        if ($month != '' && $year == '') {
+            $kpiHistory = KpiHistory::find()
+                ->where([
+                    "kpiId" => $kpiId,
+                    "status" => 2,
+                    "month" => $month,
+                    "year" => $currentYear
+                ])
+                ->one();
+        }
+        if ($month == '' && $year == '') {
+            return 0;
+        }
+
+        if (isset($kpiHistory) && !empty($kpiHistory)) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

@@ -4,6 +4,7 @@ namespace frontend\modules\kpi\controllers;
 
 use frontend\models\hrvc\KpiHistory;
 use common\helpers\Path;
+use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
@@ -637,11 +638,8 @@ class KpiTeamController extends Controller
 			"status" => $status,
 			"type" => $type
 		]);
-
+		Session::PimTeamFilter($companyId, $branchId, $teamId, $month, $year, $status, $type);
 		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
-			if ($session->has('kpiTeam')) {
-				$session->remove('kpiTeam');
-			}
 			if ($type == "list") {
 				return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi');
 			} else {
@@ -655,6 +653,7 @@ class KpiTeamController extends Controller
 		}
 		$userId = Yii::$app->user->id;
 		$userTeamId = Team::userTeam($userId);
+		//throw new exception('kpi/kpi-team/kpi-team-filter?' . $paramText);
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -1133,6 +1132,10 @@ class KpiTeamController extends Controller
 			$kpiTeam->status = 1;
 			$kpiTeam->month = $nextMonth;
 			$kpiTeam->year = $nextYear;
+			$kpiTeam->fromDate = null;
+			$kpiTeam->toDate = null;
+			$kpiTeam->nextCheckDate = null;
+			$kpiTeam->result = 0.00;
 			$kpiTeam->updateDateTime = new Expression('NOW()');
 			if ($kpiTeam->save(false)) {
 
@@ -1157,6 +1160,10 @@ class KpiTeamController extends Controller
 							$empoyee->status = 1;
 							$empoyee->month = $nextMonth;
 							$empoyee->year = $nextYear;
+							$empoyee->fromDate = null;
+							$empoyee->toDate = null;
+							$empoyee->nextCheckDate = null;
+							$empoyee->result = 0.00;
 						}
 						$kpiEmpoyeeHistory = new KpiEmployeeHistory();
 						$kpiEmpoyeeHistory->kpiEmployeeId = $empoyee->kpiEmployeeId;

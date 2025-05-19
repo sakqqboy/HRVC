@@ -181,9 +181,30 @@ use frontend\models\hrvc\Team;
     <div class="col-1 pr-5 pl-1">
         <select class="form-select font-size-12 <?= $status != "" ? 'select-pimselect' : 'select-pim' ?>" id="status-filter"
             onchange="applySelectStyle(this)">
+            <?php
+            if (isset($status) && $status != "") {
+                if ($status == 1) {
+                    $text = 'In Progress';
+                }
+                if ($status == 2) {
+                    $text = 'Completed';
+                }
+                if ($status == 3) {
+                    $text = 'Due Passed';
+                }
+                if ($status == 4) {
+                    $text = 'Not Set';
+                }
+            ?>
+                <option value="<?= $status ?>"><?= $text ?></option>
+            <?php
+            }
+            ?>
             <option value=""><?= Yii::t('app', 'Status') ?></option>
-            <option value="1"><?= Yii::t('app', 'Active') ?></option>
-            <option value="2"><?= Yii::t('app', 'Finished') ?></option>
+            <option value="1"><?= Yii::t('app', 'In Progress') ?></option>
+            <option value="3"><?= Yii::t('app', 'Due Passed') ?></option>
+            <option value="4"><?= Yii::t('app', 'Not Set') ?></option>
+            <option value="2"><?= Yii::t('app', 'Completed') ?></option>
         </select>
     </div>
 

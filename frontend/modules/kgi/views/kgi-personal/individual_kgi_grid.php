@@ -21,7 +21,7 @@ $this->title = "INDIVIDUAL KGI";
                 "role" => $role
             ]) ?>
             <div class="alert mt-10 pim-body bg-white">
-                <div class="row sticky-section">
+                <div class="row">
                     <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">
                         <div class="row">
                             <div class="col-8">
@@ -476,9 +476,9 @@ $this->title = "INDIVIDUAL KGI";
                                                         } else {
                                                             $decimal = explode('.', $targetAmount);
                                                             if (isset($decimal[1])) {
-                                                                $show = ($decimal[1] == '00') ? $decimal[0] : $targetAmount;
+                                                                $show = ($decimal[1] == '00') ?  number_format($decimal[0]) : $show = number_format($targetAmount, 2);
                                                             } else {
-                                                                $show = $targetAmount;
+                                                                $show = number_format($targetAmount);
                                                             }
                                                         }
                                                         ?>

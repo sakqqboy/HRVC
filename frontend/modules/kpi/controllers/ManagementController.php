@@ -3,6 +3,7 @@
 namespace frontend\modules\kpi\controllers;
 
 use common\helpers\Path;
+use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
@@ -963,20 +964,8 @@ class ManagementController extends Controller
         $type = $param["type"];
         $branches = [];
         $teams = [];
-        $session = Yii::$app->session;
-        $session->open();
-        $session->set('kpi', [
-            "companyId" => $companyId,
-            "branchId" => $branchId,
-            "month" => $month,
-            "year" => $year,
-            "status" => $status,
-            "type" => $type
-        ]);
-        if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
-            if ($session->has('kpi')) {
-                $session->remove('kpi');
-            }
+        Session::PimFilter($companyId, $branchId, $month, $year, $status, $type);
+        if ($companyId == "" && $branchId == "" && $month == "" && $status == "" && $year == "") {
             if ($type == "list") {
                 return $this->redirect(Yii::$app->homeUrl . 'kpi/management/index');
             } else {
@@ -2059,6 +2048,9 @@ class ManagementController extends Controller
             $kpi->status = 1;
             $kpi->month = $nextMonth;
             $kpi->year = $nextYear;
+            $kpi->toDate = null;
+            $kpi->fromDate = null;
+            $kpi->result = 0.00;
             $kpi->updateDateTime = new Expression('NOW()');
             if ($kpi->save(false)) {
 
@@ -2074,6 +2066,10 @@ class ManagementController extends Controller
                             $team->status = 1;
                             $team->month = $nextMonth;
                             $team->year = $nextYear;
+                            $team->fromDate = null;
+                            $team->toDate = null;
+                            $team->NextCheckDate = null;
+                            $team->result = 0.00;
                         }
                         $kpiTeamHistory = new kpiTeamHistory();
                         $kpiTeamHistory->kpiTeamId = $team->kpiTeamId;
@@ -2100,6 +2096,10 @@ class ManagementController extends Controller
                             $employee->status = 1;
                             $employee->month = $nextMonth;
                             $employee->year = $nextYear;
+                            $employee->fromDate = null;
+                            $employee->toDate = null;
+                            $employee->NextCheckDate = null;
+                            $employee->result = 0.00;
                         }
                         $kpiEmployeeHistory = new kpiEmployeeHistory();
                         $kpiEmployeeHistory->kpiEmployeeId = $employee->kpiEmployeeId;

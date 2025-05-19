@@ -181,12 +181,52 @@ class KgiTeam extends \backend\models\hrvc\master\KgiTeamMaster
         $kgiHistory = KgiTeamHistory::find()
             ->select('nextCheckDate')
             ->where(["kgiTeamId" => $kgiTeamId, "status" => [1, 2, 4]])
-            ->orderBy('kgiTeamHistoryId DESC')
+            ->orderBy('year DESC,month DESC,status DESC,createDateTime DESC')
             ->asArray()
             ->one();
         if (isset($kgiHistory) && !empty($kgiHistory) && $kgiHistory["nextCheckDate"] != '') {
             $date = ModelMaster::engDate($kgiHistory["nextCheckDate"], 2);
         }
         return $date;
+    }
+    public static function checkComplete($kgiTeamId, $month, $year, $currentYear)
+    {
+        if ($month != '' && $year != '') {
+            $kgiTeamHistory = KgiTeamHistory::find()
+                ->where([
+                    "kgiTeamId" => $kgiTeamId,
+                    "status" => 2,
+                    "month" => $month,
+                    "year" => $year
+                ])
+                ->one();
+        }
+        if ($month == '' && $year != '') {
+            if ($year != $currentYear) {
+                return 1;
+            } else {
+
+                return 0;
+            }
+        }
+        if ($month != '' && $year == '') {
+            $kgiTeamHistory = KgiTeamHistory::find()
+                ->where([
+                    "kgiTeamId" => $kgiTeamId,
+                    "status" => 2,
+                    "month" => $month,
+                    "year" => $currentYear
+                ])
+                ->one();
+        }
+        if ($month == '' && $year == '') {
+            return 0;
+        }
+
+        if (isset($kgiTeamHistory) && !empty($kgiTeamHistory)) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

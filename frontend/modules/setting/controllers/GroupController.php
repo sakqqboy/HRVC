@@ -3,6 +3,7 @@
 namespace frontend\modules\setting\controllers;
 
 use common\helpers\Path;
+use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
@@ -36,6 +37,7 @@ class GroupController extends Controller
         if (!Yii::$app->user->id) {
             return $this->redirect(Yii::$app->homeUrl . 'site/login');
         }
+        Session::deleteSession();
         return true; //go to origin request
     }
     public function actionIndex()
@@ -195,12 +197,12 @@ class GroupController extends Controller
             endforeach;
         }
         $employees = Employee::find()
-        ->where(["status" => 1])
-        ->asArray()
-        ->all();
+            ->where(["status" => 1])
+            ->asArray()
+            ->all();
 
         // กรองข้อมูลที่ picture ไม่เป็นค่าว่าง
-        $filteredEmployees = array_filter($employees, function($employee) {
+        $filteredEmployees = array_filter($employees, function ($employee) {
             return !empty($employee['picture']);
         });
 

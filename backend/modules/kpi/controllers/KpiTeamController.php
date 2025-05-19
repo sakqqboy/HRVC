@@ -246,7 +246,7 @@ class KpiTeamController extends Controller
 		if ($role <= 3) {
 			$kpiTeams = KpiTeam::find()
 				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,kpi_team.month,kpi_team.year,
-			kpi_team.teamId,kpi_team.target,kpi_team.updateDateTime')
+			kpi_team.teamId,kpi_team.target,kpi_team.result,kpi_team.updateDateTime,kpi_team.fromDate,kpi_team.toDate,kpi_team.nextCheckDate,kpi_team.status')
 				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
 				->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
@@ -257,7 +257,7 @@ class KpiTeamController extends Controller
 		} else {
 			$kpiTeams = KpiTeam::find()
 				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,kpi_team.month,kpi_team.year,
-			kpi_team.teamId,kpi_team.target,kpi_team.updateDateTime')
+			kpi_team.teamId,kpi_team.target,kpi_team.result,kpi_team.updateDateTime,kpi_team.fromDate,kpi_team.toDate,kpi_team.nextCheckDate,kpi_team.status')
 				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
 				->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
@@ -265,39 +265,33 @@ class KpiTeamController extends Controller
 				->asArray()
 				->all();
 		}
-		$employeeId = Employee::employeeId($userId);
-		$employee = Employee::EmployeeDetail($employeeId);
-		$teamId = $employee["teamId"];
-
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $kpiTeam) :
 				$commonData = [];
-				$kpiTeamHistory = KpiTeamHistory::find()
-					->where(["kpiTeamId" => $kpiTeam["kpiTeamId"], "status" => [1, 2, 4]])
-					->asArray()
-					->orderBy('year DESC, month DESC,updateDateTime DESC')
-					->one();
+				// $kpiTeamHistory = KpiTeamHistory::find()
+				// 	->where(["kpiTeamId" => $kpiTeam["kpiTeamId"], "status" => [1, 2, 4]])
+				// 	->asArray()
+				// 	->orderBy('year DESC, month DESC,updateDateTime DESC')
+				// 	->one();
 
-				if (!isset($kpiTeamHistory) || empty($kpiTeamHistory)) {
-					$kpiTeamHistory = KpiTeam::find()
-						->where(["kpiTeamId" => $kpiTeam["kpiTeamId"]])
-						->asArray()
-						->orderBy('createDateTime DESC')
-						->one();
-				}
+				// if (!isset($kpiTeamHistory) || empty($kpiTeamHistory)) {
+				// 	$kpiTeamHistory = KpiTeam::find()
+				// 		->where(["kpiTeamId" => $kpiTeam["kpiTeamId"]])
+				// 		->asArray()
+				// 		->orderBy('createDateTime DESC')
+				// 		->one();
+				// }
 				$ratio = 0;
 				if ($kpiTeam["target"] != '' && $kpiTeam["target"] != 0 && $kpiTeam["target"] != null) {
 					if ($kpiTeam["code"] == '<' || $kpiTeam["code"] == '=') {
-						$ratio = ($kpiTeamHistory["result"] / $kpiTeam["target"]) * 100;
+						$ratio = ($kpiTeam["result"] / $kpiTeam["target"]) * 100;
 					} else {
-						if ($kpiTeamHistory["result"] != '' && $kpiTeamHistory["result"] != 0) {
-							$ratio = ($kpiTeam["target"] / $kpiTeamHistory["result"]) * 100;
+						if ($kpiTeam["result"] != '' && $kpiTeam["result"] != 0) {
+							$ratio = ($kpiTeam["target"] / $kpiTeam["result"]) * 100;
 						} else {
 							$ratio = 0;
 						}
 					}
-				} else {
-					$ratio = 0;
 				}
 				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiTeam["kpiId"], $kpiTeam["teamId"], $kpiTeam["month"], $kpiTeam["year"]);
 				$countTeamEmployee = count($teamEmployee);
@@ -318,7 +312,7 @@ class KpiTeamController extends Controller
 				} else {
 					$kpiName = $kpiTeam["kpiName"];
 				}
-				$isOver = ModelMaster::isOverDuedate($kpiTeamHistory['nextCheckDate']);
+				$isOver = ModelMaster::isOverDuedate($kpiTeam['nextCheckDate']);
 				$kpiTeamId = $kpiTeam["kpiTeamId"];
 				$commonData = [
 					"kpiName" => $kpiName,
@@ -332,16 +326,17 @@ class KpiTeamController extends Controller
 					"teamName" => Team::teamName($kpiTeam["teamId"]),
 					"quantRatio" => $kpiTeam["quantRatio"],
 					"target" => empty($kpiTeam["target"]) ? 0 : $kpiTeam["target"],
-					"result" => empty($kpiTeamHistory["result"]) ? 0 : $kpiTeamHistory["result"],
+					"result" => empty($kpiTeam["result"]) ? 0 : $kpiTeam["result"],
 					"code" => $kpiTeam["code"],
-					"month" =>  ModelMaster::monthEng($kpiTeamHistory['month'], 1),
-					"year" => $kpiTeamHistory['year'],
-					"fromDate" => ModelMaster::engDate($kpiTeamHistory["fromDate"], 2),
-					"toDate" => ModelMaster::engDate($kpiTeamHistory["toDate"], 2),
+					"month" =>  ModelMaster::monthEng($kpiTeam['month'], 1),
+					"year" => $kpiTeam['year'],
+					"fromDate" => ModelMaster::engDate($kpiTeam["fromDate"], 2),
+					"toDate" => ModelMaster::engDate($kpiTeam["toDate"], 2),
 					"periodCheck" => ModelMaster::engDate(KpiTeam::lastestCheckDate($kpiTeam["kpiTeamId"]), 2), //lastest check date
-					"nextCheckDate" =>  ModelMaster::engDate($kpiTeamHistory["nextCheckDate"], 2),
-					"status" => $kpiTeamHistory["status"],
-					"kpiTeamHistoryId" => $kpiTeamHistory["kpiTeamHistoryId"] ?? 0,
+					"nextCheckDate" =>  ModelMaster::engDate($kpiTeam["nextCheckDate"], 2),
+					"status" => $kpiTeam["status"],
+					//"kpiTeamHistoryId" => $kpiTeamHistory["kpiTeamHistoryId"] ?? 0,
+					"kpiTeamHistoryId" => 0,
 					"flag" => Country::countryFlagBycompany($kpiTeam["companyId"]),
 					"countryName" => Country::countryNameBycompany($kpiTeam['companyId']),
 					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
@@ -358,11 +353,11 @@ class KpiTeamController extends Controller
 					"lastestUpdate" => ModelMaster::engDate($kpiTeam["updateDateTime"], 2)
 
 				];
-				if ($kpiTeamHistory["fromDate"] == "" || $kpiTeamHistory["toDate"] == "") {
+				if (($kpiTeam["fromDate"] == "" || $kpiTeam["toDate"] == "") && $isOver == 2) {
 					$data1[$kpiTeamId] = $commonData;
-				} elseif ($isOver == 1 && $kpiTeamHistory["status"] == 1) {
+				} elseif ($isOver == 1 && $kpiTeam["status"] == 1) {
 					$data2[$kpiTeamId] = $commonData;
-				} elseif ($kpiTeamHistory["status"] == 2) {
+				} elseif ($kpiTeam["status"] == 2) {
 					$data4[$kpiTeamId] = $commonData;
 				} else {
 					$data3[$kpiTeamId] = $commonData;
@@ -853,28 +848,32 @@ class KpiTeamController extends Controller
 		$data2 = [];
 		$data3 = [];
 		$data4 = [];
+		$searchStatus = '';
+		if ($status == 1 || $status == 3 || $status == 4) {
+			$searchStatus = 1;
+		}
+		if ($status == 2) {
+			$searchStatus = 2;
+		}
 		$kpiTeams = KpiTeam::find()
 			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,kpi_team.updateDateTime,kpi_team.month,kpi_team.year,
-			kpi_team.teamId,kpi_team.target')
+			kpi_team.teamId,kpi_team.target,kpi_team.status,kpi_team.fromDate,kpi_team.toDate,kpi_team.nextCheckDate')
 			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
 			->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=k.kpiId")
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
 			->where("kpi_team.status!=99 and k.status!=99")
 			->andFilterWhere([
+				"k.companyId" => $companyId,
 				"kb.branchId" => $branchId,
 				"kpi_team.teamId" => $teamId,
-				//"kpi_team.month" => $month,
-				//"kpi_team.year" => $year,
-				"kpi_team.status" => $status,
 			])
 			->orderBy("k.createDateTime DESC,t.teamName ASC")
 			->asArray()
 			->all();
-		$data = [];
-		$ratio = 0;
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $kpiTeam) :
 				$commonData = [];
+				$show = 0;
 				$kpiTeamHistory = KpiTeamHistory::find()
 					->select('kpi_team_history.*')
 					->JOIN("LEFT JOIN", "kpi_team kt", "kt.kpiTeamId=kpi_team_history.kpiTeamId")
@@ -883,109 +882,124 @@ class KpiTeamController extends Controller
 						"kpi_team_history.status" => [1, 2]
 					])
 					->andFilterWhere([
-						"kt.teamId" => $teamId,
 						"kpi_team_history.month" => $month,
 						"kpi_team_history.year" => $year,
-						"kpi_team_history.status" => $status,
+						"kpi_team_history.status" => $searchStatus,
 					])
+					->orderBy('kpi_team_history.year DESC,kpi_team_history.month DESC,kpi_team_history.status DESC,kpi_team_history.createDateTime DESC')
 					->asArray()
-					->orderBy('kpi_team_history.createDateTime DESC')
 					->one();
-				if (!isset($kpiTeamHistory) || empty($kpiTeamHistory)) {
-					$kpiTeamHistory = KpiTeam::find()
-						->where(["kpiTeamId" => $kpiTeam["kpiTeamId"]])
-						->andFilterWhere([
-							"teamId" => $teamId,
-							"month" => $month,
-							"year" => $year,
-							"status" => $status,
-						])
-						->asArray()
-						->orderBy('createDateTime DESC')
-						->one();
+				$ratio = 0;
+				$checkComplete = 0;
+				if (isset($kpiTeamHistory) && !empty($kpiTeamHistory)  && $status == 1) {
+					$checkComplete = KpiTeam::checkComplete($kpiTeamHistory["kpiTeamId"], $month, $year, $kpiTeamHistory["year"]);
 				}
-				if ($kpiTeam["target"] != '' && $kpiTeam["target"] != 0 && $kpiTeam["target"] != null) {
-					if ($kpiTeam["code"] == '<' || $kpiTeam["code"] == '=') {
-						$ratio = ($kpiTeamHistory["result"] / $kpiTeam["target"]) * 100;
-					} else {
-						if ($kpiTeamHistory["result"] != '' && $kpiTeamHistory["result"] != 0) {
-							$ratio = ($kpiTeam["target"] / $kpiTeamHistory["result"]) * 100;
+				if (isset($kpiTeamHistory) && !empty($kpiTeamHistory)  && $checkComplete == 0) {
+					if ($kpiTeamHistory["target"] != '' && $kpiTeamHistory["target"] != 0 && $kpiTeamHistory["target"] != null) {
+						if ($kpiTeam["code"] == '<' || $kpiTeam["code"] == '=') {
+							$ratio = ($kpiTeamHistory["result"] / $kpiTeamHistory["target"]) * 100;
 						} else {
-							$ratio = 0;
+							if ($kpiTeamHistory["result"] != '' && $kpiTeamHistory["result"] != 0) {
+								$ratio = ($kpiTeamHistory["target"] / $kpiTeamHistory["result"]) * 100;
+							} else {
+								$ratio = 0;
+							}
 						}
 					}
-				} else {
-					$ratio = 0;
-				}
-				$teamEmployee = KpiEmployee::countKpiFromTeam($kpiTeam["kpiId"], $kpiTeam["teamId"], $kpiTeam["month"], $kpiTeam["year"]);
-				$countTeamEmployee = count($teamEmployee);
-				$selectPic = [];
-				if ($countTeamEmployee >= 3) {
-					$randomEmpployee = array_rand($teamEmployee, 3);
-					$selectPic[0] = $teamEmployee[$randomEmpployee[0]];
-					$selectPic[1] = $teamEmployee[$randomEmpployee[1]];
-					$selectPic[2] = $teamEmployee[$randomEmpployee[2]];
-				} else {
-					if ($countTeamEmployee > 0) {
-						$selectPic = $teamEmployee;
-						sort($selectPic);
+					$teamEmployee = KpiEmployee::countKpiFromTeam($kpiTeam["kpiId"], $kpiTeam["teamId"], $kpiTeamHistory["month"], $kpiTeamHistory["year"]);
+					$countTeamEmployee = count($teamEmployee);
+					$selectPic = [];
+					if ($countTeamEmployee >= 3) {
+						$randomEmpployee = array_rand($teamEmployee, 3);
+						$selectPic[0] = $teamEmployee[$randomEmpployee[0]];
+						$selectPic[1] = $teamEmployee[$randomEmpployee[1]];
+						$selectPic[2] = $teamEmployee[$randomEmpployee[2]];
+					} else {
+						if ($countTeamEmployee > 0) {
+							$selectPic = $teamEmployee;
+							sort($selectPic);
+						}
 					}
-				}
-				if (strlen($kpiTeam["kpiName"]) > 34) {
-					$kpiName = substr($kpiTeam["kpiName"], 0, 34) . '. . .';
-				} else {
-					$kpiName = $kpiTeam["kpiName"];
-				}
-				$isOver = ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeam['kpiTeamId']));
-				$kpiTeamId = $kpiTeam["kpiTeamId"];
-				$commonData = [
-					"kpiName" => $kpiName,
-					"kpiId" => $kpiTeam["kpiId"],
-					"teamId" => $kpiTeam["teamId"],
-					"companyName" => Company::companyName($kpiTeam["companyId"]),
-					"companyId" => $kpiTeam["companyId"],
-					"branch" => KpiBranch::kpiBranch($kpiTeam["kpiId"]),
-					"priority" => $kpiTeam["priority"],
-					"unit" => Unit::unitName($kpiTeam["unitId"]),
-					"teamName" => Team::teamName($kpiTeam["teamId"]),
-					"quantRatio" => $kpiTeam["quantRatio"],
-					"target" => empty($kpiTeam["target"]) ? 0 : $kpiTeam["target"],
-					"result" => empty($kpiTeamHistory["result"]) ? 0 : $kpiTeamHistory["result"],
-					"code" => $kpiTeam["code"],
-					"month" =>  ModelMaster::monthEng($kpiTeamHistory['month'], 1),
-					"year" => $kpiTeamHistory['year'],
-					"fromDate" => ModelMaster::engDate($kpiTeamHistory["fromDate"], 2),
-					"toDate" => ModelMaster::engDate($kpiTeamHistory["toDate"], 2),
-					"periodCheck" => ModelMaster::engDate(KpiTeam::lastestCheckDate($kpiTeam["kpiTeamId"]), 2),
-					"nextCheckDate" =>  ModelMaster::engDate($kpiTeamHistory["nextCheckDate"], 2),
-					"status" => $kpiTeamHistory["status"],
-					"kpiTeamHistoryId" => $kpiTeamHistory["kpiTeamHistoryId"] ?? 0,
-					"flag" => Country::countryFlagBycompany($kpiTeam["companyId"]),
-					"countryName" => Country::countryNameBycompany($kpiTeam['companyId']),
-					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
-					"ratio" => number_format($ratio, 2),
-					"isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeam['kpiTeamId'])),
-					"employee" => KpiTeam::kpiTeamEmployee($kpiTeam['kpiId'], $kpiTeam["kpiTeamId"]),
-					"countTeam" => KpiTeam::kpiTeam($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
-					"amountType" => $kpiTeam["amountType"],
-					"issue" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["issue"],
-					"solution" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["solution"],
-					"countTeamEmployee" => $countTeamEmployee,
-					"kpiEmployeeSelect" => $selectPic,
-					"lastestUpdate" => ModelMaster::engDate($kpiTeam["updateDateTime"], 2)
-				];
-				if ($kpiTeamHistory["fromDate"] == "" || $kpiTeamHistory["toDate"] == "") {
-					$data1[$kpiTeamId] = $commonData;
-				} elseif ($isOver == 1 && $kpiTeamHistory["status"] == 1) {
-					$data2[$kpiTeamId] = $commonData;
-				} elseif ($kpiTeamHistory["status"] == 2) {
-					$data4[$kpiTeamId] = $commonData;
-				} else {
-					$data3[$kpiTeamId] = $commonData;
+					if (strlen($kpiTeam["kpiName"]) > 34) {
+						$kpiName = substr($kpiTeam["kpiName"], 0, 34) . '. . .';
+					} else {
+						$kpiName = $kpiTeam["kpiName"];
+					}
+					if ($kpiTeam["status"] == 2) {
+						$isOver = 0;
+					} else {
+						if ($kpiTeam["status"] == 1 && $kpiTeam["year"] > $year && $year != '') {
+							$isOver = 0;
+						} else {
+							$isOver = ModelMaster::isOverDuedate($kpiTeam["nextCheckDate"]);
+						}
+					}
+					$kpiTeamId = $kpiTeam["kpiTeamId"];
+					if ($status == 1 && $isOver == 0 && $kpiTeam["status"] == 1) {
+						$show = 1;
+					} else if ($status == 3 && $isOver == 1) {
+						$show = 1;
+					} else if ($status == 4 && $isOver == 2) {
+						$show = 1;
+					} else if ($status == 2 && $kpiTeamHistory["status"] == 2) {
+						$show = 1;
+					} elseif ($status == '') {
+						$show = 1;
+					}
+					if ($show == 1) {
+						$commonData = [
+							"kpiName" => $kpiName,
+							"kpiId" => $kpiTeam["kpiId"],
+							"teamId" => $kpiTeam["teamId"],
+							"companyName" => Company::companyName($kpiTeam["companyId"]),
+							"companyId" => $kpiTeam["companyId"],
+							"branch" => KpiBranch::kpiBranch($kpiTeam["kpiId"]),
+							"priority" => $kpiTeam["priority"],
+							"unit" => Unit::unitName($kpiTeam["unitId"]),
+							"teamName" => Team::teamName($kpiTeam["teamId"]),
+							"quantRatio" => $kpiTeam["quantRatio"],
+							"target" => $kpiTeamHistory["target"],
+							"result" => $kpiTeamHistory["result"],
+							"code" => $kpiTeam["code"],
+							"month" =>  ModelMaster::monthEng($kpiTeamHistory['month'], 1),
+							"year" => $kpiTeamHistory['year'],
+							"fromDate" => ModelMaster::engDate($kpiTeamHistory["fromDate"], 2),
+							"toDate" => ModelMaster::engDate($kpiTeamHistory["toDate"], 2),
+							"periodCheck" => ModelMaster::engDate(KpiTeam::lastestCheckDate($kpiTeam["kpiTeamId"]), 2),
+							"nextCheckDate" =>  ModelMaster::engDate($kpiTeamHistory["nextCheckDate"], 2),
+							"status" => $kpiTeamHistory["status"],
+							"kpiTeamHistoryId" => $kpiTeamHistory["kpiTeamHistoryId"] ?? 0,
+							"flag" => Country::countryFlagBycompany($kpiTeam["companyId"]),
+							"countryName" => Country::countryNameBycompany($kpiTeam['companyId']),
+							"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"], $kpiTeamHistory["month"], $kpiTeamHistory["year"]),
+							"ratio" => number_format($ratio, 2),
+							"isOver" => $isOver,
+							"employee" => KpiTeam::kpiTeamEmployee($kpiTeam['kpiId'], $kpiTeam["kpiTeamId"]),
+							"countTeam" => KpiTeam::kpiTeam($kpiTeam["kpiId"], $kpiTeamHistory["month"], $kpiTeamHistory["year"]),
+							"amountType" => $kpiTeam["amountType"],
+							"issue" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["issue"],
+							"solution" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["solution"],
+							"countTeamEmployee" => $countTeamEmployee,
+							"kpiEmployeeSelect" => $selectPic,
+							"lastestUpdate" => ModelMaster::engDate($kpiTeamHistory["updateDateTime"], 2)
+						];
+					}
+					if (!empty($commonData)) {
+						if (($kpiTeamHistory["fromDate"] == "" || $kpiTeamHistory["toDate"] == "") && $isOver == 2) {
+							$data1[$kpiTeamId] = $commonData;
+						} elseif ($isOver == 1 && $kpiTeamHistory["status"] == 1) {
+							$data2[$kpiTeamId] = $commonData;
+						} elseif ($kpiTeamHistory["status"] == 2) {
+							$data4[$kpiTeamId] = $commonData;
+						} else {
+							$data3[$kpiTeamId] = $commonData;
+						}
+					}
 				}
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
+		//	throw new exception(print_r($data, true));
 		return json_encode($data);
 	}
 	public function actionKpiTeamEmployee($kpiId, $month, $year)

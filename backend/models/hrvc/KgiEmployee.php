@@ -180,7 +180,7 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
         $kgiHistory = KgiEmployeeHistory::find()
             ->select('nextCheckDate')
             ->where(["kgiEmployeeId" => $kgiEmployeeId, "status" => [1, 2, 4]])
-            ->orderBy('kgiEmployeeHistoryId DESC')
+            ->orderBy('year DESC,month DESC,status DESC,createDateTime DESC')
             ->asArray()
             ->one();
         if (isset($kgiHistory) && !empty($kgiHistory) && $kgiHistory["nextCheckDate"] != '') {
@@ -294,5 +294,45 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
             ->asArray()
             ->all();
         return count($kgiEmployee);
+    }
+    public static function checkComplete($kgiEmployeeId, $month, $year, $currentYear)
+    {
+        if ($month != '' && $year != '') {
+            $kgiEmployeeHistory = KgiEmployeeHistory::find()
+                ->where([
+                    "kgiEmployeeId" => $kgiEmployeeId,
+                    "status" => 2,
+                    "month" => $month,
+                    "year" => $year
+                ])
+                ->one();
+        }
+        if ($month == '' && $year != '') {
+            if ($year != $currentYear) {
+                return 1;
+            } else {
+
+                return 0;
+            }
+        }
+        if ($month != '' && $year == '') {
+            $kgiEmployeeHistory = KgiTeamHistory::find()
+                ->where([
+                    "kgiEmployeeId" => $kgiEmployeeId,
+                    "status" => 2,
+                    "month" => $month,
+                    "year" => $currentYear
+                ])
+                ->one();
+        }
+        if ($month == '' && $year == '') {
+            return 0;
+        }
+
+        if (isset($kgiEmployeeHistory) && !empty($kgiEmployeeHistory)) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

@@ -48,12 +48,6 @@ $this->title = 'KPI Grid View';
                             <?php
                             if ($role >= 3) {
                             ?>
-                                <!-- <button type="button" class="btn-createnew font-size-11" data-bs-toggle="modal"
-                                data-bs-target="#create-kpi-modal" style="position:absolute;">
-                                <?= Yii::t('app', 'Create New') ?>
-                                <img src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
-                                    class="pim-icon ml-3" style="margin-top: -1px;">
-                            </button> -->
                                 <a type="button" class="btn-createnew font-size-11"
                                     href="<?= Yii::$app->homeUrl ?>kpi/management/create-kpi/"
                                     style="position:absolute;text-decoration:none;">
@@ -116,7 +110,7 @@ $this->title = 'KPI Grid View';
                     ?>
                             <div class="col-12 mt-10 mb-5 pim-big-box pim-<?= $colorFormat ?>" id="kpi-<?= $kpiId ?>">
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-5 col-12 pim-name pr-0">
+                                    <div class="col-lg-3 col-md-5 col-12 pim-name">
                                         <?= $kpi["kpiName"] ?>
                                     </div>
                                     <div class="col-lg-1 col-md-2 col-4 text-center">
@@ -145,25 +139,25 @@ $this->title = 'KPI Grid View';
                                     </div>
                                     <div class="col-lg-5 col-md-2 col-4 text-end pr-20" style="margin-top: -5px;">
                                         <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 1]) ?>"
-                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
                                             style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
                                                 class="pim-icon" style="margin-top: -1px;">
                                         </a>
                                         <a href="<?= Yii::$app->homeUrl ?>kpi/view/index/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 2]) ?>"
-                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
                                             style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg" alt="History"
                                                 class="pim-icon mr-3" style="margin-top: -2px;"><?= Yii::t('app', 'History') ?>
                                         </a>
                                         <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 3]) ?>"
-                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
                                             style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="Chats"
                                                 class="pim-icon mr-3" style="margin-top: -2px;"><?= Yii::t('app', 'Chats') ?>
                                         </a>
                                         <a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'openTab' => 4]) ?>"
-                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
+                                            class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
                                             style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
                                                 class="pim-icon mr-3" style="margin-top: -2px;"><?= Yii::t('app', 'Chart') ?>
@@ -176,7 +170,7 @@ $this->title = 'KPI Grid View';
                                                 onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                                 onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
-                                                    class="pim-icon mr-3" style="margin-top: -2px;">
+                                                    class="pim-icon" style="margin-top: -2px;">
                                             </a>
                                         <?php
                                         }
@@ -474,7 +468,6 @@ $this->title = 'KPI Grid View';
                                         <div class="col-12  pim-unit-text">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
                                                 class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
-
                                             <?= Yii::t('app', $kpi["unit"]) ?>
                                         </div>
                                     </div>

@@ -3,6 +3,7 @@
 namespace frontend\modules\kgi\controllers;
 
 use common\helpers\Path;
+use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
 use FFI\Exception as FFIException;
@@ -574,22 +575,8 @@ class KgiPersonalController extends Controller
 		$employees = [];
 		$teams = [];
 		$role = UserRole::userRight();
-		$session = Yii::$app->session;
-		$session->open();
-		$session->set('kgiEmployee', [
-			"companyId" => $companyId,
-			"branchId" => $branchId,
-			"teamId" => $teamId,
-			"employeeId" => $employeeId,
-			"month" => $month,
-			"year" => $year,
-			"status" => $status,
-			"type" => $type
-		]);
+		Session::PimEmployeeFilter($companyId, $branchId, $teamId, $employeeId, $month, $year, $status, $type);
 		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
-			if ($session->has('kgiEmployee')) {
-				$session->remove('kgiEmployee');
-			}
 			if ($type == "list") {
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 			} else {
@@ -705,6 +692,10 @@ class KgiPersonalController extends Controller
 			$kgiEmployee->status = 1;
 			$kgiEmployee->month = $nextMonth;
 			$kgiEmployee->year = $nextYear;
+			$kgiEmployee->fromDate = null;
+			$kgiEmployee->toDate = null;
+			$kgiEmployee->nextCheckDate = null;
+			$kgiEmployee->result = 0.00;
 			$kgiEmployee->updateDateTime = new Expression('NOW()');
 			$kgiEmployee->save(false);
 		}

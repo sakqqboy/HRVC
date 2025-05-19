@@ -3,6 +3,7 @@
 namespace frontend\modules\setting\controllers;
 
 use common\helpers\Path;
+use common\helpers\Session;
 use common\models\ModelMaster;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -51,6 +52,7 @@ class EmployeeController extends Controller
         if (!Yii::$app->user->id) {
             return $this->redirect(Yii::$app->homeUrl . 'site/login');
         }
+        Session::deleteSession();
         return true; //go to origin request
     }
     public function actionIndex($hash)

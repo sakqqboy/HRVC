@@ -3,6 +3,7 @@
 namespace frontend\modules\kgi\controllers;
 
 use common\helpers\Path;
+use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Company;
@@ -281,7 +282,7 @@ class KgiTeamController extends Controller
 		$waitForApprove = json_decode($waitForApprove, true);
 
 		curl_close($api);
-		// throw new Exception(Yii::$app->user->id);
+		//throw new Exception('kgi/kgi-team/all-team-kgi?userId=' . $userId . '&&role=' . $role);
 
 		//throw new Exception($role);
 		// throw new Exception(print_r($teamKgis,true));
@@ -336,21 +337,8 @@ class KgiTeamController extends Controller
 		$status = $param["status"];
 		$year = $param["year"];
 		$type = $param["type"];
-		$session = Yii::$app->session;
-		$session->open();
-		$session->set('kgiTeam', [
-			"companyId" => $companyId,
-			"branchId" => $branchId,
-			"teamId" => $teamId,
-			"month" => $month,
-			"year" => $year,
-			"status" => $status,
-			"type" => $type
-		]);
+		Session::PimTeamFilter($companyId, $branchId, $teamId, $month, $year, $status, $type);
 		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
-			if ($session->has('kgiTeam')) {
-				$session->remove('kgiTeam');
-			}
 			if ($type == "list") {
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi');
 			} else {
@@ -741,6 +729,10 @@ class KgiTeamController extends Controller
 			$kgiTeam->status = 1;
 			$kgiTeam->month = $nextMonth;
 			$kgiTeam->year = $nextYear;
+			$kgiTeam->fromDate = null;
+			$kgiTeam->toDate = null;
+			$kgiTeam->nextCheckDate = null;
+			$kgiTeam->result = 0.00;
 			$kgiTeam->updateDateTime = new Expression('NOW()');
 			if ($kgiTeam->save(false)) {
 				// $KgiEmployee = KgiEmployee::find()->where(["kgiId" => $kgiTeam["kgiId"]])->all();
@@ -767,6 +759,10 @@ class KgiTeamController extends Controller
 							$empoyee->status = 1;
 							$empoyee->month = $nextMonth;
 							$empoyee->year = $nextYear;
+							$empoyee->fromDate = null;
+							$empoyee->toDate = null;
+							$empoyee->nextCheckDate = null;
+							$empoyee->result = 0.00;
 						}
 						$KgiEmployeeHistory = new KgiEmployeeHistory();
 						$KgiEmployeeHistory->kgiEmployeeId = $empoyee->kgiEmployeeId;

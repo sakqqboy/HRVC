@@ -371,4 +371,44 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
 
         return $sumResult ?? 0;
     }
+    public static function checkComplete($kpiEmployeeId, $month, $year, $currentYear)
+    {
+        if ($month != '' && $year != '') {
+            $kpiEmployeeHistory = KpiEmployeeHistory::find()
+                ->where([
+                    "kpiEmployeeId" => $kpiEmployeeId,
+                    "status" => 2,
+                    "month" => $month,
+                    "year" => $year
+                ])
+                ->one();
+        }
+        if ($month == '' && $year != '') {
+            if ($year != $currentYear) {
+                return 1;
+            } else {
+
+                return 0;
+            }
+        }
+        if ($month != '' && $year == '') {
+            $kpiEmployeeHistory = KpiTeamHistory::find()
+                ->where([
+                    "kpiEmployeeId" => $kpiEmployeeId,
+                    "status" => 2,
+                    "month" => $month,
+                    "year" => $currentYear
+                ])
+                ->one();
+        }
+        if ($month == '' && $year == '') {
+            return 0;
+        }
+
+        if (isset($kpiEmployeeHistory) && !empty($kpiEmployeeHistory)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

@@ -3,6 +3,7 @@
 namespace frontend\modules\setting\controllers;
 
 use common\helpers\Path;
+use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
@@ -37,6 +38,7 @@ class CompanyController extends Controller
 		if (!Yii::$app->user->id) {
 			return $this->redirect(Yii::$app->homeUrl . 'site/login');
 		}
+		Session::deleteSession();
 		return true; //go to origin request
 	}
 	public function actionIndex()
@@ -178,7 +180,7 @@ class CompanyController extends Controller
 	public function actionSaveCreateCompany()
 	{
 
-				// throw new Exception("POST DATA: " . print_r($_POST, true));
+		// throw new Exception("POST DATA: " . print_r($_POST, true));
 
 		if (isset($_POST["companyName"]) && trim($_POST["companyName"]) != '') {
 			$company = new Company();
@@ -305,7 +307,7 @@ class CompanyController extends Controller
 		$companyCountry = json_decode($resultCountryDetail, true);
 
 		curl_close($api);
-		 
+
 		// throw new Exception("Company: " . print_r($company, true));
 
 		return $this->render('update_company', [

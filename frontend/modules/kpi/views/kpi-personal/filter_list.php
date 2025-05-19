@@ -11,69 +11,69 @@ use frontend\models\hrvc\Team;
     <?php
     if ($role > 3) {
     ?>
-    <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 <?= $companyId != "" ? 'select-pimselect' : 'select-pim' ?>"
-            id="company-filter" onchange="applySelectStyle(this)">
-            <?php
+        <div class="col-2 pr-5 pl-1">
+            <select class="form-select font-size-12 <?= $companyId != "" ? 'select-pimselect' : 'select-pim' ?>"
+                id="company-filter" onchange="applySelectStyle(this)">
+                <?php
                 if (isset($companyId) && $companyId != "") { ?>
-            <option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
-            <?php
+                    <option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
+                <?php
                     $branches = Branch::branchInCompany($companyId);
                 }
                 ?>
-            <option value=""><?= Yii::t('app', 'Company') ?></option>
-            <?php
+                <option value=""><?= Yii::t('app', 'Company') ?></option>
+                <?php
                 if (isset($companies) && count($companies) > 0) {
                     foreach ($companies as $company) : ?>
-            <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-            <?php
+                        <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+                <?php
                     endforeach;
                 }
                 ?>
-        </select>
-    </div>
-    <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 <?= $branchId != "" ? 'select-pimselect' : 'select-pim' ?>"
-            id="branch-filter" <?= $companyId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
-            <?php
+            </select>
+        </div>
+        <div class="col-2 pr-5 pl-1">
+            <select class="form-select font-size-12 <?= $branchId != "" ? 'select-pimselect' : 'select-pim' ?>"
+                id="branch-filter" <?= $companyId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
+                <?php
                 if (isset($branchId) && $branchId != "") { ?>
-            <option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>
-            <?php
+                    <option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>
+                <?php
                     $teams = Team::teamInBranch($branchId);
                 }
                 ?>
-            <option value=""><?= Yii::t('app', 'Branch') ?></option>
-            <?php
+                <option value=""><?= Yii::t('app', 'Branch') ?></option>
+                <?php
                 if (isset($branches) && count($branches) > 0) {
                     foreach ($branches as $branch) : ?>
-            <option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
-            <?php
+                        <option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
+                <?php
                     endforeach;
                 }
                 ?>
 
-        </select>
-    </div>
-    <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 <?= $teamId != "" ? 'select-pimselect' : 'select-pim' ?>"
-            id="team-filter" <?= $branchId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
-            <?php
+            </select>
+        </div>
+        <div class="col-2 pr-5 pl-1">
+            <select class="form-select font-size-12 <?= $teamId != "" ? 'select-pimselect' : 'select-pim' ?>"
+                id="team-filter" <?= $branchId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
+                <?php
                 if (isset($teamId) && $teamId != "") { ?>
-            <option value="<?= $teamId ?>"><?= Team::teamName($teamId) ?></option>
-            <?php
+                    <option value="<?= $teamId ?>"><?= Team::teamName($teamId) ?></option>
+                <?php
                 } ?>
-            <option value=""><?= Yii::t('app', 'Team') ?></option>
-            <?php
+                <option value=""><?= Yii::t('app', 'Team') ?></option>
+                <?php
 
                 if (isset($teams) && count($teams) > 0) {
                     foreach ($teams as $team) : ?>
-            <option value="<?= $team['teamId'] ?>"><?= $team['teamName'] ?></option>
-            <?php
+                        <option value="<?= $team['teamId'] ?>"><?= $team['teamName'] ?></option>
+                <?php
                     endforeach;
                 }
                 ?>
-        </select>
-    </div>
+            </select>
+        </div>
     <?php
     }
     if (isset($teamId) && $teamId != null) {
@@ -83,27 +83,27 @@ use frontend\models\hrvc\Team;
     }
     if ($role >= 3) {
     ?>
-    <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 <?= $employeeId != "" ? 'select-pimselect' : 'select-pim' ?>"
-            id="employee-filter" <?= $disabled ?> onchange="applySelectStyle(this)">
-            <?php
+        <div class="col-2 pr-5 pl-1">
+            <select class="form-select font-size-12 <?= $employeeId != "" ? 'select-pimselect' : 'select-pim' ?>"
+                id="employee-filter" <?= $disabled ?> onchange="applySelectStyle(this)">
+                <?php
                 if (isset($employeeId) && $employeeId != null) { ?>
-            <option value="<?= $employeeId ?>"><?= Employee::employeeName($employeeId) ?></option>
-            <?php
+                    <option value="<?= $employeeId ?>"><?= Employee::employeeName($employeeId) ?></option>
+                <?php
                 }
                 ?>
-            <option value=""><?= Yii::t('app', 'Employee') ?></option>
-            <?php
+                <option value=""><?= Yii::t('app', 'Employee') ?></option>
+                <?php
                 if (isset($employees) && count($employees) > 0) {
                     foreach ($employees as $employee) : ?>
-            <option value="<?= $employee['employeeId'] ?>"><?= $employee["employeeFirstname"] ?>
-                <?= $employee["employeeSurename"] ?></option>
-            <?php
+                        <option value="<?= $employee['employeeId'] ?>"><?= $employee["employeeFirstname"] ?>
+                            <?= $employee["employeeSurename"] ?></option>
+                <?php
                     endforeach;
                 }
                 ?>
-        </select>
-    </div>
+            </select>
+        </div>
     <?php
     }
     ?>
@@ -111,26 +111,26 @@ use frontend\models\hrvc\Team;
 
     if ($role == 3) { ?>
 
-    <div class="col-2 pr-5 pl-1">
-        <select class="form-select font-size-12 <?= $teamId != "" ? 'select-pimselect' : 'select-pim' ?>"" id="
-            team-filter" onchange="applySelectStyle(this)">
-            <?php
+        <div class="col-2 pr-5 pl-1">
+            <select class="form-select font-size-12 <?= $teamId != "" ? 'select-pimselect' : 'select-pim' ?>"" id="
+                team-filter" onchange="applySelectStyle(this)">
+                <?php
                 if (isset($teamId) && $teamId != "") { ?>
-            <option value="<?= $teamId ?>"><?= Team::teamName($teamId) ?></option>
-            <?php
+                    <option value="<?= $teamId ?>"><?= Team::teamName($teamId) ?></option>
+                <?php
                 } ?>
-            <option value=""><?= Yii::t('app', 'Team') ?></option>
-            <?php
+                <option value=""><?= Yii::t('app', 'Team') ?></option>
+                <?php
                 if (isset($teams) && count($teams) > 0) {
 
                     foreach ($teams as $team) : ?>
-            <option value="<?= $team['teamId'] ?>"><?= $team['teamName'] ?></option>
-            <?php
+                        <option value="<?= $team['teamId'] ?>"><?= $team['teamName'] ?></option>
+                <?php
                     endforeach;
                 }
                 ?>
-        </select>
-    </div>
+            </select>
+        </div>
     <?php
 
     }
@@ -142,7 +142,7 @@ use frontend\models\hrvc\Team;
             <?php
 
             if (isset($month) && $month != "") { ?>
-            <option value="<?= $month ?>"><?= Yii::t('app',  ModelMaster::monthFull()[$month]) ?></option>
+                <option value="<?= $month ?>"><?= Yii::t('app',  ModelMaster::monthFull()[$month]) ?></option>
             <?php
             }
             ?>
@@ -150,7 +150,7 @@ use frontend\models\hrvc\Team;
             <?php
             if (isset($months) && count($months) > 0) {
                 foreach ($months as $value => $month) : ?>
-            <option value="<?= $value ?>"><?= Yii::t('app', $month) ?></option>
+                    <option value="<?= $value ?>"><?= Yii::t('app', $month) ?></option>
             <?php
                 endforeach;
             }
@@ -162,7 +162,7 @@ use frontend\models\hrvc\Team;
             onchange="applySelectStyle(this)">
             <?php
             if (isset($year) && $year != "") { ?>
-            <option value="<?= $year ?>"><?= $year ?></option>
+                <option value="<?= $year ?>"><?= $year ?></option>
             <?php
             }
             ?>
@@ -172,7 +172,7 @@ use frontend\models\hrvc\Team;
             $i = 1;
             while ($i < 20) {
             ?>
-            <option value="<?= $year ?>"><?= $year ?></option>
+                <option value="<?= $year ?>"><?= $year ?></option>
             <?php
                 $year += 1;
                 $i++;
@@ -182,9 +182,30 @@ use frontend\models\hrvc\Team;
     </div>
     <div class="col-1 pr-5 pl-1">
         <select class="form-select font-size-12 select-pim" id="status-filter" onchange="applySelectStyle(this)">
+            <?php
+            if (isset($status) && $status != "") {
+                if ($status == 1) {
+                    $text = 'In Progress';
+                }
+                if ($status == 2) {
+                    $text = 'Completed';
+                }
+                if ($status == 3) {
+                    $text = 'Due Passed';
+                }
+                if ($status == 4) {
+                    $text = 'Not Set';
+                }
+            ?>
+                <option value="<?= $status ?>"><?= $text ?></option>
+            <?php
+            }
+            ?>
             <option value=""><?= Yii::t('app', 'Status') ?></option>
-            <option value="1"><?= Yii::t('app', 'Active') ?></option>
-            <option value="2"><?= Yii::t('app', 'Finished') ?></option>
+            <option value="1"><?= Yii::t('app', 'In Progress') ?></option>
+            <option value="3"><?= Yii::t('app', 'Due Passed') ?></option>
+            <option value="4"><?= Yii::t('app', 'Not Set') ?></option>
+            <option value="2"><?= Yii::t('app', 'Completed') ?></option>
         </select>
     </div>
 
@@ -199,13 +220,13 @@ use frontend\models\hrvc\Team;
 </div>
 
 <script>
-function applySelectStyle(selectElement) {
-    if (selectElement.value) {
-        selectElement.classList.remove('select-pim');
-        selectElement.classList.add('select-pimselect');
-    } else {
-        selectElement.classList.remove('select-pimselect');
-        selectElement.classList.add('select-pim');
+    function applySelectStyle(selectElement) {
+        if (selectElement.value) {
+            selectElement.classList.remove('select-pim');
+            selectElement.classList.add('select-pimselect');
+        } else {
+            selectElement.classList.remove('select-pimselect');
+            selectElement.classList.add('select-pim');
+        }
     }
-}
 </script>

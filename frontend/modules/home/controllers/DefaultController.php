@@ -6,6 +6,7 @@ use frontend\models\hrvc\User;
 use Yii;
 use yii\web\Controller;
 use common\helpers\Path;
+use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Group;
@@ -20,6 +21,11 @@ class DefaultController extends Controller
      * Renders the index view for the module
      * @return string
      */
+    public function beforeAction($action)
+    {
+        Session::deleteSession();
+        return true;
+    }
     public function actionIndex()
     {
         return $this->render('index');

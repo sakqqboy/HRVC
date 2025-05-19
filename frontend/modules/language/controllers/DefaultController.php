@@ -3,6 +3,7 @@
 namespace frontend\modules\language\controllers;
 
 use common\helpers\Path;
+use common\helpers\Session;
 use Exception;
 use frontend\models\hrvc\Translator;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
@@ -19,6 +20,11 @@ class DefaultController extends Controller
      * Renders the index view for the module
      * @return string
      */
+    public function beforeAction($action)
+    {
+        Session::deleteSession();
+        return true;
+    }
     public function actionIndex($english = false)
     {
 

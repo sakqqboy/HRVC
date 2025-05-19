@@ -3,6 +3,7 @@
 namespace frontend\modules\setting\controllers;
 
 use common\helpers\Path;
+use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
@@ -34,6 +35,7 @@ class BranchController extends Controller
         if (!Yii::$app->user->id) {
             return $this->redirect(Yii::$app->homeUrl . 'site/login');
         }
+        Session::deleteSession();
         return true; //go to origin request
     }
     public function actionIndex()
@@ -117,7 +119,7 @@ class BranchController extends Controller
             endforeach;
         }
 
-                //  throw new Exception(print_r($branches, true));
+        //  throw new Exception(print_r($branches, true));
 
 
         return $this->render('create', [
