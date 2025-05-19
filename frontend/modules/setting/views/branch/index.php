@@ -49,23 +49,23 @@ $page = "list"
             <table id="myTable" class="table align-middle table-spacing">
                 <thead class="table-light">
                     <tr class="table-border-weight">
-                        <th class="text-start" onclick="sortCompany('companyName')">
+                        <th class="text-start" onclick="sortBranch('companyName')">
                             <?= Yii::t('app', 'Company Name') ?>
                             <img src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;">
                         </th>
-                        <th class="text-start" onclick="sortCompany('country')">
+                        <th class="text-start" onclick="sortBranch('country')">
                             <?= Yii::t('app', 'Country') ?>
                             <img src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;">
                         </th>
-                        <th class="text-start" onclick="sortCompany('department')">
+                        <th class="text-start" onclick="sortBranch('department')">
                             <?= Yii::t('app', 'Department') ?>
                             <img src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;">
                         </th>
-                        <th class="text-start" onclick="sortCompany('team')">
+                        <th class="text-start" onclick="sortBranch('team')">
                             <?= Yii::t('app', 'Team') ?>
                             <img src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;">
                         </th>
-                        <th class="text-start" onclick="sortCompany('employee')">
+                        <th class="text-start" onclick="sortBranch('employee')">
                             <?= Yii::t('app', 'Employee') ?>
                             <img src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;">
                         </th>

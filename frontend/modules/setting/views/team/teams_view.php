@@ -11,7 +11,7 @@ $page = 'view';
 
     <div class="col-12">
         <div class=" d-flex align-items-center gap-2">
-            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" style="width: 24px; height: 24px;">
+            <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" style="width: 24px; height: 24px;">
             <div class="pim-name-title ml-10">
                 <?= Yii::t('app', 'Team in Details') ?>
             </div>

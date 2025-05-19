@@ -77,14 +77,19 @@ function sortBranch(column) {
 
     const getCellValue = (row, column) => {
         switch (column) {
-            case 'departmentName':
+            case 'companyName':
                 // alert(column);
                 return row.cells[0].innerText.trim().toLowerCase();
-            // return parseInt(row.cells[2].innerText.trim()) || 0;
+            case 'country':
+                // alert(column);
+                return row.cells[1].innerText.trim().toLowerCase();
+            case 'department':
+                // alert(column);
+                return row.cells[2].innerText.trim().toLowerCase();
             case 'team':
-                return parseInt(row.cells[1].innerText.trim()) || 0;
+                return parseInt(row.cells[3].innerText.trim()) || 0;
             case 'employee':
-                return parseInt(row.cells[2].innerText.trim()) || 0;
+                return parseInt(row.cells[4].innerText.trim()) || 0;
             default:
                 return '';
         }

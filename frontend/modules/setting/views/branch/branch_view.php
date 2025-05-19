@@ -11,7 +11,7 @@ $page = 'view';
 
     <div class="col-12">
         <div class=" d-flex align-items-center gap-2">
-            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" style="width: 24px; height: 24px;">
+            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" style="width: 24px; height: 24px;">
             <div class="pim-name-title ml-10">
                 <?= Yii::t('app', 'Branch in Details') ?>
             </div>
@@ -28,12 +28,13 @@ $page = 'view';
             </a>
 
             <div style="display: flex; align-items: center;">
-                <a class="part-text mr-3" href="<?= Yii::$app->homeUrl ?>setting/group/display-group">Group Config</a>
+                <a class="part-text mr-3"
+                    href="<?= Yii::$app->homeUrl ?>setting/group/display-group"><?= Yii::t('app', 'Group Config') ?></a>
                 <div class="mid-center" style="width: 20px; height: 20px;">
                     <text class="squeezer-text mr-3"> / </text>
                 </div>
                 <a class="part-text mr-3"
-                    href="<?= Yii::$app->homeUrl ?>setting/branch/no-branch/<?= ModelMaster::encodeParams(['companyId' => '']) ?>">Branch</a>
+                    href="<?= Yii::$app->homeUrl ?>setting/branch/no-branch/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"><?= Yii::t('app', 'Branch') ?></a>
                 <div class="mid-center" style="width: 20px; height: 20px;">
                     <text class="squeezer-text mr-3"> / </text>
                 </div>
@@ -88,15 +89,15 @@ $page = 'view';
                     <table id="myTable" class="table align-middle table-spacing">
                         <thead class="table-light">
                             <tr class="table-border-weight">
-                                <th class="text-start" onclick="sortBranch('departmentName')" style="width: 314px;">
+                                <th class="text-start" onclick="sortDepartment('departmentName')" style="width: 314px;">
                                     <?= Yii::t('app', 'Associated Department') ?>
                                     <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
                                 </th>
-                                <th class="text-start" onclick="sortBranch('team')" style="width: 230px;">
+                                <th class="text-start" onclick="sortDepartment('team')" style="width: 230px;">
                                     <?= Yii::t('app', 'Associated Teams') ?>
                                     <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
                                 </th>
-                                <th class="text-start" onclick="sortBranch('employee')" style="width: 230px;">
+                                <th class="text-start" onclick="sortDepartment('employee')" style="width: 230px;">
                                     <?= Yii::t('app', 'Associated Employees') ?>
                                     <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
                                 </th>

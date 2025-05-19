@@ -5,7 +5,12 @@ if (window.location.host == 'localhost') {
     $baseUrl = window.location.protocol + "//" + window.location.host + '/';
 }
 $url = $baseUrl;
-let sortDirection = {}; // เก็บทิศทางการ sort ของแต่ละคอลัมน์
+
+// let sortDirection = {}; // เก็บทิศทางการ sort ของแต่ละคอลัมน์
+
+// function sortCompany(column) {
+//     alert(column);
+// }
 
 function deleteCompany(companyId) {
     if (confirm("Are you sure to delete this company?")) {
@@ -226,27 +231,27 @@ function sortCompany(column) {
 // }
 
 
-// function filterPageCompany(page, nowPage) {
-//     // console.log("Page:", page); // Add this line to check the value of `page`
+function filterPageCompany(page, nowPage) {
+    // console.log("Page:", page); // Add this line to check the value of `page`
 
-//     const countryId = document.getElementById('countrySelect').value;
-//     var url = $url + 'setting/company/encode-params-page';
-//     // alert(page);
-//     $.ajax({
-//         type: "POST",
-//         dataType: 'json',
-//         url: url,
-//         data: {
-//             countryId: countryId,
-//             page: page,
-//             nowPage: nowPage
-//         },
-//         success: function (data) {
-//             // window.location.href = "company-grid-filter/" + data.url;
-//             alert(data);
-//         },
-//         error: function (xhr, status, error) {
-//             console.error("AJAX request failed: " + error);
-//         }
-//     });
-// }
+    const countryId = document.getElementById('countrySelect').value;
+    var url = $url + 'setting/company/encode-params-page';
+    // alert(page);
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: {
+            countryId: countryId,
+            page: page,
+            nowPage: nowPage
+        },
+        success: function (data) {
+            // window.location.href = "company-grid-filter/" + data.url;
+            alert(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX request failed: " + error);
+        }
+    });
+}
