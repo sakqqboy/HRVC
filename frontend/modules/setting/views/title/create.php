@@ -11,122 +11,99 @@ $form = ActiveForm::begin([
 	],
 	'action' => Yii::$app->homeUrl . 'setting/title/save-create-title'
 ]); ?>
-<div class="col-12 department-one  mb-20" style="margin-top: 90px;">
-	<div class="col-lg-9 col-md-6 col-12">
-		<div class="col-12 text-primary font-size-32 font-b">
-			<i class="fa fa-magic ml-5" aria-hidden="true"></i>
-			Title Registeration
-		</div>
-	</div>
-	<div class="col-12 mt-40 pl-20 pr-20">
-		<div class="row ">
-			<div class="col-lg-6 col-md-6 col-12">
-				<div class="col-12">
-					<label class="form-label font-size-12 font-b">
-						<span class="text-danger mr-5"><b>*</b></span>Title
-					</label>
-					<input type="text" name="titleName" id="titleName" class="form-control" required>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 col-12">
-				<div class="col-12">
-					<label class="form-label font-size-12 font-b"><span class="text-danger mr-5"><b>*</b></span>Select Associate Layer</label>
-					<select class="form-select" id="layer" name="layer" required>
-						<option value="">Select Layer</option>
-						<?php
-						if (isset($layer) && count($layer) > 0) {
-						?>
-							<?php
-							foreach ($layer as $l) : ?>
-								<option value="<?= $l['layerId'] ?>"><?= $l['layerName'] ?></option>
-							<?php
-							endforeach; ?>
+<div class="company-group-body">
+    <div class="contrainer-body">
+        <div class="col-12">
+            <div class=" d-flex align-items-center gap-2">
+                <a href="" style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg"
+                        style="width:18px; height:18px; margin-top:-3px;">
+                    Back </a>
+                <div class="pim-name-title ml-10">
+                    Create Title
+                </div>
+            </div>
+        </div>
 
-						<?php
-						}
-						?>
-					</select>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-6 col-12">
-				<div class="col-12">
-					<label class="form-label font-size-12 font-b"><span class="text-danger mr-5"><b>*</b></span>Shot Tag </label>
-					<input type="text" name="shortTag" id="shortTag" class="form-control" required>
-				</div>
-			</div>
-			<div class="col-lg-3 col-6 mt-10">
-				<label class="form-label font-size-12 font-b"><span class="text-danger mr-5"><b>*</b></span>Company </label>
-				<select class="form-select" id="company-team" onchange="javascript:branchCompany()" required>
-					<option value="">Select Company</option>
-					<?php
-					if (isset($companies) && count($companies) > 0) {
-					?>
-						<?php
-						foreach ($companies as $company) : ?>
-							<option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-						<?php
-						endforeach; ?>
+        <div class="row update-group-body mt-20">
+            <div class="col-3">
+                <span class="font-size-18 font-weight-600 ">Associated Group</span>
+                <div class="d-flex mb-20 mt-19" style="align-items: center; gap: 29px; align-self: stretch;">
+                    <div class="avatar-preview">
+                        <img src="<?= Yii::$app->homeUrl ?>images/branch/profile/Tp-bPC6u8a.png"
+                            class="cycle-big-image">
+                    </div>
+                    <div class="start-center">
+                        <span class="font-size-20 font-weight-500">
+                            Thailand consulting
+                        </span>
+                        <div class="col-12 font-size-14 tokyo-small">
+                            <img src="<?= Yii::$app->homeUrl ?>image/hyphen.svg">
+                            What we give is What we get.
+                        </div>
+                    </div>
+                </div>
+                <span class="font-gray font-size-14 font-weight-400 ">
+                    All the titles created here will be associated with the Tokyo Consulting Group and it’s subsidiaries
+                    based on departments of each branch
+                </span>
+            </div>
+            <div class="col-9">
 
-					<?php
-					}
-					?>
-				</select>
-			</div>
-			<div class="col-lg-3 col-6 mt-10">
-				<label class="form-label font-size-12 font-b"><span class="text-danger mr-5"><b>*</b></span>Branch </label>
-				<select class="form-select" id="branch-team" onchange="javascript:departmentBranch()" required>
-					<option value="">Select Branch</option>
+            </div>
+            <div class="col-12 mt-54">
+                <label class="form-label font-size-16 font-weight-600 font-b">
+                    Title’s Job Description <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                        data-toggle="tooltip" data-placement="top" aria-label="Select to Company"
+                        data-bs-original-title="Select to Company">
+                </label>
+                <hr class="hr-group">
 
-				</select>
-			</div>
-			<div class="col-lg-3 col-6 mt-10">
-				<label class="form-label font-size-12 font-b"><span class="text-danger mr-5"><b>*</b></span>Department </label>
-				<select class="form-select" name="departmentId" id="department-team" required onchange="javascript:addDepartmentId()">
-					<option value="">Select Department</option>
+                <div class="row" style="gap: 22px;">
+                    <div class="row">
+                        <label class="form-gro font-size-16 font-weight-600 font-b mb-12">
+                            Purpose of The Job <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                data-toggle="tooltip" data-placement="top" aria-label="Select to Company"
+                                data-bs-original-title="Select to Company">
+                        </label>
+                        <textarea class=" form-control " style="height: 115px;"
+                            placeholder="Write the purpose of the job for this title"></textarea>
+                    </div>
+                    <div class="row">
+                        <label class="form-label font-size-16 font-weight-600 font-b mb-12">
+                            Purpose of The Job <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                data-toggle="tooltip" data-placement="top" aria-label="Select to Company"
+                                data-bs-original-title="Select to Company">
+                        </label>
+                        <textarea class=" form-control " style="height: 115px;"
+                            placeholder="Core Responsibility"></textarea>
+                    </div>
+                    <div class="row">
+                        <label class="form-label font-size-16 font-weight-600 font-b mb-12">
+                            Purpose of The Job <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                data-toggle="tooltip" data-placement="top" aria-label="Select to Company"
+                                data-bs-original-title="Select to Company">
+                        </label>
+                        <textarea class=" form-control " style="height: 115px;"
+                            placeholder="Key Responsibility"></textarea>
+                    </div>
+                </div>
 
-				</select>
-			</div>
-			<div class="col-12 mt-50">
-				<span class="text-danger mr-5"><b>*</b></span><b>Job Description Panel</b>
-				<hr>
-			</div>
-			<div class="col-12 mt-10">
-				<label class="form-label font-size-12 font-b">
-					<span class="text-danger mr-5"><b>*</b></span>Job Description Name</label>
-				<!-- <input type="text" name="jobDescription" id="jobDescription" class="form-control" required> -->
-				<textarea name="jobDescription" id="jobDescription" class="form-control" style="white-space: pre-wrap;"></textarea>
-			</div>
-			<div class="col-12 mt-10">
-				<label class="form-label font-size-12 font-b">Purpose of the Job</label>
-				<textarea name="purpose" id="purpose" class="form-control" style="white-space: pre-wrap;height:150px;"></textarea>
-			</div>
-			<div class="col-12 mt-10">
-				<label class="form-label font-size-12 font-b">Key Responsibility</label>
-				<textarea name="keyResponsibility" id="keyResponsibility" class="form-control" style="white-space: pre-wrap;height:150px;"></textarea>
-			</div>
-			<div class="col-12 mt-10">
-				<label class="form-label font-size-12 font-b">Required Skills</label>
-				<div class="col-12">
-					<div class="tags-input">
-						<div id="tags" class="">
-							<span id="show-text"></span>
-							<input type="text" id="input-tag" class="border form-control mt-10" placeholder="Add required skill(s)">
-						</div>
-					</div>
-				</div>
-				<input type="hidden" id="currentId" value="1">
-				<div style="display:none;" id="tag-value"></div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12 col-md-2 col-12 pt-30 text-end pr-1 pl-0 text-end">
-				<button type="reset" class="btn btn-secondary" id="create-title">Cancel
-				</button>
-				<a href="javascript:checkDupplicateTitle()" class="btn btn-primary" id="create-title">Create
-				</a>
+                <div class="col-12 text-end mt-22">
+                    <input type="hidden" id="branchId" value="">
+                    <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
+                        <button type="button" class="btn-cancel-group"
+                            action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
+                            Cancel </button>
+                    </a>
 
-			</div>
-		</div>
-	</div>
-</div>
-<?php ActiveForm::end(); ?>
+                    <button type="submit" class="btn-save-group">
+                        Create <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="LinkedIn"
+                            style="width: 20px; height: 20px;">
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <?php ActiveForm::end(); ?>

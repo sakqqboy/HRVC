@@ -3,6 +3,7 @@
 namespace frontend\modules\setting\controllers;
 
 use common\helpers\Path;
+use common\models\hrvc\Company;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
@@ -10,6 +11,7 @@ use frontend\models\hrvc\Department;
 use frontend\models\hrvc\DepartmentTitle;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Layer;
+use frontend\models\hrvc\Team;
 use frontend\models\hrvc\Title;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Html;
@@ -41,6 +43,44 @@ class TitleController extends Controller
         }
         return true; //go to origin request
     }
+
+    public function actionNoTitle($hash)
+	{
+        $param = ModelMaster::decodeParams($hash);
+        $departmentId = $param["departmentId"]??0;
+        // throw new exception(print_r($branchId, true));
+
+        $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+        if (!isset($group) && !empty($group)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+        }
+
+        $company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
+        if (!isset($company) && !empty($company)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/company/create-company/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
+        }
+
+        $branch = Branch::find()->select('branchId')->where(["status" => 1])->asArray()->one();
+        if (!isset($branch) && !empty($branch)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/branch/create-branch/' . ModelMaster::encodeParams(["companyId" => '']));
+        }
+
+        $department = Department::find()->select('departmentId')->where(["status" => 1])->asArray()->one();
+        if (!isset($department) && !empty($department)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/department/create-department/');
+        }
+
+        $team = Title::find()->select('titleId')->where(["status" => 0])->asArray()->one();
+        if (isset($team) && !empty($team)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/title/index/');
+        }
+
+        return $this->render('no_title', [
+            "departmentId" => $departmentId,
+            "group" =>  $group
+        ]);
+	}
+    
     public function actionIndex()
     {
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
@@ -76,8 +116,18 @@ class TitleController extends Controller
             "departments" => $departments,
         ]);
     }
-    public function actionCreate()
+    public function actionCreate($hash)
     {
+        $param = ModelMaster::decodeParams($hash);
+        $departmentId = $param["departmentId"];
+        $branchId = $param["branchId"]?? null;
+        $companyId = $param["companyId"] ?? null;
+        $groupId = Group::currentGroupId();        // throw new exception(print_r($branchId, true));
+
+        $companyName = '';
+        $branchName = '';
+        $departmentName = '';
+
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
         if (!isset($group) && !empty($group)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
@@ -87,18 +137,60 @@ class TitleController extends Controller
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        $companies = curl_exec($api);
-        $companies = json_decode($companies, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
-        $layer = curl_exec($api);
-        $layer = json_decode($layer, true);
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        // $companies = curl_exec($api);
+        // $companies = json_decode($companies, true);
+        
+         if (!empty($departmentId)) {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-detail?id=' . $departmentId);
+            $departmenJson = curl_exec($api);
+            $departmentes = json_decode($departmenJson, true);
+            // throw new Exception(print_r($departmentes, true));
+            $departmentName = $departmentes["departmentName"];
+            $branchId = $departmentes["branchId"];
+        }
+
+        if (!empty($branchId)) {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' . $branchId);
+            $branchJson = curl_exec($api);
+            $branches = json_decode($branchJson, true);
+            $branchName = $branches["branchName"];
+            $companyId = $branches["companyId"];
+        } 
+
+        if (!empty($companyId)) {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId );
+            $companies = curl_exec($api);
+            $companies = json_decode($companies, true);
+            $companyName = $companies["companyName"];
+        } else {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+            $companies = curl_exec($api);
+            $companies = json_decode($companies, true);
+        }
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
+        $group = curl_exec($api);
+        $group = json_decode($group, true);
+
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
+        // $layer = curl_exec($api);
+        // $layer = json_decode($layer, true);
 
         curl_close($api);
         return $this->render('create', [
-            "companies" => $companies,
-            "layer" => $layer,
+            "group" => $group,
+            "departmentId" => $departmentId,
+            "branchId" => $branchId,
+            "companyId" => $companyId,
+            "companyName" => $companyName,
+            "branchName" => $branchName,
+            "departmentName" => $departmentName,
+            // "departments" => $departments,
+            // "branches" => $branches,
+            // "companies" => $companies,
+            // "layer" => $layer,
         ]);
     }
     public function actionCheckDupplicateTitle()

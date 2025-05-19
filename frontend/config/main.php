@@ -120,6 +120,8 @@ return [
                 'setting/team/teams-view/<hash>' => 'setting/team/teams-view',
                 'setting/layer/result-layer-title/<hash>' => 'setting/layer/result-layer-title',
                 'setting/employee/employee-result/<hash>' => 'setting/employee/employee-result',
+                'setting/title/no-title/<hash>' => 'setting/title/no-title',
+                'setting/title/create/<hash>' => 'setting/title/create',
                 'setting/title/search-result/<hash>' => 'setting/title/search-result',
                 'setting/title/update-title/<hash>' => 'setting/title/update-title',
                 'setting/title/title-detail/<hash>' => 'setting/title/title-detail',
