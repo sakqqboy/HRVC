@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 
-$this->title = 'Department Profile';
+$this->title = 'Team Profile';
 $page = 'view';
 
 ?>
@@ -13,7 +13,7 @@ $page = 'view';
         <div class=" d-flex align-items-center gap-2">
             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" style="width: 24px; height: 24px;">
             <div class="pim-name-title ml-10">
-                <?= Yii::t('app', 'Branch in Details') ?>
+                <?= Yii::t('app', 'Team in Details') ?>
             </div>
         </div>
     </div>
@@ -28,12 +28,13 @@ $page = 'view';
             </a>
 
             <div style="display: flex; align-items: center;">
-                <a class="part-text mr-3" href="<?= Yii::$app->homeUrl ?>setting/group/display-group">Group Config</a>
+                <a class="part-text mr-3"
+                    href="<?= Yii::$app->homeUrl ?>setting/group/display-group"><?= Yii::t('app', 'Group Config') ?></a>
                 <div class="mid-center" style="width: 20px; height: 20px;">
                     <text class="squeezer-text mr-3"> / </text>
                 </div>
                 <a class="part-text mr-3"
-                    href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['branchId' => '']) ?>">Teams</a>
+                    href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['branchId' => '']) ?>"><?= Yii::t('app', 'Teams') ?></a>
                 <div class="mid-center" style="width: 20px; height: 20px;">
                     <text class="squeezer-text mr-3"> / </text>
                 </div>
@@ -103,11 +104,11 @@ $page = 'view';
                             <tr class="table-border-weight">
                                 <th class="text-start" onclick="sortTeam('teamName')" style="width: 314px;">
                                     <?= Yii::t('app', 'Associated Teams') ?>
-                                    <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;">
                                 </th>
                                 <th class="text-start" onclick="sortTeam('employee')" style="width: 230px;">
                                     <?= Yii::t('app', 'Associated Employees') ?>
-                                    <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;">
                                 </th>
                                 <th class="text-start" style="width: 30px;">
                                 </th>
@@ -198,8 +199,8 @@ $page = 'view';
                                 <td>
                                     <a onclick="openPopupModalTeam('<?= Yii::$app->homeUrl ?>setting/team/modal-team/<?= ModelMaster::encodeParams(['departmentId' => $data['departmentId'],'teamId' => $team['teamId']]) ?>')"
                                         class="btn btn-bg-white-xs mr-5" style="margin-top: 3px;">
-                                        <img src="/HRVC/frontend/web/images/icons/Settings/editblack.svg" alt="edit"
-                                            class="pim-icon">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                            alt="edit" class="pim-icon">
                                     </a>
                                 </td>
                             </tr>

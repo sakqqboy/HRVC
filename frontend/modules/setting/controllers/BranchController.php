@@ -429,7 +429,7 @@ class BranchController extends Controller
             endforeach;
         }
 
-        // throw new Exception(print_r($data, true)); // Debug: ดูข้อมูลทั้งหมด
+        // throw new Exception(print_r($company, true)); // Debug: ดูข้อมูลทั้งหมด
 
         return $this->render('branch_grid', [
             "branches" => $data,
@@ -452,7 +452,6 @@ class BranchController extends Controller
         $nextPage = $param["nextPage"];
 
         // throw new Exception(print_r($countryId, true));
-
 
         $totalEmployees = 0;
         $totalDepartment = 0;
@@ -478,10 +477,9 @@ class BranchController extends Controller
 		$numPage = json_decode($numPage, true);
         // throw new Exception(print_r($numPage, true));
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch-filter?id=1' . '&page=' . $nextPage . '&countryId='. $countryId . '&companyId=' . $companyId . '&limit=6');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch-filter?id=' . '&page=' . $nextPage . '&countryId='. $countryId . '&companyId=' . $companyId . '&limit=6');
         $branchJson = curl_exec($api);
         $branches = json_decode($branchJson, true);
-
 
         // throw new Exception(print_r($branches, true));
 

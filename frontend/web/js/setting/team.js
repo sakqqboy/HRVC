@@ -439,11 +439,11 @@ function renderTeamList(teams) {
                 <div class="col-2 text-end">
                     <a href="#" style="cursor: pointer;"
                     onclick="openModalDeleteTeam('${team.teamId}')" class="no-underline icon-delete">
-                        <img src="/HRVC/frontend/web/images/icons/Settings/binred.svg" alt="Delete"
+                        <img src="${$url}images/icons/Settings/binred.svg" alt="Delete"
                             class="pim-icon bin-icon transition-icon">
                     </a>
                     <a href="#" class="no-underline icon-edit" onclick="handleTeamEditClick(event, this)">
-                        <img src="/HRVC/frontend/web/image/edit-blue.svg" alt="Edit"
+                        <img src="${$url}image/edit-blue.svg" alt="Edit"
                             class="pim-icon edit-icon transition-icon" style="margin-top: -3px;">
                         <span class="text-blue edit-label transition-label" style="font-weight: 500;">Edit</span>
                     </a>
@@ -541,7 +541,7 @@ function handleTeamEditClick(e, element) {
                     placeholder="Write team name">
                 <span class="input-group-text" id="enterHintlist" style="background-color: #ffff; border-left: none;">
                     <div class="city-crad-company" id="hintTextlist" style="color: #ffffff; background-color: #2580D3;">
-                        <img src="/HRVC/frontend/web/image/enter-white.svg" style="width: 24px; height: 24px;">
+                        <img src="${$url}image/enter-white.svg" style="width: 24px; height: 24px;">
                         Enter to Save
                     </div>
                 </span>

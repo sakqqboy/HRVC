@@ -182,19 +182,20 @@ function modalTest(departmentId) {
 }
 
 function sortDepartment(column) {
-
+    // alert(column);
     const table = document.getElementById('myTable');
     const tbody = table.querySelector('tbody');
     const rows = Array.from(tbody.querySelectorAll('tr'));
-
     const getCellValue = (row, column) => {
         switch (column) {
-            case 'brachName':
-                return parseInt(row.cells[2].innerText.trim()) || 0;
+            case 'departmentName':
+                // alert(column);
+                return row.cells[0].innerText.trim().toLowerCase();
             case 'team':
-                return parseInt(row.cells[4].innerText.trim()) || 0;
+                // alert(column);
+                return parseInt(row.cells[1].innerText.trim()) || 0;
             case 'employee':
-                return parseInt(row.cells[5].innerText.trim()) || 0;
+                return parseInt(row.cells[2].innerText.trim()) || 0;
             default:
                 return '';
         }
@@ -401,11 +402,11 @@ function renderDepartmentList(departments) {
                 <div class="col-2 text-end">
                     <a href="#" style="cursor: pointer;"
                      onclick="openModalDeleteDepartment('${dept.departmentId}')" class="no-underline icon-delete">
-                        <img src="/HRVC/frontend/web/images/icons/Settings/binred.svg" alt="Delete"
+                        <img src="${$url}images/icons/Settings/binred.svg" alt="Delete"
                             class="pim-icon bin-icon transition-icon">
                     </a>
                     <a href="#" class="no-underline icon-edit" onclick="handleDepEditClick(event, this)">
-                        <img src="/HRVC/frontend/web/image/edit-blue.svg" alt="Edit"
+                        <img src="${$url}image/edit-blue.svg" alt="Edit"
                             class="pim-icon edit-icon transition-icon" style="margin-top: -3px;">
                         <span class="text-blue edit-label transition-label" style="font-weight: 500;">Edit</span>
                     </a>
@@ -446,7 +447,7 @@ function handleDepEditClick(e, element) {
                     placeholder="Write department name">
                 <span class="input-group-text" id="enterHintlist" style="background-color: #ffff; border-left: none;">
                     <div class="city-crad-company" id="hintTextlist" style="color: #ffffff; background-color: #2580D3;">
-                        <img src="/HRVC/frontend/web/image/enter-white.svg" style="width: 24px; height: 24px;">
+                        <img src="${$url}image/enter-white.svg" style="width: 24px; height: 24px;">
                         Enter to Save
                     </div>
                 </span>

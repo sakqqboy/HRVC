@@ -51,7 +51,7 @@ if (Yii::$app->session->hasFlash('error')) {
                     <div class="start-center" style="gap: 20px;">
                         <div>
                             <span class="font-size-18" style="font-weight: 600;">
-                                Associated Group
+                                <?= Yii::t('app', 'Associated Group') ?>
                             </span>
                             <div class="mt-19" style="display: flex;">
                                 <div class="avatar-preview mr-24">
@@ -71,8 +71,8 @@ if (Yii::$app->session->hasFlash('error')) {
                             </div>
                         </div>
                         <span class="name-full-tokyo" style="font-size: 14px; width: 369px; ">
-                            Departments are created here will be associated with the Tokyo
-                            Consulting Group
+                            <?= Yii::t('app', 'Departments are created here will be associated with the Tokyo
+                            Consulting Group') ?>
                         </span>
                     </div>
 
@@ -111,8 +111,6 @@ if (Yii::$app->session->hasFlash('error')) {
                                 <span class="input-group-text mt-12"
                                     style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
                                     onclick="document.getElementById('companySelectId').focus();">
-                                    <!-- <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="Founded"
-                                        style="width: 20px; height: 20px;"> -->
                                     <div class="cycle-current-gray" style="width: 20px; height: 20px;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
                                             alt="icon" style="width: 10px; height: 10px;">

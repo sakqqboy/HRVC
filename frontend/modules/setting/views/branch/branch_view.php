@@ -88,7 +88,7 @@ $page = 'view';
                     <table id="myTable" class="table align-middle table-spacing">
                         <thead class="table-light">
                             <tr class="table-border-weight">
-                                <th class="text-start" onclick="sortBranch('brachName')" style="width: 314px;">
+                                <th class="text-start" onclick="sortBranch('departmentName')" style="width: 314px;">
                                     <?= Yii::t('app', 'Associated Department') ?>
                                     <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
                                 </th>

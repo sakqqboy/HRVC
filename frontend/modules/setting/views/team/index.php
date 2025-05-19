@@ -117,7 +117,7 @@ $page = "grid";
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
                                                             alt="Delete" class="pim-icon mr-10"
                                                             style="margin-top: -2px;">
-                                                        Delete </a>
+                                                        <?= Yii::t('app', 'Delete') ?></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -130,12 +130,12 @@ $page = "grid";
                                 <div style="align-self: stretch; height: 147px">
                                     <div class="between-start">
                                         <span class="detailname-crad-company mb-14">
-                                            Registered Teams
+                                            <?= Yii::t('app', 'Registered Teams') ?>
                                         </span>
                                         <a class="see-all-company"
                                             href="
                                         <?= Yii::$app->homeUrl ?>setting/team/teams-view/<?= ModelMaster::encodeParams(['departmentId' => $department['departmentId']]) ?>">
-                                            See All
+                                            <?= Yii::t('app', 'See All') ?>
                                             <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
                                                 style="cursor: pointer;">
                                         </a>

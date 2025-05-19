@@ -49,7 +49,7 @@ if (Yii::$app->session->hasFlash('error')) {
                     <div class="start-center" style="gap: 20px;">
                         <div>
                             <span class="font-size-18" style="font-weight: 600;">
-                                Associated Group
+                                <?= Yii::t('app', 'Associated Group') ?>
                             </span>
                             <div class="mt-19" style="display: flex;">
                                 <div class="avatar-preview mr-24">
@@ -69,8 +69,8 @@ if (Yii::$app->session->hasFlash('error')) {
                             </div>
                         </div>
                         <span class="name-full-tokyo" style="font-size: 14px; width: 369px; ">
-                            Departments are created here will be associated with the Tokyo
-                            Consulting Group
+                            <?= Yii::t('app', 'Departments are created here will be associated with the Tokyo
+                            Consulting Group') ?>
                         </span>
                     </div>
 
