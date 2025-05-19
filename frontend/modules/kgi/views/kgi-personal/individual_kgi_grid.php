@@ -57,7 +57,7 @@ $this->title = "INDIVIDUAL KGI";
                                 if ($role >= 3) {
                                 ?>
                                     <div
-                                        class="col-12 <?= $waitForApprove["totalRequest"] > 0 ? 'approval-box' : 'noapproval-box' ?> text-center pr-3">
+                                        class="col-12 <?= $waitForApprove["totalRequest"] > 0 ? 'approval-box' : 'noapproval-box' ?> text-center pr-3" style="margin-top:-3px;">
                                         <?php
                                         if ($waitForApprove["totalRequest"] > 0) {
                                         ?>
@@ -189,12 +189,12 @@ $this->title = "INDIVIDUAL KGI";
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-5 col-md-2 col-4 text-end pr-20" style="margin-top: -5px;">
+                                        <div class="col-lg-5 col-md-2 col-4 text-end pr-20 pt-0" style="margin-top: -7px;">
+
                                             <?php
                                             if ($role >= 3) {
                                             ?>
-                                                <span class="team-wrapper <?= $colorFormat ?>-teamshow"
-                                                    style="margin-right: 5px; padding: 5px; bottom: 1px;">
+                                                <span class="team-wrapper <?= $colorFormat ?>-teamshow" style="margin-right: 5px;">
                                                     <span class="team-icon pim-team-<?= $colorFormat ?>">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg"
                                                             alt="Team Icon">
@@ -202,53 +202,51 @@ $this->title = "INDIVIDUAL KGI";
                                                     <span class="team-name"><?= $kgi["teamName"] ?></span>
                                                 </span>
                                             <?php } ?>
-                                            <span class="team-wrapper <?= $colorFormat ?>-teamshow"
-                                                style="margin-right: 5px; padding: 5px; ">
-
-                                                <span class="pim-pic-icon">
-                                                    <img src="<?= Yii::$app->homeUrl . $kgi['picture'] ?>">
+                                            <span class="team-wrapper <?= $colorFormat ?>-teamshow text-start" style="margin-right: 5px; ">
+                                                <span>
+                                                    <img src="<?= Yii::$app->homeUrl . $kgi['picture'] ?>" alt="Team Icon" class="pim-pic-icon">
                                                 </span>
-                                                <span class="team-name"><?= $kgi["employeeName"] ?></span>
+                                                <span class="team-name">
+                                                    <?php
+                                                    $employeeName = mb_strimwidth($kgi["employeeName"], 0, 15, '...');
+
+                                                    echo htmlspecialchars($employeeName) ?>
+                                                </span>
                                             </span>
 
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiEmployeeHistoryId' => 0, 'kgiId' => $kgi['kgiId'], 'openTab' => 1]) ?>"
-                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
-                                                style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
+                                                style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
-                                                    class="pim-icon" style="margin-top: -1px;">
+                                                    class="pim-icon" style="margin-top: 1px;">
                                             </a>
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-individual-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiEmployeeId" => $kgiEmployeeId]) ?>"
-                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?>"
-                                                style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
+                                                style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
-                                                    alt="History" class="pim-icon mr-3"
-                                                    style="margin-top: -2px;"><?= Yii::t('app', 'History') ?>
+                                                    alt="History" class="pim-icon mr-3"><?= Yii::t('app', 'History') ?>
                                             </a>
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiEmployeeHistoryId' => 0, 'kgiId' => $kgi['kgiId'], 'openTab' => 3]) ?>"
-                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
-                                                style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
+                                                style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
-                                                    alt="Chats" class="pim-icon mr-3"
-                                                    style="margin-top: -2px;"><?= Yii::t('app', 'Chats') ?>
+                                                    alt="Chats" class="pim-icon mr-3"><?= Yii::t('app', 'Chats') ?>
                                             </a>
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiEmployeeHistoryId' => 0, 'kgiId' => $kgi['kgiId'], 'openTab' => 4]) ?>"
-                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
-                                                style="margin-top: -5px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                                class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs' ?> mr-5"
+                                                style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
-                                                    class="pim-icon mr-3"
-                                                    style="margin-top: -2px;"><?= Yii::t('app', 'Chart') ?>
+                                                    class="pim-icon mr-3"><?= Yii::t('app', 'Chart') ?>
                                             </a>
                                             <?php
                                             if ($role >= 5) {
                                             ?>
-                                                <a class="btn btn-bg-red-xs" data-bs-toggle="modal"
-                                                    data-bs-target="#delete-kgi-employee"
+                                                <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kgi-employee"
                                                     onclick="javascript:prepareDeleteKgiEmployee(<?= $kgiEmployeeId ?>)"
-                                                    style="margin-top: -3px;"
                                                     onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                                     onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
-                                                        alt="History" class="pim-icon" style="margin-top: -2px;">
+                                                        alt="History" class="pim-icon">
                                                 </a>
                                             <?php
                                             }
@@ -599,7 +597,7 @@ $this->title = "INDIVIDUAL KGI";
                                                         <?= $kgi["issue"] ?>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-12 pr-20">
+                                                <div class="col-lg-6 col-md-6 col-12 pl-5 pr-20">
                                                     <div class="col-12 head-letter head-<?= $colorFormat ?>">
                                                         <?= Yii::t('app', 'Solution') ?></div>
                                                     <div class="col-12 body-letter body-letter-<?= $colorFormat ?>">

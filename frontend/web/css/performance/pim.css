@@ -1365,21 +1365,22 @@ thead {
 
 
 .team-wrapper {
+	height: 32px;
+	max-width: 150px;
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
-.team-icon {
+.team-wrapper img {
 	width: 19px;
 	height: 19px;
-	border-radius: 50%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border: 0.5px solid #FFFFFF;
-	/* Default border color */
+	vertical-align: middle;
+	object-fit: cover;
 }
+
 
 
 /* Specific color formats */
@@ -1414,6 +1415,17 @@ thead {
 }
 
 /* Icon inside the circle */
+.team-icon {
+	width: 19px;
+	height: 19px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 0.5px solid #FFFFFF;
+	/* Default border color */
+}
+
 .team-icon img {
 	width: 8px;
 	height: 8px;
@@ -1421,18 +1433,9 @@ thead {
 }
 
 .pim-pic-icon {
-	/* border-radius: 50%; */
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	/* border: 0.5px solid #FFFFFF; */
-}
-
-.pim-pic-icon img {
 	border-radius: 100%;
-	width: 12px;
-	height: 12px;
-	/* object-fit: cover; */
+	object-fit: cover;
+
 }
 
 
