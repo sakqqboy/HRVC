@@ -5,7 +5,11 @@ if (window.location.host == 'localhost') {
     $baseUrl = window.location.protocol + "//" + window.location.host + '/';
 }
 $url = $baseUrl;
-let modalTestCallCount = 0;
+// let modalTestCallCount = 0;
+
+$('#departmentModal').on('hidden.bs.modal', function () {
+    location.reload(); // รีเฟรชหน้า
+});
 
 function showTitleList(departmentId) {
     var url = $url + 'setting/department/title-list';
@@ -469,9 +473,9 @@ function handleDepEditClick(e, element) {
 
     input.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
-            $('#departmentModal').modal('hide');
+            // $('#departmentModal').modal('hide');
             saveDeptEdit(input.value.trim());
-            location.reload(); // รีเฟรชหน้าทันทีหลังจากกด Enter
+            // location.reload(); // รีเฟรชหน้าทันทีหลังจากกด Enter
         }
     });
 

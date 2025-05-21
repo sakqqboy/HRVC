@@ -92,8 +92,8 @@ $page = "grid";
                                         </a>
                                         <span class="dropdown" href="#" id="dropdownMenuLink-1"
                                             data-bs-toggle="dropdown" style="align-self: flex-start;">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/3-dot.svg" alt="icon"
-                                                style="cursor: pointer;">
+                                            <!-- <img src="<?= Yii::$app->homeUrl ?>image/3-dot.svg" alt="icon"
+                                                style="cursor: pointer;"> -->
                                         </span>
                                         <div class="menu-dot ">
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">

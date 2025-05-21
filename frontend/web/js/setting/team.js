@@ -5,6 +5,9 @@ if (window.location.host == 'localhost') {
     $baseUrl = window.location.protocol + "//" + window.location.host + '/';
 }
 $url = $baseUrl;
+$('#teamModal').on('hidden.bs.modal', function () {
+    location.reload(); // รีเฟรชหน้า
+});
 
 function branchCompany() {
     var companyId = $("#company-team").val();
@@ -260,22 +263,22 @@ $("#reset-team").click(function (e) {
 //         });
 //     }
 // }
-function filterTeam() {
-    var companyId = $("#company-team-filter").val();
-    var branchId = $("#branch-team-filter").val();
-    var departmentId = $("#department-team-filter").val();
-    var url = $url + 'setting/team/filter-team';
-    $.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: url,
-        data: { companyId: companyId, branchId: branchId, departmentId: departmentId },
-        success: function (data) {
+// function filterTeam() {
+//     var companyId = $("#company-team-filter").val();
+//     var branchId = $("#branch-team-filter").val();
+//     var departmentId = $("#department-team-filter").val();
+//     var url = $url + 'setting/team/filter-team';
+//     $.ajax({
+//         type: "POST",
+//         dataType: 'json',
+//         url: url,
+//         data: { companyId: companyId, branchId: branchId, departmentId: departmentId },
+//         success: function (data) {
 
 
-        }
-    });
-}
+//         }
+//     });
+// }
 
 function openPopupModalTeam(url) {
     // alert(url);
@@ -559,9 +562,9 @@ function handleTeamEditClick(e, element) {
 
     input.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
-            $('#teamModal').modal('hide');
+            // $('#teamModal').modal('hide');
             saveTeamEdit(input.value.trim());
-            location.reload(); // รีเฟรชหน้าทันทีหลังจากกด Enter
+            // location.reload(); // รีเฟรชหน้าทันทีหลังจากกด Enter
         }
     });
 

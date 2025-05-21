@@ -60,4 +60,42 @@ class TitleController extends Controller
 			->all();
 		return json_encode($titles);
 	}
+
+	public function actionTitleDepartmentFilter($departmentId,$page,$limit)
+	{
+		$titles = Title::find()
+			->select('titleId,titleName')
+			->where(["departmentId" => $departmentId, "status" => 1])
+			->orderBy("titleName")
+			->asArray()
+			->all();
+		return json_encode($titles);
+	}
+
+	public function actionTitlePage($id,$page ,$limit)
+    {
+        
+      $query = Title::find()
+		->select('title.*')
+		->join('LEFT JOIN', 'department d', 'd.departmentId = title.departmentId')
+		->where(['title.status' => 1]);
+
+		if (!empty($id)) {
+			$query->andWhere(['title.departmentId' => $id]);
+		}
+		$totalRows = $query->count(); // นับจำนวนแถวทั้งหมดตามเงื่อนไข
+		$totalPages = ceil($totalRows / $limit);
+
+		// ดึงข้อมูลตามเงื่อนไข พร้อมใส่ limit/offset ถ้าจำเป็น
+		// $data = $query->asArray()->all();
+
+		return json_encode([
+            'totalPages' => $totalPages,
+            'totalRows' => $totalRows,
+            'perPage' => $limit,
+            'nowPage' => $page
+        ]);
+
+	}
+
 }

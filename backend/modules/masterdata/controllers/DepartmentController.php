@@ -324,7 +324,7 @@ class DepartmentController extends Controller
 		
 	
 		if (!empty($departmentId)) {
-			$query->andWhere(["c.countryId" => $departmentId]);
+			$query->andWhere(["department.departmentId" => $departmentId]);
 		}
 		
 		if (!empty($branchId)) {
@@ -332,7 +332,7 @@ class DepartmentController extends Controller
 		}
 
 		if (!empty($companyId)) {
-			$query->andWhere(["c.countryId" => $companyId]);
+			$query->andWhere(["c.companyId" => $companyId]);
 		}
 
     
@@ -348,7 +348,7 @@ class DepartmentController extends Controller
             'nowPage' => $page
         ]);
 
-		// return json_encode($id);
+		// return json_encode($companyId);
     }
 	
 	public function actionDepartmentTitle($id)

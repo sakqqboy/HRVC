@@ -418,7 +418,7 @@
     align-items: center;
     width: 32.25px;
     height: 32.25px;
-    border-radius: 15.75px;
+    border-radius: 100%;
     border: 1px solid var(--Blocked-Strock, #CBD5E1);
     background: var(--Overall-Blocked, #E74C3C);
     position: relative;
@@ -455,6 +455,30 @@
 }
 
 .cycle-current-green img {
+    width: 18px;
+    height: 18px;
+}
+
+
+.cycle-current-blue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32.25px;
+    height: 32.25px;
+    border-radius: 15.75px;
+    border: 1px solid var(--Blocked-Strock, #CBD5E1);
+    background: var(--Overall-Blocked, #2980B9);
+    position: relative;
+    /* z-index: 1; */
+}
+
+
+.cycle-current-blue:not(:last-child) {
+    margin-left: -16px;
+}
+
+.cycle-current-blue img {
     width: 18px;
     height: 18px;
 }

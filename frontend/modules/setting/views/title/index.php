@@ -10,204 +10,211 @@ use frontend\models\hrvc\Department;
 use kartik\editors\Summernote;
 use yii\bootstrap5\Widget;
 
-$this->title = 'Title';
+$this->title = 'Titles';
+$page = "grid";
+
 ?>
-<div class="col-12 department-one" style="margin-top: 90px;">
+<div class="contrainer-body mt-10">
 
-	<div class="col-lg-9 col-md-6 col-12">
-		<div class="col-12 branch-title">
-			Title
-		</div>
-	</div>
-	<div class="col-12 mt-20 layer-link pl-40 pt-10 pb-10">
-		<div class="row">
-			<div class="col-lg-2 col-3 link-item">
-				<a href="<?= Yii::$app->homeUrl ?>setting/layer/index" class="no-underline-black ">
-					<i class="fa fa-bars mr-2" aria-hidden="true"></i>
-					Management Layer
-				</a>
-			</div>
-			<div class="col-lg-2 col-3 link-item-active">
-				<i class="fa fa-list-ul mr-2" aria-hidden="true"></i>
-				Title
-			</div>
-		</div>
-	</div>
-	<div class="row  mt-20">
-		<div class="col-3 pl-20">
-			<b class="mr-10">Title</b>
-			<span class="font-size-12">
-				<a href="<?= Yii::$app->homeUrl ?>setting/title/create/" class="btn btn-primary btn-sm mr-5">
-					<i class="fa fa-magic" aria-hidden="true"></i> Register
-				</a>
-				<a href="<?= Yii::$app->homeUrl ?>setting/title/import" class="btn btn-secondary btn-sm">
-					<i class="fa fa-upload mr-5" aria-hidden="true"></i> Import
-				</a>
-			</span>
-		</div>
-		<div class="col-lg-3 col-md-4 col-12">
-			<div class="input-group">
-				<button class="btn btn-secondary" type="button">Company</button>
-				<select class="form-control font-size-14" id="company-team" onchange="javascript:branchCompany()">
-					<?php
-					if (isset($companyId) && $companyId != "") { ?>
-						<option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
-					<?php
+    <div class="between-center mt-20" style="width: 100%;">
+        <div class="col-8">
+            <div class=" d-flex align-items-center gap-2">
+                <img src=" <?= Yii::$app->homeUrl ?>image/star-black.svg" style="width: 24px; height: 24px;">
+                <div class="pim-name-title ml-10">
+                    <?= Yii::t('app', 'Titles') ?>
+                </div>
+                <a href="<?= Yii::$app->homeUrl ?>setting/title/create/<?= ModelMaster::encodeParams(["companyId" => '' , "branchId" => '', "departmentId" => '' ]) ?>"
+                    style="text-decoration: none;">
+                    <button type="button" class="btn-create" style="padding: 3px 9px;"
+                        action=" <?= Yii::$app->homeUrl ?>setting/branch/create-branch">Create New <img
+                            src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
+                            style="width:18px; height:18px; margin-top:-3px;">
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="col-4" style="text-align: right;">
+            <?= $this->render('filter_list', ['companies' => $companies, 'branches' => $branches, 'departments' => $departments, 'page' => $page,'companyIdOld' => $companyId,'branchIdOld' => $branchId,'departmentIdOld' => $departmentId]) ?>
 
-					}
-					?>
-					<option value="">All Company</option>
-					<?php
-					if (isset($companies) && count($companies) > 0) {
+        </div>
+    </div>
+    <div class="pim-body company-group-edit bg-white mt-10">
+        <div class="alert alert-branch-body" role="alert">
+            <div class="row">
+                <?php
+				if (isset($data) && count($data) > 0) {
+					$i = 1;
+                    foreach ($data as $departmentsId => $department):
+            	?>
+                <div class="col-lg-6 col-md-5 col-sm-3 col-12" id="department">
+                    <div class="card-comany" style="height: auto;">
+                        <div class="card-body" style=" background: #F9FBFF;  border-radius: 5px;">
+                            <div class="between-center"
+                                style="flex-direction: column;  gap: 20px;  align-self: stretch;">
+                                <!-- ส่วนบน -->
+                                <div class="between-center" style=" gap: 17px; width: 100%;">
 
-						foreach ($companies as $company) : ?>
-							<option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-					<?php
-						endforeach;
-					}
-					?>
-				</select>
-			</div>
-		</div>
-		<div class="col-lg-3 col-md-4 col-12">
-			<div class="input-group">
-				<button class="btn btn-secondary" type="button">Branch</button>
-				<select class="form-select font-size-14" id="branch-team" onchange="javascript:departmentBranch()">
-					<?php
-					if (isset($branchId) && $branchId != "") { ?>
-						<option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>
-					<?php
+                                    <div style="display: flex; align-items: center; gap: 17px;">
+                                        <div class="mid-center cycle-current-red" style="width: 70px; height: 70px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
+                                                style="width: 40px; height: 40px;">
+                                        </div>
+                                        <div class="header-crad-company" style="width: 500px;">
+                                            <div class="name-crad-company">
+                                                <?= $department['departmentName'] ?>
+                                            </div>
+                                            <div class="city-crad-company">
+                                                <div class="cycle-current-yellow" style="width: 20px; height: 20px;">
+                                                    <img src="<?= Yii::$app->homeUrl . $department['picture'] ?>"
+                                                        class="card-tcf">
+                                                </div>
+                                                <?= Yii::t('app', $department['companyName']) ?>
+                                            </div>
+                                            <div style="display: flex; gap: 20px; align-items: center;">
+                                                <div class="city-crad-company"
+                                                    style="display: flex; align-items: center; gap: 5px;">
+                                                    <div class="cycle-current-yellow"
+                                                        style="width: 20px; height: 20px;">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
+                                                            alt="icon" style="width: 10px; height: 10px;">
+                                                    </div>
+                                                    <?= $department['branchName'] ?>,
+                                                </div>
 
-					}
-					?>
-					<option value="">All Branch</option>
-					<?php
-					if (isset($branches) && count($branches) > 0) {
-						foreach ($branches as $branch) : ?>
-							<option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
-					<?php
-						endforeach;
-					}
-					?>
-				</select>
-			</div>
-		</div>
-		<div class="col-lg-3 col-md-4 col-12">
-			<div class="input-group">
-				<button class="btn btn-secondary" type="button">Department</button>
-				<select class="form-select font-size-14" id="department-team">
-					<?php
-					if (isset($departmentId) && $departmentId != "") { ?>
-						<option value="<?= $departmentId ?>"><?= Department::departmentNAme($departmentId) ?></option>
-					<?php
+                                                <div class="city-crad-company"
+                                                    style="display: flex; align-items: center; gap: 5px;">
+                                                    <img src="<?= Yii::$app->homeUrl ?><?= $department['flag'] ?>"
+                                                        class="bangladresh-hrvc" style="width: 16px; height: 12px;">
+                                                    <?= $department['city'] ?>,
+                                                    <?= Yii::t('app', $department['countryName']) ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-					}
-					?>
-					<option value="">All Department</option>
-					<?php
-					if (isset($departments) && count($departments) > 0) {
-						foreach ($departments as $department) : ?>
-							<option value="<?= $department['departmentId'] ?>"><?= $department['departmentName'] ?></option>
-					<?php
-						endforeach;
-					}
-					?>
-				</select>
-				<button type="button" class="btn btn-outline-dark" onclick="javascrip:filterTitle()">
-					<i class="fa fa-filter" aria-hidden="true"></i>
-				</button>
-			</div>
-		</div>
+                                    <div style="margin-bottom: 30px;">
+                                        <?php if(count($department['titles']) > 0) { ?>
 
-	</div>
-	<div class="col-12 mt-20">
-		<div class="col-12">
-			<div class="alert alert-layer" role="alert">
-				<input type="hidden" id="preUrl" name="preUrl" value="">
-				<div class="row" id="all-title-list">
-					<?php
-					if (isset($title) && count($title) > 0) {
-						foreach ($title as $t) :
-					?>
-							<div class="col-lg-6 col-md-6 col-12 mt-10" id="title-<?= $t['titleId'] ?>">
-								<div class="title-box" style="border: none;border-radius:10px;">
-									<div class="col-12">
-										<div class="col-12 text-end pr-0">
-											<a href="<?= Yii::$app->homeUrl ?>setting/title/update-title/<?= ModelMaster::encodeParams(['titleId' => $t['titleId']]) ?>" class="btn btn-sm btn-outline-dark mr-5 font-size-12">
-												<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-											</a>
-											<a href="javascript:deleteTitle(<?= $t['titleId'] ?>)" class="btn btn-sm btn-outline-danger font-size-12">
-												<i class="fa fa-trash" aria-hidden="true"></i>
-											</a>
-											<input type="hidden" id="redirect" value="0">
-										</div>
+                                        <a class="btn btn-bg-white-xs mr-5" style="margin-top: 3px;"
+                                            onclick="openPopupModalTitle('<?= Yii::$app->homeUrl ?>setting/title/modal-title/<?= ModelMaster::encodeParams(['departmentId' => $department['departmentId']]) ?>')">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
+                                                alt="History" class="pim-icon"
+                                                style="margin-top: -1px; width: 14px; height: 14px;">
+                                        </a>
 
-									</div>
-									<div class="row" style="margin-top: -25px;">
-										<div class="col-5">
+                                        <?php }?>
+                                        <a href="
+                                        <?= Yii::$app->homeUrl ?>setting/title/titles-view/<?= ModelMaster::encodeParams(['departmentId' => $department['departmentId']]) ?>"
+                                            class="btn btn-bg-white-xs mr-5" style="margin-top: 3px; ">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
+                                                alt="History" class="pim-icon" style="margin-top: -1px;">
+                                        </a>
+                                        <span class="dropdown" href="#" id="dropdownMenuLink-1"
+                                            data-bs-toggle="dropdown" style="align-self: flex-start;">
+                                            <!-- <img src="<?= Yii::$app->homeUrl ?>image/3-dot.svg" alt="icon"
+                                                style="cursor: pointer;"> -->
+                                        </span>
+                                        <div class="menu-dot ">
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
+                                                <li class="pl-4 pr-4" data-bs-toggle="modal"
+                                                    data-bs-target="#staticBackdrop4"
+                                                    onclick="javascript:prepareDeleteTitle('<?=$department['departmentId']?>')"
+                                                    title="Delete">
+                                                    <a class="dropdown-itemNEW pl-4 pr-25" href="#">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
+                                                            alt="Delete" class="pim-icon mr-10"
+                                                            style="margin-top: -2px;">
+                                                        <?= Yii::t('app', 'Delete') ?></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
 
-											<div class="col-12 font-size-14 font-b">
-												<?= $t['titleName'] ?><?= $t['tShort'] != null ? '&nbsp;&nbsp;<span class="badge rounded-pill bg-primary">&nbsp;&nbsp;' . $t['tShort'] . '&nbsp;&nbsp;</span>'  : '' ?>
-											</div>
-											<div class="row mt-20">
-												<div class="col-5 font-size-12">
-													<b>Layer : </b>
-												</div>
-												<div class="col-7 font-size-10">
-													<?= $t['layerName'] ?> <?= $t['lShort'] != null ? ' (' . $t['lShort'] . ')' : '' ?>
-												</div>
-												<div class="col-5 font-size-12 mt-7">
-													<b>Branch : </b>
-												</div>
-												<div class="col-7 font-size-10 mt-7">
-													<?php
-													$flag = Branch::branchFlag($t["branchId"]);
-													if ($flag != "") { ?>
-														<img src="<?= Yii::$app->homeUrl . $flag ?>" class="card-round mr-5">
-													<?php
-													}
-													?>
-													<?= $t["branchName"] ?>
-												</div>
-												<div class="col-5 font-size-12 mt-7">
-													<b>Department : </b>
-												</div>
-												<div class="col-7 font-size-10 mt-7">
-													<?= $t["departmentName"] ?>
-												</div>
-											</div>
-										</div>
-										<div class="col-7">
-											<div class="col-12 font-size-14 font-b pl-20">
-												Job Description
-											</div>
-											<div class="col-12 mt-20 font-size-12 title-description-box pl-20">
-												<?php
-												if (isset($t["jobDescription"]) && $t["jobDescription"] != '') {
-												?>
-													<?= substr($t["jobDescription"], 0, 190) ?><?= strlen($t["jobDescription"]) > 190 ? '...' : '' ?>
-												<?php
-												}
-												?>
-											</div>
-										</div>
-									</div>
-									<div class="col-12 text-end font-size-12" style="font-weight: 500;">
-										<a href="<?= Yii::$app->homeUrl ?>setting/title/title-detail/<?= ModelMaster::encodeParams(['titleId' => $t['titleId']]) ?>" class="no-underline text-primary">
-											View More
-										</a>
-									</div>
-								</div>
-							</div>
-						<?php
-						endforeach;
-					} else { ?>
-						<div class="col-12 text-center font-b font-size-16"> Title not found.</div>
-					<?php
-					}
-					?>
-				</div>
-			</div>
-		</div>
-	</div>
+                                <?php
+                                // echo $department['totalDepartment']; 
+                                if(count($department['titles']) > 0) { 
+                                ?>
+                                <div style="align-self: stretch; height: 147px">
+                                    <div class="between-start">
+                                        <span class="detailname-crad-company mb-14">
+                                            <?= Yii::t('app', 'Registered Titles') ?>
+                                        </span>
+                                        <a class="see-all-company"
+                                            href="
+                                        <?= Yii::$app->homeUrl ?>setting/title/titles-view/<?= ModelMaster::encodeParams(['departmentId' => $department['departmentId']]) ?>">
+                                            <?= Yii::t('app', 'See All') ?>
+                                            <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
+                                                style="cursor: pointer;">
+                                        </a>
+                                    </div>
+
+                                    <?php if (!empty($department['titles'])): ?>
+                                    <div class="row mt-2">
+                                        <?php
+                                        $limitedDepartments = array_slice($department['titles'], 0, 6);
+                                        foreach ($limitedDepartments as $index => $dept):
+                                        ?>
+                                        <div class="col-6 mb-1">
+                                            <span class="d-flex align-items-center mb-12"
+                                                style="font-size: 13px; color: #333;">
+                                                <div class="cycle-current-blue mr-5">
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/title.svg"
+                                                        alt="icon">
+                                                </div>
+                                                <?= $dept['titleName'] ?>
+                                            </span>
+                                        </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <?php endif; ?>
+                                </div>
+
+                                <?php } else{ ?>
+                                <!-- ส่วนล่าง -->
+                                <div class="create-crad-company ">
+                                    <!-- <?=  $department['branchId'] ?> -->
+                                    <span class="text-create-crad">
+                                        <?= Yii::t('app', 'No associated department, title, or employee found!') ?>
+                                    </span>
+                                    <a style="text-decoration: none;"
+                                        onclick="openPopupModalTitle('<?= Yii::$app->homeUrl ?>setting/title/modal-title/<?= ModelMaster::encodeParams(['departmentId' => $department['departmentId']]) ?>')">
+                                        <button type="button" class="btn-create"
+                                            style="padding: 3px 9px;"><?= Yii::t('app', 'Create Titles') ?>
+                                            <img src="<?= Yii::$app->homeUrl ?>image/arrow-top-r.svg"
+                                                style="width:18px; height:18px; margin-top:-3px;">
+                                        </button>
+                                    </a>
+                                </div>
+                                <?php } ?>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+						$i++;
+					endforeach;
+				}
+				?>
+            </div>
+        </div>
+        <!-- // -->
+        <?= $this->render('pagination_page', [ 'companyId' => $companyId, 'branchId' => $branchId, 'departmentId' => $departmentId,'page' => $page,'numPage' => $numPage]) ?>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="titleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="row" id="titleModalBody" style="width: 100%; padding: 50px; gap: 30px;">
+                <!-- AJAX content will be injected here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="titleDeleteModal" tabindex="-2" aria-labelledby="titleDeleteModal" aria-hidden="true">
 </div>

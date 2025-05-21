@@ -101,7 +101,7 @@ use common\models\ModelMaster;
                 }else{
                 ?>
             <!-- ถ้าไม่มี Departments ให้แสดงเป็น 0 -->
-            <div class="create-crad-company " style="background-color: #F9F9F9;">
+            <div class="create-crad-company " id="no-existing" style="background-color: #F9F9F9;">
                 <span class="text-create-crad">
                     No Existing Departments Yet!
                 </span>
@@ -162,6 +162,7 @@ document.getElementById('departmentName').addEventListener('keydown', function(e
         if (deptName !== '') {
             // ส่งค่าใหม่ไปบันทึก
             actionSaveDepartment(branchId, deptName);
+            $("#no-existing").hide();
         }
     }
 });
