@@ -50,7 +50,7 @@ use common\models\ModelMaster;
         <!-- content -->
         <div class="row d-flex align-items-center gap-2 mb-3">
             <span class="mb-14 font-size-16 " style=" font-weight: 600; padding: 0;">
-                Add Another Title
+                <?= Yii::t('app', 'Add Another Title') ?>
             </span>
 
             <div class="input-group">
@@ -59,7 +59,7 @@ use common\models\ModelMaster;
                     <div class="city-crad-company" id="hintText">
                         <img src="<?= Yii::$app->homeUrl . 'image/enter-black.svg' ?>"
                             style="width: 24px; height: 24px;">
-                        Enter to Save
+                        <?= Yii::t('app', 'Enter to Save') ?>
                     </div>
                 </span>
             </div>
@@ -67,7 +67,7 @@ use common\models\ModelMaster;
         </div>
         <div class="row d-flex align-items-center gap-2 mb-3 mt-30" style="gap: 30px;">
             <span class="mb-14 font-size-16 " style=" font-weight: 600; padding: 0;">
-                Existing Titles (<?= $countTitle ?>)
+                <?= Yii::t('app', 'Existing Titles') ?> (<?= $countTitle ?>)
                 <hr class="hr-group">
             </span>
 
@@ -93,7 +93,7 @@ use common\models\ModelMaster;
             <?php else: ?>
             <!-- If No Titles -->
             <div class="create-crad-company " id="no-existing" style="background-color: #F9F9F9;">
-                <span class="text-create-crad">No Existing Titles Yet!</span>
+                <span class="text-create-crad"><?= Yii::t('app', 'No Existing Titles Yet!') ?></span>
             </div>
             <input type="hidden" name="Search" id="Search">
             <ul id="schedule-list" type="hidden"></ul>
@@ -108,6 +108,9 @@ use common\models\ModelMaster;
     <input type="hidden" name="titleId" id="titleId" value="<?php echo $titleId ?>">
     <input type="hidden" name="url" id="url"
         value="<?= Yii::$app->homeUrl ?>setting/title/modal-title/<?= ModelMaster::encodeParams(['branchId' => '' ]) ?>">
+</div>
+
+<div class="modal fade" id="titleDeleteModal" tabindex="-2" aria-labelledby="titleDeleteModal" aria-hidden="true">
 </div>
 
 <script>

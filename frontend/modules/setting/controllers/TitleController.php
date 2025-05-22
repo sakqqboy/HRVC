@@ -392,7 +392,6 @@ class TitleController extends Controller
 			endforeach;
 		}
 
-
         curl_close($api);
 
         $data = [
@@ -430,12 +429,13 @@ class TitleController extends Controller
         $departmentId = $param["departmentId"];
         $branchId = $param["branchId"]?? null;
         $companyId = $param["companyId"] ?? null;
+        $titleId = $param["titleId"] ?? null;
         $groupId = Group::currentGroupId();        // throw new exception(print_r($branchId, true));
-
+        $typePage ='';
         $companyName = '';
         $branchName = '';
         $departmentName = '';
-
+        $title = '';
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
         if (!isset($group) && !empty($group)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
@@ -477,6 +477,17 @@ class TitleController extends Controller
             $companies = curl_exec($api);
             $companies = json_decode($companies, true);
         }
+        
+        if (!empty($titleId)) {
+            // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' . $branchId);
+            // $branchJson = curl_exec($api);
+            // $branches = json_decode($branchJson, true);
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-detail?id=' . $titleId);
+            $title = curl_exec($api);
+            $title = json_decode($title, true);
+            $typePage = 'Edit';
+            // throw new Exception(print_r($title, true)); // Debug: ดูข้อมูลทั้งหมด
+        } 
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
         $group = curl_exec($api);
@@ -498,6 +509,8 @@ class TitleController extends Controller
             // "departments" => $departments,
             // "branches" => $branches,
             "companies" => $companies,
+            "title" => $title,
+            "typePage" => $typePage,
             // "layer" => $layer,
         ]);
     }
@@ -686,7 +699,7 @@ class TitleController extends Controller
                     $api = curl_init();
                     curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
                     curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-department?departmentId=' .  $departmentId . '&page=1' . '&limit=0');
+                    curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-department?departmentId=' .  $departmentId . '&page=1' . '&limit=0');
                     $titles = curl_exec($api);
                     $titles = json_decode($titles, true);
                     curl_close($api);
@@ -775,6 +788,8 @@ class TitleController extends Controller
     {
         $titleId = $_POST["titleId"];
         $title = Title::find()->where(["titleId" => $titleId])->one();
+        // throw new Exception(json_encode($_POST));
+
         /* $oldDepartmentId = $title->departmentId;
         if ($oldDepartmentId != $_POST["departmentId"]) {
             DepartmentTitle::deleteAll(["titleId" => $titleId, "departmentId" => $oldDepartmentId]);
@@ -787,29 +802,28 @@ class TitleController extends Controller
             $departmentTitle->save(false);
         }*/
         $title->titleName = $_POST["titleName"];
-        $title->layerId = $_POST["layer"];
-        $title->shortTag = $_POST["shortTag"];
-        $title->departmentId = $_POST["departmentId"];
+        // $title->layerId = $_POST["layer"];
+        // $title->shortTag = $_POST["shortTag"];
+        // $title->departmentId = $_POST["departmentId"];
         $title->jobDescription = $_POST["jobDescription"];
         $title->purpose = $_POST["purpose"];
         $title->keyResponsibility = $_POST["keyResponsibility"];
-        $title->jobDescription = $_POST["jobDescription"];
         $title->status = 1;
         $title->updateDateTime = new Expression('NOW()');
-        if (isset($_POST["tags"]) && count($_POST["tags"]) > 0) {
-            $tags = '';
-            foreach ($_POST["tags"] as $tag) :
-                $tags .= $tag . ',';
-            endforeach;
-            if ($tags != '') {
-                $tags = substr($tags, 0, -1);
-                $title->requireSkill = $tags;
-            } else {
-                $title->requireSkill = null;
-            }
-        } else {
-            $title->requireSkill = null;
-        }
+        // if (isset($_POST["tags"]) && count($_POST["tags"]) > 0) {
+        //     $tags = '';
+        //     foreach ($_POST["tags"] as $tag) :
+        //         $tags .= $tag . ',';
+        //     endforeach;
+        //     if ($tags != '') {
+        //         $tags = substr($tags, 0, -1);
+        //         $title->requireSkill = $tags;
+        //     } else {
+        //         $title->requireSkill = null;
+        //     }
+        // } else {
+        //     $title->requireSkill = null;
+        // }
         $title->save(false);
 
         return $this->redirect($_POST["preUrl"]);
@@ -919,20 +933,75 @@ class TitleController extends Controller
 
         // return $this->renderPartial('modal_team');
     }
+    public function actionModalDelete(){
+        $titleId = Yii::$app->request->get("titleId");
+        // throw new exception(print_r($teamId, true));
+
+        return $this -> renderPartial('modal_delete', [
+            "titleId" => $titleId
+        ]);
+    }  
+    
     public function actionDeleteTitle()
     {
-        $titleId = $_POST["titleId"];
-        $title = Title::find()->where(["titleId" => $titleId])->one();
-        $title->status = 99;
-        $res["status"] = false;
-        if ($title->save(false)) {
-            $res["status"] = true;
+        // $titleId = $_POST["titleId"];
+        // $title = Title::find()->where(["titleId" => $titleId])->one();
+        // $title->status = 99;
+        // $res["status"] = false;
+        // if ($title->save(false)) {
+        //     $res["status"] = true;
+        // }
+        // if ($_POST["redirect"] == 1) {
+        //     // return $this->redirect($_POST["preUrl"]);
+        //     return $this->redirect(Yii::$app->homeUrl . 'setting/title/index');
+        // }
+        // return json_encode($res);
+         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON; // ← สำคัญ!
+
+        if (isset($_POST["titleId"])) {
+            $titleId = $_POST["titleId"];
+
+            $update = Title::find()->where([
+                "titleId" => $titleId,
+                "status" => '1'
+            ])->one();
+
+            if ($update) {
+                $update->status = '99';
+                $update->updateDateTime = new Expression('NOW()');
+
+                if ($update->save(false)) {
+                    $departmentId = $update->departmentId;
+                    $api = curl_init();
+                    curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+                    curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-department?departmentId=' .  $departmentId . '&page=1' . '&limit=0');
+                    $titles = curl_exec($api);
+                    $titles = json_decode($titles, true);
+                    curl_close($api);
+
+                    if($_POST["preUrl"]){
+                                return $this->redirect($_POST["preUrl"]);
+                    }else{
+                        return [
+                            'success' => true,
+                            'departments' => $titles
+                        ];
+                    }
+
+                   
+                } else {
+                    $errorText = [];
+                    foreach ($update->getErrors() as $field => $errors) {
+                        $errorText[] = implode(', ', $errors);
+                    }
+                    return ['success' => false, 'message' => implode("\n", $errorText)];
+                }
+            } else {
+                return ['success' => false, 'message' => 'Title not found' . $update ];
+            }
         }
-        if ($_POST["redirect"] == 1) {
-            // return $this->redirect($_POST["preUrl"]);
-            return $this->redirect(Yii::$app->homeUrl . 'setting/title/index');
-        }
-        return json_encode($res);
+        return ['success' => false, 'message' => 'Missing required POST parameters'];
     }
 
     public function actionUploadImage()

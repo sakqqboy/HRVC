@@ -425,3 +425,20 @@
     /* 224.886% */
 
 }
+
+
+.btn-delete-custom {
+    background-color: #ffffff;
+    color: #dc3545;
+    /* สีแดง */
+    border: 1px solid #dc3545;
+    transition: all 0.3s ease;
+    width: 100px;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.btn-delete-custom:hover {
+    background-color: #dc3545;
+    color: #ffffff;
+}

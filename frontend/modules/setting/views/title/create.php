@@ -2,26 +2,36 @@
 
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Create Title';
+$urlSubmit = '';
+$namePage = $typePage ?? "Create";
+$this->title =  $namePage . ' Title';
+if($namePage == "Create" ){
+    $urlSubmit = 'setting/title/save-create-title';
+}else{
+    $urlSubmit = 'setting/title/save-update-title';
+}
+
 $form = ActiveForm::begin([
 	'id' => 'create-title',
 	'method' => 'post',
 	'options' => [
 		'enctype' => 'multipart/form-data',
 	],
-	'action' => Yii::$app->homeUrl . 'setting/title/save-create-title'
-]); ?>
+	'action' => Yii::$app->homeUrl . $urlSubmit
+]);
+ ?>
 <div class="company-group-body">
     <div class="contrainer-body">
         <div class="col-12">
             <div class=" d-flex align-items-center gap-2">
-                <a href="" style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+                <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl ?>"
+                    style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg"
                         style="width:18px; height:18px; margin-top:-3px;">
-                    Back
+                    <?= Yii::t('app', 'Back') ?>
                 </a>
                 <div class="pim-name-title ml-10">
-                    Create Title
+                    <?= Yii::t('app', $namePage . 'Title') ?>
                 </div>
             </div>
         </div>
@@ -29,7 +39,7 @@ $form = ActiveForm::begin([
         <div class="row update-group-body mt-20">
             <div class="col-3">
                 <span class="font-size-18 font-weight-600 ">
-                    Associated Group
+                    <?= Yii::t('app', 'Associated Group') ?>
                 </span>
                 <div class="d-flex mb-20 mt-19" style="align-items: center; gap: 29px; align-self: stretch;">
                     <div class="avatar-preview">
@@ -38,17 +48,18 @@ $form = ActiveForm::begin([
                     </div>
                     <div class="start-center">
                         <span class="font-size-20 font-weight-500">
-                            Thailand consulting
+                            <?= Yii::t('app', 'Thailand consulting') ?>
                         </span>
                         <div class="col-12 font-size-14 tokyo-small">
                             <img src="<?= Yii::$app->homeUrl ?>image/hyphen.svg">
-                            What we give is What we get.
+                            <?= Yii::t('app', 'What we give is What we get.') ?>
                         </div>
                     </div>
                 </div>
                 <span class="font-gray font-size-14 font-weight-400 ">
-                    All the titles created here will be associated with the Tokyo Consulting Group and it’s subsidiaries
-                    based on departments of each branch
+                    <?= Yii::t('app', 'All the titles created here will be associated with the Tokyo Consulting
+                    Group and it’s subsidiaries
+                    based on departments of each branch') ?>
                 </span>
             </div>
             <div class="col-9">
@@ -60,13 +71,16 @@ $form = ActiveForm::begin([
                             <?= Yii::t('app', 'Name of The Title') ?>
 
                         </label>
-                        <input type="text" class="form-control mt-12" name="titleName" id="titleName"
-                            placeholder="Name of The Title">
+                        <div class="input-group">
+                            <input type="text" class="form-control mt-12" name="titleName" id="titleName"
+                                value="<?= $title['titleName'] ?? '';?>" placeholder="Name of The Title">
+                        </div>
                     </div>
 
                     <div class="col-6">
                         <!-- input3 -->
-                        <label for="exampleFormControlInput1" class="form-label font-size-12 font-b">
+                        <label for="exampleFormControlInput1" class="form-label font-size-12 font-b"
+                            style="margin-bottom: 7px;">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Select Branch') ?>
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
@@ -75,10 +89,18 @@ $form = ActiveForm::begin([
                         </label>
                         <div class="input-group">
                             <?php if($branchName) {?>
-                            <div class="col-12 font-b">
-                                <input type="hidden" id="branch" name="branchId" value="<?= $branchId?>">
-                                <?= $branchName ?>
-                            </div>
+                            <input type="hidden" id="branch" name="branchId" value="<?= $branchId?>">
+                            <input type="text" class="form-control mt-12" value="<?= $branchName?>" disabled>
+                            <span class="input-group-text mt-12"
+                                style="background-color: #e9ecef; border-left: none; gap: 5px; ">
+                                <div class="cycle-current-yellow" style="width: 20px; height: 20px;">
+
+                                    <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon"
+                                        style="width: 10px; height: 10px;">
+                                </div>
+                                <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
+                                    style="width: 10px; height: 10px;">
+                            </span>
                             <?php }else{?>
                             <select id="branchSelectId" brancSelect" class="form-select mt-12"
                                 style="border-right: none; width: 239px; appearance: none; background-image: none;"
@@ -115,10 +137,16 @@ $form = ActiveForm::begin([
                         </label>
                         <div class="input-group">
                             <?php if($companyName) {?>
-                            <div class="col-12 font-b">
-                                <input type="hidden" id="company" name="companyId" value="<?= $companyId?>">
-                                <?= $companyName ?>
-                            </div>
+                            <input type="hidden" id="branch" name="branchId" value="<?= $companyId?>">
+                            <input type="text" class="form-control mt-12" value="<?= $companyName?>" disabled>
+                            <span class="input-group-text mt-12"
+                                style="background-color: #e9ecef; border-left: none; gap: 5px;  ">
+                                <div class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                    <img src="<?= Yii::$app->homeUrl . $companies['picture'] ?>" class="card-tcf">
+                                </div>
+                                <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
+                                    style="width: 10px; height: 10px;">
+                            </span>
                             <?php }else{?>
                             <select id="companySelectId" class="form-select mt-12"
                                 style="border-right: none; width: 239px; appearance: none; background-image: none;"
@@ -138,7 +166,7 @@ $form = ActiveForm::begin([
                                 style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
                                 onclick="document.getElementById('companySelectId').focus();">
                                 <div class="cycle-current-gray" style="width: 20px; height: 20px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="icon"
+                                    <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon"
                                         style="width: 10px; height: 10px;">
                                 </div>
                                 <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
@@ -160,10 +188,20 @@ $form = ActiveForm::begin([
                         </label>
                         <div class="input-group">
                             <?php if($departmentName) {?>
-                            <div class="col-12 font-b">
+                            <!-- <div class="col-12 font-b">
                                 <input type="hidden" id="branch" name="departmentId" value="<?= $departmentId?>">
                                 <?= $departmentName ?>
-                            </div>
+                            </div> -->
+                            <input type="text" class="form-control mt-12" value="<?= $departmentName?>" disabled>
+                            <span class="input-group-text mt-12"
+                                style="background-color: #e9ecef; border-left: none; gap: 5px;  ">
+                                <div class="cycle-current-red" style="width: 20px; height: 20px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon"
+                                        style="width: 10px; height: 10px;">
+                                </div>
+                                <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
+                                    style="width: 10px; height: 10px;">
+                            </span>
                             <?php }else{?>
                             <select id="departmentSelectId" brancSelect" class="form-select mt-12"
                                 style="border-right: none; width: 239px; appearance: none; background-image: none;"
@@ -191,55 +229,86 @@ $form = ActiveForm::begin([
             </div>
             <div class="col-12 mt-54">
                 <label class="form-label font-size-16 font-weight-600 font-b">
-                    Title’s Job Description <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
-                        data-toggle="tooltip" data-placement="top" aria-label="Select to Company"
-                        data-bs-original-title="Select to Company">
+                    <?= Yii::t('app', 'Title’s Job Description') ?>
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                        data-placement="top" aria-label="<?= Yii::t('app', 'Title’s Job Description') ?>"
+                        data-bs-original-title="<?= Yii::t('app', 'Title’s Job Description') ?>">
                 </label>
                 <hr class="hr-group">
 
                 <div class="row" style="gap: 22px;">
                     <div class="row">
                         <label class="form-gro font-size-16 font-weight-600 font-b mb-12">
-                            Purpose of The Job <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
-                                data-toggle="tooltip" data-placement="top" aria-label="Select to Company"
-                                data-bs-original-title="Select to Company">
+                            <?= Yii::t('app', 'Purpose of The Job') ?>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                data-placement="top" aria-label="<?= Yii::t('app', 'Purpose of The Job') ?>"
+                                data-bs-original-title="<?= Yii::t('app', 'Purpose of The Job') ?>">
                         </label>
                         <textarea class=" form-control " name="purpose" id="purpose" style="height: 115px;"
-                            placeholder="Write the purpose of the job for this title"></textarea>
+                            placeholder="<?= Yii::t('app', 'Write the purpose of the job for this title') ?>"><?= $title['purpose'] ?? '';?></textarea>
                     </div>
                     <div class="row">
                         <label class="form-label font-size-16 font-weight-600 font-b mb-12">
-                            Core Responsibility <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
-                                data-toggle="tooltip" data-placement="top" aria-label="Select to Company"
-                                data-bs-original-title="Select to Company">
+                            <?= Yii::t('app', 'Core Responsibility') ?>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                data-placement="top" aria-label="<?= Yii::t('app', 'Core Responsibility') ?>"
+                                data-bs-original-title="<?= Yii::t('app', 'Core Responsibility') ?>">
                         </label>
                         <textarea class=" form-control " name="jobDescription" id="jobDescription"
-                            style="height: 115px;" placeholder="Core Responsibility"></textarea>
+                            style="height: 115px;"
+                            placeholder="<?= Yii::t('app', 'Core Responsibility') ?>"><?= $title['jobDescription'] ?? '';?></textarea>
                     </div>
                     <div class="row">
                         <label class="form-label font-size-16 font-weight-600 font-b mb-12">
-                            Key Responsibility <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
-                                data-toggle="tooltip" data-placement="top" aria-label="Select to Company"
-                                data-bs-original-title="Select to Company">
+                            <?= Yii::t('app', 'Key Responsibility') ?>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                data-placement="top" aria-label="<?= Yii::t('app', 'Key Responsibility') ?>"
+                                data-bs-original-title="<?= Yii::t('app', 'Key Responsibility') ?>">
                         </label>
                         <textarea class=" form-control " name="keyResponsibility" id="keyResponsibility"
-                            style="height: 115px;" placeholder="Key Responsibility"></textarea>
+                            style="height: 115px;"
+                            placeholder="<?= Yii::t('app', 'Key Responsibility') ?>"><?= $title['keyResponsibility'] ?? '';?></textarea>
                     </div>
                 </div>
 
-                <div class="col-12 text-end mt-22">
-                    <input type="hidden" id="branchId" value="">
-                    <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
-                        <button type="button" class="btn-cancel-group"
-                            action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
-                            Cancel </button>
+                <div class="col-12 mt-22 d-flex justify-content-end align-items-center gap-2">
+                    <input type="hidden" id="titleId" name="titleId" value="<?= $title['titleId'] ?? '' ?>">
+                    <input type="hidden" name="preUrl" id="preUrl"
+                        value="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl ?>">
+                    <!-- Cancel Button -->
+                    <button type="button" class="btn-cancel-group"
+                        onclick="window.location.href='<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl ?>'">
+                        <?= Yii::t('app', 'Cancel') ?>
+                    </button>
+
+                    <!-- Delete Button (only in Edit mode) -->
+                    <?php if ($namePage == "Edit") { ?>
+                    <a href="javascript:saveDeleteTitle('<?= $title['titleId'] ?? '' ?>','<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl ?>')"
+                        class="btn btn-delete-custom d-flex align-items-center"
+                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="Delete"
+                            class="pim-icon me-1" style="width: 14px; height: 14px;">
+                        <?= Yii::t('app', 'Delete') ?>
                     </a>
 
-                    <button type="submit" class="btn-save-group">
-                        Create <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="LinkedIn"
-                            style="width: 20px; height: 20px;">
+                    <?php } ?>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-save-group d-flex align-items-center">
+                        <?php if ($namePage == "Edit") { ?>
+                        <?= Yii::t('app', 'Save') ?>
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="plus icon"
+                            style="width: 20px; height: 20px; margin-left: 5px;">
+                        <?php }else {?>
+                        <?= Yii::t('app', 'Create') ?>
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="plus icon"
+                            style="width: 20px; height: 20px; margin-left: 5px;">
+                        <?php } ?>
+
                     </button>
                 </div>
+
 
             </div>
         </div>

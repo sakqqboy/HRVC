@@ -11,7 +11,7 @@ $page = 'view';
 
     <div class="col-12">
         <div class=" d-flex align-items-center gap-2">
-            <img src="<?= Yii::$app->homeUrl ?>image/titles-black.svg" style="width: 24px; height: 24px;">
+            <img src="<?= Yii::$app->homeUrl ?>image/star-black.svg" style="width: 24px; height: 24px;">
             <div class="pim-name-title ml-10">
                 <?= Yii::t('app', 'Title in Details') ?>
             </div>
@@ -203,7 +203,12 @@ $page = 'view';
                                     </div>
                                 </td>
                                 <td>
-                                    <a onclick="openPopupModalTitle('<?= Yii::$app->homeUrl ?>setting/title/modal-title/<?= ModelMaster::encodeParams(['departmentId' => $data['departmentId'],'titleId' => $title['titleId']]) ?>')"
+                                    <!-- <a onclick="openPopupModalTitle('<?= Yii::$app->homeUrl ?>setting/title/modal-title/<?= ModelMaster::encodeParams(['departmentId' => $data['departmentId'],'titleId' => $title['titleId']]) ?>')"
+                                        class="btn btn-bg-white-xs mr-5" style="margin-top: 3px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                            alt="edit" class="pim-icon">
+                                    </a> -->
+                                    <a href="<?= Yii::$app->homeUrl ?>setting/title/create/<?= ModelMaster::encodeParams(["companyId" => $data['companyId'] , "branchId" => $data['branchId'], "departmentId" => $data['departmentId'], "titleId" => $title['titleId'] ]) ?>"
                                         class="btn btn-bg-white-xs mr-5" style="margin-top: 3px;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
                                             alt="edit" class="pim-icon">

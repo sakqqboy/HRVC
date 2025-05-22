@@ -63,12 +63,32 @@ class TitleController extends Controller
 
 	public function actionTitleDepartmentFilter($departmentId,$page,$limit)
 	{
-		$titles = Title::find()
+		// $titles = Title::find()
+		// 	->select('titleId,titleName')
+		// 	->where(["departmentId" => $departmentId, "status" => 1])
+		// 	->orderBy("titleName")
+		// 	->asArray()
+		// 	->all();
+
+			$offset = ($page - 1) * $limit;
+
+			$titles = [];
+		
+			$query =  Title::find()
 			->select('titleId,titleName')
-			->where(["departmentId" => $departmentId, "status" => 1])
-			->orderBy("titleName")
-			->asArray()
-			->all();
+			->where(["departmentId" => $departmentId, "status" => 1]);
+			
+			// if ($limit > 0) {
+			if (!empty($limit)) {
+				$query ->offset($offset)
+				->limit($limit);
+			}
+	
+			$titles = $query
+				->orderBy("titleName")
+				->asArray()
+				->all();
+
 		return json_encode($titles);
 	}
 

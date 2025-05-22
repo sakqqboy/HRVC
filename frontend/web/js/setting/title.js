@@ -119,27 +119,29 @@ $("#reset-title").click(function (e) {
 	$("#reset-title").css("display", "none");
 	$("#create-title").show();
 });
-function deleteTitle(titleId) {
-	if (confirm("Are you sure to delete this title")) {
-		var url = $url + 'setting/title/delete-title?';
-		var redirect = $("#redirect").val();
-		var preUrl = $("#preUrl").val();
-		$.ajax({
-			type: "POST",
-			dataType: 'json',
-			url: url,
-			data: { titleId: titleId, redirect: redirect, preUrl: preUrl },
-			success: function (data) {
-				if (data.status) {
-					$("#title-" + titleId).hide(200);
-				} else {
-					alert("Can not delete this title.");
-				}
 
-			}
-		});
-	}
-}
+// function deleteTitle(titleId) {
+// 	if (confirm("Are you sure to delete this title")) {
+// 		var url = $url + 'setting/title/delete-title?';
+// 		var redirect = $("#redirect").val();
+// 		var preUrl = $("#preUrl").val();
+// 		$.ajax({
+// 			type: "POST",
+// 			dataType: 'json',
+// 			url: url,
+// 			data: { titleId: titleId, redirect: redirect, preUrl: preUrl },
+// 			success: function (data) {
+// 				if (data.status) {
+// 					$("#title-" + titleId).hide(200);
+// 				} else {
+// 					alert("Can not delete this title.");
+// 				}
+
+// 			}
+// 		});
+// 	}
+// }
+
 function addDepartmentId() {
 	var departmentId = $("#department-team").val();
 	$("#departmentId").val(departmentId);
@@ -388,9 +390,9 @@ function actionSaveTitle(departmentId, titleName) {
 
 
 function openModalDeleteTitle(titleId) {
-	// alert(titleid);
+	// alert(titleId);
 	var url = $url + 'setting/title/modal-delete';
-	// alert(url);
+	alert(url);
 	$.ajax({
 		url: url,
 		type: 'GET',
@@ -403,6 +405,7 @@ function openModalDeleteTitle(titleId) {
 			$('#titleDeleteModal').modal('show');
 		},
 		error: function () {
+			alert('error');
 			$('#titleDeleteModal').html('<p class="text-danger">Failed to load content.</p>');
 			$('#titleDeleteModal').modal('show');
 		}
@@ -440,7 +443,7 @@ function handleTitleEditClick(e, element) {
 	const input = document.getElementById('editTitleInputlist');
 	// input.focus();
 	setTimeout(() => {
-		input.focus();
+		input.focus(); Settings / binred.svg
 		input.setSelectionRange(input.value.length, input.value.length); // ให้เคอร์เซอร์อยู่ท้ายข้อความ
 	}, 500);
 
@@ -563,6 +566,27 @@ function deleteTitle(titleId) {
 			} else {
 				alert(response.message || 'ไม่สามารถลบได้');
 			}
+		}
+	});
+}
+
+function saveDeleteTitle(titleId, preUrl) {
+	// alert(titleId);
+	// updateTitleModalContent(titleId);
+	var url = $url + 'setting/title/delete-title';
+	$.ajax({
+		url: url,
+		type: 'POST',
+		data: { titleId: titleId, preUrl: preUrl },
+		success: function (response) {
+			// สมมุติว่า server ส่ง JSON กลับมา
+			// เช่น { success: true, departments: [...] }
+			// if (response.success && response.departments) {
+			// 	openCloseTitleModal();
+			// 	renderDepartmentList(response.departments); // อัปเดตรายการ department
+			// } else {
+			// 	alert(response.message || 'ไม่สามารถลบได้');
+			// }
 		}
 	});
 }
