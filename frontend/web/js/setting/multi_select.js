@@ -40,3 +40,27 @@ function deleteTags(id) {
     });
     $("#tag-" + id).remove();
 }
+
+
+function applySelectStyleGroup(select) {
+    // alert(select.value);
+    if (select.value != 0) {
+        select.classList.remove("select-pim");
+        select.classList.add("select-pimselect");
+    } else {
+        select.classList.remove("select-pimselect");
+        select.classList.add("select-pim");
+    }
+
+    // ถ้าเป็น companySelect ให้เปิดหรือปิด branchSelect
+    if (select.id === "companySelect") {
+        const branchSelect = document.getElementById("branchSelect");
+        if (select.value != 0) {
+            branchSelect.disabled = false;
+        } else {
+            branchSelect.disabled = true;
+            branchSelect.value = "";
+            applySelectStyle(branchSelect);
+        }
+    }
+}

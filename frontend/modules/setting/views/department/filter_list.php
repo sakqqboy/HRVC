@@ -1,3 +1,12 @@
+<?php
+
+use common\models\ModelMaster;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Company;
+use frontend\models\hrvc\Employee;
+use frontend\models\hrvc\Team;
+
+?>
 <div style="display: flex; justify-content: flex-end; gap: 16px; align-items: center; width: 100%;">
 
     <select id="countrySelect" class="form-select font-size-12 select-pim" style="border-left: none;" required>
@@ -11,31 +20,31 @@
         </option>
         <?php endforeach; ?>
     </select>
-
-    <select id="companySelect" class="form-select font-size-12 select-pim" style="border-left: none;" required>
-        <option value="" disabled <?= empty($companyIdOld) ? 'selected' : '' ?> hidden
-            style="color: var(--Helper-Text, #8A8A8A);">
-            <?= Yii::t('app', 'Company') ?>
-        </option>
+    <!-- อันเก่า -->
+    <select class="form-select font-size-12 <?= !empty($companyIdOld) ? 'select-pimselect' : 'select-pim' ?>"
+        id="companySelect" onchange="applySelectStyleGroup(this)">
+        <?php if (!empty($companyIdOld)) : ?>
+        <option value="<?= $companyIdOld ?>"><?= Company::companyName($companyIdOld) ?></option>
+        <?php endif; ?>
+        <option value=""><?= Yii::t('app', 'Company') ?></option>
         <?php foreach ($companies as $company) : ?>
-        <option value="<?= $company['companyId'] ?>" <?= $companyIdOld == $company['companyId'] ? 'selected' : '' ?>>
-            <?= $company['companyName'] ?>
-
-        </option>
+        <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
         <?php endforeach; ?>
     </select>
 
-    <select id="branchSelect" class="form-select font-size-12 select-pim" style="border-left: none;" required>
-        <option value="" disabled <?= empty($branchIdOld) ? 'selected' : '' ?> hidden
-            style="color: var(--Helper-Text, #8A8A8A);">
-            <?= Yii::t('app', 'Branch') ?>
-        </option>
-        <?php foreach ($branches as $branch) : ?>
-        <option value="<?= $branch['branchId'] ?>" <?= $branchIdOld == $branch['branchId'] ? 'selected' : '' ?>>
-            <?= $branch['branchName'] ?>
-        </option>
-        <?php endforeach; ?>
+    <select class="form-select font-size-12 <?= !empty($branchIdOld) ? 'select-pimselect' : 'select-pim' ?>"
+        id="branchSelect" <?= empty($companyIdOld) ? 'disabled' : '' ?> onchange="applySelectStyleGroup(this)">
+        <?php if (!empty($branchIdOld)) : ?>
+        <option value="<?= $branchIdOld ?>"><?= Branch::branchName($branchIdOld) ?></option>
+        <?php endif; ?>
+        <option value=""><?= Yii::t('app', 'Branch') ?></option>
+        <?php if (!empty($branches)) :
+        foreach ($branches as $branch) : ?>
+        <option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
+        <?php endforeach; endif; ?>
     </select>
+
+
 
     <span class="btn font-size-12 justify-content-center d-flex align-items-center custom-button-select"
         onclick="filterCountryDepartment('<?= $page ?>')" style="flex: 1; text-align: center; cursor: pointer;">
