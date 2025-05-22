@@ -78,7 +78,7 @@ $this->title = 'Create Branch';
                                 data-placement="top" aria-label="<?= Yii::t('app', 'select to country') ?>"
                                 data-bs-original-title="<?= Yii::t('app', 'Select to Company') ?>">
                         </label>
-                        <div class="col-12 font-b" style="width: 330px;">
+                        <!-- <div class="col-12 font-b" style="width: 330px;">
                             <?php if (isset($companyId) && $companyId != ''): ?>
                             <input type="hidden" id="company" name="companyId" value="<?= $company['companyId'] ?>">
                             <?= $company['companyName'] ?>
@@ -92,6 +92,34 @@ $this->title = 'Create Branch';
                                 <?php endif; ?>
                             </select>
                             <?php endif; ?>
+                        </div> -->
+                        <div class="input-group" style="width: 330px;">
+                            <?php if (isset($companyId) && $companyId != '') {?>
+                            <div class="col-12 font-b" style="width: 330px;">
+                                <input type="hidden" id="company" name="companyId" value="<?= $company['companyId'] ?>">
+                                <?= $company['companyName'] ?>
+                            </div>
+                            <?php }else{?>
+                            <select class="form-select" id="company" name="companyId">
+                                <option value=""><?= Yii::t('app', 'Select Company') ?></option>
+                                <?php if (isset($companies) && count($companies) > 0): ?>
+                                <?php foreach ($companies as $c): ?>
+                                <option value="<?= $c['companyId'] ?>"><?= $c['companyName'] ?></option>
+                                <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                            <span class="input-group-text"
+                                style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
+                                onclick="document.getElementById('companySelectId').focus();">
+                                <div class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="icon"
+                                        style="width: 10px; height: 10px;">
+                                </div>
+                                <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
+                                    style="width: 10px; height: 10px;">
+                            </span>
+                            <?php }?>
+
                         </div>
                     </div>
                 </div>

@@ -3,8 +3,10 @@
 use yii\bootstrap5\ActiveForm;
 
 $urlSubmit = '';
-$namePage = $typePage ?? "Create";
+$namePage = !empty($typePage) ? $typePage : " Create";
+
 $this->title =  $namePage . ' Title';
+
 if($namePage == "Create" ){
     $urlSubmit = 'setting/title/save-create-title';
 }else{

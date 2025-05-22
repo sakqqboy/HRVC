@@ -5,7 +5,7 @@ use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Create Department';
+$this->title = 'Create Team';
 $form = ActiveForm::begin([
 	'id' => 'create-branch',
 	'method' => 'post',
@@ -35,7 +35,7 @@ if (Yii::$app->session->hasFlash('error')) {
                 style="width:18px; height:18px; margin-top:-3px;">
             <?= Yii::t('app', 'Back') ?>
         </a>
-        <?= Yii::t('app', 'Create New Department') ?>
+        <?= Yii::t('app', 'Create Team') ?>
     </div>
 
     <div class="mid-center max-background mt-18" style="height: 780px;
