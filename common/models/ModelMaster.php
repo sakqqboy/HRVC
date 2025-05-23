@@ -681,4 +681,21 @@ class ModelMaster extends \yii\db\ActiveRecord
         $data["nextYear"] = $nextYear;
         return $data;
     }
+    public static function pimNumberFormat($number)
+    {
+        $num = 0;
+        if ($number != '') {
+            $decimal = explode('.', $number);
+            if (isset($decimal[1])) {
+                if ($decimal[1] == '00') {
+                    $num = number_format($decimal[0]);
+                } else {
+                    $num = number_format($decimal[0], 2);
+                }
+            } else {
+                $num = number_format($number);
+            }
+        }
+        return $num;
+    }
 }

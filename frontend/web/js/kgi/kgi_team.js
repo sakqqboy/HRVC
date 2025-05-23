@@ -356,3 +356,28 @@ function validateFormKgiTeam() {
         return true;
     }
 }
+
+
+function kgiTeamHistoryView(kgiId, teamId) { 
+    var viewType = $("#viewType").val();
+    //alert(viewType);
+var url = $url + 'kgi/view/kgi-team-history-view';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { teamId: teamId, kgiId: kgiId,viewType:viewType },
+        success: function (data) {
+            if (data.status) {
+                $("#all").css('display', 'none');
+                $("#all").html('');
+                $("#employee-all").css('display', 'none');
+                $("#employee-all").html('');
+                $("#man-check").show();
+                $("#kgi-employee").show();
+                $("#man-check").html(data.history);
+            }
+
+        }
+    });
+}

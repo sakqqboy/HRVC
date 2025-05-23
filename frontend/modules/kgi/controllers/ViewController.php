@@ -6,9 +6,13 @@ use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
 use FFI\Exception as FFIException;
+use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\KgiHistory;
+use frontend\models\hrvc\KgiTeam;
+use frontend\models\hrvc\Team;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -445,13 +449,16 @@ class ViewController extends Controller
 		$kgiTeams = curl_exec($api);
 		$kgiTeams = json_decode($kgiTeams, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=0");
+		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=0");
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/assigned-kgi-employee?kgiId=' . $kgiId . "&&kgiHistoryId=0");
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 		curl_close($api);
-		$res["kgiEmployeeTeam"] = $this->renderAjax("kgi_employee_team", [
+		//throw new Exception(print_r($kgiDetail, true));
+		$res["kgiEmployeeTeam"] = $this->renderAjax("kgi_employee_team_all", [
 			"kgiTeams" => $kgiTeams,
-			"kgiDetail" => $kgiDetail
+			"kgiDetail" => $kgiDetail,
+			"kgiId" => $kgiId
 
 		]);
 		return json_encode($res);
@@ -744,6 +751,45 @@ class ViewController extends Controller
 		$res["kpiTeam"] = $this->renderAjax('kpi_team', [
 			"kpiTeams" => $kpiTeams
 		]);
+		return json_encode($res);
+	}
+	public function actionKgiTeamHistoryView()
+	{
+		$kgiId = $_POST['kgiId'];
+		$teamId = $_POST['teamId'];
+		$kgiTeam = KgiTeam::find()->select('kgiTeamId')
+			->where(["teamId" => $teamId, "kgiId" => $kgiId, "status" => [1, 2]])
+			->asArray()
+			->one();
+		$kgi = Kgi::find()->where(["kgiId" => $kgiId])->asArray()->one();
+		$team = Team::find()->where(["teamId" => $teamId])->asArray()->one();
+		$departnemtName = Department::departmentNAme($team["departmentId"]);
+		if (isset($kgiTeam) && !empty($kgiTeam)) {
+			$kgiTeamId = $kgiTeam["kgiTeamId"];
+			$res["status"] = true;
+		} else {
+			$res["status"] = false;
+		}
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-history-view?kgiTeamId=' . $kgiTeamId);
+		$kgiTeamHistory = curl_exec($api);
+		$kgiTeamHistory = json_decode($kgiTeamHistory, true);
+		curl_close($api);
+
+
+		$teamText = $this->renderAjax('kgi_team_history_view', [
+			"kgiTeamHistory" => $kgiTeamHistory,
+			"team" => $team,
+			"departmentName" => $departnemtName,
+			"code" => $kgi["code"],
+			"kgiId" => $kgi["kgiId"],
+			"viewType" => $_POST['viewType']
+		]);
+		$res["kgiTeam"] = $kgiTeam;
+		$res["history"] = $teamText;
 		return json_encode($res);
 	}
 }

@@ -81,6 +81,11 @@
 	/* รวม padding ในขนาดองค์ประกอบ */
 }
 
+.selectedTeam {
+	background-color: #F4F9FF;
+	border: #2580D3 solid thin !important;
+}
+
 .pim-head-text {
 	font-size: 24px;
 	letter-spacing: 0.2px;
@@ -96,7 +101,7 @@
 	height: 35px;
 }
 
-thead {
+.thead {
 	position: sticky;
 	top: 180px;
 	/* ปรับค่าจาก 50px เป็น 150px หรือค่าที่ต้องการ */
@@ -198,6 +203,12 @@ thead {
 
 .pim-change-modes {
 	padding: 1px 10px 10px 10px !important;
+	border-color: #2F80ED !important;
+	height: 25px;
+}
+
+.pim-view-change-mode {
+	padding: 3px 10px 10px 10px !important;
 	border-color: #2F80ED !important;
 	height: 25px;
 }
@@ -1381,6 +1392,31 @@ thead {
 	object-fit: cover;
 }
 
+.team-number-tag {
+	background-color: #FFFFFF;
+	font-weight: 700;
+	font-size: 16px;
+	text-align: center;
+	border: #CBD5E1 solid 1px;
+	width: 25px;
+	height: 25px;
+	gap: 10px;
+	padding-top: 8px;
+	padding-right: 4px;
+	padding-bottom: 8px;
+	padding-left: 4px;
+	border-radius: 100%;
+	padding: 0px;
+	margin-top: -57px;
+	margin-left: 37px;
+}
+
+.pim-image-AssignMembers {
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+}
+
 
 
 /* Specific color formats */
@@ -1424,6 +1460,11 @@ thead {
 	align-items: center;
 	border: 0.5px solid #FFFFFF;
 	/* Default border color */
+}
+
+.title-team-icon {
+	width: 25px;
+	height: 25px;
 }
 
 .team-icon img {
@@ -1628,10 +1669,11 @@ thead {
 .sub-tab-active {
 	border-bottom: #2580D3 solid 1px;
 	padding-top: 3px;
-	font-size: 10px;
+	font-size: 20px;
 	padding-bottom: 2px;
 	letter-spacing: 0.5px;
 	color: #2580D3;
+	font-weight: 600;
 }
 
 .sub-tab {
@@ -2375,6 +2417,91 @@ input:checked+.slider:before {
 	background-color: white;
 	padding: 5px;
 	z-index: 1001;
+}
+
+.small-content-pim {
+	border-radius: 6px;
+	padding-top: 9px;
+	padding-bottom: 9px;
+	padding-left: 14px;
+	padding-right: 14px;
+	gap: 10px;
+	border: #F4F6F9 solid thin;
+	font-size: 16px;
+	font-weight: 600;
+
+}
+
+.view-back-btn {
+	background-color: #2580D3;
+	width: 66px;
+	height: 26px;
+	border-radius: 4px;
+	text-align: center;
+	color: white;
+	padding: 3px 5px 3px 5px;
+
+}
+
+.doubleplay-btn {
+	height: 35px;
+	width: 35px;
+	border-radius: 5px;
+	padding-top: 5px;
+	padding-right: 6px;
+	padding-bottom: 8px;
+	padding-left: 6px;
+	border: #CBD5E1 solid thin;
+	text-align: center;
+}
+
+.doubleplay-btn-blue {
+	height: 35px;
+	width: 35px;
+	border-radius: 5px;
+	padding-top: 5px;
+	padding-right: 6px;
+	padding-bottom: 8px;
+	padding-left: 6px;
+	border: #CBD5E1 solid thin;
+	text-align: center;
+	background-color: #2580D3;
+}
+
+.circle-view-bg {
+	fill: none;
+	stroke: #eee;
+	stroke-width: 3.8;
+}
+
+.circle-view {
+	fill: none;
+	stroke-width: 2.8;
+	stroke: #2580D3;
+	stroke-linecap: round;
+}
+
+.circular-chart-view {
+	display: block;
+	width: 40px;
+	height: 40px;
+
+}
+
+
+.circular-chart-view.dark-blue.circle-view {
+	stroke: #2580D3;
+}
+
+.circular-chart-view.dark-blue .circle-view-bg {
+	stroke: #D0E2FF;
+}
+
+.percentage-view {
+	fill: #666;
+	font-family: sans-serif;
+	font-size: 0.7em;
+	text-anchor: middle;
 }
 
 @media (max-width: 1935px) and (max-height: 950px) {

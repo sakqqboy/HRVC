@@ -28,15 +28,15 @@ $this->title = 'KGI View';
                 <div class="col-1 text-end">
                     <?php if ($role >= 5) {
                     ?>
-                    <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kgi"
-                        onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
-                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
-                            class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
-                        <?= Yii::t('app', 'Delete') ?>
+                        <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kgi"
+                            onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
+                            onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                            onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
+                                class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
+                            <?= Yii::t('app', 'Delete') ?>
 
-                    </a>
+                        </a>
                     <?php } ?>
                 </div>
             </div>
@@ -90,44 +90,44 @@ $this->title = 'KGI View';
                                 <!-- <div class="offset-1 col-11"> -->
                                 <div class="ml-12 priority-star">
                                     <?php
-                                            if ($kgiDetail["priority"] == "A" || $kgiDetail["priority"] == "B") {
-                                            ?>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    if ($kgiDetail["priority"] == "A" || $kgiDetail["priority"] == "B") {
+                                    ?>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
                                     <?php
-                                            }
-                                            if ($kgiDetail["priority"] == "A" || $kgiDetail["priority"] == "C") {
-                                            ?>
-                                    <i class="fa fa-star big-star" aria-hidden="true"></i>
+                                    }
+                                    if ($kgiDetail["priority"] == "A" || $kgiDetail["priority"] == "C") {
+                                    ?>
+                                        <i class="fa fa-star big-star" aria-hidden="true"></i>
                                     <?php
-                                            }
-                                            if ($kgiDetail["priority"] == "B") {
-                                            ?>
-                                    <i class="fa fa-star ml-10" aria-hidden="true"></i>
+                                    }
+                                    if ($kgiDetail["priority"] == "B") {
+                                    ?>
+                                        <i class="fa fa-star ml-10" aria-hidden="true"></i>
                                     <?php
-                                            }
-                                            if ($kgiDetail["priority"] == "A") {
-                                            ?>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    }
+                                    if ($kgiDetail["priority"] == "A") {
+                                    ?>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
                                     <?php
-                                            }
-                                            ?>
+                                    }
+                                    ?>
                                 </div>
                                 <?php
-                                        if ($kgiDetail["priority"] != '') {
-                                        ?>
-                                <div class="col-12 text-center priority-box">
-                                    <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
-                                    <div class="col-12 text-priority"><?= $kgiDetail["priority"] ?></div>
-                                </div>
+                                if ($kgiDetail["priority"] != '') {
+                                ?>
+                                    <div class="col-12 text-center priority-box">
+                                        <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
+                                        <div class="col-12 text-priority"><?= $kgiDetail["priority"] ?></div>
+                                    </div>
                                 <?php
-                                        } else { ?>
-                                <div class="col-12 text-center priority-box-null">
-                                    <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
-                                    <div class="col-12 text-priority">N/A</div>
-                                </div>
+                                } else { ?>
+                                    <div class="col-12 text-center priority-box-null">
+                                        <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
+                                        <div class="col-12 text-priority">N/A</div>
+                                    </div>
                                 <?php
-                                        }
-                                        ?>
+                                }
+                                ?>
                                 <!-- </div> -->
                                 <!-- </div> -->
 
@@ -221,17 +221,17 @@ $this->title = 'KGI View';
                                             </div>
                                             <div class="col-4 text-center mt-5 pt-6 pl-8 pr-8">
                                                 <?php
-                                        if ($role > 3  && $kgiDetail["status"] == 1) {
-                                        ?>
-                                                <a class="pim-btn-<?= $colorFormat ?>"
-                                                    href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
-                                                    style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
-                                                    <i class="fa fa-refresh" aria-hidden="true"></i>
-                                                    <?= Yii::t('app', 'Update') ?>
-                                                </a>
+                                                if ($role > 3  && $kgiDetail["status"] == 1) {
+                                                ?>
+                                                    <a class="pim-btn-<?= $colorFormat ?>"
+                                                        href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
+                                                        style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
+                                                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                                                        <?= Yii::t('app', 'Update') ?>
+                                                    </a>
                                                 <?php
-                                        }
-                                        ?>
+                                                }
+                                                ?>
                                             </div>
                                             <div class="col-4 pl-0 pr-5 mt-5 ">
                                                 <div class="col-12 text-start font-<?= $colorFormat ?>"
@@ -301,6 +301,7 @@ $this->title = 'KGI View';
     </div>
 </div>
 <input type="hidden" id="kgiId" value="<?= $kgiId ?>">
+<input type="hidden" id="viewType" value="grid">
 <?php
 $form = ActiveForm::begin([
     'id' => 'update-kgi',
@@ -323,12 +324,12 @@ $form = ActiveForm::begin([
 
 
 <script>
-window.onload = function() {
-    let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
-    if (openTab) {
-        viewTabKgi(<?= $kgiHistoryId ?>, openTab); // Set the tab based on the PHP value
-    } else {
-        viewTabKgi(<?= $kgiHistoryId ?>, 1); // Default to tab 1 if no value is passed
+    window.onload = function() {
+        let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
+        if (openTab) {
+            viewTabKgi(<?= $kgiHistoryId ?>, openTab); // Set the tab based on the PHP value
+        } else {
+            viewTabKgi(<?= $kgiHistoryId ?>, 1); // Default to tab 1 if no value is passed
+        }
     }
-}
 </script>

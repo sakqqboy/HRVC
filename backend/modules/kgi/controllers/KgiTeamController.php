@@ -86,20 +86,24 @@ class KgiTeamController extends Controller
 	public function actionKgiTeamSummarize($kgiId)
 	{
 		$kgiTeams = KgiTeam::find()
-			->select('kgi_team.teamId,t.teamName,t.departmentId')
+			->select('kgi_team.teamId,t.teamName,t.departmentId,kgi_team.target,kgi_team.result,kgi_team.updateDateTime')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
-			->where(["kgi_team.status" => [1, 2, 4], "t.status" => [1, 2, 4]])
-			->andWhere(["kgi_team.kgiId" => $kgiId])
+			->where(["kgi_team.status" => [1, 2, 4], "t.status" => [1, 2, 4], "kgi_team.kgiId" => $kgiId])
 			->orderBy('t.teamName')
 			->asArray()
 			->all();
 		$data = [];
 		if (isset($kgiTeams) && count($kgiTeams) > 0) {
 			foreach ($kgiTeams as $kt):
+				$target = ModelMaster::pimNumberFormat($kt["target"]);
+				$result = ModelMaster::pimNumberFormat($kt["result"]);
 				$data[$kt["teamId"]] = [
 					"teamName" => $kt["teamName"],
 					"totalEmployee" => KgiEmployee::totolEmployeeInTeam($kgiId, $kt["teamId"]),
-					"departmentName" => Department::departmentName($kt["departmentId"])
+					"departmentName" => Department::departmentName($kt["departmentId"]),
+					"target" => $target,
+					"result" => $result,
+					"updateDateTime" => ModelMaster::monthDateYearTime($kt["updateDateTime"]),
 				];
 			endforeach;
 		}
@@ -440,7 +444,7 @@ class KgiTeamController extends Controller
 			->where([
 				"kgi_team_history.kgiTeamId" => $kgiTeamId,
 			])
-			->orderBy('kgi_team_history.createDateTime DESC')
+			->orderBy('kgi_team_history.year DESC,kgi_team_history.month DESC,kgi_team_history.createDateTime DESC')
 			->asArray()
 			->all();
 		if (!isset($kgiTeamHistory) || count($kgiTeamHistory) == 0) {

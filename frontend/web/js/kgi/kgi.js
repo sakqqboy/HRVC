@@ -853,14 +853,22 @@ function viewTabKgi(kgiHistoryId, tabId) {
 	$("#currentTab").val(tabId);
 	if (tabId == 1) {
 		var url = $url + 'kgi/view/kgi-team-employee';
+		var viewType = $("#viewType").val();
 		$.ajax({
 			type: "POST",
 			dataType: 'json',
 			url: url,
 			data: { kgiId: kgiId },
 			success: function (data) {
-				kgiId
 				$("#show-content").html(data.kgiEmployeeTeam);
+				if (viewType == 'list') {
+					$('#man-check').css("display", 'none');
+					$('#all').show();
+					$('#employee-all').show();
+					$('#kgi-employee').css("display", 'none');
+					$("#viewType").val('list');
+				}
+
 			}
 		});
 	}
@@ -1031,4 +1039,4 @@ function kgiUpdateHistory(kgiId) {
 			$("#history-list-creater").html(data.individualText);
 		}
 	});
- }
+}

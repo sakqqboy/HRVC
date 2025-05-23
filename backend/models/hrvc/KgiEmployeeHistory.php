@@ -51,4 +51,25 @@ class KgiEmployeeHistory extends \backend\models\hrvc\master\KgiEmployeeHistoryM
         }
         return $date;
     }
+    public static function allHistory($kgiEmployeeId, $month, $year)
+    {
+        $data = [];
+        $kgiEmployeeHistory = KgiEmployeeHistory::find()
+            ->where(["kgiEmployeeId" => $kgiEmployeeId, "status" => [1, 2, 3, 4, 5]])
+            ->orderBy('updateDateTime DESC')
+            ->asArray()
+            ->all();
+        if (isset($kgiEmployeeHistory) && count($kgiEmployeeHistory) > 0) {
+            foreach ($kgiEmployeeHistory as $keh):
+                $data[$keh["kgiEmployeeHistoryId"]] = [
+                    "detail" => $keh["detail"],
+                    "result" => $keh["result"],
+                    "dueBehide" => ModelMaster::pimNumberFormat($keh["result"] - $keh["result"]),
+                    "fromDate" => $keh["fromDate"],
+                    "toDate" => $keh["toDate"],
+                ];
+            endforeach;
+        }
+        return $data;
+    }
 }

@@ -923,6 +923,25 @@ class KgiPersonalController extends Controller
 		}
 		return json_encode($res);
 	}
+	public function actionKgiEachTeamEmployee()
+	{
+		$kgiId = $_POST["kgiId"];
+		$teamId = $_POST["teamId"];
+		$month = $_POST["month"];
+		$year = $_POST["year"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-each-team-employee-history?kgiId=' . $kgiId . '&&teamId=' . $teamId . '&&month=' . $month . '&&year=' . $year);
+		$kgiTeamEmployeeHistory = curl_exec($api);
+		$kgiTeamEmployeeHistory = json_decode($kgiTeamEmployeeHistory, true);
+		curl_close($api);
+		//throw new exception('kgi/kgi-personal/kgi-each-team-employee-history?kgiId=' . $kgiId . '&&teamId=' . $teamId . '&&month=' . $month . '&&year=' . $year);
+		$employeeHistory = $this->renderAjax('employee_history', ["kgiTeamEmployeeHistory" => $kgiTeamEmployeeHistory, "month" => $month, "year" => $year]);
+		$res["status"] = true;
+		$res["employeeHistory"] = $employeeHistory;
+		return json_encode($res);
+	}
 	public function actionKgiEmployeeChart()
 	{
 		$kgiId = $_POST["kgiId"];

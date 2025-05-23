@@ -9,6 +9,7 @@ use backend\models\hrvc\Kgi;
 use backend\models\hrvc\KgiBranch;
 use backend\models\hrvc\KgiEmployee;
 use backend\models\hrvc\KgiEmployeeHistory;
+use backend\models\hrvc\KgiHistory;
 use backend\models\hrvc\KgiIssue;
 use backend\models\hrvc\KgiTeam;
 use backend\models\hrvc\Team;
@@ -705,5 +706,96 @@ class KgiPersonalController extends Controller
 			endforeach;
 		}
 		return json_encode($data);
+	}
+	public function actionKgiEachTeamEmployeeHistory($kgiId, $teamId, $month, $year)
+	{
+
+		$kgiEmployee = KgiEmployee::find()
+			->select('e.employeeFirstname,e.employeeSurename,t.titleName,kgi_employee.kgiEmployeeId,e.picture')
+			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+			->JOIN("LEFT JOIN", "title t", "t.titleId=e.titleId")
+			->where(["kgi_employee.kgiId" => $kgiId, "e.teamId" => $teamId])
+			->orderBy('e.employeeFirstname')
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+			foreach ($kgiEmployee as $ke):
+				$kgiEmployeeHistory = KgiEmployeeHistory::find()
+					->where(["kgiEmployeeId" => $ke["kgiEmployeeId"], "month" => $month, "year" => $year])
+					->orderBy("status DESC,updateDateTime DESC")
+					->asArray()
+					->one();
+				if (isset($kgiEmployeeHistory) && !empty($kgiEmployeeHistory)) {
+					$img = "image/user.png";
+
+					if ($ke["picture"] != '') {
+						$img = $ke["picture"];
+					} else {
+						$img = "image/user.png";
+					}
+					$data[$ke["kgiEmployeeId"]] = [
+						"employeeName" => $ke["employeeFirstname"] . ' ' . $ke["employeeSurename"],
+						"picture" => $img,
+						"title" => $ke["titleName"],
+						"target" => $kgiEmployeeHistory["target"],
+						"result" => $kgiEmployeeHistory["result"],
+						"updateDateTime" => ModelMaster::monthDateYearTime($kgiEmployeeHistory["updateDateTime"]),
+						"employeeHistory" => KgiEmployeeHistory::allHistory($ke["kgiEmployeeId"], $month, $year)
+					];
+				}
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionAssignedKgiEmployee($kgiId, $kgiHistoryId)
+	{
+
+		if ($kgiHistoryId == 0) {
+			$kgi = Kgi::find()->where(["kgiId" => $kgiId])->asArray()->one();
+		} else {
+			$kgi = KgiHistory::find()->where(["kgiHistoryId" => $kgiHistoryId])
+				->asArray()
+				->one();
+		}
+		$kgiEmployee = KgiEmployee::find()
+			->select('e.picture,e.employeeId,e.gender,t.titleName,e.employeeFirstname,e.employeeSurename,e.teamId,
+			kgi_employee.target,kgi_employee.result,kgi_employee.updateDateTime,team.teamName')
+			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+			->JOIN("LEFT JOIN", "title t", "t.titleId=e.titleId")
+			->JOIN("LEFT JOIN", "team", "team.teamId=e.teamId")
+			->where([
+				"kgi_employee.status" => [1, 2, 4],
+				"kgi_employee.kgiId" => $kgiId,
+				"e.status" => 1,
+				"kgi_employee.month" => $kgi["month"],
+				"kgi_employee.year" => $kgi["year"]
+			])
+			->andWhere("kgi_employee.employeeId is not null")
+			->orderBy("team.teamName,e.employeeFirstname")
+			->asArray()
+			->all();
+		$employeeData = [];
+		if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+			foreach ($kgiEmployee as $ke) :
+				if ($ke["picture"] != "") {
+					$picture = $ke["picture"];
+				} else {
+					$picture =  'images/icons/Settings/personblack.svg';
+				}
+				$target = ModelMaster::pimNumberFormat($ke["target"]);
+				$result = ModelMaster::pimNumberFormat($ke["result"]);
+				$employeeData[$ke["teamId"]][$ke["employeeId"]] = [
+					"employeeName" => $ke["employeeFirstname"] . ' ' . $ke["employeeSurename"],
+					"teamName" => $ke["teamName"],
+					"title" => $ke["titleName"],
+					"picture" => $picture,
+					"target" => $target,
+					"result" => $result,
+					"updateDateTime" => ModelMaster::monthDateYearTime($ke["updateDateTime"]),
+				];
+			endforeach;
+			return json_encode($employeeData);
+		}
 	}
 }
