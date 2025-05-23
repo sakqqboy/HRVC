@@ -106,14 +106,14 @@ $form = ActiveForm::begin([
                             <?php }else{?>
                             <select id="branchSelectId" brancSelect" class="form-select mt-12"
                                 style="border-right: none; width: 239px; appearance: none; background-image: none;"
-                                name="branchId" data-company-branch="branch" required>
+                                name="branchId" data-company-branch="branch" required disabled>
                                 <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A); ">
                                     <?= Yii::t('app', 'Select from a Branch') ?>
                                 </option>
                             </select>
 
                             <span class="input-group-text mt-12"
-                                style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
+                                style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;"
                                 onclick="document.getElementById('companySelectId').focus();">
                                 <div id="branchIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
                                     <img id="branchIconImg" src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
@@ -205,14 +205,14 @@ $form = ActiveForm::begin([
                             <?php }else{?>
                             <select id="departmentSelectId" brancSelect" class="form-select mt-12"
                                 style="border-right: none; width: 239px; appearance: none; background-image: none;"
-                                name="departmentId" data-company-branch="department" required>
+                                name="departmentId" data-company-branch="department" required disabled>
                                 <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A); ">
                                     <?= Yii::t('app', 'Select from a Department') ?>
                                 </option>
                             </select>
 
                             <span class="input-group-text mt-12"
-                                style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
+                                style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;"
                                 onclick="document.getElementById('companySelectId').focus();">
                                 <div id="departmentIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
                                     <img id="departmentIconImg"
@@ -323,6 +323,16 @@ $form = ActiveForm::begin([
         const selectedOption = this.options[this.selectedIndex];
         const selectedImg = selectedOption.getAttribute('data-img');
         const selectedValue = this.value;
+        const branchSelect = document.getElementById('branchSelectId');
+        const branchSpan = branchSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
+
+        // เอา disabled ออก
+        branchSelect.removeAttribute('disabled');
+
+        // เปลี่ยนสี background
+        if (branchSpan && branchSpan.classList.contains('input-group-text')) {
+            branchSpan.style.backgroundColor = '#fff';
+        }
         if (selectedValue !== '') {
             iconImg.src = homeUrl + selectedImg;
             iconImg.removeAttribute('style');
@@ -336,6 +346,16 @@ $form = ActiveForm::begin([
         const iconImg = document.getElementById('branchIconImg');
         const selectedValue = this.value;
         const iconDiv = document.getElementById('branchIcon');
+        const departmentSelect = document.getElementById('departmentSelectId');
+        const departmentSpan = departmentSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
+
+        // เอา disabled ออก
+        departmentSelect.removeAttribute('disabled');
+
+        // เปลี่ยนสี background
+        if (departmentSpan && departmentSpan.classList.contains('input-group-text')) {
+            departmentSpan.style.backgroundColor = '#fff';
+        }
         if (selectedValue !== '') {
             iconImg.src = homeUrl + 'image/branches-black.svg';
             // alert(selectedValue);
