@@ -33,7 +33,7 @@ $form = ActiveForm::begin([
                     <?= Yii::t('app', 'Back') ?>
                 </a>
                 <div class="pim-name-title ml-10">
-                    <?= Yii::t('app', $namePage . 'Title') ?>
+                    <?= Yii::t('app', $namePage . ' Title') ?>
                 </div>
             </div>
         </div>
@@ -115,9 +115,9 @@ $form = ActiveForm::begin([
                             <span class="input-group-text mt-12"
                                 style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
                                 onclick="document.getElementById('companySelectId').focus();">
-                                <div class="cycle-current-gray" style="width: 20px; height: 20px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon"
-                                        style="width: 10px; height: 10px;">
+                                <div id="branchIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                    <img id="branchIconImg" src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
+                                        alt="icon" style="width: 10px; height: 10px;">
                                 </div>
                                 <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
                                     style="width: 10px; height: 10px;">
@@ -150,25 +150,23 @@ $form = ActiveForm::begin([
                                     style="width: 10px; height: 10px;">
                             </span>
                             <?php }else{?>
-                            <select id="companySelectId" class="form-select mt-12"
-                                style="border-right: none; width: 239px; appearance: none; background-image: none;"
-                                name="companyId" data-company-branch="company" required>
-                                <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A); ">
-                                    <?= Yii::t('app', 'Select from a Company') ?>
+                            <select class="form-select mt-12" id="companySelectId" name="companyId"
+                                style="appearance: none; background-image: none;">
+                                <option value=""><?= Yii::t('app', 'Select Company') ?></option>
+                                <?php if (isset($companies) && count($companies) > 0): ?>
+                                <?php foreach ($companies as $c): ?>
+                                <option value="<?= $c['companyId'] ?>" data-img="<?= $c['picture'] ?>">
+                                    <?= $c['companyName'] ?>
                                 </option>
-                                <?php
-									if (!empty($companies)) {
-										foreach ($companies as $company) {
-											echo '<option value="' . $company['companyId'] . '">' . $company['companyName'] . '</option>';
-										}
-									}
-									?>
+                                <?php endforeach; ?>
+                                <?php endif; ?>
                             </select>
                             <span class="input-group-text mt-12"
                                 style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
                                 onclick="document.getElementById('companySelectId').focus();">
-                                <div class="cycle-current-gray" style="width: 20px; height: 20px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="icon"
+                                <div id="companyIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                    <img id="companyIconImg"
+                                        src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="icon"
                                         style="width: 10px; height: 10px;">
                                 </div>
                                 <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
@@ -216,8 +214,9 @@ $form = ActiveForm::begin([
                             <span class="input-group-text mt-12"
                                 style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
                                 onclick="document.getElementById('companySelectId').focus();">
-                                <div class="cycle-current-gray" style="width: 20px; height: 20px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon"
+                                <div id="departmentIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                    <img id="departmentIconImg"
+                                        src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon"
                                         style="width: 10px; height: 10px;">
                                 </div>
                                 <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
@@ -318,6 +317,54 @@ $form = ActiveForm::begin([
 
 
     <script>
+    const homeUrl = "<?= Yii::$app->homeUrl ?>";
+    document.getElementById('companySelectId').addEventListener('change', function() {
+        const iconImg = document.getElementById('companyIconImg');
+        const selectedOption = this.options[this.selectedIndex];
+        const selectedImg = selectedOption.getAttribute('data-img');
+        const selectedValue = this.value;
+        if (selectedValue !== '') {
+            iconImg.src = homeUrl + selectedImg;
+            iconImg.removeAttribute('style');
+            iconImg.classList.add('card-tcf');
+        } else {
+            iconImg.src = '<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg';
+        }
+    });
+
+    document.getElementById('branchSelectId').addEventListener('change', function() {
+        const iconImg = document.getElementById('branchIconImg');
+        const selectedValue = this.value;
+        const iconDiv = document.getElementById('branchIcon');
+        if (selectedValue !== '') {
+            iconImg.src = homeUrl + 'image/branches.svg';
+            // alert(selectedValue);
+            iconDiv.classList.remove('cycle-current-gray');
+            iconDiv.classList.add('cycle-current-blue');
+
+        } else {
+            iconDiv.classList.remove('cycle-current-blue');
+            iconDiv.classList.add('cycle-current-gray');
+        }
+    });
+
+
+    document.getElementById('departmentSelectId').addEventListener('change', function() {
+        const iconImg = document.getElementById('departmentIconImg');
+        const selectedValue = this.value;
+        const iconDiv = document.getElementById('departmentIcon');
+        if (selectedValue !== '') {
+            iconImg.src = homeUrl + 'image/departments.svg';
+            // alert(selectedValue);
+            iconDiv.classList.remove('cycle-current-gray');
+            iconDiv.classList.add('cycle-current-blue');
+
+        } else {
+            iconDiv.classList.remove('cycle-current-blue');
+            iconDiv.classList.add('cycle-current-gray');
+        }
+    });
+
     document.getElementById('companySelectId').addEventListener('change', function() {
         const companyId = this.value;
         // alert(companyId);

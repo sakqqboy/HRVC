@@ -91,31 +91,7 @@ if (Yii::$app->session->hasFlash('error')) {
                                     <?= $companyName ?>
                                 </div>
                                 <?php }else{?>
-                                <!-- <select id="companySelectId" class="form-select mt-12"
-                                    style="border-right: none; width: 239px; appearance: none; background-image: none;"
-                                    name="companyId" data-company-branch="company" required>
-                                    <option value="" disabled selected hidden
-                                        style="color: var(--Helper-Text, #8A8A8A); ">
-                                        <?= Yii::t('app', 'Select from a Company') ?>
-                                    </option>
-                                    <?php
-									if (!empty($companies)) {
-										foreach ($companies as $company) {
-											echo '<option value="' . $company['companyId'] . '">' . $company['companyName'] . '</option>';
-										}
-									}
-									?>
-                                </select>
-                                <span class="input-group-text mt-12"
-                                    style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
-                                    onclick="document.getElementById('companySelectId').focus();">
-                                    <div class="cycle-current-gray" style="width: 20px; height: 20px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
-                                            alt="icon" style="width: 10px; height: 10px;">
-                                    </div>
-                                    <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
-                                        style="width: 10px; height: 10px;">
-                                </span> -->
+
                                 <select class="form-select" id="companySelectId" name="companyId"
                                     style="appearance: none; background-image: none;">
                                     <option value=""><?= Yii::t('app', 'Select Company') ?></option>
