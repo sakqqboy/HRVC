@@ -219,16 +219,17 @@ document.getElementById('branchSelectId').addEventListener('change', function() 
     const selectedValue = this.value;
     const iconDiv = document.getElementById('branchIcon');
     if (selectedValue !== '') {
-        iconImg.src = homeUrl + 'image/branches.svg';
+        iconImg.src = homeUrl + 'image/branches-black.svg';
         // alert(selectedValue);
         iconDiv.classList.remove('cycle-current-gray');
-        iconDiv.classList.add('cycle-current-blue');
+        iconDiv.classList.add('cycle-current-yellow');
 
     } else {
-        iconDiv.classList.remove('cycle-current-blue');
+        iconDiv.classList.remove('cycle-current-yellow');
         iconDiv.classList.add('cycle-current-gray');
     }
 });
+
 
 document.getElementById('companySelectId').addEventListener('change', function() {
     const companyId = this.value;
