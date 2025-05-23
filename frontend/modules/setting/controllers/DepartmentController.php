@@ -521,7 +521,7 @@ class DepartmentController extends Controller
         // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1'. '&limit=6');
         // $branchJson = curl_exec($api);
         // $branches = json_decode($branchJson, true);
-		// throw new exception(print_r($branches, true));
+		// throw new exception(print_r($companies, true));
 
 		curl_close($api);
 

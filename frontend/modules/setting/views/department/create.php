@@ -91,7 +91,7 @@ if (Yii::$app->session->hasFlash('error')) {
                                     <?= $companyName ?>
                                 </div>
                                 <?php }else{?>
-                                <select id="companySelectId" class="form-select mt-12"
+                                <!-- <select id="companySelectId" class="form-select mt-12"
                                     style="border-right: none; width: 239px; appearance: none; background-image: none;"
                                     name="companyId" data-company-branch="company" required>
                                     <option value="" disabled selected hidden
@@ -109,11 +109,32 @@ if (Yii::$app->session->hasFlash('error')) {
                                 <span class="input-group-text mt-12"
                                     style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
                                     onclick="document.getElementById('companySelectId').focus();">
-                                    <!-- <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="Founded"
-                                        style="width: 20px; height: 20px;"> -->
                                     <div class="cycle-current-gray" style="width: 20px; height: 20px;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
                                             alt="icon" style="width: 10px; height: 10px;">
+                                    </div>
+                                    <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
+                                        style="width: 10px; height: 10px;">
+                                </span> -->
+                                <select class="form-select" id="companySelectId" name="companyId"
+                                    style="appearance: none; background-image: none;">
+                                    <option value=""><?= Yii::t('app', 'Select Company') ?></option>
+                                    <?php if (isset($companies) && count($companies) > 0): ?>
+                                    <?php foreach ($companies as $c): ?>
+                                    <option value="<?= $c['companyId'] ?>" data-img="<?= $c['picture'] ?>">
+                                        <?= $c['companyName'] ?>
+                                    </option>
+                                    <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </select>
+
+                                <span class="input-group-text"
+                                    style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
+                                    onclick="document.getElementById('company').focus();">
+                                    <div id="companyIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                        <img id="companyIconImg"
+                                            src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="icon"
+                                            style="width: 10px; height: 10px;">
                                     </div>
                                     <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
                                         style="width: 10px; height: 10px;">
@@ -137,7 +158,7 @@ if (Yii::$app->session->hasFlash('error')) {
                                     <?= $branchName ?>
                                 </div>
                                 <?php }else{?>
-                                <select id="branchSelectId" brancSelect" class="form-select mt-12"
+                                <select id="branchSelectId" brancSelect class="form-select mt-12"
                                     style="border-right: none; width: 239px; appearance: none; background-image: none;"
                                     name="branchId" data-company-branch="branch" required>
                                     <option value="" disabled selected hidden
@@ -149,9 +170,9 @@ if (Yii::$app->session->hasFlash('error')) {
                                 <span class="input-group-text mt-12"
                                     style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
                                     onclick="document.getElementById('companySelectId').focus();">
-                                    <div class="cycle-current-gray" style="width: 20px; height: 20px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon"
-                                            style="width: 10px; height: 10px;">
+                                    <div id="branchIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                        <img id="branchIconImg" src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
+                                            alt="icon" style="width: 10px; height: 10px;">
                                     </div>
                                     <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
                                         style="width: 10px; height: 10px;">
@@ -202,6 +223,37 @@ if (Yii::$app->session->hasFlash('error')) {
 </div>
 
 <script>
+const homeUrl = "<?= Yii::$app->homeUrl ?>";
+document.getElementById('companySelectId').addEventListener('change', function() {
+    const iconImg = document.getElementById('companyIconImg');
+    const selectedOption = this.options[this.selectedIndex];
+    const selectedImg = selectedOption.getAttribute('data-img');
+    const selectedValue = this.value;
+    if (selectedValue !== '') {
+        iconImg.src = homeUrl + selectedImg;
+        iconImg.removeAttribute('style');
+        iconImg.classList.add('card-tcf');
+    } else {
+        iconImg.src = '<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg';
+    }
+});
+
+document.getElementById('branchSelectId').addEventListener('change', function() {
+    const iconImg = document.getElementById('branchIconImg');
+    const selectedValue = this.value;
+    const iconDiv = document.getElementById('branchIcon');
+    if (selectedValue !== '') {
+        iconImg.src = homeUrl + 'image/branches.svg';
+        // alert(selectedValue);
+        iconDiv.classList.remove('cycle-current-gray');
+        iconDiv.classList.add('cycle-current-blue');
+
+    } else {
+        iconDiv.classList.remove('cycle-current-blue');
+        iconDiv.classList.add('cycle-current-gray');
+    }
+});
+
 document.getElementById('companySelectId').addEventListener('change', function() {
     const companyId = this.value;
 

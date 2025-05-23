@@ -99,3 +99,4 @@ function applySelectStyleGroup(select) {
         applySelectStyleGroup(departmentSelect);
     }
 }
+

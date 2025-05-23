@@ -100,19 +100,24 @@ $this->title = 'Create Branch';
                                 <?= $company['companyName'] ?>
                             </div>
                             <?php }else{?>
-                            <select class="form-select" id="company" name="companyId">
+                            <select class="form-select" id="company" name="companyId"
+                                style="appearance: none; background-image: none;">
                                 <option value=""><?= Yii::t('app', 'Select Company') ?></option>
                                 <?php if (isset($companies) && count($companies) > 0): ?>
                                 <?php foreach ($companies as $c): ?>
-                                <option value="<?= $c['companyId'] ?>"><?= $c['companyName'] ?></option>
+                                <option value="<?= $c['companyId'] ?>" data-img="<?= $c['picture'] ?>">
+                                    <?= $c['companyName'] ?>
+                                </option>
                                 <?php endforeach; ?>
                                 <?php endif; ?>
                             </select>
+
                             <span class="input-group-text"
                                 style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
-                                onclick="document.getElementById('companySelectId').focus();">
-                                <div class="cycle-current-gray" style="width: 20px; height: 20px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="icon"
+                                onclick="document.getElementById('company').focus();">
+                                <div id="companyIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                    <img id="companyIconImg"
+                                        src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="icon"
                                         style="width: 10px; height: 10px;">
                                 </div>
                                 <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
@@ -152,3 +157,29 @@ $this->title = 'Create Branch';
 </div>
 
 <?php ActiveForm::end(); ?>
+
+<script>
+const homeUrl = "<?= Yii::$app->homeUrl ?>";
+const companySelect = document.getElementById('company');
+const iconDiv = document.getElementById('companyIcon');
+const iconImg = document.getElementById('companyIconImg');
+document.getElementById('company').addEventListener('change', function() {
+    // alert('1');
+    const selectedOption = this.options[this.selectedIndex];
+    const selectedImg = selectedOption.getAttribute('data-img');
+    const selectedValue = this.value;
+    const iconDiv = document.getElementById('companyIcon');
+    if (selectedValue !== '') {
+        // alert(selectedValue);
+        // iconDiv.classList.remove('cycle-current-gray');
+        // iconDiv.classList.add('cycle-current-blue');
+        iconImg.src = homeUrl + selectedImg;
+        iconImg.removeAttribute('style');
+        iconImg.classList.add('card-tcf');
+    } else {
+        // iconDiv.classList.remove('cycle-current-blue');
+        // iconDiv.classList.add('cycle-current-gray');
+        iconImg.src = '<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg';
+    }
+});
+</script>

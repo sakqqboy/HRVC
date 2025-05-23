@@ -139,7 +139,7 @@ $form = ActiveForm::begin([
                         </label>
                         <div class="input-group">
                             <?php if($companyName) {?>
-                            <input type="hidden" id="branch" name="branchId" value="<?= $companyId?>">
+                            <input type="hidden" id="companyId" name="companyId" value="<?= $companyId?>">
                             <input type="text" class="form-control mt-12" value="<?= $companyName?>" disabled>
                             <span class="input-group-text mt-12"
                                 style="background-color: #e9ecef; border-left: none; gap: 5px;  ">
@@ -168,7 +168,7 @@ $form = ActiveForm::begin([
                                 style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
                                 onclick="document.getElementById('companySelectId').focus();">
                                 <div class="cycle-current-gray" style="width: 20px; height: 20px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="icon"
                                         style="width: 10px; height: 10px;">
                                 </div>
                                 <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"

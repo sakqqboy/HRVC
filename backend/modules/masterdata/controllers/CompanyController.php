@@ -29,7 +29,7 @@ class CompanyController extends Controller
 	public function actionAllCompany()
 	{
 		$company = Company::find()
-			->select('companyName,companyId')
+			->select('companyName,companyId,picture')
 			->where(["status" => 1])->asArray()->orderBy("companyName")->all();
 		return json_encode($company);
 	}
