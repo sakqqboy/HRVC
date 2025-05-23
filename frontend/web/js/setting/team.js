@@ -320,14 +320,7 @@ function filterTeam(page) {
     // const branchId = document.getElementById('branchSelect').value;
     const companyId = document.getElementById('company-filter').value;
     const branchId = document.getElementById('branch-filter').value;
-    const departmentId = document.getElementById('departmentSelect').value;
-
-    // nextPage = 1;
-    // alert(page);
-    // alert(nextPage);
-    // alert(companyId);
-    // alert(branchId);
-    // alert(departmentId);
+    const departmentId = document.getElementById('department-filter').value;
 
     var url = $url + 'setting/team/encode-params-filter';
     // alert(page);

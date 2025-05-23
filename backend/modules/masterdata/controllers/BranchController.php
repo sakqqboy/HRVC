@@ -216,4 +216,22 @@ class BranchController extends Controller
 		}
 		return json_encode($team);
 	}
+
+	public function actionBranchDepartment($id)
+	{
+		$departments = [];
+		$department = Department::find()
+			->where(["branchId" => $id, "status" => 1])
+			->asArray()
+			->all();
+		if (isset($department) && count($department) > 0) {
+			foreach ($department as $dep) :
+				$departments[$dep["departmentId"]] = [
+							"departmentId" => $dep['departmentId'],
+							"departmentName" => $dep["departmentName"]
+						];
+			endforeach;
+		}
+		return json_encode($departments);
+	}
 }

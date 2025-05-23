@@ -10,7 +10,7 @@ $page = "list"
 <div class="contrainer-body mt-10">
 
     <div class="between-center mt-20" style="width: 100%;">
-        <div class="col-9">
+        <div class="col-8">
             <div class=" d-flex align-items-center gap-2">
                 <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" style="width: 24px; height: 24px;">
                 <div class="pim-name-title ml-10">
@@ -28,7 +28,7 @@ $page = "list"
                 <?php }?>
             </div>
         </div>
-        <div class="col-2" style="text-align: right;">
+        <div class="col-3" style="text-align: right;">
             <?= $this->render('filter_list', ['countries' => $countries,'companies' => $company,'page' => $page,'countryIdOld' => $countryId]) ?>
         </div>
         <div class="col-1 pr-0 text-end">

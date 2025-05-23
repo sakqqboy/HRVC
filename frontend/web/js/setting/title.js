@@ -169,16 +169,13 @@ function addDepartmentId() {
 function filterTitle(page) {
 	// console.log("Page:", page); // Add this line to check the value of `page`
 
-	const companyId = document.getElementById('companySelect').value;
-	const branchId = document.getElementById('branchSelect').value;
-	const departmentId = document.getElementById('departmentSelect').value;
+	// const companyId = document.getElementById('companySelect').value;
+	// const branchId = document.getElementById('branchSelect').value;
+	// const departmentId = document.getElementById('departmentSelect').value;
 
-	// nextPage = 1;
-	// alert(page);
-	// alert(nextPage);
-	// alert(companyId);
-	// alert(branchId);
-	// alert(departmentId);
+	const companyId = document.getElementById('company-filter').value;
+	const branchId = document.getElementById('branch-filter').value;
+	const departmentId = document.getElementById('department-filter').value;
 
 	var url = $url + 'setting/title/encode-params-filter';
 	// alert(page);

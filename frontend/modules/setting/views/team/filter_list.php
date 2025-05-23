@@ -10,70 +10,6 @@ use frontend\models\hrvc\Team;
 ?>
 <div style="display: flex; justify-content: flex-end; gap: 16px; align-items: center; width: 100%;">
 
-
-
-    <!-- <select id="companySelect" class="form-select font-size-12 select-pim" style="border-left: none;" required>
-        <option value="" disabled <?= empty($companyIdOld) ? 'selected' : '' ?> hidden
-            style="color: var(--Helper-Text, #8A8A8A);">
-            <?= Yii::t('app', 'Company') ?>
-        </option>
-        <?php foreach ($companies as $company) : ?>
-        <option value="<?= $company['companyId'] ?>" <?= $companyIdOld == $company['companyId'] ? 'selected' : '' ?>>
-            <?= $company['companyName'] ?>
-
-        </option>
-        <?php endforeach; ?>
-    </select>
-
-    <select id="branchSelect" class="form-select font-size-12 select-pim" style="border-left: none;" required>
-        <option value="" disabled <?= empty($branchIdOld) ? 'selected' : '' ?> hidden
-            style="color: var(--Helper-Text, #8A8A8A);">
-            <?= Yii::t('app', 'Branch') ?>
-        </option>
-        <?php foreach ($branches as $branch) : ?>
-        <option value="<?= $branch['branchId'] ?>" <?= $branchIdOld == $branch['branchId'] ? 'selected' : '' ?>>
-            <?= $branch['branchName'] ?>
-        </option>
-        <?php endforeach; ?>
-    </select> -->
-
-
-    <!-- <select id="departmentSelect" class="form-select font-size-12 select-pim" style="border-left: none;" required>
-        <option value="" disabled <?= empty($departmentIdOld) ? 'selected' : '' ?> hidden
-            style="color: var(--Helper-Text, #8A8A8A);">
-            <?= Yii::t('app', 'Department') ?>
-        </option>
-        <?php foreach ($departments as $department) : ?>
-        <option value="<?= $department['departmentId'] ?>"
-            <?= $departmentIdOld == $department['departmentId'] ? 'selected' : '' ?>>
-            <?= $department['departmentName'] ?>
-        </option>
-        <?php endforeach; ?>
-    </select> -->
-
-    <!-- <select class="form-select font-size-12 <?= !empty($companyIdOld) ? 'select-pimselect' : 'select-pim' ?>"
-        id="companySelect" onchange="applySelectStyleGroup(this)">
-        <?php if (!empty($companyIdOld)) : ?>
-        <option value="<?= $companyIdOld ?>"><?= Company::companyName($companyIdOld) ?></option>
-        <?php endif; ?>
-        <option value=""><?= Yii::t('app', 'Company') ?></option>
-        <?php foreach ($companies as $company) : ?>
-        <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-        <?php endforeach; ?>
-    </select>
-
-    <select class="form-select font-size-12 <?= !empty($branchIdOld) ? 'select-pimselect' : 'select-pim' ?>"
-        id="branchSelect" <?= empty($companyIdOld) ? 'disabled' : '' ?> onchange="applySelectStyleGroup(this)">
-        <?php if (!empty($branchIdOld)) : ?>
-        <option value="<?= $branchIdOld ?>"><?= Branch::branchName($branchIdOld) ?></option>
-        <?php endif; ?>
-        <option value=""><?= Yii::t('app', 'Branch') ?></option>
-        <?php if (!empty($branches)) :
-        foreach ($branches as $branch) : ?>
-        <option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
-        <?php endforeach; endif; ?>
-    </select> -->
-
     <select class="form-select font-size-12 <?= !empty($companyIdOld) ? 'select-pimselect' : 'select-pim' ?>"
         id="company-filter" onchange="applySelectStyle(this)">
         <?php
@@ -95,13 +31,13 @@ use frontend\models\hrvc\Team;
     </select>
 
     <select class="form-select font-size-12 <?= !empty($branchIdOld) ? 'select-pimselect' : 'select-pim' ?>"
-        id="branch-filter" <?= empty($companyIdOld) ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
+        id="branch-filter" <?= empty($companyIdOld) ? 'disabled' : '' ?> onchange="applySelectStyleGroup(this)">
         <?php
             if (!empty($branchIdOld)) { 
         ?>
         <option value="<?= $branchIdOld ?>"><?= Branch::branchName($branchIdOld) ?></option>
         <?php
-                $teams = Department::departmentInBranch($branchIdOld);
+                $departments = Department::departmentInBranch($branchIdOld);
             }
         ?>
         <option value=""><?= Yii::t('app', 'Branch') ?></option>
@@ -115,10 +51,8 @@ use frontend\models\hrvc\Team;
         ?>
     </select>
 
-    <select id="departmentSelect"
-        class="form-select font-size-12 <?= !empty($departmentIdOld) ? 'select-pimselect' : 'select-pim' ?>"
-        style="border-left: none;" onchange="applySelectStyle(this)" <?= empty($branchIdOld) ? 'disabled' : '' ?>>
-
+    <select class="form-select font-size-12 <?= !empty($departmentIdOld) ? 'select-pimselect' : 'select-pim' ?>"
+        id="department-filter" <?= empty($branchIdOld) ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
         <?php if (!empty($departmentIdOld)) : ?>
         <option value="<?= $departmentIdOld ?>"><?= Department::departmentName($departmentIdOld) ?></option>
         <?php endif; ?>
