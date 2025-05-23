@@ -316,8 +316,10 @@ function addTeamInput() {
 function filterTeam(page) {
     // console.log("Page:", page); // Add this line to check the value of `page`
 
-    const companyId = document.getElementById('companySelect').value;
-    const branchId = document.getElementById('branchSelect').value;
+    // const companyId = document.getElementById('companySelect').value;
+    // const branchId = document.getElementById('branchSelect').value;
+    const companyId = document.getElementById('company-filter').value;
+    const branchId = document.getElementById('branch-filter').value;
     const departmentId = document.getElementById('departmentSelect').value;
 
     // nextPage = 1;

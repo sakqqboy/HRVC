@@ -41,6 +41,17 @@ function deleteTags(id) {
     $("#tag-" + id).remove();
 }
 
+// function applySelectStyle(selectElement) {
+//     alert(selectElement.value);
+//     if (selectElement.value) {
+//         selectElement.classList.remove('select-pim');
+//         selectElement.classList.add('select-pimselect');
+//     } else {
+//         selectElement.classList.remove('select-pimselect');
+//         selectElement.classList.add('select-pim');
+//     }
+// }
+
 
 function applySelectStyleGroup(select) {
     // ตรวจสอบว่า value มีจริง (แม้ว่าเป็น "0" ก็ถือว่า valid)

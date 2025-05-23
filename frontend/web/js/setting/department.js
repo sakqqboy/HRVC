@@ -227,15 +227,19 @@ function sortDepartment(column) {
 
 function filterCountryDepartment(page) {
     // console.log("Page:", page); // Add this line to check the value of `page`
-
-    const countryId = document.getElementById('countrySelect').value;
-    const companyId = document.getElementById('companySelect').value;
-    const branchId = document.getElementById('branchSelect').value;
-    // nextPage = 1;
     // alert(page);
+
+    // const countryId = document.getElementById('countrySelect').value;
+    // const companyId = document.getElementById('companySelect').value;
+    // const branchId = document.getElementById('branchSelect').value;
+    const countryId = document.getElementById('countrySelect').value;
+    const companyId = document.getElementById('company-filter').value;
+    const branchId = document.getElementById('branch-filter').value;
+    // nextPage = 1;
     // alert(nextPage);
-    // alert(countryId);
+    // alert(countryId);    
     // alert(companyId);
+    // alert(branchId);
     var url = $url + 'setting/department/encode-params-country';
     // alert(page);
     $.ajax({

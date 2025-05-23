@@ -101,15 +101,7 @@ flatpickr("#founded", {
 });
 
 
-function applySelectStyle(selectElement) {
-    if (selectElement.value) {
-        selectElement.classList.remove('select-pim');
-        selectElement.classList.add('select-pimselect');
-    } else {
-        selectElement.classList.remove('select-pimselect');
-        selectElement.classList.add('select-pim');
-    }
-}
+
 
 function filterCountryCompany(page) {
     // console.log("Page:", page); // Add this line to check the value of `page`

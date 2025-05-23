@@ -20,9 +20,9 @@ use frontend\models\hrvc\Team;
         </option>
         <?php endforeach; ?>
     </select>
-    <!-- อันเก่า -->
+    <!-- 
     <select class="form-select font-size-12 <?= !empty($companyIdOld) ? 'select-pimselect' : 'select-pim' ?>"
-        id="companySelect" onchange="applySelectStyleGroup(this)">
+        id="company-filter" onchange="applySelectStyle(this)">
         <?php if (!empty($companyIdOld)) : ?>
         <option value="<?= $companyIdOld ?>"><?= Company::companyName($companyIdOld) ?></option>
         <?php endif; ?>
@@ -33,7 +33,7 @@ use frontend\models\hrvc\Team;
     </select>
 
     <select class="form-select font-size-12 <?= !empty($branchIdOld) ? 'select-pimselect' : 'select-pim' ?>"
-        id="branchSelect" <?= empty($companyIdOld) ? 'disabled' : '' ?> onchange="applySelectStyleGroup(this)">
+        id="branch-filter" <?= empty($companyIdOld) ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
         <?php if (!empty($branchIdOld)) : ?>
         <option value="<?= $branchIdOld ?>"><?= Branch::branchName($branchIdOld) ?></option>
         <?php endif; ?>
@@ -42,9 +42,48 @@ use frontend\models\hrvc\Team;
         foreach ($branches as $branch) : ?>
         <option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
         <?php endforeach; endif; ?>
+    </select> -->
+
+    <select class="form-select font-size-12 <?= !empty($companyIdOld) ? 'select-pimselect' : 'select-pim' ?>"
+        id="company-filter" onchange="applySelectStyle(this)">
+        <?php
+            if (!empty($companyIdOld)) { ?>
+        <option value="<?= $companyIdOld ?>"><?= Company::companyName($companyIdOld) ?></option>
+        <?php
+            $branches = Branch::branchInCompany($companyIdOld);
+            }
+        ?>
+        <option value=""><?= Yii::t('app', 'Company') ?></option>
+        <?php
+            if (isset($companies) && count($companies) > 0) {
+                foreach ($companies as $company) : ?>
+        <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+        <?php
+                 endforeach;
+            }
+        ?>
     </select>
 
-
+    <select class="form-select font-size-12 <?= !empty($branchIdOld) ? 'select-pimselect' : 'select-pim' ?>"
+        id="branch-filter" <?= empty($companyIdOld) ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
+        <?php
+            if (!empty($branchIdOld)) { 
+        ?>
+        <option value="<?= $branchIdOld ?>"><?= Branch::branchName($branchIdOld) ?></option>
+        <?php
+                $teams = Team::teamInBranch($branchIdOld);
+            }
+        ?>
+        <option value=""><?= Yii::t('app', 'Branch') ?></option>
+        <?php
+            if (isset($branches) && count($branches) > 0) {
+                foreach ($branches as $branch) : ?>
+        <option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
+        <?php
+                endforeach;
+            }
+        ?>
+    </select>
 
     <span class="btn font-size-12 justify-content-center d-flex align-items-center custom-button-select"
         onclick="filterCountryDepartment('<?= $page ?>')" style="flex: 1; text-align: center; cursor: pointer;">
