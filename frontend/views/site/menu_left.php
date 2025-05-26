@@ -96,7 +96,7 @@ $session = Yii::$app->session;
                 if ($isHr == 1 || $role >= 2) {
                 ?>
             <div class="col-12 first-layer-manu">
-                <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
+                <a href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
                     class="no-underline">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/my_portal.svg"
                         class="first-layer-icon" style="margin-top: -3px;">

@@ -53,13 +53,54 @@ class EmployeeController extends Controller
         }
         return true; //go to origin request
     }
+
+    public function actionNoEmployee($hash)
+	{
+        $param = ModelMaster::decodeParams($hash);
+        $departmentId = $param["departmentId"]??0;
+        // throw new exception(print_r($branchId, true));
+
+        $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+        if (!isset($group) && !empty($group)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+        }
+
+        $company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
+        if (!isset($company) && !empty($company)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/company/create-company/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
+        }
+
+        $branch = Branch::find()->select('branchId')->where(["status" => 1])->asArray()->one();
+        if (!isset($branch) && !empty($branch)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/branch/create-branch/' . ModelMaster::encodeParams(["companyId" => '']));
+        }
+
+        $department = Department::find()->select('departmentId')->where(["status" => 1])->asArray()->one();
+        if (!isset($department) && !empty($department)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/department/create-department/');
+        }
+
+        $team = Team::find()->select('teamId')->where(["status" => 1])->asArray()->one();
+        if (!isset($team) && !empty($team)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/department/create-team/');
+        }
+
+        $employee = Employee::find()->select('employeeId')->where(["status" => 0])->asArray()->one();
+        if (isset($employee) && !empty($employee)) {
+            return $this->redirect( Yii::$app->homeUrl . 'setting/team/index-grid/' );
+        }
+
+        return $this->render('no_employee', [
+            "departmentId" => $departmentId,
+            "group" =>  $group
+        ]);
+	}
+    
     public function actionIndex($hash)
     {
         $param = ModelMaster::decodeParams($hash);
-        $companyId = $param["companyId"];
-        if ($companyId == '') {
-            $companyId = null;
-        }
+        $companyId = !empty($param["companyId"]) ? $param["companyId"] : null;
+
         $groupId = Group::currentGroupId();
         if ($groupId == null) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
@@ -138,7 +179,7 @@ class EmployeeController extends Controller
     }
     public function actionSaveCreateEmployee()
     {
-        // throw new Exception(print_r(Yii::$app->request->post(), true));
+        throw new Exception(print_r(Yii::$app->request->post(), true));
         if (isset($_POST["firstName"]) && trim($_POST["firstName"] != '')) {
             $employee = new Employee();
             $employee->employeeFirstname = $_POST["firstName"];
@@ -634,275 +675,275 @@ class EmployeeController extends Controller
         $res["status"] = true;
         return json_encode($res);
     }
-    public function actionImport()
-    {
-        $error = [];
-        $isError = 0;
-        $correct = [];
-        $update = [];
-        $success = 0;
-        $countUpdate = 0;
-        $totalError = 0;
-        //throw new Exception(print_r(Yii::$app->request->post(), true));
-        // if (isset($_POST["employeeFile"])) {
+    // public function actionImport()
+    // {
+    //     $error = [];
+    //     $isError = 0;
+    //     $correct = [];
+    //     $update = [];
+    //     $success = 0;
+    //     $countUpdate = 0;
+    //     $totalError = 0;
+    //     //throw new Exception(print_r(Yii::$app->request->post(), true));
+    //     // if (isset($_POST["employeeFile"])) {
 
-        $imageObj = UploadedFile::getInstanceByName("employeeFile");
-        if (isset($imageObj) && !empty($imageObj)) {
-            $urlFolder = Path::getHost() . 'file/import/employee';
-            if (!file_exists($urlFolder)) {
-                mkdir($urlFolder, 0777, true);
-            }
-            $file = $imageObj->name;
-            $filenameArray = explode('.', $file);
-            $countArrayFile = count($filenameArray);
-            $fileType = $filenameArray[$countArrayFile - 1];
-            if ($fileType == 'xlsx' || $fileType == 'xls') {
+    //     $imageObj = UploadedFile::getInstanceByName("employeeFile");
+    //     if (isset($imageObj) && !empty($imageObj)) {
+    //         $urlFolder = Path::getHost() . 'file/import/employee';
+    //         if (!file_exists($urlFolder)) {
+    //             mkdir($urlFolder, 0777, true);
+    //         }
+    //         $file = $imageObj->name;
+    //         $filenameArray = explode('.', $file);
+    //         $countArrayFile = count($filenameArray);
+    //         $fileType = $filenameArray[$countArrayFile - 1];
+    //         if ($fileType == 'xlsx' || $fileType == 'xls') {
 
-                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
-                $pathSave = $urlFolder . '/' . $fileName;
-                if ($imageObj->saveAs($pathSave)) {
+    //             $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+    //             $pathSave = $urlFolder . '/' . $fileName;
+    //             if ($imageObj->saveAs($pathSave)) {
 
-                    $reader = new Xlsx();
-                    $spreadsheet = $reader->load($pathSave);
-                    $sheetData = $spreadsheet->getActiveSheet()->toArray();
-                    // unset($sheetData[0]);
-                    $i = 0;
-                    $transaction = Yii::$app->db->beginTransaction();
-                    foreach ($sheetData as $data) :
-                        $line = $i;
+    //                 $reader = new Xlsx();
+    //                 $spreadsheet = $reader->load($pathSave);
+    //                 $sheetData = $spreadsheet->getActiveSheet()->toArray();
+    //                 // unset($sheetData[0]);
+    //                 $i = 0;
+    //                 $transaction = Yii::$app->db->beginTransaction();
+    //                 foreach ($sheetData as $data) :
+    //                     $line = $i;
 
-                        $companyId = '';
-                        $branchId = '';
-                        $departmentId = '';
-                        $teamId = '';
-                        $teamPositionId = '';
-                        $isError = 0;
-                        $error[$i] = "";
-                        if ($i >= 1 && trim($data[0]) != "" && trim($data[1]) != "" && trim($data[2]) != "") {
+    //                     $companyId = '';
+    //                     $branchId = '';
+    //                     $departmentId = '';
+    //                     $teamId = '';
+    //                     $teamPositionId = '';
+    //                     $isError = 0;
+    //                     $error[$i] = "";
+    //                     if ($i >= 1 && trim($data[0]) != "" && trim($data[1]) != "" && trim($data[2]) != "") {
 
-                            // throw new exception('2222');
-                            if (trim($data[0]) == "") {
-                                $isError = 1;
-                                $error[$i] .= '- firstname<br>';
-                            }
-                            if (trim($data[1]) == "") {
-                                $isError = 1;
-                                $error[$i] .= '- Surename<br>';
-                            }
-                            if (trim($data[3]) == "") {
-                                $isError = 1;
-                                $error[$i] .= '- Email<br>';
-                            }
-                            if (trim($data[7]) == "") {
-                                $isError = 1;
-                                $error[$i] .= '- Telephone<br>';
-                            }
-                            if (trim($data[9]) == "") {
-                                $isError = 1;
-                                $error[$i] .= '- Company<br>';
-                            } else {
-                                $companyId = Company::companyId($data[9]);
-                                if ($companyId == '') {
-                                    $isError = 1;
-                                    $error[$i] .= '- Company name "' . $data[9] . '" not found in database<br>';
-                                }
-                            }
-                            if (trim($data[10]) == "") {
-                                $isError = 1;
+    //                         // throw new exception('2222');
+    //                         if (trim($data[0]) == "") {
+    //                             $isError = 1;
+    //                             $error[$i] .= '- firstname<br>';
+    //                         }
+    //                         if (trim($data[1]) == "") {
+    //                             $isError = 1;
+    //                             $error[$i] .= '- Surename<br>';
+    //                         }
+    //                         if (trim($data[3]) == "") {
+    //                             $isError = 1;
+    //                             $error[$i] .= '- Email<br>';
+    //                         }
+    //                         if (trim($data[7]) == "") {
+    //                             $isError = 1;
+    //                             $error[$i] .= '- Telephone<br>';
+    //                         }
+    //                         if (trim($data[9]) == "") {
+    //                             $isError = 1;
+    //                             $error[$i] .= '- Company<br>';
+    //                         } else {
+    //                             $companyId = Company::companyId($data[9]);
+    //                             if ($companyId == '') {
+    //                                 $isError = 1;
+    //                                 $error[$i] .= '- Company name "' . $data[9] . '" not found in database<br>';
+    //                             }
+    //                         }
+    //                         if (trim($data[10]) == "") {
+    //                             $isError = 1;
 
-                                $error[$i] .= '- Branch<br>';
-                            } else {
-                                if ($companyId != '') {
-                                    $branchId = Branch::companyBranch($companyId, $data[10]);
-                                    if ($branchId == '') {
-                                        $isError = 1;
-                                        $error[$i] .= '- branch name "' . $data[10] . '" not found in company "' . $data[9] . '"<br>';
-                                    }
-                                }
-                            }
+    //                             $error[$i] .= '- Branch<br>';
+    //                         } else {
+    //                             if ($companyId != '') {
+    //                                 $branchId = Branch::companyBranch($companyId, $data[10]);
+    //                                 if ($branchId == '') {
+    //                                     $isError = 1;
+    //                                     $error[$i] .= '- branch name "' . $data[10] . '" not found in company "' . $data[9] . '"<br>';
+    //                                 }
+    //                             }
+    //                         }
 
-                            if (trim($data[11]) == "") {
-                                $isError = 1;
-                                $error[$i] .= '- Department<br>';
-                            } else {
-                                if ($branchId != '') {
-                                    $departmentId = Department::branchDepartment($branchId, $data[11]);
-                                    if ($departmentId == '') {
-                                        $isError = 1;
-                                        $error[$i] .= '- Department name "' . $data[11] . '" not found in branch "' . $data[10] . '"<br>';
-                                    }
-                                }
-                            }
-                            if (trim($data[14]) != '') {
-                                if ($departmentId != '') {
-                                    $titleName = explode(':', $data[14]);
-                                    $titleId = Title::titleId($departmentId, $titleName[0]);
-                                } else {
-                                    $isError = 1;
-                                    $error[$i] .= "- Title and deparment did't match.<br>";
-                                }
-                            } else {
-                                $titleId = null;
-                            }
+    //                         if (trim($data[11]) == "") {
+    //                             $isError = 1;
+    //                             $error[$i] .= '- Department<br>';
+    //                         } else {
+    //                             if ($branchId != '') {
+    //                                 $departmentId = Department::branchDepartment($branchId, $data[11]);
+    //                                 if ($departmentId == '') {
+    //                                     $isError = 1;
+    //                                     $error[$i] .= '- Department name "' . $data[11] . '" not found in branch "' . $data[10] . '"<br>';
+    //                                 }
+    //                             }
+    //                         }
+    //                         if (trim($data[14]) != '') {
+    //                             if ($departmentId != '') {
+    //                                 $titleName = explode(':', $data[14]);
+    //                                 $titleId = Title::titleId($departmentId, $titleName[0]);
+    //                             } else {
+    //                                 $isError = 1;
+    //                                 $error[$i] .= "- Title and deparment did't match.<br>";
+    //                             }
+    //                         } else {
+    //                             $titleId = null;
+    //                         }
 
-                            if (trim($data[12]) == "") {
-                                $isError = 1;
-                                $error[$i] .= '- Team<br>';
-                            } else {
-                                if ($departmentId != '') {
-                                    $teamId = Team::departmentTeam($departmentId, $data[12]);
-                                    if ($teamId == '') {
-                                        $isError = 1;
-                                        $error[$i] .= '- Team name "' . $data[12] . '" not found in department "' . $data[11] . '."<br>';
-                                    }
-                                }
-                            }
-                            if (trim($data[13]) == "") {
-                                $isError = 1;
-                                $error[$i] .= '- Team Position<br>';
-                            } else {
-                                $teamPositionId = TeamPosition::teamPositionId($data[13]);
-                                if ($teamPositionId == '') {
-                                    $isError = 1;
-                                    $error[$i] .= '- Team Position name "' . $data[13] . '" not found in database. <br>';
-                                }
-                            }
-                            if (trim($data[17]) == "") {
-                                $isError = 1;
-                                $error[$i] .= '- Right<br>';
-                            } else {
-                                $right = Role::roleId($data[17]);
-                                if ($right == '') {
-                                    $isError = 1;
-                                    $error[$i] .= '- Right name "' . $data[17] . '" not found in database. <br>';
-                                }
-                            }
-                            if (trim($data[6]) == '') {
-                                $isError = 1;
-                                $error[$i] .= '- Gender can not be null.<br>';
-                            } else {
-                                if ($data[6] == 'Male') {
-                                    $gender = 1;
-                                } else {
-                                    $gender = 2;
-                                }
-                            }
+    //                         if (trim($data[12]) == "") {
+    //                             $isError = 1;
+    //                             $error[$i] .= '- Team<br>';
+    //                         } else {
+    //                             if ($departmentId != '') {
+    //                                 $teamId = Team::departmentTeam($departmentId, $data[12]);
+    //                                 if ($teamId == '') {
+    //                                     $isError = 1;
+    //                                     $error[$i] .= '- Team name "' . $data[12] . '" not found in department "' . $data[11] . '."<br>';
+    //                                 }
+    //                             }
+    //                         }
+    //                         if (trim($data[13]) == "") {
+    //                             $isError = 1;
+    //                             $error[$i] .= '- Team Position<br>';
+    //                         } else {
+    //                             $teamPositionId = TeamPosition::teamPositionId($data[13]);
+    //                             if ($teamPositionId == '') {
+    //                                 $isError = 1;
+    //                                 $error[$i] .= '- Team Position name "' . $data[13] . '" not found in database. <br>';
+    //                             }
+    //                         }
+    //                         if (trim($data[17]) == "") {
+    //                             $isError = 1;
+    //                             $error[$i] .= '- Right<br>';
+    //                         } else {
+    //                             $right = Role::roleId($data[17]);
+    //                             if ($right == '') {
+    //                                 $isError = 1;
+    //                                 $error[$i] .= '- Right name "' . $data[17] . '" not found in database. <br>';
+    //                             }
+    //                         }
+    //                         if (trim($data[6]) == '') {
+    //                             $isError = 1;
+    //                             $error[$i] .= '- Gender can not be null.<br>';
+    //                         } else {
+    //                             if ($data[6] == 'Male') {
+    //                                 $gender = 1;
+    //                             } else {
+    //                                 $gender = 2;
+    //                             }
+    //                         }
 
-                            if ($isError == 0) {
-                                $isExisting = $this->checkDupplicate($data[0], $data[1], $data[2], $companyId);
-                                if ($isExisting == 0) {
-                                    $employee = new Employee();
-                                    $employee->createDateTime = new Expression('NOW()');
-                                } else {
-                                    $employee = Employee::find()
-                                        ->where([
-                                            "employeeFirstname" => $data[0],
-                                            "employeeSurename" => $data[1],
-                                            "employeeNumber" =>  $data[2],
-                                            "companyId" => $companyId,
-                                        ])
-                                        ->one();
-                                }
-                                $employee->employeeFirstname = $data[0];
-                                $employee->employeeSurename = $data[1];
-                                $employee->employeeNumber =  $data[2];
-                                if (trim($data[4]) != '') {
-                                    $joinDateArr = explode('/', $data[4]);
-                                    //throw new exception(print_r($joinDateArr, true));
-                                    if (count($joinDateArr) == 3) {
-                                        $employee->joinDate = $joinDateArr[2] . '-' . $joinDateArr[1] . '-' . $joinDateArr[0];
-                                    }
-                                }
-                                if (trim($data[5]) != '') {
-                                    $birthDateArr = explode('/', $data[5]);
-                                    if (count($birthDateArr) == 3) {
-                                        $employee->birthDate = $birthDateArr[2] . '-' . $birthDateArr[1] . '-' . $birthDateArr[0];
-                                    }
-                                }
-                                // $employee->joinDate = $data[4];
-                                // $employee->birthDate = $data[5];
-                                // $employee->nationalityId = $_POST["nationality"];
-                                // $employee->address1 = $_POST["address1"];
-                                // $employee->countryId = $_POST["country"];
-                                $employee->gender = $gender;
-                                $employee->telephoneNumber = $data[7];
-                                $employee->emergencyTel = $data[8];
-                                $employee->companyEmail = $data[3];
-                                $employee->email = $data[3];
-                                $employee->companyId = $companyId;
-                                $employee->branchId = $branchId;
-                                $employee->departmentId = $departmentId;
-                                $employee->teamId = $teamId;
-                                $employee->teamPositionId = $teamPositionId;
-                                $employee->titleId = $titleId;
+    //                         if ($isError == 0) {
+    //                             $isExisting = $this->checkDupplicate($data[0], $data[1], $data[2], $companyId);
+    //                             if ($isExisting == 0) {
+    //                                 $employee = new Employee();
+    //                                 $employee->createDateTime = new Expression('NOW()');
+    //                             } else {
+    //                                 $employee = Employee::find()
+    //                                     ->where([
+    //                                         "employeeFirstname" => $data[0],
+    //                                         "employeeSurename" => $data[1],
+    //                                         "employeeNumber" =>  $data[2],
+    //                                         "companyId" => $companyId,
+    //                                     ])
+    //                                     ->one();
+    //                             }
+    //                             $employee->employeeFirstname = $data[0];
+    //                             $employee->employeeSurename = $data[1];
+    //                             $employee->employeeNumber =  $data[2];
+    //                             if (trim($data[4]) != '') {
+    //                                 $joinDateArr = explode('/', $data[4]);
+    //                                 //throw new exception(print_r($joinDateArr, true));
+    //                                 if (count($joinDateArr) == 3) {
+    //                                     $employee->joinDate = $joinDateArr[2] . '-' . $joinDateArr[1] . '-' . $joinDateArr[0];
+    //                                 }
+    //                             }
+    //                             if (trim($data[5]) != '') {
+    //                                 $birthDateArr = explode('/', $data[5]);
+    //                                 if (count($birthDateArr) == 3) {
+    //                                     $employee->birthDate = $birthDateArr[2] . '-' . $birthDateArr[1] . '-' . $birthDateArr[0];
+    //                                 }
+    //                             }
+    //                             // $employee->joinDate = $data[4];
+    //                             // $employee->birthDate = $data[5];
+    //                             // $employee->nationalityId = $_POST["nationality"];
+    //                             // $employee->address1 = $_POST["address1"];
+    //                             // $employee->countryId = $_POST["country"];
+    //                             $employee->gender = $gender;
+    //                             $employee->telephoneNumber = $data[7];
+    //                             $employee->emergencyTel = $data[8];
+    //                             $employee->companyEmail = $data[3];
+    //                             $employee->email = $data[3];
+    //                             $employee->companyId = $companyId;
+    //                             $employee->branchId = $branchId;
+    //                             $employee->departmentId = $departmentId;
+    //                             $employee->teamId = $teamId;
+    //                             $employee->teamPositionId = $teamPositionId;
+    //                             $employee->titleId = $titleId;
 
-                                //$employee->workingTime = $_POST["workTime"];
-                                $employee->employeeConditionId = EmployeeCondition::employeeConditionId($data[15]);
-                                $employee->spoken = $data[16];
-                                $employee->status = 1;
+    //                             //$employee->workingTime = $_POST["workTime"];
+    //                             $employee->employeeConditionId = EmployeeCondition::employeeConditionId($data[15]);
+    //                             $employee->spoken = $data[16];
+    //                             $employee->status = 1;
 
-                                $employee->updateDateTime = new Expression('NOW()');
-                                if ($employee->save(false)) {
-                                    $success++;
-                                    if ($isExisting == 0) {
-                                        $employeeId = Yii::$app->db->lastInsertID;
-                                    } else {
-                                        $employeeId = $employee->employeeId;
-                                    }
-                                    $userId = $this->createUser($employeeId, $data[3]);
-                                    $this->saveUserRole($userId, $data[17]);
-                                    $titleName = explode(':', $data[14]);
-                                    if ($isExisting == 0) {
-                                        $correct[$i] = [
-                                            "name" => $data[0] . ' ' . $data[1],
-                                            "email" => $data[3],
-                                            "company" => $data[9],
-                                            "branch" => $data[10],
-                                            "department" => $data[11],
-                                            "title" => $titleName[0],
-                                        ];
-                                    }
-                                    if ($isExisting == 1) {
-                                        $countUpdate++;
-                                        $update[$i] = [
-                                            "name" => $data[0] . ' ' . $data[1],
-                                            "email" => $data[3],
-                                            "company" => $data[9],
-                                            "branch" => $data[10],
-                                            "department" => $data[11],
-                                            "title" => $titleName[0],
-                                        ];
-                                    }
-                                }
-                            }
-                        }
-                        if ($isError == 0) {
-                            $totalError++;
-                            unset($error[$i]); // if there is no error delete this index
-                        }
-                        $i++;
-                    endforeach;
-                    if (count($error) == 0) {
-                        $transaction->commit();
-                    } else {
-                        $transaction->rollBack();
-                    }
-                }
-            } else {
-                $error[0] = "Please select .xlsx or .xls file";
-            }
+    //                             $employee->updateDateTime = new Expression('NOW()');
+    //                             if ($employee->save(false)) {
+    //                                 $success++;
+    //                                 if ($isExisting == 0) {
+    //                                     $employeeId = Yii::$app->db->lastInsertID;
+    //                                 } else {
+    //                                     $employeeId = $employee->employeeId;
+    //                                 }
+    //                                 $userId = $this->createUser($employeeId, $data[3]);
+    //                                 $this->saveUserRole($userId, $data[17]);
+    //                                 $titleName = explode(':', $data[14]);
+    //                                 if ($isExisting == 0) {
+    //                                     $correct[$i] = [
+    //                                         "name" => $data[0] . ' ' . $data[1],
+    //                                         "email" => $data[3],
+    //                                         "company" => $data[9],
+    //                                         "branch" => $data[10],
+    //                                         "department" => $data[11],
+    //                                         "title" => $titleName[0],
+    //                                     ];
+    //                                 }
+    //                                 if ($isExisting == 1) {
+    //                                     $countUpdate++;
+    //                                     $update[$i] = [
+    //                                         "name" => $data[0] . ' ' . $data[1],
+    //                                         "email" => $data[3],
+    //                                         "company" => $data[9],
+    //                                         "branch" => $data[10],
+    //                                         "department" => $data[11],
+    //                                         "title" => $titleName[0],
+    //                                     ];
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+    //                     if ($isError == 0) {
+    //                         $totalError++;
+    //                         unset($error[$i]); // if there is no error delete this index
+    //                     }
+    //                     $i++;
+    //                 endforeach;
+    //                 if (count($error) == 0) {
+    //                     $transaction->commit();
+    //                 } else {
+    //                     $transaction->rollBack();
+    //                 }
+    //             }
+    //         } else {
+    //             $error[0] = "Please select .xlsx or .xls file";
+    //         }
 
-            unlink($pathSave);
-        }
-        // }
-        return $this->render('import', [
-            "errors" => $error,
-            "success" => $success,
-            "countUpdate" => $countUpdate,
-            "corrects" => $correct,
-            "update" => $update
-        ]);
-    }
+    //         unlink($pathSave);
+    //     }
+    //     // }
+    //     return $this->render('import', [
+    //         "errors" => $error,
+    //         "success" => $success,
+    //         "countUpdate" => $countUpdate,
+    //         "corrects" => $correct,
+    //         "update" => $update
+    //     ]);
+    // }
     public function checkDupplicate($firstName, $sureName, $code, $companyId)
     {
         $isExisting = 0;
@@ -921,162 +962,162 @@ class EmployeeController extends Controller
         }
         return $isExisting;
     }
-    public function actionExport()
-    {
-        $companies = Company::find()
-            ->select('companyName')
-            ->where(["status" => 1])
-            ->asArray()
-            ->groupBy('companyName')
-            ->orderBy('companyName')
-            ->all();
-        $branches = Branch::find()
-            ->select('branchName')
-            ->where(["status" => 1])
-            ->asArray()
-            ->groupBy('branchName')
-            ->orderBy('branchName')
-            ->all();
-        $departments = Department::find()
-            ->select('departmentName')
-            ->where(["status" => 1])
-            ->asArray()
-            ->groupBy('departmentName')
-            ->orderBy('departmentName')
-            ->all();
-        $teams = Team::find()
-            ->select('teamName')
-            ->where(["status" => 1])
-            ->asArray()
-            ->groupBy('teamName')
-            ->orderBy('teamName')
-            ->all();
-        $teamPositions = TeamPosition::find()
-            ->select('teamPositionName')
-            ->where(["status" => 1])
-            ->asArray()
-            ->groupBy('teamPositionName')
-            ->orderBy('teamPositionName')
-            ->all();
-        $titles = Title::find()
-            ->select('title.titleName,d.departmentName')
-            ->JOIN("LEFT JOIN", "department d", "d.departmentId=title.departmentId")
-            ->where(["d.status" => 1, "title.status" => 1])
-            ->asArray()
-            // ->groupBy('titleName')
-            ->orderBy('title.titleName')
-            ->all();
-        $employeeCondition = EmployeeCondition::find()
-            ->select('employeeConditionName')
-            ->where(["status" => 1])
-            ->asArray()
-            ->orderBy('employeeConditionName')
-            ->all();
-        $rights = Role::find()
-            ->select('roleName')
-            ->where(["status" => 1])
-            ->asArray()
-            ->orderBy('roleName')
-            ->all();
-        $gender[0] = "Male";
-        $gender[1] = "Female";
-        //throw new exception(print_r($titles, true));
-        $htmlExcel = $this->renderPartial('export', [
-            "companies" => $companies,
-            "branches" => $branches,
-            "departments" => $departments,
-            "teams" => $teams,
-            "titles" => $titles,
-            "employeeCondition" => $employeeCondition,
-            "rights" => $rights,
-            "teamPositions" => $teamPositions,
-            "gender" => $gender
-        ]);
-        //throw new exception($htmlExcel);
-        $urlFolder = Path::getHost() . 'file/import/employee/';
-        $fileName = 'employee.xlsx';
-        $filePath = $urlFolder . $fileName;
-        $reader = new Xlsx();
+    // public function actionExport()
+    // {
+    //     $companies = Company::find()
+    //         ->select('companyName')
+    //         ->where(["status" => 1])
+    //         ->asArray()
+    //         ->groupBy('companyName')
+    //         ->orderBy('companyName')
+    //         ->all();
+    //     $branches = Branch::find()
+    //         ->select('branchName')
+    //         ->where(["status" => 1])
+    //         ->asArray()
+    //         ->groupBy('branchName')
+    //         ->orderBy('branchName')
+    //         ->all();
+    //     $departments = Department::find()
+    //         ->select('departmentName')
+    //         ->where(["status" => 1])
+    //         ->asArray()
+    //         ->groupBy('departmentName')
+    //         ->orderBy('departmentName')
+    //         ->all();
+    //     $teams = Team::find()
+    //         ->select('teamName')
+    //         ->where(["status" => 1])
+    //         ->asArray()
+    //         ->groupBy('teamName')
+    //         ->orderBy('teamName')
+    //         ->all();
+    //     $teamPositions = TeamPosition::find()
+    //         ->select('teamPositionName')
+    //         ->where(["status" => 1])
+    //         ->asArray()
+    //         ->groupBy('teamPositionName')
+    //         ->orderBy('teamPositionName')
+    //         ->all();
+    //     $titles = Title::find()
+    //         ->select('title.titleName,d.departmentName')
+    //         ->JOIN("LEFT JOIN", "department d", "d.departmentId=title.departmentId")
+    //         ->where(["d.status" => 1, "title.status" => 1])
+    //         ->asArray()
+    //         // ->groupBy('titleName')
+    //         ->orderBy('title.titleName')
+    //         ->all();
+    //     $employeeCondition = EmployeeCondition::find()
+    //         ->select('employeeConditionName')
+    //         ->where(["status" => 1])
+    //         ->asArray()
+    //         ->orderBy('employeeConditionName')
+    //         ->all();
+    //     $rights = Role::find()
+    //         ->select('roleName')
+    //         ->where(["status" => 1])
+    //         ->asArray()
+    //         ->orderBy('roleName')
+    //         ->all();
+    //     $gender[0] = "Male";
+    //     $gender[1] = "Female";
+    //     //throw new exception(print_r($titles, true));
+    //     $htmlExcel = $this->renderPartial('export', [
+    //         "companies" => $companies,
+    //         "branches" => $branches,
+    //         "departments" => $departments,
+    //         "teams" => $teams,
+    //         "titles" => $titles,
+    //         "employeeCondition" => $employeeCondition,
+    //         "rights" => $rights,
+    //         "teamPositions" => $teamPositions,
+    //         "gender" => $gender
+    //     ]);
+    //     //throw new exception($htmlExcel);
+    //     $urlFolder = Path::getHost() . 'file/import/employee/';
+    //     $fileName = 'employee.xlsx';
+    //     $filePath = $urlFolder . $fileName;
+    //     $reader = new Xlsx();
 
 
-        $spreadsheet = new Spreadsheet;
-        $reader2 = new Html();
+    //     $spreadsheet = new Spreadsheet;
+    //     $reader2 = new Html();
 
-        $spreadsheet->createSheet();
+    //     $spreadsheet->createSheet();
 
-        $reader2->setSheetIndex(1);
-        $spreadsheet = $reader2->loadFromString($htmlExcel);
-        $spreadsheet->getActiveSheet(1)->setTitle('data');
+    //     $reader2->setSheetIndex(1);
+    //     $spreadsheet = $reader2->loadFromString($htmlExcel);
+    //     $spreadsheet->getActiveSheet(1)->setTitle('data');
 
-        $spreadsheet1 = $reader->load($filePath);
-        $reader2->setSheetIndex(0);
-        $clonedWorksheet = clone $spreadsheet1->getSheetByName('employee');
-        $clonedWorksheet->setTitle('employee');
-        $spreadsheet->addExternalSheet($clonedWorksheet);
+    //     $spreadsheet1 = $reader->load($filePath);
+    //     $reader2->setSheetIndex(0);
+    //     $clonedWorksheet = clone $spreadsheet1->getSheetByName('employee');
+    //     $clonedWorksheet->setTitle('employee');
+    //     $spreadsheet->addExternalSheet($clonedWorksheet);
 
-        $fileName = 'Import Employee format' . date('Y-m-d');
+    //     $fileName = 'Import Employee format' . date('Y-m-d');
 
-        $spreadsheet->removeSheetByIndex(
-            $spreadsheet->getIndex(
-                $spreadsheet->getSheetByName('Worksheet')
-            )
-        );
-        //  $spreadsheet->getActiveSheet()->setTitle('employee');
+    //     $spreadsheet->removeSheetByIndex(
+    //         $spreadsheet->getIndex(
+    //             $spreadsheet->getSheetByName('Worksheet')
+    //         )
+    //     );
+    //     //  $spreadsheet->getActiveSheet()->setTitle('employee');
 
-        $spreadsheet->setActiveSheetIndex(1);
-        $folderName = "export";
-        $urlFolder = Path::getHost() . 'file/' . $folderName . "/" . $fileName;
-        $folder_path = Path::getHost() . 'file/' . $folderName;
-        $files = glob($folder_path . '/*');
-        foreach ($files as $file) {
-            if (is_file($file)) {
-                unlink($file);
-            }
-        }
+    //     $spreadsheet->setActiveSheetIndex(1);
+    //     $folderName = "export";
+    //     $urlFolder = Path::getHost() . 'file/' . $folderName . "/" . $fileName;
+    //     $folder_path = Path::getHost() . 'file/' . $folderName;
+    //     $files = glob($folder_path . '/*');
+    //     foreach ($files as $file) {
+    //         if (is_file($file)) {
+    //             unlink($file);
+    //         }
+    //     }
 
-        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-        $writer->save($urlFolder);
-        return Yii::$app->response->sendFile($urlFolder, $fileName . '.xlsx');
-    }
-    public function actionExportEmployee($hash)
-    {
-        $param = ModelMaster::decodeParams($hash);
-        $employeeId = $param["employeeId"];
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-        $employee = curl_exec($api);
-        $employee = json_decode($employee, true);
-        curl_close($api);
-        if ($employee["birthDate"] != '') {
-            $year = date('Y');
-            $birthDateArr = explode('-', $employee["birthDate"]);
-            $birthYear = (int)$birthDateArr[0];
-            $employee["age"] = (int)$year - (int)$birthYear;
-        } else {
-            $employee["age"] = '-';
-        }
-        $employee["branchName"] = Branch::branchName($employee['branchId']);
-        $employee["departmentName"] =  Department::departmentName($employee['departmentId']);
-        $employee["teamName"] =  Team::teamName($employee['teamId']);
-        $employee["titleName"] = Title::titleName($employee['titleId']);
-        $employee["conditionName"] = EmployeeCondition::conditionName($employee['employeeConditionId']);
-        $employee["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
-        //throw new exception(print_r($employee, true));
-        $content = $this->renderPartial('export_employee', ["employee" => $employee]);
-        $options = new Options();
+    //     $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+    //     $writer->save($urlFolder);
+    //     return Yii::$app->response->sendFile($urlFolder, $fileName . '.xlsx');
+    // }
+    // public function actionExportEmployee($hash)
+    // {
+    //     $param = ModelMaster::decodeParams($hash);
+    //     $employeeId = $param["employeeId"];
+    //     $api = curl_init();
+    //     curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+    //     curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+    //     curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+    //     $employee = curl_exec($api);
+    //     $employee = json_decode($employee, true);
+    //     curl_close($api);
+    //     if ($employee["birthDate"] != '') {
+    //         $year = date('Y');
+    //         $birthDateArr = explode('-', $employee["birthDate"]);
+    //         $birthYear = (int)$birthDateArr[0];
+    //         $employee["age"] = (int)$year - (int)$birthYear;
+    //     } else {
+    //         $employee["age"] = '-';
+    //     }
+    //     $employee["branchName"] = Branch::branchName($employee['branchId']);
+    //     $employee["departmentName"] =  Department::departmentName($employee['departmentId']);
+    //     $employee["teamName"] =  Team::teamName($employee['teamId']);
+    //     $employee["titleName"] = Title::titleName($employee['titleId']);
+    //     $employee["conditionName"] = EmployeeCondition::conditionName($employee['employeeConditionId']);
+    //     $employee["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
+    //     //throw new exception(print_r($employee, true));
+    //     $content = $this->renderPartial('export_employee', ["employee" => $employee]);
+    //     $options = new Options();
 
-        //$options->set('defaultFont', 'sans-serif');
-        //$options->set('Sofia', 'sans-serif');
-        $options->set('isRemoteEnabled', true);
-        $dompdf = new Dompdf($options);
-        $dompdf->loadHtml($content);
-        $dompdf->setPaper('A4', 'vertical');
-        $dompdf->render();
-        $dompdf->stream("1234", array("Attachment" => false));
-        exit(0);
-    }
+    //     //$options->set('defaultFont', 'sans-serif');
+    //     //$options->set('Sofia', 'sans-serif');
+    //     $options->set('isRemoteEnabled', true);
+    //     $dompdf = new Dompdf($options);
+    //     $dompdf->loadHtml($content);
+    //     $dompdf->setPaper('A4', 'vertical');
+    //     $dompdf->render();
+    //     $dompdf->stream("1234", array("Attachment" => false));
+    //     exit(0);
+    // }
     public function actionAddUser()
     {
         $employees = Employee::find()->select('employeeId,companyEmail')->where(["status" => 1])->asArray()->all();

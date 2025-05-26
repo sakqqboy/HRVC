@@ -111,8 +111,8 @@ class TitleController extends Controller
             return $this->redirect(Yii::$app->homeUrl . 'setting/department/create-department/');
         }
 
-        $team = Title::find()->select('titleId')->where(["status" => 1])->asArray()->one();
-        if (isset($team) && !empty($team)) {
+        $title = Title::find()->select('titleId')->where(["status" => 1])->asArray()->one();
+        if (isset($title) && !empty($title)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/title/index/');
         }
 

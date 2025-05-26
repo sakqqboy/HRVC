@@ -150,6 +150,11 @@
     justify-content: center;
 }
 
+.flex-center {
+    display: flex;
+    align-items: center;
+}
+
 .mid-center {
     display: flex;
     flex-direction: column;
@@ -194,4 +199,12 @@
     display: flex;
     flex-direction: column;
     align-self: stretch;
+}
+
+.w-100 {
+    width: 100vw;
+    /* เต็มความกว้างของหน้าจอ */
+    margin: 0;
+    /* ลบ margin ที่อาจขัดขวาง */
+    box-sizing: border-box;
 }

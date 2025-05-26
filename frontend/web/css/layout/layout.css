@@ -3356,3 +3356,12 @@
     justify-content: center;
     align-items: center;
 }
+
+.vertical-line {
+    width: 1px;
+    /* ปรับความสูงตามที่ต้องการ */
+    background-color: #CBD5E1;
+    /* สีของเส้น */
+    margin: 0 15px;
+    /* ระยะห่างซ้าย-ขวา */
+}

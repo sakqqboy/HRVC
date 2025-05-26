@@ -2097,6 +2097,24 @@ input:checked+.slider:before {
 	text-underline-position: from-font;
 }
 
+.select-employee-status {
+	display: flex;
+	width: 130px;
+	height: 40px;
+	padding: 6px 15px;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	flex-shrink: 0;
+	border-radius: 24.444px;
+	border: 0.5px solid #FF9D00;
+	background: #FFF2DD;
+	font-size: 16px;
+	font-weight: 500;
+	font-family: "SF Pro Display";
+	color: #30313D;
+}
+
 .select-create-status {
 	display: flex;
 	width: 130px;
@@ -2270,54 +2288,6 @@ input:checked+.slider:before {
 	font-style: normal;
 	font-weight: 500;
 	line-height: 36px;
-}
-
-.text-gray {
-	color: var(--Helper-Text-Gray, #8A8A8A);
-	font-family: "SF Pro Display";
-	font-style: normal;
-}
-
-.text-gray-back {
-	color: var(--Helper-Text-Gray, #666);
-	font-family: "SF Pro Display";
-	font-style: normal;
-}
-
-.text-blue {
-	color: #2580D3;
-	font-family: "SF Pro Display";
-	font-style: normal;
-}
-
-.text-black {
-	color: var(--HRVC---Text-Black, #30313D);
-	font-family: "SF Pro Display";
-	font-style: normal;
-}
-
-.text-blue-sea {
-	color: var(--HRVC---Text-Black, #2F42ED);
-	font-family: "SF Pro Display";
-	font-style: normal;
-}
-
-.text-green {
-	color: var(--HRVC---Text-Black, #2D7F06);
-	font-family: "SF Pro Display";
-	font-style: normal;
-}
-
-.text-red {
-	color: var(--HRVC---Text-Black, #E05757);
-	font-family: "SF Pro Display";
-	font-style: normal;
-}
-
-.text-orang {
-	color: var(--HRVC---Text-Black, #DD7A01);
-	font-family: "SF Pro Display";
-	font-style: normal;
 }
 
 #calendar-container {
