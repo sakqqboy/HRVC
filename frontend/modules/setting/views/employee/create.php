@@ -106,7 +106,7 @@ $this->title = 'Create Employee';
                                     Login ID</text>
                                 <div class="input-group">
                                     <span class="input-group-text" style="background-color: white; border-right: none;">
-                                        <img src="/HRVC/frontend/web/image/web-gray.svg" alt="Website"
+                                        <img src="<?= Yii::$app->homeUrl ?>image/web-gray.svg" alt="Website"
                                             style="width: 20px; height: 20px;">
                                     </span>
                                     <input type="text" class="form-control font-size-14" name="///"
@@ -128,7 +128,7 @@ $this->title = 'Create Employee';
 
                                 <div class="input-group">
                                     <span class="input-group-text" style="background-color: white; border-right: none;">
-                                        <img src="/HRVC/frontend/web/image/web-gray.svg" alt="Website"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/mail.svg" alt="Website"
                                             style="width: 20px; height: 20px;">
                                     </span>
                                     <input type="text" class="form-control font-size-14" name="///"
@@ -142,7 +142,7 @@ $this->title = 'Create Employee';
 
                                 <div class="input-group">
                                     <span class="input-group-text" style="background-color: white; border-right: none;">
-                                        <img src="/HRVC/frontend/web/image/web-gray.svg" alt="Website"
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/lock.svg" alt="Website"
                                             style="width: 20px; height: 20px;">
                                     </span>
                                     <input type="text" class="form-control font-size-14" name="///"
@@ -287,12 +287,12 @@ $this->title = 'Create Employee';
 
                 <!-- ✅ ปุ่ม Cancel + Save -->
                 <div class="d-flex justify-content-end align-items-center" style="gap: 10px;">
-                    <a href="/HRVC/frontend/web/setting/group/create-group" style="text-decoration: none;">
+                    <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
                         <button type="button" class="btn-cancel-group">
                             Cancel
                         </button>
                     </a>
-                    <a href="/HRVC/frontend/web/setting/group/create-group" style="text-decoration: none;">
+                    <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
                         <button type="button" class="btn-cancel-group w-100">
                             Save as Draft
                             <img src="<?= Yii::$app->homeUrl ?>image/draft.svg">
@@ -300,7 +300,7 @@ $this->title = 'Create Employee';
                     </a>
                     <button type="submit" class="btn-save-group">
                         Save
-                        <img src="/HRVC/frontend/web/image/save-icon.svg" alt="Save Icon"
+                        <img src="<?= Yii::$app->homeUrl ?>image/save-icon.svg" alt="Save Icon"
                             style="width: 20px; height: 20px;">
                     </button>
                 </div>
