@@ -229,18 +229,17 @@ $this->title = 'Create Employee';
                                 <hr class="hr-group">
                             </div>
                             <div class="checkbox-wrapper">
-                                <?php
-                                        foreach ($modules as $modul) {
-                                    ?>
+                                <?php foreach ($modules as $modul) { ?>
                                 <div class="checkbox-item">
-                                    <input type="checkbox" id="module" name="moduleId" value="<?=$modul['moduleId']?>">
+                                    <!-- แก้ name เป็น moduleId[] เพื่อให้ส่งเป็น array -->
+                                    <input type="checkbox" id="module_<?= $modul['moduleId'] ?>" name="moduleId[]"
+                                        value="<?= $modul['moduleId'] ?>">
                                     <span class="checkbox-cycle"></span>
-                                    <label for="module"><?=$modul['moduleName']?></label>
+                                    <label for="module_<?= $modul['moduleId'] ?>"><?= $modul['moduleName'] ?></label>
                                 </div>
-                                <?php
-                                        }
-                                    ?>
+                                <?php } ?>
                             </div>
+
                         </div>
                     </div>
 
