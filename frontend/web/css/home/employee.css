@@ -156,6 +156,154 @@
     color: black;
 }
 
+.radio-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    padding: 20px 0;
+    /* เพิ่มระยะบนล่าง */
+}
+
+/* เส้นประจุดกลมสีฟ้า */
+.radio-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background-image: radial-gradient(circle, #79ACDD 1.5px, transparent 1.5px);
+    background-size: 6px 6px;
+    /* ระยะห่างจุด */
+    background-repeat: repeat-x;
+    z-index: 0;
+    transform: translateY(-50%);
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    /* ให้ทับเส้นประ */
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 0.83px solid #BBCDDE;
+    background: #DCDCDC;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* background เปลี่ยนเมื่อ radio ถูกเลือก */
+.radio-item input[type="radio"]:checked~.radio-cycle {
+    border: 0.5px solid var(--Stroke-Bluish-Gray, #BBCDDE);
+    background: var(--Warning-Yellow-Deep, #FFD000);
+}
+
+/* background radio-item เปลี่ยนเป็นขาวเมื่อเลือก */
+.radio-item input[type="radio"]:checked~.radio-cycle {
+    position: relative;
+}
+
+/* ซ่อน input จริง */
+.radio-item input[type="radio"] {
+    display: none;
+}
+
+/* วงกลมแทน input */
+.radio-cycle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50.642px;
+    border: 0.83px solid #2580D3;
+    background: #F5F5F5;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* label */
+.radio-item label {
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+}
+
+/* background radio-item เปลี่ยนเป็นขาวเมื่อ radio ถูกเลือก */
+.radio-item input[type="radio"]:checked {
+    /* ใช้ parent sibling selector เปลี่ยนพื้นหลัง radio-item */
+}
+
+.radio-item input[type="radio"]:checked~.radio-cycle {
+    /* เพิ่ม svg ไอคอนตรงกลาง */
+}
+
+.radio-item input[type="radio"]:checked~.radio-cycle::after {
+    content: '';
+    position: absolute;
+    width: 13px;
+    height: 9px;
+    background: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M2.27734 5.85714L4.52734 8L11.2773 2" stroke="black" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/></svg>');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    background-color: #30313D;
+}
+
+/* trick to change background of radio-item when input checked */
+.radio-item input[type="radio"]:checked~.radio-cycle {
+    background: var(--Warning-Yellow-Deep, #FFD000);
+    border: 0.5px solid var(--Stroke-Bluish-Gray, #BBCDDE);
+}
+
+.radio-item input[type="radio"]:checked~.radio-cycle {
+    position: relative;
+}
+
+.radio-item input[type="radio"]:checked~.radio-cycle::after {
+    content: '';
+    position: absolute;
+    width: 13px;
+    height: 9px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    background-color: #30313D;
+    /* mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none"><path d="M2.27734 5.85714L4.52734 8L11.2773 2" stroke="black" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/></svg>'); */
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+
+/* เปลี่ยน background radio-item */
+.radio-item input[type="radio"]:checked {
+    /* Trick: ใช้ sibling selector */
+}
+
+.radio-item input[type="radio"]:checked~.radio-cycle {
+    /* This will be handled */
+}
+
+.radio-item input[type="radio"]:checked~.radio-cycle {
+    /* This stays */
+}
+
+.radio-item input[type="radio"]:checked~.radio-cycle {
+    /* This stays */
+}
+
+/* เปลี่ยน background ของ radio-item โดยใช้ label:hover หรือ :checked + parent ด้วย JS (เพราะ CSS ไม่มี parent selector) */
 
 @media(max-width: 992px) {
     .all-employee0 {

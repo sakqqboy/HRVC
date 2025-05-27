@@ -180,75 +180,112 @@ $this->title = 'Create Employee';
                                     System Wide Permission Level </text>
                                 <hr class="hr-group">
                             </div>
-                            <style>
-                            .radio-wrapper {
-                                display: flex;
-                                align-items: center;
-                                justify-content: space-between;
-                                width: 100%;
-                                position: relative;
-                                margin: 40px 0;
-                            }
-
-                            .radio-wrapper::before {
-                                content: "";
-                                position: absolute;
-                                top: 50%;
-                                left: 0;
-                                width: 100%;
-                                height: 6px;
-                                background-image: radial-gradient(circle, #79ACDD 1.5px, transparent 1.5px);
-                                background-size: 6px 6px;
-                                /* ระยะห่างจุดแนวนอน */
-                                background-repeat: repeat-x;
-                                z-index: 0;
-                                transform: translateY(-50%);
-                            }
-
-                            .radio-item {
-                                background: white;
-                                padding: 0 1px;
-                                z-index: 1;
-                                text-align: center;
-                                flex-shrink: 0;
-                            }
-
-                            .radio-item input {
-                                margin-bottom: 5px;
-                            }
-                            </style>
 
                             <div class="radio-wrapper">
                                 <div class="radio-item">
-                                    <input type="radio" id="staff" name="position" value="staff">
+                                    <input type="radio" id="staff" name="role" value="1">
+                                    <span class="radio-cycle"></span>
                                     <label for="staff">Staff</label>
                                 </div>
                                 <div class="radio-item">
-                                    <input type="radio" id="teamLeader" name="position" value="teamLeader">
+                                    <input type="radio" id="teamLeader" name="role" value="2">
+                                    <span class="radio-cycle"></span>
                                     <label for="teamLeader">Team Leader</label>
                                 </div>
                                 <div class="radio-item">
-                                    <input type="radio" id="hr" name="position" value="hr">
+                                    <input type="radio" id="hr" name="role" value="3">
+                                    <span class="radio-cycle"></span>
                                     <label for="hr">HR</label>
                                 </div>
                                 <div class="radio-item">
-                                    <input type="radio" id="manager" name="position" value="manager">
+                                    <input type="radio" id="manager" name="role" value="4">
+                                    <span class="radio-cycle"></span>
                                     <label for="manager">Manager</label>
                                 </div>
                                 <div class="radio-item">
-                                    <input type="radio" id="generalManager" name="position" value="generalManager">
+                                    <input type="radio" id="generalManager" name="role" value="5">
+                                    <span class="radio-cycle"></span>
                                     <label for="generalManager">General Manager</label>
                                 </div>
                                 <div class="radio-item">
-                                    <input type="radio" id="admin" name="position" value="admin">
+                                    <input type="radio" id="admin" name="role" value="6">
+                                    <span class="radio-cycle"></span>
                                     <label for="admin">Admin</label>
                                 </div>
                                 <div class="radio-item">
-                                    <input type="radio" id="systemAdmin" name="position" value="systemAdmin">
+                                    <input type="radio" id="systemAdmin" name="role" value="7">
+                                    <span class="radio-cycle"></span>
                                     <label for="systemAdmin">System Admin</label>
                                 </div>
                             </div>
+                            <!-- 
+                            <script>
+                            const svgNS = "http://www.w3.org/2000/svg";
 
+                            document.querySelectorAll('.radio-item').forEach(item => {
+                                item.addEventListener('click', () => {
+                                    const clickedRadio = item.querySelector('input[type="radio"]');
+                                    const selectedValue = parseInt(clickedRadio.value);
+
+                                    // ลูปทุก radio-item
+                                    document.querySelectorAll('.radio-item').forEach(i => {
+                                        const radio = i.querySelector('input[type="radio"]');
+                                        const radioValue = parseInt(radio.value);
+
+                                        const cycle = i.querySelector('.radio-cycle');
+
+                                        // ล้าง svg เดิมออกก่อน
+                                        const existingSvg = cycle.querySelector('.check-svg');
+                                        if (existingSvg) existingSvg.remove();
+
+                                        // ถ้า value <= value ที่เลือก
+                                        if (radioValue <= selectedValue) {
+                                            // เปลี่ยนสีพื้นหลังและเส้นขอบborder: 0.5px solid var(--Stroke-Bluish-Gray, #BBCDDE);
+
+                                            i.style.background = '#FFFFFF';
+                                            i.style.borderColor = '#BBCDDE';
+                                            cycle.style.background = '#FFD000';
+                                            cycle.style.borderColor = '#FFD000';
+
+                                            // สร้าง SVG checkmark
+                                            const svg = document.createElementNS(svgNS, "svg");
+                                            svg.setAttribute("width", "13");
+                                            svg.setAttribute("height", "9");
+                                            svg.setAttribute("viewBox", "0 0 13 9");
+                                            svg.setAttribute("fill", "none");
+                                            svg.classList.add("check-svg");
+
+                                            const path = document.createElementNS(svgNS,
+                                                "path");
+                                            path.setAttribute("d",
+                                                "M2.27734 5.85714L4.52734 8L11.2773 2");
+                                            path.setAttribute("stroke", "#30313D");
+                                            path.setAttribute("stroke-width", "2");
+                                            path.setAttribute("stroke-linecap", "square");
+                                            path.setAttribute("stroke-linejoin", "round");
+
+                                            svg.appendChild(path);
+                                            cycle.appendChild(svg);
+
+                                            // ให้ radio ตัวที่เลือกถูกเช็คจริง
+                                            if (radioValue === selectedValue) {
+                                                radio.checked = true;
+                                            } else {
+                                                radio.checked = false;
+                                            }
+
+                                        } else {
+                                            // รีเซตกลับ
+                                            i.style.background = '#DCDCDC';
+                                            i.style.borderColor = '#BBCDDE';
+                                            cycle.style.background = '#F5F5F5';
+                                            cycle.style.borderColor = '#2580D3';
+                                            radio.checked = false;
+                                        }
+                                    });
+                                });
+                            });
+                            </script> -->
 
                         </div>
                         <div class="w-100">
@@ -261,7 +298,13 @@ $this->title = 'Create Employee';
                                 </text>
                                 <hr class="hr-group">
                             </div>
-                            <div>Group Config</div>
+                            <div class="checkbox-wrapper">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="module" name="moduleId" value="1">
+                                    <span class="checkbox-cycle"></span>
+                                    <label for="module">//</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -403,3 +446,11 @@ $this->title = 'Create Employee';
     </div>
 </div>
 <?php ActiveForm::end(); ?>
+
+<script src="radioHighlight.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    initRadioSelection(); // เรียกใช้กับ `.radio-wrapper` ปกติ
+    // หรือใส่ selector อื่นถ้ามีหลายกลุ่ม
+});
+</script>

@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\models\hrvc\master;
+namespace frontend/models\hrvc\master;
 
 use Yii;
 
@@ -11,7 +11,9 @@ use Yii;
     * @property string $language
     * @property string $languageName
     * @property integer $countryId
-    * @property string $createDate
+    * @property integer $status
+    * @property string $createDatetime
+    * @property string $updateDatetime
 */
 class DefaultLanguageMaster extends \common\models\ModelMaster
 {
@@ -29,8 +31,8 @@ return 'default_language';
 public function rules()
 {
 return [
-            [['countryId'], 'integer'],
-            [['createDate'], 'safe'],
+            [['countryId', 'status'], 'integer'],
+            [['createDatetime', 'updateDatetime'], 'safe'],
             [['language'], 'string', 'max' => 5],
             [['languageName'], 'string', 'max' => 255],
         ];
@@ -46,7 +48,9 @@ return [
     'language' => 'Language',
     'languageName' => 'Language Name',
     'countryId' => 'Country ID',
-    'createDate' => 'Create Date',
+    'status' => 'Status',
+    'createDatetime' => 'Create Datetime',
+    'updateDatetime' => 'Update Datetime',
 ];
 }
 }

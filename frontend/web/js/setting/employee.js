@@ -131,3 +131,61 @@ function togglePassword() {
             $url + "image/e-pass.svg"; // เปลี่ยนเป็น icon ตาเปิด
     }
 }
+
+
+function initRadioSelection(containerSelector = '.radio-wrapper') {
+    const svgNS = "http://www.w3.org/2000/svg";
+    const container = document.querySelector(containerSelector);
+    if (!container) return;
+
+    container.querySelectorAll('.radio-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const clickedRadio = item.querySelector('input[type="radio"]');
+            const selectedValue = parseInt(clickedRadio.value);
+
+            container.querySelectorAll('.radio-item').forEach(i => {
+                const radio = i.querySelector('input[type="radio"]');
+                const radioValue = parseInt(radio.value);
+                const cycle = i.querySelector('.radio-cycle');
+
+                // ลบ svg ติ๊กถูก เดิม
+                const existingSvg = cycle.querySelector('.check-svg');
+                if (existingSvg) existingSvg.remove();
+
+                if (radioValue <= selectedValue) {
+                    // ปรับสีและใส่ svg
+                    i.style.background = '#FFFFFF';
+                    i.style.borderColor = '#BBCDDE';
+                    cycle.style.background = '#FFD000';
+                    cycle.style.borderColor = '#FFD000';
+
+                    const svg = document.createElementNS(svgNS, "svg");
+                    svg.setAttribute("width", "13");
+                    svg.setAttribute("height", "9");
+                    svg.setAttribute("viewBox", "0 0 13 9");
+                    svg.setAttribute("fill", "none");
+                    svg.classList.add("check-svg");
+
+                    const path = document.createElementNS(svgNS, "path");
+                    path.setAttribute("d", "M2.27734 5.85714L4.52734 8L11.2773 2");
+                    path.setAttribute("stroke", "#30313D");
+                    path.setAttribute("stroke-width", "2");
+                    path.setAttribute("stroke-linecap", "square");
+                    path.setAttribute("stroke-linejoin", "round");
+
+                    svg.appendChild(path);
+                    cycle.appendChild(svg);
+
+                    radio.checked = radioValue === selectedValue;
+                } else {
+                    // รีเซต
+                    i.style.background = '#DCDCDC';
+                    i.style.borderColor = '#BBCDDE';
+                    cycle.style.background = '#F5F5F5';
+                    cycle.style.borderColor = '#2580D3';
+                    radio.checked = false;
+                }
+            });
+        });
+    });
+}
