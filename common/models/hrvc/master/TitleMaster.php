@@ -42,7 +42,7 @@ return [
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['titleName', 'requireSkill'], 'string', 'max' => 255],
             [['shortTag'], 'string', 'max' => 45],
-            [['status'], 'string', 'max' => 4],
+            [['status'], 'string', 'max' => 10],
         ];
 }
 

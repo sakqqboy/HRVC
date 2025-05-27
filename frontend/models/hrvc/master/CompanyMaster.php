@@ -20,7 +20,7 @@ use Yii;
     * @property string $postalCode
     * @property string $industries
     * @property string $founded
-    * @property string $director
+    * @property integer $directorId
     * @property string $email
     * @property string $contact
     * @property string $specialties
@@ -48,13 +48,13 @@ return 'company';
 public function rules()
 {
 return [
-            [['companyName', 'groupId', 'displayName', 'location', 'industries', 'director'], 'required'],
-            [['groupId', 'countryId', 'headQuaterId'], 'integer'],
+            [['companyName', 'groupId', 'displayName', 'location', 'industries'], 'required'],
+            [['groupId', 'countryId', 'headQuaterId', 'directorId'], 'integer'],
             [['location', 'industries', 'contact', 'specialties', 'socialTag', 'about'], 'string'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['companyName', 'website', 'displayName', 'tagLine', 'city', 'banner', 'picture'], 'string', 'max' => 255],
-            [['postalCode', 'founded', 'director', 'email'], 'string', 'max' => 100],
-            [['status'], 'string', 'max' => 4],
+            [['postalCode', 'founded', 'email'], 'string', 'max' => 100],
+            [['status'], 'string', 'max' => 10],
         ];
 }
 
@@ -77,7 +77,7 @@ return [
     'postalCode' => 'Postal Code',
     'industries' => 'Industries',
     'founded' => 'Founded',
-    'director' => 'Director',
+    'directorId' => 'Director ID',
     'email' => 'Email',
     'contact' => 'Contact',
     'specialties' => 'Specialties',

@@ -102,71 +102,163 @@ $this->title = 'Create Employee';
                     <div class="start-center" style="width: 822px; gap: 34px;">
                         <div class="flex-center" style="gap: 37px;">
                             <div>
-                                <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>System
-                                    Login ID</text>
+                                <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                    System Login ID
+                                </text>
                                 <div class="input-group">
                                     <span class="input-group-text" style="background-color: white; border-right: none;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/web-gray.svg" alt="Website"
+                                        <img src="<?= Yii::$app->homeUrl ?>image/e-mail.svg" alt="Website"
                                             style="width: 20px; height: 20px;">
                                     </span>
-                                    <input type="text" class="form-control font-size-14" name="///"
+                                    <input type="text" class="form-control font-size-14" id="mailId" name="mailId"
                                         placeholder="kaori@gmail.com" value=""
                                         style="width: 290.59px; border-left: none;">
                                 </div>
                             </div>
                             <div>
-                                <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>Employee
-                                    ID</text>
-                                <input type="text" class="form-control font-size-14" name="///"
+                                <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                    Employee ID
+                                </text>
+                                <input type="text" class="form-control font-size-14" id="employeeId"" name=" employeeId"
                                     placeholder="Please assign the employee ID  " value="" style="width:  330.59px;">
                             </div>
                         </div>
                         <div class="flex-center" style="gap: 37px;">
                             <div>
-                                <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>Password
+                                <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                    Password
                                 </text>
 
                                 <div class="input-group">
                                     <span class="input-group-text" style="background-color: white; border-right: none;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/mail.svg" alt="Website"
+                                        <img src="<?= Yii::$app->homeUrl ?>image/e-lock.svg" alt="Website"
                                             style="width: 20px; height: 20px;">
                                     </span>
-                                    <input type="text" class="form-control font-size-14" name="///"
-                                        placeholder="Register Password here" value=""
-                                        style="width: 290.59px; border-left: none;">
+                                    <input type="password" class="form-control font-size-14" name="password"
+                                        id="password" placeholder="Register Password here" value=""
+                                        style="width: 245px; border-left: none; border-right: none;">
+                                    <span class="input-group-text" onclick="togglePassword()"
+                                        style="background-color: white; cursor: pointer; border-left: none;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/e-pass.svg" id="toggleIcon"
+                                            style="width: 20px; height: 20px; ">
+                                    </span>
                                 </div>
+
                             </div>
                             <div>
-                                <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>System
-                                    Language Preference</text>
+                                <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                    System Language Preference
+                                </text>
 
                                 <div class="input-group">
                                     <span class="input-group-text" style="background-color: white; border-right: none;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/lock.svg" alt="Website"
+                                        <img src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
                                             style="width: 20px; height: 20px;">
                                     </span>
-                                    <input type="text" class="form-control font-size-14" name="///"
+                                    <!-- <input type="text" class="form-control font-size-14" name="///"
                                         placeholder="Select preferred language" value=""
-                                        style="width: 290.59px; border-left: none;">
+                                        style="width: 290.59px; border-left: none;"> -->
+                                    <select class="form-select" style="width: 290.59px; border-left: none;"
+                                        id="defaulLanguage" name="defaulLanguage" required="">
+                                        <option value="" disabled selected hidden
+                                            style="color: var(--Helper-Text, #8A8A8A); ">
+                                            <?= Yii::t('app', 'Select preferred language') ?>
+                                        </option> <?php
+                                        foreach ($languages as $lang) {
+                                            echo '<option value="' . htmlspecialchars($lang['languageId']) . '">' . htmlspecialchars($lang['languageName']) . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+
                                 </div>
                             </div>
                         </div>
 
                         <div class="w-100">
                             <div class="w-100">
-                                <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>System
-                                    Wide Permission Level </text>
+                                <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                    System Wide Permission Level </text>
                                 <hr class="hr-group">
                             </div>
-                            <div>Staff</div>
+                            <style>
+                            .radio-wrapper {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                                width: 100%;
+                                position: relative;
+                                margin: 40px 0;
+                            }
+
+                            .radio-wrapper::before {
+                                content: "";
+                                position: absolute;
+                                top: 50%;
+                                left: 0;
+                                width: 100%;
+                                height: 6px;
+                                background-image: radial-gradient(circle, #79ACDD 1.5px, transparent 1.5px);
+                                background-size: 6px 6px;
+                                /* ระยะห่างจุดแนวนอน */
+                                background-repeat: repeat-x;
+                                z-index: 0;
+                                transform: translateY(-50%);
+                            }
+
+                            .radio-item {
+                                background: white;
+                                padding: 0 1px;
+                                z-index: 1;
+                                text-align: center;
+                                flex-shrink: 0;
+                            }
+
+                            .radio-item input {
+                                margin-bottom: 5px;
+                            }
+                            </style>
+
+                            <div class="radio-wrapper">
+                                <div class="radio-item">
+                                    <input type="radio" id="staff" name="position" value="staff">
+                                    <label for="staff">Staff</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="teamLeader" name="position" value="teamLeader">
+                                    <label for="teamLeader">Team Leader</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="hr" name="position" value="hr">
+                                    <label for="hr">HR</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="manager" name="position" value="manager">
+                                    <label for="manager">Manager</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="generalManager" name="position" value="generalManager">
+                                    <label for="generalManager">General Manager</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="admin" name="position" value="admin">
+                                    <label for="admin">Admin</label>
+                                </div>
+                                <div class="radio-item">
+                                    <input type="radio" id="systemAdmin" name="position" value="systemAdmin">
+                                    <label for="systemAdmin">System Admin</label>
+                                </div>
+                            </div>
+
+
                         </div>
                         <div class="w-100">
                             <div class="w-100">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
                                     data-placement="top" aria-label="Module Access"
                                     data-bs-original-title="Module Access">
-                                <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>Module
-                                    Access </text>
+                                <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                    Module Access
+                                </text>
                                 <hr class="hr-group">
                             </div>
                             <div>Group Config</div>

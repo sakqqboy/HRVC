@@ -36,8 +36,8 @@ return 'bonus_record';
 public function rules()
 {
 return [
-            [['bonusRecordId', 'termId', 'employeeId'], 'required'],
-            [['bonusRecordId', 'termId', 'employeeId', 'rankId', 'creator'], 'integer'],
+            [['termId', 'employeeId'], 'required'],
+            [['termId', 'employeeId', 'rankId', 'creator'], 'integer'],
             [['salary', 'bonusRate', 'finalAdjustment'], 'number'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['rankName'], 'string', 'max' => 200],

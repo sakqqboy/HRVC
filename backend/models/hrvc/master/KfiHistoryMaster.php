@@ -54,7 +54,7 @@ return [
             [['target', 'result'], 'number'],
             [['description', 'remark'], 'string'],
             [['kfiHistoryName', 'formular', 'titleProgress'], 'string', 'max' => 255],
-            [['unitId', 'amountType', 'historyStatus', 'status'], 'string', 'max' => 4],
+            [['unitId', 'amountType', 'historyStatus', 'status'], 'string', 'max' => 10],
             [['quantRatio', 'code', 'month', 'year'], 'string', 'max' => 45],
         ];
 }

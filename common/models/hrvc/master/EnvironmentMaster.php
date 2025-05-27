@@ -34,7 +34,7 @@ return [
             [['companyId', 'branchId'], 'required'],
             [['companyId', 'branchId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['isAllEmployee', 'status'], 'string', 'max' => 4],
+            [['isAllEmployee', 'status'], 'string', 'max' => 10],
         ];
 }
 

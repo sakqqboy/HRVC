@@ -32,7 +32,7 @@ return [
             [['positionName'], 'required'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['positionName'], 'string', 'max' => 200],
-            [['status'], 'string', 'max' => 4],
+            [['status'], 'string', 'max' => 10],
         ];
 }
 

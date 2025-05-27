@@ -35,7 +35,7 @@ return [
             [['termId', 'stepId'], 'required'],
             [['termId', 'stepId'], 'integer'],
             [['startDate', 'finishDate', 'createDateTime', 'updateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 4],
+            [['status'], 'string', 'max' => 10],
         ];
 }
 

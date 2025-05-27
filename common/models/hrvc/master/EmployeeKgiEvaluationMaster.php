@@ -33,7 +33,7 @@ return [
             [['kgiWeighId', 'employeeId'], 'required'],
             [['kgiWeighId', 'employeeId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 4],
+            [['status'], 'string', 'max' => 10],
         ];
 }
 

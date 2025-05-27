@@ -37,7 +37,7 @@ return [
             [['kfiId', 'employeeId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['file'], 'string', 'max' => 255],
-            [['status'], 'string', 'max' => 4],
+            [['status'], 'string', 'max' => 10],
         ];
 }
 

@@ -149,7 +149,7 @@ class DepartmentController extends Controller
 		//throw  new Exception(print_r($department, true));
 		return json_encode($department);
 	}
-	public function actionActiveDepartment($page,$limit)
+	public function actionActiveDepartment($page = null, $limit = null)
 	{
 		$offset = ($page - 1) * $limit;
 		$department = [];
@@ -182,7 +182,7 @@ class DepartmentController extends Controller
 		//throw  new Exception(print_r($department, true));
 		return json_encode($department);
 	}
-	public function actionBranchDepartment($id,$page,$limit)
+	public function actionBranchDepartment($id,$page = null, $limit = null)
 	{
 		// $department = Department::find()
 		// 	->where(["status" => 1, "branchId" => $id])

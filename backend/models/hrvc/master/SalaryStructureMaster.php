@@ -34,7 +34,7 @@ return [
             [['salaryId', 'structureId', 'defaultValue'], 'required'],
             [['salaryId', 'structureId', 'defaultValue'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 4],
+            [['status'], 'string', 'max' => 10],
         ];
 }
 

@@ -35,7 +35,7 @@ return [
             [['termId', 'employeeId'], 'required'],
             [['termId', 'employeeId', 'primaryId', 'finalId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 4],
+            [['status'], 'string', 'max' => 10],
         ];
 }
 

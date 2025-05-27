@@ -27,6 +27,11 @@ use Yii;
     * @property string $about
     * @property string $picture
     * @property string $banner
+    * @property string $socialInstargram
+    * @property string $socialFacebook
+    * @property string $socialYoutube
+    * @property string $socialLinkin
+    * @property string $socialX
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -47,13 +52,13 @@ return 'group';
 public function rules()
 {
 return [
-            [['groupName', 'headQuaterName', 'displayName', 'location', 'industries', 'director', 'email', 'contact'], 'required'],
+            [['groupName', 'displayName', 'location', 'industries', 'director', 'email'], 'required'],
             [['location', 'specialties', 'socialTag', 'about'], 'string'],
             [['countryId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['groupName', 'headQuaterName', 'displayName', 'tagLine', 'city', 'industries', 'website', 'picture', 'banner'], 'string', 'max' => 255],
+            [['groupName', 'headQuaterName', 'displayName', 'tagLine', 'city', 'industries', 'website', 'picture', 'banner', 'socialInstargram', 'socialFacebook', 'socialYoutube', 'socialLinkin', 'socialX'], 'string', 'max' => 255],
             [['postalCode', 'founded', 'director', 'email', 'contact'], 'string', 'max' => 100],
-            [['status'], 'string', 'max' => 4],
+            [['status'], 'string', 'max' => 10],
         ];
 }
 
@@ -83,6 +88,11 @@ return [
     'about' => 'About',
     'picture' => 'Picture',
     'banner' => 'Banner',
+    'socialInstargram' => 'Social Instargram',
+    'socialFacebook' => 'Social Facebook',
+    'socialYoutube' => 'Social Youtube',
+    'socialLinkin' => 'Social Linkin',
+    'socialX' => 'Social X',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

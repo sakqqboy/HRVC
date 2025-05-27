@@ -54,7 +54,7 @@ return [
             [['description', 'remark'], 'string'],
             [['kpiHistoryName', 'titleProcess'], 'string', 'max' => 255],
             [['month', 'year', 'priority', 'code'], 'string', 'max' => 45],
-            [['quantRatio', 'amountType', 'status'], 'string', 'max' => 4],
+            [['quantRatio', 'amountType', 'status'], 'string', 'max' => 10],
         ];
 }
 

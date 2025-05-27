@@ -38,7 +38,7 @@ return [
             [['environmentId', 'attributeId'], 'integer'],
             [['startDate', 'endDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['frameName'], 'string', 'max' => 255],
-            [['isMid', 'status'], 'string', 'max' => 4],
+            [['isMid', 'status'], 'string', 'max' => 10],
         ];
 }
 

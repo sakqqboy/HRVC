@@ -36,7 +36,7 @@ return [
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['subLayerName'], 'string', 'max' => 255],
             [['shortTag'], 'string', 'max' => 45],
-            [['status'], 'string', 'max' => 4],
+            [['status'], 'string', 'max' => 10],
         ];
 }
 

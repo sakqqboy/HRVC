@@ -63,7 +63,7 @@
     cursor: default;
 }
 
-.individualImage{
+.individualImage {
     width: 90px;
     height: 90px;
     border-radius: 100%;
@@ -121,8 +121,9 @@
     font-weight: 600;
     font-size: 9px;
 }
-.employee-action{
-   background-color: white;
+
+.employee-action {
+    background-color: white;
     padding: 3px;
     text-align: center;
     width: 37px;
@@ -135,6 +136,7 @@
     display: none;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
+
 .bg-success0 {
     background-color: rgb(17, 179, 57);
     margin-left: 100px;
@@ -153,6 +155,7 @@
     border: none;
     color: black;
 }
+
 
 @media(max-width: 992px) {
     .all-employee0 {

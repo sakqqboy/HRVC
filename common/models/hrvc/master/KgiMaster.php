@@ -51,7 +51,7 @@ return [
             [['targetAmount', 'result'], 'number'],
             [['kgiDetail'], 'string'],
             [['kgiName'], 'string', 'max' => 255],
-            [['active', 'quantRatio', 'amountType', 'status'], 'string', 'max' => 4],
+            [['active', 'quantRatio', 'amountType', 'status'], 'string', 'max' => 10],
             [['month', 'year', 'priority', 'code'], 'string', 'max' => 45],
         ];
 }

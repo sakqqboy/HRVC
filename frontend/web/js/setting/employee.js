@@ -117,3 +117,17 @@ function changeStatus() {
         $("#pim-status").addClass('select-complete-status');
     }
 }
+
+function togglePassword() {
+    const passwordInput = document.getElementById("password");
+    const icon = document.getElementById("toggleIcon");
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        icon.src =
+            $url + "image/e-pass.svg"; // เปลี่ยนเป็น icon ตาปิด
+    } else {
+        passwordInput.type = "password";
+        icon.src =
+            $url + "image/e-pass.svg"; // เปลี่ยนเป็น icon ตาเปิด
+    }
+}

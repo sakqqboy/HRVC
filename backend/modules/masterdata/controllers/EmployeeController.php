@@ -2,6 +2,7 @@
 
 namespace backend\modules\masterdata\controllers;
 
+use backend\models\hrvc\DefaultLanguage;
 use backend\models\hrvc\Department;
 use backend\models\hrvc\Employee;
 use backend\models\hrvc\EmployeeSalary;
@@ -139,5 +140,13 @@ class EmployeeController extends Controller
 			endforeach;
 		}
 		return json_encode($data);
+	}
+
+	public function actionDefaultLanguage () {
+		$language = DefaultLanguage::find()
+		->where(["status" => 1])
+		->asArray()
+		->all();
+		return json_encode($language);
 	}
 }

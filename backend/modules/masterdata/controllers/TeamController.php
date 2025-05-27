@@ -20,7 +20,7 @@ class TeamController extends Controller
 {
 
 	
-	public function actionIndex($id,$page,$limit)
+	public function actionIndex($id,$page = null, $limit = null)
 	{
 
 		$offset = ($page - 1) * $limit;
@@ -169,7 +169,7 @@ class TeamController extends Controller
 			->one();
 		return json_encode($teams);
 	}
-	public function actionDepartmentTeam($id,$page,$limit)
+	public function actionDepartmentTeam($id,$page = null, $limit = null)
 	{
 		// $teams = [];
 		// $teams = Team::find()

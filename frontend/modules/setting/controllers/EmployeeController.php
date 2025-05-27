@@ -135,36 +135,48 @@ class EmployeeController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
         $countries = curl_exec($api);
         $countries = json_decode($countries, true);
-        //throw new Exception(print_r($countries, true));
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        // throw new Exception(print_r($countries, true));
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1' . '&limit=0');
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
+        // throw new Exception(print_r($companies, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-list');
         $titles = curl_exec($api);
         $titles = json_decode($titles, true);
+        // throw new Exception(print_r($titles, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/status/active-status');
         $status = curl_exec($api);
         $status = json_decode($status, true);
+        // throw new Exception(print_r($status, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee-condition/active-condition');
         $conditions = curl_exec($api);
         $conditions = json_decode($conditions, true);
+        // throw new Exception(print_r($conditions, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/role/active-role');
         $roles = curl_exec($api);
         $roles = json_decode($roles, true);
+        // throw new Exception(print_r($roles, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team-position/index');
         $teamPosition = curl_exec($api);
         $teamPosition = json_decode($teamPosition, true);
+        // throw new Exception(print_r($teamPosition, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/nationality');
         $nationalities = curl_exec($api);
         $nationalities = json_decode($nationalities, true);
+        // throw new Exception(print_r($nationalities, true));
 
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/default-language');
+        $language = curl_exec($api);
+        $language = json_decode($language, true);
         curl_close($api);
+        // throw new Exception(print_r($language, true));
+
 
         return $this->render('create', [
             "countries" => $countries,
@@ -174,7 +186,8 @@ class EmployeeController extends Controller
             "conditions" => $conditions,
             "roles" => $roles,
             "teamPosition" => $teamPosition,
-            "nationalities" => $nationalities
+            "nationalities" => $nationalities,
+            "languages" => $language
         ]);
     }
     public function actionSaveCreateEmployee()

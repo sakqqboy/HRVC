@@ -32,7 +32,7 @@ return [
             [['employeeConditionName'], 'required'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['employeeConditionName'], 'string', 'max' => 45],
-            [['status'], 'string', 'max' => 4],
+            [['status'], 'string', 'max' => 10],
         ];
 }
 

@@ -37,7 +37,7 @@ class BranchController extends Controller
 		return json_encode($branch);
 	}
 	
-	public function actionActiveBranch($page,$limit)
+	public function actionActiveBranch($page = null, $limit = null)
 	{
 		// $branch = Branch::find()
 		// 	->select('branch.*,co.countryName,c.companyName,c.picture,co.flag,c.city')

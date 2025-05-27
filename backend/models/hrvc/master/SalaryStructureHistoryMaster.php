@@ -35,7 +35,7 @@ return [
             [['salaryStructureId', 'defaultValue', 'currencyId', 'round'], 'required'],
             [['salaryStructureId', 'defaultValue', 'currencyId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['round', 'status'], 'string', 'max' => 4],
+            [['round', 'status'], 'string', 'max' => 10],
         ];
 }
 

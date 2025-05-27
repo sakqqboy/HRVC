@@ -32,7 +32,7 @@ return [
             [['unitName'], 'required'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['unitName'], 'string', 'max' => 255],
-            [['status'], 'string', 'max' => 4],
+            [['status'], 'string', 'max' => 10],
         ];
 }
 

@@ -46,7 +46,7 @@ return [
             [['kfiDetail'], 'string'],
             [['periodDate', 'fromDate', 'toDate', 'createDateTime', 'updateDateTime'], 'safe'],
             [['kfiName', 'month', 'year'], 'string', 'max' => 45],
-            [['active', 'status'], 'string', 'max' => 4],
+            [['active', 'status'], 'string', 'max' => 10],
         ];
 }
 

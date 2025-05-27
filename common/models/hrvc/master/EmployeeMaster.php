@@ -42,6 +42,7 @@ use Yii;
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
+    * @property integer $defaultLanguage
 */
 class EmployeeMaster extends \common\models\ModelMaster
 {
@@ -61,10 +62,10 @@ public function rules()
 return [
             [['employeeFirstname', 'employeeSurename', 'gender', 'email', 'telephoneNumber', 'companyId', 'branchId', 'departmentId', 'titleId', 'employeeConditionId'], 'required'],
             [['birthDate', 'joinDate', 'hireDate', 'createDateTime', 'updateDateTime'], 'safe'],
-            [['companyId', 'branchId', 'departmentId', 'titleId', 'teamId', 'teamPositionId', 'countryId', 'employeeConditionId', 'nationalityId', 'workingTime'], 'integer'],
+            [['companyId', 'branchId', 'departmentId', 'titleId', 'teamId', 'teamPositionId', 'countryId', 'employeeConditionId', 'nationalityId', 'workingTime', 'defaultLanguage'], 'integer'],
             [['address1', 'address2', 'spoken', 'socialLink', 'remark'], 'string'],
             [['employeeNumber', 'employeeFirstname', 'employeeSurename', 'employeeNickname', 'email', 'contact'], 'string', 'max' => 100],
-            [['gender', 'status'], 'string', 'max' => 4],
+            [['gender', 'status'], 'string', 'max' => 10],
             [['companyEmail', 'telephoneNumber', 'emergencyTel', 'picture', 'resume', 'employeeAgreement'], 'string', 'max' => 255],
         ];
 }
@@ -110,6 +111,7 @@ return [
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',
+    'defaultLanguage' => 'Default Language',
 ];
 }
 }

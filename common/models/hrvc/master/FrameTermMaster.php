@@ -15,6 +15,7 @@ use Yii;
     * @property string $endDate
     * @property string $midDate
     * @property integer $isIncludeBonus
+    * @property string $bonusBudget
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -38,8 +39,9 @@ return [
             [['termName', 'frameId'], 'required'],
             [['frameId'], 'integer'],
             [['startDate', 'endDate', 'midDate', 'createDateTime', 'updateDateTime'], 'safe'],
+            [['bonusBudget'], 'number'],
             [['termName'], 'string', 'max' => 100],
-            [['sort', 'isIncludeBonus', 'status'], 'string', 'max' => 4],
+            [['sort', 'isIncludeBonus', 'status'], 'string', 'max' => 10],
         ];
 }
 
@@ -57,6 +59,7 @@ return [
     'endDate' => 'End Date',
     'midDate' => 'Mid Date',
     'isIncludeBonus' => 'Is Include Bonus',
+    'bonusBudget' => 'Bonus Budget',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',
