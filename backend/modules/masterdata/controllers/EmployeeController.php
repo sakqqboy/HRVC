@@ -8,6 +8,7 @@ use backend\models\hrvc\Employee;
 use backend\models\hrvc\EmployeeSalary;
 use backend\models\hrvc\PimWeight;
 use backend\models\hrvc\Title;
+use backend\Module;
 use Exception;
 use yii\web\Controller;
 
@@ -144,6 +145,15 @@ class EmployeeController extends Controller
 
 	public function actionDefaultLanguage () {
 		$language = DefaultLanguage::find()
+		->where(["status" => 1])
+		->asArray()
+		->all();
+		return json_encode($language);
+	}
+
+
+	public function actionModule () {
+		$language = Module::find()
 		->where(["status" => 1])
 		->asArray()
 		->all();

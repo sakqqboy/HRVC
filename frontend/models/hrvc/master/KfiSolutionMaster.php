@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend/models\hrvc\master;
+namespace frontend\models\hrvc\master;
 
 use Yii;
 

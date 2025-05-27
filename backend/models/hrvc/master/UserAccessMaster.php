@@ -1,6 +1,6 @@
 <?php
 
-namespace backend/models\hrvc\master;
+namespace backend\models\hrvc\master;
 
 use Yii;
 
@@ -10,7 +10,7 @@ use Yii;
     * @property integer $acessId
     * @property integer $userId
     * @property integer $moduleId
-    * @property string $status
+    * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
 */
