@@ -152,11 +152,11 @@ class EmployeeController extends Controller
 	}
 
 
-	public function actionModule () {
-		$language = Module::find()
+	public function actionModuleRole () {
+		$module = Module::find()
 		->where(["status" => 1])
 		->asArray()
 		->all();
-		return json_encode($language);
+		return json_encode($module);
 	}
 }

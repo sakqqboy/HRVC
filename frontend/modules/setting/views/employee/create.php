@@ -155,15 +155,14 @@ $this->title = 'Create Employee';
                                         <img src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
                                             style="width: 20px; height: 20px;">
                                     </span>
-                                    <!-- <input type="text" class="form-control font-size-14" name="///"
-                                        placeholder="Select preferred language" value=""
-                                        style="width: 290.59px; border-left: none;"> -->
+
                                     <select class="form-select" style="width: 290.59px; border-left: none;"
                                         id="defaulLanguage" name="defaulLanguage" required="">
                                         <option value="" disabled selected hidden
                                             style="color: var(--Helper-Text, #8A8A8A); ">
                                             <?= Yii::t('app', 'Select preferred language') ?>
-                                        </option> <?php
+                                        </option>
+                                        <?php
                                         foreach ($languages as $lang) {
                                             echo '<option value="' . htmlspecialchars($lang['languageId']) . '">' . htmlspecialchars($lang['languageName']) . '</option>';
                                         }
@@ -218,75 +217,6 @@ $this->title = 'Create Employee';
                                     <label for="systemAdmin">System Admin</label>
                                 </div>
                             </div>
-                            <!-- 
-                            <script>
-                            const svgNS = "http://www.w3.org/2000/svg";
-
-                            document.querySelectorAll('.radio-item').forEach(item => {
-                                item.addEventListener('click', () => {
-                                    const clickedRadio = item.querySelector('input[type="radio"]');
-                                    const selectedValue = parseInt(clickedRadio.value);
-
-                                    // ลูปทุก radio-item
-                                    document.querySelectorAll('.radio-item').forEach(i => {
-                                        const radio = i.querySelector('input[type="radio"]');
-                                        const radioValue = parseInt(radio.value);
-
-                                        const cycle = i.querySelector('.radio-cycle');
-
-                                        // ล้าง svg เดิมออกก่อน
-                                        const existingSvg = cycle.querySelector('.check-svg');
-                                        if (existingSvg) existingSvg.remove();
-
-                                        // ถ้า value <= value ที่เลือก
-                                        if (radioValue <= selectedValue) {
-                                            // เปลี่ยนสีพื้นหลังและเส้นขอบborder: 0.5px solid var(--Stroke-Bluish-Gray, #BBCDDE);
-
-                                            i.style.background = '#FFFFFF';
-                                            i.style.borderColor = '#BBCDDE';
-                                            cycle.style.background = '#FFD000';
-                                            cycle.style.borderColor = '#FFD000';
-
-                                            // สร้าง SVG checkmark
-                                            const svg = document.createElementNS(svgNS, "svg");
-                                            svg.setAttribute("width", "13");
-                                            svg.setAttribute("height", "9");
-                                            svg.setAttribute("viewBox", "0 0 13 9");
-                                            svg.setAttribute("fill", "none");
-                                            svg.classList.add("check-svg");
-
-                                            const path = document.createElementNS(svgNS,
-                                                "path");
-                                            path.setAttribute("d",
-                                                "M2.27734 5.85714L4.52734 8L11.2773 2");
-                                            path.setAttribute("stroke", "#30313D");
-                                            path.setAttribute("stroke-width", "2");
-                                            path.setAttribute("stroke-linecap", "square");
-                                            path.setAttribute("stroke-linejoin", "round");
-
-                                            svg.appendChild(path);
-                                            cycle.appendChild(svg);
-
-                                            // ให้ radio ตัวที่เลือกถูกเช็คจริง
-                                            if (radioValue === selectedValue) {
-                                                radio.checked = true;
-                                            } else {
-                                                radio.checked = false;
-                                            }
-
-                                        } else {
-                                            // รีเซตกลับ
-                                            i.style.background = '#DCDCDC';
-                                            i.style.borderColor = '#BBCDDE';
-                                            cycle.style.background = '#F5F5F5';
-                                            cycle.style.borderColor = '#2580D3';
-                                            radio.checked = false;
-                                        }
-                                    });
-                                });
-                            });
-                            </script> -->
-
                         </div>
                         <div class="w-100">
                             <div class="w-100">
@@ -299,11 +229,17 @@ $this->title = 'Create Employee';
                                 <hr class="hr-group">
                             </div>
                             <div class="checkbox-wrapper">
+                                <?php
+                                        foreach ($modules as $modul) {
+                                    ?>
                                 <div class="checkbox-item">
-                                    <input type="checkbox" id="module" name="moduleId" value="1">
+                                    <input type="checkbox" id="module" name="moduleId" value="<?=$modul['moduleId']?>">
                                     <span class="checkbox-cycle"></span>
-                                    <label for="module">//</label>
+                                    <label for="module"><?=$modul['moduleName']?></label>
                                 </div>
+                                <?php
+                                        }
+                                    ?>
                             </div>
                         </div>
                     </div>
@@ -452,5 +388,6 @@ $this->title = 'Create Employee';
 document.addEventListener("DOMContentLoaded", function() {
     initRadioSelection(); // เรียกใช้กับ `.radio-wrapper` ปกติ
     // หรือใส่ selector อื่นถ้ามีหลายกลุ่ม
+    initCheckboxSelection(); // เรียกใช้กับ `.checkbox-wrapper`
 });
 </script>

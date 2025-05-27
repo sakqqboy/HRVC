@@ -177,6 +177,12 @@ class EmployeeController extends Controller
         curl_close($api);
         // throw new Exception(print_r($language, true));
 
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/module-role');
+        $module = curl_exec($api);
+        $module = json_decode($module, true);
+        curl_close($api);
+        // throw new Exception(print_r($module, true));
+
 
         return $this->render('create', [
             "countries" => $countries,
@@ -187,7 +193,8 @@ class EmployeeController extends Controller
             "roles" => $roles,
             "teamPosition" => $teamPosition,
             "nationalities" => $nationalities,
-            "languages" => $language
+            "languages" => $language,
+            "modules" => $module
         ]);
     }
     public function actionSaveCreateEmployee()

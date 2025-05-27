@@ -133,6 +133,7 @@ function togglePassword() {
 }
 
 
+
 function initRadioSelection(containerSelector = '.radio-wrapper') {
     const svgNS = "http://www.w3.org/2000/svg";
     const container = document.querySelector(containerSelector);
@@ -189,3 +190,63 @@ function initRadioSelection(containerSelector = '.radio-wrapper') {
         });
     });
 }
+
+function initCheckboxSelection(containerSelector = '.checkbox-wrapper') {
+    const svgNS = "http://www.w3.org/2000/svg";
+    const container = document.querySelector(containerSelector);
+    if (!container) return;
+
+    container.querySelectorAll('.checkbox-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const checkbox = item.querySelector('input[type="checkbox"]');
+            const cycle = item.querySelector('.checkbox-cycle');
+
+            if (checkbox.checked) {
+                // ถ้าเลือกอยู่แล้ว จะเป็นการยกเลิกเลือก
+                checkbox.checked = false;
+
+                // ลบ svg ติ๊กถูก
+                const existingSvg = cycle.querySelector('.check-svg');
+                if (existingSvg) existingSvg.remove();
+
+                // รีเซตสี
+                item.style.background = '#DCDCDC';
+                item.style.borderColor = '#BBCDDE';
+                cycle.style.background = '#F5F5F5';
+                cycle.style.borderColor = '#2580D3';
+
+            } else {
+                // เลือก checkbox
+                checkbox.checked = true;
+
+                // เปลี่ยนสีพื้นหลัง
+                item.style.background = '#FFFFFF';
+                item.style.borderColor = '#BBCDDE';
+                cycle.style.background = '#FFD000';
+                cycle.style.borderColor = '#FFD000';
+
+                // สร้าง svg checkmark
+                const existingSvg = cycle.querySelector('.check-svg');
+                if (!existingSvg) {
+                    const svg = document.createElementNS(svgNS, "svg");
+                    svg.setAttribute("width", "13");
+                    svg.setAttribute("height", "9");
+                    svg.setAttribute("viewBox", "0 0 13 9");
+                    svg.setAttribute("fill", "none");
+                    svg.classList.add("check-svg");
+
+                    const path = document.createElementNS(svgNS, "path");
+                    path.setAttribute("d", "M2.27734 5.85714L4.52734 8L11.2773 2");
+                    path.setAttribute("stroke", "#30313D");
+                    path.setAttribute("stroke-width", "2");
+                    path.setAttribute("stroke-linecap", "square");
+                    path.setAttribute("stroke-linejoin", "round");
+
+                    svg.appendChild(path);
+                    cycle.appendChild(svg);
+                }
+            }
+        });
+    });
+}
+
