@@ -6,9 +6,9 @@ use backend\models\hrvc\DefaultLanguage;
 use backend\models\hrvc\Department;
 use backend\models\hrvc\Employee;
 use backend\models\hrvc\EmployeeSalary;
+use backend\models\hrvc\Module;
 use backend\models\hrvc\PimWeight;
 use backend\models\hrvc\Title;
-use backend\Module;
 use Exception;
 use yii\web\Controller;
 

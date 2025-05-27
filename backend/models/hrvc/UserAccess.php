@@ -1,9 +1,9 @@
 <?php
 
-namespace backend/models\hrvc;
+namespace backend\models\hrvc;
 
 use Yii;
-use \backend/models\hrvc\master\UserAccessMaster;
+use \backend\models\hrvc\master\UserAccessMaster;
 
 /**
 * This is the model class for table "user_access".
@@ -11,12 +11,12 @@ use \backend/models\hrvc\master\UserAccessMaster;
 * @property integer $acessId
 * @property integer $userId
 * @property integer $moduleId
-* @property string $status
+* @property integer $status
 * @property string $createDateTime
 * @property string $updateDateTime
 */
 
-class UserAccess extends \backend/models\hrvc\master\UserAccessMaster{
+class UserAccess extends \backend\models\hrvc\master\UserAccessMaster{
     /**
     * @inheritdoc
     */

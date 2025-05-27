@@ -1,9 +1,9 @@
 <?php
 
-namespace backend/models\hrvc;
+namespace backend\models\hrvc;
 
 use Yii;
-use \backend/models\hrvc\master\ModuleMaster;
+use \backend\models\hrvc\master\ModuleMaster;
 
 /**
 * This is the model class for table "module".
@@ -15,7 +15,7 @@ use \backend/models\hrvc\master\ModuleMaster;
 * @property string $updateDatetime
 */
 
-class Module extends \backend/models\hrvc\master\ModuleMaster{
+class Module extends \backend\models\hrvc\master\ModuleMaster{
     /**
     * @inheritdoc
     */
