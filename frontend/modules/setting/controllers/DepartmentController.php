@@ -1097,4 +1097,27 @@ class DepartmentController extends Controller
         }
         return json_encode($res);
     }
+    public function actionDepartmentTeamList()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+    
+        // รับ JSON body โดยตรง
+        $data = json_decode(file_get_contents("php://input"), true);
+        $departmentId = isset($data['departmentId']) ? $data['departmentId'] : null;
+    
+        if (!$departmentId) {
+            return ['error' => 'Missing departmentId'];
+        }
+    
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false); // ปิดเฉพาะใน dev/localhost
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-team?id=' . $departmentId . '&page=1' . '&limit=0');
+    
+        $response = curl_exec($api);
+        curl_close($api);
+    
+        $teams = json_decode($response, true);
+        return $teams;
+    }
 }

@@ -405,6 +405,18 @@
     /* ช่องว่างระหว่าง checkbox */
 }
 
+/* .input-group-text.active {
+    background-color: rgb(215, 235, 255) !important;
+    border: 0.5px solid rgb(190, 218, 255) !important;
+}
+
+.input-group-text.active img[data-icon="calendar"] {
+    content: url('<?= Yii::$app->homeUrl ?>image/calendar-blue.svg');
+}
+
+.input-group-text.active img[data-icon="weld"] {
+    content: url('<?= Yii::$app->homeUrl ?>image/calendar-gray.svg');
+} */
 
 
 @media(max-width: 992px) {

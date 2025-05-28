@@ -4,6 +4,7 @@ namespace backend\modules\masterdata\controllers;
 
 use backend\models\hrvc\Branch;
 use backend\models\hrvc\Department;
+use backend\models\hrvc\Team;
 use backend\models\hrvc\Title;
 use common\models\ModelMaster;
 use Exception;
@@ -360,5 +361,23 @@ class DepartmentController extends Controller
 			->asArray()
 			->all();
 		return json_encode($title);
+	}
+
+	public function actionDepartmentTeam($id)
+	{
+		$teams = [];
+		$team = Team::find()
+			->where(["departmentId" => $id, "status" => 1])
+			->asArray()
+			->all();
+		if (isset($team) && count($team) > 0) {
+			foreach ($team as $dep) :
+				$teams[$dep["teamId"]] = [
+							"teamId" => $dep['teamId'],
+							"teamName" => $dep["teamName"]
+						];
+			endforeach;
+		}
+		return json_encode($teams);
 	}
 }

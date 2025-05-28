@@ -136,7 +136,7 @@ class EmployeeController extends Controller
         $countries = curl_exec($api);
         $countries = json_decode($countries, true);
         // throw new Exception(print_r($countries, true));
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1' . '&limit=0');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId );
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
         // throw new Exception(print_r($companies, true));

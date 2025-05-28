@@ -660,7 +660,7 @@ function multiTeam(departmentId) {
 function multiTeamUpdate(departmentId) {
     var sumTeam = totalTeamUpdate(departmentId);
     var totalChecked = $('input[id^="multi-check-team-"]:checked').length;
-    
+
     var multiTeamDepartment = [];
     var i = 0;
     // ตรวจสอบว่าทุกทีมถูกเลือกหรือไม่
@@ -685,7 +685,7 @@ function multiTeamUpdate(departmentId) {
         multiTeamDepartment[i] = $(this).val();
         i++;
     });
-//    alert('totalTeam= '+sumTeam+' totalCheck= '+multiTeamDepartment.length);
+    //    alert('totalTeam= '+sumTeam+' totalCheck= '+multiTeamDepartment.length);
     //alert(sumTeam + '=>' + multiTeamDepartment.length);
     if (sumTeam != multiTeamDepartment.length) {
         $("#multi-check-all-team-" + departmentId + '-update').prop("checked", false);
@@ -1233,6 +1233,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function openDatePicker() {
+    alert('monthYearPicker');
     const picker = document.getElementById('monthYearPicker');
     picker.style.display = (picker.style.display === 'none' || picker.style.display === '') ? 'block' : 'none';
 }
