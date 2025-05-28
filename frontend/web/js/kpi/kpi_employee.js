@@ -94,7 +94,9 @@ function viewTabEmployeeKpi(kpiEmployeeHistoryId, kpiEmployeeId, tabId) {
 	$("#tab-" + tabId + "-black").hide();
 	$("#currentTab").val(tabId);
 	if (tabId == 1) {
-		var url = $url + 'kpi/view/kpi-team-employee-detail';
+		//var url = $url + 'kpi/view/kpi-team-employee-detail';
+	var url = $url + 'kpi/kpi-personal/kpi-team-employee';
+
 		$.ajax({
 			type: "POST",
 			dataType: 'json',
@@ -104,11 +106,16 @@ function viewTabEmployeeKpi(kpiEmployeeHistoryId, kpiEmployeeId, tabId) {
 				kpiEmployeeId: kpiEmployeeId,
 				month: month,
 				year: year
-				// kpiTeamId: kpiEmployeeId,
-				// kpiHistoryId: kpiEmployeeHistoryId
 			},
 			success: function (data) {
 				$("#show-content").html(data.kpiEmployeeTeam);
+				if (viewType == 'list') {
+					$('#man-check').css("display", 'none');
+					$('#all').show();
+					$('#employee-all').show();
+					$('#kgi-employee').css("display", 'none');
+					$("#viewType").val('list');
+				}
 			}
 		});
 	}
@@ -259,22 +266,22 @@ function showKpiTeamEmployee2(teamId) {
 	}
 	
 }
-function showKpiTeamEmployeeUpdate(teamId, kpiId, month, year,kgiTeamHistoryId) {
+function showKpiTeamEmployeeUpdate(teamId, kpiId, month, year,kpiTeamHistoryId) {
 	var currentSelect = $("#currentSelect").val();
-	if (kgiTeamHistoryId != currentSelect) {
+	if (kpiTeamHistoryId != currentSelect) {
 		$("#historyMonthYear-" + currentSelect).removeClass("selectedTeam");
 		$("#historyMonthYear-" + currentSelect).addClass("bg-white");
 
-		$("#historyMonthYear-" + kgiTeamHistoryId).removeClass("bg-white");
-		$("#historyMonthYear-" + kgiTeamHistoryId).addClass("selectedTeam");
+		$("#historyMonthYear-" + kpiTeamHistoryId).removeClass("bg-white");
+		$("#historyMonthYear-" + kpiTeamHistoryId).addClass("selectedTeam");
 
 		$('#img-' + currentSelect).attr('src', $url + 'images/icons/pim/doubleplay-black.svg');
 		$("#btn-" + currentSelect).removeClass("doubleplay-btn-blue");
 		$("#btn-" + currentSelect).addClass("doubleplay-btn");
 
-		$('#img-' + kgiTeamHistoryId).attr('src', $url + 'images/icons/pim/doubleplay-white.svg');
-		$("#btn-" + kgiTeamHistoryId).removeClass("doubleplay-btn");
-		$("#btn-" + kgiTeamHistoryId).addClass("doubleplay-btn-blue");
+		$('#img-' + kpiTeamHistoryId).attr('src', $url + 'images/icons/pim/doubleplay-white.svg');
+		$("#btn-" + kpiTeamHistoryId).removeClass("doubleplay-btn");
+		$("#btn-" + kpiTeamHistoryId).addClass("doubleplay-btn-blue");
 
 		var url = $url + 'kpi/kpi-personal/kpi-each-team-employee';
 		$.ajax({
@@ -288,24 +295,24 @@ function showKpiTeamEmployeeUpdate(teamId, kpiId, month, year,kgiTeamHistoryId) 
 				}
 			}
 		});
-		$("#currentSelect").val(kgiTeamHistoryId);
+		$("#currentSelect").val(kpiTeamHistoryId);
 	}
 }
-function showFirstKpiTeamEmployeeUpdate(teamId, kpiId, month, year, kgiTeamHistoryId) {
-	var currentSelect = kgiTeamHistoryId
+function showFirstKpiTeamEmployeeUpdate(teamId, kpiId, month, year, kpiTeamHistoryId) {
+	var currentSelect = kpiTeamHistoryId
 	$("#historyMonthYear-" + currentSelect).removeClass("selectedTeam");
 	$("#historyMonthYear-" + currentSelect).addClass("bg-white");
 
-	$("#historyMonthYear-" + kgiTeamHistoryId).removeClass("bg-white");
-	$("#historyMonthYear-" + kgiTeamHistoryId).addClass("selectedTeam");
+	$("#historyMonthYear-" + kpiTeamHistoryId).removeClass("bg-white");
+	$("#historyMonthYear-" + kpiTeamHistoryId).addClass("selectedTeam");
 
 	$('#img-' + currentSelect).attr('src', $url + 'images/icons/pim/doubleplay-black.svg');
 	$("#btn-" + currentSelect).removeClass("doubleplay-btn-blue");
 	$("#btn-" + currentSelect).addClass("doubleplay-btn");
 
-	$('#img-' + kgiTeamHistoryId).attr('src', $url + 'images/icons/pim/doubleplay-white.svg');
-	$("#btn-" + kgiTeamHistoryId).removeClass("doubleplay-btn");
-	$("#btn-" + kgiTeamHistoryId).addClass("doubleplay-btn-blue");
+	$('#img-' + kpiTeamHistoryId).attr('src', $url + 'images/icons/pim/doubleplay-white.svg');
+	$("#btn-" + kpiTeamHistoryId).removeClass("doubleplay-btn");
+	$("#btn-" + kpiTeamHistoryId).addClass("doubleplay-btn-blue");
 
 	var url = $url + 'kpi/kpi-personal/kpi-each-team-employee';
 	$.ajax({

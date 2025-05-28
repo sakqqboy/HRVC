@@ -58,7 +58,7 @@ function viewTabTeamKpi(kpiTeamHistoryId, kpiTeamId, tabId) {
 	$("#tab-" + tabId + "-black").hide();
 	$("#currentTab").val(tabId);
 	if (tabId == 1) {
-		var url = $url + 'kpi/view/kpi-team-employee-detail';
+		var url = $url + 'kpi/kpi-team/kpi-team-employee';
 		$.ajax({
 			type: "POST",
 			dataType: 'json',
@@ -68,10 +68,16 @@ function viewTabTeamKpi(kpiTeamHistoryId, kpiTeamId, tabId) {
 				kpiTeamId: kpiTeamId,
 				month: month,
 				year: year
-				// kpiHistoryId: kpiTeamHistoryId
 			},
 			success: function (data) {
 				$("#show-content").html(data.kpiEmployeeTeam);
+				if (viewType == 'list') {
+					$('#man-check').css("display", 'none');
+					$('#all').show();
+					$('#employee-all').show();
+					$('#kgi-employee').css("display", 'none');
+					$("#viewType").val('list');
+				}
 			}
 		});
 	}

@@ -42,7 +42,7 @@ class KpiEmployeeHistory extends \backend\models\hrvc\master\KpiEmployeeHistoryM
     {
         $data = [];
         $kpiEmployeeHistory = KpiEmployeeHistory::find()
-            ->where(["kpiEmployeeId" => $kpiEmployeeId, "status" => [1, 2, 3, 4, 5]])
+            ->where(["kpiEmployeeId" => $kpiEmployeeId, "status" => [1, 2, 3, 4, 5], "month" => $month, "year" => $year])
             ->orderBy('updateDateTime DESC')
             ->asArray()
             ->all();
@@ -51,7 +51,7 @@ class KpiEmployeeHistory extends \backend\models\hrvc\master\KpiEmployeeHistoryM
                 $data[$keh["kpiEmployeeHistoryId"]] = [
                     "detail" => $keh["detail"],
                     "result" => $keh["result"],
-                    "dueBehide" => ModelMaster::pimNumberFormat($keh["result"] - $keh["result"]),
+                    "dueBehide" => ModelMaster::pimNumberFormat($keh["target"] - $keh["result"]),
                     "fromDate" => $keh["fromDate"],
                     "toDate" => $keh["toDate"],
                 ];

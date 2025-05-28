@@ -229,16 +229,6 @@ class KpiTeamController extends Controller
 		} else {
 			$kpiTeamHistoryId = 0;
 		}
-		// $kpiTeamHistoryId = KpiTeamHistory::find()
-		// ->select('kpiTeamHistoryId')
-		// ->where(["kpiTeamId" => $kpiTeamId])
-		// ->orderBy('kpiTeamHistoryId DESC')
-		// ->asArray()->one();
-
-		// if(isset($kpiTeamHistoryId) && !empty($kpiTeamHistoryId)) {
-		// 	$kpiTeamHistoryId = $kpiTeamHistoryId['kpiTeamHistoryId'];
-		// }
-		// throw new Exception(print_r($kpiTeamHistoryId,true));
 
 		$openTab = array_key_exists("openTab", $param) ? $param["openTab"] : 0;
 		$groupId = Group::currentGroupId();
@@ -265,13 +255,6 @@ class KpiTeamController extends Controller
 		$kpiTeams = curl_exec($api);
 		$kpiTeams = json_decode($kpiTeams, true);
 
-		// throw new Exception(print_r($kpiTeamDetail,true));
-
-		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-one-team-summarize?kpiId=' . $kpiId . '&&kpiTeamId=' . $kpiTeamId);
-		// $kpiTeam = curl_exec($api);
-		// $kpiTeam = json_decode($kpiTeam, true);
-		// // throw new Exception(print_r($kpiTeam,true));
-
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
@@ -289,6 +272,46 @@ class KpiTeamController extends Controller
 			"kpiTeams" => $kpiTeams,
 			"kpiTeamHistoryId" => $kpiTeamHistoryId
 		]);
+	}
+	public function actionKpiTeamEmployee()
+	{
+		$kpiId = $_POST["kpiId"];
+		if (isset($_POST["kpiTeamId"])) {
+			$kpiTeamId = $_POST["kpiTeamId"];
+			// ดำเนินการต่อเมื่อมีค่า
+		} else {
+			// echo "ค่า kpiTeamId ไม่มีอยู่ใน POST";
+			$kpiEmployeeId = $_POST["kpiEmployeeId"];
+			$kpiTeamId  =  KpiEmployee::employeeKpiTeamId($kpiEmployeeId);
+		}
+		$month = $_POST["month"];
+		$year = $_POST["year"];
+
+		$res["kpiEmployeeTeam"] = "";
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
+		$kpiTeams = curl_exec($api);
+		$kpiTeams = json_decode($kpiTeams, true);
+
+		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-each-team-employee?kpiTeamId=' . $kpiTeamId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/assigned-kpi-employee?kpiId=' . $kpiId . "&&kpiHistoryId=0");
+		$kpiDetail = curl_exec($api);
+		$kpiDetail = json_decode($kpiDetail, true);
+
+		curl_close($api);
+
+		//throw new Exception(print_r($kpiDetail, true));
+
+		$res["kpiEmployeeTeam"] = $this->renderAjax("kpi_employee_team_all", [
+			"kpiTeams" => $kpiTeams,
+			"kpiDetail" => $kpiDetail,
+			"kpiId" => $kpiId
+
+		]);
+		return json_encode($res);
 	}
 
 	public function actionAllKpiHistory()
@@ -1101,6 +1124,7 @@ class KpiTeamController extends Controller
 		$res["team"] = $team;
 		return json_encode($res);
 	}
+
 	public function actionNextKpiTeamHistory()
 	{
 		$kpiTeamHistoryId = $_POST["kpiTeamHistoryId"];

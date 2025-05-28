@@ -13,6 +13,7 @@ use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiEmployee;
 use frontend\models\hrvc\KpiEmployeeHistory;
+use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\Unit;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
@@ -482,6 +483,38 @@ class KpiPersonalController extends Controller
 		$employeeHistory = $this->renderAjax('employee_history', ["kpiTeamEmployeeHistory" => $kpiTeamEmployeeHistory, "month" => $month, "year" => $year]);
 		$res["status"] = true;
 		$res["employeeHistory"] = $employeeHistory;
+		return json_encode($res);
+	}
+	public function actionKpiTeamEmployee()
+	{
+		$kpiId = $_POST["kpiId"];
+		$res["kpiEmployeeTeam"] = "";
+		$kpiEmployeeId = $_POST["kpiEmployeeId"];
+		$kpiEmployee = KpiEmployee::find()->where(["kpiEmployeeId" => $kpiEmployeeId])->asArray()->one();
+		$employeeTeam = Employee::employeeTeam($kpiEmployee["employeeId"]);
+
+		$kpiTeam = KpiTeam::find()
+			->select('kpiTeamId')
+			->where(["kpiId" => $kpiId, "teamId" => $employeeTeam["teamId"]])->asArray()->one();
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
+		$kpiTeams = curl_exec($api);
+		$kpiTeams = json_decode($kpiTeams, true);
+
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/assigned-kpi-employee?kpiId=' . $kpiId . "&&kpiHistoryId=0");
+		$kpiDetail = curl_exec($api);
+		$kpiDetail = json_decode($kpiDetail, true);
+		curl_close($api);
+		$res["kpiEmployeeTeam"] = $this->renderAjax("kpi_employee_team_all", [
+			"kpiTeams" => $kpiTeams,
+			"kpiDetail" => $kpiDetail,
+			"kpiId" => $kpiId
+
+		]);
 		return json_encode($res);
 	}
 	public function actionKpiChart()
