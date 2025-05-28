@@ -996,58 +996,6 @@ flatpickr("#hiring-select", {
     }
 });
 
-let startDateSelected = null;
-let endDateSelected = null;
-
-flatpickr("#startDatePicker", {
-    dateFormat: "d-M-Y",
-    onChange: function(selectedDates, dateStr) {
-        startDateSelected = dateStr;
-        document.getElementById("probationStart").value = dateStr;
-        checkAndApplyStyle();
-    }
-});
-
-flatpickr("#endDatePicker", {
-    dateFormat: "d-M-Y",
-    onChange: function(selectedDates, dateStr) {
-        endDateSelected = dateStr;
-        document.getElementById("probationEnd").value = dateStr;
-        checkAndApplyStyle();
-    }
-});
-
-function checkAndApplyStyle() {
-    if (startDateSelected && endDateSelected) {
-        document.getElementById("due-term-icon-group").style.backgroundColor = "rgb(215, 235, 255)";
-        document.getElementById("due-term-icon-group").style.border = "0.5px solid rgb(190, 218, 255)";
-        document.getElementById("start-img-probation").src = "<?= Yii::$app->homeUrl ?>image/calendar-blue.svg";
-        document.getElementById("end-img-probation").src = "<?= Yii::$app->homeUrl ?>image/calendar-blue.svg";
-        document.getElementById("weld-img-probation").src = "<?= Yii::$app->homeUrl ?>image/weld.svg";
-
-        // ปิด calendar ถ้าต้องการ
-        document.getElementById("calendar-due-term").style.display = "none";
-    }
-}
-
-
-// let calendarOpen = false;
-
-// function toggleCalendarEmployee() {
-//     const calendar = document.getElementById('calendar-due-term');
-//     const iconGroup = document.getElementById('due-term-icon-group');
-
-
-//     document.getElementById("due-term-icon-group").style.backgroundColor = "rgb(215, 235, 255)";
-//     document.getElementById("due-term-icon-group").style.border = "0.5px solid rgb(190, 218, 255)";
-//     document.getElementById("start-img-probation").src =
-//         "<?= Yii::$app->homeUrl ?>image/calendar-blue.svg";
-//     document.getElementById("end-img-probation").src =
-//         "<?= Yii::$app->homeUrl ?>image/calendar-blue.svg";
-//     document.getElementById("weld-img-probation").src =
-//         "<?= Yii::$app->homeUrl ?>image/weld.svg";
-
-// }
 
 document.addEventListener("DOMContentLoaded", function() {
     initRadioSelection(); // เรียกใช้กับ `.radio-wrapper` ปกติ

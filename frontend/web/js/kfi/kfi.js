@@ -1376,7 +1376,6 @@ function validateFormKfi(acType) {
 
 // อัปเดตข้อความวันที่ใน multi-due-term
 function updateSelectedDates() {
-
     const fromDate = document.getElementById('fromDate');
     const toDate = document.getElementById('toDate');
 
@@ -1398,10 +1397,23 @@ function updateSelectedDates() {
         "font-weight": "500",
         "line-height": "20px"
     });
+    if (window.startDate && window.endDate) {
+        const iconGroup = document.getElementById('due-term-icon-group');
+        if (iconGroup) {
+            iconGroup.style.backgroundColor = '#D7EBFF';
+            iconGroup.style.border = '0.5px solid #BEDAFF';
+
+            // อัปเดต src ของไอคอนแต่ละตัว
+            document.getElementById('start-img-probation').src = $url + 'image/calendar-blue.svg';
+            document.getElementById('weld-img-probation').src = $url + 'image/weld.svg';
+            document.getElementById('end-img-probation').src = $url + 'image/calendar-blue.svg';
+        }
+    }
 
     // อัปเดต hidden inputs
     document.getElementById('fromDate').value = startDate;
     document.getElementById('toDate').value = endDate;
+
 
 
     // ตรวจสอบว่าทั้ง Start Date และ End Date ถูกเลือกแล้ว
@@ -1417,6 +1429,7 @@ function updateSelectedDates() {
         images[1].src = $url + 'image/weld.svg';
         images[2].src = $url + 'image/calendar-blue.svg';
     }
+
 }
 
 function updateInputGroupStyle(target, backgroundColor, borderColor, icons) {
