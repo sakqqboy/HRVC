@@ -397,3 +397,26 @@ function checkAllKpiTeam(kpiId) {
 		}
 	});
 }
+function kpiTeamHistoryView(kpiId, teamId) { 
+    var viewType = $("#viewType").val();
+    //alert(viewType);
+var url = $url + 'kpi/view/kpi-team-history-view';
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { teamId: teamId, kpiId: kpiId,viewType:viewType },
+        success: function (data) {
+            if (data.status) {
+                $("#all").css('display', 'none');
+                $("#all").html('');
+                $("#employee-all").css('display', 'none');
+                $("#employee-all").html('');
+                $("#man-check").show();
+                $("#kpi-employee").show();
+                $("#man-check").html(data.history);
+            }
+
+        }
+    });
+}

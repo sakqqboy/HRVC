@@ -8,10 +8,16 @@ use common\models\ModelMaster;
 use frontend\models\hrvc\KpiEmployee;
 
 use Exception;
+use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\Kpi;
+use frontend\models\hrvc\KpiTeam;
+use frontend\models\hrvc\KpiTeamHistory;
+use frontend\models\hrvc\Team;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
+use yii\db\Expression;
 use yii\web\Controller;
 
 /**
@@ -261,9 +267,9 @@ class ViewController extends Controller
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
-		$kpiTeams = curl_exec($api);
-		$kpiTeams = json_decode($kpiTeams, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
+		// $kpiTeams = curl_exec($api);
+		// $kpiTeams = json_decode($kpiTeams, true);
 
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
@@ -278,7 +284,7 @@ class ViewController extends Controller
 			"isManager" => $isManager,
 			"units" => $units,
 			"companies" => $companies,
-			"kpiTeams" => $kpiTeams,
+			// "kpiTeams" => $kpiTeams,
 			"kpiHistoryId" => $kpiHistoryId
 		]);
 	}
@@ -293,17 +299,19 @@ class ViewController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
 		$kpiTeams = curl_exec($api);
 		$kpiTeams = json_decode($kpiTeams, true);
+		//throw new Exception(print_r($kpiTeams, true));
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
+		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/assigned-kpi-employee?kpiId=' . $kpiId . "&&kpiHistoryId=0");
 		$kpiDetail = curl_exec($api);
 		$kpiDetail = json_decode($kpiDetail, true);
 		curl_close($api);
-		$res["kpiEmployeeTeam"] = $this->renderAjax("kpi_employee_team", [
+		$res["kpiEmployeeTeam"] = $this->renderAjax("kpi_employee_team_all", [
 			"kpiTeams" => $kpiTeams,
 			"kpiDetail" => $kpiDetail,
 			"kpiId" => $kpiId
-
 		]);
+		//$res["kpiEmployeeTeam"] = "";
 		return json_encode($res);
 	}
 	public function actionKpiTeamEmployeeDetail()
@@ -819,5 +827,71 @@ class ViewController extends Controller
 			"kgiTeams" => $kgiTeams
 		]);
 		return json_encode($res);
+	}
+	public function actionKpiTeamHistoryView()
+	{
+		$kpiId = $_POST['kpiId'];
+		$teamId = $_POST['teamId'];
+		$kpiTeam = KpiTeam::find()->select('kpiTeamId')
+			->where(["teamId" => $teamId, "kpiId" => $kpiId, "status" => [1, 2]])
+			->asArray()
+			->one();
+		$kpi = Kpi::find()->where(["kpiId" => $kpiId])->asArray()->one();
+		$team = Team::find()->where(["teamId" => $teamId])->asArray()->one();
+		$departnemtName = Department::departmentNAme($team["departmentId"]);
+		if (isset($kpiTeam) && !empty($kpiTeam)) {
+			$kpiTeamId = $kpiTeam["kpiTeamId"];
+			$res["status"] = true;
+		} else {
+			$res["status"] = false;
+		}
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-history-view?kpiTeamId=' . $kpiTeamId);
+		$kpiTeamHistory = curl_exec($api);
+		$kpiTeamHistory = json_decode($kpiTeamHistory, true);
+		curl_close($api);
+
+
+		$teamText = $this->renderAjax('kpi_team_history_view', [
+			"kpiTeamHistory" => $kpiTeamHistory,
+			"team" => $team,
+			"departmentName" => $departnemtName,
+			"code" => $kpi["code"],
+			"kpiId" => $kpi["kpiId"],
+			"viewType" => $_POST['viewType']
+		]);
+		$res["kpiTeam"] = $kpiTeam;
+		$res["history"] = $teamText;
+		return json_encode($res);
+	}
+	public function actionUpdateKpiTeamHistory()
+	{
+		$history = KpiTeamHistory::find()
+			->where(['not in', 'status', [1, 2, 4, 5, 8, 99]])
+			->all();
+		foreach ($history as $kt):
+			$kt->delete();
+		endforeach;
+
+		$kpiTeam = KpiTeam::find()->where(["status" => [1, 2, 4]])->asArray()->all();
+		foreach ($kpiTeam as $kt):
+			$history = KpiTeamHistory::find()->where(["kpiTeamId" => $kt["kpiTeamId"]])->asArray()->one();
+			if (!isset($history) || empty($history)) {
+				$kpiTeamHistory = new KpiTeamHistory();
+				$kpiTeamHistory->kpiTeamId = $kt["kpiTeamId"];
+				$kpiTeamHistory->target = $kt["target"];
+				$kpiTeamHistory->result = $kt["result"];
+				$kpiTeamHistory->month = $kt["month"];
+				$kpiTeamHistory->year = $kt["year"];
+				$kpiTeamHistory->status = $kt["status"];
+				$kpiTeamHistory->createrId = $kt["createrId"];
+				$kpiTeamHistory->createDateTime = new Expression('NOW()');
+				$kpiTeamHistory->updateDateTime = new Expression('NOW()');
+				$kpiTeamHistory->save(false);
+			}
+		endforeach;
 	}
 }

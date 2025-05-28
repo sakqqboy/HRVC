@@ -4,36 +4,59 @@ namespace backend\models\hrvc;
 
 use Yii;
 use \backend\models\hrvc\master\KpiEmployeeHistoryMaster;
+use common\models\ModelMaster;
 
 /**
-* This is the model class for table "kpi_employee_history".
-*
-* @property integer $kpiEmployeeHistoryId
-* @property integer $kpiEmployeeId
-* @property string $target
-* @property string $result
-* @property string $detail
-* @property string $nextCheckDate
-* @property string $lastCheckDate
-* @property integer $status
-* @property string $createDateTime
-* @property string $updateDateTime
-*/
+ * This is the model class for table "kpi_employee_history".
+ *
+ * @property integer $kpiEmployeeHistoryId
+ * @property integer $kpiEmployeeId
+ * @property string $target
+ * @property string $result
+ * @property string $detail
+ * @property string $nextCheckDate
+ * @property string $lastCheckDate
+ * @property integer $status
+ * @property string $createDateTime
+ * @property string $updateDateTime
+ */
 
-class KpiEmployeeHistory extends \backend\models\hrvc\master\KpiEmployeeHistoryMaster{
+class KpiEmployeeHistory extends \backend\models\hrvc\master\KpiEmployeeHistoryMaster
+{
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function rules()
     {
         return array_merge(parent::rules(), []);
     }
 
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), []);
+    }
+    public static function allHistory($kpiEmployeeId, $month, $year)
+    {
+        $data = [];
+        $kpiEmployeeHistory = KpiEmployeeHistory::find()
+            ->where(["kpiEmployeeId" => $kpiEmployeeId, "status" => [1, 2, 3, 4, 5]])
+            ->orderBy('updateDateTime DESC')
+            ->asArray()
+            ->all();
+        if (isset($kpiEmployeeHistory) && count($kpiEmployeeHistory) > 0) {
+            foreach ($kpiEmployeeHistory as $keh):
+                $data[$keh["kpiEmployeeHistoryId"]] = [
+                    "detail" => $keh["detail"],
+                    "result" => $keh["result"],
+                    "dueBehide" => ModelMaster::pimNumberFormat($keh["result"] - $keh["result"]),
+                    "fromDate" => $keh["fromDate"],
+                    "toDate" => $keh["toDate"],
+                ];
+            endforeach;
+        }
+        return $data;
     }
 }

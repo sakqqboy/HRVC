@@ -76,7 +76,7 @@ class KpiTeamController extends Controller
 	public function actionKpiTeamSummarize($kpiId)
 	{
 		$kpiTeams = KpiTeam::find()
-			->select('kpi_team.teamId,t.teamName,t.departmentId')
+			->select('kpi_team.teamId,t.teamName,t.departmentId,kpi_team.target,kpi_team.result,kpi_team.updateDateTime')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
 			->where(["kpi_team.status" => [1, 2, 4], "t.status" => [1, 2, 4]])
 			->andWhere(["kpi_team.kpiId" => $kpiId])
@@ -86,10 +86,15 @@ class KpiTeamController extends Controller
 		$data = [];
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $kt):
+				$target = ModelMaster::pimNumberFormat($kt["target"]);
+				$result = ModelMaster::pimNumberFormat($kt["result"]);
 				$data[$kt["teamId"]] = [
 					"teamName" => $kt["teamName"],
 					"totalEmployee" => KpiEmployee::totolEmployeeInTeam($kpiId, $kt["teamId"]),
-					"departmentName" => Department::departmentName($kt["departmentId"])
+					"departmentName" => Department::departmentName($kt["departmentId"]),
+					"target" => $target,
+					"result" => $result,
+					"updateDateTime" => ModelMaster::monthDateYearTime($kt["updateDateTime"]),
 				];
 			endforeach;
 		}

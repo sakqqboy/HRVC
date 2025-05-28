@@ -465,7 +465,25 @@ class KpiPersonalController extends Controller
 		return json_encode($res);
 	}
 
-
+	public function actionKpiEachTeamEmployee()
+	{
+		$kpiId = $_POST["kpiId"];
+		$teamId = $_POST["teamId"];
+		$month = $_POST["month"];
+		$year = $_POST["year"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-each-team-employee-history?kpiId=' . $kpiId . '&&teamId=' . $teamId . '&&month=' . $month . '&&year=' . $year);
+		$kpiTeamEmployeeHistory = curl_exec($api);
+		$kpiTeamEmployeeHistory = json_decode($kpiTeamEmployeeHistory, true);
+		curl_close($api);
+		//throw new exception('kpi/kpi-personal/kpi-each-team-employee-history?kpiId=' . $kpiId . '&&teamId=' . $teamId . '&&month=' . $month . '&&year=' . $year);
+		$employeeHistory = $this->renderAjax('employee_history', ["kpiTeamEmployeeHistory" => $kpiTeamEmployeeHistory, "month" => $month, "year" => $year]);
+		$res["status"] = true;
+		$res["employeeHistory"] = $employeeHistory;
+		return json_encode($res);
+	}
 	public function actionKpiChart()
 	{
 		$kpiId = $_POST["kpiId"];

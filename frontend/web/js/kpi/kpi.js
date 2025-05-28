@@ -31,6 +31,14 @@ function viewTabKpi(kpiHistoryId, tabId) {
 			},
 			success: function (data) {
 				$("#show-content").html(data.kpiEmployeeTeam);
+				if (viewType == 'list') {
+					$('#man-check').css("display", 'none');
+					$('#all').show();
+					$('#employee-all').show();
+					$('#kpi-employee').css("display", 'none');
+					$("#viewType").val('list');
+				}
+				
 			}
 		});
 	}

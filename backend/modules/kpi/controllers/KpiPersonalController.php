@@ -507,6 +507,47 @@ class KpiPersonalController extends Controller
 			->all();
 		return json_encode($kpiHistory);
 	}
+	public function actionKpiEachTeamEmployeeHistory($kpiId, $teamId, $month, $year)
+	{
+
+		$kpiEmployee = KpiEmployee::find()
+			->select('e.employeeFirstname,e.employeeSurename,t.titleName,kpi_employee.kpiEmployeeId,e.picture')
+			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+			->JOIN("LEFT JOIN", "title t", "t.titleId=e.titleId")
+			->where(["kpi_employee.kpiId" => $kpiId, "e.teamId" => $teamId])
+			->orderBy('e.employeeFirstname')
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+			foreach ($kpiEmployee as $ke):
+				$kpiEmployeeHistory = KpiEmployeeHistory::find()
+					->where(["kpiEmployeeId" => $ke["kpiEmployeeId"], "month" => $month, "year" => $year])
+					->orderBy("status DESC,updateDateTime DESC")
+					->asArray()
+					->one();
+				if (isset($kpiEmployeeHistory) && !empty($kpiEmployeeHistory)) {
+					$img = "image/user.png";
+
+					if ($ke["picture"] != '') {
+						$img = $ke["picture"];
+					} else {
+						$img = "image/user.png";
+					}
+					$data[$ke["kpiEmployeeId"]] = [
+						"employeeName" => $ke["employeeFirstname"] . ' ' . $ke["employeeSurename"],
+						"picture" => $img,
+						"title" => $ke["titleName"],
+						"target" => $kpiEmployeeHistory["target"],
+						"result" => $kpiEmployeeHistory["result"],
+						"updateDateTime" => ModelMaster::monthDateYearTime($kpiEmployeeHistory["updateDateTime"]),
+						"employeeHistory" => KpiEmployeeHistory::allHistory($ke["kpiEmployeeId"], $month, $year)
+					];
+				}
+			endforeach;
+		}
+		return json_encode($data);
+	}
 	public function actionKpiEmployeeHistoryView($kpiId, $employeeId)
 	{
 		$kpiEmployeeHistory = KpiEmployeeHistory::find()
@@ -902,6 +943,55 @@ class KpiPersonalController extends Controller
 				$i++;
 			endforeach;
 		}
-		throw new exception(print_r($data, true));
+	}
+	public function actionAssignedKpiEmployee($kpiId, $kpiHistoryId)
+	{
+
+		if ($kpiHistoryId == 0) {
+			$kpi = Kpi::find()->where(["kpiId" => $kpiId])->asArray()->one();
+		} else {
+			$kpi = KpiHistory::find()->where(["kpiHistoryId" => $kpiHistoryId])
+				->asArray()
+				->one();
+		}
+		$kpiEmployee = KpiEmployee::find()
+			->select('e.picture,e.employeeId,e.gender,t.titleName,e.employeeFirstname,e.employeeSurename,e.teamId,
+			kpi_employee.target,kpi_employee.result,kpi_employee.updateDateTime,team.teamName')
+			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+			->JOIN("LEFT JOIN", "title t", "t.titleId=e.titleId")
+			->JOIN("LEFT JOIN", "team", "team.teamId=e.teamId")
+			->where([
+				"kpi_employee.status" => [1, 2, 4],
+				"kpi_employee.kpiId" => $kpiId,
+				"e.status" => 1,
+				"kpi_employee.month" => $kpi["month"],
+				"kpi_employee.year" => $kpi["year"]
+			])
+			->andWhere("kpi_employee.employeeId is not null")
+			->orderBy("team.teamName,e.employeeFirstname")
+			->asArray()
+			->all();
+		$employeeData = [];
+		if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+			foreach ($kpiEmployee as $ke) :
+				if ($ke["picture"] != "") {
+					$picture = $ke["picture"];
+				} else {
+					$picture =  'images/icons/Settings/personblack.svg';
+				}
+				$target = ModelMaster::pimNumberFormat($ke["target"]);
+				$result = ModelMaster::pimNumberFormat($ke["result"]);
+				$employeeData[$ke["teamId"]][$ke["employeeId"]] = [
+					"employeeName" => $ke["employeeFirstname"] . ' ' . $ke["employeeSurename"],
+					"teamName" => $ke["teamName"],
+					"title" => $ke["titleName"],
+					"picture" => $picture,
+					"target" => $target,
+					"result" => $result,
+					"updateDateTime" => ModelMaster::monthDateYearTime($ke["updateDateTime"]),
+				];
+			endforeach;
+			return json_encode($employeeData);
+		}
 	}
 }

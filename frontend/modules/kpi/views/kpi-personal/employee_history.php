@@ -12,13 +12,13 @@
 
 			use common\models\ModelMaster;
 
-			$allKgiEmployeeId = '';
-			if (isset($kgiTeamEmployeeHistory) && count($kgiTeamEmployeeHistory) > 0) {
+			$allKpiEmployeeId = '';
+			if (isset($kpiTeamEmployeeHistory) && count($kpiTeamEmployeeHistory) > 0) {
 				$i = 0;
-				foreach ($kgiTeamEmployeeHistory as $kgiEmployeeId => $kgh):
+				foreach ($kpiTeamEmployeeHistory as $kpiEmployeeId => $kgh):
 			?>
-					<div class="col-12 mb-15" id="main-<?= $kgiEmployeeId ?>">
-						<div class="col-12 small-content-pim bg-white" style="cursor: pointer;" onclick="ShowEmployeeUpdating(<?= $kgiEmployeeId ?>)">
+					<div class="col-12 mb-15" id="main-<?= $kpiEmployeeId ?>">
+						<div class="col-12 small-content-pim bg-white" style="cursor: pointer;" onclick="ShowKpiEmployeeUpdating(<?= $kpiEmployeeId ?>)">
 							<div class="row">
 								<div class="col-1 pr-0 pl-0 text-center pt-5">
 									<img src="<?= Yii::$app->homeUrl ?><?= $kgh['picture'] ?>" class="pim-image-AssignMembers">
@@ -41,7 +41,7 @@
 									</div>
 								</div>
 								<div class="col-1 text-center pr-0 pl-0 pt-10" style="font-weight: 400;">
-									<a href="javascript:void(0);" onclick="event.stopPropagation();ShowEmployeeUpdating(<?= $kgiEmployeeId ?>)" class="doubleplay-btn">
+									<a href="javascript:void(0);" onclick="event.stopPropagation();ShowKpiEmployeeUpdating(<?= $kpiEmployeeId ?>)" class="doubleplay-btn">
 										<img src="<?= Yii::$app->homeUrl ?>images/icons/pim/doubleplay-black.svg">
 									</a>
 
@@ -50,10 +50,10 @@
 
 						</div>
 					</div>
-					<div class="col-12 small-content-pim ligth-gray-box" style="display:none;" id="history-<?= $kgiEmployeeId ?>">
+					<div class="col-12 small-content-pim ligth-gray-box" style="display:none;" id="history-<?= $kpiEmployeeId ?>">
 						<div class="row mb-20">
 							<div class="col-7 border-bottom pb-10 pt-10 pl-0 ">
-								<a onclick="javascript:backUpdatingKgiEmployee(<?= $kgiEmployeeId ?>)" class="view-back-btn" style="text-decoration: none;cursor:pointer;">
+								<a onclick="javascript:backUpdatingKpiEmployee(<?= $kpiEmployeeId ?>)" class="view-back-btn" style="text-decoration: none;cursor:pointer;">
 									<img src="<?= Yii::$app->homeUrl ?>images/icons/pim/double-back.svg">
 									<?= Yii::t('app', 'Back') ?>
 								</a>
@@ -69,7 +69,7 @@
 							</div>
 						</div>
 						<?php if (count($kgh['employeeHistory']) > 0) {
-							foreach ($kgh['employeeHistory'] as $kgiEmployeeHistoryId => $history):
+							foreach ($kgh['employeeHistory'] as $kpiEmployeeHistoryId => $history):
 						?>
 								<div class="row">
 									<div class="col-12 small-content-pim bg-white" style="cursor: pointer;">
@@ -102,7 +102,7 @@
 						?>
 					</div>
 				<?php
-					$allKgiEmployeeId .= $kgiEmployeeId . ',';
+					$allKpiEmployeeId .= $kpiEmployeeId . ',';
 					$i++;
 				endforeach;
 			} else {
@@ -115,6 +115,6 @@
 		</div><?php
 			}
 			?>
-	<input type="hidden" id="allKgiEmployeeId" value="<?= $allKgiEmployeeId ?>">
+	<input type="hidden" id="allKpiEmployeeId" value="<?= $allKpiEmployeeId ?>">
 	</div>
 </div>

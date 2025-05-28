@@ -240,8 +240,14 @@ function viewTabTeamKgi(kgiTeamHistoryId, tabId, kgiId, kgiTeamId) {
             url: url,
             data: { kgiId: kgiId, kgiTeamHistoryId: kgiTeamHistoryId,kgiTeamId:kgiTeamId },
             success: function (data) {
-                kgiId
                 $("#show-content").html(data.kgiEmployeeTeam);
+                if (viewType == 'list') {
+                    $('#man-check').css("display", 'none');
+                    $('#all').show();
+                    $('#employee-all').show();
+                    $('#kgi-employee').css("display", 'none');
+                    $("#viewType").val('list');
+                }
             }
         });
     }

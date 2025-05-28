@@ -196,3 +196,148 @@ function assignKpiToEmployeeInTeam(teamId, kpiId) {
 		$("#employee-in-team-" + teamId).remove();
 	}
 }
+function showKpiTeamEmployee1(teamId) {
+	var teamStr = $("#allTeam1").val();
+	var teamArr = teamStr.split(",");
+	var currentTeam1 = $("#currentTeam1").val();
+	if (teamId != currentTeam1) {
+		$.each(teamArr, function (index, value) {
+			if (value != '' && value != teamId) {
+				$("#team1-" + value).css("display", "none");
+				$("#employee1-" + value).css("display", "none");
+				$("#selectTeam1-" + value).removeClass("selectedTeam");
+				$("#selectTeam1-" + value).addClass("bg-white");
+			}
+		
+		});
+		$("#team1-" + teamId).show();
+		$("#employee1-" + teamId).show();
+		$("#selectTeam1-" + teamId).removeClass("bg-white");
+		$("#selectTeam1-" + teamId).addClass("selectedTeam");
+		$("#currentTeam1").val(teamId);
+	} else { 
+		$.each(teamArr, function (index, value) {
+			$("#team1-" + value).css("display", "none");
+			$("#employee1-" + value).css("display", "none");
+			$("#selectTeam1-" + value).removeClass("selectedTeam");
+			$("#selectTeam1-" + value).addClass("bg-white");
+			$("#team1-" + value).show();
+			$("#employee1-" + value).show();
+		});
+		$("#currentTeam1").val('all');
+	}
+}
+function showKpiTeamEmployee2(teamId) {
+	var teamStr = $("#allTeam2").val();
+	var teamArr = teamStr.split(",");
+	var currentTeam2 = $("#currentTeam2").val();
+	if (teamId != currentTeam2) {
+		$.each(teamArr, function (index, value) {
+			if (value != '' && value != teamId) {
+				$("#team2-" + value).css("display", "none");
+				$("#employee2-" + value).css("display", "none");
+				// $("#selectTeam1-" + value).css("border", "0px");
+				$("#selectTeam2-" + value).removeClass("selectedTeam");
+				$("#selectTeam2-" + value).addClass("bg-white");
+			}
+		});
+		$("#team2-" + teamId).show();
+		$("#employee2-" + teamId).show();
+		$("#selectTeam2-" + teamId).removeClass("bg-white");
+		$("#selectTeam2-" + teamId).addClass("selectedTeam");
+		$("#currentTeam2").val(teamId);
+	} else {
+		$.each(teamArr, function (index, value) {
+			$("#team2-" + value).css("display", "none");
+			$("#employee2-" + value).css("display", "none");
+			$("#selectTeam2-" + value).removeClass("selectedTeam");
+			$("#selectTeam2-" + value).addClass("bg-white");
+			$("#team2-" + value).show();
+			$("#employee2-" + value).show();
+		});
+		$("#currentTeam2").val('all');
+	}
+	
+}
+function showKpiTeamEmployeeUpdate(teamId, kpiId, month, year,kgiTeamHistoryId) {
+	var currentSelect = $("#currentSelect").val();
+	if (kgiTeamHistoryId != currentSelect) {
+		$("#historyMonthYear-" + currentSelect).removeClass("selectedTeam");
+		$("#historyMonthYear-" + currentSelect).addClass("bg-white");
+
+		$("#historyMonthYear-" + kgiTeamHistoryId).removeClass("bg-white");
+		$("#historyMonthYear-" + kgiTeamHistoryId).addClass("selectedTeam");
+
+		$('#img-' + currentSelect).attr('src', $url + 'images/icons/pim/doubleplay-black.svg');
+		$("#btn-" + currentSelect).removeClass("doubleplay-btn-blue");
+		$("#btn-" + currentSelect).addClass("doubleplay-btn");
+
+		$('#img-' + kgiTeamHistoryId).attr('src', $url + 'images/icons/pim/doubleplay-white.svg');
+		$("#btn-" + kgiTeamHistoryId).removeClass("doubleplay-btn");
+		$("#btn-" + kgiTeamHistoryId).addClass("doubleplay-btn-blue");
+
+		var url = $url + 'kpi/kpi-personal/kpi-each-team-employee';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kpiId: kpiId, teamId: teamId, year: year, month: month },
+			success: function (data) {
+				if (data.status) {
+					$("#kpi-employee").html(data.employeeHistory);
+				}
+			}
+		});
+		$("#currentSelect").val(kgiTeamHistoryId);
+	}
+}
+function showFirstKpiTeamEmployeeUpdate(teamId, kpiId, month, year, kgiTeamHistoryId) {
+	var currentSelect = kgiTeamHistoryId
+	$("#historyMonthYear-" + currentSelect).removeClass("selectedTeam");
+	$("#historyMonthYear-" + currentSelect).addClass("bg-white");
+
+	$("#historyMonthYear-" + kgiTeamHistoryId).removeClass("bg-white");
+	$("#historyMonthYear-" + kgiTeamHistoryId).addClass("selectedTeam");
+
+	$('#img-' + currentSelect).attr('src', $url + 'images/icons/pim/doubleplay-black.svg');
+	$("#btn-" + currentSelect).removeClass("doubleplay-btn-blue");
+	$("#btn-" + currentSelect).addClass("doubleplay-btn");
+
+	$('#img-' + kgiTeamHistoryId).attr('src', $url + 'images/icons/pim/doubleplay-white.svg');
+	$("#btn-" + kgiTeamHistoryId).removeClass("doubleplay-btn");
+	$("#btn-" + kgiTeamHistoryId).addClass("doubleplay-btn-blue");
+
+	var url = $url + 'kpi/kpi-personal/kpi-each-team-employee';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kpiId: kpiId, teamId: teamId, year: year, month: month },
+		success: function (data) {
+			if (data.status) {
+				$("#kpi-employee").html(data.employeeHistory);
+			}
+		}
+	});
+	$("#currentSelect").val(kpiTeamHistoryId);
+	
+}
+function ShowKpiEmployeeUpdating(kpiEmployeeId) { 
+	var idStr = $("#allKpiEmployeeId").val();
+	var idArr = idStr.split(",");
+
+	$.each(idArr, function (index, value) {
+		$("#history-" + value).hide();
+		$("#main-"+value).hide();
+	});
+	$("#history-"+kpiEmployeeId).show();
+}
+function backUpdatingKpiEmployee(kpiEmployeeId) { 
+	var idStr = $("#allKpiEmployeeId").val();
+	var idArr = idStr.split(",");
+	$.each(idArr, function (index, value) {
+		$("#main-"+value).show();
+	});
+	$("#history-" + kpiEmployeeId).hide();
+	
+}

@@ -12,10 +12,12 @@ use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\KgiHistory;
 use frontend\models\hrvc\KgiTeam;
+use frontend\models\hrvc\KgiTeamHistory;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
 use Yii;
+use yii\db\Expression;
 use yii\web\Controller;
 
 /**
@@ -791,5 +793,32 @@ class ViewController extends Controller
 		$res["kgiTeam"] = $kgiTeam;
 		$res["history"] = $teamText;
 		return json_encode($res);
+	}
+	public function actionUpdateKgiTeamHistory()
+	{
+		$history = KgiTeamHistory::find()
+			->where(['not in', 'status', [1, 2, 4, 5, 8, 99]])
+			->all();
+		foreach ($history as $kt):
+			$kt->delete();
+		endforeach;
+
+		$kgiTeam = KgiTeam::find()->where(["status" => [1, 2, 4]])->asArray()->all();
+		foreach ($kgiTeam as $kt):
+			$history = KgiTeamHistory::find()->where(["kgiTeamId" => $kt["kgiTeamId"]])->asArray()->one();
+			if (!isset($history) || empty($history)) {
+				$kgiTeamHistory = new KgiTeamHistory();
+				$kgiTeamHistory->kgiTeamId = $kt["kgiTeamId"];
+				$kgiTeamHistory->target = $kt["target"];
+				$kgiTeamHistory->result = $kt["result"];
+				$kgiTeamHistory->month = $kt["month"];
+				$kgiTeamHistory->year = $kt["year"];
+				$kgiTeamHistory->status = $kt["status"];
+				$kgiTeamHistory->createrId = $kt["createrId"];
+				$kgiTeamHistory->createDateTime = new Expression('NOW()');
+				$kgiTeamHistory->updateDateTime = new Expression('NOW()');
+				$kgiTeamHistory->save(false);
+			}
+		endforeach;
 	}
 }

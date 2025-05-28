@@ -447,17 +447,6 @@ class KgiTeamController extends Controller
 			->orderBy('kgi_team_history.year DESC,kgi_team_history.month DESC,kgi_team_history.createDateTime DESC')
 			->asArray()
 			->all();
-		if (!isset($kgiTeamHistory) || count($kgiTeamHistory) == 0) {
-			$kgiTeamHistory = KgiTeam::find()
-				->select('kgi_team.*,e.employeeFirstname,e.employeeSurename')
-				->JOIN("LEFT JOIN", "user u", "u.userId=kgi_team.createrId")
-				->JOIN("LEFT JOIN", "employee e", "e.employeeId=u.employeeId")
-				->where([
-					"kgi_team.kgiTeamId" => $kgiTeamId,
-				])
-				->asArray()
-				->all();
-		}
 		return json_encode($kgiTeamHistory);
 	}
 	public function actionKgiTeamFilter($companyId, $branchId, $teamId, $month, $status, $year)

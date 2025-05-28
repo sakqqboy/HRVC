@@ -788,16 +788,6 @@ class KgiTeamController extends Controller
 		$kgiTeamId = $param["kgiTeamId"];
 		$openTab = isset($param["openTab"]) ? $param["openTab"] : 1;
 		$kgiTeamHistoryId = $param["kgiTeamHistoryId"];
-		// throw new exception(print_r($kgiTeamHistoryId, true));
-		// $kgiTeamHistory = KgiTeamHistory::find()
-		// 	->select('kgiTeamHistoryId')
-		// 	->where(["kgiTeamId" => $kgiTeamId])
-		// 	->orderBy("kgiTeamHistoryId DESC")
-		// 	->asArray()
-		// 	->one();
-		// if (isset($kgiTeamHistory) && !empty($kgiTeamHistory)) {
-		// 	$kgiTeamHistoryId = $kgiTeamHistory["kgiTeamHistoryId"];
-		// }
 		$kgiId = $param["kgiId"];
 		$role = UserRole::userRight();
 		$groupId = Group::currentGroupId();
@@ -852,21 +842,17 @@ class KgiTeamController extends Controller
 		$kgiTeams = curl_exec($api);
 		$kgiTeams = json_decode($kgiTeams, true);
 
-		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=0");
-		// $kgiDetail = curl_exec($api);
-		// $kgiDetail = json_decode($kgiDetail, true);
-
-		//throw new exception('kgi/kgi-team/kgi-each-team-employee?kgiTeamId=' . $kgiTeamId);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-each-team-employee?kgiTeamId=' . $kgiTeamId);
+		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-each-team-employee?kgiTeamId=' . $kgiTeamId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/assigned-kgi-employee?kgiId=' . $kgiId . "&&kgiHistoryId=0");
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
-		//throw new exception('kgi/kgi-team/kgi-each-team-employee?kgiTeamId=' . $kgiTeamId);
 
 
 		curl_close($api);
-		$res["kgiEmployeeTeam"] = $this->renderAjax("kgi_employee_team", [
+		$res["kgiEmployeeTeam"] = $this->renderAjax("kgi_employee_team_all", [
 			"kgiTeams" => $kgiTeams,
-			"kgiDetail" => $kgiDetail
+			"kgiDetail" => $kgiDetail,
+			"kgiId" => $kgiId
 
 		]);
 		return json_encode($res);

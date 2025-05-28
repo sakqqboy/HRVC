@@ -709,15 +709,6 @@ class KgiPersonalController extends Controller
 		$openTab = isset($param["openTab"]) ? $param["openTab"] : 1;
 		$kgiEmployeeHistoryId = $param["kgiEmployeeHistoryId"];
 		$kgiId = $param["kgiId"];
-		// $kgiEmployeeHistory = KgiEmployeeHistory::find()
-		// 	->select('kgiEmployeeHistoryId')
-		// 	->where(["kgiEmployeeId" => $kgiEmployeeId])
-		// 	->orderBy("kgiEmployeeHistoryId DESC")
-		// 	->asArray()
-		// 	->one();
-		// if (isset($kgiEmployeeHistory) && !empty($kgiEmployeeHistory)) {
-		// 	$kgiEmployeeHistoryId = $kgiEmployeeHistory["kgiEmployeeHistoryId"];
-		// }
 		$role = UserRole::userRight();
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
@@ -775,17 +766,14 @@ class KgiPersonalController extends Controller
 		$kgiTeams = json_decode($kgiTeams, true);
 
 
-
-		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=0");
-		// $kgiDetail = curl_exec($api);
-		// $kgiDetail = json_decode($kgiDetail, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-each-team-employee?kgiTeamId=' . $kgiTeam["kgiTeamId"]);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/assigned-kgi-employee?kgiId=' . $kgiId . "&&kgiHistoryId=0");
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 		curl_close($api);
-		$res["kgiEmployeeTeam"] = $this->renderAjax("kgi_employee_team", [
+		$res["kgiEmployeeTeam"] = $this->renderAjax("kgi_employee_team_all", [
 			"kgiTeams" => $kgiTeams,
-			"kgiDetail" => $kgiDetail
+			"kgiDetail" => $kgiDetail,
+			"kgiId" => $kgiId
 
 		]);
 		return json_encode($res);
@@ -797,9 +785,6 @@ class KgiPersonalController extends Controller
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
-		// $kgi = curl_exec($api);
-		// $kgi = json_decode($kgi, true);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-employee-history2?kgiEmployeeId=' . $kgiEmployeeId . '&&kgiEmployeeHistoryId=' . $kgiEmployeeHistoryId);
 		$history = curl_exec($api);
@@ -932,6 +917,7 @@ class KgiPersonalController extends Controller
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-each-team-employee-history?kgiId=' . $kgiId . '&&teamId=' . $teamId . '&&month=' . $month . '&&year=' . $year);
 		$kgiTeamEmployeeHistory = curl_exec($api);
 		$kgiTeamEmployeeHistory = json_decode($kgiTeamEmployeeHistory, true);
