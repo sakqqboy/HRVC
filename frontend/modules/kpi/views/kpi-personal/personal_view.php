@@ -47,7 +47,7 @@ $this->title = "Individual KPI Detail";
 					<i class="fa fa-bullseye" aria-hidden="true"></i> <?= Yii::t('app', 'Target') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10" id="targetHistory">
-					<?= $kpiEmployeeDetail["amountType"] == 1 ? number_format($kpiEmployeeDetail["target"], 2) : number_format($kpiEmployeeDetail["target"]) ?>
+					<?= $kpiEmployeeDetail["amountType"] == 1 ?  $kpiEmployeeDetail["target"] . '%' : $kpiEmployeeDetail["target"] ?>
 				</div>
 			</div>
 			<div class="col-lg-1 col-md-6 col-3 text-center">
@@ -60,7 +60,7 @@ $this->title = "Individual KPI Detail";
 					<i class="fa fa-trophy" aria-hidden="true"></i> <?= Yii::t('app', 'Result') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10 " id="resultHistory">
-					<?= $kpiEmployeeDetail["amountType"] == 1 ? number_format($kpiEmployeeDetail["result"], 2) : number_format($kpiEmployeeDetail["result"]) ?>
+					<?= $kpiEmployeeDetail["amountType"] == 1 ? $kpiEmployeeDetail["result"] . '%' : $kpiEmployeeDetail["result"] ?>
 				</div>
 			</div>
 			<div class="row" style="margin-top: -40px;">

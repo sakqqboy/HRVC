@@ -50,7 +50,7 @@ class KpiEmployeeHistory extends \backend\models\hrvc\master\KpiEmployeeHistoryM
             foreach ($kpiEmployeeHistory as $keh):
                 $data[$keh["kpiEmployeeHistoryId"]] = [
                     "detail" => $keh["detail"],
-                    "result" => $keh["result"],
+                    "result" => ModelMaster::pimNumberFormat($keh["result"]),
                     "dueBehide" => ModelMaster::pimNumberFormat($keh["target"] - $keh["result"]),
                     "fromDate" => $keh["fromDate"],
                     "toDate" => $keh["toDate"],

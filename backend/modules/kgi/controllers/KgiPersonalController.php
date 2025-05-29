@@ -425,7 +425,8 @@ class KgiPersonalController extends Controller
 						if ($kgiEmployeeHistory["status"] == 1 && $kgiEmployeeHistory["year"] > $year && $year != '') {
 							$isOver = 0;
 						} else {
-							$isOver = ModelMaster::isOverDuedate(KgiEmployee::nextCheckDate($kgiEmployeeHistory['kgiEmployeeId']));
+							$isOver = ModelMaster::isOverDuedate($kgiEmployeeHistory["nextCheckDate"]);
+							//$isOver = ModelMaster::isOverDuedate(KgiEmployee::nextCheckDate($kgiEmployeeHistory['kgiEmployeeId']));
 						}
 					}
 					$picture = Employee::employeeImage($kgiEmployeeHistory["employeeId"]);
@@ -493,6 +494,7 @@ class KgiPersonalController extends Controller
 				}
 			endforeach;
 		}
+		//throw new exception(print_r($data1, true));
 		$data = $data1 + $data2 + $data3 + $data4;
 		return json_encode($data);
 	}
@@ -734,15 +736,20 @@ class KgiPersonalController extends Controller
 					} else {
 						$img = "image/user.png";
 					}
+					$target = $kgiEmployeeHistory["target"];
+					$result = $kgiEmployeeHistory["result"];
 					$data[$ke["kgiEmployeeId"]] = [
 						"employeeName" => $ke["employeeFirstname"] . ' ' . $ke["employeeSurename"],
 						"picture" => $img,
 						"title" => $ke["titleName"],
-						"target" => $kgiEmployeeHistory["target"],
-						"result" => $kgiEmployeeHistory["result"],
+						"target" => ModelMaster::pimNumberFormat($target),
+						"result" => ModelMaster::pimNumberFormat($result),
 						"updateDateTime" => ModelMaster::monthDateYearTime($kgiEmployeeHistory["updateDateTime"]),
 						"employeeHistory" => KgiEmployeeHistory::allHistory($ke["kgiEmployeeId"], $month, $year)
 					];
+					if ($target == '252450.90') {
+						throw new Exception(print_r($data[$ke["kgiEmployeeId"]], true));
+					}
 				}
 			endforeach;
 		}

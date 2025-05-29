@@ -10,7 +10,10 @@ use frontend\models\hrvc\KpiEmployee;
 use Exception;
 use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\KgiEmployee;
+use frontend\models\hrvc\KgiEmployeeHistory;
 use frontend\models\hrvc\Kpi;
+use frontend\models\hrvc\KpiEmployeeHistory;
 use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\KpiTeamHistory;
 use frontend\models\hrvc\Team;
@@ -845,6 +848,45 @@ class ViewController extends Controller
 				$kpiTeamHistory->createDateTime = new Expression('NOW()');
 				$kpiTeamHistory->updateDateTime = new Expression('NOW()');
 				$kpiTeamHistory->save(false);
+			}
+		endforeach;
+	}
+	public function actionUpdateKpiEmployeeHistory()
+	{
+
+		$kpiEmployee = KpiEmployee::find()->where(["status" => [1, 2, 4]])->asArray()->all();
+		foreach ($kpiEmployee as $kt):
+			$history = KpiEmployeeHistory::find()->where(["kpiEmployeeId" => $kt["kpiEmployeeId"]])->asArray()->one();
+			if (!isset($history) || empty($history)) {
+				$kpiEmployeeHistory = new KpiEmployeeHistory();
+				$kpiEmployeeHistory->kpiEmployeeId = $kt["kpiEmployeeId"];
+				$kpiEmployeeHistory->target = $kt["target"];
+				$kpiEmployeeHistory->result = $kt["result"];
+				$kpiEmployeeHistory->month = $kt["month"];
+				$kpiEmployeeHistory->year = $kt["year"];
+				$kpiEmployeeHistory->status = $kt["status"];
+				$kpiEmployeeHistory->createrId = $kt["createrId"];
+				$kpiEmployeeHistory->createDateTime = new Expression('NOW()');
+				$kpiEmployeeHistory->updateDateTime = new Expression('NOW()');
+				$kpiEmployeeHistory->save(false);
+			}
+		endforeach;
+
+		$kgiEmployee = KgiEmployee::find()->where(["status" => [1, 2, 4]])->asArray()->all();
+		foreach ($kgiEmployee as $kt):
+			$history = KgiEmployeeHistory::find()->where(["kgiEmployeeId" => $kt["kgiEmployeeId"]])->asArray()->one();
+			if (!isset($history) || empty($history)) {
+				$kgiEmployeeHistory = new KgiEmployeeHistory();
+				$kgiEmployeeHistory->kgiEmployeeId = $kt["kgiEmployeeId"];
+				$kgiEmployeeHistory->target = $kt["target"];
+				$kgiEmployeeHistory->result = $kt["result"];
+				$kgiEmployeeHistory->month = $kt["month"];
+				$kgiEmployeeHistory->year = $kt["year"];
+				$kgiEmployeeHistory->status = $kt["status"];
+				$kgiEmployeeHistory->createrId = $kt["createrId"];
+				$kgiEmployeeHistory->createDateTime = new Expression('NOW()');
+				$kgiEmployeeHistory->updateDateTime = new Expression('NOW()');
+				$kgiEmployeeHistory->save(false);
 			}
 		endforeach;
 	}

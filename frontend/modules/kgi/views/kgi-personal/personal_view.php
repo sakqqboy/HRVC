@@ -47,7 +47,7 @@ $this->title = "Individual KGI Detail";
 					<i class="fa fa-bullseye" aria-hidden="true"></i> <?= Yii::t('app', 'Target') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10" id="targetHistory">
-					<?= $kgiEmployeeDetail["amountType"] == 1 ? number_format($kgiEmployeeDetail["target"], 2) : number_format($kgiEmployeeDetail["target"]) ?>
+					<?= $kgiEmployeeDetail["amountType"] == 1 ? $kgiEmployeeDetail["target"] . '%' : $kgiEmployeeDetail["target"] ?>
 				</div>
 			</div>
 			<div class="col-lg-1 col-md-6 col-3 text-center">
@@ -60,7 +60,7 @@ $this->title = "Individual KGI Detail";
 					<i class="fa fa-trophy" aria-hidden="true"></i> <?= Yii::t('app', 'Result') ?>
 				</div>
 				<div class="col-12 million-number-Backdrop3 mt-10 " id="resultHistory">
-					<?= $kgiEmployeeDetail["amountType"] == 1 ? number_format($kgiEmployeeDetail["result"], 2) : number_format($kgiEmployeeDetail["result"]) ?>
+					<?= $kgiEmployeeDetail["amountType"] == 1 ? $kgiEmployeeDetail["result"] . '%' : $kgiEmployeeDetail["result"] ?>
 				</div>
 			</div>
 			<div class="row" style="margin-top: -40px;">

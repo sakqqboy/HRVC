@@ -690,7 +690,7 @@ class ModelMaster extends \yii\db\ActiveRecord
                 if ($decimal[1] == '00') {
                     $num = number_format($decimal[0]);
                 } else {
-                    $num = number_format($decimal[0], 2);
+                    $num = number_format($number, 2);
                 }
             } else {
                 $num = number_format($number);

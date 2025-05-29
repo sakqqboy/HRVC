@@ -538,8 +538,8 @@ class KpiPersonalController extends Controller
 						"employeeName" => $ke["employeeFirstname"] . ' ' . $ke["employeeSurename"],
 						"picture" => $img,
 						"title" => $ke["titleName"],
-						"target" => $kpiEmployeeHistory["target"],
-						"result" => $kpiEmployeeHistory["result"],
+						"target" => ModelMaster::pimNumberFormat($kpiEmployeeHistory["target"]),
+						"result" => ModelMaster::pimNumberFormat($kpiEmployeeHistory["result"]),
 						"updateDateTime" => ModelMaster::monthDateYearTime($kpiEmployeeHistory["updateDateTime"]),
 						"employeeHistory" => KpiEmployeeHistory::allHistory($ke["kpiEmployeeId"], $month, $year)
 					];
@@ -671,7 +671,8 @@ class KpiPersonalController extends Controller
 						if ($kpiEmployeeHistory["status"] == 1 && $kpiEmployeeHistory["year"] > $year && $year != '') {
 							$isOver = 0;
 						} else {
-							$isOver = ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployeeHistory['kpiEmployeeId']));
+							//$isOver = ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployeeHistory['kpiEmployeeId']));
+							$isOver = ModelMaster::isOverDuedate($kpiEmployeeHistory["nextCheckDate"]);
 						}
 					}
 					if ($status == 1 && $isOver == 0 && $kpiEmployee["status"] == 1) {
