@@ -174,7 +174,7 @@ class EmployeeController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/default-language');
         $language = curl_exec($api);
         $language = json_decode($language, true);
-        curl_close($api);
+        // curl_close($api);
         // throw new Exception(print_r($language, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/module-role');
@@ -227,7 +227,7 @@ class EmployeeController extends Controller
             $employee->employeeConditionId = $_POST["condition"];
             $employee->spoken = $_POST["language"];
             //$employee->socialLink = $_POST["socialLink"];
-            $pictureProfile = UploadedFile::getInstanceByName("picture");
+            $pictureProfile = UploadedFile::getInstanceByName("image");
             if (isset($pictureProfile) && !empty($pictureProfile)) {
                 $path = Path::getHost() . 'images/employee/profile/';
                 if (!file_exists($path)) {

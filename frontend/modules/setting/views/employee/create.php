@@ -126,8 +126,8 @@ $this->title = 'Create Employee';
                                 <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
                                     Employee ID
                                 </text>
-                                <input type="text" class="form-control font-size-14" id="employeeId"" name=" employeeId"
-                                    placeholder="Please assign the employee ID  " value="" style="width:  330.59px;">
+                                <input type="text" class="form-control font-size-14" id="employeeId" name=" employeeId"
+                                    placeholder="Please assign the employee ID " value="" style="width:  330.59px;">
                             </div>
                         </div>
                         <div class="flex-center" style="gap: 37px;">
@@ -772,7 +772,7 @@ $this->title = 'Create Employee';
                         <hr class="hr-group">
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-12 " style="border-right:lightgray solid thin;">
+                        <div class="col-lg-6 col-md-6 col-12 ">
                             <span class="font-size-14 font-weight: 500;">Relevant Files</span>
 
                             <div class="col-lg-11 mt-5 mb-24">
@@ -1081,7 +1081,7 @@ $this->title = 'Create Employee';
                         <span class="font-size-20 font-weight-600">${data.titleName}</span>
                     </div>
                     <div class="center-center" style="gap: 63px; margin: 36px 29px;">
-                        <div class="row">
+                        <div class="row" style="border-right:lightgray solid thin;">
                             <div class="row mb-36">
                                 <span class="font-size-16 font-weight-500 mb-22">Purpose of the Job</span>
                                 <span class="font-size-14 font-weight-400">${data.purpose}</span>
