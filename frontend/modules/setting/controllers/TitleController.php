@@ -864,6 +864,45 @@ class TitleController extends Controller
             "preUrl" => Yii::$app->request->referrer
         ]);
     }
+    public function actionGetTitleDetail()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $request = Yii::$app->request;
+        $body = json_decode($request->getRawBody(), true);
+        $titleId = $body['titleId'] ?? null;
+
+        if (!$titleId) {
+            return ['error' => 'Missing titleId'];
+        }
+
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-detail?id=' . $titleId);
+        $titleResponse = curl_exec($api);
+        curl_close($api);
+
+        $title = json_decode($titleResponse, true);
+            return [
+                'titleName' => $title['titleName'] ?? '',
+                'purpose' => $title['purpose'] ?? '',
+                'jobDescription' => $title['jobDescription'] ?? '',
+                'keyResponsibility' => $title['keyResponsibility'] ?? '',
+            ];
+        // if (isset($title['data'])) {
+        //     return [
+        //         'titleName' => $title['data']['titleName'] ?? '',
+        //         'purpose' => $title['data']['purpose'] ?? '',
+        //         'jobDescription' => $title['data']['jobDescription'] ?? '',
+        //         'keyResponsibility' => $title['data']['keyResponsibility'] ?? '',
+        //     ];
+        // } else {
+        //     return ['error' => 'Title not found or API error'];
+        // }
+    }
+
+
     public function actionModalTitle($hash)
     {
         $param = ModelMaster::decodeParams($hash);

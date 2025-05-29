@@ -251,6 +251,7 @@ $this->title = 'Create Employee';
 
                 </div>
             </div>
+
             <input type="hidden" id="systemAdmin" name="conten2" value="Contact & Personal Details">
             <!-- Contact & Personal Details -->
             <div>
@@ -423,6 +424,7 @@ $this->title = 'Create Employee';
 
                 </div>
             </div>
+
             <input type="hidden" id="systemAdmin" name="conten3" value="Work Details">
             <!-- Work Details -->
             <div>
@@ -654,11 +656,6 @@ $this->title = 'Create Employee';
                                     Select the term <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                                 </div>
                                 <!-- hidden inputs เพื่อเก็บค่า month และ year -->
-                                <!-- <input type="hidden" id="probationStart" name="probationStart"
-                                    value="<?= isset($data['probationStart']) ? $data['probationStart'] : '' ?>"
-                                    required>
-                                <input type="hidden" id="probationEnd" name="probationEnd"
-                                    value="<?= isset($data['probationEnd']) ? $data['probationEnd'] : '' ?>" required> -->
                                 <input type="hidden" id="fromDate" name="fromDate"
                                     value="<?= isset($data['probationStart']) ? $data['probationStart'] : '' ?>"
                                     required>
@@ -687,6 +684,8 @@ $this->title = 'Create Employee';
                     </div>
                 </div>
             </div>
+
+            <input type="hidden" id="systemAdmin" name="conten4" value="Job Description">
             <!-- Job Description -->
             <div>
                 <div>
@@ -745,8 +744,8 @@ $this->title = 'Create Employee';
 
 
                     <div id="descriptionTitle" class="alert bg-white mt-22">
-
-                        <!-- <div class="create-crad-company" id="no-existing" style="background-color: #F9F9F9;">
+                        <!-- ตอนยังไม่เลือก -->
+                        <div class="create-crad-company" id="no-existing" style="background-color: #F9F9F9;">
                             <span class="font-size-15 font-weight-700 ">
                                 Job Description has not been selected yet!
                             </span>
@@ -754,73 +753,12 @@ $this->title = 'Create Employee';
                                 from the list, and it will
                                 appear here.
                             </span>
-                        </div> -->
-
-                        <div>
-                            <!-- head details -->
-                            <span class="font-size-20 font-weight-600">
-                                Senior Executive, Marketing & Branding
-                            </span>
-                        </div>
-                        <div class="center-center" style="gap: 63px;">
-                            <!-- body details -->
-                            <div class="row">
-                                <div>
-                                    <span>Purpose of the Job</span>
-                                    <span>
-                                        The purpose of this role is to support the General Manager in driving the sales
-                                        and marketing activities within the dynamic market of Bangladesh. The key focus
-                                        areas encompass fostering and nurturing robust relationships with factories,
-                                        industrial parks, general contractors, and engineering companies. The role
-                                        necessitates diligent collection of vital information from a diverse range of
-                                        stakeholders, including customers and relevant governmental authorities
-                                    </span>
-                                </div>
-                                <div>
-                                    <span>Core Responsibility</span>
-                                    <span>
-                                        1. Support the general manager in sales & and marketing activities in
-                                        Bangladesh, especially in creating a good relationship with factories,
-                                        industrial parks, general contractors, and engineering companies.
-                                        2. Collect the necessary information from customers (factories, industrial
-                                        parks, general contractors), and national government/local government/related
-                                        authorities.
-                                        3. Prepare the necessary application and get approval from the concerned
-                                        authorities.
-                                        4. Control documentary and filing system for the sales department
-                                        5. Prepare estimations, contracts, and reports.
-
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <span>Key Responsibility</span>
-                                <span>
-                                    Maintain existing customers and expand new customers (concentrate in
-                                    National/Local Public projects)
-                                    Prepare visit plans and visit report.
-                                    Approach & present information to customers about the company’s products and
-                                    services.
-                                    Prepare and submit quotation to customer.
-                                    Maintain and create relationships with customers.
-                                    Survey market and report to General Manager.
-                                    Maintain gross profit as assigned.
-                                    Negotiate with customers on price and service to achieve gross profit.
-                                    Take good care of customers.
-                                    Response to customer complaints and comments.
-                                    Keep on time appointments.
-                                    Coordinate and communicate correct customer’s inquiry to engineering department.
-                                    Initiative and improve own work process and cross functional with other section to
-                                    achieve company objectives.
-                                    Performing the jobs assigned by superior.
-                                </span>
-                            </div>
-                            </divcla>
-
                         </div>
 
                     </div>
                 </div>
+
+                <input type="hidden" id="systemAdmin" name="conten5" value=" Attachments & Remarks">
                 <!--  Attachments & Remarks -->
                 <div>
                     <div>
@@ -830,12 +768,100 @@ $this->title = 'Create Employee';
                         </span>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
                             data-placement="top" aria-label=" Attachments & Remarks"
-                            data-bs-original-title=" DeAttachments & Remarkstails">
+                            data-bs-original-title=" DeAttachments & Remarks">
                         <hr class="hr-group">
                     </div>
-                    <div>
-                        <!-- body -->
-                        fff
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12 " style="border-right:lightgray solid thin;">
+                            <span class="font-size-14 font-weight: 500;">Relevant Files</span>
+
+                            <div class="col-lg-11 mt-5 mb-24">
+                                <!-- <div class="dashed"> -->
+                                <div class="form-control">
+                                    <div class="row">
+                                        <div class="col-lg-2 center-center">
+                                            <!-- <div class="choosefile text-dark">File</div> -->
+                                            <img src="<?= Yii::$app->homeUrl ?>image/file-big.svg" alt="icon"
+                                                style="width: 40px; height: 40px;">
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12 "
+                                            style="border-right:lightgray solid thin;">
+                                            <label class="text-gray font-size-16 font-weight-500" for="name">
+                                                Upload Resume/CV here
+                                            </label>
+                                            <div class="text-secondary text-gray font-size-14">
+                                                <!-- Supported Files -->
+                                                <span class="text-gray font-size-12">Supported - pdf, .doc, .docx</span>
+                                            </div>
+                                            <!-- <div class="text-secondary font-size-14">Maximum File Size 5 MB</div> -->
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-12 text-center pt-13">
+                                            <label for="resume" class="text-blue font-size-16 font-weight-600"
+                                                style="cursor: pointer;">
+                                                Upload
+                                                <img src="<?= Yii::$app->homeUrl ?>image/file-up-blue.svg" alt="icon"
+                                                    style="width: 16px; height: 16px;">
+                                            </label>
+                                            <span class="ml-5 text-success" id="resume-check" style="display:none;">
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                            </span>
+                                            <input id="resume" style="display:none;" type="file" name="resume"
+                                                onchange="javascript:checkUploadFile(1)">
+                                            <input type="hidden" value="" id="hasResume">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-11">
+                                <div class="form-control">
+                                    <div class="row">
+                                        <div class="col-lg-2 center-center">
+                                            <!-- <div class="choosefile text-dark">File</div> -->
+                                            <img src="<?= Yii::$app->homeUrl ?>image/file-big.svg" alt="icon"
+                                                style="width: 40px; height: 40px;">
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12"
+                                            style="border-right:lightgray solid thin;">
+                                            <label class="text-gray font-size-16 font-weight-500" for="name">
+                                                Upload Agreement Here
+                                            </label>
+                                            <div class="text-secondary text-gray  font-size-14">
+                                                <!-- Supported Files -->
+                                                <span class="text-gray font-size-12"> Supported - pdf, .doc,
+                                                    .docx</span>
+                                            </div>
+                                            <!-- <div class="text-secondary font-size-14">Maximum File Size 5 MB</div> -->
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-12 text-center pt-13">
+                                            <label type="button" for="agreement"
+                                                class="text-blue font-size-16 font-weight-600">
+                                                Upload
+                                                <img src="<?= Yii::$app->homeUrl ?>image/file-up-blue.svg" alt="icon"
+                                                    style="width: 16px; height: 16px;">
+                                            </label>
+                                            <span class="ml-5 text-success" id="agreement-check" style="display:none;">
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                            </span>
+                                            <input id="agreement" style="display:none;" type="file" name="agreement"
+                                                onchange="javascript:checkUploadFile(2)">
+                                            <input type="hidden" value="" id="hasAgreement">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-12 pl-40">
+                            <div class="col-12 font-size-14 font-weight: 500">
+                                About the Employee
+                            </div>
+                            <div class="col-12 mt-5">
+                                <textarea class="form-control" name="remark" style="height:276px;"></textarea>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Certificates and Skill Tags -->
@@ -992,7 +1018,7 @@ $this->title = 'Create Employee';
 
         if (selectedValue !== '') {
             iconImg.src = homeUrl + 'image/departments.svg';
-            // alert(selectedValue);
+            //alert(selectedValue);
             iconDiv.classList.remove('cycle-current-gray');
             iconDiv.classList.add('cycle-current-red');
 
@@ -1011,7 +1037,7 @@ $this->title = 'Create Employee';
         const iconDiv = document.getElementById('teamIcon');
         if (selectedValue !== '') {
             iconImg.src = homeUrl + 'image/teams.svg';
-            // alert(selectedValue);
+            //alert(selectedValue);
             iconDiv.classList.remove('cycle-current-gray');
             iconDiv.classList.add('cycle-current-green');
 
@@ -1028,21 +1054,65 @@ $this->title = 'Create Employee';
         const iconDiv = document.getElementById('titleIcon');
         if (selectedValue !== '') {
             iconImg.src = homeUrl + 'images/icons/white-icons/MasterSetting/title.svg';
-            // alert(selectedValue);
+            //alert(selectedValue);
             iconDiv.classList.remove('cycle-current-gray');
             iconDiv.classList.add('cycle-current-blue');
+
+            //alert(selectedValue);
+
+            fetch('<?= Yii::$app->homeUrl ?>setting/title/get-title-detail', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
+                    },
+                    body: JSON.stringify({
+                        titleId: selectedValue
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // ซ่อน "ยังไม่เลือก"
+                    document.getElementById('no-existing').style.display = 'none';
+
+                    // สร้าง HTML ใหม่สำหรับรายละเอียด
+                    const html = `
+                    <div>
+                        <span class="font-size-20 font-weight-600">${data.titleName}</span>
+                    </div>
+                    <div class="center-center" style="gap: 63px; margin: 36px 29px;">
+                        <div class="row">
+                            <div class="row mb-36">
+                                <span class="font-size-16 font-weight-500 mb-22">Purpose of the Job</span>
+                                <span class="font-size-14 font-weight-400">${data.purpose}</span>
+                            </div>
+                            <div class="row">
+                                <span class="font-size-16 font-weight-500 mb-22">Core Responsibility</span>
+                                <span class="font-size-14 font-weight-400">${data.jobDescription}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <span class="font-size-16 font-weight-500 mb-22">Key Responsibility</span>
+                            <span class="font-size-14 font-weight-400">${data.keyResponsibility}</span>
+                        </div>
+                    </div>
+                `;
+                    document.getElementById('descriptionTitle').innerHTML = html;
+                });
 
         } else {
             iconDiv.classList.remove('cycle-current-blue');
             iconDiv.classList.add('cycle-current-gray');
         }
+
+
     });
 
 
 
     document.getElementById('companySelectId').addEventListener('change', function() {
         const companyId = this.value;
-        // alert(companyId);
+        //alert(companyId);
 
         fetch('<?= Yii::$app->homeUrl ?>setting/company/company-branch-list', {
                 method: 'POST',
@@ -1076,7 +1146,7 @@ $this->title = 'Create Employee';
     document.getElementById('branchSelectId').addEventListener('change', function() {
         const beanchId = this.value;
 
-        // alert(beanchId);
+        //alert(beanchId);
 
         fetch('<?= Yii::$app->homeUrl ?>setting/branch/branch-department-list', {
                 method: 'POST',
@@ -1168,7 +1238,7 @@ $this->title = 'Create Employee';
     document.getElementById('nationalityId').addEventListener('change', function() {
         const selectedOption = this.options[this.selectedIndex];
         const flagUrl = selectedOption.getAttribute('data-flag');
-        alert(flagUrl);
+        // alert(flagUrl);
         if (flagUrl) {
             document.getElementById('flag').src = homeUrl + flagUrl;
         }

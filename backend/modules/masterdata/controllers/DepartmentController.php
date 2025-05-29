@@ -355,7 +355,6 @@ class DepartmentController extends Controller
 	public function actionDepartmentTitle($id)
 	{
 		$title = Title::find()
-			->select('titleId,titleName')
 			->where(["departmentId" => $id, "status" => 1])
 			->orderBy('layerId')
 			->asArray()
