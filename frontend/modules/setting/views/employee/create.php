@@ -700,39 +700,53 @@ $this->title = 'Create Employee';
                 </div>
                 <div>
                     <!-- body -->
-                    <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                        <text class="font-size-16 font-weight-500"><span class="text-danger">*
-                            </span>
-                            Employee’s Title
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                data-placement="top" aria-label=" Employee’s Title"
-                                data-bs-original-title="  Employee’s Titlen">
-                        </text>
-                        <div class="input-group">
-                            <select id="titleSelectId" brancSelect" class="form-select"
-                                style="border-right: none; width: 239px; appearance: none; background-image: none;"
-                                name="titleId" data-company-branch="title" required disabled>
-                                <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A); ">
-                                    <?= Yii::t('app', 'What your his/her Tile?') ?>
-                                </option>
-                            </select>
+                    <div class="row">
+                        <div class="col-4 d-flex flex-column" style="gap: 12px;">
+                            <label class="font-size-16 font-weight-500">
+                                <span class="text-danger">*</span> Employee’s Title
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" aria-label="Employee’s Title"
+                                    data-bs-original-title="Employee’s Title">
+                            </label>
 
-                            <span class="input-group-text"
-                                style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;"
-                                onclick="document.getElementById('companySelectId').focus();">
-                                <div id="titleIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
-                                    <img id="titleIconImg" src="<?= Yii::$app->homeUrl ?>image/star-black.svg"
-                                        alt="icon" style="width: 10px; height: 10px;">
-                                </div>
-                                <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
-                                    style="width: 10px; height: 10px;">
-                            </span>
+                            <div class="input-group">
+                                <select id="titleSelectId" class="form-select"
+                                    style="border-right: none; width: 239px; appearance: none; background-image: none;"
+                                    name="titleId" data-company-branch="title" required disabled>
+                                    <option value="" disabled selected hidden
+                                        style="color: var(--Helper-Text, #8A8A8A);">
+                                        <?= Yii::t('app', 'What your his/her Tile?') ?>
+                                    </option>
+                                    <!-- options will be populated dynamically -->
+                                </select>
+
+                                <span class="input-group-text"
+                                    style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;"
+                                    onclick="document.getElementById('titleSelectId').focus();">
+                                    <div id="titleIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                        <img id="titleIconImg" src="<?= Yii::$app->homeUrl ?>image/star-black.svg"
+                                            alt="icon" style="width: 10px; height: 10px;">
+                                    </div>
+                                    <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
+                                        style="width: 10px; height: 10px;">
+                                </span>
+                            </div>
                         </div>
 
+                        <div class="col-8 d-flex justify-content-end align-items-end">
+                            <a href="<?= Yii::$app->homeUrl ?>setting/title/create/<?= ModelMaster::encodeParams(["companyId" => '', "branchId" => '', "departmentId" => '' ]) ?>"
+                                class="text-blue font-size-13 font-weight-500">
+                                Edit Job Description here
+                                <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
+                                    style="cursor: pointer;">
+                            </a>
+                        </div>
                     </div>
 
-                    <div class="alert bg-white mt-22">
-                        <div class="create-crad-company" id="no-existing" style="background-color: #F9F9F9;">
+
+                    <div id="descriptionTitle" class="alert bg-white mt-22">
+
+                        <!-- <div class="create-crad-company" id="no-existing" style="background-color: #F9F9F9;">
                             <span class="font-size-15 font-weight-700 ">
                                 Job Description has not been selected yet!
                             </span>
@@ -740,453 +754,515 @@ $this->title = 'Create Employee';
                                 from the list, and it will
                                 appear here.
                             </span>
+                        </div> -->
+
+                        <div>
+                            <!-- head details -->
+                            <span class="font-size-20 font-weight-600">
+                                Senior Executive, Marketing & Branding
+                            </span>
                         </div>
+                        <div class="center-center" style="gap: 63px;">
+                            <!-- body details -->
+                            <div class="row">
+                                <div>
+                                    <span>Purpose of the Job</span>
+                                    <span>
+                                        The purpose of this role is to support the General Manager in driving the sales
+                                        and marketing activities within the dynamic market of Bangladesh. The key focus
+                                        areas encompass fostering and nurturing robust relationships with factories,
+                                        industrial parks, general contractors, and engineering companies. The role
+                                        necessitates diligent collection of vital information from a diverse range of
+                                        stakeholders, including customers and relevant governmental authorities
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>Core Responsibility</span>
+                                    <span>
+                                        1. Support the general manager in sales & and marketing activities in
+                                        Bangladesh, especially in creating a good relationship with factories,
+                                        industrial parks, general contractors, and engineering companies.
+                                        2. Collect the necessary information from customers (factories, industrial
+                                        parks, general contractors), and national government/local government/related
+                                        authorities.
+                                        3. Prepare the necessary application and get approval from the concerned
+                                        authorities.
+                                        4. Control documentary and filing system for the sales department
+                                        5. Prepare estimations, contracts, and reports.
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span>Key Responsibility</span>
+                                <span>
+                                    Maintain existing customers and expand new customers (concentrate in
+                                    National/Local Public projects)
+                                    Prepare visit plans and visit report.
+                                    Approach & present information to customers about the company’s products and
+                                    services.
+                                    Prepare and submit quotation to customer.
+                                    Maintain and create relationships with customers.
+                                    Survey market and report to General Manager.
+                                    Maintain gross profit as assigned.
+                                    Negotiate with customers on price and service to achieve gross profit.
+                                    Take good care of customers.
+                                    Response to customer complaints and comments.
+                                    Keep on time appointments.
+                                    Coordinate and communicate correct customer’s inquiry to engineering department.
+                                    Initiative and improve own work process and cross functional with other section to
+                                    achieve company objectives.
+                                    Performing the jobs assigned by superior.
+                                </span>
+                            </div>
+                            </divcla>
+
+                        </div>
+
+                    </div>
+                </div>
+                <!--  Attachments & Remarks -->
+                <div>
+                    <div>
+                        <!-- head -->
+                        <span class="font-size-16 font-weight-600">
+                            Attachments & Remarks
+                        </span>
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                            data-placement="top" aria-label=" Attachments & Remarks"
+                            data-bs-original-title=" DeAttachments & Remarkstails">
+                        <hr class="hr-group">
+                    </div>
+                    <div>
+                        <!-- body -->
+                        fff
+                    </div>
+                </div>
+                <!-- Certificates and Skill Tags -->
+                <div>
+                    <div>
+                        <!-- head -->
+                        <span class="font-size-16 font-weight-600">
+                            Certificates and Skill Tags
+                        </span>
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                            data-placement="top" aria-label=" Certificates and Skill Tags"
+                            data-bs-original-title=" Certificates and Skill Tags">
+                        <hr class="hr-group">
+                    </div>
+                    <div>
+                        <!-- body -->
+                        fff
+                    </div>
+                </div>
+                <!-- Others -->
+                <div>
+                    <div>
+                        <!-- head -->
+                        <span class="font-size-16 font-weight-600">
+                            Others
+                        </span>
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                            data-placement="top" aria-label="Others" data-bs-original-title="Others">
+                        <hr class="hr-group">
+                    </div>
+                    <div>
+                        <!-- body -->
+                        fff
+                    </div>
+                </div>
+
+                <!-- กล่องรวม checkbox และปุ่ม -->
+                <div class="d-flex flex-column align-items-end w-100" style="gap: 20px;">
+
+                    <!-- ✅ Checkbox: Email login -->
+                    <div class="d-flex justify-content-end align-items-center" style="gap: 10px;">
+                        <input type="checkbox" id="sendEmail">
+                        <label for="sendEmail" class="mb-0">Email login details to employee</label>
+                    </div>
+
+                    <!-- ✅ ปุ่ม Cancel + Save -->
+                    <div class="d-flex justify-content-end align-items-center" style="gap: 10px;">
+                        <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
+                            <button type="button" class="btn-cancel-group">
+                                Cancel
+                            </button>
+                        </a>
+                        <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
+                            <button type="button" class="btn-cancel-group w-100">
+                                Save as Draft
+                                <img src="<?= Yii::$app->homeUrl ?>image/draft.svg">
+                            </button>
+                        </a>
+                        <button type="submit" class="btn-save-group">
+                            Save
+                            <img src="<?= Yii::$app->homeUrl ?>image/save-icon.svg" alt="Save Icon"
+                                style="width: 20px; height: 20px;">
+                        </button>
                     </div>
 
                 </div>
-            </div>
-            <!--  Attachments & Remarks -->
-            <div>
-                <div>
-                    <!-- head -->
-                    <span class="font-size-16 font-weight-600">
-                        Attachments & Remarks
-                    </span>
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                        data-placement="top" aria-label=" Attachments & Remarks"
-                        data-bs-original-title=" DeAttachments & Remarkstails">
-                    <hr class="hr-group">
-                </div>
-                <div>
-                    <!-- body -->
-                    fff
-                </div>
-            </div>
-            <!-- Certificates and Skill Tags -->
-            <div>
-                <div>
-                    <!-- head -->
-                    <span class="font-size-16 font-weight-600">
-                        Certificates and Skill Tags
-                    </span>
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                        data-placement="top" aria-label=" Certificates and Skill Tags"
-                        data-bs-original-title=" Certificates and Skill Tags">
-                    <hr class="hr-group">
-                </div>
-                <div>
-                    <!-- body -->
-                    fff
-                </div>
-            </div>
-            <!-- Others -->
-            <div>
-                <div>
-                    <!-- head -->
-                    <span class="font-size-16 font-weight-600">
-                        Others
-                    </span>
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                        data-placement="top" aria-label="Others" data-bs-original-title="Others">
-                    <hr class="hr-group">
-                </div>
-                <div>
-                    <!-- body -->
-                    fff
-                </div>
-            </div>
-
-            <!-- กล่องรวม checkbox และปุ่ม -->
-            <div class="d-flex flex-column align-items-end w-100" style="gap: 20px;">
-
-                <!-- ✅ Checkbox: Email login -->
-                <div class="d-flex justify-content-end align-items-center" style="gap: 10px;">
-                    <input type="checkbox" id="sendEmail">
-                    <label for="sendEmail" class="mb-0">Email login details to employee</label>
-                </div>
-
-                <!-- ✅ ปุ่ม Cancel + Save -->
-                <div class="d-flex justify-content-end align-items-center" style="gap: 10px;">
-                    <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
-                        <button type="button" class="btn-cancel-group">
-                            Cancel
-                        </button>
-                    </a>
-                    <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
-                        <button type="button" class="btn-cancel-group w-100">
-                            Save as Draft
-                            <img src="<?= Yii::$app->homeUrl ?>image/draft.svg">
-                        </button>
-                    </a>
-                    <button type="submit" class="btn-save-group">
-                        Save
-                        <img src="<?= Yii::$app->homeUrl ?>image/save-icon.svg" alt="Save Icon"
-                            style="width: 20px; height: 20px;">
-                    </button>
-                </div>
 
             </div>
-
         </div>
     </div>
-</div>
-<script>
-const homeUrl = "<?= Yii::$app->homeUrl ?>";
-document.getElementById('companySelectId').addEventListener('change', function() {
-    const iconImg = document.getElementById('companyIconImg');
-    const selectedOption = this.options[this.selectedIndex];
-    const selectedImg = selectedOption.getAttribute('data-img');
-    const selectedValue = this.value;
-    const branchSelect = document.getElementById('branchSelectId');
-    const branchSpan = branchSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
+    <script>
+    const homeUrl = "<?= Yii::$app->homeUrl ?>";
+    document.getElementById('companySelectId').addEventListener('change', function() {
+        const iconImg = document.getElementById('companyIconImg');
+        const selectedOption = this.options[this.selectedIndex];
+        const selectedImg = selectedOption.getAttribute('data-img');
+        const selectedValue = this.value;
+        const branchSelect = document.getElementById('branchSelectId');
+        const branchSpan = branchSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
 
-    // เอา disabled ออก
-    branchSelect.removeAttribute('disabled');
+        // เอา disabled ออก
+        branchSelect.removeAttribute('disabled');
 
-    // เปลี่ยนสี background
-    if (branchSpan && branchSpan.classList.contains('input-group-text')) {
-        branchSpan.style.backgroundColor = '#fff';
-    }
-    if (selectedValue !== '') {
-        iconImg.src = homeUrl + selectedImg;
-        iconImg.removeAttribute('style');
-        iconImg.classList.add('card-tcf');
-    } else {
-        iconImg.src = '<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg';
-    }
-});
+        // เปลี่ยนสี background
+        if (branchSpan && branchSpan.classList.contains('input-group-text')) {
+            branchSpan.style.backgroundColor = '#fff';
+        }
+        if (selectedValue !== '') {
+            iconImg.src = homeUrl + selectedImg;
+            iconImg.removeAttribute('style');
+            iconImg.classList.add('card-tcf');
+        } else {
+            iconImg.src = '<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg';
+        }
+    });
 
-document.getElementById('branchSelectId').addEventListener('change', function() {
-    const iconImg = document.getElementById('branchIconImg');
-    const selectedValue = this.value;
-    const iconDiv = document.getElementById('branchIcon');
-    const departmentSelect = document.getElementById('departmentSelectId');
-    const departmentSpan = departmentSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
+    document.getElementById('branchSelectId').addEventListener('change', function() {
+        const iconImg = document.getElementById('branchIconImg');
+        const selectedValue = this.value;
+        const iconDiv = document.getElementById('branchIcon');
+        const departmentSelect = document.getElementById('departmentSelectId');
+        const departmentSpan = departmentSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
 
-    // เอา disabled ออก
-    departmentSelect.removeAttribute('disabled');
+        // เอา disabled ออก
+        departmentSelect.removeAttribute('disabled');
 
-    // เปลี่ยนสี background
-    if (departmentSpan && departmentSpan.classList.contains('input-group-text')) {
-        departmentSpan.style.backgroundColor = '#fff';
-    }
-    if (selectedValue !== '') {
-        iconImg.src = homeUrl + 'image/branches-black.svg';
-        // alert(selectedValue);
-        iconDiv.classList.remove('cycle-current-gray');
-        iconDiv.classList.add('cycle-current-yellow');
+        // เปลี่ยนสี background
+        if (departmentSpan && departmentSpan.classList.contains('input-group-text')) {
+            departmentSpan.style.backgroundColor = '#fff';
+        }
+        if (selectedValue !== '') {
+            iconImg.src = homeUrl + 'image/branches-black.svg';
+            // alert(selectedValue);
+            iconDiv.classList.remove('cycle-current-gray');
+            iconDiv.classList.add('cycle-current-yellow');
 
-    } else {
-        iconDiv.classList.remove('cycle-current-yellow');
-        iconDiv.classList.add('cycle-current-gray');
-    }
-});
-
-
-
-document.getElementById('departmentSelectId').addEventListener('change', function() {
-    const departmentId = this.value;
-
-    const iconImg = document.getElementById('departmentIconImg');
-    const selectedValue = this.value;
-    const iconDiv = document.getElementById('departmentIcon');
-    const teamSelect = document.getElementById('teamSelectId');
-    const teamSpan = teamSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
-
-    // เอา disabled ออก
-    teamSelect.removeAttribute('disabled');
-
-    // เปลี่ยนสี background
-    if (teamSpan && teamSpan.classList.contains('input-group-text')) {
-        teamSpan.style.backgroundColor = '#fff';
-    }
-    loadTeamsSelect(departmentId);
-
-
-    const titileSelect = document.getElementById('titleSelectId');
-    const titleSpan = titileSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
-
-    // เอา disabled ออก
-    titileSelect.removeAttribute('disabled');
-
-    // เปลี่ยนสี background
-    if (titleSpan && titleSpan.classList.contains('input-group-text')) {
-        titleSpan.style.backgroundColor = '#fff';
-    }
-
-    if (selectedValue !== '') {
-        iconImg.src = homeUrl + 'image/departments.svg';
-        // alert(selectedValue);
-        iconDiv.classList.remove('cycle-current-gray');
-        iconDiv.classList.add('cycle-current-red');
-
-    } else {
-        iconDiv.classList.remove('cycle-current-red');
-        iconDiv.classList.add('cycle-current-gray');
-    }
-    loadTitlesSelect(departmentId);
-
-});
-
-
-document.getElementById('teamSelectId').addEventListener('change', function() {
-    const iconImg = document.getElementById('teamIconImg');
-    const selectedValue = this.value;
-    const iconDiv = document.getElementById('teamIcon');
-    if (selectedValue !== '') {
-        iconImg.src = homeUrl + 'image/teams.svg';
-        // alert(selectedValue);
-        iconDiv.classList.remove('cycle-current-gray');
-        iconDiv.classList.add('cycle-current-green');
-
-    } else {
-        iconDiv.classList.remove('cycle-current-green');
-        iconDiv.classList.add('cycle-current-gray');
-    }
-});
-
-
-document.getElementById('titleSelectId').addEventListener('change', function() {
-    const iconImg = document.getElementById('titleIconImg');
-    const selectedValue = this.value;
-    const iconDiv = document.getElementById('titleIcon');
-    if (selectedValue !== '') {
-        iconImg.src = homeUrl + 'images/icons/white-icons/MasterSetting/title.svg';
-        // alert(selectedValue);
-        iconDiv.classList.remove('cycle-current-gray');
-        iconDiv.classList.add('cycle-current-blue');
-
-    } else {
-        iconDiv.classList.remove('cycle-current-blue');
-        iconDiv.classList.add('cycle-current-gray');
-    }
-});
+        } else {
+            iconDiv.classList.remove('cycle-current-yellow');
+            iconDiv.classList.add('cycle-current-gray');
+        }
+    });
 
 
 
-document.getElementById('companySelectId').addEventListener('change', function() {
-    const companyId = this.value;
-    // alert(companyId);
+    document.getElementById('departmentSelectId').addEventListener('change', function() {
+        const departmentId = this.value;
 
-    fetch('<?= Yii::$app->homeUrl ?>setting/company/company-branch-list', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
-            },
-            body: JSON.stringify({
-                companyId: companyId
+        const iconImg = document.getElementById('departmentIconImg');
+        const selectedValue = this.value;
+        const iconDiv = document.getElementById('departmentIcon');
+        const teamSelect = document.getElementById('teamSelectId');
+        const teamSpan = teamSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
+
+        // เอา disabled ออก
+        teamSelect.removeAttribute('disabled');
+
+        // เปลี่ยนสี background
+        if (teamSpan && teamSpan.classList.contains('input-group-text')) {
+            teamSpan.style.backgroundColor = '#fff';
+        }
+        loadTeamsSelect(departmentId);
+
+
+        const titileSelect = document.getElementById('titleSelectId');
+        const titleSpan = titileSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
+
+        // เอา disabled ออก
+        titileSelect.removeAttribute('disabled');
+
+        // เปลี่ยนสี background
+        if (titleSpan && titleSpan.classList.contains('input-group-text')) {
+            titleSpan.style.backgroundColor = '#fff';
+        }
+
+        if (selectedValue !== '') {
+            iconImg.src = homeUrl + 'image/departments.svg';
+            // alert(selectedValue);
+            iconDiv.classList.remove('cycle-current-gray');
+            iconDiv.classList.add('cycle-current-red');
+
+        } else {
+            iconDiv.classList.remove('cycle-current-red');
+            iconDiv.classList.add('cycle-current-gray');
+        }
+        loadTitlesSelect(departmentId);
+
+    });
+
+
+    document.getElementById('teamSelectId').addEventListener('change', function() {
+        const iconImg = document.getElementById('teamIconImg');
+        const selectedValue = this.value;
+        const iconDiv = document.getElementById('teamIcon');
+        if (selectedValue !== '') {
+            iconImg.src = homeUrl + 'image/teams.svg';
+            // alert(selectedValue);
+            iconDiv.classList.remove('cycle-current-gray');
+            iconDiv.classList.add('cycle-current-green');
+
+        } else {
+            iconDiv.classList.remove('cycle-current-green');
+            iconDiv.classList.add('cycle-current-gray');
+        }
+    });
+
+
+    document.getElementById('titleSelectId').addEventListener('change', function() {
+        const iconImg = document.getElementById('titleIconImg');
+        const selectedValue = this.value;
+        const iconDiv = document.getElementById('titleIcon');
+        if (selectedValue !== '') {
+            iconImg.src = homeUrl + 'images/icons/white-icons/MasterSetting/title.svg';
+            // alert(selectedValue);
+            iconDiv.classList.remove('cycle-current-gray');
+            iconDiv.classList.add('cycle-current-blue');
+
+        } else {
+            iconDiv.classList.remove('cycle-current-blue');
+            iconDiv.classList.add('cycle-current-gray');
+        }
+    });
+
+
+
+    document.getElementById('companySelectId').addEventListener('change', function() {
+        const companyId = this.value;
+        // alert(companyId);
+
+        fetch('<?= Yii::$app->homeUrl ?>setting/company/company-branch-list', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
+                },
+                body: JSON.stringify({
+                    companyId: companyId
+                })
             })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Fetched data:", data);
-            const branchSelect = document.querySelector('[name="branchId"]');
-            branchSelect.innerHTML =
-                '<option value="" disabled selected hidden><?= Yii::t("app", "Select from Branches") ?></option>';
+            .then(response => response.json())
+            .then(data => {
+                console.log("Fetched data:", data);
+                const branchSelect = document.querySelector('[name="branchId"]');
+                branchSelect.innerHTML =
+                    '<option value="" disabled selected hidden><?= Yii::t("app", "Select from Branches") ?></option>';
 
-            if (Array.isArray(data)) {
-                data.forEach(branch => {
-                    const option = document.createElement('option');
-                    option.value = branch.branchId;
-                    option.text = branch.branchName;
-                    branchSelect.appendChild(option);
-                });
-            }
-        });
-});
+                if (Array.isArray(data)) {
+                    data.forEach(branch => {
+                        const option = document.createElement('option');
+                        option.value = branch.branchId;
+                        option.text = branch.branchName;
+                        branchSelect.appendChild(option);
+                    });
+                }
+            });
+    });
 
 
-document.getElementById('branchSelectId').addEventListener('change', function() {
-    const beanchId = this.value;
+    document.getElementById('branchSelectId').addEventListener('change', function() {
+        const beanchId = this.value;
 
-    // alert(beanchId);
+        // alert(beanchId);
 
-    fetch('<?= Yii::$app->homeUrl ?>setting/branch/branch-department-list', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
-            },
-            body: JSON.stringify({
-                beanchId: beanchId
+        fetch('<?= Yii::$app->homeUrl ?>setting/branch/branch-department-list', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
+                },
+                body: JSON.stringify({
+                    beanchId: beanchId
+                })
             })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Fetched data:", data);
-            const branchSelect = document.querySelector('[name="departmentId"]');
-            branchSelect.innerHTML =
-                '<option value="" disabled selected hidden><?= Yii::t("app", "In which Department?") ?></option>';
+            .then(response => response.json())
+            .then(data => {
+                console.log("Fetched data:", data);
+                const branchSelect = document.querySelector('[name="departmentId"]');
+                branchSelect.innerHTML =
+                    '<option value="" disabled selected hidden><?= Yii::t("app", "In which Department?") ?></option>';
 
-            if (Array.isArray(data)) {
-                data.forEach(branch => {
-                    const option = document.createElement('option');
-                    option.value = branch.departmentId;
-                    option.text = branch.departmentName;
-                    branchSelect.appendChild(option);
-                });
-            }
-        });
-});
+                if (Array.isArray(data)) {
+                    data.forEach(branch => {
+                        const option = document.createElement('option');
+                        option.value = branch.departmentId;
+                        option.text = branch.departmentName;
+                        branchSelect.appendChild(option);
+                    });
+                }
+            });
+    });
 
 
-function loadTeamsSelect(departmentId) {
-    fetch('<?= Yii::$app->homeUrl ?>setting/department/department-team-list', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
-            },
-            body: JSON.stringify({
-                departmentId: departmentId
+    function loadTeamsSelect(departmentId) {
+        fetch('<?= Yii::$app->homeUrl ?>setting/department/department-team-list', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
+                },
+                body: JSON.stringify({
+                    departmentId: departmentId
+                })
             })
-        })
-        .then(response => response.json())
-        .then(data => {
-            const teamSelect = document.getElementById('teamSelectId');
-            teamSelect.innerHTML =
-                '<option value="" disabled selected hidden><?= Yii::t("app", "Select his/her team") ?></option>';
+            .then(response => response.json())
+            .then(data => {
+                const teamSelect = document.getElementById('teamSelectId');
+                teamSelect.innerHTML =
+                    '<option value="" disabled selected hidden><?= Yii::t("app", "Select his/her team") ?></option>';
 
-            if (data && typeof data === 'object') {
-                Object.values(data).forEach(team => {
-                    const option = document.createElement('option');
-                    option.value = team.teamId;
-                    option.textContent = team.teamName;
-                    teamSelect.appendChild(option);
-                });
-                teamSelect.disabled = false; // เปิดการใช้งาน dropdown
-            }
-        });
-}
-
-function loadTitlesSelect(departmentId) {
-    fetch('<?= Yii::$app->homeUrl ?>setting/department/department-title-list', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
-            },
-            body: JSON.stringify({
-                departmentId: departmentId
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            const titleSelect = document.getElementById('titleSelectId');
-            titleSelect.innerHTML =
-                '<option value="" disabled selected hidden><?= Yii::t("app", "What your his/her Tile?") ?></option>';
-
-            if (data && typeof data === 'object') {
-                Object.values(data).forEach(title => {
-                    const option = document.createElement('option');
-                    option.value = title.titleId;
-                    option.textContent = title.titleName;
-                    titleSelect.appendChild(option);
-                });
-                titleSelect.disabled = false; // เปิดการใช้งาน dropdown
-            }
-        });
-}
-
-document.getElementById('nationalityId').addEventListener('change', function() {
-    const selectedOption = this.options[this.selectedIndex];
-    const flagUrl = selectedOption.getAttribute('data-flag');
-    alert(flagUrl);
-    if (flagUrl) {
-        document.getElementById('flag').src = homeUrl + flagUrl;
+                if (data && typeof data === 'object') {
+                    Object.values(data).forEach(team => {
+                        const option = document.createElement('option');
+                        option.value = team.teamId;
+                        option.textContent = team.teamName;
+                        teamSelect.appendChild(option);
+                    });
+                    teamSelect.disabled = false; // เปิดการใช้งาน dropdown
+                }
+            });
     }
-});
-</script>
-<?php ActiveForm::end(); ?>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="radioHighlight.js"></script>
-<script>
-flatpickr("#birthdate-select", {
-    dateFormat: "d/m/Y",
-    maxDate: "today",
-    onChange: function(selectedDates, dateStr, instance) {
-        // เปลี่ยนข้อความใน #birthdate-select
-        document.getElementById("birthdate-select").innerHTML = `
+
+    function loadTitlesSelect(departmentId) {
+        fetch('<?= Yii::$app->homeUrl ?>setting/department/department-title-list', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
+                },
+                body: JSON.stringify({
+                    departmentId: departmentId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const titleSelect = document.getElementById('titleSelectId');
+                titleSelect.innerHTML =
+                    '<option value="" disabled selected hidden><?= Yii::t("app", "What your his/her Tile?") ?></option>';
+
+                if (data && typeof data === 'object') {
+                    Object.values(data).forEach(title => {
+                        const option = document.createElement('option');
+                        option.value = title.titleId;
+                        option.textContent = title.titleName;
+                        titleSelect.appendChild(option);
+                    });
+                    titleSelect.disabled = false; // เปิดการใช้งาน dropdown
+                }
+            });
+    }
+
+    document.getElementById('nationalityId').addEventListener('change', function() {
+        const selectedOption = this.options[this.selectedIndex];
+        const flagUrl = selectedOption.getAttribute('data-flag');
+        alert(flagUrl);
+        if (flagUrl) {
+            document.getElementById('flag').src = homeUrl + flagUrl;
+        }
+    });
+    </script>
+    <?php ActiveForm::end(); ?>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="radioHighlight.js"></script>
+    <script>
+    flatpickr("#birthdate-select", {
+        dateFormat: "d/m/Y",
+        maxDate: "today",
+        onChange: function(selectedDates, dateStr, instance) {
+            // เปลี่ยนข้อความใน #birthdate-select
+            document.getElementById("birthdate-select").innerHTML = `
             ${dateStr} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
         `;
 
-        // เซ็ตค่าวันเกิดใน hidden input
-        document.getElementById("birthDate").value = dateStr;
+            // เซ็ตค่าวันเกิดใน hidden input
+            document.getElementById("birthDate").value = dateStr;
 
-        // เปลี่ยนรูปภาพ calendar เป็น calendar-blue.svg
-        const calendarImg = document.querySelector('#group-birtdate img');
-        if (calendarImg) {
-            calendarImg.src = "<?= Yii::$app->homeUrl ?>image/calendar-blue.svg";
+            // เปลี่ยนรูปภาพ calendar เป็น calendar-blue.svg
+            const calendarImg = document.querySelector('#group-birtdate img');
+            if (calendarImg) {
+                calendarImg.src = "<?= Yii::$app->homeUrl ?>image/calendar-blue.svg";
+            }
+
+            // เปลี่ยน background-color และ border ของ input-group-text
+            const inputGroupText = document.querySelector('#group-birtdate .input-group-text');
+            if (inputGroupText) {
+                inputGroupText.style.backgroundColor = "rgb(215, 235, 255)";
+                inputGroupText.style.border = "0.5px solid rgb(190, 218, 255)";
+            }
         }
+    });
 
-        // เปลี่ยน background-color และ border ของ input-group-text
-        const inputGroupText = document.querySelector('#group-birtdate .input-group-text');
-        if (inputGroupText) {
-            inputGroupText.style.backgroundColor = "rgb(215, 235, 255)";
-            inputGroupText.style.border = "0.5px solid rgb(190, 218, 255)";
+    flatpickr("#hiring-select", {
+        dateFormat: "d/m/Y",
+        maxDate: "today",
+        onChange: function(selectedDates, dateStr, instance) {
+            document.getElementById("hiringDate").value = dateStr;
+            document.getElementById("hiring-select").innerHTML = dateStr;
+
+            // เปลี่ยนสีพื้นหลัง & icon
+            document.getElementById("calendar-icon-hiring").style.backgroundColor = "rgb(215, 235, 255)";
+            document.getElementById("calendar-icon-hiring").style.border = "0.5px solid rgb(190, 218, 255)";
+            document.getElementById("calendar-img-hiring").src =
+                "<?= Yii::$app->homeUrl ?>image/calendar-blue.svg";
         }
-    }
-});
+    });
 
-flatpickr("#hiring-select", {
-    dateFormat: "d/m/Y",
-    maxDate: "today",
-    onChange: function(selectedDates, dateStr, instance) {
-        document.getElementById("hiringDate").value = dateStr;
-        document.getElementById("hiring-select").innerHTML = dateStr;
+    flatpickr("#startProbationPicker", {
+        inline: true,
+        dateFormat: "d/m/Y",
+        onChange: function(selectedDates, dateStr) {
+            window.startDate = dateStr; // เก็บค่า Start Date
+            updateSelectedDates();
+        }
+    });
 
-        // เปลี่ยนสีพื้นหลัง & icon
-        document.getElementById("calendar-icon-hiring").style.backgroundColor = "rgb(215, 235, 255)";
-        document.getElementById("calendar-icon-hiring").style.border = "0.5px solid rgb(190, 218, 255)";
-        document.getElementById("calendar-img-hiring").src =
-            "<?= Yii::$app->homeUrl ?>image/calendar-blue.svg";
-    }
-});
-
-flatpickr("#startProbationPicker", {
-    inline: true,
-    dateFormat: "d/m/Y",
-    onChange: function(selectedDates, dateStr) {
-        window.startDate = dateStr; // เก็บค่า Start Date
-        updateSelectedDates();
-    }
-});
-
-// กำหนด Flatpickr สำหรับปฏิทินสิ้นสุด
-flatpickr("#endProbationPicker", {
-    inline: true,
-    dateFormat: "d/m/Y",
-    onChange: function(selectedDates, dateStr) {
-        window.endDate = dateStr; // เก็บค่า End Date
-        updateSelectedDates();
-    }
-});
+    // กำหนด Flatpickr สำหรับปฏิทินสิ้นสุด
+    flatpickr("#endProbationPicker", {
+        inline: true,
+        dateFormat: "d/m/Y",
+        onChange: function(selectedDates, dateStr) {
+            window.endDate = dateStr; // เก็บค่า End Date
+            updateSelectedDates();
+        }
+    });
 
 
-document.getElementById('override-probation-employee').addEventListener('change', function() {
-    const hiddenInput = document.getElementById('override-probation-employee-hidden');
-    const multiDueTerm = document.getElementById('multi-due-term');
+    document.getElementById('override-probation-employee').addEventListener('change', function() {
+        const hiddenInput = document.getElementById('override-probation-employee-hidden');
+        const multiDueTerm = document.getElementById('multi-due-term');
 
-    if (this.checked) {
-        hiddenInput.value = "1";
-        multiDueTerm.style.backgroundColor = ""; // หรือสีพื้นหลังปกติ เช่น "#fff"
-        multiDueTerm.style.pointerEvents = "auto"; // เปิดให้คลิกได้
-    } else {
-        hiddenInput.value = "0";
-        multiDueTerm.style.backgroundColor = "#e9ecef";
-        multiDueTerm.style.pointerEvents = "none"; // ปิดไม่ให้คลิก
-    }
-});
+        if (this.checked) {
+            hiddenInput.value = "1";
+            multiDueTerm.style.backgroundColor = ""; // หรือสีพื้นหลังปกติ เช่น "#fff"
+            multiDueTerm.style.pointerEvents = "auto"; // เปิดให้คลิกได้
+        } else {
+            hiddenInput.value = "0";
+            multiDueTerm.style.backgroundColor = "#e9ecef";
+            multiDueTerm.style.pointerEvents = "none"; // ปิดไม่ให้คลิก
+        }
+    });
 
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    initRadioSelection(); // เรียกใช้กับ `.radio-wrapper` ปกติ
-    // หรือใส่ selector อื่นถ้ามีหลายกลุ่ม
-    initCheckboxSelection(); // เรียกใช้กับ `.checkbox-wrapper`
+    document.addEventListener("DOMContentLoaded", function() {
+        initRadioSelection(); // เรียกใช้กับ `.radio-wrapper` ปกติ
+        // หรือใส่ selector อื่นถ้ามีหลายกลุ่ม
+        initCheckboxSelection(); // เรียกใช้กับ `.checkbox-wrapper`
 
 
-});
-</script>
+    });
+    </script>
