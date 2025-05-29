@@ -1120,4 +1120,23 @@ class DepartmentController extends Controller
         $teams = json_decode($response, true);
         return $teams;
     }
+
+public function actionDepartmentTitleList()
+{
+    Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+    $data = json_decode(file_get_contents("php://input"), true);
+    $departmentId = isset($data['departmentId']) ? $data['departmentId'] : null;
+
+    $api = curl_init();
+    curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-title?id=' . $departmentId);
+    $titles = curl_exec($api);
+    curl_close($api);
+
+    $title = json_decode($titles, true); // decode ครั้งเดียวพอ
+    return $title;
+}
+
 }

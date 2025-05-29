@@ -38,6 +38,11 @@ class CountryController extends Controller
         }
         return json_encode($country);
     }
+      public function actionAllCountry()
+    {
+        $countries = Country::find()->select('countryId,countryName,flag')->where(["status" => 1])->asArray()->orderBy('countryName')->all();
+        return json_encode($countries);
+    }
     public function actionCompanyCountry()
     {
         $country = [];

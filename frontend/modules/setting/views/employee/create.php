@@ -314,7 +314,7 @@ $this->title = 'Create Employee';
                                 </span>Nationality</text>
                             <div class="input-group">
                                 <span class="input-group-text" style="background-color: white; border-right: none;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
+                                    <img id="flag" src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
                                         style="width: 20px; height: 20px;">
                                 </span>
                                 <select class="form-select" name="nationalityId" id="nationalityId"
@@ -326,7 +326,10 @@ $this->title = 'Create Employee';
                                     <?php
                                     if (isset($nationalities) && count($nationalities) > 0) {
                                         foreach ($nationalities as $nation) : ?>
-                                    <option value="<?= $nation['numCode'] ?>"><?= $nation['nationalityName'] ?></option>
+                                    <option value="<?= $nation['countryId'] ?>"
+                                        data-flag="<?= Yii::$app->homeUrl . $nation['flag'] ?>">
+                                        <?= $nation['countryName'] ?>
+                                    </option>
                                     <?php
                                         endforeach;
                                     }
@@ -436,11 +439,15 @@ $this->title = 'Create Employee';
                     <div class="row">
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"><span class="text-danger">*
-                                </span>Select Company</text>
+                                </span>Select Company
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" aria-label="ttt" data-bs-original-title="ttt">
+                            </text>
                             <div class="input-group">
                                 <select class="form-select " id="companySelectId" name="companyId"
                                     style="appearance: none; background-image: none;">
-                                    <option value=""><?= Yii::t('app', 'Select Company') ?></option>
+                                    <option value=""><?= Yii::t('app', 'Which Company your are is working in ? ') ?>
+                                    </option>
                                     <?php if (isset($companies) && count($companies) > 0): ?>
                                     <?php foreach ($companies as $c): ?>
                                     <option value="<?= $c['companyId'] ?>" data-img="<?= $c['picture'] ?>">
@@ -463,8 +470,11 @@ $this->title = 'Create Employee';
                             </div>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>Select
-                                Branch</text>
+                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                Select Branch
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" aria-label="ttt" data-bs-original-title="ttt">
+                            </text>
                             <!-- <select class="form-select" name="fff" id="fff" style="border-left: none;" required>
                                 <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A); ">
                                     <?= Yii::t('app', 'Select') ?>
@@ -477,7 +487,7 @@ $this->title = 'Create Employee';
                                     name="branchId" data-company-branch="branch" required disabled>
                                     <option value="" disabled selected hidden
                                         style="color: var(--Helper-Text, #8A8A8A); ">
-                                        <?= Yii::t('app', 'Select from a Branch') ?>
+                                        <?= Yii::t('app', 'Select from Branches') ?>
                                     </option>
                                 </select>
 
@@ -494,15 +504,18 @@ $this->title = 'Create Employee';
                             </div>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>Select
-                                Department</text>
+                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                Select Department
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" aria-label="ttt" data-bs-original-title="ttt">
+                            </text>
                             <div class="input-group">
                                 <select id="departmentSelectId" brancSelect" class="form-select"
                                     style="border-right: none; width: 239px; appearance: none; background-image: none;"
                                     name="departmentId" data-company-branch="department" required disabled>
                                     <option value="" disabled selected hidden
                                         style="color: var(--Helper-Text, #8A8A8A); ">
-                                        <?= Yii::t('app', 'Select from a Department') ?>
+                                        <?= Yii::t('app', 'In which Department?') ?>
                                     </option>
                                 </select>
 
@@ -526,6 +539,8 @@ $this->title = 'Create Employee';
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
                                 Select Team
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" aria-label="ttt" data-bs-original-title="ttt">
                             </text>
                             <div class="input-group">
                                 <select id="teamSelectId" brancSelect" class="form-select"
@@ -533,7 +548,7 @@ $this->title = 'Create Employee';
                                     name="teamId" data-company-branch="team" required disabled>
                                     <option value="" disabled selected hidden
                                         style="color: var(--Helper-Text, #8A8A8A); ">
-                                        <?= Yii::t('app', 'Select from a Team') ?>
+                                        <?= Yii::t('app', 'Select his/her team') ?>
                                     </option>
                                 </select>
 
@@ -602,6 +617,9 @@ $this->title = 'Create Employee';
                                     <input type="checkbox" id="override-probation-employee" checked="">
                                     <span class="slider round"></span>
                                 </label>
+                                <input type="hidden" name="overrideProbationEmployee"
+                                    id="override-probation-employee-hidden" value="1">
+
                                 <label class="font-size-16 font-weight-500">
                                     Probation Period
                                 </label>
@@ -624,20 +642,26 @@ $this->title = 'Create Employee';
                                     Select the term <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                                 </div>
                                 <!-- hidden inputs เพื่อเก็บค่า month และ year -->
-                                <input type="hidden" id="probationStart" name="probationStart"
+                                <!-- <input type="hidden" id="probationStart" name="probationStart"
                                     value="<?= isset($data['probationStart']) ? $data['probationStart'] : '' ?>"
                                     required>
                                 <input type="hidden" id="probationEnd" name="probationEnd"
+                                    value="<?= isset($data['probationEnd']) ? $data['probationEnd'] : '' ?>" required> -->
+                                <input type="hidden" id="fromDate" name="fromDate"
+                                    value="<?= isset($data['probationStart']) ? $data['probationStart'] : '' ?>"
+                                    required>
+                                <input type="hidden" id="toDate" name="toDate"
                                     value="<?= isset($data['probationEnd']) ? $data['probationEnd'] : '' ?>" required>
+
                             </div>
 
                             <!-- กล่อง calendar ที่จะโชว์เมื่อกด -->
                             <div class="calendar-container" id="calendar-due-term"
                                 style="display: none; position: absolute; margin-top: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 10px; background: #fff; width: 650px; gap: 3px; z-index: 1;">
                                 <!-- ปฏิทินสำหรับวันที่เริ่มต้น -->
-                                <div id="startDatePicker"></div>
+                                <div id="startProbationPicker"></div>
                                 <!-- ปฏิทินสำหรับวันที่สิ้นสุด -->
-                                <div id="endDatePicker"></div>
+                                <div id="endProbationPicker"></div>
                             </div>
                         </div>
 
@@ -664,7 +688,49 @@ $this->title = 'Create Employee';
                 </div>
                 <div>
                     <!-- body -->
-                    fff
+                    <div class="col-4 d-flex flex-column" style="gap: 12px;">
+                        <text class="font-size-16 font-weight-500"><span class="text-danger">*
+                            </span>
+                            Employee’s Title
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                data-placement="top" aria-label=" Employee’s Title"
+                                data-bs-original-title="  Employee’s Titlen">
+                        </text>
+                        <div class="input-group">
+                            <select id="titleSelectId" brancSelect" class="form-select"
+                                style="border-right: none; width: 239px; appearance: none; background-image: none;"
+                                name="titleId" data-company-branch="title" required disabled>
+                                <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A); ">
+                                    <?= Yii::t('app', 'What your his/her Tile?') ?>
+                                </option>
+                            </select>
+
+                            <span class="input-group-text"
+                                style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;"
+                                onclick="document.getElementById('companySelectId').focus();">
+                                <div id="titleIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                    <img id="titleIconImg" src="<?= Yii::$app->homeUrl ?>image/star-black.svg"
+                                        alt="icon" style="width: 10px; height: 10px;">
+                                </div>
+                                <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
+                                    style="width: 10px; height: 10px;">
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="alert bg-white mt-22">
+                        <div class="create-crad-company" id="no-existing" style="background-color: #F9F9F9;">
+                            <span class="font-size-15 font-weight-700 ">
+                                Job Description has not been selected yet!
+                            </span>
+                            <span class="font-size-12 font-weight-400 font-gray">Select a job description template
+                                from the list, and it will
+                                appear here.
+                            </span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <!--  Attachments & Remarks -->
@@ -807,6 +873,8 @@ document.getElementById('branchSelectId').addEventListener('change', function() 
 
 
 document.getElementById('departmentSelectId').addEventListener('change', function() {
+    const departmentId = this.value;
+
     const iconImg = document.getElementById('departmentIconImg');
     const selectedValue = this.value;
     const iconDiv = document.getElementById('departmentIcon');
@@ -820,6 +888,19 @@ document.getElementById('departmentSelectId').addEventListener('change', functio
     if (teamSpan && teamSpan.classList.contains('input-group-text')) {
         teamSpan.style.backgroundColor = '#fff';
     }
+    loadTeamsSelect(departmentId);
+
+
+    const titileSelect = document.getElementById('titleSelectId');
+    const titleSpan = titileSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
+
+    // เอา disabled ออก
+    titileSelect.removeAttribute('disabled');
+
+    // เปลี่ยนสี background
+    if (titleSpan && titleSpan.classList.contains('input-group-text')) {
+        titleSpan.style.backgroundColor = '#fff';
+    }
 
     if (selectedValue !== '') {
         iconImg.src = homeUrl + 'image/departments.svg';
@@ -831,6 +912,8 @@ document.getElementById('departmentSelectId').addEventListener('change', functio
         iconDiv.classList.remove('cycle-current-red');
         iconDiv.classList.add('cycle-current-gray');
     }
+    loadTitlesSelect(departmentId);
+
 });
 
 
@@ -846,6 +929,23 @@ document.getElementById('teamSelectId').addEventListener('change', function() {
 
     } else {
         iconDiv.classList.remove('cycle-current-green');
+        iconDiv.classList.add('cycle-current-gray');
+    }
+});
+
+
+document.getElementById('titleSelectId').addEventListener('change', function() {
+    const iconImg = document.getElementById('titleIconImg');
+    const selectedValue = this.value;
+    const iconDiv = document.getElementById('titleIcon');
+    if (selectedValue !== '') {
+        iconImg.src = homeUrl + 'images/icons/white-icons/MasterSetting/title.svg';
+        // alert(selectedValue);
+        iconDiv.classList.remove('cycle-current-gray');
+        iconDiv.classList.add('cycle-current-blue');
+
+    } else {
+        iconDiv.classList.remove('cycle-current-blue');
         iconDiv.classList.add('cycle-current-gray');
     }
 });
@@ -871,7 +971,7 @@ document.getElementById('companySelectId').addEventListener('change', function()
             console.log("Fetched data:", data);
             const branchSelect = document.querySelector('[name="branchId"]');
             branchSelect.innerHTML =
-                '<option value="" disabled selected hidden><?= Yii::t("app", "Select from a Branch") ?></option>';
+                '<option value="" disabled selected hidden><?= Yii::t("app", "Select from Branches") ?></option>';
 
             if (Array.isArray(data)) {
                 data.forEach(branch => {
@@ -905,7 +1005,7 @@ document.getElementById('branchSelectId').addEventListener('change', function() 
             console.log("Fetched data:", data);
             const branchSelect = document.querySelector('[name="departmentId"]');
             branchSelect.innerHTML =
-                '<option value="" disabled selected hidden><?= Yii::t("app", "Select from the departments") ?></option>';
+                '<option value="" disabled selected hidden><?= Yii::t("app", "In which Department?") ?></option>';
 
             if (Array.isArray(data)) {
                 data.forEach(branch => {
@@ -919,9 +1019,7 @@ document.getElementById('branchSelectId').addEventListener('change', function() 
 });
 
 
-document.getElementById('departmentSelectId').addEventListener('change', function() {
-    const departmentId = this.value;
-
+function loadTeamsSelect(departmentId) {
     fetch('<?= Yii::$app->homeUrl ?>setting/department/department-team-list', {
             method: 'POST',
             headers: {
@@ -936,7 +1034,7 @@ document.getElementById('departmentSelectId').addEventListener('change', functio
         .then(data => {
             const teamSelect = document.getElementById('teamSelectId');
             teamSelect.innerHTML =
-                '<option value="" disabled selected hidden><?= Yii::t("app", "Select from a Team") ?></option>';
+                '<option value="" disabled selected hidden><?= Yii::t("app", "Select his/her team") ?></option>';
 
             if (data && typeof data === 'object') {
                 Object.values(data).forEach(team => {
@@ -948,6 +1046,44 @@ document.getElementById('departmentSelectId').addEventListener('change', functio
                 teamSelect.disabled = false; // เปิดการใช้งาน dropdown
             }
         });
+}
+
+function loadTitlesSelect(departmentId) {
+    fetch('<?= Yii::$app->homeUrl ?>setting/department/department-title-list', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
+            },
+            body: JSON.stringify({
+                departmentId: departmentId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const titleSelect = document.getElementById('titleSelectId');
+            titleSelect.innerHTML =
+                '<option value="" disabled selected hidden><?= Yii::t("app", "What your his/her Tile?") ?></option>';
+
+            if (data && typeof data === 'object') {
+                Object.values(data).forEach(title => {
+                    const option = document.createElement('option');
+                    option.value = title.titleId;
+                    option.textContent = title.titleName;
+                    titleSelect.appendChild(option);
+                });
+                titleSelect.disabled = false; // เปิดการใช้งาน dropdown
+            }
+        });
+}
+
+document.getElementById('nationalityId').addEventListener('change', function() {
+    const selectedOption = this.options[this.selectedIndex];
+    const flagUrl = selectedOption.getAttribute('data-flag');
+
+    if (flagUrl) {
+        document.getElementById('flag').src = homeUrl + flagUrl;
+    }
 });
 </script>
 <?php ActiveForm::end(); ?>
@@ -955,7 +1091,7 @@ document.getElementById('departmentSelectId').addEventListener('change', functio
 <script src="radioHighlight.js"></script>
 <script>
 flatpickr("#birthdate-select", {
-    dateFormat: "d-M-Y",
+    dateFormat: "d/m/Y",
     maxDate: "today",
     onChange: function(selectedDates, dateStr, instance) {
         // เปลี่ยนข้อความใน #birthdate-select
@@ -982,7 +1118,7 @@ flatpickr("#birthdate-select", {
 });
 
 flatpickr("#hiring-select", {
-    dateFormat: "Y-m-d",
+    dateFormat: "d/m/Y",
     maxDate: "today",
     onChange: function(selectedDates, dateStr, instance) {
         document.getElementById("hiringDate").value = dateStr;
@@ -995,6 +1131,43 @@ flatpickr("#hiring-select", {
             "<?= Yii::$app->homeUrl ?>image/calendar-blue.svg";
     }
 });
+
+flatpickr("#startProbationPicker", {
+    inline: true,
+    dateFormat: "d/m/Y",
+    onChange: function(selectedDates, dateStr) {
+        window.startDate = dateStr; // เก็บค่า Start Date
+        updateSelectedDates();
+    }
+});
+
+// กำหนด Flatpickr สำหรับปฏิทินสิ้นสุด
+flatpickr("#endProbationPicker", {
+    inline: true,
+    dateFormat: "d/m/Y",
+    onChange: function(selectedDates, dateStr) {
+        window.endDate = dateStr; // เก็บค่า End Date
+        updateSelectedDates();
+    }
+});
+
+
+document.getElementById('override-probation-employee').addEventListener('change', function() {
+    const hiddenInput = document.getElementById('override-probation-employee-hidden');
+    const multiDueTerm = document.getElementById('multi-due-term');
+
+    if (this.checked) {
+        hiddenInput.value = "1";
+        multiDueTerm.style.backgroundColor = ""; // หรือสีพื้นหลังปกติ เช่น "#fff"
+        multiDueTerm.style.pointerEvents = "auto"; // เปิดให้คลิกได้
+    } else {
+        hiddenInput.value = "0";
+        multiDueTerm.style.backgroundColor = "#e9ecef";
+        multiDueTerm.style.pointerEvents = "none"; // ปิดไม่ให้คลิก
+    }
+});
+
+
 
 
 document.addEventListener("DOMContentLoaded", function() {

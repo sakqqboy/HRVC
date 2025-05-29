@@ -166,7 +166,7 @@ class EmployeeController extends Controller
         $teamPosition = json_decode($teamPosition, true);
         // throw new Exception(print_r($teamPosition, true));
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/nationality');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/all-country');
         $nationalities = curl_exec($api);
         $nationalities = json_decode($nationalities, true);
         // throw new Exception(print_r($nationalities, true));
