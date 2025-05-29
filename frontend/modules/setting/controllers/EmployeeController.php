@@ -185,6 +185,7 @@ class EmployeeController extends Controller
 
 
         return $this->render('create', [
+            "groupId" => $groupId,
             "countries" => $countries,
             "companies" => $companies,
             "titles" => $titles,

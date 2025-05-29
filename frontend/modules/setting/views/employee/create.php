@@ -1,5 +1,6 @@
 <?php
 
+use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 $statusform = 'create';
 $this->title = 'Create Employee';
@@ -314,7 +315,8 @@ $this->title = 'Create Employee';
                                 </span>Nationality</text>
                             <div class="input-group">
                                 <span class="input-group-text" style="background-color: white; border-right: none;">
-                                    <img id="flag" src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
+                                    <img class="cycle-current" id="flag"
+                                        src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
                                         style="width: 20px; height: 20px;">
                                 </span>
                                 <select class="form-select" name="nationalityId" id="nationalityId"
@@ -326,8 +328,7 @@ $this->title = 'Create Employee';
                                     <?php
                                     if (isset($nationalities) && count($nationalities) > 0) {
                                         foreach ($nationalities as $nation) : ?>
-                                    <option value="<?= $nation['countryId'] ?>"
-                                        data-flag="<?= Yii::$app->homeUrl . $nation['flag'] ?>">
+                                    <option value="<?= $nation['countryId'] ?>" data-flag="<?= $nation['flag'] ?>">
                                         <?= $nation['countryName'] ?>
                                     </option>
                                     <?php
@@ -425,15 +426,26 @@ $this->title = 'Create Employee';
             <input type="hidden" id="systemAdmin" name="conten3" value="Work Details">
             <!-- Work Details -->
             <div>
-                <div>
+                <div class="between-center">
                     <!-- head -->
-                    <span class="font-size-16 font-weight-600">
-                        Work Details
-                    </span>
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                        data-placement="top" aria-label=" Work Details" data-bs-original-title=" Work Details">
-                    <hr class="hr-group">
+                    <div>
+                        <span class="font-size-16 font-weight-600">
+                            Work Details
+                        </span>
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                            data-placement="top" aria-label=" Work Details" data-bs-original-title=" Work Details">
+                    </div>
+                    <div>
+                        <span class="text-gray font-size-13 font-weight-400 mr-12">Can’t find the company?</span>
+                        <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
+                            class="text-blue font-size-13 font-weight-500">Register Company Here <img
+                                src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
+                                style="cursor: pointer;"></a>
+                    </div>
+
                 </div>
+                <hr class="hr-group">
+
                 <div class="d-flex flex-column" style="gap: 40px">
                     <!-- body -->
                     <div class="row">
@@ -1080,7 +1092,7 @@ function loadTitlesSelect(departmentId) {
 document.getElementById('nationalityId').addEventListener('change', function() {
     const selectedOption = this.options[this.selectedIndex];
     const flagUrl = selectedOption.getAttribute('data-flag');
-
+    alert(flagUrl);
     if (flagUrl) {
         document.getElementById('flag').src = homeUrl + flagUrl;
     }
