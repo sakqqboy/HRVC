@@ -777,7 +777,8 @@ $this->title = 'Create Employee';
 
                             <div class="col-lg-11 mt-5 mb-24">
                                 <!-- <div class="dashed"> -->
-                                <div class="form-control">
+                                <div class="form-control"
+                                    style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)">
                                     <div class="row">
                                         <div class="col-lg-2 center-center">
                                             <!-- <div class="choosefile text-dark">File</div> -->
@@ -815,7 +816,8 @@ $this->title = 'Create Employee';
                             </div>
 
                             <div class="col-lg-11">
-                                <div class="form-control">
+                                <div class="form-control"
+                                    style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)">
                                     <div class="row">
                                         <div class="col-lg-2 center-center">
                                             <!-- <div class="choosefile text-dark">File</div> -->
@@ -864,6 +866,8 @@ $this->title = 'Create Employee';
                         </div>
                     </div>
                 </div>
+
+                <input type="hidden" id="systemAdmin" name="conten5" value=" Attachments & Remarks">
                 <!-- Certificates and Skill Tags -->
                 <div>
                     <div>
@@ -878,7 +882,21 @@ $this->title = 'Create Employee';
                     </div>
                     <div>
                         <!-- body -->
-                        fff
+                        <div>
+                            <span class="font-size-16 font-weight-500">
+                                <span class="text-danger">* </span>
+                                Certificate Achievements
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" aria-label=" Certificates and Skill Tags"
+                                    data-bs-original-title=" Certificates and Skill Tags">
+                            </span>
+                            <div>
+                                <!-- เพิ่มรูป -->
+                            </div>
+                        </div>
+                        <div>
+
+                        </div>
                     </div>
                 </div>
                 <!-- Others -->
