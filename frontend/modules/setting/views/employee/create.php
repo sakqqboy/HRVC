@@ -782,10 +782,10 @@ $this->title = 'Create Employee';
                                     <div class="row">
                                         <div class="col-lg-2 center-center">
                                             <!-- <div class="choosefile text-dark">File</div> -->
-                                            <img src="<?= Yii::$app->homeUrl ?>image/file-big.svg" alt="icon"
-                                                style="width: 40px; height: 40px;">
+                                            <img id="icon-file1" src="<?= Yii::$app->homeUrl ?>image/file-big.svg"
+                                                alt="icon" style="width: 40px; height: 40px;">
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-12 "
+                                        <div id="file-uplode-name1" class="col-lg-6 col-md-6 col-12 "
                                             style="border-right:lightgray solid thin;">
                                             <label class="text-gray font-size-16 font-weight-500" for="name">
                                                 Upload Resume/CV here
@@ -796,7 +796,7 @@ $this->title = 'Create Employee';
                                             </div>
                                             <!-- <div class="text-secondary font-size-14">Maximum File Size 5 MB</div> -->
                                         </div>
-                                        <div class="col-lg-4 col-md-6 col-12 text-center pt-13">
+                                        <div id="file-edit1" class="col-lg-4 col-md-6 col-12 text-center pt-13">
                                             <label for="resume" class="text-blue font-size-16 font-weight-600"
                                                 style="cursor: pointer;">
                                                 Upload
@@ -821,10 +821,10 @@ $this->title = 'Create Employee';
                                     <div class="row">
                                         <div class="col-lg-2 center-center">
                                             <!-- <div class="choosefile text-dark">File</div> -->
-                                            <img src="<?= Yii::$app->homeUrl ?>image/file-big.svg" alt="icon"
-                                                style="width: 40px; height: 40px;">
+                                            <img id="icon-file2" src="<?= Yii::$app->homeUrl ?>image/file-big.svg"
+                                                alt="icon" style="width: 40px; height: 40px;">
                                         </div>
-                                        <div class="col-lg-6 col-md-6 col-12"
+                                        <div id="file-uplode-name1" class="col-lg-6 col-md-6 col-12"
                                             style="border-right:lightgray solid thin;">
                                             <label class="text-gray font-size-16 font-weight-500" for="name">
                                                 Upload Agreement Here
@@ -836,7 +836,7 @@ $this->title = 'Create Employee';
                                             </div>
                                             <!-- <div class="text-secondary font-size-14">Maximum File Size 5 MB</div> -->
                                         </div>
-                                        <div class="col-lg-4 col-md-6 col-12 text-center pt-13">
+                                        <div id="file-edit2" class="col-lg-4 col-md-6 col-12 text-center pt-13">
                                             <label type="button" for="agreement"
                                                 class="text-blue font-size-16 font-weight-600">
                                                 Upload
