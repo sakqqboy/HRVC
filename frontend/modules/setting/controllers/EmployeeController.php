@@ -689,6 +689,22 @@ class EmployeeController extends Controller
             "teams" => $teams
         ]);
     }
+
+    public function actionModalCertificate()
+    {
+        $api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        // api
+
+        curl_close($api);
+        
+        // throw new Exception("department: " . print_r($data, true));
+        return $this->renderPartial('modal_certificate', [
+
+        ]); 
+    }
+
     public function actionDeleteEmployee()
     {
         User::updateAll(["status" => 99], ["employeeId" => $_POST["employeeId"]]);

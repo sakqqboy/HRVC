@@ -628,3 +628,21 @@ document.getElementById('override-probation-employee').addEventListener('change'
         multiDueTerm.style.pointerEvents = "none"; // ปิดไม่ให้คลิก
     }
 });
+
+
+
+function openPopupModalCertificate() {
+    var url = $url + 'setting/employee/modal-certificate'
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (response) {
+            $('#certificateModalBody').html(response);
+            $('#certificateModal').modal('show');
+        },
+        error: function () {
+            $('#certificateModalBody').html('<p class="text-danger">Failed to load content.</p>');
+            $('#certificateModal').modal('show');
+        }
+    });
+}

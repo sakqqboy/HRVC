@@ -913,7 +913,7 @@ $this->title = 'Create Employee';
                             </ul>
                             <button type="button" class="center-center bg-white mt-12"
                                 style="padding: 13px 20px; height: 40px; width: 100%; border-radius: 5px; border: 0.5px solid #CBD5E1;"
-                                onclick="addCertificateInput()">
+                                onclick="openPopupModalCertificate()">
                                 <span class="text-blue mr-6" style="font-weight: 600; font-size: 14px;"> Add
                                     More
                                 </span>
@@ -1009,6 +1009,15 @@ $this->title = 'Create Employee';
 
                 </div>
 
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="certificateModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="row" id="certificateModalBody" style="width: 100%; padding: 50px; gap: 30px;">
+                    <!-- AJAX content will be injected here -->
+                </div>
             </div>
         </div>
     </div>
