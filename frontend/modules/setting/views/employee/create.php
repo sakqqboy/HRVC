@@ -785,18 +785,18 @@ $this->title = 'Create Employee';
                                             <img id="icon-file1" src="<?= Yii::$app->homeUrl ?>image/file-big.svg"
                                                 alt="icon" style="width: 40px; height: 40px;">
                                         </div>
-                                        <div id="file-uplode-name1" class="col-lg-6 col-md-6 col-12 "
+                                        <div id="file-uplode-name1" class="col-lg-6 col-md-6 col-12"
                                             style="border-right:lightgray solid thin;">
-                                            <label class="text-gray font-size-16 font-weight-500" for="name">
-                                                Upload Resume/CV here
-                                            </label>
+                                            <label class="text-gray font-size-16 font-weight-500" for="resume">Upload
+                                                Resume/CV here</label>
                                             <div class="text-secondary text-gray font-size-14">
                                                 <span class="text-gray font-size-12">Supported - pdf, .doc, .docx</span>
                                             </div>
+                                            <div id="filename-display1" class="font-size-16 font-weight-600 mt-2"></div>
                                         </div>
                                         <div id="file-edit1" class="col-lg-4 col-md-6 col-12 text-center pt-13">
-                                            <label for="resume" class="text-blue font-size-16 font-weight-600"
-                                                style="cursor: pointer;">
+                                            <label id="resume-btn" for="resume"
+                                                class="text-blue font-size-16 font-weight-600" style="cursor: pointer;">
                                                 Upload
                                                 <img src="<?= Yii::$app->homeUrl ?>image/file-up-blue.svg" alt="icon"
                                                     style="width: 16px; height: 16px;">
@@ -804,15 +804,11 @@ $this->title = 'Create Employee';
                                             <span class="ml-5 text-success" id="resume-check" style="display:none;">
                                                 <i class="fa fa-check" aria-hidden="true"></i>
                                             </span>
-                                            <input id="resume" style="display:none;" type="file" name="resume"
-                                                onchange="javascript:checkUploadFile(1)">
-                                            <input type="hidden" value="" id="hasResume">
-
                                         </div>
+                                        <input id="resume" style="display:none;" type="file" name="resume"
+                                            onchange="checkUploadFile(1)">
                                     </div>
                                 </div>
-
-
                             </div>
 
                             <div class="col-lg-11">
@@ -820,24 +816,21 @@ $this->title = 'Create Employee';
                                     style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)">
                                     <div class="row">
                                         <div class="col-lg-2 center-center">
-                                            <!-- <div class="choosefile text-dark">File</div> -->
                                             <img id="icon-file2" src="<?= Yii::$app->homeUrl ?>image/file-big.svg"
                                                 alt="icon" style="width: 40px; height: 40px;">
                                         </div>
-                                        <div id="file-uplode-name1" class="col-lg-6 col-md-6 col-12"
+                                        <div id="file-uplode-name2" class="col-lg-6 col-md-6 col-12"
                                             style="border-right:lightgray solid thin;">
                                             <label class="text-gray font-size-16 font-weight-500" for="name">
                                                 Upload Agreement Here
                                             </label>
                                             <div class="text-secondary text-gray  font-size-14">
-                                                <!-- Supported Files -->
                                                 <span class="text-gray font-size-12"> Supported - pdf, .doc,
                                                     .docx</span>
                                             </div>
-                                            <!-- <div class="text-secondary font-size-14">Maximum File Size 5 MB</div> -->
                                         </div>
                                         <div id="file-edit2" class="col-lg-4 col-md-6 col-12 text-center pt-13">
-                                            <label type="button" for="agreement"
+                                            <label id="agreement-btn" type="button" for="agreement"
                                                 class="text-blue font-size-16 font-weight-600">
                                                 Upload
                                                 <img src="<?= Yii::$app->homeUrl ?>image/file-up-blue.svg" alt="icon"
@@ -846,13 +839,16 @@ $this->title = 'Create Employee';
                                             <span class="ml-5 text-success" id="agreement-check" style="display:none;">
                                                 <i class="fa fa-check" aria-hidden="true"></i>
                                             </span>
-                                            <input id="agreement" style="display:none;" type="file" name="agreement"
-                                                onchange="javascript:checkUploadFile(2)">
-                                            <input type="hidden" value="" id="hasAgreement">
+
                                         </div>
+                                        <input id="agreement" style="display:none;" type="file" name="agreement"
+                                            onchange="javascript:checkUploadFile(2)">
                                     </div>
                                 </div>
                             </div>
+
+                            <input type="hidden" value="" id="hasResume">
+                            <input type="hidden" value="" id="hasAgreement">
 
                         </div>
 
@@ -880,9 +876,9 @@ $this->title = 'Create Employee';
                             data-bs-original-title=" Certificates and Skill Tags">
                         <hr class="hr-group">
                     </div>
-                    <div>
-                        <!-- body -->
-                        <div class="col-6">
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12 " style="border-right:lightgray solid thin;">
                             <span class=" font-size-16 font-weight-500">
                                 <span class="text-danger">* </span>
                                 Certificate Achievements
@@ -890,12 +886,78 @@ $this->title = 'Create Employee';
                                     data-placement="top" aria-label=" Certificates and Skill Tags"
                                     data-bs-original-title=" Certificates and Skill Tags">
                             </span>
-                            <div>
-                                <!-- เพิ่มรูป -->
-                            </div>
+                            <!-- เพิ่มรูป -->
+                            <ul id="schedule-list" class="list-unstyled small  m-0 p-0 mt-12">
+                                <li class="schedule-item" data-id="9"
+                                    style="padding: 13px 20px; background-color: #FFFFFF;">
+                                    <div class="row align-items-center dept-name">
+                                        <div class="col-10 dept-label" style="font-weight: 600; font-size: 16px;">
+                                            ชื่อ
+                                        </div>
+                                        <div class="col-2 text-end">
+                                            <a href="#" style="cursor: pointer;" onclick="tttt"
+                                                class="no-underline icon-delete">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                                    alt="Delete" class="pim-icon bin-icon transition-icon">
+                                            </a>
+                                            <a href="#" class="no-underline icon-edit" onclick="tttt">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/edit-blue.svg" alt="Edit"
+                                                    class="pim-icon edit-icon transition-icon"
+                                                    style="margin-top: -3px;">
+                                                <span class="text-blue edit-label transition-label"
+                                                    style="font-weight: 500;">Edit</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <button type="button" class="center-center bg-white mt-12"
+                                style="padding: 13px 20px; height: 40px; width: 100%; border-radius: 5px; border: 0.5px solid #CBD5E1;"
+                                onclick="addCertificateInput()">
+                                <span class="text-blue mr-6" style="font-weight: 600; font-size: 14px;"> Add
+                                    More
+                                </span>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-blue.svg" alt="LinkedIn"
+                                    style="width: 20px; height: 20px;">
+                            </button>
                         </div>
-                        <div class="col-6 company-group-edit bg-white">
 
+                        <div class="col-lg-6 col-md-6 col-12 pl-40">
+                            <div class="company-group-edit bg-white">
+                                <span class=" font-size-16 font-weight-500">
+                                    <span class="text-danger">* </span>
+                                    Certificate Achievements
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                        data-toggle="tooltip" data-placement="top"
+                                        aria-label=" Certificates and Skill Tags"
+                                        data-bs-original-title=" Certificates and Skill Tags">
+                                </span>
+                                <div class="input-group mt-12">
+                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                        <img id="flag"
+                                            src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-gray.svg"
+                                            alt="Website" style="width: 20px; height: 20px;">
+                                    </span>
+                                    <input type="text" name="tttt" id="tttt" class="form-control"
+                                        style=" border-left: none;  border-right: none;"
+                                        placeholder="e.g., Python, Data Analysis, Communication  ">
+                                    <span class="input-group-text" id="enterHint"
+                                        style="background-color: #ffff; border-left: none; ">
+                                        <div class="city-crad-company" id="hintText"
+                                            style="background: var(--HRVC---Light-Text, #94989C);"><img
+                                                src="<?= Yii::$app->homeUrl ?>image/enter-white.svg"
+                                                style="width: 24px; height: 24px;">
+                                            <span class="font-white">
+                                                Enter to Save
+                                            </span>
+                                        </div>
+                                    </span>
+                                </div>
+
+                                <div class="company-group-edit bg-white mt-20" style=" height: 141px;">
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1194,65 +1256,6 @@ $this->title = 'Create Employee';
             });
     });
 
-
-    function loadTeamsSelect(departmentId) {
-        fetch('<?= Yii::$app->homeUrl ?>setting/department/department-team-list', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
-                },
-                body: JSON.stringify({
-                    departmentId: departmentId
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                const teamSelect = document.getElementById('teamSelectId');
-                teamSelect.innerHTML =
-                    '<option value="" disabled selected hidden><?= Yii::t("app", "Select his/her team") ?></option>';
-
-                if (data && typeof data === 'object') {
-                    Object.values(data).forEach(team => {
-                        const option = document.createElement('option');
-                        option.value = team.teamId;
-                        option.textContent = team.teamName;
-                        teamSelect.appendChild(option);
-                    });
-                    teamSelect.disabled = false; // เปิดการใช้งาน dropdown
-                }
-            });
-    }
-
-    function loadTitlesSelect(departmentId) {
-        fetch('<?= Yii::$app->homeUrl ?>setting/department/department-title-list', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
-                },
-                body: JSON.stringify({
-                    departmentId: departmentId
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                const titleSelect = document.getElementById('titleSelectId');
-                titleSelect.innerHTML =
-                    '<option value="" disabled selected hidden><?= Yii::t("app", "What your his/her Tile?") ?></option>';
-
-                if (data && typeof data === 'object') {
-                    Object.values(data).forEach(title => {
-                        const option = document.createElement('option');
-                        option.value = title.titleId;
-                        option.textContent = title.titleName;
-                        titleSelect.appendChild(option);
-                    });
-                    titleSelect.disabled = false; // เปิดการใช้งาน dropdown
-                }
-            });
-    }
-
     document.getElementById('nationalityId').addEventListener('change', function() {
         const selectedOption = this.options[this.selectedIndex];
         const flagUrl = selectedOption.getAttribute('data-flag');
@@ -1266,86 +1269,6 @@ $this->title = 'Create Employee';
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="radioHighlight.js"></script>
     <script>
-    flatpickr("#birthdate-select", {
-        dateFormat: "d/m/Y",
-        maxDate: "today",
-        onChange: function(selectedDates, dateStr, instance) {
-            // เปลี่ยนข้อความใน #birthdate-select
-            document.getElementById("birthdate-select").innerHTML = `
-            ${dateStr} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
-        `;
-
-            // เซ็ตค่าวันเกิดใน hidden input
-            document.getElementById("birthDate").value = dateStr;
-
-            // เปลี่ยนรูปภาพ calendar เป็น calendar-blue.svg
-            const calendarImg = document.querySelector('#group-birtdate img');
-            if (calendarImg) {
-                calendarImg.src = "<?= Yii::$app->homeUrl ?>image/calendar-blue.svg";
-            }
-
-            // เปลี่ยน background-color และ border ของ input-group-text
-            const inputGroupText = document.querySelector('#group-birtdate .input-group-text');
-            if (inputGroupText) {
-                inputGroupText.style.backgroundColor = "rgb(215, 235, 255)";
-                inputGroupText.style.border = "0.5px solid rgb(190, 218, 255)";
-            }
-        }
-    });
-
-    flatpickr("#hiring-select", {
-        dateFormat: "d/m/Y",
-        maxDate: "today",
-        onChange: function(selectedDates, dateStr, instance) {
-            document.getElementById("hiringDate").value = dateStr;
-            document.getElementById("hiring-select").innerHTML = dateStr;
-
-            // เปลี่ยนสีพื้นหลัง & icon
-            document.getElementById("calendar-icon-hiring").style.backgroundColor = "rgb(215, 235, 255)";
-            document.getElementById("calendar-icon-hiring").style.border = "0.5px solid rgb(190, 218, 255)";
-            document.getElementById("calendar-img-hiring").src =
-                "<?= Yii::$app->homeUrl ?>image/calendar-blue.svg";
-        }
-    });
-
-    flatpickr("#startProbationPicker", {
-        inline: true,
-        dateFormat: "d/m/Y",
-        onChange: function(selectedDates, dateStr) {
-            window.startDate = dateStr; // เก็บค่า Start Date
-            updateSelectedDates();
-        }
-    });
-
-    // กำหนด Flatpickr สำหรับปฏิทินสิ้นสุด
-    flatpickr("#endProbationPicker", {
-        inline: true,
-        dateFormat: "d/m/Y",
-        onChange: function(selectedDates, dateStr) {
-            window.endDate = dateStr; // เก็บค่า End Date
-            updateSelectedDates();
-        }
-    });
-
-
-    document.getElementById('override-probation-employee').addEventListener('change', function() {
-        const hiddenInput = document.getElementById('override-probation-employee-hidden');
-        const multiDueTerm = document.getElementById('multi-due-term');
-
-        if (this.checked) {
-            hiddenInput.value = "1";
-            multiDueTerm.style.backgroundColor = ""; // หรือสีพื้นหลังปกติ เช่น "#fff"
-            multiDueTerm.style.pointerEvents = "auto"; // เปิดให้คลิกได้
-        } else {
-            hiddenInput.value = "0";
-            multiDueTerm.style.backgroundColor = "#e9ecef";
-            multiDueTerm.style.pointerEvents = "none"; // ปิดไม่ให้คลิก
-        }
-    });
-
-
-
-
     document.addEventListener("DOMContentLoaded", function() {
         initRadioSelection(); // เรียกใช้กับ `.radio-wrapper` ปกติ
         // หรือใส่ selector อื่นถ้ามีหลายกลุ่ม
