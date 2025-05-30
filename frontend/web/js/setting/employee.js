@@ -85,82 +85,75 @@ function deleteEmployee(employeeId) {
         });
     }
 }
-
 function checkUploadFile(type) {
+    if (type !== 1 && type !== 2) return;
 
-    if (type === 1) {
-        const input = document.getElementById("resume");
-        const file = input.files[0];
+    const inputId = (type === 1) ? "resume" : "agreement";
+    const hasInputId = (type === 1) ? "hasResume" : "hasAgreement";
+    const checkId = (type === 1) ? "resume-check" : "agreement-check";
 
-        if (file) {
-            // Get file extension
-            let fileName = file.name;
-            const fileExtension = fileName.split('.').pop().toLowerCase();
-            const maxLength = 26;
+    const input = document.getElementById(inputId);
+    const file = input?.files?.[0];
 
-            if (fileName.length > maxLength) {
-                const ext = fileExtension;
-                const baseName = fileName.substring(0, maxLength - 3);
-                fileName = baseName + '...';
-            }
+    const wrapperId = `upload-file${type}`;
+    const nameId = `file-uplode-name${type}`;
+    const eyeId = `eye-file${type}`;
+    const binId = `bin-file${type}`;
+    const refesId = `refes-file${type}`;
+    const iconId = `icon-file${type}`;
 
-            // Icon path logic
-            let iconSrc = $url + "image/ex-file.svg";
-            if (fileExtension === "pdf") {
-                iconSrc = $url + "image/pdf-file.svg";
-            }
+    if (file) {
+        let fileName = file.name;
+        const fileExtension = fileName.split('.').pop().toLowerCase();
+        const maxLength = 26;
 
-            // Get current time
-            const now = new Date();
-            const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            const date = now.toLocaleDateString('en-GB').split('/').join('/'); // dd/mm/yyyy
+        if (fileName.length > maxLength) {
+            fileName = fileName.substring(0, maxLength - 3) + '...';
+        }
 
-            // Replace content
-            document.getElementById("upload-file1").innerHTML = `
-                <div class="row">
-                    <div class="col-lg-2 center-center">
-                        <img id="icon-file1" src="${iconSrc}" alt="icon" style="width: 40px; height: 40px;">
-                    </div>
-                    <div id="file-uplode-name1" class="col-lg-6 col-md-6 col-12" style="border-right:lightgray solid thin;">
-                        <label class="font-size-16 font-weight-600" for="name">
-                            ${fileName}
-                        </label>
-                        <div class="text-secondary text-gray font-size-14">
-                            <span class="text-gray font-size-12">${time} • ${date}</span>
-                        </div>
-                    </div>
-                    <div id="file-edit1" class="col-lg-4 col-md-6 col-12 text-center pt-13">
-                        <a href="#" onclick="viewFile('${fileName}')">
-                            <img id="eye-file1" src="${$url}images/icons/Settings/eye.svg" alt="icon" style="width: 23px; height: 23px;">
-                        </a>
-                        <a href="#" onclick="removeFile(1)">
-                            <img id="bin-file1" src="${$url}images/icons/Settings/binred.svg" alt="icon" style="width: 20px; height: 20px;">
-                        </a>
-                        <a href="#" onclick="resetUpload(1)">
-                            <img id="refes-file1" src="${$url}image/refes-blue.svg" alt="icon" style="width: 18px; height: 18px;">
-                        </a>
+        let iconSrc = $url + "image/ex-file.svg";
+        if (fileExtension === "pdf") {
+            iconSrc = $url + "image/pdf-file.svg";
+        }
+
+        const now = new Date();
+        const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const date = now.toLocaleDateString('en-GB');
+
+        document.getElementById(wrapperId).innerHTML = `
+            <div class="row">
+                <div class="col-lg-2 center-center">
+                    <img id="${iconId}" src="${iconSrc}" alt="icon" style="width: 40px; height: 40px;">
+                </div>
+                <div id="${nameId}" class="col-lg-6 col-md-6 col-12" style="border-right:lightgray solid thin;">
+                    <label class="font-size-16 font-weight-600" for="name">${fileName}</label>
+                    <div class="text-secondary text-gray font-size-14">
+                        <span class="text-gray font-size-12">${time} • ${date}</span>
                     </div>
                 </div>
-            `;
-            document.getElementById("upload-file1").style.border = "1px solid var(--Stroke-Bluish-Gray, #BBCDDE)";
+                <div id="file-edit${type}" class="col-lg-4 d-flex justify-content-center align-items-center gap-3">
+                    <a href="#" onclick="viewFile('${fileName}')">
+                        <img id="${eyeId}" src="${$url}images/icons/Settings/eye.svg" alt="icon" style="width: 23px; height: 23px;">
+                    </a>
+                    <a href="#" class="mt-5 ml-9" onclick="removeFile(${type})">
+                        <img id="${binId}" src="${$url}images/icons/Settings/binred.svg" alt="icon" style="width: 28px; height: 28px;">
+                    </a>
+                    <a href="#" onclick="resetUpload(${type})">
+                        <img id="${refesId}" src="${$url}image/refes-blue.svg" alt="icon" style="width: 18px; height: 18px;">
+                    </a>
+                </div>
+            </div>
+        `;
 
-            document.getElementById("hasResume").value = 1;
-        } else {
-            document.getElementById("hasResume").value = '';
-            document.getElementById("resume-check").style.display = 'none';
-        }
-    }
-
-    if (type == 2) {
-        if ($("#agreement").length > 0) {
-            $("#hasAgreement").val(1);
-            $("#agreement-check").show()
-        } else {
-            $("#hasAgreement").val('');
-            $("#agreement-check").hide()
-        }
+        document.getElementById(wrapperId).style.border = "1px solid var(--Stroke-Bluish-Gray, #BBCDDE)";
+        document.getElementById(hasInputId).value = 1;
+        document.getElementById(checkId).style.display = 'inline';
+    } else {
+        document.getElementById(hasInputId).value = '';
+        document.getElementById(checkId).style.display = 'none';
     }
 }
+
 
 function viewFile(fileName) {
     alert("Preview file: " + fileName);

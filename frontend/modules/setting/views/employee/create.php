@@ -170,8 +170,10 @@ $this->title = 'Create Employee';
                                             <?= Yii::t('app', 'Select preferred language') ?>
                                         </option>
                                         <?php
-                                        foreach ($languages as $lang) {
-                                            echo '<option value="' . htmlspecialchars($lang['languageId']) . '">' . htmlspecialchars($lang['languageName']) . '</option>';
+                                        if (isset($languages) && count($languages) > 0) {
+                                            foreach ($languages as $lang) {
+                                                echo '<option value="' . htmlspecialchars($lang['languageId']) . '">' . htmlspecialchars($lang['languageName']) . '</option>';
+                                            }
                                         }
                                         ?>
                                     </select>
@@ -814,7 +816,7 @@ $this->title = 'Create Employee';
                             </div>
 
                             <div class="col-lg-11">
-                                <div class="form-control"
+                                <div id="upload-file2" class="form-control"
                                     style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)">
                                     <div class="row">
                                         <div class="col-lg-2 center-center">
