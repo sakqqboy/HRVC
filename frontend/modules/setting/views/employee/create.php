@@ -776,12 +776,10 @@ $this->title = 'Create Employee';
                             <span class="font-size-14 font-weight: 500;">Relevant Files</span>
 
                             <div class="col-lg-11 mt-5 mb-24">
-                                <!-- <div class="dashed"> -->
-                                <div class="form-control"
+                                <div id="upload-file1" class="form-control"
                                     style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)">
                                     <div class="row">
                                         <div class="col-lg-2 center-center">
-                                            <!-- <div class="choosefile text-dark">File</div> -->
                                             <img id="icon-file1" src="<?= Yii::$app->homeUrl ?>image/file-big.svg"
                                                 alt="icon" style="width: 40px; height: 40px;">
                                         </div>
@@ -791,10 +789,8 @@ $this->title = 'Create Employee';
                                                 Upload Resume/CV here
                                             </label>
                                             <div class="text-secondary text-gray font-size-14">
-                                                <!-- Supported Files -->
                                                 <span class="text-gray font-size-12">Supported - pdf, .doc, .docx</span>
                                             </div>
-                                            <!-- <div class="text-secondary font-size-14">Maximum File Size 5 MB</div> -->
                                         </div>
                                         <div id="file-edit1" class="col-lg-4 col-md-6 col-12 text-center pt-13">
                                             <label for="resume" class="text-blue font-size-16 font-weight-600"
@@ -813,6 +809,8 @@ $this->title = 'Create Employee';
                                         </div>
                                     </div>
                                 </div>
+
+
                             </div>
 
                             <div class="col-lg-11">

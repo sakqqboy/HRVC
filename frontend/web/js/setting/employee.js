@@ -85,16 +85,72 @@ function deleteEmployee(employeeId) {
         });
     }
 }
+
 function checkUploadFile(type) {
-    if (type == 1) {
-        if ($("#resume").length > 0) {
-            $("#hasResume").val(1);
-            $("#resume-check").show()
+
+    if (type === 1) {
+        const input = document.getElementById("resume");
+        const file = input.files[0];
+
+        if (file) {
+            // Get file extension
+            let fileName = file.name;
+            const fileExtension = fileName.split('.').pop().toLowerCase();
+            const maxLength = 26;
+
+            if (fileName.length > maxLength) {
+                const ext = fileExtension;
+                const baseName = fileName.substring(0, maxLength - 3);
+                fileName = baseName + '...';
+            }
+
+            // Icon path logic
+            let iconSrc = $url + "image/ex-file.svg";
+            if (fileExtension === "pdf") {
+                iconSrc = $url + "image/pdf-file.svg";
+            }
+
+            // Get current time
+            const now = new Date();
+            const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const date = now.toLocaleDateString('en-GB').split('/').join('/'); // dd/mm/yyyy
+
+            // Replace content
+            document.getElementById("upload-file1").innerHTML = `
+                <div class="row">
+                    <div class="col-lg-2 center-center">
+                        <img id="icon-file1" src="${iconSrc}" alt="icon" style="width: 40px; height: 40px;">
+                    </div>
+                    <div id="file-uplode-name1" class="col-lg-6 col-md-6 col-12" style="border-right:lightgray solid thin;">
+                        <label class="font-size-16 font-weight-600" for="name">
+                            ${fileName}
+                        </label>
+                        <div class="text-secondary text-gray font-size-14">
+                            <span class="text-gray font-size-12">${time} • ${date}</span>
+                        </div>
+                    </div>
+                    <div id="file-edit1" class="col-lg-4 col-md-6 col-12 text-center pt-13">
+                        <a href="#" onclick="viewFile('${fileName}')">
+                            <img id="eye-file1" src="${$url}images/icons/Settings/eye.svg" alt="icon" style="width: 23px; height: 23px;">
+                        </a>
+                        <a href="#" onclick="removeFile(1)">
+                            <img id="bin-file1" src="${$url}images/icons/Settings/binred.svg" alt="icon" style="width: 20px; height: 20px;">
+                        </a>
+                        <a href="#" onclick="resetUpload(1)">
+                            <img id="refes-file1" src="${$url}image/refes-blue.svg" alt="icon" style="width: 18px; height: 18px;">
+                        </a>
+                    </div>
+                </div>
+            `;
+            document.getElementById("upload-file1").style.border = "1px solid var(--Stroke-Bluish-Gray, #BBCDDE)";
+
+            document.getElementById("hasResume").value = 1;
         } else {
-            $("#hasResume").val('');
-            $("#resume-check").hide()
+            document.getElementById("hasResume").value = '';
+            document.getElementById("resume-check").style.display = 'none';
         }
     }
+
     if (type == 2) {
         if ($("#agreement").length > 0) {
             $("#hasAgreement").val(1);
@@ -103,6 +159,59 @@ function checkUploadFile(type) {
             $("#hasAgreement").val('');
             $("#agreement-check").hide()
         }
+    }
+}
+
+function viewFile(fileName) {
+    alert("Preview file: " + fileName);
+    // หรือใช้ window.open(pathToFile) ถ้ามี path
+}
+
+
+function removeFile(type) {
+    if (type === 1) {
+        // สร้าง HTML แบบดั้งเดิมของ upload file กลับไปแทนที่ div
+        const originalHTML = `
+            <div class="row">
+                <div class="col-lg-2 center-center">
+                    <img id="icon-file1" src="${$url}image/file-big.svg"
+                        alt="icon" style="width: 40px; height: 40px;">
+                </div>
+                <div id="file-uplode-name1" class="col-lg-6 col-md-6 col-12"
+                    style="border-right:lightgray solid thin;">
+                    <label class="text-gray font-size-16 font-weight-500" for="name">
+                        Upload Resume/CV here
+                    </label>
+                    <div class="text-secondary text-gray font-size-14">
+                        <span class="text-gray font-size-12">Supported - pdf, .doc, .docx</span>
+                    </div>
+                </div>
+                <div id="file-edit1" class="col-lg-4 col-md-6 col-12 text-center pt-13">
+                    <label for="resume" class="text-blue font-size-16 font-weight-600" style="cursor: pointer;">
+                        Upload
+                        <img src="${$url}image/file-up-blue.svg" alt="icon"
+                            style="width: 16px; height: 16px;">
+                    </label>
+                    <span class="ml-5 text-success" id="resume-check" style="display:none;">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    </span>
+                    <input id="resume" style="display:none;" type="file" name="resume"
+                        onchange="javascript:checkUploadFile(1)">
+                    <input type="hidden" value="" id="hasResume">
+                </div>
+            </div>
+        `;
+        document.getElementById("upload-file1").style.border = "border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)";
+
+        // แทนที่ div ด้วย HTML ดั้งเดิม
+        document.getElementById("upload-file1").innerHTML = originalHTML;
+    }
+}
+
+function resetUpload(type) {
+    if (type === 1) {
+        document.getElementById("resume").value = '';
+        checkUploadFile(1);
     }
 }
 
