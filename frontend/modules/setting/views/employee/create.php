@@ -882,8 +882,8 @@ $this->title = 'Create Employee';
                     </div>
                     <div>
                         <!-- body -->
-                        <div>
-                            <span class="font-size-16 font-weight-500">
+                        <div class="col-6">
+                            <span class=" font-size-16 font-weight-500">
                                 <span class="text-danger">* </span>
                                 Certificate Achievements
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
@@ -894,7 +894,7 @@ $this->title = 'Create Employee';
                                 <!-- เพิ่มรูป -->
                             </div>
                         </div>
-                        <div>
+                        <div class="col-6 company-group-edit bg-white">
 
                         </div>
                     </div>
