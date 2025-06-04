@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use DateTime;
 use Exception;
 use Yii;
 
@@ -680,5 +681,23 @@ class ModelMaster extends \yii\db\ActiveRecord
         $data["nextMonth"] = $nextMonth;
         $data["nextYear"] = $nextYear;
         return $data;
+    }
+    public static function isOverthanMonth($date, $month)
+    {
+        if ($date != '') {
+            $givenDate = new DateTime($date);
+            $today = new DateTime();
+
+            // เพิ่ม 1 เดือนจากวันที่ที่กำหนด
+            $oneMonthLater = clone $givenDate;
+            $oneMonthLater->modify('+' . $month . ' month');
+
+            // เปรียบเทียบวันนี้กับวันที่ +1 เดือน
+            if ($today > $oneMonthLater) {
+                return 1; // เกิน 1 เดือนแล้ว
+            } else {
+                return 0; // ยังไม่เกิน
+            }
+        }
     }
 }

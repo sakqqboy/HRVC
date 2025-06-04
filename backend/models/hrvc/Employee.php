@@ -4,6 +4,7 @@ namespace backend\models\hrvc;
 
 use Yii;
 use \backend\models\hrvc\master\EmployeeMaster;
+use common\helpers\Path;
 use Exception;
 
 /**
@@ -83,20 +84,19 @@ class Employee extends \backend\models\hrvc\master\EmployeeMaster
     public static function employeeImage($employeeId)
     {
         $employee = Employee::find()
-            ->select('picture,gender')
+            ->select('picture')
             ->where(["employeeId" => $employeeId])
             ->asArray()
             ->one();
-        $img = "image/user.png";
+        $img = "images/employee/profile/employee-no-image.svg";
+        $url = Path::frontendUrl() . $employee["picture"];
+        $headers = @get_headers($url);
         if (isset($employee) && !empty($employee)) {
-            if ($employee["picture"] != '') {
+            if ($employee["picture"] != '' && $headers && strpos($headers[0], '200') !== false) {
+                //    throw new Exception(Path::frontendUrl() . $employee["picture"]);
                 $img = $employee["picture"];
             } else {
-                if ($employee["gender"] == 1) {
-                    $img = "image/user.png";
-                } else {
-                    $img = "image/lady.png";
-                }
+                $img = "images/employee/profile/employee-no-image.svg";
             }
         }
         return $img;

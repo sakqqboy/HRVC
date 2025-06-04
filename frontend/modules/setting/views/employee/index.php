@@ -70,144 +70,207 @@ $this->title = 'Employee';
 			</div>
 		</div>
 	</div>
-	<div class="col-12 mt-20">
-		<div class="card example-1 scrollbar-ripe-malinka">
-			<div class="card-body">
-				<div class="row">
-					<?php
-					if (isset($employees) && count($employees) > 0) {
-						foreach ($employees as $employee) :
-					?>
-							<div class="col-lg-2 col-md-6 col-6" id="employee-<?= $employee['employeeId'] ?>">
-								<div class="alert alert-employee pr-5 pl-5">
-									<div class="row" style="margin-top: -13px;">
-										<div class="col-lg-10 col-md-10 col-10 text-end">
-											<?php
-											$employeeStatus = EmployeeStatus::employeeStatus($employee['employeeId']);
-											if ($employeeStatus["name"] == "Active") {
-												$text = 'success0';
-											} else {
-												$text = 'danger';
-											}
-											?>
-											<span class="badge rounded-pill bg-<?= $text ?>" style="font-size: 7px;"><?= $employeeStatus["name"] ?></span>
-										</div>
-										<div class="col-lg-2 col-md-2 col-2 text-end" onclick="javascript:showAction(<?= $employee['employeeId'] ?>)" style="cursor: pointer;">
-											<div class="col-12 employee-ellipsis">
-												<strong><i class="fa fa-ellipsis-v" aria-hidden="true"></i></strong>
-											</div>
-										</div>
-										<div class="employee-action" id="employee-action-<?= $employee['employeeId'] ?>">
-											<a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employee['employeeId']]) ?>" class="btn btn-outline-dark btn-sm font-size-12">
-												<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-											</a>
-											<a href="javascript:deleteEmployee(<?= $employee['employeeId'] ?>)" class="btn btn-outline-danger btn-sm font-size-14 mt-5">
-												<i class="fa fa-trash" aria-hidden="true"></i>
-											</a>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-lg-5 col-md-6 col-6">
-											<div class="col-12">
-												<?php
-												if ($employee['picture'] == "") {
-													if ($employee['gender'] == 1) {
-														$picture = 'image/user.png';
-													} else {
-														$picture = 'image/lady.jpg';
-													}
-												} else {
-													$picture = $employee['picture'];
-												}
-												?>
-												<img src="<?= Yii::$app->homeUrl . $picture ?>" class="image-employee">
-											</div>
-										</div>
-										<div class="col-lg-7 col-md-6 col-6">
-											<div class="col-12 emplo-tadawoki">
-												<?= $employee["employeeFirstname"] ?>
-											</div>
-											<div class="col-12 emplo-tadawoki mt-5">
-												<?= $employee["employeeSurename"] ?>
-											</div>
-											<div class="col-12 emplo-permanent">
-												<span class="badge bg-info text-dark"><?= $employee["employeeConditionName"] ?></span>
-											</div>
-										</div>
-									</div>
+	<div class="col-12 mt-20 pr-15 pl-15">
+		<div class="pim-body bg-white" style="border-radius:10px;">
 
-									<div class="col-12 pt-5 pb-5 mt-10 pl-5 pr-5" style="background-color:#F0F8FF;border-radius:3px;">
+			<div class="row">
+				<?php
+				if (isset($employees) && count($employees) > 0) {
+					foreach ($employees as $employeeId => $employee) :
+						//throw new exception(print_r($employees, true));
+				?>
+						<div class="col-lg-4 col-md-6 col-12 mt-15" id="employee-<?= $employeeId ?>">
+							<div class="employee-box ">
+								<div class="row">
+									<div class="col-3 text-center" style="position:relative;">
+										<img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>" class="image-employee2">
+										<div class="status-badge"><?= $employee["status"] ?></div>
+									</div>
+									<div class="col-7 pl-0 pr-0">
+										<div class="col-12 pr-0 pl-0 profile-employee-name " style="margin-top: -5px;"><?= $employee["employeeName"] ?></div>
+										<div class="col-12 pr-0 pl-0 profile-employee-title mt-3">
+											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/star.svg" class="profile-icon" style="margin-top: -3px;">
+											<?= $employee["titleName"] ?>
+										</div>
+										<div class="col-12 pr-0 pl-0 profile-employee-department ">
+											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/share.svg" class="profile-icon">
+											<?= $employee["departmentName"] ?>
+										</div>
+										<div class="col-12 pr-0 pl-0 profile-employee-team">
+											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" class="profile-icon">
+											<?= $employee["teamName"] ?>
+										</div>
+
+									</div>
+									<div class="col-lg-2 text-end pr-0 pl-0" onclick="javascript:showAction(<?= $employeeId ?>)" style="cursor: pointer;">
+										<a href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>" style="text-decoration: none;">
+											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" class="pim-icon">
+										</a>
+										<a href="javascript:deleteEmployee(<?= $employeeId ?>)">
+											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/threedot.svg" class="pim-icon">
+										</a>
+									</div>
+									<div class="employee-action" id="employee-action-<?= $employeeId ?>">
+
+										<a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>">
+											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" class="pim-icon">
+										</a>
+										<a href="javascript:deleteEmployee(<?= $employeeId ?>)" class="btn btn-outline-danger btn-sm font-size-14 mt-5">
+											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/threedot.svg" class="pim-icon">
+										</a>
+									</div>
+								</div>
+
+								<div class="col-12 employee-contact-box mt-25">
+									<div class="row">
+										<div class="col-lg-6 col-md-6 col-6">
+											<div class="col-12 lead-programmer">
+												<?= $employee["titleName"] ?>
+											</div>
+											<div class="col-12 lead-it mt-3">
+												<?= $employee["departmentName"] ?>
+											</div>
+										</div>
+										<div class="col-lg-6 col-md-6 col-6">
+											<div class="col-12 lead-programmer">
+												<i class="fa fa-calendar" aria-hidden="true"></i> Hiring Date
+											</div>
+											<div class="col-12 lead-it mt-3">
+												<?= $employee['joinDate'] ?>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 mt-25">
 										<div class="row">
-											<div class="col-lg-6 col-md-6 col-6">
-												<div class="col-12 lead-programmer">
-													<?= Title::titleName($employee["titleId"]) ?>
-												</div>
-												<div class="col-12 lead-it mt-3">
-													<?= Department::departmentNAme($employee["departmentId"]) ?>
+											<div class="col-lg-2 col-md-6 col-2">
+												<div class="col-12" style="margin-top: -10px;">
+													<i class="fa fa-envelope-o envelope-send" aria-hidden="true"></i>
 												</div>
 											</div>
-											<div class="col-lg-6 col-md-6 col-6">
-												<div class="col-12 lead-programmer">
-													<i class="fa fa-calendar" aria-hidden="true"></i> Hiring Date
-												</div>
-												<div class="col-12 lead-it mt-3">
-													<?= ModelMaster::dateNumberDash($employee['hireDate']) ?>
+											<div class="col-lg-10 col-md-6 col-10 pr-0 pl-0">
+												<div class="col-12 employee-email mt-3 ">
+													<?= $employee["email"] ?>
 												</div>
 											</div>
-										</div>
-										<div class="col-12 mt-5">
-											<div class="row">
-												<div class="col-lg-2 col-md-6 col-2">
-													<div class="col-12" style="margin-top: -10px;">
-														<i class="fa fa-envelope-o envelope-send" aria-hidden="true"></i>
-													</div>
+											<div class="col-lg-2 col-md-6 col-2">
+												<div class="col-12" style="margin-top: -10px;">
+													<i class="fa fa-phone envelope-send" aria-hidden="true"></i>
 												</div>
-												<div class="col-lg-10 col-md-6 col-10 pr-0 pl-0">
-													<div class="col-12 employee-email mt-3 ">
-														<?= $employee["companyEmail"] ?>
-													</div>
+											</div>
+											<div class="col-lg-10 col-md-6 col-10  pr-0 pl-0">
+												<div class="col-12 envelope-mail">
+													<?= $employee["telephoneNumber"] ?>
 												</div>
-												<div class="col-lg-2 col-md-6 col-2">
-													<div class="col-12" style="margin-top: -10px;">
-														<i class="fa fa-phone envelope-send" aria-hidden="true"></i>
-													</div>
+											</div>
+											<div class="col-lg-2 col-md-6 col-2">
+												<div class="col-12" style="margin-top: -10px;">
+													<i class="fa fa-user envelope-send" aria-hidden="true"></i>
 												</div>
-												<div class="col-lg-10 col-md-6 col-10  pr-0 pl-0">
-													<div class="col-12 envelope-mail">
-														<?= $employee["telephoneNumber"] ?>
-													</div>
-												</div>
-												<div class="col-lg-2 col-md-6 col-2">
-													<div class="col-12" style="margin-top: -10px;">
-														<i class="fa fa-user envelope-send" aria-hidden="true"></i>
-													</div>
-												</div>
-												<div class="col-lg-10 col-md-6 col-10  pr-0 pl-0">
-													<div class="col-12 employee-email mt-3">
-														<?= $employee["employeeNumber"] ?>
-													</div>
+											</div>
+											<div class="col-lg-10 col-md-6 col-10  pr-0 pl-0">
+												<div class="col-12 employee-email mt-3">
+													<?= $employee["employeeNumber"] ?>
 												</div>
 											</div>
 										</div>
-										<div class="col-12 employee-view">
-											<a href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => $employee['employeeId']]) ?>" style="text-decoration: none;">
-												View Profile
-											</a>
-										</div>
+									</div>
+									<div class="col-12 employee-view">
+										<a href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>" style="text-decoration: none;">
+											View Profile
+										</a>
 									</div>
 								</div>
 							</div>
+						</div>
 
-						<?php
-						endforeach;
-					} else { ?>
-						<div class="col-12 text-center font-b font-size-16"> Employee not found.</div>
 					<?php
-					}
-					?>
-				</div>
-				<input type="hidden" id="show-action" value="">
+					endforeach;
+				} else { ?>
+					<div class="col-12 text-center font-b font-size-16"> Employee not found.</div>
+				<?php
+				}
+				?>
 			</div>
+			<input type="hidden" id="show-action" value="">
 		</div>
 	</div>
 </div>
+<style>
+	.employee-box {
+		background-color: #FBFCFF;
+		height: 368;
+		gap: 10px;
+		border-radius: 5px;
+		padding-top: 14px;
+		padding-bottom: 14px;
+		padding-left: 10px;
+		padding-right: 10px;
+		padding: 20px 10px 20px 10px;
+		border: #BBCDDE solid thin;
+	}
+
+	.employee-contact-box {
+		background-color: #FFFFFF;
+		border-radius: 5px;
+		padding: 20px 16px 20px 16px;
+		border: #BBCDDE solid thin;
+	}
+
+	.image-employee2 {
+		display: block;
+		margin: 0 auto;
+		/* จัดรูปภาพให้ตรงกลางแนวนอน */
+		max-width: 100%;
+		height: auto;
+		border-radius: 100%;
+	}
+
+	.profile-employee-name {
+		font-size: 16px;
+		font-weight: 600;
+		color: #30313D;
+
+	}
+
+	.profile-employee-department {
+		font-size: 13px;
+		font-weight: 400;
+		color: #30313D;
+		line-height: 18px;
+
+	}
+
+	.profile-employee-team {
+		font-size: 13px;
+		font-weight: 400;
+		color: #666666;
+		line-height: 18px;
+	}
+
+	.profile-employee-title {
+		font-size: 14px;
+		font-weight: 500;
+		color: #30313D;
+		line-height: 18px;
+	}
+
+	.profile-icon {
+		width: 14px;
+		height: 14px;
+	}
+
+	.status-badge {
+		width: 75px;
+		height: 20px;
+		background-color: #20598D;
+		color: white;
+		text-align: center;
+		line-height: 20px;
+		font-size: 12px;
+		font-weight: 600;
+		border-radius: 12px;
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+</style>
