@@ -60,7 +60,6 @@
                         </label>
                         <!-- <input type="text" class="form-control font-size-14" value=""> -->
 
-                        <!-- ✅ แก้ ID ให้ไม่ซ้ำ -->
                         <div class="input-group" id="cer-due-term-group" style="position: relative;">
                             <span class="input-group-text pb-10 pt-10" id="due-term-icon-group"
                                 style="background-color: #C3C3C3; border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1; height: 40px;">
@@ -71,8 +70,6 @@
                                 <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" data-icon="calendar"
                                     id="end-img-cer" alt="Calendar" style="width: 16px; height: 16px;">
                             </span>
-
-                            <!-- ✅ ตัวที่เปิด datepicker -->
                             <div class="form-control" id="multi-cer-term"
                                 style="border-radius: 53px; text-align: center; cursor: pointer; position: absolute; width: 100%; height: 40px;">
                                 <span class="font-size-12 font-weight-500 ml-60" id="cer-date-label">
@@ -80,15 +77,11 @@
                                 </span>
                                 <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                             </div>
-
-                            <!-- ✅ hidden -->
                             <input type="hidden" id="fromCerDate" name="fromDate"
                                 value="<?= isset($data['cerStart']) ? $data['cerStart'] : '' ?>" required>
                             <input type="hidden" id="toCerDate" name="toDate"
                                 value="<?= isset($data['cerEnd']) ? $data['cerEnd'] : '' ?>" required>
                         </div>
-
-                        <!-- ✅ ปฏิทิน (แสดงเฉพาะ Flatpickr) -->
                         <div class="calendar-container" id="flatpickrContainer"
                             style="display: none; position: absolute; padding: 10px; border: 1px solid #ddd; border-radius: 10px; background: #fff; width: 350px; gap: 3px; z-index: 1;">
                             <input type="text" id="rangeCalendarInput" value="start date - end date"
@@ -162,79 +155,79 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
-const calendarContainer = document.getElementById("flatpickrContainer");
-const trigger = document.getElementById("multi-cer-term");
-const label = document.getElementById("cer-date-label");
-const startInput = document.getElementById("fromCerDate");
-const endInput = document.getElementById("toCerDate");
-const rangeInput = document.getElementById("rangeCalendarInput");
-const checkbox = document.getElementById("noExpiryCheckbox");
+// const calendarContainer = document.getElementById("flatpickrContainer");
+// const trigger = document.getElementById("multi-cer-term");
+// const label = document.getElementById("cer-date-label");
+// const startInput = document.getElementById("fromCerDate");
+// const endInput = document.getElementById("toCerDate");
+// const checkbox = document.getElementById("noExpiryCheckbox");
 
-// เปิด flatpickr แบบ range
-flatpickr(rangeInput, {
-    mode: "range",
-    dateFormat: "Y-m-d",
-    defaultDate: [
-        startInput.value || null,
-        endInput.value || null
-    ],
-    onChange: function(selectedDates, dateStr, instance) {
-        if (selectedDates.length === 2) {
-            const [start, end] = selectedDates;
-            const formattedStart = flatpickr.formatDate(start, "Y-m-d");
-            const formattedEnd = flatpickr.formatDate(end, "Y-m-d");
+// // เปิด flatpickr แบบ range
+// const rangeInput = document.getElementById("rangeCalendarInput");
+// flatpickr(rangeInput, {
+//     mode: "range",
+//     dateFormat: "Y-m-d",
+//     defaultDate: [
+//         startInput.value || null,
+//         endInput.value || null
+//     ],
+//     onChange: function(selectedDates, dateStr, instance) {
+//         if (selectedDates.length === 2) {
+//             const [start, end] = selectedDates;
+//             const formattedStart = flatpickr.formatDate(start, "Y-m-d");
+//             const formattedEnd = flatpickr.formatDate(end, "Y-m-d");
 
-            startInput.value = formattedStart;
-            endInput.value = formattedEnd;
-            label.innerText = `${formattedStart} - ${formattedEnd}`;
+//             startInput.value = formattedStart;
+//             endInput.value = formattedEnd;
+//             label.innerText = `${formattedStart} - ${formattedEnd}`;
 
-            // ปิด calendar
-            calendarContainer.style.display = "none";
-        }
-    }
-});
+//             // ปิด calendar
+//             calendarContainer.style.display = "none";
+//         }
+//     }
+// });
 
-// แสดง/ซ่อน calendar
-trigger.addEventListener("click", function() {
-    // alert('dd');
-    calendarContainer.style.display = (calendarContainer.style.display === "none" ||
-        calendarContainer.style.display === "") ? "block" : "none";
-});
+// // แสดง/ซ่อน calendar
+// trigger.addEventListener("click", function() {
+//     // alert('dd');
+//     calendarContainer.style.display = (calendarContainer.style.display === "none" ||
+//         calendarContainer.style.display === "") ? "block" : "none";
+// });
 
-// ปิดเมื่อคลิกข้างนอก
-document.addEventListener("click", function(event) {
-    if (!calendarContainer.contains(event.target) && !trigger.contains(event.target)) {
-        calendarContainer.style.display = "none";
-    }
-});
+// // ปิดเมื่อคลิกข้างนอก
+// document.addEventListener("click", function(event) {
+//     if (!calendarContainer.contains(event.target) && !trigger.contains(event.target)) {
+//         calendarContainer.style.display = "none";
+//     }
+// });
 
-// โหลด label ถ้ามีค่าจากเดิม
-if (startInput.value && endInput.value) {
-    label.innerText = `${startInput.value} - ${endInput.value}`;
-}
+// // โหลด label ถ้ามีค่าจากเดิม
+// if (startInput.value && endInput.value) {
+//     label.innerText = `${startInput.value} - ${endInput.value}`;
+// }
 
-// ✅ ปิด/เปิดการเลือกวันตาม checkbox
-checkbox.addEventListener("change", function() {
-    const isDisabled = checkbox.checked;
-    // alert('ddd');
-    if (isDisabled) {
-        // ปิดปฏิทิน
-        calendarContainer.style.display = "none";
+// // ✅ ปิด/เปิดการเลือกวันตาม checkbox
+// checkbox.addEventListener("change", function() {
+//     const isDisabled = checkbox.checked;
+//     // alert('ddd');
+//     if (isDisabled) {
+//         // ปิดปฏิทิน
+//         calendarContainer.style.display = "none";
 
-        // ล้างค่า
-        startInput.value = '';
-        endInput.value = '';
-        rangeInput.value = '';
-        label.innerText = 'No expiry date';
-        trigger.style.pointerEvents = 'none';
-        trigger.style.opacity = '0.6';
-    } else {
-        // เปิดให้เลือกวันได้
-        trigger.style.pointerEvents = 'auto';
-        trigger.style.opacity = '1';
-        label.innerText = (startInput.value && endInput.value) ?
-            `${startInput.value} - ${endInput.value}` :
-            'start date - end date';
-    }
-});
+//         // ล้างค่า
+//         startInput.value = '';
+//         endInput.value = '';
+//         rangeInput.value = '';
+//         label.innerText = 'No expiry date';
+//         trigger.style.pointerEvents = 'none';
+//         trigger.style.opacity = '0.6';
+//     } else {
+//         // เปิดให้เลือกวันได้
+//         trigger.style.pointerEvents = 'auto';
+//         trigger.style.opacity = '1';
+//         label.innerText = (startInput.value && endInput.value) ?
+//             `${startInput.value} - ${endInput.value}` :
+//             'start date - end date';
+//     }
+// });
 </script>

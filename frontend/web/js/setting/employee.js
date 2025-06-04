@@ -614,6 +614,101 @@ flatpickr("#endProbationPicker", {
 });
 
 
+// เปิด flatpickr แบบ range
+const rangeInput = document.getElementById("rangeCalendarInput");
+flatpickr(rangeInput, {
+    mode: "range",
+    dateFormat: "Y-m-d",
+    defaultDate: [
+        startInput.value || null,
+        endInput.value || null
+    ],
+    onChange: function (selectedDates, dateStr, instance) {
+        if (selectedDates.length === 2) {
+            const [start, end] = selectedDates;
+            const formattedStart = flatpickr.formatDate(start, "Y-m-d");
+            const formattedEnd = flatpickr.formatDate(end, "Y-m-d");
+
+            startInput.value = formattedStart;
+            endInput.value = formattedEnd;
+            label.innerText = `${formattedStart} - ${formattedEnd}`;
+
+            // ปิด calendar
+            calendarContainer.style.display = "none";
+        }
+    }
+});
+
+function initCerDateCalendar() {
+    const calendarContainer = document.getElementById("flatpickrContainer");
+    const trigger = document.getElementById("multi-cer-term");
+    const label = document.getElementById("cer-date-label");
+    const startInput = document.getElementById("fromCerDate");
+    const endInput = document.getElementById("toCerDate");
+    const checkbox = document.getElementById("noExpiryCheckbox");
+    const rangeInput = document.getElementById("rangeCalendarInput");
+
+    if (!calendarContainer || !trigger || !rangeInput || !checkbox) {
+        console.warn('Calendar elements not found. Maybe popup not fully rendered yet.');
+        return;
+    }
+
+    flatpickr(rangeInput, {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        defaultDate: [
+            startInput.value || null,
+            endInput.value || null
+        ],
+        onChange: function (selectedDates, dateStr, instance) {
+            if (selectedDates.length === 2) {
+                const [start, end] = selectedDates;
+                const formattedStart = flatpickr.formatDate(start, "Y-m-d");
+                const formattedEnd = flatpickr.formatDate(end, "Y-m-d");
+
+                startInput.value = formattedStart;
+                endInput.value = formattedEnd;
+                label.innerText = `${formattedStart} - ${formattedEnd}`;
+                calendarContainer.style.display = "none";
+            }
+        }
+    });
+
+    trigger.addEventListener("click", function () {
+        calendarContainer.style.display =
+            (calendarContainer.style.display === "none" || calendarContainer.style.display === "") ? "block" : "none";
+    });
+
+    document.addEventListener("click", function (event) {
+        if (!calendarContainer.contains(event.target) && !trigger.contains(event.target)) {
+            calendarContainer.style.display = "none";
+        }
+    });
+
+    if (startInput.value && endInput.value) {
+        label.innerText = `${startInput.value} - ${endInput.value}`;
+    }
+
+    checkbox.addEventListener("change", function () {
+        const isDisabled = checkbox.checked;
+        if (isDisabled) {
+            calendarContainer.style.display = "none";
+            startInput.value = '';
+            endInput.value = '';
+            rangeInput.value = '';
+            label.innerText = 'No expiry date';
+            trigger.style.pointerEvents = 'none';
+            trigger.style.opacity = '0.6';
+        } else {
+            trigger.style.pointerEvents = 'auto';
+            trigger.style.opacity = '1';
+            label.innerText = (startInput.value && endInput.value) ?
+                `${startInput.value} - ${endInput.value}` :
+                'start date - end date';
+        }
+    });
+}
+
 document.getElementById('override-probation-employee').addEventListener('change', function () {
     const hiddenInput = document.getElementById('override-probation-employee-hidden');
     const multiDueTerm = document.getElementById('multi-due-term');
@@ -639,6 +734,9 @@ function openPopupModalCertificate() {
         success: function (response) {
             $('#certificateModalBody').html(response);
             $('#certificateModal').modal('show');
+            setTimeout(() => {
+                initCerDateCalendar();
+            }, 100); // หรือ 200ms ถ้าจำเป็น
         },
         error: function () {
             $('#certificateModalBody').html('<p class="text-danger">Failed to load content.</p>');
