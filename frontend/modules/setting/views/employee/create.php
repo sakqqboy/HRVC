@@ -287,7 +287,7 @@ $this->title = 'Create Employee';
                             </select>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>ddd</text>
+                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>Gender</text>
                             <select class="form-select" name="gender" id="gender" style="border-left: none;" required>
                                 <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A); ">
                                     <?= Yii::t('app', 'Select') ?>
@@ -888,11 +888,11 @@ $this->title = 'Create Employee';
                             </span>
                             <!-- เพิ่มรูป -->
                             <ul id="schedule-list" class="list-unstyled small  m-0 p-0 mt-12">
-                                <li class="schedule-item" data-id="9"
+                                <!-- พอแอดแลวให้เอาข้อมูลจากอาเรย์ มาแสดงตรงนี้   -->
+                                <!-- <li class="schedule-item" data-id="9"
                                     style="padding: 13px 20px; background-color: #FFFFFF;">
                                     <div class="row align-items-center dept-name">
                                         <div class="col-10 dept-label" style="font-weight: 600; font-size: 16px;">
-                                            ชื่อ
                                         </div>
                                         <div class="col-2 text-end">
                                             <a href="#" style="cursor: pointer;" onclick="tttt"
@@ -909,7 +909,7 @@ $this->title = 'Create Employee';
                                             </a>
                                         </div>
                                     </div>
-                                </li>
+                                </li>  -->
                             </ul>
                             <button type="button" class="center-center bg-white mt-12"
                                 style="padding: 13px 20px; height: 40px; width: 100%; border-radius: 5px; border: 0.5px solid #CBD5E1;"
@@ -1012,15 +1012,19 @@ $this->title = 'Create Employee';
             </div>
         </div>
     </div>
+    <input type="hidden" id="certificateDataHidden" name="certificateData">
+
     <div class="modal fade" id="certificateModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="row" id="certificateModalBody" style="width: 100%; padding: 50px; gap: 30px;">
+            <div class="modal-content" style="width: 120%;">
+                <div class="row" id="certificateModalBody" style="width: 100%; padding: 60px; gap: 35px;">
                     <!-- AJAX content will be injected here -->
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="radioHighlight.js"></script>
     <script>
     const homeUrl = "<?= Yii::$app->homeUrl ?>";
     document.getElementById('companySelectId').addEventListener('change', function() {
@@ -1273,16 +1277,114 @@ $this->title = 'Create Employee';
             document.getElementById('flag').src = homeUrl + flagUrl;
         }
     });
-    </script>
-    <?php ActiveForm::end(); ?>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="radioHighlight.js"></script>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        initRadioSelection(); // เรียกใช้กับ `.radio-wrapper` ปกติ
+
+
+    // ตัวแปรเก็บ certificate ทั้งหมด
+    let certificates = [];
+
+    function createSchedule() {
+        // อ่านค่าจากฟอร์ม
+        const cerName = document.getElementById('cerName').value.trim();
+        const issuingName = document.getElementById('issuingName').value.trim();
+        const fromDate = document.getElementById('fromCerDate').value.trim();
+        const toDate = document.getElementById('toCerDate').value.trim();
+        const credential = document.getElementById('credential').value.trim();
+        const noExpiry = document.getElementById('noExpiryCheckbox').checked;
+
+        // ตรวจสอบข้อมูลที่จำเป็น
+        if (!cerName || !issuingName || (!fromDate && !noExpiry) || (!toDate && !noExpiry)) {
+            alert('Please fill all required fields.');
+            return;
+        }
+
+        // สร้าง object ข้อมูล certificate
+        const cert = {
+            cerName,
+            issuingName,
+            fromDate: noExpiry ? 'No expiry date' : fromDate,
+            toDate: noExpiry ? '' : toDate,
+            credential,
+            noExpiry
+        };
+
+        // เก็บลงในอาเรย์
+        certificates.push(cert);
+
+        // แสดงผลลัพธ์ใน UL
+        renderScheduleList();
+        console.log(certificates);
+
+        // เคลียร์ฟอร์มหลังเพิ่ม
+        clearForm();
+
+        // ปิดป็อปอัพ Bootstrap modal
+        const certificateModalEl = document.getElementById('certificateModal');
+        const modal = bootstrap.Modal.getInstance(certificateModalEl); // ดึง instance ของ modal ที่เปิดอยู่
+        if (modal) {
+            modal.hide(); // สั่งปิด modal
+        }
+    }
+
+
+    function renderScheduleList() {
+        const list = document.getElementById('schedule-list');
+        list.innerHTML = ''; // เคลียร์ของเก่า
+
+        certificates.forEach((cert, index) => {
+            const li = document.createElement('li');
+            li.classList.add('mb-2');
+            li.innerHTML = `
+                                <li class="schedule-item" data-id="9"
+                                    style="padding: 13px 20px; background-color: #FFFFFF;">
+                                    <div class="row align-items-center dept-name">
+                                        <div class="col-9 dept-label" style="font-weight: 600; font-size: 16px;">
+                                        ${cert.issuingName}
+                                        </div>
+                                        <div class="col-3 text-end">
+                                            <a href="#" style="cursor: pointer;" onclick="tttt"
+                                                class="no-underline icon-delete">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                                    alt="Delete" class="pim-icon bin-icon transition-icon">
+                                            </a>
+                                            <a href="#" class="no-underline icon-edit" onclick="tttt">
+                                                <img src="<?= Yii::$app->homeUrl ?>image/edit-blue.svg" alt="Edit"
+                                                    class="pim-icon edit-icon transition-icon"
+                                                    style="margin-top: -3px;">
+                                                <span class="text-blue edit-label transition-label"
+                                                    style="font-weight: 500;">Edit</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li> 
+      `;
+            list.appendChild(li);
+        });
+    }
+
+    function clearForm() {
+        document.getElementById('cerName').value = '';
+        document.getElementById('issuingName').value = '';
+        document.getElementById('fromCerDate').value = '';
+        document.getElementById('toCerDate').value = '';
+        document.getElementById('credential').value = '';
+        document.getElementById('noExpiryCheckbox').checked = false;
+        document.getElementById('cer-date-label').innerText = 'start date - end date';
+        document.getElementById('multi-cer-term').style.pointerEvents = 'auto';
+        document.getElementById('multi-cer-term').style.opacity = '1';
+    }
+
+    function removeCertificate(index) {
+        certificates.splice(index, 1); // ลบ element ที่ index
+        renderScheduleList();
+    }
+    r ` ปกติ
         // หรือใส่ selector อื่นถ้ามีหลายกลุ่ม
-        initCheckboxSelection(); // เรียกใช้กับ `.checkbox-wrapper`
+        initCheckboxSelection(); // เรียกใช้กับ `.checkbox -
+        document.addEventListener("DOMContentLoaded", function() {
+            initRadioSelection(); // เรียกใช้กับ `.radio-wrappewrapper`
 
 
-    });
+        });
     </script>
+
+    <?php ActiveForm::end(); ?>

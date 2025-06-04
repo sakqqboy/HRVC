@@ -1103,13 +1103,22 @@ document.addEventListener("DOMContentLoaded", function () {
         // console.error("Element with id 'yearSelect' not found.");
     }
 
-    var month = document.getElementById('hiddenMonth').value;
-    var year = document.getElementById('hiddenYear').value;
+    var monthElem = document.getElementById('hiddenMonth');
+    var yearElem = document.getElementById('hiddenYear');
+
+    var month = monthElem ? monthElem.value : 0;
+    var year = yearElem ? yearElem.value : 0;
 
     if (month && year) {
         // alert(month);
-        document.getElementById('multi-mount-year').innerHTML =
-            `${getMonthName(month)}, ${year} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+        // document.getElementById('multi-mount-year').innerHTML =
+        //     `${getMonthName(month)}, ${year} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+        var el = document.getElementById('multi-mount-year');
+        if (el) {
+            el.innerHTML = `${getMonthName(month)}, ${year} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+        } else {
+            console.warn('Element #multi-mount-year not found');
+        }
 
         // เปลี่ยนสไตล์ข้อความ
         $("#multi-mount-year").css({
@@ -1138,8 +1147,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const month = String(today.getMonth() + 1).padStart(2, '0'); // แปลงเป็น string และเติม 0 ถ้าจำนวนน้อยกว่า 2 หลัก
         year = today.getFullYear();
 
-        document.getElementById('multi-mount-year').innerHTML =
-            `${getMonthName(month)}, ${year} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+        // document.getElementById('multi-mount-year').innerHTML =
+        //     `${getMonthName(month)}, ${year} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+        var el = document.getElementById('multi-mount-year');
+        if (el) {
+            el.innerHTML = `${getMonthName(month)}, ${year} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+        } else {
+            console.warn('Element #multi-mount-year not found');
+        }
 
         // เปลี่ยนสไตล์ข้อความ
         $("#multi-mount-year").css({
@@ -1157,14 +1172,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // อัปเดตไอคอนภายใน <span>
         const images = inputGroupText.querySelectorAll('img');
-        images[0].src = $url + 'image/calendar-blue.svg';
-        images[1].src = $url + 'image/weld.svg';
-        images[2].src = $url + 'image/calendar-blue.svg';
 
-        document.getElementById('hiddenMonth').value = month;
-        document.getElementById('hiddenYear').value = year;
-        document.getElementById('monthSelect').value = month;
-        document.getElementById('yearSelect').value = year;
+        if (images.length >= 3) {
+            images[0].src = $url + 'image/calendar-blue.svg';
+            images[1].src = $url + 'image/weld.svg';
+            images[2].src = $url + 'image/calendar-blue.svg';
+        } else {
+            console.warn('ไม่พบรูปภาพครบทั้ง 3 ตัวใน inputGroupText');
+        }
+
+
+        const hiddenMonth = document.getElementById('hiddenMonth');
+        const hiddenYear = document.getElementById('hiddenYear');
+        const monthSelect = document.getElementById('monthSelect');
+        const yearSelect = document.getElementById('yearSelect');
+
+        if (hiddenMonth) hiddenMonth.value = month;
+        if (hiddenYear) hiddenYear.value = year;
+        if (monthSelect) monthSelect.value = month;
+        if (yearSelect) yearSelect.value = year;
+
     }
 
     const startDate = document.getElementById('fromDate').value;
@@ -1198,7 +1225,9 @@ document.addEventListener("DOMContentLoaded", function () {
         images[1].src = $url + 'image/weld.svg';
         images[2].src = $url + 'image/calendar-blue.svg';
     }
-    const nextCheckDate = document.getElementById('nextDate').value;  // ดึงค่าจาก input hidden
+    // const nextCheckDate = document.getElementById('nextDate').value;  // ดึงค่าจาก input hidden
+    const nextDateElem = document.getElementById('nextDate');
+    const nextCheckDate = nextDateElem ? nextDateElem.value : '';  // ถ้าไม่เจอ element จะได้เป็น ''
 
     if (nextCheckDate) {
         // อัปเดตข้อความใน div multi-due-update

@@ -567,7 +567,7 @@ flatpickr("#birthdate-select", {
         // เปลี่ยนรูปภาพ calendar เป็น calendar-blue.svg
         const calendarImg = document.querySelector('#group-birtdate img');
         if (calendarImg) {
-            calendarImg.src = "<?= Yii::$app->homeUrl ?>image/calendar-blue.svg";
+            calendarImg.src = $url + "image/calendar-blue.svg";
         }
 
         // เปลี่ยน background-color และ border ของ input-group-text
@@ -590,7 +590,7 @@ flatpickr("#hiring-select", {
         document.getElementById("calendar-icon-hiring").style.backgroundColor = "rgb(215, 235, 255)";
         document.getElementById("calendar-icon-hiring").style.border = "0.5px solid rgb(190, 218, 255)";
         document.getElementById("calendar-img-hiring").src =
-            "<?= Yii::$app->homeUrl ?>image/calendar-blue.svg";
+            $url + "image/calendar-blue.svg";
     }
 });
 
