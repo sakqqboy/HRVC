@@ -55,9 +55,9 @@ class EmployeeController extends Controller
     }
 
     public function actionNoEmployee($hash)
-	{
+    {
         $param = ModelMaster::decodeParams($hash);
-        $departmentId = $param["departmentId"]??0;
+        $departmentId = $param["departmentId"] ?? 0;
         // throw new exception(print_r($branchId, true));
 
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
@@ -87,15 +87,15 @@ class EmployeeController extends Controller
 
         $employee = Employee::find()->select('employeeId')->where(["status" => 0])->asArray()->one();
         if (isset($employee) && !empty($employee)) {
-            return $this->redirect( Yii::$app->homeUrl . 'setting/team/index-grid/' );
+            return $this->redirect(Yii::$app->homeUrl . 'setting/team/index-grid/');
         }
 
         return $this->render('no_employee', [
             "departmentId" => $departmentId,
             "group" =>  $group
         ]);
-	}
-    
+    }
+
     public function actionIndex($hash)
     {
         $param = ModelMaster::decodeParams($hash);
@@ -116,7 +116,6 @@ class EmployeeController extends Controller
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
         curl_close($api);
-
         return $this->render('index', [
             "employees" => $employees,
             "companies" => $companies
@@ -136,7 +135,7 @@ class EmployeeController extends Controller
         $countries = curl_exec($api);
         $countries = json_decode($countries, true);
         // throw new Exception(print_r($countries, true));
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId );
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
         // throw new Exception(print_r($companies, true));

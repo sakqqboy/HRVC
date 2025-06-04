@@ -5,10 +5,13 @@ namespace backend\modules\masterdata\controllers;
 use backend\models\hrvc\DefaultLanguage;
 use backend\models\hrvc\Department;
 use backend\models\hrvc\Employee;
+use backend\models\hrvc\EmployeeCondition;
 use backend\models\hrvc\EmployeeSalary;
 use backend\models\hrvc\Module;
 use backend\models\hrvc\PimWeight;
+use backend\models\hrvc\Status;
 use backend\models\hrvc\Title;
+use common\models\ModelMaster;
 use Exception;
 use yii\web\Controller;
 
@@ -44,20 +47,46 @@ class EmployeeController extends Controller
 	{
 		$employee = Employee::find()
 			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,
-			condition.employeeConditionName,s.statusName,na.nationalityName')
+			condition.employeeConditionName,s.statusName,na.nationalityName,d.departmentName,d.departmentId,te.teamId,te.teamName')
 			->JOIN("LEFT JOIN", "company c", "c.companyId=employee.companyId")
 			->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
+			->JOIN("LEFT JOIN", "department d", "d.departmentId=employee.departmentId")
+			->JOIN("LEFT JOIN", "team te", "te.teamId=employee.teamId")
 			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
 			->JOIN("LEFT JOIN", "nationality na", "na.numCode=employee.nationalityId")
-			//->JOIN("LEFT JOIN", "employee_status es", "es.employeeId=employee.employeeId")
 			->JOIN("LEFT JOIN", "status s", "s.statusId=employee.status")
 			->JOIN("LEFT JOIN", "employee_condition condition", "condition.employeeConditionId=employee.employeeConditionId")
 			->where(["employee.status" => 1])
 			->andFilterWhere(["employee.companyId" => $companyId])
 			->orderBy('employee.employeeFirstname')
 			->asArray()
+			->limit(15)
 			->all();
-		return json_encode($employee);
+		$data = [];
+		if (isset($employee) && count($employee) > 0) {
+			foreach ($employee as $em):
+				$isNew = 0;
+				$isNew = ModelMaster::isOverthanMonth($em["joinDate"], 1);
+				$data[$em["employeeId"]] = [
+					"employeeName" => $em["employeeFirstname"] . ' ' . $em["employeeSurename"],
+					"picture" => Employee::employeeImage($em["employeeId"]),
+					"titleName" =>  $em["titleName"],
+					"departmentName" =>  $em["departmentName"],
+					"departmentId" =>  $em["departmentId"],
+					"teamId" => $em["teamId"],
+					"teamName" => $em["teamName"],
+					"status" =>  Status::employeeStatus($em["status"]),
+					"isNew" => $isNew,
+					"email" => $em["companyEmail"],
+					"employeeNumber" => $em["employeeNumber"],
+					"telephoneNumber" => $em["telephoneNumber"],
+					"joinDate" => ModelMaster::dateFullFormat($em["joinDate"]),
+					"companyName" => $em["companyName"]
+
+				];
+			endforeach;
+		}
+		return json_encode($data);
 	}
 	public function actionEmployeeDepartmentTitleByDepartment($departmentId)
 	{
@@ -143,20 +172,22 @@ class EmployeeController extends Controller
 		return json_encode($data);
 	}
 
-	public function actionDefaultLanguage () {
+	public function actionDefaultLanguage()
+	{
 		$language = DefaultLanguage::find()
-		->where(["status" => 1])
-		->asArray()
-		->all();
+			->where(["status" => 1])
+			->asArray()
+			->all();
 		return json_encode($language);
 	}
 
 
-	public function actionModuleRole () {
+	public function actionModuleRole()
+	{
 		$module = Module::find()
-		->where(["status" => 1])
-		->asArray()
-		->all();
+			->where(["status" => 1])
+			->asArray()
+			->all();
 		return json_encode($module);
 	}
 }
