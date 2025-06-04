@@ -474,6 +474,11 @@
     color: #8A8A8A;
 }
 
+.font-white {
+    color: #fff;
+}
+
+
 
 .text-gray {
     color: var(--Helper-Text-Gray, #8A8A8A);
