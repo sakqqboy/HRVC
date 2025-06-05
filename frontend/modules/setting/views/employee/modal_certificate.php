@@ -1,3 +1,15 @@
+<?php
+// กำหนดค่าเริ่มต้นกันก่อน
+$id = $cert['id'] ?? '';
+$cerName = $cert['cerName'] ?? '';
+$issuingName = $cert['issuingName'] ?? '';
+$cerStart = $cert['fromCerDate'] ?? '';
+$cerEnd = $cert['toCerDate'] ?? '';
+$credential = $cert['credential'] ?? '';
+$noExpiry = $cert['noExpiry'] ?? false;
+$imagePath = $cert['imagePath'] ?? Yii::$app->homeUrl . 'image/upload-plusimg.svg';
+?>
+
 <div class="between-start">
     <!-- head modal -->
     <div>
@@ -15,22 +27,21 @@
 <div class="row" style="gap: 37px; ">
     <div class="d-flex" style="gap: 38px;">
         <div class="avatar-upload" style="margin:0px">
-            <div class="avatar-preview" id="imagePreview" style="
-                            background-color: white;
-                            fill: #FFF; 
-                            stroke-width: 1px;
-                            stroke: var(--Primary-Blue---HRVC, #2580D3);
-                            border-radius: 20%;
-                            padding: 10px;
-                            text-align: center;
-                            cursor: pointer;
-                        ">
-                <label for="imageUpload" class="upload-label" style="cursor: pointer;  display: block;">
-                    <img src="<?= Yii::$app->homeUrl ?>image/upload-plusimg.svg" style="width: 150px; height: 150px;"
-                        alt="Upload Icon">
+            <div class="avatar-preview" id="cerPreview" style="
+            background-color: white;
+            fill: #FFF; 
+            stroke-width: 1px;
+            stroke: var(--Primary-Blue---HRVC, #2580D3);
+            border-radius: 20%;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;">
+                <label for="cerimage" class="upload-label" style="cursor: pointer; display: block;">
+                    <img id="previewImage" src="<?= Yii::$app->homeUrl ?>image/upload-plusimg.svg"
+                        style="width: 150px; height: 150px;" alt="Upload Icon">
                 </label>
-                <input type="file" name="cerImage" id="image" class="upload up upload-checklist" style="display: none;">
             </div>
+            <input type="file" name="cerImage" id="cerimage" style="display: none;">
         </div>
         <div class="row" style="gap: 12px; ">
             <div class="container">
@@ -40,14 +51,16 @@
                             <span class="text-danger">*</span> Certificate Name
                         </label>
                         <input type="text" class="form-control font-size-14" id="cerName" name="cerName"
-                            placeholder="Write the name of the certificate" value="">
+                            placeholder="Write the name of the certificate" value="<?= htmlspecialchars($cerName) ?>">
+
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label font-size-16 font-weight-500">
                             <span class="text-danger">*</span> Issuing Institute / Authority
                         </label>
                         <input type="text" class="form-control font-size-14" id="issuingName" name="issuingName"
-                            placeholder="Write the issuer authority name" value="">
+                            placeholder="Write the issuer authority name" value="<?= htmlspecialchars($issuingName) ?>">
+
                     </div>
                 </div>
 
@@ -61,7 +74,7 @@
                         <!-- <input type="text" class="form-control font-size-14" value=""> -->
 
                         <div class="input-group" id="cer-due-term-group" style="position: relative;">
-                            <span class="input-group-text pb-10 pt-10" id="due-term-icon-group"
+                            <span class="input-group-text pb-10 pt-10" id="due-term-cer-group"
                                 style="background-color: #C3C3C3; border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1; height: 40px;">
                                 <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" data-icon="calendar"
                                     id="start-img-cer" alt="Calendar" style="width: 16px; height: 16px;">
@@ -77,15 +90,19 @@
                                 </span>
                                 <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                             </div>
-                            <input type="hidden" id="fromCerDate" name="fromDate"
-                                value="<?= isset($data['cerStart']) ? $data['cerStart'] : '' ?>" required>
-                            <input type="hidden" id="toCerDate" name="toDate"
-                                value="<?= isset($data['cerEnd']) ? $data['cerEnd'] : '' ?>" required>
+                            <input type="hidden" id="fromCerDate" name="fromCerDate"
+                                value="<?= htmlspecialchars($cerStart) ?>" required>
+
+                            <input type="hidden" id="toCerDate" name="toCerDate"
+                                value="<?= htmlspecialchars($cerEnd) ?>" <?= $noExpiry ? 'disabled' : '' ?> required>
+
                         </div>
                         <div class="calendar-container" id="flatpickrContainer"
                             style="display: none; position: absolute; padding: 10px; border: 1px solid #ddd; border-radius: 10px; background: #fff; width: 350px; gap: 3px; z-index: 1;">
-                            <input type="text" id="rangeCalendarInput" value="start date - end date"
+                            <input type="text" id="rangeCalendarInput"
+                                value="<?= $cerStart && $cerEnd ? $cerStart . ' - ' . $cerEnd : 'start date - end date' ?>"
                                 style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
+
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -93,24 +110,25 @@
                             <span class="text-danger">*</span> Credential Link
                         </label>
                         <input type="text" class="form-control font-size-14" id="credential" name="credential"
-                            placeholder="Input the link of evidence (if any)" value="">
+                            placeholder="Input the link of evidence (if any)"
+                            value="<?= htmlspecialchars($credential) ?>">
                     </div>
                 </div>
             </div>
 
             <div class="d-flex justify-content-start align-items-center" style="gap: 10px;">
-                <input type="checkbox" id="noExpiryCheckbox">
+                <input type="checkbox" id="noExpiryCheckbox" <?= $noExpiry ? 'checked' : '' ?>>
                 <label class="mb-0" for="noExpiryCheckbox">The Certificate does not have expiry date</label>
             </div>
         </div>
     </div>
 
     <div class="between-start d-flex  align-items-center">
-        <div id="upload-file2" class="form-control"
+        <div id="upload-file3" class="form-control"
             style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE); width: 60%; ">
             <div class="row">
                 <div class="col-lg-2 center-center">
-                    <img id="icon-file2" src="<?= Yii::$app->homeUrl ?>image/file-big.svg" alt="icon"
+                    <img id="icon-file3" src="<?= Yii::$app->homeUrl ?>image/file-big.svg" alt="icon"
                         style="width: 40px; height: 40px;">
                 </div>
                 <div id="file-uplode-name3" class="col-lg-6 col-md-6 col-12" style="border-right:lightgray solid thin;">
@@ -133,101 +151,78 @@
                     </span>
 
                 </div>
-                <input id="certificate" style="display:none;" type="file" name="certificate"
-                    onchange="javascript:checkUploadFile(2)">
+                <input id="certificate" onchange="javascript:checkUploadFile(3)" style="display:none;" type="file"
+                    name="certificate" multiple>
             </div>
         </div>
+
         <div class="d-flex" style="gap: 22px;">
             <a href="javascript:void(0);" onclick="$('#certificateModal').modal('hide');"
                 style="text-decoration: none;">
                 <button type="button" class="btn-cancel-group"
                     action="<?= Yii::$app->homeUrl ?>setting/group/create-group">Cancel</button>
             </a>
-
+            <?php if($id){
+            ?>
+            <button type="button" class="btn-save-group" onclick="editSchedule(<?= $id ?>)">
+                Create <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
+                    style="width: 20px; height: 20px;">
+            </button>
+            <?php
+            }else{
+            ?>
             <button type="button" class="btn-save-group" onclick="createSchedule()">
                 Create <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
                     style="width: 20px; height: 20px;">
             </button>
+            <?php
+            }
+            ?>
+
         </div>
     </div>
 </div>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <script>
-// const calendarContainer = document.getElementById("flatpickrContainer");
-// const trigger = document.getElementById("multi-cer-term");
-// const label = document.getElementById("cer-date-label");
-// const startInput = document.getElementById("fromCerDate");
-// const endInput = document.getElementById("toCerDate");
-// const checkbox = document.getElementById("noExpiryCheckbox");
+let rangeInput = document.getElementById('rangeCalendarInput');
+let fromDateInput = document.getElementById('fromCerDate');
+let toDateInput = document.getElementById('toCerDate');
+let noExpiryCheckbox = document.getElementById('noExpiryCheckbox');
 
-// // เปิด flatpickr แบบ range
-// const rangeInput = document.getElementById("rangeCalendarInput");
-// flatpickr(rangeInput, {
-//     mode: "range",
-//     dateFormat: "Y-m-d",
-//     defaultDate: [
-//         startInput.value || null,
-//         endInput.value || null
-//     ],
-//     onChange: function(selectedDates, dateStr, instance) {
-//         if (selectedDates.length === 2) {
-//             const [start, end] = selectedDates;
-//             const formattedStart = flatpickr.formatDate(start, "Y-m-d");
-//             const formattedEnd = flatpickr.formatDate(end, "Y-m-d");
+flatpickr(rangeInput, {
+    mode: 'range',
+    dateFormat: 'Y-m-d',
+    defaultDate: fromDateInput.value && toDateInput.value ? [fromDateInput.value, toDateInput.value] : null,
+    onClose: function(selectedDates) {
+        if (selectedDates.length === 2) {
+            fromDateInput.value = selectedDates[0].toISOString().slice(0, 10);
+            toDateInput.value = selectedDates[1].toISOString().slice(0, 10);
+        } else {
+            fromDateInput.value = '';
+            toDateInput.value = '';
+        }
+    }
+});
 
-//             startInput.value = formattedStart;
-//             endInput.value = formattedEnd;
-//             label.innerText = `${formattedStart} - ${formattedEnd}`;
+// ควบคุม enable/disable ฟิลด์วันที่ตาม checkbox no expiry
+noExpiryCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+        toDateInput.disabled = true;
+        rangeInput.value = fromDateInput.value ? fromDateInput.value + ' - No Expiry' : 'No Expiry';
+        toDateInput.value = '';
+    } else {
+        toDateInput.disabled = false;
+        rangeInput.value = fromDateInput.value && toDateInput.value ? fromDateInput.value + ' - ' + toDateInput
+            .value : '';
+    }
+});
 
-//             // ปิด calendar
-//             calendarContainer.style.display = "none";
-//         }
-//     }
-// });
-
-// // แสดง/ซ่อน calendar
-// trigger.addEventListener("click", function() {
-//     // alert('dd');
-//     calendarContainer.style.display = (calendarContainer.style.display === "none" ||
-//         calendarContainer.style.display === "") ? "block" : "none";
-// });
-
-// // ปิดเมื่อคลิกข้างนอก
-// document.addEventListener("click", function(event) {
-//     if (!calendarContainer.contains(event.target) && !trigger.contains(event.target)) {
-//         calendarContainer.style.display = "none";
-//     }
-// });
-
-// // โหลด label ถ้ามีค่าจากเดิม
-// if (startInput.value && endInput.value) {
-//     label.innerText = `${startInput.value} - ${endInput.value}`;
-// }
-
-// // ✅ ปิด/เปิดการเลือกวันตาม checkbox
-// checkbox.addEventListener("change", function() {
-//     const isDisabled = checkbox.checked;
-//     // alert('ddd');
-//     if (isDisabled) {
-//         // ปิดปฏิทิน
-//         calendarContainer.style.display = "none";
-
-//         // ล้างค่า
-//         startInput.value = '';
-//         endInput.value = '';
-//         rangeInput.value = '';
-//         label.innerText = 'No expiry date';
-//         trigger.style.pointerEvents = 'none';
-//         trigger.style.opacity = '0.6';
-//     } else {
-//         // เปิดให้เลือกวันได้
-//         trigger.style.pointerEvents = 'auto';
-//         trigger.style.opacity = '1';
-//         label.innerText = (startInput.value && endInput.value) ?
-//             `${startInput.value} - ${endInput.value}` :
-//             'start date - end date';
-//     }
-// });
+// กรณีโหลดหน้าแล้ว checkbox ถูกติ๊ก
+if (noExpiryCheckbox.checked) {
+    toDateInput.disabled = true;
+    rangeInput.value = fromDateInput.value ? fromDateInput.value + ' - No Expiry' : 'No Expiry';
+}
 </script>

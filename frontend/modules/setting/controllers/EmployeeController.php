@@ -199,7 +199,11 @@ class EmployeeController extends Controller
     }
     public function actionSaveCreateEmployee()
     {
+ 
+    
         throw new Exception(print_r(Yii::$app->request->post(), true));
+
+
         if (isset($_POST["firstName"]) && trim($_POST["firstName"] != '')) {
             $employee = new Employee();
             $employee->employeeFirstname = $_POST["firstName"];
@@ -691,18 +695,19 @@ class EmployeeController extends Controller
 
     public function actionModalCertificate()
     {
-        $api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        // api
+        $mode = Yii::$app->request->post('mode'); // create หรือ edit
+        $certData = Yii::$app->request->post('cert'); // JSON string ของ certificate
 
-        curl_close($api);
-        
-        // throw new Exception("department: " . print_r($data, true));
+        $cert = $certData ? json_decode($certData, true) : [];
+        // throw new Exception(print_r($cert, true));
+
+
         return $this->renderPartial('modal_certificate', [
-
-        ]); 
+            'mode' => $mode,
+            'cert' => $cert
+        ]);
     }
+
 
     public function actionDeleteEmployee()
     {
@@ -1366,4 +1371,10 @@ class EmployeeController extends Controller
             endforeach;
         }
     }
+
+     public function actionTest()
+    {
+         return $this->render('test', [ ]);
+    }
+
 }

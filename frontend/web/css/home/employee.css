@@ -405,6 +405,25 @@
     /* ช่องว่างระหว่าง checkbox */
 }
 
+.skill-tag {
+    display: inline-block;
+    background-color: #EFF7FF;
+    color: var(--HRVC---Text-Black, #30313D);
+    padding: 6px 7px;
+    border-radius: 49px;
+    margin: 5px 5px 0 0;
+    font-size: 14px;
+}
+
+.skill-tag button {
+    background: none;
+    border: none;
+    color: var(--HRVC---Text-Black, #30313D);
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 /* .input-group-text.active {
     background-color: rgb(215, 235, 255) !important;
     border: 0.5px solid rgb(190, 218, 255) !important;
