@@ -3365,3 +3365,14 @@
     margin: 0 15px;
     /* ระยะห่างซ้าย-ขวา */
 }
+
+.cycle-box-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}

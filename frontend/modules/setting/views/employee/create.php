@@ -22,8 +22,8 @@ $this->title = 'Create Employee';
 <div class="company-group-body mt-50">
     <div class=" company-group-edit bg-white">
         <div class=" d-flex align-items-center gap-2">
-            <a href="<?= Yii::$app->homeUrl ?>setting/team/index/"
-                style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+            <a href="javascript:history.back()" style="text-decoration: none; width:66px; height:26px;"
+                class="btn-create-branch">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg"
                     style="width:18px; height:18px; margin-top:-3px;">
                 Back
@@ -167,7 +167,7 @@ $this->title = 'Create Employee';
                                     </span>
 
                                     <select class="form-select" style="width: 290.59px; border-left: none;"
-                                        id="defaulLanguage" name="defaulLanguage" required="">
+                                        id="defaultLanguage" name="defaultLanguage" required="">
                                         <option value="" disabled selected hidden
                                             style="color: var(--Helper-Text, #8A8A8A); ">
                                             <?= Yii::t('app', 'Select preferred language') ?>
@@ -1030,7 +1030,7 @@ $this->title = 'Create Employee';
                                 <div class="input-group">
                                     <span class="input-group-text "
                                         style="background-color: white; border-right: none;">
-                                        <img src="/HRVC/frontend/web/image/in-image.svg" alt="LinkedIn"
+                                        <img src="<?= Yii::$app->homeUrl ?>image/in-image.svg" alt="LinkedIn"
                                             style="width: 20px; height: 20px;">
                                     </span>
                                     <input type="text" style="border-left: none;" class="form-control " name="linkedin"
@@ -1115,6 +1115,7 @@ $this->title = 'Create Employee';
     </div>
 
     <input type="hidden" id="certificateDataHidden" name="certificateData">
+    <input type="hidden" id="cerDate" name="cerDate" value="0">
     <input type="hidden" id="darf" name="darf">
     <!-- container สำหรับเก็บ input ไฟล์ทั้งหมด -->
     <div id="imgInputsContainer"></div>
@@ -1379,15 +1380,26 @@ $this->title = 'Create Employee';
     let uploadedCertificateFiles = []; // สำหรับ certificate (multiple files)
     let certificates = [];
 
-
     $(document).on('change', '#cerimage', function(e) {
         const file = e.target.files[0];
         if (file) {
             uploadedCerFile = file;
             $('#previewImage').attr('src', URL.createObjectURL(file));
+            $('#bin-file4').show();
+            $('#refes-file4').show();
         }
     });
 
+    $(document).on('click', '#bin-file4', function() {
+        $('#cerimage').val('');
+        uploadedCerFile = null;
+        $('#previewImage').attr('src', '<?= Yii::$app->homeUrl ?>image/upload-plusimg.svg');
+        $('#bin-file4, #refes-file4').hide();
+    });
+
+    $(document).on('click', '#refes-file4', function() {
+        $('#cerimage').click(); // เปิด file picker
+    });
 
 
     $(document).on('change', '#certificate', function(e) {

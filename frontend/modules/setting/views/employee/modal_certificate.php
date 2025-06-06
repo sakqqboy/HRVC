@@ -27,22 +27,48 @@ $imagePath = $cert['imagePath'] ?? Yii::$app->homeUrl . 'image/upload-plusimg.sv
 <div class="row" style="gap: 37px; ">
     <div class="d-flex" style="gap: 38px;">
         <div class="avatar-upload" style="margin:0px">
-            <div class="avatar-preview" id="cerPreview" style="
-            background-color: white;
-            fill: #FFF; 
-            stroke-width: 1px;
-            stroke: var(--Primary-Blue---HRVC, #2580D3);
-            border-radius: 20%;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;">
+            <div class="avatar-preview " id="cerPreview" style="
+                    position: relative;
+                    background-color: white;
+                    fill: #FFF; 
+                    stroke-width: 1px;
+                    stroke: var(--Primary-Blue---HRVC, #2580D3);
+                    border-radius: 20%;
+                    padding: 10px;
+                    text-align: center;
+                    cursor: pointer;
+                ">
                 <label for="cerimage" class="upload-label" style="cursor: pointer; display: block;">
                     <img id="previewImage" src="<?= Yii::$app->homeUrl ?>image/upload-plusimg.svg"
                         style="width: 150px; height: 150px;" alt="Upload Icon">
                 </label>
+
+                <!-- ปุ่มลบ + ปุ่มรีเฟรช -->
+                <div class="center-center" id="cer-action-buttons" style="
+                        position: absolute;
+                        bottom: 10px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        gap: 10px;
+                    ">
+                    <!-- ปุ่มลบ -->
+                    <div class="cycle-box-icon" style=" background-color: #fff0f0; display: none;" id="bin-file4">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="Delete"
+                            style="width: 20px;height: 20px;padding-top: 0px;margin-top: 5px;margin-left: 7px;">
+                    </div>
+
+                    <!-- ปุ่มรีเฟรช -->
+                    <div class="cycle-box-icon" style=" background-color: #e6f1ff; display: none;" id="refes-file4">
+                        <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg" alt="Refresh"
+                            style="width: 18px; height: 18px;">
+                    </div>
+                </div>
             </div>
             <input type="file" name="cerImage" id="cerimage" style="display: none;">
         </div>
+
+
+
         <div class="row" style="gap: 12px; ">
             <div class="container">
                 <div class="row mb-30">
@@ -208,21 +234,9 @@ flatpickr(rangeInput, {
 });
 
 // ควบคุม enable/disable ฟิลด์วันที่ตาม checkbox no expiry
-noExpiryCheckbox.addEventListener('change', function() {
-    if (this.checked) {
-        toDateInput.disabled = true;
-        rangeInput.value = fromDateInput.value ? fromDateInput.value + ' - No Expiry' : 'No Expiry';
-        toDateInput.value = '';
-    } else {
-        toDateInput.disabled = false;
-        rangeInput.value = fromDateInput.value && toDateInput.value ? fromDateInput.value + ' - ' + toDateInput
-            .value : '';
-    }
-});
+const cerDate = document.getElementById('cerDate');
 
-// กรณีโหลดหน้าแล้ว checkbox ถูกติ๊ก
-if (noExpiryCheckbox.checked) {
-    toDateInput.disabled = true;
-    rangeInput.value = fromDateInput.value ? fromDateInput.value + ' - No Expiry' : 'No Expiry';
-}
+noExpiryCheckbox.addEventListener('change', function() {
+    cerDate.value = this.checked ? '1' : '0';
+});
 </script>

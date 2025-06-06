@@ -200,15 +200,21 @@ function resetUpload(type) {
     `;
 }
 
-// // ตัวอย่างฟังก์ชันลบไฟล์ (อาจจะคล้าย reset หรือเพิ่ม logic ลบไฟล์ใน server)
-// function removeFile(type) {
-//     // ตัวอย่างแค่ล้างไฟล์
-//     resetUpload(type);
-// }
 
 // ตัวอย่างฟังก์ชันดูไฟล์ (เปิด preview หรือดาวน์โหลด)
 function viewFile(type) {
-    const inputId = (type === 1) ? "resume" : "agreement";
+    let inputId = "";
+
+    if (type === 1) {
+        inputId = "resume";
+    } else if (type === 2) {
+        inputId = "agreement";
+    } else if (type === 3) {
+        inputId = "certificate";
+    } else {
+        return alert("Invalid file type.");
+    }
+
     const input = document.getElementById(inputId);
     const file = input?.files?.[0];
     if (!file) return alert("No file to view.");
@@ -216,14 +222,6 @@ function viewFile(type) {
     const fileURL = URL.createObjectURL(file);
     window.open(fileURL, '_blank');
 }
-
-
-
-// function viewFile(fileName) {
-//     alert("Preview file: " + fileName);
-//     // หรือใช้ window.open(pathToFile) ถ้ามี path
-// }
-
 
 function removeFile(type) {
     if (type === 1) {
@@ -303,6 +301,43 @@ function removeFile(type) {
 
         // แทนที่ div ด้วย HTML ดั้งเดิม
         uploadFile2Div.innerHTML = originalHTML;
+    }
+
+    if (type === 3) {
+        // สมมติว่า $url คือตัวแปร JS ที่เก็บ path Yii::$app->homeUrl แล้ว
+        const originalHTML = `
+        <div class="row">
+            <div class="col-lg-2 center-center">
+                <img id="icon-file3" src="${$url}image/file-big.svg"
+                    alt="icon" style="width: 40px; height: 40px;">
+            </div>
+            <div id="file-uplode-name3" class="col-lg-6 col-md-6 col-12"
+                style="border-right:lightgray solid thin;">
+                <label class="text-gray font-size-16 font-weight-500" for="name">
+                    Upload Certificate
+                </label>
+                <div class="text-secondary text-gray  font-size-14">
+                    <span class="text-gray font-size-12"> Supported - pdf, .doc, .docx</span>
+                </div>
+            </div>
+            <div id="file-edit3" class="col-lg-4 col-md-6 col-12 text-center pt-13">
+                <label id="certificate-btn" type="button" for="certificate"
+                    class="text-blue font-size-16 font-weight-600" style="cursor:pointer;">
+                    Upload
+                    <img src="${$url}image/file-up-blue.svg" alt="icon" style="width: 16px; height: 16px;">
+                </label>
+                <span class="ml-5 text-success" id="certificate-check" style="display:none;">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </span>
+                <input id="certificate" style="display:none;" type="file" name="certificate"
+                    onchange="javascript:checkUploadFile(3)">
+                <input type="hidden" value="" id="hascertificatet">
+            </div>
+        </div>
+    `;
+        document.getElementById("upload-file3").style.border = "1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)";
+        // แทนที่ div ด้วย HTML ดั้งเดิม
+        document.getElementById("upload-file3").innerHTML = originalHTML;
     }
 }
 
@@ -630,20 +665,7 @@ function initCerDateCalendar() {
             startInput.value || null,
             endInput.value || null
         ],
-        // onChange: function (selectedDates, dateStr, instance) {
-        //     if (selectedDates.length === 2) {
-        //         const [start, end] = selectedDates;
-        //         const formattedStart = flatpickr.formatDate(start, "Y-m-d");
-        //         const formattedEnd = flatpickr.formatDate(end, "Y-m-d");
-
-        //         startInput.value = formattedStart;
-        //         endInput.value = formattedEnd;
-        //         label.innerText = `${formattedStart} - ${formattedEnd}`;
-        //         calendarContainer.style.display = "none";
-        //     }
-        // }
         onChange: function (selectedDates, dateStr, instance) {
-            // alert('1');
 
             if (selectedDates.length === 2) {
                 const [start, end] = selectedDates;
@@ -656,6 +678,7 @@ function initCerDateCalendar() {
                 // ✅ เปลี่ยน background
                 const iconGroup = document.getElementById("due-term-cer-group");
                 iconGroup.style.backgroundColor = "rgb(215, 235, 255)";
+                iconGroup.style.border = "0.5px solid rgb(190, 218, 255)";
 
                 // ✅ เปลี่ยนรูปภาพ
                 const startImg = document.getElementById("start-img-cer");
@@ -692,25 +715,6 @@ function initCerDateCalendar() {
     if (startInput.value && endInput.value) {
         label.innerText = `${startInput.value} - ${endInput.value}`;
     }
-
-    checkbox.addEventListener("change", function () {
-        const isDisabled = checkbox.checked;
-        if (isDisabled) {
-            calendarContainer.style.display = "none";
-            startInput.value = '';
-            endInput.value = '';
-            rangeInput.value = '';
-            label.innerText = 'No expiry date';
-            trigger.style.pointerEvents = 'none';
-            trigger.style.opacity = '0.6';
-        } else {
-            trigger.style.pointerEvents = 'auto';
-            trigger.style.opacity = '1';
-            label.innerText = (startInput.value && endInput.value) ?
-                `${startInput.value} - ${endInput.value}` :
-                'start date - end date';
-        }
-    });
 }
 
 document.getElementById('override-probation-employee').addEventListener('change', function () {

@@ -4,6 +4,7 @@ namespace frontend\modules\setting\controllers;
 
 use common\helpers\Path;
 use common\models\ModelMaster;
+use DateTime;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Exception;
@@ -199,96 +200,185 @@ class EmployeeController extends Controller
     }
     public function actionSaveCreateEmployee()
     {
- 
-    
-        throw new Exception(print_r(Yii::$app->request->post(), true));
+        // throw new Exception(print_r(Yii::$app->request->post(), true));
+       $_POST = [
+            'status' => '4',
+            'mailId' => 'user001',
+            'employeeId' => '00001',
+            'password' => 'takahashi.shuhei',
+            'defaulLanguage' => '3',
+            'role' => '7',
+            'moduleId' => ['1', '2', '3', '4', '5', '6', '7'],
+            'salutation' => 'Mr.',
+            'gender' => '2',
+            'employeeFirstname' => 'test',
+            'employeeSurename' => 'LastNameTest',
+            'nationalityId' => '15',
+            'telephoneNumber' => '+66801074818',
+            'emergencyTel' => '0801074818',
+            'address1' => '126/1-7 Petchkasem Old Road, Pak Khlong Phasi Charoen Subdistrict, Phasi Charoen District, Bangkok 10160',
+            'email' => 'TCG@gmail.com',
+            'maritalStatus' => '2',
+            'birthDate' => '04/06/2025',
+            'companyId' => '3',
+            'branchId' => '34',
+            'departmentId' => '25',
+            'teamId' => '36',
+            'companyEmail' => 'watcharapong.hom@gmail.com',
+            'hiringDate' => '03/06/2025',
+            'overrideProbationEmployee' => '1',
+            'fromDate' => '03/06/2025',
+            'toDate' => '30/06/2025',
+            'titleId' => '108',
+            'remark' => 'About the Employee Test',
+            'skill' => '',
+            'skills' => '["1","2","3","4"]',
+            'mainLanguage' => '3',
+            'lavelLanguage' => '7',
+            'linkedin' => '111',
+            'mainLanguage1' => '2',
+            'mainLanguage2' => '4',
+            'mainLanguage3' => '1',
+            'lavelLanguage1' => '1',
+            'lavelLanguage2' => '2',
+            'lavelLanguage3' => '4',
+            'sendEmail' => '1',
+            'certificateData' => '[{"id":1749180178186,"cerName":"Certificate  Test","issuingName":"Authority Test","fromCerDate":"No expiry date","toCerDate":"","credential":"Link.com","noExpiry":true}]',
+            'cerDate' => '1',
+            'darf' => ''
+        ];
 
+    // จำลอง $_FILES
+    $_FILES = [
+        'image' => [
+            'name' => 'test5.png',
+            'full_path' => 'test5.png',
+            'type' => 'image/png',
+            'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php8673.tmp',
+            'error' => 0,
+            'size' => 2194299,
+        ],
+        'resume' => [
+            'name' => 'test1.xlsx',
+            'full_path' => 'test1.xlsx',
+            'type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php8674.tmp',
+            'error' => 0,
+            'size' => 12112,
+        ],
+        'agreement' => [
+            'name' => 'test2.pdf',
+            'full_path' => 'test2.pdf',
+            'type' => 'application/pdf',
+            'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php8675.tmp',
+            'error' => 0,
+            'size' => 2585811,
+        ],
+        'certificateHidden_1749180178186_0' => [
+            'name' => 'test3.txt',
+            'full_path' => 'test3.txt',
+            'type' => 'text/plain',
+            'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php86B4.tmp',
+            'error' => 0,
+            'size' => 189,
+        ],
+        'cerImageHidden_1749180178186' => [
+            'name' => 'test1.png',
+            'full_path' => 'test1.png',
+            'type' => 'image/png',
+            'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php86B5.tmp',
+            'error' => 0,
+            'size' => 10085,
+        ]
+    ];
 
-        if (isset($_POST["firstName"]) && trim($_POST["firstName"] != '')) {
+        if (isset($_POST["employeeFirstname"]) && trim($_POST["employeeFirstname"]) !== '') {
             $employee = new Employee();
-            $employee->employeeFirstname = $_POST["firstName"];
-            $employee->employeeSurename = $_POST["lastName"];
-            $employee->employeeNumber = $_POST["employeeNumber"];
-            $employee->joinDate = $_POST["joinDate"] . " 00:00:00";
-            $employee->birthDate = $_POST["birthDate"];
-            $employee->hireDate = $_POST["joinDate"];
-            $employee->nationalityId = $_POST["nationality"];
-            $employee->address1 = $_POST["address1"];
-            $employee->countryId = $_POST["country"];
+            $employee->employeeConditionId = $_POST["status"];
+            $employee->employeeNumber = $_POST["employeeId"];
+            $employee->defaultLanguage = $_POST["defaulLanguage"];
+            $employee->salutation = $_POST["salutation"];
             $employee->gender = $_POST["gender"];
+            $employee->employeeFirstname = $_POST["employeeFirstname"];
+            $employee->employeeSurename = $_POST["employeeSurename"];
+            $employee->nationalityId = $_POST["nationalityId"];
             $employee->telephoneNumber = $_POST["telephoneNumber"];
             $employee->emergencyTel = $_POST["emergencyTel"];
+            $employee->address1 = $_POST["address1"];
+            $employee->email = $_POST["email"];
+            $employee->maritalStatus = $_POST["maritalStatus"];
+            $employee->birthDate = date("Y-m-d", strtotime($_POST["birthDate"]));
+            $employee->companyId = $_POST["companyId"];
+            $employee->branchId = $_POST["branchId"];
+            $employee->departmentId = $_POST["departmentId"];
+            $employee->teamId = $_POST["teamId"];
             $employee->companyEmail = $_POST["companyEmail"];
-            $employee->email = $_POST["companyEmail"];
-            $employee->companyId = $_POST["company"];
-            $employee->branchId = $_POST["branch"];
-            $employee->departmentId = $_POST["department"];
-            $employee->teamId = $_POST["team"];
-            $employee->teamPositionId = $_POST["teamPosition"];
-            $employee->titleId = $_POST["title"];
-            //$employee->workingTime = $_POST["workTime"];
-            $employee->employeeConditionId = $_POST["condition"];
-            $employee->spoken = $_POST["language"];
-            //$employee->socialLink = $_POST["socialLink"];
+            $employee->hireDate = date("Y-m-d", strtotime($_POST["hiringDate"]));
+            $employee->probationStatus = $_POST["overrideProbationEmployee"];
+            $employee->probationStart = date("Y-m-d", strtotime($_POST["fromDate"]));
+            $employee->probationEnd = date("Y-m-d", strtotime($_POST["toDate"]));
+            $employee->titleId = $_POST["titleId"];
+            $employee->remark = $_POST["remark"];
+            $employee->skills = $_POST["skills"];
+            $employee->contact = $_POST["linkedin"];
+            $employee->createDateTime = new Expression('NOW()');
+            $employee->updateDateTime = new Expression('NOW()');
+
+            // Upload Profile Image
             $pictureProfile = UploadedFile::getInstanceByName("image");
-            if (isset($pictureProfile) && !empty($pictureProfile)) {
+            if ($pictureProfile) {
                 $path = Path::getHost() . 'images/employee/profile/';
                 if (!file_exists($path)) {
                     mkdir($path, 0777, true);
                 }
-                $file = $pictureProfile->name;
-                $filenameArray = explode('.', $file);
-                $countArrayFile = count($filenameArray);
-                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $pictureProfile->extension;
                 $pathSave = $path . $fileName;
                 $pictureProfile->saveAs($pathSave);
                 $employee->picture = 'images/employee/profile/' . $fileName;
             } else {
                 $employee->picture = 'image/user.png';
             }
+
+            // Upload Resume
             $fileResume = UploadedFile::getInstanceByName("resume");
-            if (isset($fileResume) && !empty($fileResume)) {
+            if ($fileResume) {
                 $path = Path::getHost() . 'files/resume/';
                 if (!file_exists($path)) {
                     mkdir($path, 0777, true);
                 }
-                $file = $fileResume->name;
-                $filenameArray = explode('.', $file);
-                $countArrayFile = count($filenameArray);
-                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $fileResume->extension;
                 $pathSave = $path . $fileName;
                 $fileResume->saveAs($pathSave);
                 $employee->resume = 'files/resume/' . $fileName;
             }
+
+        //     // Upload Agreement
             $fileAgreement = UploadedFile::getInstanceByName("agreement");
-            if (isset($fileAgreement) && !empty($fileAgreement)) {
+            if ($fileAgreement) {
                 $path = Path::getHost() . 'files/agreement/';
                 if (!file_exists($path)) {
                     mkdir($path, 0777, true);
                 }
-                $file = $fileAgreement->name;
-                $filenameArray = explode('.', $file);
-                $countArrayFile = count($filenameArray);
-                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $fileAgreement->extension;
                 $pathSave = $path . $fileName;
                 $fileAgreement->saveAs($pathSave);
                 $employee->employeeAgreement = 'files/agreement/' . $fileName;
             }
-            $employee->remark = $_POST["remark"];
-            $employee->status = 1;
-            $employee->createDateTime = new Expression('NOW()');
-            $employee->updateDateTime = new Expression('NOW()');
+
             if ($employee->save(false)) {
-                $employeeId = Yii::$app->db->lastInsertID;
-                $this->saveEmployeeStatus($employeeId, $_POST["status"]);
-                $userId = $this->createUser($employeeId, $_POST["companyEmail"]);
-                if (isset($_POST["role"]) && count($_POST["role"]) > 0) {
-                    $this->saveRole($_POST["role"], $userId);
-                }
-                return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-profile/' . ModelMaster::encodeParams(["employeeId" => $employeeId]));
+                // $employeeId = Yii::$app->db->lastInsertID;
+                // $this->saveEmployeeStatus($employeeId, $_POST["status"]);
+                // $userId = $this->createUser($employeeId, $_POST["companyEmail"]);
+
+                // if (isset($_POST["role"]) && !empty($_POST["role"])) {
+                //     $this->saveRole([$_POST["role"]], $userId); // ห่อ role เป็น array ถ้าเป็นค่าเดียว
+                // }
+
+                // return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-profile/' . ModelMaster::encodeParams(["employeeId" => $employeeId]));
             }
         }
     }
+
     public function actionEmployeeProfile($hash)
     {
         $param = ModelMaster::decodeParams($hash);
