@@ -4,6 +4,7 @@ namespace backend\models\hrvc;
 
 use Yii;
 use \backend\models\hrvc\master\CompanyMaster;
+use common\helpers\Path;
 
 /**
  * This is the model class for table "company".
@@ -61,5 +62,18 @@ class Company extends \backend\models\hrvc\master\CompanyMaster
             ->asArray()
             ->one();
         return $employee["companyId"];
+    }
+    public  static function companyPicture($picture)
+    {
+
+        $url = Path::frontendUrl() . $picture;
+        $headers = @get_headers($url);
+
+        if ($picture != '' && $headers && strpos($headers[0], '200') !== false) {
+            $img = $picture;
+        } else {
+            $img = 'image/userProfile.png';
+        }
+        return $img;
     }
 }
