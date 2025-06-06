@@ -23,6 +23,7 @@ use frontend\models\hrvc\Team;
 use frontend\models\hrvc\TeamPosition;
 use frontend\models\hrvc\Title;
 use frontend\models\hrvc\User;
+use frontend\models\hrvc\UserAccess;
 use frontend\models\hrvc\UserRole;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Html;
@@ -389,6 +390,83 @@ class EmployeeController extends Controller
                     $role->createDateTime = new Expression('NOW()');
                     $role->updateDateTime = new Expression('NOW()');
                     $role->save(false); // ✅ สำคัญ!
+
+                    if (!empty($_POST["moduleId"]) && is_array($_POST["moduleId"])) {
+                        foreach ($_POST["moduleId"] as $moduleId) {
+                            $access = new UserAccess();
+                            $access->userId = $user->userId;
+                            $access->moduleId = $moduleId;
+                            $access->status = 1;
+                            $access->createDateTime = new Expression('NOW()');
+                            $access->updateDateTime = new Expression('NOW()');
+                            $access->save(false); // ✅ สำคัญ!
+                        }
+                    }
+
+                    // $certificates = json_decode($_POST['certificateData'], true);
+
+                    // if ($certificates && is_array($certificates)) {
+                    //     foreach ($certificates as $cert) {
+                    //         $tmpId = $cert['id']; // เช่น 1749180178186
+                    //         $cerName = $cert['cerName'] ?? null;
+                    //         $issuing = $cert['issuingName'] ?? null;
+                    //         $fromDate = ($cert['fromCerDate'] == 'No expiry date') ? null : date('Y-m-d', strtotime($cert['fromCerDate']));
+                    //         $toDate = ($cert['toCerDate']) ? date('Y-m-d', strtotime($cert['toCerDate'])) : null;
+                    //         $credential = $cert['credential'] ?? null;
+                    //         $noExpiry = !empty($cert['noExpiry']) ? 1 : 0;
+
+                    //         $certificatePath = null;
+                    //         $cerImagePath = null;
+
+                    //         // 📎 อัปโหลด certificate file
+                    //         $fileKey = "certificateHidden_{$tmpId}_0";
+                    //         if (isset($_FILES[$fileKey]) && $_FILES[$fileKey]['error'] === 0) {
+                    //             $file = $_FILES[$fileKey];
+                    //             $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+                    //             $fileName = Yii::$app->security->generateRandomString(12) . '.' . $ext;
+                    //             $path = Path::getHost() . 'files/certificate/';
+                    //             if (!file_exists($path)) {
+                    //                 mkdir($path, 0777, true);
+                    //             }
+                    //             move_uploaded_file($file['tmp_name'], $path . $fileName);
+                    //             $certificatePath = 'files/certificate/' . $fileName;
+                    //         }
+
+                    //         // 🖼️ อัปโหลด cerImage
+                    //         $imageKey = "cerImageHidden_{$tmpId}";
+                    //         if (isset($_FILES[$imageKey]) && $_FILES[$imageKey]['error'] === 0) {
+                    //             $img = $_FILES[$imageKey];
+                    //             $ext = pathinfo($img['name'], PATHINFO_EXTENSION);
+                    //             $imgName = Yii::$app->security->generateRandomString(12) . '.' . $ext;
+                    //             $path = Path::getHost() . 'images/certificate/';
+                    //             if (!file_exists($path)) {
+                    //                 mkdir($path, 0777, true);
+                    //             }
+                    //             move_uploaded_file($img['tmp_name'], $path . $imgName);
+                    //             $cerImagePath = 'images/certificate/' . $imgName;
+                    //         }
+
+                    //         // 🔁 บันทึกข้อมูล (Insert ใหม่ หรือ Update ก็ได้)
+                    //         $certificate = new Certificate();
+                    //         $certificate->cerName = $cerName;
+                    //         $certificate->issuing = $issuing;
+                    //         $certificate->fromCerDate = $fromDate;
+                    //         $certificate->toCerDate = $toDate;
+                    //         $certificate->credential = $credential;
+                    //         $certificate->noExpiry = $noExpiry;
+                    //         $certificate->userId = $userId; // <-- ใส่ userId ให้ตรง
+                    //         if ($certificatePath) {
+                    //             $certificate->certificate = $certificatePath;
+                    //         }
+                    //         if ($cerImagePath) {
+                    //             $certificate->cerImage = $cerImagePath;
+                    //         }
+                    //         $certificate->createDateTime = new \yii\db\Expression('NOW()');
+                    //         $certificate->updateDateTime = new \yii\db\Expression('NOW()');
+                    //         $certificate->save(false);
+                    //     }
+                    // }
+
                 } 
                
             }
