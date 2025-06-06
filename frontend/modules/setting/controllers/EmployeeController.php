@@ -25,6 +25,7 @@ use frontend\models\hrvc\TeamPosition;
 use frontend\models\hrvc\Title;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserAccess;
+use frontend\models\hrvc\UserLanguage;
 use frontend\models\hrvc\UserRole;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Html;
@@ -210,102 +211,102 @@ class EmployeeController extends Controller
     public function actionSaveCreateEmployee()
     {
         // throw new Exception(print_r(Yii::$app->request->post(), true));
-       $_POST = [
-            'status' => '4',
-            'mailId' => 'user001',
-            'employeeId' => '00001',
-            'password' => 'takahashi.shuhei',
-            'defaulLanguage' => '3',
-            'role' => '7',
-            'moduleId' => ['1', '2', '3', '4', '5', '6', '7'],
-            'salutation' => 'Mr.',
-            'gender' => '2',
-            'employeeFirstname' => 'test',
-            'employeeSurename' => 'LastNameTest',
-            'nationalityId' => '15',
-            'telephoneNumber' => '+66801074818',
-            'emergencyTel' => '0801074818',
-            'address1' => '126/1-7 Petchkasem Old Road, Pak Khlong Phasi Charoen Subdistrict, Phasi Charoen District, Bangkok 10160',
-            'email' => 'TCG@gmail.com',
-            'maritalStatus' => '2',
-            'birthDate' => '04/06/2025',
-            'companyId' => '3',
-            'branchId' => '34',
-            'departmentId' => '25',
-            'teamId' => '36',
-            'companyEmail' => 'watcharapong.hom@gmail.com',
-            'hiringDate' => '03/06/2025',
-            'overrideProbationEmployee' => '1',
-            'fromDate' => '03/06/2025',
-            'toDate' => '30/06/2025',
-            'titleId' => '108',
-            'remark' => 'About the Employee Test',
-            'skill' => '',
-            'skills' => '["1","2","3","4"]',
-            'mainLanguage' => '3',
-            'lavelLanguage' => '7',
-            'linkedin' => '111',
-            'mainLanguage1' => '2',
-            'mainLanguage2' => '4',
-            'mainLanguage3' => '1',
-            'lavelLanguage1' => '1',
-            'lavelLanguage2' => '2',
-            'lavelLanguage3' => '4',
-            'sendEmail' => '1',
-            'certificateData' => '[{"id":1749180178186,"cerName":"Certificate  Test","issuingName":"Authority Test","fromCerDate":"No expiry date","toCerDate":"","credential":"Link.com","noExpiry":true}]',
-            'cerDate' => '1',
-            'darf' => ''
-        ];
+    //    $_POST = [
+    //         'status' => '4',
+    //         'mailId' => 'user001',
+    //         'employeeId' => '00001',
+    //         'password' => 'takahashi.shuhei',
+    //         'defaulLanguage' => '3',
+    //         'role' => '7',
+    //         'moduleId' => ['1', '2', '3', '4', '5', '6', '7'],
+    //         'salutation' => 'Mr.',
+    //         'gender' => '2',
+    //         'employeeFirstname' => 'test',
+    //         'employeeSurename' => 'LastNameTest',
+    //         'nationalityId' => '15',
+    //         'telephoneNumber' => '+66801074818',
+    //         'emergencyTel' => '0801074818',
+    //         'address1' => '126/1-7 Petchkasem Old Road, Pak Khlong Phasi Charoen Subdistrict, Phasi Charoen District, Bangkok 10160',
+    //         'email' => 'TCG@gmail.com',
+    //         'maritalStatus' => '2',
+    //         'birthDate' => '04/06/2025',
+    //         'companyId' => '3',
+    //         'branchId' => '34',
+    //         'departmentId' => '25',
+    //         'teamId' => '36',
+    //         'companyEmail' => 'watcharapong.hom@gmail.com',
+    //         'hiringDate' => '03/06/2025',
+    //         'overrideProbationEmployee' => '1',
+    //         'fromDate' => '03/06/2025',
+    //         'toDate' => '30/06/2025',
+    //         'titleId' => '108',
+    //         'remark' => 'About the Employee Test',
+    //         'skill' => '',
+    //         'skills' => '["1","2","3","4"]',
+    //         'mainLanguage' => '3',
+    //         'lavelLanguage' => '7',
+    //         'linkedin' => '111',
+    //         'mainLanguage1' => '2',
+    //         'mainLanguage2' => '4',
+    //         'mainLanguage3' => '1',
+    //         'lavelLanguage1' => '1',
+    //         'lavelLanguage2' => '2',
+    //         'lavelLanguage3' => '4',
+    //         'sendEmail' => '1',
+    //         'certificateData' => '[{"id":1749180178186,"cerName":"Certificate  Test","issuingName":"Authority Test","fromCerDate":"No expiry date","toCerDate":"","credential":"Link.com","noExpiry":true}]',
+    //         'cerDate' => '1',
+    //         'darf' => ''
+    //     ];
 
-    // จำลอง $_FILES
-    $_FILES = [
-        'image' => [
-            'name' => 'test5.png',
-            'full_path' => 'test5.png',
-            'type' => 'image/png',
-            'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php8673.tmp',
-            'error' => 0,
-            'size' => 2194299,
-        ],
-        'resume' => [
-            'name' => 'test1.xlsx',
-            'full_path' => 'test1.xlsx',
-            'type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php8674.tmp',
-            'error' => 0,
-            'size' => 12112,
-        ],
-        'agreement' => [
-            'name' => 'test2.pdf',
-            'full_path' => 'test2.pdf',
-            'type' => 'application/pdf',
-            'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php8675.tmp',
-            'error' => 0,
-            'size' => 2585811,
-        ],
-        'certificateHidden_1749180178186_0' => [
-            'name' => 'test3.txt',
-            'full_path' => 'test3.txt',
-            'type' => 'text/plain',
-            'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php86B4.tmp',
-            'error' => 0,
-            'size' => 189,
-        ],
-        'cerImageHidden_1749180178186' => [
-            'name' => 'test1.png',
-            'full_path' => 'test1.png',
-            'type' => 'image/png',
-            'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php86B5.tmp',
-            'error' => 0,
-            'size' => 10085,
-        ]
-    ];
+    // // จำลอง $_FILES
+    // $_FILES = [
+    //     'image' => [
+    //         'name' => 'test5.png',
+    //         'full_path' => 'test5.png',
+    //         'type' => 'image/png',
+    //         'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php8673.tmp',
+    //         'error' => 0,
+    //         'size' => 2194299,
+    //     ],
+    //     'resume' => [
+    //         'name' => 'test1.xlsx',
+    //         'full_path' => 'test1.xlsx',
+    //         'type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    //         'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php8674.tmp',
+    //         'error' => 0,
+    //         'size' => 12112,
+    //     ],
+    //     'agreement' => [
+    //         'name' => 'test2.pdf',
+    //         'full_path' => 'test2.pdf',
+    //         'type' => 'application/pdf',
+    //         'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php8675.tmp',
+    //         'error' => 0,
+    //         'size' => 2585811,
+    //     ],
+    //     'certificateHidden_1749180178186_0' => [
+    //         'name' => 'test3.txt',
+    //         'full_path' => 'test3.txt',
+    //         'type' => 'text/plain',
+    //         'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php86B4.tmp',
+    //         'error' => 0,
+    //         'size' => 189,
+    //     ],
+    //     'cerImageHidden_1749180178186' => [
+    //         'name' => 'test1.png',
+    //         'full_path' => 'test1.png',
+    //         'type' => 'image/png',
+    //         'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php86B5.tmp',
+    //         'error' => 0,
+    //         'size' => 10085,
+    //     ]
+    // ];
 
         if (isset($_POST["employeeFirstname"]) && trim($_POST["employeeFirstname"]) !== '') {
             $employee = new Employee();
             $employee->employeeConditionId = $_POST["status"];
             $employee->employeeNumber = $_POST["employeeId"];
-            $employee->defaultLanguage = $_POST["defaulLanguage"];
+            $employee->defaultLanguage = $_POST["defaultLanguage"];
             $employee->salutation = $_POST["salutation"];
             $employee->gender = $_POST["gender"];
             $employee->employeeFirstname = $_POST["employeeFirstname"];
@@ -330,6 +331,12 @@ class EmployeeController extends Controller
             $employee->remark = $_POST["remark"];
             $employee->skills = $_POST["skills"];
             $employee->contact = $_POST["linkedin"];
+            $employee->contact = $_POST["linkedin"];
+            if($_POST["darf"] == 1){
+                $employee->status = 2;
+            }else{
+                $employee->status = 100;
+            }
             $employee->createDateTime = new Expression('NOW()');
             $employee->updateDateTime = new Expression('NOW()');
 
@@ -468,14 +475,37 @@ class EmployeeController extends Controller
                             $certificate->save(false);
                         }
                     }
-
            
+                    // 1. เตรียมภาษาและระดับที่จับคู่กัน
+                    $languages = [
+                        ['language' => $_POST['mainLanguage'], 'level' => $_POST['lavelLanguage']],
+                    ];
 
-                   
+                    // 2. เพิ่มข้อมูลภาษาและระดับอื่น ๆ ถ้ามี
+                    for ($i = 1; $i <= 3; $i++) {
+                        if (!empty($_POST["mainLanguage$i"]) && !empty($_POST["lavelLanguage$i"])) {
+                            $languages[] = [
+                                'language' => $_POST["mainLanguage$i"],
+                                'level' => $_POST["lavelLanguage$i"]
+                            ];
+                        }
+                    }
+
+                    // 3. วนลูปบันทึก
+                    foreach ($languages as $lang) {
+                        $userLang = new UserLanguage();
+                        $userLang->userId = $user->userId;
+                        $userLang->languageId = $lang['language'];
+                        $userLang->lavel = $lang['level'];
+                        $userLang->createDateTime = new \yii\db\Expression('NOW()');
+                        $userLang->updateDateTime = new \yii\db\Expression('NOW()');
+                        $userLang->save(false);
+                    }
 
                 } 
                
             }
+                return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
         }
     }
 
@@ -589,117 +619,209 @@ class EmployeeController extends Controller
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-update?id=' . $employeeId);
+        $employee = curl_exec($api);
+        $employee = json_decode($employee, true);
+        // throw new Exception(print_r($employee, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId);
+        $userEmployee = curl_exec($api);
+        $userEmployee = json_decode($userEmployee, true);
+        // throw new Exception(print_r($userEmployee, true));
+
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
         $countries = curl_exec($api);
         $countries = json_decode($countries, true);
-        //throw new Exception(print_r($countries, true));
+        // throw new Exception(print_r($countries, true));
+        
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
+        // throw new Exception(print_r($companies, true));
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-department');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-list');
         $titles = curl_exec($api);
         $titles = json_decode($titles, true);
+        // throw new Exception(print_r($titles, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/status/active-status');
         $status = curl_exec($api);
         $status = json_decode($status, true);
+        // throw new Exception(print_r($status, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee-condition/active-condition');
         $conditions = curl_exec($api);
         $conditions = json_decode($conditions, true);
+        // throw new Exception(print_r($conditions, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/role/active-role');
         $roles = curl_exec($api);
         $roles = json_decode($roles, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-        $employee = curl_exec($api);
-        $employee = json_decode($employee, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/role/employee-role?id=' . $employeeId);
-        $userRoles = curl_exec($api);
-        $userRoles = json_decode($userRoles, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $employee['companyId']);
-        $branches = curl_exec($api);
-        $branches = json_decode($branches, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $employee['branchId'] . '&&page=1' . '&limit=7');
-        $departments = curl_exec($api);
-        $departments = json_decode($departments, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' . $employee['departmentId']);
-        $teams = curl_exec($api);
-        $teams = json_decode($teams, true);
+        // throw new Exception(print_r($roles, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team-position/index');
         $teamPosition = curl_exec($api);
         $teamPosition = json_decode($teamPosition, true);
+        // throw new Exception(print_r($teamPosition, true));
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/nationality');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/all-country');
         $nationalities = curl_exec($api);
         $nationalities = json_decode($nationalities, true);
+        // throw new Exception(print_r($nationalities, true));
 
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/default-language');
+        $language = curl_exec($api);
+        $language = json_decode($language, true);
+        // curl_close($api);
+        // throw new Exception(print_r($language, true));\
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/main-language');
+        $mainLanguage = curl_exec($api);
+        $mainLanguage = json_decode($mainLanguage, true);
+        // curl_close($api);
+        // throw new Exception(print_r($mainLanguage, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/module-role');
+        $module = curl_exec($api);
+        $module = json_decode($module, true);
         curl_close($api);
+        // throw new Exception(print_r($module, true));
 
-        $oldData["company"] = [
-            "id" => $employee['companyId'],
-            "name" => Company::companyName($employee['companyId'])
-        ];
-        $oldData["nationality"] = [
-            "id" => $employee['nationalityId'],
-            "name" => Nationality::nationalityName($employee['nationalityId'])
-        ];
-        $oldData["country"] = [
-            "id" => $employee['countryId'],
-            "name" => Country::countryName($employee['countryId'])
-        ];
-        $oldData["branch"] = [
-            "id" => $employee['branchId'],
-            "name" => Branch::branchName($employee['branchId'])
-        ];
-        $oldData["department"] = [
-            "id" => $employee['departmentId'],
-            "name" => Department::departmentName($employee['departmentId'])
-        ];
-        $oldData["team"] = [
-            "id" => $employee['teamId'],
-            "name" => Team::teamName($employee['teamId'])
-        ];
-        $oldData["teamPosition"] = [
-            "id" => $employee['teamPositionId'],
-            "name" => TeamPosition::teamPositionName($employee['teamPositionId'])
-        ];
-        $oldData["title"] = [
-            "id" => $employee['titleId'],
-            "name" => Title::titleName($employee['titleId'])
-        ];
-        $oldData["condition"] = [
-            "id" => $employee['employeeConditionId'],
-            "name" => EmployeeCondition::conditionName($employee['employeeConditionId'])
-        ];
-        $oldData["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
-        $role = UserRole::userRight();
-        // throw new Exception(print_r($userRoles, true));
-        return $this->render('update', [
+
+        return $this->render('create', [
+            "groupId" => $groupId,
             "countries" => $countries,
             "companies" => $companies,
             "titles" => $titles,
             "status" => $status,
             "conditions" => $conditions,
             "roles" => $roles,
-            "employee" => $employee,
-            "oldData" => $oldData,
-            "userRoles" => $userRoles,
-            "branches" => $branches,
-            "departments" => $departments,
-            "teams" => $teams,
             "teamPosition" => $teamPosition,
             "nationalities" => $nationalities,
-            "role" => $role
-
+            "languages" => $language,
+            "mainLanguage" => $mainLanguage,
+            "modules" => $module
         ]);
+        
+        // $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+        // if (!isset($group) || empty($group)) {
+        //     return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+        // }
+        // $groupId = $group["groupId"];
+        // $api = curl_init();
+        // curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        // curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
+        // $countries = curl_exec($api);
+        // $countries = json_decode($countries, true);
+        // //throw new Exception(print_r($countries, true));
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        // $companies = curl_exec($api);
+        // $companies = json_decode($companies, true);
+
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-department');
+        // $titles = curl_exec($api);
+        // $titles = json_decode($titles, true);
+
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/status/active-status');
+        // $status = curl_exec($api);
+        // $status = json_decode($status, true);
+
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee-condition/active-condition');
+        // $conditions = curl_exec($api);
+        // $conditions = json_decode($conditions, true);
+
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/role/active-role');
+        // $roles = curl_exec($api);
+        // $roles = json_decode($roles, true);
+
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+        // $employee = curl_exec($api);
+        // $employee = json_decode($employee, true);
+
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/role/employee-role?id=' . $employeeId);
+        // $userRoles = curl_exec($api);
+        // $userRoles = json_decode($userRoles, true);
+
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $employee['companyId']);
+        // $branches = curl_exec($api);
+        // $branches = json_decode($branches, true);
+
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $employee['branchId'] . '&&page=1' . '&limit=7');
+        // $departments = curl_exec($api);
+        // $departments = json_decode($departments, true);
+
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' . $employee['departmentId']);
+        // $teams = curl_exec($api);
+        // $teams = json_decode($teams, true);
+
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team-position/index');
+        // $teamPosition = curl_exec($api);
+        // $teamPosition = json_decode($teamPosition, true);
+
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/nationality');
+        // $nationalities = curl_exec($api);
+        // $nationalities = json_decode($nationalities, true);
+
+        // curl_close($api);
+
+        // $oldData["company"] = [
+        //     "id" => $employee['companyId'],
+        //     "name" => Company::companyName($employee['companyId'])
+        // ];
+        // $oldData["nationality"] = [
+        //     "id" => $employee['nationalityId'],
+        //     "name" => Nationality::nationalityName($employee['nationalityId'])
+        // ];
+        // $oldData["country"] = [
+        //     "id" => $employee['countryId'],
+        //     "name" => Country::countryName($employee['countryId'])
+        // ];
+        // $oldData["branch"] = [
+        //     "id" => $employee['branchId'],
+        //     "name" => Branch::branchName($employee['branchId'])
+        // ];
+        // $oldData["department"] = [
+        //     "id" => $employee['departmentId'],
+        //     "name" => Department::departmentName($employee['departmentId'])
+        // ];
+        // $oldData["team"] = [
+        //     "id" => $employee['teamId'],
+        //     "name" => Team::teamName($employee['teamId'])
+        // ];
+        // $oldData["teamPosition"] = [
+        //     "id" => $employee['teamPositionId'],
+        //     "name" => TeamPosition::teamPositionName($employee['teamPositionId'])
+        // ];
+        // $oldData["title"] = [
+        //     "id" => $employee['titleId'],
+        //     "name" => Title::titleName($employee['titleId'])
+        // ];
+        // $oldData["condition"] = [
+        //     "id" => $employee['employeeConditionId'],
+        //     "name" => EmployeeCondition::conditionName($employee['employeeConditionId'])
+        // ];
+        // $oldData["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
+        // $role = UserRole::userRight();
+        // // throw new Exception(print_r($userRoles, true));
+        // return $this->render('update', [
+        //     "countries" => $countries,
+        //     "companies" => $companies,
+        //     "titles" => $titles,
+        //     "status" => $status,
+        //     "conditions" => $conditions,
+        //     "roles" => $roles,
+        //     "employee" => $employee,
+        //     "oldData" => $oldData,
+        //     "userRoles" => $userRoles,
+        //     "branches" => $branches,
+        //     "departments" => $departments,
+        //     "teams" => $teams,
+        //     "teamPosition" => $teamPosition,
+        //     "nationalities" => $nationalities,
+        //     "role" => $role
+        // ]);
     }
     public function actionSaveUpdateEmployee()
     {

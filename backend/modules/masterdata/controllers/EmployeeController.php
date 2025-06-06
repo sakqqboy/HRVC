@@ -15,6 +15,7 @@ use backend\models\hrvc\Status;
 use backend\models\hrvc\Title;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\User;
 use yii\web\Controller;
 
 /**
@@ -176,6 +177,67 @@ class EmployeeController extends Controller
 		}
 		return json_encode($data);
 	}
+
+	public function actionEmployeeUpdate($id){
+		
+		$employee = Employee::find()
+		->select([
+			'employeeId AS id',
+			'`status`',
+			'employeeNumber AS employeeId',
+			'defaultLanguage',
+			'salutation',
+			'gender',
+			'employeeFirstname',
+			'employeeSurename',
+			'nationalityId',
+			'telephoneNumber',
+			'emergencyTel',
+			'address1',
+			'email',
+			'maritalStatus',
+			'birthDate',
+			'companyId',
+			'branchId',
+			'departmentId',
+			'teamId',
+			'companyEmail',
+			'hireDate AS hiringDate',
+			'probationStatus AS overrideProbationEmployee',
+			'probationStart AS fromDate',
+			'probationEnd AS toDate',
+			'titleId',
+			'remark',
+			'skills',
+			'contact AS linkedin',
+			'resume',
+			'employeeAgreement AS agreement',
+			'picture AS image',
+			'`status`'
+		])
+		->from('employee')
+		->where(['employeeId' => $id])
+		->one();
+		return json_encode($employee	);
+
+	}
+	
+	public function actionUserEmployee($id) {
+		$users = User::find()
+			->select([
+				'userId',
+				'employeeId',
+				'username AS mailId',
+				'password_hash AS password'
+			])
+			->where(['employeeId' => $id])
+			->asArray() // สำคัญ! เพื่อให้ผลลัพธ์เป็น array สำหรับ json_encode
+			->all(); // หรือ ->one(); ถ้ามีแค่ 1 user ต่อ 1 employee
+
+		return json_encode($users); // ← ตรงนี้ต้องเป็น $users ไม่ใช่ $id
+	}
+
+
 
 	public function actionDefaultLanguage()
 	{
