@@ -70,7 +70,6 @@ class EmployeeController extends Controller
 				$isNew = ModelMaster::isOverthanMonth($em["joinDate"], 1);
 				$data[$em["employeeId"]] = [
 					"employeeName" => $em["employeeFirstname"] . ' ' . $em["employeeSurename"],
-
 					"picture" => Employee::employeeImage($em["employeeId"]),
 					"titleName" =>  $em["titleName"],
 					"departmentName" =>  $em["departmentName"],

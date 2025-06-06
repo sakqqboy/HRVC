@@ -75,6 +75,13 @@ $this->title = 'Employee';
 				<?php
 				if (isset($employees) && count($employees) > 0) {
 					foreach ($employees as $employeeId => $employee) :
+						$statusClass = "status-badge-full-time";
+						if ($employee["status"] == "Intren") {
+							$statusClass = "status-badge-intern";
+						}
+						if ($employee["status"] == "Part-time") {
+							$statusClass = "status-badge-part-time";
+						}
 						//throw new exception(print_r($employees, true));
 				?>
 						<div class="col-lg-4 col-md-6 col-12">
@@ -86,7 +93,7 @@ $this->title = 'Employee';
 								<div class="d-flex align-items-start justify-content-between mt-3">
 									<div class="position-relative me-2">
 										<img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>" class="rounded-circle profile-img" alt="Profile">
-										<span class="status-badge"><?= $employee["status"] ?></span>
+										<span class="status-badge-full-time"><?= $employee["status"] ?></span>
 									</div>
 									<div class="flex-grow-1">
 										<div class="d-flex justify-content-between align-items-start">
@@ -313,7 +320,7 @@ $this->title = 'Employee';
 		margin-right: 5px;
 	}
 
-	.status-badge {
+	.status-badge-full-time {
 		position: absolute;
 		bottom: 3px;
 		left: 0;
@@ -328,12 +335,6 @@ $this->title = 'Employee';
 		line-height: 20px;
 		font-size: 12px;
 		font-weight: 600;
-
-
-
-
-		/* transform: translateY(50%); */
-		/* padding: 0.3rem 0; */
 	}
 
 	.employee-contact-box {
