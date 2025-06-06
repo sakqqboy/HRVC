@@ -82,6 +82,9 @@ $this->title = 'Employee';
 						if ($employee["status"] == "Part-time") {
 							$statusClass = "status-badge-part-time";
 						}
+						if ($employee["status"] == "Intren") {
+							$statusClass = "status-badge-intern";
+						}
 						//throw new exception(print_r($employees, true));
 				?>
 						<div class="col-lg-4 col-md-6 col-12">
