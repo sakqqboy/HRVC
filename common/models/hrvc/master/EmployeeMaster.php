@@ -12,7 +12,9 @@ use Yii;
     * @property string $employeeFirstname
     * @property string $employeeSurename
     * @property string $employeeNickname
+    * @property string $salutation
     * @property integer $gender
+    * @property string $maritalStatus
     * @property string $birthDate
     * @property string $email
     * @property string $companyEmail
@@ -26,7 +28,11 @@ use Yii;
     * @property integer $teamPositionId
     * @property string $joinDate
     * @property string $hireDate
+    * @property integer $probationStatus
+    * @property string $probationStart
+    * @property string $probationEnd
     * @property integer $countryId
+    * @property integer $defaultLanguage
     * @property integer $employeeConditionId
     * @property string $address1
     * @property string $address2
@@ -42,7 +48,7 @@ use Yii;
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
-    * @property integer $defaultLanguage
+    * @property string $skills
 */
 class EmployeeMaster extends \common\models\ModelMaster
 {
@@ -61,11 +67,11 @@ public function rules()
 {
 return [
             [['employeeFirstname', 'employeeSurename', 'gender', 'email', 'telephoneNumber', 'companyId', 'branchId', 'departmentId', 'titleId', 'employeeConditionId'], 'required'],
-            [['birthDate', 'joinDate', 'hireDate', 'createDateTime', 'updateDateTime'], 'safe'],
-            [['companyId', 'branchId', 'departmentId', 'titleId', 'teamId', 'teamPositionId', 'countryId', 'employeeConditionId', 'nationalityId', 'workingTime', 'defaultLanguage'], 'integer'],
-            [['address1', 'address2', 'spoken', 'socialLink', 'remark'], 'string'],
+            [['salutation', 'maritalStatus', 'address1', 'address2', 'spoken', 'socialLink', 'remark', 'skills'], 'string'],
+            [['birthDate', 'joinDate', 'hireDate', 'probationStart', 'probationEnd', 'createDateTime', 'updateDateTime'], 'safe'],
+            [['companyId', 'branchId', 'departmentId', 'titleId', 'teamId', 'teamPositionId', 'countryId', 'defaultLanguage', 'employeeConditionId', 'nationalityId', 'workingTime'], 'integer'],
             [['employeeNumber', 'employeeFirstname', 'employeeSurename', 'employeeNickname', 'email', 'contact'], 'string', 'max' => 100],
-            [['gender', 'status'], 'string', 'max' => 10],
+            [['gender', 'probationStatus', 'status'], 'string', 'max' => 10],
             [['companyEmail', 'telephoneNumber', 'emergencyTel', 'picture', 'resume', 'employeeAgreement'], 'string', 'max' => 255],
         ];
 }
@@ -81,7 +87,9 @@ return [
     'employeeFirstname' => 'Employee Firstname',
     'employeeSurename' => 'Employee Surename',
     'employeeNickname' => 'Employee Nickname',
+    'salutation' => 'Salutation',
     'gender' => 'Gender',
+    'maritalStatus' => 'Marital Status',
     'birthDate' => 'Birth Date',
     'email' => 'Email',
     'companyEmail' => 'Company Email',
@@ -95,7 +103,11 @@ return [
     'teamPositionId' => 'Team Position ID',
     'joinDate' => 'Join Date',
     'hireDate' => 'Hire Date',
+    'probationStatus' => 'Probation Status',
+    'probationStart' => 'Probation Start',
+    'probationEnd' => 'Probation End',
     'countryId' => 'Country ID',
+    'defaultLanguage' => 'Default Language',
     'employeeConditionId' => 'Employee Condition ID',
     'address1' => 'Address1',
     'address2' => 'Address2',
@@ -111,7 +123,7 @@ return [
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',
-    'defaultLanguage' => 'Default Language',
+    'skills' => 'Skills',
 ];
 }
 }
