@@ -1259,4 +1259,24 @@ class KpiTeamController extends Controller
 		$res["countTeam"] = count($kpiTeams);
 		return json_encode($res);
 	}
+	public function actionCheckKpiEmployee()
+	{
+		$kpiTeamId = $_POST["kpiTeamId"];
+		$kpiTeam = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->asArray()->one();
+		$teamId = $kpiTeam["teamId"];
+		$kpiId = $kpiTeam["kpiId"];
+		$kpiEmployee = KpiEmployee::find()
+			->select('kpi_employee.status')
+			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+			->where(["kpi_employee.kpiId" => $kpiId, "kpi_employee.status" => 1, "e.teamId" => $teamId, "e.status" => [1]])
+			->one();
+		$res = [];
+		$res["status"] = true;
+		if (isset($kpiEmployee) && !empty($kpiEmployee)) {
+			$res["status"] = true;
+		} else {
+			$res["status"] = false;
+		}
+		return json_encode($res);
+	}
 }

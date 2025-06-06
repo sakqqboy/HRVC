@@ -279,26 +279,72 @@ document.getElementById('check2').addEventListener('change', function () {
 	const textboxDiv = document.getElementById('textbox-check-completed');
 	const borderCicleDiv = document.getElementById('border-cicle-completed'); // ใช้ ID แทน
 	const textgreen = document.getElementById('text-green'); // ใช้ ID แทน
+	var pimType = $("#pimType").val();
 
 	if (this.checked) {
 		// alert("1"); // แสดง Alert เมื่อกดเลือก check2
-		check1.style.display = 'none'; // ซ่อน check1
-		textgreen.classList.add('text-green');
-
-		if (textboxDiv) {
-			textboxDiv.classList.remove('textbox-check-hide');
-			textboxDiv.classList.add('textbox-check-green');
+		if (pimType == 'kgi-team') { 
+			var kgiTeamId = $("#kgiTeamId").val();
+            var kgiId=$("#kgiId").val();
+			var url = $url + 'kgi/kgi-team/check-kgi-employee';
+			var change = 0;
+			$.ajax({
+				type: "POST",
+				dataType: 'json',
+				url: url,
+				data: { kgiId: kgiId, kgiTeamId: kgiTeamId },
+				success: function (data) {
+					if (data.status) {//มีคนยังไม่อัพเดท
+						change = 0;
+					} else {
+						change = 1;
+					}
+                
+				}
+			});
 		}
-
-		if (borderCicleDiv) {
-			borderCicleDiv.classList.remove('text-black');
-			borderCicleDiv.classList.add('text-green');
-			borderCicleDiv.style.border = '0.5px solid #2D7F06'; // เปลี่ยนสี border
+		if (pimType == 'kpi-team') { 
+			var kpiTeamId = $("#kpiTeamId").val();
+            var kpiId=$("#kpiId").val();
+			var url = $url + 'kpi/kpi-team/check-kpi-employee';
+			var change = 0;
+			$.ajax({
+				type: "POST",
+				dataType: 'json',
+				url: url,
+				data: { kpiId: kpiId, kpiTeamId: kpiTeamId },
+				success: function (data) {
+					if (data.status) {//มีคนยังไม่อัพเดท
+						change = 0;
+					} else {
+						change = 1;
+					}
+                
+				}
+			});
 		}
+		if (change == 1) {
+			check1.style.display = 'none'; // ซ่อน check1
+			textgreen.classList.add('text-green');
 
-		if (textgreen) {
-			textgreen.classList.remove('text-black');
-			textgreen.classList.add('text-green'); // เปลี่ยนสีข้อความ
+			if (textboxDiv) {
+				textboxDiv.classList.remove('textbox-check-hide');
+				textboxDiv.classList.add('textbox-check-green');
+			}
+
+			if (borderCicleDiv) {
+				borderCicleDiv.classList.remove('text-black');
+				borderCicleDiv.classList.add('text-green');
+				borderCicleDiv.style.border = '0.5px solid #2D7F06'; // เปลี่ยนสี border
+			}
+
+			if (textgreen) {
+				textgreen.classList.remove('text-black');
+				textgreen.classList.add('text-green'); // เปลี่ยนสีข้อความ
+			}
+		} else { 
+			$("#warning-kpi").modal("show");
+			this.checked=false;
 		}
 
 	} else {

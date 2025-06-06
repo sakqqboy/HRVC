@@ -2213,7 +2213,7 @@ function showEditRelateKgi(type, kfiId) {
         });
     }
 }
-function changeStatus() {
+function changeStatus(type) {
     var pimStatus = $("#pim-status").val();
     $("#pim-status").removeClass('select-create-status');
     $("#pim-status").removeClass('select-complete-status');
@@ -2221,6 +2221,47 @@ function changeStatus() {
         $("#pim-status").addClass('select-create-status');
     }
     if (pimStatus == 2) {
-        $("#pim-status").addClass('select-complete-status');
+        if (type == 'kgi') { 
+            var kgiId=$("#kgiId").val();
+            var url = $url + 'kgi/management/check-kgi-team';
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: url,
+                data: { kgiId: kgiId },
+                success: function (data) {
+                    if (data.countTeam == 0) {
+                        $("#pim-status").addClass('select-complete-status');
+                    } else { 
+                        $("#pim-status").val(1)
+                        $("#pim-status").addClass('select-create-status');
+                        $("#warning-kgi").modal("show");
+                    }
+                
+                }
+            });
+            
+        }
+        if (type == 'kpi') { 
+            var kpiId=$("#kpiId").val();
+            var url = $url + 'kpi/management/check-kpi-team';
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: url,
+                data: { kpiId: kpiId },
+                success: function (data) {
+                    if (data.countTeam == 0) {
+                        $("#pim-status").addClass('select-complete-status');
+                    } else { 
+                        $("#pim-status").val(1)
+                        $("#pim-status").addClass('select-create-status');
+                        $("#warning-kpi").modal("show");
+                    }
+                
+                }
+            });
+            
+        }
     }
 }

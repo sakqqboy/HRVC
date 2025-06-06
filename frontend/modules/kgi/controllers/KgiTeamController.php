@@ -1204,4 +1204,24 @@ class KgiTeamController extends Controller
 		$res["individualText"] = $individualText;
 		return json_encode($res);
 	}
+	public function actionCheckKgiEmployee()
+	{
+		$kgiTeamId = $_POST["kgiTeamId"];
+		$kgiTeam = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->asArray()->one();
+		$teamId = $kgiTeam["teamId"];
+		$kgiId = $kgiTeam["kgiId"];
+		$kgiEmployee = KgiEmployee::find()
+			->select('kgi_employee.status')
+			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+			->where(["kgi_employee.kgiId" => $kgiId, "kgi_employee.status" => 1, "e.teamId" => $teamId, "e.status" => [1]])
+			->one();
+		$res = [];
+		$res["status"] = true;
+		if (isset($kgiEmployee) && !empty($kgiEmployee)) {
+			$res["status"] = true;
+		} else {
+			$res["status"] = false;
+		}
+		return json_encode($res);
+	}
 }

@@ -2376,4 +2376,17 @@ class ManagementController extends Controller
 		$res["individualText"] = $individualText;
 		return json_encode($res);
 	}
+	public function actionCheckKgiTeam()
+	{
+		$kgiId = $_POST["kgiId"];
+		$kgiTeam = KgiTeam::find()->where(["kgiId" => $kgiId, "status" => 1])->asArray()->all();
+		$res = [];
+		$res["status"] = true;
+		if (isset($kgiTeam) && count($kgiTeam) > 0) {
+			$res["count"] = count($kgiTeam);
+		} else {
+			$res["count"] = 0;
+		}
+		return json_encode($res);
+	}
 }

@@ -790,7 +790,7 @@ if ($DueBehind < 0) {
                                 <select
                                     class="<?= $data['status'] == 1 ? 'select-create-status' : 'select-complete-status' ?>"
                                     aria-label="Default select example" name="status" id="pim-status"
-                                    onchange="javascript:changeStatus()" required="">
+                                    onchange="javascript:changeStatus('kpi')" required="">
                                     <option value="1"
                                         <?= isset($data['status']) && $data['status'] == 1 ? 'selected' : '' ?>> In-Progress
                                     </option>
@@ -844,6 +844,7 @@ if ($DueBehind < 0) {
 <input type="hidden" value="<?= $lastUrl ?>" name="lastUrl" id="lastUrl">
 
 <?php ActiveForm::end(); ?>
+<?= $this->render('modal_warning') ?>
 <?= $this->render('modal_history') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

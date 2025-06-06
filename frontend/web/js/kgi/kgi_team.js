@@ -355,7 +355,6 @@ function validateFormKgiTeam() {
     }
 }
 
-
 function kgiTeamHistoryView(kgiId, teamId) { 
     var viewType = $("#viewType").val();
     //alert(viewType);

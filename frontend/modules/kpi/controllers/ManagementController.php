@@ -2134,4 +2134,17 @@ class ManagementController extends Controller
         }
         return json_encode($res);
     }
+    public function actionCheckKpiTeam()
+    {
+        $kpiId = $_POST["kpiId"];
+        $kpiTeam = KpiTeam::find()->where(["kpiId" => $kpiId, "status" => 1])->asArray()->all();
+        $res = [];
+        $res["status"] = true;
+        if (isset($kpiTeam) && count($kpiTeam) > 0) {
+            $res["count"] = count($kpiTeam);
+        } else {
+            $res["count"] = 0;
+        }
+        return json_encode($res);
+    }
 }

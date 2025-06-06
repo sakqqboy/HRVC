@@ -798,7 +798,7 @@ $DueBehind = $targetAmount -  $result;
                                 <select
                                     class="<?= $data['status'] == 1 ? 'select-create-status' : 'select-complete-status' ?>"
                                     aria-label="Default select example" name="status" id="pim-status"
-                                    onchange="javascript:changeStatus()" required="">
+                                    onchange="javascript:changeStatus('kgi')" required="">
                                     <option value="1"
                                         <?= isset($data['status']) && $data['status'] == 1 ? 'selected' : '' ?>> In-Progress
                                     </option>
@@ -840,7 +840,9 @@ $DueBehind = $targetAmount -  $result;
             <!-- </form> -->
         </div>
     </div>
+
 </div>
+<?= $this->render('modal_warning') ?>
 <?php if ($statusform == 'update') {
     //throw new exception(print_r($data, true));
 ?>
@@ -854,7 +856,9 @@ $DueBehind = $targetAmount -  $result;
 
 <?php } ?>
 <?php ActiveForm::end(); ?>
+
 <?= $this->render('modal_history') ?>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
