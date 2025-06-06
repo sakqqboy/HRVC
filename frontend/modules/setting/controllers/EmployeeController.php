@@ -512,6 +512,7 @@ class EmployeeController extends Controller
             "employee" => $employee
         ]);
     }
+    
     public function saveEmployeeStatus($employeeId, $statusId)
     {
         $employeeStatus = EmployeeStatus::find()
