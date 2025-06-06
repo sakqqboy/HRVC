@@ -993,9 +993,9 @@ $this->title = 'Create Employee';
                                             <?= Yii::t('app', 'Select preferred language') ?>
                                         </option>
                                         <?php
-                                        if (isset($languages) && count($languages) > 0) {
-                                            foreach ($languages as $lang) {
-                                                echo '<option value="' . htmlspecialchars($lang['languageId']) . '">' . htmlspecialchars($lang['languageName']) . '</option>';
+                                        if (isset($mainLanguage) && count($mainLanguage) > 0) {
+                                            foreach ($mainLanguage as $lang) {
+                                                echo '<option value="' . htmlspecialchars($lang['LanguageId']) . '">' . htmlspecialchars($lang['name']) . '</option>';
                                             }
                                         }
                                         ?>
@@ -1812,11 +1812,9 @@ $this->title = 'Create Employee';
                     <?= Yii::t('app', 'Select Additional Language') ?>
                 </option>
                 <?php
-                if (isset($languages) && count($languages) > 0) {
-                    foreach ($languages as $lang) {
-                        echo '<option value="' . htmlspecialchars($lang['languageId']) . '">' . htmlspecialchars($lang['languageName']) . '</option>';
+                    foreach ($mainLanguage as $lang) {
+                        echo '<option value="' . $lang['LanguageId'] . '">' .  htmlspecialchars($lang['name'], ENT_QUOTES) . '</option>';
                     }
-                }
                 ?>
             </select>
         </div>

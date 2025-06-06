@@ -8,6 +8,7 @@ use backend\models\hrvc\Department;
 use backend\models\hrvc\Employee;
 use backend\models\hrvc\EmployeeCondition;
 use backend\models\hrvc\EmployeeSalary;
+use backend\models\hrvc\Language;
 use backend\models\hrvc\Module;
 use backend\models\hrvc\PimWeight;
 use backend\models\hrvc\Status;
@@ -179,6 +180,15 @@ class EmployeeController extends Controller
 	public function actionDefaultLanguage()
 	{
 		$language = DefaultLanguage::find()
+			->where(["status" => 1])
+			->asArray()
+			->all();
+		return json_encode($language);
+	}
+
+	public function actionMainLanguage()
+	{
+		$language = Language::find()
 			->where(["status" => 1])
 			->asArray()
 			->all();

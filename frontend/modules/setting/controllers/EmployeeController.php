@@ -175,7 +175,13 @@ class EmployeeController extends Controller
         $language = curl_exec($api);
         $language = json_decode($language, true);
         // curl_close($api);
-        // throw new Exception(print_r($language, true));
+        // throw new Exception(print_r($language, true));\
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/main-language');
+        $mainLanguage = curl_exec($api);
+        $mainLanguage = json_decode($mainLanguage, true);
+        // curl_close($api);
+        // throw new Exception(print_r($mainLanguage, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/module-role');
         $module = curl_exec($api);
@@ -195,6 +201,7 @@ class EmployeeController extends Controller
             "teamPosition" => $teamPosition,
             "nationalities" => $nationalities,
             "languages" => $language,
+            "mainLanguage" => $mainLanguage,
             "modules" => $module
         ]);
     }
@@ -352,7 +359,7 @@ class EmployeeController extends Controller
                 $employee->resume = 'files/resume/' . $fileName;
             }
 
-        //     // Upload Agreement
+            // Upload Agreement
             $fileAgreement = UploadedFile::getInstanceByName("agreement");
             if ($fileAgreement) {
                 $path = Path::getHost() . 'files/agreement/';
@@ -366,15 +373,24 @@ class EmployeeController extends Controller
             }
 
             if ($employee->save(false)) {
-                // $employeeId = Yii::$app->db->lastInsertID;
-                // $this->saveEmployeeStatus($employeeId, $_POST["status"]);
-                // $userId = $this->createUser($employeeId, $_POST["companyEmail"]);
-
-                // if (isset($_POST["role"]) && !empty($_POST["role"])) {
-                //     $this->saveRole([$_POST["role"]], $userId); // ห่อ role เป็น array ถ้าเป็นค่าเดียว
-                // }
-
-                // return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-profile/' . ModelMaster::encodeParams(["employeeId" => $employeeId]));
+                
+                $user = new User();
+                $user->employeeId = $employee->employeeId; 
+                $user->username =  $_POST["mailId"];    // หรือใช้ companyEmail แทน
+                $user->password_hash = Yii::$app->security->generatePasswordHash($_POST["password"]); // เข้ารหัสแบบ secure
+                $user->createDateTime = new Expression('NOW()');
+                $user->updateDateTime = new Expression('NOW()');
+                if ($user->save(false)) {
+                    // สำเร็จทั้ง employee และ user
+                    $role = new UserRole();
+                    $role->userId = $user->userId; 
+                    $role->roleId = $_POST["role"]; 
+                    $role->status = 1; 
+                    $role->createDateTime = new Expression('NOW()');
+                    $role->updateDateTime = new Expression('NOW()');
+                    $role->save(false); // ✅ สำคัญ!
+                } 
+               
             }
         }
     }
