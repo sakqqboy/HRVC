@@ -85,15 +85,14 @@ function deleteEmployee(employeeId) {
         });
     }
 }
-
-
 function checkUploadFile(type) {
-    if (type !== 1 && type !== 2) return;
-    const inputId = (type === 1) ? "resume" : "agreement";
-    const hasInputId = (type === 1) ? "hasResume" : "hasAgreement";
-    const checkId = (type === 1) ? "resume-check" : "agreement-check";
-    const btnId = (type === 1) ? "resume-btn" : "agreement-btn";
-    const fileId = (type === 1) ? "file-edit1" : "file-edit2";
+    if (![1, 2, 3].includes(type)) return;
+
+    const inputId = (type === 1) ? "resume" : (type === 2) ? "agreement" : "certificate";
+    const hasInputId = (type === 1) ? "hasResume" : (type === 2) ? "hasAgreement" : "hasCertificate";
+    const checkId = (type === 1) ? "resume-check" : (type === 2) ? "agreement-check" : "certificate-check";
+    const btnId = (type === 1) ? "resume-btn" : (type === 2) ? "agreement-btn" : "certificate-btn";
+    const fileId = (type === 1) ? "file-edit1" : (type === 2) ? "file-edit2" : "file-edit3";
 
     const input = document.getElementById(inputId);
     const file = input?.files?.[0];
@@ -123,67 +122,38 @@ function checkUploadFile(type) {
         const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         const date = now.toLocaleDateString('en-GB');
 
-        // document.getElementById(wrapperId).innerHTML = `
-        //     <div class="row">
-        //         <div class="col-lg-2 center-center">
-        //             <img id="${iconId}" src="${iconSrc}" alt="icon" style="width: 40px; height: 40px;">
-        //         </div>
-        // <div id="${nameId}" class="col-lg-6 col-md-6 col-12" style="border-right:lightgray solid thin;">
-        //     <label class="font-size-16 font-weight-600" for="name">${fileName}</label>
-        //     <div class="text-secondary text-gray font-size-14">
-        //         <span class="text-gray font-size-12">${time} • ${date}</span>
-        //     </div>
-        // </div>
-        //         <div id="file-edit${type}" class="col-lg-4 d-flex justify-content-center align-items-center gap-3">
-        //             <a href="#" onclick="viewFile(${type}); return false;">
-        //                 <img id="${eyeId}" src="${$url}images/icons/Settings/eye.svg" alt="icon" style="width: 23px; height: 23px;">
-        //             </a>
-        //             <a href="#" onclick="removeFile(${type}); return false;">
-        //                 <img id="${binId}" src="${$url}images/icons/Settings/binred.svg" alt="icon" style="width: 28px; height: 28px;">
-        //             </a>
-        //             <a href="#" onclick="resetUpload(${type}); return false;">
-        //                 <img id="${refesId}" src="${$url}image/refes-blue.svg" alt="icon" style="width: 18px; height: 18px;">
-        //             </a>
-        //         </div>
-        //     </div>
-        // `;
-        // alert(nameId);
-
         document.getElementById(nameId).innerHTML = `
-                    <label class="font-size-16 font-weight-600" for="name">${fileName}</label>
-                    <div class="text-secondary text-gray font-size-14">
-                        <span class="text-gray font-size-12">${time} • ${date}</span>
-                    </div>
+            <label class="font-size-16 font-weight-600" for="name">${fileName}</label>
+            <div class="text-secondary text-gray font-size-14">
+                <span class="text-gray font-size-12">${time} • ${date}</span>
+            </div>
         `;
 
         document.getElementById(iconId).src = iconSrc;
-        // document.getElementById(btnId).style.display = 'none';
 
         const fileEdit = document.getElementById(fileId);
         if (fileEdit) {
             fileEdit.className = "col-lg-4 d-flex justify-content-center align-items-center gap-3";
             fileEdit.innerHTML = `
-        <a href="#" onclick="viewFile(${type}); return false;">
-            <img id="${eyeId}" src="${$url}images/icons/Settings/eye.svg" alt="icon" style="width: 23px; height: 23px;">
-        </a>
-        <a href="#" onclick="removeFile(${type}); return false;">
-            <img class="mt-5 ml-9" id="${binId}" src="${$url}images/icons/Settings/binred.svg" alt="icon" style="width: 28px; height: 28px;">
-        </a>
-        <a href="#" onclick="resetUpload(${type}); return false;">
-            <img id="${refesId}" src="${$url}image/refes-blue.svg" alt="icon" style="width: 18px; height: 18px;">
-        </a>
-        `;
+                <a href="#" onclick="viewFile(${type}); return false;">
+                    <img id="${eyeId}" src="${$url}images/icons/Settings/eye.svg" alt="icon" style="width: 23px; height: 23px;">
+                </a>
+                <a href="#" onclick="removeFile(${type}); return false;">
+                    <img class="mt-5 ml-9" id="${binId}" src="${$url}images/icons/Settings/binred.svg" alt="icon" style="width: 28px; height: 28px;">
+                </a>
+                <a href="#" onclick="resetUpload(${type}); return false;">
+                    <img id="${refesId}" src="${$url}image/refes-blue.svg" alt="icon" style="width: 18px; height: 18px;">
+                </a>
+            `;
         }
-
 
         document.getElementById(wrapperId).style.border = "1px solid var(--Stroke-Bluish-Gray, #BBCDDE)";
         document.getElementById(hasInputId).value = 1;
-        // document.getElementById(checkId).style.display = 'inline';
     } else {
-        // ถ้าไม่มีไฟล์ กู้คืน UI แบบเริ่มต้น
         resetUpload(type);
     }
 }
+
 
 // ตัวอย่างฟังก์ชันล้างไฟล์
 function resetUpload(type) {
@@ -337,14 +307,14 @@ function removeFile(type) {
 }
 
 function resetUpload(type) {
-    if (type === 1) {
-        document.getElementById("resume").value = '';
-        checkUploadFile(1);
-    }
-    if (type === 2) {
-        document.getElementById("agreement").value = '';
-        checkUploadFile(2);
-    }
+    // if (type === 1) {
+    //     document.getElementById("resume").value = '';
+    //     checkUploadFile(1);
+    // }
+    // if (type === 2) {
+    //     document.getElementById("agreement").value = '';
+    //     checkUploadFile(2);
+    // }
 }
 
 function changeStatus() {
@@ -567,7 +537,7 @@ flatpickr("#birthdate-select", {
         // เปลี่ยนรูปภาพ calendar เป็น calendar-blue.svg
         const calendarImg = document.querySelector('#group-birtdate img');
         if (calendarImg) {
-            calendarImg.src = "<?= Yii::$app->homeUrl ?>image/calendar-blue.svg";
+            calendarImg.src = $url + "image/calendar-blue.svg";
         }
 
         // เปลี่ยน background-color และ border ของ input-group-text
@@ -590,7 +560,7 @@ flatpickr("#hiring-select", {
         document.getElementById("calendar-icon-hiring").style.backgroundColor = "rgb(215, 235, 255)";
         document.getElementById("calendar-icon-hiring").style.border = "0.5px solid rgb(190, 218, 255)";
         document.getElementById("calendar-img-hiring").src =
-            "<?= Yii::$app->homeUrl ?>image/calendar-blue.svg";
+            $url + "image/calendar-blue.svg";
     }
 });
 
@@ -613,6 +583,135 @@ flatpickr("#endProbationPicker", {
     }
 });
 
+
+// เปิด flatpickr แบบ range
+// const rangeInput = document.getElementById("rangeCalendarInput");
+// flatpickr(rangeInput, {
+//     mode: "range",
+//     dateFormat: "Y-m-d",
+//     defaultDate: [
+//         startInput.value || null,
+//         endInput.value || null
+//     ],
+//     onChange: function (selectedDates, dateStr, instance) {
+//         if (selectedDates.length === 2) {
+//             const [start, end] = selectedDates;
+//             const formattedStart = flatpickr.formatDate(start, "Y-m-d");
+//             const formattedEnd = flatpickr.formatDate(end, "Y-m-d");
+
+//             startInput.value = formattedStart;
+//             endInput.value = formattedEnd;
+//             label.innerText = `${formattedStart} - ${formattedEnd}`;
+
+//             // ปิด calendar
+//             calendarContainer.style.display = "none";
+//         }
+//     }
+// });
+
+function initCerDateCalendar() {
+    const calendarContainer = document.getElementById("flatpickrContainer");
+    const trigger = document.getElementById("multi-cer-term");
+    const label = document.getElementById("cer-date-label");
+    const startInput = document.getElementById("fromCerDate");
+    const endInput = document.getElementById("toCerDate");
+    const checkbox = document.getElementById("noExpiryCheckbox");
+    const rangeInput = document.getElementById("rangeCalendarInput");
+
+    if (!calendarContainer || !trigger || !rangeInput || !checkbox) {
+        console.warn('Calendar elements not found. Maybe popup not fully rendered yet.');
+        return;
+    }
+
+    flatpickr(rangeInput, {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        defaultDate: [
+            startInput.value || null,
+            endInput.value || null
+        ],
+        // onChange: function (selectedDates, dateStr, instance) {
+        //     if (selectedDates.length === 2) {
+        //         const [start, end] = selectedDates;
+        //         const formattedStart = flatpickr.formatDate(start, "Y-m-d");
+        //         const formattedEnd = flatpickr.formatDate(end, "Y-m-d");
+
+        //         startInput.value = formattedStart;
+        //         endInput.value = formattedEnd;
+        //         label.innerText = `${formattedStart} - ${formattedEnd}`;
+        //         calendarContainer.style.display = "none";
+        //     }
+        // }
+        onChange: function (selectedDates, dateStr, instance) {
+            // alert('1');
+
+            if (selectedDates.length === 2) {
+                const [start, end] = selectedDates;
+                const formattedStart = flatpickr.formatDate(start, "Y-m-d");
+                const formattedEnd = flatpickr.formatDate(end, "Y-m-d");
+
+                startInput.value = formattedStart;
+                endInput.value = formattedEnd;
+                label.innerText = `${formattedStart} - ${formattedEnd}`;
+                // ✅ เปลี่ยน background
+                const iconGroup = document.getElementById("due-term-cer-group");
+                iconGroup.style.backgroundColor = "rgb(215, 235, 255)";
+
+                // ✅ เปลี่ยนรูปภาพ
+                const startImg = document.getElementById("start-img-cer");
+                const weldImg = document.getElementById("weld-img-cer");
+                const endImg = document.getElementById("end-img-cer");
+
+                if (startImg) {
+                    startImg.src = $url + "image/calendar-blue.svg";
+                }
+                if (weldImg) {
+                    weldImg.src = $url + "image/weld.svg";
+                }
+                if (endImg) {
+                    endImg.src = $url + "image/calendar-blue.svg";
+                }
+
+                // ปิด calendar
+                calendarContainer.style.display = "none";
+            }
+        }
+    });
+
+    trigger.addEventListener("click", function () {
+        calendarContainer.style.display =
+            (calendarContainer.style.display === "none" || calendarContainer.style.display === "") ? "block" : "none";
+    });
+
+    document.addEventListener("click", function (event) {
+        if (!calendarContainer.contains(event.target) && !trigger.contains(event.target)) {
+            calendarContainer.style.display = "none";
+        }
+    });
+
+    if (startInput.value && endInput.value) {
+        label.innerText = `${startInput.value} - ${endInput.value}`;
+    }
+
+    checkbox.addEventListener("change", function () {
+        const isDisabled = checkbox.checked;
+        if (isDisabled) {
+            calendarContainer.style.display = "none";
+            startInput.value = '';
+            endInput.value = '';
+            rangeInput.value = '';
+            label.innerText = 'No expiry date';
+            trigger.style.pointerEvents = 'none';
+            trigger.style.opacity = '0.6';
+        } else {
+            trigger.style.pointerEvents = 'auto';
+            trigger.style.opacity = '1';
+            label.innerText = (startInput.value && endInput.value) ?
+                `${startInput.value} - ${endInput.value}` :
+                'start date - end date';
+        }
+    });
+}
 
 document.getElementById('override-probation-employee').addEventListener('change', function () {
     const hiddenInput = document.getElementById('override-probation-employee-hidden');
@@ -639,6 +738,9 @@ function openPopupModalCertificate() {
         success: function (response) {
             $('#certificateModalBody').html(response);
             $('#certificateModal').modal('show');
+            setTimeout(() => {
+                initCerDateCalendar();
+            }, 100); // หรือ 200ms ถ้าจำเป็น
         },
         error: function () {
             $('#certificateModalBody').html('<p class="text-danger">Failed to load content.</p>');
