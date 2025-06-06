@@ -694,9 +694,9 @@ class ModelMaster extends \yii\db\ActiveRecord
 
             // เปรียบเทียบวันนี้กับวันที่ +1 เดือน
             if ($today > $oneMonthLater) {
-                return 1; // เกิน 1 เดือนแล้ว
+                return 0; // เกิน 1 เดือนแล้ว
             } else {
-                return 0; // ยังไม่เกิน
+                return 1; // ยังไม่เกิน
             }
         }
     }

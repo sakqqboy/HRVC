@@ -2,6 +2,7 @@
 
 namespace backend\modules\masterdata\controllers;
 
+use backend\models\hrvc\Company;
 use backend\models\hrvc\DefaultLanguage;
 use backend\models\hrvc\Department;
 use backend\models\hrvc\Employee;
@@ -46,8 +47,8 @@ class EmployeeController extends Controller
 	public function actionAllEmployeeDetail($companyId)
 	{
 		$employee = Employee::find()
-			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,
-			condition.employeeConditionName,s.statusName,na.nationalityName,d.departmentName,d.departmentId,te.teamId,te.teamName')
+			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,c.city,
+			condition.employeeConditionName,s.statusName,na.nationalityName,d.departmentName,d.departmentId,te.teamId,te.teamName,c.picture as cPicture')
 			->JOIN("LEFT JOIN", "company c", "c.companyId=employee.companyId")
 			->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
 			->JOIN("LEFT JOIN", "department d", "d.departmentId=employee.departmentId")
@@ -81,7 +82,10 @@ class EmployeeController extends Controller
 					"employeeNumber" => $em["employeeNumber"],
 					"telephoneNumber" => $em["telephoneNumber"],
 					"joinDate" => ModelMaster::dateFullFormat($em["joinDate"]),
-					"companyName" => $em["companyName"]
+					"companyName" => $em["companyName"],
+					"companyPicture" => Company::companyPicture($em["cPicture"]),
+					"city" => $em["city"],
+					"countryName" => $em["countryName"]
 
 				];
 			endforeach;
