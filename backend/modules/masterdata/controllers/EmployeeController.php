@@ -2,6 +2,7 @@
 
 namespace backend\modules\masterdata\controllers;
 
+use backend\models\hrvc\Certificate;
 use backend\models\hrvc\Company;
 use backend\models\hrvc\DefaultLanguage;
 use backend\models\hrvc\Department;
@@ -13,6 +14,9 @@ use backend\models\hrvc\Module;
 use backend\models\hrvc\PimWeight;
 use backend\models\hrvc\Status;
 use backend\models\hrvc\Title;
+use backend\models\hrvc\UserAccess;
+use backend\models\hrvc\UserLanguage;
+use backend\models\hrvc\UserRole;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\User;
@@ -181,44 +185,61 @@ class EmployeeController extends Controller
 	public function actionEmployeeUpdate($id){
 		
 		$employee = Employee::find()
-		->select([
-			'employeeId AS id',
-			'`status`',
-			'employeeNumber AS employeeId',
-			'defaultLanguage',
-			'salutation',
-			'gender',
-			'employeeFirstname',
-			'employeeSurename',
-			'nationalityId',
-			'telephoneNumber',
-			'emergencyTel',
-			'address1',
-			'email',
-			'maritalStatus',
-			'birthDate',
-			'companyId',
-			'branchId',
-			'departmentId',
-			'teamId',
-			'companyEmail',
-			'hireDate AS hiringDate',
-			'probationStatus AS overrideProbationEmployee',
-			'probationStart AS fromDate',
-			'probationEnd AS toDate',
-			'titleId',
-			'remark',
-			'skills',
-			'contact AS linkedin',
-			'resume',
-			'employeeAgreement AS agreement',
-			'picture AS image',
-			'`status`'
-		])
-		->from('employee')
-		->where(['employeeId' => $id])
-		->one();
-		return json_encode($employee	);
+    	->select([
+        'employee.employeeId AS id',
+		'employee.employeeConditionId',
+        'employee.status',
+        'employee.employeeNumber AS employeeId',
+        'employee.defaultLanguage',
+        'employee.salutation',
+        'employee.gender',
+        'employee.employeeFirstname',
+        'employee.employeeSurename',
+        'employee.nationalityId',
+        'employee.telephoneNumber',
+        'employee.emergencyTel',
+        'employee.address1',
+        'employee.email',
+        'employee.maritalStatus',
+        'employee.birthDate',
+        'employee.companyId',
+        'employee.branchId',
+        'employee.departmentId',
+        'employee.teamId',
+        'employee.companyEmail',
+        'employee.hireDate AS hiringDate',
+        'employee.probationStatus AS overrideProbationEmployee',
+        'employee.probationStart AS fromDate',
+        'employee.probationEnd AS toDate',
+        'employee.titleId',
+        'employee.remark',
+        'employee.skills',
+        'employee.contact AS linkedin',
+        'employee.resume',
+        'employee.employeeAgreement AS agreement',
+        'employee.picture AS image'
+    ])
+    ->from('employee')
+    ->where(['employee.employeeId' => $id])
+    ->asArray()
+    ->one();
+
+		// $employee = Employee::find()
+		// 	->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,b.branchName,
+		// 	condition.employeeConditionName,s.statusName,na.nationalityName,c.city,t.shortTag')
+		// 	->JOIN("LEFT JOIN", "company c", "c.companyId=employee.companyId")
+		// 	->JOIN("LEFT JOIN", "branch b", "b.branchId=employee.branchId")
+		// 	->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
+		// 	->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
+		// 	->JOIN("LEFT JOIN", "nationality na", "na.numCode=employee.nationalityId")
+		// 	//->JOIN("LEFT JOIN", "employee_status es", "es.employeeId=employee.employeeId")
+		// 	->JOIN("LEFT JOIN", "status s", "s.statusId=employee.status")
+		// 	->JOIN("LEFT JOIN", "employee_condition condition", "condition.employeeConditionId=employee.employeeConditionId")
+		// 	->where(["employee.employeeId" => $id])
+		// 	->asArray()
+		// 	->one();
+
+		return json_encode($employee);
 
 	}
 	
@@ -232,12 +253,64 @@ class EmployeeController extends Controller
 			])
 			->where(['employeeId' => $id])
 			->asArray() // สำคัญ! เพื่อให้ผลลัพธ์เป็น array สำหรับ json_encode
-			->all(); // หรือ ->one(); ถ้ามีแค่ 1 user ต่อ 1 employee
+			->one(); // หรือ ->one(); ถ้ามีแค่ 1 user ต่อ 1 employee
 
 		return json_encode($users); // ← ตรงนี้ต้องเป็น $users ไม่ใช่ $id
 	}
 
 
+	public function actionUserRole($id){
+		$userRole = UserRole::find()
+		->select(['userRoleId', 'roleid', 'userId AS role'])
+		->where(['userId' => $id])
+		->asArray()
+		->one();
+		
+		return json_encode($userRole);
+	}
+
+
+	public function actionUserAccess($id){
+		$userAccess = UserAccess::find()
+		->select(['acessId', 'moduleId', 'userId'])
+		->where(['userId' => $id])
+		->asArray()
+		->all();
+
+		return json_encode($userAccess);
+	}
+
+	public function actionUserCertificate($id){
+		$certificates = Certificate::find()
+		->select([
+			'cerId',
+			'cerName',
+			'userId',
+			'issuing',
+			'fromCerDate',
+			'toCerDate',
+			'credential',
+			'noExpiry',
+			'certificate',
+			'cerImage'
+		])
+		->where(['userId' => $id])
+		->asArray()
+		->all();
+
+		return json_encode($certificates);
+	}
+
+
+	public function actionUserLanguage($id){
+		$Languages = UserLanguage::find()
+		->select(['userLanguageId', 'userId', 'languageId', 'lavel'])
+		->where(['userId' => $id])
+		->asArray()
+		->all();
+
+		return json_encode($Languages);
+	}
 
 	public function actionDefaultLanguage()
 	{

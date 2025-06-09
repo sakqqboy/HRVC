@@ -493,7 +493,6 @@ select.form-select option:disabled {
                                     aria-hidden="true"></i>
                             </div>
 
-
                             <!-- hidden inputs เพื่อเก็บค่า month และ year -->
                             <input type="hidden" id="hiddenMonth" name="month"
                                 value="<?= htmlspecialchars($data['month'] ?? '') ?>" required>

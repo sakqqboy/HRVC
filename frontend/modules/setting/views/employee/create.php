@@ -2,8 +2,36 @@
 
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
-$statusform = 'create';
+// $statusfrom = 'create';
 $this->title = 'Create Employee';
+
+$urlSubmit = '';
+if($statusfrom == 'Create'){
+    $urlSubmit = 'setting/employee/save-create-employee';
+}else{
+    $urlSubmit = 'setting/employee/save-update-employee';
+}
+// $userModuleIds = array_column($userAccess, 'moduleId');  // [3, 4, 6]
+$userModuleIds = [];
+
+if (isset($userAccess) && is_array($userAccess) && !empty($userAccess)) {
+    $userModuleIds = array_column($userAccess, 'moduleId');
+}
+
+$companyId = isset($employee['companyId']) ? $employee['companyId'] : '';
+
+
+$companyId = isset($employee['companyId']) ? $employee['companyId'] : '';
+
+$resumePath = isset($employee['resume']) ? $employee['resume'] : '';
+$resumeFileName = basename($resumePath); // ดึงชื่อไฟล์จาก path เช่น bcRGoVHyu2.xlsx
+$resumeExtension = pathinfo($resumeFileName, PATHINFO_EXTENSION); // xlsx
+
+
+$agreementPath = isset($employee['agreement']) ? $employee['agreement'] : '';
+$agreementFileName = basename($agreementPath);              // bcRGoVHyu2.xlsx
+$agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
+
 ?>
 <?php $form = ActiveForm::begin([
 	'id' => 'create-employee',
@@ -11,7 +39,7 @@ $this->title = 'Create Employee';
 	'options' => [
 		'enctype' => 'multipart/form-data',
 	],
-	'action' => Yii::$app->homeUrl . 'setting/employee/save-create-employee'
+	'action' => Yii::$app->homeUrl . $urlSubmit
 
 ]); ?>
 <!-- Flatpickr CSS -->
@@ -29,15 +57,11 @@ $this->title = 'Create Employee';
                 Back
             </a>
             <div class="pim-name-title ml-10">
-                Create Employee
+                <?= $statusfrom ?> Employee
             </div>
         </div>
         <div class="row update-group-body mt-20" style="gap: 60px;">
             <!-- Account Details -->
-            <input type="hidden" id="systemAdmin" name="//" value=" // ">
-            <input type="hidden" id="systemAdmin" name="content1" value="Account Details">
-            <input type="hidden" id="systemAdmin" name="//" value=" // ">
-
             <div>
                 <!-- head -->
                 <div class="between-center">
@@ -55,18 +79,21 @@ $this->title = 'Create Employee';
                         </span>
                         <select class="select-employee-status" aria-label="Default select example" name="status"
                             id="pim-status" onchange="javascript:changeStatusEmploywee()" required>
-                            <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A); ">
+                            <option value="" disabled hidden
+                                <?= empty($employee['employeeConditionId']) ? 'selected' : '' ?>
+                                style="color: var(--Helper-Text, #8A8A8A);">
                                 <?= Yii::t('app', 'Select') ?>
                             </option>
                             <?php
-                                if (isset($conditions) && count($conditions) > 0) {
-                                    foreach ($conditions as $c) : ?>
-                            <option value="<?= $c['employeeConditionId'] ?>"><?= $c["employeeConditionName"] ?></option>
-                            <?php
-                                    endforeach;
+                            if (!empty($conditions) && isset($employee['employeeConditionId'])) {
+                                foreach ($conditions as $c) {
+                                    $selected = ($c['employeeConditionId'] == $employee['employeeConditionId']) ? 'selected' : '';
+                                    echo '<option value="' . $c['employeeConditionId'] . '" ' . $selected . '>' . $c['employeeConditionName'] . '</option>';
                                 }
+                            }
                             ?>
                         </select>
+
                     </div>
 
                 </div>
@@ -83,7 +110,14 @@ $this->title = 'Create Employee';
                             text-align: center;
                             cursor: pointer;
                         ">
+
                                 <label for="imageUpload" class="upload-label" style="cursor: pointer;  display: block;">
+                                    <?php
+                                    if (isset($employee) && $employee["image"] != null) { ?>
+                                    <img src="<?= Yii::$app->homeUrl . $employee['image'] ?>"
+                                        class="company-group-picture" id="old-image">
+                                    <?php
+                                    } else { ?>
                                     <img src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"
                                         style="width: 50px; height: auto;" alt="Upload Icon"> <br><br>
                                     <span>
@@ -92,7 +126,9 @@ $this->title = 'Create Employee';
                                     </span>
                                     <br>
                                     <span style="font-size: 13px; color: #666;">Branch Picture here</span>
-
+                                    <?php
+                                    }
+                                    ?>
                                 </label>
                                 <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
                                     style="display: none;">
@@ -121,7 +157,7 @@ $this->title = 'Create Employee';
                                             style="width: 20px; height: 20px;">
                                     </span>
                                     <input type="text" class="form-control font-size-14" id="mailId" name="mailId"
-                                        placeholder="kaori@gmail.com" value=""
+                                        placeholder="kaori@gmail.com" value="<?= $userEmployee['mailId'] ?? '' ?>"
                                         style="width: 290.59px; border-left: none;">
                                 </div>
                             </div>
@@ -130,7 +166,8 @@ $this->title = 'Create Employee';
                                     Employee ID
                                 </text>
                                 <input type="text" class="form-control font-size-14" id="employeeId" name=" employeeId"
-                                    placeholder="Please assign the employee ID " value="" style="width:  330.59px;">
+                                    placeholder="Please assign the employee ID "
+                                    value="<?= $employee['employeeId'] ?? '' ?>" style="width:  330.59px;">
                             </div>
                         </div>
                         <div class="flex-center" style="gap: 37px;">
@@ -167,23 +204,28 @@ $this->title = 'Create Employee';
                                     </span>
 
                                     <select class="form-select" style="width: 290.59px; border-left: none;"
-                                        id="defaultLanguage" name="defaultLanguage" required="">
-                                        <option value="" disabled selected hidden
-                                            style="color: var(--Helper-Text, #8A8A8A); ">
+                                        id="defaultLanguage" name="defaultLanguage" required>
+                                        <option value="" disabled hidden
+                                            <?= empty($employee['defaultLanguage']) ? 'selected' : '' ?>
+                                            style="color: var(--Helper-Text, #8A8A8A);">
                                             <?= Yii::t('app', 'Select preferred language') ?>
                                         </option>
                                         <?php
                                         if (isset($languages) && count($languages) > 0) {
                                             foreach ($languages as $lang) {
-                                                echo '<option value="' . htmlspecialchars($lang['languageId']) . '">' . htmlspecialchars($lang['languageName']) . '</option>';
+                                                $selected = (isset($employee) && $lang['languageId'] == $employee['defaultLanguage']) ? 'selected' : '';
+                                                echo '<option value="' . htmlspecialchars($lang['languageId']) . '" ' . $selected . '>' . htmlspecialchars($lang['languageName']) . '</option>';
                                             }
                                         }
                                         ?>
                                     </select>
 
+
                                 </div>
                             </div>
                         </div>
+
+                        <?php $selectedRoleId = $userRole['roleid'] ?? null; ?>
 
                         <div class="w-100">
                             <div class="w-100">
@@ -193,43 +235,32 @@ $this->title = 'Create Employee';
                             </div>
 
                             <div class="radio-wrapper">
-                                <div class="radio-item">
-                                    <input type="radio" id="staff" name="role" value="1" required>
-                                    <span class="radio-cycle"></span>
-                                    <label for="staff">Staff</label>
-                                </div>
-                                <div class="radio-item">
-                                    <input type="radio" id="teamLeader" name="role" value="2">
-                                    <span class="radio-cycle"></span>
-                                    <label for="teamLeader">Team Leader</label>
-                                </div>
-                                <div class="radio-item">
-                                    <input type="radio" id="hr" name="role" value="3">
-                                    <span class="radio-cycle"></span>
-                                    <label for="hr">HR</label>
-                                </div>
-                                <div class="radio-item">
-                                    <input type="radio" id="manager" name="role" value="4">
-                                    <span class="radio-cycle"></span>
-                                    <label for="manager">Manager</label>
-                                </div>
-                                <div class="radio-item">
-                                    <input type="radio" id="generalManager" name="role" value="5">
-                                    <span class="radio-cycle"></span>
-                                    <label for="generalManager">General Manager</label>
-                                </div>
-                                <div class="radio-item">
-                                    <input type="radio" id="admin" name="role" value="6">
-                                    <span class="radio-cycle"></span>
-                                    <label for="admin">Admin</label>
-                                </div>
-                                <div class="radio-item">
-                                    <input type="radio" id="systemAdmin" name="role" value="7">
-                                    <span class="radio-cycle"></span>
-                                    <label for="systemAdmin">System Admin</label>
-                                </div>
+                                <?php
+                                $roles = [
+                                    1 => 'Staff',
+                                    2 => 'Team Leader',
+                                    3 => 'HR',
+                                    4 => 'Manager',
+                                    5 => 'General Manager',
+                                    6 => 'Admin',
+                                    7 => 'System Admin'
+                                ];
+
+                                foreach ($roles as $id => $label) {
+                                    $checked = ($selectedRoleId == $id) ? 'checked' : '';
+                                    $htmlId = strtolower(str_replace(' ', '', $label));
+                                    echo <<<HTML
+                                    <div class="radio-item">
+                                        <input type="radio" id="{$htmlId}" name="role" value="{$id}" required {$checked}>
+                                        <span class="radio-cycle"></span>
+                                        <label for="{$htmlId}">{$label}</label>
+                                    </div>
+                                    HTML;
+                                }
+                                ?>
                             </div>
                         </div>
+
                         <div class="w-100">
                             <div class="w-100">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
@@ -241,14 +272,17 @@ $this->title = 'Create Employee';
                                 <hr class="hr-group">
                             </div>
                             <div class="checkbox-wrapper">
-                                <?php foreach ($modules as $modul) { ?>
+                                <?php foreach ($modules as $modul) {
+                                    $isChecked = in_array($modul['moduleId'], $userModuleIds) ? 'checked' : '';
+                                ?>
                                 <div class="checkbox-item">
                                     <input type="checkbox" id="module_<?= $modul['moduleId'] ?>" name="moduleId[]"
-                                        value="<?= $modul['moduleId'] ?>" class="module-check">
+                                        value="<?= $modul['moduleId'] ?>" class="module-check" <?= $isChecked ?>>
                                     <span class="checkbox-cycle"></span>
                                     <label for="module_<?= $modul['moduleId'] ?>"><?= $modul['moduleName'] ?></label>
                                 </div>
                                 <?php } ?>
+
                             </div>
 
                         </div>
@@ -256,10 +290,6 @@ $this->title = 'Create Employee';
 
                 </div>
             </div>
-
-            <input type="hidden" id="systemAdmin" name="//" value=" // ">
-            <input type="hidden" id="systemAdmin" name="content2" value="Contact & Personal Details">
-            <input type="hidden" id="systemAdmin" name="//" value=" // ">
 
             <!-- Contact & Personal Details -->
             <div>
@@ -281,25 +311,35 @@ $this->title = 'Create Employee';
                                 </span>Salutation</text>
                             <select class="form-select" name="salutation" id="salutation" style="border-left: none;"
                                 required>
-                                <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A);">
+                                <option value="" disabled <?= empty($employee['salutation']) ? 'selected' : '' ?> hidden
+                                    style="color: var(--Helper-Text, #8A8A8A);">
                                     <?= Yii::t('app', 'Select') ?>
                                 </option>
-                                <option value="Mr.">Mr.</option>
-                                <option value="Mrs.">Mrs.</option>
-                                <option value="Miss">Miss</option>
-                                <option value="Ms.">Ms.</option>
-                                <option value="Dr.">Dr.</option>
-                                <option value="Prof.">Prof.</option>
+                                <option value="Mr." <?= ($employee['salutation'] ?? '') === 'Mr.' ? 'selected' : '' ?>>
+                                    Mr.</option>
+                                <option value="Mrs."
+                                    <?= ($employee['salutation'] ?? '') === 'Mrs.' ? 'selected' : '' ?>>Mrs.</option>
+                                <option value="Miss"
+                                    <?= ($employee['salutation'] ?? '') === 'Miss' ? 'selected' : '' ?>>Miss</option>
+                                <option value="Ms." <?= ($employee['salutation'] ?? '') === 'Ms.' ? 'selected' : '' ?>>
+                                    Ms.</option>
+                                <option value="Dr." <?= ($employee['salutation'] ?? '') === 'Dr.' ? 'selected' : '' ?>>
+                                    Dr.</option>
+                                <option value="Prof."
+                                    <?= ($employee['salutation'] ?? '') === 'Prof.' ? 'selected' : '' ?>>Prof.</option>
                             </select>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>Gender</text>
                             <select class="form-select" name="gender" id="gender" style="border-left: none;" required>
-                                <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A); ">
+                                <option value="" disabled <?= empty($employee['gender']) ? 'selected' : '' ?> hidden
+                                    style="color: var(--Helper-Text, #8A8A8A);">
                                     <?= Yii::t('app', 'Select') ?>
                                 </option>
-                                <option value="1">Male</option>
-                                <option value="2">Female</option>
+                                <option value="1" <?= ($employee['gender'] ?? '') == '1' ? 'selected' : '' ?>>Male
+                                </option>
+                                <option value="2" <?= ($employee['gender'] ?? '') == '2' ? 'selected' : '' ?>>Female
+                                </option>
                             </select>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
@@ -311,13 +351,15 @@ $this->title = 'Create Employee';
                             <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>First
                                 Name</text>
                             <input type="text" name="employeeFirstname" id="employeeFirstname" class="form-control"
-                                placeholder="Please Write the First Name" required>
+                                placeholder="Please Write the First Name"
+                                value="<?=$employee['employeeFirstname'] ?? '' ?>" required>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>Last
                                 Name</text>
                             <input type="text" name="employeeSurename" id="employeeSurename" class="form-control"
-                                placeholder="Please Write the Last Name" required>
+                                placeholder="Please Write the Last Name"
+                                value="<?=$employee['employeeSurename'] ?? '' ?>" required>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"><span class="text-danger">*
@@ -330,14 +372,17 @@ $this->title = 'Create Employee';
                                 </span>
                                 <select class="form-select" name="nationalityId" id="nationalityId"
                                     style="border-left: none;" required>
-                                    <option value="" disabled selected hidden
-                                        style="color: var(--Helper-Text, #8A8A8A);">
+                                    <option value="" disabled <?= empty($employee['nationalityId']) ? 'selected' : '' ?>
+                                        hidden style="color: var(--Helper-Text, #8A8A8A);">
                                         <?= Yii::t('app', 'Select Nationality') ?>
                                     </option>
                                     <?php
                                     if (isset($nationalities) && count($nationalities) > 0) {
-                                        foreach ($nationalities as $nation) : ?>
-                                    <option value="<?= $nation['countryId'] ?>" data-flag="<?= $nation['flag'] ?>">
+                                        foreach ($nationalities as $nation) :
+                                            $selected = ($employee['nationalityId'] ?? '') == $nation['countryId'] ? 'selected' : '';
+                                    ?>
+                                    <option value="<?= $nation['countryId'] ?>" data-flag="<?= $nation['flag'] ?>"
+                                        <?= $selected ?>>
                                         <?= $nation['countryName'] ?>
                                     </option>
                                     <?php
@@ -350,38 +395,41 @@ $this->title = 'Create Employee';
                     </div>
                     <div class="row">
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>Contact
-                                Number</text>
+                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                Contact Number
+                            </text>
                             <input type="text" name="telephoneNumber" id="telephoneNumber" class="form-control"
-                                placeholder="e.g., +66 081 091 87" required>
+                                placeholder="e.g., +66 081 091 87" value="<?=$employee['telephoneNumber'] ?? '' ?>"
+                                required>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500">Emergency Contact</text>
                             <input type="text" name="emergencyTel" id="emergencyTel" class="form-control"
-                                placeholder="e.g., +66 081 091 87">
+                                placeholder="e.g., +66 081 091 87" value="<?=$employee['emergencyTel'] ?? '' ?>">
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"> Address</text>
                             <input type="text" name="address1" id="address1" class="form-control"
-                                placeholder="e.g., 23 Elm Street, Apt 4B">
+                                placeholder="e.g., 23 Elm Street, Apt 4B" value="<?=$employee['address1'] ?? '' ?>">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>Personal
-                                Email</text>
+                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                Personal Email</text>
                             <div class="input-group">
                                 <span class="input-group-text" style="background-color: white; border-right: none;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/e-mail.svg" alt="Website"
                                         style="width: 20px; height: 20px;">
                                 </span>
                                 <input type="text" name="email" id="email" class="form-control"
-                                    placeholder="kaori@gmail.com" style=" border-left: none;" required>
+                                    placeholder="kaori@gmail.com" style=" border-left: none;"
+                                    value="<?=$employee['email'] ?? '' ?>" required>
                             </div>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>Marital
-                                Status</text>
+                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                Marital Status</text>
                             <div class="input-group">
                                 <span class="input-group-text" style="background-color: white; border-right: none;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
@@ -389,21 +437,31 @@ $this->title = 'Create Employee';
                                 </span>
                                 <select class="form-select" name="maritalStatus" id="maritalStatus"
                                     style="border-left: none;" required>
-                                    <option value="" disabled selected hidden
-                                        style="color: var(--Helper-Text, #8A8A8A);">
+                                    <option value="" disabled <?= empty($employee['maritalStatus']) ? 'selected' : '' ?>
+                                        hidden style="color: var(--Helper-Text, #8A8A8A);">
                                         <?= Yii::t('app', 'Select') ?>
                                     </option>
-                                    <option value="1">Single</option>
-                                    <option value="2">Married</option>
-                                    <option value="3">Divorced</option>
-                                    <option value="4">Widowed</option>
-                                    <option value="5">Separated</option>
+                                    <option value="1"
+                                        <?= (isset($employee['maritalStatus']) && $employee['maritalStatus'] == 1) ? 'selected' : '' ?>>
+                                        Single</option>
+                                    <option value="2"
+                                        <?= (isset($employee['maritalStatus']) && $employee['maritalStatus'] == 2) ? 'selected' : '' ?>>
+                                        Married</option>
+                                    <option value="3"
+                                        <?= (isset($employee['maritalStatus']) && $employee['maritalStatus'] == 3) ? 'selected' : '' ?>>
+                                        Divorced</option>
+                                    <option value="4"
+                                        <?= (isset($employee['maritalStatus']) && $employee['maritalStatus'] == 4) ? 'selected' : '' ?>>
+                                        Widowed</option>
+                                    <option value="5"
+                                        <?= (isset($employee['maritalStatus']) && $employee['maritalStatus'] == 5) ? 'selected' : '' ?>>
+                                        Separated</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <label class="font-size-16 font-weight-500"><span class="text-danger">* </span>Date of
-                                Birth</label>
+                            <label class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                Date of Birth</label>
                             <div class="input-group" id="group-birtdate" style="position: relative;">
                                 <span class="input-group-text mid-center pb-10 pt-10"
                                     style="background-color: #C3C3C3; border:0.5px solid #818181; border-radius: 36px; width: 66px; z-index: 1; height: 40px;">
@@ -418,7 +476,8 @@ $this->title = 'Create Employee';
                                 </div>
 
                                 <!-- input ที่ใช้ส่งค่าจริง -->
-                                <input type="hidden" name="birthDate" id="birthDate" value="">
+                                <input type="hidden" name="birthDate" id="birthDate"
+                                    value="<?=$employee['birthDate'] ?? '' ?>">
                             </div>
 
                             <!-- กล่อง calendar ที่จะโชว์เมื่อกด -->
@@ -432,10 +491,6 @@ $this->title = 'Create Employee';
 
                 </div>
             </div>
-
-            <input type="hidden" id="systemAdmin" name="//" value=" // ">
-            <input type="hidden" id="systemAdmin" name="content3" value="Work Details">
-            <input type="hidden" id="systemAdmin" name="//" value=" // ">
 
             <!-- Work Details -->
             <div>
@@ -469,18 +524,20 @@ $this->title = 'Create Employee';
                                     data-placement="top" aria-label="ttt" data-bs-original-title="ttt">
                             </text>
                             <div class="input-group">
-                                <select class="form-select " id="companySelectId" name="companyId"
+                                <select class="form-select" id="companySelectId" name="companyId"
                                     style="appearance: none; background-image: none;">
                                     <option value=""><?= Yii::t('app', 'Which Company your are is working in ? ') ?>
                                     </option>
                                     <?php if (isset($companies) && count($companies) > 0): ?>
                                     <?php foreach ($companies as $c): ?>
-                                    <option value="<?= $c['companyId'] ?>" data-img="<?= $c['picture'] ?>">
+                                    <option value="<?= $c['companyId'] ?>" data-img="<?= $c['picture'] ?>"
+                                        <?= (isset($companyId) && $companyId == $c['companyId']) ? 'selected' : '' ?>>
                                         <?= $c['companyName'] ?>
                                     </option>
                                     <?php endforeach; ?>
                                     <?php endif; ?>
                                 </select>
+                                <input type="hidden" name="companyIdValue" id="">
                                 <span class="input-group-text "
                                     style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
                                     onclick="document.getElementById('companySelectId').focus();">
@@ -500,12 +557,6 @@ $this->title = 'Create Employee';
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
                                     data-placement="top" aria-label="ttt" data-bs-original-title="ttt">
                             </text>
-                            <!-- <select class="form-select" name="fff" id="fff" style="border-left: none;" required>
-                                <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A); ">
-                                    <?= Yii::t('app', 'Select') ?>
-                                </option>
-
-                            </select> -->
                             <div class="input-group">
                                 <select id="branchSelectId" brancSelect" class="form-select"
                                     style="border-right: none; width: 239px; appearance: none; background-image: none;"
@@ -587,6 +638,9 @@ $this->title = 'Create Employee';
                                     <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
                                         style="width: 10px; height: 10px;">
                                 </span>
+                                <input type="hidden" name="employeeTeamId" id="employeeTeamId"
+                                    value="<?= isset($employee['teamId']) ? $employee['teamId'] : '' ?>">
+
                             </div>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
@@ -599,13 +653,16 @@ $this->title = 'Create Employee';
                                         style="width: 20px; height: 20px;">
                                 </span>
                                 <input type="text" style="border-left: none;" name="companyEmail" id="companyEmail"
-                                    class="form-control" placeholder="kaori@gmail.com" required>
+                                    class="form-control" placeholder="kaori@gmail.com"
+                                    value="<?= isset($employee['companyEmail']) ? $employee['companyEmail'] : '' ?>"
+                                    required>
                             </div>
                         </div>
 
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <label class="font-size-16 font-weight-500">
-                                <span class="text-danger">* </span> Hiring Date
+                                <span class="text-danger">* </span>
+                                Hiring Date
                             </label>
                             <div class="input-group" id="group-hiringdate" style="position: relative;">
                                 <span class="input-group-text mid-center pb-10 pt-10" id="calendar-icon-hiring"
@@ -620,7 +677,8 @@ $this->title = 'Create Employee';
                                         aria-hidden="true"></i>
                                 </div>
 
-                                <input type="hidden" name="hiringDate" id="hiringDate" value="">
+                                <input type="hidden" name="hiringDate" id="hiringDate"
+                                    value="<?= isset($employee['hiringDate']) ? $employee['hiringDate'] : '' ?>">
                             </div>
 
                             <div id="calendar-hiringdate"
@@ -639,7 +697,8 @@ $this->title = 'Create Employee';
                             <div style="display: flex;  align-items: center; gap: 5px;">
                                 <span class="text-danger">* </span>
                                 <label class="switch">
-                                    <input type="checkbox" id="override-probation-employee" checked="">
+                                    <input type="checkbox" id="override-probation-employee"
+                                        <?= (isset($employee['overrideProbationEmployee']) && $employee['overrideProbationEmployee'] == 1) ? 'checked' : '' ?>>
                                     <span class="slider round"></span>
                                 </label>
                                 <input type="hidden" name="overrideProbationEmployee"
@@ -667,11 +726,10 @@ $this->title = 'Create Employee';
                                     Select the term <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                                 </div>
                                 <!-- hidden inputs เพื่อเก็บค่า month และ year -->
-                                <input type="hidden" id="fromDate" name="fromDate"
-                                    value="<?= isset($data['probationStart']) ? $data['probationStart'] : '' ?>"
-                                    required>
+                                <input type="hidden" id="fromDate" name="fromDated"
+                                    value="<?= isset($employee['fromDate']) ? $employee['fromDate'] : '' ?>" required>
                                 <input type="hidden" id="toDate" name="toDate"
-                                    value="<?= isset($data['probationEnd']) ? $data['probationEnd'] : '' ?>" required>
+                                    value="<?= isset($employee['toDate']) ? $employee['toDate'] : '' ?>" required>
 
                             </div>
 
@@ -695,10 +753,6 @@ $this->title = 'Create Employee';
                     </div>
                 </div>
             </div>
-
-            <input type="hidden" id="systemAdmin" name="//" value=" // ">
-            <input type="hidden" id="systemAdmin" name="content4" value="Job Description">
-            <input type="hidden" id="systemAdmin" name="//" value=" // ">
 
             <!-- Job Description -->
             <div>
@@ -742,7 +796,10 @@ $this->title = 'Create Employee';
                                     </div>
                                     <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
                                         style="width: 10px; height: 10px;">
-                                </span>
+
+                                    <input type="hidden" name="employeeTitleId" id="employeeTitleId"
+                                        value="<?= isset($employee['titleId']) ? $employee['titleId'] : '' ?>">
+
                             </div>
                         </div>
 
@@ -772,10 +829,6 @@ $this->title = 'Create Employee';
                     </div>
                 </div>
 
-                <input type="hidden" id="systemAdmin" name="//" value=" // ">
-                <input type="hidden" id="systemAdmin" name="content5" value=" Attachments & Remarks">
-                <input type="hidden" id="systemAdmin" name="//" value=" // ">
-
                 <!--  Attachments & Remarks -->
                 <div>
                     <div>
@@ -797,21 +850,74 @@ $this->title = 'Create Employee';
                                     style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)">
                                     <div class="row">
                                         <div class="col-lg-2 center-center">
+                                            <?php
+                                            if($resumeExtension == 'pdf'){
+                                            ?>
+                                            <img id="icon-file1" src="<?= Yii::$app->homeUrl ?>image/pdf-file.svg"
+                                                alt="icon" style="width: 40px; height: 40px;">
+                                            <?php
+                                            }else if($resumeExtension == 'xlsx'){
+                                            ?>
+                                            <img id="icon-file1" src="<?= Yii::$app->homeUrl ?>image/ex-file.svg"
+                                                alt="icon" style="width: 40px; height: 40px;">
+                                            <?php
+                                            }else{
+                                            ?>
                                             <img id="icon-file1" src="<?= Yii::$app->homeUrl ?>image/file-big.svg"
                                                 alt="icon" style="width: 40px; height: 40px;">
+                                            <?php
+                                            }
+                                            ?>
                                         </div>
                                         <div id="file-uplode-name1" class="col-lg-6 col-md-6 col-12"
                                             style="border-right:lightgray solid thin;">
+                                            <?php
+                                            if($resumeFileName){
+                                            ?>
+                                            <label class="font-size-16 font-weight-600"
+                                                for="name"><?=$resumeFileName?></label>
+                                            <div class="text-secondary text-gray font-size-14">
+                                                <span class="text-gray font-size-12"></span>
+                                            </div>
+                                            <?php
+                                            }else{
+                                            ?>
                                             <label class="text-gray font-size-16 font-weight-500" for="resume">Upload
                                                 Resume/CV here</label>
                                             <div class="text-secondary text-gray font-size-14">
                                                 <span class="text-gray font-size-12">Supported - pdf, .doc, .docx</span>
                                             </div>
+                                            <?php
+                                            }
+                                            ?>
                                             <div id="filename-display1" class="font-size-16 font-weight-600 mt-2"></div>
                                         </div>
-                                        <div id="file-edit1" class="col-lg-4 col-md-6 col-12 text-center pt-13">
+                                        <div id="file-edit1" class="col-lg-4 col-md-6 col-12 text-center">
+                                            <?php
+                                            if($resumeFileName){
+                                            ?>
+                                            <a class="no-underline " href="#" onclick="viewFile(1); return false;">
+                                                <img id="eye-file1"
+                                                    src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
+                                                    alt="icon" style="width: 23px; height: 23px;">
+                                            </a>
+                                            <a class="no-underline " href="#" onclick="removeFile(1); return false;">
+                                                <img id="bin-file1" class="mt-5 ml-9"
+                                                    src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                                    alt="icon" style="width: 28px; height: 28px;">
+                                            </a>
+                                            <a class="no-underline " href="#" onclick="resetUpload(1); return false;">
+                                                <img id="refes-file1"
+                                                    src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg" alt="icon"
+                                                    style="width: 18px; height: 18px;">
+                                            </a>
+                                            <?php
+                                            }else{
+                                            ?>
+
                                             <label id="resume-btn" for="resume"
-                                                class="text-blue font-size-16 font-weight-600" style="cursor: pointer;">
+                                                class="text-blue font-size-16 font-weight-600 pt-13"
+                                                style="cursor: pointer;">
                                                 Upload
                                                 <img src="<?= Yii::$app->homeUrl ?>image/file-up-blue.svg" alt="icon"
                                                     style="width: 16px; height: 16px;">
@@ -819,6 +925,9 @@ $this->title = 'Create Employee';
                                             <span class="ml-5 text-success" id="resume-check" style="display:none;">
                                                 <i class="fa fa-check" aria-hidden="true"></i>
                                             </span>
+                                            <?php
+                                            }
+                                            ?>
                                         </div>
                                         <input id="resume" style="display:none;" type="file" name="resume"
                                             onchange="checkUploadFile(1)">
@@ -831,11 +940,39 @@ $this->title = 'Create Employee';
                                     style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)">
                                     <div class="row">
                                         <div class="col-lg-2 center-center">
+                                            <?php
+                                            if($agreementExtension == 'pdf'){
+                                            ?>
+                                            <img id="icon-file2" src="<?= Yii::$app->homeUrl ?>image/pdf-file.svg"
+                                                alt="icon" style="width: 40px; height: 40px;">
+                                            <?php
+                                            }else if($agreementExtension == 'xlsx'){
+                                            ?>
+                                            <img id="icon-file2" src="<?= Yii::$app->homeUrl ?>image/ex-file.svg"
+                                                alt="icon" style="width: 40px; height: 40px;">
+                                            <?php
+                                            }else{
+                                            ?>
                                             <img id="icon-file2" src="<?= Yii::$app->homeUrl ?>image/file-big.svg"
                                                 alt="icon" style="width: 40px; height: 40px;">
+                                            <?php
+                                            }
+                                            ?>
+
                                         </div>
                                         <div id="file-uplode-name2" class="col-lg-6 col-md-6 col-12"
                                             style="border-right:lightgray solid thin;">
+                                            <?php
+                                            if($agreementFileName){
+                                            ?>
+                                            <label class="font-size-16 font-weight-600"
+                                                for="name"><?=$agreementFileName?></label>
+                                            <div class="text-secondary text-gray font-size-14">
+                                                <span class="text-gray font-size-12"></span>
+                                            </div>
+                                            <?php
+                                            }else{
+                                            ?>
                                             <label class="text-gray font-size-16 font-weight-500" for="name">
                                                 Upload Agreement Here
                                             </label>
@@ -843,10 +980,34 @@ $this->title = 'Create Employee';
                                                 <span class="text-gray font-size-12"> Supported - pdf, .doc,
                                                     .docx</span>
                                             </div>
+                                            <?php
+                                            }
+                                            ?>
                                         </div>
-                                        <div id="file-edit2" class="col-lg-4 col-md-6 col-12 text-center pt-13">
+                                        <div id="file-edit2" class="col-lg-4 col-md-6 col-12 text-center">
+                                            <?php
+                                            if($agreementFileName){
+                                            ?>
+                                            <a class="no-underline " href="#" onclick="viewFile(2); return false;">
+                                                <img id="eye-file2"
+                                                    src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
+                                                    alt="icon" style="width: 23px; height: 23px;">
+                                            </a>
+                                            <a class="no-underline " href="#" onclick="removeFile(2); return false;">
+                                                <img id="bin-file2" class="mt-5 ml-9"
+                                                    src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                                    alt="icon" style="width: 28px; height: 28px;">
+                                            </a>
+                                            <a class="no-underline " href="#" onclick="resetUpload(2); return false;">
+                                                <img id="refes-file2"
+                                                    src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg" alt="icon"
+                                                    style="width: 18px; height: 18px;">
+                                            </a>
+                                            <?php
+                                            }else{
+                                            ?>
                                             <label id="agreement-btn" type="button" for="agreement"
-                                                class="text-blue font-size-16 font-weight-600">
+                                                class="text-blue font-size-16 font-weight-600  pt-13">
                                                 Upload
                                                 <img src="<?= Yii::$app->homeUrl ?>image/file-up-blue.svg" alt="icon"
                                                     style="width: 16px; height: 16px;">
@@ -854,6 +1015,10 @@ $this->title = 'Create Employee';
                                             <span class="ml-5 text-success" id="agreement-check" style="display:none;">
                                                 <i class="fa fa-check" aria-hidden="true"></i>
                                             </span>
+                                            <?php
+                                            }
+                                            ?>
+
 
                                         </div>
                                         <input id="agreement" style="display:none;" type="file" name="agreement"
@@ -872,15 +1037,14 @@ $this->title = 'Create Employee';
                                 About the Employee
                             </div>
                             <div class="col-12 mt-5">
-                                <textarea class="form-control" name="remark" style="height:276px;"></textarea>
+                                <textarea class="form-control" name="remark"
+                                    placeholder="Add any relevant details about the employee here"
+                                    style="height:276px;"><?= isset($employee['remark']) ? $employee['remark'] : '' ?></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <input type="hidden" id="systemAdmin" name="//" value=" // ">
-                <input type="hidden" id="systemAdmin" name="content6" value=" Certificates and Skill Tags">
-                <input type="hidden" id="systemAdmin" name="//" value=" // ">
                 <!-- Certificates and Skill Tags -->
                 <div>
                     <div>
@@ -922,7 +1086,7 @@ $this->title = 'Create Employee';
                             <div class="company-group-edit bg-white">
                                 <span class=" font-size-16 font-weight-500">
                                     <span class="text-danger">* </span>
-                                    Certificate Achievements
+                                    Skill Tags
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                         data-toggle="tooltip" data-placement="top"
                                         aria-label=" Certificates and Skill Tags"
@@ -959,10 +1123,6 @@ $this->title = 'Create Employee';
                     </div>
                 </div>
 
-                <input type="hidden" id="systemAdmin" name="//" value=" // ">
-                <input type="hidden" id="systemAdmin" name="content7" value=" Others ">
-                <input type="hidden" id="systemAdmin" name="//" value=" // ">
-
                 <!-- Others -->
                 <div>
                     <div>
@@ -986,41 +1146,61 @@ $this->title = 'Create Employee';
                                             src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
                                             style="width: 20px; height: 20px;">
                                     </span>
+                                    <?php
+                                    // ดึงค่าภาษาเริ่มต้นจาก array ตำแหน่งที่ 0 (ถ้ามี)
+                                    $selectedLanguageId = isset($userLanguage[0]['languageId']) ? $userLanguage[0]['languageId'] : '';
+                                    ?>
+
                                     <select class="form-select" style="width: 290.59px; border-left: none;"
                                         id="mainLanguage" name="mainLanguage" required="">
-                                        <option value="" disabled selected hidden
+                                        <option value="" disabled <?= $selectedLanguageId ? '' : 'selected' ?> hidden
                                             style="color: var(--Helper-Text, #8A8A8A); ">
                                             <?= Yii::t('app', 'Select preferred language') ?>
                                         </option>
                                         <?php
                                         if (isset($mainLanguage) && count($mainLanguage) > 0) {
                                             foreach ($mainLanguage as $lang) {
-                                                echo '<option value="' . htmlspecialchars($lang['LanguageId']) . '">' . htmlspecialchars($lang['name']) . '</option>';
+                                                $selected = ($lang['LanguageId'] == $selectedLanguageId) ? 'selected' : '';
+                                                echo '<option value="' . htmlspecialchars($lang['LanguageId']) . '" ' . $selected . '>' . 
+                                                    htmlspecialchars($lang['name']) . 
+                                                    '</option>';
                                             }
                                         }
                                         ?>
                                     </select>
+
                                 </div>
                             </div>
                             <div class="col-4 d-flex flex-column" style="gap: 12px;">
                                 <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
                                     Level of Proficiency
                                 </text>
-
+                                <?php
+                                // ดึงค่าภาษาเริ่มต้นจาก array ตำแหน่งที่ 0 (ถ้ามี)
+                                $selectedLanguageId = isset($userLanguage[0]['lavel']) ? $userLanguage[0]['lavel'] : '';
+                                ?>
                                 <select class="form-select" name="lavelLanguage" id="lavelLanguage"
                                     style="border-left: none;" required>
-                                    <option value="" disabled selected hidden
+                                    <option value="" disabled <?= $selectedLanguageId ? '' : 'selected' ?> hidden
                                         style="color: var(--Helper-Text, #8A8A8A);">
                                         <?= Yii::t('app', 'Select') ?>
                                     </option>
-                                    <option value="1">Beginner</option>
-                                    <option value="2">Elementary</option>
-                                    <option value="3">Intermediate</option>
-                                    <option value="4">Upper Intermediate</option>
-                                    <option value="5">Advanced</option>
-                                    <option value="6">Fluent</option>
-                                    <option value="7">Native</option>
+                                    <option value="1" <?= $selectedLanguageId == '1' ? 'selected' : '' ?>>Beginner
+                                    </option>
+                                    <option value="2" <?= $selectedLanguageId == '2' ? 'selected' : '' ?>>Elementary
+                                    </option>
+                                    <option value="3" <?= $selectedLanguageId == '3' ? 'selected' : '' ?>>Intermediate
+                                    </option>
+                                    <option value="4" <?= $selectedLanguageId == '4' ? 'selected' : '' ?>>Upper
+                                        Intermediate</option>
+                                    <option value="5" <?= $selectedLanguageId == '5' ? 'selected' : '' ?>>Advanced
+                                    </option>
+                                    <option value="6" <?= $selectedLanguageId == '6' ? 'selected' : '' ?>>Fluent
+                                    </option>
+                                    <option value="7" <?= $selectedLanguageId == '7' ? 'selected' : '' ?>>Native
+                                    </option>
                                 </select>
+
 
                             </div>
                             <div class="col-4 d-flex flex-column" style="gap: 12px;">
@@ -1034,7 +1214,8 @@ $this->title = 'Create Employee';
                                             style="width: 20px; height: 20px;">
                                     </span>
                                     <input type="text" style="border-left: none;" class="form-control " name="linkedin"
-                                        value="" placeholder="LinkedIn link here">
+                                        value="<?= isset($employee['linkedin']) ? $employee['linkedin'] : '' ?>"
+                                        placeholder="LinkedIn link here">
                                 </div>
                             </div>
 
@@ -1117,6 +1298,7 @@ $this->title = 'Create Employee';
     <input type="hidden" id="certificateDataHidden" name="certificateData">
     <input type="hidden" id="cerDate" name="cerDate" value="0">
     <input type="hidden" id="darf" name="darf">
+
     <!-- container สำหรับเก็บ input ไฟล์ทั้งหมด -->
     <div id="imgInputsContainer"></div>
     <div id="fileInputsContainer"></div>
@@ -1352,8 +1534,8 @@ $this->title = 'Create Employee';
             .then(response => response.json())
             .then(data => {
                 console.log("Fetched data:", data);
-                const branchSelect = document.querySelector('[name="departmentId"]');
-                branchSelect.innerHTML =
+                const departmentSelect = document.querySelector('[name="departmentId"]');
+                departmentSelect.innerHTML =
                     '<option value="" disabled selected hidden><?= Yii::t("app", "In which Department?") ?></option>';
 
                 if (Array.isArray(data)) {
@@ -1361,7 +1543,7 @@ $this->title = 'Create Employee';
                         const option = document.createElement('option');
                         option.value = branch.departmentId;
                         option.text = branch.departmentName;
-                        branchSelect.appendChild(option);
+                        departmentSelect.appendChild(option);
                     });
                 }
             });
@@ -1565,7 +1747,6 @@ $this->title = 'Create Employee';
     }
 
 
-
     function renderScheduleList() {
         const list = document.getElementById('schedule-list');
         list.innerHTML = '';
@@ -1581,7 +1762,7 @@ $this->title = 'Create Employee';
                         ${cert.cerName}
                     </div>
                     <div class="col-3 text-end">
-                        <a href="javascript:void(0);" onclick="deleteCertificate(${cert.id})"
+                        <a href="javascript:void(0);" onclick="if(confirm('Do you want to delete this certificate?')) deleteCertificate(${cert.id});"
                             class="no-underline icon-delete">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
                                 alt="Delete" class="pim-icon bin-icon transition-icon">
@@ -1600,6 +1781,7 @@ $this->title = 'Create Employee';
             list.appendChild(li);
         });
     }
+
 
     function editCertificate(id) {
         const cert = certificates.find(c => c.id === id);
@@ -1669,10 +1851,253 @@ $this->title = 'Create Employee';
         certificates.splice(index, 1); // ลบ element ที่ index
         renderScheduleList();
     }
+    // companySelect.addEventListener('change', updateCompanyIconAndBranches);
+
+
+    function updateSelectCheng() {
+        // alert('1');
+        const companySelect = document.getElementById('companySelectId');
+        const iconImg = document.getElementById('companyIconImg');
+        const branchSelect = document.getElementById('branchSelectId');
+        const departmentSelect = document.getElementById('departmentSelectId');
+
+        // const homeUrl = '<?= Yii::$app->homeUrl ?>';  // กำหนดตัวแปร homeUrl ให้ใช้ใน JS
+        const selectedOption = companySelect.options[companySelect.selectedIndex];
+        const selectedImg = selectedOption.getAttribute('data-img');
+        const selectedValue = companySelect.value;
+
+        const selectedBranchId = <?= isset($employee['branchId']) ? (int)$employee['branchId'] : 'null' ?>;
+        const departmentSelectId =
+            <?= isset($employee['departmentId']) ? (int)$employee['departmentId'] : 'null' ?>;
+
+        // เปลี่ยนไอคอนรูปบริษัท
+        if (selectedValue !== '') {
+            iconImg.src = $url + selectedImg;
+            iconImg.removeAttribute('style');
+            iconImg.classList.add('card-tcf');
+        } else {
+            iconImg.src = $url + 'images/icons/Dark/48px/company.svg';
+        }
+
+        // เอา disabled ออกจาก select สาขา
+        if (selectedBranchId !== null) {
+            branchSelect.removeAttribute('disabled');
+
+            // เปลี่ยนสี background ของ span ถ้ามี
+            const branchSpan = branchSelect.nextElementSibling;
+            if (branchSpan && branchSpan.classList.contains('input-group-text')) {
+                branchSpan.style.backgroundColor = '#fff';
+            }
+
+            // โหลดข้อมูลสาขา
+
+            fetch(homeUrl + 'setting/company/company-branch-list', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
+                    },
+                    body: JSON.stringify({
+                        companyId: selectedValue
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const branchSelect = document.getElementById('branchSelectId');
+
+                    branchSelect.innerHTML =
+                        '<option value="" disabled selected hidden><?= Yii::t("app", "Select from Branches") ?></option>';
+
+                    if (Array.isArray(data)) {
+                        data.forEach(branch => {
+                            const option = document.createElement('option');
+                            option.value = branch.branchId;
+                            option.text = branch.branchName;
+
+                            // ถ้า branchId ตรงกับของพนักงาน ให้ mark ว่า selected
+                            if (selectedBranchId !== null && selectedBranchId === parseInt(branch
+                                    .branchId)) {
+                                option.selected = true;
+                            }
+
+                            branchSelect.appendChild(option);
+                        });
+
+                        const iconImg = document.getElementById('branchIconImg');
+                        const selectedValue = this.value;
+                        const iconDiv = document.getElementById('branchIcon');
+                        const departmentSelect = document.getElementById('departmentSelectId');
+                        const departmentSpan = departmentSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
+
+                        // เอา disabled ออก
+                        departmentSelect.removeAttribute('disabled');
+
+                        // เปลี่ยนสี background
+                        if (departmentSpan && departmentSpan.classList.contains('input-group-text')) {
+                            departmentSpan.style.backgroundColor = '#fff';
+                        }
+                        if (selectedValue !== '') {
+                            iconImg.src = homeUrl + 'image/branches-black.svg';
+                            // alert(selectedValue);
+                            iconDiv.classList.remove('cycle-current-gray');
+                            iconDiv.classList.add('cycle-current-yellow');
+
+                        } else {
+                            iconDiv.classList.remove('cycle-current-yellow');
+                            iconDiv.classList.add('cycle-current-gray');
+                        }
+                    }
+                });
+
+            if (departmentSelectId !== null) {
+                departmentSelect.removeAttribute('disabled');
+
+                // เปลี่ยนสี background ของ span ถ้ามี
+                const departmentSpan = departmentSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
+                if (departmentSpan && departmentSpan.classList.contains('input-group-text')) {
+                    departmentSpan.style.backgroundColor = '#fff';
+                }
+
+
+                // alert(departmentSelectId);
+
+                fetch('<?= Yii::$app->homeUrl ?>setting/branch/branch-department-list', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
+                        },
+                        body: JSON.stringify({
+                            beanchId: selectedBranchId
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const departmentSelect = document.getElementById('departmentSelectId');
+
+                        departmentSelect.innerHTML =
+                            '<option value="" disabled selected hidden><?= Yii::t("app", "In which Department?") ?></option>';
+
+                        if (Array.isArray(data)) {
+                            data.forEach(branch => {
+                                const option = document.createElement('option');
+                                option.value = branch.departmentId;
+                                option.text = branch.departmentName;
+
+                                // ถ้า departmentId ตรงกับของพนักงาน ให้ mark ว่า selected
+                                if (departmentSelectId !== null && departmentSelectId === parseInt(branch
+                                        .departmentId)) {
+                                    option.selected = true;
+                                }
+
+
+                                departmentSelect.appendChild(option);
+                            });
+                            // const departmentId = this.value;
+
+                            const iconImg = document.getElementById('departmentIconImg');
+                            const selectedValue = this.value;
+                            const iconDiv = document.getElementById('departmentIcon');
+                            const teamSelect = document.getElementById('teamSelectId');
+                            const teamSpan = teamSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
+
+                            // เอา disabled ออก
+                            teamSelect.removeAttribute('disabled');
+
+                            // เปลี่ยนสี background
+                            if (teamSpan && teamSpan.classList.contains('input-group-text')) {
+                                teamSpan.style.backgroundColor = '#fff';
+                            }
+                            loadTeamsSelect(departmentSelectId);
+
+
+                            const titileSelect = document.getElementById('titleSelectId');
+                            const titleSpan = titileSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
+
+                            // เอา disabled ออก
+                            titileSelect.removeAttribute('disabled');
+
+                            // เปลี่ยนสี background
+                            if (titleSpan && titleSpan.classList.contains('input-group-text')) {
+                                titleSpan.style.backgroundColor = '#fff';
+                            }
+
+                            if (selectedValue !== '') {
+                                iconImg.src = homeUrl + 'image/departments.svg';
+                                //alert(selectedValue);
+                                iconDiv.classList.remove('cycle-current-gray');
+                                iconDiv.classList.add('cycle-current-red');
+
+                            } else {
+                                iconDiv.classList.remove('cycle-current-red');
+                                iconDiv.classList.add('cycle-current-gray');
+                            }
+                            loadTitlesSelect(departmentSelectId);
+
+                        }
+                    });
+            }
+        }
+    }
 
     document.addEventListener("DOMContentLoaded", function() {
         initRadioSelection(); // เรียกใช้กับ `.radio-wrappewrapper`
         initCheckboxSelection();
+        flatpickrDate();
+        updateSelectCheng();
+        updateMultiDueTermState();
+
+        const loadedCertificates = <?= json_encode($userCertificate) ?>;
+        // console.log(loadedCertificates);
+
+        // alert(JSON.stringify(loadedCertificates, null, 2));
+
+        if (Array.isArray(loadedCertificates)) {
+            loadedCertificates.forEach(item => {
+                // alert(item.cerId);
+                const cert = {
+                    id: item.cerId,
+                    cerName: item.cerName,
+                    issuingName: item.issuing,
+                    fromCerDate: item.noExpiry == 1 ? 'No expiry date' : item.fromCerDate,
+                    toCerDate: item.noExpiry == 1 ? '' : item.toCerDate,
+                    credential: item.credential,
+                    noExpiry: item.noExpiry == 1,
+                    certificate: item.certificate,
+                    cerImage: item.cerImage
+                };
+                certificates.push(cert);
+            });
+
+            renderScheduleList(); // แสดงข้อมูล
+        }
+
+        let initialSkills = <?= json_encode($employee['skills'] ?? []) ?>;
+        console.log(initialSkills);
+        // alert(JSON.stringify(initialSkills, null, 2));
+
+        if (typeof initialSkills === "string") {
+            try {
+                initialSkills = JSON.parse(initialSkills);
+            } catch (e) {
+                console.error("ไม่สามารถแปลง initialSkills:", e);
+                initialSkills = [];
+            }
+        }
+
+        if (Array.isArray(initialSkills)) {
+            initialSkills.forEach(skill => {
+                if (skill && !skillArray.includes(skill.toLowerCase())) {
+                    skillArray.push(skill.toLowerCase());
+                    addSkillTag(skill);
+                }
+            });
+            updateHiddenInput();
+        }
+
+        // เรียกทุกครั้งที่ checkbox เปลี่ยน
+        // เรียกฟังก์ชันทันทีเมื่อโหลดหน้า (ถ้ามีค่า companyId)
+        // if (companySelect.value !== '') {}
     });
 
     document.getElementById('create-employee').addEventListener('submit', function(e) {
@@ -1739,6 +2164,7 @@ $this->title = 'Create Employee';
     });
 
     function addSkillTag(skill) {
+        // alert(skill);
         const tag = document.createElement("span");
         tag.className = "skill-tag";
         tag.style.display = "inline-flex";
@@ -1747,17 +2173,17 @@ $this->title = 'Create Employee';
 
         const removeBtn = document.createElement("span");
         removeBtn.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none" style="cursor: pointer;">
-    <g clip-path="url(#clip0_17970_18863)">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 16.8755C5.15075 16.8755 1.625 13.3486 1.625 9.00049C1.625 4.65236 5.15075 1.12549 9.5 1.12549C13.8492 1.12549 17.375 4.65236 17.375 9.00049C17.375 13.3486 13.8492 16.8755 9.5 16.8755ZM9.5 0.000488281C4.52919 0.000488281 0.5 4.02799 0.5 9.00049C0.5 13.973 4.52919 18.0005 9.5 18.0005C14.4708 18.0005 18.5 13.973 18.5 9.00049C18.5 4.02799 14.4708 0.000488281 9.5 0.000488281ZM12.7158 5.783C12.4942 5.56363 12.1359 5.56363 11.9142 5.783L9.49664 8.20171L7.11387 5.81672C6.89394 5.59734 6.53731 5.59734 6.3185 5.81672C6.09856 6.03609 6.09856 6.39612 6.3185 6.61549L8.70126 8.99486L6.30164 11.3967C6.08058 11.6161 6.08058 11.9761 6.30164 12.2011C6.52326 12.4205 6.88212 12.4205 7.10374 12.2011L9.50336 9.79926L11.8861 12.1843C12.1061 12.4036 12.4627 12.4036 12.6821 12.1843C12.902 11.9649 12.902 11.6049 12.6821 11.3855L10.2987 9.00612L12.7158 6.58734C12.9369 6.36234 12.9369 6.008 12.7158 5.783Z" fill="#30313D"/>
-    </g>
-    <defs>
-        <clipPath id="clip0_17970_18863">
-        <rect width="18" height="18" fill="white" transform="translate(0.5 0.000488281)"/>
-        </clipPath>
-    </defs>
-    </svg>
-    `;
+        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none" style="cursor: pointer;">
+        <g clip-path="url(#clip0_17970_18863)">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 16.8755C5.15075 16.8755 1.625 13.3486 1.625 9.00049C1.625 4.65236 5.15075 1.12549 9.5 1.12549C13.8492 1.12549 17.375 4.65236 17.375 9.00049C17.375 13.3486 13.8492 16.8755 9.5 16.8755ZM9.5 0.000488281C4.52919 0.000488281 0.5 4.02799 0.5 9.00049C0.5 13.973 4.52919 18.0005 9.5 18.0005C14.4708 18.0005 18.5 13.973 18.5 9.00049C18.5 4.02799 14.4708 0.000488281 9.5 0.000488281ZM12.7158 5.783C12.4942 5.56363 12.1359 5.56363 11.9142 5.783L9.49664 8.20171L7.11387 5.81672C6.89394 5.59734 6.53731 5.59734 6.3185 5.81672C6.09856 6.03609 6.09856 6.39612 6.3185 6.61549L8.70126 8.99486L6.30164 11.3967C6.08058 11.6161 6.08058 11.9761 6.30164 12.2011C6.52326 12.4205 6.88212 12.4205 7.10374 12.2011L9.50336 9.79926L11.8861 12.1843C12.1061 12.4036 12.4627 12.4036 12.6821 12.1843C12.902 11.9649 12.902 11.6049 12.6821 11.3855L10.2987 9.00612L12.7158 6.58734C12.9369 6.36234 12.9369 6.008 12.7158 5.783Z" fill="#30313D"/>
+        </g>
+        <defs>
+            <clipPath id="clip0_17970_18863">
+            <rect width="18" height="18" fill="white" transform="translate(0.5 0.000488281)"/>
+            </clipPath>
+        </defs>
+        </svg>
+        `;
         removeBtn.style.marginRight = "6px"; // เพิ่มระยะห่างด้านขวา
 
         removeBtn.onclick = function() {
@@ -1768,6 +2194,7 @@ $this->title = 'Create Employee';
                 updateHiddenInput();
             }
         };
+
 
         const skillText = document.createElement("span");
         skillText.textContent = skill;
