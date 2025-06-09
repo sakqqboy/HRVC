@@ -91,7 +91,7 @@ $this->title = 'Company KGI History';
                                             }
                                             ?>
                                             <?php
-                                            if ($i == 0 && $kgi["status"] == 2 && $role >= 5) {
+                                            if ($i == 0 && $kgi["status"] == 2 && $role >= 4) {
                                             ?>
                                                 <a class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;"
                                                     onclick="javascript:prepareKgiNextTarget(<?= $kgi['kgiHistoryId'] ?>)">

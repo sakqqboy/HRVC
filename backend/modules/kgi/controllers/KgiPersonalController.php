@@ -510,7 +510,7 @@ class KgiPersonalController extends Controller
 
 			])
 			->andWhere("kgi_employee_history.status!=99")
-			->orderBy("kgi_employee_history.year DESC,kgi_employee_history.month DESC,kgi_employee_history.updateDateTime DESC")
+			->orderBy("kgi_employee_history.year DESC,kgi_employee_history.month DESC,kgi_employee_history.status DESC,kgi_employee_history.updateDateTime DESC")
 			->asArray()
 			->all();
 		$data = [];

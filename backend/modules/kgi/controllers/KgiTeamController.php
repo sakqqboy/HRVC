@@ -868,7 +868,7 @@ class KgiTeamController extends Controller
 				"kgi_team_history.status" => [1, 2, 4]
 			])
 			->andWhere("kgi_team_history.status!=99")
-			->orderBy("kgi_team_history.year DESC,kgi_team_history.month DESC,kgi_team_history.updateDateTime DESC")
+			->orderBy("kgi_team_history.year DESC,kgi_team_history.month DESC,kgi_team_history.status DESC,kgi_team_history.kgiTeamHistoryId DESC")
 			->asArray()
 			->all();
 		$data = [];

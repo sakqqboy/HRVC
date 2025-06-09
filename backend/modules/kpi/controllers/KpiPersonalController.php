@@ -754,7 +754,7 @@ class KpiPersonalController extends Controller
 				"kpi_employee_history.status" => [1, 2, 4]
 			])
 			->andWhere("kpi_employee_history.status!=99")
-			->orderBy("kpi_employee_history.year DESC,kpi_employee_history.month DESC,kpi_employee_history.updateDateTime DESC")
+			->orderBy("kpi_employee_history.year DESC,kpi_employee_history.month DESC,kpi_employee_history.status DESC,kpi_employee_history.updateDateTime DESC")
 			->asArray()
 			->all();
 		$data = [];

@@ -91,15 +91,17 @@ $this->title = 'Team KGI History';
                                             }
                                             ?>
                                             <?php
-                                            if ($i == 0 && $kgi["status"] == 2) {
+                                            //if ($i == 0 && $kgi["status"] == 2 && $role >= 4) {
                                             ?>
-                                                <a class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;"
-                                                    onclick="javascript:prepareKgiTeamNextTarget(<?= $kgi['kgiTeamHistoryId'] ?>)">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy.svg" alt="History"
+                                            <!-- <a class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;"
+                                                    onclick="javascript:prepareKgiTeamNextTarget(<?php // $kgi['kgiTeamHistoryId'] 
+                                                                                                    ?>)">
+                                                    <img src="<?php // Yii::$app->homeUrl 
+                                                                ?>images/icons/Settings/coppy.svg" alt="History"
                                                         style="margin-top: -3px; " class="pim-icon">
-                                                </a>
+                                                </a> -->
                                             <?php
-                                            }
+                                            //    }
                                             ?>
 
 
