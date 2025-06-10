@@ -1,19 +1,22 @@
 <?php
 
 use common\models\ModelMaster;
-use frontend\models\hrvc\Department;
-use frontend\models\hrvc\EmployeeStatus;
-use frontend\models\hrvc\Title;
+use frontend\models\hrvc\Status;
 
 $this->title = 'Employee';
 ?>
-<div class="col-12 mt-70">
-	<div class="row">
+<?php
+$statusTexArr = Status::allStatusText();
+?>
+<div class="col-12 mt-70 pt-20">
+	<!-- <div class="row">
 		<div class="col-lg-9 col-12 text-end">
-			<a href="<?= Yii::$app->homeUrl ?>setting/employee/import" class="btn btn-secondary font-size-12 mr-10">
+			<a href="<?php // Yii::$app->homeUrl 
+					?>setting/employee/import" class="btn btn-secondary font-size-12 mr-10">
 				<i class="fa fa-upload mr-5" aria-hidden="true"></i> Import File
 			</a>
-			<a href="<?= Yii::$app->homeUrl ?>setting/employee/create" class="btn btn-success font-size-12">
+			<a href="<?php // Yii::$app->homeUrl 
+					?>setting/employee/create" class="btn btn-success font-size-12">
 				<i class="fa fa-user-plus mr-5" aria-hidden="true"></i> Create
 			</a>
 			<div class="btn-group ml-10" role="group" aria-label="Basic example">
@@ -24,14 +27,49 @@ $this->title = 'Employee';
 			</div>
 		</div>
 
-	</div>
-	<div class="col-12 mt-20 pr-15 pl-15">
-		<div class="row mb-40">
-			<div class="col-lg-6 col-12 text-start employee-profiles-header  pb-0">
-				<img src="/HRVC/frontend/web/images/icons/Settings/all-employees.svg" class="mr-6" style="margin-top: -5px;">
-				<?= Yii::t('app', 'All Employees') ?>
-			</div>
-			<div class="col-lg-6 col-12 pb-0 pl-0">
+	</div> -->
+	<div class="col-12 pr-15 pl-15">
+		<div class="col-12">
+			<div class="row mb-20">
+				<div class="col-lg-6 col-12 text-start employee-profiles-header  pb-0">
+					<div class="d-flex align-items-center justify-content-start gap-2">
+						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/all-employees.svg" class="mr-6" style="margin-top: -5px;">
+						<?= Yii::t('app', 'All Employees') ?>
+						<a href="<?= Yii::$app->homeUrl ?>setting/employee/create" class="d-flex align-items-center create-employee-btn justify-content-center">
+							Create New
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-circle.svg" class="ms-1" style="width: 18px;height:18px;">
+						</a>
+						<a href="<?= Yii::$app->homeUrl ?>setting/employee/import" class="d-flex align-items-center export-employee-btn justify-content-center">
+							Import Employees
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/export-employee.svg" class="ms-2" style="width: 18px;height:18px;">
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-6 col-12 pb-0 pl-0">
+					<div class="d-flex align-items-center justify-content-end gap-2">
+						<a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/draft.svg" class="me-2" style="width: 18px;height:18px;">
+							Drafts
+
+						</a>
+						<a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action.svg" class="me-2" style="width: 18px;height:18px;">
+							Actions
+
+						</a>
+						<a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action.svg" class="me-2" style="width: 18px;height:18px;">
+							Export All
+
+						</a>
+						<a href="" class="d-flex align-items-center view-employee-gray justify-content-center">
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" class="me-2" style="width: 18px;height:18px;">
+							<span class="font-size-16 font-weight-600" style="color:#30313D;">40 /</span>
+							<span class="font-size-16 font-weight-600" style="color:#8A8A8A;">123</span>
+
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -39,53 +77,15 @@ $this->title = 'Employee';
 		<div class="bg-white-employee">
 			<div class="row mb-40">
 				<div class="col-lg-5 col-12 text-start employee-profiles  pb-0">
-					<?= Yii::t('app', 'Employee Profiles') ?>
+					<div class="d-flex justify-content-start align-items-center  gap-2">
+						<?= Yii::t('app', 'Employee Profiles') ?>
+					</div>
 				</div>
 				<div class="col-lg-7 col-12 text-end pb-0 pl-0">
-					<div class="d-flex align-items-end justify-content-between gap-2">
-						<select class="select-pim form-select font-size-12 mt-3" id="company-team" onchange="javascript:branchCompany()">
-							<option value="">Company</option>
-							<?php
-							if (isset($companies) && count($companies) > 0) {
-							?>
-								<?php
-								foreach ($companies as $company) : ?>
-									<option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-								<?php
-								endforeach; ?>
-
-							<?php
-							}
-							?>
-						</select>
-						<select class="select-pim form-select font-size-12" id="branch-team" onchange="javascript:departmentBranch()" disabled>
-							<option value=""><?= Yii::t('app', 'Branch') ?>
-						</select>
-						<select class="select-pim form-select font-size-12" id="department-team" onchange="javascript:teamDepartment()" disabled>
-							<option value=""><?= Yii::t('app', 'Department') ?>
-						</select>
-						<select class="select-pim form-select font-size-12" id="team-department" disabled>
-							<option value=""><?= Yii::t('app', 'Team') ?>
-						</select>
-						<select class="select-pim form-select font-size-12" id="employee-status">
-							<option value=""><?= Yii::t('app', 'Status') ?>
-
-						</select>
-						<span class="justify-content-center d-flex align-items-center employee-filter-btn" style="cursor: pointer;" onclick="javascrip:filterEmployee()">
-							<img src="/HRVC/frontend/web/images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-1">
-							Filter
-						</span>
-
-						<div class="btn-group" role="group">
-							<a href="#" class="btn btn-primary font-size-12 pim-change-modes">
-								<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg" style="cursor: pointer;">
-							</a>
-							<a href="<?= Yii::$app->homeUrl . 'setting/branch/index' ?>"
-								class="btn btn-outline-primary font-size-12 pim-change-modes" style="border-color: #CBD5E1 !important;">
-								<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg" style="cursor: pointer;">
-							</a>
-						</div>
-					</div>
+					<?= $this->render('filter', [
+						"companies" => $companies,
+						"statusTexArr" => $statusTexArr
+					]) ?>
 				</div>
 			</div>
 			<div class="row" style="--bs-gutter-x:19px;">
@@ -93,27 +93,48 @@ $this->title = 'Employee';
 				if (isset($employees) && count($employees) > 0) {
 					foreach ($employees as $employeeId => $employee) :
 						$statusClass = "status-badge-full-time";
-						if ($employee["status"] == "Intren") {
+						if ($employee["status"] == "Full-Time") {
+							$statusClass = "status-badge-full-time";
+						}
+						if ($employee["status"] == "Probationary") {
+							$statusClass = "status-badge-probationary";
+						}
+						if ($employee["status"] == "Part-Time") {
+							$statusClass = "status-badge-part-Time";
+						}
+						if ($employee["status"] == "Intern") {
 							$statusClass = "status-badge-intern";
 						}
-						if ($employee["status"] == "Part-time") {
-							$statusClass = "status-badge-part-time";
+						if ($employee["status"] == "Temporary") {
+							$statusClass = "status-badge-temporarye";
 						}
-						if ($employee["status"] == "Intren") {
-							$statusClass = "status-badge-intern";
+						if ($employee["status"] == "Freelance") {
+							$statusClass = "status-badge-freelance";
+						}
+						if ($employee["status"] == "Suspended") {
+							$statusClass = "status-badge-sspended";
+						}
+						if ($employee["status"] == "Resigned") {
+							$statusClass = "status-badge-resigned";
+						}
+						if ($employee["status"] == "Lay off") {
+							$statusClass = "status-badge-layoff";
+						}
+						if ($employee["status"] == "not set") {
+							$statusClass = "status-badge-notset";
 						}
 						//throw new exception(print_r($employees, true));
 				?>
 						<div class="col-lg-4 col-md-6 col-12">
 							<div class="card employee-box" id="employee-<?= $employeeId ?>">
 								<div class="position-relative new-employee">
-									<input type="checkbox" id="check-employee-<?= $employeeId ?>" name="" class="checkbox-employee pull-left" onchange="javascript:selectEmployee(<?= $employeeId ?>)">
+									<input type="checkbox" id="check-employee-<?= $employeeId ?>" name="" class="checkbox-employee pull-left invisible" onchange="javascript:selectEmployee(<?= $employeeId ?>)">
 									<img src="<?= Yii::$app->homeUrl ?>images/employee/status/new-employee.svg" class="pull-right <?= $employee['isNew'] == 1 ? '' : 'invisible' ?>" alt="New Employee" style="margin-top:-15px;">
 								</div>
 								<div class="d-flex align-items-start justify-content-between mt-3">
 									<div class="position-relative me-2">
 										<img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>" class="rounded-circle profile-img" alt="Profile">
-										<span class="status-badge-full-time"><?= $employee["status"] ?></span>
+										<span class="<?= $statusClass ?>"><?= $employee["status"] ?></span>
 									</div>
 									<div class="flex-grow-1">
 										<div class="d-flex justify-content-between align-items-start">
@@ -358,6 +379,160 @@ $this->title = 'Employee';
 		font-weight: 600;
 	}
 
+	.status-badge-probationary {
+		position: absolute;
+		bottom: 3px;
+		left: 0;
+		width: 100%;
+		height: 20px;
+		transform: translateY(50%);
+		text-align: center;
+		border-radius: 12px;
+		z-index: 1;
+		background-color: #20598D;
+		color: white;
+		line-height: 20px;
+		font-size: 12px;
+		font-weight: 600;
+	}
+
+	.status-badge-part-time {
+		position: absolute;
+		bottom: 3px;
+		left: 0;
+		width: 100%;
+		height: 20px;
+		transform: translateY(50%);
+		text-align: center;
+		border-radius: 12px;
+		z-index: 1;
+		background-color: #20598D;
+		color: white;
+		line-height: 20px;
+		font-size: 12px;
+		font-weight: 600;
+	}
+
+	.status-badge-intern {
+		position: absolute;
+		bottom: 3px;
+		left: 0;
+		width: 100%;
+		height: 20px;
+		transform: translateY(50%);
+		text-align: center;
+		border-radius: 12px;
+		z-index: 1;
+		background-color: #FFE100;
+		color: black;
+		line-height: 20px;
+		font-size: 12px;
+		font-weight: 600;
+	}
+
+	.status-badge-temporary {
+		position: absolute;
+		bottom: 3px;
+		left: 0;
+		width: 100%;
+		height: 20px;
+		transform: translateY(50%);
+		text-align: center;
+		border-radius: 12px;
+		z-index: 1;
+		background-color: #FF9D00;
+		color: black;
+		line-height: 20px;
+		font-size: 12px;
+		font-weight: 600;
+	}
+
+	.status-badge-freelance {
+		position: absolute;
+		bottom: 3px;
+		left: 0;
+		width: 100%;
+		height: 20px;
+		transform: translateY(50%);
+		text-align: center;
+		border-radius: 12px;
+		z-index: 1;
+		background-color: #FF9D00;
+		color: black;
+		line-height: 20px;
+		font-size: 12px;
+		font-weight: 600;
+	}
+
+	.status-badge-suspened {
+		position: absolute;
+		bottom: 3px;
+		left: 0;
+		width: 100%;
+		height: 20px;
+		transform: translateY(50%);
+		text-align: center;
+		border-radius: 12px;
+		z-index: 1;
+		background-color: #E05757;
+		color: white;
+		line-height: 20px;
+		font-size: 12px;
+		font-weight: 600;
+	}
+
+	.status-badge-resigned {
+		position: absolute;
+		bottom: 3px;
+		left: 0;
+		width: 100%;
+		height: 20px;
+		transform: translateY(50%);
+		text-align: center;
+		border-radius: 12px;
+		z-index: 1;
+		background-color: #EC1D42;
+		color: white;
+		line-height: 20px;
+		font-size: 12px;
+		font-weight: 600;
+	}
+
+	.status-badge-layoff {
+		position: absolute;
+		bottom: 3px;
+		left: 0;
+		width: 100%;
+		height: 20px;
+		transform: translateY(50%);
+		text-align: center;
+		border-radius: 12px;
+		z-index: 1;
+		background-color: #FF9D00;
+		color: white;
+		line-height: 20px;
+		font-size: 12px;
+		font-weight: 600;
+	}
+
+	.status-badge-notset {
+		position: absolute;
+		bottom: 3px;
+		left: 0;
+		width: 100%;
+		height: 20px;
+		transform: translateY(50%);
+		text-align: center;
+		border-radius: 12px;
+		z-index: 1;
+		background-color: #C3C3C3;
+		border: 1px black solid;
+		color: black;
+		line-height: 20px;
+		font-size: 12px;
+		font-weight: 600;
+	}
+
 	.employee-contact-box {
 		background-color: #FFFFFF;
 		border-radius: 5px;
@@ -423,6 +598,60 @@ $this->title = 'Employee';
 		line-height: 21.43px;
 		letter-spacing: 0%;
 		vertical-align: middle;
+
+	}
+
+	.create-employee-btn {
+		background-color: #2580D3;
+		font-size: 14px;
+		font-weight: 600;
+		border-radius: 3px;
+		color: white;
+		text-decoration: none;
+		height: 30px;
+		text-align: center;
+		min-width: 115px;
+		min-height: 30px;
+	}
+
+	.export-employee-btn {
+		font-size: 14px;
+		font-weight: 600;
+		border: 0.5px #2580D3 solid;
+		border-radius: 3px;
+		background-color: white;
+		color: #2580D3;
+		text-decoration: none;
+		height: 30px;
+		text-align: center;
+		min-width: 157px;
+		min-height: 30px;
+	}
+
+	.action-employee-btn {
+		background-color: white;
+		color: #2580D3;
+		min-height: 30px;
+		border-radius: 66px;
+		padding-left: 9px;
+		padding-right: 9px;
+		font-size: 14px;
+		font-weight: 600;
+		border: 0.5px #2580D3 solid;
+		text-decoration: none;
+
+	}
+
+	.view-employee-gray {
+		background-color: #F8F8F8;
+		min-height: 30px;
+		border-radius: 66px;
+		padding-left: 9px;
+		padding-right: 9px;
+		font-size: 14px;
+		font-weight: 600;
+		border: 0.5px #666666 solid;
+		text-decoration: none;
 
 	}
 
