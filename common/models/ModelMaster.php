@@ -581,7 +581,7 @@ class ModelMaster extends \yii\db\ActiveRecord
     }
     public static function dateFullFormat($date)
     {
-        if ($date != '') {
+        if ($date != '' && $date != '0000-00-00') {
             $dateArr = explode('-', $date);
             $day = $dateArr[2];
             $month = $dateArr[1];

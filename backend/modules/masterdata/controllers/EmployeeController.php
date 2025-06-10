@@ -63,7 +63,7 @@ class EmployeeController extends Controller
 			->JOIN("LEFT JOIN", "nationality na", "na.numCode=employee.nationalityId")
 			->JOIN("LEFT JOIN", "status s", "s.statusId=employee.status")
 			->JOIN("LEFT JOIN", "employee_condition condition", "condition.employeeConditionId=employee.employeeConditionId")
-			->where(["employee.status" => 1])
+			->where(["employee.status" => [1, 2, 3, 4, 5, 6, 7]])
 			->andFilterWhere(["employee.companyId" => $companyId])
 			->orderBy('employee.employeeFirstname')
 			->asArray()
@@ -82,7 +82,8 @@ class EmployeeController extends Controller
 					"departmentId" =>  $em["departmentId"],
 					"teamId" => $em["teamId"],
 					"teamName" => $em["teamName"],
-					"status" =>  Status::employeeStatus($em["status"]),
+					//"status" =>  Status::employeeStatus($em["status"]),
+					"status" => $em["statusName"] == null ? 'not set' : $em["statusName"],
 					"isNew" => $isNew,
 					"email" => $em["companyEmail"],
 					"employeeNumber" => $em["employeeNumber"],
@@ -182,47 +183,48 @@ class EmployeeController extends Controller
 		return json_encode($data);
 	}
 
-	public function actionEmployeeUpdate($id){
-		
+	public function actionEmployeeUpdate($id)
+	{
+
 		$employee = Employee::find()
-    	->select([
-        'employee.employeeId AS id',
-		'employee.employeeConditionId',
-        'employee.status',
-        'employee.employeeNumber AS employeeId',
-        'employee.defaultLanguage',
-        'employee.salutation',
-        'employee.gender',
-        'employee.employeeFirstname',
-        'employee.employeeSurename',
-        'employee.nationalityId',
-        'employee.telephoneNumber',
-        'employee.emergencyTel',
-        'employee.address1',
-        'employee.email',
-        'employee.maritalStatus',
-        'employee.birthDate',
-        'employee.companyId',
-        'employee.branchId',
-        'employee.departmentId',
-        'employee.teamId',
-        'employee.companyEmail',
-        'employee.hireDate AS hiringDate',
-        'employee.probationStatus AS overrideProbationEmployee',
-        'employee.probationStart AS fromDate',
-        'employee.probationEnd AS toDate',
-        'employee.titleId',
-        'employee.remark',
-        'employee.skills',
-        'employee.contact AS linkedin',
-        'employee.resume',
-        'employee.employeeAgreement AS agreement',
-        'employee.picture AS image'
-    ])
-    ->from('employee')
-    ->where(['employee.employeeId' => $id])
-    ->asArray()
-    ->one();
+			->select([
+				'employee.employeeId AS id',
+				'employee.employeeConditionId',
+				'employee.status',
+				'employee.employeeNumber AS employeeId',
+				'employee.defaultLanguage',
+				'employee.salutation',
+				'employee.gender',
+				'employee.employeeFirstname',
+				'employee.employeeSurename',
+				'employee.nationalityId',
+				'employee.telephoneNumber',
+				'employee.emergencyTel',
+				'employee.address1',
+				'employee.email',
+				'employee.maritalStatus',
+				'employee.birthDate',
+				'employee.companyId',
+				'employee.branchId',
+				'employee.departmentId',
+				'employee.teamId',
+				'employee.companyEmail',
+				'employee.hireDate AS hiringDate',
+				'employee.probationStatus AS overrideProbationEmployee',
+				'employee.probationStart AS fromDate',
+				'employee.probationEnd AS toDate',
+				'employee.titleId',
+				'employee.remark',
+				'employee.skills',
+				'employee.contact AS linkedin',
+				'employee.resume',
+				'employee.employeeAgreement AS agreement',
+				'employee.picture AS image'
+			])
+			->from('employee')
+			->where(['employee.employeeId' => $id])
+			->asArray()
+			->one();
 
 		// $employee = Employee::find()
 		// 	->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,b.branchName,
@@ -240,10 +242,10 @@ class EmployeeController extends Controller
 		// 	->one();
 
 		return json_encode($employee);
-
 	}
-	
-	public function actionUserEmployee($id) {
+
+	public function actionUserEmployee($id)
+	{
 		$users = User::find()
 			->select([
 				'userId',
@@ -259,55 +261,59 @@ class EmployeeController extends Controller
 	}
 
 
-	public function actionUserRole($id){
+	public function actionUserRole($id)
+	{
 		$userRole = UserRole::find()
-		->select(['userRoleId', 'roleid', 'userId AS role'])
-		->where(['userId' => $id])
-		->asArray()
-		->one();
-		
+			->select(['userRoleId', 'roleid', 'userId AS role'])
+			->where(['userId' => $id])
+			->asArray()
+			->one();
+
 		return json_encode($userRole);
 	}
 
 
-	public function actionUserAccess($id){
+	public function actionUserAccess($id)
+	{
 		$userAccess = UserAccess::find()
-		->select(['acessId', 'moduleId', 'userId'])
-		->where(['userId' => $id])
-		->asArray()
-		->all();
+			->select(['acessId', 'moduleId', 'userId'])
+			->where(['userId' => $id])
+			->asArray()
+			->all();
 
 		return json_encode($userAccess);
 	}
 
-	public function actionUserCertificate($id){
+	public function actionUserCertificate($id)
+	{
 		$certificates = Certificate::find()
-		->select([
-			'cerId',
-			'cerName',
-			'userId',
-			'issuing',
-			'fromCerDate',
-			'toCerDate',
-			'credential',
-			'noExpiry',
-			'certificate',
-			'cerImage'
-		])
-		->where(['userId' => $id])
-		->asArray()
-		->all();
+			->select([
+				'cerId',
+				'cerName',
+				'userId',
+				'issuing',
+				'fromCerDate',
+				'toCerDate',
+				'credential',
+				'noExpiry',
+				'certificate',
+				'cerImage'
+			])
+			->where(['userId' => $id])
+			->asArray()
+			->all();
 
 		return json_encode($certificates);
 	}
 
 
-	public function actionUserLanguage($id){
+	public function actionUserLanguage($id)
+	{
 		$Languages = UserLanguage::find()
-		->select(['userLanguageId', 'userId', 'languageId', 'lavel'])
-		->where(['userId' => $id])
-		->asArray()
-		->all();
+			->select(['userLanguageId', 'userId', 'languageId', 'lavel'])
+			->where(['userId' => $id])
+			->asArray()
+			->all();
 
 		return json_encode($Languages);
 	}
