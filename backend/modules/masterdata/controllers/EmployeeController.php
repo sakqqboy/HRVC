@@ -63,8 +63,10 @@ class EmployeeController extends Controller
 			->JOIN("LEFT JOIN", "nationality na", "na.numCode=employee.nationalityId")
 			->JOIN("LEFT JOIN", "status s", "s.statusId=employee.status")
 			->JOIN("LEFT JOIN", "employee_condition condition", "condition.employeeConditionId=employee.employeeConditionId")
-			->where(["employee.status" => [1, 2, 3, 4, 5, 6, 7]])
-			->andFilterWhere(["employee.companyId" => $companyId])
+			->where([
+				"employee.status" => [1, 2, 3, 4, 5, 6, 7],
+				"employee.companyId" => $companyId
+			])
 			->orderBy('employee.employeeFirstname')
 			->asArray()
 			->limit(15)
@@ -82,7 +84,60 @@ class EmployeeController extends Controller
 					"departmentId" =>  $em["departmentId"],
 					"teamId" => $em["teamId"],
 					"teamName" => $em["teamName"],
-					//"status" =>  Status::employeeStatus($em["status"]),
+					"status" => $em["statusName"] == null ? 'not set' : $em["statusName"],
+					"isNew" => $isNew,
+					"email" => $em["companyEmail"],
+					"employeeNumber" => $em["employeeNumber"],
+					"telephoneNumber" => $em["telephoneNumber"],
+					"joinDate" => ModelMaster::dateFullFormat($em["joinDate"]),
+					"companyName" => $em["companyName"],
+					"companyPicture" => Company::companyPicture($em["cPicture"]),
+					"city" => $em["city"],
+					"countryName" => $em["countryName"]
+
+				];
+			endforeach;
+		}
+		return json_encode($data);
+	}
+	public function actionEmployeeFilter($companyId, $branchId, $departmentId, $teamId, $status)
+	{
+		$employee = Employee::find()
+			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,c.city,
+			condition.employeeConditionName,s.statusName,na.nationalityName,d.departmentName,d.departmentId,te.teamId,te.teamName,c.picture as cPicture')
+			->JOIN("LEFT JOIN", "company c", "c.companyId=employee.companyId")
+			->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
+			->JOIN("LEFT JOIN", "department d", "d.departmentId=employee.departmentId")
+			->JOIN("LEFT JOIN", "team te", "te.teamId=employee.teamId")
+			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
+			->JOIN("LEFT JOIN", "nationality na", "na.numCode=employee.nationalityId")
+			->JOIN("LEFT JOIN", "status s", "s.statusId=employee.status")
+			->JOIN("LEFT JOIN", "employee_condition condition", "condition.employeeConditionId=employee.employeeConditionId")
+			->where(["employee.status" => [1, 2, 3, 4, 5, 6, 7]])
+			->andFilterWhere([
+				"employee.companyId" => $companyId,
+				"employee.branchId" => $branchId,
+				"employee.departmentId" => $departmentId,
+				"employee.teamId" => $teamId,
+				"employee.status" => $status,
+			])
+			->orderBy('employee.employeeFirstname')
+			->asArray()
+			->limit(15)
+			->all();
+		$data = [];
+		if (isset($employee) && count($employee) > 0) {
+			foreach ($employee as $em):
+				$isNew = 0;
+				$isNew = ModelMaster::isOverthanMonth($em["joinDate"], 1);
+				$data[$em["employeeId"]] = [
+					"employeeName" => $em["employeeFirstname"] . ' ' . $em["employeeSurename"],
+					"picture" => Employee::employeeImage($em["employeeId"]),
+					"titleName" =>  $em["titleName"],
+					"departmentName" =>  $em["departmentName"],
+					"departmentId" =>  $em["departmentId"],
+					"teamId" => $em["teamId"],
+					"teamName" => $em["teamName"],
 					"status" => $em["statusName"] == null ? 'not set' : $em["statusName"],
 					"isNew" => $isNew,
 					"email" => $em["companyEmail"],
