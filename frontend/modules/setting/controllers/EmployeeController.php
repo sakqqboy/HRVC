@@ -541,7 +541,7 @@ class EmployeeController extends Controller
         $userEmployee = json_decode($userEmployee, true);
         // throw new Exception(print_r($userEmployee, true));
 
-        $userId = $userEmployee['userId'];
+        $userId = $userEmployee['userId'] ?? '';
         // throw new Exception(print_r($userId, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-role?id=' . $userId);
@@ -564,7 +564,7 @@ class EmployeeController extends Controller
         $UserLanguage = json_decode($UserLanguage, true);
         // throw new Exception(print_r($UserLanguage, true));
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
+        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
         $countries = curl_exec($api);
         $countries = json_decode($countries, true);
         // throw new Exception(print_r($countries, true));
@@ -934,7 +934,7 @@ class EmployeeController extends Controller
         }
         curl_close($api);
         //throw new Exception(print_r($param, true));
-        return $this->render('search_result', [
+        return $this->render('index', [
             "employees" => $employees,
             "companies" => $companies,
             "companyId" => $companyId,

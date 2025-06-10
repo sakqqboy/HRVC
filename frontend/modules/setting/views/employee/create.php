@@ -32,6 +32,8 @@ $agreementPath = isset($employee['agreement']) ? $employee['agreement'] : '';
 $agreementFileName = basename($agreementPath);              // bcRGoVHyu2.xlsx
 $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
 
+$userCertificate = $userCertificate ?? []; // or fetch it from database
+$LanguageId = '';
 ?>
 <?php $form = ActiveForm::begin([
 	'id' => 'create-employee',
@@ -1138,8 +1140,9 @@ $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
                         <!-- body -->
                         <div class="row">
                             <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                                <text class="font-size-16 font-weight-500"><span class="text-danger">*
-                                    </span>Primary Language Spoken</text>
+                                <text class="font-size-16 font-weight-500"><span class="text-danger">*</span>
+                                    Primary Language Spoken
+                                </text>
                                 <div class="input-group">
                                     <span class="input-group-text" style="background-color: white; border-right: none;">
                                         <img class="cycle-current" id="flag"
@@ -2073,7 +2076,7 @@ $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
         }
 
         let initialSkills = <?= json_encode($employee['skills'] ?? []) ?>;
-        console.log(initialSkills);
+        // console.log(initialSkills);
         // alert(JSON.stringify(initialSkills, null, 2));
 
         if (typeof initialSkills === "string") {
@@ -2093,6 +2096,17 @@ $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
                 }
             });
             updateHiddenInput();
+        }
+
+        const userLanguage = <?= json_encode($userLanguage ?? []) ?>;
+
+        if (Array.isArray(userLanguage) && userLanguage.length > 0) {
+            userLanguage.forEach(lang => {
+                // สมมติ lang.languageId คือค่าที่จะตั้งใน select
+                // alert(JSON.stringify(userLanguage, null, 2));
+                // console.log(userLanguage);
+                addAdditionalLanguage(lang.languageId);
+            });
         }
 
         // เรียกทุกครั้งที่ checkbox เปลี่ยน
@@ -2213,10 +2227,11 @@ $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
     let additionalLangCount = 0;
     const maxAdditionalLangs = 3;
 
-    function addAdditionalLanguage() {
-        if (additionalLangCount >= maxAdditionalLangs) return;
+    function addAdditionalLanguage(selectedValue = "") {
+        // console.log(additionalLangCount);
 
-        // ตรวจสอบว่า select ล่าสุดถูกเลือกค่าหรือยัง
+        if (additionalLangCount >= maxAdditionalLangs) return;
+        // ตรวจสอบ select ก่อนหน้าว่ามีค่าแล้วหรือไม่ (ถ้ามีแล้วไม่เพิ่ม)
         if (additionalLangCount > 0) {
             const previousSelect = document.getElementById(`mainLanguage${additionalLangCount}`);
             if (previousSelect && previousSelect.value === "") {
@@ -2224,30 +2239,122 @@ $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
             }
         }
 
+
+        if (additionalLangCount == 1) {
+            <?php
+                $LanguageId = isset($userLanguage[1]['languageId']) ? $userLanguage[1]['languageId'] : '';
+            ?>
+        } else if (additionalLangCount == 2) {
+            <?php
+                $LanguageId = isset($userLanguage[2]['languageId']) ? $userLanguage[2]['languageId'] : '';
+            ?>
+        } else if (additionalLangCount == 3) {
+            <?php
+                $LanguageId = isset($userLanguage[3]['languageId']) ? $userLanguage[3]['languageId'] : '';
+            ?>
+        }
         additionalLangCount++;
 
-        const langHtml = `
-        <div class="input-group mt-12">
-            <span class="input-group-text" style="background-color: white; border-right: none;">
-                <img class="cycle-current" src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
-                    style="width: 20px; height: 20px;">
-            </span>
-            <select class="form-select" style="border-left: none;"
-                id="mainLanguage${additionalLangCount}" name="mainLanguage${additionalLangCount}" required
-                onchange="handleLanguageChange(${additionalLangCount})">
-                <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A);">
-                    <?= Yii::t('app', 'Select Additional Language') ?>
-                </option>
-                <?php
-                    foreach ($mainLanguage as $lang) {
-                        echo '<option value="' . $lang['LanguageId'] . '">' .  htmlspecialchars($lang['name'], ENT_QUOTES) . '</option>';
-                    }
-                ?>
-            </select>
-        </div>
-    `;
-        document.getElementById('al').insertAdjacentHTML('beforeend', langHtml);
+        // const noId = additionalLangCount - 1;
 
+        // alert(noId);
+        let langHtml = '';
+
+        <?php if ($statusfrom === 'Update'): ?>
+        langHtml = `
+            <div class="input-group mt-12">
+                <span class="input-group-text" style="background-color: white; border-right: none;">
+                    <img class="cycle-current" src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
+                        style="width: 20px; height: 20px;">
+                </span>
+                <select class="form-select" style="border-left: none;"
+                    id="mainLanguage${additionalLangCount-1}" name="mainLanguage${additionalLangCount-1}" required
+                    onchange="handleLanguageChange(${additionalLangCount-1})">
+                    <option value="" disabled hidden style="color: var(--Helper-Text, #8A8A8A);">
+                        <?= Yii::t('app', 'Select Additional Language') ?>
+                    </option>
+                    <?php if (isset($mainLanguage) && count($mainLanguage) > 0): ?>
+                        <option value=""><?= Yii::t('app', 'Select Additional Language') ?></option>
+                        <?php foreach ($mainLanguage as $lang): 
+                            $selected = ($lang['LanguageId'] == $LanguageId) ? 'selected' : '';
+                        ?>
+                            <option value="<?= htmlspecialchars($lang['LanguageId']) ?>" <?= $selected ?>>
+                                <?= htmlspecialchars($lang['name']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </select>
+            </div>
+        `;
+        <?php else: ?>
+        langHtml = `
+            <div class="input-group mt-12">
+                <span class="input-group-text" style="background-color: white; border-right: none;">
+                    <img class="cycle-current" src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
+                        style="width: 20px; height: 20px;">
+                </span>
+                <select class="form-select" style="border-left: none;"
+                    id="mainLanguage${additionalLangCount}" name="mainLanguage${additionalLangCount}" required
+                    onchange="handleLanguageChange(${additionalLangCount})">
+                    <option value="" disabled hidden style="color: var(--Helper-Text, #8A8A8A);">
+                        <?= Yii::t('app', 'Select Additional Language') ?>
+                    </option>
+                    <?php if (isset($mainLanguage) && count($mainLanguage) > 0): ?>
+                        <option value=""><?= Yii::t('app', 'Select Additional Language') ?></option>
+                        <?php foreach ($mainLanguage as $lang): 
+                            $selected = ($lang['LanguageId'] == $LanguageId) ? 'selected' : '';
+                        ?>
+                            <option value="<?= htmlspecialchars($lang['LanguageId']) ?>" <?= $selected ?>>
+                                <?= htmlspecialchars($lang['name']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </select>
+            </div>
+        `;
+        <?php endif; ?>
+
+
+        <?php if ($statusfrom === 'Update'): ?>
+        if (additionalLangCount >= 2) {
+            document.getElementById('al').insertAdjacentHTML('beforeend', langHtml);
+            // ตั้งค่าที่เลือกให้ select ตัวล่าสุด ถ้ามี
+            if (selectedValue) {
+                const currentSelect = document.getElementById(`mainLanguage${additionalLangCount-1}`);
+                if (currentSelect) {
+                    currentSelect.value = selectedValue;
+                }
+            }
+
+            // alert(additionalLangCount);
+            // handleLanguageChange(additionalLangCount - 1);
+        }
+        <?php elseif ($statusfrom === 'Create'): ?>
+        // ตั้งค่าที่เลือกให้ select ตัวล่าสุด ถ้ามี
+        if (selectedValue) {
+            const currentSelect = document.getElementById(`mainLanguage${additionalLangCount}`);
+            if (currentSelect) {
+                currentSelect.value = selectedValue;
+            }
+        }
+        document.getElementById('al').insertAdjacentHTML('beforeend', langHtml);
+        <?php endif; ?>
+
+
+        <?php if ($statusfrom === 'Update'): ?>
+        if (additionalLangCount >= 3) {
+            const lockSpan = `
+            <span id="lockId-${additionalLangCount-1}"
+                class="input-group-text d-flex justify-content-center align-items-center mt-12"
+                style="background-color: #e9ecef; height: 40px;">
+                Add additional Language First
+            </span>
+            `;
+            document.getElementById('ald').insertAdjacentHTML('beforeend', lockSpan);
+            // alert(additionalLangCount);
+        }
+        handleLanguageChange(additionalLangCount);
+        <?php elseif ($statusfrom === 'Create'): ?>
         if (additionalLangCount >= 2) {
             const lockSpan = `
             <span id="lockId-${additionalLangCount}"
@@ -2255,13 +2362,18 @@ $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
                 style="background-color: #e9ecef; height: 40px;">
                 Add additional Language First
             </span>
-        `;
+            `;
             document.getElementById('ald').insertAdjacentHTML('beforeend', lockSpan);
         }
+        <?php endif; ?>
 
-        if (additionalLangCount >= 3) {
+        if (additionalLangCount >= maxAdditionalLangs) {
             document.getElementById('addCertificateBtn')?.classList.add('d-none');
+        } else {
+            document.getElementById('addCertificateBtn')?.classList.remove('d-none');
         }
+        // }
+
     }
 
     function handleLanguageChange(no) {
@@ -2274,28 +2386,55 @@ $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
             return others.some(otherValue => otherValue === value);
         }
 
+
         function replaceLockWithLevelSelect(lockId, levelName, levelId) {
             const lockSpan = document.getElementById(lockId);
+            alert(lockSpan);
             if (lockSpan) {
+                let number = lockId.split('-')[1]; // '2'
+
+                if (number == 1) {
+                    <?php
+                        // สมมุติว่าคุณมีค่าจาก backend เช่นนี้:
+                        $languageLevel = isset($userLanguage[1]['lavel']) ? $userLanguage[1]['lavel'] : '';
+                    ?>
+                } else if (number == 2) {
+                    <?php
+                        $languageLevel = isset($userLanguage[2]['lavel']) ? $userLanguage[2]['lavel'] : '';
+                    ?>
+
+                }
+                alert(no);
+
                 lockSpan.outerHTML = `
-                <select class="form-select mt-12" name="lavelLanguage${no}" id="lavelLanguage${no}" style="border-left: none;" required>
-                    <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A);">
-                        <?= Yii::t('app', 'Select') ?>
-                    </option>
-                    <option value="1">Beginner</option>
-                    <option value="2">Elementary</option>
-                    <option value="3">Intermediate</option>
-                    <option value="4">Upper Intermediate</option>
-                    <option value="5">Advanced</option>
-                    <option value="6">Fluent</option>
-                    <option value="7">Native</option>
-                </select>
-            `;
+                    <select class="form-select mt-12" name="lavelLanguage${no}" id="lavelLanguage${no}" required>
+                        <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A);">
+                            <?= Yii::t('app', 'Select') ?>
+                        </option>
+                        <?php
+                       
+                        $levels = [
+                            1 => 'Beginner',
+                            2 => 'Elementary',
+                            3 => 'Intermediate',
+                            4 => 'Upper Intermediate',
+                            5 => 'Advanced',
+                            6 => 'Fluent',
+                            7 => 'Native',
+                        ];
+
+                        foreach ($levels as $val => $label) {
+                            $selected = ($val == $languageLevel) ? 'selected' : '';
+                            echo '<option value="' . $val . '" ' . $selected . '>' . $label . '</option>';
+                        }
+                        ?>
+                    </select>
+                `;
             }
+
         }
 
         if (no === 1) {
-
             if (lang2 || lang3) {
                 const val1 = lang1?.value || "";
                 const valsOther = [(lang2?.value || ""), (lang3?.value || "")];
@@ -2304,6 +2443,7 @@ $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
                     lang1.value = "";
                 }
             } else {
+                // alert(no);
                 replaceLockWithLevelSelect('lockId-1', 'lavelLanguage1', 'lavelLanguage1');
             }
         } else if (no === 2) {
@@ -2315,7 +2455,10 @@ $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
                     lang2.value = "";
                 } else if (val2) {
                     replaceLockWithLevelSelect('lockId-2', 'lavelLanguage2', 'lavelLanguage2');
+                } else {
+                    replaceLockWithLevelSelect('lockId-2', 'lavelLanguage2', 'lavelLanguage2');
                 }
+
             }
         } else if (no === 3) {
             if (lang1 || lang2) {
