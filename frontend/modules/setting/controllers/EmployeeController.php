@@ -211,96 +211,96 @@ class EmployeeController extends Controller
     public function actionSaveCreateEmployee()
     {
         // throw new Exception(print_r(Yii::$app->request->post(), true));
-    //    $_POST = [
-    //         'status' => '4',
-    //         'mailId' => 'user001',
-    //         'employeeId' => '00001',
-    //         'password' => 'takahashi.shuhei',
-    //         'defaulLanguage' => '3',
-    //         'role' => '7',
-    //         'moduleId' => ['1', '2', '3', '4', '5', '6', '7'],
-    //         'salutation' => 'Mr.',
-    //         'gender' => '2',
-    //         'employeeFirstname' => 'test',
-    //         'employeeSurename' => 'LastNameTest',
-    //         'nationalityId' => '15',
-    //         'telephoneNumber' => '+66801074818',
-    //         'emergencyTel' => '0801074818',
-    //         'address1' => '126/1-7 Petchkasem Old Road, Pak Khlong Phasi Charoen Subdistrict, Phasi Charoen District, Bangkok 10160',
-    //         'email' => 'TCG@gmail.com',
-    //         'maritalStatus' => '2',
-    //         'birthDate' => '04/06/2025',
-    //         'companyId' => '3',
-    //         'branchId' => '34',
-    //         'departmentId' => '25',
-    //         'teamId' => '36',
-    //         'companyEmail' => 'watcharapong.hom@gmail.com',
-    //         'hiringDate' => '03/06/2025',
-    //         'overrideProbationEmployee' => '1',
-    //         'fromDate' => '03/06/2025',
-    //         'toDate' => '30/06/2025',
-    //         'titleId' => '108',
-    //         'remark' => 'About the Employee Test',
-    //         'skill' => '',
-    //         'skills' => '["1","2","3","4"]',
-    //         'mainLanguage' => '3',
-    //         'lavelLanguage' => '7',
-    //         'linkedin' => '111',
-    //         'mainLanguage1' => '2',
-    //         'mainLanguage2' => '4',
-    //         'mainLanguage3' => '1',
-    //         'lavelLanguage1' => '1',
-    //         'lavelLanguage2' => '2',
-    //         'lavelLanguage3' => '4',
-    //         'sendEmail' => '1',
-    //         'certificateData' => '[{"id":1749180178186,"cerName":"Certificate  Test","issuingName":"Authority Test","fromCerDate":"No expiry date","toCerDate":"","credential":"Link.com","noExpiry":true}]',
-    //         'cerDate' => '1',
-    //         'darf' => ''
-    //     ];
+        //    $_POST = [
+        //         'status' => '4',
+        //         'mailId' => 'user001',
+        //         'employeeId' => '00001',
+        //         'password' => 'takahashi.shuhei',
+        //         'defaulLanguage' => '3',
+        //         'role' => '7',
+        //         'moduleId' => ['1', '2', '3', '4', '5', '6', '7'],
+        //         'salutation' => 'Mr.',
+        //         'gender' => '2',
+        //         'employeeFirstname' => 'test',
+        //         'employeeSurename' => 'LastNameTest',
+        //         'nationalityId' => '15',
+        //         'telephoneNumber' => '+66801074818',
+        //         'emergencyTel' => '0801074818',
+        //         'address1' => '126/1-7 Petchkasem Old Road, Pak Khlong Phasi Charoen Subdistrict, Phasi Charoen District, Bangkok 10160',
+        //         'email' => 'TCG@gmail.com',
+        //         'maritalStatus' => '2',
+        //         'birthDate' => '04/06/2025',
+        //         'companyId' => '3',
+        //         'branchId' => '34',
+        //         'departmentId' => '25',
+        //         'teamId' => '36',
+        //         'companyEmail' => 'watcharapong.hom@gmail.com',
+        //         'hiringDate' => '03/06/2025',
+        //         'overrideProbationEmployee' => '1',
+        //         'fromDate' => '03/06/2025',
+        //         'toDate' => '30/06/2025',
+        //         'titleId' => '108',
+        //         'remark' => 'About the Employee Test',
+        //         'skill' => '',
+        //         'skills' => '["1","2","3","4"]',
+        //         'mainLanguage' => '3',
+        //         'lavelLanguage' => '7',
+        //         'linkedin' => '111',
+        //         'mainLanguage1' => '2',
+        //         'mainLanguage2' => '4',
+        //         'mainLanguage3' => '1',
+        //         'lavelLanguage1' => '1',
+        //         'lavelLanguage2' => '2',
+        //         'lavelLanguage3' => '4',
+        //         'sendEmail' => '1',
+        //         'certificateData' => '[{"id":1749180178186,"cerName":"Certificate  Test","issuingName":"Authority Test","fromCerDate":"No expiry date","toCerDate":"","credential":"Link.com","noExpiry":true}]',
+        //         'cerDate' => '1',
+        //         'darf' => ''
+        //     ];
 
-    // // จำลอง $_FILES
-    // $_FILES = [
-    //     'image' => [
-    //         'name' => 'test5.png',
-    //         'full_path' => 'test5.png',
-    //         'type' => 'image/png',
-    //         'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php8673.tmp',
-    //         'error' => 0,
-    //         'size' => 2194299,
-    //     ],
-    //     'resume' => [
-    //         'name' => 'test1.xlsx',
-    //         'full_path' => 'test1.xlsx',
-    //         'type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    //         'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php8674.tmp',
-    //         'error' => 0,
-    //         'size' => 12112,
-    //     ],
-    //     'agreement' => [
-    //         'name' => 'test2.pdf',
-    //         'full_path' => 'test2.pdf',
-    //         'type' => 'application/pdf',
-    //         'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php8675.tmp',
-    //         'error' => 0,
-    //         'size' => 2585811,
-    //     ],
-    //     'certificateHidden_1749180178186_0' => [
-    //         'name' => 'test3.txt',
-    //         'full_path' => 'test3.txt',
-    //         'type' => 'text/plain',
-    //         'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php86B4.tmp',
-    //         'error' => 0,
-    //         'size' => 189,
-    //     ],
-    //     'cerImageHidden_1749180178186' => [
-    //         'name' => 'test1.png',
-    //         'full_path' => 'test1.png',
-    //         'type' => 'image/png',
-    //         'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php86B5.tmp',
-    //         'error' => 0,
-    //         'size' => 10085,
-    //     ]
-    // ];
+        // // จำลอง $_FILES
+        // $_FILES = [
+        //     'image' => [
+        //         'name' => 'test5.png',
+        //         'full_path' => 'test5.png',
+        //         'type' => 'image/png',
+        //         'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php8673.tmp',
+        //         'error' => 0,
+        //         'size' => 2194299,
+        //     ],
+        //     'resume' => [
+        //         'name' => 'test1.xlsx',
+        //         'full_path' => 'test1.xlsx',
+        //         'type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        //         'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php8674.tmp',
+        //         'error' => 0,
+        //         'size' => 12112,
+        //     ],
+        //     'agreement' => [
+        //         'name' => 'test2.pdf',
+        //         'full_path' => 'test2.pdf',
+        //         'type' => 'application/pdf',
+        //         'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php8675.tmp',
+        //         'error' => 0,
+        //         'size' => 2585811,
+        //     ],
+        //     'certificateHidden_1749180178186_0' => [
+        //         'name' => 'test3.txt',
+        //         'full_path' => 'test3.txt',
+        //         'type' => 'text/plain',
+        //         'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php86B4.tmp',
+        //         'error' => 0,
+        //         'size' => 189,
+        //     ],
+        //     'cerImageHidden_1749180178186' => [
+        //         'name' => 'test1.png',
+        //         'full_path' => 'test1.png',
+        //         'type' => 'image/png',
+        //         'tmp_name' => 'C:\\Users\\tcf_t\\AppData\\Local\\Temp\\php86B5.tmp',
+        //         'error' => 0,
+        //         'size' => 10085,
+        //     ]
+        // ];
 
         if (isset($_POST["employeeFirstname"]) && trim($_POST["employeeFirstname"]) !== '') {
             $employee = new Employee();
@@ -332,9 +332,9 @@ class EmployeeController extends Controller
             $employee->skills = $_POST["skills"];
             $employee->contact = $_POST["linkedin"];
             $employee->contact = $_POST["linkedin"];
-            if($_POST["darf"] == 1){
+            if ($_POST["darf"] == 1) {
                 $employee->status = 2;
-            }else{
+            } else {
                 $employee->status = 100;
             }
             $employee->createDateTime = new Expression('NOW()');
@@ -382,9 +382,9 @@ class EmployeeController extends Controller
             }
 
             if ($employee->save(false)) {
-                
+
                 $user = new User();
-                $user->employeeId = $employee->employeeId; 
+                $user->employeeId = $employee->employeeId;
                 $user->username =  $_POST["mailId"];    // หรือใช้ companyEmail แทน
                 $user->password_hash = Yii::$app->security->generatePasswordHash($_POST["password"]); // เข้ารหัสแบบ secure
                 $user->createDateTime = new Expression('NOW()');
@@ -392,9 +392,9 @@ class EmployeeController extends Controller
                 if ($user->save(false)) {
                     // สำเร็จทั้ง employee และ user
                     $role = new UserRole();
-                    $role->userId = $user->userId; 
-                    $role->roleId = $_POST["role"]; 
-                    $role->status = 1; 
+                    $role->userId = $user->userId;
+                    $role->roleId = $_POST["role"];
+                    $role->status = 1;
                     $role->createDateTime = new Expression('NOW()');
                     $role->updateDateTime = new Expression('NOW()');
                     $role->save(false); // ✅ สำคัญ!
@@ -475,7 +475,7 @@ class EmployeeController extends Controller
                             $certificate->save(false);
                         }
                     }
-           
+
                     // 1. เตรียมภาษาและระดับที่จับคู่กัน
                     $languages = [
                         ['language' => $_POST['mainLanguage'], 'level' => $_POST['lavelLanguage']],
@@ -501,11 +501,9 @@ class EmployeeController extends Controller
                         $userLang->updateDateTime = new \yii\db\Expression('NOW()');
                         $userLang->save(false);
                     }
-
-                } 
-               
+                }
             }
-                return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
+            return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
         }
     }
 
@@ -542,7 +540,7 @@ class EmployeeController extends Controller
             "employee" => $employee
         ]);
     }
-    
+
     public function saveEmployeeStatus($employeeId, $statusId)
     {
         $employeeStatus = EmployeeStatus::find()
@@ -634,7 +632,7 @@ class EmployeeController extends Controller
         $countries = curl_exec($api);
         $countries = json_decode($countries, true);
         // throw new Exception(print_r($countries, true));
-        
+
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
@@ -703,7 +701,7 @@ class EmployeeController extends Controller
             "mainLanguage" => $mainLanguage,
             "modules" => $module
         ]);
-        
+
         // $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
         // if (!isset($group) || empty($group)) {
         //     return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
@@ -1685,9 +1683,8 @@ class EmployeeController extends Controller
         }
     }
 
-     public function actionTest()
+    public function actionTest()
     {
-         return $this->render('test', [ ]);
+        return $this->render('test', []);
     }
-
 }
