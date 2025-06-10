@@ -139,7 +139,7 @@ class EmployeeController extends Controller
         $countries = curl_exec($api);
         $countries = json_decode($countries, true);
         // throw new Exception(print_r($countries, true));
-        
+
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
@@ -211,7 +211,7 @@ class EmployeeController extends Controller
         ]);
     }
     public function actionSaveCreateEmployee()
-    {   
+    {
 
         if (isset($_POST["employeeFirstname"]) && trim($_POST["employeeFirstname"]) !== '') {
             $employee = new Employee();
@@ -243,9 +243,9 @@ class EmployeeController extends Controller
             $employee->skills = $_POST["skills"];
             $employee->contact = $_POST["linkedin"];
             $employee->contact = $_POST["linkedin"];
-            if($_POST["darf"] == 1){
+            if ($_POST["darf"] == 1) {
                 $employee->status = 2;
-            }else{
+            } else {
                 $employee->status = 100;
             }
             $employee->createDateTime = new Expression('NOW()');
@@ -293,9 +293,9 @@ class EmployeeController extends Controller
             }
 
             if ($employee->save(false)) {
-                
+
                 $user = new User();
-                $user->employeeId = $employee->employeeId; 
+                $user->employeeId = $employee->employeeId;
                 $user->username =  $_POST["mailId"];    // หรือใช้ companyEmail แทน
                 $user->password_hash = Yii::$app->security->generatePasswordHash($_POST["password"]); // เข้ารหัสแบบ secure
                 $user->createDateTime = new Expression('NOW()');
@@ -303,9 +303,9 @@ class EmployeeController extends Controller
                 if ($user->save(false)) {
                     // สำเร็จทั้ง employee และ user
                     $role = new UserRole();
-                    $role->userId = $user->userId; 
-                    $role->roleId = $_POST["role"]; 
-                    $role->status = 1; 
+                    $role->userId = $user->userId;
+                    $role->roleId = $_POST["role"];
+                    $role->status = 1;
                     $role->createDateTime = new Expression('NOW()');
                     $role->updateDateTime = new Expression('NOW()');
                     $role->save(false); // ✅ สำคัญ!
@@ -386,7 +386,7 @@ class EmployeeController extends Controller
                             $certificate->save(false);
                         }
                     }
-           
+
                     // 1. เตรียมภาษาและระดับที่จับคู่กัน
                     $languages = [
                         ['language' => $_POST['mainLanguage'], 'level' => $_POST['lavelLanguage']],
@@ -412,11 +412,9 @@ class EmployeeController extends Controller
                         $userLang->updateDateTime = new \yii\db\Expression('NOW()');
                         $userLang->save(false);
                     }
-
-                } 
-               
+                }
             }
-                return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
+            return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
         }
     }
 
@@ -453,7 +451,7 @@ class EmployeeController extends Controller
             "employee" => $employee
         ]);
     }
-    
+
     public function saveEmployeeStatus($employeeId, $statusId)
     {
         $employeeStatus = EmployeeStatus::find()
@@ -570,7 +568,7 @@ class EmployeeController extends Controller
         $countries = curl_exec($api);
         $countries = json_decode($countries, true);
         // throw new Exception(print_r($countries, true));
-        
+
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
@@ -580,7 +578,7 @@ class EmployeeController extends Controller
         $titles = curl_exec($api);
         $titles = json_decode($titles, true);
         // throw new Exception(print_r($titles, true));
- 
+
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/status/active-status');
         $status = curl_exec($api);
         $status = json_decode($status, true);
@@ -647,7 +645,7 @@ class EmployeeController extends Controller
             "userLanguage" => $UserLanguage,
             "statusfrom" => 'Update'
         ]);
-        
+
         // $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
         // if (!isset($group) || empty($group)) {
         //     return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
@@ -1629,9 +1627,8 @@ class EmployeeController extends Controller
         }
     }
 
-     public function actionTest()
+    public function actionTest()
     {
-         return $this->render('test', [ ]);
+        return $this->render('test', []);
     }
-
 }
