@@ -934,7 +934,7 @@ class EmployeeController extends Controller
         }
         curl_close($api);
         //throw new Exception(print_r($param, true));
-        return $this->render('search_result', [
+        return $this->render('index', [
             "employees" => $employees,
             "companies" => $companies,
             "companyId" => $companyId,

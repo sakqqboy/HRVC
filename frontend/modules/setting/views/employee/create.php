@@ -2255,7 +2255,39 @@ $LanguageId = '';
         }
         additionalLangCount++;
 
-        const langHtml = `
+        // const noId = additionalLangCount - 1;
+
+        // alert(noId);
+        let langHtml = '';
+
+        <?php if ($statusfrom === 'Update'): ?>
+        langHtml = `
+            <div class="input-group mt-12">
+                <span class="input-group-text" style="background-color: white; border-right: none;">
+                    <img class="cycle-current" src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
+                        style="width: 20px; height: 20px;">
+                </span>
+                <select class="form-select" style="border-left: none;"
+                    id="mainLanguage${additionalLangCount-1}" name="mainLanguage${additionalLangCount-1}" required
+                    onchange="handleLanguageChange(${additionalLangCount-1})">
+                    <option value="" disabled hidden style="color: var(--Helper-Text, #8A8A8A);">
+                        <?= Yii::t('app', 'Select Additional Language') ?>
+                    </option>
+                    <?php if (isset($mainLanguage) && count($mainLanguage) > 0): ?>
+                        <option value=""><?= Yii::t('app', 'Select Additional Language') ?></option>
+                        <?php foreach ($mainLanguage as $lang): 
+                            $selected = ($lang['LanguageId'] == $LanguageId) ? 'selected' : '';
+                        ?>
+                            <option value="<?= htmlspecialchars($lang['LanguageId']) ?>" <?= $selected ?>>
+                                <?= htmlspecialchars($lang['name']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </select>
+            </div>
+        `;
+        <?php else: ?>
+        langHtml = `
             <div class="input-group mt-12">
                 <span class="input-group-text" style="background-color: white; border-right: none;">
                     <img class="cycle-current" src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
@@ -2280,17 +2312,24 @@ $LanguageId = '';
                 </select>
             </div>
         `;
+        <?php endif; ?>
+
 
         <?php if ($statusfrom === 'Update'): ?>
         if (additionalLangCount >= 2) {
             document.getElementById('al').insertAdjacentHTML('beforeend', langHtml);
+            // ตั้งค่าที่เลือกให้ select ตัวล่าสุด ถ้ามี
+            if (selectedValue) {
+                const currentSelect = document.getElementById(`mainLanguage${additionalLangCount-1}`);
+                if (currentSelect) {
+                    currentSelect.value = selectedValue;
+                }
+            }
+
             // alert(additionalLangCount);
-            handleLanguageChange(additionalLangCount);
+            // handleLanguageChange(additionalLangCount - 1);
         }
         <?php elseif ($statusfrom === 'Create'): ?>
-        document.getElementById('al').insertAdjacentHTML('beforeend', langHtml);
-        <?php endif; ?>
-
         // ตั้งค่าที่เลือกให้ select ตัวล่าสุด ถ้ามี
         if (selectedValue) {
             const currentSelect = document.getElementById(`mainLanguage${additionalLangCount}`);
@@ -2298,18 +2337,23 @@ $LanguageId = '';
                 currentSelect.value = selectedValue;
             }
         }
+        document.getElementById('al').insertAdjacentHTML('beforeend', langHtml);
+        <?php endif; ?>
+
 
         <?php if ($statusfrom === 'Update'): ?>
         if (additionalLangCount >= 3) {
             const lockSpan = `
-            <span id="lockId-${additionalLangCount}"
+            <span id="lockId-${additionalLangCount-1}"
                 class="input-group-text d-flex justify-content-center align-items-center mt-12"
                 style="background-color: #e9ecef; height: 40px;">
                 Add additional Language First
             </span>
             `;
             document.getElementById('ald').insertAdjacentHTML('beforeend', lockSpan);
+            // alert(additionalLangCount);
         }
+        handleLanguageChange(additionalLangCount);
         <?php elseif ($statusfrom === 'Create'): ?>
         if (additionalLangCount >= 2) {
             const lockSpan = `
@@ -2322,8 +2366,6 @@ $LanguageId = '';
             document.getElementById('ald').insertAdjacentHTML('beforeend', lockSpan);
         }
         <?php endif; ?>
-
-
 
         if (additionalLangCount >= maxAdditionalLangs) {
             document.getElementById('addCertificateBtn')?.classList.add('d-none');
@@ -2335,7 +2377,6 @@ $LanguageId = '';
     }
 
     function handleLanguageChange(no) {
-
         const lang1 = document.getElementById('mainLanguage1');
         const lang2 = document.getElementById('mainLanguage2');
         const lang3 = document.getElementById('mainLanguage3');
@@ -2345,28 +2386,55 @@ $LanguageId = '';
             return others.some(otherValue => otherValue === value);
         }
 
+
         function replaceLockWithLevelSelect(lockId, levelName, levelId) {
             const lockSpan = document.getElementById(lockId);
+            alert(lockSpan);
             if (lockSpan) {
+                let number = lockId.split('-')[1]; // '2'
+
+                if (number == 1) {
+                    <?php
+                        // สมมุติว่าคุณมีค่าจาก backend เช่นนี้:
+                        $languageLevel = isset($userLanguage[1]['lavel']) ? $userLanguage[1]['lavel'] : '';
+                    ?>
+                } else if (number == 2) {
+                    <?php
+                        $languageLevel = isset($userLanguage[2]['lavel']) ? $userLanguage[2]['lavel'] : '';
+                    ?>
+
+                }
+                alert(no);
+
                 lockSpan.outerHTML = `
-                <select class="form-select mt-12" name="lavelLanguage${no}" id="lavelLanguage${no}" style="border-left: none;" required>
-                    <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A);">
-                        <?= Yii::t('app', 'Select') ?>
-                    </option>
-                    <option value="1">Beginner</option>
-                    <option value="2">Elementary</option>
-                    <option value="3">Intermediate</option>
-                    <option value="4">Upper Intermediate</option>
-                    <option value="5">Advanced</option>
-                    <option value="6">Fluent</option>
-                    <option value="7">Native</option>
-                </select>
-            `;
+                    <select class="form-select mt-12" name="lavelLanguage${no}" id="lavelLanguage${no}" required>
+                        <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A);">
+                            <?= Yii::t('app', 'Select') ?>
+                        </option>
+                        <?php
+                       
+                        $levels = [
+                            1 => 'Beginner',
+                            2 => 'Elementary',
+                            3 => 'Intermediate',
+                            4 => 'Upper Intermediate',
+                            5 => 'Advanced',
+                            6 => 'Fluent',
+                            7 => 'Native',
+                        ];
+
+                        foreach ($levels as $val => $label) {
+                            $selected = ($val == $languageLevel) ? 'selected' : '';
+                            echo '<option value="' . $val . '" ' . $selected . '>' . $label . '</option>';
+                        }
+                        ?>
+                    </select>
+                `;
             }
+
         }
 
         if (no === 1) {
-
             if (lang2 || lang3) {
                 const val1 = lang1?.value || "";
                 const valsOther = [(lang2?.value || ""), (lang3?.value || "")];
@@ -2375,6 +2443,7 @@ $LanguageId = '';
                     lang1.value = "";
                 }
             } else {
+                // alert(no);
                 replaceLockWithLevelSelect('lockId-1', 'lavelLanguage1', 'lavelLanguage1');
             }
         } else if (no === 2) {
@@ -2386,7 +2455,10 @@ $LanguageId = '';
                     lang2.value = "";
                 } else if (val2) {
                     replaceLockWithLevelSelect('lockId-2', 'lavelLanguage2', 'lavelLanguage2');
+                } else {
+                    replaceLockWithLevelSelect('lockId-2', 'lavelLanguage2', 'lavelLanguage2');
                 }
+
             }
         } else if (no === 3) {
             if (lang1 || lang2) {
