@@ -1358,7 +1358,6 @@ $LanguageId = '';
         }
         if (selectedValue !== '') {
             iconImg.src = homeUrl + 'image/branches-black.svg';
-            // alert(selectedValue);
             iconDiv.classList.remove('cycle-current-gray');
             iconDiv.classList.add('cycle-current-yellow');
 
@@ -1400,7 +1399,6 @@ $LanguageId = '';
 
         if (selectedValue !== '') {
             iconImg.src = homeUrl + 'image/departments.svg';
-            //alert(selectedValue);
             iconDiv.classList.remove('cycle-current-gray');
             iconDiv.classList.add('cycle-current-red');
 
@@ -1418,7 +1416,6 @@ $LanguageId = '';
         const iconDiv = document.getElementById('teamIcon');
         if (selectedValue !== '') {
             iconImg.src = homeUrl + 'image/teams.svg';
-            //alert(selectedValue);
             iconDiv.classList.remove('cycle-current-gray');
             iconDiv.classList.add('cycle-current-green');
 
@@ -1434,11 +1431,8 @@ $LanguageId = '';
         const iconDiv = document.getElementById('titleIcon');
         if (selectedValue !== '') {
             iconImg.src = homeUrl + 'images/icons/white-icons/MasterSetting/title.svg';
-            //alert(selectedValue);
             iconDiv.classList.remove('cycle-current-gray');
             iconDiv.classList.add('cycle-current-blue');
-
-            //alert(selectedValue);
 
             fetch('<?= Yii::$app->homeUrl ?>setting/title/get-title-detail', {
                     method: 'POST',
@@ -1489,7 +1483,6 @@ $LanguageId = '';
 
     document.getElementById('companySelectId').addEventListener('change', function() {
         const companyId = this.value;
-        //alert(companyId);
 
         fetch('<?= Yii::$app->homeUrl ?>setting/company/company-branch-list', {
                 method: 'POST',
@@ -1522,8 +1515,6 @@ $LanguageId = '';
     document.getElementById('branchSelectId').addEventListener('change', function() {
         const beanchId = this.value;
 
-        //alert(beanchId);
-
         fetch('<?= Yii::$app->homeUrl ?>setting/branch/branch-department-list', {
                 method: 'POST',
                 headers: {
@@ -1555,7 +1546,6 @@ $LanguageId = '';
     document.getElementById('nationalityId').addEventListener('change', function() {
         const selectedOption = this.options[this.selectedIndex];
         const flagUrl = selectedOption.getAttribute('data-flag');
-        // alert(flagUrl);
         if (flagUrl) {
             document.getElementById('flag').src = homeUrl + flagUrl;
         }
@@ -1858,7 +1848,6 @@ $LanguageId = '';
 
 
     function updateSelectCheng() {
-        // alert('1');
         const companySelect = document.getElementById('companySelectId');
         const iconImg = document.getElementById('companyIconImg');
         const branchSelect = document.getElementById('branchSelectId');
@@ -1941,7 +1930,6 @@ $LanguageId = '';
                         }
                         if (selectedValue !== '') {
                             iconImg.src = homeUrl + 'image/branches-black.svg';
-                            // alert(selectedValue);
                             iconDiv.classList.remove('cycle-current-gray');
                             iconDiv.classList.add('cycle-current-yellow');
 
@@ -1960,9 +1948,6 @@ $LanguageId = '';
                 if (departmentSpan && departmentSpan.classList.contains('input-group-text')) {
                     departmentSpan.style.backgroundColor = '#fff';
                 }
-
-
-                // alert(departmentSelectId);
 
                 fetch('<?= Yii::$app->homeUrl ?>setting/branch/branch-department-list', {
                         method: 'POST',
@@ -2027,7 +2012,6 @@ $LanguageId = '';
 
                             if (selectedValue !== '') {
                                 iconImg.src = homeUrl + 'image/departments.svg';
-                                //alert(selectedValue);
                                 iconDiv.classList.remove('cycle-current-gray');
                                 iconDiv.classList.add('cycle-current-red');
 
@@ -2053,11 +2037,8 @@ $LanguageId = '';
         const loadedCertificates = <?= json_encode($userCertificate) ?>;
         // console.log(loadedCertificates);
 
-        // alert(JSON.stringify(loadedCertificates, null, 2));
-
         if (Array.isArray(loadedCertificates)) {
             loadedCertificates.forEach(item => {
-                // alert(item.cerId);
                 const cert = {
                     id: item.cerId,
                     cerName: item.cerName,
@@ -2077,8 +2058,6 @@ $LanguageId = '';
 
         let initialSkills = <?= json_encode($employee['skills'] ?? []) ?>;
         // console.log(initialSkills);
-        // alert(JSON.stringify(initialSkills, null, 2));
-
         if (typeof initialSkills === "string") {
             try {
                 initialSkills = JSON.parse(initialSkills);
@@ -2102,16 +2081,10 @@ $LanguageId = '';
 
         if (Array.isArray(userLanguage) && userLanguage.length > 0) {
             userLanguage.forEach(lang => {
-                // สมมติ lang.languageId คือค่าที่จะตั้งใน select
-                // alert(JSON.stringify(userLanguage, null, 2));
                 // console.log(userLanguage);
                 addAdditionalLanguage(lang.languageId);
             });
         }
-
-        // เรียกทุกครั้งที่ checkbox เปลี่ยน
-        // เรียกฟังก์ชันทันทีเมื่อโหลดหน้า (ถ้ามีค่า companyId)
-        // if (companySelect.value !== '') {}
     });
 
     document.getElementById('create-employee').addEventListener('submit', function(e) {
@@ -2178,7 +2151,6 @@ $LanguageId = '';
     });
 
     function addSkillTag(skill) {
-        // alert(skill);
         const tag = document.createElement("span");
         tag.className = "skill-tag";
         tag.style.display = "inline-flex";
@@ -2255,9 +2227,6 @@ $LanguageId = '';
         }
         additionalLangCount++;
 
-        // const noId = additionalLangCount - 1;
-
-        // alert(noId);
         let langHtml = '';
 
         <?php if ($statusfrom === 'Update'): ?>
@@ -2325,9 +2294,6 @@ $LanguageId = '';
                     currentSelect.value = selectedValue;
                 }
             }
-
-            // alert(additionalLangCount);
-            // handleLanguageChange(additionalLangCount - 1);
         }
         <?php elseif ($statusfrom === 'Create'): ?>
         // ตั้งค่าที่เลือกให้ select ตัวล่าสุด ถ้ามี
@@ -2342,19 +2308,27 @@ $LanguageId = '';
 
 
         <?php if ($statusfrom === 'Update'): ?>
-        const noId = additionalLangCount - 1;
-        if (noId >= 2) {
-            const lockSpan = `
+        //additionalLangCount = 1 2 3 4 ไม่เอา 1 
+        const noId = additionalLangCount - 1; // 0 1 2 3
+        if (additionalLangCount >= 3) { //2 3
+            const lockSpan =
+                `
             <span id="lockId-${noId}"
                 class="input-group-text d-flex justify-content-center align-items-center mt-12"
                 style="background-color: #e9ecef; height: 40px;">
                 Add additional Language First
             </span>
-            `;
+            `; // lockId สร้าง 2 3 เพราะ 1 มีอยุ่แแล้ว แต่ 1 นั้น = 2 ในดาต้า = ต้องสร้างดาต้า ที่ 3 กับ 4 ใน lockId 2 กับ 3  lockId ก้จะมี 1 2 3
             document.getElementById('ald').insertAdjacentHTML('beforeend', lockSpan);
+            // alert('lockId2');
+            // alert(noId); //1,2
+            // ต้องส่งค่า 1 2 3  เข้าไป ถ้าดาต้ามาเป็น 1 2 3 ต้องส่งไปแค่ 2 3 ซึ่งต้องแปลงเป็ย 1 2 ถ้าเป็น 1 2 3 4 ส่ง 2 3 4 แปลงเป็น 1 2 3
+            // handleLanguageChange(additionalLangCount);
         }
-        // alert(noId);
-        handleLanguageChange(additionalLangCount);
+        if (noId != 0) { // 1 2 3
+            alert('noId' + noId);
+            handleLanguageChange(noId);
+        }
         <?php elseif ($statusfrom === 'Create'): ?>
         if (additionalLangCount >= 2) {
             const lockSpan = `
@@ -2381,6 +2355,7 @@ $LanguageId = '';
         const lang1 = document.getElementById('mainLanguage1');
         const lang2 = document.getElementById('mainLanguage2');
         const lang3 = document.getElementById('mainLanguage3');
+        // alert('ee');
 
         function isDuplicate(value, others) {
             if (!value) return false;
@@ -2390,22 +2365,27 @@ $LanguageId = '';
 
         function replaceLockWithLevelSelect(lockId, levelName, levelId) {
             const lockSpan = document.getElementById(lockId);
-            alert(lockSpan);
+            // lockId 1 2 3
             if (lockSpan) {
                 let number = lockId.split('-')[1]; // '2'
-
+                //อาเรย์ 0 1 2 3
                 if (number == 1) {
+                    alert('โหลดอาเรย์1')
                     <?php
                         // สมมุติว่าคุณมีค่าจาก backend เช่นนี้:
                         $languageLevel = isset($userLanguage[1]['lavel']) ? $userLanguage[1]['lavel'] : '';
                     ?>
                 } else if (number == 2) {
+                    alert('โหลดอาเรย์2')
                     <?php
                         $languageLevel = isset($userLanguage[2]['lavel']) ? $userLanguage[2]['lavel'] : '';
                     ?>
-
+                } else if (number == 3) {
+                    alert('โหลดอาเรย์3')
+                    <?php
+                        $languageLevel = isset($userLanguage[3]['lavel']) ? $userLanguage[3]['lavel'] : '';
+                    ?>
                 }
-                // alert(no);
 
                 lockSpan.outerHTML = `
                     <select class="form-select mt-12" name="lavelLanguage${no}" id="lavelLanguage${no}" required>
@@ -2435,7 +2415,7 @@ $LanguageId = '';
 
         }
 
-        if (no === 1) {
+        if (no === 1) { //additionalLangCount 2
             if (lang2 || lang3) {
                 const val1 = lang1?.value || "";
                 const valsOther = [(lang2?.value || ""), (lang3?.value || "")];
@@ -2444,17 +2424,18 @@ $LanguageId = '';
                     lang1.value = "";
                 }
             } else {
-                // alert(no);
+                alert('โหลดlockId-1');
                 replaceLockWithLevelSelect('lockId-1', 'lavelLanguage1', 'lavelLanguage1');
             }
-        } else if (no === 2) {
+        } else if (no === 2) { //additionalLangCount 3
             if (lang1 || lang3) {
                 const val2 = lang2?.value || "";
                 const valsOther = [(lang1?.value || ""), (lang3?.value || "")];
                 if (val2 && isDuplicate(val2, valsOther)) {
                     alert('Language Duplicate');
                     lang2.value = "";
-                } else if (val2) {
+                } else {
+                    alert('โหลดlockId-2');
                     replaceLockWithLevelSelect('lockId-2', 'lavelLanguage2', 'lavelLanguage2');
                 }
             }
