@@ -224,9 +224,13 @@ function viewFile(type) {
 }
 
 function removeFile(type) {
-    if (type === 1) {
-        // สร้าง HTML แบบดั้งเดิมของ upload file กลับไปแทนที่ div
-        const originalHTML = `
+    const confirmDelete = confirm('Do you want to delete the file?');
+
+    if (confirmDelete) {
+        // ผู้ใช้กด "OK"
+        if (type === 1) {
+            // สร้าง HTML แบบดั้งเดิมของ upload file กลับไปแทนที่ div
+            const originalHTML = `
             <div class="row">
                 <div class="col-lg-2 center-center">
                     <img id="icon-file1" src="${$url}image/file-big.svg"
@@ -256,15 +260,15 @@ function removeFile(type) {
                 </div>
             </div>
         `;
-        document.getElementById("upload-file1").style.border = "border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)";
+            document.getElementById("upload-file1").style.border = "border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)";
 
-        // แทนที่ div ด้วย HTML ดั้งเดิม
-        document.getElementById("upload-file1").innerHTML = originalHTML;
-    }
+            // แทนที่ div ด้วย HTML ดั้งเดิม
+            document.getElementById("upload-file1").innerHTML = originalHTML;
+        }
 
-    if (type === 2) {
-        // สมมติว่า $url คือตัวแปร JS ที่เก็บ path Yii::$app->homeUrl แล้ว
-        const originalHTML = `
+        if (type === 2) {
+            // สมมติว่า $url คือตัวแปร JS ที่เก็บ path Yii::$app->homeUrl แล้ว
+            const originalHTML = `
         <div class="row">
             <div class="col-lg-2 center-center">
                 <img id="icon-file2" src="${$url}image/file-big.svg"
@@ -295,17 +299,17 @@ function removeFile(type) {
         </div>
     `;
 
-        // ตั้งค่า border แบบถูกต้อง
-        const uploadFile2Div = document.getElementById("upload-file2");
-        uploadFile2Div.style.border = "1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)";
+            // ตั้งค่า border แบบถูกต้อง
+            const uploadFile2Div = document.getElementById("upload-file2");
+            uploadFile2Div.style.border = "1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)";
 
-        // แทนที่ div ด้วย HTML ดั้งเดิม
-        uploadFile2Div.innerHTML = originalHTML;
-    }
+            // แทนที่ div ด้วย HTML ดั้งเดิม
+            uploadFile2Div.innerHTML = originalHTML;
+        }
 
-    if (type === 3) {
-        // สมมติว่า $url คือตัวแปร JS ที่เก็บ path Yii::$app->homeUrl แล้ว
-        const originalHTML = `
+        if (type === 3) {
+            // สมมติว่า $url คือตัวแปร JS ที่เก็บ path Yii::$app->homeUrl แล้ว
+            const originalHTML = `
         <div class="row">
             <div class="col-lg-2 center-center">
                 <img id="icon-file3" src="${$url}image/file-big.svg"
@@ -335,22 +339,26 @@ function removeFile(type) {
             </div>
         </div>
     `;
-        document.getElementById("upload-file3").style.border = "1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)";
-        // แทนที่ div ด้วย HTML ดั้งเดิม
-        document.getElementById("upload-file3").innerHTML = originalHTML;
+            document.getElementById("upload-file3").style.border = "1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)";
+            // แทนที่ div ด้วย HTML ดั้งเดิม
+            document.getElementById("upload-file3").innerHTML = originalHTML;
+        }
+    } else {
+        // ผู้ใช้กด "Cancel"
+        console.log('User canceled file deletion.');
     }
 }
 
-function resetUpload(type) {
-    // if (type === 1) {
-    //     document.getElementById("resume").value = '';
-    //     checkUploadFile(1);
-    // }
-    // if (type === 2) {
-    //     document.getElementById("agreement").value = '';
-    //     checkUploadFile(2);
-    // }
-}
+// function resetUpload(type) {
+//     // if (type === 1) {
+//     //     document.getElementById("resume").value = '';
+//     //     checkUploadFile(1);
+//     // }
+//     // if (type === 2) {
+//     //     document.getElementById("agreement").value = '';
+//     //     checkUploadFile(2);
+//     // }
+// }
 
 function changeStatus() {
     var pimStatus = $("#pim-status").val();
@@ -435,6 +443,11 @@ function initRadioSelection(containerSelector = '.radio-wrapper') {
             });
         });
     });
+    // <<< NEW: trigger click on pre-checked radio
+    const preChecked = container.querySelector('.radio-item input[type="radio"]:checked');
+    if (preChecked) {
+        preChecked.closest('.radio-item').click();
+    }
 }
 
 function initCheckboxSelection(containerSelector = '.checkbox-wrapper') {
@@ -494,20 +507,53 @@ function initCheckboxSelection(containerSelector = '.checkbox-wrapper') {
             }
         });
     });
+
+    // === รันเริ่มต้นสำหรับ checkbox ที่ถูก checked ===
+    container.querySelectorAll('.checkbox-item input[type="checkbox"]:checked').forEach(checkbox => {
+        const item = checkbox.closest('.checkbox-item');
+        const cycle = item.querySelector('.checkbox-cycle');
+
+        item.style.background = '#FFFFFF';
+        item.style.borderColor = '#BBCDDE';
+        cycle.style.background = '#FFD000';
+        cycle.style.borderColor = '#FFD000';
+
+        const existingSvg = cycle.querySelector('.check-svg');
+        if (!existingSvg) {
+            const svg = document.createElementNS(svgNS, "svg");
+            svg.setAttribute("width", "13");
+            svg.setAttribute("height", "9");
+            svg.setAttribute("viewBox", "0 0 13 9");
+            svg.setAttribute("fill", "none");
+            svg.classList.add("check-svg");
+
+            const path = document.createElementNS(svgNS, "path");
+            path.setAttribute("d", "M2.27734 5.85714L4.52734 8L11.2773 2");
+            path.setAttribute("stroke", "#30313D");
+            path.setAttribute("stroke-width", "2");
+            path.setAttribute("stroke-linecap", "square");
+            path.setAttribute("stroke-linejoin", "round");
+
+            svg.appendChild(path);
+            cycle.appendChild(svg);
+        }
+    });
+
 }
 
 
 
 function loadTeamsSelect(departmentId) {
+    const employeeTeamId = document.getElementById('employeeTeamId');
+    const teamId = parseInt(employeeTeamId.value);
+
     fetch($url + 'setting/department/department-team-list', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
         },
-        body: JSON.stringify({
-            departmentId: departmentId
-        })
+        body: JSON.stringify({ departmentId: departmentId })
     })
         .then(response => response.json())
         .then(data => {
@@ -515,19 +561,45 @@ function loadTeamsSelect(departmentId) {
             teamSelect.innerHTML =
                 '<option value="" disabled selected hidden>Select his/her team</option>';
 
-            if (data && typeof data === 'object') {
-                Object.values(data).forEach(team => {
-                    const option = document.createElement('option');
-                    option.value = team.teamId;
-                    option.textContent = team.teamName;
-                    teamSelect.appendChild(option);
-                });
-                teamSelect.disabled = false; // เปิดการใช้งาน dropdown
+            const teams = Object.values(data); // ✅ ดึง array จาก object
+
+            teams.forEach(team => {
+                const option = document.createElement('option');
+                option.value = team.teamId;
+                option.textContent = team.teamName;
+
+                // ✅ เลือกค่าเดิมของพนักงานถ้ามี
+                if (!isNaN(teamId) && teamId === parseInt(team.teamId)) {
+                    option.selected = true;
+                }
+
+                teamSelect.appendChild(option);
+            });
+
+
+            const iconImg = document.getElementById('teamIconImg');
+            const iconDiv = document.getElementById('teamIcon');
+            if (teamId) {
+                iconImg.src = homeUrl + 'image/teams.svg';
+                //alert(selectedValue);
+                iconDiv.classList.remove('cycle-current-gray');
+                iconDiv.classList.add('cycle-current-green');
+
+            } else {
+                iconDiv.classList.remove('cycle-current-green');
+                iconDiv.classList.add('cycle-current-gray');
             }
+
+            teamSelect.disabled = false;
         });
 }
 
+
+
 function loadTitlesSelect(departmentId) {
+    const employeeTitleId = document.getElementById('employeeTitleId');
+    const titleId = parseInt(employeeTitleId?.value || 0);
+
     fetch($url + 'setting/department/department-title-list', {
         method: 'POST',
         headers: {
@@ -542,17 +614,70 @@ function loadTitlesSelect(departmentId) {
         .then(data => {
             const titleSelect = document.getElementById('titleSelectId');
             titleSelect.innerHTML =
-                '<option value="" disabled selected hidden>What your his/her Tile?</option>';
+                '<option value="" disabled selected hidden>What is his/her Title?</option>';
 
             if (data && typeof data === 'object') {
                 Object.values(data).forEach(title => {
                     const option = document.createElement('option');
                     option.value = title.titleId;
                     option.textContent = title.titleName;
+
+                    if (title.titleId === titleId) {
+                        option.selected = true;
+                    }
+
                     titleSelect.appendChild(option);
                 });
-                titleSelect.disabled = false; // เปิดการใช้งาน dropdown
+
+                titleSelect.disabled = false;
+
+                // แก้ตรงนี้: ต้องเอา getElementById ก่อนถึงจะใช้ iconImg ได้
+                const iconImg = document.getElementById('titleIconImg');
+                const iconDiv = document.getElementById('titleIcon');
+                // ตรวจสอบว่า titleId มีค่าจริงก่อน fetch
+                if (titleId) {
+                    iconImg.src = homeUrl + 'images/icons/white-icons/MasterSetting/title.svg';
+                    iconDiv.classList.remove('cycle-current-gray');
+                    iconDiv.classList.add('cycle-current-blue');
+
+                    fetch($url + 'setting/title/get-title-detail', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
+                        },
+                        body: JSON.stringify({ titleId: titleId })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById('no-existing').style.display = 'none';
+
+                            const html = `
+                                <div>
+                                    <span class="font-size-20 font-weight-600">${data.titleName}</span>
+                                </div>
+                                <div class="center-center" style="gap: 63px; margin: 36px 29px;">
+                                    <div class="row" style="border-right:lightgray solid thin;">
+                                        <div class="row mb-36">
+                                            <span class="font-size-16 font-weight-500 mb-22">Purpose of the Job</span>
+                                            <span class="font-size-14 font-weight-400">${data.purpose}</span>
+                                        </div>
+                                        <div class="row">
+                                            <span class="font-size-16 font-weight-500 mb-22">Core Responsibility</span>
+                                            <span class="font-size-14 font-weight-400">${data.jobDescription}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <span class="font-size-16 font-weight-500 mb-22">Key Responsibility</span>
+                                        <span class="font-size-14 font-weight-400">${data.keyResponsibility}</span>
+                                    </div>
+                                </div>
+                            `;
+                            document.getElementById('descriptionTitle').innerHTML = html;
+                        });
+                }
             }
+
         });
 }
 
@@ -717,20 +842,37 @@ function initCerDateCalendar() {
     }
 }
 
-document.getElementById('override-probation-employee').addEventListener('change', function () {
+
+
+// ฟังก์ชันปรับสถานะตาม checkbox
+function updateMultiDueTermState() {
+    const checkbox = document.getElementById('override-probation-employee');
     const hiddenInput = document.getElementById('override-probation-employee-hidden');
     const multiDueTerm = document.getElementById('multi-due-term');
-
-    if (this.checked) {
+    if (checkbox.checked) {
         hiddenInput.value = "1";
-        multiDueTerm.style.backgroundColor = ""; // หรือสีพื้นหลังปกติ เช่น "#fff"
-        multiDueTerm.style.pointerEvents = "auto"; // เปิดให้คลิกได้
+        multiDueTerm.style.backgroundColor = ""; // เปิดใช้งาน
+        multiDueTerm.style.pointerEvents = "auto";
     } else {
         hiddenInput.value = "0";
-        multiDueTerm.style.backgroundColor = "#e9ecef";
-        multiDueTerm.style.pointerEvents = "none"; // ปิดไม่ให้คลิก
+        multiDueTerm.style.backgroundColor = "#e9ecef"; // เทา ปิดใช้งาน
+        multiDueTerm.style.pointerEvents = "none";
     }
-});
+
+    document.getElementById('override-probation-employee').addEventListener('change', function () {
+        if (this.checked) {
+            hiddenInput.value = "1";
+            multiDueTerm.style.backgroundColor = ""; // หรือสีพื้นหลังปกติ เช่น "#fff"
+            multiDueTerm.style.pointerEvents = "auto"; // เปิดให้คลิกได้
+        } else {
+            hiddenInput.value = "0";
+            multiDueTerm.style.backgroundColor = "#e9ecef";
+            multiDueTerm.style.pointerEvents = "none"; // ปิดไม่ให้คลิก
+        }
+    });
+}
+
+
 
 
 
@@ -751,4 +893,80 @@ function openPopupModalCertificate() {
             $('#certificateModal').modal('show');
         }
     });
+}
+
+function flatpickrDate() {
+
+    var birthDate = document.getElementById('birthDate').value;
+    // alert(birthDate);
+    if (birthDate) {
+        var el = document.getElementById('birthdate-select');
+        if (el) {
+            el.innerHTML = `${birthDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+        } else {
+            console.warn('Element #birthdate-select not found');
+        }
+
+        const inputGroupText = document.querySelector('#group-birtdate .input-group-text');
+        if (inputGroupText) {
+            inputGroupText.style.backgroundColor = "rgb(215, 235, 255)";
+            inputGroupText.style.border = "0.5px solid rgb(190, 218, 255)";
+        }
+
+        const calendarImg = document.querySelector('#group-birtdate img');
+        if (calendarImg) {
+            calendarImg.src = $url + "image/calendar-blue.svg";
+        }
+    }
+
+    var hiringDate = document.getElementById('hiringDate').value;
+    // alert(hiringDate);
+
+    if (hiringDate) {
+        var el = document.getElementById('hiring-select');
+        if (el) {
+            el.innerHTML = `${birthDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+        } else {
+            console.warn('Element #hiring-select not found');
+        }
+
+        const inputGroupText = document.querySelector('#group-hiringdate .input-group-text');
+        if (inputGroupText) {
+            inputGroupText.style.backgroundColor = "rgb(215, 235, 255)";
+            inputGroupText.style.border = "0.5px solid rgb(190, 218, 255)";
+        }
+
+        const calendarImg = document.querySelector('#group-hiringdate img');
+        if (calendarImg) {
+            calendarImg.src = $url + "image/calendar-blue.svg";
+        }
+    }
+
+    const fromDate = document.getElementById('fromDate')?.value;
+    const toDate = document.getElementById('toDate')?.value;
+    // alert(fromDate);
+
+    if (toDate && fromDate) {
+        const el = document.getElementById('multi-due-term');
+        if (fromDate && toDate && el) {
+            el.innerHTML = `${fromDate} - ${toDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+        } else if (!el) {
+            console.warn('Element #multi-due-term not found');
+        }
+
+        const inputGroupText = document.querySelector('#group-due-term .input-group-text');
+        if (inputGroupText) {
+            inputGroupText.style.backgroundColor = '#D7EBFF';
+            inputGroupText.style.border = '0.5px solid #BEDAFF';
+        }
+
+        const images = inputGroupText.querySelectorAll('img');
+        if (images) {
+            images[0].src = $url + 'image/calendar-blue.svg';
+            images[1].src = $url + 'image/weld.svg';
+            images[2].src = $url + 'image/calendar-blue.svg';
+        }
+    }
+
+
 }
