@@ -899,21 +899,24 @@ class EmployeeController extends Controller
         $departments = [];
         $teams = [];
         $groupId = Group::currentGroupId();
-        $employees = Employee::find()->where(["status" => [1, 0]])
-            ->andFilterWhere([
-                "companyId" => $companyId,
-                "branchId" => $branchId,
-                "departmentId" => $departmentId,
-                "status" => $status,
-                "teamId" => $teamId,
-            ])
-            ->asArray()
-            ->orderBy("employeeFirstname")
-            ->all();
+        // $employees = Employee::find()->where(["status" => [1, 0]])
+        //     ->andFilterWhere([
+        //         "companyId" => $companyId,
+        //         "branchId" => $branchId,
+        //         "departmentId" => $departmentId,
+        //         "status" => $status,
+        //         "teamId" => $teamId,
+        //     ])
+        //     ->asArray()
+        //     ->orderBy("employeeFirstname")
+        //     ->all();
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-filter?companyId=' . $companyId.'&&branchId='.$branchId.'&&departmentId='.$departmentId.'&&teamId='.$teamId.'&&status='.$status);
+        $employees = curl_exec($api);
+        $employees = json_decode($employees, true);
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $companies = curl_exec($api);

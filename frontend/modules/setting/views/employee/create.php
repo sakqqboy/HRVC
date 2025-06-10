@@ -2342,17 +2342,18 @@ $LanguageId = '';
 
 
         <?php if ($statusfrom === 'Update'): ?>
-        if (additionalLangCount >= 3) {
+        const noId = additionalLangCount - 1;
+        if (noId >= 2) {
             const lockSpan = `
-            <span id="lockId-${additionalLangCount-1}"
+            <span id="lockId-${noId}"
                 class="input-group-text d-flex justify-content-center align-items-center mt-12"
                 style="background-color: #e9ecef; height: 40px;">
                 Add additional Language First
             </span>
             `;
             document.getElementById('ald').insertAdjacentHTML('beforeend', lockSpan);
-            // alert(additionalLangCount);
         }
+        // alert(noId);
         handleLanguageChange(additionalLangCount);
         <?php elseif ($statusfrom === 'Create'): ?>
         if (additionalLangCount >= 2) {
@@ -2404,7 +2405,7 @@ $LanguageId = '';
                     ?>
 
                 }
-                alert(no);
+                // alert(no);
 
                 lockSpan.outerHTML = `
                     <select class="form-select mt-12" name="lavelLanguage${no}" id="lavelLanguage${no}" required>
@@ -2455,10 +2456,7 @@ $LanguageId = '';
                     lang2.value = "";
                 } else if (val2) {
                     replaceLockWithLevelSelect('lockId-2', 'lavelLanguage2', 'lavelLanguage2');
-                } else {
-                    replaceLockWithLevelSelect('lockId-2', 'lavelLanguage2', 'lavelLanguage2');
                 }
-
             }
         } else if (no === 3) {
             if (lang1 || lang2) {
