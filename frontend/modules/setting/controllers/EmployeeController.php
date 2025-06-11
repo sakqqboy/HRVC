@@ -768,7 +768,7 @@ class EmployeeController extends Controller
     public function actionSaveUpdateEmployee()
     {            
 
-        // throw new exception(print_r(Yii::$app->request->post(), true));
+        throw new exception(print_r(Yii::$app->request->post(), true));
 
         if (isset($_POST["employeeFirstname"]) && trim($_POST["employeeSurename"] != '')) {
            $userId=  $_POST["userId"];
