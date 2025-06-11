@@ -193,9 +193,9 @@ function resetUpload(type) {
                 <span class="ml-5 text-success" id="${inputId}-check" style="display:none;">
                     <i class="fa fa-check" aria-hidden="true"></i>
                 </span>
-                <input id="${inputId}" style="display:none;" type="file" name="${inputId}" onchange="checkUploadFile(${type})">
                 <input type="hidden" value="" id="${hasInputId}">
             </div>
+            <input id="${inputId}" style="display:none;" type="file" name="${inputId}" onchange="checkUploadFile(${type})">
         </div>
     `;
 }
@@ -254,10 +254,10 @@ function removeFile(type) {
                     <span class="ml-5 text-success" id="resume-check" style="display:none;">
                         <i class="fa fa-check" aria-hidden="true"></i>
                     </span>
-                    <input id="resume" style="display:none;" type="file" name="resume"
+                </div>
+                <input id="resume" style="display:none;" type="file" name="resume"
                         onchange="javascript:checkUploadFile(1)">
                     <input type="hidden" value="" id="hasResume">
-                </div>
             </div>
         `;
             document.getElementById("upload-file1").style.border = "border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)";
@@ -269,35 +269,35 @@ function removeFile(type) {
         if (type === 2) {
             // สมมติว่า $url คือตัวแปร JS ที่เก็บ path Yii::$app->homeUrl แล้ว
             const originalHTML = `
-        <div class="row">
-            <div class="col-lg-2 center-center">
-                <img id="icon-file2" src="${$url}image/file-big.svg"
-                    alt="icon" style="width: 40px; height: 40px;">
-            </div>
-            <div id="file-uplode-name2" class="col-lg-6 col-md-6 col-12"
-                style="border-right:lightgray solid thin;">
-                <label class="text-gray font-size-16 font-weight-500" for="name">
-                    Upload Agreement Here
-                </label>
-                <div class="text-secondary text-gray  font-size-14">
-                    <span class="text-gray font-size-12"> Supported - pdf, .doc, .docx</span>
+                <div class="row">
+                    <div class="col-lg-2 center-center">
+                        <img id="icon-file2" src="${$url}image/file-big.svg"
+                            alt="icon" style="width: 40px; height: 40px;">
+                    </div>
+                    <div id="file-uplode-name2" class="col-lg-6 col-md-6 col-12"
+                        style="border-right:lightgray solid thin;">
+                        <label class="text-gray font-size-16 font-weight-500" for="name">
+                            Upload Agreement Here
+                        </label>
+                        <div class="text-secondary text-gray  font-size-14">
+                            <span class="text-gray font-size-12"> Supported - pdf, .doc, .docx</span>
+                        </div>
+                    </div>
+                    <div id="file-edit2" class="col-lg-4 col-md-6 col-12 text-center pt-13">
+                        <label id="agreement-btn" type="button" for="agreement"
+                            class="text-blue font-size-16 font-weight-600" style="cursor:pointer;">
+                            Upload
+                            <img src="${$url}image/file-up-blue.svg" alt="icon" style="width: 16px; height: 16px;">
+                        </label>
+                        <span class="ml-5 text-success" id="agreement-check" style="display:none;">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <input id="agreement" style="display:none;" type="file" name="agreement"
+                            onchange="javascript:checkUploadFile(2)">
+                    <input type="hidden" value="" id="hasAgreement">
                 </div>
-            </div>
-            <div id="file-edit2" class="col-lg-4 col-md-6 col-12 text-center pt-13">
-                <label id="agreement-btn" type="button" for="agreement"
-                    class="text-blue font-size-16 font-weight-600" style="cursor:pointer;">
-                    Upload
-                    <img src="${$url}image/file-up-blue.svg" alt="icon" style="width: 16px; height: 16px;">
-                </label>
-                <span class="ml-5 text-success" id="agreement-check" style="display:none;">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                </span>
-                <input id="agreement" style="display:none;" type="file" name="agreement"
-                    onchange="javascript:checkUploadFile(2)">
-                <input type="hidden" value="" id="hasAgreement">
-            </div>
-        </div>
-    `;
+            `;
 
             // ตั้งค่า border แบบถูกต้อง
             const uploadFile2Div = document.getElementById("upload-file2");

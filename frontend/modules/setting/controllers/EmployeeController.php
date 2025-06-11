@@ -242,7 +242,6 @@ class EmployeeController extends Controller
             $employee->remark = $_POST["remark"];
             $employee->skills = $_POST["skills"];
             $employee->contact = $_POST["linkedin"];
-            $employee->contact = $_POST["linkedin"];
             if ($_POST["darf"] == 1) {
                 $employee->status = 2;
             } else {
@@ -301,7 +300,7 @@ class EmployeeController extends Controller
                 $user->createDateTime = new Expression('NOW()');
                 $user->updateDateTime = new Expression('NOW()');
                 if ($user->save(false)) {
-                    // สำเร็จทั้ง employee และ user
+                    // UserRole
                     $role = new UserRole();
                     $role->userId = $user->userId;
                     $role->roleId = $_POST["role"];
@@ -310,6 +309,7 @@ class EmployeeController extends Controller
                     $role->updateDateTime = new Expression('NOW()');
                     $role->save(false); // ✅ สำคัญ!
 
+                    // UserAccess
                     if (!empty($_POST["moduleId"]) && is_array($_POST["moduleId"])) {
                         foreach ($_POST["moduleId"] as $moduleId) {
                             $access = new UserAccess();
@@ -322,8 +322,8 @@ class EmployeeController extends Controller
                         }
                     }
 
+                    // certificateData
                     $certificates = json_decode($_POST['certificateData'], true);
-
                     if ($certificates && is_array($certificates)) {
                         foreach ($certificates as $cert) {
                             $tmpId = $cert['id']; // เช่น 1749180178186
@@ -387,11 +387,11 @@ class EmployeeController extends Controller
                         }
                     }
 
+                    // UserLanguage
                     // 1. เตรียมภาษาและระดับที่จับคู่กัน
                     $languages = [
                         ['language' => $_POST['mainLanguage'], 'level' => $_POST['lavelLanguage']],
                     ];
-
                     // 2. เพิ่มข้อมูลภาษาและระดับอื่น ๆ ถ้ามี
                     for ($i = 1; $i <= 3; $i++) {
                         if (!empty($_POST["mainLanguage$i"]) && !empty($_POST["lavelLanguage$i"])) {
@@ -401,7 +401,6 @@ class EmployeeController extends Controller
                             ];
                         }
                     }
-
                     // 3. วนลูปบันทึก
                     foreach ($languages as $lang) {
                         $userLang = new UserLanguage();
@@ -625,6 +624,7 @@ class EmployeeController extends Controller
 
         return $this->render('create', [
             "groupId" => $groupId,
+            "employeeId" => $employeeId,
             "countries" => $countries,
             "companies" => $companies,
             "titles" => $titles,
@@ -766,106 +766,253 @@ class EmployeeController extends Controller
         // ]);
     }
     public function actionSaveUpdateEmployee()
-    {
-        if (isset($_POST["firstName"]) && trim($_POST["firstName"] != '')) {
-            // throw new exception(print_r(Yii::$app->request->post(), true));
-            $employee = Employee::find()->where(["employeeId" => $_POST['eId']])->one();
-            $oldPicture = $employee->picture;
-            $oldResume = $employee->resume;
-            $oldAgreement = $employee->employeeAgreement;
-            $employee->employeeFirstname = $_POST["firstName"];
-            $employee->employeeSurename = $_POST["lastName"];
-            $employee->employeeNumber = $_POST["employeeNumber"];
-            $employee->joinDate = $_POST["joinDate"];
-            $employee->birthDate = $_POST["birthDate"];
-            $employee->hireDate = $_POST["joinDate"];
-            $employee->nationalityId = $_POST["nationality"];
-            $employee->address1 = $_POST["address1"];
-            $employee->countryId = $_POST["country"];
-            $employee->gender = $_POST["gender"];
-            $employee->telephoneNumber = $_POST["telephoneNumber"];
-            $employee->emergencyTel = $_POST["emergencyTel"];
-            $employee->companyEmail = $_POST["companyEmail"];
-            $employee->email = $_POST["companyEmail"];
-            $employee->companyId = $_POST["company"];
-            $employee->branchId = $_POST["branch"];
-            $employee->departmentId = $_POST["department"];
-            $employee->teamId = $_POST["team"];
-            $employee->teamPositionId = $_POST["teamPosition"];
-            $employee->titleId = $_POST["title"];
-            //$employee->workingTime = $_POST["workTime"];
-            $employee->employeeConditionId = $_POST["condition"];
-            $employee->spoken = $_POST["language"];
-            //$employee->socialLink = $_POST["socialLink"];
-            $pictureProfile = UploadedFile::getInstanceByName("picture");
-            if (isset($pictureProfile) && !empty($pictureProfile)) {
+    {            
 
-                $path = Path::getHost() . 'images/employee/profile/';
-                if (!file_exists($path)) {
-                    mkdir($path, 0777, true);
-                }
-                $oldProfilePic = Path::getHost() . $oldPicture;
-                if (file_exists($oldProfilePic) && $oldProfilePic != '' && $oldPicture != '') {
-                    unlink($oldProfilePic);
-                }
-                $file = $pictureProfile->name;
-                $filenameArray = explode('.', $file);
-                $countArrayFile = count($filenameArray);
-                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
-                $pathSave = $path . $fileName;
-                $pictureProfile->saveAs($pathSave);
-                $employee->picture = 'images/employee/profile/' . $fileName;
-            }
-            $fileResume = UploadedFile::getInstanceByName("resume");
-            if (isset($fileResume) && !empty($fileResume)) {
-                $path = Path::getHost() . 'files/resume/';
-                if (!file_exists($path)) {
-                    mkdir($path, 0777, true);
-                }
-                $oldResu = Path::getHost() . $oldResume;
-                if (file_exists($oldResu) && $oldResume != '') {
-                    unlink($oldResu);
-                }
-                $file = $fileResume->name;
-                $filenameArray = explode('.', $file);
-                $countArrayFile = count($filenameArray);
-                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
-                $pathSave = $path . $fileName;
-                $fileResume->saveAs($pathSave);
-                $employee->resume = 'files/resume/' . $fileName;
-            }
-            $fileAgreement = UploadedFile::getInstanceByName("agreement");
-            if (isset($fileAgreement) && !empty($fileAgreement)) {
-                //throw new exception("1111");
-                $path = Path::getHost() . 'files/agreement/';
-                if (!file_exists($path)) {
-                    mkdir($path, 0777, true);
-                }
-                $oldAgree = Path::getHost() . $oldAgreement;
-                if (file_exists($oldAgree)) {
-                    unlink($oldAgree);
-                }
-                $file = $fileAgreement->name;
-                $filenameArray = explode('.', $file);
-                $countArrayFile = count($filenameArray);
-                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
-                $pathSave = $path . $fileName;
-                $fileAgreement->saveAs($pathSave);
-                $employee->employeeAgreement = 'files/agreement/' . $fileName;
-            }
+        throw new exception(print_r(Yii::$app->request->post(), true));
 
-            $employee->remark = $_POST["remark"];
-            $employee->status =  $_POST["status"];
-            $employee->updateDateTime = new Expression('NOW()');
-            if ($employee->save(false)) {
-                $employeeId = $_POST["eId"];
-                $this->saveEmployeeStatus($employeeId, $_POST["status"]);
-                $userId = $this->createUser($employeeId, $_POST["companyEmail"]);
-                if (isset($_POST["role"]) && count($_POST["role"]) > 0) {
-                    $this->saveRole($_POST["role"], $userId);
+        if (isset($_POST["employeeFirstname"]) && trim($_POST["employeeSurename"] != '')) {
+           $userId=  $_POST["userId"];
+           $employee = Employee::find()->where(["employeeId" => $_POST["emId"]])->one();
+            if ($employee) {
+                $oldPicture = $employee->picture;
+                $oldResume = $employee->resume;
+                $oldAgreement = $employee->employeeAgreement;
+                $employee->employeeConditionId = $_POST["status"];
+                $employee->employeeNumber = $_POST["employeeId"];
+                $employee->defaultLanguage = $_POST["defaultLanguage"];
+                $employee->salutation = $_POST["salutation"];
+                $employee->gender = $_POST["gender"];
+                $employee->employeeFirstname = $_POST["employeeFirstname"];
+                $employee->employeeSurename = $_POST["employeeSurename"];
+                $employee->nationalityId = $_POST["nationalityId"];
+                $employee->telephoneNumber = $_POST["telephoneNumber"];
+                $employee->emergencyTel = $_POST["emergencyTel"];
+                $employee->address1 = $_POST["address1"];
+                $employee->email = $_POST["email"];
+                $employee->maritalStatus = $_POST["maritalStatus"];
+                $employee->birthDate = date("Y-m-d", strtotime($_POST["birthDate"]));
+                $employee->companyId = $_POST["companyId"];
+                $employee->branchId = $_POST["branchId"];
+                $employee->departmentId = $_POST["departmentId"];
+                $employee->teamId = $_POST["teamId"];
+                $employee->companyEmail = $_POST["companyEmail"];
+                $employee->hireDate = date("Y-m-d", strtotime($_POST["hiringDate"]));
+                $employee->probationStatus = $_POST["overrideProbationEmployee"];
+                $employee->probationStart = date("Y-m-d", strtotime($_POST["fromDate"]));
+                $employee->probationEnd = date("Y-m-d", strtotime($_POST["toDate"]));
+                $employee->titleId = $_POST["titleId"];
+                $employee->remark = $_POST["remark"];
+                $employee->skills = $_POST["skills"];
+                $employee->contact = $_POST["linkedin"];
+                $employee->status = ($_POST["darf"] == 1) ? 2 : 100;
+                $employee->updateDateTime = new Expression('NOW()');
+
+                $pictureProfile = UploadedFile::getInstanceByName("image");
+                if (isset($pictureProfile) && !empty($pictureProfile)) {
+
+                    $path = Path::getHost() . 'images/employee/profile/';
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
+                    $oldProfilePic = Path::getHost() . $oldPicture;
+                    if (file_exists($oldProfilePic) && $oldProfilePic != '' && $oldPicture != '') {
+                        unlink($oldProfilePic);
+                    }
+                    $file = $pictureProfile->name;
+                    $filenameArray = explode('.', $file);
+                    $countArrayFile = count($filenameArray);
+                    $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+                    $pathSave = $path . $fileName;
+                    $pictureProfile->saveAs($pathSave);
+                    $employee->picture = 'images/employee/profile/' . $fileName;
                 }
-                return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-profile/' . ModelMaster::encodeParams(["employeeId" => $employeeId]));
+
+                $fileResume = UploadedFile::getInstanceByName("resume");
+                if (isset($fileResume) && !empty($fileResume)) {
+                    $path = Path::getHost() . 'files/resume/';
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
+                    $oldResu = Path::getHost() . $oldResume;
+                    if (file_exists($oldResu) && $oldResume != '') {
+                        unlink($oldResu);
+                    }
+                    $file = $fileResume->name;
+                    $filenameArray = explode('.', $file);
+                    $countArrayFile = count($filenameArray);
+                    $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+                    $pathSave = $path . $fileName;
+                    $fileResume->saveAs($pathSave);
+                    $employee->resume = 'files/resume/' . $fileName;
+                }
+                throw new exception(print_r($fileResume, true));
+
+                $fileAgreement = UploadedFile::getInstanceByName("agreement");
+                if (isset($fileAgreement) && !empty($fileAgreement)) {
+                    //throw new exception("1111");
+                    $path = Path::getHost() . 'files/agreement/';
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
+                    $oldAgree = Path::getHost() . $oldAgreement;
+                    if (file_exists($oldAgree)) {
+                        unlink($oldAgree);
+                    }
+                    $file = $fileAgreement->name;
+                    $filenameArray = explode('.', $file);
+                    $countArrayFile = count($filenameArray);
+                    $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+                    $pathSave = $path . $fileName;
+                    $fileAgreement->saveAs($pathSave);
+                    $employee->employeeAgreement = 'files/agreement/' . $fileName;
+                }
+                // throw new exception(print_r($fileAgreement, true));
+
+                if ($employee->save(false)) {
+                    $user = User::find()->where(["employeeId" => $_POST["emId"]])->one();
+                    if (!$user) {
+                        $user = new User();
+                        $user->employeeId = $employee->employeeId;
+                        $user->createDateTime = new Expression('NOW()'); // แค่ตอนสร้างใหม่
+                    }
+                    $user->username = $_POST["mailId"];
+                    if (!Yii::$app->security->validatePassword($_POST["password"], $user->password_hash)) {
+                        if($_POST["password"] != $user->password_hash ){
+                            $user->password_hash = Yii::$app->security->generatePasswordHash($_POST["password"]);
+                        }
+                    }
+                    $user->updateDateTime = new Expression('NOW()');
+                    
+                    if ($user->save(false)) {
+                        // UserRole
+                        $role = UserRole::find()->where(['userId' => $_POST["userId"]])->one();
+                        if (!$role) {
+                            $role = new UserRole();
+                            $role->userId = $user->userId;
+                            $role->createDateTime = new Expression('NOW()'); // เฉพาะตอนสร้าง
+                        }
+                        // อัปเดตค่าที่จำเป็น
+                        $role->roleId = $_POST["role"];
+                        $role->updateDateTime = new Expression('NOW()');
+                        $role->save(false); // ✅ บันทึกโดยไม่เช็ค validation
+
+                        // ลบ access เดิมทั้งหมดของ user
+                        UserAccess::deleteAll(['userId' => $user->userId]);
+                        // UserAccess::updateAll(["status" => 99],["userId" => $userId]);
+                        if (!empty($_POST["moduleId"]) && is_array($_POST["moduleId"])) {
+                            foreach ($_POST["moduleId"] as $moduleId) {
+                                $access = new UserAccess();
+                                $access->userId = $user->userId;
+                                $access->moduleId = $moduleId;
+                                $access->status = 1;
+                                $access->createDateTime = new Expression('NOW()');
+                                $access->updateDateTime = new Expression('NOW()');
+                                $access->save(false); // ✅
+                            }
+                        }
+
+                        // certificateData
+                        $certificates = json_decode($_POST['certificateData'], true);
+                        if ($certificates && is_array($certificates)) {
+                            foreach ($certificates as $cert) {
+                                $tmpId = $cert['id']; // เช่น 1749180178186
+                                $cerName = $cert['cerName'] ?? null;
+                                $issuing = $cert['issuingName'] ?? null;
+                                $fromDate = ($cert['fromCerDate'] == 'No expiry date') ? null : date('Y-m-d', strtotime($cert['fromCerDate']));
+                                $toDate = ($cert['toCerDate']) ? date('Y-m-d', strtotime($cert['toCerDate'])) : null;
+                                $credential = $cert['credential'] ?? null;
+                                $noExpiry = !empty($cert['noExpiry']) ? 1 : 0;
+
+                                $certificatePath = null;
+                                $cerImagePath = null;
+
+                                // 📎 อัปโหลด certificate file
+                                $fileKey = "certificateHidden_{$tmpId}_0";
+                                if (isset($_FILES[$fileKey]) && $_FILES[$fileKey]['error'] === 0) {
+                                    $file = $_FILES[$fileKey];
+                                    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+                                    $fileName = Yii::$app->security->generateRandomString(12) . '.' . $ext;
+                                    $path = Path::getHost() . 'files/certificate/';
+                                    if (!file_exists($path)) {
+                                        mkdir($path, 0777, true);
+                                    }
+                                    move_uploaded_file($file['tmp_name'], $path . $fileName);
+                                    $certificatePath = 'files/certificate/' . $fileName;
+                                }
+
+                                // 🖼️ อัปโหลด cerImage
+                                $imageKey = "cerImageHidden_{$tmpId}";
+                                if (isset($_FILES[$imageKey]) && $_FILES[$imageKey]['error'] === 0) {
+                                    $img = $_FILES[$imageKey];
+                                    $ext = pathinfo($img['name'], PATHINFO_EXTENSION);
+                                    $imgName = Yii::$app->security->generateRandomString(12) . '.' . $ext;
+                                    $path = Path::getHost() . 'images/certificate/';
+                                    if (!file_exists($path)) {
+                                        mkdir($path, 0777, true);
+                                    }
+                                    move_uploaded_file($img['tmp_name'], $path . $imgName);
+                                    $cerImagePath = 'images/certificate/' . $imgName;
+                                }
+
+                                // 🔁 บันทึกข้อมูล (Insert ใหม่ หรือ Update ก็ได้)
+                                $certificate = Certificate::findOne(['cerId' => $tmpId]);
+                                if (!$certificate) {
+                                    $certificate = new Certificate();
+                                    $certificate->cerId = $tmpId; // กำหนดเฉพาะตอน insert ใหม่
+                                    $certificate->createDateTime = new \yii\db\Expression('NOW()');
+                                }
+                                // กำหนดค่าทั่วไป
+                                $certificate->cerName = $cerName;
+                                $certificate->issuing = $issuing;
+                                $certificate->fromCerDate = $fromDate;
+                                $certificate->toCerDate = $toDate;
+                                $certificate->credential = $credential;
+                                $certificate->noExpiry = $noExpiry;
+                                $certificate->userId = $userId;
+                                if ($certificatePath) {
+                                    $certificate->certificate = $certificatePath;
+                                }
+                                if ($cerImagePath) {
+                                    $certificate->cerImage = $cerImagePath;
+                                }
+                                $certificate->updateDateTime = new \yii\db\Expression('NOW()');
+                                $certificate->save(false); // ✅ บันทึก
+
+                            }
+                        }
+
+                        // UserLanguage
+                        // 1. เตรียมภาษาและระดับที่จับคู่กัน
+                        $languages = [
+                            ['language' => $_POST['mainLanguage'], 'level' => $_POST['lavelLanguage']],
+                        ];
+                        // 2. เพิ่มข้อมูลภาษาและระดับอื่น ๆ ถ้ามี
+                        for ($i = 1; $i <= 3; $i++) {
+                            if (!empty($_POST["mainLanguage$i"]) && !empty($_POST["lavelLanguage$i"])) {
+                                $languages[] = [
+                                    'language' => $_POST["mainLanguage$i"],
+                                    'level' => $_POST["lavelLanguage$i"]
+                                ];
+                            }
+                        }
+                        // 3. วนลูปบันทึก
+                        UserLanguage::deleteAll(['userId' => $userId]);
+
+                        foreach ($languages as $lang) {
+                            $userLang = new UserLanguage();
+                            $userLang->userId = $userId;
+                            $userLang->languageId = $lang['language'];
+                            $userLang->lavel = $lang['level'];
+                            $userLang->createDateTime = new \yii\db\Expression('NOW()');
+                            $userLang->updateDateTime = new \yii\db\Expression('NOW()');
+                            $userLang->save(false);
+                        }
+
+                    } 
+                }
+
             }
+            
         }
     }
     public function actionFilterEmployee()
@@ -967,13 +1114,24 @@ class EmployeeController extends Controller
     }
 
 
-    public function actionDeleteEmployee()
+    public function actionDeleteEmployee($hash)
     {
-        User::updateAll(["status" => 99], ["employeeId" => $_POST["employeeId"]]);
-        Employee::updateAll(["status" => 99], ["employeeId" => $_POST["employeeId"]]);
-        $res["status"] = true;
-        return json_encode($res);
+        $param = ModelMaster::decodeParams($hash);
+        $employeeId = $param["employeeId"];;
+        $userId = $param["userId"];
+        // throw new Exception(print_r($userId, true));
+
+        Employee::updateAll(["status" => 99], ["employeeId" => $employeeId]);
+        User::updateAll(["status" => 99], ["employeeId" => $employeeId]);
+        UserRole::updateAll(["status" => 99],["userId" => $userId]);
+        UserAccess::updateAll(["status" => 99],["userId" => $userId]);
+
+        return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
+
+        // $res["status"] = true;
+        // return json_encode($res);
     }
+    
     // public function actionImport()
     // {
     //     $error = [];
