@@ -53,10 +53,11 @@ class EmployeeController extends Controller
 	public function actionAllEmployeeDetail($companyId)
 	{
 		$employee = Employee::find()
-			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,c.city,
+			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,c.city,b.branchName,
 			condition.employeeConditionName,s.statusName,na.nationalityName,d.departmentName,d.departmentId,te.teamId,te.teamName,c.picture as cPicture')
 			->JOIN("LEFT JOIN", "company c", "c.companyId=employee.companyId")
 			->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
+			->JOIN("LEFT JOIN", "branch b", "b.branchId=employee.branchId")
 			->JOIN("LEFT JOIN", "department d", "d.departmentId=employee.departmentId")
 			->JOIN("LEFT JOIN", "team te", "te.teamId=employee.teamId")
 			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
@@ -95,7 +96,8 @@ class EmployeeController extends Controller
 					"companyName" => $em["companyName"],
 					"companyPicture" => Company::companyPicture($em["cPicture"]),
 					"city" => $em["city"],
-					"countryName" => $em["countryName"]
+					"countryName" => $em["countryName"],
+					"branchName" => $em["branchName"]
 				];
 			endforeach;
 		}
@@ -105,10 +107,11 @@ class EmployeeController extends Controller
 	public function actionEmployeeFilter($companyId, $branchId, $departmentId, $teamId, $status)
 	{
 		$employee = Employee::find()
-			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,c.city,
+			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,c.city,b.branchName,
 			condition.employeeConditionName,s.statusName,na.nationalityName,d.departmentName,d.departmentId,te.teamId,te.teamName,c.picture as cPicture')
 			->JOIN("LEFT JOIN", "company c", "c.companyId=employee.companyId")
 			->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
+			->JOIN("LEFT JOIN", "branch b", "b.branchId=employee.branchId")
 			->JOIN("LEFT JOIN", "department d", "d.departmentId=employee.departmentId")
 			->JOIN("LEFT JOIN", "team te", "te.teamId=employee.teamId")
 			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
@@ -149,7 +152,8 @@ class EmployeeController extends Controller
 					"companyName" => $em["companyName"],
 					"companyPicture" => Company::companyPicture($em["cPicture"]),
 					"city" => $em["city"],
-					"countryName" => $em["countryName"]
+					"countryName" => $em["countryName"],
+					"branchName" => $em["branchName"]
 
 				];
 			endforeach;

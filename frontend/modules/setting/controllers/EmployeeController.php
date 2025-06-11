@@ -125,6 +125,29 @@ class EmployeeController extends Controller
             "companies" => $companies
         ]);
     }
+    public function actionEmployeeList()
+    {
+
+        $groupId = Group::currentGroupId();
+        if ($groupId == null) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+        }
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/all-employee-detail?companyId=');
+        $employees = curl_exec($api);
+        $employees = json_decode($employees, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        $companies = curl_exec($api);
+        $companies = json_decode($companies, true);
+        curl_close($api);
+        return $this->render('index_list', [
+            "employees" => $employees,
+            "companies" => $companies
+        ]);
+    }
     public function actionCreate()
     {
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
