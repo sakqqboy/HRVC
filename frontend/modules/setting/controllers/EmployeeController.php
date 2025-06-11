@@ -791,7 +791,7 @@ class EmployeeController extends Controller
     public function actionSaveUpdateEmployee()
     {
 
-        throw new exception(print_r(Yii::$app->request->post(), true));
+        // throw new exception(print_r(Yii::$app->request->post(), true));
 
         if (isset($_POST["employeeFirstname"]) && trim($_POST["employeeSurename"] != '')) {
             $userId =  $_POST["userId"];
@@ -868,7 +868,7 @@ class EmployeeController extends Controller
                     $fileResume->saveAs($pathSave);
                     $employee->resume = 'files/resume/' . $fileName;
                 }
-                throw new exception(print_r($fileResume, true));
+                // throw new exception(print_r($file, true));
 
                 $fileAgreement = UploadedFile::getInstanceByName("agreement");
                 if (isset($fileAgreement) && !empty($fileAgreement)) {
@@ -887,9 +887,9 @@ class EmployeeController extends Controller
                     $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
                     $pathSave = $path . $fileName;
                     $fileAgreement->saveAs($pathSave);
-                    $employee->employeeAgreement = 'files/agreement/' . $fileName;
+                    $employee->employeeAgreement = 'files/agreement/' . $file;
+                    // throw new exception(print_r($employee->employeeAgreement, true));
                 }
-                // throw new exception(print_r($fileAgreement, true));
 
                 if ($employee->save(false)) {
                     $user = User::find()->where(["employeeId" => $_POST["emId"]])->one();
@@ -905,7 +905,6 @@ class EmployeeController extends Controller
                         }
                     }
                     $user->updateDateTime = new Expression('NOW()');
-
                     if ($user->save(false)) {
                         // UserRole
                         $role = UserRole::find()->where(['userId' => $_POST["userId"]])->one();
@@ -937,6 +936,7 @@ class EmployeeController extends Controller
                         // certificateData
                         $certificates = json_decode($_POST['certificateData'], true);
                         if ($certificates && is_array($certificates)) {
+                            
                             foreach ($certificates as $cert) {
                                 $tmpId = $cert['id']; // เช่น 1749180178186
                                 $cerName = $cert['cerName'] ?? null;
@@ -976,7 +976,6 @@ class EmployeeController extends Controller
                                     move_uploaded_file($img['tmp_name'], $path . $imgName);
                                     $cerImagePath = 'images/certificate/' . $imgName;
                                 }
-
                                 // 🔁 บันทึกข้อมูล (Insert ใหม่ หรือ Update ก็ได้)
                                 $certificate = Certificate::findOne(['cerId' => $tmpId]);
                                 if (!$certificate) {
@@ -984,6 +983,7 @@ class EmployeeController extends Controller
                                     $certificate->cerId = $tmpId; // กำหนดเฉพาะตอน insert ใหม่
                                     $certificate->createDateTime = new \yii\db\Expression('NOW()');
                                 }
+
                                 // กำหนดค่าทั่วไป
                                 $certificate->cerName = $cerName;
                                 $certificate->issuing = $issuing;
@@ -999,6 +999,8 @@ class EmployeeController extends Controller
                                     $certificate->cerImage = $cerImagePath;
                                 }
                                 $certificate->updateDateTime = new \yii\db\Expression('NOW()');
+                                // throw new exception(print_r( $certificate->cerName, true));
+
                                 $certificate->save(false); // ✅ บันทึก
 
                             }
