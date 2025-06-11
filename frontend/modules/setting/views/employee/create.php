@@ -1022,8 +1022,6 @@ $LanguageId = '';
                                             <?php
                                             }
                                             ?>
-
-
                                         </div>
                                         <input id="agreement" style="display:none;" type="file" name="agreement"
                                             onchange="javascript:checkUploadFile(2)">
@@ -1750,6 +1748,9 @@ $LanguageId = '';
             credential: credential,
             noExpiry: noExpiry
         };
+
+        // console.log(certificates);
+        document.getElementById('certificateDataHidden').value = JSON.stringify(certificates);
 
         renderScheduleList();
         clearForm();

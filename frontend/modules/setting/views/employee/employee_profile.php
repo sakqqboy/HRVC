@@ -4,171 +4,126 @@ use common\models\ModelMaster;
 
 $this->title = 'view';
 ?>
+<style>
+.menu-item {
+    padding: 10px 15px;
+    transition: background-color 0.2s;
+}
 
-<div class="col-12 mt-90">
-	<div class="col-12 view-goback">
-		<a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $employee['companyId']]) ?>" class="no-underline-black">
-			<i class="fa fa-caret-left font-size-22" aria-hidden="true"></i> &nbsp;Go Back
-		</a>
-	</div>
-	<div class="alert alert-goback">
-		<div class="col-12">
-			<div class="alert alert-light mr-10 ml-10" style="border: none;">
-				<div class="row">
-					<div class="col-lg-2 col-md-6 col-12">
-						<?php
-						if ($employee['picture'] == '') {
-							if ($employee['gender'] == 1) {
-								$picture = 'image/user.png';
-							} else {
-								$picture = 'image/lady.jpg';
-							}
-						?>
+.menu-item:hover {
+    background-color: #e0f0ff;
+}
 
-							<img src="<?= Yii::$app->homeUrl . $picture ?>" class="imageView">
-						<?php
-						} else { ?>
-							<img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>" class="imageView">
-						<?php
-						}
-						?>
+.active-menu {
+    color: var(--Primary-Blue---HRVC, #2580D3);
+    font-weight: bold;
+    border-right: 5px solid var(--Primary-Blue---HRVC, #2580D3);
+    border-radius: 0;
+    background-color: transparent;
+    /* ไม่ต้องเปลี่ยนพื้นหลัง */
+}
+</style>
 
-					</div>
-					<div class="col-lg-10 col-md-6 col-12">
-						<div class="con-12 mt-30">
-							<span class="name-Tadawoki"><?= $employee['employeeFirstname'] ?>&nbsp;&nbsp;&nbsp;<?= $employee['employeeSurename'] ?></span>
-							<?php
-							if ($employee["statusName"] == "Active") {
-								$text = "success";
-							} else {
-								$text = "danger";
-							}
-							?>
-							<span class="badge bg-<?= $text ?> font-size-14 ml-20"><?= $employee["statusName"] ?></span>
-						</div>
-						<div class="row">
-							<div class="col-lg-6 col-lg-6 col-12">
-								<div class="col-12 pt-10 Director-view">
-									<?= $employee["titleName"] ?>, <?= $employee["countryName"] ?>
-								</div>
-								<div class="col-12 pt-20 font-size-14">
-									<i class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp; <span class="text-dark"> Joined on </span><strong> <?= ModelMaster::dateNumberDash($employee['joinDate']) ?></strong>
-									<span class="view-solid"></span> <i class="fa fa-birthday-cake pl-10" aria-hidden="true"></i> <span class="text-dark"> Age</span><strong> <?= $employee['age'] ?></strong>
-									<span class="badge bg-secondary ml-10"> <?= $employee['employeeConditionName'] ?></span>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-12 text-end">
-								<div class="col-12 pt-10">
-									Working Place
-								</div>
-								<div class="col-12 pt-10 font-size-14 font-b">
-									<img src="<?= Yii::$app->homeUrl ?><?= $employee["flag"] ?>" class="bd"> <?= $employee["companyName"] ?>, <?= $employee["countryName"] ?>
-								</div>
-							</div>
-						</div>
-						<div class="row mt-20">
-							<div class="col-lg-12 col-md-6 col-12">
-								<div class="row">
-									<div class="col-3"></div>
-									<div class="col-2 font-size-14 share-pointer">
-										<!-- <i class="fa fa-share-alt" aria-hidden="true"></i> Share Profile -->
-									</div>
-									<div class="col-1 font-size-14 share-pointer">
-										<a href="<?= Yii::$app->homeUrl ?>setting/employee/export-employee/<?= ModelMaster::encodeParams(["employeeId" => $employee["employeeId"]]) ?>" target="_blank" style="text-decoration:none;">
-											<i class="fa fa-print" aria-hidden="true"></i> Print
-										</a>
-									</div>
-									<div class="col-2 font-size-14 share-pointer">
-										<?php
-										if ($employee['resume'] != '') { ?>
-											<a href="<?= Yii::$app->homeUrl . $employee['resume'] ?>" target="_blank" style="text-decoration:none;">
-												<i class="fa fa-cloud-download" aria-hidden="true"></i> Download CV
-											</a>
-										<?php
-										} else { ?>
-											<a href="#" target="_blank" style="text-decoration:none;">
-												<i class="fa fa-cloud-download" aria-hidden="true"></i> Download CV
-											</a>
-										<?php
-										}
-										?>
-									</div>
-									<div class="col-3 font-size-14 share-pointer text-center">
+<div class="contrainer-body mt-10">
 
-										<?php
-										if ($employee['employeeAgreement'] != '') { ?>
-											<a href="<?= Yii::$app->homeUrl . $employee['employeeAgreement'] ?>" target="_blank" style="text-decoration:none;">
-												<i class="fa fa-cloud-download" aria-hidden="true"></i> Download Agreement
-											</a>
-										<?php
-										} else { ?>
-											<a href="<?= Yii::$app->homeUrl . $employee['employeeAgreement'] ?>" target="_blank" style="text-decoration:none;">
-												<i class="fa fa-cloud-download" aria-hidden="true"></i> Download Agreement
-											</a>
-										<?php
-										}
-										?>
+    <div class="between-center mt-20" style="width: 100%;">
+        <div class="col-8">
+            <div class=" d-flex align-items-center gap-2">
+                <a href="javascript:history.back()" style="text-decoration: none; width:66px; height:26px;"
+                    class="btn-create-branch">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg"
+                        style="width:18px; height:18px; margin-top:-3px;">
+                    Back
+                </a>
+                <div class="pim-name-title ml-10">
+                    <?= Yii::t('app', 'Employee in Details') ?>
+                </div>
+            </div>
+        </div>
+        <div class="col-3" style="text-align: right;">
 
-									</div>
-									<div class="col-1 font-size-14 share-pointer">
-										<a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employee['employeeId']]) ?>" style="text-decoration:none;">
-											<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row pr-20">
-				<div class="col-lg-3 col-md-6 col-12">
-					<div class="alert crd-background">
-						<div class="col-12">
-							<div class="col-12 mr-20 ml-20 font-size-28 font-b pt-20">
-								Employee
-								Information
-							</div>
-							<div class="pt-30">
-								<div class="nav flex-column nav-tabs" id="v-tabs-tab" role="tablist" aria-orientation="vertical">
-									<a href="javascript:showEmployeeView(1)" class="link-2 font-b" id="link1">Personal & Contact Details</a>
-									<a href="javascript:showEmployeeView(2)" class="link-2" id="link2">Work Information</a>
-									<a href="javascript:showEmployeeView(3)" class="link-2" id="link3">Attachments</a>
-									<?php
-									if (isset($canUseSalary) && $canUseSalary == 1) {
-									?>
-										<a href="javascript:showEmployeeView(4)" class="link-2" id="link4">Salary & Allowance</a>
-										<a href="javascript:showEmployeeView(5)" class="link-2" id="link5">Evaluation</a>
-									<?php
-									}
-									?>
-									<input type="hidden" value="1" id="currentShow">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-9 col-md-6 col-12" id='show1' style="background-color: white;">
-					<?= $this->render('personal', ["employee" => $employee]) ?>
-				</div>
+        </div>
+        <div class="col-1 pr-0 text-end">
+            <button type="button" class="btn-create" style="padding: 3px 9px;"
+                action="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => '']) ?>">
+                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/edit.svg"
+                    style="width:18px; height:18px; margin-top:-3px;">
+                Edit
+            </button>
+        </div>
+    </div>
 
-				<div class="col-lg-9 col-md-6 col-12" id='show2' style="background-color: white;display:none;">
-					<?= $this->render('work_info', ["employee" => $employee]) ?>
-				</div>
-				<div class="col-lg-9 col-md-6 col-12" id='show3' style="background-color: white;display:none;">
-					<?= $this->render('attachments', [
-						"resume" => $employee["resume"],
-						"agreement" => $employee["employeeAgreement"],
-						"updateDateTime" => ModelMaster::dateNumberDash($employee["updateDateTime"])
-					]) ?>
-				</div>
-				<div class="col-lg-9 col-md-6 col-12" id='show4' style="background-color: white;display:none;">
-					<?= $this->render('salary') ?>
-				</div>
-				<div class="col-lg-9 col-md-6 col-12" id='show5' style="background-color: white;display:none;">
-					<?= $this->render('evaluation') ?>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-3 company-group-edit mt-10" style="border-radius: 9.17px 0px 0px 9.17px;
+		border: 0.5px solid var(--Stroke-Bluish-Gray, #BBCDDE);
+		background: #F9FCFF;">
+            <div class="mid-center mt-53" style="gap: 35px;">
+                <div class="text-center position-relative ">
+                    <img src="/HRVC/frontend/web/images/employee/profile/AE5oEMwTio.jpg"
+                        class="profile-picture rounded-circle mb-3" alt="User Avatar"
+                        style="width: 150px; height: 150px;">
+                    <span class="condition-name badge position-absolute bottom-0 start-50 translate-middle-x">
+                        Full-Time
+                    </span>
+                </div>
+
+                <div class="row text-center">
+                    <span class="font-size-22 font-weight-600">
+                        Mr. Dibbo Dutta
+                    </span>
+                    <span class="font-size-16 font-weight-400">
+                        Marketing Manager
+                    </span>
+                </div>
+            </div>
+            <!-- //ปุ่มกดเมนู -->
+            <div id="menu-profile" class="text-end mt-70">
+                <div class="menu-item font-size-16 font-weight-400" data-target="contact">Contact & Personal Details
+                </div>
+                <div class="menu-item font-size-16 font-weight-400" data-target="work">Work Details</div>
+                <div class="menu-item font-size-16 font-weight-400" data-target="attachments">Attachments & Remarks
+                </div>
+                <div class="menu-item font-size-16 font-weight-400" data-target="certificates">Certificates and Skill
+                    Tags</div>
+                <div class="menu-item font-size-16 font-weight-400" data-target="performance">Performance</div>
+                <div class="menu-item font-size-16 font-weight-400" data-target="evaluation">Evaluation</div>
+                <div class="menu-item font-size-16 font-weight-400" data-target="salary">Salary & Allowance</div>
+                <div class="menu-item font-size-16 font-weight-400" data-target="role">Role & Permission</div>
+            </div>
+
+        </div>
+        <div class="col-9 company-group-edit mt-10" style="border-radius: 0px 10px 10px 0px;
+		border: 0.5px solid var(--Stroke-Bluish-Gray, #BBCDDE);
+		background: #FFF;" id="menu-profile-detail">
+            <!-- //แสดงผลข้อมูล ตามเมนูที่กด -->
+        </div>
+    </div>
 </div>
+
+<script>
+const menuItems = document.querySelectorAll('.menu-item');
+const detailBox = document.getElementById('menu-profile-detail');
+
+const contentMap = {
+    contact: '<h4>Contact & Personal Details</h4><p>ข้อมูลติดต่อและส่วนตัว</p>',
+    work: '<h4>Work Details</h4><p>รายละเอียดการทำงาน</p>',
+    attachments: '<h4>Attachments & Remarks</h4><p>ไฟล์แนบและหมายเหตุ</p>',
+    certificates: '<h4>Certificates and Skill Tags</h4><p>ใบรับรองและทักษะ</p>',
+    performance: '<h4>Performance</h4><p>ผลการปฏิบัติงาน</p>',
+    evaluation: '<h4>Evaluation</h4><p>การประเมิน</p>',
+    salary: '<h4>Salary & Allowance</h4><p>เงินเดือนและเบี้ยเลี้ยง</p>',
+    role: '<h4>Role & Permission</h4><p>สิทธิ์และบทบาท</p>',
+};
+
+menuItems.forEach(item => {
+    item.style.cursor = 'pointer';
+    item.addEventListener('click', () => {
+        const target = item.getAttribute('data-target');
+        detailBox.innerHTML = contentMap[target] || '<p>ไม่พบเนื้อหา</p>';
+
+        // highlight เมนูที่เลือก
+        menuItems.forEach(i => i.classList.remove('active-menu'));
+        item.classList.add('active-menu');
+    });
+});
+</script>
