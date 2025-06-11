@@ -1315,8 +1315,8 @@ $LanguageId = '';
             </div>
         </div>
     </div>
-    <input type="hidden" id="emId" name="emId" value="<?=$employeeId?>">
-    <input type="hidden" id="userId" name="userId" value="<?=$userId?>">
+    <input type="hidden" id="emId" name="emId" value="<?= isset($employeeId) ? $employeeId : '' ?>">
+    <input type="hidden" id="userId" name="userId" value="<?= isset($userId) ? $userId : '' ?>">
 
     <input type="hidden" id="certificateDataHidden" name="certificateData">
     <input type="hidden" id="cerDate" name="cerDate" value="0">
