@@ -914,7 +914,7 @@ class EmployeeController extends Controller
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-filter?companyId=' . $companyId.'&&branchId='.$branchId.'&&departmentId='.$departmentId.'&&teamId='.$teamId.'&&status='.$status);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-filter?companyId=' . $companyId . '&&branchId=' . $branchId . '&&departmentId=' . $departmentId . '&&teamId=' . $teamId . '&&status=' . $status);
         $employees = curl_exec($api);
         $employees = json_decode($employees, true);
 

@@ -64,10 +64,12 @@ class EmployeeController extends Controller
 			->JOIN("LEFT JOIN", "status s", "s.statusId=employee.status")
 			->JOIN("LEFT JOIN", "employee_condition condition", "condition.employeeConditionId=employee.employeeConditionId")
 			->where([
-				"employee.status" => [1, 2, 3, 4, 5, 6, 7],
-				"employee.companyId" => $companyId
+				"employee.status" => [1, 2, 3, 4, 5, 6, 7]
 			])
-			->orderBy('employee.employeeFirstname')
+			->andFilterWhere([
+				"employee.companyId" => $companyId,
+			])
+			->orderBy('employee.employeeFirstname ASC')
 			->asArray()
 			->limit(15)
 			->all();
@@ -94,10 +96,10 @@ class EmployeeController extends Controller
 					"companyPicture" => Company::companyPicture($em["cPicture"]),
 					"city" => $em["city"],
 					"countryName" => $em["countryName"]
-
 				];
 			endforeach;
 		}
+		//throw new Exception(print_r($data, true));
 		return json_encode($data);
 	}
 	public function actionEmployeeFilter($companyId, $branchId, $departmentId, $teamId, $status)
@@ -121,7 +123,7 @@ class EmployeeController extends Controller
 				"employee.teamId" => $teamId,
 				"employee.status" => $status,
 			])
-			->orderBy('employee.employeeFirstname')
+			->orderBy('employee.employeeFirstname ASC')
 			->asArray()
 			->limit(15)
 			->all();

@@ -2,6 +2,7 @@
 
 use common\models\ModelMaster;
 use frontend\models\hrvc\Status;
+use yii\web\View;
 
 $this->title = 'Employee';
 ?>
@@ -52,16 +53,32 @@ $statusTexArr = Status::allStatusText();
 							Drafts
 
 						</a>
-						<a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
+						<a href="#" onclick="javascript:showAction()" class="d-flex align-items-center action-employee-btn justify-content-center me-0 d-none"
+							id="close-action" style="z-index: 1; position:relative;">
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/close-circle.svg" class="me-4" style="width: 18px;height:18px;">
+
+						</a>
+						<a href="#" onclick="javascript:showAction()" class="d-flex align-items-center action-employee-btn-blue justify-content-center d-none"
+							id="active-action" style="z-index: 2;margin-left:-37px;">
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action-select.svg" class="me-2" style="width: 18px;height:18px;">
+							Actions
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down.svg" class="ms-2" style="width: 18px;height:18px;">
+
+						</a>
+
+						<a href="#" onclick="javascript:showAction()" class="d-flex align-items-center action-employee-btn justify-content-center" id="normal-action">
 							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action.svg" class="me-2" style="width: 18px;height:18px;">
 							Actions
 
 						</a>
+
 						<a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
 							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action.svg" class="me-2" style="width: 18px;height:18px;">
 							Export All
 
+
 						</a>
+
 						<a href="" class="d-flex align-items-center view-employee-gray justify-content-center">
 							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" class="me-2" style="width: 18px;height:18px;">
 							<span class="font-size-16 font-weight-600" style="color:#30313D;">40 /</span>
@@ -73,6 +90,7 @@ $statusTexArr = Status::allStatusText();
 			</div>
 		</div>
 	</div>
+	<input type="hidden" id="action" value="0">
 	<div class="col-12 mt-20 pr-15 pl-15">
 		<div class="bg-white-employee">
 			<div class="row mb-40">
@@ -84,7 +102,17 @@ $statusTexArr = Status::allStatusText();
 				<div class="col-lg-7 col-12 text-end pb-0 pl-0">
 					<?= $this->render('filter', [
 						"companies" => $companies,
-						"statusTexArr" => $statusTexArr
+						"statusTexArr" => $statusTexArr,
+						"companies" => isset($companies) ? $companies : [],
+						"companyId" =>  isset($companyId) ? $companyId : '',
+						"branchId" =>  isset($branchId) ? $branchId : '',
+						"teamId" =>  isset($teamId) ? $teamId : '',
+						"departmentId" =>  isset($departmentId) ? $departmentId : '',
+						"status" =>  isset($status) ? $status : '',
+						"branches" =>  isset($branches) ? $branches : [],
+						"departments" =>  isset($departments) ? $departments : [],
+						"teams" =>  isset($teams) ? $teams : [],
+						"teamId" => isset($teamId) ? $teamId : '',
 					]) ?>
 				</div>
 			</div>
@@ -642,6 +670,18 @@ $statusTexArr = Status::allStatusText();
 
 	}
 
+	.action-employee-btn-blue {
+		background-color: #2580D3;
+		color: #FFFFFF;
+		min-height: 30px;
+		border-radius: 66px;
+		padding-left: 9px;
+		padding-right: 9px;
+		font-size: 14px;
+		font-weight: 600;
+		text-decoration: none;
+	}
+
 	.view-employee-gray {
 		background-color: #F8F8F8;
 		min-height: 30px;
@@ -707,4 +747,40 @@ $statusTexArr = Status::allStatusText();
 			$("#employee-" + employeeId).removeClass('checked-employee');
 		}
 	}
+
+	function showAction() {
+		var action = $("#action").val();
+		if (action == 0) {
+			$("#action").val(1);
+			$("#normal-action").addClass("d-none");
+			$("#active-action").removeClass("d-none");
+			$("#close-action").removeClass("d-none");
+		} else {
+			$("#action").val(0);
+			$("#normal-action").removeClass("d-none");
+			$("#active-action").addClass("d-none");
+			$("#close-action").addClass("d-none");
+
+		}
+	}
 </script>
+<?php
+$this->registerJs('
+   function showAction() {
+		var action = $("#action").val();
+		if (action == 0) {
+			$("#action").val(1);
+			$("#normal-action").addClass("d-none");
+			$("#active-action").removeClass("d-none");
+			$("#close-action").removeClass("d-none");
+			$("[id^=check-employee-]").removeClass("invisible");
+		} else {
+			$("#action").val(0);
+			$("#normal-action").removeClass("d-none");
+			$("#active-action").addClass("d-none");
+			$("#close-action").addClass("d-none");
+			$("[id^=check-employee-]").addClass("invisible");
+		}
+	}
+', View::POS_END);
+?>
