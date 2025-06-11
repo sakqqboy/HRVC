@@ -588,13 +588,13 @@ class ModelMaster extends \yii\db\ActiveRecord
             $year = $dateArr[0];
             $lastDigit = substr($day, -1);
             if ($lastDigit == 1) {
-                $day .= '<sup>st</sup>';
+                $day .= 'st';
             } else if ($lastDigit == 2) {
-                $day .= '<sup>nd</sup>';
+                $day .= 'nd';
             } else if ($lastDigit == 3) {
-                $day .= '<sup>rd</sup>';
+                $day .= 'rd';
             } else {
-                $day .= '<sup>th</sup>';
+                $day .= 'th';
             }
             $fullMonth = ModelMaster::monthEng($month, 1);
             $fullText = $day . "&nbsp;" . $fullMonth . "&nbsp;" . $year;

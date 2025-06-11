@@ -10,25 +10,6 @@ $this->title = 'Employee';
 $statusTexArr = Status::allStatusText();
 ?>
 <div class="col-12 mt-70 pt-20">
-	<!-- <div class="row">
-		<div class="col-lg-9 col-12 text-end">
-			<a href="<?php // Yii::$app->homeUrl 
-					?>setting/employee/import" class="btn btn-secondary font-size-12 mr-10">
-				<i class="fa fa-upload mr-5" aria-hidden="true"></i> Import File
-			</a>
-			<a href="<?php // Yii::$app->homeUrl 
-					?>setting/employee/create" class="btn btn-success font-size-12">
-				<i class="fa fa-user-plus mr-5" aria-hidden="true"></i> Create
-			</a>
-			<div class="btn-group ml-10" role="group" aria-label="Basic example">
-				<button type="button" class="btn btn-primary btn-curr font-size-12" id="btn-0" onclick="javascript:employeeType(0)">All</button>
-				<button type="button" class="btn btn-primary font-size-12" id="btn-1" onclick="javascript:employeeType(1)"><i class="fa fa-briefcase" aria-hidden="true"></i> Current</button>
-				<button type="button" class="btn btn-primary btn-curr font-size-12" id="btn-2" onclick="javascript:employeeType(2)">Resigned <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></button>
-				<input type="hidden" id="status" value="1">
-			</div>
-		</div>
-
-	</div> -->
 	<div class="col-12 pr-15 pl-15">
 		<div class="col-12">
 			<div class="row mb-20">
@@ -113,177 +94,44 @@ $statusTexArr = Status::allStatusText();
 						"departments" =>  isset($departments) ? $departments : [],
 						"teams" =>  isset($teams) ? $teams : [],
 						"teamId" => isset($teamId) ? $teamId : '',
-						"page" => 'grid'
+						"page" => 'list'
 					]) ?>
 				</div>
 			</div>
 			<div class="row" style="--bs-gutter-x:19px;">
-				<?php
-				if (isset($employees) && count($employees) > 0) {
-					foreach ($employees as $employeeId => $employee) :
-						$statusClass = "status-badge-full-time";
-						if ($employee["status"] == "Full-Time") {
-							$statusClass = "status-badge-full-time";
-						}
-						if ($employee["status"] == "Probationary") {
-							$statusClass = "status-badge-probationary";
-						}
-						if ($employee["status"] == "Part-Time") {
-							$statusClass = "status-badge-part-Time";
-						}
-						if ($employee["status"] == "Intern") {
-							$statusClass = "status-badge-intern";
-						}
-						if ($employee["status"] == "Temporary") {
-							$statusClass = "status-badge-temporarye";
-						}
-						if ($employee["status"] == "Freelance") {
-							$statusClass = "status-badge-freelance";
-						}
-						if ($employee["status"] == "Suspended") {
-							$statusClass = "status-badge-sspended";
-						}
-						if ($employee["status"] == "Resigned") {
-							$statusClass = "status-badge-resigned";
-						}
-						if ($employee["status"] == "Lay off") {
-							$statusClass = "status-badge-layoff";
-						}
-						if ($employee["status"] == "not set") {
-							$statusClass = "status-badge-notset";
-						}
-						//throw new exception(print_r($employees, true));
-				?>
-						<div class="col-lg-4 col-md-6 col-12">
-							<div class="card employee-box" id="employee-<?= $employeeId ?>">
-								<div class="position-relative new-employee">
-									<input type="checkbox" id="check-employee-<?= $employeeId ?>" name="" class="checkbox-employee pull-left invisible" onchange="javascript:selectEmployee(<?= $employeeId ?>)">
-									<img src="<?= Yii::$app->homeUrl ?>images/employee/status/new-employee.svg" class="pull-right <?= $employee['isNew'] == 1 ? '' : 'invisible' ?>" alt="New Employee" style="margin-top:-15px;">
-								</div>
-								<div class="d-flex align-items-start justify-content-between mt-3">
-									<div class="position-relative me-2">
-										<img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>" class="rounded-circle profile-img" alt="Profile">
-										<span class="<?= $statusClass ?>"><?= $employee["status"] ?></span>
-									</div>
-									<div class="flex-grow-1">
-										<div class="d-flex justify-content-between align-items-start">
-											<div>
-												<div class="mb-0 profile-employee-name text-truncate">
-													<?= $employee["employeeName"] ?>
-												</div>
-												<span class="profile-employee-title">
-													<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/star.svg" class="profile-icon" style="margin-top: -3px;">
-													<?= $employee["titleName"] ?>
-												</span>
-												<span class="profile-employee-department">
-													<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/share.svg" class="profile-icon">
-													<?= $employee["departmentName"] ?>
-												</span>
-												<span class="profile-employee-team">
-													<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" class="profile-icon">
-													<?= $employee["teamName"] ?>
-												</span>
-											</div>
+				<table class="">
+					<thead class="employee-header-table">
+						<th class="boder-table-radius-left"><span class="ms-2"><?= Yii::t('app', "Employee's Name") ?></span></th>
+						<th><?= Yii::t('app', "Designature") ?></th>
+						<th><?= Yii::t('app', "Company") ?></th>
+						<th><?= Yii::t('app', "Branch") ?></th>
+						<th><?= Yii::t('app', "Department") ?></th>
+						<th><?= Yii::t('app', "Team") ?></th>
+						<th class="boder-table-radius-right"></th>
+					</thead>
+					<tbody>
+						<?php
+						if (isset($employees) && count($employees) > 0) {
+							foreach ($employees as $employeeId => $employee) : ?>
+								<tr>
+									<td><?= $employee["employeeName"] ?></td>
+									<td><?= $employee["titleName"] ?></td>
+									<td><?= $employee["companyName"] ?></td>
+									<td><?= $employee["branchName"] ?></td>
+									<td><?= $employee["departmentName"] ?></td>
+									<td><?= $employee["teamName"] ?></td>
+									<td></td>
+								</tr>
 
-										</div>
-									</div>
-									<div class="position-relative">
-										<div class="position-absolute top-0 end-0 d-flex gap-0">
-											<a href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>" style="text-decoration: none;">
-												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" class="pim-icon">
-											</a>
-											<a href="javascript:deleteEmployee(<?= $employeeId ?>)" style="text-decoration: none;">
-												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/threedot.svg" class="pim-icon">
-											</a>
-										</div>
-									</div>
-								</div>
-
-								<!-- Divider -->
-
-
-
-								<!-- Contact & Info -->
-								<div class="employee-contact-box">
-									<div class="d-flex align-items-start justify-content-start pb-10 mb-10" style="border-bottom:1px dashed  #94989C;">
-										<div class="position-relative me-2">
-											<img src="<?= Yii::$app->homeUrl . $employee['companyPicture'] ?>" class="rounded-circle company-img" alt="Profile">
-										</div>
-										<div class="flex-grow-1">
-											<div class="d-flex justify-content-start align-items-start" style="margin-top: -5px;">
-												<div>
-													<div class="profile-company-name text-truncate flex-grow-1">
-														<?= $employee["companyName"] ?>
-													</div>
-													<span class="profile-city-name">
-														<?= $employee["city"] ?>, <?= $employee["countryName"] ?>
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
-
-
-									<div class="d-flex justify-content-between align-items-start">
-										<div>
-											<div class="d-flex align-items-start justify-content-start">
-												<div class="position-relative mr-5">
-													<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/mail-gray.svg" class="profile-icon">
-												</div>
-												<div class="profile-employee-email text-truncate flex-grow-1"
-													title="<?= $employee['email'] ?>" style="position: relative;">
-													<?= $employee["email"] ?>
-													<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy-gray.svg" class="profile-icon position-absolute view-cursor"
-														onclick="javascript:copyToClipboard('<?= $employee['telephoneNumber'] ?>')" title="<?= $employee['email'] ?>"
-														style="top: 50%; right: 0; transform: translateY(-50%);">
-												</div>
-											</div>
-											<div class="d-flex align-items-start justify-content-start mt-12">
-												<div class="position-relative mr-5">
-													<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/tel.svg" class="profile-icon">
-												</div>
-												<div class="profile-employee-tel flex-grow-1"
-													title="<?= $employee['telephoneNumber'] ?>" style="position: relative;">
-													<?= $employee["telephoneNumber"] ?>
-													<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy-gray.svg" class="ml-5 profile-icon view-cursor"
-														onclick="javascript:copyToClipboard('<?= $employee['telephoneNumber'] ?>')" title="<?= $employee['telephoneNumber'] ?>"
-														style="margin-top: -3px;">
-												</div>
-											</div>
-											<div class="d-flex align-items-start justify-content-start mt-12">
-												<div class="position-relative mr-5">
-													<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/employee-gray.svg" class="profile-icon" style="margin-top: -3px;">
-												</div>
-												<div class="profile-employee-number flex-grow-1"
-													title="<?= $employee['telephoneNumber'] ?>" style="position: relative;">
-													Employee ID
-													<span style="font-weight: 600;color:#30313D;" class="ms-1"><?= $employee["employeeNumber"] ?></span>
-												</div>
-											</div>
-											<div class="d-flex align-items-start justify-content-start mt-12">
-												<div class="position-relative mr-5">
-													<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/calendar-gray.svg" class="profile-icon" style="margin-top: -3px;">
-												</div>
-												<div class="profile-employee-number flex-grow-1"
-													title="<?= $employee['telephoneNumber'] ?>" style="position: relative;">
-													Employee Since
-													<span style="font-weight: 600;color:#30313D;" class="ms-1"><?= $employee["joinDate"] ?></span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-							</div>
-						</div>
-
-					<?php
-					endforeach;
-				} else { ?>
-					<div class="col-12 text-center font-b font-size-16"> Employee not found.</div>
-				<?php
-				}
-				?>
+							<?php
+							endforeach;
+						} else { ?>
+							<div class="col-12 text-center font-b font-size-16"> Employee not found.</div>
+						<?php
+						}
+						?>
+					</tbody>
+				</table>
 			</div>
 			<input type="hidden" id="show-action" value="">
 		</div>
@@ -694,6 +542,29 @@ $statusTexArr = Status::allStatusText();
 		border: 0.5px #666666 solid;
 		text-decoration: none;
 
+	}
+
+	.employee-header-table {
+		height: 45px;
+		border-radius: 4px;
+		background-color: #E4E4E4;
+
+		color: #727272;
+	}
+
+	.employee-header-table th {
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	.boder-table-radius-left {
+		border-bottom-left-radius: 4px;
+		border-top-left-radius: 4px;
+	}
+
+	.boder-table-radius-right {
+		border-bottom-right-radius: 4px;
+		border-top-right-radius: 4px;
 	}
 
 

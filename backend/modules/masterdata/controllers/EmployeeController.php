@@ -53,10 +53,11 @@ class EmployeeController extends Controller
 	public function actionAllEmployeeDetail($companyId)
 	{
 		$employee = Employee::find()
-			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,c.city,
+			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,c.city,b.branchName,
 			condition.employeeConditionName,s.statusName,na.nationalityName,d.departmentName,d.departmentId,te.teamId,te.teamName,c.picture as cPicture')
 			->JOIN("LEFT JOIN", "company c", "c.companyId=employee.companyId")
 			->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
+			->JOIN("LEFT JOIN", "branch b", "b.branchId=employee.branchId")
 			->JOIN("LEFT JOIN", "department d", "d.departmentId=employee.departmentId")
 			->JOIN("LEFT JOIN", "team te", "te.teamId=employee.teamId")
 			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
@@ -64,10 +65,12 @@ class EmployeeController extends Controller
 			->JOIN("LEFT JOIN", "status s", "s.statusId=employee.status")
 			->JOIN("LEFT JOIN", "employee_condition condition", "condition.employeeConditionId=employee.employeeConditionId")
 			->where([
-				"employee.status" => [1, 2, 3, 4, 5, 6, 7],
-				"employee.companyId" => $companyId
+				"employee.status" => [1, 2, 3, 4, 5, 6, 7]
 			])
-			->orderBy('employee.employeeFirstname')
+			->andFilterWhere([
+				"employee.companyId" => $companyId,
+			])
+			->orderBy('employee.employeeFirstname ASC')
 			->asArray()
 			->limit(15)
 			->all();
@@ -93,20 +96,22 @@ class EmployeeController extends Controller
 					"companyName" => $em["companyName"],
 					"companyPicture" => Company::companyPicture($em["cPicture"]),
 					"city" => $em["city"],
-					"countryName" => $em["countryName"]
-
+					"countryName" => $em["countryName"],
+					"branchName" => $em["branchName"]
 				];
 			endforeach;
 		}
+		//throw new Exception(print_r($data, true));
 		return json_encode($data);
 	}
 	public function actionEmployeeFilter($companyId, $branchId, $departmentId, $teamId, $status)
 	{
 		$employee = Employee::find()
-			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,c.city,
+			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,c.city,b.branchName,
 			condition.employeeConditionName,s.statusName,na.nationalityName,d.departmentName,d.departmentId,te.teamId,te.teamName,c.picture as cPicture')
 			->JOIN("LEFT JOIN", "company c", "c.companyId=employee.companyId")
 			->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")
+			->JOIN("LEFT JOIN", "branch b", "b.branchId=employee.branchId")
 			->JOIN("LEFT JOIN", "department d", "d.departmentId=employee.departmentId")
 			->JOIN("LEFT JOIN", "team te", "te.teamId=employee.teamId")
 			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
@@ -121,7 +126,7 @@ class EmployeeController extends Controller
 				"employee.teamId" => $teamId,
 				"employee.status" => $status,
 			])
-			->orderBy('employee.employeeFirstname')
+			->orderBy('employee.employeeFirstname ASC')
 			->asArray()
 			->limit(15)
 			->all();
@@ -147,7 +152,8 @@ class EmployeeController extends Controller
 					"companyName" => $em["companyName"],
 					"companyPicture" => Company::companyPicture($em["cPicture"]),
 					"city" => $em["city"],
-					"countryName" => $em["countryName"]
+					"countryName" => $em["countryName"],
+					"branchName" => $em["branchName"]
 
 				];
 			endforeach;
