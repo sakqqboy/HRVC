@@ -3,12 +3,13 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 // $statusfrom = 'create';
-$this->title = 'Create Employee';
 
 $urlSubmit = '';
 if($statusfrom == 'Create'){
+    $this->title = 'Create Employee';
     $urlSubmit = 'setting/employee/save-create-employee';
 }else{
+    $this->title = 'Update Employee';
     $urlSubmit = 'setting/employee/save-update-employee';
 }
 // $userModuleIds = array_column($userAccess, 'moduleId');  // [3, 4, 6]
@@ -95,7 +96,6 @@ $LanguageId = '';
                             }
                             ?>
                         </select>
-
                     </div>
 
                 </div>
@@ -184,7 +184,8 @@ $LanguageId = '';
                                             style="width: 20px; height: 20px;">
                                     </span>
                                     <input type="password" class="form-control font-size-14" name="password"
-                                        id="password" placeholder="Register Password here" value=""
+                                        id="password" placeholder="Register Password here"
+                                        value="<?= $userEmployee['password'] ?? '' ?>"
                                         style="width: 245px; border-left: none; border-right: none;">
                                     <span class="input-group-text" onclick="togglePassword()"
                                         style="background-color: white; cursor: pointer; border-left: none;">
@@ -728,7 +729,7 @@ $LanguageId = '';
                                     Select the term <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                                 </div>
                                 <!-- hidden inputs เพื่อเก็บค่า month และ year -->
-                                <input type="hidden" id="fromDate" name="fromDated"
+                                <input type="hidden" id="fromDate" name="fromDate"
                                     value="<?= isset($employee['fromDate']) ? $employee['fromDate'] : '' ?>" required>
                                 <input type="hidden" id="toDate" name="toDate"
                                     value="<?= isset($employee['toDate']) ? $employee['toDate'] : '' ?>" required>
@@ -884,8 +885,9 @@ $LanguageId = '';
                                             <?php
                                             }else{
                                             ?>
-                                            <label class="text-gray font-size-16 font-weight-500" for="resume">Upload
-                                                Resume/CV here</label>
+                                            <label class="text-gray font-size-16 font-weight-500" for="resume">
+                                                Upload Resume/CV here
+                                            </label>
                                             <div class="text-secondary text-gray font-size-14">
                                                 <span class="text-gray font-size-12">Supported - pdf, .doc, .docx</span>
                                             </div>
@@ -1274,11 +1276,26 @@ $LanguageId = '';
 
                     <!-- ✅ ปุ่ม Cancel + Save -->
                     <div class="d-flex justify-content-end align-items-center" style="gap: 10px;">
-                        <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
+                        <a href="javascript:history.back()" style="text-decoration: none;">
                             <button type="button" class="btn-cancel-group">
                                 Cancel
                             </button>
                         </a>
+                        <?php if($statusfrom == 'Update'){?>
+                        <a href="<?= Yii::$app->homeUrl ?>setting/employee/delete-employee/<?= ModelMaster::encodeParams(['employeeId' => $employeeId, 'userId' => $userId]) ?>"
+                            class="btn btn-delete-custom d-flex align-items-center"
+                            onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                            onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="Delete"
+                                class="pim-icon me-1" style="width: 14px; height: 14px;">
+                            Delete
+                        </a>
+                        <button type="submit" class="btn-save-group">
+                            <img src="<?= Yii::$app->homeUrl ?>image/refece-whiet.svg" alt="Save Icon"
+                                style="width: 20px; height: 20px;">
+                            Update
+                        </button>
+                        <?php }else{?>
                         <a style="text-decoration: none;">
                             <button type="button" id="saveDraftBtn" class="btn-cancel-group w-100">
                                 Save as Draft
@@ -1290,6 +1307,7 @@ $LanguageId = '';
                             <img src="<?= Yii::$app->homeUrl ?>image/save-icon.svg" alt="Save Icon"
                                 style="width: 20px; height: 20px;">
                         </button>
+                        <?php }?>
                     </div>
 
                 </div>
@@ -1297,6 +1315,8 @@ $LanguageId = '';
             </div>
         </div>
     </div>
+    <input type="hidden" id="emId" name="emId" value="<?=$employeeId?>">
+    <input type="hidden" id="userId" name="userId" value="<?=$userId?>">
 
     <input type="hidden" id="certificateDataHidden" name="certificateData">
     <input type="hidden" id="cerDate" name="cerDate" value="0">
@@ -1317,6 +1337,10 @@ $LanguageId = '';
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="radioHighlight.js"></script>
     <script>
+    let uploadedCerFile = null; // สำหรับ cerimage
+    let uploadedCertificateFiles = []; // สำหรับ certificate (multiple files)
+    let certificates = [];
+
     const homeUrl = "<?= Yii::$app->homeUrl ?>";
     document.getElementById('companySelectId').addEventListener('change', function() {
         const iconImg = document.getElementById('companyIconImg');
@@ -1550,11 +1574,6 @@ $LanguageId = '';
             document.getElementById('flag').src = homeUrl + flagUrl;
         }
     });
-
-    let uploadedCerFile = null; // สำหรับ cerimage
-    let uploadedCertificateFiles = []; // สำหรับ certificate (multiple files)
-    let certificates = [];
-
     $(document).on('change', '#cerimage', function(e) {
         const file = e.target.files[0];
         if (file) {
@@ -1743,6 +1762,7 @@ $LanguageId = '';
     function renderScheduleList() {
         const list = document.getElementById('schedule-list');
         list.innerHTML = '';
+        // console.log(certificates);
 
         certificates.forEach(cert => {
             const li = document.createElement('li');
@@ -2051,6 +2071,7 @@ $LanguageId = '';
                     cerImage: item.cerImage
                 };
                 certificates.push(cert);
+                document.getElementById('certificateDataHidden').value = JSON.stringify(certificates);
             });
 
             renderScheduleList(); // แสดงข้อมูล
@@ -2326,7 +2347,7 @@ $LanguageId = '';
             // handleLanguageChange(additionalLangCount);
         }
         if (noId != 0) { // 1 2 3
-            alert('noId' + noId);
+            // alert('noId' + noId);
             handleLanguageChange(noId);
         }
         <?php elseif ($statusfrom === 'Create'): ?>
@@ -2366,51 +2387,44 @@ $LanguageId = '';
         function replaceLockWithLevelSelect(lockId, levelName, levelId) {
             const lockSpan = document.getElementById(lockId);
             // lockId 1 2 3
+            // เตรียมข้อมูลล่วงหน้าจาก PHP
+            const languageLevels = {
+                1: "<?= isset($userLanguage[1]['lavel']) ? $userLanguage[1]['lavel'] : '' ?>",
+                2: "<?= isset($userLanguage[2]['lavel']) ? $userLanguage[2]['lavel'] : '' ?>",
+                3: "<?= isset($userLanguage[3]['lavel']) ? $userLanguage[3]['lavel'] : '' ?>"
+            };
+
+            const levels = {
+                1: 'Beginner',
+                2: 'Elementary',
+                3: 'Intermediate',
+                4: 'Upper Intermediate',
+                5: 'Advanced',
+                6: 'Fluent',
+                7: 'Native',
+            };
+
             if (lockSpan) {
-                let number = lockId.split('-')[1]; // '2'
-                //อาเรย์ 0 1 2 3
-                if (number == 1) {
-                    alert('โหลดอาเรย์1')
-                    <?php
-                        // สมมุติว่าคุณมีค่าจาก backend เช่นนี้:
-                        $languageLevel = isset($userLanguage[1]['lavel']) ? $userLanguage[1]['lavel'] : '';
-                    ?>
-                } else if (number == 2) {
-                    alert('โหลดอาเรย์2')
-                    <?php
-                        $languageLevel = isset($userLanguage[2]['lavel']) ? $userLanguage[2]['lavel'] : '';
-                    ?>
-                } else if (number == 3) {
-                    alert('โหลดอาเรย์3')
-                    <?php
-                        $languageLevel = isset($userLanguage[3]['lavel']) ? $userLanguage[3]['lavel'] : '';
-                    ?>
+                let number = lockId.split('-')[1]; // ตัวเลขจาก lockId
+                // alert('โหลดอาเรย์' + number);
+
+                const arayData = languageLevels[number] || '';
+                // alert(arayData);
+
+                let options = `<option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A);">
+                        <?= Yii::t('app', 'Select') ?>
+                       </option>`;
+
+                for (let val in levels) {
+                    const selected = (val == arayData) ? 'selected' : '';
+                    options += `<option value="${val}" ${selected}>${levels[val]}</option>`;
                 }
 
                 lockSpan.outerHTML = `
-                    <select class="form-select mt-12" name="lavelLanguage${no}" id="lavelLanguage${no}" required>
-                        <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A);">
-                            <?= Yii::t('app', 'Select') ?>
-                        </option>
-                        <?php
-                       
-                        $levels = [
-                            1 => 'Beginner',
-                            2 => 'Elementary',
-                            3 => 'Intermediate',
-                            4 => 'Upper Intermediate',
-                            5 => 'Advanced',
-                            6 => 'Fluent',
-                            7 => 'Native',
-                        ];
-
-                        foreach ($levels as $val => $label) {
-                            $selected = ($val == $languageLevel) ? 'selected' : '';
-                            echo '<option value="' . $val . '" ' . $selected . '>' . $label . '</option>';
-                        }
-                        ?>
-                    </select>
-                `;
+            <select class="form-select mt-12" name="lavelLanguage${no}" id="lavelLanguage${no}" required>
+                ${options}
+            </select>
+        `;
             }
 
         }
@@ -2424,7 +2438,7 @@ $LanguageId = '';
                     lang1.value = "";
                 }
             } else {
-                alert('โหลดlockId-1');
+                // alert('โหลดlockId-1');
                 replaceLockWithLevelSelect('lockId-1', 'lavelLanguage1', 'lavelLanguage1');
             }
         } else if (no === 2) { //additionalLangCount 3
@@ -2435,7 +2449,7 @@ $LanguageId = '';
                     alert('Language Duplicate');
                     lang2.value = "";
                 } else {
-                    alert('โหลดlockId-2');
+                    // alert('โหลดlockId-2');
                     replaceLockWithLevelSelect('lockId-2', 'lavelLanguage2', 'lavelLanguage2');
                 }
             }
@@ -2446,7 +2460,7 @@ $LanguageId = '';
                 if (val3 && isDuplicate(val3, valsOther)) {
                     alert('Language Duplicate');
                     lang3.value = "";
-                } else if (val3) {
+                } else {
                     replaceLockWithLevelSelect('lockId-3', 'lavelLanguage3', 'lavelLanguage3');
                 }
             }

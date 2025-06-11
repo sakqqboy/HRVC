@@ -122,6 +122,7 @@ return [
                 'setting/employee/employee-result/<hash>' => 'setting/employee/employee-result',
                 'setting/employee/no-employee/<hash>' => 'setting/employee/no-employee',
                 'setting/employee/create/<hash>' => 'setting/employee/create',
+                'setting/employee/delete-employee/<hash>' => 'setting/employee/delete-employee',
                 'setting/title/no-title/<hash>' => 'setting/title/no-title',
                 'setting/title/index-filter/<hash>' => 'setting/title/index-filter',
                 'setting/title/create/<hash>' => 'setting/title/create',
