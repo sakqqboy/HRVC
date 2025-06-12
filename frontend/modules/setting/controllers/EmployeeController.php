@@ -1744,10 +1744,23 @@ class EmployeeController extends Controller
         return $this->render('test', []);
     }
 
-    public function actionContactDetail()
+    public function actionContactDetail($hash)
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
-        return $this->renderPartial('contact_detail');
+        $param = ModelMaster::decodeParams($hash);
+        $employeeId = $param["employeeId"];
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+        $employee = curl_exec($api);
+        $employee = json_decode($employee, true);
+        curl_close($api);
+                // throw new Exception(print_r($employee, true));
+
+        return $this->renderPartial('contact_detail',[
+            'employee' => $employee
+        ]);
     }
 
     public function actionWorkDetail()
