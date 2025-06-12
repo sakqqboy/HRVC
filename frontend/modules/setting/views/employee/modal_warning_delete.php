@@ -16,11 +16,11 @@
 			<div class="d-flex justify-content-end pr-20" style="width:100%;border-top: none; padding-top: 20px;">
 				<a class="btn btn-primary me-2 d-flex justify-content-center align-content-center" data-bs-dismiss="modal" aria-label="Close"
 					style="min-width: 100px;">
-					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/close-white.svg" class="pim-icon me-2">
+					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/close-white.svg" class="me-2">
 					<?= Yii::t('app', 'Cancel') ?>
 				</a>
 				<a class="btn btn-outline-danger" style="min-width: 100px;" onclick="javascript:deleteMultiEmployee()">
-					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.svg" class="pim-icon me-2">
+					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.svg" class="me-2">
 					<?= Yii::t('app', 'Delete') ?>
 				</a>
 			</div>
