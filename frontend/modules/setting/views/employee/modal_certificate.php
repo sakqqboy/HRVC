@@ -196,26 +196,56 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
             style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE); width: 60%; ">
             <div class="row">
                 <div class="col-lg-2 center-center">
-                    <!-- <img id="icon-file3" src="<?= Yii::$app->homeUrl ?>image/file-big.svg" alt="icon"
-                        style="width: 40px; height: 40px;"> -->
+
                     <?php
-                        if($certExtension == 'pdf'){
-                    ?>
-                    <img id="icon-file3" src="<?= Yii::$app->homeUrl ?>image/pdf-file.svg" alt="icon"
-                        style="width: 40px; height: 40px;">
-                    <?php
-                        }else if($certExtension == 'xlsx'){
-                    ?>
-                    <img id="icon-file3" src="<?= Yii::$app->homeUrl ?>image/ex-file.svg" alt="icon"
-                        style="width: 40px; height: 40px;">
-                    <?php
-                        }else{
-                    ?>
-                    <img id="icon-file3" src="<?= Yii::$app->homeUrl ?>image/file-big.svg" alt="icon"
-                        style="width: 40px; height: 40px;">
-                    <?php
+                        switch ($certExtension) {
+                            case 'doc':
+                                $iconFile = 'doc-file.svg';
+                                break;
+                            case 'mp4':
+                                $iconFile = 'mp4-file.svg';
+                                break;
+                            case 'picture':
+                                $iconFile = 'picture-file.svg';
+                                break;
+                            case 'file':
+                                $iconFile = 'file-file.svg';
+                                break;
+                            case 'xml':
+                                $iconFile = 'xml-file.svg';
+                                break;
+                            case 'ai':
+                                $iconFile = 'ai-file.svg';
+                                break;
+                            case 'pds':
+                                $iconFile = 'pds-file.svg';
+                                break;
+                            case 'pptx':
+                                $iconFile = 'pptx-file.svg';
+                                break;
+                            case 'eps':
+                                $iconFile = 'eps-file.svg';
+                                break;
+                            case 'zip':
+                                $iconFile = 'zip-file.svg';
+                                break;
+                            case 'txt':
+                                $iconFile = 'txt-file.svg';
+                                break;
+                            case 'pdf':
+                                $iconFile = 'pdf-file.svg';
+                                break;
+                            case 'xlsx':
+                                $iconFile = 'ex-file.svg';
+                                break;
+                            default:
+                                $iconFile = 'file-big.svg'; // ไอคอน default
                         }
-                    ?>
+                        ?>
+
+                    <img id="icon-file3" src="<?= Yii::$app->homeUrl ?>image/<?= $iconFile ?>" alt="icon"
+                        style="width: 40px; height: 40px;">
+
                 </div>
                 <div id="file-uplode-name3" class="col-lg-6 col-md-6 col-12" style="border-right:lightgray solid thin;">
                     <?php
