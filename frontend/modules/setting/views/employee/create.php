@@ -60,7 +60,7 @@ $LanguageId = '';
                 <?= Yii::t('app', 'Back') ?>
             </a>
             <div class="pim-name-title ml-10">
-                <?= Yii::t('app', 'Employee') ?> <?= $statusfrom ?>
+                <?= Yii::t('app', $statusfrom.' Employee') ?>
             </div>
         </div>
         <div class="row update-group-body mt-20" style="gap: 60px;">

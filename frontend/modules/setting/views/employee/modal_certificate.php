@@ -26,7 +26,7 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
     <!-- head modal -->
     <div>
         <span class="text-blue font-size-24 font-weight-500">
-            Add Certificate
+            <?= Yii::t('app', 'Add Certificate') ?>
         </span>
     </div>
     <div>
@@ -95,19 +95,21 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
                 <div class="row mb-30">
                     <div class="col-md-6 mb-3">
                         <label class="form-label font-size-16 font-weight-500">
-                            <span class="text-danger">*</span> Certificate Name
-
+                            <span class="text-danger">*</span>
+                            <?= Yii::t('app', 'Certificate Name') ?>
                         </label>
                         <input type="text" class="form-control font-size-14" id="cerName" name="cerName"
-                            placeholder="Write the name of the certificate" value="<?= htmlspecialchars($cerName) ?>">
+                            placeholder="<?= Yii::t('app', 'Write the name of the certificate') ?>"
+                            value="<?= htmlspecialchars($cerName) ?>">
 
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label font-size-16 font-weight-500">
-                            <span class="text-danger">*</span> Issuing Institute / Authority
+                            <span class="text-danger">*</span> <?= Yii::t('app', 'Issuing Institute / Authority') ?>
                         </label>
                         <input type="text" class="form-control font-size-14" id="issuingName" name="issuingName"
-                            placeholder="Write the issuer authority name" value="<?= htmlspecialchars($issuingName) ?>">
+                            placeholder="<?= Yii::t('app', 'Write the issuer authority name') ?>"
+                            value="<?= htmlspecialchars($issuingName) ?>">
 
                     </div>
                 </div>
@@ -115,7 +117,8 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
                 <div class="row mb-4">
                     <div class="col-md-6 mb-3">
                         <label for="issueExpiryDate" class="form-label font-size-16 font-weight-500">
-                            <span class="text-danger">*</span> Issue & Expiry Date
+                            <span class="text-danger">*</span>
+                            <?= Yii::t('app', 'Issue & Expiry Date') ?>
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
                                 data-placement="top" title="ttt" alt="Help icon">
                         </label>
@@ -149,7 +152,7 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
                             <div class="form-control" id="multi-cer-term"
                                 style="border-radius: 53px; text-align: center; cursor: pointer; position: absolute; width: 100%; height: 40px;">
                                 <span class="font-size-12 font-weight-500 ml-60" id="cer-date-label">
-                                    start date - end date
+                                    <?= Yii::t('app', 'start date - end date') ?>
                                 </span>
                                 <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                             </div>
@@ -170,10 +173,11 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="credentialLink" class="form-label font-size-16 font-weight-500">
-                            <span class="text-danger">*</span> Credential Link
+                            <span class="text-danger">*</span>
+                            <?= Yii::t('app', 'Credential Link') ?>
                         </label>
                         <input type="text" class="form-control font-size-14" id="credential" name="credential"
-                            placeholder="Input the link of evidence (if any)"
+                            placeholder="<?= Yii::t('app', 'Input the link of evidence (if any)') ?>"
                             value="<?= htmlspecialchars($credential) ?>">
                     </div>
                 </div>
@@ -181,7 +185,8 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
 
             <div class="d-flex justify-content-start align-items-center" style="gap: 10px;">
                 <input type="checkbox" id="noExpiryCheckbox" <?= $noExpiry ? 'checked' : '' ?>>
-                <label class="mb-0" for="noExpiryCheckbox">The Certificate does not have expiry date</label>
+                <label class="mb-0" for="noExpiryCheckbox"><?= Yii::t('app', 'The Certificate does not have') ?>
+                    expiry date</label>
             </div>
         </div>
     </div>
@@ -224,10 +229,12 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
                     }else{
                     ?>
                     <label class="text-gray font-size-16 font-weight-500" for="name">
-                        Upload Certificate
+                        <?= Yii::t('app', 'Upload Certificate') ?>
                     </label>
                     <div class="text-secondary text-gray  font-size-14">
-                        <span class="text-gray font-size-12"> Supported - pdf, .doc, .docx, png, jpeg</span>
+                        <span class="text-gray font-size-12">
+                            <?= Yii::t('app', 'Supported - pdf, .doc, .docx, png, jpeg') ?>
+                        </span>
                     </div>
                     <?php
                     }
@@ -257,7 +264,7 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
                 <div id="file-edit3" class="col-lg-4 col-md-6 col-12 text-center pt-13">
                     <label id="certificate-btn" type="button" for="certificate"
                         class="text-blue font-size-16 font-weight-600">
-                        Upload
+                        <?= Yii::t('app', 'Upload') ?>
                         <img src="<?= Yii::$app->homeUrl ?>image/file-up-blue.svg" alt="icon"
                             style="width: 16px; height: 16px;">
                     </label>
@@ -282,15 +289,15 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
             <?php if($id){
             ?>
             <button type="button" class="btn-save-group" onclick="editSchedule(<?= $id ?>)">
-                Create <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
-                    style="width: 20px; height: 20px;">
+                <img src="<?= Yii::$app->homeUrl ?>image/save-icon.svg" style="width: 20px; height: 20px;">
+                <?= Yii::t('app', 'Update') ?>
             </button>
             <?php
             }else{
             ?>
             <button type="button" class="btn-save-group" onclick="createSchedule()">
-                Create <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
-                    style="width: 20px; height: 20px;">
+                <?= Yii::t('app', 'Create') ?>
+                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" style="width: 20px; height: 20px;">
             </button>
             <?php
             }

@@ -33,7 +33,7 @@ $this->title = 'view';
                     class="btn-create-branch">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg"
                         style="width:18px; height:18px; margin-top:-3px;">
-                    Back
+                    <?= Yii::t('app', 'Back') ?>
                 </a>
                 <div class="pim-name-title ml-10">
                     <?= Yii::t('app', 'Employee in Details') ?>
@@ -48,7 +48,7 @@ $this->title = 'view';
                 class="btn-create no-underline " style="padding: 3px 9px; display: inline-block;">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/edit.svg"
                     style="width:18px; height:18px; margin-top:-3px;">
-                Edit
+                <?= Yii::t('app', 'Edit') ?>
             </a>
         </div>
     </div>
@@ -59,36 +59,59 @@ $this->title = 'view';
 		background: #F9FCFF;">
             <div class="mid-center mt-53" style="gap: 35px;">
                 <div class="text-center position-relative ">
-                    <img src="/HRVC/frontend/web/images/employee/profile/AE5oEMwTio.jpg"
+                    <?php
+                    if (isset($employee) && $employee["picture"] != null) { ?>
+                    <img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>"
                         class="profile-picture rounded-circle mb-3" alt="User Avatar"
                         style="width: 150px; height: 150px;">
+                    <?php
+                    } else { ?>
+                    <img src="<?= Yii::$app->homeUrl ?>image/upload-plusimg.svg"
+                        class="profile-picture rounded-circle mb-3" alt="User Avatar"
+                        style="width: 150px; height: 150px;">
+                    <?php
+                    }
+                    ?>
                     <span class="condition-name badge position-absolute bottom-0 start-50 translate-middle-x">
-                        Full-Time
+                        <?= $employee['conditionName'] ?>
                     </span>
                 </div>
 
                 <div class="row text-center">
                     <span class="font-size-22 font-weight-600">
-                        Mr. Dibbo Dutta
+                        <?= $employee['employeeFirstname'] ?> <?= $employee['employeeSurename'] ?>
                     </span>
                     <span class="font-size-16 font-weight-400">
-                        Marketing Manager
+                        <?= $employee['titleName'] ?>
                     </span>
                 </div>
             </div>
             <!-- //ปุ่มกดเมนู -->
             <div id="menu-profile" class="text-end mt-70">
-                <div class="menu-item font-size-16 font-weight-400" data-target="contact">Contact & Personal Details
+                <div class="menu-item font-size-16 font-weight-400" data-target="contact">
+                    <?= Yii::t('app', 'Contact & Personal Details') ?>
                 </div>
-                <div class="menu-item font-size-16 font-weight-400" data-target="work">Work Details</div>
-                <div class="menu-item font-size-16 font-weight-400" data-target="attachments">Attachments & Remarks
+                <div class="menu-item font-size-16 font-weight-400" data-target="work">
+                    <?= Yii::t('app', 'Work Details') ?>
                 </div>
-                <div class="menu-item font-size-16 font-weight-400" data-target="certificates">Certificates and Skill
-                    Tags</div>
-                <div class="menu-item font-size-16 font-weight-400" data-target="performance">Performance</div>
-                <div class="menu-item font-size-16 font-weight-400" data-target="evaluation">Evaluation</div>
-                <div class="menu-item font-size-16 font-weight-400" data-target="salary">Salary & Allowance</div>
-                <div class="menu-item font-size-16 font-weight-400" data-target="role">Role & Permission</div>
+                <div class="menu-item font-size-16 font-weight-400" data-target="attachments">
+                    <?= Yii::t('app', 'Attachments & Remarks') ?>
+                </div>
+                <div class="menu-item font-size-16 font-weight-400" data-target="certificates">
+                    <?= Yii::t('app', 'Certificates and Skill Tags') ?>
+                </div>
+                <div class="menu-item font-size-16 font-weight-400" data-target="performance">
+                    <?= Yii::t('app', 'Performance') ?>
+                </div>
+                <div class="menu-item font-size-16 font-weight-400" data-target="evaluation">
+                    <?= Yii::t('app', 'Evaluation') ?>
+                </div>
+                <div class="menu-item font-size-16 font-weight-400" data-target="salary">
+                    <?= Yii::t('app', 'Salary & Allowance') ?>
+                </div>
+                <div class="menu-item font-size-16 font-weight-400" data-target="role">
+                    <?= Yii::t('app', 'Role & Permission') ?>
+                </div>
             </div>
 
         </div>
@@ -99,31 +122,59 @@ $this->title = 'view';
         </div>
     </div>
 </div>
-
 <script>
+const employeeId = <?= $employeeId ?>;
+
+const urlMap = {
+    contact: '<?= Yii::$app->homeUrl ?>setting/employee/contact-detail/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+    work: '<?= Yii::$app->homeUrl ?>setting/employee/work-detail/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+    attachments: '<?= Yii::$app->homeUrl ?>setting/employee/attachments/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+    certificates: '<?= Yii::$app->homeUrl ?>setting/employee/certificates/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+    performance: '<?= Yii::$app->homeUrl ?>setting/employee/performance/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+    evaluation: '<?= Yii::$app->homeUrl ?>setting/employee/evaluation/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+    salary: '<?= Yii::$app->homeUrl ?>setting/employee/salary/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+    role: '<?= Yii::$app->homeUrl ?>setting/employee/role/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+};
+
 const menuItems = document.querySelectorAll('.menu-item');
 const detailBox = document.getElementById('menu-profile-detail');
 
-const contentMap = {
-    contact: '<h4>Contact & Personal Details</h4><p>ข้อมูลติดต่อและส่วนตัว</p>',
-    work: '<h4>Work Details</h4><p>รายละเอียดการทำงาน</p>',
-    attachments: '<h4>Attachments & Remarks</h4><p>ไฟล์แนบและหมายเหตุ</p>',
-    certificates: '<h4>Certificates and Skill Tags</h4><p>ใบรับรองและทักษะ</p>',
-    performance: '<h4>Performance</h4><p>ผลการปฏิบัติงาน</p>',
-    evaluation: '<h4>Evaluation</h4><p>การประเมิน</p>',
-    salary: '<h4>Salary & Allowance</h4><p>เงินเดือนและเบี้ยเลี้ยง</p>',
-    role: '<h4>Role & Permission</h4><p>สิทธิ์และบทบาท</p>',
-};
+function loadMenu(targetKey) {
+    const url = urlMap[targetKey];
+
+    if (!url) {
+        detailBox.innerHTML = '<p>ไม่พบเนื้อหา</p>';
+        return;
+    }
+
+    menuItems.forEach(i => i.classList.remove('active-menu'));
+
+    const activeItem = document.querySelector(`.menu-item[data-target="${targetKey}"]`);
+    if (activeItem) {
+        activeItem.classList.add('active-menu');
+    }
+
+    fetch(url)
+        .then(response => response.text())
+        .then(html => {
+            detailBox.innerHTML = html;
+        })
+        .catch(error => {
+            detailBox.innerHTML = '<p>เกิดข้อผิดพลาดในการโหลดข้อมูล</p>';
+            console.error(error);
+        });
+}
 
 menuItems.forEach(item => {
     item.style.cursor = 'pointer';
     item.addEventListener('click', () => {
         const target = item.getAttribute('data-target');
-        detailBox.innerHTML = contentMap[target] || '<p>ไม่พบเนื้อหา</p>';
-
-        // highlight เมนูที่เลือก
-        menuItems.forEach(i => i.classList.remove('active-menu'));
-        item.classList.add('active-menu');
+        loadMenu(target);
     });
+});
+
+// 🟦 โหลดเมนูแรกเมื่อหน้าโหลดเสร็จ
+document.addEventListener('DOMContentLoaded', function() {
+    loadMenu('contact'); // หรือเปลี่ยนเป็นเมนูอื่นที่คุณต้องการให้เริ่มแสดง
 });
 </script>

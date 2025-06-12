@@ -469,7 +469,7 @@ class EmployeeController extends Controller
         //    $status = $employee["status"];
         $employee["status"] = $employee['statusName'];
         //    $employee["statusId"] = $status;
-        //throw new Exception(print_r($employee, true));
+        // throw new Exception(print_r($employee, true));
         return $this->render('employee_profile', [
             "employee" => $employee,
             "employeeId" => $employeeId
@@ -1743,4 +1743,53 @@ class EmployeeController extends Controller
     {
         return $this->render('test', []);
     }
+
+    public function actionContactDetail()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('contact_detail');
+    }
+
+    public function actionWorkDetail()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('work_detail');
+    }
+
+    public function actionAttachments()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('attachments');
+    }
+
+    public function actionCertificates()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('certificates');
+    }
+
+    public function actionPerformance()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('performance');
+    }
+
+    public function actionEvaluation()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('evaluation');
+    }
+
+    public function actionSalary()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('salary');
+    }
+
+    public function actionRole()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('role');
+    }
+
 }
