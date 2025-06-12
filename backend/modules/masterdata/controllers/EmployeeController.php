@@ -372,7 +372,7 @@ class EmployeeController extends Controller
 		$Certificate = Certificate::find()
 			->where(['cerId' => $id])
 			->asArray()
-			->all();
+			->one();
 
 		return json_encode($Certificate);
 	}

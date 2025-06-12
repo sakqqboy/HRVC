@@ -1011,14 +1011,29 @@ class EmployeeController extends Controller
     {
         $mode = Yii::$app->request->post('mode'); // create หรือ edit
         $certData = Yii::$app->request->post('cert'); // JSON string ของ certificate
+        $certificate = null;
 
         $cert = $certData ? json_decode($certData, true) : [];
-        // throw new Exception(print_r($cert, true));
+        // throw new Exception(print_r($cert['id'], true));
 
+        if (is_array($cert) && isset($cert['id']) && !empty($cert['id'])) {
+            $api = curl_init();
+            curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+            curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/certificate-detail?id=' . $cert['id']);
+            
+            $certificate = curl_exec($api);
+            $certificate = json_decode($certificate, true);
+            curl_close($api);
+        } else {
+            // คุณอาจจะต้อง log หรือแจ้งว่าไม่มี cert['id']
+            Yii::error('Invalid cert data: ' . print_r($cert, true));
+        }
 
         return $this->renderPartial('modal_certificate', [
             'mode' => $mode,
-            'cert' => $cert
+            'cert' => $cert,
+            'certificate' => $certificate
         ]);
     }
 
