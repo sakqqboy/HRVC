@@ -40,7 +40,7 @@
 							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/export-black.svg" class="me-1" style="margin-top:-2px;">
 							Export
 						</div>
-						<div class="mt-5" style="color: #EC1D42;cursor: pointer;">
+						<div class="mt-5" style="color: #EC1D42;cursor: pointer;" onclick="javascript:deleteMultiEmployee()">
 							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin-action.svg" class="me-1" style="margin-top:-2px;">
 							Delete
 						</div>

@@ -232,7 +232,7 @@ $statusTexArr = Status::allStatusText();
 		</div>
 	</div>
 </div>
-<?= $this->render('modal_delete') ?>
+<?= $this->render('modal_warning_delete') ?>
 <style>
 	.profile-img {
 		width: 73px;
@@ -709,6 +709,10 @@ $statusTexArr = Status::allStatusText();
 			$("#employee-" + employeeId).removeClass('checked-employee');
 		}
 	}
+
+	function deleteMultiEmployee() {
+		$("#warning-delete-employee").show();
+	}
 </script>
 <?php
 $this->registerJs('
@@ -738,6 +742,9 @@ $this->registerJs('
 			$("#action-menu").addClass("d-none");
 			$("#action-menu").val(0);
 		}
+	}
+		function deleteMultiEmployee() {
+		$("#warning-delete-employee").show();
 	}
 		
 		
