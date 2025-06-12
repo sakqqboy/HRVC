@@ -744,7 +744,7 @@ $this->registerJs('
 		}
 	}
 		function deleteMultiEmployee() {
-		$("#warning-delete-employee").show();
+		$("#warning-delete-employee").modal("show");
 	}
 		
 		
