@@ -44,12 +44,12 @@ $this->title = 'view';
 
         </div>
         <div class="col-1 pr-0 text-end">
-            <button type="button" class="btn-create" style="padding: 3px 9px;"
-                action="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => '']) ?>">
+            <a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>"
+                class="btn-create no-underline " style="padding: 3px 9px; display: inline-block;">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/edit.svg"
                     style="width:18px; height:18px; margin-top:-3px;">
                 Edit
-            </button>
+            </a>
         </div>
     </div>
 

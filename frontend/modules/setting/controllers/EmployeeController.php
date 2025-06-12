@@ -444,6 +444,7 @@ class EmployeeController extends Controller
     {
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
+        // throw new Exception(print_r($employeeId, true));
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -470,7 +471,8 @@ class EmployeeController extends Controller
         //    $employee["statusId"] = $status;
         //throw new Exception(print_r($employee, true));
         return $this->render('employee_profile', [
-            "employee" => $employee
+            "employee" => $employee,
+            "employeeId" => $employeeId
         ]);
     }
 
@@ -668,125 +670,6 @@ class EmployeeController extends Controller
             "userLanguage" => $UserLanguage,
             "statusfrom" => 'Update'
         ]);
-
-        // $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
-        // if (!isset($group) || empty($group)) {
-        //     return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
-        // }
-        // $groupId = $group["groupId"];
-        // $api = curl_init();
-        // curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        // curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
-        // $countries = curl_exec($api);
-        // $countries = json_decode($countries, true);
-        // //throw new Exception(print_r($countries, true));
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        // $companies = curl_exec($api);
-        // $companies = json_decode($companies, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-department');
-        // $titles = curl_exec($api);
-        // $titles = json_decode($titles, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/status/active-status');
-        // $status = curl_exec($api);
-        // $status = json_decode($status, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee-condition/active-condition');
-        // $conditions = curl_exec($api);
-        // $conditions = json_decode($conditions, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/role/active-role');
-        // $roles = curl_exec($api);
-        // $roles = json_decode($roles, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-        // $employee = curl_exec($api);
-        // $employee = json_decode($employee, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/role/employee-role?id=' . $employeeId);
-        // $userRoles = curl_exec($api);
-        // $userRoles = json_decode($userRoles, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $employee['companyId']);
-        // $branches = curl_exec($api);
-        // $branches = json_decode($branches, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $employee['branchId'] . '&&page=1' . '&limit=7');
-        // $departments = curl_exec($api);
-        // $departments = json_decode($departments, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' . $employee['departmentId']);
-        // $teams = curl_exec($api);
-        // $teams = json_decode($teams, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team-position/index');
-        // $teamPosition = curl_exec($api);
-        // $teamPosition = json_decode($teamPosition, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/nationality');
-        // $nationalities = curl_exec($api);
-        // $nationalities = json_decode($nationalities, true);
-
-        // curl_close($api);
-
-        // $oldData["company"] = [
-        //     "id" => $employee['companyId'],
-        //     "name" => Company::companyName($employee['companyId'])
-        // ];
-        // $oldData["nationality"] = [
-        //     "id" => $employee['nationalityId'],
-        //     "name" => Nationality::nationalityName($employee['nationalityId'])
-        // ];
-        // $oldData["country"] = [
-        //     "id" => $employee['countryId'],
-        //     "name" => Country::countryName($employee['countryId'])
-        // ];
-        // $oldData["branch"] = [
-        //     "id" => $employee['branchId'],
-        //     "name" => Branch::branchName($employee['branchId'])
-        // ];
-        // $oldData["department"] = [
-        //     "id" => $employee['departmentId'],
-        //     "name" => Department::departmentName($employee['departmentId'])
-        // ];
-        // $oldData["team"] = [
-        //     "id" => $employee['teamId'],
-        //     "name" => Team::teamName($employee['teamId'])
-        // ];
-        // $oldData["teamPosition"] = [
-        //     "id" => $employee['teamPositionId'],
-        //     "name" => TeamPosition::teamPositionName($employee['teamPositionId'])
-        // ];
-        // $oldData["title"] = [
-        //     "id" => $employee['titleId'],
-        //     "name" => Title::titleName($employee['titleId'])
-        // ];
-        // $oldData["condition"] = [
-        //     "id" => $employee['employeeConditionId'],
-        //     "name" => EmployeeCondition::conditionName($employee['employeeConditionId'])
-        // ];
-        // $oldData["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
-        // $role = UserRole::userRight();
-        // // throw new Exception(print_r($userRoles, true));
-        // return $this->render('update', [
-        //     "countries" => $countries,
-        //     "companies" => $companies,
-        //     "titles" => $titles,
-        //     "status" => $status,
-        //     "conditions" => $conditions,
-        //     "roles" => $roles,
-        //     "employee" => $employee,
-        //     "oldData" => $oldData,
-        //     "userRoles" => $userRoles,
-        //     "branches" => $branches,
-        //     "departments" => $departments,
-        //     "teams" => $teams,
-        //     "teamPosition" => $teamPosition,
-        //     "nationalities" => $nationalities,
-        //     "role" => $role
-        // ]);
     }
     public function actionSaveUpdateEmployee()
     {
@@ -1036,6 +919,10 @@ class EmployeeController extends Controller
                 }
             }
         }
+        return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-profile/' . ModelMaster::encodeParams([
+                     "employeeId" => $_POST["emId"]
+        ]));
+
     }
     public function actionFilterEmployee()
     {
@@ -1133,6 +1020,33 @@ class EmployeeController extends Controller
             'mode' => $mode,
             'cert' => $cert
         ]);
+    }
+
+    public function actionDeleteCertificate()
+    {
+        $certId = $_POST['id'] ?? '';
+
+        if (empty($certId)) {
+            echo json_encode(['status' => 'error', 'message' => 'Missing certificate ID']);
+            return;
+        }
+
+        // ตรวจสอบว่ามี Certificate นี้อยู่ก่อน
+        $exists = Certificate::find()->where(['cerId' => $certId])->exists();
+
+        if (!$exists) {
+            echo json_encode(['status' => 'error', 'message' => 'Certificate not found']);
+            return;
+        }
+
+        // ลบ certificate
+        $deleted = Certificate::deleteAll(['cerId' => $certId]);
+
+        if ($deleted > 0) {
+            echo json_encode(['status' => 'success', 'message' => 'Certificate deleted']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Delete failed']);
+        }
     }
 
 

@@ -1842,9 +1842,27 @@ $LanguageId = '';
         // อัปเดต hidden input
         document.getElementById('certificateDataHidden').value = JSON.stringify(certificates);
 
+        const url = $url + 'setting/employee/delete-certificate';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                mode: 'edit',
+                id: id
+            },
+            success: function(response) {
+                console.log("Deleted successfully:", response);
+            },
+            error: function(xhr, status, error) {
+                console.error("Error deleting certificate:", error);
+            }
+        });
+
         // render ใหม่
         renderScheduleList();
     }
+
 
 
 
