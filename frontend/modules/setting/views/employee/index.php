@@ -30,67 +30,10 @@ $statusTexArr = Status::allStatusText();
 
 	</div> -->
 	<div class="col-12 pr-15 pl-15">
-		<div class="col-12">
-			<div class="row mb-20">
-				<div class="col-lg-6 col-12 text-start employee-profiles-header  pb-0">
-					<div class="d-flex align-items-center justify-content-start gap-2">
-						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/all-employees.svg" class="mr-6" style="margin-top: -5px;">
-						<?= Yii::t('app', 'All Employees') ?>
-						<a href="<?= Yii::$app->homeUrl ?>setting/employee/create" class="d-flex align-items-center create-employee-btn justify-content-center">
-							Create New
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-circle.svg" class="ms-1" style="width: 18px;height:18px;">
-						</a>
-						<a href="<?= Yii::$app->homeUrl ?>setting/employee/import" class="d-flex align-items-center export-employee-btn justify-content-center">
-							Import Employees
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/export-employee.svg" class="ms-2" style="width: 18px;height:18px;">
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-6 col-12 pb-0 pl-0">
-					<div class="d-flex align-items-center justify-content-end gap-2">
-						<a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/draft.svg" class="me-2" style="width: 18px;height:18px;">
-							Drafts
+		<?= $this->render('header') ?>
 
-						</a>
-						<a href="#" onclick="javascript:showAction()" class="d-flex align-items-center action-employee-btn justify-content-center me-0 d-none"
-							id="close-action" style="z-index: 1; position:relative;">
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/close-circle.svg" class="me-4" style="width: 18px;height:18px;">
-
-						</a>
-						<a href="#" onclick="javascript:showAction()" class="d-flex align-items-center action-employee-btn-blue justify-content-center d-none"
-							id="active-action" style="z-index: 2;margin-left:-37px;">
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action-select.svg" class="me-2" style="width: 18px;height:18px;">
-							Actions
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down.svg" class="ms-2" style="width: 18px;height:18px;">
-
-						</a>
-
-						<a href="#" onclick="javascript:showAction()" class="d-flex align-items-center action-employee-btn justify-content-center" id="normal-action">
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action.svg" class="me-2" style="width: 18px;height:18px;">
-							Actions
-
-						</a>
-
-						<a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action.svg" class="me-2" style="width: 18px;height:18px;">
-							Export All
-
-
-						</a>
-
-						<a href="" class="d-flex align-items-center view-employee-gray justify-content-center">
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" class="me-2" style="width: 18px;height:18px;">
-							<span class="font-size-16 font-weight-600" style="color:#30313D;">40 /</span>
-							<span class="font-size-16 font-weight-600" style="color:#8A8A8A;">123</span>
-
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
-	<input type="hidden" id="action" value="0">
+
 	<div class="col-12 mt-20 pr-15 pl-15">
 		<div class="bg-white-employee">
 			<div class="row mb-40">
@@ -289,6 +232,7 @@ $statusTexArr = Status::allStatusText();
 		</div>
 	</div>
 </div>
+<?= $this->render('modal_warning_delete') ?>
 <style>
 	.profile-img {
 		width: 73px;
@@ -681,6 +625,7 @@ $statusTexArr = Status::allStatusText();
 		font-size: 14px;
 		font-weight: 600;
 		text-decoration: none;
+		cursor: pointer;
 	}
 
 	.view-employee-gray {
@@ -693,6 +638,22 @@ $statusTexArr = Status::allStatusText();
 		font-weight: 600;
 		border: 0.5px #666666 solid;
 		text-decoration: none;
+
+	}
+
+	.action-menu {
+		font-size: 13px;
+		font-weight: 600;
+		background-color: white;
+		min-width: 149px;
+		padding-left: 15px;
+		padding-top: 28px;
+		padding-bottom: 8px;
+		border-radius: 5px;
+		margin-top: 10px;
+		box-shadow: 0px 1px 3px 0px #1018281A;
+		position: absolute;
+		/* margin-left: 40.2%; */
 
 	}
 
@@ -749,20 +710,8 @@ $statusTexArr = Status::allStatusText();
 		}
 	}
 
-	function showAction() {
-		var action = $("#action").val();
-		if (action == 0) {
-			$("#action").val(1);
-			$("#normal-action").addClass("d-none");
-			$("#active-action").removeClass("d-none");
-			$("#close-action").removeClass("d-none");
-		} else {
-			$("#action").val(0);
-			$("#normal-action").removeClass("d-none");
-			$("#active-action").addClass("d-none");
-			$("#close-action").addClass("d-none");
-
-		}
+	function deleteMultiEmployee() {
+		$("#warning-delete-employee").show();
 	}
 </script>
 <?php
@@ -773,15 +722,31 @@ $this->registerJs('
 			$("#action").val(1);
 			$("#normal-action").addClass("d-none");
 			$("#active-action").removeClass("d-none");
-			$("#close-action").removeClass("d-none");
 			$("[id^=check-employee-]").removeClass("invisible");
+			$("[id^=check-employee-list-]").removeClass("d-none");
 		} else {
 			$("#action").val(0);
 			$("#normal-action").removeClass("d-none");
 			$("#active-action").addClass("d-none");
-			$("#close-action").addClass("d-none");
 			$("[id^=check-employee-]").addClass("invisible");
+			$("[id^=check-employee-list-]").addClass("d-none");
 		}
 	}
+		function showActionMenu() {
+		var actionMenu = $("#action-menu").val();
+		if (actionMenu == 0) {
+			$("#action-menu").removeClass("d-none");
+			$("#action-menu").val(1);
+
+		} else {
+			$("#action-menu").addClass("d-none");
+			$("#action-menu").val(0);
+		}
+	}
+		function deleteMultiEmployee() {
+		$("#warning-delete-employee").modal("show");
+	}
+		
+		
 ', View::POS_END);
 ?>

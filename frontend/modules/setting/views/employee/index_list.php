@@ -11,64 +11,9 @@ $statusTexArr = Status::allStatusText();
 ?>
 <div class="col-12 mt-70 pt-20">
 	<div class="col-12 pr-15 pl-15">
-		<div class="col-12">
-			<div class="row mb-20">
-				<div class="col-lg-6 col-12 text-start employee-profiles-header  pb-0">
-					<div class="d-flex align-items-center justify-content-start gap-2">
-						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/all-employees.svg" class="mr-6" style="margin-top: -5px;">
-						<?= Yii::t('app', 'All Employees') ?>
-						<a href="<?= Yii::$app->homeUrl ?>setting/employee/create" class="d-flex align-items-center create-employee-btn justify-content-center">
-							Create New
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-circle.svg" class="ms-1" style="width: 18px;height:18px;">
-						</a>
-						<a href="<?= Yii::$app->homeUrl ?>setting/employee/import" class="d-flex align-items-center export-employee-btn justify-content-center">
-							Import Employees
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/export-employee.svg" class="ms-2" style="width: 18px;height:18px;">
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-6 col-12 pb-0 pl-0">
-					<div class="d-flex align-items-center justify-content-end gap-2">
-						<a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/draft.svg" class="me-2" style="width: 18px;height:18px;">
-							Drafts
+		<div class="col-12 pr-15 pl-15">
+			<?= $this->render('header') ?>
 
-						</a>
-						<a href="#" onclick="javascript:showAction()" class="d-flex align-items-center action-employee-btn justify-content-center me-0 d-none"
-							id="close-action" style="z-index: 1; position:relative;">
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/close-circle.svg" class="me-4" style="width: 18px;height:18px;">
-
-						</a>
-						<a href="#" onclick="javascript:showAction()" class="d-flex align-items-center action-employee-btn-blue justify-content-center d-none"
-							id="active-action" style="z-index: 2;margin-left:-37px;">
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action-select.svg" class="me-2" style="width: 18px;height:18px;">
-							Actions
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down.svg" class="ms-2" style="width: 18px;height:18px;">
-
-						</a>
-
-						<a href="#" onclick="javascript:showAction()" class="d-flex align-items-center action-employee-btn justify-content-center" id="normal-action">
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action.svg" class="me-2" style="width: 18px;height:18px;">
-							Actions
-
-						</a>
-
-						<a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action.svg" class="me-2" style="width: 18px;height:18px;">
-							Export All
-
-
-						</a>
-
-						<a href="" class="d-flex align-items-center view-employee-gray justify-content-center">
-							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" class="me-2" style="width: 18px;height:18px;">
-							<span class="font-size-16 font-weight-600" style="color:#30313D;">40 /</span>
-							<span class="font-size-16 font-weight-600" style="color:#8A8A8A;">123</span>
-
-						</a>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 	<input type="hidden" id="action" value="0">
@@ -98,9 +43,10 @@ $statusTexArr = Status::allStatusText();
 					]) ?>
 				</div>
 			</div>
-			<div class="row" style="--bs-gutter-x:19px;">
-				<table class="">
-					<thead class="employee-header-table">
+			<div class="row d-flex">
+				<table class="employee-table">
+
+					<tr class="employee-header-table">
 						<th class="boder-table-radius-left"><span class="ms-2"><?= Yii::t('app', "Employee's Name") ?></span></th>
 						<th><?= Yii::t('app', "Designature") ?></th>
 						<th><?= Yii::t('app', "Company") ?></th>
@@ -108,29 +54,46 @@ $statusTexArr = Status::allStatusText();
 						<th><?= Yii::t('app', "Department") ?></th>
 						<th><?= Yii::t('app', "Team") ?></th>
 						<th class="boder-table-radius-right"></th>
-					</thead>
-					<tbody>
-						<?php
-						if (isset($employees) && count($employees) > 0) {
-							foreach ($employees as $employeeId => $employee) : ?>
-								<tr>
-									<td><?= $employee["employeeName"] ?></td>
-									<td><?= $employee["titleName"] ?></td>
-									<td><?= $employee["companyName"] ?></td>
-									<td><?= $employee["branchName"] ?></td>
-									<td><?= $employee["departmentName"] ?></td>
-									<td><?= $employee["teamName"] ?></td>
-									<td></td>
-								</tr>
+					</tr>
 
-							<?php
-							endforeach;
-						} else { ?>
-							<div class="col-12 text-center font-b font-size-16"> Employee not found.</div>
+
+					<?php
+					if (isset($employees) && count($employees) > 0) {
+						foreach ($employees as $employeeId => $employee) : ?>
+							<tr class="tr-space"></tr>
+							<tr class="employee-tr">
+								<td style="font-weight: 600;position: relative; width:20%;">
+									<div class="col-12 border-left-radius-table" style="height:48px;">
+										<input type="checkbox" id="check-employee-list-<?= $employeeId ?>" name="" class="checkbox-employee me-2 d-none" style="margin-top: -2px;"
+											onchange="javascript:selectEmployee(<?= $employeeId ?>)">
+										<img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>" class="img-table me-2">
+										<?= $employee["employeeName"] ?>
+									</div>
+								</td>
+								<td style="width: 10%;"><?= $employee["titleName"] ?></td>
+								<td style="width: 20%;"><?= $employee["companyName"] ?></td>
+								<td style="width: 15%;"><?= $employee["branchName"] ?></td>
+								<td style="width: 15%;"><?= $employee["departmentName"] ?></td>
+								<td style="width: 15%;"><?= $employee["teamName"] ?></td>
+								<td style="font-weight: 600;position: relative;width: 5%;">
+									<div class="col-12 border-right-radius-table" style="height:48px;">
+										<a href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>" style="text-decoration: none;">
+											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" class="pim-icon">
+										</a>
+										<a href="javascript:deleteEmployee(<?= $employeeId ?>)" style="text-decoration: none;">
+											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/threedot.svg" class="pim-icon">
+										</a>
+									</div>
+								</td>
+							</tr>
+
 						<?php
-						}
-						?>
-					</tbody>
+						endforeach;
+					} else { ?>
+						<div class="col-12 text-center font-b font-size-16"> Employee not found.</div>
+					<?php
+					}
+					?>
 				</table>
 			</div>
 			<input type="hidden" id="show-action" value="">
@@ -138,6 +101,92 @@ $statusTexArr = Status::allStatusText();
 	</div>
 </div>
 <style>
+	.border-left-radius-table {
+		border-left: 1px solid var(--Color-Tokens-Border-Primary, #E4E4E4);
+		border-bottom-left-radius: 6px;
+		border-top-left-radius: 6px;
+		z-index: 10;
+		padding-left: 8px;
+		margin-left: -4px;
+		position: absolute;
+		top: -1px;
+		display: flex;
+		align-items: center;
+	}
+
+	.border-right-radius-table {
+		border-right: 1px solid var(--Color-Tokens-Border-Primary, #E4E4E4);
+		border-bottom-right-radius: 6px;
+		border-top-right-radius: 6px;
+		z-index: 10;
+		margin-right: -8px;
+		position: absolute;
+		top: -1px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.employee-table {
+		font-size: 14px;
+		font-weight: 400;
+	}
+
+	.employee-table td {
+		padding-top: 0px;
+		padding-bottom: 0px;
+	}
+
+	.employee-header-table {
+		height: 45px;
+		border-radius: 4px;
+		background-color: #E4E4E4;
+		color: #727272;
+	}
+
+	.employee-header-table th {
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	.employee-tr {
+		height: 47px;
+		background-color: #FFFFFF;
+		border-top: 0.5px solid var(--Color-Tokens-Border-Primary, #E4E4E4);
+		border-bottom: 0.5px solid var(--Color-Tokens-Border-Primary, #E4E4E4);
+		padding-top: 0px;
+		padding-bottom: 0px;
+	}
+
+	.tr-space {
+		height: 12px;
+	}
+
+	.img-table {
+		width: 26px;
+		height: 26px;
+		border-radius: 100%;
+
+	}
+
+
+	.boder-table-radius-left {
+		border: 0.86px;
+		border-bottom-left-radius: 4px;
+		border-top-left-radius: 4px;
+	}
+
+	.boder-table-radius-right {
+		border: 0.86px;
+		border-bottom-right-radius: 4px;
+		border-top-right-radius: 4px;
+	}
+
+	.employee-list-body {
+		font-size: 14px;
+		font-weight: 400;
+	}
+
 	.profile-img {
 		width: 73px;
 		height: 73px;
@@ -529,6 +578,7 @@ $statusTexArr = Status::allStatusText();
 		font-size: 14px;
 		font-weight: 600;
 		text-decoration: none;
+		cursor: pointer;
 	}
 
 	.view-employee-gray {
@@ -544,28 +594,24 @@ $statusTexArr = Status::allStatusText();
 
 	}
 
-	.employee-header-table {
-		height: 45px;
-		border-radius: 4px;
-		background-color: #E4E4E4;
-
-		color: #727272;
-	}
-
-	.employee-header-table th {
-		font-size: 14px;
+	.action-menu {
+		font-size: 13px;
 		font-weight: 600;
+		background-color: white;
+		min-width: 149px;
+		padding-left: 15px;
+		padding-top: 28px;
+		padding-bottom: 8px;
+		border-radius: 5px;
+		margin-top: 10px;
+		box-shadow: 0px 1px 3px 0px #1018281A;
+		position: absolute;
+		/* margin-left: 40.2%; */
+
 	}
 
-	.boder-table-radius-left {
-		border-bottom-left-radius: 4px;
-		border-top-left-radius: 4px;
-	}
 
-	.boder-table-radius-right {
-		border-bottom-right-radius: 4px;
-		border-top-right-radius: 4px;
-	}
+
 
 
 
@@ -644,15 +690,28 @@ $this->registerJs('
 			$("#action").val(1);
 			$("#normal-action").addClass("d-none");
 			$("#active-action").removeClass("d-none");
-			$("#close-action").removeClass("d-none");
 			$("[id^=check-employee-]").removeClass("invisible");
+			$("[id^=check-employee-list-]").removeClass("d-none");
 		} else {
 			$("#action").val(0);
 			$("#normal-action").removeClass("d-none");
 			$("#active-action").addClass("d-none");
-			$("#close-action").addClass("d-none");
 			$("[id^=check-employee-]").addClass("invisible");
+			$("[id^=check-employee-list-]").addClass("d-none");
 		}
 	}
+		function showActionMenu() {
+		var actionMenu = $("#action-menu").val();
+		if (actionMenu == 0) {
+			$("#action-menu").removeClass("d-none");
+			$("#action-menu").val(1);
+
+		} else {
+			$("#action-menu").addClass("d-none");
+			$("#action-menu").val(0);
+		}
+	}
+		
+		
 ', View::POS_END);
 ?>
