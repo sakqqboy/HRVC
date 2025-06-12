@@ -444,6 +444,7 @@ class EmployeeController extends Controller
     {
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
+        // throw new Exception(print_r($employeeId, true));
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -468,9 +469,10 @@ class EmployeeController extends Controller
         //    $status = $employee["status"];
         $employee["status"] = $employee['statusName'];
         //    $employee["statusId"] = $status;
-        //throw new Exception(print_r($employee, true));
+        // throw new Exception(print_r($employee, true));
         return $this->render('employee_profile', [
-            "employee" => $employee
+            "employee" => $employee,
+            "employeeId" => $employeeId
         ]);
     }
 
@@ -668,130 +670,11 @@ class EmployeeController extends Controller
             "userLanguage" => $UserLanguage,
             "statusfrom" => 'Update'
         ]);
-
-        // $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
-        // if (!isset($group) || empty($group)) {
-        //     return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
-        // }
-        // $groupId = $group["groupId"];
-        // $api = curl_init();
-        // curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        // curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
-        // $countries = curl_exec($api);
-        // $countries = json_decode($countries, true);
-        // //throw new Exception(print_r($countries, true));
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        // $companies = curl_exec($api);
-        // $companies = json_decode($companies, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-department');
-        // $titles = curl_exec($api);
-        // $titles = json_decode($titles, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/status/active-status');
-        // $status = curl_exec($api);
-        // $status = json_decode($status, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee-condition/active-condition');
-        // $conditions = curl_exec($api);
-        // $conditions = json_decode($conditions, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/role/active-role');
-        // $roles = curl_exec($api);
-        // $roles = json_decode($roles, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-        // $employee = curl_exec($api);
-        // $employee = json_decode($employee, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/role/employee-role?id=' . $employeeId);
-        // $userRoles = curl_exec($api);
-        // $userRoles = json_decode($userRoles, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $employee['companyId']);
-        // $branches = curl_exec($api);
-        // $branches = json_decode($branches, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $employee['branchId'] . '&&page=1' . '&limit=7');
-        // $departments = curl_exec($api);
-        // $departments = json_decode($departments, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' . $employee['departmentId']);
-        // $teams = curl_exec($api);
-        // $teams = json_decode($teams, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team-position/index');
-        // $teamPosition = curl_exec($api);
-        // $teamPosition = json_decode($teamPosition, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/nationality');
-        // $nationalities = curl_exec($api);
-        // $nationalities = json_decode($nationalities, true);
-
-        // curl_close($api);
-
-        // $oldData["company"] = [
-        //     "id" => $employee['companyId'],
-        //     "name" => Company::companyName($employee['companyId'])
-        // ];
-        // $oldData["nationality"] = [
-        //     "id" => $employee['nationalityId'],
-        //     "name" => Nationality::nationalityName($employee['nationalityId'])
-        // ];
-        // $oldData["country"] = [
-        //     "id" => $employee['countryId'],
-        //     "name" => Country::countryName($employee['countryId'])
-        // ];
-        // $oldData["branch"] = [
-        //     "id" => $employee['branchId'],
-        //     "name" => Branch::branchName($employee['branchId'])
-        // ];
-        // $oldData["department"] = [
-        //     "id" => $employee['departmentId'],
-        //     "name" => Department::departmentName($employee['departmentId'])
-        // ];
-        // $oldData["team"] = [
-        //     "id" => $employee['teamId'],
-        //     "name" => Team::teamName($employee['teamId'])
-        // ];
-        // $oldData["teamPosition"] = [
-        //     "id" => $employee['teamPositionId'],
-        //     "name" => TeamPosition::teamPositionName($employee['teamPositionId'])
-        // ];
-        // $oldData["title"] = [
-        //     "id" => $employee['titleId'],
-        //     "name" => Title::titleName($employee['titleId'])
-        // ];
-        // $oldData["condition"] = [
-        //     "id" => $employee['employeeConditionId'],
-        //     "name" => EmployeeCondition::conditionName($employee['employeeConditionId'])
-        // ];
-        // $oldData["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
-        // $role = UserRole::userRight();
-        // // throw new Exception(print_r($userRoles, true));
-        // return $this->render('update', [
-        //     "countries" => $countries,
-        //     "companies" => $companies,
-        //     "titles" => $titles,
-        //     "status" => $status,
-        //     "conditions" => $conditions,
-        //     "roles" => $roles,
-        //     "employee" => $employee,
-        //     "oldData" => $oldData,
-        //     "userRoles" => $userRoles,
-        //     "branches" => $branches,
-        //     "departments" => $departments,
-        //     "teams" => $teams,
-        //     "teamPosition" => $teamPosition,
-        //     "nationalities" => $nationalities,
-        //     "role" => $role
-        // ]);
     }
     public function actionSaveUpdateEmployee()
     {
 
-        throw new exception(print_r(Yii::$app->request->post(), true));
+        // throw new exception(print_r(Yii::$app->request->post(), true));
 
         if (isset($_POST["employeeFirstname"]) && trim($_POST["employeeSurename"] != '')) {
             $userId =  $_POST["userId"];
@@ -868,7 +751,7 @@ class EmployeeController extends Controller
                     $fileResume->saveAs($pathSave);
                     $employee->resume = 'files/resume/' . $fileName;
                 }
-                throw new exception(print_r($fileResume, true));
+                // throw new exception(print_r($file, true));
 
                 $fileAgreement = UploadedFile::getInstanceByName("agreement");
                 if (isset($fileAgreement) && !empty($fileAgreement)) {
@@ -887,9 +770,9 @@ class EmployeeController extends Controller
                     $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
                     $pathSave = $path . $fileName;
                     $fileAgreement->saveAs($pathSave);
-                    $employee->employeeAgreement = 'files/agreement/' . $fileName;
+                    $employee->employeeAgreement = 'files/agreement/' . $file;
+                    // throw new exception(print_r($employee->employeeAgreement, true));
                 }
-                // throw new exception(print_r($fileAgreement, true));
 
                 if ($employee->save(false)) {
                     $user = User::find()->where(["employeeId" => $_POST["emId"]])->one();
@@ -905,7 +788,6 @@ class EmployeeController extends Controller
                         }
                     }
                     $user->updateDateTime = new Expression('NOW()');
-
                     if ($user->save(false)) {
                         // UserRole
                         $role = UserRole::find()->where(['userId' => $_POST["userId"]])->one();
@@ -937,6 +819,7 @@ class EmployeeController extends Controller
                         // certificateData
                         $certificates = json_decode($_POST['certificateData'], true);
                         if ($certificates && is_array($certificates)) {
+                            
                             foreach ($certificates as $cert) {
                                 $tmpId = $cert['id']; // เช่น 1749180178186
                                 $cerName = $cert['cerName'] ?? null;
@@ -976,7 +859,6 @@ class EmployeeController extends Controller
                                     move_uploaded_file($img['tmp_name'], $path . $imgName);
                                     $cerImagePath = 'images/certificate/' . $imgName;
                                 }
-
                                 // 🔁 บันทึกข้อมูล (Insert ใหม่ หรือ Update ก็ได้)
                                 $certificate = Certificate::findOne(['cerId' => $tmpId]);
                                 if (!$certificate) {
@@ -984,6 +866,7 @@ class EmployeeController extends Controller
                                     $certificate->cerId = $tmpId; // กำหนดเฉพาะตอน insert ใหม่
                                     $certificate->createDateTime = new \yii\db\Expression('NOW()');
                                 }
+
                                 // กำหนดค่าทั่วไป
                                 $certificate->cerName = $cerName;
                                 $certificate->issuing = $issuing;
@@ -999,6 +882,8 @@ class EmployeeController extends Controller
                                     $certificate->cerImage = $cerImagePath;
                                 }
                                 $certificate->updateDateTime = new \yii\db\Expression('NOW()');
+                                // throw new exception(print_r( $certificate->cerName, true));
+
                                 $certificate->save(false); // ✅ บันทึก
 
                             }
@@ -1034,6 +919,10 @@ class EmployeeController extends Controller
                 }
             }
         }
+        return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-profile/' . ModelMaster::encodeParams([
+                     "employeeId" => $_POST["emId"]
+        ]));
+
     }
     public function actionFilterEmployee()
     {
@@ -1122,15 +1011,57 @@ class EmployeeController extends Controller
     {
         $mode = Yii::$app->request->post('mode'); // create หรือ edit
         $certData = Yii::$app->request->post('cert'); // JSON string ของ certificate
+        $certificate = null;
 
         $cert = $certData ? json_decode($certData, true) : [];
-        // throw new Exception(print_r($cert, true));
+        // throw new Exception(print_r($cert['id'], true));
 
+        if (is_array($cert) && isset($cert['id']) && !empty($cert['id'])) {
+            $api = curl_init();
+            curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+            curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/certificate-detail?id=' . $cert['id']);
+            
+            $certificate = curl_exec($api);
+            $certificate = json_decode($certificate, true);
+            curl_close($api);
+        } else {
+            // คุณอาจจะต้อง log หรือแจ้งว่าไม่มี cert['id']
+            Yii::error('Invalid cert data: ' . print_r($cert, true));
+        }
 
         return $this->renderPartial('modal_certificate', [
             'mode' => $mode,
-            'cert' => $cert
+            'cert' => $cert,
+            'certificate' => $certificate
         ]);
+    }
+
+    public function actionDeleteCertificate()
+    {
+        $certId = $_POST['id'] ?? '';
+
+        if (empty($certId)) {
+            echo json_encode(['status' => 'error', 'message' => 'Missing certificate ID']);
+            return;
+        }
+
+        // ตรวจสอบว่ามี Certificate นี้อยู่ก่อน
+        $exists = Certificate::find()->where(['cerId' => $certId])->exists();
+
+        if (!$exists) {
+            echo json_encode(['status' => 'error', 'message' => 'Certificate not found']);
+            return;
+        }
+
+        // ลบ certificate
+        $deleted = Certificate::deleteAll(['cerId' => $certId]);
+
+        if ($deleted > 0) {
+            echo json_encode(['status' => 'success', 'message' => 'Certificate deleted']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Delete failed']);
+        }
     }
 
 
@@ -1812,4 +1743,53 @@ class EmployeeController extends Controller
     {
         return $this->render('test', []);
     }
+
+    public function actionContactDetail()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('contact_detail');
+    }
+
+    public function actionWorkDetail()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('work_detail');
+    }
+
+    public function actionAttachments()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('attachments');
+    }
+
+    public function actionCertificates()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('certificates');
+    }
+
+    public function actionPerformance()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('performance');
+    }
+
+    public function actionEvaluation()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('evaluation');
+    }
+
+    public function actionSalary()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('salary');
+    }
+
+    public function actionRole()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
+        return $this->renderPartial('role');
+    }
+
 }

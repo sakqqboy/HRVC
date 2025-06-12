@@ -57,10 +57,10 @@ $LanguageId = '';
                 class="btn-create-branch">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg"
                     style="width:18px; height:18px; margin-top:-3px;">
-                Back
+                <?= Yii::t('app', 'Back') ?>
             </a>
             <div class="pim-name-title ml-10">
-                <?= $statusfrom ?> Employee
+                <?= Yii::t('app', $statusfrom.' Employee') ?>
             </div>
         </div>
         <div class="row update-group-body mt-20" style="gap: 60px;">
@@ -70,15 +70,16 @@ $LanguageId = '';
                 <div class="between-center">
                     <div>
                         <span class="font-size-16 font-weight-600">
-                            Account Details
+                            <?= Yii::t('app', 'Account Details') ?>
                         </span>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                            data-placement="top" aria-label="Account Details" data-bs-original-title="Account Details">
+                            data-placement="top" aria-label="<?= Yii::t('app', 'Account Details') ?>"
+                            data-bs-original-title="<?= Yii::t('app', 'Account Details') ?>">
                     </div>
                     <div class="d-flex align-items-center" style="gap: 10px;">
                         <span class="font-size-16 font-weight-600">
                             <span class="text-danger">* </span>
-                            Employment Status
+                            <?= Yii::t('app', 'Employment Status') ?>
                         </span>
                         <select class="select-employee-status" aria-label="Default select example" name="status"
                             id="pim-status" onchange="javascript:changeStatusEmploywee()" required>
@@ -91,7 +92,7 @@ $LanguageId = '';
                             if (!empty($conditions) && isset($employee['employeeConditionId'])) {
                                 foreach ($conditions as $c) {
                                     $selected = ($c['employeeConditionId'] == $employee['employeeConditionId']) ? 'selected' : '';
-                                    echo '<option value="' . $c['employeeConditionId'] . '" ' . $selected . '>' . $c['employeeConditionName'] . '</option>';
+                                    echo '<option value="' . $c['employeeConditionId'] . '" ' . $selected . '>' . Yii::t('app',$c['employeeConditionName']) . '</option>';
                                 }
                             }
                             ?>
@@ -123,11 +124,13 @@ $LanguageId = '';
                                     <img src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"
                                         style="width: 50px; height: auto;" alt="Upload Icon"> <br><br>
                                     <span>
-                                        Upload <span style="font-size: 13px; color: #666;">
-                                            or Drop </span>
+                                        <?= Yii::t('app', 'Upload') ?> <span style="font-size: 13px; color: #666;">
+                                            <?= Yii::t('app', 'or Drop') ?> </span>
                                     </span>
                                     <br>
-                                    <span style="font-size: 13px; color: #666;">Branch Picture here</span>
+                                    <span style="font-size: 13px; color: #666;">
+                                        <?= Yii::t('app', 'Branch Picture here') ?>
+                                    </span>
                                     <?php
                                     }
                                     ?>
@@ -138,8 +141,8 @@ $LanguageId = '';
                         </div>
                         <div style="text-align: center;">
                             <span class="font-size-14 font-weight-400 text-gray">
-                                Acceptable file <br>
-                                types: JPEG & PNG
+                                <?= Yii::t('app', 'Acceptable file') ?> <br>
+                                <?= Yii::t('app', 'types: JPEG & PNG') ?>
                             </span>
                         </div>
                     </div>
@@ -151,7 +154,7 @@ $LanguageId = '';
                         <div class="flex-center" style="gap: 37px;">
                             <div>
                                 <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
-                                    System Login ID
+                                    <?= Yii::t('app', 'System Login ID') ?>
                                 </text>
                                 <div class="input-group">
                                     <span class="input-group-text" style="background-color: white; border-right: none;">
@@ -165,17 +168,17 @@ $LanguageId = '';
                             </div>
                             <div>
                                 <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
-                                    Employee ID
+                                    <?= Yii::t('app', 'Employee ID') ?>
                                 </text>
                                 <input type="text" class="form-control font-size-14" id="employeeId" name=" employeeId"
-                                    placeholder="Please assign the employee ID "
+                                    placeholder="<?= Yii::t('app', 'Please assign the employee ID') ?>"
                                     value="<?= $employee['employeeId'] ?? '' ?>" style="width:  330.59px;">
                             </div>
                         </div>
                         <div class="flex-center" style="gap: 37px;">
                             <div>
                                 <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
-                                    Password
+                                    <?= Yii::t('app', 'Password') ?>
                                 </text>
 
                                 <div class="input-group">
@@ -184,7 +187,7 @@ $LanguageId = '';
                                             style="width: 20px; height: 20px;">
                                     </span>
                                     <input type="password" class="form-control font-size-14" name="password"
-                                        id="password" placeholder="Register Password here"
+                                        id="password" placeholder="<?= Yii::t('app', 'Register Password here') ?>"
                                         value="<?= $userEmployee['password'] ?? '' ?>"
                                         style="width: 245px; border-left: none; border-right: none;">
                                     <span class="input-group-text" onclick="togglePassword()"
@@ -197,7 +200,7 @@ $LanguageId = '';
                             </div>
                             <div>
                                 <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
-                                    System Language Preference
+                                    <?= Yii::t('app', 'System Language Preference') ?>
                                 </text>
 
                                 <div class="input-group">
@@ -233,7 +236,7 @@ $LanguageId = '';
                         <div class="w-100">
                             <div class="w-100">
                                 <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
-                                    System Wide Permission Level </text>
+                                    <?= Yii::t('app', 'System Wide Permission Level') ?></text>
                                 <hr class="hr-group">
                             </div>
 
@@ -267,10 +270,10 @@ $LanguageId = '';
                         <div class="w-100">
                             <div class="w-100">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                    data-placement="top" aria-label="Module Access"
-                                    data-bs-original-title="Module Access">
+                                    data-placement="top" aria-label="<?= Yii::t('app', 'Module Access') ?>"
+                                    data-bs-original-title="<?= Yii::t('app', 'Module Access') ?>">
                                 <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
-                                    Module Access
+                                    <?= Yii::t('app', 'Module Access') ?>
                                 </text>
                                 <hr class="hr-group">
                             </div>
@@ -299,11 +302,11 @@ $LanguageId = '';
                 <div>
                     <!-- head -->
                     <span class="font-size-16 font-weight-600">
-                        Contact & Personal Details
+                        <?= Yii::t('app', 'Contact & Personal Details') ?>
                     </span>
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                        data-placement="top" aria-label=" Contact & Personal Details"
-                        data-bs-original-title=" Contact & Personal Details">
+                        data-placement="top" aria-label="<?= Yii::t('app', 'Contact & Personal Details') ?>"
+                        data-bs-original-title="<?= Yii::t('app', 'Contact & Personal Details') ?>">
                     <hr class="hr-group">
                 </div>
                 <div class="d-flex flex-column" style="gap: 40px">
@@ -311,7 +314,7 @@ $LanguageId = '';
                     <div class="row">
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"><span class="text-danger">*
-                                </span>Salutation</text>
+                                </span><?= Yii::t('app', 'Salutation') ?></text>
                             <select class="form-select" name="salutation" id="salutation" style="border-left: none;"
                                 required>
                                 <option value="" disabled <?= empty($employee['salutation']) ? 'selected' : '' ?> hidden
@@ -319,29 +322,42 @@ $LanguageId = '';
                                     <?= Yii::t('app', 'Select') ?>
                                 </option>
                                 <option value="Mr." <?= ($employee['salutation'] ?? '') === 'Mr.' ? 'selected' : '' ?>>
-                                    Mr.</option>
+                                    <?= Yii::t('app', 'Mr.') ?>
+                                </option>
                                 <option value="Mrs."
-                                    <?= ($employee['salutation'] ?? '') === 'Mrs.' ? 'selected' : '' ?>>Mrs.</option>
+                                    <?= ($employee['salutation'] ?? '') === 'Mrs.' ? 'selected' : '' ?>>
+                                    <?= Yii::t('app', 'Mrs.') ?>
+                                </option>
                                 <option value="Miss"
-                                    <?= ($employee['salutation'] ?? '') === 'Miss' ? 'selected' : '' ?>>Miss</option>
+                                    <?= ($employee['salutation'] ?? '') === 'Miss' ? 'selected' : '' ?>>
+                                    <?= Yii::t('app', 'Miss') ?>
+                                </option>
                                 <option value="Ms." <?= ($employee['salutation'] ?? '') === 'Ms.' ? 'selected' : '' ?>>
-                                    Ms.</option>
+                                    <?= Yii::t('app', 'Ms.') ?>
+                                </option>
                                 <option value="Dr." <?= ($employee['salutation'] ?? '') === 'Dr.' ? 'selected' : '' ?>>
-                                    Dr.</option>
+                                    <?= Yii::t('app', 'Dr.') ?>
+                                </option>
                                 <option value="Prof."
-                                    <?= ($employee['salutation'] ?? '') === 'Prof.' ? 'selected' : '' ?>>Prof.</option>
+                                    <?= ($employee['salutation'] ?? '') === 'Prof.' ? 'selected' : '' ?>>
+                                    <?= Yii::t('app', 'Prof.') ?>
+                                </option>
                             </select>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>Gender</text>
+                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                <?= Yii::t('app', 'Gender') ?>
+                            </text>
                             <select class="form-select" name="gender" id="gender" style="border-left: none;" required>
                                 <option value="" disabled <?= empty($employee['gender']) ? 'selected' : '' ?> hidden
                                     style="color: var(--Helper-Text, #8A8A8A);">
                                     <?= Yii::t('app', 'Select') ?>
                                 </option>
-                                <option value="1" <?= ($employee['gender'] ?? '') == '1' ? 'selected' : '' ?>>Male
+                                <option value="1" <?= ($employee['gender'] ?? '') == '1' ? 'selected' : '' ?>>
+                                    <?= Yii::t('app', 'Male') ?>
                                 </option>
-                                <option value="2" <?= ($employee['gender'] ?? '') == '2' ? 'selected' : '' ?>>Female
+                                <option value="2" <?= ($employee['gender'] ?? '') == '2' ? 'selected' : '' ?>>
+                                    <?= Yii::t('app', 'Female') ?>
                                 </option>
                             </select>
                         </div>
@@ -351,22 +367,25 @@ $LanguageId = '';
 
                     <div class="row">
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>First
-                                Name</text>
+                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                <?= Yii::t('app', 'First Name') ?>
+                            </text>
                             <input type="text" name="employeeFirstname" id="employeeFirstname" class="form-control"
-                                placeholder="Please Write the First Name"
+                                placeholder="<?= Yii::t('app', 'Please Write the First Name') ?>"
                                 value="<?=$employee['employeeFirstname'] ?? '' ?>" required>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>Last
-                                Name</text>
+                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                <?= Yii::t('app', 'Last Name') ?>
+                            </text>
                             <input type="text" name="employeeSurename" id="employeeSurename" class="form-control"
-                                placeholder="Please Write the Last Name"
+                                placeholder="<?= Yii::t('app', 'Please Write the Last Name') ?>"
                                 value="<?=$employee['employeeSurename'] ?? '' ?>" required>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"><span class="text-danger">*
-                                </span>Nationality</text>
+                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                <?= Yii::t('app', 'Nationality') ?>
+                            </text>
                             <div class="input-group">
                                 <span class="input-group-text" style="background-color: white; border-right: none;">
                                     <img class="cycle-current" id="flag"
@@ -399,19 +418,23 @@ $LanguageId = '';
                     <div class="row">
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
-                                Contact Number
+                                <?= Yii::t('app', 'Contact Number') ?>
                             </text>
                             <input type="text" name="telephoneNumber" id="telephoneNumber" class="form-control"
                                 placeholder="e.g., +66 081 091 87" value="<?=$employee['telephoneNumber'] ?? '' ?>"
                                 required>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500">Emergency Contact</text>
+                            <text class="font-size-16 font-weight-500">
+                                <?= Yii::t('app', 'Emergency Contact') ?>
+                            </text>
                             <input type="text" name="emergencyTel" id="emergencyTel" class="form-control"
                                 placeholder="e.g., +66 081 091 87" value="<?=$employee['emergencyTel'] ?? '' ?>">
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"> Address</text>
+                            <text class="font-size-16 font-weight-500">
+                                <?= Yii::t('app', 'Address') ?>
+                            </text>
                             <input type="text" name="address1" id="address1" class="form-control"
                                 placeholder="e.g., 23 Elm Street, Apt 4B" value="<?=$employee['address1'] ?? '' ?>">
                         </div>
@@ -419,7 +442,8 @@ $LanguageId = '';
                     <div class="row">
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
-                                Personal Email</text>
+                                <?= Yii::t('app', 'Personal Email') ?>
+                            </text>
                             <div class="input-group">
                                 <span class="input-group-text" style="background-color: white; border-right: none;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/e-mail.svg" alt="Website"
@@ -432,7 +456,8 @@ $LanguageId = '';
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
-                                Marital Status</text>
+                                <?= Yii::t('app', 'Marital Status') ?>
+                            </text>
                             <div class="input-group">
                                 <span class="input-group-text" style="background-color: white; border-right: none;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
@@ -446,25 +471,31 @@ $LanguageId = '';
                                     </option>
                                     <option value="1"
                                         <?= (isset($employee['maritalStatus']) && $employee['maritalStatus'] == 1) ? 'selected' : '' ?>>
-                                        Single</option>
+                                        <?= Yii::t('app', 'Single') ?>
+                                    </option>
                                     <option value="2"
                                         <?= (isset($employee['maritalStatus']) && $employee['maritalStatus'] == 2) ? 'selected' : '' ?>>
-                                        Married</option>
+                                        <?= Yii::t('app', 'Married') ?>
+                                    </option>
                                     <option value="3"
                                         <?= (isset($employee['maritalStatus']) && $employee['maritalStatus'] == 3) ? 'selected' : '' ?>>
-                                        Divorced</option>
+                                        <?= Yii::t('app', 'Divorced') ?>
+                                    </option>
                                     <option value="4"
                                         <?= (isset($employee['maritalStatus']) && $employee['maritalStatus'] == 4) ? 'selected' : '' ?>>
-                                        Widowed</option>
+                                        <?= Yii::t('app', 'Widowed') ?>
+                                    </option>
                                     <option value="5"
                                         <?= (isset($employee['maritalStatus']) && $employee['maritalStatus'] == 5) ? 'selected' : '' ?>>
-                                        Separated</option>
+                                        <?= Yii::t('app', 'Separated') ?>
+                                    </option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <label class="font-size-16 font-weight-500"><span class="text-danger">* </span>
-                                Date of Birth</label>
+                                <?= Yii::t('app', 'Date of Birth') ?>
+                            </label>
                             <div class="input-group" id="group-birtdate" style="position: relative;">
                                 <span class="input-group-text mid-center pb-10 pt-10"
                                     style="background-color: #C3C3C3; border:0.5px solid #818181; border-radius: 36px; width: 66px; z-index: 1; height: 40px;">
@@ -475,7 +506,8 @@ $LanguageId = '';
                                 <!-- คลิกเปิด calendar -->
                                 <div class="form-control" id="birthdate-select"
                                     style="border-radius: 53px; text-align: center; cursor: pointer; position: absolute; width: 100%; height: 40px;">
-                                    Select Birthday <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
+                                    <?= Yii::t('app', 'Select Birthday') ?>
+                                    <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                                 </div>
 
                                 <!-- input ที่ใช้ส่งค่าจริง -->
@@ -501,15 +533,18 @@ $LanguageId = '';
                     <!-- head -->
                     <div>
                         <span class="font-size-16 font-weight-600">
-                            Work Details
+                            <?= Yii::t('app', 'Work Details') ?>
                         </span>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                            data-placement="top" aria-label=" Work Details" data-bs-original-title=" Work Details">
+                            data-placement="top" aria-label="<?= Yii::t('app', 'Work Details') ?>"
+                            data-bs-original-title="<?= Yii::t('app', 'Work Details') ?>">
                     </div>
                     <div>
-                        <span class="text-gray font-size-13 font-weight-400 mr-12">Can’t find the company?</span>
+                        <span class="text-gray font-size-13 font-weight-400 mr-12">
+                            <?= Yii::t('app', 'Can’t find the company?') ?></span>
                         <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
-                            class="text-blue font-size-13 font-weight-500">Register Company Here <img
+                            class="text-blue font-size-13 font-weight-500">
+                            <?= Yii::t('app', 'Register Company Here') ?> <img
                                 src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
                                 style="cursor: pointer;"></a>
                     </div>
@@ -522,9 +557,11 @@ $LanguageId = '';
                     <div class="row">
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"><span class="text-danger">*
-                                </span>Select Company
+                                </span>
+                                <?= Yii::t('app', 'Select Company') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                    data-placement="top" aria-label="ttt" data-bs-original-title="ttt">
+                                    data-placement="top" aria-label="<?= Yii::t('app', 'Select Company') ?>"
+                                    data-bs-original-title="<?= Yii::t('app', 'Select Company') ?>">
                             </text>
                             <div class="input-group">
                                 <select class="form-select" id="companySelectId" name="companyId"
@@ -556,9 +593,10 @@ $LanguageId = '';
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
-                                Select Branch
+                                <?= Yii::t('app', 'Select Branch') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                    data-placement="top" aria-label="ttt" data-bs-original-title="ttt">
+                                    data-placement="top" aria-label="<?= Yii::t('app', 'Select Branch') ?>"
+                                    data-bs-original-title="<?= Yii::t('app', 'Select Branch') ?>">
                             </text>
                             <div class="input-group">
                                 <select id="branchSelectId" brancSelect" class="form-select"
@@ -584,9 +622,10 @@ $LanguageId = '';
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
-                                Select Department
+                                <?= Yii::t('app', 'Select Department') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                    data-placement="top" aria-label="ttt" data-bs-original-title="ttt">
+                                    data-placement="top" aria-label="<?= Yii::t('app', 'Select Department') ?>"
+                                    data-bs-original-title="<?= Yii::t('app', 'Select Department') ?>">
                             </text>
                             <div class="input-group">
                                 <select id="departmentSelectId" brancSelect" class="form-select"
@@ -617,9 +656,10 @@ $LanguageId = '';
                     <div class="row">
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
-                                Select Team
+                                <?= Yii::t('app', 'Select Team') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                    data-placement="top" aria-label="ttt" data-bs-original-title="ttt">
+                                    data-placement="top" aria-label="<?= Yii::t('app', 'Select Team') ?>"
+                                    data-bs-original-title="<?= Yii::t('app', 'Select Team') ?>">
                             </text>
                             <div class="input-group">
                                 <select id="teamSelectId" brancSelect" class="form-select"
@@ -648,7 +688,7 @@ $LanguageId = '';
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
-                                Work Email
+                                <?= Yii::t('app', 'Work Email') ?>
                             </text>
                             <div class="input-group">
                                 <span class="input-group-text" style="background-color: white; border-right: none;">
@@ -665,7 +705,7 @@ $LanguageId = '';
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <label class="font-size-16 font-weight-500">
                                 <span class="text-danger">* </span>
-                                Hiring Date
+                                <?= Yii::t('app', 'Hiring Date') ?>
                             </label>
                             <div class="input-group" id="group-hiringdate" style="position: relative;">
                                 <span class="input-group-text mid-center pb-10 pt-10" id="calendar-icon-hiring"
@@ -676,8 +716,8 @@ $LanguageId = '';
 
                                 <div class="form-control" id="hiring-select"
                                     style="border-radius: 53px; text-align: center; cursor: pointer; position: absolute; width: 100%; height: 40px;">
-                                    Select hiring Date <i class="fa fa-angle-down pull-right mt-5"
-                                        aria-hidden="true"></i>
+                                    <?= Yii::t('app', 'Select hiring Date') ?>
+                                    <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                                 </div>
 
                                 <input type="hidden" name="hiringDate" id="hiringDate"
@@ -708,7 +748,7 @@ $LanguageId = '';
                                     id="override-probation-employee-hidden" value="1">
 
                                 <label class="font-size-16 font-weight-500">
-                                    Probation Period
+                                    <?= Yii::t('app', 'Probation Period') ?>
                                 </label>
                             </div>
                             <div class="input-group" id="group-due-term" style="position: relative;">
@@ -726,7 +766,8 @@ $LanguageId = '';
                                 <!-- คลิกเปิด calendar -->
                                 <div class="form-control" id="multi-due-term"
                                     style="border-radius: 53px; text-align: center; cursor: pointer; position: absolute; width: 100%; height: 40px;">
-                                    Select the term <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
+                                    <?= Yii::t('app', 'Select the term') ?>
+                                    <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
                                 </div>
                                 <!-- hidden inputs เพื่อเก็บค่า month และ year -->
                                 <input type="hidden" id="fromDate" name="fromDate"
@@ -762,10 +803,11 @@ $LanguageId = '';
                 <div>
                     <!-- head -->
                     <span class="font-size-16 font-weight-600">
-                        Job Description
+                        <?= Yii::t('app', 'Job Description') ?>
                     </span>
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                        data-placement="top" aria-label=" Job Description" data-bs-original-title=" Job Description">
+                        data-placement="top" aria-label="<?= Yii::t('app', 'Job Description') ?>"
+                        data-bs-original-title="<?= Yii::t('app', 'Job Description') ?>">
                     <hr class="hr-group">
                 </div>
                 <div>
@@ -773,10 +815,11 @@ $LanguageId = '';
                     <div class="row">
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <label class="font-size-16 font-weight-500">
-                                <span class="text-danger">*</span> Employee’s Title
+                                <span class="text-danger">*</span>
+                                <?= Yii::t('app', 'Employee’s Title') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                    data-placement="top" aria-label="Employee’s Title"
-                                    data-bs-original-title="Employee’s Title">
+                                    data-placement="top" aria-label="<?= Yii::t('app', 'Employee’s Title') ?>"
+                                    data-bs-original-title="<?= Yii::t('app', 'Employee’s Title') ?>">
                             </label>
 
                             <div class="input-group">
@@ -809,7 +852,7 @@ $LanguageId = '';
                         <div class="col-8 d-flex justify-content-end align-items-end">
                             <a href="<?= Yii::$app->homeUrl ?>setting/title/create/<?= ModelMaster::encodeParams(["companyId" => '', "branchId" => '', "departmentId" => '' ]) ?>"
                                 class="text-blue font-size-13 font-weight-500">
-                                Edit Job Description here
+                                <?= Yii::t('app', 'Edit Job Description here') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
                                     style="cursor: pointer;">
                             </a>
@@ -821,11 +864,12 @@ $LanguageId = '';
                         <!-- ตอนยังไม่เลือก -->
                         <div class="create-crad-company" id="no-existing" style="background-color: #F9F9F9;">
                             <span class="font-size-15 font-weight-700 ">
-                                Job Description has not been selected yet!
+                                <?= Yii::t('app', 'Job Description has not been selected yet!') ?>
                             </span>
-                            <span class="font-size-12 font-weight-400 font-gray">Select a job description template
+                            <span class="font-size-12 font-weight-400 font-gray">
+                                <?= Yii::t('app', 'Select a job description template
                                 from the list, and it will
-                                appear here.
+                                appear here.') ?>
                             </span>
                         </div>
 
@@ -837,16 +881,18 @@ $LanguageId = '';
                     <div>
                         <!-- head -->
                         <span class="font-size-16 font-weight-600">
-                            Attachments & Remarks
+                            <?= Yii::t('app', 'Attachments & Remarks') ?>
                         </span>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                            data-placement="top" aria-label=" Attachments & Remarks"
-                            data-bs-original-title=" DeAttachments & Remarks">
+                            data-placement="top" aria-label="<?= Yii::t('app', 'Attachments & Remarks') ?>"
+                            data-bs-original-title="<?= Yii::t('app', 'Attachments & Remarks') ?>">
                         <hr class="hr-group">
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12 ">
-                            <span class="font-size-14 font-weight: 500;">Relevant Files</span>
+                            <span class="font-size-14 font-weight: 500;">
+                                <?= Yii::t('app', 'Relevant Files') ?>
+                            </span>
 
                             <div class="col-lg-11 mt-5 mb-24">
                                 <div id="upload-file1" class="form-control"
@@ -886,10 +932,12 @@ $LanguageId = '';
                                             }else{
                                             ?>
                                             <label class="text-gray font-size-16 font-weight-500" for="resume">
-                                                Upload Resume/CV here
+                                                <?= Yii::t('app', 'Upload Resume/CV here') ?>
                                             </label>
                                             <div class="text-secondary text-gray font-size-14">
-                                                <span class="text-gray font-size-12">Supported - pdf, .doc, .docx</span>
+                                                <span class="text-gray font-size-12">
+                                                    <?= Yii::t('app', 'Supported - pdf, .doc, .docx') ?>
+                                                </span>
                                             </div>
                                             <?php
                                             }
@@ -922,7 +970,7 @@ $LanguageId = '';
                                             <label id="resume-btn" for="resume"
                                                 class="text-blue font-size-16 font-weight-600 pt-13"
                                                 style="cursor: pointer;">
-                                                Upload
+                                                <?= Yii::t('app', 'Upload') ?>
                                                 <img src="<?= Yii::$app->homeUrl ?>image/file-up-blue.svg" alt="icon"
                                                     style="width: 16px; height: 16px;">
                                             </label>
@@ -978,11 +1026,13 @@ $LanguageId = '';
                                             }else{
                                             ?>
                                             <label class="text-gray font-size-16 font-weight-500" for="name">
-                                                Upload Agreement Here
+                                                <?= Yii::t('app', 'Upload Agreement Here') ?>
                                             </label>
                                             <div class="text-secondary text-gray  font-size-14">
-                                                <span class="text-gray font-size-12"> Supported - pdf, .doc,
-                                                    .docx</span>
+                                                <span class="text-gray font-size-12">
+                                                    <?= Yii::t('app', 'Supported - pdf, .doc,
+                                                    .docx') ?>
+                                                </span>
                                             </div>
                                             <?php
                                             }
@@ -1012,7 +1062,7 @@ $LanguageId = '';
                                             ?>
                                             <label id="agreement-btn" type="button" for="agreement"
                                                 class="text-blue font-size-16 font-weight-600  pt-13">
-                                                Upload
+                                                <?= Yii::t('app', 'Upload') ?>
                                                 <img src="<?= Yii::$app->homeUrl ?>image/file-up-blue.svg" alt="icon"
                                                     style="width: 16px; height: 16px;">
                                             </label>
@@ -1022,8 +1072,6 @@ $LanguageId = '';
                                             <?php
                                             }
                                             ?>
-
-
                                         </div>
                                         <input id="agreement" style="display:none;" type="file" name="agreement"
                                             onchange="javascript:checkUploadFile(2)">
@@ -1038,7 +1086,7 @@ $LanguageId = '';
 
                         <div class="col-lg-6 col-md-6 col-12 pl-40">
                             <div class="col-12 font-size-14 font-weight: 500">
-                                About the Employee
+                                <?= Yii::t('app', 'About the Employee') ?>
                             </div>
                             <div class="col-12 mt-5">
                                 <textarea class="form-control" name="remark"
@@ -1054,11 +1102,11 @@ $LanguageId = '';
                     <div>
                         <!-- head -->
                         <span class="font-size-16 font-weight-600">
-                            Certificates and Skill Tags
+                            <?= Yii::t('app', 'Certificates and Skill Tags') ?>
                         </span>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                            data-placement="top" aria-label=" Certificates and Skill Tags"
-                            data-bs-original-title=" Certificates and Skill Tags">
+                            data-placement="top" aria-label="<?= Yii::t('app', 'Certificates and Skill Tags') ?>"
+                            data-bs-original-title="<?= Yii::t('app', 'Certificates and Skill Tags') ?>">
                         <hr class="hr-group">
                     </div>
 
@@ -1066,10 +1114,10 @@ $LanguageId = '';
                         <div class="col-lg-6 col-md-6 col-12 " style="border-right:lightgray solid thin;">
                             <span class=" font-size-16 font-weight-500">
                                 <span class="text-danger">* </span>
-                                Certificate Achievements
+                                <?= Yii::t('app', 'Certificate Achievements') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                    data-placement="top" aria-label=" Certificates and Skill Tags"
-                                    data-bs-original-title=" Certificates and Skill Tags">
+                                    data-placement="top" aria-label="<?= Yii::t('app', 'Certificate Achievements') ?>"
+                                    data-bs-original-title="<?= Yii::t('app', 'Certificate Achievements') ?>">
                             </span>
                             <!-- เพิ่มรูป -->
                             <ul id="schedule-list" class="list-unstyled small  m-0 p-0 mt-12">
@@ -1079,7 +1127,7 @@ $LanguageId = '';
                                 style="padding: 13px 20px; height: 40px; width: 100%; border-radius: 5px; border: 0.5px solid #CBD5E1;"
                                 onclick="openPopupModalCertificate()">
                                 <span class="text-blue mr-6" style="font-weight: 600; font-size: 14px;">
-                                    Add Certificate
+                                    <?= Yii::t('app', 'Add Certificate') ?>
                                 </span>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-blue.svg" alt="LinkedIn"
                                     style="width: 20px; height: 20px;">
@@ -1090,11 +1138,11 @@ $LanguageId = '';
                             <div class="company-group-edit bg-white">
                                 <span class=" font-size-16 font-weight-500">
                                     <span class="text-danger">* </span>
-                                    Skill Tags
+                                    <?= Yii::t('app', 'Skill Tags') ?>
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                         data-toggle="tooltip" data-placement="top"
-                                        aria-label=" Certificates and Skill Tags"
-                                        data-bs-original-title=" Certificates and Skill Tags">
+                                        aria-label="<?= Yii::t('app', 'Certificates and Skill Tags') ?>"
+                                        data-bs-original-title="<?= Yii::t('app', 'Certificates and Skill Tags') ?>">
                                 </span>
                                 <div class="input-group mt-12">
                                     <span class="input-group-text" style="background-color: white; border-right: none;">
@@ -1104,7 +1152,7 @@ $LanguageId = '';
                                     </span>
                                     <input type="text" name="skill" id="skill" class="form-control"
                                         style=" border-left: none;  border-right: none;"
-                                        placeholder="e.g., Python, Data Analysis, Communication  ">
+                                        placeholder="<?= Yii::t('app', 'e.g., Python, Data Analysis, Communication') ?>">
                                     <span class="input-group-text" id="enterHint"
                                         style="background-color: #ffff; border-left: none; ">
                                         <div class="city-crad-company" id="hintText"
@@ -1112,7 +1160,7 @@ $LanguageId = '';
                                                 src="<?= Yii::$app->homeUrl ?>image/enter-white.svg"
                                                 style="width: 24px; height: 24px;">
                                             <span class="font-white">
-                                                Enter to add
+                                                <?= Yii::t('app', 'Enter to add') ?>
                                             </span>
                                         </div>
                                     </span>
@@ -1132,10 +1180,11 @@ $LanguageId = '';
                     <div>
                         <!-- head -->
                         <span class="font-size-16 font-weight-600">
-                            Others
+                            <?= Yii::t('app', 'Others') ?>
                         </span>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                            data-placement="top" aria-label="Others" data-bs-original-title="Others">
+                            data-placement="top" aria-label="<?= Yii::t('app', 'Others') ?>"
+                            data-bs-original-title="<?= Yii::t('app', 'Others') ?>">
                         <hr class="hr-group">
                     </div>
                     <div>
@@ -1143,7 +1192,7 @@ $LanguageId = '';
                         <div class="row">
                             <div class="col-4 d-flex flex-column" style="gap: 12px;">
                                 <text class="font-size-16 font-weight-500"><span class="text-danger">*</span>
-                                    Primary Language Spoken
+                                    <?= Yii::t('app', 'Primary Language Spoken') ?>
                                 </text>
                                 <div class="input-group">
                                     <span class="input-group-text" style="background-color: white; border-right: none;">
@@ -1178,7 +1227,7 @@ $LanguageId = '';
                             </div>
                             <div class="col-4 d-flex flex-column" style="gap: 12px;">
                                 <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
-                                    Level of Proficiency
+                                    <?= Yii::t('app', 'Level of Proficiency') ?>
                                 </text>
                                 <?php
                                 // ดึงค่าภาษาเริ่มต้นจาก array ตำแหน่งที่ 0 (ถ้ามี)
@@ -1190,19 +1239,27 @@ $LanguageId = '';
                                         style="color: var(--Helper-Text, #8A8A8A);">
                                         <?= Yii::t('app', 'Select') ?>
                                     </option>
-                                    <option value="1" <?= $selectedLanguageId == '1' ? 'selected' : '' ?>>Beginner
+                                    <option value="1" <?= $selectedLanguageId == '1' ? 'selected' : '' ?>>
+                                        <?= Yii::t('app', 'Beginner') ?>
                                     </option>
-                                    <option value="2" <?= $selectedLanguageId == '2' ? 'selected' : '' ?>>Elementary
+                                    <option value="2" <?= $selectedLanguageId == '2' ? 'selected' : '' ?>>
+                                        <?= Yii::t('app', 'Elementary') ?>
                                     </option>
-                                    <option value="3" <?= $selectedLanguageId == '3' ? 'selected' : '' ?>>Intermediate
+                                    <option value="3" <?= $selectedLanguageId == '3' ? 'selected' : '' ?>>
+                                        <?= Yii::t('app', 'Intermediate') ?>
                                     </option>
-                                    <option value="4" <?= $selectedLanguageId == '4' ? 'selected' : '' ?>>Upper
-                                        Intermediate</option>
-                                    <option value="5" <?= $selectedLanguageId == '5' ? 'selected' : '' ?>>Advanced
+                                    <option value="4" <?= $selectedLanguageId == '4' ? 'selected' : '' ?>>
+                                        <?= Yii::t('app', 'Upper
+                                        Intermediate') ?>
                                     </option>
-                                    <option value="6" <?= $selectedLanguageId == '6' ? 'selected' : '' ?>>Fluent
+                                    <option value="5" <?= $selectedLanguageId == '5' ? 'selected' : '' ?>>
+                                        <?= Yii::t('app', 'Advanced') ?>
                                     </option>
-                                    <option value="7" <?= $selectedLanguageId == '7' ? 'selected' : '' ?>>Native
+                                    <option value="6" <?= $selectedLanguageId == '6' ? 'selected' : '' ?>>
+                                        <?= Yii::t('app', 'Fluent') ?>
+                                    </option>
+                                    <option value="7" <?= $selectedLanguageId == '7' ? 'selected' : '' ?>>
+                                        <?= Yii::t('app', 'Native') ?>
                                     </option>
                                 </select>
 
@@ -1210,7 +1267,7 @@ $LanguageId = '';
                             </div>
                             <div class="col-4 d-flex flex-column" style="gap: 12px;">
                                 <text class="font-size-16 font-weight-500">
-                                    Linkedin Link
+                                    <?= Yii::t('app', 'Linkedin Link') ?>
                                 </text>
                                 <div class="input-group">
                                     <span class="input-group-text "
@@ -1220,14 +1277,14 @@ $LanguageId = '';
                                     </span>
                                     <input type="text" style="border-left: none;" class="form-control " name="linkedin"
                                         value="<?= isset($employee['linkedin']) ? $employee['linkedin'] : '' ?>"
-                                        placeholder="LinkedIn link here">
+                                        placeholder="<?= Yii::t('app', 'LinkedIn link here') ?>">
                                 </div>
                             </div>
 
                             <div class="row mt-33">
                                 <div class="col-4 d-flex flex-column" style="gap: 12px;">
                                     <span class=" font-size-16 font-weight-500">
-                                        Additional Languages
+                                        <?= Yii::t('app', 'Additional Languages') ?>
                                     </span>
                                     <div id="al">
 
@@ -1236,7 +1293,7 @@ $LanguageId = '';
                                         style="padding: 13px 20px; height: 40px; width: 100%; border-radius: 5px; border: 0.5px solid #CBD5E1;"
                                         onclick="addAdditionalLanguage()">
                                         <span class="text-blue mr-6" style="font-weight: 600; font-size: 14px;">
-                                            Add More
+                                            <?= Yii::t('app', 'Add More') ?>
                                         </span>
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-blue.svg"
                                             alt="LinkedIn" style="width: 20px; height: 20px;">
@@ -1245,14 +1302,14 @@ $LanguageId = '';
                                 </div>
                                 <div class="col-4 d-flex flex-column" style="gap: 12px;">
                                     <span class=" font-size-16 font-weight-500">
-                                        Additional Languages Level
+                                        <?= Yii::t('app', 'Additional Languages Level') ?>
                                     </span>
 
                                     <div id="ald">
                                         <span id="lockId-1"
                                             class="input-group-text d-flex justify-content-center align-items-center mt-12"
                                             style="background-color: #e9ecef; height: 40px;">
-                                            Add additional Language First
+                                            <?= Yii::t('app', 'Add additional Language First') ?>
                                         </span>
                                     </div>
 
@@ -1271,14 +1328,16 @@ $LanguageId = '';
                     <!-- ✅ Checkbox: Email login -->
                     <div class="d-flex justify-content-end align-items-center" style="gap: 10px;">
                         <input type="checkbox" id="sendEmail" name="sendEmail" value="1">
-                        <label for="sendEmail" class="mb-0">Email login details to employee</label>
+                        <label for="sendEmail" class="mb-0">
+                            <?= Yii::t('app', 'Email login details to employee') ?>
+                        </label>
                     </div>
 
                     <!-- ✅ ปุ่ม Cancel + Save -->
                     <div class="d-flex justify-content-end align-items-center" style="gap: 10px;">
                         <a href="javascript:history.back()" style="text-decoration: none;">
                             <button type="button" class="btn-cancel-group">
-                                Cancel
+                                <?= Yii::t('app', 'Cancel') ?>
                             </button>
                         </a>
                         <?php if($statusfrom == 'Update'){?>
@@ -1288,22 +1347,22 @@ $LanguageId = '';
                             onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="Delete"
                                 class="pim-icon me-1" style="width: 14px; height: 14px;">
-                            Delete
+                            <?= Yii::t('app', 'Delete') ?>
                         </a>
                         <button type="submit" class="btn-save-group">
                             <img src="<?= Yii::$app->homeUrl ?>image/refece-whiet.svg" alt="Save Icon"
                                 style="width: 20px; height: 20px;">
-                            Update
+                            <?= Yii::t('app', 'Update') ?>
                         </button>
                         <?php }else{?>
                         <a style="text-decoration: none;">
                             <button type="button" id="saveDraftBtn" class="btn-cancel-group w-100">
-                                Save as Draft
+                                <?= Yii::t('app', 'Save as Draft') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>image/draft.svg">
                             </button>
                         </a>
                         <button type="submit" class="btn-save-group">
-                            Save
+                            <?= Yii::t('app', 'Save') ?>
                             <img src="<?= Yii::$app->homeUrl ?>image/save-icon.svg" alt="Save Icon"
                                 style="width: 20px; height: 20px;">
                         </button>
@@ -1751,6 +1810,9 @@ $LanguageId = '';
             noExpiry: noExpiry
         };
 
+        // console.log(certificates);
+        document.getElementById('certificateDataHidden').value = JSON.stringify(certificates);
+
         renderScheduleList();
         clearForm();
 
@@ -1841,9 +1903,27 @@ $LanguageId = '';
         // อัปเดต hidden input
         document.getElementById('certificateDataHidden').value = JSON.stringify(certificates);
 
+        const url = $url + 'setting/employee/delete-certificate';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                mode: 'edit',
+                id: id
+            },
+            success: function(response) {
+                console.log("Deleted successfully:", response);
+            },
+            error: function(xhr, status, error) {
+                console.error("Error deleting certificate:", error);
+            }
+        });
+
         // render ใหม่
         renderScheduleList();
     }
+
 
 
 

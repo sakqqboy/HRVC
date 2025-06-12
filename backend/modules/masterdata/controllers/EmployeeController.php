@@ -367,6 +367,15 @@ class EmployeeController extends Controller
 		return json_encode($certificates);
 	}
 
+	public function actionCertificateDetail($id)
+	{
+		$Certificate = Certificate::find()
+			->where(['cerId' => $id])
+			->asArray()
+			->one();
+
+		return json_encode($Certificate);
+	}
 
 	public function actionUserLanguage($id)
 	{

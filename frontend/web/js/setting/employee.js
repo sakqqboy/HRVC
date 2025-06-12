@@ -744,31 +744,6 @@ flatpickr("#endProbationPicker", {
 });
 
 
-// เปิด flatpickr แบบ range
-// const rangeInput = document.getElementById("rangeCalendarInput");
-// flatpickr(rangeInput, {
-//     mode: "range",
-//     dateFormat: "Y-m-d",
-//     defaultDate: [
-//         startInput.value || null,
-//         endInput.value || null
-//     ],
-//     onChange: function (selectedDates, dateStr, instance) {
-//         if (selectedDates.length === 2) {
-//             const [start, end] = selectedDates;
-//             const formattedStart = flatpickr.formatDate(start, "Y-m-d");
-//             const formattedEnd = flatpickr.formatDate(end, "Y-m-d");
-
-//             startInput.value = formattedStart;
-//             endInput.value = formattedEnd;
-//             label.innerText = `${formattedStart} - ${formattedEnd}`;
-
-//             // ปิด calendar
-//             calendarContainer.style.display = "none";
-//         }
-//     }
-// });
-
 function initCerDateCalendar() {
     const calendarContainer = document.getElementById("flatpickrContainer");
     const trigger = document.getElementById("multi-cer-term");
@@ -785,7 +760,7 @@ function initCerDateCalendar() {
 
     flatpickr(rangeInput, {
         mode: "range",
-        dateFormat: "Y-m-d",
+        dateFormat: "d-m-Y",
         defaultDate: [
             startInput.value || null,
             endInput.value || null
@@ -794,8 +769,8 @@ function initCerDateCalendar() {
 
             if (selectedDates.length === 2) {
                 const [start, end] = selectedDates;
-                const formattedStart = flatpickr.formatDate(start, "Y-m-d");
-                const formattedEnd = flatpickr.formatDate(end, "Y-m-d");
+                const formattedStart = flatpickr.formatDate(start, "d-m-Y");
+                const formattedEnd = flatpickr.formatDate(end, "d-m-Y");
 
                 startInput.value = formattedStart;
                 endInput.value = formattedEnd;
