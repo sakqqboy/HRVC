@@ -819,7 +819,7 @@ class EmployeeController extends Controller
                         // certificateData
                         $certificates = json_decode($_POST['certificateData'], true);
                         if ($certificates && is_array($certificates)) {
-                            
+
                             foreach ($certificates as $cert) {
                                 $tmpId = $cert['id']; // เช่น 1749180178186
                                 $cerName = $cert['cerName'] ?? null;
@@ -920,9 +920,8 @@ class EmployeeController extends Controller
             }
         }
         return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-profile/' . ModelMaster::encodeParams([
-                     "employeeId" => $_POST["emId"]
+            "employeeId" => $_POST["emId"]
         ]));
-
     }
     public function actionFilterEmployee()
     {
@@ -1021,7 +1020,7 @@ class EmployeeController extends Controller
             curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
             curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/certificate-detail?id=' . $cert['id']);
-            
+
             $certificate = curl_exec($api);
             $certificate = json_decode($certificate, true);
             curl_close($api);
@@ -1081,6 +1080,14 @@ class EmployeeController extends Controller
 
         // $res["status"] = true;
         // return json_encode($res);
+    }
+    public function actionMultiDeleteEmployee()
+    {
+
+        $employeeIds = $_POST["selectedEmployees"];
+        Employee::updateAll(["status" => 99], ["in", "employeeId", $employeeIds]);
+        $res["status"] = true;
+        return json_encode($res);
     }
 
     public function actionImport()
@@ -1756,9 +1763,9 @@ class EmployeeController extends Controller
         $employee = curl_exec($api);
         $employee = json_decode($employee, true);
         curl_close($api);
-                // throw new Exception(print_r($employee, true));
+        // throw new Exception(print_r($employee, true));
 
-        return $this->renderPartial('contact_detail',[
+        return $this->renderPartial('contact_detail', [
             'employee' => $employee
         ]);
     }
@@ -1804,5 +1811,4 @@ class EmployeeController extends Controller
         Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
         return $this->renderPartial('role');
     }
-
 }

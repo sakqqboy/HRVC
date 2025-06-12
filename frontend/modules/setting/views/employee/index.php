@@ -33,7 +33,7 @@ $statusTexArr = Status::allStatusText();
 		<?= $this->render('header') ?>
 
 	</div>
-
+	<input type="hidden" id="page-type" value="grid">
 	<div class="col-12 mt-20 pr-15 pl-15">
 		<div class="bg-white-employee">
 			<div class="row mb-40">
@@ -233,6 +233,7 @@ $statusTexArr = Status::allStatusText();
 	</div>
 </div>
 <?= $this->render('modal_warning_delete') ?>
+<?= $this->render('modal_deleting') ?>
 <style>
 	.profile-img {
 		width: 73px;
@@ -735,7 +736,7 @@ $statusTexArr = Status::allStatusText();
 		const selectedEmployees = $("[id^=check-employee-]:checked").map(function() {
 			return $(this).val();
 		}).get();
-		var url = $url + 'setting/employee/filter-employee';
+		var url = "http://localhost/HRVC/frontend/web/setting/employee/multi-delete-employee";
 		$.ajax({
 			type: "POST",
 			dataType: "json",
@@ -744,8 +745,11 @@ $statusTexArr = Status::allStatusText();
 				selectedEmployees: selectedEmployees
 			},
 			success: function(data) {
-
-
+				if (data.status) {
+					$.each(selectedEmployees, function(index, value) {
+						$("#employee-" + value).css("display", "none");
+					});
+				}
 			}
 		});
 	}
@@ -779,13 +783,19 @@ $this->registerJs('
 			$("#action-menu").val(0);
 		}
 	}
-		function warningDeleteMultiEmployee() {
+	function warningDeleteMultiEmployee() {
 		var i = 0;
-		var employeeId = "";
-		const selectedEmployees = $("[id^=check-employee-]:checked").map(function() {
-			return $(this).val();
-		}).get();
-
+		var pageType = $("#page-type").val();
+		var selectedEmployees;
+		if (pageType == "list") {
+			selectedEmployees = $("[id^=check-employee-list-]:checked").map(function() {
+				return $(this).val();
+			}).get();
+		} else {
+			selectedEmployees = $("[id^=check-employee-]:checked").map(function() {
+				return $(this).val();
+			}).get();
+		}
 		if (selectedEmployees.length == 0) {
 			return false;
 		} else {
@@ -794,6 +804,34 @@ $this->registerJs('
 		}
 
 
+	}
+	function deleteMultiEmployee() {
+		var pageType = $("#page-type").val();
+		var selectedEmployees;
+		if (pageType == "list") {
+			selectedEmployees = $("[id^=check-employee-list-]:checked").map(function() {
+				return $(this).val();
+			}).get();
+		} else {
+			selectedEmployees = $("[id^=check-employee-list-]:checked").map(function() {
+				return $(this).val();
+			}).get();
+		}
+			$("#deleting").modal("show");
+		var url = "http://localhost/HRVC/frontend/web/setting/employee/multi-delete-employee";
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: url,
+			data: {
+				selectedEmployees: selectedEmployees
+			},
+			success: function(data) {
+				if (data.status) {
+					location.reload();
+				}
+			}
+		});
 	}
 	
 		

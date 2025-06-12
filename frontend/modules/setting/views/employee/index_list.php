@@ -17,6 +17,7 @@ $statusTexArr = Status::allStatusText();
 		</div>
 	</div>
 	<input type="hidden" id="action" value="0">
+	<input type="hidden" id="page-type" value="list">
 	<div class="col-12 mt-20 pr-15 pl-15">
 		<div class="bg-white-employee">
 			<div class="row mb-40">
@@ -64,8 +65,7 @@ $statusTexArr = Status::allStatusText();
 							<tr class="employee-tr">
 								<td style="font-weight: 600;position: relative; width:20%;">
 									<div class="col-12 border-left-radius-table" style="height:48px;">
-										<input type="checkbox" id="check-employee-list-<?= $employeeId ?>" name="" class="checkbox-employee me-2 d-none" style="margin-top: -2px;"
-											onchange="javascript:selectEmployee(<?= $employeeId ?>)">
+										<input type="checkbox" id="check-employee-list-<?= $employeeId ?>" value="" name="<?= $employeeId ?>" class="checkbox-employee me-2 d-none" style="margin-top: -2px;">
 										<img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>" class="img-table me-2">
 										<?= $employee["employeeName"] ?>
 									</div>
@@ -100,6 +100,8 @@ $statusTexArr = Status::allStatusText();
 		</div>
 	</div>
 </div>
+<?= $this->render('modal_warning_delete') ?>
+<?= $this->render('modal_deleting') ?>
 <style>
 	.border-left-radius-table {
 		border-left: 1px solid var(--Color-Tokens-Border-Primary, #E4E4E4);
@@ -711,6 +713,57 @@ $this->registerJs('
 			$("#action-menu").val(0);
 		}
 	}
+	function warningDeleteMultiEmployee() {
+		var i = 0;
+		var pageType = $("#page-type").val();
+		var selectedEmployees;
+		if (pageType == "list") {
+			selectedEmployees = $("[id^=check-employee-list-]:checked").map(function() {
+				return $(this).val();
+			}).get();
+		} else {
+			selectedEmployees = $("[id^=check-employee-]:checked").map(function() {
+				return $(this).val();
+			}).get();
+		}
+		if (selectedEmployees.length == 0) {
+			return false;
+		} else {
+			$("#totalSelectEmployee").html(selectedEmployees.length);
+			$("#warning-delete-employee").modal("show");
+		}
+
+
+	}
+	function deleteMultiEmployee() {
+		var pageType = $("#page-type").val();
+		var selectedEmployees;
+		if (pageType == "list") {
+			selectedEmployees = $("[id^=check-employee-list-]:checked").map(function() {
+				return $(this).val();
+			}).get();
+		} else {
+			selectedEmployees = $("[id^=check-employee-list-]:checked").map(function() {
+				return $(this).val();
+			}).get();
+		}
+			$("#deleting").modal("show");
+		var url = "http://localhost/HRVC/frontend/web/setting/employee/multi-delete-employee";
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: url,
+			data: {
+				selectedEmployees: selectedEmployees
+			},
+			success: function(data) {
+				if (data.status) {
+					location.reload();
+				}
+			}
+		});
+	}
+	
 		
 		
 ', View::POS_END);
