@@ -89,10 +89,11 @@ $LanguageId = '';
                                 <?= Yii::t('app', 'Select') ?>
                             </option>
                             <?php
-                            if (!empty($conditions) && isset($employee['employeeConditionId'])) {
+                            if (!empty($conditions)) {
+                                $selectedId = $employee['employeeConditionId'] ?? null;
                                 foreach ($conditions as $c) {
-                                    $selected = ($c['employeeConditionId'] == $employee['employeeConditionId']) ? 'selected' : '';
-                                    echo '<option value="' . $c['employeeConditionId'] . '" ' . $selected . '>' . Yii::t('app',$c['employeeConditionName']) . '</option>';
+                                    $selected = ($c['employeeConditionId'] == $selectedId) ? 'selected' : '';
+                                    echo '<option value="' . $c['employeeConditionId'] . '" ' . $selected . '>' . Yii::t('app', $c['employeeConditionName']) . '</option>';
                                 }
                             }
                             ?>

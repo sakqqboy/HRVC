@@ -67,6 +67,8 @@ if (isset($employee['birthDate'])) {
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500">
+                    <img src="<?= Yii::$app->homeUrl ?>image/male-img.svg" alt="Website"
+                        style="width: 20px; height: 20px;">
                     <?php 
                     if($employee['gender'] == 1){
                         echo 'Male';
