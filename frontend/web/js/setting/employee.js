@@ -113,10 +113,52 @@ function checkUploadFile(type) {
             fileName = fileName.substring(0, maxLength - 3) + '...';
         }
 
-        let iconSrc = $url + "image/ex-file.svg";
-        if (fileExtension === "pdf") {
-            iconSrc = $url + "image/pdf-file.svg";
+        let iconSrc = "";
+
+        switch (fileExtension) {
+            case "doc":
+                iconSrc = $url + "image/doc-file.svg";
+                break;
+            case "mp4":
+                iconSrc = $url + "image/mp4-file.svg";
+                break;
+            case "picture":
+                iconSrc = $url + "image/picture-file.svg";
+                break;
+            case "file":
+                iconSrc = $url + "image/file-file.svg";
+                break;
+            case "xml":
+                iconSrc = $url + "image/xml-file.svg";
+                break;
+            case "ai":
+                iconSrc = $url + "image/ai-file.svg";
+                break;
+            case "pds":
+                iconSrc = $url + "image/pds-file.svg";
+                break;
+            case "pptx":
+                iconSrc = $url + "image/pptx-file.svg";
+                break;
+            case "eps":
+                iconSrc = $url + "image/eps-file.svg";
+                break;
+            case "zip":
+                iconSrc = $url + "image/zip-file.svg";
+                break;
+            case "txt":
+                iconSrc = $url + "image/txt-file.svg";
+                break;
+            case "pdf":
+                iconSrc = $url + "image/pdf-file.svg";
+                break;
+            case "xlsx":
+                iconSrc = $url + "image/ex-file.svg";
+                break;
+            default:
+                iconSrc = $url + "image/file-big.svg"; // หรือใช้ icon default
         }
+
 
         const now = new Date();
         const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });

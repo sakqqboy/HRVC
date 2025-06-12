@@ -518,7 +518,7 @@ $LanguageId = '';
                             <!-- กล่อง calendar ที่จะโชว์เมื่อกด -->
                             <div id="calendar-birtdate"
                                 style="position: absolute; margin-top: 75px; padding: 10px; border: 1px solid #ddd; border-radius: 10px; background: #fff; width: 100%; z-index: 1; display: none; justify-content: center; align-items: center;">
-                                <input type="date" id="calendarInput" max="<?= date('Y-m-d') ?>" class="form-control">
+                                <input type="date" id="calendarInput" max="<?= date('d/m/Y') ?>" class="form-control">
                             </div>
                         </div>
 
@@ -726,7 +726,7 @@ $LanguageId = '';
 
                             <div id="calendar-hiringdate"
                                 style="position: absolute; margin-top: 75px; padding: 10px; border: 1px solid #ddd; border-radius: 10px; background: #fff; width: 100%; z-index: 1; display: none; justify-content: center; align-items: center;">
-                                <input type="date" id="calendarInputHiring" max="<?= date('Y-m-d') ?>"
+                                <input type="date" id="calendarInputHiring" max="<?= date('d/m/Y') ?>"
                                     class="form-control">
                             </div>
                         </div>
@@ -900,23 +900,53 @@ $LanguageId = '';
                                     <div class="row">
                                         <div class="col-lg-2 center-center">
                                             <?php
-                                            if($resumeExtension == 'pdf'){
-                                            ?>
-                                            <img id="icon-file1" src="<?= Yii::$app->homeUrl ?>image/pdf-file.svg"
+                                                switch ($resumeExtension) {
+                                                    case 'doc':
+                                                        $iconFile = 'doc-file.svg';
+                                                        break;
+                                                    case 'mp4':
+                                                        $iconFile = 'mp4-file.svg';
+                                                        break;
+                                                    case 'picture':
+                                                        $iconFile = 'picture-file.svg';
+                                                        break;
+                                                    case 'file':
+                                                        $iconFile = 'file-file.svg';
+                                                        break;
+                                                    case 'xml':
+                                                        $iconFile = 'xml-file.svg';
+                                                        break;
+                                                    case 'ai':
+                                                        $iconFile = 'ai-file.svg';
+                                                        break;
+                                                    case 'pds':
+                                                        $iconFile = 'pds-file.svg';
+                                                        break;
+                                                    case 'pptx':
+                                                        $iconFile = 'pptx-file.svg';
+                                                        break;
+                                                    case 'eps':
+                                                        $iconFile = 'eps-file.svg';
+                                                        break;
+                                                    case 'zip':
+                                                        $iconFile = 'zip-file.svg';
+                                                        break;
+                                                    case 'txt':
+                                                        $iconFile = 'txt-file.svg';
+                                                        break;
+                                                    case 'pdf':
+                                                        $iconFile = 'pdf-file.svg';
+                                                        break;
+                                                    case 'xlsx':
+                                                        $iconFile = 'ex-file.svg';
+                                                        break;
+                                                    default:
+                                                        $iconFile = 'file-big.svg'; // ไอคอน default
+                                                }
+                                                ?>
+                                            <img id="icon-file1" src="<?= Yii::$app->homeUrl ?>image/<?= $iconFile ?>"
                                                 alt="icon" style="width: 40px; height: 40px;">
-                                            <?php
-                                            }else if($resumeExtension == 'xlsx'){
-                                            ?>
-                                            <img id="icon-file1" src="<?= Yii::$app->homeUrl ?>image/ex-file.svg"
-                                                alt="icon" style="width: 40px; height: 40px;">
-                                            <?php
-                                            }else{
-                                            ?>
-                                            <img id="icon-file1" src="<?= Yii::$app->homeUrl ?>image/file-big.svg"
-                                                alt="icon" style="width: 40px; height: 40px;">
-                                            <?php
-                                            }
-                                            ?>
+
                                         </div>
                                         <div id="file-uplode-name1" class="col-lg-6 col-md-6 col-12"
                                             style="border-right:lightgray solid thin;">
