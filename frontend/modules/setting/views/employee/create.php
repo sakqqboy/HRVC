@@ -518,7 +518,7 @@ $LanguageId = '';
                             <!-- กล่อง calendar ที่จะโชว์เมื่อกด -->
                             <div id="calendar-birtdate"
                                 style="position: absolute; margin-top: 75px; padding: 10px; border: 1px solid #ddd; border-radius: 10px; background: #fff; width: 100%; z-index: 1; display: none; justify-content: center; align-items: center;">
-                                <input type="date" id="calendarInput" max="<?= date('Y-m-d') ?>" class="form-control">
+                                <input type="date" id="calendarInput" max="<?= date('d/m/Y') ?>" class="form-control">
                             </div>
                         </div>
 
@@ -726,7 +726,7 @@ $LanguageId = '';
 
                             <div id="calendar-hiringdate"
                                 style="position: absolute; margin-top: 75px; padding: 10px; border: 1px solid #ddd; border-radius: 10px; background: #fff; width: 100%; z-index: 1; display: none; justify-content: center; align-items: center;">
-                                <input type="date" id="calendarInputHiring" max="<?= date('Y-m-d') ?>"
+                                <input type="date" id="calendarInputHiring" max="<?= date('d/m/Y') ?>"
                                     class="form-control">
                             </div>
                         </div>
