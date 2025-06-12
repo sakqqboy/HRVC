@@ -100,7 +100,7 @@ $statusTexArr = Status::allStatusText();
 						<div class="col-lg-4 col-md-6 col-12">
 							<div class="card employee-box" id="employee-<?= $employeeId ?>">
 								<div class="position-relative new-employee">
-									<input type="checkbox" id="check-employee-<?= $employeeId ?>" name="" class="checkbox-employee pull-left invisible" onchange="javascript:selectEmployee(<?= $employeeId ?>)">
+									<input type="checkbox" id="check-employee-<?= $employeeId ?>" name="" class="checkbox-employee pull-left invisible" onchange="javascript:selectEmployee(<?= $employeeId ?>)" value="<?= $employeeId ?>">
 									<img src="<?= Yii::$app->homeUrl ?>images/employee/status/new-employee.svg" class="pull-right <?= $employee['isNew'] == 1 ? '' : 'invisible' ?>" alt="New Employee" style="margin-top:-15px;">
 								</div>
 								<div class="d-flex align-items-start justify-content-between mt-3">
@@ -713,6 +713,42 @@ $statusTexArr = Status::allStatusText();
 	function deleteMultiEmployee() {
 		$("#warning-delete-employee").show();
 	}
+
+	function deleteMultiEmployee() {
+		var i = 0;
+		var employeeId = "";
+		const selectedEmployees = $("[id^=check-employee-]:checked").map(function() {
+			return $(this).val();
+		}).get();
+
+		if (selectedEmployees.length == 0) {
+			return false;
+		} else {
+			$("#totalSelectEmployee").html(selectedEmployees.length);
+			$("#warning-delete-employee").modal("show");
+		}
+
+
+	}
+
+	function deleteMultiEmployee() {
+		const selectedEmployees = $("[id^=check-employee-]:checked").map(function() {
+			return $(this).val();
+		}).get();
+		var url = $url + 'setting/employee/filter-employee';
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: url,
+			data: {
+				selectedEmployees: selectedEmployees
+			},
+			success: function(data) {
+
+
+			}
+		});
+	}
 </script>
 <?php
 $this->registerJs('
@@ -743,9 +779,23 @@ $this->registerJs('
 			$("#action-menu").val(0);
 		}
 	}
-		function deleteMultiEmployee() {
-		$("#warning-delete-employee").modal("show");
+		function warningDeleteMultiEmployee() {
+		var i = 0;
+		var employeeId = "";
+		const selectedEmployees = $("[id^=check-employee-]:checked").map(function() {
+			return $(this).val();
+		}).get();
+
+		if (selectedEmployees.length == 0) {
+			return false;
+		} else {
+			$("#totalSelectEmployee").html(selectedEmployees.length);
+			$("#warning-delete-employee").modal("show");
+		}
+
+
 	}
+	
 		
 		
 ', View::POS_END);
