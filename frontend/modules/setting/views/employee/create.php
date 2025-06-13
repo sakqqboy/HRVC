@@ -35,7 +35,13 @@ $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
 
 $userCertificate = $userCertificate ?? []; // or fetch it from database
 $LanguageId = '';
-?>
+
+// echo '<pre>';
+// print_r($mainLanguage);
+// echo '</pre>';
+// exit;
+
+    ?>
 <?php $form = ActiveForm::begin([
 	'id' => 'create-employee',
 	'method' => 'post',
@@ -206,8 +212,8 @@ $LanguageId = '';
 
                                 <div class="input-group">
                                     <span class="input-group-text" style="background-color: white; border-right: none;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
-                                            style="width: 20px; height: 20px;">
+                                        <img class="cycle-current" src="<?= Yii::$app->homeUrl ?>image/e-world.svg"
+                                            id="flag-dl" alt="Website" style="width: 20px; height: 20px; border: none;">
                                     </span>
 
                                     <select class="form-select" style="width: 290.59px; border-left: none;"
@@ -221,7 +227,10 @@ $LanguageId = '';
                                         if (isset($languages) && count($languages) > 0) {
                                             foreach ($languages as $lang) {
                                                 $selected = (isset($employee) && $lang['languageId'] == $employee['defaultLanguage']) ? 'selected' : '';
-                                                echo '<option value="' . htmlspecialchars($lang['languageId']) . '" ' . $selected . '>' . htmlspecialchars($lang['languageName']) . '</option>';
+                                                echo '<option value="' . htmlspecialchars($lang['languageId']) . '" ' . $selected .
+                                                    ' data-flag="' . htmlspecialchars($lang['flag']?? '') . '">' .
+                                                    htmlspecialchars($lang['languageName'?? '']) .
+                                                    '</option>';
                                             }
                                         }
                                         ?>
@@ -391,7 +400,7 @@ $LanguageId = '';
                                 <span class="input-group-text" style="background-color: white; border-right: none;">
                                     <img class="cycle-current" id="flag"
                                         src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
-                                        style="width: 20px; height: 20px;">
+                                        style="width: 20px; height: 20px; border: none;">
                                 </span>
                                 <select class="form-select" name="nationalityId" id="nationalityId"
                                     style="border-left: none;" required>
@@ -1227,9 +1236,9 @@ $LanguageId = '';
                                 </text>
                                 <div class="input-group">
                                     <span class="input-group-text" style="background-color: white; border-right: none;">
-                                        <img class="cycle-current" id="flag"
+                                        <img class="cycle-current" id="flag-ml"
                                             src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
-                                            style="width: 20px; height: 20px;">
+                                            style="width: 20px; height: 20px; border: none;">
                                     </span>
                                     <?php
                                     // ดึงค่าภาษาเริ่มต้นจาก array ตำแหน่งที่ 0 (ถ้ามี)
@@ -1243,11 +1252,17 @@ $LanguageId = '';
                                             <?= Yii::t('app', 'Select preferred language') ?>
                                         </option>
                                         <?php
-                                        if (isset($mainLanguage) && count($mainLanguage) > 0) {
+                                        if (!empty($mainLanguage)) {
                                             foreach ($mainLanguage as $lang) {
-                                                $selected = ($lang['LanguageId'] == $selectedLanguageId) ? 'selected' : '';
-                                                echo '<option value="' . htmlspecialchars($lang['LanguageId']) . '" ' . $selected . '>' . 
-                                                    htmlspecialchars($lang['name']) . 
+                                                $languageId = htmlspecialchars($lang['LanguageId'] ?? '');
+                                                $flag = htmlspecialchars($lang['flag'] ?? '');
+                                                $name = htmlspecialchars($lang['name'] ?? '');
+
+                                                $selected = ($lang['LanguageId'] == ($selectedLanguageId ?? null)) ? 'selected' : '';
+
+                                                echo '<option value="' . $languageId . '" ' . $selected .
+                                                    ' data-flag="' . $flag . '">' .
+                                                    $name .
                                                     '</option>';
                                             }
                                         }
@@ -1332,7 +1347,7 @@ $LanguageId = '';
 
                                 </div>
                                 <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                                    <span class=" font-size-16 font-weight-500">
+                                    <span class="font-size-16 font-weight-500">
                                         <?= Yii::t('app', 'Additional Languages Level') ?>
                                     </span>
 
@@ -1657,13 +1672,6 @@ $LanguageId = '';
             });
     });
 
-    document.getElementById('nationalityId').addEventListener('change', function() {
-        const selectedOption = this.options[this.selectedIndex];
-        const flagUrl = selectedOption.getAttribute('data-flag');
-        if (flagUrl) {
-            document.getElementById('flag').src = homeUrl + flagUrl;
-        }
-    });
     $(document).on('change', '#cerimage', function(e) {
         const file = e.target.files[0];
         if (file) {
@@ -2164,6 +2172,8 @@ $LanguageId = '';
         flatpickrDate();
         updateSelectCheng();
         updateMultiDueTermState();
+        changeStatusEmployee()
+        changeSelectFlag()
 
         const loadedCertificates = <?= json_encode($userCertificate) ?>;
         // console.log(loadedCertificates);
