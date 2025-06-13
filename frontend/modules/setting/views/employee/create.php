@@ -34,6 +34,8 @@ $agreementFileName = basename($agreementPath);              // bcRGoVHyu2.xlsx
 $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
 
 $userCertificate = $userCertificate ?? []; // or fetch it from database
+$userLanguage = isset($userLanguage) ? $userLanguage : [];
+
 $LanguageId = '';
 
 // echo '<pre>';
@@ -207,13 +209,30 @@ $LanguageId = '';
                             </div>
                             <div>
                                 <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                    <?php
+                                        $flag = 'image/e-world.svg'; // default fallback flag
+
+                                        if (!empty($employee['defaultLanguage']) && !empty($languages)) {
+                                            foreach ($languages as $lang) {
+                                                if ($employee['defaultLanguage'] == $lang['languageId']) {
+                                                    $flag = !empty($lang['flag']) ? $lang['flag'] : 'image/e-world.svg';
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        // echo $flag ;
+                                    ?>
+
                                     <?= Yii::t('app', 'System Language Preference') ?>
                                 </text>
 
                                 <div class="input-group">
                                     <span class="input-group-text" style="background-color: white; border-right: none;">
-                                        <img class="cycle-current" src="<?= Yii::$app->homeUrl ?>image/e-world.svg"
-                                            id="flag-dl" alt="Website" style="width: 20px; height: 20px; border: none;">
+                                        <!-- <img class="cycle-current" src="<?= Yii::$app->homeUrl ?>image/e-world.svg"
+                                            id="flag-dl" alt="Website" style="width: 20px; height: 20px; border: none;"> -->
+                                        <img class="cycle-current" id="flag-dl"
+                                            src="<?= Yii::$app->homeUrl . htmlspecialchars($flag) ?>" alt="Website"
+                                            style="width: 20px; height: 20px; border: none;">
                                     </span>
 
                                     <select class="form-select" style="width: 290.59px; border-left: none;"
@@ -398,10 +417,24 @@ $LanguageId = '';
                             </text>
                             <div class="input-group">
                                 <span class="input-group-text" style="background-color: white; border-right: none;">
+                                    <?php
+                                        $flag = 'image/e-world.svg'; // default fallback flag
+
+                                        if (!empty($employee['nationalityId']) && !empty($nationalities)) {
+                                            foreach ($nationalities as $nation) {
+                                                if ($employee['defaultLanguage'] == $nation['countryId']) {
+                                                    $flag = !empty($nation['flag']) ? $nation['flag'] : 'image/e-world.svg';
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        // echo $flag ;
+                                    ?>
                                     <img class="cycle-current" id="flag"
-                                        src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
+                                        src="<?= Yii::$app->homeUrl . htmlspecialchars($flag) ?>" alt="Website"
                                         style="width: 20px; height: 20px; border: none;">
                                 </span>
+
                                 <select class="form-select" name="nationalityId" id="nationalityId"
                                     style="border-left: none;" required>
                                     <option value="" disabled <?= empty($employee['nationalityId']) ? 'selected' : '' ?>
@@ -1236,8 +1269,23 @@ $LanguageId = '';
                                 </text>
                                 <div class="input-group">
                                     <span class="input-group-text" style="background-color: white; border-right: none;">
+                                        <?php
+                                            $flag = 'image/e-world.svg'; // default fallback flag
+
+                                            if (!empty($userLanguage[0]['languageId']) && !empty($mainLanguage)) {
+                                                foreach ($mainLanguage as $lang) {
+                                                    if ($userLanguage[0]['languageId'] == $lang['LanguageId']) {
+                                                        $flag = !empty($lang['flag']) ? $lang['flag'] : 'image/e-world.svg';
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        ?>
+                                        <!-- <img class="cycle-current" id="flag"
+                                        src="<?= Yii::$app->homeUrl . htmlspecialchars($flag) ?>" alt="Website"
+                                        style="width: 20px; height: 20px; border: none;"> -->
                                         <img class="cycle-current" id="flag-ml"
-                                            src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
+                                            src="<?= Yii::$app->homeUrl . htmlspecialchars($flag) ?>" alt="Website"
                                             style="width: 20px; height: 20px; border: none;">
                                     </span>
                                     <?php
@@ -2369,27 +2417,47 @@ $LanguageId = '';
         }
         additionalLangCount++;
 
-        let langHtml = '';
+        const userLanguage = <?= json_encode($userLanguage) ?>;
+        const mainLanguage = <?= json_encode($mainLanguage) ?>;
+        // const additionalLangCount = 2; // สมมุติค่านี้ได้จากที่อื่น
+        let languageId = '';
+        let flag = 'image/e-world.svg';
+        if (userLanguage.length >= additionalLangCount) {
+            languageId = userLanguage[additionalLangCount - 1]?.languageId || '';
+        }
 
+        if (languageId) {
+            const lang = mainLanguage.find(l => l.LanguageId == languageId);
+            if (lang && lang.flag) {
+                flag = lang.flag;
+            }
+        }
+
+        // console.log("LanguageId:", languageId);
+        // console.log("Flag URL:", flag);
+
+
+        let langHtml = '';
         <?php if ($statusfrom === 'Update'): ?>
         langHtml = `
             <div class="input-group mt-12">
                 <span class="input-group-text" style="background-color: white; border-right: none;">
-                    <img class="cycle-current" src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
-                        style="width: 20px; height: 20px;">
+                    <img class="cycle-current" id="flag-ml${additionalLangCount - 1}" src="<?= Yii::$app->homeUrl ?>${flag}" alt="Website"
+                        style="width: 20px; height: 20px; border: none;">
                 </span>
                 <select class="form-select" style="border-left: none;"
-                    id="mainLanguage${additionalLangCount-1}" name="mainLanguage${additionalLangCount-1}" required
-                    onchange="handleLanguageChange(${additionalLangCount-1})">
+                    id="mainLanguage${additionalLangCount - 1}" name="mainLanguage${additionalLangCount - 1}" required
+                    onchange="handleLanguageChange(${additionalLangCount - 1})">
                     <option value="" disabled hidden style="color: var(--Helper-Text, #8A8A8A);">
                         <?= Yii::t('app', 'Select Additional Language') ?>
                     </option>
                     <?php if (isset($mainLanguage) && count($mainLanguage) > 0): ?>
-                        <option value=""><?= Yii::t('app', 'Select Additional Language') ?></option>
                         <?php foreach ($mainLanguage as $lang): 
                             $selected = ($lang['LanguageId'] == $LanguageId) ? 'selected' : '';
                         ?>
-                            <option value="<?= htmlspecialchars($lang['LanguageId']) ?>" <?= $selected ?>>
+                            <option value="<?= htmlspecialchars($lang['LanguageId']) ?>"
+                                    data-flag="<?= htmlspecialchars($lang['flag'] ?? '') ?>"
+                                    <?= $selected ?>>
                                 <?= htmlspecialchars($lang['name']) ?>
                             </option>
                         <?php endforeach; ?>
@@ -2397,12 +2465,13 @@ $LanguageId = '';
                 </select>
             </div>
         `;
+
         <?php else: ?>
         langHtml = `
             <div class="input-group mt-12">
                 <span class="input-group-text" style="background-color: white; border-right: none;">
-                    <img class="cycle-current" src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
-                        style="width: 20px; height: 20px;">
+                    <img class="cycle-current" id="flag-ml${additionalLangCount}" src="<?= Yii::$app->homeUrl ?>${flag}" alt="Website"
+                        style="width: 20px; height: 20px; border: none;">
                 </span>
                 <select class="form-select" style="border-left: none;"
                     id="mainLanguage${additionalLangCount}" name="mainLanguage${additionalLangCount}" required
@@ -2411,11 +2480,12 @@ $LanguageId = '';
                         <?= Yii::t('app', 'Select Additional Language') ?>
                     </option>
                     <?php if (isset($mainLanguage) && count($mainLanguage) > 0): ?>
-                        <option value=""><?= Yii::t('app', 'Select Additional Language') ?></option>
                         <?php foreach ($mainLanguage as $lang): 
                             $selected = ($lang['LanguageId'] == $LanguageId) ? 'selected' : '';
                         ?>
-                            <option value="<?= htmlspecialchars($lang['LanguageId']) ?>" <?= $selected ?>>
+                            <option value="<?= htmlspecialchars($lang['LanguageId']) ?>"
+                                    data-flag="<?= htmlspecialchars($lang['flag'] ?? '') ?>"
+                                    <?= $selected ?>>
                                 <?= htmlspecialchars($lang['name']) ?>
                             </option>
                         <?php endforeach; ?>
@@ -2586,6 +2656,50 @@ $LanguageId = '';
                 }
             }
         }
+
+        if (no === 1) {
+            const selectElement = document.getElementById('mainLanguage1');
+            const flagImg = document.getElementById('flag-ml1');
+
+
+            if (selectElement && flagImg) {
+                // console.log(selectElement);
+                // console.log(flagImg);
+                selectElement.addEventListener('change', function() {
+                    const selectedOption = this.options[this.selectedIndex];
+                    const flagUrl = selectedOption.getAttribute('data-flag');
+                    if (flagUrl) {
+                        // alert('1');
+                        flagImg.src = homeUrl + flagUrl;
+                    } else {
+                        // alert('2');
+                        flagImg.src = homeUrl + 'image/e-world.svg';
+                    }
+                });
+            }
+        }
+
+        if (no === 2) {
+            const selectElement = document.getElementById('mainLanguage2');
+            const flagImg = document.getElementById('flag-ml2');
+
+            if (selectElement && flagImg) {
+                // console.log(selectElement);
+                // console.log(flagImg);
+
+                // ไม่ต้องใช้ getElementById อีกครั้ง!
+                selectElement.addEventListener('change', function() {
+                    const selectedOption = this.options[this.selectedIndex];
+                    const flagUrl = selectedOption.getAttribute('data-flag');
+                    if (flagUrl) {
+                        flagImg.src = homeUrl + flagUrl;
+                    } else {
+                        flagImg.src = homeUrl + 'image/e-world.svg';
+                    }
+                });
+            }
+        }
+
     }
     document.getElementById('saveDraftBtn').addEventListener('click', function(e) {
         e.preventDefault();

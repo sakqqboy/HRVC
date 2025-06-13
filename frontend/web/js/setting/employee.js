@@ -1031,10 +1031,6 @@ function changeStatusEmployee() {
 
 
 function changeSelectFlag() {
-    const nationalitySelect = document.getElementById('nationalityId');
-    if (nationalitySelect.value) {
-        nationalitySelect.dispatchEvent(new Event('change'));
-    }
 
     document.getElementById('nationalityId').addEventListener('change', function () {
         const selectedOption = this.options[this.selectedIndex];
@@ -1044,10 +1040,6 @@ function changeSelectFlag() {
         }
     });
 
-    const defaultLanguageSelect = document.getElementById('defaultLanguage');
-    if (defaultLanguageSelect.value) {
-        defaultLanguageSelect.dispatchEvent(new Event('change'));
-    }
     document.getElementById('defaultLanguage').addEventListener('change', function () {
         const selectedOption = this.options[this.selectedIndex];
         const flagUrl = selectedOption.getAttribute('data-flag');
@@ -1057,10 +1049,6 @@ function changeSelectFlag() {
         }
     });
 
-    const mainLanguageSelect = document.getElementById('mainLanguage');
-    if (mainLanguageSelect.value) {
-        mainLanguageSelect.dispatchEvent(new Event('change'));
-    }
     document.getElementById('mainLanguage').addEventListener('change', function () {
         const selectedOption = this.options[this.selectedIndex];
         // alert(1);
