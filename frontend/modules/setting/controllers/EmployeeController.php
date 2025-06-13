@@ -1376,162 +1376,162 @@ class EmployeeController extends Controller
         }
         return $isExisting;
     }
-    // public function actionExport()
-    // {
-    //     $companies = Company::find()
-    //         ->select('companyName')
-    //         ->where(["status" => 1])
-    //         ->asArray()
-    //         ->groupBy('companyName')
-    //         ->orderBy('companyName')
-    //         ->all();
-    //     $branches = Branch::find()
-    //         ->select('branchName')
-    //         ->where(["status" => 1])
-    //         ->asArray()
-    //         ->groupBy('branchName')
-    //         ->orderBy('branchName')
-    //         ->all();
-    //     $departments = Department::find()
-    //         ->select('departmentName')
-    //         ->where(["status" => 1])
-    //         ->asArray()
-    //         ->groupBy('departmentName')
-    //         ->orderBy('departmentName')
-    //         ->all();
-    //     $teams = Team::find()
-    //         ->select('teamName')
-    //         ->where(["status" => 1])
-    //         ->asArray()
-    //         ->groupBy('teamName')
-    //         ->orderBy('teamName')
-    //         ->all();
-    //     $teamPositions = TeamPosition::find()
-    //         ->select('teamPositionName')
-    //         ->where(["status" => 1])
-    //         ->asArray()
-    //         ->groupBy('teamPositionName')
-    //         ->orderBy('teamPositionName')
-    //         ->all();
-    //     $titles = Title::find()
-    //         ->select('title.titleName,d.departmentName')
-    //         ->JOIN("LEFT JOIN", "department d", "d.departmentId=title.departmentId")
-    //         ->where(["d.status" => 1, "title.status" => 1])
-    //         ->asArray()
-    //         // ->groupBy('titleName')
-    //         ->orderBy('title.titleName')
-    //         ->all();
-    //     $employeeCondition = EmployeeCondition::find()
-    //         ->select('employeeConditionName')
-    //         ->where(["status" => 1])
-    //         ->asArray()
-    //         ->orderBy('employeeConditionName')
-    //         ->all();
-    //     $rights = Role::find()
-    //         ->select('roleName')
-    //         ->where(["status" => 1])
-    //         ->asArray()
-    //         ->orderBy('roleName')
-    //         ->all();
-    //     $gender[0] = "Male";
-    //     $gender[1] = "Female";
-    //     //throw new exception(print_r($titles, true));
-    //     $htmlExcel = $this->renderPartial('export', [
-    //         "companies" => $companies,
-    //         "branches" => $branches,
-    //         "departments" => $departments,
-    //         "teams" => $teams,
-    //         "titles" => $titles,
-    //         "employeeCondition" => $employeeCondition,
-    //         "rights" => $rights,
-    //         "teamPositions" => $teamPositions,
-    //         "gender" => $gender
-    //     ]);
-    //     //throw new exception($htmlExcel);
-    //     $urlFolder = Path::getHost() . 'file/import/employee/';
-    //     $fileName = 'employee.xlsx';
-    //     $filePath = $urlFolder . $fileName;
-    //     $reader = new Xlsx();
+    public function actionExport()
+    {
+        $companies = Company::find()
+            ->select('companyName')
+            ->where(["status" => 1])
+            ->asArray()
+            ->groupBy('companyName')
+            ->orderBy('companyName')
+            ->all();
+        $branches = Branch::find()
+            ->select('branchName')
+            ->where(["status" => 1])
+            ->asArray()
+            ->groupBy('branchName')
+            ->orderBy('branchName')
+            ->all();
+        $departments = Department::find()
+            ->select('departmentName')
+            ->where(["status" => 1])
+            ->asArray()
+            ->groupBy('departmentName')
+            ->orderBy('departmentName')
+            ->all();
+        $teams = Team::find()
+            ->select('teamName')
+            ->where(["status" => 1])
+            ->asArray()
+            ->groupBy('teamName')
+            ->orderBy('teamName')
+            ->all();
+        $teamPositions = TeamPosition::find()
+            ->select('teamPositionName')
+            ->where(["status" => 1])
+            ->asArray()
+            ->groupBy('teamPositionName')
+            ->orderBy('teamPositionName')
+            ->all();
+        $titles = Title::find()
+            ->select('title.titleName,d.departmentName')
+            ->JOIN("LEFT JOIN", "department d", "d.departmentId=title.departmentId")
+            ->where(["d.status" => 1, "title.status" => 1])
+            ->asArray()
+            // ->groupBy('titleName')
+            ->orderBy('title.titleName')
+            ->all();
+        $employeeCondition = EmployeeCondition::find()
+            ->select('employeeConditionName')
+            ->where(["status" => 1])
+            ->asArray()
+            ->orderBy('employeeConditionName')
+            ->all();
+        $rights = Role::find()
+            ->select('roleName')
+            ->where(["status" => 1])
+            ->asArray()
+            ->orderBy('roleName')
+            ->all();
+        $gender[0] = "Male";
+        $gender[1] = "Female";
+        //throw new exception(print_r($titles, true));
+        $htmlExcel = $this->renderPartial('export', [
+            "companies" => $companies,
+            "branches" => $branches,
+            "departments" => $departments,
+            "teams" => $teams,
+            "titles" => $titles,
+            "employeeCondition" => $employeeCondition,
+            "rights" => $rights,
+            "teamPositions" => $teamPositions,
+            "gender" => $gender
+        ]);
+        //throw new exception($htmlExcel);
+        $urlFolder = Path::getHost() . 'file/import/employee/';
+        $fileName = 'employee.xlsx';
+        $filePath = $urlFolder . $fileName;
+        $reader = new Xlsx();
 
 
-    //     $spreadsheet = new Spreadsheet;
-    //     $reader2 = new Html();
+        $spreadsheet = new Spreadsheet;
+        $reader2 = new Html();
 
-    //     $spreadsheet->createSheet();
+        $spreadsheet->createSheet();
 
-    //     $reader2->setSheetIndex(1);
-    //     $spreadsheet = $reader2->loadFromString($htmlExcel);
-    //     $spreadsheet->getActiveSheet(1)->setTitle('data');
+        $reader2->setSheetIndex(1);
+        $spreadsheet = $reader2->loadFromString($htmlExcel);
+        $spreadsheet->getActiveSheet(1)->setTitle('data');
 
-    //     $spreadsheet1 = $reader->load($filePath);
-    //     $reader2->setSheetIndex(0);
-    //     $clonedWorksheet = clone $spreadsheet1->getSheetByName('employee');
-    //     $clonedWorksheet->setTitle('employee');
-    //     $spreadsheet->addExternalSheet($clonedWorksheet);
+        $spreadsheet1 = $reader->load($filePath);
+        $reader2->setSheetIndex(0);
+        $clonedWorksheet = clone $spreadsheet1->getSheetByName('employee');
+        $clonedWorksheet->setTitle('employee');
+        $spreadsheet->addExternalSheet($clonedWorksheet);
 
-    //     $fileName = 'Import Employee format' . date('Y-m-d');
+        $fileName = 'Import Employee format' . date('Y-m-d');
 
-    //     $spreadsheet->removeSheetByIndex(
-    //         $spreadsheet->getIndex(
-    //             $spreadsheet->getSheetByName('Worksheet')
-    //         )
-    //     );
-    //     //  $spreadsheet->getActiveSheet()->setTitle('employee');
+        $spreadsheet->removeSheetByIndex(
+            $spreadsheet->getIndex(
+                $spreadsheet->getSheetByName('Worksheet')
+            )
+        );
+        //  $spreadsheet->getActiveSheet()->setTitle('employee');
 
-    //     $spreadsheet->setActiveSheetIndex(1);
-    //     $folderName = "export";
-    //     $urlFolder = Path::getHost() . 'file/' . $folderName . "/" . $fileName;
-    //     $folder_path = Path::getHost() . 'file/' . $folderName;
-    //     $files = glob($folder_path . '/*');
-    //     foreach ($files as $file) {
-    //         if (is_file($file)) {
-    //             unlink($file);
-    //         }
-    //     }
+        $spreadsheet->setActiveSheetIndex(1);
+        $folderName = "export";
+        $urlFolder = Path::getHost() . 'file/' . $folderName . "/" . $fileName;
+        $folder_path = Path::getHost() . 'file/' . $folderName;
+        $files = glob($folder_path . '/*');
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                unlink($file);
+            }
+        }
 
-    //     $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-    //     $writer->save($urlFolder);
-    //     return Yii::$app->response->sendFile($urlFolder, $fileName . '.xlsx');
-    // }
-    // public function actionExportEmployee($hash)
-    // {
-    //     $param = ModelMaster::decodeParams($hash);
-    //     $employeeId = $param["employeeId"];
-    //     $api = curl_init();
-    //     curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-    //     curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-    //     curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-    //     $employee = curl_exec($api);
-    //     $employee = json_decode($employee, true);
-    //     curl_close($api);
-    //     if ($employee["birthDate"] != '') {
-    //         $year = date('Y');
-    //         $birthDateArr = explode('-', $employee["birthDate"]);
-    //         $birthYear = (int)$birthDateArr[0];
-    //         $employee["age"] = (int)$year - (int)$birthYear;
-    //     } else {
-    //         $employee["age"] = '-';
-    //     }
-    //     $employee["branchName"] = Branch::branchName($employee['branchId']);
-    //     $employee["departmentName"] =  Department::departmentName($employee['departmentId']);
-    //     $employee["teamName"] =  Team::teamName($employee['teamId']);
-    //     $employee["titleName"] = Title::titleName($employee['titleId']);
-    //     $employee["conditionName"] = EmployeeCondition::conditionName($employee['employeeConditionId']);
-    //     $employee["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
-    //     //throw new exception(print_r($employee, true));
-    //     $content = $this->renderPartial('export_employee', ["employee" => $employee]);
-    //     $options = new Options();
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $writer->save($urlFolder);
+        return Yii::$app->response->sendFile($urlFolder, $fileName . '.xlsx');
+    }
+    public function actionExportEmployee($hash)
+    {
+        $param = ModelMaster::decodeParams($hash);
+        $employeeId = $param["employeeId"];
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+        $employee = curl_exec($api);
+        $employee = json_decode($employee, true);
+        curl_close($api);
+        if ($employee["birthDate"] != '') {
+            $year = date('Y');
+            $birthDateArr = explode('-', $employee["birthDate"]);
+            $birthYear = (int)$birthDateArr[0];
+            $employee["age"] = (int)$year - (int)$birthYear;
+        } else {
+            $employee["age"] = '-';
+        }
+        $employee["branchName"] = Branch::branchName($employee['branchId']);
+        $employee["departmentName"] =  Department::departmentName($employee['departmentId']);
+        $employee["teamName"] =  Team::teamName($employee['teamId']);
+        $employee["titleName"] = Title::titleName($employee['titleId']);
+        $employee["conditionName"] = EmployeeCondition::conditionName($employee['employeeConditionId']);
+        $employee["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
+        //throw new exception(print_r($employee, true));
+        $content = $this->renderPartial('export_employee', ["employee" => $employee]);
+        $options = new Options();
 
-    //     //$options->set('defaultFont', 'sans-serif');
-    //     //$options->set('Sofia', 'sans-serif');
-    //     $options->set('isRemoteEnabled', true);
-    //     $dompdf = new Dompdf($options);
-    //     $dompdf->loadHtml($content);
-    //     $dompdf->setPaper('A4', 'vertical');
-    //     $dompdf->render();
-    //     $dompdf->stream("1234", array("Attachment" => false));
-    //     exit(0);
-    // }
+        //$options->set('defaultFont', 'sans-serif');
+        //$options->set('Sofia', 'sans-serif');
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml($content);
+        $dompdf->setPaper('A4', 'vertical');
+        $dompdf->render();
+        $dompdf->stream("1234", array("Attachment" => false));
+        exit(0);
+    }
     public function actionAddUser()
     {
         $employees = Employee::find()->select('employeeId,companyEmail')->where(["status" => 1])->asArray()->all();
@@ -1762,18 +1762,18 @@ class EmployeeController extends Controller
         $employee = curl_exec($api);
         $employee = json_decode($employee, true);
 
-         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId);
         $userEmployee = curl_exec($api);
         $userEmployee = json_decode($userEmployee, true);
         // throw new Exception(print_r($userEmployee, true));
 
-        $userId = $userEmployee['userId'] ?? '';  
-        
+        $userId = $userEmployee['userId'] ?? '';
+
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-language?id=' . $userId);
         $UserLanguage = curl_exec($api);
         $UserLanguage = json_decode($UserLanguage, true);
         // throw new Exception(print_r($UserLanguage, true));
-        
+
         curl_close($api);
         // throw new Exception(print_r($employee, true));
 
