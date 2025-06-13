@@ -833,6 +833,9 @@ $this->registerJs('
 			}
 		});
 	}
+	function modalImportEmployee(){
+	$("#import-employee-modal").modal("show");
+	}
 	
 		
 		
