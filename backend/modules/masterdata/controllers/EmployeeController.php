@@ -390,21 +390,31 @@ class EmployeeController extends Controller
 
 	public function actionDefaultLanguage()
 	{
-		$language = DefaultLanguage::find()
-			->where(["status" => 1])
-			->asArray()
-			->all();
+		  $language = DefaultLanguage::find()
+        ->alias('d') // ตั้ง alias ให้ DefaultLanguage
+        ->select(['d.languageId', 'd.language', 'd.languageName', 'd.countryId', 'c.flag'])
+        ->leftJoin('country c', 'c.countryId = d.countryId') // ✅ ใช้ alias 'c'
+        ->where(['d.status' => 1])
+        ->asArray()
+        ->all();
+
+
 		return json_encode($language);
 	}
 
 	public function actionMainLanguage()
 	{
 		$language = Language::find()
-			->where(["status" => 1])
+			->alias('l')  // ตั้ง alias สำหรับ language
+			->select(['l.LanguageId', 'l.name', 'l.symbol', 'l.countryId', 'c.flag'])
+			->leftJoin('country c', 'c.countryId = l.countryId')
+			->where(['l.status' => 1])
 			->asArray()
 			->all();
+		// ส่ง response แบบ JSON ของ Yii
 		return json_encode($language);
 	}
+
 
 
 	public function actionModuleRole()

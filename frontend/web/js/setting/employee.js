@@ -1028,3 +1028,54 @@ function changeStatusEmployee() {
     selectElement.className = newClass;
 }
 
+
+
+function changeSelectFlag() {
+    const nationalitySelect = document.getElementById('nationalityId');
+    if (nationalitySelect.value) {
+        nationalitySelect.dispatchEvent(new Event('change'));
+    }
+
+    document.getElementById('nationalityId').addEventListener('change', function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const flagUrl = selectedOption.getAttribute('data-flag');
+        if (flagUrl) {
+            document.getElementById('flag').src = homeUrl + flagUrl;
+        }
+    });
+
+    const defaultLanguageSelect = document.getElementById('defaultLanguage');
+    if (defaultLanguageSelect.value) {
+        defaultLanguageSelect.dispatchEvent(new Event('change'));
+    }
+    document.getElementById('defaultLanguage').addEventListener('change', function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const flagUrl = selectedOption.getAttribute('data-flag');
+        if (flagUrl) {
+            // alert(1);
+            document.getElementById('flag-dl').src = homeUrl + flagUrl;
+        }
+    });
+
+    const mainLanguageSelect = document.getElementById('mainLanguage');
+    if (mainLanguageSelect.value) {
+        mainLanguageSelect.dispatchEvent(new Event('change'));
+    }
+    document.getElementById('mainLanguage').addEventListener('change', function () {
+        const selectedOption = this.options[this.selectedIndex];
+        // alert(1);
+        const flagUrl = selectedOption.getAttribute('data-flag');
+        if (flagUrl) {
+            document.getElementById('flag-ml').src = homeUrl + flagUrl;
+        }
+    });
+
+    // document.getElementById('mainLanguage1').addEventListener('change', function () {
+    //     const selectedOption = this.options[this.selectedIndex];
+    //     // alert(1);
+    //     const flagUrl = selectedOption.getAttribute('data-flag');
+    //     if (flagUrl) {
+    //         document.getElementById('flag-ml1').src = homeUrl + flagUrl;
+    //     }
+    // });
+}
