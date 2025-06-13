@@ -8,7 +8,7 @@
 					Create New
 					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-circle.svg" class="ms-1" style="width: 18px;height:18px;">
 				</a>
-				<a href="<?= Yii::$app->homeUrl ?>setting/employee/import" class="d-flex align-items-center export-employee-btn justify-content-center">
+				<a href="#" onclick="javascript:modalImportEmployee()" class="d-flex align-items-center export-employee-btn justify-content-center">
 					Import Employees
 					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/export-employee.svg" class="ms-2" style="width: 18px;height:18px;">
 				</a>
@@ -72,3 +72,4 @@
 </div>
 <input type="hidden" id="action" value="0">
 <input type="hidden" id="action-menu" value="0">
+<?= $this->render('modal_import') ?>
