@@ -1762,6 +1762,19 @@ class EmployeeController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
         $employee = curl_exec($api);
         $employee = json_decode($employee, true);
+
+         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId);
+        $userEmployee = curl_exec($api);
+        $userEmployee = json_decode($userEmployee, true);
+        // throw new Exception(print_r($userEmployee, true));
+
+        $userId = $userEmployee['userId'] ?? '';  
+        
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-language?id=' . $userId);
+        $UserLanguage = curl_exec($api);
+        $UserLanguage = json_decode($UserLanguage, true);
+        // throw new Exception(print_r($UserLanguage, true));
+        
         curl_close($api);
         // throw new Exception(print_r($employee, true));
 

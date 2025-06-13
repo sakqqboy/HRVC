@@ -4,11 +4,11 @@ $id = $cert['id'] ?? '';
 $cerName = $cert['cerName'] ?? '';
 $issuingName = $cert['issuingName'] ?? '';
 $cerStart = (!empty($cert['fromCerDate']) && strtotime($cert['fromCerDate']) !== false)
-    ? (new DateTime($cert['fromCerDate']))->format('d-m-Y')
+    ? (new DateTime($cert['fromCerDate']))->format('d/m/Y')
     : '';
 
 $cerEnd = (!empty($cert['toCerDate']) && strtotime($cert['toCerDate']) !== false)
-    ? (new DateTime($cert['toCerDate']))->format('d-m-Y')
+    ? (new DateTime($cert['toCerDate']))->format('d/m/Y')
     : '';
 
 $credential = $cert['credential'] ?? '';
