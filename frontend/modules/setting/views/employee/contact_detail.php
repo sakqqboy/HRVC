@@ -13,9 +13,6 @@ if (isset($employee['birthDate'])) {
 
     // คำนวณจำนวนวัน
     $interval = $today->diff($nextBirthday)->days;
-    echo $interval . ' days to next Birthday';
-} else {
-    echo '-';
 }
 ?>
 
@@ -55,8 +52,24 @@ if (isset($employee['birthDate'])) {
                 <img src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website" style="width: 20px; height: 20px;">
                 <span class="text-gray font-size-16 font-weight-400">Nationality</span>
             </div>
+
             <div style="flex: 8;">
-                <span class="font-size-16 font-weight-500"><?= $employee['countryName'] ?? '-' ?></span>
+                <?php
+                    $flag = 'image/e-world.svg'; // default fallback flag
+                        if (!empty($employee['nationalityId']) && !empty($nationalities)) {
+                            foreach ($nationalities as $nation) {
+                                if ($employee['defaultLanguage'] == $nation['countryId']) {
+                                    $flag = !empty($nation['flag']) ? $nation['flag'] : 'image/e-world.svg';
+                                        break;
+                                }
+                            }
+                        }
+                ?>
+                <span class="font-size-16 font-weight-500">
+                    <img src="<?= Yii::$app->homeUrl . htmlspecialchars($flag) ?>" alt="Website"
+                        style="width: 20px; height: 20px; border: none;">
+                    <?= $employee['countryName'] ?? '-' ?>
+                </span>
             </div>
         </div>
 
