@@ -380,13 +380,25 @@ class EmployeeController extends Controller
 	public function actionUserLanguage($id)
 	{
 		$Languages = UserLanguage::find()
-			->select(['userLanguageId', 'userId', 'languageId', 'lavel'])
-			->where(['userId' => $id])
+			->alias('u') // alias สำหรับ user_language
+			->select([
+				'u.userLanguageId',
+				'u.userId',
+				'u.languageId',
+				'u.lavel',
+				'l.name',
+				'l.countryId',
+				'c.flag'
+			])
+			->leftJoin('language l', 'l.languageId = u.languageId') // JOIN กับ default_language ก่อน
+			->leftJoin('country c', 'c.countryId = l.countryId') // แล้วค่อย JOIN กับ country
+			->where(['u.userId' => $id])
 			->asArray()
 			->all();
 
 		return json_encode($Languages);
 	}
+
 
 	public function actionDefaultLanguage()
 	{
