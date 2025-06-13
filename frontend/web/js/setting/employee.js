@@ -987,3 +987,44 @@ function flatpickrDate() {
 
 
 }
+
+function changeStatusEmployee() {
+    const selectElement = document.getElementById('pim-status');
+    const selectedId = parseInt(selectElement.value);
+
+    // กำหนดคลาสใหม่ตาม employeeConditionId
+    let newClass = '';
+
+    switch (selectedId) {
+        case 1:
+            newClass = 'select-blue';
+            break;
+        case 2:
+        case 3:
+            newClass = 'select-blackblue';
+            break;
+        case 4:
+            newClass = 'select-yellow';
+            break;
+        case 5:
+        case 6:
+            newClass = 'select-orange';
+            break;
+        case 7:
+            newClass = 'select-pink';
+            break;
+        case 8:
+            newClass = 'select-red';
+            break;
+        case 9:
+            newClass = 'select-whiteorange';
+            break;
+        default:
+            newClass = 'select-employee-status';
+            break;
+    }
+
+    // ล้างคลาสเก่าออกทั้งหมด แล้วใส่เฉพาะคลาสสีใหม่
+    selectElement.className = newClass;
+}
+

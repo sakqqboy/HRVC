@@ -82,7 +82,7 @@ $LanguageId = '';
                             <?= Yii::t('app', 'Employment Status') ?>
                         </span>
                         <select class="select-employee-status" aria-label="Default select example" name="status"
-                            id="pim-status" onchange="javascript:changeStatusEmploywee()" required>
+                            id="pim-status" onchange="changeStatusEmployee()" required>
                             <option value="" disabled hidden
                                 <?= empty($employee['employeeConditionId']) ? 'selected' : '' ?>
                                 style="color: var(--Helper-Text, #8A8A8A);">
@@ -2164,7 +2164,7 @@ $LanguageId = '';
         flatpickrDate();
         updateSelectCheng();
         updateMultiDueTermState();
-
+        changeStatusEmployee()
         const loadedCertificates = <?= json_encode($userCertificate) ?>;
         // console.log(loadedCertificates);
 
