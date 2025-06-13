@@ -39,16 +39,16 @@ use common\models\ModelMaster;
 											<div class="d-flex justify-content-start">
 												<img src="<?= Yii::$app->homeUrl . 'images/icons/Settings/excel.svg' ?>" alt="" class="me-2">
 												<div class="text-start align-content-center" style="line-height:19px;">
-													<span class="font-size-14 font-weight-500">Register Employees.CSV</span><br>
+													<span class="font-size-14 font-weight-500">Register Employees.XLSX</span><br>
 													<span class="font-size-12 font-weight-400" style="color:#6B7280;">1.5 KB</span>
 												</div>
 											</div>
 										</div>
 										<div class="col-5 font-size-14  text-end pr-10" style="align-content: center;">
-											<span class="download-btn">
+											<a href="<?= Yii::$app->homeUrl ?>setting/employee/export" class="download-btn" style="text-decoration: none;">
 												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/download-white.svg" class="me-1" style="width: 18px;height:18px;">
 												Download Format
-											</span>
+											</a>
 										</div>
 									</div>
 								</div>
@@ -79,10 +79,10 @@ use common\models\ModelMaster;
 								3.<span class="ms-2"><?= Yii::t('app', 'Do not change the format.') ?></span>
 							</div>
 							<div class="col-12">
-								4.<span class="ms-2"><?= Yii::t('app', 'Save the file as a CSV.') ?></span>
+								4.<span class="ms-2"><?= Yii::t('app', 'Save the file as a XLS or XLSX.') ?></span>
 							</div>
 							<div class="col-12">
-								5.<span class="ms-2"><?= Yii::t('app', 'Upload the CSV in the second box.') ?></span>
+								5.<span class="ms-2"><?= Yii::t('app', 'Upload the XLS or XLSX in the second box.') ?></span>
 							</div>
 						</div>
 					</div>
@@ -110,12 +110,12 @@ use common\models\ModelMaster;
 						<div class="upload-explain text-center mt-20">
 							Open the file you downloaded in Step 1 and enter your values in the
 							specified rows and columns without changing the format.
-							Save the file as an <b>CSV.</b> Please upload the file you saved after
+							Save the file as an <b>XLS or XLSX.</b> Please upload the file you saved after
 							inputting the data to the second box to continue.
 						</div>
 					</div>
 					<div class="col-12 text-center font-size-14 font-weight-400  mt-20" style="color:#1A1A24;">
-						<span style="color:#666666;">Acceptable file types: </span>.CSV (Formatted file only)
+						<span style="color:#666666;">Acceptable file types: </span>.XLS or XLSX (Formatted file only)
 					</div>
 				</div>
 			</div>
