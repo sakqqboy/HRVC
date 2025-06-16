@@ -344,7 +344,12 @@ use yii\bootstrap5\ActiveForm;
 			return;
 		}
 		if (fileInput.files.length > 0) {
-			fileName.innerHTML = "<img src='<?= Yii::$app->homeUrl . 'images/icons/Settings/excel.svg' ?>' class='ms-2' width='16' />" + fileInput.files[0].name;
+			$("#spinner-container").show();
+			setTimeout(() => {
+				document.getElementById("spinner-container").style.display = "none";
+				fileName.innerHTML = "<img src='<?= Yii::$app->homeUrl . 'images/icons/Settings/excel.svg' ?>' class='ms-2' width='16' />" + fileInput.files[0].name +
+					"<img src='<?= Yii::$app->homeUrl . 'images/icons/Settings/check-success.svg' ?>' class='ms-1' width='16' />";
+			}, 1000);
 		}
 	});
 

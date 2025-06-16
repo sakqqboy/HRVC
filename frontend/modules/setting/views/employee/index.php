@@ -232,6 +232,9 @@ $statusTexArr = Status::allStatusText();
 		</div>
 	</div>
 </div>
+<?php
+$showModal = $isFromImport; // หรือ 0
+?>
 <?= $this->render('modal_warning_delete') ?>
 <?= $this->render('modal_deleting') ?>
 <style>
@@ -710,6 +713,13 @@ $statusTexArr = Status::allStatusText();
 			$("#employee-" + employeeId).removeClass('checked-employee');
 		}
 	}
+	window.onload = function() {
+		var showModal = <?= json_encode($showModal) ?>;
+		if (showModal === 1) {
+			var modal = new bootstrap.Modal(document.getElementById('import-employee-modal'));
+			modal.show();
+		}
+	};
 
 	function deleteMultiEmployee() {
 		$("#warning-delete-employee").show();

@@ -104,7 +104,7 @@ class EmployeeController extends Controller
     {
         $param = ModelMaster::decodeParams($hash);
         $companyId = !empty($param["companyId"]) ? $param["companyId"] : null;
-
+        $isFromImport = isset($param["import"]) ? $param["import"] : 0;
         $groupId = Group::currentGroupId();
         if ($groupId == null) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
@@ -122,7 +122,8 @@ class EmployeeController extends Controller
         curl_close($api);
         return $this->render('index', [
             "employees" => $employees,
-            "companies" => $companies
+            "companies" => $companies,
+            "isFromImport" => $isFromImport
         ]);
     }
     public function actionEmployeeList()
@@ -1097,7 +1098,6 @@ class EmployeeController extends Controller
         $update = [];
         $success = 0;
         $countUpdate = 0;
-        $totalError = 0;
         //throw new Exception(print_r(Yii::$app->request->post(), true));
         // if (isset($_POST["employeeFile"])) {
 
@@ -1130,6 +1130,7 @@ class EmployeeController extends Controller
                         'email' => [],
                         'telephoneName' => []
                     ];
+                    $isError = 0;
                     foreach ($sheetData as $data) :
                         $line = $i;
                         $companyId = '';
@@ -1161,9 +1162,8 @@ class EmployeeController extends Controller
                         $errormessageCol12 = '';
                         $errormessageCol14 = '';
                         $errormessageCol17 = '';
-                        $isError = 0;
-                        $error[$i] = "";
 
+                        $error[$i] = "";
                         if ($i >= 1) {
                             $lineError = 0;
                             if (trim($data[0]) == "") {
@@ -1281,6 +1281,7 @@ class EmployeeController extends Controller
                             $isExisting = $this->checkDupplicate($data[0], $data[1], $data[2], $companyId);
                             if (trim($data[0]) == "" || trim($data[1]) == "" || trim($data[3]) == "" || trim($data[6]) == "" || trim($data[7]) == "") {
                                 $lineError = 1;
+                                $isError = 1;
                             }
                             // if ($isError == 0) {
                             //     if ($isExisting == 0) {
@@ -1377,7 +1378,6 @@ class EmployeeController extends Controller
 
                             $dataLine[$line] = [
                                 "isExisting" => $isExisting,
-                                "isError" => $isError,
                                 "errorCol0" => $errorCol0 == 1 ? $errormessageCol0 : '',
                                 "errorCol1" => $errorCol1 == 1 ? $errormessageCol1 : '',
                                 "errorCol3" => $errorCol3 == 1 ? $errormessageCol3 : '',
@@ -1401,12 +1401,7 @@ class EmployeeController extends Controller
                                 "email" => $data[3],
                                 "lineError" => $lineError,
                                 "dupeFields" => $dupeFields
-                                //"isDuplicate" => $isDuplicate
                             ];
-                        }
-                        if ($isError == 0) {
-                            $totalError++;
-                            unset($error[$i]); // if there is no error delete this index
                         }
                         $i++;
                     endforeach;
@@ -1416,14 +1411,11 @@ class EmployeeController extends Controller
                         //$transaction->rollBack();
                     }
                 }
-            } else {
-                $error[0] = "Please select .xlsx or .xls file";
             }
-
             unlink($pathSave);
         }
         // }
-        return $this->render('import_result', ["dataLine" => $dataLine]);
+        return $this->render('import_result', ["dataLine" => $dataLine, "isError" => $isError]);
         return $this->render('import', [
             "errors" => $error,
             "success" => $success,
@@ -1432,6 +1424,7 @@ class EmployeeController extends Controller
             "update" => $update
         ]);
     }
+    public function actionSaveImport() {}
     public function checkDupplicate($firstName, $sureName, $code, $companyId)
     {
         $isExisting = 0;
@@ -1440,9 +1433,10 @@ class EmployeeController extends Controller
                 ->where([
                     "employeeFirstname" => $firstName,
                     "employeeSurename" => $sureName,
-                    "employeeNumber" => $code,
-                    "companyId" => $companyId,
+                    // "employeeNumber" => $code,
+                    // "companyId" => $companyId,
                 ])
+                ->andwhere("status!=99")
                 ->one();
             if (isset($employee) && !empty($employee)) {
                 $isExisting = 1;
@@ -1883,7 +1877,7 @@ class EmployeeController extends Controller
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        
+
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
         $employee = curl_exec($api);
         $employee = json_decode($employee, true);
@@ -1928,7 +1922,7 @@ class EmployeeController extends Controller
 
         curl_close($api);
 
-        return $this->renderPartial('work_detail',[
+        return $this->renderPartial('work_detail', [
             'employee' => $employee,
             'company' => $company,
             'branch' => $branch,
