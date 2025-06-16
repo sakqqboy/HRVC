@@ -37,11 +37,16 @@ $this->title = 'Import Employee Result';
 						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/close-circle.svg" class="me-1" style="width:14px;height:14px;margin-top:-2px;">
 						<?= Yii::t('app', 'Cancel') ?>
 					</a>
-					<a href="javascript:submitData()" class="btn-accept-import align-content-center text-center" style="text-decoration: none;cursor:pointer">
-						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editwhite.svg" class="me-1" style="width:14px;height:14px;margin-top:-2px;">
-						<?= Yii::t('app', 'Accept') ?>
-					</a>
-
+					<?php
+					if ($isError == 0) {
+					?>
+						<a href="javascript:submitData()" class="btn-accept-import align-content-center text-center" style="text-decoration: none;cursor:pointer">
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editwhite.svg" class="me-1" style="width:14px;height:14px;margin-top:-2px;">
+							<?= Yii::t('app', 'Accept') ?>
+						</a>
+					<?php
+					}
+					?>
 				</div>
 			</div>
 			<div class="row d-flex" style="--bs-gutter-x:0 !important;">
@@ -59,19 +64,24 @@ $this->title = 'Import Employee Result';
 						foreach ($dataLine as $line => $da) :
 					?>
 							<tr class="tr-space"></tr>
-							<?php if ($da["lineError"] == 1 || count($da["dupeFields"]) > 0) { ?>
+							<?php if ($da["lineError"] == 1 || count($da["dupeFields"]) > 0 || $da["isExisting"] == 1) { ?>
 								<tr class="employee-tr">
 									<td colspan="6" class="pl-0 pr-0" style="border:0px !important;">
 										<div class="col-12 justify-content-start div-red" style="height:48px;">
 											<span class="line-error me-2">Error in row <?= $line + 1 ?></span>
 											<?php
-											if ($da["lineError"] == 1) {
+											if ($da["isExisting"] == 0) {
+												if ($da["lineError"] == 1) {
 											?>
-												<span class="text-danger me-2">Please check the required informatioin !</span>
-											<?php
-											}
-											if (count($da["dupeFields"]) > 0) { ?>
-												<span class="text-danger">Your data contains duplicates in the fields: <?= implode(', ', $da["dupeFields"]) ?>. Please correct these issues to continue.</span>
+													<span class="text-danger me-2">Please check the required informatioin !</span>
+												<?php
+												}
+												if (count($da["dupeFields"]) > 0) { ?>
+													<span class="text-danger">Your data contains duplicates in the fields: <?= implode(', ', $da["dupeFields"]) ?>. Please correct these issues to continue.</span>
+												<?php
+												}
+											} else { ?>
+												<span class="text-danger me-2"><?= $da["employeeName"] ?> This name already exists in the database.</span>
 											<?php
 											}
 											?>
@@ -125,7 +135,7 @@ $form = ActiveForm::begin([
 		'enctype' => 'multipart/form-data',
 		'id' => 'import-employee',
 	],
-	'action' => Yii::$app->homeUrl . "setting/employee/submit-import"
+	'action' => Yii::$app->homeUrl . "setting/employee/save-import"
 ]);
 ?>
 <?php ActiveForm::end(); ?>
