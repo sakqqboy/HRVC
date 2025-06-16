@@ -37,7 +37,7 @@ if (isset($employee['birthDate'])) {
         <!-- Employee ID -->
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
-                <img src="<?= Yii::$app->homeUrl ?>image/e-employee.svg" alt="Website"
+                <img src="<?= Yii::$app->homeUrl ?>image/e-employee.svg" alt="Employee"
                     style="width: 20px; height: 20px;">
                 <span class="text-gray font-size-16 font-weight-400">Employee ID</span>
             </div>
@@ -49,7 +49,8 @@ if (isset($employee['birthDate'])) {
         <!-- Nationality -->
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
-                <img src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website" style="width: 20px; height: 20px;">
+                <img src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Nationality"
+                    style="width: 20px; height: 20px;">
                 <span class="text-gray font-size-16 font-weight-400">Nationality</span>
             </div>
 
@@ -66,7 +67,7 @@ if (isset($employee['birthDate'])) {
                         }
                 ?>
                 <span class="font-size-16 font-weight-500">
-                    <img src="<?= Yii::$app->homeUrl . htmlspecialchars($flag) ?>" alt="Website"
+                    <img src="<?= Yii::$app->homeUrl . htmlspecialchars($flag) ?>" alt="country"
                         style="width: 20px; height: 20px; border: none; border-radius: 100%;">
                     <?= $employee['countryName'] ?? '-' ?>
                 </span>
@@ -80,7 +81,7 @@ if (isset($employee['birthDate'])) {
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500">
-                    <img src="<?= Yii::$app->homeUrl ?>image/male-img.svg" alt="Website"
+                    <img src="<?= Yii::$app->homeUrl ?>image/male-img.svg" alt="Gender"
                         style="width: 20px; height: 20px;">
                     <?php 
                     if($employee['gender'] == 1){
@@ -108,7 +109,7 @@ if (isset($employee['birthDate'])) {
         <!-- Age -->
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
-                <img src="<?= Yii::$app->homeUrl ?>image/e-birth.svg" alt="Website" style="width: 20px; height: 20px;">
+                <img src="<?= Yii::$app->homeUrl ?>image/e-birth.svg" alt="birth" style="width: 20px; height: 20px;">
                 <span class="text-gray font-size-16 font-weight-400">Age</span>
             </div>
             <div style="flex: 8;">
@@ -190,7 +191,7 @@ if (isset($employee['birthDate'])) {
         <!-- Work Email -->
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
-                <img src="<?= Yii::$app->homeUrl ?>image/e-mail.svg" alt="Website" style="width: 20px; height: 20px;">
+                <img src="<?= Yii::$app->homeUrl ?>image/e-mail.svg" alt="mail" style="width: 20px; height: 20px;">
                 <span class="text-gray font-size-16 font-weight-400">Work Email</span>
             </div>
             <div style="flex: 8;">
@@ -206,7 +207,7 @@ if (isset($employee['birthDate'])) {
         <!-- Personal Email -->
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
-                <img src="<?= Yii::$app->homeUrl ?>image/e-mail.svg" alt="Website" style="width: 20px; height: 20px;">
+                <img src="<?= Yii::$app->homeUrl ?>image/e-mail.svg" alt="mail" style="width: 20px; height: 20px;">
                 <span class="text-gray font-size-16 font-weight-400">Personal Email</span>
             </div>
             <div style="flex: 8;">
@@ -222,7 +223,7 @@ if (isset($employee['birthDate'])) {
         <!-- Address -->
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
-                <img src="<?= Yii::$app->homeUrl ?>image/e-address.svg" alt="Website"
+                <img src="<?= Yii::$app->homeUrl ?>image/e-address.svg" alt="Address"
                     style="width: 20px; height: 20px;">
                 <span class="text-gray font-size-16 font-weight-400">Address</span>
             </div>
@@ -243,9 +244,9 @@ if (isset($employee['birthDate'])) {
                     ?>
 
                     <span class="font-size-16 font-weight-500">
-                        <img src="<?= Yii::$app->homeUrl . htmlspecialchars($flag1) ?>" alt="Website"
+                        <img src="<?= Yii::$app->homeUrl . htmlspecialchars($flag1) ?>" alt="Language"
                             style="width: 20px; height: 20px; border: none; border-radius: 100%;">
-                        <?= $UserLanguage[0]['name'] ?? '-' ?>
+                        <?= $UserLanguage[0]['name'] ?? '' ?>
                     </span>
                 </div>
 
@@ -264,7 +265,7 @@ if (isset($employee['birthDate'])) {
                     $flag1 = isset($UserLanguage[1]['flag']) ? $UserLanguage[1]['flag'] : '';
                     ?>
                     <span class="font-size-16 font-weight-500">
-                        <img src="<?= Yii::$app->homeUrl . htmlspecialchars($flag1) ?>" alt="Website"
+                        <img src="<?= Yii::$app->homeUrl . htmlspecialchars($flag1) ?>" alt="Language"
                             style="width: 20px; height: 20px; border: none; border-radius: 100%;">
                         <?= $UserLanguage[1]['name'] ?? '-' ?>
                     </span>
@@ -276,9 +277,9 @@ if (isset($employee['birthDate'])) {
                     $flag1 = isset($UserLanguage[2]['flag']) ? $UserLanguage[2]['flag'] : '';
                 ?>
                     <span class="font-size-16 font-weight-500">
-                        <img src="<?= Yii::$app->homeUrl . htmlspecialchars($flag1) ?>" alt="Website"
+                        <img src="<?= Yii::$app->homeUrl . htmlspecialchars($flag1) ?>" alt="Language"
                             style="width: 20px; height: 20px; border: none; border-radius: 100%;">
-                        <?= $UserLanguage[2]['name'] ?? '-' ?>
+                        <?= $UserLanguage[2]['name'] ?? '' ?>
                     </span>
                 </div>
                 <?php endif; ?>
