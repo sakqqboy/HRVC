@@ -1961,7 +1961,21 @@ class EmployeeController extends Controller
     public function actionAttachments()
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
-        return $this->renderPartial('attachments');
+        $param = ModelMaster::decodeParams($hash);
+        $employeeId = $param["employeeId"];
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+        $employee = curl_exec($api);
+        $employee = json_decode($employee, true);
+        curl_close($api);
+
+        return $this->renderPartial('attachments',[
+            'employee' => $employee,
+            'employeeId' => $employeeId
+        ]);
     }
 
     public function actionCertificates()
