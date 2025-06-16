@@ -1,9 +1,21 @@
 <?php
 
 use common\models\ModelMaster;
+use yii\bootstrap5\ActiveForm;
+
 ?>
 <div class="modal fade" id="import-employee-modal" tabindex="-1" aria-hidden="true">
 	<div class="modal-dialog modal-xl">
+		<?php
+		$form = ActiveForm::begin([
+			'options' => [
+				'class' => 'panel panel-default form-horizontal',
+				'enctype' => 'multipart/form-data',
+				'id' => 'import',
+			],
+			'action' => Yii::$app->homeUrl . "setting/employee/import"
+		]);
+		?>
 		<div class="modal-content" style="width:100%;padding: 40px 40px 35px 40px;">
 			<div class="col-12">
 				<div class="row">
@@ -89,7 +101,7 @@ use common\models\ModelMaster;
 
 				</div>
 			</div>
-			<div class="col-12 mt-20 upload-zone align-content-center">
+			<div class="col-12 mt-20 upload-zone align-content-center" id="dropZone">
 				<div class="row" style="--bs-gutter-x:0 !important;">
 					<div class="col-5 align-content-center">
 						<div class="d-flex justify-content-center ">
@@ -103,10 +115,11 @@ use common\models\ModelMaster;
 					</div>
 					<div class="col-1 text-center  font-size-16 font-weight-600 align-content-center">Or</div>
 					<div class="col-6 text-center align-content-center ">
-						<span class="select-file-btn font-size-16">
+						<span class="select-file-btn font-size-16" onclick="javascript:openDialog()">
 							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/add-file-white.svg" class="me-1" style="width: 18px;height:18px;">
 							Select File
 						</span>
+						<input type="file" id="employee-file" name="employeeFile">
 						<div class="upload-explain text-center mt-20">
 							Open the file you downloaded in Step 1 and enter your values in the
 							specified rows and columns without changing the format.
@@ -116,6 +129,7 @@ use common\models\ModelMaster;
 					</div>
 					<div class="col-12 text-center font-size-14 font-weight-400  mt-20" style="color:#1A1A24;">
 						<span style="color:#666666;">Acceptable file types: </span>.XLS or XLSX (Formatted file only)
+						<span id="fileName" style="margin-top: 10px; color:#2580D3;"></span>
 					</div>
 				</div>
 			</div>
@@ -124,16 +138,20 @@ use common\models\ModelMaster;
 					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/close-red.svg" class="me-1">
 					<?= Yii::t('app', 'Cancel') ?>
 				</a>
-				<a class="btn-upload align-content-center text-center" data-bs-dismiss="modal" aria-label="Close" style="text-decoration: none;cursor:pointer">
+				<a class="btn-upload align-content-center text-center" onclick="javascript:($('#import').submit())" style="text-decoration: none;cursor:pointer">
 					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/upload.svg" class="me-1">
 					<?= Yii::t('app', 'Upload') ?>
 				</a>
-
 			</div>
 		</div>
+		<?php ActiveForm::end(); ?>
 	</div>
 </div>
 <style>
+	#employee-file {
+		display: none;
+	}
+
 	.btn-upload {
 		width: 100px;
 		height: 40px;
@@ -240,6 +258,10 @@ use common\models\ModelMaster;
 		background: var(--Background-Blue, #F4F6F9);
 	}
 
+	.upload-zone.dragover {
+		opacity: 0.5;
+	}
+
 	.upload-explain {
 		max-width: 70%;
 		font-weight: 400;
@@ -257,4 +279,53 @@ use common\models\ModelMaster;
 		$baseUrl = window.location.protocol + "//" + window.location.host + '/';
 	}
 	var url = $baseUrl;
+	const fileName = document.getElementById('fileName');
+	const fileInput = document.getElementById('employee-file');
+	const dropZone = document.getElementById('dropZone');
+	fileInput.addEventListener('change', (e) => {
+		const file = fileInput.files[0];
+		if (!file) return;
+
+		const allowedExtensions = ['xls', 'xlsx'];
+		const fileExtension = file.name.split('.').pop().toLowerCase();
+		if (!allowedExtensions.includes(fileExtension)) {
+			alert(" ❌ Acceptable file types: .XLS and .XLSX ! ! !");
+			fileInput.value = ""; // เคลียร์ไฟล์ออก
+			fileName.textContent = "";
+			return;
+		}
+		if (fileInput.files.length > 0) {
+			fileName.innerHTML = "<img src='<?= Yii::$app->homeUrl . 'images/icons/Settings/excel.svg' ?>' class='ms-2' width='16' />" + fileInput.files[0].name;
+		}
+	});
+
+	['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+		dropZone.addEventListener(eventName, e => e.preventDefault());
+		dropZone.addEventListener(eventName, e => e.stopPropagation());
+	});
+	dropZone.addEventListener('dragover', () => {
+		dropZone.classList.add('dragover');
+	});
+	dropZone.addEventListener('dragleave', () => {
+		dropZone.classList.remove('dragover');
+	});
+	dropZone.addEventListener('drop', (e) => {
+		dropZone.classList.remove('dragover');
+		if (e.dataTransfer.files.length > 0) {
+			const file = e.dataTransfer.files[0];
+			if (!file) return;
+
+			const allowedExtensions = ['xls', 'xlsx'];
+			const fileExtension = file.name.split('.').pop().toLowerCase();
+			if (!allowedExtensions.includes(fileExtension)) {
+				alert(" ❌ Acceptable file types: .XLS and .XLSX ! ! !");
+				fileInput.value = ""; // เคลียร์ไฟล์ออก
+				fileName.textContent = "";
+				return;
+			}
+			fileInput.files = e.dataTransfer.files; // ใส่ไฟล์ลง input
+			fileName.innerHTML = "<img src='<?= Yii::$app->homeUrl . 'images/icons/Settings/excel.svg' ?>' class='ms-2' width='16' />" + e.dataTransfer.files[0].name;
+			// สามารถส่งฟอร์มได้ที่นี่ถ้าต้องการ
+		}
+	});
 </script>
