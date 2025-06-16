@@ -1,0 +1,176 @@
+<?php
+if (isset($employee['birthDate'])) {
+    $birthDate = new DateTime($employee['birthDate']);
+    $today = new DateTime();
+
+    // ตั้งวันเกิดถัดไปในปีนี้
+    $nextBirthday = new DateTime($today->format('Y') . '-' . $birthDate->format('m-d'));
+
+    // ถ้าวันเกิดปีนี้ผ่านไปแล้ว ให้เพิ่มปี +1
+    if ($nextBirthday < $today) {
+        $nextBirthday->modify('+1 year');
+    }
+
+    // คำนวณจำนวนวัน
+    $interval = $today->diff($nextBirthday)->days;
+}
+?>
+
+<div class="d-flex row" style="gap: 32px;">
+    <div class="w-100">
+        <span class="font-size-16 font-weight-600">Work Details</span>
+        <hr class="hr-group">
+    </div>
+
+    <div class="start-center" style="gap: 43px; display: flex; flex-wrap: wrap;">
+        <div class="center-center" style="gap: 72px;  width: 100%;">
+            <div class="start-center" style="gap: 35px;">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 17px;">
+                        <div class="mid-center" style="height: 60px; padding: 20.944px 4.189px; gap: 10.472px;">
+                            <img src="<?= Yii::$app->homeUrl ?>image/userProfile.png" class="card-tcf">
+                        </div>
+                        <div class="header-crad-company">
+                            <span class="font-size-22 font-weight-500">
+                                Mitsubishi Corp.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="start-center" style="gap: 22px;">
+                    <span class="profile-employee-title">
+                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" class="profile-icon"
+                            style="margin-top: -3px; width: 15px; height: 15px;">
+                        Bangladesh Branch
+                    </span>
+                    <span class="profile-employee-title">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/share.svg" class="profile-icon"
+                            style="margin-top: -3px;">
+                        Marketing Department
+                    </span>
+                    <span class="profile-employee-title">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" class="profile-icon"
+                            style="margin-top: -3px;">
+                        Sales Team
+                    </span>
+                    <span class="profile-employee-title">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/star.svg" class="profile-icon"
+                            style="margin-top: -3px;">
+                        Marketing Manager
+                    </span>
+                </div>
+            </div>
+            <div class="start-center" style="gap: 28px; width: 100%;">
+                <div style="display: flex; gap: 25px; width: 100%;">
+                    <span class="text-gray font-size-16 font-weight-400" style="width: 171px;">
+                        Employment Status
+                    </span>
+                    <span class="condition-name badge">
+                        Full-Time
+                    </span>
+                </div>
+                <div style="display: flex; gap: 25px; width: 100%;">
+                    <span class="text-gray font-size-16 font-weight-400" style="width: 171px;">
+                        <img src="<?= Yii::$app->homeUrl ?>image/e-since.svg" alt="Address"
+                            style="width: 16px; height: 16px;">
+                        Employee Since
+                    </span>
+                    <div class="row">
+                        <span class="font-size-16 font-weight-500">
+                            12th December 2024
+                        </span>
+                        <span class="text-gray font-size-16 font-weight-400">
+                            1 Year 3 months
+                        </span>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 25px; width: 100%;">
+                    <span class="text-gray font-size-16 font-weight-400" style="width: 171px;">
+                        <img src="<?= Yii::$app->homeUrl ?>image/e-period.svg" alt="Address"
+                            style="width: 16px; height: 16px;">
+                        Probation Period
+                    </span>
+                    <div class="row">
+                        <span class="font-size-16 font-weight-500">
+                            12th December 2024
+                        </span>
+                        <span class="text-gray font-size-16 font-weight-400">
+                            1 Year 3 months
+                        </span>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 25px; width: 100%;">
+                    <span class="text-gray font-size-16 font-weight-400" style="width: 171px;">
+                        <img src="<?= Yii::$app->homeUrl ?>image/e-address.svg" alt="Address"
+                            style="width: 16px; height: 16px;">
+                        Work Address
+                    </span>
+                    <div class="row">
+                        <span class="font-size-16 font-weight-500">
+                            House-38, Road-21, Mohakhali, Dhaka-1206
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex row" style="gap: 16px; width: 100%;">
+            <div class="w-100">
+                <span class="font-size-16 font-weight-600">Job Description</span>
+            </div>
+            <div class="company-group-edit bg-white" style="gap: 43px; padding: 36px 26px;">
+                <div class="center-center" style="gap: 63px; margin: 36px 29px;">
+                    <div class="row" style="border-right:lightgray solid thin;">
+                        <div class="row mb-36">
+                            <span class="font-size-16 font-weight-500 mb-22">Purpose of the Job</span>
+                            <span class="font-size-14 font-weight-400">
+                                The purpose of this role is to support the General Manager in driving the sales and
+                                marketing activities within the dynamic market of Bangladesh. The key focus areas
+                                encompass fostering and nurturing robust relationships with factories, industrial parks,
+                                general contractors, and engineering companies. The role necessitates diligent
+                                collection of vital information from a diverse range of stakeholders, including
+                                customers and relevant governmental authorities
+                            </span>
+                        </div>
+                        <div class="row">
+                            <span class="font-size-16 font-weight-500 mb-22">Core Responsibility</span>
+                            <span class="font-size-14 font-weight-400">
+                                1. Support the general manager in sales & and marketing activities in Bangladesh,
+                                especially in creating a good relationship with factories, industrial parks, general
+                                contractors, and engineering companies.
+                                2. Collect the necessary information from customers (factories, industrial parks,
+                                general contractors), and national government/local government/related authorities.
+                                3. Prepare the necessary application and get approval from the concerned authorities.
+                                4. Control documentary and filing system for the sales department
+                                5. Prepare estimations, contracts, and reports.
+
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="font-size-16 font-weight-500 mb-22">Key Responsibility</span>
+                        <span class="font-size-14 font-weight-400">
+                            Maintain existing customers and expand new customers (concentrate in National/Local Public
+                            projects)
+                            Prepare visit plans and visit report.
+                            Approach & present information to customers about the company’s products and services.
+                            Prepare and submit quotation to customer.
+                            Maintain and create relationships with customers.
+                            Survey market and report to General Manager.
+                            Maintain gross profit as assigned.
+                            Negotiate with customers on price and service to achieve gross profit.
+                            Take good care of customers.
+                            Response to customer complaints and comments.
+                            Keep on time appointments.
+                            Coordinate and communicate correct customer’s inquiry to engineering department.
+                            Initiative and improve own work process and cross functional with other section to achieve
+                            company objectives.
+                            Performing the jobs assigned by superior.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

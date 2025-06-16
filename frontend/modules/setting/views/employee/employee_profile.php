@@ -22,6 +22,19 @@ $this->title = 'view';
     background-color: transparent;
     /* ไม่ต้องเปลี่ยนพื้นหลัง */
 }
+
+.action-employee-btn {
+    background-color: white;
+    color: #2580D3;
+    min-height: 30px;
+    border-radius: 66px;
+    padding-left: 9px;
+    padding-right: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 0.5px #2580D3 solid;
+    text-decoration: none;
+}
 </style>
 
 <div class="contrainer-body mt-10">
@@ -41,7 +54,24 @@ $this->title = 'view';
             </div>
         </div>
         <div class="col-3" style="text-align: right;">
-
+            <div class="d-flex align-items-center justify-content-end gap-2">
+                <a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/draft.svg" class="me-2"
+                        style="width: 18px;height:18px;">
+                    Share
+                </a>
+                <a href="#" onclick="javascript:showAction()"
+                    class="d-flex align-items-center action-employee-btn justify-content-center" id="normal-action">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action.svg" class="me-2"
+                        style="width: 18px;height:18px;">
+                    Download
+                </a>
+                <a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action.svg" class="me-2"
+                        style="width: 18px;height:18px;">
+                    Print Profile
+                </a>
+            </div>
         </div>
         <div class="col-1 pr-0 text-end">
             <a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>"
