@@ -1,7 +1,25 @@
 <?php
-$updateDateTime = $updateDateTime ??  '';
-$resume = $resume ??  '';
-$agreement = $agreement ??  '';
+
+// echo '<pre>';
+// print_r($employee);
+// echo '</pre>';
+// exit;
+
+$updateDateTime = '-';
+
+if (!empty($employee['updateDateTime'])) {
+    try {
+        $dt = new DateTime($employee['updateDateTime']);
+        // ฟอร์แมต dd/mm/YYYY HH:mm
+        $updateDateTime = $dt->format('d/m/Y');
+    } catch (Exception $e) {
+        // ถ้าแปลงไม่ได้ ก็เก็บเป็น "-"
+        $updateDateTime = '-';
+    }
+}
+$resume = $employee['resume'] ??  '';
+$agreement = $employee['employeeAgreement'] ??  '';
+
 
 ?>
 <style>
@@ -27,16 +45,16 @@ $agreement = $agreement ??  '';
                 style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE);">
                 <div class="row align-items-center">
                     <div class="col-auto">
-                        <img src="http://localhost/HRVC/frontend/web/image/ex-file.svg" alt="icon"
+                        <img src="<?= Yii::$app->homeUrl ?>image/ex-file.svg" alt="icon"
                             style="width: 40px; height: 40px;">
                     </div>
                     <div class="col">
-                        <label class="text-black font-size-16 font-weight-600">test1.xlsx</label>
+                        <label class="text-black font-size-16 font-weight-600"><?= $resume ?></label>
                         <div class="text-secondary font-size-14">
                             <span class="font-size-12">1.9 mb</span>
                         </div>
                         <div class="text-secondary font-size-14">
-                            <span class="font-size-12">Uploaded on 16/06/2025</span>
+                            <span class="font-size-12">Uploaded on <?= $updateDateTime ?></span>
                         </div>
                     </div>
                     <div class="col-auto d-flex justify-content-center align-items-center gap-3">
@@ -59,16 +77,16 @@ $agreement = $agreement ??  '';
                 style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE);">
                 <div class="row align-items-center">
                     <div class="col-auto">
-                        <img src="http://localhost/HRVC/frontend/web/image/ex-file.svg" alt="icon"
+                        <img src="<?= Yii::$app->homeUrl ?>image/ex-file.svg" alt="icon"
                             style="width: 40px; height: 40px;">
                     </div>
                     <div class="col">
-                        <label class="text-black font-size-16 font-weight-600">test2.docx</label>
+                        <label class="text-black font-size-16 font-weight-600"><?= $agreement ?></label>
                         <div class="text-secondary font-size-14">
                             <span class="font-size-12">1.9 mb</span>
                         </div>
                         <div class="text-secondary font-size-14">
-                            <span class="font-size-12">Uploaded on 16/06/2025</span>
+                            <span class="font-size-12">Uploaded on <?= $updateDateTime ?></span>
                         </div>
                     </div>
                     <div class="col-auto d-flex justify-content-center align-items-center gap-3">
