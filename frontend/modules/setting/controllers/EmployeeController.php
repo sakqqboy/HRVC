@@ -1848,11 +1848,27 @@ class EmployeeController extends Controller
         $UserLanguage = json_decode($UserLanguage, true);
         // throw new Exception(print_r($UserLanguage, true));
 
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/all-country');
+        $nationalities = curl_exec($api);
+        $nationalities = json_decode($nationalities, true);
+        // throw new Exception(print_r($nationalities, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/main-language');
+        $mainLanguage = curl_exec($api);
+        $mainLanguage = json_decode($mainLanguage, true);
+        // throw new Exception(print_r($mainLanguage, true));
+
         curl_close($api);
         // throw new Exception(print_r($employee, true));
 
         return $this->renderPartial('contact_detail', [
-            'employee' => $employee
+            'employee' => $employee,
+            'userEmployee' => $userEmployee,
+            'UserLanguage' =>  $UserLanguage,
+            'nationalities' => $nationalities,
+            'mainLanguage' => $mainLanguage,
+            'employeeId' => $employeeId,
+            'userId' => $userId
         ]);
     }
 
