@@ -836,7 +836,9 @@ $this->registerJs('
 	function modalImportEmployee(){
 	$("#import-employee-modal").modal("show");
 	}
-	
+	function openDialog(){
+	$("#employee-file").click();
+	}
 		
 		
 ', View::POS_END);

@@ -1102,6 +1102,7 @@ class EmployeeController extends Controller
         // if (isset($_POST["employeeFile"])) {
 
         $imageObj = UploadedFile::getInstanceByName("employeeFile");
+        $dataLine = [];
         if (isset($imageObj) && !empty($imageObj)) {
             $urlFolder = Path::getHost() . 'file/import/employee';
             if (!file_exists($urlFolder)) {
@@ -1123,6 +1124,8 @@ class EmployeeController extends Controller
                     // unset($sheetData[0]);
                     $i = 0;
                     $transaction = Yii::$app->db->beginTransaction();
+                    $data = [];
+
                     foreach ($sheetData as $data) :
                         $line = $i;
 
@@ -1130,61 +1133,105 @@ class EmployeeController extends Controller
                         $branchId = '';
                         $departmentId = '';
                         $teamId = '';
-                        $teamPositionId = '';
+                        $errorCol0 = 0;
+                        $errorCol1 = 0;
+                        $errorCol3 = 0;
+                        $errorCol6 = 0;
+                        $errorCol7 = 0;
+                        $errorCol8 = 0;
+                        $errorCol9 = 0;
+                        $errorCol10 = 0;
+                        $errorCol11 = 0;
+                        $errorCol12 = 0;
+                        $errorCol14 = 0;
+                        $errorCol17 = 0;
+
+                        $errormessageCol0 = '';
+                        $errormessageCol1 = '';
+                        $errormessageCol3 = '';
+                        $errormessageCol6 = '';
+                        $errormessageCol7 = '';
+                        $errormessageCol8 = '';
+                        $errormessageCol9 = '';
+                        $errormessageCol10 = '';
+                        $errormessageCol11 = '';
+                        $errormessageCol12 = '';
+                        $errormessageCol14 = '';
+                        $errormessageCol17 = '';
                         $isError = 0;
                         $error[$i] = "";
-                        if ($i >= 1 && trim($data[0]) != "" && trim($data[1]) != "" && trim($data[2]) != "") {
 
+                        if ($i >= 1 && trim($data[0]) != "" && trim($data[1]) != "" && trim($data[2]) != "") {
+                            $lineError = 0;
                             // throw new exception('2222');
                             if (trim($data[0]) == "") {
                                 $isError = 1;
-                                $error[$i] .= '- firstname<br>';
+                                $lineError++;
+                                $errorCol0 = 1;
+                                $errormessageCol0 = 'Missing';
                             }
                             if (trim($data[1]) == "") {
                                 $isError = 1;
-                                $error[$i] .= '- Surename<br>';
+                                $lineError++;
+                                $errorCol1 = 1;
+                                $errormessageCol1 = 'Missing';
                             }
                             if (trim($data[3]) == "") {
                                 $isError = 1;
-                                $error[$i] .= '- Email<br>';
+                                $lineError++;
+                                $errorCol3 = 1;
+                                $errormessageCol3 = 'Missing';
                             }
                             if (trim($data[7]) == "") {
                                 $isError = 1;
-                                $error[$i] .= '- Telephone<br>';
+                                $lineError++;
+                                $errorCol7 = 1;
+                                $errormessageCol7 = 'Missing';
                             }
                             if (trim($data[9]) == "") {
                                 $isError = 1;
-                                $error[$i] .= '- Company<br>';
+                                $lineError++;
+                                $errorCol9 = 1;
+                                $errormessageCol9 = 'Missing';
                             } else {
                                 $companyId = Company::companyId($data[9]);
                                 if ($companyId == '') {
                                     $isError = 1;
-                                    $error[$i] .= '- Company name "' . $data[9] . '" not found in database<br>';
+                                    $lineError++;
+                                    $errorCol9 = 1;
+                                    $errormessageCol9 = 'Company Error';
                                 }
                             }
                             if (trim($data[10]) == "") {
                                 $isError = 1;
-
-                                $error[$i] .= '- Branch<br>';
+                                $errorCol10 = 1;
+                                $errormessageCol10 = 'Missing';
+                                $lineError++;
                             } else {
                                 if ($companyId != '') {
                                     $branchId = Branch::companyBranch($companyId, $data[10]);
                                     if ($branchId == '') {
                                         $isError = 1;
-                                        $error[$i] .= '- branch name "' . $data[10] . '" not found in company "' . $data[9] . '"<br>';
+                                        $errorCol10 = 1;
+                                        $errormessageCol9 = 'Branch Error';
+                                        $lineError++;
                                     }
                                 }
                             }
 
                             if (trim($data[11]) == "") {
                                 $isError = 1;
-                                $error[$i] .= '- Department<br>';
+                                $errorCol11 = 1;
+                                $errormessageCol11 = 'Missing';
+                                $lineError++;
                             } else {
                                 if ($branchId != '') {
                                     $departmentId = Department::branchDepartment($branchId, $data[11]);
                                     if ($departmentId == '') {
                                         $isError = 1;
-                                        $error[$i] .= '- Department name "' . $data[11] . '" not found in branch "' . $data[10] . '"<br>';
+                                        $errorCol11 = 1;
+                                        $errormessageCol11 = 'Department Error';
+                                        $lineError++;
                                     }
                                 }
                             }
@@ -1194,7 +1241,9 @@ class EmployeeController extends Controller
                                     $titleId = Title::titleId($departmentId, $titleName[0]);
                                 } else {
                                     $isError = 1;
-                                    $error[$i] .= "- Title and deparment did't match.<br>";
+                                    $lineError++;
+                                    $errorCol14 = 1;
+                                    $errormessageCol14 = 'Title Error';
                                 }
                             } else {
                                 $titleId = null;
@@ -1202,39 +1251,40 @@ class EmployeeController extends Controller
 
                             if (trim($data[12]) == "") {
                                 $isError = 1;
-                                $error[$i] .= '- Team<br>';
+                                $errorCol12 = 1;
+                                $errormessageCol12 = 'Missing';
+                                $lineError++;
                             } else {
                                 if ($departmentId != '') {
                                     $teamId = Team::departmentTeam($departmentId, $data[12]);
                                     if ($teamId == '') {
                                         $isError = 1;
-                                        $error[$i] .= '- Team name "' . $data[12] . '" not found in department "' . $data[11] . '."<br>';
+                                        $errorCol12 = 1;
+                                        $errormessageCol12 = 'Team Error';
+                                        $lineError++;
                                     }
                                 }
                             }
-                            if (trim($data[13]) == "") {
-                                $isError = 1;
-                                $error[$i] .= '- Team Position<br>';
-                            } else {
-                                $teamPositionId = TeamPosition::teamPositionId($data[13]);
-                                if ($teamPositionId == '') {
-                                    $isError = 1;
-                                    $error[$i] .= '- Team Position name "' . $data[13] . '" not found in database. <br>';
-                                }
-                            }
+
                             if (trim($data[17]) == "") {
                                 $isError = 1;
-                                $error[$i] .= '- Right<br>';
+                                $errorCol17 = 1;
+                                $errormessageCol17 = 'Missing';
+                                $lineError++;
                             } else {
                                 $right = Role::roleId($data[17]);
                                 if ($right == '') {
                                     $isError = 1;
-                                    $error[$i] .= '- Right name "' . $data[17] . '" not found in database. <br>';
+                                    $errormessageCol17 = 'Right Error';
+                                    $errorCol17 = 1;
+                                    $lineError++;
                                 }
                             }
                             if (trim($data[6]) == '') {
                                 $isError = 1;
-                                $error[$i] .= '- Gender can not be null.<br>';
+                                $errorCol6 = 1;
+                                $errormessageCol6 = 'Missing';
+                                $lineError++;
                             } else {
                                 if ($data[6] == 'Male') {
                                     $gender = 1;
@@ -1242,94 +1292,114 @@ class EmployeeController extends Controller
                                     $gender = 2;
                                 }
                             }
+                            $isExisting = $this->checkDupplicate($data[0], $data[1], $data[2], $companyId);
+                            // if ($isError == 0) {
+                            //     if ($isExisting == 0) {
+                            //         $employee = new Employee();
+                            //         $employee->createDateTime = new Expression('NOW()');
+                            //         $isError = 1;
+                            //     } else {
+                            //         $employee = Employee::find()
+                            //             ->where([
+                            //                 "employeeFirstname" => $data[0],
+                            //                 "employeeSurename" => $data[1],
+                            //                 "employeeNumber" =>  $data[2],
+                            //                 "companyId" => $companyId,
+                            //             ])
+                            //             ->one();
+                            //     }
+                            //     $employee->employeeFirstname = $data[0];
+                            //     $employee->employeeSurename = $data[1];
+                            //     $employee->employeeNumber =  $data[2];
+                            //     if (trim($data[4]) != '') {
+                            //         $joinDateArr = explode('/', $data[4]);
+                            //         if (count($joinDateArr) == 3) {
+                            //             $employee->joinDate = $joinDateArr[2] . '-' . $joinDateArr[1] . '-' . $joinDateArr[0];
+                            //         }
+                            //     }
+                            //     if (trim($data[5]) != '') {
+                            //         $birthDateArr = explode('/', $data[5]);
+                            //         if (count($birthDateArr) == 3) {
+                            //             $employee->birthDate = $birthDateArr[2] . '-' . $birthDateArr[1] . '-' . $birthDateArr[0];
+                            //         }
+                            //     }
+                            //     $employee->gender = $gender;
+                            //     $employee->telephoneNumber = $data[7];
+                            //     $employee->emergencyTel = $data[8];
+                            //     $employee->companyEmail = $data[3];
+                            //     $employee->email = $data[3];
+                            //     $employee->companyId = $companyId;
+                            //     $employee->branchId = $branchId;
+                            //     $employee->departmentId = $departmentId;
+                            //     $employee->teamId = $teamId;
+                            //     $employee->teamPositionId = $teamPositionId;
+                            //     $employee->titleId = $titleId;
 
-                            if ($isError == 0) {
-                                $isExisting = $this->checkDupplicate($data[0], $data[1], $data[2], $companyId);
-                                if ($isExisting == 0) {
-                                    $employee = new Employee();
-                                    $employee->createDateTime = new Expression('NOW()');
-                                } else {
-                                    $employee = Employee::find()
-                                        ->where([
-                                            "employeeFirstname" => $data[0],
-                                            "employeeSurename" => $data[1],
-                                            "employeeNumber" =>  $data[2],
-                                            "companyId" => $companyId,
-                                        ])
-                                        ->one();
-                                }
-                                $employee->employeeFirstname = $data[0];
-                                $employee->employeeSurename = $data[1];
-                                $employee->employeeNumber =  $data[2];
-                                if (trim($data[4]) != '') {
-                                    $joinDateArr = explode('/', $data[4]);
-                                    //throw new exception(print_r($joinDateArr, true));
-                                    if (count($joinDateArr) == 3) {
-                                        $employee->joinDate = $joinDateArr[2] . '-' . $joinDateArr[1] . '-' . $joinDateArr[0];
-                                    }
-                                }
-                                if (trim($data[5]) != '') {
-                                    $birthDateArr = explode('/', $data[5]);
-                                    if (count($birthDateArr) == 3) {
-                                        $employee->birthDate = $birthDateArr[2] . '-' . $birthDateArr[1] . '-' . $birthDateArr[0];
-                                    }
-                                }
-                                // $employee->joinDate = $data[4];
-                                // $employee->birthDate = $data[5];
-                                // $employee->nationalityId = $_POST["nationality"];
-                                // $employee->address1 = $_POST["address1"];
-                                // $employee->countryId = $_POST["country"];
-                                $employee->gender = $gender;
-                                $employee->telephoneNumber = $data[7];
-                                $employee->emergencyTel = $data[8];
-                                $employee->companyEmail = $data[3];
-                                $employee->email = $data[3];
-                                $employee->companyId = $companyId;
-                                $employee->branchId = $branchId;
-                                $employee->departmentId = $departmentId;
-                                $employee->teamId = $teamId;
-                                $employee->teamPositionId = $teamPositionId;
-                                $employee->titleId = $titleId;
+                            //     $employee->employeeConditionId = EmployeeCondition::employeeConditionId($data[15]);
+                            //     $employee->spoken = $data[16];
+                            //     $employee->status = 1;
 
-                                //$employee->workingTime = $_POST["workTime"];
-                                $employee->employeeConditionId = EmployeeCondition::employeeConditionId($data[15]);
-                                $employee->spoken = $data[16];
-                                $employee->status = 1;
+                            //     $employee->updateDateTime = new Expression('NOW()');
+                            //     if ($employee->save(false)) {
+                            //         $success++;
+                            //         if ($isExisting == 0) {
+                            //             $employeeId = Yii::$app->db->lastInsertID;
+                            //         } else {
+                            //             $employeeId = $employee->employeeId;
+                            //         }
+                            //         $userId = $this->createUser($employeeId, $data[3]);
+                            //         $this->saveUserRole($userId, $data[17]);
+                            //         $titleName = explode(':', $data[14]);
+                            //         if ($isExisting == 0) {
+                            //             $correct[$i] = [
+                            //                 "name" => $data[0] . ' ' . $data[1],
+                            //                 "email" => $data[3],
+                            //                 "company" => $data[9],
+                            //                 "branch" => $data[10],
+                            //                 "department" => $data[11],
+                            //                 "title" => $titleName[0],
+                            //             ];
+                            //         }
+                            //         if ($isExisting == 1) {
+                            //             $countUpdate++;
+                            //             $update[$i] = [
+                            //                 "name" => $data[0] . ' ' . $data[1],
+                            //                 "email" => $data[3],
+                            //                 "company" => $data[9],
+                            //                 "branch" => $data[10],
+                            //                 "department" => $data[11],
+                            //                 "title" => $titleName[0],
+                            //             ];
+                            //         }
+                            //     }
+                            // }
 
-                                $employee->updateDateTime = new Expression('NOW()');
-                                if ($employee->save(false)) {
-                                    $success++;
-                                    if ($isExisting == 0) {
-                                        $employeeId = Yii::$app->db->lastInsertID;
-                                    } else {
-                                        $employeeId = $employee->employeeId;
-                                    }
-                                    $userId = $this->createUser($employeeId, $data[3]);
-                                    $this->saveUserRole($userId, $data[17]);
-                                    $titleName = explode(':', $data[14]);
-                                    if ($isExisting == 0) {
-                                        $correct[$i] = [
-                                            "name" => $data[0] . ' ' . $data[1],
-                                            "email" => $data[3],
-                                            "company" => $data[9],
-                                            "branch" => $data[10],
-                                            "department" => $data[11],
-                                            "title" => $titleName[0],
-                                        ];
-                                    }
-                                    if ($isExisting == 1) {
-                                        $countUpdate++;
-                                        $update[$i] = [
-                                            "name" => $data[0] . ' ' . $data[1],
-                                            "email" => $data[3],
-                                            "company" => $data[9],
-                                            "branch" => $data[10],
-                                            "department" => $data[11],
-                                            "title" => $titleName[0],
-                                        ];
-                                    }
-                                }
-                            }
+                            $dataLine[$line] = [
+                                "isExisting" => $isExisting,
+                                "isError" => $isError,
+                                "errorCol0" => $errorCol0 == 1 ? $errormessageCol0 : '',
+                                "errorCol1" => $errorCol1 == 1 ? $errormessageCol1 : '',
+                                "errorCol3" => $errorCol3 == 1 ? $errormessageCol3 : '',
+                                "errorCol6" => $errorCol6 == 1 ? $errormessageCol6 : '',
+                                "errorCol7" => $errorCol7 == 1 ? $errormessageCol7 : '',
+                                "errorCol8" => $errorCol8 == 1 ? $errormessageCol8 : '',
+                                "errorCol9" => $errorCol9 == 1 ? $errormessageCol9 : '',
+                                "errorCol10" => $errorCol10 == 1 ? $errormessageCol10 : '',
+                                "errorCol11" => $errorCol11 == 1 ? $errormessageCol11 : '',
+                                "errorCol12" => $errorCol12 == 1 ? $errormessageCol12 : '',
+                                "errorCol14" => $errorCol14 == 1 ? $errormessageCol14 : '',
+                                "errorCol17" => $errorCol17 == 1 ? $errormessageCol17 : '',
+                                "employeeName" => $data[0] . ' ' . $data[1],
+                                "titleName" => $data[14],
+                                "teamName" => $data[12],
+                                "departmentName" => $data[11],
+                                "branchName" => $data[10],
+                                "companyName" => $data[9],
+                                "telephoneName" => $data[7],
+                                "gender" => $data[6],
+                                "email" => $data[3],
+                                "totalError" => $lineError
+                            ];
                         }
                         if ($isError == 0) {
                             $totalError++;
@@ -1338,9 +1408,9 @@ class EmployeeController extends Controller
                         $i++;
                     endforeach;
                     if (count($error) == 0) {
-                        $transaction->commit();
+                        //$transaction->commit();
                     } else {
-                        $transaction->rollBack();
+                        //$transaction->rollBack();
                     }
                 }
             } else {
@@ -1350,6 +1420,7 @@ class EmployeeController extends Controller
             unlink($pathSave);
         }
         // }
+        return $this->render('import_result', ["dataLine" => $dataLine]);
         return $this->render('import', [
             "errors" => $error,
             "success" => $success,
@@ -1447,6 +1518,9 @@ class EmployeeController extends Controller
             "teamPositions" => $teamPositions,
             "gender" => $gender
         ]);
+        libxml_use_internal_errors(true);
+        $htmlExcel = mb_convert_encoding($htmlExcel, 'HTML-ENTITIES', 'UTF-8');
+
         //throw new exception($htmlExcel);
         $urlFolder = Path::getHost() . 'file/import/employee/';
         $fileName = 'employee.xlsx';
@@ -1469,7 +1543,7 @@ class EmployeeController extends Controller
         $clonedWorksheet->setTitle('employee');
         $spreadsheet->addExternalSheet($clonedWorksheet);
 
-        $fileName = 'Import Employee format' . date('Y-m-d');
+        $fileName = 'Register Employees-' . date('Y-m-d');
 
         $spreadsheet->removeSheetByIndex(
             $spreadsheet->getIndex(
