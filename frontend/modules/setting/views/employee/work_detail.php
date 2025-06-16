@@ -23,7 +23,9 @@ $probation  = $datePeriod->diff($today);
 
 <div class="d-flex row" style="gap: 32px;">
     <div class="w-100">
-        <span class="font-size-16 font-weight-600">Work Details</span>
+        <span class="font-size-16 font-weight-600">
+            <?= Yii::t('app', 'Work Details') ?>
+        </span>
         <hr class="hr-group">
     </div>
 
@@ -56,17 +58,17 @@ $probation  = $datePeriod->diff($today);
                     <span class="profile-employee-title">
                         <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" class="profile-icon"
                             style="margin-top: -3px; width: 15px; height: 15px;">
-                        <?= $branch['branchName'] ?> Branch
+                        <?= $branch['branchName'] ?> <?= Yii::t('app', 'Branch') ?>
                     </span>
                     <span class="profile-employee-title">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/share.svg" class="profile-icon"
                             style="margin-top: -3px;">
-                        <?= $department['departmentName'] ?> Department
+                        <?= $department['departmentName'] ?> <?= Yii::t('app', 'Department') ?>
                     </span>
                     <span class="profile-employee-title">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" class="profile-icon"
                             style="margin-top: -3px;">
-                        <?= $team['teamName'] ?> Team
+                        <?= $team['teamName'] ?> <?= Yii::t('app', 'Team') ?>
                     </span>
                     <span class="profile-employee-title">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/star.svg" class="profile-icon"
@@ -78,7 +80,7 @@ $probation  = $datePeriod->diff($today);
             <div class="start-center" style="gap: 28px; width: 100%;">
                 <div style="display: flex; gap: 25px; width: 100%;">
                     <span class="text-gray font-size-16 font-weight-400" style="width: 171px;">
-                        Employment Status
+                        <?= Yii::t('app', 'Employment Status') ?>
                     </span>
                     <span class="condition-name badge">
                         <?= $employee['employeeConditionName'] ?>
@@ -88,7 +90,7 @@ $probation  = $datePeriod->diff($today);
                     <span class="text-gray font-size-16 font-weight-400" style="width: 171px;">
                         <img src="<?= Yii::$app->homeUrl ?>image/e-since.svg" alt="Address"
                             style="width: 16px; height: 16px;">
-                        Employee Since
+                        <?= Yii::t('app', 'Employee Since') ?>
                     </span>
                     <div class="row">
                         <span class="font-size-16 font-weight-500">
@@ -103,11 +105,12 @@ $probation  = $datePeriod->diff($today);
                     <span class="text-gray font-size-16 font-weight-400" style="width: 171px;">
                         <img src="<?= Yii::$app->homeUrl ?>image/e-period.svg" alt="Address"
                             style="width: 16px; height: 16px;">
-                        Probation Period
+                        <?= Yii::t('app', 'Probation Period') ?>
                     </span>
                     <div class="row">
                         <span class="font-size-16 font-weight-500">
-                            Finished on <?=  $datePeriod->format('d/m/Y');  // ตัวอย่างผลลัพธ์: 31st January 2024?>
+                            <?= Yii::t('app', 'Finished on') ?>
+                            <?=  $datePeriod->format('d/m/Y');  // ตัวอย่างผลลัพธ์: 31st January 2024?>
                         </span>
                         <span class="text-gray font-size-16 font-weight-400">
                             <?=  $probation->y . ' Year ' . $interval->m . ' months';?>
@@ -120,7 +123,7 @@ $probation  = $datePeriod->diff($today);
                             style="white-space: nowrap; display: flex; align-items: center; gap: 6px;">
                             <img src="<?= Yii::$app->homeUrl ?>image/e-address.svg" alt="Address"
                                 style="width: 16px; height: 16px;">
-                            Work Address
+                            <?= Yii::t('app', 'Work Address') ?>
                         </span>
                     </div>
                     <div class="row d-flex">
@@ -134,26 +137,29 @@ $probation  = $datePeriod->diff($today);
 
         <div class="d-flex row" style="gap: 16px; width: 100%;">
             <div class="w-100">
-                <span class="font-size-16 font-weight-600">Job Description</span>
+                <span class="font-size-16 font-weight-600"><?= Yii::t('app', 'Job Description') ?></span>
             </div>
             <div class="company-group-edit bg-white" style="gap: 43px; padding: 36px 26px;">
                 <div class="center-center" style="gap: 63px; margin: 36px 29px;">
                     <div class="row" style="border-right:lightgray solid thin;">
                         <div class="row mb-36">
-                            <span class="font-size-16 font-weight-500 mb-22">Purpose of the Job</span>
+                            <span
+                                class="font-size-16 font-weight-500 mb-22"><?= Yii::t('app', 'Purpose of the Job') ?></span>
                             <span class="font-size-14 font-weight-400">
                                 <?= $title['purpose'] ?>
                             </span>
                         </div>
                         <div class="row">
-                            <span class="font-size-16 font-weight-500 mb-22">Core Responsibility</span>
+                            <span
+                                class="font-size-16 font-weight-500 mb-22"><?= Yii::t('app', 'Core Responsibility') ?></span>
                             <span class="font-size-14 font-weight-400">
                                 <?= $title['jobDescription'] ?>
                             </span>
                         </div>
                     </div>
                     <div class="row">
-                        <span class="font-size-16 font-weight-500 mb-22">Key Responsibility</span>
+                        <span
+                            class="font-size-16 font-weight-500 mb-22"><?= Yii::t('app', 'Key Responsibility') ?></span>
                         <span class="font-size-14 font-weight-400">
                             <?= $title['keyResponsibility'] ?>
                         </span>

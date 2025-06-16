@@ -27,7 +27,7 @@ if (isset($employee['birthDate'])) {
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
                 <span class="text-gray font-size-16 font-weight-400">
-                    Name
+                    <?= Yii::t('app', 'Name') ?>
                 </span>
             </div>
             <div style="flex: 8;">
@@ -41,7 +41,9 @@ if (isset($employee['birthDate'])) {
             <div style="flex: 4;">
                 <img src="<?= Yii::$app->homeUrl ?>image/e-employee.svg" alt="Employee"
                     style="width: 20px; height: 20px;">
-                <span class="text-gray font-size-16 font-weight-400">Employee ID</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    <?= Yii::t('app', 'Employee ID') ?>
+                </span>
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500"><?= $employee['employeeNumber'] ?? '-' ?></span>
@@ -53,7 +55,9 @@ if (isset($employee['birthDate'])) {
             <div style="flex: 4;">
                 <img src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Nationality"
                     style="width: 20px; height: 20px;">
-                <span class="text-gray font-size-16 font-weight-400">Nationality</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    <?= Yii::t('app', 'Nationality') ?>
+                </span>
             </div>
 
             <div style="flex: 8;">
@@ -79,7 +83,9 @@ if (isset($employee['birthDate'])) {
         <!-- Gender -->
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
-                <span class="text-gray font-size-16 font-weight-400">Gender</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    <?= Yii::t('app', 'Gender') ?>
+                </span>
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500">
@@ -99,7 +105,9 @@ if (isset($employee['birthDate'])) {
         <!-- Date of Birth -->
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
-                <span class="text-gray font-size-16 font-weight-400">Date of Birth</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    <?= Yii::t('app', 'Date of Birth') ?>
+                </span>
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500">
@@ -112,7 +120,9 @@ if (isset($employee['birthDate'])) {
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
                 <img src="<?= Yii::$app->homeUrl ?>image/e-birth.svg" alt="birth" style="width: 20px; height: 20px;">
-                <span class="text-gray font-size-16 font-weight-400">Age</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    <?= Yii::t('app', 'Age') ?>
+                </span>
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500">
@@ -123,7 +133,7 @@ if (isset($employee['birthDate'])) {
                 ? ((new DateTime())->diff(
                     ($n = new DateTime(date('Y') . '-' . date('m-d', strtotime($employee['birthDate'])))) < new DateTime()
                         ? $n->modify('+1 year') : $n
-                )->days . ' days to next Birthday')
+                )->days .  Yii::t('app', 'days to next Birthday'))
                 : '-' ?>
                     )
                 </span>
@@ -133,7 +143,9 @@ if (isset($employee['birthDate'])) {
         <!-- Marital Status -->
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
-                <span class="text-gray font-size-16 font-weight-400">Marital Status</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    <?= Yii::t('app', 'Marital Status') ?>
+                </span>
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500">
@@ -163,7 +175,9 @@ if (isset($employee['birthDate'])) {
         <!-- Contact Number -->
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
-                <span class="text-gray font-size-16 font-weight-400">Contact Number</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    <?= Yii::t('app', 'Contact Number') ?>
+                </span>
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500">
@@ -178,7 +192,9 @@ if (isset($employee['birthDate'])) {
         <!-- Emergency Contact -->
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
-                <span class="text-gray font-size-16 font-weight-400">Emergency Contact</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    <?= Yii::t('app', 'Emergency Contact') ?>
+                </span>
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500">
@@ -194,7 +210,9 @@ if (isset($employee['birthDate'])) {
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
                 <img src="<?= Yii::$app->homeUrl ?>image/e-mail.svg" alt="mail" style="width: 20px; height: 20px;">
-                <span class="text-gray font-size-16 font-weight-400">Work Email</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    <?= Yii::t('app', 'Work Email') ?>
+                </span>
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500">
@@ -210,7 +228,9 @@ if (isset($employee['birthDate'])) {
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
                 <img src="<?= Yii::$app->homeUrl ?>image/e-mail.svg" alt="mail" style="width: 20px; height: 20px;">
-                <span class="text-gray font-size-16 font-weight-400">Personal Email</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    <?= Yii::t('app', 'Personal Email') ?>
+                </span>
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500">
@@ -227,7 +247,9 @@ if (isset($employee['birthDate'])) {
             <div style="flex: 4;">
                 <img src="<?= Yii::$app->homeUrl ?>image/e-address.svg" alt="Address"
                     style="width: 20px; height: 20px;">
-                <span class="text-gray font-size-16 font-weight-400">Address</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    <?= Yii::t('app', 'Address') ?>
+                </span>
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500"><?= $employee['address1'] ?? '-' ?></span>
@@ -237,7 +259,9 @@ if (isset($employee['birthDate'])) {
         <!-- Language (Primary) -->
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
-                <span class="text-gray font-size-16 font-weight-400">Language (Primary)</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    <?= Yii::t('app', 'Language (Primary)') ?>
+                </span>
             </div>
             <div style="flex: 8;">
                 <div class="language-dropdown" style="height: 30px;">
@@ -258,7 +282,9 @@ if (isset($employee['birthDate'])) {
         <!-- Language (Additional) -->
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
-                <span class="text-gray font-size-16 font-weight-400">Language (Additional)</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    <?= Yii::t('app', 'Language (Additional)') ?>
+                </span>
             </div>
             <div style="display: flex; flex: 8; align-items: center;">
                 <?php if (!empty($UserLanguage[1]['name'])): ?>
@@ -292,7 +318,9 @@ if (isset($employee['birthDate'])) {
         <!-- LinkedIn -->
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
-                <span class="text-gray font-size-16 font-weight-400">LinkedIn</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    <?= Yii::t('app', 'LinkedIn') ?>
+                </span>
             </div>
             <div style="flex: 8;  cursor: pointer;">
                 <a href="<?= $employee['contact'] ?? '-' ?>">
@@ -300,7 +328,7 @@ if (isset($employee['birthDate'])) {
                         style="width: 80px; height: 26px; flex-direction:row; gap: 3px;">
                         <img src="<?= Yii::$app->homeUrl ?>image/in-image-white.svg" alt="LinkedIn"
                             style="width: 14px; height: 13px;">
-                        Visit
+                        <?= Yii::t('app', 'Visit') ?>
                         <img src="<?= Yii::$app->homeUrl ?>image/see-all-white.svg" alt="icon"
                             style="width: 14px; height: 13">
                     </span>
@@ -310,7 +338,9 @@ if (isset($employee['birthDate'])) {
 
         <div style="display: flex; width: 100%; max-width: 600px; ">
             <div style="flex: 4;">
-                <span class="text-gray font-size-16 font-weight-400">About Employee</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    <?= Yii::t('app', 'About Employee') ?>
+                </span>
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500"><?= $employee['remark'] ?? '-' ?></span>
