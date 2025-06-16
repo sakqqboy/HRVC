@@ -17,6 +17,7 @@ use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\EmployeeCondition;
 use frontend\models\hrvc\EmployeeStatus;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\Language;
 use frontend\models\hrvc\Nationality;
 use frontend\models\hrvc\Role;
 use frontend\models\hrvc\Status;
@@ -1124,7 +1125,7 @@ class EmployeeController extends Controller
                     // unset($sheetData[0]);
                     $i = 0;
                     $transaction = Yii::$app->db->beginTransaction();
-                    $data = [];
+                    $dataSubmit = [];
                     $seenIndex = [
                         'employeeName' => [],
                         'email' => [],
@@ -1283,6 +1284,7 @@ class EmployeeController extends Controller
                                 $lineError = 1;
                                 $isError = 1;
                             }
+
                             // if ($isError == 0) {
                             //     if ($isExisting == 0) {
                             //         $employee = new Employee();
@@ -1375,7 +1377,28 @@ class EmployeeController extends Controller
                             $seenIndex['email'][] = $email;
                             $seenIndex['telephoneName'][] = $telephoneName;
                             $dupeFields = array_keys(array_filter($isDuplicate));
-
+                            if ($isError == 0 && count($dupeFields) == 0) {
+                                $dataSubmit[$line] = [
+                                    "employeeFirstname" => $data[0],
+                                    "employeeSurename" => $data[1],
+                                    "employeeNumber" => $data[2],
+                                    "email" => $data[3],
+                                    "joinDate" => $data[4],
+                                    "birthDate" => $data[5],
+                                    "gender" => $gender,
+                                    "telephone" => $data[7],
+                                    "emergencyTel" => $data[8],
+                                    "companyId" => $companyId,
+                                    "branchId" => $branchId,
+                                    "departmentId" => $departmentId,
+                                    "teamId" => $teamId,
+                                    "teamPosition" => $data[13] == '' ? null : TeamPosition::teamPositionId($data[13]),
+                                    "titleId" => $titleId,
+                                    "employeeCondition" => EmployeeCondition::employeeConditionId($data[15]),
+                                    "defaultLanguage" => Language::languageId($data[16]),
+                                    "rightId" => $right,
+                                ];
+                            }
                             $dataLine[$line] = [
                                 "isExisting" => $isExisting,
                                 "errorCol0" => $errorCol0 == 1 ? $errormessageCol0 : '',
