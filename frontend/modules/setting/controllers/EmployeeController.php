@@ -1958,7 +1958,7 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function actionAttachments()
+    public function actionAttachments($hash)
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
         $param = ModelMaster::decodeParams($hash);
