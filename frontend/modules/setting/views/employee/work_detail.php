@@ -10,10 +10,13 @@ if (isset($employee['birthDate'])) {
     if ($nextBirthday < $today) {
         $nextBirthday->modify('+1 year');
     }
-
     // คำนวณจำนวนวัน
     $interval = $today->diff($nextBirthday)->days;
 }
+
+$dateSince = new DateTime($employee['joinDate']);
+$datePeriod = new DateTime($employee['probationEnd']);
+
 ?>
 
 <div class="d-flex row" style="gap: 32px;">
@@ -28,11 +31,21 @@ if (isset($employee['birthDate'])) {
                 <div>
                     <div style="display: flex; align-items: center; gap: 17px;">
                         <div class="mid-center" style="height: 60px; padding: 20.944px 4.189px; gap: 10.472px;">
+                            <?php 
+                            if($company['companyName']){
+                            ?>
+                            <img src="<?= Yii::$app->homeUrl . $company['picture']?>" class="card-tcf">
+                            <?php
+                            }else{
+                              ?>
                             <img src="<?= Yii::$app->homeUrl ?>image/userProfile.png" class="card-tcf">
+                            <?php  
+                            }
+                            ?>
                         </div>
                         <div class="header-crad-company">
                             <span class="font-size-22 font-weight-500">
-                                Mitsubishi Corp.
+                                <?= $company['companyName'] ?>
                             </span>
                         </div>
                     </div>
@@ -41,22 +54,22 @@ if (isset($employee['birthDate'])) {
                     <span class="profile-employee-title">
                         <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" class="profile-icon"
                             style="margin-top: -3px; width: 15px; height: 15px;">
-                        Bangladesh Branch
+                        <?= $branch['branchName'] ?> Branch
                     </span>
                     <span class="profile-employee-title">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/share.svg" class="profile-icon"
                             style="margin-top: -3px;">
-                        Marketing Department
+                        <?= $department['departmentName'] ?> Department
                     </span>
                     <span class="profile-employee-title">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" class="profile-icon"
                             style="margin-top: -3px;">
-                        Sales Team
+                        <?= $team['teamName'] ?> Team
                     </span>
                     <span class="profile-employee-title">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/star.svg" class="profile-icon"
                             style="margin-top: -3px;">
-                        Marketing Manager
+                        <?= $title['titleName'] ?>
                     </span>
                 </div>
             </div>
@@ -66,7 +79,7 @@ if (isset($employee['birthDate'])) {
                         Employment Status
                     </span>
                     <span class="condition-name badge">
-                        Full-Time
+                        <?= $employee['employeeConditionName'] ?>
                     </span>
                 </div>
                 <div style="display: flex; gap: 25px; width: 100%;">
@@ -77,7 +90,7 @@ if (isset($employee['birthDate'])) {
                     </span>
                     <div class="row">
                         <span class="font-size-16 font-weight-500">
-                            12th December 2024
+                            <?=  $dateSince->format('jS F Y');  // ตัวอย่างผลลัพธ์: 31st January 2024?>
                         </span>
                         <span class="text-gray font-size-16 font-weight-400">
                             1 Year 3 months
@@ -92,7 +105,7 @@ if (isset($employee['birthDate'])) {
                     </span>
                     <div class="row">
                         <span class="font-size-16 font-weight-500">
-                            12th December 2024
+                            Finished on <?=  $datePeriod->format('d/m/Y');  // ตัวอย่างผลลัพธ์: 31st January 2024?>
                         </span>
                         <span class="text-gray font-size-16 font-weight-400">
                             1 Year 3 months
