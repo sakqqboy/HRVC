@@ -97,7 +97,7 @@ $this->title = 'Import Employee Result';
 									<td><?= $da["errorCol9"] == '' ? $da["companyName"] : '<span class="missing-input">' . $da["errorCol9"] . '</span>' ?></td>
 									<td><?= $da["errorCol10"] == '' ? $da["branchName"] : '<span class="missing-input">' . $da["errorCol10"] . '</span>' ?></td>
 									<td><?= $da["errorCol11"] == '' ? $da["departmentName"] : '<span class="missing-input">' . $da["errorCol11"] . '</span>' ?></td>
-									<td style="border:0px !important;" class="pr-0">
+									<td style="border:0px !important;" class="pl-0 pr-0">
 										<div class="col-12 border-right-radius-table" style="height:48px;">
 											<?= $da["errorCol12"] == '' ? $da["teamName"] : '<span class="missing-input">' . $da["errorCol12"] . '</span>' ?>
 										</div>
