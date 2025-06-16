@@ -56,18 +56,18 @@ $this->title = 'view';
         <div class="col-3" style="text-align: right;">
             <div class="d-flex align-items-center justify-content-end gap-2">
                 <a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/draft.svg" class="me-2"
+                    <img src="<?= Yii::$app->homeUrl ?>image/share-blue.svg" class="me-2"
                         style="width: 18px;height:18px;">
                     Share
                 </a>
                 <a href="#" onclick="javascript:showAction()"
                     class="d-flex align-items-center action-employee-btn justify-content-center" id="normal-action">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action.svg" class="me-2"
+                    <img src="<?= Yii::$app->homeUrl ?>image/download-blue.svg" class="me-2"
                         style="width: 18px;height:18px;">
                     Download
                 </a>
                 <a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action.svg" class="me-2"
+                    <img src="<?= Yii::$app->homeUrl ?>image/print-blue.svg" class="me-2"
                         style="width: 18px;height:18px;">
                     Print Profile
                 </a>

@@ -1875,10 +1875,70 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function actionWorkDetail()
+    public function actionWorkDetail($hash)
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
-        return $this->renderPartial('work_detail');
+        $param = ModelMaster::decodeParams($hash);
+        $employeeId = $param["employeeId"];
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+        $employee = curl_exec($api);
+        $employee = json_decode($employee, true);
+        $companyId = $employee['companyId'] ?? '';
+        $branchId = $employee['branchId'] ?? '';
+        $departmentId = $employee['departmentId'] ?? '';
+        $teamId = $employee['teamId'] ?? '';
+        $titleId = $employee['titleId'] ?? '';
+        // throw new Exception(print_r($companyId, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
+        $company = curl_exec($api);
+        $company = json_decode($company, true);
+        // throw new Exception(print_r($company, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' . $branchId);
+        $branch = curl_exec($api);
+        $branch = json_decode($branch, true);
+        // throw new Exception(print_r($branch, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-detail?id=' . $departmentId);
+        $department = curl_exec($api);
+        $department = json_decode($department, true);
+        // throw new Exception(print_r($department, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/team-detail?id=' . $teamId);
+        $team = curl_exec($api);
+        $team = json_decode($team, true);
+        // throw new Exception(print_r($team, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-detail?id=' . $titleId);
+        $title = curl_exec($api);
+        $title = json_decode($title, true);
+        // throw new Exception(print_r($title, true));
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId);
+        $userEmployee = curl_exec($api);
+        $userEmployee = json_decode($userEmployee, true);
+        // throw new Exception(print_r($userEmployee, true));
+
+        $userId = $userEmployee['userId'] ?? '';
+
+        curl_close($api);
+
+        return $this->renderPartial('work_detail',[
+            'employee' => $employee,
+            'company' => $company,
+            'branch' => $branch,
+            'department' => $department,
+            'team' => $team,
+            'title' => $title,
+            'userEmployee' => $userEmployee,
+            'employeeId' => $employeeId,
+            'companyId' => $companyId,
+        ]);
     }
 
     public function actionAttachments()
