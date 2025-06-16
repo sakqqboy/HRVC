@@ -26,7 +26,9 @@ if (isset($employee['birthDate'])) {
         <!-- Name -->
         <div style="display: flex; width: 100%; max-width: 600px;">
             <div style="flex: 4;">
-                <span class="text-gray font-size-16 font-weight-400">Name</span>
+                <span class="text-gray font-size-16 font-weight-400">
+                    Name
+                </span>
             </div>
             <div style="flex: 8;">
                 <span

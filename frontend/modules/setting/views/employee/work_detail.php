@@ -16,6 +16,8 @@ if (isset($employee['birthDate'])) {
 
 $dateSince = new DateTime($employee['joinDate']);
 $datePeriod = new DateTime($employee['probationEnd']);
+$interval = $dateSince->diff($today);
+$probation  = $datePeriod->diff($today);
 
 ?>
 
@@ -93,7 +95,7 @@ $datePeriod = new DateTime($employee['probationEnd']);
                             <?=  $dateSince->format('jS F Y');  // ตัวอย่างผลลัพธ์: 31st January 2024?>
                         </span>
                         <span class="text-gray font-size-16 font-weight-400">
-                            1 Year 3 months
+                            <?=  $interval->y . ' Year ' . $interval->m . ' months';?>
                         </span>
                     </div>
                 </div>
@@ -108,19 +110,22 @@ $datePeriod = new DateTime($employee['probationEnd']);
                             Finished on <?=  $datePeriod->format('d/m/Y');  // ตัวอย่างผลลัพธ์: 31st January 2024?>
                         </span>
                         <span class="text-gray font-size-16 font-weight-400">
-                            1 Year 3 months
+                            <?=  $probation->y . ' Year ' . $interval->m . ' months';?>
                         </span>
                     </div>
                 </div>
                 <div style="display: flex; gap: 25px; width: 100%;">
-                    <span class="text-gray font-size-16 font-weight-400" style="width: 171px;">
-                        <img src="<?= Yii::$app->homeUrl ?>image/e-address.svg" alt="Address"
-                            style="width: 16px; height: 16px;">
-                        Work Address
-                    </span>
-                    <div class="row">
+                    <div style="width: 171px;">
+                        <span class="text-gray font-size-16 font-weight-400"
+                            style="white-space: nowrap; display: flex; align-items: center; gap: 6px;">
+                            <img src="<?= Yii::$app->homeUrl ?>image/e-address.svg" alt="Address"
+                                style="width: 16px; height: 16px;">
+                            Work Address
+                        </span>
+                    </div>
+                    <div class="row d-flex">
                         <span class="font-size-16 font-weight-500">
-                            House-38, Road-21, Mohakhali, Dhaka-1206
+                            <?= $company['location'] ?>
                         </span>
                     </div>
                 </div>
@@ -137,48 +142,20 @@ $datePeriod = new DateTime($employee['probationEnd']);
                         <div class="row mb-36">
                             <span class="font-size-16 font-weight-500 mb-22">Purpose of the Job</span>
                             <span class="font-size-14 font-weight-400">
-                                The purpose of this role is to support the General Manager in driving the sales and
-                                marketing activities within the dynamic market of Bangladesh. The key focus areas
-                                encompass fostering and nurturing robust relationships with factories, industrial parks,
-                                general contractors, and engineering companies. The role necessitates diligent
-                                collection of vital information from a diverse range of stakeholders, including
-                                customers and relevant governmental authorities
+                                <?= $title['purpose'] ?>
                             </span>
                         </div>
                         <div class="row">
                             <span class="font-size-16 font-weight-500 mb-22">Core Responsibility</span>
                             <span class="font-size-14 font-weight-400">
-                                1. Support the general manager in sales & and marketing activities in Bangladesh,
-                                especially in creating a good relationship with factories, industrial parks, general
-                                contractors, and engineering companies.
-                                2. Collect the necessary information from customers (factories, industrial parks,
-                                general contractors), and national government/local government/related authorities.
-                                3. Prepare the necessary application and get approval from the concerned authorities.
-                                4. Control documentary and filing system for the sales department
-                                5. Prepare estimations, contracts, and reports.
-
+                                <?= $title['jobDescription'] ?>
                             </span>
                         </div>
                     </div>
                     <div class="row">
                         <span class="font-size-16 font-weight-500 mb-22">Key Responsibility</span>
                         <span class="font-size-14 font-weight-400">
-                            Maintain existing customers and expand new customers (concentrate in National/Local Public
-                            projects)
-                            Prepare visit plans and visit report.
-                            Approach & present information to customers about the company’s products and services.
-                            Prepare and submit quotation to customer.
-                            Maintain and create relationships with customers.
-                            Survey market and report to General Manager.
-                            Maintain gross profit as assigned.
-                            Negotiate with customers on price and service to achieve gross profit.
-                            Take good care of customers.
-                            Response to customer complaints and comments.
-                            Keep on time appointments.
-                            Coordinate and communicate correct customer’s inquiry to engineering department.
-                            Initiative and improve own work process and cross functional with other section to achieve
-                            company objectives.
-                            Performing the jobs assigned by superior.
+                            <?= $title['keyResponsibility'] ?>
                         </span>
                     </div>
                 </div>
