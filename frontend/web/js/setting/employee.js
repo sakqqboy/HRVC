@@ -1067,3 +1067,17 @@ function changeSelectFlag() {
     //     }
     // });
 }
+
+function toggleActiveFileBox(id) {
+    // alert('s');
+    // ลบ class ทั้งหมดก่อน
+    document.querySelectorAll('.form-control').forEach(function (el) {
+        el.classList.remove('file-box-active');
+    });
+
+    // เพิ่ม class ที่คลิก
+    var target = document.getElementById(id);
+    if (target) {
+        target.classList.add('file-box-active');
+    }
+}

@@ -4,6 +4,13 @@ $resume = $resume ??  '';
 $agreement = $agreement ??  '';
 
 ?>
+<style>
+.file-box-active {
+    background-color: #F8FBFF !important;
+    border: 1px solid #2580D3 !important;
+}
+</style>
+
 <div class="d-flex row" style="gap: 32px;">
     <div class="w-100">
         <span class="font-size-16 font-weight-600">
@@ -13,17 +20,18 @@ $agreement = $agreement ??  '';
     </div>
 
     <div class="between-center">
-        <!-- ฝั่งซ้าย -->
         <div class="d-flex flex-column gap-2" style="width: 45%;">
             <span class="font-size-16 font-weight-600"><?= Yii::t('app', 'Resume / CV') ?></span>
-            <div class="form-control p-3" style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE);">
+            <a href="#" class="form-control p-3 no-underline" id="resume-btn"
+                onclick="toggleActiveFileBox('resume-btn'); return false;"
+                style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE);">
                 <div class="row align-items-center">
                     <div class="col-auto">
                         <img src="http://localhost/HRVC/frontend/web/image/ex-file.svg" alt="icon"
                             style="width: 40px; height: 40px;">
                     </div>
                     <div class="col">
-                        <label class="font-size-16 font-weight-600">test1.xlsx</label>
+                        <label class="text-black font-size-16 font-weight-600">test1.xlsx</label>
                         <div class="text-secondary font-size-14">
                             <span class="font-size-12">1.9 mb</span>
                         </div>
@@ -32,30 +40,30 @@ $agreement = $agreement ??  '';
                         </div>
                     </div>
                     <div class="col-auto d-flex justify-content-center align-items-center gap-3">
-                        <!-- ปุ่ม edit/delete -->
-                        <a href="#" onclick="javascript:showAction()"
+                        <buttom href="#" onclick="javascript:showAction()"
                             class="d-flex align-items-center action-employee-btn justify-content-center"
                             id="normal-action">
                             <img src="/HRVC/frontend/web/image/download-blue.svg" class="me-2"
                                 style="width: 18px;height:18px;">
                             <?= Yii::t('app', 'Download') ?>
-                        </a>
+                        </buttom>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
 
-        <!-- ฝั่งขวา (เหมือนฝั่งซ้าย) -->
         <div class="d-flex flex-column gap-2" style="width: 45%;">
             <span class="font-size-16 font-weight-600"><?= Yii::t('app', 'Agreement') ?></span>
-            <div class="form-control p-3" style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE);">
+            <a href="#" class="form-control p-3 no-underline" id="agreement-btn"
+                onclick="toggleActiveFileBox('agreement-btn'); return false;"
+                style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE);">
                 <div class="row align-items-center">
                     <div class="col-auto">
                         <img src="http://localhost/HRVC/frontend/web/image/ex-file.svg" alt="icon"
                             style="width: 40px; height: 40px;">
                     </div>
                     <div class="col">
-                        <label class="font-size-16 font-weight-600">test2.docx</label>
+                        <label class="text-black font-size-16 font-weight-600">test2.docx</label>
                         <div class="text-secondary font-size-14">
                             <span class="font-size-12">1.9 mb</span>
                         </div>
@@ -64,17 +72,16 @@ $agreement = $agreement ??  '';
                         </div>
                     </div>
                     <div class="col-auto d-flex justify-content-center align-items-center gap-3">
-                        <!-- ปุ่ม edit/delete -->
-                        <a href="#" onclick="javascript:showAction()"
+                        <buttom href="#" onclick="javascript:showAction()"
                             class="d-flex align-items-center action-employee-btn justify-content-center"
                             id="normal-action">
                             <img src="/HRVC/frontend/web/image/download-blue.svg" class="me-2"
                                 style="width: 18px;height:18px;">
                             <?= Yii::t('app', 'Download') ?>
-                        </a>
+                        </buttom>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 
