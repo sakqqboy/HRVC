@@ -1125,10 +1125,13 @@ class EmployeeController extends Controller
                     $i = 0;
                     $transaction = Yii::$app->db->beginTransaction();
                     $data = [];
-
+                    $seenIndex = [
+                        'employeeName' => [],
+                        'email' => [],
+                        'telephoneName' => []
+                    ];
                     foreach ($sheetData as $data) :
                         $line = $i;
-
                         $companyId = '';
                         $branchId = '';
                         $departmentId = '';
@@ -1161,43 +1164,36 @@ class EmployeeController extends Controller
                         $isError = 0;
                         $error[$i] = "";
 
-                        if ($i >= 1 && trim($data[0]) != "" && trim($data[1]) != "" && trim($data[2]) != "") {
+                        if ($i >= 1) {
                             $lineError = 0;
-                            // throw new exception('2222');
                             if (trim($data[0]) == "") {
                                 $isError = 1;
-                                $lineError++;
                                 $errorCol0 = 1;
                                 $errormessageCol0 = 'Missing';
                             }
                             if (trim($data[1]) == "") {
                                 $isError = 1;
-                                $lineError++;
                                 $errorCol1 = 1;
                                 $errormessageCol1 = 'Missing';
                             }
                             if (trim($data[3]) == "") {
                                 $isError = 1;
-                                $lineError++;
                                 $errorCol3 = 1;
                                 $errormessageCol3 = 'Missing';
                             }
                             if (trim($data[7]) == "") {
                                 $isError = 1;
-                                $lineError++;
                                 $errorCol7 = 1;
                                 $errormessageCol7 = 'Missing';
                             }
                             if (trim($data[9]) == "") {
                                 $isError = 1;
-                                $lineError++;
                                 $errorCol9 = 1;
                                 $errormessageCol9 = 'Missing';
                             } else {
                                 $companyId = Company::companyId($data[9]);
                                 if ($companyId == '') {
                                     $isError = 1;
-                                    $lineError++;
                                     $errorCol9 = 1;
                                     $errormessageCol9 = 'Company Error';
                                 }
@@ -1206,7 +1202,6 @@ class EmployeeController extends Controller
                                 $isError = 1;
                                 $errorCol10 = 1;
                                 $errormessageCol10 = 'Missing';
-                                $lineError++;
                             } else {
                                 if ($companyId != '') {
                                     $branchId = Branch::companyBranch($companyId, $data[10]);
@@ -1214,7 +1209,6 @@ class EmployeeController extends Controller
                                         $isError = 1;
                                         $errorCol10 = 1;
                                         $errormessageCol9 = 'Branch Error';
-                                        $lineError++;
                                     }
                                 }
                             }
@@ -1223,7 +1217,6 @@ class EmployeeController extends Controller
                                 $isError = 1;
                                 $errorCol11 = 1;
                                 $errormessageCol11 = 'Missing';
-                                $lineError++;
                             } else {
                                 if ($branchId != '') {
                                     $departmentId = Department::branchDepartment($branchId, $data[11]);
@@ -1231,7 +1224,6 @@ class EmployeeController extends Controller
                                         $isError = 1;
                                         $errorCol11 = 1;
                                         $errormessageCol11 = 'Department Error';
-                                        $lineError++;
                                     }
                                 }
                             }
@@ -1241,7 +1233,6 @@ class EmployeeController extends Controller
                                     $titleId = Title::titleId($departmentId, $titleName[0]);
                                 } else {
                                     $isError = 1;
-                                    $lineError++;
                                     $errorCol14 = 1;
                                     $errormessageCol14 = 'Title Error';
                                 }
@@ -1253,7 +1244,6 @@ class EmployeeController extends Controller
                                 $isError = 1;
                                 $errorCol12 = 1;
                                 $errormessageCol12 = 'Missing';
-                                $lineError++;
                             } else {
                                 if ($departmentId != '') {
                                     $teamId = Team::departmentTeam($departmentId, $data[12]);
@@ -1261,7 +1251,6 @@ class EmployeeController extends Controller
                                         $isError = 1;
                                         $errorCol12 = 1;
                                         $errormessageCol12 = 'Team Error';
-                                        $lineError++;
                                     }
                                 }
                             }
@@ -1270,21 +1259,18 @@ class EmployeeController extends Controller
                                 $isError = 1;
                                 $errorCol17 = 1;
                                 $errormessageCol17 = 'Missing';
-                                $lineError++;
                             } else {
                                 $right = Role::roleId($data[17]);
                                 if ($right == '') {
                                     $isError = 1;
                                     $errormessageCol17 = 'Right Error';
                                     $errorCol17 = 1;
-                                    $lineError++;
                                 }
                             }
                             if (trim($data[6]) == '') {
                                 $isError = 1;
                                 $errorCol6 = 1;
                                 $errormessageCol6 = 'Missing';
-                                $lineError++;
                             } else {
                                 if ($data[6] == 'Male') {
                                     $gender = 1;
@@ -1293,6 +1279,9 @@ class EmployeeController extends Controller
                                 }
                             }
                             $isExisting = $this->checkDupplicate($data[0], $data[1], $data[2], $companyId);
+                            if (trim($data[0]) == "" || trim($data[1]) == "" || trim($data[3]) == "" || trim($data[6]) == "" || trim($data[7]) == "") {
+                                $lineError = 1;
+                            }
                             // if ($isError == 0) {
                             //     if ($isExisting == 0) {
                             //         $employee = new Employee();
@@ -1373,6 +1362,18 @@ class EmployeeController extends Controller
                             //         }
                             //     }
                             // }
+                            $employeeName   = $data[0] . ' ' . $data[1];
+                            $email          = $data[3];
+                            $telephoneName  = $data[7];
+                            $isDuplicate = [
+                                'employeeName' => in_array($employeeName, $seenIndex['employeeName']) ? 1 : 0,
+                                'email'        => in_array($email, $seenIndex['email']) ? 1 : 0,
+                                'telephone'    => in_array($telephoneName, $seenIndex['telephoneName']) ? 1 : 0,
+                            ];
+                            $seenIndex['employeeName'][] = $employeeName;
+                            $seenIndex['email'][] = $email;
+                            $seenIndex['telephoneName'][] = $telephoneName;
+                            $dupeFields = array_keys(array_filter($isDuplicate));
 
                             $dataLine[$line] = [
                                 "isExisting" => $isExisting,
@@ -1398,7 +1399,9 @@ class EmployeeController extends Controller
                                 "telephoneName" => $data[7],
                                 "gender" => $data[6],
                                 "email" => $data[3],
-                                "totalError" => $lineError
+                                "lineError" => $lineError,
+                                "dupeFields" => $dupeFields
+                                //"isDuplicate" => $isDuplicate
                             ];
                         }
                         if ($isError == 0) {

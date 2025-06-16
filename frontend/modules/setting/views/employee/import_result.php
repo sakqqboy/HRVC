@@ -53,7 +53,7 @@ $this->title = 'Import Employee Result';
 					if (isset($dataLine) && count($dataLine) > 0) {
 						foreach ($dataLine as $line => $da) :
 
-							if ($da["totalError"] > 3) {
+							if ($da["lineError"] == 1 || count($da["dupeFields"]) > 0) {
 								$trClass = "employee-tr-red";
 								$tdLeft = "border-left-radius-table-red";
 								$tdRight = "border-right-radius-table-red";
@@ -64,11 +64,22 @@ $this->title = 'Import Employee Result';
 							}
 					?>
 							<tr class="tr-space"></tr>
-							<?php if ($da["totalError"] > 3) { ?>
+							<?php if ($da["lineError"] == 1 || count($da["dupeFields"]) > 0) { ?>
 								<tr class="<?= $trClass ?>">
-									<td colspan="9">
-										<div class="col-12 <?= $tdRight ?> <?= $tdLeft ?> justify-content-start" style="height:48px;">
-											<span class="line-error">Error in row <?= $line + 1 ?></span>
+									<td colspan="9" class="pl-0 pr-0">
+										<div class="justify-content-start <?= $tdLeft ?> <?= $tdRight ?>" style="height:48px;">
+											<span class="line-error me-2">Error in row <?= $line + 1 ?></span>
+											<?php
+											if ($da["lineError"] == 1) {
+											?>
+												<span class="text-danger me-2">Please check the required informatioin !</span>
+											<?php
+											}
+											if (count($da["dupeFields"]) > 0) { ?>
+												<span class="text-danger">Your data contains duplicates in the fields: <?= implode(', ', $da["dupeFields"]) ?>. Please correct these issues to continue.</span>
+											<?php
+											}
+											?>
 										</div>
 									</td>
 								</tr>
@@ -171,15 +182,17 @@ $this->title = 'Import Employee Result';
 
 	.border-left-radius-table-red {
 		border-left: 1px solid var(--Color-Tokens-Border-Primary, #DC3545);
-		border-bottom-left-radius: 6px;
-		border-top-left-radius: 6px;
+		border-bottom-left-radius: 4px;
+		border-top-left-radius: 4px;
 		z-index: 10;
 		padding-left: 8px;
-		margin-left: -4px;
 		position: absolute;
-		top: -1px;
+		/* top: -1px; */
 		display: flex;
 		align-items: center;
+		width: 100.3%;
+		position: relative;
+		margin-left: -2px;
 	}
 
 	.border-right-radius-table {
@@ -199,13 +212,6 @@ $this->title = 'Import Employee Result';
 		border-right: 1px solid var(--Color-Tokens-Border-Primary, #DC3545);
 		border-bottom-right-radius: 6px;
 		border-top-right-radius: 6px;
-		z-index: 10;
-		margin-right: -8px;
-		position: absolute;
-		top: -1px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
 	}
 
 	.employee-table {
@@ -246,6 +252,8 @@ $this->title = 'Import Employee Result';
 		border-bottom: 0.5px solid var(--Color-Tokens-Border-Primary, #DC3545);
 		padding-top: 0px;
 		padding-bottom: 0px;
+		padding-left: 0px;
+		padding-right: 0px;
 	}
 
 	.tr-space {
