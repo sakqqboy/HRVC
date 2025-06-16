@@ -97,6 +97,7 @@ use yii\bootstrap5\ActiveForm;
 								5.<span class="ms-2"><?= Yii::t('app', 'Upload the XLS or XLSX in the second box.') ?></span>
 							</div>
 						</div>
+
 					</div>
 
 				</div>
@@ -113,8 +114,8 @@ use yii\bootstrap5\ActiveForm;
 							</div>
 						</div>
 					</div>
-					<div class="col-1 text-center  font-size-16 font-weight-600 align-content-center">Or</div>
-					<div class="col-6 text-center align-content-center ">
+					<div class="col-1 text-end font-size-16 font-weight-600 align-content-center">Or</div>
+					<div class="col-6 text-center align-content-center">
 						<span class="select-file-btn font-size-16" onclick="javascript:openDialog()">
 							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/add-file-white.svg" class="me-1" style="width: 18px;height:18px;">
 							Select File
@@ -127,12 +128,19 @@ use yii\bootstrap5\ActiveForm;
 							inputting the data to the second box to continue.
 						</div>
 					</div>
-					<div class="col-12 text-center font-size-14 font-weight-400  mt-20" style="color:#1A1A24;">
+					<div class="col-12 d-flex justify-content-center font-size-14 font-weight-400  mt-20" style="color:#1A1A24;">
 						<span style="color:#666666;">Acceptable file types: </span>.XLS or XLSX (Formatted file only)
-						<span id="fileName" style="margin-top: 10px; color:#2580D3;"></span>
+						<span class="dot-spinner" id="spinner-container" style="display:none;">
+							<div class="dot"></div>
+							<div class="dot"></div>
+							<div class="dot"></div>
+						</span>
+
+						<span id="fileName" style="color:#2580D3;"></span>
 					</div>
 				</div>
 			</div>
+
 			<div class="col-12 mt-36 text-end">
 				<a class="btn-outline-red me-2 align-content-center text-center" data-bs-dismiss="modal" aria-label="Close" style="text-decoration: none;cursor:pointer">
 					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/close-red.svg" class="me-1">
@@ -270,6 +278,47 @@ use yii\bootstrap5\ActiveForm;
 		line-height: 15px;
 		justify-self: center;
 	}
+
+	.dot-spinner {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.dot {
+		width: 12px;
+		height: 12px;
+		background-color: #3498db;
+		border-radius: 50%;
+		animation: bounce 1.4s infinite ease-in-out both;
+	}
+
+	.dot:nth-child(1) {
+		animation-delay: -0.32s;
+	}
+
+	.dot:nth-child(2) {
+		animation-delay: -0.16s;
+	}
+
+	.dot:nth-child(3) {
+		animation-delay: 0;
+	}
+
+	@keyframes bounce {
+
+		0%,
+		80%,
+		100% {
+			transform: scale(0);
+		}
+
+		40% {
+			transform: scale(1);
+		}
+
+	}
 </style>
 <script>
 	var $baseUrl = window.location.protocol + "//" + window.location.host;
@@ -324,7 +373,17 @@ use yii\bootstrap5\ActiveForm;
 				return;
 			}
 			fileInput.files = e.dataTransfer.files; // ใส่ไฟล์ลง input
-			fileName.innerHTML = "<img src='<?= Yii::$app->homeUrl . 'images/icons/Settings/excel.svg' ?>' class='ms-2' width='16' />" + e.dataTransfer.files[0].name;
+			$("#spinner-container").show();
+			setTimeout(() => {
+				document.getElementById("spinner-container").style.display = "none";
+				fileName.innerHTML = "<img src='<?= Yii::$app->homeUrl . 'images/icons/Settings/excel.svg' ?>' class='ms-2' width='16' /> " + file.name +
+					"<img src='<?= Yii::$app->homeUrl . 'images/icons/Settings/check-success.svg' ?>' class='ms-1' width='16' />";
+			}, 1000);
+			// setTimeout(() => {
+			// 	document.getElementById("spinner-container").style.display = "none";
+			// 	fileName.innerHTML = "<img src='<?= Yii::$app->homeUrl . 'images/icons/Settings/excel.svg' ?>' class='ms-2' width='16' />" + e.dataTransfer.files[0].name;
+			// }, 2000);
+
 			// สามารถส่งฟอร์มได้ที่นี่ถ้าต้องการ
 		}
 	});
