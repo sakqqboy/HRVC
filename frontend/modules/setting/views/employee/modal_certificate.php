@@ -278,6 +278,7 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
                         <img id="eye-file3" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="icon"
                             style="width: 23px; height: 23px;">
                     </a>
+                    <input type="hidden" id="certificatePath" value="<?=$certPath?>">
                     <a class="no-underline " href="#" onclick="removeFile(3); return false;">
                         <img id="bin-file3" class="mt-5 ml-9"
                             src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="icon"

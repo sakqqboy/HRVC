@@ -192,77 +192,92 @@ function checkUploadFile(type) {
         document.getElementById(wrapperId).style.border = "1px solid var(--Stroke-Bluish-Gray, #BBCDDE)";
         document.getElementById(hasInputId).value = 1;
     } else {
-        resetUpload(type);
+        // resettUpload(type);
     }
 }
 
 
 // ตัวอย่างฟังก์ชันล้างไฟล์
-function resetUpload(type) {
-    const wrapperId = `upload-file${type}`;
-    const inputId = (type === 1) ? "resume" : "agreement";
-    const hasInputId = (type === 1) ? "hasResume" : "hasAgreement";
-    const checkId = (type === 1) ? "resume-check" : "agreement-check";
+// function resettUpload(type) {
+//     alert(type);
+//     // const wrapperId = `upload-file${type}`;
+//     // const inputId = (type === 1) ? "resume" : "agreement";
+//     // const hasInputId = (type === 1) ? "hasResume" : "hasAgreement";
+//     // const checkId = (type === 1) ? "resume-check" : "agreement-check";
 
-    // ล้าง input file
-    const input = document.getElementById(inputId);
-    if (input) input.value = "";
+//     // // ล้าง input file
+//     // const input = document.getElementById(inputId);
+//     // if (input) input.value = "";
 
-    // เคลียร์ hidden input
-    document.getElementById(hasInputId).value = '';
+//     // // เคลียร์ hidden input
+//     // document.getElementById(hasInputId).value = '';
 
-    // ซ่อน check icon
-    document.getElementById(checkId).style.display = 'none';
+//     // // ซ่อน check icon
+//     // document.getElementById(checkId).style.display = 'none';
 
-    // กู้คืน UI เป็นแบบเดิม (ตามตัวอย่างแรก)
-    document.getElementById(wrapperId).innerHTML = `
-        <div class="row">
-            <div class="col-lg-2 center-center">
-                <img id="icon-file${type}" src="${$url}image/file-big.svg" alt="icon" style="width: 40px; height: 40px;">
-            </div>
-            <div id="file-upload-name${type}" class="col-lg-6 col-md-6 col-12" style="border-right:lightgray solid thin;">
-                <label class="text-gray font-size-16 font-weight-500" for="${inputId}">Upload Resume/CV here</label>
-                <div class="text-secondary text-gray font-size-14">
-                    <span class="text-gray font-size-12">Supported - pdf, .doc, .docx</span>
-                </div>
-                <div id="filename-display${type}" class="font-size-16 font-weight-600 mt-2"></div>
-            </div>
-            <div id="file-edit${type}" class="col-lg-4 col-md-6 col-12 text-center pt-13">
-                <label for="${inputId}" class="text-blue font-size-16 font-weight-600" style="cursor: pointer;">
-                    Upload
-                    <img src="${$url}image/file-up-blue.svg" alt="icon" style="width: 16px; height: 16px;">
-                </label>
-                <span class="ml-5 text-success" id="${inputId}-check" style="display:none;">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                </span>
-                <input type="hidden" value="" id="${hasInputId}">
-            </div>
-            <input id="${inputId}" style="display:none;" type="file" name="${inputId}" onchange="checkUploadFile(${type})">
-        </div>
-    `;
-}
+//     // // กู้คืน UI เป็นแบบเดิม (ตามตัวอย่างแรก)
+//     // document.getElementById(wrapperId).innerHTML = `
+//     //     <div class="row">
+//     //         <div class="col-lg-2 center-center">
+//     //             <img id="icon-file${type}" src="${$url}image/file-big.svg" alt="icon" style="width: 40px; height: 40px;">
+//     //         </div>
+//     //         <div id="file-upload-name${type}" class="col-lg-6 col-md-6 col-12" style="border-right:lightgray solid thin;">
+//     //             <label class="text-gray font-size-16 font-weight-500" for="${inputId}">Upload Resume/CV here</label>
+//     //             <div class="text-secondary text-gray font-size-14">
+//     //                 <span class="text-gray font-size-12">Supported - pdf, .doc, .docx</span>
+//     //             </div>
+//     //             <div id="filename-display${type}" class="font-size-16 font-weight-600 mt-2"></div>
+//     //         </div>
+//     //         <div id="file-edit${type}" class="col-lg-4 col-md-6 col-12 text-center pt-13">
+//     //             <label for="${inputId}" class="text-blue font-size-16 font-weight-600" style="cursor: pointer;">
+//     //                 Upload
+//     //                 <img src="${$url}image/file-up-blue.svg" alt="icon" style="width: 16px; height: 16px;">
+//     //             </label>
+//     //             <span class="ml-5 text-success" id="${inputId}-check" style="display:none;">
+//     //                 <i class="fa fa-check" aria-hidden="true"></i>
+//     //             </span>
+//     //             <input type="hidden" value="" id="${hasInputId}">
+//     //         </div>
+//     //         <input id="${inputId}" style="display:none;" type="file" name="${inputId}" onchange="checkUploadFile(${type})">
+//     //     </div>
+//     // `;
+//     checkUploadFile(type)
+// }
 
 
 // ตัวอย่างฟังก์ชันดูไฟล์ (เปิด preview หรือดาวน์โหลด)
 function viewFile(type) {
     let inputId = "";
+    let pathId = "";
 
     if (type === 1) {
         inputId = "resume";
+        pathId = "resumePath";
     } else if (type === 2) {
         inputId = "agreement";
+        pathId = "agreementPath";
     } else if (type === 3) {
         inputId = "certificate";
+        pathId = "certificatePath";
     } else {
         return alert("Invalid file type.");
     }
 
     const input = document.getElementById(inputId);
     const file = input?.files?.[0];
-    if (!file) return alert("No file to view.");
 
-    const fileURL = URL.createObjectURL(file);
-    window.open(fileURL, '_blank');
+    if (file) {
+        const fileURL = URL.createObjectURL(file);
+        window.open(fileURL, '_blank');
+    } else {
+        // ใช้ path เดิมที่มีอยู่แล้ว
+        const filePath = document.getElementById(pathId)?.value;
+        if (!filePath) {
+            return alert("No file to view.");
+        }
+        // const baseUrl = "<?= Yii::$app->homeUrl ?>"; // ใส่ในไฟล์ PHP
+        window.open($url + filePath, '_blank');
+    }
 }
 
 function removeFile(type) {
@@ -392,15 +407,40 @@ function removeFile(type) {
 }
 
 // function resetUpload(type) {
-//     // if (type === 1) {
-//     //     document.getElementById("resume").value = '';
-//     //     checkUploadFile(1);
-//     // }
-//     // if (type === 2) {
-//     //     document.getElementById("agreement").value = '';
-//     //     checkUploadFile(2);
-//     // }
+//     if (type === 1) {
+//         document.getElementById("resume").value = '';
+//         checkUploadFile(1);
+//     }
+//     if (type === 2) {
+//         document.getElementById("agreement").value = '';
+//         checkUploadFile(2);
+//     }
+//     if (type === 3) {
+//         document.getElementById("certificate").value = '';
+//         checkUploadFile(3);
+//     }
+
 // }
+function resetUpload(type) {
+    let inputId = "";
+    if (type === 2) {
+        inputId = "agreement";
+    } else if (type === 1) {
+        inputId = "resume";
+    } else if (type === 3) {
+        inputId = "certificate";
+    } else {
+        return alert("Invalid type");
+    }
+
+    const input = document.getElementById(inputId);
+
+    // ล้างค่าไฟล์เดิม
+    input.value = "";
+
+    // เปิด dialog ให้อัปโหลดใหม่
+    input.click();
+}
 
 function changeStatus() {
     var pimStatus = $("#pim-status").val();

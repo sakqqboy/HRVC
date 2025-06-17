@@ -1978,10 +1978,39 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function actionCertificates()
+    public function actionCertificates($hash)
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
-        return $this->renderPartial('certificates');
+          $param = ModelMaster::decodeParams($hash);
+        $employeeId = $param["employeeId"];
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+        $employee = curl_exec($api);
+        $employee = json_decode($employee, true);
+        // throw new Exception(print_r($employee, true));
+
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId);
+        $userEmployee = curl_exec($api);
+        $userEmployee = json_decode($userEmployee, true);
+        // throw new Exception(print_r($userEmployee, true));
+
+        $userId = $userEmployee['userId'] ?? '';
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-certificate?id=' . $userId);
+        $UserCertificate = curl_exec($api);
+        $UserCertificate = json_decode($UserCertificate, true);
+        // throw new Exception(print_r($UserCertificate, true));
+
+        curl_close($api);
+        return $this->renderPartial('certificates',[
+            'employee' => $employee,
+            'userEmployee' => $userEmployee,
+            'UserCertificate' =>  $UserCertificate
+        ]);
     }
 
     public function actionPerformance()

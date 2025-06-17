@@ -1026,6 +1026,7 @@ $LanguageId = '';
                                                     src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
                                                     alt="icon" style="width: 23px; height: 23px;">
                                             </a>
+                                            <input type="hidden" id="resumePath" value="<?=$resumePath?>">
                                             <a class="no-underline " href="#" onclick="removeFile(1); return false;">
                                                 <img id="bin-file1" class="mt-5 ml-9"
                                                     src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
@@ -1120,6 +1121,7 @@ $LanguageId = '';
                                                     src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
                                                     alt="icon" style="width: 23px; height: 23px;">
                                             </a>
+                                            <input type="hidden" id="agreementPath" value="<?=$agreementPath?>">
                                             <a class="no-underline " href="#" onclick="removeFile(2); return false;">
                                                 <img id="bin-file2" class="mt-5 ml-9"
                                                     src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
