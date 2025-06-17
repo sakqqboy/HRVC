@@ -58,8 +58,7 @@ $agreement = $agreement ??  '';
 				if ($resume != '' && $resume != null) {
 					$type = explode('.', $resume);
 					if ($type[1] != 'pdf') { ?>
-                <iframe
-                    src="https://view.officeapps.live.com/op/embed.aspx?src=https://tcg-hrvc-system.com/<?= $resume ?>"
+                <iframe src="https://view.officeapps.live.com/op/embed.aspx?src=https://app.tcghrvc.com/<?= $resume ?>"
                     id="file1" style="display: none;"></iframe>
                 <?php
 					} else { ?>

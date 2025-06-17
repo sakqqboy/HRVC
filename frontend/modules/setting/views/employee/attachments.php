@@ -17,9 +17,17 @@ if (!empty($employee['updateDateTime'])) {
         $updateDateTime = '-';
     }
 }
-$resume = $employee['resume'] ??  '';
-$agreement = $employee['employeeAgreement'] ??  '';
+// $resume = $employee['resume'] ??  '';
+// $agreement = $employee['employeeAgreement'] ??  '';
 
+$resumePath = isset($employee['resume']) ? $employee['resume'] : '';
+$resumeFileName = basename($resumePath); // ดึงชื่อไฟล์จาก path เช่น bcRGoVHyu2.xlsx
+$resumeExtension = pathinfo($resumeFileName, PATHINFO_EXTENSION); // xlsx
+
+
+$agreementPath = isset($employee['employeeAgreement']) ? $employee['employeeAgreement'] : '';
+$agreementFileName = basename($agreementPath);              // bcRGoVHyu2.xlsx
+$agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
 
 ?>
 <style>
@@ -36,20 +44,65 @@ $agreement = $employee['employeeAgreement'] ??  '';
         </span>
         <hr class="hr-group">
     </div>
-
+    <?php
+                                                switch ($resumeExtension) {
+                                                    case 'doc':
+                                                        $iconFile = 'doc-file.svg';
+                                                        break;
+                                                    case 'mp4':
+                                                        $iconFile = 'mp4-file.svg';
+                                                        break;
+                                                    case 'picture':
+                                                        $iconFile = 'picture-file.svg';
+                                                        break;
+                                                    case 'file':
+                                                        $iconFile = 'file-file.svg';
+                                                        break;
+                                                    case 'xml':
+                                                        $iconFile = 'xml-file.svg';
+                                                        break;
+                                                    case 'ai':
+                                                        $iconFile = 'ai-file.svg';
+                                                        break;
+                                                    case 'pds':
+                                                        $iconFile = 'pds-file.svg';
+                                                        break;
+                                                    case 'pptx':
+                                                        $iconFile = 'pptx-file.svg';
+                                                        break;
+                                                    case 'eps':
+                                                        $iconFile = 'eps-file.svg';
+                                                        break;
+                                                    case 'zip':
+                                                        $iconFile = 'zip-file.svg';
+                                                        break;
+                                                    case 'txt':
+                                                        $iconFile = 'txt-file.svg';
+                                                        break;
+                                                    case 'pdf':
+                                                        $iconFile = 'pdf-file.svg';
+                                                        break;
+                                                    case 'xlsx':
+                                                        $iconFile = 'ex-file.svg';
+                                                        break;
+                                                    default:
+                                                        $iconFile = 'file-big.svg'; // ไอคอน default
+                                                }
+                                                ?>
     <div class="between-center">
         <div class="d-flex flex-column gap-2" style="width: 45%;">
             <span class="font-size-16 font-weight-600"><?= Yii::t('app', 'Resume / CV') ?></span>
-            <a href="#" class="form-control p-3 no-underline" id="resume-btn"
-                onclick="toggleActiveFileBox('resume-btn'); return false;"
-                style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE);">
+            <div class="form-control p-3 no-underline" id="resume-btn"
+                data-url="<?= Yii::$app->homeUrl . ltrim($resumePath, '/') ?>"
+                onclick="handleFileBoxClick('resume-btn');"
+                style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE); cursor: pointer;">
                 <div class="row align-items-center">
                     <div class="col-auto">
-                        <img src="<?= Yii::$app->homeUrl ?>image/ex-file.svg" alt="icon"
+                        <img src="<?= Yii::$app->homeUrl ?>image/<?= $iconFile ?>" alt="icon"
                             style="width: 40px; height: 40px;">
                     </div>
                     <div class="col">
-                        <label class="text-black font-size-16 font-weight-600"><?= $resume ?></label>
+                        <label class="text-black font-size-16 font-weight-600"><?= $resumeFileName ?></label>
                         <div class="text-secondary font-size-14">
                             <span class="font-size-12">1.9 mb</span>
                         </div>
@@ -58,30 +111,76 @@ $agreement = $employee['employeeAgreement'] ??  '';
                         </div>
                     </div>
                     <div class="col-auto d-flex justify-content-center align-items-center gap-3">
-                        <buttom href="#" onclick="javascript:showAction()"
+                        <a href="<?= Yii::$app->homeUrl ?><?= $resumePath ?>" download
+                            onclick="event.stopPropagation();"
                             class="d-flex align-items-center action-employee-btn justify-content-center"
                             id="normal-action">
                             <img src="/HRVC/frontend/web/image/download-blue.svg" class="me-2"
                                 style="width: 18px;height:18px;">
                             <?= Yii::t('app', 'Download') ?>
-                        </buttom>
+                        </a>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
-
+        <?php
+                                                switch ($agreementExtension) {
+                                                    case 'doc':
+                                                        $iconFile = 'doc-file.svg';
+                                                        break;
+                                                    case 'mp4':
+                                                        $iconFile = 'mp4-file.svg';
+                                                        break;
+                                                    case 'picture':
+                                                        $iconFile = 'picture-file.svg';
+                                                        break;
+                                                    case 'file':
+                                                        $iconFile = 'file-file.svg';
+                                                        break;
+                                                    case 'xml':
+                                                        $iconFile = 'xml-file.svg';
+                                                        break;
+                                                    case 'ai':
+                                                        $iconFile = 'ai-file.svg';
+                                                        break;
+                                                    case 'pds':
+                                                        $iconFile = 'pds-file.svg';
+                                                        break;
+                                                    case 'pptx':
+                                                        $iconFile = 'pptx-file.svg';
+                                                        break;
+                                                    case 'eps':
+                                                        $iconFile = 'eps-file.svg';
+                                                        break;
+                                                    case 'zip':
+                                                        $iconFile = 'zip-file.svg';
+                                                        break;
+                                                    case 'txt':
+                                                        $iconFile = 'txt-file.svg';
+                                                        break;
+                                                    case 'pdf':
+                                                        $iconFile = 'pdf-file.svg';
+                                                        break;
+                                                    case 'xlsx':
+                                                        $iconFile = 'ex-file.svg';
+                                                        break;
+                                                    default:
+                                                        $iconFile = 'file-big.svg'; // ไอคอน default
+                                                }
+                                                ?>
         <div class="d-flex flex-column gap-2" style="width: 45%;">
             <span class="font-size-16 font-weight-600"><?= Yii::t('app', 'Agreement') ?></span>
-            <a href="#" class="form-control p-3 no-underline" id="agreement-btn"
-                onclick="toggleActiveFileBox('agreement-btn'); return false;"
-                style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE);">
+            <div class="form-control p-3 no-underline" id="agreement-btn"
+                data-url="<?= Yii::$app->homeUrl . ltrim($agreementPath, '/') ?>"
+                onclick="handleFileBoxClick('agreement-btn'); return false;"
+                style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE); cursor: pointer;">
                 <div class="row align-items-center">
                     <div class="col-auto">
-                        <img src="<?= Yii::$app->homeUrl ?>image/ex-file.svg" alt="icon"
+                        <img src="<?= Yii::$app->homeUrl ?>image/<?= $iconFile ?>" alt="icon"
                             style="width: 40px; height: 40px;">
                     </div>
                     <div class="col">
-                        <label class="text-black font-size-16 font-weight-600"><?= $agreement ?></label>
+                        <label class="text-black font-size-16 font-weight-600"><?= $agreementFileName ?></label>
                         <div class="text-secondary font-size-14">
                             <span class="font-size-12">1.9 mb</span>
                         </div>
@@ -90,16 +189,17 @@ $agreement = $employee['employeeAgreement'] ??  '';
                         </div>
                     </div>
                     <div class="col-auto d-flex justify-content-center align-items-center gap-3">
-                        <buttom href="#" onclick="javascript:showAction()"
+                        <a href="<?= Yii::$app->homeUrl ?><?= $agreementPath ?>" download
+                            onclick="event.stopPropagation();"
                             class="d-flex align-items-center action-employee-btn justify-content-center"
                             id="normal-action">
                             <img src="/HRVC/frontend/web/image/download-blue.svg" class="me-2"
                                 style="width: 18px;height:18px;">
                             <?= Yii::t('app', 'Download') ?>
-                        </buttom>
+                        </a>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
     </div>
 
@@ -111,35 +211,7 @@ $agreement = $employee['employeeAgreement'] ??  '';
                 </span>
             </div>
             <div class="myIframe mt-24">
-                <?php
-				if ($resume != '' && $resume != null) {
-					$type = explode('.', $resume);
-					if ($type[1] != 'pdf') { ?>
-                <iframe
-                    src="https://view.officeapps.live.com/op/embed.aspx?src=https://tcg-hrvc-system.com/<?= $resume ?>"
-                    id="file1" style="display: none;"></iframe>
-                <?php
-					} else { ?>
-                <iframe src="<?= Yii::$app->homeUrl . $resume ?>" title="description" id="file1"
-                    style="display: none;"></iframe>
-                <?php
-					}
-				}
-				if ($agreement != '' && $agreement != null) {
-					$type = explode('.', $agreement);
-					if ($type[1] != 'pdf') { ?>
-                <iframe
-                    src="https://view.officeapps.live.com/op/embed.aspx?src=https://tcg-hrvc-system.com/<?= $agreement ?>"
-                    id="file2" style="display: none;"></iframe>
-                <?php
-					} else {
-					?>
-                <iframe src="<?= Yii::$app->homeUrl . $agreement ?>" title="description" id="file2"
-                    style="display: none;"></iframe>
-                <?php
-					}
-				}
-				?>
+
             </div>
         </div>
     </div>

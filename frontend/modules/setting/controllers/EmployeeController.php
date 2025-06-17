@@ -771,7 +771,7 @@ class EmployeeController extends Controller
                     $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
                     $pathSave = $path . $fileName;
                     $fileAgreement->saveAs($pathSave);
-                    $employee->employeeAgreement = 'files/agreement/' . $file;
+                    $employee->employeeAgreement = 'files/agreement/' . $fileName;
                     // throw new exception(print_r($employee->employeeAgreement, true));
                 }
 

@@ -1069,8 +1069,6 @@ function changeSelectFlag() {
 }
 
 function toggleActiveFileBox(id) {
-    // alert('s');
-    // ลบ class ทั้งหมดก่อน
     document.querySelectorAll('.form-control').forEach(function (el) {
         el.classList.remove('file-box-active');
     });
@@ -1079,5 +1077,37 @@ function toggleActiveFileBox(id) {
     var target = document.getElementById(id);
     if (target) {
         target.classList.add('file-box-active');
+    }
+}
+
+function handleFileBoxClick(id) {
+    // alert('1');
+    toggleActiveFileBox(id); // ✅ เรียกใช้ของคุณ
+    previewFile(id); // ✅ เรียกฟังก์ชัน preview
+}
+
+function previewFile(id) {
+
+    const element = document.getElementById(id);
+    const fileUrl = element.getAttribute('data-url');
+    const previewArea = document.querySelector('.myIframe');
+
+    if (!fileUrl) return;
+
+    const extension = fileUrl.split('.').pop().toLowerCase();
+    const previewableTypes = ['pdf', 'png', 'jpg', 'jpeg'];
+
+    if (previewableTypes.includes(extension)) {
+
+        previewArea.innerHTML = `
+            <iframe src="${fileUrl}" width="100%" height="600px" style="border:1px solid #ccc;"></iframe>
+        `;
+    } else {
+        // alert('2');
+        previewArea.innerHTML = `
+            <div class="text-danger mt-3">
+                ไม่สามารถแสดงตัวอย่างไฟล์ <strong>.${extension}</strong> ได้ กรุณากดปุ่มดาวน์โหลด
+            </div>
+        `;
     }
 }
