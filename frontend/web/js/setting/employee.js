@@ -1105,7 +1105,7 @@ function previewFile(id) {
     } else {
         // alert('2');
         previewArea.innerHTML = `
-            <div class="text-danger mt-3">
+            <div class="text-danger " stle="text-align:center;">
                 ไม่สามารถแสดงตัวอย่างไฟล์ <strong>.${extension}</strong> ได้ กรุณากดปุ่มดาวน์โหลด
             </div>
         `;
