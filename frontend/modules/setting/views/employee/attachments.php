@@ -20,12 +20,12 @@ if (!empty($employee['updateDateTime'])) {
 // $resume = $employee['resume'] ??  '';
 // $agreement = $employee['employeeAgreement'] ??  '';
 
-$resumePath = isset($employee['resume']) ? $employee['resume'] : '';
+$resumePath = isset($employee['resume']) ? $employee['resume'] : 'Not Uploaded';
 $resumeFileName = basename($resumePath); // ดึงชื่อไฟล์จาก path เช่น bcRGoVHyu2.xlsx
 $resumeExtension = pathinfo($resumeFileName, PATHINFO_EXTENSION); // xlsx
 
 
-$agreementPath = isset($employee['employeeAgreement']) ? $employee['employeeAgreement'] : '';
+$agreementPath = isset($employee['employeeAgreement']) ? $employee['employeeAgreement'] : 'Not Uploaded';
 $agreementFileName = basename($agreementPath);              // bcRGoVHyu2.xlsx
 $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
 
@@ -104,10 +104,11 @@ $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
                     <div class="col">
                         <label class="text-black font-size-16 font-weight-600"><?= $resumeFileName ?></label>
                         <div class="text-secondary font-size-14">
-                            <span class="font-size-12">1.9 mb</span>
+                            <span class="font-size-12"><?= isset($employee['resume']) ? '1.9 mb' : '0.0 mb'  ?></span>
                         </div>
                         <div class="text-secondary font-size-14">
-                            <span class="font-size-12">Uploaded on <?= $updateDateTime ?></span>
+                            <span class="font-size-12"><?= isset($employee['resume']) ? 'Uploaded on' : ''  ?>
+                                <?= isset($employee['resume']) ? $updateDateTime : '--'  ?></span>
                         </div>
                     </div>
                     <div class="col-auto d-flex justify-content-center align-items-center gap-3">
@@ -182,10 +183,14 @@ $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
                     <div class="col">
                         <label class="text-black font-size-16 font-weight-600"><?= $agreementFileName ?></label>
                         <div class="text-secondary font-size-14">
-                            <span class="font-size-12">1.9 mb</span>
+                            <span
+                                class="font-size-12"><?= isset($employee['employeeAgreement']) ? '1.9 mb' :  '0.0 mb'  ?></span>
                         </div>
                         <div class="text-secondary font-size-14">
-                            <span class="font-size-12">Uploaded on <?= $updateDateTime ?></span>
+                            <!-- <span class="font-size-12">Uploaded on <?= $updateDateTime ?></span> -->
+                            <span
+                                class="font-size-12"><?= isset($employee['employeeAgreement']) ? 'Uploaded on' : ''  ?>
+                                <?= isset($employee['employeeAgreement']) ? $updateDateTime : '--'  ?></span>
                         </div>
                     </div>
                     <div class="col-auto d-flex justify-content-center align-items-center gap-3">

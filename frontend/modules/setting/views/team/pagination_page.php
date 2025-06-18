@@ -2,7 +2,8 @@
     <!-- ถ้ามีมากกว่า 7 แุวให้แสดง Page Numbers เริ่มจาก 1  -->
     <?php 
             if(  $numPage['totalRows'] > 7){
-            ?>
+    ?>
+
     <!-- Previous Button -->
     <button type="button" class="btn-previous<?= ($numPage['nowPage'] == 1 ? '-disable' : '') ?>"
         <?= ($numPage['nowPage'] == 1 ? 'disabled' : '') ?>
@@ -21,7 +22,7 @@
             style=" <?= ($numPage['nowPage'] == 1 ? 'color: white; font-weight: 700;' : 'color: black; font-weight: 500;') ?>">1</span>
     </a>
 
-    <?php if ($numPage['totalPages'] >= 4 && $numPage['nowPage'] ==  $numPage['totalPages'] || $numPage['nowPage'] ==  $numPage['totalPages'] - 2 || $numPage['nowPage'] == $numPage['totalPages'] - 1 && $numPage['totalPages'] >= 4) { ?>
+    <?php if (($numPage['totalPages'] >= 4 && $numPage['nowPage'] ==  $numPage['totalPages'] ) || (($numPage['nowPage'] ==  $numPage['totalPages'] - 2 || $numPage['nowPage'] == $numPage['totalPages'] - 1) && $numPage['totalPages'] >= 4)) { ?>
     <span id="page-jump-ellipsis" style="cursor: pointer; font-weight: 500;">...</span>
     <div id="page-jump-form" style="display: none; align-items: center; gap: 5px;">
         <form id="gotoPage">
@@ -57,6 +58,17 @@
     </a>
     <?php 
                 } 
+                if ($numPage['totalPages'] > 4 ) {
+            ?>
+    <a href="javascript:void(0);"
+        onclick="goToPageTeam(4, '<?php echo $page ?>', <?php echo $departmentId ?>, <?php echo $companyId ?>, <?php echo $branchId ?>)"
+        class=" <?= ($numPage['nowPage'] == 4 ? 'btn btn-bg-blue-xs pt-7' : '') ?>"
+        style=" <?= ($numPage['nowPage'] == 4 ? 'border: none; padding: 5px 10px; border-radius: 5px;' : 'text-decoration: none;') ?>">
+        <span
+            style="<?= ($numPage['nowPage'] == 4 ? 'color: white; font-weight: 700;' : 'color: black; font-weight: 500;') ?>">4</span>
+    </a>
+    <?php 
+                } 
             }else if( $numPage['nowPage'] > 3 && $numPage['nowPage'] < $numPage['totalPages'] - 2) {
             ?>
     <a href="javascript:void(0);"
@@ -74,7 +86,6 @@
 
 
     <?php if ($numPage['totalPages'] >= 4 && $numPage['nowPage'] != $numPage['totalPages'] && $numPage['nowPage'] != $numPage['totalPages'] - 2 && $numPage['nowPage'] != $numPage['totalPages'] - 1) { ?>
-    <!-- <span style="color: black; font-weight: 500;">...</span> -->
     <!-- จุดที่คลิกเพื่อแสดง Textbox -->
     <span id="page-jump-ellipsis" style="cursor: pointer; font-weight: 500;">...</span>
     <div id="page-jump-form" style="display: none; align-items: center; gap: 5px;">
@@ -88,10 +99,10 @@
     <?php } ?>
 
     <!-- ถ้ามี Page Numbers มากกว่า 4 -->
-    <?php if ($numPage['totalPages'] >= 4) {    
-                if ($numPage['nowPage'] >= $numPage['totalPages'] - 2 ) { 
+    <?php if ($numPage['totalPages']  >= 4) {   
+        // หน้าปัจุบันต้องไม่ใช่ 2 3 
+                if ($numPage['nowPage'] >= $numPage['totalPages'] - 2 &&  ($numPage['nowPage'] != 3 && $numPage['nowPage'] != 2) ) {
                     ?>
-
     <a href="javascript:void(0);"
         onclick="goToPageTeam(<?php echo $numPage['totalPages'] - 2 ?>, '<?php echo $page ?>', <?php echo $departmentId ?>, <?php echo $companyId ?>, <?php echo $branchId ?>)"
         class="<?= ($numPage['nowPage'] ==   $numPage['totalPages'] - 2 ? 'btn btn-bg-blue-xs pt-7' : '') ?>"
@@ -101,7 +112,6 @@
             <?php echo $numPage['totalPages'] - 2; ?>
         </span>
     </a>
-
     <a href="javascript:void(0);"
         onclick="goToPageTeam(<?php echo $numPage['totalPages'] - 1 ?>, '<?php echo $page ?>', <?php echo $departmentId ?>, <?php echo $companyId ?>, <?php echo $branchId ?>)"
         class="<?= ($numPage['nowPage'] ==   $numPage['totalPages'] - 1 ? 'btn btn-bg-blue-xs pt-7' : '') ?>"

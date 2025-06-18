@@ -114,7 +114,7 @@ $LanguageId = '';
                     <!-- body -->
                     <div>
                         <div class="avatar-upload" style="margin:0px">
-                            <div class="avatar-preview" id="imagePreview" style="
+                            <div class="avatar-preview" style="
                             background-color: white;
                             stroke-width: 1px;
                             stroke: var(--Primary-Blue---HRVC, #2580D3);
@@ -126,11 +126,11 @@ $LanguageId = '';
                                 <label for="imageUpload" class="upload-label" style="cursor: pointer;  display: block;">
                                     <?php
                                     if (isset($employee) && $employee["image"] != null) { ?>
-                                    <img src="<?= Yii::$app->homeUrl . $employee['image'] ?>"
-                                        class="company-group-picture" id="old-image">
+                                    <img id="old-image" src="<?= Yii::$app->homeUrl . $employee['image'] ?>"
+                                        class="company-group-picture">
                                     <?php
                                     } else { ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"
+                                    <img id="old-image" src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"
                                         style="width: 50px; height: auto;" alt="Upload Icon"> <br><br>
                                     <span>
                                         <?= Yii::t('app', 'Upload') ?> <span style="font-size: 13px; color: #666;">
@@ -144,7 +144,30 @@ $LanguageId = '';
                                     }
                                     ?>
                                 </label>
-                                <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
+                                <!-- ปุ่มลบ + ปุ่มรีเฟรช -->
+                                <div class="center-center" id="cer-action-buttons" style="
+                                        position: absolute;
+                                        bottom: 10px;
+                                        left: 50%;
+                                        transform: translateX(-50%);
+                                        gap: 10px;
+                                    ">
+                                    <!-- ปุ่มลบ -->
+                                    <div class="cycle-box-icon" style=" background-color: #fff0f0; display: none;"
+                                        id="bin-file">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                            alt="Delete"
+                                            style="width: 20px;height: 20px;padding-top: 0px;margin-top: 5px;margin-left: 7px;">
+                                    </div>
+
+                                    <!-- ปุ่มรีเฟรช -->
+                                    <div class="cycle-box-icon" style=" background-color: #e6f1ff; display: none;"
+                                        id="refes-file">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg" alt="Refresh"
+                                            style="width: 18px; height: 18px;">
+                                    </div>
+                                </div>
+                                <input type="file" name="image" id="imgUpload" class="upload up upload-checklist"
                                     style="display: none;">
                             </div>
                         </div>
@@ -938,8 +961,9 @@ $LanguageId = '';
                             </span>
 
                             <div class="col-lg-11 mt-5 mb-24">
-                                <div id="upload-file1" class="form-control"
-                                    style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)">
+                                <div id="upload-file1" class="form-control" <?php if($resumeFileName){
+                                ?> style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE);" <?php }else{ ?>
+                                    style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE) " <?php } ?>>
                                     <div class="row">
                                         <div class="col-lg-2 center-center">
                                             <?php
@@ -1017,11 +1041,12 @@ $LanguageId = '';
                                             ?>
                                             <div id="filename-display1" class="font-size-16 font-weight-600 mt-2"></div>
                                         </div>
-                                        <div id="file-edit1" class="col-lg-4 col-md-6 col-12 text-center">
+                                        <div id="file-edit1"
+                                            class="col-lg-4 d-flex justify-content-center align-items-center gap-3">
                                             <?php
                                             if($resumeFileName){
                                             ?>
-                                            <a class="no-underline " href="#" onclick="viewFile(1); return false;">
+                                            <a class="no-underline" href="#" onclick="viewFile(1); return false;">
                                                 <img id="eye-file1"
                                                     src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
                                                     alt="icon" style="width: 23px; height: 23px;">
@@ -1042,8 +1067,7 @@ $LanguageId = '';
                                             ?>
 
                                             <label id="resume-btn" for="resume"
-                                                class="text-blue font-size-16 font-weight-600 pt-13"
-                                                style="cursor: pointer;">
+                                                class="text-blue font-size-16 font-weight-600" style="cursor: pointer;">
                                                 <?= Yii::t('app', 'Upload') ?>
                                                 <img src="<?= Yii::$app->homeUrl ?>image/file-up-blue.svg" alt="icon"
                                                     style="width: 16px; height: 16px;">
@@ -1062,11 +1086,12 @@ $LanguageId = '';
                             </div>
 
                             <div class="col-lg-11">
-                                <div id="upload-file2" class="form-control"
-                                    style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)">
+                                <div id="upload-file2" class="form-control" <?php if($agreementFileName){
+                                ?> style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE);" <?php }else{ ?>
+                                    style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE) " <?php } ?>>
                                     <div class="row">
                                         <div class="col-lg-2 center-center">
-                                            <?php
+                                            <!-- <?php
                                             if($agreementExtension == 'pdf'){
                                             ?>
                                             <img id="icon-file2" src="<?= Yii::$app->homeUrl ?>image/pdf-file.svg"
@@ -1083,8 +1108,54 @@ $LanguageId = '';
                                                 alt="icon" style="width: 40px; height: 40px;">
                                             <?php
                                             }
-                                            ?>
-
+                                            ?> -->
+                                            <?php
+                                                switch ($agreementExtension) {
+                                                    case 'doc':
+                                                        $iconFile = 'doc-file.svg';
+                                                        break;
+                                                    case 'mp4':
+                                                        $iconFile = 'mp4-file.svg';
+                                                        break;
+                                                    case 'picture':
+                                                        $iconFile = 'picture-file.svg';
+                                                        break;
+                                                    case 'file':
+                                                        $iconFile = 'file-file.svg';
+                                                        break;
+                                                    case 'xml':
+                                                        $iconFile = 'xml-file.svg';
+                                                        break;
+                                                    case 'ai':
+                                                        $iconFile = 'ai-file.svg';
+                                                        break;
+                                                    case 'pds':
+                                                        $iconFile = 'pds-file.svg';
+                                                        break;
+                                                    case 'pptx':
+                                                        $iconFile = 'pptx-file.svg';
+                                                        break;
+                                                    case 'eps':
+                                                        $iconFile = 'eps-file.svg';
+                                                        break;
+                                                    case 'zip':
+                                                        $iconFile = 'zip-file.svg';
+                                                        break;
+                                                    case 'txt':
+                                                        $iconFile = 'txt-file.svg';
+                                                        break;
+                                                    case 'pdf':
+                                                        $iconFile = 'pdf-file.svg';
+                                                        break;
+                                                    case 'xlsx':
+                                                        $iconFile = 'ex-file.svg';
+                                                        break;
+                                                    default:
+                                                        $iconFile = 'file-big.svg'; // ไอคอน default
+                                                }
+                                                ?>
+                                            <img id="icon-file2" src="<?= Yii::$app->homeUrl ?>image/<?= $iconFile ?>"
+                                                alt="icon" style="width: 40px; height: 40px;">
                                         </div>
                                         <div id="file-uplode-name2" class="col-lg-6 col-md-6 col-12"
                                             style="border-right:lightgray solid thin;">
@@ -1112,7 +1183,9 @@ $LanguageId = '';
                                             }
                                             ?>
                                         </div>
-                                        <div id="file-edit2" class="col-lg-4 col-md-6 col-12 text-center">
+                                        <div id="file-edit2"
+                                            class="col-lg-4 d-flex justify-content-center align-items-center gap-3">
+
                                             <?php
                                             if($agreementFileName){
                                             ?>
@@ -1136,7 +1209,7 @@ $LanguageId = '';
                                             }else{
                                             ?>
                                             <label id="agreement-btn" type="button" for="agreement"
-                                                class="text-blue font-size-16 font-weight-600  pt-13">
+                                                class="text-blue font-size-16 font-weight-600 ">
                                                 <?= Yii::t('app', 'Upload') ?>
                                                 <img src="<?= Yii::$app->homeUrl ?>image/file-up-blue.svg" alt="icon"
                                                     style="width: 16px; height: 16px;">
@@ -1339,8 +1412,7 @@ $LanguageId = '';
                                 // ดึงค่าภาษาเริ่มต้นจาก array ตำแหน่งที่ 0 (ถ้ามี)
                                 $selectedLanguageId = isset($userLanguage[0]['lavel']) ? $userLanguage[0]['lavel'] : '';
                                 ?>
-                                <select class="form-select" name="lavelLanguage" id="lavelLanguage"
-                                    style="border-left: none;" required>
+                                <select class="form-select" name="lavelLanguage" id="lavelLanguage" required>
                                     <option value="" disabled <?= $selectedLanguageId ? '' : 'selected' ?> hidden
                                         style="color: var(--Helper-Text, #8A8A8A);">
                                         <?= Yii::t('app', 'Select') ?>
@@ -1732,15 +1804,27 @@ $LanguageId = '';
             });
     });
 
+
     $(document).on('change', '#cerimage', function(e) {
         const file = e.target.files[0];
         if (file) {
             uploadedCerFile = file;
             $('#previewImage').attr('src', URL.createObjectURL(file));
-            $('#bin-file4').show();
-            $('#refes-file4').show();
+            iconBinRe4();
         }
     });
+
+    $(document).on('change', '#imgUpload', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            uploadedCerFile = file;
+            $('#old-image').attr('src', URL.createObjectURL(file));
+            $('#old-image').style.display = 'block';;
+            iconBinRe();
+        }
+    });
+
+
 
     $(document).on('click', '#bin-file4', function() {
         $('#cerimage').val('');
@@ -1753,10 +1837,31 @@ $LanguageId = '';
         $('#cerimage').click(); // เปิด file picker
     });
 
+    $(document).on('click', '#bin-file', function() {
+        $('#imgUpload').val('');
+        // uploadedCerFile = null;
+        // $('#previewImage').hide();
+        $('#bin-file, #refes-file').hide();
+    });
+
+    $(document).on('click', '#refes-file', function() {
+        $('#imgUpload').click(); // เปิด file picker
+    });
+
 
     $(document).on('change', '#certificate', function(e) {
         uploadedCertificateFiles = Array.from(e.target.files); // เก็บไฟล์หลายไฟล์
     });
+
+    function iconBinRe4() {
+        $('#bin-file4').show();
+        $('#refes-file4').show();
+    }
+
+    function iconBinRe() {
+        $('#bin-file').show();
+        $('#refes-file').show();
+    }
 
     function createSchedule() {
         if (!uploadedCerFile) {
@@ -1829,6 +1934,8 @@ $LanguageId = '';
         const certificateModalEl = document.getElementById('certificateModal');
         const modal = bootstrap.Modal.getInstance(certificateModalEl);
         if (modal) {
+            $('#bin-file4').hide();
+            $('#refes-file4').hide();
             modal.hide();
             console.log(certificates);
             document.getElementById('certificateDataHidden').value = JSON.stringify(certificates);

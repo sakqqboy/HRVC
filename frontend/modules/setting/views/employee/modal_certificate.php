@@ -53,8 +53,11 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
                 <label for="cerimage" class="upload-label" style="cursor: pointer; display: block;">
                     <?php
                     if (isset($certificate) && $certificate["cerImage"] != null) { ?>
-                    <img id="previewImage" src="<?= Yii::$app->homeUrl . $certificate['cerImage'] ?>"
-                        class="company-group-picture" alt="Upload Icon">
+                    <img id="previewImage" src="<?= Yii::$app->homeUrl . $certificate['cerImage'] ?>" alt="Upload Icon"
+                        style="border-radius: none; width: 150px; height: 150px;">
+                    <script>
+                    iconBinRe4();
+                    </script>
                     <?php
                     } else { ?>
                     <img id="previewImage" src="<?= Yii::$app->homeUrl ?>image/upload-plusimg.svg"
@@ -342,30 +345,31 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
-let rangeInput = document.getElementById('rangeCalendarInput');
-let fromDateInput = document.getElementById('fromCerDate');
-let toDateInput = document.getElementById('toCerDate');
-let noExpiryCheckbox = document.getElementById('noExpiryCheckbox');
+// iconBinRe()
 
-flatpickr(rangeInput, {
-    mode: 'range',
-    dateFormat: 'd-m-Y',
-    defaultDate: fromDateInput.value && toDateInput.value ? [fromDateInput.value, toDateInput.value] : null,
-    onClose: function(selectedDates) {
-        if (selectedDates.length === 2) {
-            fromDateInput.value = selectedDates[0].toISOString().slice(0, 10);
-            toDateInput.value = selectedDates[1].toISOString().slice(0, 10);
-        } else {
-            fromDateInput.value = '';
-            toDateInput.value = '';
-        }
-    }
-});
+// let rangeInput = document.getElementById('rangeCalendarInput');
+// let fromDateInput = document.getElementById('fromCerDate');
+// let toDateInput = document.getElementById('toCerDate');
+// let noExpiryCheckbox = document.getElementById('noExpiryCheckbox');
+// flatpickr(rangeInput, {
+//     mode: 'range',
+//     dateFormat: 'd-m-Y',
+//     defaultDate: fromDateInput.value && toDateInput.value ? [fromDateInput.value, toDateInput.value] : null,
+//     onClose: function(selectedDates) {
+//         if (selectedDates.length === 2) {
+//             fromDateInput.value = selectedDates[0].toISOString().slice(0, 10);
+//             toDateInput.value = selectedDates[1].toISOString().slice(0, 10);
+//         } else {
+//             fromDateInput.value = '';
+//             toDateInput.value = '';
+//         }
+//     }
+// });
 
-// ควบคุม enable/disable ฟิลด์วันที่ตาม checkbox no expiry
-const cerDate = document.getElementById('cerDate');
+// // ควบคุม enable/disable ฟิลด์วันที่ตาม checkbox no expiry
+// const cerDate = document.getElementById('cerDate');
 
-noExpiryCheckbox.addEventListener('change', function() {
-    cerDate.value = this.checked ? '1' : '0';
-});
+// noExpiryCheckbox.addEventListener('change', function() {
+//     cerDate.value = this.checked ? '1' : '0';
+// });
 </script>
