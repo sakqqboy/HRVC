@@ -406,21 +406,6 @@ function removeFile(type) {
     }
 }
 
-// function resetUpload(type) {
-//     if (type === 1) {
-//         document.getElementById("resume").value = '';
-//         checkUploadFile(1);
-//     }
-//     if (type === 2) {
-//         document.getElementById("agreement").value = '';
-//         checkUploadFile(2);
-//     }
-//     if (type === 3) {
-//         document.getElementById("certificate").value = '';
-//         checkUploadFile(3);
-//     }
-
-// }
 function resetUpload(type) {
     let inputId = "";
     if (type === 2) {
