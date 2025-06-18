@@ -16,20 +16,20 @@ $page = "list"
                 <div class="pim-name-title ml-10">
                     <?= Yii::t('app', 'Branch') ?>
                 </div>
-                <?php if($role >= 5 ) { ?>
-                <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
-                    style="text-decoration: none;">
-                    <button type="button" class="btn-create" style="padding: 3px 9px;"
-                        action="<?= Yii::$app->homeUrl ?>setting/branch/create-branch"><?= Yii::t('app', 'Create New') ?>
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
-                            style="width:18px; height:18px; margin-top:-3px;">
-                    </button>
-                </a>
-                <?php }?>
+                <?php if ($role >= 5) { ?>
+                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
+                        style="text-decoration: none;">
+                        <button type="button" class="btn-create" style="padding: 3px 9px;"
+                            action="<?= Yii::$app->homeUrl ?>setting/branch/create-branch"><?= Yii::t('app', 'Create New') ?>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
+                                style="width:18px; height:18px; margin-top:-3px;">
+                        </button>
+                    </a>
+                <?php } ?>
             </div>
         </div>
         <div class="col-3" style="text-align: right;">
-            <?= $this->render('filter_list', ['countries' => $countries,'companies' => $company,'page' => $page,'countryIdOld' => $countryId]) ?>
+            <?= $this->render('filter_list', ['countries' => $countries, 'companies' => $company, 'page' => $page, 'countryIdOld' => $countryId]) ?>
         </div>
         <div class="col-1 pr-0 text-end">
             <div class="btn-group" role="group">
@@ -75,7 +75,7 @@ $page = "list"
 
                 <tbody>
                     <?php
-                    if (isset($branches) && count($branches) > 0) {   
+                    if (isset($branches) && count($branches) > 0) {
                         $countrow = 0;
                         $i = 1;
                         foreach ($branches as $branch) :
@@ -83,40 +83,40 @@ $page = "list"
                             $branchId = $branch['branchId'] + 543;
                     ?>
 
-                    <tr class="tr-font list-table-body " id="branch-<?= $branch['branchId'] ?>">
-                        <td>
-                            <?php
+                            <tr class="tr-font list-table-body " id="branch-<?= $branch['branchId'] ?>">
+                                <td>
+                                    <?php
                                     if ($branch["branchImage"] != null) { ?>
-                            <img src="<?= Yii::$app->homeUrl ?><?= $branch['branchImage'] ?>" class="width-aa mr-10">
-                            <?php
+                                        <img src="<?= Yii::$app->homeUrl ?><?= $branch['branchImage'] ?>" class="width-aa mr-10">
+                                    <?php
                                     } else { ?>
-                            <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="width-aa mr-10">
-                            <?php   
+                                        <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="width-aa mr-10">
+                                    <?php
                                     }
                                     ?>
-                            <?= $branch['companyName'] ?>
-                        </td>
-                        <td>
-                            <img src="<?= Yii::$app->homeUrl ?><?= $branch['flag'] ?>" class="bangladresh-hrvc mr-10"">
+                                    <?= $branch['companyName'] ?>
+                                </td>
+                                <td>
+                                    <img src="<?= Yii::$app->homeUrl ?><?= $branch['flag'] ?>" class="bangladresh-hrvc mr-10"">
                             <?= Yii::t('app', $branch['countryName']) ?>
                         </td>
                         <td>
                             <div class=" circle-container ml-15">
-                            <div class="cycle-current-<?= $branch['totalDepartment'] >= 1 ? 'red' : 'gray' ?>">
-                                <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $branch['totalDepartment'] >= 1 ? '' : '-black' ?>.svg"
-                                    alt="icon">
-                            </div>
-                            <div class="cycle-current-<?= $branch['totalDepartment'] >= 2 ? 'red' : 'gray' ?>">
-                                <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $branch['totalDepartment'] >= 2 ? '' : '-black' ?>.svg"
-                                    alt="icon">
-                            </div>
-                            <div class="cycle-current-<?= $branch['totalDepartment'] >= 3 ? 'red' : 'gray' ?>">
-                                <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $branch['totalDepartment'] >= 3 ? '' : '-black' ?>.svg"
-                                    alt="icon">
-                            </div>
-                            <div class="number-current-cycle ">
-                                <?= $branch['totalDepartment'] ?>
-                            </div>
+                                    <div class="cycle-current-<?= $branch['totalDepartment'] >= 1 ? 'red' : 'gray' ?>">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $branch['totalDepartment'] >= 1 ? '' : '-black' ?>.svg"
+                                            alt="icon">
+                                    </div>
+                                    <div class="cycle-current-<?= $branch['totalDepartment'] >= 2 ? 'red' : 'gray' ?>">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $branch['totalDepartment'] >= 2 ? '' : '-black' ?>.svg"
+                                            alt="icon">
+                                    </div>
+                                    <div class="cycle-current-<?= $branch['totalDepartment'] >= 3 ? 'red' : 'gray' ?>">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $branch['totalDepartment'] >= 3 ? '' : '-black' ?>.svg"
+                                            alt="icon">
+                                    </div>
+                                    <div class="number-current-cycle ">
+                                        <?= $branch['totalDepartment'] ?>
+                                    </div>
         </div>
         </td>
         <td>
@@ -139,32 +139,32 @@ $page = "list"
         </td>
         <td>
             <div class="circle-container ml-15">
-                <?php if($branch['totalEmployee'] >= 1 && isset($branch['employees'][0])) { ?>
-                <div class="cycle-image mr-3">
-                    <img src="<?= Yii::$app->homeUrl ?><?php echo $branch['employees'][0]['picture'] ?>" alt="icon">
-                </div>
-                <?php }else{ ?>
-                <div class="cycle-current-gray"><img src="<?= Yii::$app->homeUrl ?>image/employees-black.svg"
-                        alt="icon">
-                </div>
+                <?php if ($branch['totalEmployee'] >= 1 && isset($branch['employees'][0])) { ?>
+                    <div class="cycle-image mr-3">
+                        <img src="<?= Yii::$app->homeUrl ?><?php echo $branch['employees'][0]['picture'] ?>" alt="icon">
+                    </div>
+                <?php } else { ?>
+                    <div class="cycle-current-gray"><img src="<?= Yii::$app->homeUrl ?>image/employees-black.svg"
+                            alt="icon">
+                    </div>
                 <?php } ?>
-                <?php if($branch['totalEmployee'] >= 2 && isset($branch['employees'][1])) { ?>
-                <div class="cycle-image mr-3">
-                    <img src="<?= Yii::$app->homeUrl ?><?php echo $branch['employees'][1]['picture'] ?>" alt="icon">
-                </div>
-                <?php }else{ ?>
-                <div class="cycle-current-gray"><img src="<?= Yii::$app->homeUrl ?>image/employees-black.svg"
-                        alt="icon">
-                </div>
+                <?php if ($branch['totalEmployee'] >= 2 && isset($branch['employees'][1])) { ?>
+                    <div class="cycle-image mr-3">
+                        <img src="<?= Yii::$app->homeUrl ?><?php echo $branch['employees'][1]['picture'] ?>" alt="icon">
+                    </div>
+                <?php } else { ?>
+                    <div class="cycle-current-gray"><img src="<?= Yii::$app->homeUrl ?>image/employees-black.svg"
+                            alt="icon">
+                    </div>
                 <?php } ?>
-                <?php if($branch['totalEmployee'] >= 3 && isset($branch['employees'][2])) { ?>
-                <div class="cycle-image mr-3">
-                    <img src="<?= Yii::$app->homeUrl ?><?php echo $branch['employees'][2]['picture'] ?>" alt="icon">
-                </div>
-                <?php }else{ ?>
-                <div class="cycle-current-gray"><img src="<?= Yii::$app->homeUrl ?>image/employees-black.svg"
-                        alt="icon">
-                </div>
+                <?php if ($branch['totalEmployee'] >= 3 && isset($branch['employees'][2])) { ?>
+                    <div class="cycle-image mr-3">
+                        <img src="<?= Yii::$app->homeUrl ?><?php echo $branch['employees'][2]['picture'] ?>" alt="icon">
+                    </div>
+                <?php } else { ?>
+                    <div class="cycle-current-gray"><img src="<?= Yii::$app->homeUrl ?>image/employees-black.svg"
+                            alt="icon">
+                    </div>
                 <?php } ?>
                 <div class="number-current-cycle ">
                     <?= $branch['totalEmployee'] ?>
@@ -193,39 +193,39 @@ $page = "list"
                             <?= Yii::t('app', 'edit') ?>
                         </a>
                     </li>
-                    <?php if($branch['totalDepartment'] == 0) { ?>
-                    <li class="pl-4 pr-4">
-                        <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'], 'branchId' => $branch['branchId']]) ?>"
-                            class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -1px; ">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg" alt="History"
-                                class="pim-icon mr-10" style="margin-top: -2px;">
-                            <?= Yii::t('app', 'Create') ?>
-                        </a>
-                    </li>
-                    <li class="pl-4 pr-4">
-                        <a class="dropdown-itemNEW pl-4 pr-25"
-                            href="javascript:deleteBranch(<?= $branch['branchId'] + 543 ?>)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg" alt="Delete"
-                                class="pim-icon mr-10" style="margin-top: -2px;">
-                            <?= Yii::t('app', 'Delete') ?>
-                        </a>
-                    </li>
+                    <?php if ($branch['totalDepartment'] == 0) { ?>
+                        <li class="pl-4 pr-4">
+                            <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'], 'branchId' => $branch['branchId']]) ?>"
+                                class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -1px; ">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg" alt="History"
+                                    class="pim-icon mr-10" style="margin-top: -2px;">
+                                <?= Yii::t('app', 'Create') ?>
+                            </a>
+                        </li>
+                        <li class="pl-4 pr-4">
+                            <a class="dropdown-itemNEW pl-4 pr-25"
+                                href="javascript:deleteBranch(<?= $branch['branchId'] + 543 ?>)">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg" alt="Delete"
+                                    class="pim-icon mr-10" style="margin-top: -2px;">
+                                <?= Yii::t('app', 'Delete') ?>
+                            </a>
+                        </li>
                     <?php } ?>
                 </ul>
             </div>
         </td>
         </tr>
 
-        <?php
+<?php
                             $i++;
                         endforeach;
                     }
-                    ?>
-        </tbody>
-        </table>
+?>
+</tbody>
+</table>
     </div>
 
-    <?= $this->render('pagination_page', ['countryId' => $countryId,'companyId' => $companyId,'page' => $page,'numPage' => $numPage]) ?>
+    <?= $this->render('pagination_page', ['countryId' => $countryId, 'companyId' => $companyId, 'page' => $page, 'numPage' => $numPage]) ?>
 
 
 </div>

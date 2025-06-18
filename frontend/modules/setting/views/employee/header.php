@@ -62,8 +62,8 @@
 
 				<a href="" class="d-flex align-items-center view-employee-gray justify-content-center">
 					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" class="me-2" style="width: 18px;height:18px;">
-					<span class="font-size-16 font-weight-600" style="color:#30313D;">40 /</span>
-					<span class="font-size-16 font-weight-600" style="color:#8A8A8A;">123</span>
+					<span class="font-size-16 font-weight-600" style="color:#30313D;"><?= $actualShow ?> /</span>
+					<span class="font-size-16 font-weight-600" style="color:#8A8A8A;"><?= $totalEmployee ?></span>
 
 				</a>
 			</div>

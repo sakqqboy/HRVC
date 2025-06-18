@@ -11,10 +11,10 @@ $statusTexArr = Status::allStatusText();
 ?>
 <div class="col-12 mt-70 pt-20">
 	<div class="col-12 pr-15 pl-15">
-		<div class="col-12 pr-15 pl-15">
-			<?= $this->render('header') ?>
-
-		</div>
+		<?= $this->render('header', [
+			"totalEmployee" => $totalEmployee,
+			"actualShow" => count($employees)
+		]) ?>
 	</div>
 	<input type="hidden" id="action" value="0">
 	<input type="hidden" id="page-type" value="list">

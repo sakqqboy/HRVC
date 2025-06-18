@@ -30,7 +30,10 @@ $statusTexArr = Status::allStatusText();
 
 	</div> -->
 	<div class="col-12 pr-15 pl-15">
-		<?= $this->render('header') ?>
+		<?= $this->render('header', [
+			"totalEmployee" => $totalEmployee,
+			"actualShow" => count($employees)
+		]) ?>
 
 	</div>
 	<input type="hidden" id="page-type" value="grid">
@@ -222,6 +225,10 @@ $statusTexArr = Status::allStatusText();
 
 					<?php
 					endforeach;
+					echo $this->render('pagination_page', ['totalEmployee' => $totalEmployee, "currentPage" => $currentPage, 'totalPage' => $totalPage]);
+
+					?>
+				<?php
 				} else { ?>
 					<div class="col-12 text-center font-b font-size-16"> Employee not found.</div>
 				<?php
