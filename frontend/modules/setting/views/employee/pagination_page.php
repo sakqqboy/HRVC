@@ -1,4 +1,4 @@
-<div style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center; gap: 21px;">
+<div class="gap-4" style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center;">
     <!-- ถ้ามีมากกว่า 7 แุวให้แสดง Page Numbers เริ่มจาก 1  -->
     <?php
 
@@ -6,27 +6,29 @@
 
     if ($totalPage > 1) {
     ?>
-        <button type="button" class="btn-previous<?= ($currentPage == 1 ? '-disable' : '') ?>"
-            <?= ($currentPage == 1 ? 'disabled' : '') ?>
-            onclick="employeePage(<?= $currentPage - 1 ?>)">
+        <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/page<?= $currentPage - 1 ?>"
+            class="btn-previous<?= ($currentPage == 1 ? '-disable' : '') ?> text-center align-content-center"
+            onclick="<?= $currentPage == 1 ? 'return false;' : '' ?>" style="text-decoration: none;<?= $currentPage == 1 ? 'pointer-events:none;' : '' ?>">
             <img src="<?= Yii::$app->homeUrl ?>image/btn-previous<?= ($currentPage == 1 ? '-disable' : '') ?>.svg"
-                style="width: 4.958px; height: 8.5px; vertical-align: middle;">
+                style="width: 4.958px; height: 8.5px;">
             <span style="margin-left: 5px;"><?= Yii::t('app', 'Previous') ?></span>
-        </button>
+        </a>
         <?php
-        $i = 1;
+        $startPage =
+            $i = 1;
         $dot = 0;
+
         while ($i <= $totalPage) {
-            if ($i <= 3) {
+            if ($i <= 4) {
         ?>
                 <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/page<?= $i ?>"
-                    class=" <?= ($currentPage == $i ? 'btn btn-bg-blue-xs pt-7' : '') ?>"
-                    style=" <?= ($currentPage == $i ? 'border: none; padding: 5px 10px; border-radius: 5px;' : 'text-decoration: none;') ?>">
-                    <span style=" <?= ($currentPage == $i ? 'color: white; font-weight: 700;' : 'color: black; font-weight: 500;') ?>"><?= $i ?></span>
+                    class="<?= ($currentPage == $i ? 'btn btn-bg-blue-xs' : '') ?> font-size-12 pt-0 pb-0 align-content-center"
+                    style=" <?= ($currentPage == $i ? 'border: none; border-radius: 4px;width:26px;height:26px;' : 'text-decoration: none;') ?>">
+                    <span style=" <?= ($currentPage == $i ? 'color: white; font-weight: 700;' : 'color: black; font-weight: 400;') ?>"><?= $i ?></span>
                 </a>
             <?php
             }
-            if ($i >= 3 && $dot == 0) {
+            if ($i >= 4 && $dot == 0) {
             ?>
                 <span id="page-jump-ellipsis" style="cursor: pointer; font-weight: 500;" onclick="javascrip:showInputPage()">...</span>
                 <div id="page-jump-form" style="display: none; align-items: center; gap: 5px;">
@@ -36,25 +38,25 @@
                             style="width: 30px; height: 35px; padding: 4px 8px; font-size: 14px; text-align: center; border: 1px solid #ccc; border-radius: 5px;">
                     </form>
                 </div>
-                <a href="javascript:void(0);"
-                    onclick="goToPageBranch(<?php echo $totalPage ?>)"
-                    class=" <?= ($currentPage ==  $totalPage ? 'btn btn-bg-blue-xs pt-7' : '') ?>"
-                    style=" <?= ($currentPage ==  $totalPage ? 'border: none; padding: 5px 10px; border-radius: 5px;' : 'text-decoration: none;') ?>">
+                <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/page<?= $totalPage ?>"
+
+                    class=" <?= ($currentPage ==  $totalPage ? 'btn btn-bg-blue-xs' : '') ?> font-size-12 pt-0 pb-0 align-content-center"
+                    style=" <?= ($currentPage ==  $totalPage ? 'border: none; border-radius: 4px;width:26px;height:26px;' : 'text-decoration: none;') ?>">
                     <!-- Page Numbers สุดท้าย -->
-                    <span
-                        style="<?= ($currentPage == $totalPage ? 'color: white; font-weight: 700;' : 'color: black; font-weight: 500;') ?>">
-                        <?php echo $totalPage; ?>
+                    <span style="<?= ($currentPage == $totalPage ? 'color: white; font-weight: 700;' : 'color: black; font-weight: 400;') ?>">
+                        <?= $totalPage; ?>
                     </span>
                 </a>
-                <button type="button" class="pt-3 btn-next<?= ($currentPage == $totalPage ? '-disable' : '') ?>"
+                <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/page<?= $currentPage + 1 ?>"
+                    class="btn-previous<?= ($currentPage == $totalPage ? '-disable' : '') ?>  text-center align-content-center"
                     <?= ($currentPage == $totalPage ? 'disabled' : '') ?>
-                    onclick="goToPageBranch(<?= $currentPage + 1 ?>)"
-                    style="text-decoration: none; ">
+                    onclick="<?= $currentPage == $totalPage ? 'return false;' : '' ?>"
+                    style="text-decoration: none;<?= $currentPage == $totalPage ? 'pointer-events:none;' : '' ?>">
                     <!-- <button class="btn-next"> -->
                     <span style="margin-right: 5px;"><?= Yii::t('app', 'Next') ?></span>
                     <img src="<?= Yii::$app->homeUrl ?>image/btn-next<?= ($currentPage == $totalPage ? '-disable' : '') ?>.svg"
-                        style="width: 4.958px; height: 8.5px; vertical-align: middle;">
-                </button>
+                        style="width: 4.958px; height: 8.5px;">
+                </a>
         <?php
                 $dot = 1;
                 break;

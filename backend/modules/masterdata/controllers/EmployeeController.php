@@ -52,7 +52,7 @@ class EmployeeController extends Controller
 	}
 	public function actionAllEmployeeDetail($companyId, $currentPage, $limit)
 	{
-		$startAt = ($currentPage * $limit);
+		$startAt = (($currentPage - 1) * $limit);
 		$employee = Employee::find()
 			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,c.city,b.branchName,
 			condition.employeeConditionName,s.statusName,na.nationalityName,d.departmentName,d.departmentId,te.teamId,te.teamName,c.picture as cPicture')
