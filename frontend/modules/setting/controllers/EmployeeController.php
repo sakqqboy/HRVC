@@ -132,7 +132,7 @@ class EmployeeController extends Controller
         curl_close($api);
         $totalEmployee = Employee::totalEmployee($companyId);
         $totalPage = ceil($totalEmployee / 15);
-        $pagination = ModelMaster::getPagination($currentPage, $totalPage, 2);
+        $pagination = ModelMaster::getPagination($currentPage, $totalPage);
         return $this->render('index', [
             "employees" => $employees,
             "companies" => $companies,

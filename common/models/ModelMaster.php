@@ -700,31 +700,56 @@ class ModelMaster extends \yii\db\ActiveRecord
             }
         }
     }
-    public static function getPagination($currentPage, $totalPages, $adjacents)
+    public static function getPagination($currentPage, $totalPages)
     {
         $pagination = [];
 
         // Always show first page
         $pagination[] = 1;
 
-        // Decide start and end range
-        $start = max(2, $currentPage - $adjacents);
-        $end = min($totalPages - 1, $currentPage + $adjacents);
+        $start = $currentPage - 1;
+        $end = $currentPage + 1;
+        if ($end >= $totalPages) {
+            $end = $totalPages - 1;
+        }
+        if ($currentPage <= 3) {
+            $start = 2;
+            $end = 4;
+            for ($i = $start; $i <= $end; $i++) {
+                $pagination[] = $i;
+            }
+            if ($totalPages > 5) {
+                $pagination[] = '...';
+            }
+        } else {
+            if ($currentPage == $totalPages) {
+                $start = $totalPages - 2;
+            }
+            $before = $start - 1;
+            $after = $totalPages - $end;
+            if ($end == ($totalPages - 1) || $before >= $after) {
+                $pagination[] = '...';
+            }
 
-        // Add ellipsis if gap exists between 1 and start
-        if ($start > 2) {
-            $pagination[] = '...';
+
+            for ($i = $start; $i <= $end; $i++) {
+                $pagination[] = $i;
+            }
+            if ($end == ($totalPages - 2)) {
+                $pagination[] = ($totalPages - 1);
+            }
+            if ($after > $before) {
+                $pagination[] = '...';
+            }
         }
 
-        // Add pages around current page
-        for ($i = $start; $i <= $end; $i++) {
-            $pagination[] = $i;
-        }
+
 
         // Add ellipsis if gap exists between end and last page
-        if ($end < $totalPages - 1) {
-            $pagination[] = '...';
-        }
+
+        // if ($end < $totalPages - 1 && $flag == 0) {
+        //     $pagination[] = '...';
+        // }
 
         // Always show last page if more than one page
         if ($totalPages > 1) {

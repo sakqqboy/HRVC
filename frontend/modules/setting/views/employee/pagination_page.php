@@ -18,19 +18,9 @@
 
         $i = 1;
         $dot = 0;
-
-        while ($i <= $totalPage) {
-            if ($i == 1 || $i <= 4) {
+        foreach ($pagination as $page) {
+            if ($page === '...') {
         ?>
-                <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/page<?= $i ?>"
-                    class="<?= ($currentPage == $i ? 'btn btn-bg-blue-xs' : '') ?> font-size-12 pt-0 pb-0 align-content-center"
-                    style=" <?= ($currentPage == $i ? 'border: none; border-radius: 4px;width:26px;height:26px;' : 'text-decoration: none;') ?>">
-                    <span style=" <?= ($currentPage == $i ? 'color: white; font-weight: 700;' : 'color: black; font-weight: 400;') ?>"><?= $i ?></span>
-                </a>
-            <?php
-            }
-            if ($i >= 4 && $dot == 0 && ($totalPage - 4) > 1) {
-            ?>
                 <span id="page-jump-ellipsis" style="cursor: pointer; font-weight: 500;" onclick="javascrip:showInputPage()">...</span>
                 <div id="page-jump-form" style="display: none; align-items: center; gap: 5px;">
                     <form id="gotoPage">
@@ -40,24 +30,16 @@
                     </form>
                 </div>
             <?php
-                $dot = 1;
-                break;
-            }
-            $i++;
-        }
-        if ($totalPage > 4) {
-            ?>
-
-            <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/page<?= $totalPage ?>"
-                class=" <?= ($currentPage ==  $totalPage ? 'btn btn-bg-blue-xs' : '') ?> font-size-12 pt-0 pb-0 align-content-center"
-                style=" <?= ($currentPage ==  $totalPage ? 'border: none; border-radius: 4px;width:26px;height:26px;' : 'text-decoration: none;') ?>">
-                <!-- Page Numbers สุดท้าย -->
-                <span style="<?= ($currentPage == $totalPage ? 'color: white; font-weight: 700;' : 'color: black; font-weight: 400;') ?>">
-                    <?= $totalPage; ?>
-                </span>
-            </a>
+            } else { ?>
+                <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/page<?= $page ?>"
+                    class="<?= ($currentPage == $page ? 'btn btn-bg-blue-xs' : '') ?> font-size-12 pt-0 pb-0 align-content-center"
+                    style=" <?= ($currentPage == $page ? 'border: none; border-radius: 4px;width:26px;height:26px;' : 'text-decoration: none;') ?>">
+                    <span style=" <?= ($currentPage == $page ? 'color: white; font-weight: 700;' : 'color: black; font-weight: 400;') ?>"><?= $page ?></span>
+                </a>
         <?php
+            }
         }
+
         ?>
         <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/page<?= $currentPage + 1 ?>"
             class="btn-previous<?= ($currentPage == $totalPage ? '-disable' : '') ?>  text-center align-content-center"
@@ -71,6 +53,8 @@
         </a>
 
     <?php } ?>
+    <input type="hidden" id="totalPages" value="<?= $totalPage ?>">
+    <input type="hidden" id="targetPage" value="<?= Yii::$app->homeUrl ?>setting/employee/index/page">
 </div>
 
 <script>
@@ -110,13 +94,13 @@
             }
         });
 
-        const gotoPage = document.getElementById("gotoPage");
+        //const gotoPage = document.getElementById("gotoPage");
 
-        gotoPage.addEventListener("submit", function(event) {
-            event.preventDefault(); // ป้องกันการ submit จริง
-            const nextPage = gotoPage.querySelector("input[name='pageInput']").value;
-            goToPageBranch(nextPage);
-        });
+        // gotoPage.addEventListener("submit", function(event) {
+        //     event.preventDefault(); // ป้องกันการ submit จริง
+        //     const nextPage = gotoPage.querySelector("input[name='pageInput']").value;
+        //     goToPageBranch(nextPage);
+        // });
     });
 </script>
 <?php
@@ -126,6 +110,18 @@ $("#page-jump-ellipsis").css("display","none");
 $("#page-jump-form").css("display","inline-flex");
             $("#input-page").focus();
 }
+$("#gotoPage").on("submit", function(e) {
+        e.preventDefault(); //  ป้องกันไม่ให้ฟอร์ม submit จริง (ถ้าต้องการ)
+        var totalPage = $("#totalPage").val();
+        var inputPage = $("#input-page").val();
+
+        if (inputPage > totalPage) {
+            alert("Entered the wrong number");
+        } else {
+            var targetPage = $("#targetPage").val() + inputPage;
+            window.location.href = targetPage;
+        }
+    });
 
 ', View::POS_END);
 ?>
