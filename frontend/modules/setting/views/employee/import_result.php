@@ -29,7 +29,9 @@ $this->title = 'Import Employee Result';
 					<div class="d-flex justify-content-start align-items-center  gap-2">
 						<?= Yii::t('app', 'Imported Data Confirmation') ?>
 					</div>
-					<div class="font-size-14 font-weight-400" style="margin-top:-2px;color: #94989C;">Imported <?= count($dataLine) ?> new entries.</div>
+					<div class="font-size-14 font-weight-400" style="margin-top:-2px;color: #94989C;">Imported <?= count($dataLine) ?> new entries
+						<?= $isError == 0 ? ' with 0 error' : '' ?>.
+					</div>
 				</div>
 				<div class="col-6 text-end employee-profiles pt-0 pb-0 align-content-center">
 					<a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['import' => 1]) ?>"
@@ -40,7 +42,7 @@ $this->title = 'Import Employee Result';
 					<?php
 					if ($isError == 0) {
 					?>
-						<a href="javascript:submitData()" class="btn-accept-import align-content-center text-center" style="text-decoration: none;cursor:pointer">
+						<a href="#" onclick="javascript:submitData()" class="btn-accept-import align-content-center text-center" style="text-decoration: none;cursor:pointer">
 							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editwhite.svg" class="me-1" style="width:14px;height:14px;margin-top:-2px;">
 							<?= Yii::t('app', 'Accept') ?>
 						</a>
@@ -99,7 +101,6 @@ $this->title = 'Import Employee Result';
 											} else { ?>
 												<span class="missing-input">Missing</span>
 											<?php	} ?>
-											<?= $da["employeeName"] ?>
 										</div>
 									</td>
 
@@ -137,6 +138,13 @@ $form = ActiveForm::begin([
 	],
 	'action' => Yii::$app->homeUrl . "setting/employee/save-import"
 ]);
+if (count($dataSubmit) > 0) {
+	$info = json_encode($dataSubmit);
+?>
+	<input type="hidden" name="dataSubmit" value='<?= $info ?>'>
+<?php
+
+}
 ?>
 <?php ActiveForm::end(); ?>
 <style>
@@ -309,7 +317,7 @@ $form = ActiveForm::begin([
 $this->registerJs('
  
 	function submitData(){
-	$("#import-employee).submit();
+	$("#import-employee").submit();
 	}
 				
 ', View::POS_END);

@@ -1093,15 +1093,7 @@ class EmployeeController extends Controller
 
     public function actionImport()
     {
-        $error = [];
         $isError = 0;
-        $correct = [];
-        $update = [];
-        $success = 0;
-        $countUpdate = 0;
-        //throw new Exception(print_r(Yii::$app->request->post(), true));
-        // if (isset($_POST["employeeFile"])) {
-
         $imageObj = UploadedFile::getInstanceByName("employeeFile");
         $dataLine = [];
         if (isset($imageObj) && !empty($imageObj)) {
@@ -1124,7 +1116,6 @@ class EmployeeController extends Controller
                     $sheetData = $spreadsheet->getActiveSheet()->toArray();
                     // unset($sheetData[0]);
                     $i = 0;
-                    $transaction = Yii::$app->db->beginTransaction();
                     $dataSubmit = [];
                     $seenIndex = [
                         'employeeName' => [],
@@ -1428,26 +1419,68 @@ class EmployeeController extends Controller
                         }
                         $i++;
                     endforeach;
-                    if (count($error) == 0) {
-                        //$transaction->commit();
-                    } else {
-                        //$transaction->rollBack();
-                    }
                 }
             }
             unlink($pathSave);
+            if ($isError == 1) {
+                $dataSubmit = [];
+            }
         }
         // }
-        return $this->render('import_result', ["dataLine" => $dataLine, "isError" => $isError]);
-        return $this->render('import', [
-            "errors" => $error,
-            "success" => $success,
-            "countUpdate" => $countUpdate,
-            "corrects" => $correct,
-            "update" => $update
+        return $this->render('import_result', [
+            "dataLine" => $dataLine,
+            "isError" => $isError,
+            "dataSubmit" => $dataSubmit
         ]);
     }
-    public function actionSaveImport() {}
+    public function actionSaveImport()
+    {
+        if (isset($_POST["dataSubmit"])) {
+            $dataSubmit = json_decode($_POST["dataSubmit"], true);
+            if (count($dataSubmit) > 0) {
+                foreach ($dataSubmit as $line => $em):
+                    $employee = new Employee();
+                    $employee->employeeFirstname = $em["employeeFirstname"];
+                    $employee->employeeSurename = $em["employeeSurename"];
+                    $employee->employeeNumber =  $em["employeeNumber"];
+                    $employee->gender = $em["gender"];
+                    $employee->telephoneNumber =  $em["telephone"];
+                    $employee->emergencyTel = $em["emergencyTel"];
+                    $employee->companyEmail = $em["email"];
+                    $employee->email =  $em["email"];
+                    $employee->companyId = $em["companyId"];
+                    $employee->branchId = $em["branchId"];
+                    $employee->departmentId = $em["departmentId"];
+                    $employee->teamId = $em["teamId"];
+                    $employee->teamPositionId =  $em["teamPosition"];
+                    $employee->titleId =  $em["titleId"];
+                    $employee->employeeConditionId = $em["employeeCondition"];
+                    $employee->defaultLanguage = $em["defaultLanguage"];
+                    $employee->createDateTime = new Expression('NOW()');
+                    $employee->updateDateTime = new Expression('NOW()');
+                    $employee->status = 1;
+                    if (trim($em["joinDate"]) != '') {
+                        $joinDateArr = explode('/', $em["joinDate"]);
+                        if (count($joinDateArr) == 3) {
+                            $employee->joinDate = $joinDateArr[2] . '-' . $joinDateArr[1] . '-' . $joinDateArr[0];
+                        }
+                    }
+                    if (trim($em["birthDate"]) != '') {
+                        $birthDateArr = explode('/', $em["birthDate"]);
+                        if (count($birthDateArr) == 3) {
+                            $employee->birthDate = $birthDateArr[2] . '-' . $birthDateArr[1] . '-' . $birthDateArr[0];
+                        }
+                    }
+                    if ($employee->save(false)) {
+                        $employeeId = Yii::$app->db->lastInsertID;
+                        $userId = $this->createUser($employeeId, $em["email"]);
+                        $this->saveUserRole($userId, $em["rightId"]);
+                    }
+                endforeach;
+            }
+        }
+        return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(['companyId' => '']));
+    }
     public function checkDupplicate($firstName, $sureName, $code, $companyId)
     {
         $isExisting = 0;
@@ -1696,19 +1729,19 @@ class EmployeeController extends Controller
             }
         endforeach;
     }
-    public function saveUserRole($userId, $roleName)
+    public function saveUserRole($userId, $roleId)
     {
-        UserRole::deleteAll(["userId" => $userId]);
-        $role = Role::find()->select('roleId')->where(["roleName" => $roleName])->asArray()->one();
-        if (isset($role) && !empty($role)) {
-            $userRole = new UserRole();
-            $userRole->userId = $userId;
-            $userRole->roleId = $role["roleId"];
-            $userRole->status = 1;
-            $userRole->createDateTime = new Expression('NOW()');
-            $userRole->updateDateTime = new Expression('NOW()');
-            $userRole->save(false);
-        }
+        //UserRole::deleteAll(["userId" => $userId]);
+        //$role = Role::find()->select('roleId')->where(["roleName" => $roleName])->asArray()->one();
+        //if (isset($role) && !empty($role)) {
+        $userRole = new UserRole();
+        $userRole->userId = $userId;
+        $userRole->roleId = $roleId;
+        $userRole->status = 1;
+        $userRole->createDateTime = new Expression('NOW()');
+        $userRole->updateDateTime = new Expression('NOW()');
+        $userRole->save(false);
+        //}
     }
     public function actionResetPassword()
     {
@@ -1972,7 +2005,7 @@ class EmployeeController extends Controller
         $employee = json_decode($employee, true);
         curl_close($api);
 
-        return $this->renderPartial('attachments',[
+        return $this->renderPartial('attachments', [
             'employee' => $employee,
             'employeeId' => $employeeId
         ]);
@@ -1981,7 +2014,7 @@ class EmployeeController extends Controller
     public function actionCertificates($hash)
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
-          $param = ModelMaster::decodeParams($hash);
+        $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -2006,7 +2039,7 @@ class EmployeeController extends Controller
         // throw new Exception(print_r($UserCertificate, true));
 
         curl_close($api);
-        return $this->renderPartial('certificates',[
+        return $this->renderPartial('certificates', [
             'employee' => $employee,
             'userEmployee' => $userEmployee,
             'UserCertificate' =>  $UserCertificate

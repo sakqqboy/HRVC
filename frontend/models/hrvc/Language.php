@@ -32,5 +32,13 @@ class Language extends \frontend\models\hrvc\master\LanguageMaster
     {
         return array_merge(parent::attributeLabels(), []);
     }
-    public static function languageId($language) {}
+    public static function languageId($languageName)
+    {
+        $language = Language::find()->where(["name" => $languageName, "status" => 1])->asArray()->one();
+        if (isset($language) && !empty($language)) {
+            return $language["languageId"];
+        } else {
+            return null;
+        }
+    }
 }
