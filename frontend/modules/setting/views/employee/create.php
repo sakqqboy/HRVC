@@ -1017,11 +1017,12 @@ $LanguageId = '';
                                             ?>
                                             <div id="filename-display1" class="font-size-16 font-weight-600 mt-2"></div>
                                         </div>
-                                        <div id="file-edit1" class="col-lg-4 col-md-6 col-12 text-center">
+                                        <div id="file-edit1"
+                                            class="col-lg-4 d-flex justify-content-center align-items-center gap-3">
                                             <?php
                                             if($resumeFileName){
                                             ?>
-                                            <a class="no-underline " href="#" onclick="viewFile(1); return false;">
+                                            <a class="no-underline" href="#" onclick="viewFile(1); return false;">
                                                 <img id="eye-file1"
                                                     src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
                                                     alt="icon" style="width: 23px; height: 23px;">
@@ -1042,8 +1043,7 @@ $LanguageId = '';
                                             ?>
 
                                             <label id="resume-btn" for="resume"
-                                                class="text-blue font-size-16 font-weight-600 pt-13"
-                                                style="cursor: pointer;">
+                                                class="text-blue font-size-16 font-weight-600" style="cursor: pointer;">
                                                 <?= Yii::t('app', 'Upload') ?>
                                                 <img src="<?= Yii::$app->homeUrl ?>image/file-up-blue.svg" alt="icon"
                                                     style="width: 16px; height: 16px;">
@@ -1112,7 +1112,9 @@ $LanguageId = '';
                                             }
                                             ?>
                                         </div>
-                                        <div id="file-edit2" class="col-lg-4 col-md-6 col-12 text-center">
+                                        <div id="file-edit2"
+                                            class="col-lg-4 d-flex justify-content-center align-items-center gap-3">
+
                                             <?php
                                             if($agreementFileName){
                                             ?>
@@ -1136,7 +1138,7 @@ $LanguageId = '';
                                             }else{
                                             ?>
                                             <label id="agreement-btn" type="button" for="agreement"
-                                                class="text-blue font-size-16 font-weight-600  pt-13">
+                                                class="text-blue font-size-16 font-weight-600 ">
                                                 <?= Yii::t('app', 'Upload') ?>
                                                 <img src="<?= Yii::$app->homeUrl ?>image/file-up-blue.svg" alt="icon"
                                                     style="width: 16px; height: 16px;">
@@ -1732,13 +1734,13 @@ $LanguageId = '';
             });
     });
 
+
     $(document).on('change', '#cerimage', function(e) {
         const file = e.target.files[0];
         if (file) {
             uploadedCerFile = file;
             $('#previewImage').attr('src', URL.createObjectURL(file));
-            $('#bin-file4').show();
-            $('#refes-file4').show();
+            iconBinRe()
         }
     });
 
@@ -1757,6 +1759,11 @@ $LanguageId = '';
     $(document).on('change', '#certificate', function(e) {
         uploadedCertificateFiles = Array.from(e.target.files); // เก็บไฟล์หลายไฟล์
     });
+
+    function iconBinRe() {
+        $('#bin-file4').show();
+        $('#refes-file4').show();
+    }
 
     function createSchedule() {
         if (!uploadedCerFile) {
@@ -1829,6 +1836,8 @@ $LanguageId = '';
         const certificateModalEl = document.getElementById('certificateModal');
         const modal = bootstrap.Modal.getInstance(certificateModalEl);
         if (modal) {
+            $('#bin-file4').hide();
+            $('#refes-file4').hide();
             modal.hide();
             console.log(certificates);
             document.getElementById('certificateDataHidden').value = JSON.stringify(certificates);
