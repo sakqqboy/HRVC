@@ -131,13 +131,13 @@ $LanguageId = '';
                                     <?php
                                     } else { ?>
                                     <img id="old-image" src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"
-                                        style="width: 150px; height: auto;" alt="Upload Icon"> <br><br>
-                                    <span>
+                                        alt="Upload Icon"> <br><br>
+                                    <span id="d-up-img1">
                                         <?= Yii::t('app', 'Upload') ?> <span style="font-size: 13px; color: #666;">
                                             <?= Yii::t('app', 'or Drop') ?> </span>
                                     </span>
                                     <br>
-                                    <span style="font-size: 13px; color: #666;">
+                                    <span id="d-up-img2" style="font-size: 13px; color: #666;">
                                         <?= Yii::t('app', 'Branch Picture here') ?>
                                     </span>
                                     <?php
@@ -1820,6 +1820,9 @@ $LanguageId = '';
             uploadedCerFile = file;
             // alert('1');
             $('#old-image').attr('src', URL.createObjectURL(file));
+            $('#d-up-img1').hide();
+            $('#d-up-img2').hide();
+
             iconBinRe();
         }
     });
@@ -1841,7 +1844,9 @@ $LanguageId = '';
         $('#imgUpload').val('');
         // uploadedCerFile = null;
         // $('#previewImage').hide();
-        $('#old-image').attr('src', '<?= Yii::$app->homeUrl ?>image/upload-plusimg.svg');
+        $('#old-image').attr('src', '<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg');
+        $('#d-up-img1').show();
+        $('#d-up-img2').show();
         $('#bin-file, #refes-file').hide();
     });
 
