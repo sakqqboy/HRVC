@@ -50,8 +50,9 @@ class EmployeeController extends Controller
 			->one();
 		return json_encode($employee);
 	}
-	public function actionAllEmployeeDetail($companyId)
+	public function actionAllEmployeeDetail($companyId, $currentPage, $limit)
 	{
+		$startAt = ($currentPage * $limit);
 		$employee = Employee::find()
 			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,c.city,b.branchName,
 			condition.employeeConditionName,s.statusName,na.nationalityName,d.departmentName,d.departmentId,te.teamId,te.teamName,c.picture as cPicture')
@@ -72,7 +73,8 @@ class EmployeeController extends Controller
 			])
 			->orderBy('employee.employeeFirstname ASC')
 			->asArray()
-			->limit(15)
+			->offset($startAt)
+			->limit($limit)
 			->all();
 		$data = [];
 		if (isset($employee) && count($employee) > 0) {
@@ -402,13 +404,13 @@ class EmployeeController extends Controller
 
 	public function actionDefaultLanguage()
 	{
-		  $language = DefaultLanguage::find()
-        ->alias('d') // ตั้ง alias ให้ DefaultLanguage
-        ->select(['d.languageId', 'd.language', 'd.languageName', 'd.countryId', 'c.flag'])
-        ->leftJoin('country c', 'c.countryId = d.countryId') // ✅ ใช้ alias 'c'
-        ->where(['d.status' => 1])
-        ->asArray()
-        ->all();
+		$language = DefaultLanguage::find()
+			->alias('d') // ตั้ง alias ให้ DefaultLanguage
+			->select(['d.languageId', 'd.language', 'd.languageName', 'd.countryId', 'c.flag'])
+			->leftJoin('country c', 'c.countryId = d.countryId') // ✅ ใช้ alias 'c'
+			->where(['d.status' => 1])
+			->asArray()
+			->all();
 
 
 		return json_encode($language);

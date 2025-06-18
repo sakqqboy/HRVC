@@ -33,6 +33,8 @@ use PhpOffice\PhpSpreadsheet\Reader\Html;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Yii;
+use yii\data\ArrayDataProvider;
+use yii\data\Pagination;
 use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\UploadedFile;
@@ -103,9 +105,16 @@ class EmployeeController extends Controller
 
     public function actionIndex($hash)
     {
+
         $param = ModelMaster::decodeParams($hash);
         $companyId = !empty($param["companyId"]) ? $param["companyId"] : null;
         $isFromImport = isset($param["import"]) ? $param["import"] : 0;
+        $currentPage = 1;
+        $limit = 15;
+        if (isset($hash)) {
+            $page = explode('ge', $hash);
+            $currentPage = $page[1];
+        }
         $groupId = Group::currentGroupId();
         if ($groupId == null) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
@@ -113,7 +122,7 @@ class EmployeeController extends Controller
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/all-employee-detail?companyId=' . $companyId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/all-employee-detail?companyId=' . $companyId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
         $employees = curl_exec($api);
         $employees = json_decode($employees, true);
 
@@ -121,10 +130,15 @@ class EmployeeController extends Controller
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
         curl_close($api);
+        $totalEmployee = Employee::totalEmployee($companyId);
+        $totalPage = ceil($totalEmployee / 15);
         return $this->render('index', [
             "employees" => $employees,
             "companies" => $companies,
-            "isFromImport" => $isFromImport
+            "isFromImport" => $isFromImport,
+            "totalEmployee" => $totalEmployee,
+            "totalPage" => $totalPage,
+            "currentPage" => $currentPage
         ]);
     }
     public function actionEmployeeList()
@@ -134,6 +148,7 @@ class EmployeeController extends Controller
         if ($groupId == null) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
         }
+        $companyId = null;
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -145,9 +160,11 @@ class EmployeeController extends Controller
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
         curl_close($api);
+        $totalEmployee = Employee::totalEmployee($companyId);
         return $this->render('index_list', [
             "employees" => $employees,
-            "companies" => $companies
+            "companies" => $companies,
+            "totalEmployee" => $totalEmployee
         ]);
     }
     public function actionCreate()
@@ -1275,87 +1292,6 @@ class EmployeeController extends Controller
                                 $lineError = 1;
                                 $isError = 1;
                             }
-
-                            // if ($isError == 0) {
-                            //     if ($isExisting == 0) {
-                            //         $employee = new Employee();
-                            //         $employee->createDateTime = new Expression('NOW()');
-                            //         $isError = 1;
-                            //     } else {
-                            //         $employee = Employee::find()
-                            //             ->where([
-                            //                 "employeeFirstname" => $data[0],
-                            //                 "employeeSurename" => $data[1],
-                            //                 "employeeNumber" =>  $data[2],
-                            //                 "companyId" => $companyId,
-                            //             ])
-                            //             ->one();
-                            //     }
-                            //     $employee->employeeFirstname = $data[0];
-                            //     $employee->employeeSurename = $data[1];
-                            //     $employee->employeeNumber =  $data[2];
-                            //     if (trim($data[4]) != '') {
-                            //         $joinDateArr = explode('/', $data[4]);
-                            //         if (count($joinDateArr) == 3) {
-                            //             $employee->joinDate = $joinDateArr[2] . '-' . $joinDateArr[1] . '-' . $joinDateArr[0];
-                            //         }
-                            //     }
-                            //     if (trim($data[5]) != '') {
-                            //         $birthDateArr = explode('/', $data[5]);
-                            //         if (count($birthDateArr) == 3) {
-                            //             $employee->birthDate = $birthDateArr[2] . '-' . $birthDateArr[1] . '-' . $birthDateArr[0];
-                            //         }
-                            //     }
-                            //     $employee->gender = $gender;
-                            //     $employee->telephoneNumber = $data[7];
-                            //     $employee->emergencyTel = $data[8];
-                            //     $employee->companyEmail = $data[3];
-                            //     $employee->email = $data[3];
-                            //     $employee->companyId = $companyId;
-                            //     $employee->branchId = $branchId;
-                            //     $employee->departmentId = $departmentId;
-                            //     $employee->teamId = $teamId;
-                            //     $employee->teamPositionId = $teamPositionId;
-                            //     $employee->titleId = $titleId;
-
-                            //     $employee->employeeConditionId = EmployeeCondition::employeeConditionId($data[15]);
-                            //     $employee->spoken = $data[16];
-                            //     $employee->status = 1;
-
-                            //     $employee->updateDateTime = new Expression('NOW()');
-                            //     if ($employee->save(false)) {
-                            //         $success++;
-                            //         if ($isExisting == 0) {
-                            //             $employeeId = Yii::$app->db->lastInsertID;
-                            //         } else {
-                            //             $employeeId = $employee->employeeId;
-                            //         }
-                            //         $userId = $this->createUser($employeeId, $data[3]);
-                            //         $this->saveUserRole($userId, $data[17]);
-                            //         $titleName = explode(':', $data[14]);
-                            //         if ($isExisting == 0) {
-                            //             $correct[$i] = [
-                            //                 "name" => $data[0] . ' ' . $data[1],
-                            //                 "email" => $data[3],
-                            //                 "company" => $data[9],
-                            //                 "branch" => $data[10],
-                            //                 "department" => $data[11],
-                            //                 "title" => $titleName[0],
-                            //             ];
-                            //         }
-                            //         if ($isExisting == 1) {
-                            //             $countUpdate++;
-                            //             $update[$i] = [
-                            //                 "name" => $data[0] . ' ' . $data[1],
-                            //                 "email" => $data[3],
-                            //                 "company" => $data[9],
-                            //                 "branch" => $data[10],
-                            //                 "department" => $data[11],
-                            //                 "title" => $titleName[0],
-                            //             ];
-                            //         }
-                            //     }
-                            // }
                             $employeeName   = $data[0] . ' ' . $data[1];
                             $email          = $data[3];
                             $telephoneName  = $data[7];
@@ -1551,6 +1487,12 @@ class EmployeeController extends Controller
             ->asArray()
             ->orderBy('employeeConditionName')
             ->all();
+        $language = Language::find()
+            ->select('name')
+            ->where(["status" => 1])
+            ->asArray()
+            ->orderBy('name')
+            ->all();
         $rights = Role::find()
             ->select('roleName')
             ->where(["status" => 1])
@@ -1569,7 +1511,8 @@ class EmployeeController extends Controller
             "employeeCondition" => $employeeCondition,
             "rights" => $rights,
             "teamPositions" => $teamPositions,
-            "gender" => $gender
+            "gender" => $gender,
+            "language" => $language
         ]);
         libxml_use_internal_errors(true);
         $htmlExcel = mb_convert_encoding($htmlExcel, 'HTML-ENTITIES', 'UTF-8');
