@@ -1221,7 +1221,7 @@ $LanguageId = '';
                                 </span>
                                 <div class="input-group mt-12">
                                     <span class="input-group-text" style="background-color: white; border-right: none;">
-                                        <img id="flag"
+                                        <img id="skill-plus"
                                             src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-gray.svg"
                                             alt="Website" style="width: 20px; height: 20px;">
                                     </span>
@@ -1241,7 +1241,17 @@ $LanguageId = '';
                                     </span>
                                 </div>
 
-                                <div class="company-group-edit bg-white mt-20" style="height: 141px; padding:10px;">
+                                <div class="company-group-edit mt-20" id="skill-box"
+                                    style="height: 141px; padding:10px; border: 1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE); background: var(--HRVC---Light-Text, #F9F9F9);">
+                                    <div class="mid-center mt-30" id="skill-detail">
+                                        <span class=" font-size-16 font-weight-600">
+                                            <?= Yii::t('app', 'No skill tags has been added') ?>
+                                        </span>
+                                        <span class=" font-size-12 font-weight-400">
+                                            <?= Yii::t('app', 'Please type in the skill box and press enter to add the skill tags for this employee') ?>
+                                        </span>
+                                    </div>
+
                                     <div id="skillTags"></div>
                                     <input type="hidden" name="skills" id="skillsHidden" required>
                                 </div>
@@ -2314,15 +2324,21 @@ $LanguageId = '';
             });
     });
 
+    const skillPlus = document.getElementById("skill-plus");
+
     document.getElementById("skill").addEventListener("focus", function() {
         hintText.style.backgroundColor = "hsla(209, 70%, 49%, 1)";
+        skillPlus.src = "<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-blue.svg";
     });
 
     document.getElementById("skill").addEventListener("blur", function() {
         hintText.style.backgroundColor = "var(--HRVC---Light-Text, #94989C)";
+        skillPlus.src = "<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-gray.svg";
     });
 
     const skillArray = [];
+    const skillBox = document.getElementById("skill-box");
+    const skillDetail = document.getElementById("skill-detail");
     const skillInput = document.getElementById("skill");
     const skillTagsContainer = document.getElementById("skillTags");
     const hiddenInput = document.getElementById("skillsHidden");
@@ -2348,6 +2364,10 @@ $LanguageId = '';
         tag.style.display = "inline-flex";
         tag.style.alignItems = "center";
         tag.style.gap = "4px";
+
+        skillBox.style.backgroundColor = "#ffffff";
+        skillBox.style.border = "0.5px solid #BBCDDE";
+        skillDetail.style.display = "none"; // ซ่อน
 
         const removeBtn = document.createElement("span");
         removeBtn.innerHTML = `

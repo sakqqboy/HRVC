@@ -1118,6 +1118,8 @@ function previewFile(id) {
     const previewArea = document.querySelector('.myIframe');
 
     if (!fileUrl) return;
+    const docBox = document.getElementById("doc-box");
+    docBox.style.display = "none"; // ซ่อน
 
     const extension = fileUrl.split('.').pop().toLowerCase();
     const previewableTypes = ['pdf', 'png', 'jpg', 'jpeg'];

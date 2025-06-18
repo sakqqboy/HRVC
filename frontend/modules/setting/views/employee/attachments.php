@@ -210,7 +210,19 @@ $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
                     <?= Yii::t('app', 'Document Preview') ?>
                 </span>
             </div>
-            <div class="myIframe mt-24">
+            <div class="company-group-edit mt-20" id="doc-box"
+                style="height: 141px; padding:10px; border: 1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE); background: var(--HRVC---Light-Text, #F9F9F9);">
+                <div class="mid-center mt-30">
+                    <span class=" font-size-16 font-weight-600">
+                        <?= Yii::t('app', 'The selected Document cant be previewed') ?>
+                    </span>
+                    <span class=" font-size-12 font-weight-400">
+                        <?= Yii::t('app', 'Preview is currently supported for PDF, DOCX, and image files only. Excel files (e.g., XLS, XLSX) are not supported at this time.') ?>
+                    </span>
+                </div>
+            </div>
+
+            <div class="myIframe mt-24" style="border: none;">
 
             </div>
         </div>
