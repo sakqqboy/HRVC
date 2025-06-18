@@ -123,15 +123,15 @@ $LanguageId = '';
                             cursor: pointer;
                         ">
 
-                                <label for="imageUpload" class="upload-label" style="cursor: pointer;  display: block;">
+                                <label id="imgpreview" class="upload-label" style="cursor: pointer;  display: block;">
                                     <?php
                                     if (isset($employee) && $employee["image"] != null) { ?>
                                     <img id="old-image" src="<?= Yii::$app->homeUrl . $employee['image'] ?>"
-                                        class="company-group-picture">
+                                        class="company-group-picture" style="width: 170px; height: 170px;">
                                     <?php
                                     } else { ?>
                                     <img id="old-image" src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"
-                                        style="width: 50px; height: auto;" alt="Upload Icon"> <br><br>
+                                        style="width: 150px; height: auto;" alt="Upload Icon"> <br><br>
                                     <span>
                                         <?= Yii::t('app', 'Upload') ?> <span style="font-size: 13px; color: #666;">
                                             <?= Yii::t('app', 'or Drop') ?> </span>
@@ -1818,8 +1818,8 @@ $LanguageId = '';
         const file = e.target.files[0];
         if (file) {
             uploadedCerFile = file;
+            // alert('1');
             $('#old-image').attr('src', URL.createObjectURL(file));
-            $('#old-image').style.display = 'block';;
             iconBinRe();
         }
     });
@@ -1841,6 +1841,7 @@ $LanguageId = '';
         $('#imgUpload').val('');
         // uploadedCerFile = null;
         // $('#previewImage').hide();
+        $('#old-image').attr('src', '<?= Yii::$app->homeUrl ?>image/upload-plusimg.svg');
         $('#bin-file, #refes-file').hide();
     });
 
@@ -1848,6 +1849,9 @@ $LanguageId = '';
         $('#imgUpload').click(); // เปิด file picker
     });
 
+    $(document).on('click', '#imgpreview', function() {
+        $('#imgUpload').click(); // เปิด file picker
+    });
 
     $(document).on('change', '#certificate', function(e) {
         uploadedCertificateFiles = Array.from(e.target.files); // เก็บไฟล์หลายไฟล์
