@@ -111,7 +111,7 @@ class EmployeeController extends Controller
         $isFromImport = isset($param["import"]) ? $param["import"] : 0;
         $currentPage = 1;
         $limit = 15;
-        if (isset($hash)) {
+        if (isset($hash) && explode('ge', $hash)[0] == 'pa') {
             $page = explode('ge', $hash);
             $currentPage = $page[1];
         }
@@ -132,13 +132,15 @@ class EmployeeController extends Controller
         curl_close($api);
         $totalEmployee = Employee::totalEmployee($companyId);
         $totalPage = ceil($totalEmployee / 15);
+        $pagination = ModelMaster::getPagination($currentPage, $totalPage, 2);
         return $this->render('index', [
             "employees" => $employees,
             "companies" => $companies,
             "isFromImport" => $isFromImport,
             "totalEmployee" => $totalEmployee,
             "totalPage" => $totalPage,
-            "currentPage" => $currentPage
+            "currentPage" => $currentPage,
+            "pagination" => $pagination
         ]);
     }
     public function actionEmployeeList()
