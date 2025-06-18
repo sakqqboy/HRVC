@@ -700,4 +700,37 @@ class ModelMaster extends \yii\db\ActiveRecord
             }
         }
     }
+    public static function getPagination($currentPage, $totalPages, $adjacents)
+    {
+        $pagination = [];
+
+        // Always show first page
+        $pagination[] = 1;
+
+        // Decide start and end range
+        $start = max(2, $currentPage - $adjacents);
+        $end = min($totalPages - 1, $currentPage + $adjacents);
+
+        // Add ellipsis if gap exists between 1 and start
+        if ($start > 2) {
+            $pagination[] = '...';
+        }
+
+        // Add pages around current page
+        for ($i = $start; $i <= $end; $i++) {
+            $pagination[] = $i;
+        }
+
+        // Add ellipsis if gap exists between end and last page
+        if ($end < $totalPages - 1) {
+            $pagination[] = '...';
+        }
+
+        // Always show last page if more than one page
+        if ($totalPages > 1) {
+            $pagination[] = $totalPages;
+        }
+
+        return $pagination;
+    }
 }
