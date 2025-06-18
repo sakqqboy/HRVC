@@ -114,7 +114,7 @@ $LanguageId = '';
                     <!-- body -->
                     <div>
                         <div class="avatar-upload" style="margin:0px">
-                            <div class="avatar-preview" id="imagePreview" style="
+                            <div class="avatar-preview" style="
                             background-color: white;
                             stroke-width: 1px;
                             stroke: var(--Primary-Blue---HRVC, #2580D3);
@@ -126,11 +126,11 @@ $LanguageId = '';
                                 <label for="imageUpload" class="upload-label" style="cursor: pointer;  display: block;">
                                     <?php
                                     if (isset($employee) && $employee["image"] != null) { ?>
-                                    <img src="<?= Yii::$app->homeUrl . $employee['image'] ?>"
-                                        class="company-group-picture" id="old-image">
+                                    <img id="old-image" src="<?= Yii::$app->homeUrl . $employee['image'] ?>"
+                                        class="company-group-picture">
                                     <?php
                                     } else { ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"
+                                    <img id="old-image" src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"
                                         style="width: 50px; height: auto;" alt="Upload Icon"> <br><br>
                                     <span>
                                         <?= Yii::t('app', 'Upload') ?> <span style="font-size: 13px; color: #666;">
@@ -144,7 +144,30 @@ $LanguageId = '';
                                     }
                                     ?>
                                 </label>
-                                <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
+                                <!-- ปุ่มลบ + ปุ่มรีเฟรช -->
+                                <div class="center-center" id="cer-action-buttons" style="
+                                        position: absolute;
+                                        bottom: 10px;
+                                        left: 50%;
+                                        transform: translateX(-50%);
+                                        gap: 10px;
+                                    ">
+                                    <!-- ปุ่มลบ -->
+                                    <div class="cycle-box-icon" style=" background-color: #fff0f0; display: none;"
+                                        id="bin-file">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                            alt="Delete"
+                                            style="width: 20px;height: 20px;padding-top: 0px;margin-top: 5px;margin-left: 7px;">
+                                    </div>
+
+                                    <!-- ปุ่มรีเฟรช -->
+                                    <div class="cycle-box-icon" style=" background-color: #e6f1ff; display: none;"
+                                        id="refes-file">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg" alt="Refresh"
+                                            style="width: 18px; height: 18px;">
+                                    </div>
+                                </div>
+                                <input type="file" name="image" id="imgUpload" class="upload up upload-checklist"
                                     style="display: none;">
                             </div>
                         </div>
@@ -1787,9 +1810,21 @@ $LanguageId = '';
         if (file) {
             uploadedCerFile = file;
             $('#previewImage').attr('src', URL.createObjectURL(file));
-            iconBinRe()
+            iconBinRe4();
         }
     });
+
+    $(document).on('change', '#imgUpload', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            uploadedCerFile = file;
+            $('#old-image').attr('src', URL.createObjectURL(file));
+            $('#old-image').style.display = 'block';;
+            iconBinRe();
+        }
+    });
+
+
 
     $(document).on('click', '#bin-file4', function() {
         $('#cerimage').val('');
@@ -1802,14 +1837,30 @@ $LanguageId = '';
         $('#cerimage').click(); // เปิด file picker
     });
 
+    $(document).on('click', '#bin-file', function() {
+        $('#imgUpload').val('');
+        // uploadedCerFile = null;
+        // $('#previewImage').hide();
+        $('#bin-file, #refes-file').hide();
+    });
+
+    $(document).on('click', '#refes-file', function() {
+        $('#imgUpload').click(); // เปิด file picker
+    });
+
 
     $(document).on('change', '#certificate', function(e) {
         uploadedCertificateFiles = Array.from(e.target.files); // เก็บไฟล์หลายไฟล์
     });
 
-    function iconBinRe() {
+    function iconBinRe4() {
         $('#bin-file4').show();
         $('#refes-file4').show();
+    }
+
+    function iconBinRe() {
+        $('#bin-file').show();
+        $('#refes-file').show();
     }
 
     function createSchedule() {

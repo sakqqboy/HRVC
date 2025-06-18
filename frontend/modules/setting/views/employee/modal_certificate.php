@@ -56,7 +56,7 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
                     <img id="previewImage" src="<?= Yii::$app->homeUrl . $certificate['cerImage'] ?>" alt="Upload Icon"
                         style="border-radius: none; width: 150px; height: 150px;">
                     <script>
-                    iconBinRe()
+                    iconBinRe4();
                     </script>
                     <?php
                     } else { ?>
