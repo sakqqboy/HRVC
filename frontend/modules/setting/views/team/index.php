@@ -71,7 +71,7 @@ $page = "grid";
                                                         <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
                                                             alt="icon" style="width: 10px; height: 10px;">
                                                     </div>
-                                                    <?= $department['departmentName'] ?>,
+                                                    <?= $department['departmentName'] ?>
                                                 </div>
 
                                                 <div class="city-crad-company"

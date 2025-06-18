@@ -938,8 +938,9 @@ $LanguageId = '';
                             </span>
 
                             <div class="col-lg-11 mt-5 mb-24">
-                                <div id="upload-file1" class="form-control"
-                                    style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)">
+                                <div id="upload-file1" class="form-control" <?php if($resumeFileName){
+                                ?> style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE);" <?php }else{ ?>
+                                    style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE) " <?php } ?>>
                                     <div class="row">
                                         <div class="col-lg-2 center-center">
                                             <?php
@@ -1062,11 +1063,12 @@ $LanguageId = '';
                             </div>
 
                             <div class="col-lg-11">
-                                <div id="upload-file2" class="form-control"
-                                    style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE)">
+                                <div id="upload-file2" class="form-control" <?php if($agreementFileName){
+                                ?> style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE);" <?php }else{ ?>
+                                    style="border:1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE) " <?php } ?>>
                                     <div class="row">
                                         <div class="col-lg-2 center-center">
-                                            <?php
+                                            <!-- <?php
                                             if($agreementExtension == 'pdf'){
                                             ?>
                                             <img id="icon-file2" src="<?= Yii::$app->homeUrl ?>image/pdf-file.svg"
@@ -1083,8 +1085,54 @@ $LanguageId = '';
                                                 alt="icon" style="width: 40px; height: 40px;">
                                             <?php
                                             }
-                                            ?>
-
+                                            ?> -->
+                                            <?php
+                                                switch ($agreementExtension) {
+                                                    case 'doc':
+                                                        $iconFile = 'doc-file.svg';
+                                                        break;
+                                                    case 'mp4':
+                                                        $iconFile = 'mp4-file.svg';
+                                                        break;
+                                                    case 'picture':
+                                                        $iconFile = 'picture-file.svg';
+                                                        break;
+                                                    case 'file':
+                                                        $iconFile = 'file-file.svg';
+                                                        break;
+                                                    case 'xml':
+                                                        $iconFile = 'xml-file.svg';
+                                                        break;
+                                                    case 'ai':
+                                                        $iconFile = 'ai-file.svg';
+                                                        break;
+                                                    case 'pds':
+                                                        $iconFile = 'pds-file.svg';
+                                                        break;
+                                                    case 'pptx':
+                                                        $iconFile = 'pptx-file.svg';
+                                                        break;
+                                                    case 'eps':
+                                                        $iconFile = 'eps-file.svg';
+                                                        break;
+                                                    case 'zip':
+                                                        $iconFile = 'zip-file.svg';
+                                                        break;
+                                                    case 'txt':
+                                                        $iconFile = 'txt-file.svg';
+                                                        break;
+                                                    case 'pdf':
+                                                        $iconFile = 'pdf-file.svg';
+                                                        break;
+                                                    case 'xlsx':
+                                                        $iconFile = 'ex-file.svg';
+                                                        break;
+                                                    default:
+                                                        $iconFile = 'file-big.svg'; // ไอคอน default
+                                                }
+                                                ?>
+                                            <img id="icon-file2" src="<?= Yii::$app->homeUrl ?>image/<?= $iconFile ?>"
+                                                alt="icon" style="width: 40px; height: 40px;">
                                         </div>
                                         <div id="file-uplode-name2" class="col-lg-6 col-md-6 col-12"
                                             style="border-right:lightgray solid thin;">
@@ -1341,8 +1389,7 @@ $LanguageId = '';
                                 // ดึงค่าภาษาเริ่มต้นจาก array ตำแหน่งที่ 0 (ถ้ามี)
                                 $selectedLanguageId = isset($userLanguage[0]['lavel']) ? $userLanguage[0]['lavel'] : '';
                                 ?>
-                                <select class="form-select" name="lavelLanguage" id="lavelLanguage"
-                                    style="border-left: none;" required>
+                                <select class="form-select" name="lavelLanguage" id="lavelLanguage" required>
                                     <option value="" disabled <?= $selectedLanguageId ? '' : 'selected' ?> hidden
                                         style="color: var(--Helper-Text, #8A8A8A);">
                                         <?= Yii::t('app', 'Select') ?>
