@@ -26,7 +26,14 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
     <!-- head modal -->
     <div>
         <span class="text-blue font-size-24 font-weight-500">
-            <?= Yii::t('app', 'Add Certificate') ?>
+            <?php
+            if($id){
+            echo Yii::t('app', 'Edit Certificate') ;
+            }else{
+            echo Yii::t('app', 'Add Certificate') ;
+            }
+            ?>
+
         </span>
     </div>
     <div>
@@ -315,13 +322,17 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
         </div>
 
         <div class="d-flex" style="gap: 22px;">
+            <?php if($id){
+            ?>
             <a href="javascript:void(0);" onclick="$('#certificateModal').modal('hide');"
                 style="text-decoration: none;">
                 <button type="button" class="btn-cancel-group"
-                    action="<?= Yii::$app->homeUrl ?>setting/group/create-group">Cancel</button>
+                    style="border: 0.5px solid var(--Restriction-Red, #EC1D42); color: var(--Restriction-Red, #EC1D42);"
+                    action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
+                    <img src="<?= Yii::$app->homeUrl ?>image/modal-exit-red.svg" style="width: 20px; height: 20px;">
+                    <?= Yii::t('app', 'Cancel') ?>
+                </button>
             </a>
-            <?php if($id){
-            ?>
             <button type="button" class="btn-save-group" onclick="editSchedule(<?= $id ?>)">
                 <img src="<?= Yii::$app->homeUrl ?>image/save-icon.svg" style="width: 20px; height: 20px;">
                 <?= Yii::t('app', 'Update') ?>
@@ -329,6 +340,14 @@ $certExtension = pathinfo($certFileName, PATHINFO_EXTENSION); // xlsx
             <?php
             }else{
             ?>
+            <a href="javascript:void(0);" onclick="$('#certificateModal').modal('hide');"
+                style="text-decoration: none;">
+                <button type="button" class="btn-cancel-group"
+                    action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
+                    <img src="<?= Yii::$app->homeUrl ?>image/modal-exit.svg" style="width: 20px; height: 20px;">
+                    <?= Yii::t('app', 'Cancel') ?>
+                </button>
+            </a>
             <button type="button" class="btn-save-group" onclick="createSchedule()">
                 <?= Yii::t('app', 'Create') ?>
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" style="width: 20px; height: 20px;">

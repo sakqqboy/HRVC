@@ -1199,8 +1199,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     if (startDate && endDate) {
+        const dateObj1 = new Date(startDate);
+        // ดึงวัน เดือน ปี แล้วจัดฟอร์แมต d/m/Y
+        const day1 = String(dateObj1.getDate()).padStart(2, '0');
+        const month1 = String(dateObj1.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มที่ 0
+        const year1 = dateObj1.getFullYear();
+        const formattedDate1 = `${day1}/${month1}/${year1}`;
+
+        const dateObj2 = new Date(endDate);
+        // ดึงวัน เดือน ปี แล้วจัดฟอร์แมต d/m/Y
+        const day2 = String(dateObj2.getDate()).padStart(2, '0');
+        const month2 = String(dateObj2.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มที่ 0
+        const year2 = dateObj2.getFullYear();
+        const formattedDate2 = `${day2}/${month2}/${year2}`;
+        // อัปเดตข้อความใน multi-due-term
         document.getElementById("multi-due-term").innerHTML =
-            `${startDate} - ${endDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+            `${formattedDate1} - ${formattedDate2} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
 
         // เปลี่ยนสไตล์ข้อความ
         $("#multi-due-term").css({
@@ -1411,10 +1425,22 @@ function updateSelectedDates() {
     let startDate = window.startDate || (fromDate && fromDate.value !== '' ? fromDate.value : "Start");
     let endDate = window.endDate || (toDate && toDate.value !== '' ? toDate.value : "End");
 
+    const dateObj1 = new Date(startDate);
+    // ดึงวัน เดือน ปี แล้วจัดฟอร์แมต d/m/Y
+    const day1 = String(dateObj1.getDate()).padStart(2, '0');
+    const month1 = String(dateObj1.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มที่ 0
+    const year1 = dateObj1.getFullYear();
+    const formattedDate1 = `${day1}/${month1}/${year1}`;
 
+    const dateObj2 = new Date(endDate);
+    // ดึงวัน เดือน ปี แล้วจัดฟอร์แมต d/m/Y
+    const day2 = String(dateObj2.getDate()).padStart(2, '0');
+    const month2 = String(dateObj2.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มที่ 0
+    const year2 = dateObj2.getFullYear();
+    const formattedDate2 = `${day2}/${month2}/${year2}`;
     // อัปเดตข้อความใน multi-due-term
     document.getElementById("multi-due-term").innerHTML =
-        `${startDate} - ${endDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+        `${formattedDate1} - ${formattedDate2} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
 
 
     // เปลี่ยน style ของ #multi-branch-text

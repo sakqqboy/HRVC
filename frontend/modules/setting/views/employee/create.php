@@ -90,7 +90,7 @@ $LanguageId = '';
                             <?= Yii::t('app', 'Employment Status') ?>
                         </span>
                         <select class="select-employee-status" aria-label="Default select example" name="status"
-                            id="pim-status" onchange="javascript:changeStatusEmploywee()" required>
+                            id="pim-status" onchange="javascript:changeStatusEmployee()" required>
                             <option value="" disabled hidden
                                 <?= empty($employee['employeeConditionId']) ? 'selected' : '' ?>
                                 style="color: var(--Helper-Text, #8A8A8A);">
@@ -916,8 +916,8 @@ $LanguageId = '';
                         </div>
 
                         <div class="col-8 d-flex justify-content-end align-items-end">
-                            <a href="<?= Yii::$app->homeUrl ?>setting/title/create/<?= ModelMaster::encodeParams(["companyId" => '', "branchId" => '', "departmentId" => '' ]) ?>"
-                                class="text-blue font-size-13 font-weight-500">
+                            <a id="edit-job" href="" class="text-blue font-size-13 font-weight-500"
+                                style="display: none;">
                                 <?= Yii::t('app', 'Edit Job Description here') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
                                     style="cursor: pointer;">
@@ -1708,31 +1708,39 @@ $LanguageId = '';
                 .then(response => response.json())
                 .then(data => {
                     // ซ่อน "ยังไม่เลือก"
-                    document.getElementById('no-existing').style.display = 'none';
+                    const el = document.getElementById('no-existing');
+                    if (el) {
+                        el.style.display = 'none';
+                    }
+                    const editJob = document.getElementById('edit-job');
+                    editJob.style.display = 'block';
+                    editJob.href =
+                        `<?= Yii::$app->homeUrl ?>setting/title/create/${data.paramId}`;
 
                     // สร้าง HTML ใหม่สำหรับรายละเอียด
                     const html = `
-                    <div>
-                        <span class="font-size-20 font-weight-600">${data.titleName}</span>
-                    </div>
-                    <div class="center-center" style="gap: 63px; margin: 36px 29px;">
-                        <div class="row" style="border-right:lightgray solid thin;">
-                            <div class="row mb-36">
-                                <span class="font-size-16 font-weight-500 mb-22">Purpose of the Job</span>
-                                <span class="font-size-14 font-weight-400">${data.purpose}</span>
+                            <div>
+                                <span class="font-size-20 font-weight-600">${data.titleName}</span>
                             </div>
-                            <div class="row">
-                                <span class="font-size-16 font-weight-500 mb-22">Core Responsibility</span>
-                                <span class="font-size-14 font-weight-400">${data.jobDescription}</span>
+                            <div class="center-center" style="gap: 63px; margin: 36px 29px;">
+                                <div class="row" style="border-right:lightgray solid thin; width: 50%;"  >
+                                    <div class="row mb-36">
+                                        <span class="font-size-16 font-weight-500 mb-22">Purpose of the Job</span>
+                                        <span class="font-size-14 font-weight-400">${data.purpose.replace(/\n/g, '<br>')}</span>
+                                    </div>
+                                    <div class="row">
+                                        <span class="font-size-16 font-weight-500 mb-22">Core Responsibility</span>
+                                        <span class="font-size-14 font-weight-400">${data.jobDescription.replace(/\n/g, '<br>')}</span>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 50%;>
+                                    <span class="font-size-16 font-weight-500 mb-22">Key Responsibility</span>
+                                    <span class="font-size-14 font-weight-400">${data.keyResponsibility.replace(/\n/g, '<br>')}</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <span class="font-size-16 font-weight-500 mb-22">Key Responsibility</span>
-                            <span class="font-size-14 font-weight-400">${data.keyResponsibility}</span>
-                        </div>
-                    </div>
-                `;
+                        `;
                     document.getElementById('descriptionTitle').innerHTML = html;
+
                 });
 
         } else {

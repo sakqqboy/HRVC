@@ -1,4 +1,5 @@
 <?php
+use common\models\ModelMaster;
 
 // echo '<pre>';
 // print_r($employee);
@@ -112,14 +113,25 @@ $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
                         </div>
                     </div>
                     <div class="col-auto d-flex justify-content-center align-items-center gap-3">
+
+                        <?php if($employee['resume']){
+                            ?>
                         <a href="<?= Yii::$app->homeUrl ?><?= $resumePath ?>" download
                             onclick="event.stopPropagation();"
                             class="d-flex align-items-center action-employee-btn justify-content-center"
                             id="normal-action">
-                            <img src="/HRVC/frontend/web/image/download-blue.svg" class="me-2"
+                            <img src="<?= Yii::$app->homeUrl ?>image/download-blue.svg" class="me-2"
                                 style="width: 18px;height:18px;">
                             <?= Yii::t('app', 'Download') ?>
                         </a>
+                        <?php }else{ ?>
+                        <a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>"
+                            onclick="event.stopPropagation();" class="btn-create no-underline "
+                            style="padding: 3px 9px; display: inline-block;">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/edit.svg"
+                                style="width:18px; height:18px; margin-top:-3px;">
+                            Upload in Edit </a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -194,14 +206,24 @@ $agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
                         </div>
                     </div>
                     <div class="col-auto d-flex justify-content-center align-items-center gap-3">
+                        <?php if($employee['employeeAgreement']){
+                            ?>
                         <a href="<?= Yii::$app->homeUrl ?><?= $agreementPath ?>" download
                             onclick="event.stopPropagation();"
                             class="d-flex align-items-center action-employee-btn justify-content-center"
                             id="normal-action">
-                            <img src="/HRVC/frontend/web/image/download-blue.svg" class="me-2"
+                            <img src="<?= Yii::$app->homeUrl ?>image/download-blue.svg" class="me-2"
                                 style="width: 18px;height:18px;">
                             <?= Yii::t('app', 'Download') ?>
                         </a>
+                        <?php }else{ ?>
+                        <a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>"
+                            onclick="event.stopPropagation();" class="btn-create no-underline "
+                            style="padding: 3px 9px; display: inline-block;">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/edit.svg"
+                                style="width:18px; height:18px; margin-top:-3px;">
+                            Upload in Edit </a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

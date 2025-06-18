@@ -717,29 +717,38 @@ function loadTitlesSelect(departmentId) {
                     })
                         .then(response => response.json())
                         .then(data => {
-                            document.getElementById('no-existing').style.display = 'none';
+                            const el = document.getElementById('no-existing');
+                            if (el) {
+                                el.style.display = 'none';
+                            }
+                            const editJob = document.getElementById('edit-job');
+                            editJob.style.display = 'block';
+                            editJob.href = $url + `setting/title/create/${data.paramId}`;
 
+                            // editJob.herf = '#';
+
+                            // สร้าง HTML ใหม่สำหรับรายละเอียด
                             const html = `
-                                <div>
-                                    <span class="font-size-20 font-weight-600">${data.titleName}</span>
-                                </div>
-                                <div class="center-center" style="gap: 63px; margin: 36px 29px;">
-                                    <div class="row" style="border-right:lightgray solid thin;">
-                                        <div class="row mb-36">
-                                            <span class="font-size-16 font-weight-500 mb-22">Purpose of the Job</span>
-                                            <span class="font-size-14 font-weight-400">${data.purpose}</span>
-                                        </div>
-                                        <div class="row">
-                                            <span class="font-size-16 font-weight-500 mb-22">Core Responsibility</span>
-                                            <span class="font-size-14 font-weight-400">${data.jobDescription}</span>
-                                        </div>
+                            <div>
+                                <span class="font-size-20 font-weight-600">${data.titleName}</span>
+                            </div>
+                            <div class="center-center" style="gap: 63px; margin: 36px 29px;">
+                                <div class="row" style="border-right:lightgray solid thin; width: 50%;"  >
+                                    <div class="row mb-36">
+                                        <span class="font-size-16 font-weight-500 mb-22">Purpose of the Job</span>
+                                        <span class="font-size-14 font-weight-400">${data.purpose.replace(/\n/g, '<br>')}</span>
                                     </div>
                                     <div class="row">
-                                        <span class="font-size-16 font-weight-500 mb-22">Key Responsibility</span>
-                                        <span class="font-size-14 font-weight-400">${data.keyResponsibility}</span>
+                                        <span class="font-size-16 font-weight-500 mb-22">Core Responsibility</span>
+                                        <span class="font-size-14 font-weight-400">${data.jobDescription.replace(/\n/g, '<br>')}</span>
                                     </div>
                                 </div>
-                            `;
+                                <div class="row" style="width: 50%;>
+                                    <span class="font-size-16 font-weight-500 mb-22">Key Responsibility</span>
+                                    <span class="font-size-14 font-weight-400">${data.keyResponsibility.replace(/\n/g, '<br>')}</span>
+                                </div>
+                            </div>
+                        `;
                             document.getElementById('descriptionTitle').innerHTML = html;
                         });
                 }
@@ -944,7 +953,13 @@ function flatpickrDate() {
     if (birthDate) {
         var el = document.getElementById('birthdate-select');
         if (el) {
-            el.innerHTML = `${birthDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+            const dateObj = new Date(birthDate);
+            // ดึงวัน เดือน ปี แล้วจัดฟอร์แมต d/m/Y
+            const day = String(dateObj.getDate()).padStart(2, '0');
+            const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มที่ 0
+            const year = dateObj.getFullYear();
+            const formattedDate = `${day}/${month}/${year}`;
+            el.innerHTML = `${formattedDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
         } else {
             console.warn('Element #birthdate-select not found');
         }
@@ -967,7 +982,13 @@ function flatpickrDate() {
     if (hiringDate) {
         var el = document.getElementById('hiring-select');
         if (el) {
-            el.innerHTML = `${birthDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+            const dateObj = new Date(hiringDate);
+            // ดึงวัน เดือน ปี แล้วจัดฟอร์แมต d/m/Y
+            const day = String(dateObj.getDate()).padStart(2, '0');
+            const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มที่ 0
+            const year = dateObj.getFullYear();
+            const formattedDate = `${day}/${month}/${year}`;
+            el.innerHTML = `${formattedDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
         } else {
             console.warn('Element #hiring-select not found');
         }
@@ -991,7 +1012,21 @@ function flatpickrDate() {
     if (toDate && fromDate) {
         const el = document.getElementById('multi-due-term');
         if (fromDate && toDate && el) {
-            el.innerHTML = `${fromDate} - ${toDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+            const dateObj1 = new Date(fromDate);
+            // ดึงวัน เดือน ปี แล้วจัดฟอร์แมต d/m/Y
+            const day1 = String(dateObj1.getDate()).padStart(2, '0');
+            const month1 = String(dateObj1.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มที่ 0
+            const year1 = dateObj1.getFullYear();
+            const formattedDate1 = `${day1}/${month1}/${year1}`;
+
+            const dateObj2 = new Date(toDate);
+            // ดึงวัน เดือน ปี แล้วจัดฟอร์แมต d/m/Y
+            const day2 = String(dateObj2.getDate()).padStart(2, '0');
+            const month2 = String(dateObj2.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มที่ 0
+            const year2 = dateObj2.getFullYear();
+            const formattedDate2 = `${day2}/${month2}/${year2}`;
+            // alert(el);
+            el.innerHTML = `${formattedDate1} - ${formattedDate2} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
         } else if (!el) {
             console.warn('Element #multi-due-term not found');
         }
