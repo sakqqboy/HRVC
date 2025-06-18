@@ -944,7 +944,13 @@ function flatpickrDate() {
     if (birthDate) {
         var el = document.getElementById('birthdate-select');
         if (el) {
-            el.innerHTML = `${birthDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+            const dateObj = new Date(birthDate);
+            // ดึงวัน เดือน ปี แล้วจัดฟอร์แมต d/m/Y
+            const day = String(dateObj.getDate()).padStart(2, '0');
+            const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มที่ 0
+            const year = dateObj.getFullYear();
+            const formattedDate = `${day}/${month}/${year}`;
+            el.innerHTML = `${formattedDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
         } else {
             console.warn('Element #birthdate-select not found');
         }
@@ -967,7 +973,13 @@ function flatpickrDate() {
     if (hiringDate) {
         var el = document.getElementById('hiring-select');
         if (el) {
-            el.innerHTML = `${birthDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+            const dateObj = new Date(hiringDate);
+            // ดึงวัน เดือน ปี แล้วจัดฟอร์แมต d/m/Y
+            const day = String(dateObj.getDate()).padStart(2, '0');
+            const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มที่ 0
+            const year = dateObj.getFullYear();
+            const formattedDate = `${day}/${month}/${year}`;
+            el.innerHTML = `${formattedDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
         } else {
             console.warn('Element #hiring-select not found');
         }
@@ -991,7 +1003,21 @@ function flatpickrDate() {
     if (toDate && fromDate) {
         const el = document.getElementById('multi-due-term');
         if (fromDate && toDate && el) {
-            el.innerHTML = `${fromDate} - ${toDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+            const dateObj1 = new Date(fromDate);
+            // ดึงวัน เดือน ปี แล้วจัดฟอร์แมต d/m/Y
+            const day1 = String(dateObj1.getDate()).padStart(2, '0');
+            const month1 = String(dateObj1.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มที่ 0
+            const year1 = dateObj1.getFullYear();
+            const formattedDate1 = `${day1}/${month1}/${year1}`;
+
+            const dateObj2 = new Date(toDate);
+            // ดึงวัน เดือน ปี แล้วจัดฟอร์แมต d/m/Y
+            const day2 = String(dateObj2.getDate()).padStart(2, '0');
+            const month2 = String(dateObj2.getMonth() + 1).padStart(2, '0'); // เดือนเริ่มที่ 0
+            const year2 = dateObj2.getFullYear();
+            const formattedDate2 = `${day2}/${month2}/${year2}`;
+            // alert(el);
+            el.innerHTML = `${formattedDate1} - ${formattedDate2} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
         } else if (!el) {
             console.warn('Element #multi-due-term not found');
         }
