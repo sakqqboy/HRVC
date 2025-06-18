@@ -1215,8 +1215,6 @@ document.addEventListener("DOMContentLoaded", function () {
         // อัปเดตข้อความใน multi-due-term
         document.getElementById("multi-due-term").innerHTML =
             `${formattedDate1} - ${formattedDate2} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
-        // document.getElementById("multi-due-term").innerHTML =
-        //     `${startDate} - ${endDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
 
         // เปลี่ยนสไตล์ข้อความ
         $("#multi-due-term").css({

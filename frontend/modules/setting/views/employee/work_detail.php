@@ -170,27 +170,27 @@ if (!empty($employee['probationEnd'])) {
             </div>
             <div class="company-group-edit bg-white" style="gap: 43px; padding: 36px 26px;">
                 <div class="center-center" style="gap: 63px; margin: 36px 29px;">
-                    <div class="row" style="border-right:lightgray solid thin;">
+                    <div class="row" style="border-right:lightgray solid thin; width: 50%;">
                         <div class="row mb-36">
                             <span
                                 class="font-size-16 font-weight-500 mb-22"><?= Yii::t('app', 'Purpose of the Job') ?></span>
                             <span class="font-size-14 font-weight-400">
-                                <?= $title['purpose'] ?? '' ?>
+                                <?= nl2br(htmlspecialchars($title['purpose'])) ?>
                             </span>
                         </div>
                         <div class="row">
                             <span
                                 class="font-size-16 font-weight-500 mb-22"><?= Yii::t('app', 'Core Responsibility') ?></span>
                             <span class="font-size-14 font-weight-400">
-                                <?= $title['jobDescription'] ?? '' ?>
+                                <?= nl2br(htmlspecialchars($title['jobDescription'])) ?>
                             </span>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style=" width: 50%;">
                         <span
                             class="font-size-16 font-weight-500 mb-22"><?= Yii::t('app', 'Key Responsibility') ?></span>
                         <span class="font-size-14 font-weight-400">
-                            <?= $title['keyResponsibility'] ?? '' ?>
+                            <?= nl2br(htmlspecialchars($title['keyResponsibility'])) ?>
                         </span>
                     </div>
                 </div>

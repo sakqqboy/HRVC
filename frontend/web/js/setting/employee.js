@@ -717,29 +717,38 @@ function loadTitlesSelect(departmentId) {
                     })
                         .then(response => response.json())
                         .then(data => {
-                            document.getElementById('no-existing').style.display = 'none';
+                            const el = document.getElementById('no-existing');
+                            if (el) {
+                                el.style.display = 'none';
+                            }
+                            const editJob = document.getElementById('edit-job');
+                            editJob.style.display = 'block';
+                            editJob.href = $url + `setting/title/create/${data.paramId}`;
 
+                            // editJob.herf = '#';
+
+                            // สร้าง HTML ใหม่สำหรับรายละเอียด
                             const html = `
-                                <div>
-                                    <span class="font-size-20 font-weight-600">${data.titleName}</span>
-                                </div>
-                                <div class="center-center" style="gap: 63px; margin: 36px 29px;">
-                                    <div class="row" style="border-right:lightgray solid thin;">
-                                        <div class="row mb-36">
-                                            <span class="font-size-16 font-weight-500 mb-22">Purpose of the Job</span>
-                                            <span class="font-size-14 font-weight-400">${data.purpose}</span>
-                                        </div>
-                                        <div class="row">
-                                            <span class="font-size-16 font-weight-500 mb-22">Core Responsibility</span>
-                                            <span class="font-size-14 font-weight-400">${data.jobDescription}</span>
-                                        </div>
+                            <div>
+                                <span class="font-size-20 font-weight-600">${data.titleName}</span>
+                            </div>
+                            <div class="center-center" style="gap: 63px; margin: 36px 29px;">
+                                <div class="row" style="border-right:lightgray solid thin; width: 50%;"  >
+                                    <div class="row mb-36">
+                                        <span class="font-size-16 font-weight-500 mb-22">Purpose of the Job</span>
+                                        <span class="font-size-14 font-weight-400">${data.purpose.replace(/\n/g, '<br>')}</span>
                                     </div>
                                     <div class="row">
-                                        <span class="font-size-16 font-weight-500 mb-22">Key Responsibility</span>
-                                        <span class="font-size-14 font-weight-400">${data.keyResponsibility}</span>
+                                        <span class="font-size-16 font-weight-500 mb-22">Core Responsibility</span>
+                                        <span class="font-size-14 font-weight-400">${data.jobDescription.replace(/\n/g, '<br>')}</span>
                                     </div>
                                 </div>
-                            `;
+                                <div class="row" style="width: 50%;>
+                                    <span class="font-size-16 font-weight-500 mb-22">Key Responsibility</span>
+                                    <span class="font-size-14 font-weight-400">${data.keyResponsibility.replace(/\n/g, '<br>')}</span>
+                                </div>
+                            </div>
+                        `;
                             document.getElementById('descriptionTitle').innerHTML = html;
                         });
                 }

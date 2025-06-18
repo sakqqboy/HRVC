@@ -449,6 +449,17 @@ class TitleController extends Controller
         // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         // $companies = curl_exec($api);
         // $companies = json_decode($companies, true);
+        if (!empty($titleId)) {
+            // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' . $branchId);
+            // $branchJson = curl_exec($api);
+            // $branches = json_decode($branchJson, true);
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-detail?id=' . $titleId);
+            $title = curl_exec($api);
+            $title = json_decode($title, true);
+            $typePage = 'Edit';
+            $departmentId = $title["departmentId"];
+            // throw new Exception(print_r($title, true)); // Debug: ดูข้อมูลทั้งหมด
+        } 
         
          if (!empty($departmentId)) {
             curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-detail?id=' . $departmentId);
@@ -478,16 +489,7 @@ class TitleController extends Controller
             $companies = json_decode($companies, true);
         }
         
-        if (!empty($titleId)) {
-            // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' . $branchId);
-            // $branchJson = curl_exec($api);
-            // $branches = json_decode($branchJson, true);
-            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-detail?id=' . $titleId);
-            $title = curl_exec($api);
-            $title = json_decode($title, true);
-            $typePage = 'Edit';
-            // throw new Exception(print_r($title, true)); // Debug: ดูข้อมูลทั้งหมด
-        } 
+ 
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
         $group = curl_exec($api);
@@ -871,6 +873,7 @@ class TitleController extends Controller
         $request = Yii::$app->request;
         $body = json_decode($request->getRawBody(), true);
         $titleId = $body['titleId'] ?? null;
+		$paramId =  ModelMaster::encodeParams(['departmentId' => '', 'titleId' => $titleId]);
 
         if (!$titleId) {
             return ['error' => 'Missing titleId'];
@@ -889,6 +892,7 @@ class TitleController extends Controller
                 'purpose' => $title['purpose'] ?? '',
                 'jobDescription' => $title['jobDescription'] ?? '',
                 'keyResponsibility' => $title['keyResponsibility'] ?? '',
+                'paramId' => $paramId ?? '',
             ];
         // if (isset($title['data'])) {
         //     return [
