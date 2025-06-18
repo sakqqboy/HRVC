@@ -88,7 +88,7 @@
             ?>
 
             <div id="skillTags" class="d-flex flex-wrap" style="gap: 8px;">
-                <?php foreach ($skills as $skill): ?>
+                <?php foreach ((array)$skills as $skill): ?>
                 <span class="skill-tag d-inline-flex align-items-center"
                     style="gap: 4px; background: #2580D3; color: #30313D; padding: 4px 10px; border-radius: 20px;">
                     <span class="text-white font-size-13 font-weight-400"><?= htmlspecialchars($skill) ?></span>

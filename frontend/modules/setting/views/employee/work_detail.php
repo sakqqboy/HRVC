@@ -51,6 +51,7 @@ if (!empty($employee['probationEnd'])) {
     </div>
 
     <div class="start-center" style="gap: 43px; display: flex; flex-wrap: wrap;">
+
         <div class="center-center" style="gap: 72px;  width: 100%;">
             <div class="start-center" style="gap: 35px;">
                 <div>
@@ -153,11 +154,12 @@ if (!empty($employee['probationEnd'])) {
                             <?= Yii::t('app', 'Work Address') ?>
                         </span>
                     </div>
-                    <div class="row d-flex">
-                        <span class="font-size-16 font-weight-500">
+                    <div class="row d-flex" style="max-width: 50%; min-width: 20%;">
+                        <span class="font-size-16 font-weight-500" style="display: block; word-break: break-word;">
                             <?= $company['location'] ?? '-' ?>
                         </span>
                     </div>
+
                 </div>
             </div>
         </div>
