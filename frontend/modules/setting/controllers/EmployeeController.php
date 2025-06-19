@@ -956,18 +956,21 @@ class EmployeeController extends Controller
     }
     public function actionFilterEmployee()
     {
-        $companyId = $_POST["companyId"] != '' ? $_POST["companyId"] : null;
-        $branchId = $_POST["branchId"] != '' ? $_POST["branchId"] : null;
-        $departmentId = $_POST["departmentId"] != '' ? $_POST["departmentId"] : null;
-        $teamId = $_POST["teamId"] != '' ? $_POST["teamId"] : null;
-        $status = $_POST["status"];
+        $companyId = isset($_POST["companyId"]) && $_POST["companyId"] != null ? $_POST["companyId"] : null;
+        $branchId = isset($_POST["branchId"]) && $_POST["branchId"] != null ? $_POST["branchId"] : null;
+        $departmentId = isset($_POST["departmentId"]) && $_POST["departmentId"] != null ? $_POST["departmentId"] : null;
+        $teamId = isset($_POST["teamId"]) && $_POST["teamId"] != null ? $_POST["teamId"] : null;
+        $status = isset($_POST["status"]) && $_POST["status"] != null ? $_POST["status"] : null;
+        $pageType = $_POST["pageType"];
+
 
         return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-result/' . ModelMaster::encodeParams([
             "companyId" => $companyId,
             "branchId" => $branchId,
             "departmentId" => $departmentId,
             "teamId" => $teamId,
-            "status" => $status
+            "status" => $status,
+            "pageType" => $pageType,
         ]));
     }
     public function actionEmployeeResult($hash)
@@ -978,40 +981,51 @@ class EmployeeController extends Controller
         $departmentId = $param["departmentId"];
         $teamId = $param["teamId"];
         $status = $param["status"];
+        $pageType = $param["pageType"];
+        if ($pageType == 'grid') {
+            $file = 'index';
+            $action = 'index/';
+        } else {
+            $file = 'index_list';
+            $action = 'employee-list/';
+        }
         if ($status == 0) {
             $status = null;
+        }
+        if ($companyId == "" && $branchId == "" && $teamId == "" && $departmentId == "" && $status == "" && $status == "") {
+
+            return $this->redirect(Yii::$app->homeUrl . 'setting/employee/' . $action . ModelMaster::encodeParams([
+                "companyId" => ''
+            ]));
+        }
+        $isFromImport = isset($param["import"]) ? $param["import"] : 0;
+        $currentPage = 1;
+        $limit = 15;
+        if (isset($param["currentPage"])) {
+            $currentPage = $param["currentPage"];
         }
         $branches = [];
         $departments = [];
         $teams = [];
         $groupId = Group::currentGroupId();
-        // $employees = Employee::find()->where(["status" => [1, 0]])
-        //     ->andFilterWhere([
-        //         "companyId" => $companyId,
-        //         "branchId" => $branchId,
-        //         "departmentId" => $departmentId,
-        //         "status" => $status,
-        //         "teamId" => $teamId,
-        //     ])
-        //     ->asArray()
-        //     ->orderBy("employeeFirstname")
-        //     ->all();
+        $employeeFilter = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&departmentId=' . $departmentId . '&&teamId=' . $teamId . '&&status=' . $status . '&&currentPage=' . $currentPage . '&&limit=' . $limit;
+        //throw new exception($employeeFilter);
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-filter?companyId=' . $companyId . '&&branchId=' . $branchId . '&&departmentId=' . $departmentId . '&&teamId=' . $teamId . '&&status=' . $status);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-filter?' . $employeeFilter);
         $employees = curl_exec($api);
         $employees = json_decode($employees, true);
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
-
+        //throw new exception($companyId);
         if ($companyId != '') {
             curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
             $branches = curl_exec($api);
             $branches = json_decode($branches, true);
+            // throw new exception(print_r($branches, true));
         }
         if ($branchId != '') {
             $departments = Department::find()->select('departmentId,departmentName')
@@ -1021,9 +1035,11 @@ class EmployeeController extends Controller
             $teams = Team::find()->select('teamId,teamName')
                 ->where(["departmentId" => $departmentId, "status" => 1])->asArray()->orderBy('teamName')->all();
         }
+        $totalEmployee = Employee::totalEmployeeWithFilter($companyId, $branchId, $departmentId, $teamId, $status);
+        $totalPage = ceil($totalEmployee / 15);
+        $pagination = ModelMaster::getPagination($currentPage, $totalPage);
         curl_close($api);
-        //throw new Exception(print_r($param, true));
-        return $this->render('index', [
+        return $this->render($file, [
             "employees" => $employees,
             "companies" => $companies,
             "companyId" => $companyId,
@@ -1033,8 +1049,33 @@ class EmployeeController extends Controller
             "status" => $status == null ? 0 : $status,
             "branches" => $branches,
             "departments" => $departments,
-            "teams" => $teams
+            "teams" => $teams,
+            "isFromImport" => $isFromImport,
+            "totalEmployee" => $totalEmployee,
+            "totalPage" => $totalPage,
+            "currentPage" => $currentPage,
+            "pagination" => $pagination,
         ]);
+    }
+    public function actionEncodeFilter()
+    {
+        $companyId = $_POST["companyId"];
+        $branchId = $_POST["branchId"];
+        $departmentId = $_POST["departmentId"];
+        $teamId = $_POST["teamId"];
+        $status = $_POST["status"];
+        $pageType = $_POST["pageType"];
+        $currentPage = $_POST["currentPage"];
+        $res["targetPage"] = Yii::$app->homeUrl . 'setting/employee/employee-result/' . ModelMaster::encodeParams([
+            "companyId" => $companyId,
+            "branchId" => $branchId,
+            "departmentId" => $departmentId,
+            "teamId" => $teamId,
+            "currentPage" => $currentPage,
+            "status" => $status,
+            "pageType" => $pageType
+        ]);
+        return json_encode($res);
     }
 
     public function actionModalCertificate()
@@ -1615,10 +1656,10 @@ class EmployeeController extends Controller
         $dompdf->setPaper('A4', 'vertical');
         $dompdf->render();
 
-        if($type == '1'){
-        $dompdf->stream("employee-$employeeId.pdf", ["Attachment" => true]); // เปลี่ยนชื่อไฟล์ได้ตามต้องการ
-        }else{
-        $dompdf->stream("1234", array("Attachment" => false));
+        if ($type == '1') {
+            $dompdf->stream("employee-$employeeId.pdf", ["Attachment" => true]); // เปลี่ยนชื่อไฟล์ได้ตามต้องการ
+        } else {
+            $dompdf->stream("1234", array("Attachment" => false));
         }
 
         exit(0);

@@ -35,12 +35,13 @@ function filterEmployee() {
     var departmentId = $("#department-team").val();
     var teamId = $("#team-department").val();
     var status = $("#status").val();
+    var pageType = $("#page-type").val();
     var url = $url + 'setting/employee/filter-employee';
     $.ajax({
         type: "POST",
         dataType: 'json',
         url: url,
-        data: { companyId: companyId, branchId: branchId, departmentId: departmentId, teamId: teamId, status: status },
+        data: { companyId: companyId, branchId: branchId, departmentId: departmentId, teamId: teamId, status: status,pageType:pageType },
         success: function (data) {
 
 

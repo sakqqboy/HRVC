@@ -66,7 +66,7 @@ class EmployeeController extends Controller
 			->JOIN("LEFT JOIN", "status s", "s.statusId=employee.status")
 			->JOIN("LEFT JOIN", "employee_condition condition", "condition.employeeConditionId=employee.employeeConditionId")
 			->where([
-				"employee.status" => [1, 2, 3, 4, 5, 6, 7]
+				"employee.status" => [1, 2, 3, 4, 5, 6, 7, 8, 9]
 			])
 			->andFilterWhere([
 				"employee.companyId" => $companyId,
@@ -89,7 +89,7 @@ class EmployeeController extends Controller
 					"departmentId" =>  $em["departmentId"],
 					"teamId" => $em["teamId"],
 					"teamName" => $em["teamName"],
-					"status" => $em["statusName"] == null ? 'not set' : $em["statusName"],
+					"status" => $em["status"] == null ? 'not set' : $em["statusName"],
 					"isNew" => $isNew,
 					"email" => $em["companyEmail"],
 					"employeeNumber" => $em["employeeNumber"],
@@ -106,8 +106,9 @@ class EmployeeController extends Controller
 		//throw new Exception(print_r($data, true));
 		return json_encode($data);
 	}
-	public function actionEmployeeFilter($companyId, $branchId, $departmentId, $teamId, $status)
+	public function actionEmployeeFilter($companyId, $branchId, $departmentId, $teamId, $status, $currentPage, $limit)
 	{
+		$startAt = (($currentPage - 1) * $limit);
 		$employee = Employee::find()
 			->select('employee.*,c.companyName,co.countryName,co.flag,t.titleName,c.city,b.branchName,
 			condition.employeeConditionName,s.statusName,na.nationalityName,d.departmentName,d.departmentId,te.teamId,te.teamName,c.picture as cPicture')
@@ -120,7 +121,7 @@ class EmployeeController extends Controller
 			->JOIN("LEFT JOIN", "nationality na", "na.numCode=employee.nationalityId")
 			->JOIN("LEFT JOIN", "status s", "s.statusId=employee.status")
 			->JOIN("LEFT JOIN", "employee_condition condition", "condition.employeeConditionId=employee.employeeConditionId")
-			->where(["employee.status" => [1, 2, 3, 4, 5, 6, 7]])
+			->where(["employee.status" => [1, 2, 3, 4, 5, 6, 7, 8, 9]])
 			->andFilterWhere([
 				"employee.companyId" => $companyId,
 				"employee.branchId" => $branchId,
@@ -130,7 +131,8 @@ class EmployeeController extends Controller
 			])
 			->orderBy('employee.employeeFirstname ASC')
 			->asArray()
-			->limit(15)
+			->offset($startAt)
+			->limit($limit)
 			->all();
 		$data = [];
 		if (isset($employee) && count($employee) > 0) {

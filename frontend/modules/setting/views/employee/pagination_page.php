@@ -11,13 +11,13 @@
     } else {
         $url = Yii::$app->homeUrl . 'setting/employee/employee-list';
     }
+
     if ($totalPage > 1) {
     ?>
         <a href="<?= $url ?>/page<?= $currentPage - 1 ?>"
             class="btn-previous<?= ($currentPage == 1 ? '-disable' : '') ?> text-center align-content-center"
             onclick="<?= $currentPage == 1 ? 'return false;' : '' ?>" style="text-decoration: none;<?= $currentPage == 1 ? 'pointer-events:none;' : '' ?>">
-            <img src="<?= Yii::$app->homeUrl ?>image/btn-previous<?= ($currentPage == 1 ? '-disable' : '') ?>.svg"
-                style="width: 4.958px; height: 8.5px;">
+            <img src="<?= Yii::$app->homeUrl ?>image/btn-previous<?= ($currentPage == 1 ? '-disable' : '') ?>.svg" style="width: 4.958px; height: 8.5px;">
             <span style="margin-left: 5px;"><?= Yii::t('app', 'Previous') ?></span>
         </a>
         <?php

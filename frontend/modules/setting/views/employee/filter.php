@@ -1,6 +1,5 @@
 <div class="d-flex justify-content-end align-items-center  gap-2">
 	<select class="select-pim form-select font-size-12" id="company-team" onchange="javascript:branchCompany()">
-		<option value="">Company</option>
 		<?php
 
 		use common\models\ModelMaster;
@@ -99,7 +98,7 @@
 
 	</select>
 	<span class="justify-content-center d-flex align-items-center employee-filter-btn" style="cursor: pointer;" onclick="javascrip:filterEmployee()">
-		<img src="/HRVC/frontend/web/images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-1">
+		<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-1">
 		Filter
 	</span>
 

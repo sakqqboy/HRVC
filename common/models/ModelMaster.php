@@ -742,18 +742,16 @@ class ModelMaster extends \yii\db\ActiveRecord
                 $pagination[] = '...';
             }
         }
-
-
-
-        // Add ellipsis if gap exists between end and last page
-
-        // if ($end < $totalPages - 1 && $flag == 0) {
-        //     $pagination[] = '...';
-        // }
-
-        // Always show last page if more than one page
         if ($totalPages > 1) {
             $pagination[] = $totalPages;
+        }
+        if ($totalPages <= 4) {
+            $pagination = [];
+            $start = 1;
+            $end = $totalPages;
+            for ($i = $start; $i <= $end; $i++) {
+                $pagination[] = $i;
+            }
         }
 
         return $pagination;

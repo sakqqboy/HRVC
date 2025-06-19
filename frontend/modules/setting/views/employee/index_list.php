@@ -96,7 +96,29 @@ $statusTexArr = Status::allStatusText();
 				</table>
 
 			</div>
-			<?= $this->render('pagination_page', ['totalEmployee' => $totalEmployee, "currentPage" => $currentPage, 'totalPage' => $totalPage, "pagination" => $pagination, "pageType" => "list"]); ?>
+			<?php if (Yii::$app->controller->action->id == 'employee-result') {
+				echo $this->render('pagination_page_search', [
+					'totalEmployee' => $totalEmployee,
+					"currentPage" => $currentPage,
+					'totalPage' => $totalPage,
+					"pagination" => $pagination,
+					"pageType" => "list",
+					"companyId" => $companyId,
+					"branchId" => $branchId,
+					"departmentId" => $departmentId,
+					"teamId" => $teamId,
+					"currentPage" => $currentPage,
+					"status" => $status
+				]);
+			} else {
+				echo $this->render('pagination_page', [
+					'totalEmployee' => $totalEmployee,
+					"currentPage" => $currentPage,
+					'totalPage' => $totalPage,
+					"pagination" => $pagination,
+					"pageType" => "list",
+				]);
+			} ?>
 			<input type="hidden" id="show-action" value="">
 		</div>
 	</div>

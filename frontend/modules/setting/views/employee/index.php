@@ -225,8 +225,29 @@ $statusTexArr = Status::allStatusText();
 
 					<?php
 					endforeach;
-					echo $this->render('pagination_page', ['totalEmployee' => $totalEmployee, "currentPage" => $currentPage, 'totalPage' => $totalPage, "pagination" => $pagination, "pageType" => "grid"]);
-
+					if (Yii::$app->controller->action->id == 'employee-result') {
+						echo $this->render('pagination_page_search', [
+							'totalEmployee' => $totalEmployee,
+							"currentPage" => $currentPage,
+							'totalPage' => $totalPage,
+							"pagination" => $pagination,
+							"pageType" => "grid",
+							"companyId" => $companyId,
+							"branchId" => $branchId,
+							"departmentId" => $departmentId,
+							"teamId" => $teamId,
+							"currentPage" => $currentPage,
+							"status" => $status
+						]);
+					} else {
+						echo $this->render('pagination_page', [
+							'totalEmployee' => $totalEmployee,
+							"currentPage" => $currentPage,
+							'totalPage' => $totalPage,
+							"pagination" => $pagination,
+							"pageType" => "grid",
+						]);
+					}
 					?>
 				<?php
 				} else { ?>
