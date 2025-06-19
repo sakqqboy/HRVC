@@ -55,7 +55,8 @@ $this->title = 'view';
         </div>
         <div class="col-3" style="text-align: right;">
             <div class="d-flex align-items-center justify-content-end gap-2">
-                <a class="d-flex align-items-center action-employee-btn justify-content-center">
+                <a class="d-flex align-items-center action-employee-btn justify-content-center"
+                    onclick="javascript:copyToClipboard(window.location.href)">
                     <img src="<?= Yii::$app->homeUrl ?>image/share-blue.svg" class="me-2"
                         style="width: 18px;height:18px;">
                     Share
