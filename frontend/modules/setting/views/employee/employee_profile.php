@@ -55,18 +55,19 @@ $this->title = 'view';
         </div>
         <div class="col-3" style="text-align: right;">
             <div class="d-flex align-items-center justify-content-end gap-2">
-                <a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
+                <a class="d-flex align-items-center action-employee-btn justify-content-center">
                     <img src="<?= Yii::$app->homeUrl ?>image/share-blue.svg" class="me-2"
                         style="width: 18px;height:18px;">
                     Share
                 </a>
-                <a href="#" onclick="javascript:showAction()"
+                <a href="<?= Yii::$app->homeUrl ?>setting/employee/export-employee/<?= ModelMaster::encodeParams(['employeeId' => $employeeId, 'export' => 1]) ?>"
                     class="d-flex align-items-center action-employee-btn justify-content-center" id="normal-action">
                     <img src="<?= Yii::$app->homeUrl ?>image/download-blue.svg" class="me-2"
                         style="width: 18px;height:18px;">
                     Download
                 </a>
-                <a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
+                <a href="<?= Yii::$app->homeUrl ?>setting/employee/export-employee/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>"
+                    class="d-flex align-items-center action-employee-btn justify-content-center">
                     <img src="<?= Yii::$app->homeUrl ?>image/print-blue.svg" class="me-2"
                         style="width: 18px;height:18px;">
                     Print Profile

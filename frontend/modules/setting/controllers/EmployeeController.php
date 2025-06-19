@@ -1580,6 +1580,8 @@ class EmployeeController extends Controller
     {
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
+        $type = $param["export"] ?? '0';
+
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -1612,7 +1614,13 @@ class EmployeeController extends Controller
         $dompdf->loadHtml($content);
         $dompdf->setPaper('A4', 'vertical');
         $dompdf->render();
+
+        if($type == '1'){
+        $dompdf->stream("employee-$employeeId.pdf", ["Attachment" => true]); // เปลี่ยนชื่อไฟล์ได้ตามต้องการ
+        }else{
         $dompdf->stream("1234", array("Attachment" => false));
+        }
+
         exit(0);
     }
     public function actionAddUser()
