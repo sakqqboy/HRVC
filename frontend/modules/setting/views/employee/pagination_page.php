@@ -5,9 +5,15 @@
     use yii\web\View;
 
     //    $totalPage = 5;
+
+    if ($pageType == "grid") {
+        $url = Yii::$app->homeUrl . 'setting/employee/index';
+    } else {
+        $url = Yii::$app->homeUrl . 'setting/employee/employee-list';
+    }
     if ($totalPage > 1) {
     ?>
-        <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/page<?= $currentPage - 1 ?>"
+        <a href="<?= $url ?>/page<?= $currentPage - 1 ?>"
             class="btn-previous<?= ($currentPage == 1 ? '-disable' : '') ?> text-center align-content-center"
             onclick="<?= $currentPage == 1 ? 'return false;' : '' ?>" style="text-decoration: none;<?= $currentPage == 1 ? 'pointer-events:none;' : '' ?>">
             <img src="<?= Yii::$app->homeUrl ?>image/btn-previous<?= ($currentPage == 1 ? '-disable' : '') ?>.svg"
@@ -31,7 +37,7 @@
                 </div>
             <?php
             } else { ?>
-                <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/page<?= $page ?>"
+                <a href="<?= $url ?>/page<?= $page ?>"
                     class="<?= ($currentPage == $page ? 'btn btn-bg-blue-xs' : '') ?> font-size-12 pt-0 pb-0 align-content-center"
                     style=" <?= ($currentPage == $page ? 'border: none; border-radius: 4px;width:26px;height:26px;' : 'text-decoration: none;') ?>">
                     <span style=" <?= ($currentPage == $page ? 'color: white; font-weight: 700;' : 'color: black; font-weight: 400;') ?>"><?= $page ?></span>
@@ -41,7 +47,7 @@
         }
 
         ?>
-        <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/page<?= $currentPage + 1 ?>"
+        <a href="<?= $url ?>/page<?= $currentPage + 1 ?>"
             class="btn-previous<?= ($currentPage == $totalPage ? '-disable' : '') ?>  text-center align-content-center"
             <?= ($currentPage == $totalPage ? 'disabled' : '') ?>
             onclick="<?= $currentPage == $totalPage ? 'return false;' : '' ?>"
@@ -54,7 +60,7 @@
 
     <?php } ?>
     <input type="hidden" id="totalPages" value="<?= $totalPage ?>">
-    <input type="hidden" id="targetPage" value="<?= Yii::$app->homeUrl ?>setting/employee/index/page">
+    <input type="hidden" id="targetPage" value="<?= $url ?>/page">
 </div>
 
 <script>

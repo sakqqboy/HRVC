@@ -108,7 +108,7 @@
 			<a href="#" class="btn btn-primary font-size-12 pim-change-modes">
 				<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg" style="cursor: pointer; margin-top:2px;">
 			</a>
-			<a href="<?= Yii::$app->homeUrl . 'setting/employee/employee-list' ?>"
+			<a href="<?= Yii::$app->homeUrl ?>setting/employee/employee-list/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
 				class="btn btn-outline-primary font-size-12 pim-change-modes" style="border-color: #CBD5E1 !important;">
 				<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg" style="cursor: pointer; margin-top:2px;">
 			</a>

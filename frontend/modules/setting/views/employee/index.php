@@ -225,7 +225,7 @@ $statusTexArr = Status::allStatusText();
 
 					<?php
 					endforeach;
-					echo $this->render('pagination_page', ['totalEmployee' => $totalEmployee, "currentPage" => $currentPage, 'totalPage' => $totalPage, "pagination" => $pagination]);
+					echo $this->render('pagination_page', ['totalEmployee' => $totalEmployee, "currentPage" => $currentPage, 'totalPage' => $totalPage, "pagination" => $pagination, "pageType" => "grid"]);
 
 					?>
 				<?php

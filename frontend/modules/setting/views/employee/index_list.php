@@ -44,9 +44,8 @@ $statusTexArr = Status::allStatusText();
 					]) ?>
 				</div>
 			</div>
-			<div class="row d-flex">
+			<div class="row d-flex mb-20">
 				<table class="employee-table">
-
 					<tr class="employee-header-table">
 						<th class="boder-table-radius-left"><span class="ms-2"><?= Yii::t('app', "Employee's Name") ?></span></th>
 						<th><?= Yii::t('app', "Designature") ?></th>
@@ -95,7 +94,9 @@ $statusTexArr = Status::allStatusText();
 					}
 					?>
 				</table>
+
 			</div>
+			<?= $this->render('pagination_page', ['totalEmployee' => $totalEmployee, "currentPage" => $currentPage, 'totalPage' => $totalPage, "pagination" => $pagination, "pageType" => "list"]); ?>
 			<input type="hidden" id="show-action" value="">
 		</div>
 	</div>
@@ -763,7 +764,12 @@ $this->registerJs('
 			}
 		});
 	}
-	
+	function modalImportEmployee(){
+	$("#import-employee-modal").modal("show");
+	}
+	function openDialog(){
+	$("#employee-file").click();
+	}
 		
 		
 ', View::POS_END);
