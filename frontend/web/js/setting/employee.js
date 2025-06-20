@@ -36,7 +36,8 @@ function filterEmployee() {
     var teamId = $("#team-department").val();
     var status = $("#status").val();
     var pageType = $("#page-type").val();
-    var url = $url + 'setting/employee/filter-employee';
+    var urlRedirect = $("#url-redirect").val();
+    var url = $url + 'setting/temp/' + urlRedirect;
     $.ajax({
         type: "POST",
         dataType: 'json',
