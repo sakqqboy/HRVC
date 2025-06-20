@@ -104,9 +104,46 @@ $this->title = 'view';
                     <?php
                     }
                     ?>
-                    <span class="condition-name badge position-absolute bottom-0 start-50 translate-middle-x">
+                    <?php
+						$statusClass = "status-badge-full-time";
+						if ($employee["status"] == "Full-Time") {
+							$statusClass = "status-badge-full-time";
+						}
+						if ($employee["status"] == "Probationary") {
+							$statusClass = "status-badge-probationary";
+						}
+						if ($employee["status"] == "Part-Time") {
+							$statusClass = "status-badge-part-Time";
+						}
+						if ($employee["status"] == "Intern") {
+							$statusClass = "status-badge-intern";
+						}
+						if ($employee["status"] == "Temporary") {
+							$statusClass = "status-badge-temporarye";
+						}
+						if ($employee["status"] == "Freelance") {
+							$statusClass = "status-badge-freelance";
+						}
+						if ($employee["status"] == "Suspended") {
+							$statusClass = "status-badge-sspended";
+						}
+						if ($employee["status"] == "Resigned") {
+							$statusClass = "status-badge-resigned";
+						}
+						if ($employee["status"] == "Lay off") {
+							$statusClass = "status-badge-layoff";
+						}
+						if ($employee["status"] == "not set") {
+							$statusClass = "status-badge-notset";
+						}
+						//throw new exception(print_r($employees, true));
+				?>
+                    <span class="<?=$statusClass?>">
                         <?= $employee['status'] ?>
                     </span>
+                    <!-- <span class="condition-name badge position-absolute bottom-0 start-50 translate-middle-x">
+                        <?= $employee['status'] ?>
+                    </span> -->
                 </div>
 
                 <div class="row text-center">
