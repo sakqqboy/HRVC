@@ -96,6 +96,8 @@ $LanguageId = '';
                                 style="color: var(--Helper-Text, #8A8A8A);">
                                 <?= Yii::t('app', 'Select') ?>
                             </option>
+
+                            <!-- ปรับเอามาจากสเตตัส ปรับคอนโทรเลอร์ตอนเชฟด้วย และ ทำรอโหลดน้า ปรับนาวิเกชั้นเน็ก -->
                             <?php
                             if (!empty($conditions)) {
                                 $selectedId = $employee['employeeConditionId'] ?? null;

@@ -5,11 +5,6 @@ use common\models\ModelMaster;
 $this->title = 'company';
 $page = "list"
 ?>
-<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script> -->
 
 <div class="contrainer-body mt-10">
 
@@ -39,12 +34,22 @@ $page = "list"
         </div>
         <div class="col-1 pr-0 text-end">
             <div class="btn-group" role="group">
-                <a href="<?= Yii::$app->homeUrl . 'setting/company/company-grid' ?>"
+                <!-- <a href="<?= Yii::$app->homeUrl . 'setting/company/company-grid' ?>"
                     class="btn btn-outline-primary font-size-12 pim-change-modes">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg" style="cursor: pointer;">
                 </a>
                 <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg" style="cursor: pointer;">
+                </a> -->
+                <a href="<?= Yii::$app->homeUrl . 'setting/company/company-grid' ?>"
+                    class="btn btn-outline-primary font-size-12 pim-change-modes"
+                    style="border-color: #CBD5E1 !important;">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg"
+                        style="cursor: pointer; margin-top:2px;">
+                </a>
+                <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg"
+                        style="cursor: pointer; margin-top:2px;">
                 </a>
             </div>
         </div>
@@ -214,29 +219,47 @@ $page = "list"
                             </span>
                             <div class="menu-dot ">
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
-                                    <li class="pl-4 pr-4">
-                                        <a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                    <li class="pl-9 pr-9">
+                                        <!-- <a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
                                             class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -1px; ">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
                                                 alt="History" class="pim-icon mr-10" style="margin-top: -2px;">
                                             <?= Yii::t('app', 'edit') ?>
+                                        </a> -->
+                                        <a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                            class="btn btn-bg-white-xs">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                                alt="History" class="pim-icon" style="margin-top: -1px;">
                                         </a>
                                     </li>
                                     <?php if($company['totalBranch'] == 0) { ?>
-                                    <li class="pl-4 pr-4">
-                                        <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                    <li class="pl-9 pr-9 mt-9 mb-9">
+                                        <!-- <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
                                             class="dropdown-itemNEWS pl-4  pr-20 mb-5" style="margin-top: -1px; ">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
                                                 alt="History" class="pim-icon mr-10" style="margin-top: -2px;">
                                             <?= Yii::t('app', 'Create') ?>
+                                        </a> -->
+                                        <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                            class="btn btn-bg-white-xs">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
+                                                alt="History" class="pim-icon" style="margin-top: -1px;">
                                         </a>
                                     </li>
-                                    <li class="pl-4 pr-4">
-                                        <a class="dropdown-itemNEW pl-4 pr-25"
+                                    <li class="pl-9 pr-9">
+                                        <!-- <a class="dropdown-itemNEW pl-4 pr-25"
                                             href="javascript:deleteCompany(<?= $company['companyId'] ?>)">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
                                                 alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
                                             <?= Yii::t('app', 'Delete') ?>
+                                        </a> -->
+                                        <a class="btn btn-bg-red-xs"
+                                            href="javascript:deleteCompany(<?= $company['companyId'] ?>)"
+                                            style="margin-top: 3px;"
+                                            onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                                            onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                                alt="History" class="pim-icon" style="margin-top: -3px;">
                                         </a>
                                     </li>
                                     <?php } ?>

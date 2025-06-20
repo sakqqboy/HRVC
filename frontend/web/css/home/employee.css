@@ -558,7 +558,15 @@
     color: #ffff;
 }
 
-
+.employee-filter-btn {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 3px 10px 3px 10px;
+    background-color: #2580D3;
+    color: #FFFFFF;
+    border-radius: 71px;
+    height: 26px;
+}
 
 /* .input-group-text.active {
     background-color: rgb(215, 235, 255) !important;
