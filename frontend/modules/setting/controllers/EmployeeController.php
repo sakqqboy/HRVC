@@ -131,6 +131,7 @@ class EmployeeController extends Controller
         $companies = json_decode($companies, true);
         curl_close($api);
         $totalEmployee = Employee::totalEmployee($companyId);
+        $totalDraft = Employee::totalDraft($companyId);
         $totalPage = ceil($totalEmployee / 15);
         $pagination = ModelMaster::getPagination($currentPage, $totalPage);
         return $this->render('index', [
@@ -140,7 +141,8 @@ class EmployeeController extends Controller
             "totalEmployee" => $totalEmployee,
             "totalPage" => $totalPage,
             "currentPage" => $currentPage,
-            "pagination" => $pagination
+            "pagination" => $pagination,
+            "totalDraft" => $totalDraft
         ]);
     }
     public function actionEmployeeList($hash)
@@ -169,6 +171,7 @@ class EmployeeController extends Controller
         $companies = json_decode($companies, true);
         curl_close($api);
         $totalEmployee = Employee::totalEmployee($companyId);
+        $totalDraft = Employee::totalDraft($companyId);
         $totalPage = ceil($totalEmployee / 15);
         $pagination = ModelMaster::getPagination($currentPage, $totalPage);
         return $this->render('index_list', [
@@ -177,7 +180,8 @@ class EmployeeController extends Controller
             "totalEmployee" => $totalEmployee,
             "totalPage" => $totalPage,
             "currentPage" => $currentPage,
-            "pagination" => $pagination
+            "pagination" => $pagination,
+            "totalDraft" => $totalDraft
         ]);
     }
     public function actionCreate()
@@ -726,8 +730,10 @@ class EmployeeController extends Controller
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
         curl_close($api);
-        $totalEmployee = Employee::totalEmployee($companyId);
-        $totalPage = ceil($totalEmployee / 15);
+
+        $totalEmployee = Employee::totalDraft($companyId); //total draft
+        //$totalPage = ceil($totalEmployee / 15);
+        $totalPage = 9;
         $pagination = ModelMaster::getPagination($currentPage, $totalPage);
         return $this->render('draft', [
             "employees" => $employees,
@@ -735,7 +741,7 @@ class EmployeeController extends Controller
             "totalEmployee" => $totalEmployee,
             "totalPage" => $totalPage,
             "currentPage" => $currentPage,
-            "pagination" => $pagination
+            "pagination" => $pagination,
         ]);
     }
     public function actionSaveUpdateEmployee()
@@ -1007,6 +1013,7 @@ class EmployeeController extends Controller
             "teamId" => $teamId,
             "status" => $status,
             "pageType" => $pageType,
+
         ]));
     }
     public function actionEmployeeResult($hash)
@@ -1071,10 +1078,23 @@ class EmployeeController extends Controller
             $teams = Team::find()->select('teamId,teamName')
                 ->where(["departmentId" => $departmentId, "status" => 1])->asArray()->orderBy('teamName')->all();
         }
+        curl_close($api);
+
         $totalEmployee = Employee::totalEmployeeWithFilter($companyId, $branchId, $departmentId, $teamId, $status);
+        $totalDraft = Employee::totalDraft($companyId);
         $totalPage = ceil($totalEmployee / 15);
         $pagination = ModelMaster::getPagination($currentPage, $totalPage);
-        curl_close($api);
+        $filter = [
+            "companyId" => $companyId,
+            "branchId" => $branchId,
+            "teamId" => $teamId,
+            "departmentId" => $departmentId,
+            "status" => $status == null ? 0 : $status,
+            "branches" => $branches,
+            "departments" => $departments,
+            "teams" => $teams,
+        ];
+
         return $this->render($file, [
             "employees" => $employees,
             "companies" => $companies,
@@ -1091,6 +1111,8 @@ class EmployeeController extends Controller
             "totalPage" => $totalPage,
             "currentPage" => $currentPage,
             "pagination" => $pagination,
+            "filter" => $filter,
+            "totalDraft" => $totalDraft
         ]);
     }
     public function actionEncodeFilter()
@@ -1102,7 +1124,10 @@ class EmployeeController extends Controller
         $status = $_POST["status"];
         $pageType = $_POST["pageType"];
         $currentPage = $_POST["currentPage"];
-        $res["targetPage"] = Yii::$app->homeUrl . 'setting/employee/employee-result/' . ModelMaster::encodeParams([
+        $module = $_POST["module"];
+        $controller = $_POST["controller"];
+        $action = $_POST["action"];
+        $res["newUrl"] = Yii::$app->homeUrl . $module . '/' . $controller . '/' . $action . '/' . ModelMaster::encodeParams([
             "companyId" => $companyId,
             "branchId" => $branchId,
             "departmentId" => $departmentId,

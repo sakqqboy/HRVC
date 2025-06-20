@@ -32,7 +32,8 @@ $statusTexArr = Status::allStatusText();
 	<div class="col-12 pr-15 pl-15">
 		<?= $this->render('header', [
 			"totalEmployee" => $totalEmployee,
-			"actualShow" => count($employees)
+			"actualShow" => count($employees),
+			"totalDraft" => $totalDraft
 		]) ?>
 
 	</div>
@@ -138,7 +139,7 @@ $statusTexArr = Status::allStatusText();
 											<a href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>" style="text-decoration: none;">
 												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" class="pim-icon">
 											</a>
-											<a href="#" onclick="javascript:showAction(<?= $employeeId ?>)" style="text-decoration: none;" id="show-action-box-<?= $employeeId ?>">
+											<a href="javascript:void(0);" onclick="javascript:showAction(<?= $employeeId ?>)" style="text-decoration: none;" id="show-action-box-<?= $employeeId ?>">
 												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/threedot.svg" class="pim-icon">
 											</a>
 										</div>
@@ -237,29 +238,14 @@ $statusTexArr = Status::allStatusText();
 
 					<?php
 					endforeach;
-					if (Yii::$app->controller->action->id == 'employee-result') {
-						echo $this->render('pagination_page_search', [
-							'totalEmployee' => $totalEmployee,
-							"currentPage" => $currentPage,
-							'totalPage' => $totalPage,
-							"pagination" => $pagination,
-							"pageType" => "grid",
-							"companyId" => $companyId,
-							"branchId" => $branchId,
-							"departmentId" => $departmentId,
-							"teamId" => $teamId,
-							"currentPage" => $currentPage,
-							"status" => $status
-						]);
-					} else {
-						echo $this->render('pagination_page', [
-							'totalEmployee' => $totalEmployee,
-							"currentPage" => $currentPage,
-							'totalPage' => $totalPage,
-							"pagination" => $pagination,
-							"pageType" => "grid",
-						]);
-					}
+					echo $this->render('pagination_page', [
+						'totalEmployee' => $totalEmployee,
+						"currentPage" => $currentPage,
+						'totalPage' => $totalPage,
+						"pagination" => $pagination,
+						"pageType" => "grid",
+						"filter" => isset($filter) ? $filter : []
+					]);
 					?>
 				<?php
 				} else { ?>
@@ -568,7 +554,7 @@ $showModal = $isFromImport; // หรือ 0
 
 	.checkbox-employee {
 		appearance: none;
-		width: 24px;
+		min-width: 24px;
 		height: 24px;
 		margin-top: 5px;
 		border: 1px solid #BBCDDE;
@@ -680,9 +666,9 @@ $showModal = $isFromImport; // หรือ 0
 		padding-right: 9px;
 		font-size: 14px;
 		font-weight: 600;
-		border-radius: 3px;
+		border: 0.5px #666666 solid;
 		text-decoration: none;
-
+		cursor: default;
 	}
 
 	.action-menu {

@@ -42,7 +42,7 @@ class DefaultController extends Controller
 			$model->indonesian = $_POST["indonesian"];
 			$model->status = 1;
 			if ($model->save(false)) {
-				return $this->redirect('index?english=' . $_POST["english"]);
+				return $this->redirect(Yii::$app->homeUrl . 'language/default/index?english=' . $_POST["english"]);
 			}
 		}
 		return $this->render('form');

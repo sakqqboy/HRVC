@@ -4,7 +4,7 @@ use common\models\ModelMaster;
 use frontend\models\hrvc\Status;
 use yii\web\View;
 
-$this->title = 'Employee';
+$this->title = Yii::t('app', 'Draft Employees');
 ?>
 <?php
 $statusTexArr = Status::allStatusText();
@@ -14,7 +14,7 @@ $statusTexArr = Status::allStatusText();
 		<?= $this->render('header', [
 			"totalEmployee" => $totalEmployee,
 			"actualShow" => count($employees),
-			"totalDraft" => $totalDraft
+			"totalDraft" => 0
 		]) ?>
 	</div>
 	<input type="hidden" id="action" value="0">
@@ -24,7 +24,7 @@ $statusTexArr = Status::allStatusText();
 			<div class="row mb-40">
 				<div class="col-lg-5 col-12 text-start employee-profiles  pb-0">
 					<div class="d-flex justify-content-start align-items-center  gap-2">
-						<?= Yii::t('app', 'Employee Profiles') ?>
+						<?= Yii::t('app', 'All Draft Employees') ?>
 					</div>
 				</div>
 				<div class="col-lg-7 col-12 text-end pb-0 pl-0">
@@ -83,7 +83,6 @@ $statusTexArr = Status::allStatusText();
 										<a href="javascript:void(0);" onclick="javascript:showAction(<?= $employeeId ?>)" style="text-decoration: none;" id="show-action-box-<?= $employeeId ?>" class="ms-1">
 											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/threedot.svg" class="pim-icon">
 										</a>
-
 									</div>
 									<div class="employee-action  border end-0" id="employee-action-<?= $employeeId ?>" style="margin-top:-20px;margin-right: -30px;">
 										<a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>"
@@ -108,16 +107,29 @@ $statusTexArr = Status::allStatusText();
 				</table>
 
 			</div>
-			<?php
-			echo $this->render('pagination_page', [
-				'totalEmployee' => $totalEmployee,
-				"currentPage" => $currentPage,
-				'totalPage' => $totalPage,
-				"pagination" => $pagination,
-				"pageType" => "grid",
-				"filter" => isset($filter) ? $filter : []
-			]);
-			?>
+			<?php if (Yii::$app->controller->action->id == 'employee-result') {
+				echo $this->render('pagination_page_search', [
+					'totalEmployee' => $totalEmployee,
+					"currentPage" => $currentPage,
+					'totalPage' => $totalPage,
+					"pagination" => $pagination,
+					"pageType" => "list",
+					"companyId" => $companyId,
+					"branchId" => $branchId,
+					"departmentId" => $departmentId,
+					"teamId" => $teamId,
+					"currentPage" => $currentPage,
+					"status" => $status
+				]);
+			} else {
+				echo $this->render('pagination_page', [
+					'totalEmployee' => $totalEmployee,
+					"currentPage" => $currentPage,
+					'totalPage' => $totalPage,
+					"pagination" => $pagination,
+					"pageType" => "list",
+				]);
+			} ?>
 			<input type="hidden" id="show-action" value="">
 		</div>
 	</div>
@@ -138,6 +150,7 @@ $statusTexArr = Status::allStatusText();
 		display: flex;
 		align-items: center;
 	}
+
 
 	.border-right-radius-table {
 		border-right: 1px solid var(--Color-Tokens-Border-Primary, #E4E4E4);

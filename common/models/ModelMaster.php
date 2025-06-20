@@ -756,4 +756,16 @@ class ModelMaster extends \yii\db\ActiveRecord
 
         return $pagination;
     }
+    public static function urlArr()
+    {
+        $module = Yii::$app->controller->module->id;
+        $controller = Yii::$app->controller->id;
+        $action = Yii::$app->controller->action->id;
+        $arr = [
+            "module" => $module,
+            "controller" => $controller,
+            "action" => $action,
+        ];
+        return $arr;
+    }
 }

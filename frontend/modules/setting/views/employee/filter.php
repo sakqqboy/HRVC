@@ -102,7 +102,7 @@
 		Filter
 	</span>
 
-	<div class="btn-group" role="group">
+	<div class="btn-group <?= Yii::$app->controller->action->id == 'draft' ? 'd-none' : '' ?>" role="group">
 		<?php if ($page == 'grid') { ?>
 			<a href="#" class="btn btn-primary font-size-12 pim-change-modes">
 				<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg" style="cursor: pointer; margin-top:2px;">

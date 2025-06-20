@@ -141,6 +141,14 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
             ->count();
         return $count;
     }
+    public static function totalDraft($companyId)
+    {
+        $count = Employee::find()
+            ->where(["status" => 100])
+            ->andFilterWhere(["companyId" => $companyId])
+            ->count();
+        return $count;
+    }
     public static function totalEmployeeWithFilter($companyId, $branchId, $departmentId, $teamId, $employeeConditionId)
     {
         $employee = Employee::find()

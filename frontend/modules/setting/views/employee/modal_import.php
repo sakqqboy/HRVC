@@ -38,8 +38,8 @@ use yii\bootstrap5\ActiveForm;
 						<div class="d-flex justify-content-start">
 							<div class="step-number justify-content-center me-3">1</div>
 							<div style="margin-top: -5px;">
-								<span class="font-size-16 font-weight-600" style="display:block;">Step 1</span>
-								<span class="font-size-14 font-weight-400" style="display:block;color:#6B7280;">Download the Import excel file</span>
+								<span class="font-size-16 font-weight-600" style="display:block;"><?= Yii::t('app', 'Step') ?> 1</span>
+								<span class="font-size-14 font-weight-400" style="display:block;color:#6B7280;"><?= Yii::t('app', 'Download the Import excel file') ?></span>
 							</div>
 						</div>
 
@@ -59,7 +59,7 @@ use yii\bootstrap5\ActiveForm;
 										<div class="col-5 font-size-14  text-end pr-10" style="align-content: center;">
 											<a href="<?= Yii::$app->homeUrl ?>setting/employee/export" class="download-btn" style="text-decoration: none;">
 												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/download-white.svg" class="me-1" style="width: 18px;height:18px;">
-												Download Format
+												<?= Yii::t('app', 'Download Format') ?>
 											</a>
 										</div>
 									</div>
@@ -70,7 +70,7 @@ use yii\bootstrap5\ActiveForm;
 							<div class="step-number justify-content-center me-3">2</div>
 							<div style="margin-top: -5px;">
 								<span class="font-size-16 font-weight-600" style="display:block;">Step 2</span>
-								<span class="font-size-14 font-weight-400" style="display:block;color:#6B7280;">Upload the excel file</span>
+								<span class="font-size-14 font-weight-400" style="display:block;color:#6B7280;"><?= Yii::t('app', 'Upload the excel file') ?></span>
 							</div>
 						</div>
 					</div>
@@ -108,9 +108,9 @@ use yii\bootstrap5\ActiveForm;
 						<div class="d-flex justify-content-center ">
 							<img src="<?= Yii::$app->homeUrl . 'images/icons/Settings/drop.svg' ?>" alt="" class="me-3">
 							<div class="text-start align-content-center font-size-18 font-weight-500" style="line-height:22px;color:#000000;">
-								<span>Drop</span><br>
-								<span>Your Files</span><br>
-								<span>Here</span>
+								<span> <?= Yii::t('app', 'Drop') ?></span><br>
+								<span> <?= Yii::t('app', 'Your Files') ?></span><br>
+								<span> <?= Yii::t('app', 'Here') ?></span>
 							</div>
 						</div>
 					</div>
@@ -118,14 +118,14 @@ use yii\bootstrap5\ActiveForm;
 					<div class="col-6 text-center align-content-center">
 						<span class="select-file-btn font-size-16" onclick="javascript:openDialog()">
 							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/add-file-white.svg" class="me-1" style="width: 18px;height:18px;">
-							Select File
+							<?= Yii::t('app', 'Select File') ?>
 						</span>
 						<input type="file" id="employee-file" name="employeeFile">
 						<div class="upload-explain text-center mt-20">
-							Open the file you downloaded in Step 1 and enter your values in the
+							<?= Yii::t('app', 'Open the file you downloaded in Step 1 and enter your values in the
 							specified rows and columns without changing the format.
 							Save the file as an <b>XLS or XLSX.</b> Please upload the file you saved after
-							inputting the data to the second box to continue.
+							inputting the data to the second box to continue') ?>.
 						</div>
 					</div>
 					<div class="col-12 d-flex justify-content-center font-size-14 font-weight-400  mt-20" style="color:#1A1A24;">
@@ -161,7 +161,7 @@ use yii\bootstrap5\ActiveForm;
 	}
 
 	.btn-upload {
-		width: 100px;
+		min-width: 100px;
 		height: 40px;
 		border-width: 0.5px;
 		background: #2580D3;
@@ -170,10 +170,12 @@ use yii\bootstrap5\ActiveForm;
 		font-weight: 500;
 		display: inline-block;
 		border-radius: 3px;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 
 	.btn-outline-red {
-		width: 100px;
+		min-width: 100px;
 		height: 40px;
 		border-width: 0.5px;
 		border: 0.5px solid var(--Restriction-Red, #EC1D42);
@@ -183,6 +185,8 @@ use yii\bootstrap5\ActiveForm;
 		font-weight: 500;
 		display: inline-block;
 		border-radius: 3px;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 
 	.hint-box {

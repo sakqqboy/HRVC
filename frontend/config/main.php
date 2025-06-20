@@ -113,6 +113,7 @@ return [
                 'setting/employee/export-employee/<hash>' => 'setting/employee/export-employee',
                 'setting/employee/index/<hash>' => 'setting/employee/index',
                 'setting/employee/employee-list/<hash>' => 'setting/employee/employee-list',
+                'setting/employee/draft/<hash>' => 'setting/employee/draft',
                 'setting/employee/contact-detail/<hash>' => 'setting/employee/contact-detail',
                 'setting/employee/work-detail/<hash>' => 'setting/employee/work-detail',
                 'setting/employee/attachments/<hash>' => 'setting/employee/attachments',

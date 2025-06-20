@@ -1,25 +1,21 @@
 <div class="gap-4" style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center;">
+	<?= $module . '/' . $controller . '/' . $action ?>
 	<!-- ถ้ามีมากกว่า 7 แุวให้แสดง Page Numbers เริ่มจาก 1  -->
 	<?php
 
-	use common\models\ModelMaster;
 	use yii\web\View;
 
-	$url = Yii::$app->homeUrl . 'setting/employee/employee-result/';
+	//    $totalPage = 5;
 
-
+	if ($pageType == "grid") {
+		$url = Yii::$app->homeUrl . 'setting/employee/index';
+	} else {
+		$url = Yii::$app->homeUrl . 'setting/employee/employee-list';
+	}
+	$url = Yii::$app->homeUrl . $module . '/' . $controller . '/' . $action;
 	if ($totalPage > 1) {
-		$filterPrevious = ModelMaster::encodeParams([
-			"companyId" => $companyId,
-			"branchId" => $branchId,
-			"departmentId" => $departmentId,
-			"teamId" => $teamId,
-			"currentPage" => $currentPage - 1,
-			"status" => $status,
-			"pageType" => $pageType
-		]);
 	?>
-		<a href="<?= $url . $filterPrevious ?>"
+		<a href="<?= $url ?>/page<?= $currentPage - 1 ?>"
 			class="btn-previous<?= ($currentPage == 1 ? '-disable' : '') ?> text-center align-content-center"
 			onclick="<?= $currentPage == 1 ? 'return false;' : '' ?>" style="text-decoration: none;<?= $currentPage == 1 ? 'pointer-events:none;' : '' ?>">
 			<img src="<?= Yii::$app->homeUrl ?>image/btn-previous<?= ($currentPage == 1 ? '-disable' : '') ?>.svg" style="width: 4.958px; height: 8.5px;">
@@ -29,16 +25,7 @@
 
 		$i = 1;
 		$dot = 0;
-		foreach ($pagination as $page) :
-			$filter = ModelMaster::encodeParams([
-				"companyId" => $companyId,
-				"branchId" => $branchId,
-				"departmentId" => $departmentId,
-				"teamId" => $teamId,
-				"currentPage" => $page,
-				"status" => $status,
-				"pageType" => $pageType
-			]);
+		foreach ($pagination as $page) {
 			if ($page === '...') {
 		?>
 				<span id="page-jump-ellipsis" style="cursor: pointer; font-weight: 500;" onclick="javascrip:showInputPage()">...</span>
@@ -51,25 +38,17 @@
 				</div>
 			<?php
 			} else { ?>
-				<a href="<?= $url . $filter ?>"
+				<a href="<?= $url ?>/page<?= $page ?>"
 					class="<?= ($currentPage == $page ? 'btn btn-bg-blue-xs' : '') ?> font-size-12 pt-0 pb-0 align-content-center"
 					style=" <?= ($currentPage == $page ? 'border: none; border-radius: 4px;width:26px;height:26px;' : 'text-decoration: none;') ?>">
 					<span style=" <?= ($currentPage == $page ? 'color: white; font-weight: 700;' : 'color: black; font-weight: 400;') ?>"><?= $page ?></span>
 				</a>
 		<?php
 			}
-		endforeach;
-		$nextPage = ModelMaster::encodeParams([
-			"companyId" => $companyId,
-			"branchId" => $branchId,
-			"departmentId" => $departmentId,
-			"teamId" => $teamId,
-			"currentPage" => $currentPage + 1,
-			"status" => $status,
-			"pageType" => $pageType
-		]);
+		}
+
 		?>
-		<a href="<?= $url . $nextPage  ?>"
+		<a href="<?= $url ?>/page<?= $currentPage + 1 ?>"
 			class="btn-previous<?= ($currentPage == $totalPage ? '-disable' : '') ?>  text-center align-content-center"
 			<?= ($currentPage == $totalPage ? 'disabled' : '') ?>
 			onclick="<?= $currentPage == $totalPage ? 'return false;' : '' ?>"
@@ -82,13 +61,7 @@
 
 	<?php } ?>
 	<input type="hidden" id="totalPages" value="<?= $totalPage ?>">
-	<input type="hidden" id="companyId" value="<?= $companyId ?>">
-	<input type="hidden" id="branchId" value="<?= $branchId ?>">
-	<input type="hidden" id="departmentId" value="<?= $departmentId ?>">
-	<input type="hidden" id="teamId" value="<?= $teamId ?>">
-	<input type="hidden" id="status" value="<?= $status ?>">
-	<input type="hidden" id="currentPage" value="<?= $currentPage ?>">
-	<input type="hidden" id="pageType" value="<?= $pageType ?>">
+	<input type="hidden" id="targetPage" value="<?= $url ?>/page">
 </div>
 
 <script>
@@ -119,12 +92,22 @@
 			}
 
 		});
+
+		// กด Esc เพื่อกลับไปเป็น ...
 		pageInput.addEventListener("keydown", function(e) {
 			if (e.key === 'Escape') {
 				form.style.display = "none";
 				ellipsis.style.display = "inline";
 			}
 		});
+
+		//const gotoPage = document.getElementById("gotoPage");
+
+		// gotoPage.addEventListener("submit", function(event) {
+		//     event.preventDefault(); // ป้องกันการ submit จริง
+		//     const nextPage = gotoPage.querySelector("input[name='pageInput']").value;
+		//     goToPageBranch(nextPage);
+		// });
 	});
 </script>
 <?php
@@ -134,5 +117,18 @@ $("#page-jump-ellipsis").css("display","none");
 $("#page-jump-form").css("display","inline-flex");
             $("#input-page").focus();
 }
+$("#gotoPage").on("submit", function(e) {
+        e.preventDefault(); //  ป้องกันไม่ให้ฟอร์ม submit จริง (ถ้าต้องการ)
+        var totalPage = $("#totalPage").val();
+        var inputPage = $("#input-page").val();
+
+        if (inputPage > totalPage) {
+            alert("Entered the wrong number");
+        } else {
+            var targetPage = $("#targetPage").val() + inputPage;
+            window.location.href = targetPage;
+        }
+    });
+
 ', View::POS_END);
 ?>
