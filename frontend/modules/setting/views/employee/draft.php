@@ -62,7 +62,7 @@ $statusTexArr = Status::allStatusText();
 					if (isset($employees) && count($employees) > 0) {
 						foreach ($employees as $employeeId => $employee) : ?>
 							<tr class="tr-space"></tr>
-							<tr class="employee-tr">
+							<tr class="employee-tr" id="employee-<?= $employeeId ?>">
 								<td style="width:20%;font-weight: 600;border:0px !important;font-size:14px;" class="pl-0 pr-0">
 									<div class="col-12 border-left-radius-table" style="height:48px;">
 										<input type="checkbox" id="check-employee-list-<?= $employeeId ?>" value="" name="<?= $employeeId ?>" class="checkbox-employee me-2 d-none" style="margin-top: -2px;">
@@ -89,7 +89,7 @@ $statusTexArr = Status::allStatusText();
 											class="icon-btn-white align-content-center" style="display: block;">
 											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg" class="pim-icon" style="width:16px;height:16px;">
 										</a>
-										<a href="javascript:deleteEmployee(<?= $employeeId ?>)"
+										<a href="javascript:void(0);" onclick="javascript:warningDeleteEmployee(<?= $employeeId ?>)"
 											class="icon-btn-delete mt-5 align-content-center" style="display: block;">
 											<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.svg" class="pim-icon" style="width:16px;height:16px;">
 										</a>
@@ -121,6 +121,7 @@ $statusTexArr = Status::allStatusText();
 	</div>
 </div>
 <?= $this->render('modal_warning_delete') ?>
+<?= $this->render('modal_warning_delete1') ?>
 <?= $this->render('modal_deleting') ?>
 <style>
 	.border-left-radius-table {

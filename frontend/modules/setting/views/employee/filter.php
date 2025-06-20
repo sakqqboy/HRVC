@@ -79,7 +79,16 @@
 		}
 		?>
 	</select>
-	<select class="select-pim form-select font-size-12" id="status">
+	<?php
+	if (Yii::$app->controller->action->id == "draft" || Yii::$app->controller->action->id == "draft-result") {
+		$url = 'filter-draft';
+		$showStatus = 'd-none';
+	} else {
+		$url = 'filter-employee';
+		$showStatus = '';
+	}
+	?>
+	<select class="select-pim form-select font-size-12 <?= $showStatus ?>" id="status">
 		<?php
 		if ($status != '') { ?>
 			<option value="<?= $status ?>"><?= Status::findOne($status)->statusName ?></option>
@@ -97,20 +106,13 @@
 	?>
 
 	</select>
-	<?php
-	if (Yii::$app->controller->action->id == "draft" || Yii::$app->controller->action->id == "draft-result") {
-		$url = 'filter-draft';
-	} else {
-		$url = 'filter-employee';
-	}
-	?>
-	<input type="hidden" value="<? $url ?>" id="url-redirect">
+	<input type="hidden" value="<?= $url ?>" id="url-redirect">
 	<span class="justify-content-center d-flex align-items-center employee-filter-btn" style="cursor: pointer;" onclick="javascrip:filterEmployee()">
 		<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-1">
 		Filter
 	</span>
 
-	<div class="btn-group <?= Yii::$app->controller->action->id == 'draft' ? 'd-none' : '' ?>" role="group">
+	<div class="btn-group <?= (Yii::$app->controller->action->id == 'draft' || Yii::$app->controller->action->id == 'draft-result') ? 'd-none' : '' ?>" role="group">
 		<?php
 		if ($page == 'grid') { ?>
 			<a href="#" class="btn btn-primary font-size-12 pim-change-modes">
