@@ -736,8 +736,9 @@ class CompanyController extends Controller
 		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
 		$groupJson = curl_exec($apiCompany);
 		$company = json_decode($groupJson, true);
-		
-		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $company["directorId"]);
+		$directorId = $company["directorId"];
+
+		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $directorId );
 		$groupJson = curl_exec($apiCompany);
 		$director = json_decode($groupJson, true);
 

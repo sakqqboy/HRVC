@@ -53,9 +53,11 @@ $page = 'view';
                     ">
                 <div class="avatar-preview">
                     <?php if ($branches["branchImage"] != null) { ?>
-                    <img src="<?= Yii::$app->homeUrl . $branches['picture'] ?>" class="cycle-big-image">
+                    <img src="<?= Yii::$app->homeUrl . $branches['picture'] ?>" class="cycle-big-image"
+                        style="max-width: 100px; max-height: 100px;">
                     <?php } else { ?>
-                    <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="cycle-big-image">
+                    <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="cycle-big-image"
+                        style="max-width: 100px; max-height: 100px;">
                     <?php } ?>
                 </div>
                 <div class=" column">
