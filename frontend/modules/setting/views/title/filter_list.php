@@ -68,10 +68,16 @@ use frontend\models\hrvc\Team;
     </select>
 
 
-    <span class="btn font-size-12 justify-content-center d-flex align-items-center custom-button-select"
+    <!-- <span class="btn font-size-12 justify-content-center d-flex align-items-center custom-button-select"
         onclick="filterTitle('<?= $page ?>')" style="flex: 1; text-align: center; cursor: pointer;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-2">
         <?= Yii::t('app', 'Filter') ?>
+    </span> -->
+
+    <span class="justify-content-center d-flex align-items-center employee-filter-btn" style="cursor: pointer;"
+        onclick="filterTitle('<?= $page ?>')">
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-1">
+        Filter
     </span>
 
 </div>

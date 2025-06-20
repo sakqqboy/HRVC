@@ -32,18 +32,28 @@ $page = "grid"
         </div>
         <div class="col-1 pr-0 text-end">
             <div class="btn-group" role="group">
-                <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+                <!-- <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg" style="cursor: pointer;">
                 </a>
                 <a href="<?= Yii::$app->homeUrl . 'setting/branch/index' ?>"
                     class="btn btn-outline-primary font-size-12 pim-change-modes">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg" style="cursor: pointer;">
+                </a> -->
+                <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg"
+                        style="cursor: pointer; margin-top:2px;">
+                </a>
+                <a href="<?= Yii::$app->homeUrl . 'setting/branch/index' ?>"
+                    class="btn btn-outline-primary font-size-12 pim-change-modes"
+                    style="border-color: #CBD5E1 !important;">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg"
+                        style="cursor: pointer; margin-top:2px;">
                 </a>
             </div>
         </div>
     </div>
 
-    <div class="pim-body company-group-edit bg-white mt-10">
+    <div class="pim-body company-group-edit bg-white mt-30">
         <div class="alert alert-branch-body" role="alert">
             <div class="row" id="company-branch">
                 <?php
@@ -120,25 +130,35 @@ $page = "grid"
                                         <div class="menu-dot ">
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
                                                 <?php if($branch['totalDepartment'] == 0) { ?>
-                                                <li class="pl-4 pr-4">
-                                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/branch-view/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
+                                                <li class="pl-9 pr-9 mb-9">
+                                                    <!-- <a href="<?= Yii::$app->homeUrl ?>setting/branch/branch-view/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
                                                         class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                         style="margin-top: -3px;">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
                                                             alt="History" class="pim-icon mr-10"
                                                             style="margin-top: -2px;">
                                                         <?= Yii::t('app', 'View') ?>
+                                                    </a> -->
+                                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/branch-view/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
+                                                        class="btn btn-bg-white-xs">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
+                                                            alt="History" class="pim-icon" style="margin-top: -1px;">
                                                     </a>
                                                 </li>
                                                 <?php } ?>
-                                                <li class="pl-4 pr-4">
-                                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId'] + 543]) ?>"
+                                                <li class="pl-9 pr-9">
+                                                    <!-- <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId'] + 543]) ?>"
                                                         class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                         style="margin-top: -1px; ">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
                                                             alt="History" class="pim-icon mr-10"
                                                             style="margin-top: -2px;">
                                                         <?= Yii::t('app', 'edit') ?>
+                                                    </a> -->
+                                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId'] + 543]) ?>"
+                                                        class="btn btn-bg-white-xs">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                                            alt="History" class="pim-icon" style="margin-top: -1px;">
                                                     </a>
                                                     <!-- <a href="javascript:updateBranch(<?= $branch['branchId'] + 543 ?>)"
                                                         class="btn btn-sm btn-outline-secondary font-size-12 mr-5">
