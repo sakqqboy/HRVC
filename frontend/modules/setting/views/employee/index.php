@@ -10,25 +10,6 @@ $this->title = 'Employee';
 $statusTexArr = Status::allStatusText();
 ?>
 <div class="col-12 mt-70 pt-20">
-	<!-- <div class="row">
-		<div class="col-lg-9 col-12 text-end">
-			<a href="<?php // Yii::$app->homeUrl 
-					?>setting/employee/import" class="btn btn-secondary font-size-12 mr-10">
-				<i class="fa fa-upload mr-5" aria-hidden="true"></i> Import File
-			</a>
-			<a href="<?php // Yii::$app->homeUrl 
-					?>setting/employee/create" class="btn btn-success font-size-12">
-				<i class="fa fa-user-plus mr-5" aria-hidden="true"></i> Create
-			</a>
-			<div class="btn-group ml-10" role="group" aria-label="Basic example">
-				<button type="button" class="btn btn-primary btn-curr font-size-12" id="btn-0" onclick="javascript:employeeType(0)">All</button>
-				<button type="button" class="btn btn-primary font-size-12" id="btn-1" onclick="javascript:employeeType(1)"><i class="fa fa-briefcase" aria-hidden="true"></i> Current</button>
-				<button type="button" class="btn btn-primary btn-curr font-size-12" id="btn-2" onclick="javascript:employeeType(2)">Resigned <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></button>
-				<input type="hidden" id="status" value="1">
-			</div>
-		</div>
-
-	</div> -->
 	<div class="col-12 pr-15 pl-15">
 		<?= $this->render('header', [
 			"totalEmployee" => $totalEmployee,

@@ -120,8 +120,6 @@ $statusTexArr = Status::allStatusText();
 		</div>
 	</div>
 </div>
-<?= $this->render('modal_warning_delete') ?>
-<?= $this->render('modal_deleting') ?>
 <style>
 	.border-left-radius-table {
 		border-left: 1px solid var(--Color-Tokens-Border-Primary, #E4E4E4);
