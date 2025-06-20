@@ -1,5 +1,5 @@
 <?php
-
+use frontend\models\hrvc\Status;
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 // $statusfrom = 'create';
@@ -21,7 +21,6 @@ if (isset($userAccess) && is_array($userAccess) && !empty($userAccess)) {
 
 $companyId = isset($employee['companyId']) ? $employee['companyId'] : '';
 
-
 $companyId = isset($employee['companyId']) ? $employee['companyId'] : '';
 
 $resumePath = isset($employee['resume']) ? $employee['resume'] : '';
@@ -42,7 +41,7 @@ $LanguageId = '';
 // print_r($mainLanguage);
 // echo '</pre>';
 // exit;
-
+$statusTexArr = Status::allStatusText();
     ?>
 <?php $form = ActiveForm::begin([
 	'id' => 'create-employee',
@@ -99,12 +98,20 @@ $LanguageId = '';
 
                             <!-- ปรับเอามาจากสเตตัส ปรับคอนโทรเลอร์ตอนเชฟด้วย และ ทำรอโหลดน้า ปรับนาวิเกชั้นเน็ก -->
                             <?php
-                            if (!empty($conditions)) {
-                                $selectedId = $employee['employeeConditionId'] ?? null;
-                                foreach ($conditions as $c) {
-                                    $selected = ($c['employeeConditionId'] == $selectedId) ? 'selected' : '';
-                                    echo '<option value="' . $c['employeeConditionId'] . '" ' . $selected . '>' . Yii::t('app', $c['employeeConditionName']) . '</option>';
-                                }
+                            // if (!empty($conditions)) {
+                            //     $selectedId = $employee['employeeConditionId'] ?? null;
+                            //     foreach ($conditions as $c) {
+                            //         $selected = ($c['employeeConditionId'] == $selectedId) ? 'selected' : '';
+                            //         echo '<option value="' . $c['employeeConditionId'] . '" ' . $selected . '>' . Yii::t('app', $c['employeeConditionName']) . '</option>';
+                            //     }
+                            // }
+                            ?>
+                            <?php
+                            if (count($statusTexArr) > 0) {
+                                foreach ($statusTexArr as $statusId => $status): ?>
+                            <option value="<?= $statusId ?>"><?= Yii::t('app', $status["statusName"]) ?>
+                                <?php
+                                endforeach;
                             }
                             ?>
                         </select>

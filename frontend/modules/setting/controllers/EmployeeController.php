@@ -783,7 +783,8 @@ class EmployeeController extends Controller
                 $employee->remark = $_POST["remark"];
                 $employee->skills = $_POST["skills"];
                 $employee->contact = $_POST["linkedin"];
-                $employee->status = ($_POST["darf"] == 1) ? 2 : 100;
+                $employee->status = $_POST["status"]; 
+                // $employee->status = ($_POST["darf"] == 1) ? 2 : 100;
                 $employee->updateDateTime = new Expression('NOW()');
 
                 $pictureProfile = UploadedFile::getInstanceByName("image");
