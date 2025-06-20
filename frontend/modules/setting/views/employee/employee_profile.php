@@ -104,7 +104,56 @@ $this->title = 'view';
                     <?php
                     }
                     ?>
-                    <span class="condition-name badge position-absolute bottom-0 start-50 translate-middle-x">
+                    <?php
+						// $statusClass = "status-badge-full-time";
+                        $statusClass = "status-badge-full-time";
+						if ($employee["status"] == "Full-Time") {
+							$statusClass = "status-badge-full-time";
+                            $statusClass = "background: #2580D3;";
+						}
+						if ($employee["status"] == "Probationary") {
+							$statusClass = "status-badge-probationary";
+                            $statusClass = "background: #20598D;";
+						}
+						if ($employee["status"] == "Part-Time") {
+							$statusClass = "status-badge-part-Time";
+                            $statusClass = "background: #20598D;";
+						}
+						if ($employee["status"] == "Intern") {
+							$statusClass = "status-badge-intern";
+                            $statusClass = "background: #FFE100;";
+						}
+						if ($employee["status"] == "Temporary") {
+							$statusClass = "status-badge-temporarye";
+                            $statusClass = "background: #FF9D00;";
+						}
+						if ($employee["status"] == "Freelance") {
+							$statusClass = "status-badge-freelance";
+                            $statusClass = "background: #FF9D00;";
+						}
+						if ($employee["status"] == "Suspended") {
+							$statusClass = "status-badge-sspended";
+                            $statusClass = "background: #E05757;";
+						}
+						if ($employee["status"] == "Resigned") {
+							$statusClass = "status-badge-resigned";
+                            $statusClass = "background: #EC1D42;";
+						}
+						if ($employee["status"] == "Lay off") {
+							$statusClass = "status-badge-layoff";
+                            $statusClass = "background: #FF9D00;";
+						}
+						if ($employee["status"] == "not set") {
+							$statusClass = "status-badge-notset";
+                            $statusClass = "background: #2580D3;";
+						}
+						//throw new exception(print_r($employees, true));
+				?>
+                    <!-- <span class="<?=$statusClass?>">
+                        <?= $employee['status'] ?>
+                    </span> -->
+                    <span class="condition-name badge position-absolute bottom-0 start-50 translate-middle-x"
+                        style="<?= $statusClass ?>">
                         <?= $employee['status'] ?>
                     </span>
                 </div>

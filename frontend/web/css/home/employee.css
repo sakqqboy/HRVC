@@ -568,6 +568,456 @@
     height: 26px;
 }
 
+
+.profile-img {
+    width: 73px;
+    height: 73px;
+    object-fit: cover;
+}
+
+.company-img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+
+.bg-white-employee {
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #BBCDDE;
+    height: 100%;
+    padding: 27px 20px 32px 20px;
+}
+
+.employee-box {
+    box-sizing: border-box;
+    background-color: #FBFCFF;
+    border-radius: 5px;
+    padding: 0px 10px 10px 10px;
+    border: 1px solid #BBCDDE;
+}
+
+.profile-employee-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #30313D;
+    max-width: 200px;
+    padding-right: 1.5rem;
+}
+
+.profile-employee-email {
+    font-size: 14px;
+    font-weight: 400;
+    color: #30313D;
+    padding-right: 1.5rem;
+    max-width: 250px;
+}
+
+.profile-employee-tel {
+    font-size: 14px;
+    font-weight: 400;
+    color: #30313D;
+    padding-right: 1.5rem;
+}
+
+.profile-employee-number {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+}
+
+.profile-employee-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #30313D;
+    display: block;
+}
+
+.profile-company-name {
+    font-size: 14px;
+    font-weight: 600;
+    /* display: block; */
+    padding-right: 1.5rem;
+    max-width: 253px;
+}
+
+.profile-city-name {
+    font-size: 13px;
+    font-weight: 400;
+    color: #666666;
+    display: block;
+}
+
+.profile-employee-department {
+    font-size: 13px;
+    font-weight: 400;
+    color: #30313D;
+    display: block;
+
+}
+
+.profile-employee-team {
+    font-size: 13px;
+    font-weight: 400;
+    color: #666666;
+    display: block;
+}
+
+.profile-icon {
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
+}
+
+.status-badge-full-time {
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    transform: translateY(50%);
+    text-align: center;
+    border-radius: 12px;
+    z-index: 1;
+    background-color: #2580D3;
+    color: white;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge-probationary {
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    transform: translateY(50%);
+    text-align: center;
+    border-radius: 12px;
+    z-index: 1;
+    background-color: #20598D;
+    color: white;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge-part-time {
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    transform: translateY(50%);
+    text-align: center;
+    border-radius: 12px;
+    z-index: 1;
+    background-color: #20598D;
+    color: white;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge-intern {
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    transform: translateY(50%);
+    text-align: center;
+    border-radius: 12px;
+    z-index: 1;
+    background-color: #FFE100;
+    color: black;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge-temporary {
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    transform: translateY(50%);
+    text-align: center;
+    border-radius: 12px;
+    z-index: 1;
+    background-color: #FF9D00;
+    color: black;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge-freelance {
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    transform: translateY(50%);
+    text-align: center;
+    border-radius: 12px;
+    z-index: 1;
+    background-color: #FF9D00;
+    color: black;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge-suspened {
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    transform: translateY(50%);
+    text-align: center;
+    border-radius: 12px;
+    z-index: 1;
+    background-color: #E05757;
+    color: white;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge-resigned {
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    transform: translateY(50%);
+    text-align: center;
+    border-radius: 12px;
+    z-index: 1;
+    background-color: #EC1D42;
+    color: white;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge-layoff {
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    transform: translateY(50%);
+    text-align: center;
+    border-radius: 12px;
+    z-index: 1;
+    background-color: #FF9D00;
+    color: white;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge-notset {
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    transform: translateY(50%);
+    text-align: center;
+    border-radius: 12px;
+    z-index: 1;
+    background-color: #C3C3C3;
+    border: 1px black solid;
+    color: black;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.employee-contact-box {
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    padding: 20px 16px 20px 16px;
+    border: #BBCDDE solid thin;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 20px;
+}
+
+.new-employee {
+    /* margin-top: -15px; */
+    padding-right: 10px;
+    padding-left: 0px;
+}
+
+.checkbox-employee {
+    appearance: none;
+    min-width: 24px;
+    height: 24px;
+    margin-top: 5px;
+    border: 1px solid #BBCDDE;
+    background-color: white;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px 16px;
+    cursor: pointer;
+    position: relative;
+}
+
+.checkbox-employee:checked {
+    background-color: #2580D3;
+    border: 1px solid #2580D3;
+    background-image: url('<?= Yii::$app->homeUrl . "images/icons/Settings/check-white.svg" ?>');
+}
+
+.checked-employee {
+    outline: 4px solid #81C3FF;
+    border: 1px solid #81C3FF;
+    box-shadow: 0 0 8px 3px rgba(0, 123, 255, 0.6);
+}
+
+.employee-profiles {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.employee-filter-btn {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 3px 10px 3px 10px;
+    background-color: #2580D3;
+    color: #FFFFFF;
+    border-radius: 71px;
+    height: 26px;
+
+}
+
+.employee-profiles-header {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 21.43px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+
+}
+
+.create-employee-btn {
+    background-color: #2580D3;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 3px;
+    color: white;
+    text-decoration: none;
+    height: 30px;
+    text-align: center;
+    min-width: 115px;
+    min-height: 30px;
+}
+
+.export-employee-btn {
+    font-size: 14px;
+    font-weight: 600;
+    border: 0.5px #2580D3 solid;
+    border-radius: 3px;
+    background-color: white;
+    color: #2580D3;
+    text-decoration: none;
+    height: 30px;
+    text-align: center;
+    min-width: 157px;
+    min-height: 30px;
+}
+
+.action-employee-btn {
+    background-color: white;
+    color: #2580D3;
+    min-height: 30px;
+    border-radius: 66px;
+    padding-left: 9px;
+    padding-right: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 0.5px #2580D3 solid;
+    text-decoration: none;
+
+}
+
+.action-employee-btn-blue {
+    background-color: #2580D3;
+    color: #FFFFFF;
+    min-height: 30px;
+    border-radius: 66px;
+    padding-left: 9px;
+    padding-right: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.view-employee-gray {
+    background-color: #F8F8F8;
+    min-height: 30px;
+    border-radius: 66px;
+    padding-left: 9px;
+    padding-right: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 0.5px #666666 solid;
+    text-decoration: none;
+    cursor: default;
+}
+
+.action-menu {
+    font-size: 13px;
+    font-weight: 600;
+    background-color: white;
+    min-width: 149px;
+    padding-left: 15px;
+    padding-top: 28px;
+    padding-bottom: 8px;
+    border-radius: 5px;
+    margin-top: 10px;
+    box-shadow: 0px 1px 3px 0px #1018281A;
+    position: absolute;
+    /* margin-left: 40.2%; */
+
+}
+
+.icon-btn-white {
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 3px;
+    border: 0.59px solid #CBD5E1;
+    height: 28px;
+    width: 28px;
+    display: inline-block;
+}
+
+.icon-btn-delete {
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 3px;
+    border: 0.59px solid #EC1D42;
+    height: 28px;
+    width: 28px;
+    display: inline-block;
+}
+
 /* .input-group-text.active {
     background-color: rgb(215, 235, 255) !important;
     border: 0.5px solid rgb(190, 218, 255) !important;
