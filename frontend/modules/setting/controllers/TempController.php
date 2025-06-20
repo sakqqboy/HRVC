@@ -125,7 +125,7 @@ class TempConController extends Controller
 			"teams" => $teams,
 		];
 
-		return $this->render($file, [
+		return $this->render('draft', [
 			"employees" => $employees,
 			"companies" => $companies,
 			"companyId" => $companyId,

@@ -129,7 +129,7 @@ $statusTexArr = Status::allStatusText();
 												class="icon-btn-white">
 												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg" class="pim-icon" style="width:16px;height:16px;">
 											</a>
-											<a href="javascript:deleteEmployee(<?= $employeeId ?>)"
+											<a href="javascript:void(0);" onclick="javascript:warningDeleteEmployee(<?= $employeeId ?>)"
 												class="icon-btn-delete mt-5">
 												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.svg" class="pim-icon" style="width:16px;height:16px;">
 											</a>
@@ -243,6 +243,7 @@ $statusTexArr = Status::allStatusText();
 $showModal = $isFromImport; // หรือ 0
 ?>
 <?= $this->render('modal_warning_delete') ?>
+<?= $this->render('modal_warning_delete1') ?>
 <?= $this->render('modal_deleting') ?>
 <style>
 	.profile-img {

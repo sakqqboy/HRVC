@@ -37,7 +37,7 @@ function filterEmployee() {
     var status = $("#status").val();
     var pageType = $("#page-type").val();
     var urlRedirect = $("#url-redirect").val();
-    var url = $url + 'setting/temp/' + urlRedirect;
+    var url = $url + 'setting/employee/' + urlRedirect;
     $.ajax({
         type: "POST",
         dataType: 'json',
@@ -71,9 +71,13 @@ function showAction(employeeId) {
 
 
 }
-function deleteEmployee(employeeId) {
-    if (confirm('Are you sure to delete this employee')) {
-        var url = $url + 'setting/employee/delete-employee';
+function warningDeleteEmployee(employeeId) { 
+    $("#warning-delete-employee1").modal("show");
+    $("#delete1-employee").val(employeeId);
+}
+function deleteEmployee() {
+    var url = $url + 'setting/employee/delete-employee';
+    var employeeId=$("#delete1-employee").val();
         $.ajax({
             type: "POST",
             dataType: 'json',
@@ -85,7 +89,6 @@ function deleteEmployee(employeeId) {
                 }
             }
         });
-    }
 }
 function checkUploadFile(type) {
     if (![1, 2, 3].includes(type)) return;

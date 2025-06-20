@@ -130,6 +130,7 @@ return [
                 'setting/team/teams-view/<hash>' => 'setting/team/teams-view',
                 'setting/layer/result-layer-title/<hash>' => 'setting/layer/result-layer-title',
                 'setting/employee/employee-result/<hash>' => 'setting/employee/employee-result',
+                'setting/employee/draft-result/<hash>' => 'setting/employee/draft-result',
                 'setting/employee/no-employee/<hash>' => 'setting/employee/no-employee',
                 'setting/employee/create/<hash>' => 'setting/employee/create',
                 'setting/employee/delete-employee/<hash>' => 'setting/employee/delete-employee',

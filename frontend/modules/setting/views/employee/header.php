@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 
-if (Yii::$app->controller->action->id == 'draft') {
+if (Yii::$app->controller->action->id == 'draft' || Yii::$app->controller->action->id == 'draft-result') {
 	$title = 'Employees';
 } else {
 	$title = 'All Employees';
@@ -16,12 +16,12 @@ if (Yii::$app->controller->action->id == 'draft') {
 				<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/all-employees.svg" class="mr-6" style="margin-top: -5px;">
 				<?= Yii::t('app', $title) ?>
 				<a href="<?= Yii::$app->homeUrl ?>setting/employee/create"
-					class="<?= Yii::$app->controller->action->id == 'draft' ? 'd-none' : 'd-flex' ?> align-items-center create-employee-btn justify-content-center">
+					class="<?= (Yii::$app->controller->action->id == 'draft' || Yii::$app->controller->action->id == 'draft-result') ? 'd-none' : 'd-flex' ?> align-items-center create-employee-btn justify-content-center">
 					<?= Yii::t('app', 'Create New') ?>
 					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-circle.svg" class="ms-1" style="width: 18px;height:18px;">
 				</a>
 				<a href="javascript:void(0);" onclick="javascript:modalImportEmployee()"
-					class="<?= Yii::$app->controller->action->id == 'draft' ? 'd-none' : 'd-flex' ?> align-items-center export-employee-btn justify-content-center">
+					class="<?= (Yii::$app->controller->action->id == 'draft' || Yii::$app->controller->action->id == 'draft-result') ? 'd-none' : 'd-flex' ?> align-items-center export-employee-btn justify-content-center">
 					<?= Yii::t('app', 'Import Employees') ?>
 					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/export-employee.svg" class="ms-2" style="width: 18px;height:18px;">
 				</a>
@@ -29,7 +29,8 @@ if (Yii::$app->controller->action->id == 'draft') {
 		</div>
 		<div class="col-lg-6 col-12 pb-0 pl-0">
 			<div class="d-flex align-items-center justify-content-end gap-2">
-				<a href="<?= Yii::$app->homeUrl ?>setting/employee/draft/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" class="<?= Yii::$app->controller->action->id == 'draft' ? 'd-none' : 'd-flex' ?> align-items-center action-employee-btn justify-content-center">
+				<a href="<?= Yii::$app->homeUrl ?>setting/employee/draft/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
+					class="<?= (Yii::$app->controller->action->id == 'draft' || Yii::$app->controller->action->id == 'draft-result') ? 'd-none' : 'd-flex' ?> align-items-center action-employee-btn justify-content-center">
 					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/draft.svg" class="me-2" style="width: 18px;height:18px;">
 					<?= Yii::t('app', 'Drafts') ?> <?= $totalDraft > 0 ? '<span class="text-dark ms-1">(' . $totalDraft . ')</span>' : '' ?>
 
@@ -60,13 +61,13 @@ if (Yii::$app->controller->action->id == 'draft') {
 					</span>
 				</span>
 
-				<a href="#" onclick="javascript:showActionMultiSelect()" class="d-flex align-items-center action-employee-btn justify-content-center" id="normal-action">
+				<a href="javascript:void(0);" onclick="javascript:showActionMultiSelect()" class="d-flex align-items-center action-employee-btn justify-content-center" id="normal-action">
 					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action.svg" class="me-2" style="width: 18px;height:18px;">
 					<?= Yii::t('app', 'Actions') ?>
 
 				</a>
 
-				<a href="" class="d-flex align-items-center action-employee-btn justify-content-center">
+				<a href="javascript:void(0);" class="d-flex align-items-center action-employee-btn justify-content-center">
 					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action.svg" class="me-2" style="width: 18px;height:18px;">
 					<?= Yii::t('app', 'Export All') ?>
 
