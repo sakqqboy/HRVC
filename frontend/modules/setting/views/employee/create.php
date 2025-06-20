@@ -106,12 +106,21 @@ $statusTexArr = Status::allStatusText();
                             //     }
                             // }
                             ?>
-                            <?php
+                            <!-- <?php
                             if (count($statusTexArr) > 0) {
                                 foreach ($statusTexArr as $statusId => $status): ?>
                             <option value="<?= $statusId ?>"><?= Yii::t('app', $status["statusName"]) ?>
                                 <?php
                                 endforeach;
+                            }
+                            ?> -->
+                            <?php
+                            if (!empty($statusTexArr)) {
+                                $selectedId = $employee['employeeConditionId'] ?? null;
+                                foreach ($statusTexArr as $statusId => $status) {
+                                    $selected = ($statusId == $selectedId) ? 'selected' : '';
+                                    echo '<option value="' . $statusId . '" ' . $selected . '>' . Yii::t('app', $status["statusName"]) . '</option>';
+                                }
                             }
                             ?>
                         </select>

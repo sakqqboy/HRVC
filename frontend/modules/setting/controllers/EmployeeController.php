@@ -856,11 +856,11 @@ class EmployeeController extends Controller
                         $user->createDateTime = new Expression('NOW()'); // แค่ตอนสร้างใหม่
                     }
                     $user->username = $_POST["mailId"];
-                    if (!Yii::$app->security->validatePassword($_POST["password"], $user->password_hash)) {
-                        if ($_POST["password"] != $user->password_hash) {
-                            $user->password_hash = Yii::$app->security->generatePasswordHash($_POST["password"]);
-                        }
-                    }
+                    // if (!Yii::$app->security->validatePassword($_POST["password"], $user->password_hash)) {
+                    //     if ($_POST["password"] != $user->password_hash) {
+                    //         $user->password_hash = Yii::$app->security->generatePasswordHash($_POST["password"]);
+                    //     }
+                    // }
                     $user->updateDateTime = new Expression('NOW()');
                     if ($user->save(false)) {
                         // UserRole

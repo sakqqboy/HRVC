@@ -105,7 +105,7 @@ $this->title = 'view';
                     }
                     ?>
                     <span class="condition-name badge position-absolute bottom-0 start-50 translate-middle-x">
-                        <?= $employee['conditionName'] ?>
+                        <?= $employee['status'] ?>
                     </span>
                 </div>
 
