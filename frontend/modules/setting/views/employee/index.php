@@ -138,11 +138,23 @@ $statusTexArr = Status::allStatusText();
 											<a href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>" style="text-decoration: none;">
 												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" class="pim-icon">
 											</a>
-											<a href="javascript:deleteEmployee(<?= $employeeId ?>)" style="text-decoration: none;">
+											<a href="#" onclick="javascript:showAction(<?= $employeeId ?>)" style="text-decoration: none;" id="show-action-box-<?= $employeeId ?>">
 												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/threedot.svg" class="pim-icon">
 											</a>
 										</div>
+										<div class="employee-action border" id="employee-action-<?= $employeeId ?>">
+											<a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>"
+												class="icon-btn-white">
+												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg" class="pim-icon" style="width:16px;height:16px;">
+											</a>
+											<a href="javascript:deleteEmployee(<?= $employeeId ?>)"
+												class="icon-btn-delete mt-5">
+												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/bin.svg" class="pim-icon" style="width:16px;height:16px;">
+											</a>
+										</div>
 									</div>
+
+
 								</div>
 
 								<!-- Divider -->
@@ -668,7 +680,7 @@ $showModal = $isFromImport; // หรือ 0
 		padding-right: 9px;
 		font-size: 14px;
 		font-weight: 600;
-		border: 0.5px #666666 solid;
+		border-radius: 3px;
 		text-decoration: none;
 
 	}
@@ -687,6 +699,32 @@ $showModal = $isFromImport; // หรือ 0
 		position: absolute;
 		/* margin-left: 40.2%; */
 
+	}
+
+	.icon-btn-white {
+		text-align: center;
+		text-decoration: none;
+		vertical-align: middle;
+		cursor: pointer;
+		background-color: white;
+		border-radius: 3px;
+		border: 0.59px solid #CBD5E1;
+		height: 28px;
+		width: 28px;
+		display: inline-block;
+	}
+
+	.icon-btn-delete {
+		text-align: center;
+		text-decoration: none;
+		vertical-align: middle;
+		cursor: pointer;
+		background-color: white;
+		border-radius: 3px;
+		border: 0.59px solid #EC1D42;
+		height: 28px;
+		width: 28px;
+		display: inline-block;
 	}
 
 
@@ -749,6 +787,9 @@ $showModal = $isFromImport; // หรือ 0
 		}
 	};
 
+	// คลิกปุ่มให้กล่องแสดง
+
+
 	function deleteMultiEmployee() {
 		$("#warning-delete-employee").show();
 	}
@@ -794,7 +835,7 @@ $showModal = $isFromImport; // หรือ 0
 </script>
 <?php
 $this->registerJs('
-   function showAction() {
+   function showActionMultiSelect() {
 		var action = $("#action").val();
 		if (action == 0) {
 			$("#action").val(1);
@@ -877,6 +918,26 @@ $this->registerJs('
 	function openDialog(){
 	$("#employee-file").click();
 	}
+
+	$(document).ready(function() {
+		
+		$(document).click(function(e) {
+			var showing = $("#show-action").val();
+			if (showing != "") {
+				if (!$(e.target).closest("#employee-action-" + showing).length && !$(e.target).closest("#show-action-box-" + showing).length) {
+					$("#employee-action-" + showing).hide();
+				}
+			}
+		});
+
+		// ป้องกันการคลิกภายในกล่องแล้วทำให้มันหาย
+		var showing = $("#show-action").val();
+		if (showing != "") {
+			$("#employee-action-" + showing).click(function(e) {
+				e.stopPropagation();
+			});
+		}
+	});
 		
 		
 ', View::POS_END);

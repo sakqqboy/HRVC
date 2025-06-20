@@ -22,7 +22,7 @@
 
 				</a>
 				<span class="d-flex d-none" style="position:relative;" id="active-action">
-					<a href="#" onclick="javascript:showAction()" class="d-flex align-items-center action-employee-btn justify-content-center me-0 "
+					<a href="#" onclick="javascript:showActionMultiSelect()" class="d-flex align-items-center action-employee-btn justify-content-center me-0 "
 						style="z-index: 2; position:relative;">
 						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/close-circle.svg" class="me-4" style="width: 18px;height:18px;">
 
@@ -47,7 +47,7 @@
 					</span>
 				</span>
 
-				<a href="#" onclick="javascript:showAction()" class="d-flex align-items-center action-employee-btn justify-content-center" id="normal-action">
+				<a href="#" onclick="javascript:showActionMultiSelect()" class="d-flex align-items-center action-employee-btn justify-content-center" id="normal-action">
 					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/action.svg" class="me-2" style="width: 18px;height:18px;">
 					Actions
 
