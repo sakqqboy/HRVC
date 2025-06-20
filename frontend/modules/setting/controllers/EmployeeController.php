@@ -702,6 +702,42 @@ class EmployeeController extends Controller
             "statusfrom" => 'Update'
         ]);
     }
+    public function actionDraft($hash)
+    {
+        $groupId = Group::currentGroupId();
+        if ($groupId == null) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+        }
+        $currentPage = 1;
+        $limit = 15;
+        if (isset($hash) && explode('ge', $hash)[0] == 'pa') {
+            $page = explode('ge', $hash);
+            $currentPage = $page[1];
+        }
+        $companyId = null;
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-draft?companyId=' . $companyId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
+        $employees = curl_exec($api);
+        $employees = json_decode($employees, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        $companies = curl_exec($api);
+        $companies = json_decode($companies, true);
+        curl_close($api);
+        $totalEmployee = Employee::totalEmployee($companyId);
+        $totalPage = ceil($totalEmployee / 15);
+        $pagination = ModelMaster::getPagination($currentPage, $totalPage);
+        return $this->render('draft', [
+            "employees" => $employees,
+            "companies" => $companies,
+            "totalEmployee" => $totalEmployee,
+            "totalPage" => $totalPage,
+            "currentPage" => $currentPage,
+            "pagination" => $pagination
+        ]);
+    }
     public function actionSaveUpdateEmployee()
     {
 
