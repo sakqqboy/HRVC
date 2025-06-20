@@ -116,13 +116,16 @@ $session = Yii::$app->session;
                         </a>
                     </div>
 
-                    <div class="col-12 first-layer-manu">
-                        <a href="<?= Yii::$app->homeUrl ?>setting/layer/index" class="no-underline">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/layer.svg"
+                    <!-- <div class="col-12 first-layer-manu">
+                        <a href="<?php //  Yii::$app->homeUrl 
+                                    ?>setting/layer/index" class="no-underline">
+                            <img src="<?php //  Yii::$app->homeUrl 
+                                        ?>images/icons/white-icons/MasterSetting/layer.svg"
                                 class="first-layer-icon" style="margin-top: -3px;">
-                            <?= Yii::t('app', 'Management Layer') ?>
+                            <?php // Yii::t('app', 'Management Layer') 
+                            ?>
                         </a>
-                    </div>
+                    </div> -->
                 <?php
                 }
                 ?>
