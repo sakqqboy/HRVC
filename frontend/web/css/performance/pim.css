@@ -276,22 +276,7 @@ thead {
 	line-height: 20px;
 }
 
-.part-text {
-	color: var(--Primary-Blue---HRVC, #2580D3);
-	font-feature-settings: 'salt' on;
-	font-family: "SF Pro Display";
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 500;
-	line-height: 20px;
-	/* 142.857% */
-	text-decoration-line: underline;
-	text-decoration-style: solid;
-	text-decoration-skip-ink: auto;
-	text-decoration-thickness: auto;
-	text-underline-offset: auto;
-	text-underline-position: from-font;
-}
+
 
 .pim-icon {
 	text-align: center;

@@ -105,9 +105,7 @@ if (Yii::$app->session->hasFlash('error')) {
                                     <?php endif; ?>
                                 </select>
 
-                                <span class="input-group-text"
-                                    style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
-                                    onclick="document.getElementById('company').focus();">
+                                <span class="input-group-text" style=" border-left: none; gap: 5px; cursor: pointer;">
                                     <div id="companyIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
                                         <img id="companyIconImg"
                                             src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="icon"

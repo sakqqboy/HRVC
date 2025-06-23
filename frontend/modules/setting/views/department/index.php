@@ -137,8 +137,8 @@ $page = "grid";
                                         foreach ($limitedDepartments as $index => $dept):
                                         ?>
                                         <div class="col-6 mb-1">
-                                            <span class="d-flex align-items-center mb-12"
-                                                style="font-size: 13px; color: #333;">
+                                            <span class="d-flex align-items-center font-size-13 font-weight-500 mb-12"
+                                                style=" color: #333;">
                                                 <div class="cycle-current-red mr-5">
                                                     <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
                                                         alt="icon">
