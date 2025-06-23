@@ -207,7 +207,8 @@ $statusTexArr = Status::allStatusText();
                                     <?= Yii::t('app', 'System Login ID') ?>
                                 </text>
                                 <div class="input-group">
-                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                    <span class="input-employee-text"
+                                        style="background-color: white; border-right: none;">
                                         <img src="<?= Yii::$app->homeUrl ?>image/e-mail.svg" alt="Website"
                                             style="width: 20px; height: 20px;">
                                     </span>
@@ -232,7 +233,8 @@ $statusTexArr = Status::allStatusText();
                                 </text>
 
                                 <div class="input-group">
-                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                    <span class="input-employee-text"
+                                        style="background-color: white; border-right: none;">
                                         <img src="<?= Yii::$app->homeUrl ?>image/e-lock.svg" alt="Website"
                                             style="width: 20px; height: 20px;">
                                     </span>
@@ -240,7 +242,7 @@ $statusTexArr = Status::allStatusText();
                                         id="password" placeholder="<?= Yii::t('app', 'Register Password here') ?>"
                                         value="<?= $userEmployee['password'] ?? '' ?>"
                                         style="width: 245px; border-left: none; border-right: none;">
-                                    <span class="input-group-text" onclick="togglePassword()"
+                                    <span class="input-employee-text" onclick="togglePassword()"
                                         style="background-color: white; cursor: pointer; border-left: none;">
                                         <img src="<?= Yii::$app->homeUrl ?>image/e-pass.svg" id="toggleIcon"
                                             style="width: 20px; height: 20px; ">
@@ -268,7 +270,8 @@ $statusTexArr = Status::allStatusText();
                                 </text>
 
                                 <div class="input-group">
-                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                    <span class="input-employee-text"
+                                        style="background-color: white; border-right: none;">
                                         <!-- <img class="cycle-current" src="<?= Yii::$app->homeUrl ?>image/e-world.svg"
                                             id="flag-dl" alt="Website" style="width: 20px; height: 20px; border: none;"> -->
                                         <img class="cycle-current" id="flag-dl"
@@ -457,7 +460,7 @@ $statusTexArr = Status::allStatusText();
                                 <?= Yii::t('app', 'Nationality') ?>
                             </text>
                             <div class="input-group">
-                                <span class="input-group-text" style="background-color: white; border-right: none;">
+                                <span class="input-employee-text" style="background-color: white; border-right: none;">
                                     <?php
                                         $flag = 'image/e-world.svg'; // default fallback flag
 
@@ -529,7 +532,7 @@ $statusTexArr = Status::allStatusText();
                                 <?= Yii::t('app', 'Personal Email') ?>
                             </text>
                             <div class="input-group">
-                                <span class="input-group-text" style="background-color: white; border-right: none;">
+                                <span class="input-employee-text" style="background-color: white; border-right: none;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/e-mail.svg" alt="Website"
                                         style="width: 20px; height: 20px;">
                                 </span>
@@ -543,7 +546,7 @@ $statusTexArr = Status::allStatusText();
                                 <?= Yii::t('app', 'Marital Status') ?>
                             </text>
                             <div class="input-group">
-                                <span class="input-group-text" style="background-color: white; border-right: none;">
+                                <span class="input-employee-text" style="background-color: white; border-right: none;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/e-world.svg" alt="Website"
                                         style="width: 20px; height: 20px;">
                                 </span>
@@ -581,7 +584,7 @@ $statusTexArr = Status::allStatusText();
                                 <?= Yii::t('app', 'Date of Birth') ?>
                             </label>
                             <div class="input-group" id="group-birtdate" style="position: relative;">
-                                <span class="input-group-text mid-center pb-10 pt-10"
+                                <span class="input-employee-text mid-center pb-10 pt-10"
                                     style="background-color: #C3C3C3; border:0.5px solid #818181; border-radius: 36px; width: 66px; z-index: 1; height: 40px;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="Calendar"
                                         style="width: 16px; height: 16px;">
@@ -662,7 +665,7 @@ $statusTexArr = Status::allStatusText();
                                     <?php endif; ?>
                                 </select>
                                 <input type="hidden" name="companyIdValue" id="">
-                                <span class="input-group-text "
+                                <span class="input-employee-text "
                                     style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
                                     onclick="document.getElementById('companySelectId').focus();">
                                     <div id="companyIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
@@ -692,7 +695,7 @@ $statusTexArr = Status::allStatusText();
                                     </option>
                                 </select>
 
-                                <span class="input-group-text"
+                                <span class="input-employee-text"
                                     style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;"
                                     onclick="document.getElementById('companySelectId').focus();">
                                     <div id="branchIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
@@ -721,7 +724,7 @@ $statusTexArr = Status::allStatusText();
                                     </option>
                                 </select>
 
-                                <span class="input-group-text"
+                                <span class="input-employee-text"
                                     style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;"
                                     onclick="document.getElementById('companySelectId').focus();">
                                     <div id="departmentIcon" class="cycle-current-gray"
@@ -755,7 +758,7 @@ $statusTexArr = Status::allStatusText();
                                     </option>
                                 </select>
 
-                                <span class="input-group-text"
+                                <span class="input-employee-text"
                                     style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;"
                                     onclick="document.getElementById('companySelectId').focus();">
                                     <div id="teamIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
@@ -775,7 +778,7 @@ $statusTexArr = Status::allStatusText();
                                 <?= Yii::t('app', 'Work Email') ?>
                             </text>
                             <div class="input-group">
-                                <span class="input-group-text" style="background-color: white; border-right: none;">
+                                <span class="input-employee-text" style="background-color: white; border-right: none;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/e-mail.svg" alt="Website"
                                         style="width: 20px; height: 20px;">
                                 </span>
@@ -792,7 +795,7 @@ $statusTexArr = Status::allStatusText();
                                 <?= Yii::t('app', 'Hiring Date') ?>
                             </label>
                             <div class="input-group" id="group-hiringdate" style="position: relative;">
-                                <span class="input-group-text mid-center pb-10 pt-10" id="calendar-icon-hiring"
+                                <span class="input-employee-text mid-center pb-10 pt-10" id="calendar-icon-hiring"
                                     style="background-color: #C3C3C3; border:0.5px solid #818181; border-radius: 36px; width: 66px; z-index: 1; height: 40px;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="Calendar"
                                         id="calendar-img-hiring" style="width: 16px; height: 16px;">
@@ -836,7 +839,7 @@ $statusTexArr = Status::allStatusText();
                                 </label>
                             </div>
                             <div class="input-group" id="group-due-term" style="position: relative;">
-                                <span class="input-group-text pb-10 pt-10" id="due-term-icon-group"
+                                <span class="input-employee-text pb-10 pt-10" id="due-term-icon-group"
                                     style="background-color: #C3C3C3; border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1; height: 40px;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" data-icon="calendar"
                                         id="start-img-probation" alt="Calendar" style="width: 16px; height: 16px;">
@@ -917,7 +920,7 @@ $statusTexArr = Status::allStatusText();
                                     <!-- options will be populated dynamically -->
                                 </select>
 
-                                <span class="input-group-text"
+                                <span class="input-employee-text"
                                     style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;"
                                     onclick="document.getElementById('titleSelectId').focus();">
                                     <div id="titleIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
@@ -1311,7 +1314,8 @@ $statusTexArr = Status::allStatusText();
                                         data-bs-original-title="<?= Yii::t('app', 'Certificates and Skill Tags') ?>">
                                 </span>
                                 <div class="input-group mt-12">
-                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                    <span class="input-employee-text"
+                                        style="background-color: white; border-right: none;">
                                         <img id="skill-plus"
                                             src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-gray.svg"
                                             alt="Website" style="width: 20px; height: 20px;">
@@ -1319,7 +1323,7 @@ $statusTexArr = Status::allStatusText();
                                     <input type="text" name="skill" id="skill" class="form-control"
                                         style=" border-left: none;  border-right: none;"
                                         placeholder="<?= Yii::t('app', 'e.g., Python, Data Analysis, Communication') ?>">
-                                    <span class="input-group-text" id="enterHint"
+                                    <span class="input-employee-text" id="enterHint"
                                         style="background-color: #ffff; border-left: none; ">
                                         <div class="city-crad-company" id="hintText"
                                             style="background: var(--HRVC---Light-Text, #94989C);"><img
@@ -1371,7 +1375,8 @@ $statusTexArr = Status::allStatusText();
                                     <?= Yii::t('app', 'Primary Language Spoken') ?>
                                 </text>
                                 <div class="input-group">
-                                    <span class="input-group-text" style="background-color: white; border-right: none;">
+                                    <span class="input-employee-text"
+                                        style="background-color: white; border-right: none;">
                                         <?php
                                             $flag = 'image/e-world.svg'; // default fallback flag
 
@@ -1466,7 +1471,7 @@ $statusTexArr = Status::allStatusText();
                                     <?= Yii::t('app', 'Linkedin Link') ?>
                                 </text>
                                 <div class="input-group">
-                                    <span class="input-group-text "
+                                    <span class="input-employee-text "
                                         style="background-color: white; border-right: none;">
                                         <img src="<?= Yii::$app->homeUrl ?>image/in-image.svg" alt="LinkedIn"
                                             style="width: 20px; height: 20px;">
@@ -1503,7 +1508,7 @@ $statusTexArr = Status::allStatusText();
 
                                     <div id="ald">
                                         <span id="lockId-1"
-                                            class="input-group-text d-flex justify-content-center align-items-center mt-12"
+                                            class="input-employee-text d-flex justify-content-center align-items-center mt-12"
                                             style="background-color: #e9ecef; height: 40px;">
                                             <?= Yii::t('app', 'Add additional Language First') ?>
                                         </span>
@@ -1609,7 +1614,7 @@ $statusTexArr = Status::allStatusText();
         branchSelect.removeAttribute('disabled');
 
         // เปลี่ยนสี background
-        if (branchSpan && branchSpan.classList.contains('input-group-text')) {
+        if (branchSpan && branchSpan.classList.contains('input-employee-text')) {
             branchSpan.style.backgroundColor = '#fff';
         }
         if (selectedValue !== '') {
@@ -1632,7 +1637,7 @@ $statusTexArr = Status::allStatusText();
         departmentSelect.removeAttribute('disabled');
 
         // เปลี่ยนสี background
-        if (departmentSpan && departmentSpan.classList.contains('input-group-text')) {
+        if (departmentSpan && departmentSpan.classList.contains('input-employee-text')) {
             departmentSpan.style.backgroundColor = '#fff';
         }
         if (selectedValue !== '') {
@@ -1659,7 +1664,7 @@ $statusTexArr = Status::allStatusText();
         teamSelect.removeAttribute('disabled');
 
         // เปลี่ยนสี background
-        if (teamSpan && teamSpan.classList.contains('input-group-text')) {
+        if (teamSpan && teamSpan.classList.contains('input-employee-text')) {
             teamSpan.style.backgroundColor = '#fff';
         }
         loadTeamsSelect(departmentId);
@@ -1672,7 +1677,7 @@ $statusTexArr = Status::allStatusText();
         titileSelect.removeAttribute('disabled');
 
         // เปลี่ยนสี background
-        if (titleSpan && titleSpan.classList.contains('input-group-text')) {
+        if (titleSpan && titleSpan.classList.contains('input-employee-text')) {
             titleSpan.style.backgroundColor = '#fff';
         }
 
@@ -2218,7 +2223,7 @@ $statusTexArr = Status::allStatusText();
 
             // เปลี่ยนสี background ของ span ถ้ามี
             const branchSpan = branchSelect.nextElementSibling;
-            if (branchSpan && branchSpan.classList.contains('input-group-text')) {
+            if (branchSpan && branchSpan.classList.contains('input-employee-text')) {
                 branchSpan.style.backgroundColor = '#fff';
             }
 
@@ -2266,7 +2271,7 @@ $statusTexArr = Status::allStatusText();
                         departmentSelect.removeAttribute('disabled');
 
                         // เปลี่ยนสี background
-                        if (departmentSpan && departmentSpan.classList.contains('input-group-text')) {
+                        if (departmentSpan && departmentSpan.classList.contains('input-employee-text')) {
                             departmentSpan.style.backgroundColor = '#fff';
                         }
                         if (selectedValue !== '') {
@@ -2286,7 +2291,7 @@ $statusTexArr = Status::allStatusText();
 
                 // เปลี่ยนสี background ของ span ถ้ามี
                 const departmentSpan = departmentSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
-                if (departmentSpan && departmentSpan.classList.contains('input-group-text')) {
+                if (departmentSpan && departmentSpan.classList.contains('input-employee-text')) {
                     departmentSpan.style.backgroundColor = '#fff';
                 }
 
@@ -2334,7 +2339,7 @@ $statusTexArr = Status::allStatusText();
                             teamSelect.removeAttribute('disabled');
 
                             // เปลี่ยนสี background
-                            if (teamSpan && teamSpan.classList.contains('input-group-text')) {
+                            if (teamSpan && teamSpan.classList.contains('input-employee-text')) {
                                 teamSpan.style.backgroundColor = '#fff';
                             }
                             loadTeamsSelect(departmentSelectId);
@@ -2347,7 +2352,7 @@ $statusTexArr = Status::allStatusText();
                             titileSelect.removeAttribute('disabled');
 
                             // เปลี่ยนสี background
-                            if (titleSpan && titleSpan.classList.contains('input-group-text')) {
+                            if (titleSpan && titleSpan.classList.contains('input-employee-text')) {
                                 titleSpan.style.backgroundColor = '#fff';
                             }
 
@@ -2605,7 +2610,7 @@ $statusTexArr = Status::allStatusText();
         <?php if ($statusfrom === 'Update'): ?>
         langHtml = `
             <div class="input-group mt-12">
-                <span class="input-group-text" style="background-color: white; border-right: none;">
+                <span class="input-employee-text" style="background-color: white; border-right: none;">
                     <img class="cycle-current" id="flag-ml${additionalLangCount - 1}" src="<?= Yii::$app->homeUrl ?>${flag}" alt="Website"
                         style="width: 20px; height: 20px; border: none;">
                 </span>
@@ -2633,7 +2638,7 @@ $statusTexArr = Status::allStatusText();
         <?php else: ?>
         langHtml = `
             <div class="input-group mt-12">
-                <span class="input-group-text" style="background-color: white; border-right: none;">
+                <span class="input-employee-text" style="background-color: white; border-right: none;">
                     <img class="cycle-current" id="flag-ml${additionalLangCount}" src="<?= Yii::$app->homeUrl ?>${flag}" alt="Website"
                         style="width: 20px; height: 20px; border: none;">
                 </span>
@@ -2690,7 +2695,7 @@ $statusTexArr = Status::allStatusText();
             const lockSpan =
                 `
             <span id="lockId-${noId}"
-                class="input-group-text d-flex justify-content-center align-items-center mt-12"
+                class="input-employee-text d-flex justify-content-center align-items-center mt-12"
                 style="background-color: #e9ecef; height: 40px;">
                 Add additional Language First
             </span>
@@ -2709,7 +2714,7 @@ $statusTexArr = Status::allStatusText();
         if (additionalLangCount >= 2) {
             const lockSpan = `
             <span id="lockId-${additionalLangCount}"
-                class="input-group-text d-flex justify-content-center align-items-center mt-12"
+                class="input-employee-text d-flex justify-content-center align-items-center mt-12"
                 style="background-color: #e9ecef; height: 40px;">
                 Add additional Language First
             </span>

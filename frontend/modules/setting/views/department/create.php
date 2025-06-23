@@ -104,7 +104,7 @@ if (Yii::$app->session->hasFlash('error')) {
                                     <?php endif; ?>
                                 </select>
 
-                                <span class="input-group-text"
+                                <span class="input-employee-text"
                                     style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
                                     onclick="document.getElementById('company').focus();">
                                     <div id="companyIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
@@ -143,7 +143,7 @@ if (Yii::$app->session->hasFlash('error')) {
                                     </option>
                                 </select>
 
-                                <span class="input-group-text mt-12"
+                                <span class="input-employee-text mt-12"
                                     style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;"
                                     onclick="document.getElementById('companySelectId').focus();">
                                     <div id="branchIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
@@ -212,7 +212,7 @@ document.getElementById('companySelectId').addEventListener('change', function()
     branchSelect.removeAttribute('disabled');
 
     // เปลี่ยนสี background
-    if (branchSpan && branchSpan.classList.contains('input-group-text')) {
+    if (branchSpan && branchSpan.classList.contains('input-employee-text')) {
         branchSpan.style.backgroundColor = '#fff';
     }
     if (selectedValue !== '') {

@@ -105,7 +105,8 @@ if (Yii::$app->session->hasFlash('error')) {
                                     <?php endif; ?>
                                 </select>
 
-                                <span class="input-group-text" style=" border-left: none; gap: 5px; cursor: pointer;">
+                                <span class="input-employee-text"
+                                    style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;">
                                     <div id="companyIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
                                         <img id="companyIconImg"
                                             src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="icon"
@@ -144,7 +145,7 @@ if (Yii::$app->session->hasFlash('error')) {
                                     </option>
                                 </select>
 
-                                <span class="input-group-text mt-12"
+                                <span class="input-employee-text mt-12"
                                     style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;"
                                     onclick="document.getElementById('companySelectId').focus();">
                                     <div id="branchIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
@@ -182,7 +183,7 @@ if (Yii::$app->session->hasFlash('error')) {
                                     </option>
                                 </select>
 
-                                <span class="input-group-text mt-12"
+                                <span class="input-employee-text mt-12"
                                     style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;"
                                     onclick="document.getElementById('companySelectId').focus();">
                                     <div id="departmentIcon" class="cycle-current-gray"
@@ -254,7 +255,7 @@ document.getElementById('companySelectId').addEventListener('change', function()
     branchSelect.removeAttribute('disabled');
 
     // เปลี่ยนสี background
-    if (branchSpan && branchSpan.classList.contains('input-group-text')) {
+    if (branchSpan && branchSpan.classList.contains('input-employee-text')) {
         branchSpan.style.backgroundColor = '#fff';
     }
     if (selectedValue !== '') {
@@ -277,7 +278,7 @@ document.getElementById('branchSelectId').addEventListener('change', function() 
     departmentSelect.removeAttribute('disabled');
 
     // เปลี่ยนสี background
-    if (departmentSpan && departmentSpan.classList.contains('input-group-text')) {
+    if (departmentSpan && departmentSpan.classList.contains('input-employee-text')) {
         departmentSpan.style.backgroundColor = '#fff';
     }
     if (selectedValue !== '') {

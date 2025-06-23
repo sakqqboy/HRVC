@@ -112,7 +112,7 @@ $this->title = 'Create Branch';
                                 <?php endif; ?>
                             </select>
 
-                            <span class="input-group-text"
+                            <span class="input-employee-text"
                                 style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
                                 onclick="document.getElementById('company').focus();">
                                 <div id="companyIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
