@@ -10,7 +10,7 @@ $this->title = 'Employee';
 $statusTexArr = Status::allStatusText();
 ?>
 <div class="col-12 mt-70 pt-20">
-	<div class="col-12 pr-15 pl-15">
+	<div class="col-12">
 		<?= $this->render('header', [
 			"totalEmployee" => $totalEmployee,
 			"actualShow" => count($employees),
@@ -19,15 +19,15 @@ $statusTexArr = Status::allStatusText();
 
 	</div>
 	<input type="hidden" id="page-type" value="grid">
-	<div class="col-12 mt-20 pr-15 pl-15">
+	<div class="col-12 mt-20">
 		<div class="bg-white-employee">
-			<div class="row mb-40">
-				<div class="col-lg-5 col-12 text-start employee-profiles  pb-0">
+			<div class="row mb-40" style="--bs-gutter-x:0px;">
+				<div class="col-lg-5 col-12 text-start employee-profiles pr-10 pl-10  pb-0">
 					<div class="d-flex justify-content-start align-items-center  gap-2">
 						<?= Yii::t('app', 'Employee Profiles') ?>
 					</div>
 				</div>
-				<div class="col-lg-7 col-12 text-end pb-0 pl-0">
+				<div class="col-lg-7 col-12 text-end pb-0 pl-10 pr-10">
 					<?= $this->render('filter', [
 						"companies" => $companies,
 						"statusTexArr" => $statusTexArr,
@@ -45,7 +45,7 @@ $statusTexArr = Status::allStatusText();
 					]) ?>
 				</div>
 			</div>
-			<div class="row" style="--bs-gutter-x:19px;">
+			<div class="row" style="--bs-gutter-x:0px;">
 				<?php
 				if (isset($employees) && count($employees) > 0) {
 					foreach ($employees as $employeeId => $employee) :
@@ -82,7 +82,7 @@ $statusTexArr = Status::allStatusText();
 						}
 						//throw new exception(print_r($employees, true));
 				?>
-						<div class="col-lg-4 col-md-6 col-12">
+						<div class="col-lg-4 col-md-6 col-12 pr-10 pl-10">
 							<div class="card employee-box" id="employee-<?= $employeeId ?>">
 								<div class="position-relative new-employee">
 									<input type="checkbox" id="check-employee-<?= $employeeId ?>" name="" class="checkbox-employee pull-left invisible" onchange="javascript:selectEmployee(<?= $employeeId ?>)" value="<?= $employeeId ?>">
@@ -264,7 +264,7 @@ $showModal = $isFromImport; // หรือ 0
 		border-radius: 10px;
 		border: 1px solid #BBCDDE;
 		height: 100%;
-		padding: 27px 20px 32px 20px;
+		padding: 27px 10px 32px 10px;
 	}
 
 	.employee-box {
