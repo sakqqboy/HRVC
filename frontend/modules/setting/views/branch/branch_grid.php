@@ -6,7 +6,8 @@ $this->title = 'Branch';
 $page = "grid"
 // echo $countries;
 ?>
-<div class="contrainer-body mt-10">
+<!-- <div class="contrainer-body mt-10"> -->
+<div class="mt-50" style="padding: 30px;">
 
     <div class="between-center mt-20" style="width: 100%;">
         <div class="col-8">
@@ -88,12 +89,12 @@ $page = "grid"
                                             <div class="name-crad-company">
                                                 <?= $branch['branchName'] ?>
                                             </div>
-                                            <div class="city-crad-company">
+                                            <div class="city-crad-company text-truncate">
                                                 <img src="<?= Yii::$app->homeUrl ?><?= $branch['picture'] ?>"
                                                     class="bangladresh-hrvc">
                                                 <?= Yii::t('app', $branch['companyName']) ?>
                                             </div>
-                                            <div class="city-crad-company">
+                                            <div class="city-crad-company text-truncate">
                                                 <img src="<?= Yii::$app->homeUrl ?><?= $branch['flag'] ?>"
                                                     class="bangladresh-hrvc">
                                                 <?= $branch['city'] ?>, <?= Yii::t('app', $branch['countryName']) ?>
