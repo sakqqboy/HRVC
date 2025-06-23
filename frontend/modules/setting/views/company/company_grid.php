@@ -4,13 +4,13 @@ use common\models\ModelMaster;
 
 $this->title = 'company';
 $page = "grid"
-// echo $countries;
 ?>
 
 <!-- <div class="contrainer-body mt-10"> -->
-<div class="mt-50" style="padding: 30px;">
+<!-- <div class="mt-60" style="padding: 30px;"> -->
+<div class="mt-60" style="padding: 30px 0px;">
 
-    <div class="between-center mt-20" style="width: 100%;">
+    <div class="between-center" style="width: 100%;">
         <div class="col-9">
             <div class="d-flex align-items-center gap-2">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
@@ -56,8 +56,8 @@ $page = "grid"
         </div>
     </div>
 
-    <div class="pim-body company-group-edit bg-white mt-30">
-        <div class="alert alert-branch-body" role="alert">
+    <div class="company-group-edit bg-white mt-20">
+        <div class="alert alert-branch-body" role="alert" style="padding: 0px;">
             <div class="row" id="company-branch">
                 <?php
 				if (isset($companies) && count($companies) > 0) {
@@ -69,18 +69,17 @@ $page = "grid"
                 <div class="col-lg-6 col-md-5 col-sm-3 col-12" id="company-<?php echo $company['companyId'] ?>">
                     <div class="card-comany">
                         <div class="card-body" style="background: #F9FBFF;  border-radius: 5px;">
-                            <div style="display: flex;
+                            <!-- <div style="display: flex;
                             height: 100%;
                             flex-direction: column;
                             justify-content: space-between;
                             align-items: center;
                             flex-shrink: 0;
-                            align-self: stretch;">
+                            align-self: stretch;"> -->
+                            <div class="between-center"
+                                style="flex-direction: column; height: 100%; gap: 20px;  align-self: stretch;">
                                 <!-- ส่วนบน -->
-                                <div class="between-center" style="
-                                        height: 60px;
-                                        gap: 17px;
-                                        width: 100%;">
+                                <div class="between-center" style=" gap: 17px; width: 100%;">
                                     <div style="display: flex; align-items: center; gap: 17px;">
                                         <div class="mid-center"
                                             style="height: 60px; padding: 20.944px 4.189px; gap: 10.472px;">
@@ -97,7 +96,7 @@ $page = "grid"
                                                 ?>
                                         </div>
                                         <div class="header-crad-company">
-                                            <div class="name-crad-company">
+                                            <div class="name-crad-company text-truncate">
                                                 <?= $company['companyName'] ?>
                                             </div>
                                             <div class="city-crad-company flex-grow-1">
