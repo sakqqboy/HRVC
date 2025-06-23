@@ -7,11 +7,12 @@ $page = "grid"
 // echo $countries;
 ?>
 
-<div class="contrainer-body mt-10">
+<!-- <div class="contrainer-body mt-10"> -->
+<div class="mt-50" style="padding: 30px;">
 
     <div class="between-center mt-20" style="width: 100%;">
         <div class="col-9">
-            <div class=" d-flex align-items-center gap-2">
+            <div class="d-flex align-items-center gap-2">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
                     style="width: 24px; height: 24px;">
                 <div class="pim-name-title ml-10">
@@ -99,7 +100,7 @@ $page = "grid"
                                             <div class="name-crad-company">
                                                 <?= $company['companyName'] ?>
                                             </div>
-                                            <div class="city-crad-company">
+                                            <div class="city-crad-company flex-grow-1">
                                                 <img src="<?= Yii::$app->homeUrl ?><?= $company['flag'] ?>"
                                                     class="bangladresh-hrvc">
                                                 <?= $company['city'] ?>, <?= Yii::t('app', $company['countryName']) ?>
