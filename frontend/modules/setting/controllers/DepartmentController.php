@@ -42,45 +42,47 @@ class DepartmentController extends Controller
         return true; //go to origin request
     }
 
-    public function actionEncodeParamsCountry() {
-		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-	
-		$countryId = Yii::$app->request->post('countryId');
-        $companyId = Yii::$app->request->post('companyId');
-        $branchId = Yii::$app->request->post('branchId');
-		$page = Yii::$app->request->post('page');
+    public function actionEncodeParamsCountry()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-		$url =  ModelMaster::encodeParams(['countryId' => $countryId,'companyId' => $companyId, 'branchId' => $branchId,  'nextPage' => 1]);
-	
-		if($page == 'grid') {
-			return $this->redirect(Yii::$app->homeUrl . 'setting/department/index-filter/'. $url );
-		}else if($page == 'view') {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/department/department-view/'. $url );
-		}
-	}
-
-	public function actionEncodeParamsPage() {
-		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-	
         $countryId = Yii::$app->request->post('countryId');
         $companyId = Yii::$app->request->post('companyId');
         $branchId = Yii::$app->request->post('branchId');
         $page = Yii::$app->request->post('page');
-		$nextPage = Yii::$app->request->post('nextPage');
 
-		// throw new exception(print_r($nextPage, true));
+        $url =  ModelMaster::encodeParams(['countryId' => $countryId, 'companyId' => $companyId, 'branchId' => $branchId,  'nextPage' => 1]);
 
-		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'companyId' => $companyId, 'branchId' => $branchId , 'nextPage' => $nextPage]);
-	
-		if($page == 'grid') {
-			return $this->redirect(Yii::$app->homeUrl . 'setting/department/index-filter/'. $url );
-		}else if($page == 'view') {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/department/departments-view/'. $url );
+        if ($page == 'grid') {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/department/index-filter/' . $url);
+        } else if ($page == 'view') {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/department/department-view/' . $url);
         }
-	}
+    }
 
-	public function actionNoDepartment($hash)
-	{
+    public function actionEncodeParamsPage()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $countryId = Yii::$app->request->post('countryId');
+        $companyId = Yii::$app->request->post('companyId');
+        $branchId = Yii::$app->request->post('branchId');
+        $page = Yii::$app->request->post('page');
+        $nextPage = Yii::$app->request->post('nextPage');
+
+        // throw new exception(print_r($nextPage, true));
+
+        $url =  ModelMaster::encodeParams(['countryId' => $countryId, 'companyId' => $companyId, 'branchId' => $branchId, 'nextPage' => $nextPage]);
+
+        if ($page == 'grid') {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/department/index-filter/' . $url);
+        } else if ($page == 'view') {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/department/departments-view/' . $url);
+        }
+    }
+
+    public function actionNoDepartment($hash)
+    {
         $param = ModelMaster::decodeParams($hash);
         $branchId = $param["branchId"];
         // throw new exception(print_r($branchId, true));
@@ -109,32 +111,32 @@ class DepartmentController extends Controller
             "branchId" => $branchId,
             "group" =>  $group
         ]);
-	}
+    }
 
     public function actionIndex()
     {
-        
+
         $role = UserRole::userRight();
-        $data =[];
+        $data = [];
         $api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
-		$countries = curl_exec($api);
-		$countries = json_decode($countries, true);
-        
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$company = curl_exec($api);
-		$company = json_decode($company, true);
+        $countries = curl_exec($api);
+        $countries = json_decode($countries, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1'. '&limit=0');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+        $company = curl_exec($api);
+        $company = json_decode($company, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1' . '&limit=0');
         $branch = curl_exec($api);
         $branch = json_decode($branch, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page=1' . '&countryId='. '&companyId=' . '&limit=6');
-		$numPage = curl_exec($api);
-		$numPage = json_decode($numPage, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page?page=1' . '&countryId=' . '&companyId=' . '&limit=6');
+        $numPage = curl_exec($api);
+        $numPage = json_decode($numPage, true);
 
 
         //ข้อมูลbranchเป็นหลัก
@@ -154,21 +156,21 @@ class DepartmentController extends Controller
 
                 // throw new Exception("departments: " . print_r($branchId, true));
 
-            if (!isset($data[$branchId])) {
-                // ตั้งค่าข้อมูล branch ครั้งแรก
-                $data[$branchId] = [
-                    'branchId' => $row['branchId'],
-                    'branchName' => $row['branchName'],
-                    'companyId' => $row['companyId'],
-                    'companyName' => $row['companyName'],
-                    'picture' => $row['picture'],
-                    'city' => $row['city'],
-                    'countryId' => $row['countryId'],
-                    'countryName' => $row['countryName'],
-                    'flag' => $row['flag'],
-                    'departments' => $departments
-                ];
-            }
+                if (!isset($data[$branchId])) {
+                    // ตั้งค่าข้อมูล branch ครั้งแรก
+                    $data[$branchId] = [
+                        'branchId' => $row['branchId'],
+                        'branchName' => $row['branchName'],
+                        'companyId' => $row['companyId'],
+                        'companyName' => $row['companyName'],
+                        'picture' => $row['picture'],
+                        'city' => $row['city'],
+                        'countryId' => $row['countryId'],
+                        'countryName' => $row['countryName'],
+                        'flag' => $row['flag'],
+                        'departments' => $departments
+                    ];
+                }
 
             endforeach;
         }
@@ -177,7 +179,7 @@ class DepartmentController extends Controller
 
         // throw new exception(print_r($data, true));
 
-        return $this->render('index',[
+        return $this->render('index', [
             "data" => $data,
             "role" => $role,
             "numPage" => $numPage,
@@ -199,30 +201,30 @@ class DepartmentController extends Controller
         $companyId = !empty($param["companyId"]) ? $param["companyId"] : 0;
         $branchId = !empty($param["branchId"]) ? $param["branchId"] : 0;
         $nextPage = !empty($param["nextPage"]) ? $param["nextPage"] : 0;
-        
+
         $role = UserRole::userRight();
-        $data =[];
+        $data = [];
         $api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
-		$countries = curl_exec($api);
-		$countries = json_decode($countries, true);
-        
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$company = curl_exec($api);
-		$company = json_decode($company, true);
+        $countries = curl_exec($api);
+        $countries = json_decode($countries, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1'. '&limit=0');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+        $company = curl_exec($api);
+        $company = json_decode($company, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1' . '&limit=0');
         $branch = curl_exec($api);
         $branch = json_decode($branch, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page-filter?page='. $nextPage . '&countryId='. $countryId . '&companyId='. $companyId . '&branchId='. $branchId . '&limit=6');
-		$numPage = curl_exec($api);
-		$numPage = json_decode($numPage, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-page-filter?page=' . $nextPage . '&countryId=' . $countryId . '&companyId=' . $companyId . '&branchId=' . $branchId . '&limit=6');
+        $numPage = curl_exec($api);
+        $numPage = json_decode($numPage, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/index-filter?countryId='. $countryId . '&&companyId='. $companyId . '&&branchId='. $branchId . '&&page=' . $nextPage . '&limit=6');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/index-filter?countryId=' . $countryId . '&&companyId=' . $companyId . '&&branchId=' . $branchId . '&&page=' . $nextPage . '&limit=6');
         $branches = curl_exec($api);
         $branches = json_decode($branches, true);
 
@@ -238,21 +240,21 @@ class DepartmentController extends Controller
 
                 // throw new Exception("departments: " . print_r($branchId, true));
 
-            if (!isset($data[$branchesId])) {
-                // ตั้งค่าข้อมูล branch ครั้งแรก
-                $data[$branchesId] = [
-                    'branchId' => $row['branchId'],
-                    'branchName' => $row['branchName'],
-                    'companyId' => $row['companyId'],
-                    'companyName' => $row['companyName'],
-                    'picture' => $row['picture'],
-                    'city' => $row['city'],
-                    'countryId' => $row['countryId'],
-                    'countryName' => $row['countryName'],
-                    'flag' => $row['flag'],
-                    'departments' => $departments
-                ];
-            }
+                if (!isset($data[$branchesId])) {
+                    // ตั้งค่าข้อมูล branch ครั้งแรก
+                    $data[$branchesId] = [
+                        'branchId' => $row['branchId'],
+                        'branchName' => $row['branchName'],
+                        'companyId' => $row['companyId'],
+                        'companyName' => $row['companyName'],
+                        'picture' => $row['picture'],
+                        'city' => $row['city'],
+                        'countryId' => $row['countryId'],
+                        'countryName' => $row['countryName'],
+                        'flag' => $row['flag'],
+                        'departments' => $departments
+                    ];
+                }
 
             endforeach;
         }
@@ -261,7 +263,7 @@ class DepartmentController extends Controller
 
         // throw new exception(print_r($data, true));
 
-        return $this->render('index',[
+        return $this->render('index', [
             "data" => $data,
             "role" => $role,
             "numPage" => $numPage,
@@ -280,203 +282,198 @@ class DepartmentController extends Controller
         $param = ModelMaster::decodeParams($hash);
 
         $branchId = $param["branchId"];
-        
+
         $depId = $param["departmentId"] ?? 0;
 
-		// throw new Exception(print_r($param, true)); // Debug: ดูข้อมูลทั้งหมด
+        // throw new Exception(print_r($param, true)); // Debug: ดูข้อมูลทั้งหมด
 
         $api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
-		$resultCountry = curl_exec($api);
-		$countries = json_decode($resultCountry, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
+        $resultCountry = curl_exec($api);
+        $countries = json_decode($resultCountry, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' .  $branchId );
-		$branch = curl_exec($api);
-		$branch = json_decode($branch, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' .  $branchId);
+        $branch = curl_exec($api);
+        $branch = json_decode($branch, true);
         // throw new Exception("branch: " . print_r($branch, true));
 
         // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-page?id=' . $branchId .'&page=1' . '&countryId=0' . '&limit=0');
-		// $numPage = curl_exec($api);
-		// $numPage = json_decode($numPage, true);
+        // $numPage = curl_exec($api);
+        // $numPage = json_decode($numPage, true);
         // // throw new Exception("numPage: " . print_r($numPage, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' .  $branchId . '&page=1' . '&limit=0');
-		$departments = curl_exec($api);
-		$departments = json_decode($departments, true);
+        $departments = curl_exec($api);
+        $departments = json_decode($departments, true);
         // throw new Exception("department: " . print_r($departments, true));
 
         $data = [];
-		if (!empty($departments)) {
+        if (!empty($departments)) {
             foreach ($departments as $department) :
-				$departmentId = $department['departmentId'];
+                $departmentId = $department['departmentId'];
 
-				$employees = Employee::find()
-				->where(["departmentId" => $departmentId])
-				->asArray()
-				->all();
+                $employees = Employee::find()
+                    ->where(["departmentId" => $departmentId])
+                    ->asArray()
+                    ->all();
 
 
-				// กรองเฉพาะที่มี picture
-				$filteredEmployees = array_filter($employees, function($employee) {
-					return !empty($employee['picture']);
-				});
+                // กรองเฉพาะที่มี picture
+                $filteredEmployees = array_filter($employees, function ($employee) {
+                    return !empty($employee['picture']);
+                });
 
-				// รีเซ็ต index และเลือกแค่ 3 คนแรก
-				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+                // รีเซ็ต index และเลือกแค่ 3 คนแรก
+                $filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
 
-				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
+                // throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
 
-				$totalEmployee = Employee::find()->where(["departmentId" => $departmentId, "status" => 1])->count();
-				$teams = [];
-					if (!empty($department)) {
-						$teams = Team::find()->select('teamId')
-							->where(["status" => 1])
-							->andWhere(['IN', 'departmentId', $department['departmentId']])
-							->asArray()->column();
-					}
+                $totalEmployee = Employee::find()->where(["departmentId" => $departmentId, "status" => 1])->count();
+                $teams = [];
+                if (!empty($department)) {
+                    $teams = Team::find()->select('teamId')
+                        ->where(["status" => 1])
+                        ->andWhere(['IN', 'departmentId', $department['departmentId']])
+                        ->asArray()->column();
+                }
 
-				$data[] = [
-					"departmentId" => $department['departmentId'],
-					"departmentName" => $department["departmentName"],
-					"branchId" => $department['branchId'],
-					"status" => $department['status'],
-					"createDateTime" => $department['createDateTime'],    
-					"updateDateTime" => $department['updateDateTime'],
-					"totalTeam" => count($teams),
-					"totalEmployee" => $totalEmployee,
-					"employees" => $filteredEmployees
-				];
-			endforeach;
-		}
+                $data[] = [
+                    "departmentId" => $department['departmentId'],
+                    "departmentName" => $department["departmentName"],
+                    "branchId" => $department['branchId'],
+                    "status" => $department['status'],
+                    "createDateTime" => $department['createDateTime'],
+                    "updateDateTime" => $department['updateDateTime'],
+                    "totalTeam" => count($teams),
+                    "totalEmployee" => $totalEmployee,
+                    "employees" => $filteredEmployees
+                ];
+            endforeach;
+        }
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $branch["companyId"]);
         $company = curl_exec($api);
         $company = json_decode($company, true);
-        
-		curl_close($api);
+
+        curl_close($api);
 
         // throw new Exception("department: " . print_r($data, true));
 
         return $this->renderPartial('modal_department', [
             "company" => $company,
-			"countries" => $countries,
+            "countries" => $countries,
             "branches" => $branch,
             "departments" => $data,
             "departmentId" => $depId,
             // "numPage" => $numPage,
             "countryId" => 0
-        ]); 
+        ]);
         // ไฟล์ `views/setting/model_department.php`
 
         // return $this->render('modal_department', [
-		// ]);
+        // ]);
     }
 
-    
-    public function actionDepartmentsView($hash){
-        
+
+    public function actionDepartmentsView($hash)
+    {
+
         $param = ModelMaster::decodeParams($hash);
 
         $branchId = $param["branchId"];
         $page = $param["nextPage"] ?? 1;
-       
 
 
-		// throw new Exception(print_r($param, true)); // Debug: ดูข้อมูลทั้งหมด
+
+        // throw new Exception(print_r($param, true)); // Debug: ดูข้อมูลทั้งหมด
 
         $api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
-		$resultCountry = curl_exec($api);
-		$countries = json_decode($resultCountry, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
+        $resultCountry = curl_exec($api);
+        $countries = json_decode($resultCountry, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' .  $branchId );
-		$branch = curl_exec($api);
-		$branch = json_decode($branch, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' .  $branchId);
+        $branch = curl_exec($api);
+        $branch = json_decode($branch, true);
         // throw new Exception("branch: " . print_r($branch, true));
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-page?id=' . $branchId .'&page=' .  $page . '&countryId=0' . '&limit=5');
-		$numPage = curl_exec($api);
-		$numPage = json_decode($numPage, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-page?id=' . $branchId . '&page=' .  $page . '&countryId=0' . '&limit=5');
+        $numPage = curl_exec($api);
+        $numPage = json_decode($numPage, true);
         // throw new Exception("numPage: " . print_r($numPage, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' .  $branchId . '&page=' .  $page  . '&limit=5');
-		$departments = curl_exec($api);
-		$departments = json_decode($departments, true);
+        $departments = curl_exec($api);
+        $departments = json_decode($departments, true);
         // throw new Exception("department: " . print_r($departments, true));
-
-        $data = [];
-		if (!empty($departments)) {
-            foreach ($departments as $department) :
-				$departmentId = $department['departmentId'];
-
-				$employees = Employee::find()
-				->where(["departmentId" => $departmentId])
-				->asArray()
-				->all();
-
-				// throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
-
-				// กรองเฉพาะที่มี picture
-				$filteredEmployees = array_filter($employees, function($employee) {
-					return !empty($employee['picture']);
-				});
-
-				// รีเซ็ต index และเลือกแค่ 3 คนแรก
-				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
-
-				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
-
-				$totalEmployee = Employee::find()->where(["departmentId" => $departmentId, "status" => 1])->count();
-				$teams = [];
-					if (!empty($department)) {
-						$teams = Team::find()->select('teamId')
-							->where(["status" => 1])
-							->andWhere(['IN', 'departmentId', $department['departmentId']])
-							->asArray()->column();
-					}
-
-				$data[] = [
-					"departmentId" => $department['departmentId'],
-					"departmentName" => $department["departmentName"],
-					"branchId" => $department['branchId'],
-					"status" => $department['status'],
-					"createDateTime" => $department['createDateTime'],    
-					"updateDateTime" => $department['updateDateTime'],
-					"totalTeam" => count($teams),
-					"totalEmployee" => $totalEmployee,
-					"employees" => $filteredEmployees
-				];
-			endforeach;
-		}
-
-        // throw new Exception("data: " . print_r($data, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $branch["companyId"]);
         $company = curl_exec($api);
         $company = json_decode($company, true);
 
-		curl_close($api);
-		 
-		// throw new Exception("company: " . print_r($company, true));
+        curl_close($api);
+        $data = [];
+        if (!empty($departments)) {
+            foreach ($departments as $department) :
+                $departmentId = $department['departmentId'];
 
-		return $this->render('departments_view', [
+                $employees = Employee::find()
+                    ->where(["departmentId" => $departmentId])
+                    ->asArray()
+                    ->all();
+
+                // throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
+
+                // กรองเฉพาะที่มี picture
+                $filteredEmployees = array_filter($employees, function ($employee) {
+                    return !empty($employee['picture']);
+                });
+
+                // รีเซ็ต index และเลือกแค่ 3 คนแรก
+                $filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+
+                // throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
+
+                $totalEmployee = Employee::find()->where(["departmentId" => $departmentId, "status" => 1])->count();
+                $teams = [];
+                if (!empty($department)) {
+                    $teams = Team::find()->select('teamId')
+                        ->where(["status" => 1])
+                        ->andWhere(['IN', 'departmentId', $department['departmentId']])
+                        ->asArray()->column();
+                }
+
+                $data[] = [
+                    "departmentId" => $department['departmentId'],
+                    "departmentName" => $department["departmentName"],
+                    "branchId" => $department['branchId'],
+                    "status" => $department['status'],
+                    "createDateTime" => $department['createDateTime'],
+                    "updateDateTime" => $department['updateDateTime'],
+                    "totalTeam" => count($teams),
+                    "totalEmployee" => $totalEmployee,
+                    "employees" => $filteredEmployees
+                ];
+            endforeach;
+        }
+        return $this->render('departments_view', [
             "company" => $company,
-			"countries" => $countries,
+            "countries" => $countries,
             "branches" => $branch,
             "departments" => $data,
             "numPage" => $numPage,
             "countryId" => 0
-		]);
+        ]);
     }
-    
+
 
     public function actionCreate($hash)
     {
@@ -490,12 +487,12 @@ class DepartmentController extends Controller
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
 
         $api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
         //เช็คว่ามีคอมปานีรึยัง
         if (!empty($companyId)) {
-            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId );
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
             $companies = curl_exec($api);
             $companies = json_decode($companies, true);
             $companyName = $companies["companyName"];
@@ -510,7 +507,7 @@ class DepartmentController extends Controller
             $branchJson = curl_exec($api);
             $branches = json_decode($branchJson, true);
             $branchName = $branches["branchName"];
-        } 
+        }
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $group["groupId"]);
         $group = curl_exec($api);
@@ -521,9 +518,9 @@ class DepartmentController extends Controller
         // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1'. '&limit=6');
         // $branchJson = curl_exec($api);
         // $branches = json_decode($branchJson, true);
-		// throw new exception(print_r($companies, true));
+        // throw new exception(print_r($companies, true));
 
-		curl_close($api);
+        curl_close($api);
 
         return $this->render('create', [
             // "branchId" => $branchId,
@@ -535,26 +532,25 @@ class DepartmentController extends Controller
             "branchName" => $branchName,
             "group" => $group
         ]);
-
     }
-    
 
-        
+
+
     public function actionSaveCreateDepartment()
     {
         if (isset($_POST["branchId"]) && isset($_POST["departmentName"])) {
             $branchId = $_POST["branchId"];
             $names = $_POST["departmentName"]; // ควรเป็น array เช่นจาก <input name="departmentName[]">
-        
+
             $errors = [];
             $successCount = 0;
-        
+
             foreach ($names as $name) {
                 $name = trim($name);
                 if ($name === '') {
                     continue;
                 }
-        
+
                 $existing = Department::find()->where([
                     "branchId" => $branchId,
                     "departmentName" => $name,
@@ -581,11 +577,11 @@ class DepartmentController extends Controller
                     $successCount++;
                 }
             }
-        
+
             if ($successCount > 0) {
                 Yii::$app->session->setFlash('success', "$successCount department(s) created successfully.");
             }
-        
+
             return $this->redirect(Yii::$app->homeUrl . 'setting/department/no-department/' . ModelMaster::encodeParams(["branchId" => '']));
         }
     }
@@ -594,12 +590,12 @@ class DepartmentController extends Controller
     public function actionSaveDepartment()
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-    
+
         // $rawData = file_get_contents("php://input");
         // $data = json_decode($rawData, true);
 
         // throw new exception(print_r($_POST["deptName"], true));
-    
+
         if (isset($_POST["branchId"]) && isset($_POST["deptName"])) {
             $branchId = $_POST["branchId"];
             $departmentName = $_POST["deptName"];
@@ -609,21 +605,21 @@ class DepartmentController extends Controller
                 "departmentName" => $departmentName,
                 "status" => 1
             ])->one();
-            
+
             // return ['success' => false, 'message' => $existing];
 
             if (!empty($existing)) {
                 $errors[] = 'Cannot create duplicate department name "' . $departmentName . '"';
                 // continue;
                 return ['errors' => false, 'message' =>  $errors];
-            }else{
+            } else {
                 $department = new Department();
                 $department->departmentName = $departmentName;
                 $department->branchId = $branchId;
                 $department->status = '1';
                 $department->createDateTime = new Expression('NOW()');
                 $department->updateDateTime = new Expression('NOW()');
-    
+
                 if ($department->save()) {
                     $api = curl_init();
                     curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -640,14 +636,14 @@ class DepartmentController extends Controller
                 } else {
                     return ['success' => false, 'errors' => $department->getErrors()];
                 }
-            }            
+            }
         }
-    
+
         return ['success' => false, 'message' => 'no branchId'];
     }
-    
 
-    
+
+
     public function actionUpdateDepartment()
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -694,7 +690,7 @@ class DepartmentController extends Controller
                             $errorText[] = implode(', ', $errors);
                         }
                         return ['success' => false, 'message' => implode("\n", $errorText)];
-                    }                
+                    }
                 }
 
                 // return ['success' => false, 'message' => $departmentName . ' '. $departmentId];
@@ -708,61 +704,62 @@ class DepartmentController extends Controller
         return ['success' => false, 'message' => 'Missing required POST parameters'];
     }
 
-    public function actionModalDelete(){
+    public function actionModalDelete()
+    {
         $departmentId = Yii::$app->request->get("departmentId");
         // throw new exception(print_r($departmentId, true));
 
-        return $this -> renderPartial('modal_delete', [
+        return $this->renderPartial('modal_delete', [
             "departmentId" => $departmentId
         ]);
-    }  
+    }
 
     public function actionModalTest()
-{
-    Yii::$app->response->format = Response::FORMAT_JSON;
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
 
-    $departmentId = Yii::$app->request->post("departmentId");
+        $departmentId = Yii::$app->request->post("departmentId");
 
-    $test = Department::find()->where([
-        "departmentId" => $departmentId,
-        "status" => '1'
-    ])->one();
+        $test = Department::find()->where([
+            "departmentId" => $departmentId,
+            "status" => '1'
+        ])->one();
 
-    // throw new Exception(var_export($test->attributes, true));
+        // throw new Exception(var_export($test->attributes, true));
 
-    if (!$test) {
-        return [
-            'success' => false,
-            'message' => 'Department not found'
-        ];
-    }
+        if (!$test) {
+            return [
+                'success' => false,
+                'message' => 'Department not found'
+            ];
+        }
 
-    $branchId = $test->branchId;
+        $branchId = $test->branchId;
 
-    $api = curl_init();
-    curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-    curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $branchId . '&page=1&limit=0');
-    $departments = curl_exec($api);
-    curl_close($api);
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $branchId . '&page=1&limit=0');
+        $departments = curl_exec($api);
+        curl_close($api);
 
-    $departments = json_decode($departments, true);
+        $departments = json_decode($departments, true);
         // throw new exception(print_r($departments, true));
 
-    if (!isset($departments)) {
+        if (!isset($departments)) {
+            return [
+                'success' => false,
+                'message' => 'Unable to retrieve department list'
+            ];
+        }
+
         return [
-            'success' => false,
-            'message' => 'Unable to retrieve department list'
+            'success' => true,
+            'departments' => $departments,
         ];
     }
 
-    return [
-        'success' => true,
-        'departments' => $departments,
-    ];
-}
-    
-    
+
     public function actionDeleteDepartment()
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON; // ← สำคัญ!
@@ -973,7 +970,7 @@ class DepartmentController extends Controller
             //throw new Exception(2);
         }
         //throw new Exception($branchId . '==' . $companyId);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department-filter?branchId=' . $branchIdSearch . '&&companyId=' . $companyIdSearch . '&&page=1' . '&limit=7' );
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department-filter?branchId=' . $branchIdSearch . '&&companyId=' . $companyIdSearch . '&&page=1' . '&limit=7');
         $departments = curl_exec($api);
         $departments = json_decode($departments, true);
 
@@ -1100,43 +1097,42 @@ class DepartmentController extends Controller
     public function actionDepartmentTeamList()
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-    
+
         // รับ JSON body โดยตรง
         $data = json_decode(file_get_contents("php://input"), true);
         $departmentId = isset($data['departmentId']) ? $data['departmentId'] : null;
-    
+
         if (!$departmentId) {
             return ['error' => 'Missing departmentId'];
         }
-    
+
         $api = curl_init();
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false); // ปิดเฉพาะใน dev/localhost
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-team?id=' . $departmentId . '&page=1' . '&limit=0');
-    
+
         $response = curl_exec($api);
         curl_close($api);
-    
+
         $teams = json_decode($response, true);
         return $teams;
     }
 
-public function actionDepartmentTitleList()
-{
-    Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+    public function actionDepartmentTitleList()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-    $data = json_decode(file_get_contents("php://input"), true);
-    $departmentId = isset($data['departmentId']) ? $data['departmentId'] : null;
+        $data = json_decode(file_get_contents("php://input"), true);
+        $departmentId = isset($data['departmentId']) ? $data['departmentId'] : null;
 
-    $api = curl_init();
-    curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-    curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-title?id=' . $departmentId);
-    $titles = curl_exec($api);
-    curl_close($api);
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-title?id=' . $departmentId);
+        $titles = curl_exec($api);
+        curl_close($api);
 
-    $title = json_decode($titles, true); // decode ครั้งเดียวพอ
-    return $title;
-}
-
+        $title = json_decode($titles, true); // decode ครั้งเดียวพอ
+        return $title;
+    }
 }
