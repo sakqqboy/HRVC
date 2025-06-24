@@ -7,14 +7,14 @@ use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Create Department';
 $form = ActiveForm::begin([
-	'id' => 'create-branch',
-	'method' => 'post',
-	'options' => [
-		'enctype' => 'multipart/form-data',
-	],
-	'action' => Yii::$app->homeUrl . 'setting/department/save-create-department'
+    'id' => 'create-branch',
+    'method' => 'post',
+    'options' => [
+        'enctype' => 'multipart/form-data',
+    ],
+    'action' => Yii::$app->homeUrl . 'setting/department/save-create-department'
 
-]); 
+]);
 
 if (Yii::$app->session->hasFlash('error')) {
     $error = Yii::$app->session->getFlash('error');
@@ -53,17 +53,17 @@ if (Yii::$app->session->hasFlash('error')) {
                             </span>
                             <div class="mt-19" style="display: flex;">
                                 <div class="avatar-preview mr-24">
-                                    <img src="<?= Yii::$app->homeUrl ?><?=$group['picture'] ?>" class="cycle-big-image">
+                                    <img src="<?= Yii::$app->homeUrl ?><?= $group['picture'] ?>" class="cycle-big-image">
                                 </div>
                                 <div class="mid-center">
                                     <div class="col-12 name-tokyo">
                                         <span class="name-sub-tokyo" style="font-size: 20px;">
-                                            <?=$group['groupName'] ?>
+                                            <?= $group['groupName'] ?>
                                         </span>
                                     </div>
                                     <div class="col-12 tokyo-small">
                                         <img src="<?= Yii::$app->homeUrl ?>image/hyphen.svg">
-                                        <?=$group['tagLine'] ?>
+                                        <?= $group['tagLine'] ?>
                                     </div>
                                 </div>
                             </div>
@@ -85,37 +85,37 @@ if (Yii::$app->session->hasFlash('error')) {
                                     data-bs-original-title="<?= Yii::t('app', 'Select to Company') ?>">
                             </label>
                             <div class="input-group" style="width: 330px;">
-                                <?php if($companyName) {?>
-                                <div class="col-12 font-b" style="width: 330px;">
-                                    <input type="hidden" id="company" name="companyId" value="<?= $companyId?>">
-                                    <?= $companyName ?>
-                                </div>
-                                <?php }else{?>
-
-                                <select class="form-select" id="companySelectId" name="companyId"
-                                    style="appearance: none; background-image: none;">
-                                    <option value=""><?= Yii::t('app', 'Select Company') ?></option>
-                                    <?php if (isset($companies) && count($companies) > 0): ?>
-                                    <?php foreach ($companies as $c): ?>
-                                    <option value="<?= $c['companyId'] ?>" data-img="<?= $c['picture'] ?>">
-                                        <?= $c['companyName'] ?>
-                                    </option>
-                                    <?php endforeach; ?>
-                                    <?php endif; ?>
-                                </select>
-
-                                <span class="input-employee-text"
-                                    style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
-                                    onclick="document.getElementById('company').focus();">
-                                    <div id="companyIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
-                                        <img id="companyIconImg"
-                                            src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="icon"
-                                            style="width: 10px; height: 10px;">
+                                <?php if ($companyName) { ?>
+                                    <div class="col-12 font-b" style="width: 330px;">
+                                        <input type="hidden" id="company" name="companyId" value="<?= $companyId ?>">
+                                        <?= $companyName ?>
                                     </div>
-                                    <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
-                                        style="width: 10px; height: 10px;">
-                                </span>
-                                <?php }?>
+                                <?php } else { ?>
+
+                                    <select class="form-select" id="companySelectId" name="companyId"
+                                        style="appearance: none; background-image: none;">
+                                        <option value=""><?= Yii::t('app', 'Select Company') ?></option>
+                                        <?php if (isset($companies) && count($companies) > 0): ?>
+                                            <?php foreach ($companies as $c): ?>
+                                                <option value="<?= $c['companyId'] ?>" data-img="<?= $c['picture'] ?>">
+                                                    <?= $c['companyName'] ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </select>
+
+                                    <span class="input-employee-text"
+                                        style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
+                                        onclick="document.getElementById('company').focus();">
+                                        <div id="companyIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                            <img id="companyIconImg"
+                                                src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="icon"
+                                                style="width: 10px; height: 10px;">
+                                        </div>
+                                        <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
+                                            style="width: 10px; height: 10px;">
+                                    </span>
+                                <?php } ?>
 
                             </div>
                         </div>
@@ -128,32 +128,32 @@ if (Yii::$app->session->hasFlash('error')) {
                                     data-bs-original-title="<?= Yii::t('app', 'Select to Branch') ?>">
                             </label>
                             <div class="input-group" style="width: 330px;">
-                                <?php if($branchName) {?>
-                                <div class="col-12 font-b" style="width: 330px;">
-                                    <input type="hidden" id="branch" name="branchId" value="<?= $branchId?>">
-                                    <?= $branchName ?>
-                                </div>
-                                <?php }else{?>
-                                <select id="branchSelectId" brancSelect class="form-select mt-12"
-                                    style="border-right: none; width: 239px; appearance: none; background-image: none;"
-                                    name="branchId" data-company-branch="branch" required disabled>
-                                    <option value="" disabled selected hidden
-                                        style="color: var(--Helper-Text, #8A8A8A); ">
-                                        <?= Yii::t('app', 'Select from a Branch') ?>
-                                    </option>
-                                </select>
-
-                                <span class="input-employee-text mt-12"
-                                    style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;"
-                                    onclick="document.getElementById('companySelectId').focus();">
-                                    <div id="branchIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
-                                        <img id="branchIconImg" src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
-                                            alt="icon" style="width: 10px; height: 10px;">
+                                <?php if ($branchName) { ?>
+                                    <div class="col-12 font-b" style="width: 330px;">
+                                        <input type="hidden" id="branch" name="branchId" value="<?= $branchId ?>">
+                                        <?= $branchName ?>
                                     </div>
-                                    <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
-                                        style="width: 10px; height: 10px;">
-                                </span>
-                                <?php }?>
+                                <?php } else { ?>
+                                    <select id="branchSelectId" brancSelect class="form-select mt-12"
+                                        style="border-right: none; width: 239px; appearance: none; background-image: none;"
+                                        name="branchId" data-company-branch="branch" required disabled>
+                                        <option value="" disabled selected hidden
+                                            style="color: var(--Helper-Text, #8A8A8A); ">
+                                            <?= Yii::t('app', 'Select from a Branch') ?>
+                                        </option>
+                                    </select>
+
+                                    <span class="input-employee-text mt-12"
+                                        style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;"
+                                        onclick="document.getElementById('companySelectId').focus();">
+                                        <div id="branchIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                            <img id="branchIconImg" src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
+                                                alt="icon" style="width: 10px; height: 10px;">
+                                        </div>
+                                        <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
+                                            style="width: 10px; height: 10px;">
+                                    </span>
+                                <?php } ?>
 
                             </div>
                         </div>
@@ -166,8 +166,8 @@ if (Yii::$app->session->hasFlash('error')) {
                     </label>
 
                     <!-- Container for all dynamic inputs -->
-                    <div id="departmentInputsContainer">
-                        <input type="text" class="form-control mb-2" name="departmentName[]" style="width: 330px;"
+                    <div id="departmentInputsContainer" class="" style="max-height:330px;overflow-y: auto;">
+                        <input type="text" class="form-control mb-10" name="departmentName[]" style="width: 330px;"
                             placeholder="Write the name of the Department" required>
                     </div>
 
@@ -197,80 +197,79 @@ if (Yii::$app->session->hasFlash('error')) {
         </div>
     </div>
 </div>
-
 <script>
-const homeUrl = "<?= Yii::$app->homeUrl ?>";
-document.getElementById('companySelectId').addEventListener('change', function() {
-    const iconImg = document.getElementById('companyIconImg');
-    const selectedOption = this.options[this.selectedIndex];
-    const selectedImg = selectedOption.getAttribute('data-img');
-    const selectedValue = this.value;
-    const branchSelect = document.getElementById('branchSelectId');
-    const branchSpan = branchSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
+    const homeUrl = "<?= Yii::$app->homeUrl ?>";
+    document.getElementById('companySelectId').addEventListener('change', function() {
+        const iconImg = document.getElementById('companyIconImg');
+        const selectedOption = this.options[this.selectedIndex];
+        const selectedImg = selectedOption.getAttribute('data-img');
+        const selectedValue = this.value;
+        const branchSelect = document.getElementById('branchSelectId');
+        const branchSpan = branchSelect.nextElementSibling; // span ที่อยู่ถัดจาก select
 
-    // เอา disabled ออก
-    branchSelect.removeAttribute('disabled');
+        // เอา disabled ออก
+        branchSelect.removeAttribute('disabled');
 
-    // เปลี่ยนสี background
-    if (branchSpan && branchSpan.classList.contains('input-employee-text')) {
-        branchSpan.style.backgroundColor = '#fff';
-    }
-    if (selectedValue !== '') {
-        iconImg.src = homeUrl + selectedImg;
-        iconImg.removeAttribute('style');
-        iconImg.classList.add('card-tcf');
-    } else {
-        iconImg.src = '<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg';
-    }
-});
+        // เปลี่ยนสี background
+        if (branchSpan && branchSpan.classList.contains('input-employee-text')) {
+            branchSpan.style.backgroundColor = '#fff';
+        }
+        if (selectedValue !== '') {
+            iconImg.src = homeUrl + selectedImg;
+            iconImg.removeAttribute('style');
+            iconImg.classList.add('card-tcf');
+        } else {
+            iconImg.src = '<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg';
+        }
+    });
 
-document.getElementById('branchSelectId').addEventListener('change', function() {
-    const iconImg = document.getElementById('branchIconImg');
-    const selectedValue = this.value;
-    const iconDiv = document.getElementById('branchIcon');
-    if (selectedValue !== '') {
-        iconImg.src = homeUrl + 'image/branches-black.svg';
-        // alert(selectedValue);
-        iconDiv.classList.remove('cycle-current-gray');
-        iconDiv.classList.add('cycle-current-yellow');
+    document.getElementById('branchSelectId').addEventListener('change', function() {
+        const iconImg = document.getElementById('branchIconImg');
+        const selectedValue = this.value;
+        const iconDiv = document.getElementById('branchIcon');
+        if (selectedValue !== '') {
+            iconImg.src = homeUrl + 'image/branches-black.svg';
+            // alert(selectedValue);
+            iconDiv.classList.remove('cycle-current-gray');
+            iconDiv.classList.add('cycle-current-yellow');
 
-    } else {
-        iconDiv.classList.remove('cycle-current-yellow');
-        iconDiv.classList.add('cycle-current-gray');
-    }
-});
+        } else {
+            iconDiv.classList.remove('cycle-current-yellow');
+            iconDiv.classList.add('cycle-current-gray');
+        }
+    });
 
 
-document.getElementById('companySelectId').addEventListener('change', function() {
-    const companyId = this.value;
+    document.getElementById('companySelectId').addEventListener('change', function() {
+        const companyId = this.value;
 
-    fetch('<?= Yii::$app->homeUrl ?>setting/company/company-branch-list', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
-            },
-            body: JSON.stringify({
-                companyId: companyId
+        fetch('<?= Yii::$app->homeUrl ?>setting/company/company-branch-list', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
+                },
+                body: JSON.stringify({
+                    companyId: companyId
+                })
             })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Fetched data:", data);
-            const branchSelect = document.querySelector('[name="branchId"]');
-            branchSelect.innerHTML =
-                '<option value="" disabled selected hidden><?= Yii::t("app", "Select from a Branch") ?></option>';
+            .then(response => response.json())
+            .then(data => {
+                console.log("Fetched data:", data);
+                const branchSelect = document.querySelector('[name="branchId"]');
+                branchSelect.innerHTML =
+                    '<option value="" disabled selected hidden><?= Yii::t("app", "Select from a Branch") ?></option>';
 
-            if (Array.isArray(data)) {
-                data.forEach(branch => {
-                    const option = document.createElement('option');
-                    option.value = branch.branchId;
-                    option.text = branch.branchName;
-                    branchSelect.appendChild(option);
-                });
-            }
-        });
-});
+                if (Array.isArray(data)) {
+                    data.forEach(branch => {
+                        const option = document.createElement('option');
+                        option.value = branch.branchId;
+                        option.text = branch.branchName;
+                        branchSelect.appendChild(option);
+                    });
+                }
+            });
+    });
 </script>
 
 <?php ActiveForm::end(); ?>

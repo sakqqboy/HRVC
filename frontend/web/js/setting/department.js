@@ -623,7 +623,7 @@ function addDepartmentInput() {
     const newInput = document.createElement('input');
     newInput.type = 'text';
     newInput.name = 'departmentName[]';
-    newInput.className = 'form-control mb-2';
+    newInput.className = 'form-control mb-10';
     newInput.style.width = '330px';
     newInput.placeholder = 'Write the name of the Department ';
 
