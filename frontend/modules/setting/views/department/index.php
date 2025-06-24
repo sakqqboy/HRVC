@@ -42,62 +42,66 @@ $page = "grid";
                     $i = 1;
                     foreach ($data as $branchesId => $branch):
                 ?>
-                        <div class="col-lg-6 col-md-5 col-sm-3 col-12 pr-20 pl-20 pt-3 pb-27" id="branch">
+                        <div class="col-lg-6  col-12 pr-20 pl-20 pt-3 pb-27" id="branch">
                             <!-- <div class="card-comany" style="height: auto;"> -->
-                            <div class="card-body" style="height:300px; background: #F9FBFF;padding:22px;border-radius: 4px;border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE)">
+                            <div class="card-body" style="gap:20px;height:300px; background: #F9FBFF;padding:21px 22px 22px 22px;border-radius: 4px;border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE)">
                                 <!-- <div class="col-12"> -->
 
-                                <div class="d-flex align-items- justify-content-between border">
-                                    <div class="position-relative me-2 border align-content-center">
+                                <div class="d-flex justify-content-between mb-20">
+                                    <div class="d-flex justify-content-center align-items-center">
                                         <img src="<?= Yii::$app->homeUrl . $branch['picture'] ?>" class="card-tcf">
                                     </div>
-                                    <div class="flex-grow-1">
+                                    <div class="flex-grow-1 ms-2">
                                         <div class="d-flex justify-content-between align-items-start">
                                             <div>
-                                                <div class="name-crad-company">
+                                                <div class="name-crad-company text-truncate" style="width:265px;max-width: 265px;">
                                                     <?= $branch['companyName'] ?>
                                                 </div>
-                                                <div class="city-crad-company">
-                                                    <div class="cycle-current-yellow" style="width: 20px; height: 20px;">
+                                                <div class="city-crad-company mt-5  justify-content-start pt-0 pb-0 align-content-center d-inline-flex" style="max-width: 265px;height:27px;">
+
+                                                    <div class="cycle-current-yellow ms-0" style="width: 20px; height: 20px;">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
                                                             alt="icon" style="width: 10px; height: 10px;">
                                                     </div>
-                                                    <?= Yii::t('app', $branch['branchName']) ?>
+                                                    <span class="text-truncate" style="max-width: 265px;">
+                                                        <?= Yii::t('app', $branch['branchName']) ?>
+                                                    </span>
                                                 </div>
-                                                <div class="city-crad-company">
-                                                    <img src="<?= Yii::$app->homeUrl ?><?= $branch['flag'] ?>"
-                                                        class="bangladresh-hrvc">
-                                                    <?= $branch['city'] ?>, <?= Yii::t('app', $branch['countryName']) ?>
+                                                <div>
+                                                    <div class="city-crad-company mt-5 justify-content-start pt-0 pb-0  align-content-center d-inline-flex " style="max-width: 265px;height:27px;">
+                                                        <img src=" <?= Yii::$app->homeUrl ?><?= $branch['flag'] ?>"
+                                                            class="bangladresh-hrvc">
+                                                        <?= $branch['city'] ?>, <?= Yii::t('app', $branch['countryName']) ?>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="position-relative">
-                                        <div class="position-absolute top-0 end-0 d-flex gap-0">
-                                            <?php if (count($branch['departments']) > 0) { ?>
+                                    <div class="d-flex flex-row align-items-start">
+                                        <?php if (count($branch['departments']) > 0) { ?>
 
-                                                <a class="icon-btn-white me-1" style="margin-top: 3px; width:28px;height:28px;"
-                                                    onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>')">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
-                                                        alt="History" class="pim-icon"
-                                                        style="width: 14px; height: 14px;">
-                                                </a>
-
-                                            <?php } ?>
-                                            <a href="
-                                        <?= Yii::$app->homeUrl ?>setting/department/departments-view/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
-                                                class="icon-btn-white" style="margin-top: 3px;width:28px;height:28px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
-                                                    alt="History" class="pim-icon">
+                                            <a class="icon-btn-white me-1" style="margin-top: 3px; width:28px;height:28px;"
+                                                onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>')">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
+                                                    alt="History" class="pim-icon"
+                                                    style="width: 14px; height: 14px;">
                                             </a>
-                                        </div>
-                                        <!--  <span class="dropdown" href="#" id="dropdownMenuLink-1"
+
+                                        <?php } ?>
+                                        <a href="
+                                        <?= Yii::$app->homeUrl ?>setting/department/departments-view/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
+                                            class="icon-btn-white" style="margin-top: 3px;width:28px;height:28px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
+                                                alt="History" class="pim-icon">
+                                        </a>
+                                    </div>
+                                    <!--  <span class="dropdown" href="#" id="dropdownMenuLink-1"
                                             data-bs-toggle="dropdown" style="align-self: flex-start;"> -->
-                                        <!-- <img src="<?php // Yii::$app->homeUrl 
-                                                        ?>image/3-dot.svg" alt="icon"
+                                    <!-- <img src="<?php // Yii::$app->homeUrl 
+                                                    ?>image/3-dot.svg" alt="icon"
                                                 style="cursor: pointer;"> -->
-                                        <!-- </span>  -->
-                                        <!-- <div class="menu-dot ">
+                                    <!-- </span>  -->
+                                    <!-- <div class="menu-dot ">
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
                                                 <li class="pl-4 pr-4" data-bs-toggle="modal"
                                                     data-bs-target="#staticBackdrop4"
@@ -112,7 +116,6 @@ $page = "grid";
                                                 </li>
                                             </ul>
                                         </div> -->
-                                    </div>
                                 </div>
 
 
@@ -121,7 +124,7 @@ $page = "grid";
                                 // echo $branch['totalDepartment']; 
                                 if (count($branch['departments']) > 0) {
                                 ?>
-                                    <div style="align-self: stretch; height: 147px">
+                                    <div style="align-self: stretch; height: 147px;" class="">
                                         <div class="between-start">
                                             <span class="detailname-crad-company mb-14">
                                                 <?= Yii::t('app', 'Registered Departments') ?>
@@ -141,10 +144,10 @@ $page = "grid";
                                                 $limitedDepartments = array_slice($branch['departments'], 0, 6);
                                                 foreach ($limitedDepartments as $index => $dept):
                                                 ?>
-                                                    <div class="col-6 mb-1">
-                                                        <span class="d-flex align-items-center font-size-13 font-weight-500 mb-12"
+                                                    <div class="col-lg-6 col-md-6 col-12 pt-0 pb-0 mb-12">
+                                                        <span class="d-flex align-items-center font-size-13 font-weight-500"
                                                             style=" color: #333;">
-                                                            <div class="cycle-current-red mr-5">
+                                                            <div class="cycle-current-red mr-8 text-truncate">
                                                                 <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
                                                                     alt="icon">
                                                             </div>

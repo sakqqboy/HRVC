@@ -88,7 +88,7 @@ $statusTexArr = Status::allStatusText();
 									<input type="checkbox" id="check-employee-<?= $employeeId ?>" name="" class="checkbox-employee pull-left invisible" onchange="javascript:selectEmployee(<?= $employeeId ?>)" value="<?= $employeeId ?>">
 									<img src="<?= Yii::$app->homeUrl ?>images/employee/status/new-employee.svg" class="pull-right <?= $employee['isNew'] == 1 ? '' : 'invisible' ?>" alt="New Employee" style="margin-top:-15px;">
 								</div>
-								<div class="d-flex align-items-start justify-content-between mt-3 border">
+								<div class="d-flex align-items-start justify-content-between mt-3">
 									<div class="position-relative me-2">
 										<img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>" class="rounded-circle profile-img" alt="Profile">
 										<span class="<?= $statusClass ?>"><?= $employee["status"] ?></span>
