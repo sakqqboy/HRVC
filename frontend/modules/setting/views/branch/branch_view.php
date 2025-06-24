@@ -88,9 +88,9 @@ $page = 'view';
                         <?= Yii::t('app', 'Associated Entities') ?>
                         <hr class="hr-group">
                     </span>
-                    <table id="myTable" class="table align-middle table-spacing">
-                        <thead class="table-light">
-                            <tr class="table-border-weight">
+                    <table id="myTable" class="align-middle table-spacing">
+                        <thead>
+                            <tr class="table-border-weight" style="height: 50px;">
                                 <th class="text-start" onclick="sortDepartment('departmentName')" style="width: 314px;">
                                     <?= Yii::t('app', 'Associated Department') ?>
                                     <img src="/HRVC/frontend/web/image/sorting.svg" style="cursor: pointer;">
@@ -114,7 +114,8 @@ $page = 'view';
                                     $countrow++;
                                     $departmentId = $department['branchId'] + 543;
                             ?>
-                            <tr class="tr-font list-table-body" id="department-<?= $department['departmentId'] ?>">
+                            <tr class="tr-font list-table-body" style="height: 50px;"
+                                id="department-<?= $department['departmentId'] ?>">
                                 <td>
                                     <div class="circle-container ml-15">
                                         <div class="cycle-current-red">
