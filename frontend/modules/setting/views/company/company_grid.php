@@ -21,10 +21,11 @@ $page = "grid"
                 <?php if($role >= 5 ) { ?>
                 <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
                     style="text-decoration: none;">
-                    <button type="button" class="btn-create" style="padding: 3px 9px;"
+                    <button type="button" class="btn-create"
+                        style="padding: 0px; width: 93px; height:22.5px; font-size: 12px; font-weight: 600;"
                         action="<?= Yii::$app->homeUrl ?>setting/group/create-group"><?= Yii::t('app', 'Create New') ?>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
-                            style="width:18px; height:18px; margin-top:-3px;">
+                            style="width:14px; height:14px; margin-top:-3px;">
                     </button>
                 </a>
                 <?php }?>
@@ -388,7 +389,7 @@ $page = "grid"
                                                             </button>
                                                             <?php } ?>
                                                             <?php if($company['totalTeam'] > 0 && $company['totalEmployee'] == 0) { ?>
-                                                            <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                                            <!-- <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
                                                                 style="text-decoration: none;"></a>
                                                             <button type="button" class="btn-create-small"
                                                                 action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
@@ -396,11 +397,19 @@ $page = "grid"
                                                                     style="width: 12px; height: 12px;">
                                                                 <?= Yii::t('app', 'Create') ?>
                                                             </button>
+                                                            </a> -->
+                                                            <a href="<?= Yii::$app->homeUrl ?>setting/employee/create"
+                                                                style="text-decoration: none;">
+                                                                <button type="button" class="btn-create-small">
+                                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
+                                                                        style="width: 12px; height: 12px;">
+                                                                    <?= Yii::t('app', 'Create') ?>
+                                                                </button>
                                                             </a>
                                                             <?php } ?>
                                                             <?php if($company['totalEmployee'] > 0) { ?>
                                                             <a class="text-see-all" style="font-size: 10.5px; "
-                                                                href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
+                                                                href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>">
                                                                 <?= Yii::t('app', 'see all') ?>
                                                             </a>
                                                             <?php } ?>

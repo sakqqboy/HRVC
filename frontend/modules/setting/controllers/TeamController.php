@@ -294,7 +294,7 @@ class TeamController extends Controller
     public function actionCreate($hash)
     {
         $param = ModelMaster::decodeParams($hash);
-        $departmentId = $param["departmentId"];
+        $departmentId = $param["departmentId"]?? null;
         $branchId = $param["branchId"]?? null;
         $companyId = $param["companyId"] ?? null;
         $groupId = Group::currentGroupId();

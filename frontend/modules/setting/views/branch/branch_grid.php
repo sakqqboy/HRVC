@@ -20,10 +20,11 @@ $page = "grid"
                 <?php if($role >= 5) { ?>
                 <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
                     style="text-decoration: none;">
-                    <button type="button" class="btn-create" style="padding: 3px 9px;"
+                    <button type="button" class="btn-create mr-5"
+                        style="padding: 0px; width: 93px; height:22.5px; font-size: 12px; font-weight: 600;"
                         action="<?= Yii::$app->homeUrl ?>setting/branch/create-branch"><?= Yii::t('app', 'Create New') ?>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
-                            style="width:18px; height:18px; margin-top:-3px;">
+                            style="width:14px; height:14px; margin-top:-3px;">
                     </button>
                 </a>
                 <?php }?>
@@ -289,7 +290,7 @@ $page = "grid"
                                                             </button>
                                                             <?php } ?>
                                                             <?php if($branch['totalDepartment'] > 0 && $branch['totalTeam'] == 0) { ?>
-                                                            <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>"
+                                                            <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>"
                                                                 style="text-decoration: none;">
                                                                 <button type="button" class="btn-create-small"
                                                                     action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
@@ -356,21 +357,20 @@ $page = "grid"
                                                             </span>
                                                             <?php if($branch['totalTeam'] == 0) { ?>
                                                             <button type="button" class="btn-disble-small"
-                                                                action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
+                                                                action="<?= Yii::$app->homeUrl ?>setting/employee/create-group">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-black.svg"
                                                                     style="width: 12px; height: 12px;">
                                                                 <?= Yii::t('app', 'Create') ?>
                                                             </button>
                                                             <?php } ?>
                                                             <?php if($branch['totalTeam'] > 0 && $branch['totalEmployee'] == 0) { ?>
-                                                            <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>"
-                                                                style="text-decoration: none;"></a>
-                                                            <button type="button" class="btn-create-small"
-                                                                action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
-                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
-                                                                    style="width: 12px; height: 12px;">
-                                                                <?= Yii::t('app', 'Create') ?>
-                                                            </button>
+                                                            <a href="<?= Yii::$app->homeUrl ?>setting/employee/create"
+                                                                style="text-decoration: none;">
+                                                                <button type="button" class="btn-create-small">
+                                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
+                                                                        style="width: 12px; height: 12px;">
+                                                                    <?= Yii::t('app', 'Create') ?>
+                                                                </button>
                                                             </a>
                                                             <?php } ?>
                                                             <?php if($branch['totalEmployee'] > 0) { ?>

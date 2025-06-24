@@ -65,13 +65,13 @@ $this->title = 'Create Branch';
                         </div>
                     </div>
                     <div class="start-center">
-                        <label for="exampleFormControlInput1" class="form-label font-size-12 font-b">
+                        <label for="exampleFormControlInput1" class="form-label font-size-12 font-b mt-23">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Branch Name') ?>
                         </label>
                         <input type="text" class="form-control" name="branchName" style="width: 330px;"
                             placeholder="Write the name of the branch">
-                        <label class="form-label font-size-12 font-b">
+                        <label class="form-label font-size-12 font-b mt-23">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Company') ?>
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
