@@ -116,13 +116,19 @@ $page = "grid"
                                             class="btn btn-sm btn-outline-danger font-size-12">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </a> -->
-                                        <a class="btn btn-bg-red-xs mr-5"
+                                        <!-- <a class="btn btn-bg-red-xs mr-5"
                                             href="javascript:deleteBranch(<?= $branch['branchId'] + 543 ?>)"
                                             style="margin-top: 3px;"
                                             onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                             onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
                                                 alt="History" class="pim-icon" style="margin-top: -3px;">
+                                        </a> -->
+                                        <a href="
+                                        <?= Yii::$app->homeUrl ?>setting/branch/branch-view/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
+                                            class="btn btn-bg-white-xs mr-5" style="margin-top: 3px; ">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
+                                                alt="History" class="pim-icon" style="margin-top: -1px;">
                                         </a>
                                         <?php } ?>
                                         <span class="dropdown" href="#" id="dropdownMenuLink-1"
@@ -142,9 +148,14 @@ $page = "grid"
                                                             style="margin-top: -2px;">
                                                         <?= Yii::t('app', 'View') ?>
                                                     </a> -->
-                                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/branch-view/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
+                                                    <!-- <a href="<?= Yii::$app->homeUrl ?>setting/branch/branch-view/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
                                                         class="btn btn-bg-white-xs">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
+                                                            alt="History" class="pim-icon" style="margin-top: -1px;">
+                                                    </a> -->
+                                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId'] + 543]) ?>"
+                                                        class="btn btn-bg-white-xs">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
                                                             alt="History" class="pim-icon" style="margin-top: -1px;">
                                                     </a>
                                                 </li>
@@ -158,10 +169,13 @@ $page = "grid"
                                                             style="margin-top: -2px;">
                                                         <?= Yii::t('app', 'edit') ?>
                                                     </a> -->
-                                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId'] + 543]) ?>"
-                                                        class="btn btn-bg-white-xs">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                                            alt="History" class="pim-icon" style="margin-top: -1px;">
+
+                                                    <a class="btn btn-bg-red-xs"
+                                                        href="javascript:deleteBranch(<?= $branch['branchId'] + 543 ?>)"
+                                                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                                                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                                            alt="History" class="pim-icon" style="margin-top: -3px;">
                                                     </a>
                                                     <!-- <a href="javascript:updateBranch(<?= $branch['branchId'] + 543 ?>)"
                                                         class="btn btn-sm btn-outline-secondary font-size-12 mr-5">
