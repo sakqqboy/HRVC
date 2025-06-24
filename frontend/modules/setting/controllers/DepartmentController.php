@@ -482,7 +482,7 @@ class DepartmentController extends Controller
     {
         $role = UserRole::userRight();
         $param = ModelMaster::decodeParams($hash);
-        $branchId = $param["branchId"];
+        $branchId = $param["branchId"] ?? null;
         $companyId = $param["companyId"] ?? null;
         $companyName = '';
         $branchName = '';

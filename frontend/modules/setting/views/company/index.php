@@ -21,10 +21,11 @@ $page = "list"
                 <?php if($role >= 5 ) { ?>
                 <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
                     style="text-decoration: none;">
-                    <button type="button" class="btn-create" style="padding: 3px 9px;"
+                    <button type="button" class="btn-create mr-5"
+                        style="padding: 0px; width: 93px; height:22.5px; font-size: 12px; font-weight: 600;"
                         action="<?= Yii::$app->homeUrl ?>setting/group/create-group"><?= Yii::t('app', 'Create New') ?>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
-                            style="width:18px; height:18px; margin-top:-3px;">
+                            style="width:14px; height:14px; margin-top:-3px;">
                     </button>
                 </a>
                 <?php }?>
