@@ -88,7 +88,7 @@ $statusTexArr = Status::allStatusText();
 									<input type="checkbox" id="check-employee-<?= $employeeId ?>" name="" class="checkbox-employee pull-left invisible" onchange="javascript:selectEmployee(<?= $employeeId ?>)" value="<?= $employeeId ?>">
 									<img src="<?= Yii::$app->homeUrl ?>images/employee/status/new-employee.svg" class="pull-right <?= $employee['isNew'] == 1 ? '' : 'invisible' ?>" alt="New Employee" style="margin-top:-15px;">
 								</div>
-								<div class="d-flex align-items-start justify-content-between mt-3">
+								<div class="d-flex align-items-start justify-content-between mt-3 border">
 									<div class="position-relative me-2">
 										<img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>" class="rounded-circle profile-img" alt="Profile">
 										<span class="<?= $statusClass ?>"><?= $employee["status"] ?></span>
@@ -156,7 +156,7 @@ $statusTexArr = Status::allStatusText();
 														<?= $employee["companyName"] ?>
 													</div>
 													<span class="profile-city-name">
-														<?= $employee["city"] ?>, <?= $employee["countryName"] ?>
+														<?= $employee["city"] != "" ? $employee["city"] . ',' : '' ?> <?= $employee["countryName"] ?>
 													</span>
 												</div>
 											</div>
@@ -256,15 +256,6 @@ $showModal = $isFromImport; // หรือ 0
 		width: 30px;
 		height: 30px;
 		object-fit: cover;
-	}
-
-
-	.bg-white-employee {
-		background-color: white;
-		border-radius: 10px;
-		border: 1px solid #BBCDDE;
-		height: 100%;
-		padding: 27px 10px 32px 10px;
 	}
 
 	.employee-box {
@@ -584,19 +575,6 @@ $showModal = $isFromImport; // หรือ 0
 		letter-spacing: 0%;
 		vertical-align: middle;
 
-	}
-
-	.create-employee-btn {
-		background-color: #2580D3;
-		font-size: 14px;
-		font-weight: 600;
-		border-radius: 3px;
-		color: white;
-		text-decoration: none;
-		height: 30px;
-		text-align: center;
-		min-width: 115px;
-		min-height: 30px;
 	}
 
 	.export-employee-btn {

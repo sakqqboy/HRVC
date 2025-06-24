@@ -91,7 +91,7 @@
 	<select class="select-pim form-select font-size-12 <?= $showStatus ?>" id="status">
 		<?php
 		if ($status != '') { ?>
-			<option value="<?= $status ?>"><?= Status::findOne($status)->statusName ?></option>
+			<option value="<?= $status ?>"><?= (isset($status) && $status != null) ? Status::findOne($status)->statusName : 'Not Set' ?></option>
 		<?php
 		}
 		?>

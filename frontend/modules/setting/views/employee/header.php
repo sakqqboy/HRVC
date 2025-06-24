@@ -18,12 +18,12 @@ if (Yii::$app->controller->action->id == 'draft' || Yii::$app->controller->actio
 				<a href="<?= Yii::$app->homeUrl ?>setting/employee/create"
 					class="<?= (Yii::$app->controller->action->id == 'draft' || Yii::$app->controller->action->id == 'draft-result') ? 'd-none' : 'd-flex' ?> align-items-center create-employee-btn justify-content-center">
 					<?= Yii::t('app', 'Create New') ?>
-					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-circle.svg" class="ms-1" style="width: 18px;height:18px;">
+					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-circle.svg" class="ms-1" style="width: 18px;height:18px;margin-top:-3px;">
 				</a>
 				<a href="javascript:void(0);" onclick="javascript:modalImportEmployee()"
 					class="<?= (Yii::$app->controller->action->id == 'draft' || Yii::$app->controller->action->id == 'draft-result') ? 'd-none' : 'd-flex' ?> align-items-center export-employee-btn justify-content-center">
 					<?= Yii::t('app', 'Import Employees') ?>
-					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/export-employee.svg" class="ms-2" style="width: 18px;height:18px;">
+					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/export-employee.svg" class="ms-2" style="width: 18px;height:18px;margin-top:-3px;">
 				</a>
 			</div>
 		</div>
