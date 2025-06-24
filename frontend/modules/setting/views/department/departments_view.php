@@ -239,9 +239,9 @@ $page = 'view';
                                         </td>
                                         <td>
                                             <a onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $department['branchId'], 'departmentId' => $department['departmentId']]) ?>')"
-                                                class="btn btn-bg-white-xs mr-5" style="margin-top: 3px;">
+                                                class="btn btn-bg-white-xs mr-5 p-0" style="width:27px;height:27px;">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                                    alt="edit" class="pim-icon">
+                                                    alt="edit" class="pim-icon" style="width:14px;height:14px;margin-top:3px;">
                                             </a>
                                         </td>
                                     </tr>
@@ -255,12 +255,11 @@ $page = 'view';
                     <?= $this->render('pagination_department', ['countryId' => $branches['branchId'], 'companyId' => $branches['companyId'], 'branchId' => $branches['branchId'], 'page' => $page, 'numPage' => $numPage]) ?>
                 </div>
                 <div class="col-1"></div>
-                <div class="col-3">
-                    <span class="font-size-16 text-gray-back" style="font-weight: 500;">
+                <div class="col-3 p-0" style="margin-top: -3px;">
+                    <div class="font-size-16 text-gray-back  pt-0 border-bottom mb-16" style="width:100%;font-weight: 500;height:30px;line-height:15px;">
                         <?= Yii::t('app', 'Branch Details') ?>
-                        <hr class="hr-group">
-                    </span>
-                    <text>
+                    </div>
+                    <text style="font-size:14px;font-weight:400;line-height:150%;">
                         <?= $branches['description'] ?>
                     </text>
                 </div>
