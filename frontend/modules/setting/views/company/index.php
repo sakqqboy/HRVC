@@ -7,12 +7,12 @@ $page = "list"
 ?>
 
 <!-- <div class="contrainer-body mt-10"> -->
-<div class="mt-50" style="padding: 30px;">
+<!-- <div class="mt-60" style="padding: 30px;"> -->
+<div class="mt-60" style="padding: 30px 0px;">
 
-
-    <div class="between-center mt-20" style="width: 100%;">
+    <div class="between-center" style="width: 100%;">
         <div class="col-9">
-            <div class=" d-flex align-items-center gap-2">
+            <div class="d-flex align-items-center gap-2">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
                     style="width: 24px; height: 24px;">
                 <div class="pim-name-title ml-10">
@@ -57,8 +57,8 @@ $page = "list"
         </div>
     </div>
 
-    <div class="company-group-edit mt-30">
-        <div class="col-12 mt-20 tb0">
+    <div class="company-group-edit mt-20">
+        <div class="col-12 tb0">
             <table id="myTable" class="table align-middle table-spacing">
                 <thead class="table-light">
                     <tr class="table-border-weight">

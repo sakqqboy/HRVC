@@ -4,19 +4,20 @@ use common\models\ModelMaster;
 
 $this->title = 'Branch';
 $page = "grid"
-// echo $countries;
 ?>
-<!-- <div class="contrainer-body mt-10"> -->
-<div class="mt-50" style="padding: 30px;">
 
-    <div class="between-center mt-20" style="width: 100%;">
+<!-- <div class="contrainer-body mt-10"> -->
+<!-- <div class="mt-60" style="padding: 30px;"> -->
+<div class="mt-60" style="padding: 30px 0px;">
+
+    <div class="between-center" style="width: 100%;">
         <div class="col-8">
-            <div class=" d-flex align-items-center gap-2">
+            <div class="d-flex align-items-center gap-2">
                 <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" style="width: 24px; height: 24px;">
                 <div class="pim-name-title ml-10">
-                    <?= Yii::t('app', 'Branch') ?>
+                    <?= Yii::t('app', 'Branches') ?>
                 </div>
-                <?php if($role >= 5 ) { ?>
+                <?php if($role >= 5) { ?>
                 <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
                     style="text-decoration: none;">
                     <button type="button" class="btn-create" style="padding: 3px 9px;"
@@ -54,8 +55,9 @@ $page = "grid"
         </div>
     </div>
 
-    <div class="pim-body company-group-edit bg-white mt-30">
-        <div class="alert alert-branch-body" role="alert">
+    <div class="company-group-edit bg-white mt-20">
+        <!-- <div class="alert alert-branch-body" role="alert"> -->
+        <div class="alert alert-branch-body" role="alert" style="padding: 0px;">
             <div class="row" id="company-branch">
                 <?php
 				if (isset($branches) && count($branches) > 0) {
@@ -86,7 +88,7 @@ $page = "grid"
                                                 ?>
                                         </div>
                                         <div class="header-crad-company">
-                                            <div class="name-crad-company">
+                                            <div class="name-crad-company text-truncate">
                                                 <?= $branch['branchName'] ?>
                                             </div>
                                             <div class="city-crad-company text-truncate">
@@ -101,7 +103,7 @@ $page = "grid"
                                             </div>
                                         </div>
                                     </div>
-                                    <div style="margin-bottom: 30px;">
+                                    <div style="margin-bottom: 70px;">
                                         <?php if($branch['totalDepartment'] > 0) { ?>
                                         <a href="
                                         <?= Yii::$app->homeUrl ?>setting/branch/branch-view/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"

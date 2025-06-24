@@ -4,20 +4,19 @@ use common\models\ModelMaster;
 
 $this->title = 'Branch';
 $page = "list"
-// echo $countries;
 ?>
 
 <!-- <div class="contrainer-body mt-10"> -->
-<div class="mt-50" style="padding: 30px;">
+<div class="mt-60" style="padding: 30px 0px;">
 
-    <div class="between-center mt-20" style="width: 100%;">
+    <div class="between-center" style="width: 100%;">
         <div class="col-8">
             <div class=" d-flex align-items-center gap-2">
                 <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" style="width: 24px; height: 24px;">
                 <div class="pim-name-title ml-10">
-                    <?= Yii::t('app', 'Branch') ?>
+                    <?= Yii::t('app', 'Branches') ?>
                 </div>
-                <?php if ($role >= 5) { ?>
+                <?php if($role >= 5) { ?>
                 <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
                     style="text-decoration: none;">
                     <button type="button" class="btn-create" style="padding: 3px 9px;"
@@ -55,8 +54,8 @@ $page = "list"
         </div>
     </div>
 
-    <div class="company-group-edit mt-30">
-        <div class="col-12 mt-20 tb0">
+    <div class="company-group-edit mt-20">
+        <div class="col-12 tb0">
             <table id="myTable" class="table align-middle table-spacing">
                 <thead class="table-light">
                     <tr class="table-border-weight">
