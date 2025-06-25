@@ -604,9 +604,9 @@ class BranchController extends Controller
                 ->asArray()
                 ->all();
         }
-        //  throw new Exception(print_r($companies, true));
+        //  throw new Exception(print_r($group["groupId"], true));
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $group["groupId"]. '&page=1' . '&limit=0');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $group["groupId"]);
         $companyJson = curl_exec($api);
         $companyGroup = json_decode($companyJson, true);
 
@@ -640,7 +640,7 @@ class BranchController extends Controller
             endforeach;
         }
 
-        //  throw new Exception(print_r($branches, true));
+         throw new Exception(print_r($companyGroup, true));
 
 
         return $this->render('create', [
