@@ -640,7 +640,7 @@ class BranchController extends Controller
             endforeach;
         }
 
-         throw new Exception(print_r($companyGroup, true));
+        //  throw new Exception(print_r($companyGroup, true));
 
 
         return $this->render('create', [
