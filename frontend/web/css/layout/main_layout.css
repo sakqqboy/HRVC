@@ -50,9 +50,9 @@
     /* ขยายเต็มความกว้าง */
     max-width: 100%;
     /* จำกัดไม่ให้เกินขนาดหน้าจอ */
-    padding-left: 10px;
+    padding-left: 30px;
     /* ระยะห่างด้านซ้าย */
-    padding-right: 10px;
+    padding-right: 30px;
     /* ระยะห่างด้านขวา */
     position: relative !important;
     box-sizing: border-box;
