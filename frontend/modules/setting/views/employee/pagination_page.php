@@ -173,7 +173,7 @@ $("#gotoPage").on("submit", function(e) {
         e.preventDefault(); //  ป้องกันไม่ให้ฟอร์ม submit จริง (ถ้าต้องการ)
         var totalPage = $("#totalPage").val();
         var inputPage = $("#input-page").val();
-
+alert("2222");
         if (inputPage > totalPage) {
             alert("Entered the wrong number");
             e.preventDefault();

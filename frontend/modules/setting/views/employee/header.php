@@ -74,16 +74,36 @@ if (Yii::$app->controller->action->id == 'draft' || Yii::$app->controller->actio
 
 				</a>
 
-				<a href="javascript:void(0);" class="d-flex align-items-center view-employee-gray justify-content-center">
+				<span class="d-flex align-items-center view-employee-gray justify-content-center">
 					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" class="me-2" style="width: 18px;height:18px;">
-					<span class="font-size-16 font-weight-600" style="color:#30313D;"><?= $actualShow ?> /</span>
+					<span class="font-size-16 font-weight-600 d-none" id="show-page-fill" style="color:#30313D;">
+						<input type="number" id="per-page" value=''
+							style="width:25px;height:25px;" class="no-spinner text-center mr-5" onkeyup="javascript:newSearchEmployee(event)">/
+					</span>
+
+					<span class="font-size-16 font-weight-600" id="actualShow"
+						style="color:#30313D;cursor: pointer;z-index:100;" onclick="javascript:showFillPage()"><?= $actualShow ?> /
+					</span>
 					<span class="font-size-16 font-weight-600" style="color:#8A8A8A;"><?= $totalEmployee ?></span>
 
-				</a>
+				</span>
 			</div>
 		</div>
 	</div>
 </div>
+<input type="hidden" id="perPage" value="<?= $actualShow ?>">
 <input type="hidden" id="action" value="0">
 <input type="hidden" id="action-menu" value="0">
 <?= $this->render('modal_import') ?>
+<style>
+	.no-spinner::-webkit-outer-spin-button,
+	.no-spinner::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	/* Firefox */
+	/* .no-spinner {
+		-moz-appearance: textfield;
+	} */
+</style>

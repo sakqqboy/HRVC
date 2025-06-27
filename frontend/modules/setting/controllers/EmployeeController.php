@@ -1004,6 +1004,7 @@ class EmployeeController extends Controller
         $teamId = isset($_POST["teamId"]) && $_POST["teamId"] != null ? $_POST["teamId"] : null;
         $status = isset($_POST["status"]) && $_POST["status"] != null ? $_POST["status"] : null;
         $pageType = $_POST["pageType"];
+        $perPage = $_POST["perPage"];
 
 
         return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-result/' . ModelMaster::encodeParams([
@@ -1013,6 +1014,7 @@ class EmployeeController extends Controller
             "teamId" => $teamId,
             "status" => $status,
             "pageType" => $pageType,
+            "perPage" => $perPage,
 
         ]));
     }
@@ -1025,6 +1027,7 @@ class EmployeeController extends Controller
         $teamId = $param["teamId"];
         $status = $param["status"];
         $pageType = $param["pageType"];
+        $perPage = $param["perPage"];
         if ($pageType == 'grid') {
             $file = 'index';
             $action = 'index/';
@@ -1035,7 +1038,7 @@ class EmployeeController extends Controller
         if ($status == 0) {
             $status = null;
         }
-        if ($companyId == "" && $branchId == "" && $teamId == "" && $departmentId == "" && $status == "" && $status == "") {
+        if ($companyId == "" && $branchId == "" && $teamId == "" && $departmentId == "" && $status == "" && $status == "" && $perPage == 15) {
 
             return $this->redirect(Yii::$app->homeUrl . 'setting/employee/' . $action . ModelMaster::encodeParams([
                 "companyId" => ''
@@ -1043,7 +1046,7 @@ class EmployeeController extends Controller
         }
         $isFromImport = isset($param["import"]) ? $param["import"] : 0;
         $currentPage = 1;
-        $limit = 15;
+        $limit = $perPage == 0 ? 15 : $perPage;
         if (isset($param["currentPage"])) {
             $currentPage = $param["currentPage"];
         }
@@ -1082,7 +1085,7 @@ class EmployeeController extends Controller
 
         $totalEmployee = Employee::totalEmployeeWithFilter($companyId, $branchId, $departmentId, $teamId, $status);
         $totalDraft = Employee::totalDraft($companyId);
-        $totalPage = ceil($totalEmployee / 15);
+        $totalPage = ceil($totalEmployee / $limit);
         $pagination = ModelMaster::getPagination($currentPage, $totalPage);
         $filter = [
             "companyId" => $companyId,

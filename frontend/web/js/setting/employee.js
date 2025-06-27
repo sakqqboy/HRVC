@@ -37,12 +37,13 @@ function filterEmployee() {
     var status = $("#status").val();
     var pageType = $("#page-type").val();
     var urlRedirect = $("#url-redirect").val();
+    var perPage = $("#perPage").val();
     var url = $url + 'setting/employee/' + urlRedirect;
     $.ajax({
         type: "POST",
         dataType: 'json',
         url: url,
-        data: { companyId: companyId, branchId: branchId, departmentId: departmentId, teamId: teamId, status: status,pageType:pageType },
+        data: { companyId: companyId, branchId: branchId, departmentId: departmentId, teamId: teamId, status: status,pageType:pageType,perPage:perPage },
         success: function (data) {
 
 
@@ -1176,5 +1177,17 @@ function previewFile(id) {
                 ไม่สามารถแสดงตัวอย่างไฟล์ <strong>.${extension}</strong> ได้ กรุณากดปุ่มดาวน์โหลด
             </div>
         `;
+    }
+}
+function showFillPage() { 
+    $("#actualShow").addClass("d-none");
+    $("#show-page-fill").removeClass("d-none");
+    $("#per-page").focus();
+}
+function newSearchEmployee(e) { 
+    if (e.key === 'Enter' || e.keyCode === 13) {
+        var perpage = $("#per-page").val();
+        $("#perPage").val(perpage);
+        filterEmployee();
     }
 }

@@ -872,6 +872,7 @@ $this->registerJs('
 			if (showing != "") {
 				if (!$(e.target).closest("#employee-action-" + showing).length && !$(e.target).closest("#show-action-box-" + showing).length) {
 					$("#employee-action-" + showing).hide();
+					 $("#show-action").val("");
 				}
 			}
 		});
