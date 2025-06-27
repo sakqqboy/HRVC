@@ -5,11 +5,7 @@ use yii\bootstrap5\ActiveForm;
 
 $this->title = Yii::t('app', 'KFI Grid View');
 ?>
-<div class="fixed-test">
-    <?= $this->render('header_filter', [
-        "role" => $role
-    ]) ?>
-</div>
+
 <div class="contrainer-body">
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"

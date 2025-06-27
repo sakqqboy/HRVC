@@ -39,6 +39,9 @@ function filterEmployee() {
     var urlRedirect = $("#url-redirect").val();
     var perPage = $("#perPage").val();
     var url = $url + 'setting/employee/' + urlRedirect;
+    $("#img-loading").addClass('col-12');
+    $("#main-body").addClass('d-none');
+    $("#img-loading").removeClass('d-none');
     $.ajax({
         type: "POST",
         dataType: 'json',
@@ -51,6 +54,7 @@ function filterEmployee() {
     });
 
 }
+
 function employeeType(status) {
     $("#status").val(status);
     $("#btn-" + 0).addClass('btn-curr');

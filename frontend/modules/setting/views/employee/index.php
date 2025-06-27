@@ -46,6 +46,12 @@ $statusTexArr = Status::allStatusText();
 				</div>
 			</div>
 			<div class="row" style="--bs-gutter-x:0px;">
+				<div class="d-none img-loading text-center" id="img-loading">
+					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/config/loading.gif" class="img-fluid " style="width: 750px;">
+				</div>
+			</div>
+			<div class="row" style="--bs-gutter-x:0px;" id="main-body">
+
 				<?php
 				if (isset($employees) && count($employees) > 0) {
 					foreach ($employees as $employeeId => $employee) :

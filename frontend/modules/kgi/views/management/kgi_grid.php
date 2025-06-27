@@ -82,7 +82,12 @@ $this->title = 'KGI Grid View';
                     </div>
                 </div>
             </div>
-            <div class="col-12 mt-15">
+            <div class="row" style="--bs-gutter-x:0px;">
+                <div class="d-none img-loading text-center" id="img-loading">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/config/loading.gif" class="img-fluid " style="width: 750px;">
+                </div>
+            </div>
+            <div class="col-12 mt-15 mb-20" id="main-body">
                 <div class="row">
                     <?php
                     if (isset($kgis) && count($kgis) > 0) {
@@ -623,6 +628,16 @@ $this->title = 'KGI Grid View';
                     ?>
                 </div>
             </div>
+            <?php
+            echo $this->render('pagination_page', [
+                'totalKgi' => $totalKgi,
+                "currentPage" => $currentPage,
+                'totalPage' => $totalPage,
+                "pagination" => $pagination,
+                "pageType" => "grid",
+                "filter" => isset($filter) ? $filter : []
+            ]);
+            ?>
         </div>
     </div>
 

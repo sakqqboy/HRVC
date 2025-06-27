@@ -36,13 +36,16 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class ManagementController extends Controller
 {
-	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
+	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $currentPage, $limit)
 	{
+		$startAt = (($currentPage - 1) * $limit);
 		if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
 			$kgis = Kgi::find()
 				->where(["status" => [1, 2, 4]])
 				->asArray()
 				->orderBy('createDateTime DESC')
+				->offset($startAt)
+				->limit($limit)
 				->asArray()
 				->all();
 		}
@@ -66,6 +69,8 @@ class ManagementController extends Controller
 				->asArray()
 				->orderBy('createDateTime DESC')
 				->asArray()
+				->offset($startAt)
+				->limit($limit)
 				->all();
 		}
 		$data1 = [];
@@ -502,13 +507,15 @@ class ManagementController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionKgiFilter($companyId, $branchId, $teamId, $month, $status, $year, $adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
+	public function actionKgiFilter($companyId, $branchId, $teamId, $month, $status, $year, $adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $currentPage, $limit)
 	{
+		$startAt = (($currentPage - 1) * $limit);
 		$data = [];
 		$data1 = []; //not set
 		$data2 = []; //due passed
 		$data3 = []; //inprogess
 		$data4 = []; //completed
+		$total = 0;
 		$searchStatus = '';
 		if ($status == 1 || $status == 3 || $status == 4) {
 			$searchStatus = 1;
@@ -555,6 +562,8 @@ class ManagementController extends Controller
 		}
 
 		if (count($kgis) > 0) {
+			$i = 0;
+			$count = 1;
 			foreach ($kgis as $kgi) :
 				$show = 0;
 				$commonData = [];
@@ -666,24 +675,31 @@ class ManagementController extends Controller
 							"monthNumber" => $kgiHistory["month"],
 						];
 					}
+
 					if (!empty($commonData)) {
-						if (($kgi["fromDate"] == "" || $kgi["toDate"] == "") && $isOver == 2) {
-							$data1[$kgiId] = $commonData;
-						} elseif ($isOver == 1 && $kgi["status"] == 1) {
-							$data2[$kgiId] = $commonData;
-						} elseif ($kgi["status"] == 2) {
-							$data4[$kgiId] = $commonData;
-						} else {
-							$data3[$kgiId] = $commonData;
+						if ($i >= $startAt && $count <= $limit) {
+							if (($kgi["fromDate"] == "" || $kgi["toDate"] == "") && $isOver == 2) {
+								$data1[$kgiId] = $commonData;
+							} elseif ($isOver == 1 && $kgi["status"] == 1) {
+								$data2[$kgiId] = $commonData;
+							} elseif ($kgi["status"] == 2) {
+								$data4[$kgiId] = $commonData;
+							} else {
+								$data3[$kgiId] = $commonData;
+							}
+							$count++;
 						}
+						$total++;
 					}
 				}
 
-
+				$i++;
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
-		return json_encode($data);
+		$result["data"] = $data;
+		$result["total"] = $total;
+		return json_encode($result);
 	}
 
 	public function actionBranchKgi($branchId)

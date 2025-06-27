@@ -1028,6 +1028,7 @@ class EmployeeController extends Controller
         $status = $param["status"];
         $pageType = $param["pageType"];
         $perPage = $param["perPage"];
+
         if ($pageType == 'grid') {
             $file = 'index';
             $action = 'index/';
@@ -1096,6 +1097,7 @@ class EmployeeController extends Controller
             "branches" => $branches,
             "departments" => $departments,
             "teams" => $teams,
+            "perPage" => $perPage,
         ];
 
         return $this->render($file, [

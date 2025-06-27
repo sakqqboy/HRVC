@@ -214,3 +214,11 @@
     /* ลบ margin ที่อาจขัดขวาง */
     box-sizing: border-box;
 }
+
+.img-loading {
+    width: 100%;
+    min-height: 600px;
+    position: relative;
+    z-index: 99;
+    background-color: white;
+}

@@ -14,21 +14,21 @@
             $PreviousPage = ModelMaster::encodeParams([
                 "companyId" => $filter["companyId"],
                 "branchId" => $filter["branchId"],
-                "departmentId" => $filter["departmentId"],
-                "teamId" => $filter["teamId"],
+                "month" => $filter["month"],
+                "year" => $filter["year"],
                 "currentPage" => $currentPage - 1,
                 "status" => $filter["status"],
-                "pageType" => $pageType,
+                "type" => $pageType,
                 "perPage" => $filter["perPage"],
             ]);
             $nextPage = ModelMaster::encodeParams([
                 "companyId" => $filter["companyId"],
                 "branchId" => $filter["branchId"],
-                "departmentId" => $filter["departmentId"],
-                "teamId" => $filter["teamId"],
+                "month" => $filter["month"],
+                "year" => $filter["year"],
                 "currentPage" => $currentPage + 1,
                 "status" => $filter["status"],
-                "pageType" => $pageType,
+                "type" => $pageType,
                 "perPage" => $filter["perPage"],
             ]);
         } else {
@@ -51,11 +51,11 @@
                 $directPage = ModelMaster::encodeParams([
                     "companyId" => $filter["companyId"],
                     "branchId" => $filter["branchId"],
-                    "departmentId" => $filter["departmentId"],
-                    "teamId" => $filter["teamId"],
+                    "month" => $filter["month"],
+                    "year" => $filter["year"],
                     "currentPage" => $page,
                     "status" => $filter["status"],
-                    "pageType" => $pageType,
+                    "type" => $pageType,
                     "perPage" => $filter["perPage"],
                 ]);
             } else {
@@ -87,7 +87,7 @@
         <a href="<?= $url ?>/<?= $nextPage ?>"
             class="btn-previous<?= ($currentPage == $totalPage ? '-disable' : '') ?>  text-center align-content-center"
             <?= ($currentPage == $totalPage ? 'disabled' : '') ?>
-            onclick="<?= $currentPage == $totalPage ? 'return false;' : '' ?>"
+            onclick="<?= $currentPage == $totalPage ? 'return false;' : 'javascript:showLoading()' ?>"
             style="text-decoration: none;<?= $currentPage == $totalPage ? 'pointer-events:none;' : '' ?>">
             <!-- <button class="btn-next"> -->
             <span style="margin-right: 5px;"><?= Yii::t('app', 'Next') ?></span>
@@ -104,8 +104,8 @@
     ?>
         <input type="hidden" id="companyId" value="<?= $filter["companyId"] ?>">
         <input type="hidden" id="branchId" value="<?= $filter["branchId"] ?>">
-        <input type="hidden" id="departmentId" value="<?= $filter["departmentId"] ?>">
-        <input type="hidden" id="teamId" value="<?= $filter["teamId"] ?>">
+        <input type="hidden" id="month" value="<?= $filter["month"] ?>">
+        <input type="hidden" id="year" value="<?= $filter["year"] ?>">
         <input type="hidden" id="status" value="<?= $filter["status"] ?>">
     <?php
     }

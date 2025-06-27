@@ -176,4 +176,22 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
             ->count();
         return $employee;
     }
+    public static function employeeId($userId)
+    {
+        $user = User::find()
+            ->select('employeeId')
+            ->where(["userId" => $userId])
+            ->asArray()
+            ->one();
+        if (isset($user) && !empty($user)) {
+            return $user["employeeId"];
+        } else {
+            return null;
+        }
+    }
+    public static function EmployeeDetail($employeeId)
+    {
+        $employee = Employee::find()->where(["employeeId" => $employeeId])->asArray()->one();
+        return $employee;
+    }
 }
