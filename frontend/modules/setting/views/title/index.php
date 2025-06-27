@@ -14,9 +14,10 @@ $this->title = 'Titles';
 $page = "grid";
 
 ?>
-<div class="contrainer-body mt-10">
+<!-- <div class="contrainer-body mt-10"> -->
+<div class="mt-60" style="padding: 30px 0px;">
 
-    <div class="between-center mt-20" style="width: 100%;">
+    <div class="between-center" style="width: 100%;">
         <div class="col-8">
             <div class=" d-flex align-items-center gap-2">
                 <img src=" <?= Yii::$app->homeUrl ?>image/star-black.svg" style="width: 24px; height: 24px;">
@@ -25,10 +26,11 @@ $page = "grid";
                 </div>
                 <a href="<?= Yii::$app->homeUrl ?>setting/title/create/<?= ModelMaster::encodeParams(["companyId" => '' , "branchId" => '', "departmentId" => '' ]) ?>"
                     style="text-decoration: none;">
-                    <button type="button" class="btn-create" style="padding: 3px 9px;"
-                        action=" <?= Yii::$app->homeUrl ?>setting/branch/create-branch">Create New <img
-                            src=" <?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
-                            style="width:18px; height:18px; margin-top:-3px;">
+                    <button type="button" class="btn-create mr-5"
+                        style="padding: 0px; width: 93px; height:22.5px; font-size: 12px; font-weight: 600;"
+                        action="<?= Yii::$app->homeUrl ?>setting/branch/create-branch"><?= Yii::t('app', 'Create New') ?>
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
+                            style="width:14px; height:14px; margin-top:-3px;">
                     </button>
                 </a>
             </div>
@@ -38,8 +40,8 @@ $page = "grid";
 
         </div>
     </div>
-    <div class="pim-body company-group-edit bg-white mt-10">
-        <div class="alert alert-branch-body" role="alert">
+    <div class="company-group-edit bg-white mt-20">
+        <div class="alert alert-branch-body" role="alert" style="padding: 0px;">
             <div class="row">
                 <?php
 				if (isset($data) && count($data) > 0) {
