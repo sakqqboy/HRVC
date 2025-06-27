@@ -698,4 +698,72 @@ class ModelMaster extends \yii\db\ActiveRecord
         }
         return $num;
     }
+    public static function getPagination($currentPage, $totalPages)
+    {
+        $pagination = [];
+
+        // Always show first page
+        $pagination[] = 1;
+
+        $start = $currentPage - 1;
+        $end = $currentPage + 1;
+        if ($end >= $totalPages) {
+            $end = $totalPages - 1;
+        }
+        if ($currentPage <= 3) {
+            $start = 2;
+            $end = 4;
+            for ($i = $start; $i <= $end; $i++) {
+                $pagination[] = $i;
+            }
+            if ($totalPages > 5) {
+                $pagination[] = '...';
+            }
+        } else {
+            if ($currentPage == $totalPages) {
+                $start = $totalPages - 2;
+            }
+            $before = $start - 1;
+            $after = $totalPages - $end;
+            if ($end == ($totalPages - 1) || $before >= $after) {
+                $pagination[] = '...';
+            }
+
+
+            for ($i = $start; $i <= $end; $i++) {
+                $pagination[] = $i;
+            }
+            if ($end == ($totalPages - 2)) {
+                $pagination[] = ($totalPages - 1);
+            }
+            if ($after > $before) {
+                $pagination[] = '...';
+            }
+        }
+        if ($totalPages > 1) {
+            $pagination[] = $totalPages;
+        }
+        if ($totalPages <= 4) {
+            $pagination = [];
+            $start = 1;
+            $end = $totalPages;
+            for ($i = $start; $i <= $end; $i++) {
+                $pagination[] = $i;
+            }
+        }
+
+        return $pagination;
+    }
+    public static function urlArr()
+    {
+        $module = Yii::$app->controller->module->id;
+        $controller = Yii::$app->controller->id;
+        $action = Yii::$app->controller->action->id;
+        $arr = [
+            "module" => $module,
+            "controller" => $controller,
+            "action" => $action,
+        ];
+        return $arr;
+    }
 }
