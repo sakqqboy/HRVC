@@ -3,7 +3,6 @@
 namespace frontend\modules\setting\controllers;
 
 use common\helpers\Path;
-use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
@@ -37,36 +36,56 @@ class GroupController extends Controller
         if (!Yii::$app->user->id) {
             return $this->redirect(Yii::$app->homeUrl . 'site/login');
         }
-        Session::deleteSession();
         return true; //go to origin request
     }
     public function actionIndex()
     {
         return $this->render('index');
     }
-    public function actionCreateGroup()
+
+    public function actionDisplayGroup()
     {
+        $role = UserRole::userRight();
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
         if (isset($group) && !empty($group)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
         }
+        
+        return $this->render('display_group', [
+            "role" => $role
+        ]);
+    }
+
+    public function actionCreateGroup()
+    {
+        $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+        // if (isset($group) && !empty($group)) {
+        //     return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
+        // }
         if (isset($_POST["groupName"]) && trim($_POST["groupName"]) != '') {
+            // throw new Exception('POST DATA: ' . print_r($_POST, true));
+
             $group = new Group();
             $group->groupName = $_POST["groupName"];
             $group->tagLine = $_POST["tagLine"];
-            $group->headQuaterName = $_POST["headQuaterName"];
+            // $group->headQuaterName = $_POST["headQuaterName"];
             $group->displayName = $_POST["displayName"];
             $group->website = $_POST["website"];
             $group->location = $_POST["location"];
             $group->countryId = $_POST["country"];
-            $group->city = $_POST["city"];
-            $group->postalCode = $_POST["postalCode"];
+            // $group->city = $_POST["city"];
+            // $group->postalCode = $_POST["postalCode"];
             $group->industries = $_POST["industries"];
             $group->email = $_POST["email"];
-            $group->contact = $_POST["contact"];
+            // $group->contact = $_POST["contact"];
             $group->founded = $_POST["founded"];
             $group->director = $_POST["director"];
-            $group->socialTag = $_POST["socialTag"];
+            // $group->socialTag = $_POST["socialTag"];
+            $group->socialInstargram = $_POST["instagram"];
+            $group->socialFacebook = $_POST["facebook"];
+            $group->socialYoutube = $_POST["youtube"];
+            $group->socialLinkin = $_POST["linkedin"];
+            $group->socialX = $_POST["twitter"];
             $group->about = $_POST["about"];
             $group->status = 1;
             $group->createDateTime = new Expression('NOW()');
@@ -155,7 +174,7 @@ class GroupController extends Controller
         // throw new Exception(print_r($group,true));
 
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1' . '&limit=7');
         $companyJson = curl_exec($api);
         $companyGroup = json_decode($companyJson, true);
 
@@ -197,12 +216,12 @@ class GroupController extends Controller
             endforeach;
         }
         $employees = Employee::find()
-            ->where(["status" => 1])
-            ->asArray()
-            ->all();
+        ->where(["status" => 1])
+        ->asArray()
+        ->all();
 
         // กรองข้อมูลที่ picture ไม่เป็นค่าว่าง
-        $filteredEmployees = array_filter($employees, function ($employee) {
+        $filteredEmployees = array_filter($employees, function($employee) {
             return !empty($employee['picture']);
         });
 

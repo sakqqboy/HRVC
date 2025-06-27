@@ -65,6 +65,27 @@ class FilterController extends Controller
 		$res["text"] = $text;
 		return json_encode($res);
 	}
+	public function actionBranchDepartment()
+	{
+		$teams = [];
+		$res = [];
+		$text = "<option value=''>Department</option>";
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-department?id=' . $_POST["branchId"]);
+		$departments = curl_exec($api);
+		$departments = json_decode($departments, true);
+		curl_close($api);
+		if (isset($departments) && count($departments) > 0) {
+			foreach ($departments as $department) :
+				$text .= '<option value="' . $department["departmentId"] . '">' . $department["departmentName"] . '</opotion>';
+			endforeach;
+		}
+		$res["status"] = true;
+		$res["text"] = $text;
+		return json_encode($res);
+	}
 	public function actionEmployeeTeam()
 	{
 		$res = [];

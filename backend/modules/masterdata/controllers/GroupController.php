@@ -32,18 +32,89 @@ class GroupController extends Controller
         $group = Group::find()->where(["groupId" => $id])->asArray()->one();
         return json_encode($group);
     }
-    public function actionCompanyGroup($id)
+    
+   public function actionCompanyGroup($id, $page = null, $limit = null)
+{
+    // ตั้งค่า default ถ้าไม่ได้ส่งมา
+    // $page = isset($page) && is_numeric($page) && $page > 0 ? (int)$page : 1;
+    // $limit = isset($limit) && is_numeric($limit) && $limit > 0 ? (int)$limit : 10;
+
+    $offset = ($page - 1) * $limit;
+
+    $companyQuery = Company::find()
+        ->select('company.companyName, company.companyId, company.city, c.countryName,
+            company.picture, company.headQuaterId, company.industries, g.groupName, c.flag, company.about')
+        ->join("LEFT JOIN", "country c", "c.countryId = company.countryId")
+        ->join("LEFT JOIN", "`group` g", "g.groupId = company.groupId") // group เป็น reserved word
+        ->where(["company.groupId" => $id, "company.status" => 1])
+        ->orderBy('company.companyName')
+        ->offset($offset)
+        ->limit($limit);
+
+    $company = $companyQuery->asArray()->all();
+
+    return json_encode($company);
+}
+
+    public function actionCompanyGroupFilter($id, $countryId, $page,$limit)
+{
+
+    $offset = ($page - 1) * $limit;
+
+    $query = Company::find()
+        ->select('company.companyName, company.companyId, company.city, c.countryName,
+                  company.picture, company.headQuaterId, company.industries, g.groupName, 
+                  c.flag, company.about')
+        ->join("LEFT JOIN", "country c", "c.countryId = company.countryId")
+        ->join("LEFT JOIN", "`group` g", "g.groupId = company.groupId")
+        ->where(["company.groupId" => $id, "company.status" => 1]);
+
+    if (!empty($countryId)) {
+        $query->andWhere(["company.countryId" => $countryId]);
+    }
+
+    $company = $query
+        ->offset($offset)
+        ->limit($limit)
+        ->orderBy('company.companyName')
+        ->asArray()
+        ->all();
+
+    return json_encode($company);
+}
+
+    
+    public function actionCompanyPage($id,$page,$countryId ,$limit)
     {
-        $company = [];
-        $company = Company::find()
-            ->select('company.companyName,company.companyId,company.city,c.countryName,
-            company.picture,company.headQuaterId,company.industries,g.groupName,c.flag,company.about')
-            ->JOIN("LEFT JOIN", "country c", "c.countryId=company.countryId")
-            ->JOIN("LEFT JOIN", "group g", "g.groupId=company.groupId")
-            ->where(["company.groupId" => $id, "company.status" => 1])
-            ->orderBy('company.companyName')
-            ->asArray()
-            ->all();
-        return json_encode($company);
+        // $limit = 6;
+
+        // if($page == 'list'){
+        //     $limit = 7;
+        // }else{
+        //     $limit = 6;
+        // }    
+        
+        $query = Company::find()
+            ->where(["company.groupId" => $id, "company.status" => 1]);
+    
+        if (!empty($countryId)) {
+            $query->andWhere(["company.countryId" => $countryId]);
+        }
+    
+        $totalRows = $query->count(); // นับหลังจากใส่เงื่อนไขทั้งหมดแล้ว
+    
+        $totalPages = ceil($totalRows / $limit);
+    
+        return json_encode([
+            'totalPages' => $totalPages,
+            'totalRows' => $totalRows,
+            'perPage' => $limit,
+            'nowPage' => $page
+        ]);
+    }
+    public function actionCurrentGroup()
+    {
+        $group = Group::find()->where(["status" => 1])->asArray()->one();
+        return json_encode($group);
     }
 }

@@ -37,7 +37,7 @@ return [
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['countryName', 'flag'], 'string', 'max' => 255],
             [['lat', 'lng'], 'string', 'max' => 100],
-            [['hasBranch', 'status'], 'string', 'max' => 4],
+            [['hasBranch', 'status'], 'string', 'max' => 6],
         ];
 }
 

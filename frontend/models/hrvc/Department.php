@@ -96,4 +96,16 @@ class Department extends \frontend\models\hrvc\master\DepartmentMaster
             return 0;
         }
     }
+     public static function departmentInBranch($branchId)
+    {
+        $department = [];
+        $department = Department::find()
+            ->select('department.departmentName,department.departmentId')
+            ->JOIN("LEFT JOIN", "branch b", "b.branchId=department.branchId")
+            ->where(["b.branchId" => $branchId, "department.status" => 1])
+            ->asArray()
+            ->orderBy('department.departmentName')
+            ->all();
+     return $department;
+    }
 }

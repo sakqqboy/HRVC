@@ -385,3 +385,160 @@
 .font-weight-500 {
     font-weight: 500;
 }
+
+
+.font-b {
+    font-weight: bold;
+}
+
+.font-bb {
+    font-weight: bolder;
+}
+
+.font-weight-100 {
+    font-weight: 100;
+}
+
+.font-weight-200 {
+    font-weight: 200;
+}
+
+.font-weight-300 {
+    font-weight: 300;
+}
+
+.font-weight-400 {
+    font-weight: 400;
+}
+
+.font-weight-500 {
+    font-weight: 500;
+}
+
+.font-weight-600 {
+    font-weight: 600;
+}
+
+.font-weight-700 {
+    font-weight: 700;
+}
+
+.font-weight-800 {
+    font-weight: 800;
+}
+
+.font-i {
+    font-weight: 100;
+}
+
+.font-u {
+    text-decoration: underline;
+}
+
+.font-ui {
+    text-decoration: underline;
+    font-style: italic;
+}
+
+.font-ub {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.font-ubb {
+    text-decoration: underline;
+    font-weight: bolder;
+}
+
+.font-ubbi {
+    text-decoration: underline;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.font-ubbb {
+    text-decoration: underline;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+.font-blue {
+    color: #2580D3;
+}
+
+.font-red {
+    color: #EC1D42;
+}
+
+.font-gray {
+    color: #8A8A8A;
+}
+
+.font-white {
+    color: #fff;
+}
+
+.part-text {
+    color: var(--Primary-Blue---HRVC, #2580D3);
+    font-feature-settings: 'salt' on;
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    /* 142.857% */
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+}
+
+.text-gray {
+    color: var(--Helper-Text-Gray, #8A8A8A);
+    font-family: "SF Pro Display";
+    font-style: normal;
+}
+
+.text-gray-back {
+    color: var(--Helper-Text-Gray, #666);
+    font-family: "SF Pro Display";
+    font-style: normal;
+}
+
+.text-blue {
+    color: #2580D3;
+    font-family: "SF Pro Display";
+    font-style: normal;
+}
+
+.text-black {
+    color: var(--HRVC---Text-Black, #30313D);
+    font-family: "SF Pro Display";
+    font-style: normal;
+}
+
+.text-blue-sea {
+    color: var(--HRVC---Text-Black, #2F42ED);
+    font-family: "SF Pro Display";
+    font-style: normal;
+}
+
+.text-green {
+    color: var(--HRVC---Text-Black, #2D7F06);
+    font-family: "SF Pro Display";
+    font-style: normal;
+}
+
+.text-red {
+    color: var(--HRVC---Text-Black, #E05757);
+    font-family: "SF Pro Display";
+    font-style: normal;
+}
+
+.text-orang {
+    color: var(--HRVC---Text-Black, #DD7A01);
+    font-family: "SF Pro Display";
+    font-style: normal;
+}

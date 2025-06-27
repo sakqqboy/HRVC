@@ -40,3 +40,65 @@ function deleteTags(id) {
     });
     $("#tag-" + id).remove();
 }
+
+// function applySelectStyle(selectElement) {
+//     alert(selectElement.value);
+//     if (selectElement.value) {
+//         selectElement.classList.remove('select-pim');
+//         selectElement.classList.add('select-pimselect');
+//     } else {
+//         selectElement.classList.remove('select-pimselect');
+//         selectElement.classList.add('select-pim');
+//     }
+// }
+
+
+function applySelectStyleGroup(select) {
+    // ตรวจสอบว่า value มีจริง (แม้ว่าเป็น "0" ก็ถือว่า valid)
+    const hasValue = select.value !== "" && select.value !== null;
+
+    // เปลี่ยน class
+    if (hasValue) {
+        select.classList.remove("select-pim");
+        select.classList.add("select-pimselect");
+    } else {
+        select.classList.remove("select-pimselect");
+        select.classList.add("select-pim");
+    }
+
+    // กรณีเปลี่ยน Company
+    if (select.id === "companySelect") {
+        const branchSelect = document.getElementById("branchSelect");
+        const departmentSelect = document.getElementById("departmentSelect");
+
+        if (hasValue) {
+            branchSelect.disabled = false;
+        } else {
+            branchSelect.disabled = true;
+            branchSelect.value = "";
+            applySelectStyleGroup(branchSelect);
+        }
+
+        // reset และ disable department ทุกครั้งที่เปลี่ยน company
+        departmentSelect.disabled = true;
+        departmentSelect.value = "";
+        applySelectStyleGroup(departmentSelect);
+    }
+
+    // กรณีเปลี่ยน Branch
+    if (select.id === "branchSelect") {
+        const departmentSelect = document.getElementById("departmentSelect");
+
+        if (hasValue) {
+            departmentSelect.disabled = false;
+        } else {
+            departmentSelect.disabled = true;
+            departmentSelect.value = "";
+        }
+
+        applySelectStyleGroup(departmentSelect);
+    }
+}
+
+
+

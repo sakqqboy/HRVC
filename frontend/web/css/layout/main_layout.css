@@ -1,3 +1,12 @@
+.submain-background {
+    background-color: white;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-top: 71px;
+    height: 100%;
+    padding: 30px;
+}
+
 .menu-left-side {
     width: 280px;
     background-color: #072033;
@@ -30,7 +39,7 @@
     width: calc(100% - 280px);
     position: fixed;
     z-index: 5;
-    height: 70px;
+    height: 60px;
     padding-top: 12px;
     padding-right: 12px;
     box-sizing: border-box;
@@ -45,10 +54,9 @@
     /* ระยะห่างด้านซ้าย */
     padding-right: 10px;
     /* ระยะห่างด้านขวา */
-    /* position: relative !important;
+    position: relative !important;
     box-sizing: border-box;
-    flex: 1; */
-    /* position: fixed; */
+    flex: 1;
 }
 
 .small-content {
@@ -91,6 +99,17 @@
     height: 99px;
 }
 
+.modal-content {
+    display: inline-flex;
+    /* height: 765.946px;
+    padding: 50px; */
+    flex-direction: column;
+    align-items: center;
+    /* gap: 30px; */
+    flex-shrink: 0;
+    border: none;
+}
+
 .header-name {
     text-align: right !important;
     font-size: 22px;
@@ -125,6 +144,16 @@
     height: 25px;
 }
 
+.center-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+}
 
 .mid-center {
     display: flex;
@@ -139,10 +168,22 @@
     align-items: flex-start;
 }
 
+.end-center {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 .between-center {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.between-start {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .between-column {
@@ -151,4 +192,25 @@
     justify-content: space-between;
     height: 100%;
     /* ปรับให้ div เต็มพื้นที่ */
+}
+
+.max-background {
+    width: 100%;
+    height: 100%;
+}
+
+
+.column {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+}
+
+.w-100 {
+    width: 100vw;
+    /* เต็มความกว้างของหน้าจอ */
+    margin: 0;
+    /* ลบ margin ที่อาจขัดขวาง */
+    box-sizing: border-box;
 }

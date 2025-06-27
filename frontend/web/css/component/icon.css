@@ -1,6 +1,22 @@
-.circle-icon-dash-30{
+.circle-icon-dash-30 {
 	border: gray dashed 1px;
-	padding:5px;
+	padding: 5px;
 	border-radius: 100%;
-	width:30px;
+	width: 30px;
+}
+
+.cycle-big-image {
+	display: flex;
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	/* padding: 34.906px 6.981px; */
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 17.453px;
+	flex-shrink: 0;
+	border-radius: 100%;
+	border: 0.861px solid #CBD5E1;
+	background: linear-gradient(218deg, #F9F9F9 14.86%, #F1F1F1 84.36%);
 }

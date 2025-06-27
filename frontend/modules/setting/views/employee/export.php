@@ -9,6 +9,7 @@
 		<td>Employee Condition</td>
 		<td>Right</td>
 		<td>Gender</td>
+		<td>Language</td>
 	</tr>
 	<?php
 	$i = 0;
@@ -32,6 +33,7 @@
 			<td><?= isset($employeeCondition[$i]) ? $employeeCondition[$i]["employeeConditionName"] : '' ?></td>
 			<td><?= isset($rights[$i]) ? $rights[$i]["roleName"] : '' ?></td>
 			<td><?= isset($gender[$i]) ? $gender[$i] : '' ?></td>
+			<td><?= isset($language[$i]) ? $language[$i]['name'] : '' ?></td>
 		</tr>
 	<?php
 		$i++;

@@ -63,7 +63,6 @@ class KgiEmployeeHistory extends \backend\models\hrvc\master\KgiEmployeeHistoryM
             foreach ($kgiEmployeeHistory as $keh):
                 $data[$keh["kgiEmployeeHistoryId"]] = [
                     "detail" => $keh["detail"],
-                    "target" => ModelMaster::pimNumberFormat($keh["target"]),
                     "result" => ModelMaster::pimNumberFormat($keh["result"]),
                     "dueBehide" => ModelMaster::pimNumberFormat($keh["target"] - $keh["result"]),
                     "fromDate" => $keh["fromDate"],

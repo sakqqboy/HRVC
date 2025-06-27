@@ -3,7 +3,6 @@
 namespace frontend\modules\setting\controllers;
 
 use common\helpers\Path;
-use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
@@ -14,6 +13,7 @@ use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\UserRole;
+use PHPUnit\TextUI\XmlConfiguration\Extension;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -38,35 +38,71 @@ class CompanyController extends Controller
 		if (!Yii::$app->user->id) {
 			return $this->redirect(Yii::$app->homeUrl . 'site/login');
 		}
-		Session::deleteSession();
-		return true; //go to origin request
+		$role = UserRole::userRight();
+		if($role >= 5 ){
+			return Yii::$app->request->referrer;
+		}
+				return true; //go to origin request
 	}
-	public function actionIndex()
+
+	
+	public function actionDisplayCompany()
 	{
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
 		if (!isset($group) && !empty($group)) {
-			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/display_group/');
 		}
+
+		$company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
+        if (isset($company) && !empty($company)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-grid/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
+        }
+        
 		$groupId = $group["groupId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-		//throw new exception(print_r($companies, true));
-		curl_close($api);
-		return $this->render('index', [
-			"companies" => $companies,
+		return $this->render('display_company', [
 			"groupId" => $groupId
 		]);
 	}
-	public function actionCompanyGrid()
-	{
-		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
-		if (!isset($group) && !empty($group)) {
-			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+
+	public function actionEncodeParamsCountry() {
+		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+	
+		$countryId = Yii::$app->request->post('countryId');
+		$page = Yii::$app->request->post('page');
+
+		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nextPage' => 1]);
+	
+		if($page == 'grid') {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-grid-filter/'. $url );
+		}else if($page == 'list') {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/company/index-filter/'. $url );
+		}else{
+			return "eror";
 		}
+	}
+
+	public function actionEncodeParamsPage() {
+		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+	
+		$countryId = Yii::$app->request->post('countryId');
+		$page = Yii::$app->request->post('page');
+		$nextPage = Yii::$app->request->post('nextPage');
+
+		// throw new exception(print_r($nextPage, true));
+
+		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nextPage' => $nextPage]);
+	
+		if($page == 'grid') {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-grid-filter/'. $url );
+		}else if($page == 'list') {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/company/index-filter/'. $url );
+		}else{
+			return "eror";
+		}
+	}
+
+	public function actionIndex()
+	{
 		$role = UserRole::userRight();
 		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
@@ -87,31 +123,67 @@ class CompanyController extends Controller
 			$staffId = Yii::$app->user->id;
 			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
 		}
+		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+		if (!isset($group) && !empty($group)) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+		}
+
+		$company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
+		if (!isset($company) && !empty($company)) {
+			// throw new Exception(print_r($company, true));
+			return $this->redirect(Yii::$app->homeUrl . 'setting/company/display-company/');
+		}
+
+
 		$groupId = $group["groupId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1' . '&limit=7');
 		$companies = curl_exec($api);
-
-		if ($companies === false) {
-			throw new Exception('API Error: ' . curl_error($api));
-		}
-
 		$companies = json_decode($companies, true);
-		curl_close($api);
+		//throw new exception(print_r($companies, true));
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=1' . '&countryId=' . '&limit=7');
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+		// throw new exception(print_r($numPage, true));
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
+		$result1 = curl_exec($api);
+		$countries = json_decode($result1, true);
+
 
 		$data = [];
 		if (!empty($companies)) {
 			foreach ($companies as $company) :
 				$companyId = $company['companyId'];
 
+				$employees = Employee::find()
+				->where(["companyId" => $companyId])
+				->asArray()
+				->all();
+
+				// throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
+
+				// กรองเฉพาะที่มี picture
+				$filteredEmployees = array_filter($employees, function($employee) {
+					return !empty($employee['picture']);
+				});
+
+				// รีเซ็ต index และเลือกแค่ 3 คนแรก
+				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+
+				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
+
+
 				$branchIds = Branch::find()->select('branchId')
 					->where(["companyId" => $companyId, "status" => 1])
 					->asArray()->column();  // คืนค่าเป็น array แทน all()
 
 				$totalBranch = count($branchIds);
-				$totalEmployee = Employee::find()->where(["companyId" => $companyId])->count();
+				$totalEmployee = Employee::find()->where(["companyId" => $companyId, "status" => 1])->count();
 
 				$departments = [];
 				$teams = [];
@@ -140,18 +212,408 @@ class CompanyController extends Controller
 					"totalDepartment" => count($departments),
 					"totalTeam" => count($teams),
 					"totalBranch" => $totalBranch,
-					"totalEmployee" => $totalEmployee
+					"totalEmployee" => $totalEmployee,
+					"employees" => $filteredEmployees
+				];
+			endforeach;
+		}
+		
+		curl_close($api);
+		return $this->render('index', [
+			"companies" => $data,
+			"groupId" => $groupId,
+			"countries" => $countries,
+			"numPage" => $numPage,
+			"countryId" => 0,
+			"role" => $role
+		]);
+	}
+
+	public function actionIndexFilter($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$countryId = $param["countryId"];
+		$nextPage = $param["nextPage"];
+
+		$role = UserRole::userRight();
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+		}
+		// throw new exception(print_r($nextPage, true));
+
+		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+		if (!isset($group) && !empty($group)) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+		}
+
+		$company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
+		if (!isset($company) && !empty($company)) {
+			// throw new Exception(print_r($company, true));
+			return $this->redirect(Yii::$app->homeUrl . 'setting/company/display-company/');
+		}
+
+
+		$groupId = $group["groupId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId . '&page=' . $nextPage . '&limit=7');
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+		//throw new exception(print_r($companies, true));
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=' . $nextPage . '&countryId=' . $countryId . '&limit=7');
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+		// throw new exception(print_r($numPage, true));
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
+		$result1 = curl_exec($api);
+		$countries = json_decode($result1, true);
+
+
+		$data = [];
+		if (!empty($companies)) {
+			foreach ($companies as $company) :
+				$companyId = $company['companyId'];
+
+				$employees = Employee::find()
+				->where(["companyId" => $companyId])
+				->asArray()
+				->all();
+
+				// throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
+
+				// กรองเฉพาะที่มี picture
+				$filteredEmployees = array_filter($employees, function($employee) {
+					return !empty($employee['picture']);
+				});
+
+				// รีเซ็ต index และเลือกแค่ 3 คนแรก
+				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+
+				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
+
+
+				$branchIds = Branch::find()->select('branchId')
+					->where(["companyId" => $companyId, "status" => 1])
+					->asArray()->column();  // คืนค่าเป็น array แทน all()
+
+				$totalBranch = count($branchIds);
+				$totalEmployee = Employee::find()->where(["companyId" => $companyId, "status" => 1])->count();
+
+				$departments = [];
+				$teams = [];
+				if (!empty($branchIds)) {
+					$departments = Department::find()->select('departmentId')
+						->where(["status" => 1])
+						->andWhere(['IN', 'branchId', $branchIds])
+						->asArray()->column();
+
+					if (!empty($departments)) {
+						$teams = Team::find()->select('teamId')
+							->where(["status" => 1])
+							->andWhere(['IN', 'departmentId', $departments])
+							->asArray()->column();
+					}
+				}
+
+				$data[] = [
+					"about" => $company['about'],
+					"picture" => $company["picture"],
+					"companyName" => $company['companyName'],
+					"flag" => $company['flag'],
+					"city" => $company['city'],
+					"countryName" => $company['countryName'],
+					"companyId" => $company['companyId'],
+					"totalDepartment" => count($departments),
+					"totalTeam" => count($teams),
+					"totalBranch" => $totalBranch,
+					"totalEmployee" => $totalEmployee,
+					"employees" => $filteredEmployees
+				];
+			endforeach;
+		}
+		
+		curl_close($api);
+		return $this->render('index', [
+			"companies" => $data,
+			"groupId" => $groupId,
+			"countries" => $countries,
+			"numPage" => $numPage,
+			"countryId" => $countryId,
+			"role" => $role
+		]);
+	}
+	
+	public function actionCompanyGrid()
+	{
+		
+		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+		if (!isset($group) && !empty($group)) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+		}
+		$role = UserRole::userRight();
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+		}
+		$groupId = $group["groupId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1' . '&limit=6');
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+		
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=1' . '&countryId=' . '&limit=6');
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+		// throw new exception(print_r($numPage, true));
+
+		if ($companies === false) {
+			throw new Exception('API Error: ' . curl_error($api));
+		}
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
+		$result1 = curl_exec($api);
+		$countries = json_decode($result1, true);
+		
+		curl_close($api);
+		// throw new Exception(print_r($companies, true)); // Debug: ดูข้อมูลทั้งหมด
+
+		$data = [];
+		if (!empty($companies)) {
+			foreach ($companies as $company) :
+				$companyId = $company['companyId'];
+				$employees = Employee::find()
+				->where(["companyId" => $companyId])
+				->asArray()
+				->all();
+				// กรองเฉพาะที่มี picture
+				$filteredEmployees = array_filter($employees, function($employee) {
+					return !empty($employee['picture']);
+				});
+				// รีเซ็ต index และเลือกแค่ 3 คนแรก
+				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+				$totalEmployee = Employee::find()->where(["companyId" => $companyId, "status" => 1])->count();
+
+				//นับจำนวน
+				$branchIds = Branch::find()->select('branchId')
+					->where(["companyId" => $companyId, "status" => 1])
+					->asArray()->column();  // คืนค่าเป็น array แทน all()
+				$totalBranch = count($branchIds);
+				$departments = [];
+				$teams = [];
+				if (!empty($branchIds)) {
+					$departments = Department::find()->select('departmentId')
+						->where(["status" => 1])
+						->andWhere(['IN', 'branchId', $branchIds])
+						->asArray()->column();
+
+					if (!empty($departments)) {
+						$teams = Team::find()->select('teamId')
+							->where(["status" => 1])
+							->andWhere(['IN', 'departmentId', $departments])
+							->asArray()->column();
+					}
+				}
+
+				//เก็บค่า
+				$data[] = [
+					"about" => $company['about'],
+					"picture" => $company["picture"],
+					"companyName" => $company['companyName'],
+					"flag" => $company['flag'],
+					"city" => $company['city'],
+					"countryName" => $company['countryName'],
+					"companyId" => $company['companyId'],
+					"totalBranch" => $totalBranch,
+					"totalDepartment" => count($departments),
+					"totalTeam" => count($teams),
+					"totalEmployee" => $totalEmployee,
+					"employees" => $filteredEmployees
 				];
 			endforeach;
 		}
 
+		return $this->render('company_grid', [
+			"companies" => $data,
+			"role" => $role,
+			"groupId" => $groupId,
+			"countries" => $countries,
+			"numPage" => $numPage,
+			"countryId" => 0
+		]);
+	}
+
+
+	public function actionCompanyGridFilter($hash)
+	{
+			// throw new Exception(print_r($countryId, true));
+			// $countryId = Yii::$app->request->post('countryId');
+			$param = ModelMaster::decodeParams($hash);
+			$countryId = $param["countryId"];
+			$nextPage = $param["nextPage"];
+
+		// if (Yii::$app->request->isPost && Yii::$app->request->post('countryId') !== null) {
+		// 	$countryId = Yii::$app->request->post('countryId');
+		// 	// throw new Exception(print_r($countryId, true));
+		// }
+		
+		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+		if (!isset($group) && !empty($group)) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+		}
+		$role = UserRole::userRight();
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+		}
+		$groupId = $group["groupId"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId . '&page=' . $nextPage . '&limit=6');
+		$companies = curl_exec($api);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=' . $nextPage . '&countryId=' . $countryId. '&limit=6');
+		$numPage = curl_exec($api);
+		$numPage = json_decode($numPage, true);
+		// throw new exception(print_r($numPage, true));
+
+		if ($companies === false) {
+			throw new Exception('API Error: ' . curl_error($api));
+		}
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
+		$result1 = curl_exec($api);
+		$countries = json_decode($result1, true);
+
+		$companies = json_decode($companies, true);
+		curl_close($api);
+				// throw new Exception(print_r($companies, true)); // Debug: ดูข้อมูลทั้งหมด
+
+		$data = [];
+		if (!empty($companies)) {
+			foreach ($companies as $company) :
+				$companyId = $company['companyId'];
+
+				$employees = Employee::find()
+				->where(["companyId" => $companyId])
+				->asArray()
+				->all();
+
+				// throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
+
+				// กรองเฉพาะที่มี picture
+				$filteredEmployees = array_filter($employees, function($employee) {
+					return !empty($employee['picture']);
+				});
+
+				// รีเซ็ต index และเลือกแค่ 3 คนแรก
+				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+
+				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
+
+
+				$branchIds = Branch::find()->select('branchId')
+					->where(["companyId" => $companyId, "status" => 1])
+					->asArray()->column();  // คืนค่าเป็น array แทน all()
+
+				$totalBranch = count($branchIds);
+				$totalEmployee = Employee::find()->where(["companyId" => $companyId, "status" => 1])->count();
+
+				$departments = [];
+				$teams = [];
+				if (!empty($branchIds)) {
+					$departments = Department::find()->select('departmentId')
+						->where(["status" => 1])
+						->andWhere(['IN', 'branchId', $branchIds])
+						->asArray()->column();
+
+					if (!empty($departments)) {
+						$teams = Team::find()->select('teamId')
+							->where(["status" => 1])
+							->andWhere(['IN', 'departmentId', $departments])
+							->asArray()->column();
+					}
+				}
+
+				$data[] = [
+					"about" => $company['about'],
+					"picture" => $company["picture"],
+					"companyName" => $company['companyName'],
+					"flag" => $company['flag'],
+					"city" => $company['city'],
+					"countryName" => $company['countryName'],
+					"companyId" => $company['companyId'],
+					"totalDepartment" => count($departments),
+					"totalTeam" => count($teams),
+					"totalBranch" => $totalBranch,
+					"totalEmployee" => $totalEmployee,
+					"employees" => $filteredEmployees
+				];
+			endforeach;
+		}
 
 		return $this->render('company_grid', [
 			"companies" => $data,
 			"role" => $role,
-			"groupId" => $groupId
+			"groupId" => $groupId,
+			"countries" => $countries,
+			"numPage" => $numPage,
+			"countryId" => $countryId
 		]);
 	}
+	
 	public function actionCreate($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
@@ -169,6 +631,8 @@ class CompanyController extends Controller
 		$headQuater = curl_exec($api);
 		$headQuater = json_decode($headQuater, true);
 
+		// throw new Exception(print_r($headQuater, true));
+
 		curl_close($api);
 
 		return $this->render('create', [
@@ -180,29 +644,30 @@ class CompanyController extends Controller
 	public function actionSaveCreateCompany()
 	{
 
-		// throw new Exception("POST DATA: " . print_r($_POST, true));
+				// throw new Exception("POST DATA: " . print_r($_POST, true));
 
 		if (isset($_POST["companyName"]) && trim($_POST["companyName"]) != '') {
 			$company = new Company();
 			$company->companyName = $_POST["companyName"];
 			//$company->tagLine = $_POST["tagLine"];
-			if (isset($_POST["headQuaterId"])) {
-				$company->headQuaterId = $_POST["headQuaterId"] - 534;
-			}
+			// if (isset($_POST["headQuaterId"])) {
+			// 	$company->headQuaterId = $_POST["headQuaterId"] - 534;
+			// }
 			$company->displayName = $_POST["displayName"];
-			$company->website = $_POST["website"];
-			$company->location = $_POST["location"];
-			$company->groupId = $_POST["groupId"] - 543;
-			$company->countryId = $_POST["country"];
-			$company->city = $_POST["city"];
-			$company->postalCode = $_POST["postalCode"];
-			$company->industries = $_POST["industries"];
-			$company->email = $_POST["email"];
-			$company->contact = $_POST["contact"];
 			$company->founded = $_POST["founded"];
-			$company->director = $_POST["director"];
-			$company->socialTag = $_POST["socialTag"];
+			$company->industries = $_POST["industries"];
+			$company->countryId = $_POST["country"];
+			$company->contact = $_POST["phone"]; //
+			$company->email = $_POST["email"];
+			$company->location = $_POST["location"];
 			$company->about = $_POST["about"];
+			$company->groupId = $_POST["groupId"] - 543;
+			$company->directorId = $_POST["directorId"];
+			// $company->socialTag = $_POST["socialTag"];
+			// $company->city = $_POST["city"];
+			// $company->postalCode = $_POST["postalCode"];
+			// $company->website = $_POST["website"];
+			// $company->contact = $_POST["contact"];
 			$company->status = 1;
 			$company->createDateTime = new Expression('NOW()');
 			$company->updateDateTime =  new Expression('NOW()');
@@ -242,6 +707,27 @@ class CompanyController extends Controller
 	}
 	public function actionCompanyView($hash)
 	{
+		$role = UserRole::userRight();
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+		}
+		
 		$param = ModelMaster::decodeParams($hash);
 		$companyId = $param["companyId"];
 		$apiCompany = curl_init();
@@ -250,13 +736,36 @@ class CompanyController extends Controller
 		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
 		$groupJson = curl_exec($apiCompany);
 		$company = json_decode($groupJson, true);
+		$directorId = $company["directorId"];
+
+		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $directorId );
+		$groupJson = curl_exec($apiCompany);
+		$director = json_decode($groupJson, true);
+
+		// curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/group/company-branch?id=' . $companyId . '&page=1' . '&limit=7');
+		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId );
+        $companyJson = curl_exec($apiCompany);
+        $companyBranch = json_decode($companyJson, true);
+
+		// throw new Exception("companyBranch DATA: " . print_r($companyBranch, true));
 
 		curl_close($apiCompany);
 
 		$totalDepartment = 0;
 		$totalTeam = 0;
 		$branch = Branch::find()->select('branchId')->where(["companyId" => $companyId, "status" => 1])->asArray()->all();
-		$employee = Employee::find()->select('employeeId')->where(["companyId" => $companyId])->all();
+
+		$employees = Employee::find()->where(["companyId" => $companyId])->all();
+		$filteredEmployees = array_filter($employees, function($employee) {
+            return !empty($employee['picture']);
+        });
+
+        // จัดเรียงผลลัพธ์ให้อยู่ในอาเรย์ที่มีแค่ 3 ตัวแรก
+        $filteredEmployees = array_values($filteredEmployees); // ใช้ array_values เพื่อรีเซ็ต index ของอาเรย์
+
+        // เลือกแค่ 3 ตัวแรก
+        $filteredEmployees = array_slice($filteredEmployees, 0, 3);
+		
 		if (isset($branch) && count($branch) > 0) {
 			foreach ($branch as $b) :
 				$departments = Department::find()->select('departmentId')->where(["branchId" => $b["branchId"], "status" => 1])->asArray()->all();
@@ -270,13 +779,17 @@ class CompanyController extends Controller
 			endforeach;
 		}
 		$totalBranch = count($branch);
-		$totalEmployee = count($employee);
+		$totalEmployee = count($employees);
 		return $this->render('company_view', [
 			"company" => $company,
 			"totalBranch" => $totalBranch,
-			"totalEmployee" => $totalEmployee,
 			"totalDepartment" => $totalDepartment,
-			"totalTeam" => $totalTeam
+			"totalTeam" => $totalTeam,
+			"totalEmployee" => $totalEmployee,
+			"director" => $director,
+			"role" => $role,
+			"employees" => $filteredEmployees,
+			"companyBranch" => $companyBranch
 		]);
 	}
 	public function actionUpdateCompany($hash)
@@ -307,7 +820,7 @@ class CompanyController extends Controller
 		$companyCountry = json_decode($resultCountryDetail, true);
 
 		curl_close($api);
-
+		 
 		// throw new Exception("Company: " . print_r($company, true));
 
 		return $this->render('update_company', [
@@ -320,35 +833,44 @@ class CompanyController extends Controller
 	public function actionSaveUpdateCompany()
 	{
 		// throw new Exception("POST DATA: " . print_r($_POST["director"], true));
-
 		if (isset($_POST["companyId"])) {
 			$companyId = $_POST["companyId"] - 543;
 			$company = Company::find()->where(["companyId" => $companyId])->one();
 			$oldBanner = $company->banner;
 			$oldImage = $company->picture;
 			// throw new Exception("POST DATA: " . print_r($oldImage, true));
+			// $company->companyName = $_POST["companyName"];
+			// // $company->tagLine = $_POST["tagLine"];
+			// $company->displayName = $_POST["displayName"];
+			// $company->website = $_POST["website"];
+			// $company->location = $_POST["location"];
+			// $company->countryId = $_POST["country"];
+			// $company->city = $_POST["city"];
+			// $company->postalCode = $_POST["postalCode"];
+			// $company->industries = $_POST["industries"];
+			// $company->email = $_POST["email"];
+			// $company->contact = $_POST["contact"];
+			// $company->founded = $_POST["founded"];
+			// $company->director = $_POST["director"];
+			// $company->socialTag = $_POST["socialTag"];
+			// $company->about = $_POST["about"];
 			$company->companyName = $_POST["companyName"];
-			// $company->tagLine = $_POST["tagLine"];
 			$company->displayName = $_POST["displayName"];
-			$company->website = $_POST["website"];
-			$company->location = $_POST["location"];
-			$company->countryId = $_POST["country"];
-			$company->city = $_POST["city"];
-			$company->postalCode = $_POST["postalCode"];
-			$company->industries = $_POST["industries"];
-			$company->email = $_POST["email"];
-			$company->contact = $_POST["contact"];
 			$company->founded = $_POST["founded"];
-			$company->director = $_POST["director"];
-			$company->socialTag = $_POST["socialTag"];
+			$company->industries = $_POST["industries"];
+			$company->countryId = $_POST["country"];
+			$company->contact = $_POST["phone"]; //
+			$company->email = $_POST["email"];
+			$company->location = $_POST["location"];
 			$company->about = $_POST["about"];
+			$company->directorId = $_POST["directorId"];
+
 			$company->status = 1;
 			$company->createDateTime = new Expression('NOW()');
 			$company->updateDateTime =  new Expression('NOW()');
 			$fileBanner = UploadedFile::getInstanceByName("imageUploadBanner");
 			if (isset($fileBanner) && !empty($fileBanner)) {
 				$path = Path::getHost() . 'images/company/banner/';
-
 				if (!file_exists($path)) {
 					mkdir($path, 0777, true);
 				}
@@ -367,19 +889,15 @@ class CompanyController extends Controller
 			$fileImage = UploadedFile::getInstanceByName("image");
 			if (isset($fileImage) && !empty($fileImage)) {
 				$path = Path::getHost() . 'images/company/profile/';
-
 				if (!file_exists($path)) {
 					mkdir($path, 0777, true);
 				}
-
-				// เช็คไฟล์เก่าก่อนลบ
 				if (!empty($oldImage)) {
 					$oldPathBanner = Path::getHost() . $oldImage;
 					if (file_exists($oldPathBanner) && is_file($oldPathBanner)) {
 						unlink($oldPathBanner);
 					}
 				}
-
 				$file = $fileImage->name;
 				$filenameArray = explode('.', $file);
 				$fileExt = end($filenameArray);
@@ -389,7 +907,19 @@ class CompanyController extends Controller
 				$fileImage->saveAs($pathSave);
 				$company->picture = 'images/company/profile/' . $fileName;
 			}
-
+			// if (isset($fileImage) && !empty($fileImage)) {
+			// 	$path = Path::getHost() . 'images/company/profile/';
+			// 	if (!file_exists($path)) {
+			// 		mkdir($path, 0777, true);
+			// 	}
+			// 	$file = $fileImage->name;
+			// 	$filenameArray = explode('.', $file);
+			// 	$countArrayFile = count($filenameArray);
+			// 	$fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+			// 	$pathSave = $path . $fileName;
+			// 	$fileImage->saveAs($pathSave);
+			// 	$company->picture = 'images/company/profile/' . $fileName;
+			// }
 			if ($company->save(false)) {
 				return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-view/' . ModelMaster::encodeParams(["companyId" => $companyId]));
 			}
@@ -516,4 +1046,28 @@ class CompanyController extends Controller
 		}
 		return json_encode($res);
 	}
+
+	public function actionCompanyBranchList()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+    
+        // รับ JSON body โดยตรง
+        $data = json_decode(file_get_contents("php://input"), true);
+        $companyId = isset($data['companyId']) ? $data['companyId'] : null;
+    
+        if (!$companyId) {
+            return ['error' => 'Missing companyId'];
+        }
+    
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false); // ปิดเฉพาะใน dev/localhost
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
+    
+        $response = curl_exec($api);
+        curl_close($api);
+    
+        $branches = json_decode($response, true);
+        return $branches;
+    }
 }

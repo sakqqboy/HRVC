@@ -3,7 +3,6 @@
 namespace frontend\modules\setting\controllers;
 
 use common\helpers\Path;
-use common\helpers\Session;
 use common\models\ModelMaster;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Department;
@@ -28,7 +27,6 @@ class LayerController extends Controller
 		if (!Yii::$app->user->id) {
 			return $this->redirect(Yii::$app->homeUrl . 'site/login');
 		}
-		Session::deleteSession();
 		return true; //go to origin request
 	}
 	public function actionIndex()

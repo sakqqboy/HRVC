@@ -133,4 +133,47 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
         }
         return $data;
     }
+    public static function totalEmployee($companyId)
+    {
+        $count = Employee::find()
+            ->where("status!=99")
+            ->andFilterWhere(["companyId" => $companyId])
+            ->count();
+        return $count;
+    }
+    public static function totalDraft($companyId)
+    {
+        $count = Employee::find()
+            ->where(["status" => 100])
+            ->andFilterWhere(["companyId" => $companyId])
+            ->count();
+        return $count;
+    }
+    public static function totalEmployeeWithFilter($companyId, $branchId, $departmentId, $teamId, $employeeConditionId)
+    {
+        $employee = Employee::find()
+            ->where(["status" => [1, 2, 3, 4, 5, 6, 7]])
+            ->andFilterWhere([
+                "companyId" => $companyId,
+                "branchId" => $branchId,
+                "departmentId" => $departmentId,
+                "teamId" => $teamId,
+                "employeeConditionId" => $employeeConditionId,
+            ])
+            ->count();
+        return $employee;
+    }
+    public static function totalDraftWithFilter($companyId, $branchId, $departmentId, $teamId)
+    {
+        $employee = Employee::find()
+            ->where(["status" => 100])
+            ->andFilterWhere([
+                "companyId" => $companyId,
+                "branchId" => $branchId,
+                "departmentId" => $departmentId,
+                "teamId" => $teamId,
+            ])
+            ->count();
+        return $employee;
+    }
 }

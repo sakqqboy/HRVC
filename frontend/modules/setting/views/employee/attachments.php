@@ -1,77 +1,257 @@
-<div class="row">
-	<div class="col-lg-6 col-md-6 col-12">
-		<div class="col-12 pl-30 font-size-17 pt-60">
-			<i class="fa fa-briefcase" aria-hidden="true"></i> Attachments
-		</div>
-		<hr>
-		<div class="row pl-20">
-			<div class="col-lg-2 col-md-6 col-12 pt-20 pl-20">
-				<img src="<?= Yii::$app->homeUrl ?>image/Doc-1.png" class="image-file-plus1">
-			</div>
-			<div class="col-lg-6 col-md-6 col-12 pt-20">
-				<strong class="text-dark"> Employee Resume.pdf</strong>
-				<div class="text-secondary font-size-14" style="width: 80px;">Size 5.21 MB </div>
-				<div class="text-secondary font-size-14">last Updated <?= $updateDateTime ?></div>
-			</div>
-			<div class="col-lg-4 col-md-6 col-12 pt-30">
-				<a href="javascript:showFile(1)" class="btn btn-outline-secondary font-size-12">
-					<i class="fa fa-eye" aria-hidden="true"></i>
-				</a>
-				<a href="<?= Yii::$app->homeUrl . $resume ?>" target="_blank" class="btn btn-outline-secondary font-size-12">
-					<i class="fa fa-cloud-download" aria-hidden="true"></i>
-				</a>
-			</div>
-		</div>
-		<hr>
-		<div class="row pl-20">
-			<div class="col-lg-2 col-md-6 col-12 pt-20 pl-20">
-				<img src="<?= Yii::$app->homeUrl ?>image/Doc-2.png" class="image-file-plus1">
-			</div>
-			<div class="col-lg-6 col-md-6 col-12 pt-20">
+<?php
+use common\models\ModelMaster;
 
-				<strong class="text-dark"> Employee Agreement.pdf</strong>
-				<div class="text-secondary font-size-14" style="width: 80px;">Size 5.21 MB </div>
-				<div class="text-secondary font-size-14">last Updated <?= $updateDateTime ?></div>
-			</div>
-			<div class="col-lg-4 col-md-6 col-12 pt-30">
-				<a href="javascript:showFile(2)" class="btn btn-outline-secondary font-size-12">
-					<i class="fa fa-eye" aria-hidden="true"></i>
-				</a>
-				<a href="<?= Yii::$app->homeUrl . $agreement ?>" target="_blank" class="btn btn-outline-secondary font-size-12">
-					<i class="fa fa-cloud-download" aria-hidden="true"></i>
-				</a>
-			</div>
-		</div>
-	</div>
-	<div class="col-lg-6 col-md-6 col-12 form-pdf">
-		<div class="col-12">
-			<div class="myIframe">
-				<?php
-				if ($resume != '' && $resume != null) {
-					$type = explode('.', $resume);
-					if ($type[1] != 'pdf') { ?>
-						<iframe src="https://view.officeapps.live.com/op/embed.aspx?src=https://tcg-hrvc-system.com/<?= $resume ?>" id="file1" style="display: none;"></iframe>
-					<?php
-					} else { ?>
-						<iframe src="<?= Yii::$app->homeUrl . $resume ?>" title="description" id="file1" style="display: none;"></iframe>
-					<?php
-					}
-				}
-				if ($agreement != '' && $agreement != null) {
-					$type = explode('.', $agreement);
-					if ($type[1] != 'pdf') { ?>
-						<iframe src="https://view.officeapps.live.com/op/embed.aspx?src=https://tcg-hrvc-system.com/<?= $agreement ?>" id="file2" style="display: none;"></iframe>
-					<?php
-					} else {
-					?>
-						<iframe src="<?= Yii::$app->homeUrl . $agreement ?>" title="description" id="file2" style="display: none;"></iframe>
-				<?php
-					}
-				}
-				?>
+// echo '<pre>';
+// print_r($employee);
+// echo '</pre>';
+// exit;
+
+$updateDateTime = '-';
+
+if (!empty($employee['updateDateTime'])) {
+    try {
+        $dt = new DateTime($employee['updateDateTime']);
+        // ฟอร์แมต dd/mm/YYYY HH:mm
+        $updateDateTime = $dt->format('d/m/Y');
+    } catch (Exception $e) {
+        // ถ้าแปลงไม่ได้ ก็เก็บเป็น "-"
+        $updateDateTime = '-';
+    }
+}
+// $resume = $employee['resume'] ??  '';
+// $agreement = $employee['employeeAgreement'] ??  '';
+
+$resumePath = isset($employee['resume']) ? $employee['resume'] : 'Not Uploaded';
+$resumeFileName = basename($resumePath); // ดึงชื่อไฟล์จาก path เช่น bcRGoVHyu2.xlsx
+$resumeExtension = pathinfo($resumeFileName, PATHINFO_EXTENSION); // xlsx
 
 
-			</div>
-		</div>
-	</div>
+$agreementPath = isset($employee['employeeAgreement']) ? $employee['employeeAgreement'] : 'Not Uploaded';
+$agreementFileName = basename($agreementPath);              // bcRGoVHyu2.xlsx
+$agreementExtension = pathinfo($agreementFileName, PATHINFO_EXTENSION); // xlsx
+
+?>
+<style>
+.file-box-active {
+    background-color: #F8FBFF !important;
+    border: 1px solid #2580D3 !important;
+}
+</style>
+
+<div class="d-flex row" style="gap: 32px;">
+    <div class="w-100">
+        <span class="font-size-16 font-weight-600">
+            <?= Yii::t('app', 'Attachments') ?>
+        </span>
+        <hr class="hr-group">
+    </div>
+    <?php
+                                                switch ($resumeExtension) {
+                                                    case 'doc':
+                                                        $iconFile = 'doc-file.svg';
+                                                        break;
+                                                    case 'mp4':
+                                                        $iconFile = 'mp4-file.svg';
+                                                        break;
+                                                    case 'picture':
+                                                        $iconFile = 'picture-file.svg';
+                                                        break;
+                                                    case 'file':
+                                                        $iconFile = 'file-file.svg';
+                                                        break;
+                                                    case 'xml':
+                                                        $iconFile = 'xml-file.svg';
+                                                        break;
+                                                    case 'ai':
+                                                        $iconFile = 'ai-file.svg';
+                                                        break;
+                                                    case 'pds':
+                                                        $iconFile = 'pds-file.svg';
+                                                        break;
+                                                    case 'pptx':
+                                                        $iconFile = 'pptx-file.svg';
+                                                        break;
+                                                    case 'eps':
+                                                        $iconFile = 'eps-file.svg';
+                                                        break;
+                                                    case 'zip':
+                                                        $iconFile = 'zip-file.svg';
+                                                        break;
+                                                    case 'txt':
+                                                        $iconFile = 'txt-file.svg';
+                                                        break;
+                                                    case 'pdf':
+                                                        $iconFile = 'pdf-file.svg';
+                                                        break;
+                                                    case 'xlsx':
+                                                        $iconFile = 'ex-file.svg';
+                                                        break;
+                                                    default:
+                                                        $iconFile = 'file-big.svg'; // ไอคอน default
+                                                }
+                                                ?>
+    <div class="between-center">
+        <div class="d-flex flex-column gap-2" style="width: 45%;">
+            <span class="font-size-16 font-weight-600"><?= Yii::t('app', 'Resume / CV') ?></span>
+            <div class="form-control p-3 no-underline" id="resume-btn"
+                data-url="<?= Yii::$app->homeUrl . ltrim($resumePath, '/') ?>"
+                onclick="handleFileBoxClick('resume-btn');"
+                style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE); cursor: pointer;">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <img src="<?= Yii::$app->homeUrl ?>image/<?= $iconFile ?>" alt="icon"
+                            style="width: 40px; height: 40px;">
+                    </div>
+                    <div class="col">
+                        <label class="text-black font-size-16 font-weight-600"><?= $resumeFileName ?></label>
+                        <div class="text-secondary font-size-14">
+                            <span class="font-size-12"><?= isset($employee['resume']) ? '1.9 mb' : '0.0 mb'  ?></span>
+                        </div>
+                        <div class="text-secondary font-size-14">
+                            <span class="font-size-12"><?= isset($employee['resume']) ? 'Uploaded on' : ''  ?>
+                                <?= isset($employee['resume']) ? $updateDateTime : '--'  ?></span>
+                        </div>
+                    </div>
+                    <div class="col-auto d-flex justify-content-center align-items-center gap-3">
+
+                        <?php if($employee['resume']){
+                            ?>
+                        <a href="<?= Yii::$app->homeUrl ?><?= $resumePath ?>" download
+                            onclick="event.stopPropagation();"
+                            class="d-flex align-items-center action-employee-btn justify-content-center"
+                            id="normal-action">
+                            <img src="<?= Yii::$app->homeUrl ?>image/download-blue.svg" class="me-2"
+                                style="width: 18px;height:18px;">
+                            <?= Yii::t('app', 'Download') ?>
+                        </a>
+                        <?php }else{ ?>
+                        <a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>"
+                            onclick="event.stopPropagation();" class="btn-create no-underline "
+                            style="padding: 3px 9px; display: inline-block;">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/edit.svg"
+                                style="width:18px; height:18px; margin-top:-3px;">
+                            Upload in Edit </a>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+                                                switch ($agreementExtension) {
+                                                    case 'doc':
+                                                        $iconFile = 'doc-file.svg';
+                                                        break;
+                                                    case 'mp4':
+                                                        $iconFile = 'mp4-file.svg';
+                                                        break;
+                                                    case 'picture':
+                                                        $iconFile = 'picture-file.svg';
+                                                        break;
+                                                    case 'file':
+                                                        $iconFile = 'file-file.svg';
+                                                        break;
+                                                    case 'xml':
+                                                        $iconFile = 'xml-file.svg';
+                                                        break;
+                                                    case 'ai':
+                                                        $iconFile = 'ai-file.svg';
+                                                        break;
+                                                    case 'pds':
+                                                        $iconFile = 'pds-file.svg';
+                                                        break;
+                                                    case 'pptx':
+                                                        $iconFile = 'pptx-file.svg';
+                                                        break;
+                                                    case 'eps':
+                                                        $iconFile = 'eps-file.svg';
+                                                        break;
+                                                    case 'zip':
+                                                        $iconFile = 'zip-file.svg';
+                                                        break;
+                                                    case 'txt':
+                                                        $iconFile = 'txt-file.svg';
+                                                        break;
+                                                    case 'pdf':
+                                                        $iconFile = 'pdf-file.svg';
+                                                        break;
+                                                    case 'xlsx':
+                                                        $iconFile = 'ex-file.svg';
+                                                        break;
+                                                    default:
+                                                        $iconFile = 'file-big.svg'; // ไอคอน default
+                                                }
+                                                ?>
+        <div class="d-flex flex-column gap-2" style="width: 45%;">
+            <span class="font-size-16 font-weight-600"><?= Yii::t('app', 'Agreement') ?></span>
+            <div class="form-control p-3 no-underline" id="agreement-btn"
+                data-url="<?= Yii::$app->homeUrl . ltrim($agreementPath, '/') ?>"
+                onclick="handleFileBoxClick('agreement-btn'); return false;"
+                style="border: 1px solid var(--Stroke-Bluish-Gray, #BBCDDE); cursor: pointer;">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <img src="<?= Yii::$app->homeUrl ?>image/<?= $iconFile ?>" alt="icon"
+                            style="width: 40px; height: 40px;">
+                    </div>
+                    <div class="col">
+                        <label class="text-black font-size-16 font-weight-600"><?= $agreementFileName ?></label>
+                        <div class="text-secondary font-size-14">
+                            <span
+                                class="font-size-12"><?= isset($employee['employeeAgreement']) ? '1.9 mb' :  '0.0 mb'  ?></span>
+                        </div>
+                        <div class="text-secondary font-size-14">
+                            <!-- <span class="font-size-12">Uploaded on <?= $updateDateTime ?></span> -->
+                            <span
+                                class="font-size-12"><?= isset($employee['employeeAgreement']) ? 'Uploaded on' : ''  ?>
+                                <?= isset($employee['employeeAgreement']) ? $updateDateTime : '--'  ?></span>
+                        </div>
+                    </div>
+                    <div class="col-auto d-flex justify-content-center align-items-center gap-3">
+                        <?php if($employee['employeeAgreement']){
+                            ?>
+                        <a href="<?= Yii::$app->homeUrl ?><?= $agreementPath ?>" download
+                            onclick="event.stopPropagation();"
+                            class="d-flex align-items-center action-employee-btn justify-content-center"
+                            id="normal-action">
+                            <img src="<?= Yii::$app->homeUrl ?>image/download-blue.svg" class="me-2"
+                                style="width: 18px;height:18px;">
+                            <?= Yii::t('app', 'Download') ?>
+                        </a>
+                        <?php }else{ ?>
+                        <a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>"
+                            onclick="event.stopPropagation();" class="btn-create no-underline "
+                            style="padding: 3px 9px; display: inline-block;">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/edit.svg"
+                                style="width:18px; height:18px; margin-top:-3px;">
+                            Upload in Edit </a>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="center-center">
+        <div class="col-12">
+            <div class="w-100">
+                <span class="font-size-16 font-weight-600">
+                    <?= Yii::t('app', 'Document Preview') ?>
+                </span>
+            </div>
+            <div class="company-group-edit mt-20" id="doc-box"
+                style="height: 141px; padding:10px; border: 1.22px dashed var(--Stroke-Bluish-Gray, #BBCDDE); background: var(--HRVC---Light-Text, #F9F9F9);">
+                <div class="mid-center mt-30">
+                    <span class=" font-size-16 font-weight-600">
+                        <?= Yii::t('app', 'The selected Document cant be previewed') ?>
+                    </span>
+                    <span class=" font-size-12 font-weight-400">
+                        <?= Yii::t('app', 'Preview is currently supported for PDF, DOCX, and image files only. Excel files (e.g., XLS, XLSX) are not supported at this time.') ?>
+                    </span>
+                </div>
+            </div>
+
+            <div class="myIframe mt-24" style="border: none;">
+
+            </div>
+        </div>
+    </div>
 </div>

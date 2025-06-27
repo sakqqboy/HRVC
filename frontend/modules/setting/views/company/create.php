@@ -13,212 +13,279 @@ $this->title = 'New Company';
 	'action' => Yii::$app->homeUrl . 'setting/company/save-create-company'
 
 ]); ?>
-<div class="contrainer-body" style="background-color:white;">
-    <div class="col-12" id="imagePreviewBanner" style="height: 180px;background-color:gray;">
-    </div>
-    <div class="col-12 edit-update text-end" style="padding-right: 30px;">
-        <div class="form-group">
 
-            <span class="fileUpload btn btn-light">
-                <div id="upload" class="uplode-btn"><i class="fa fa-upload" aria-hidden="true"></i> Update</div>
-                <input type="file" name="imageUploadBanner" id="imageUploadBanner" class="upload up upload-checklist"
-                    id="up" />
-            </span><!-- btn-orange -->
-            <!-- group -->
-        </div><!-- form-group -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-    </div>
-    <div class="row">
-        <div class="col-lg-4 col-md-6 col-12 all-avatar">
-            <div class="col-10 avatar-upload" style="padding-top: 100px;">
-                <div class="avatar-preview" id="imagePreview" style="background-color: white;">
-                    <label for="imageUpload" class="upload-label" style="cursor: pointer;">
-                        <img src="<?= Yii::$app->homeUrl ?>image/upload-img.svg" alt="Upload Icon">
-                        <span>Upload</span>
-                    </label>
-                    <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
-                        style="display: none;" />
+<!-- Bootstrap JS (รวม Popper แล้วใน Bootstrap 5) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="company-group-body">
+    <!-- <div class="company-group-edit"> -->
+    <div class="contrainer-body">
+        <div class="col-12 banner-uploade" id="imagePreviewBanner">
+
+        </div>
+
+        <div class="row mb-100">
+            <div class="col-12" style="margin-top:-50px; display: flex;">
+                <!-- <div class="col-10 avatar-upload" style="margin-left:36px;">
+                    <div class="avatar-preview" id="imagePreview" style="background-color: white;">
+                        <label for="imageUpload" class="upload-label">
+                            <img src="<?= Yii::$app->homeUrl ?>image/upload-img.svg" alt="Upload Icon">
+                            <span>Upload</span>
+                        </label>
+                    </div>
+                </div> -->
+                <div class="col-10 mb-15 avatar-upload" style="margin-left:36px;">
+                    <div class="avatar-preview" id="imagePreview" style="
+                            background-color: white;
+                            fill: #FFF;
+                            stroke-width: 1px;
+                            stroke: var(--Primary-Blue---HRVC, #2580D3);
+                            border-radius: 100%;
+                            padding: 20px;
+                            text-align: center;
+                            cursor: pointer;
+                        ">
+                        <label for="imageUpload" class="upload-label" style="cursor: pointer;  display: block;">
+                            <img src="<?= Yii::$app->homeUrl . 'image/upload-iconimg.svg' ?>"
+                                style="width: 50px; height: auto;" alt="Upload Icon"> <br><br>
+                            <span style=""><?= Yii::t('app', 'Upload') ?><span style="font-size: 13px; color: #666;">
+                                    <?= Yii::t('app', 'or Drop') ?></span></span><br>
+                            <span
+                                style="font-size: 13px; color: #666;"><?= Yii::t('app', 'Branch Picture here') ?></span>
+
+                        </label>
+                        <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
+                            style="display: none;" />
+                    </div>
+                </div>
+
+                <div class="col-2" style="display: flex; justify-content: center;  align-items: center; ">
+                    <!-- ลบระยะห่างระหว่างรูปและรายละเอียด -->
+                    <span class="fileUpload btn" style="padding: 0;">
+                        <div id="upload" class="uplode-btn-group">
+                            <img src="<?= Yii::$app->homeUrl ?>image/upload-white.svg" alt="Upload Icon">
+                            <?= Yii::t('app', 'Update') ?>
+                        </div>
+                        <input type="file" name="imageUploadBanner" id="imageUploadBanner"
+                            class="upload up upload-checklist" id="up" />
+                    </span>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-12">
-            <div class="form-companyname">
-                <div class="row">
-                    <?php
-					if (isset($headQuater) && !empty($headQuater)) { ?>
-                    <div class="col-5 Groupname1">
-                        Company Name <span class="profile-moon">*</span>
-                    </div>
-                    <?php
-					} else { ?>
-                    <div class="col-5 Groupname1">
-                        Head Quater Name <span class="profile-moon">*</span>
-                    </div>
-                    <?php
+        <div class="col-12 mt-50">
+            <div class="row update-group-body">
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Left Column -->
+                            <div class="col-md-6">
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span><label class="name-text-update" for="groupName">
+                                        <?= Yii::t('app', 'Registered Company Name') ?>
+                                    </label>
+                                    <input type="text" class="form-control mt-12" id="colFormLabel" name="companyName"
+                                        placeholder="<?= Yii::t('app', 'Write the name of Group') ?>" required>
+                                </div>
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update" for="groupName">
+                                        <?= Yii::t('app', 'Display Name/Brand Name') ?>
+                                    </label>
+                                    <input type="text" class="form-control mt-12" name="displayName"
+                                        placeholder="<?= Yii::t('app', 'The name you want to show (example,. Google)') ?>"
+                                        required>
+                                </div>
+                                <!-- <div class="form-group mb-30">
+                                    <span class="text-danger">* </span><label class="name-text-update"
+                                        for="tagLine">Slogan/Tagline</label>
+                                    <input type="text" class="form-control mt-12" name="tagLine"
+                                        placeholder="Write the Tagline of the group" required>
+                                </div> -->
+                                <div class="form-group mb-30">
+                                    <!-- <span class="text-danger">* </span> <label class="name-text-update"
+                                        for="founded">Founded</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text mt-12"
+                                            style="background-color: #BEDAFF; border-right: none;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/calendar-blue.svg" alt="Founded"
+                                                style="width: 20px; height: 20px;">
+                                        </span>
+                                        <input type="text" style="border-left: none;" class="form-control mt-12"
+                                            name="founded" placeholder="" required>
+                                    </div> -->
+                                    <span class="text-danger">* </span>
+                                    <label class="name-text-update"
+                                        for="founded"><?= Yii::t('app', 'Founded') ?></label>
 
-					}
-					?>
-                    <div class="col-7">
-                        <input type="text" class="form-control" id="colFormLabel" name="companyName" required>
-                    </div>
-                    <div class="mt-20"></div>
-                    <!-- <div class="col-5">
-						Tag line
-					</div>
-					<div class="col-7">
-						<input type="text" class="form-control" id="colFormLabel" name="tagLine">
-					</div> -->
-                    <div class="mt-20"></div>
-                    <?php
-					if (isset($headQuater) && !empty($headQuater)) { ?>
-                    <div class="col-5">
-                        Headquarter <span class="profile-moon">*</span>
-                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-text mt-12"
+                                            style="background-color: #BEDAFF; border-right: none;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/calendar-blue.svg" alt="Founded"
+                                                style="width: 20px; height: 20px;">
+                                        </span>
+                                        <input type="text" id="founded" name="founded"
+                                            class="form-control mt-12 text-center"
+                                            placeholder="<?= Yii::t('app', 'Select date') ?>" required
+                                            style="text-align: center;">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span><label class="name-text-update" for="industry">
+                                        <?= Yii::t('app', 'Industry') ?>
+                                    </label>
+                                    <input type="text" class="form-control mt-12" name="industries"
+                                        placeholder="<?= Yii::t('app', 'Write the industry name') ?>" required>
+                                </div>
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update"
+                                        for="director"><?= Yii::t('app', 'Country in Operation') ?>
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                            data-toggle="tooltip" data-placement="top"
+                                            aria-label="<?= Yii::t('app', 'select to country') ?>"
+                                            data-bs-original-title="<?= Yii::t('app', 'select to country') ?>">
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text mt-12"
+                                            style="background-color: white; border-right: none;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/web-gray.svg" alt="Website"
+                                                style="width: 20px; height: 20px;">
+                                        </span>
+                                        <select class="form-select mt-12" style="border-left: none;" name="country"
+                                            required>
+                                            <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A);
+                                                ">
+                                                <?= Yii::t('app', 'e.g., ASEAN, North America, Europe') ?>
+                                            </option>
+                                            <?php foreach ($countries as $countryId => $country) : ?>
+                                            <option value="<?= $countryId ?>"><?= $country ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
 
-                    <div class="col-7">
+                            </div>
 
-                        <input type="hidden" name="headQuaterId" value="<?= $headQuater["companyId"] + 543 ?>">
+                            <!-- Right Column -->
+                            <div class="col-md-6">
+                                <!-- <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update"
+                                        for="email">Group
+                                        Email </label>
+                                    <input type="email" class="form-control mt-12" name="email"
+                                        placeholder="Write the email" required>
+                                </div> -->
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update" for="phone">
+                                        <?= Yii::t('app', 'Contact/Phone Number') ?>
+                                    </label>
+                                    <input type="text" class="form-control mt-12" name="phone"
+                                        placeholder="<?= Yii::t('app', 'Write the phonenumber') ?>" required
+                                        pattern="[0-9+\-]+" title="กรุณากรอกเฉพาะตัวเลข, + และ -"
+                                        oninput="this.value = this.value.replace(/[^0-9+\-]/g, '');">
+                                </div>
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update" for="email">
+                                        <?= Yii::t('app', 'Company’s General Email') ?>
+                                    </label>
+                                    <input type="email" class="form-control mt-12" name="email"
+                                        placeholder="<?= Yii::t('app', 'e.g., jp_paris_cs@tokyoconsultinggroup.com') ?>"
+                                        required>
+                                </div>
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update">
+                                        <?= Yii::t('app', 'Company’s Address') ?>
+                                    </label>
+                                    <input type="text" class="form-control mt-12" name="location"
+                                        placeholder="<?= Yii::t('app', 'Please input the address here') ?>" required>
+                                </div>
 
-                        <?= $headQuater["companyName"] ?>
+                                <div class="form-group mb-30">
+                                    <span class="text-danger">* </span> <label class="name-text-update">
+                                        <?= Yii::t('app', 'Head of Company') ?>
+                                    </label>
+                                    <!-- <input type="email" class="form-control mt-12" name="email"
+                                        placeholder="Select from employees" required> -->
+                                    <div class="input-group">
+                                        <span class="input-group-text mt-12"
+                                            style="background-color: #ffff; border-right: none;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/employee-black.svg" alt="Founded"
+                                                style="width: 20px; height: 20px;">
+                                        </span>
+                                        <!-- <input type="text" class="form-select mt-12" placeholder="Select from employees"
+                                            style="border-left: none; background-color: #ffff; color: #000;"> -->
+                                        <select class="form-select mt-12" style="border-left: none;" name="directorId"
+                                            required>
+                                            <option value="" disabled selected hidden style="color: var(--Helper-Text, #8A8A8A);
+                                                ">
+                                                <?= Yii::t('app', 'Select from employees') ?>
+                                            </option>
+                                            <?php foreach ($headQuater as $user): ?>
+                                            <option value="<?= $user['employeeId'] ?>">
+                                                <?= $user['employeeFirstname'] . ' ' . $user['employeeSurename'] ?>
+                                            </option>
+                                            <?php endforeach; ?>
 
-                    </div>
-                    <?php
-					}
-					?>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 mt-50">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-12">
-                <hr>
-            </div>
-            <div class="col-lg-6 col-md-6 col-12 text-end Groupname2" style="padding-right: 40px;">
-                Company Profile
-            </div>
-        </div>
-    </div>
-    <div class="col-12" s>
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-12">
-                <div class="col-12 mt-40">
-                    <div class="row">
-                        <div class="col-3 pl-30">
-                            Display <span class="profile-moon">*</span>
-                        </div>
-                        <div class="col-9">
-                            <input type="text" class="form-control" name="displayName" required>
-                        </div>
-                        <div class="mt-20"></div>
-                        <div class="col-3  pl-30">
-                            Website </div>
-                        <div class="col-9">
-                            <input type="text" class="form-control" name="website">
-                        </div>
-                        <div class="mt-20"></div>
-                        <div class="col-3  pl-30">
-                            Address <span class="profile-moon">*</span>
-                        </div>
-                        <div class="col-9">
-                            <input type="text" class="form-control" name="location" required>
-                        </div>
-                        <div class="mt-20"></div>
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-3  pl-30">
-                                    Country
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-4">
-                                    <select class="form-control" name="country">
-                                        <option value="">Select country</option>
-                                        <?php
-										if (isset($countries) && count($countries) > 0) {
-											foreach ($countries as $countryId => $country) : ?>
-                                        <option value="<?= $countryId ?>"><?= $country ?></option>
-                                        <?php
-											endforeach;
-										}
-										?>
-                                    </select>
 
+                                <div class="form-group mb-30">
+                                    <span class="text-danger"> <img src="<?= Yii::$app->homeUrl ?>image/think-ideit.svg"
+                                            alt="Founded" style="width: 20px; height: 20px;"> </span> <label
+                                        class="name-text-update">
+                                        <?= Yii::t('app', 'Hints') ?>
+                                    </label>
+                                    <div class="input-group">
+                                        <text>
+                                            <?= Yii::t('app', 'To assign a company head, first add employees
+                                            under the company. Then, go
+                                            to the Company Details page, click Edit, and select a head from the
+                                            available employees in the dropdown. Save the changes to confirm.') ?>
+                                        </text>
+                                    </div>
                                 </div>
-                                <div class="col-1">
-                                    City
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="city">
-                                </div>
-                                <div class="mt-20"></div>
-                                <div class="col-3  pl-30">
-                                    Postal Code
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="postalCode">
-                                </div>
-                                <div class="mt-20"></div>
-                                <div class="col-3  pl-30">
-                                    Industries <span class="profile-moon">*</span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="industries" required>
-                                </div>
-                                <div class="col-2">
-                                    Email <span class="profile-moon">*</span>
-                                </div>
-                                <div class="col-3">
-                                    <input type="email" class="form-control" name="email">
-                                </div>
-                                <div class="mt-20"></div>
-                                <div class="col-3  pl-30">
-                                    Founded
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" name="founded" class="form-control">
-                                </div>
-                                <div class="col-2">
-                                    Contact <span class="profile-moon">*</span>
-                                </div>
-                                <div class="col-3">
-                                    <input type="text" class="form-control" name="contact">
-                                </div>
-                                <div class="mt-20"></div>
-                                <div class="col-3 pl-30">
-                                    Director <span class="profile-moon">*</span>
-                                </div>
-                                <div class="col-4">
-                                    <input type="text" class="form-control" name="director" required>
-                                </div>
-                                <div class="col-2">
-                                    Social Tag
-                                </div>
-                                <div class="col-3">
-                                    <input type="text" name="socialTag" class="form-control">
-                                </div>
+
                             </div>
                         </div>
                     </div>
+
                 </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-12 mt-40" style="padding-right: 40px;">
-                <div class="row">
-                    <div class="col-2 text-end" style="padding-top: 200px;font-size:14px;">
-                        ABOUT <span class="profile-moon">*</span>
-                    </div>
-                    <div class="col-10">
-                        <div class="alert alert-secondary" role="alert" style="font-size: 14px;">
-                            <textarea style="height:410px;" name="about" class="form-control"></textarea>
-
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="row">
+                        <div class="name-text-update">
+                            <span class="profile-moon">*</span>
+                            <?= Yii::t('app', 'Group Description') ?>
                         </div>
+                        <div>
+                            <div class="alert alert-secondary" role="alert"
+                                style="font-size: 14px; background-color: transparent; border: 0; ">
+                                <textarea style="height: 527px;" name="about"
+                                    placeholder="Write the description of the Company" class="form-control"></textarea>
 
-                    </div>
-                    <input type="hidden" name="groupId" value="<?= $groupId + 543 ?>">
-                    <div class="col-12 text-end mt-10">
-                        <button type="submit" class="btn btn-success">Create Company</button>
+                            </div>
+                            <div class="col-12 text-end mt-10 pr-13">
+                                <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group"
+                                    style="text-decoration: none;">
+                                    <button type="button" class="btn-cancel-group"
+                                        action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
+                                        <?= Yii::t('app', 'Cancel') ?>
+                                    </button>
+                                </a>
+
+                                <button type="submit" class="btn-save-group">
+                                    <?= Yii::t('app', 'Save') ?>
+                                    <img src="<?= Yii::$app->homeUrl ?>image/save-icon.svg" alt="LinkedIn"
+                                        style="width: 20px; height: 20px;"></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<input type="hidden" name="groupId" value="<?= $groupId + 543 ?>">
+
 <?php ActiveForm::end(); ?>

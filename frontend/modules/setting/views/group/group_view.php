@@ -34,10 +34,9 @@ $this->title = 'Group profile';
                     </div>
                 </div>
                 <div style="margin-top: 150px;">
-                    <!-- ลบระยะห่างระหว่างรูปและรายละเอียด -->
                     <div class="col-12 name-tokyo">
-                        <span class="name-sub-tokyo"><?= $group['displayName'] ?></span>
-                        <span class="name-full-tokyo">(<?= $group['groupName'] ?>)</span>
+                        <span class="name-sub-tokyo"><?= Yii::t('app', $group['displayName']) ?></span>
+                        <span class="name-full-tokyo">(<?= Yii::t('app', $group['groupName']) ?>)</span>
                     </div>
                     <div class="col-12 tokyo-small">
                         <img src="<?= Yii::$app->homeUrl . 'image/hyphen.svg' ?>"> <?= $group['tagLine'] ?>
@@ -50,7 +49,7 @@ $this->title = 'Group profile';
                 <a href="<?= Yii::$app->homeUrl ?>setting/group/update-group/<?= ModelMaster::encodeParams(['groupId' => $group['groupId']]) ?>"
                     class="btn-update-group" style="width: 60%;">
                     <img src="<?= Yii::$app->homeUrl . 'image/refresh-white.svg' ?>">
-                    Update Information
+                    <?= Yii::t('app', 'Update Information') ?>
                 </a>
             </div>
             <?php }?>
@@ -61,20 +60,20 @@ $this->title = 'Group profile';
                     <!-- Left Column -->
                     <div class="col-lg-6 col-md-6 col-12 all-information">
                         <div class="col-12 Group-Information">
-                            Group Details
+                            <?= Yii::t('app', 'Group Details') ?>
                             <hr class="hr-group">
                         </div>
                         <div class="row mb-36">
                             <div class="col-lg-5 col-md-6 col-12 name-head">
-                                Group Director/ Chairman
+                                <?= Yii::t('app', 'Group Director/ Chairman') ?>
                             </div>
                             <a class="col-lg-7 col-md-6 col-12 name-director text-wrap"
                                 href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => 23]) ?>">
                                 <img src="<?= Yii::$app->homeUrl ?>image/Mask-group.png" alt="Group Image">
-                                <span class="d-inline-block"><?= $group["director"] ?></span>
+                                <span class="d-inline-block ml-10"><?= $group["director"] ?></span>
                             </a>
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
-                                Headquarter Address
+                                <?= Yii::t('app', 'Headquarter Address') ?>
                             </div>
                             <div
                                 class="col-lg-7 col-md-6 col-12 name-head0 mt-10 d-flex justify-content-center align-items-center">
@@ -87,25 +86,28 @@ $this->title = 'Group profile';
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
-                                Founded
+                                <?= Yii::t('app', 'Founded') ?>
                             </div>
                             <div class="col-lg-7 col-md-6 col-12 name-head0 mt-10 text-wrap">
-                                <?= $group["founded"] ?>
+                                <?php
+                                $yearOnly = substr($group["founded"], 0, 4);
+                                echo $yearOnly; // แสดงผล: 1998
+                                ?>
                             </div>
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
-                                Industry
+                                <?= Yii::t('app', 'Industry') ?>
                             </div>
                             <div class="col-lg-7 col-md-6 col-12 name-head0 mt-10 text-wrap">
-                                <?= $group["industries"] ?>
+                                <?= Yii::t('app', $group["industries"]) ?>
                             </div>
                         </div>
                         <div class="col-12 Group-Information">
-                            Contact Information
+                            <?= Yii::t('app', 'Contact Information') ?>
                             <hr class="hr-group">
                         </div>
                         <div class="row">
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
-                                Email
+                                <?= Yii::t('app', 'Email') ?>
                             </div>
                             <div class="col-lg-7 col-md-5 col-12 name-head0 mt-5 d-flex align-items-center">
                                 <a class="text-primary address-box0 text-wrap pr-5"><?= $group["email"] ?></a>
@@ -114,7 +116,7 @@ $this->title = 'Group profile';
                                     style="width: 10.884px; height: 12px;">
                             </div>
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
-                                Phone
+                                <?= Yii::t('app', 'Phone') ?>
                             </div>
                             <div class="col-lg-7 col-md-5 col-12 name-head0 mt-5 d-flex align-items-center">
                                 <span class="text-wrap pr-5"><?= $group["contact"] ?></span>
@@ -123,7 +125,7 @@ $this->title = 'Group profile';
                                     style="width: 10.884px; height: 12px;">
                             </div>
                             <div class="col-lg-5 col-md-6 col-12 name-head mt-10">
-                                Website
+                                <?= Yii::t('app', 'Website') ?>
                             </div>
                             <div class="col-lg-7 col-md-5 col-12 name-head0 mt-5 d-flex align-items-center">
                                 <a href="<?= $group['website'] ?>" target="_blank"
@@ -137,16 +139,17 @@ $this->title = 'Group profile';
                     <div class="col-lg-6 col-md-6 col-12 box-about0">
                         <div class="row about-section">
                             <div class="col-12 about-name">
-                                <span>About us</span>
+                                <span><?= Yii::t('app', 'About us') ?></span>
                                 <hr class="hr-group">
                             </div>
                             <div class="col-12 detail-tokyo">
                                 <p id="about-text">
-                                    <?= mb_strlen($group["about"]) > 200 
-                                        ? mb_substr($group["about"], 0, 200) . '...' 
-                                        : $group["about"] ?>
-                                    <?php if (mb_strlen($group["about"]) > 200): ?>
-                                    <button id="see-more" class="see-more">See More</button>
+                                    <?= mb_strlen(Yii::t('app', $group["about"])) > 200 
+                                        ? mb_substr(Yii::t('app', $group["about"]), 0, 200) . '...' 
+                                        : Yii::t('app', $group["about"]) ?>
+                                    <?php if (mb_strlen(Yii::t('app', $group["about"])) > 200): ?>
+                                    <button id="see-more"
+                                        class="see-more"><span><?= Yii::t('app', 'See More') ?></span></button>
                                     <?php endif; ?>
                                 </p>
                             </div>
@@ -169,7 +172,7 @@ $this->title = 'Group profile';
                     <!-- Bottom Row -->
                     <div class="col-12 mt-10 current-stats">
                         <div class="col-12 Group-Information">
-                            Current Stats
+                            <?= Yii::t('app', 'Affiliated Entities') ?>
                             <hr class="hr-group">
                         </div>
                         <div class="row">
@@ -180,24 +183,41 @@ $this->title = 'Group profile';
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
-                                                    <div class="cycle-current">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches.svg"
+                                                    <!-- <div class="cycle-current-yellow">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-current">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches.svg"
+                                                    <div class="cycle-current-yellow">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-current">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches.svg"
+                                                    <div class="cycle-current-yellow">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
+                                                            alt="icon">
+                                                    </div> -->
+                                                    <div
+                                                        class="cycle-current-<?= $totalBranches >= 1 ? 'yellow' : 'gray' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
+                                                            alt="icon">
+                                                    </div>
+                                                    <div
+                                                        class="cycle-current-<?= $totalBranches >= 2 ? 'yellow' : 'gray' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
+                                                            alt="icon">
+                                                    </div>
+                                                    <div
+                                                        class="cycle-current-<?= $totalBranches >= 3 ? 'yellow' : 'gray' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
                                                             alt="icon">
                                                     </div>
                                                     <div class="number-current"><?= $totalBranches ?></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-4 text-right">
-                                                <div class="text-name-current">Branch</div>
-                                                <div class="text-see-all">See All</div>
+                                                <div class="text-name-current">
+                                                    <?= Yii::t('app', 'Branch') ?>
+                                                </div>
+                                                <div class="text-see-all"><?= Yii::t('app', 'See All') ?></div>
                                             </div>
                                         </div>
                                     </a>
@@ -210,24 +230,27 @@ $this->title = 'Group profile';
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
-                                                    <div class="cycle-current">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
+                                                    <div
+                                                        class="cycle-current-<?= $totalDepartment >= 1 ? 'red' : 'gray' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $totalDepartment >= 1 ? '' : '-black' ?>.svg"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-current">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
+                                                    <div
+                                                        class="cycle-current-<?= $totalDepartment >= 2 ? 'red' : 'gray' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $totalDepartment >= 2 ? '' : '-black' ?>.svg"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-current">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
+                                                    <div
+                                                        class="cycle-current-<?= $totalDepartment >= 3 ? 'red' : 'gray' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/departments<?= $totalDepartment >= 3 ? '' : '-black' ?>.svg"
                                                             alt="icon">
                                                     </div>
                                                     <div class="number-current"><?= $totalDepartment ?></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-4 text-right">
-                                                <div class="text-name-current">Department</div>
-                                                <div class="text-see-all">See All</div>
+                                                <div class="text-name-current"><?= Yii::t('app', 'Department') ?></div>
+                                                <div class="text-see-all"><?= Yii::t('app', 'See All') ?></div>
                                             </div>
                                         </div>
                                     </a>
@@ -240,24 +263,27 @@ $this->title = 'Group profile';
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
-                                                    <div class="cycle-current">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon"
-                                                            style="margin-right: 1px;">
+                                                    <div
+                                                        class="cycle-current-<?= $totalTeam >= 1 ? 'green' : 'gray' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $totalTeam >= 1 ? '' : '-black' ?>.svg"
+                                                            alt="icon">
                                                     </div>
-                                                    <div class="cycle-current">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon"
-                                                            style="margin-right: 1px;">
+                                                    <div
+                                                        class="cycle-current-<?= $totalTeam >= 2 ? 'green' : 'gray' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $totalTeam >= 2 ? '' : '-black' ?>.svg"
+                                                            alt="icon">
                                                     </div>
-                                                    <div class="cycle-current">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon"
-                                                            style="margin-right: 1px;">
+                                                    <div
+                                                        class="cycle-current-<?= $totalTeam >= 3 ? 'green' : 'gray' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $totalTeam >= 3 ? '' : '-black' ?>.svg"
+                                                            alt="icon">
                                                     </div>
                                                     <div class="number-current"><?= $totalTeam ?></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-4 text-right">
-                                                <div class="text-name-current">Team</div>
-                                                <div class="text-see-all">See All</div>
+                                                <div class="text-name-current"><?= Yii::t('app', 'Team') ?></div>
+                                                <div class="text-see-all"><?= Yii::t('app', 'See All') ?></div>
                                             </div>
                                         </div>
                                     </a>
@@ -270,34 +296,36 @@ $this->title = 'Group profile';
                                         <div class="row align-items-center">
                                             <div class="col-8">
                                                 <div class="circle-container-img">
-                                                    <div class="cycle-image">
-                                                        <img src="<?= Yii::$app->homeUrl ?><?php echo $employees[0]['picture'] ?>"
+                                                    <?php for ($i = 0; $i < 3; $i++): ?>
+                                                    <?php if (!empty($employees[$i]['picture'])): ?>
+                                                    <div class="cycle-image <?= $i == 2 ? 'mr-10' : 'mr-3' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl . $employees[$i]['picture'] ?>"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-image">
-                                                        <img src="<?= Yii::$app->homeUrl ?><?php echo $employees[1]['picture'] ?>"
+                                                    <?php else: ?>
+                                                    <div class="cycle-current-gray <?= $i == 2 ? 'mr-10' : 'mr-3' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>image/employees-black.svg"
                                                             alt="icon">
                                                     </div>
-                                                    <div class="cycle-image">
-                                                        <img src="<?= Yii::$app->homeUrl ?><?php echo $employees[2]['picture'] ?>"
-                                                            alt="icon">
-                                                    </div>
+                                                    <?php endif; ?>
+                                                    <?php endfor; ?>
                                                     <div class="number-current"><?= $totalEmployees ?></div>
                                                 </div>
 
 
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-4 text-right">
-                                                <div class="text-name-current">Employee</div>
-                                                <div class="text-see-all">See All</div>
+                                                <div class="text-name-current"><?= Yii::t('app', 'Employee') ?>
+                                                </div>
+                                                <div class="text-see-all"><?= Yii::t('app', 'See All') ?></div>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
 
             </div>
@@ -310,7 +338,7 @@ $this->title = 'Group profile';
                         <img src="<?= Yii::$app->homeUrl ?>image/companies.svg" style="width: 15px; height: 15px;">
                     </div>
                     <div class="col-lg-9 col-md-7 col-12 Affiliated0">
-                        Affiliated Companies
+                        <?= Yii::t('app', 'Affiliated Companies') ?>
                     </div>
                     <div class="col-lg-1 col-md-3 col-12 box-27">
                         <?= count($companyGroup) ?>
@@ -320,10 +348,10 @@ $this->title = 'Group profile';
                 <div class="col-12">
 
                     <?php
-				if (isset($companyGroup) && count($companyGroup) > 0) {
-					$i = 0;
-					foreach ($companyGroup as $company) :
-				?>
+                    if (isset($companyGroup) && count($companyGroup) > 0) {
+                        $i = 0;
+                        foreach ($companyGroup as $company) :
+                    ?>
                     <a href="<?= Yii::$app->homeUrl . 'setting/company/company-view/' . ModelMaster::encodeParams([
 									'companyId' => $company['companyId']
 								]) ?>" class="no-underline" style="color:black;">
@@ -367,16 +395,16 @@ $this->title = 'Group profile';
                     </a>
                     <?php
 						$i++;
-					endforeach;
-				}
-				if (count($companyGroup) > 5) {
+                        endforeach;
+                    }
+                    if (count($companyGroup) > 5) {
 					?>
                     <div class="col-12 text-end">
-                        <a href="<?= Yii::$app->homeUrl ?>setting/company/index"> See All </a>
+                        <a href="<?= Yii::$app->homeUrl ?>setting/company/index"> <?= Yii::t('app', 'See All') ?> </a>
                     </div>
                     <?php
-				}
-				?>
+                    }
+                    ?>
 
                 </div>
             </div>

@@ -1,43 +1,26 @@
 <div style="display: flex; justify-content: flex-end; gap: 16px; align-items: center; width: 100%;">
-    <!-- <select class="form-select font-size-12 select-pim" id="company-filter" onchange="applySelectStyle(this)"
-        style="flex: 1;">
-        <option value=""><?= Yii::t('app', 'Employee') ?></option>
-        <option value=""><?= Yii::t('app', 'Employee') ?></option>
 
+    <select id="countrySelect" class="form-select font-size-12 select-pim" style="border-left: none;" required>
+        <option value="" disabled <?= empty($selectedCountryId) ? 'selected' : '' ?> hidden
+            style="color: var(--Helper-Text, #8A8A8A);">
+            <?= Yii::t('app', 'Country') ?>
+        </option>
+        <?php foreach ($countries as $countryId => $country) : ?>
+        <option value="<?= $countryId ?>" <?= $countryIdOld == $countryId ? 'selected' : '' ?>>
+            <?= $country ?>
+        </option>
+        <?php endforeach; ?>
     </select>
 
-    <select class="form-select font-size-12 select-pim" id="branch-filter" disabled onchange="applySelectStyle(this)"
-        style="flex: 1;">
-        <option value=""><?= Yii::t('app', 'Tokyo Co..') ?></option>
-        <option value=""><?= Yii::t('app', 'Tokyo Co..') ?></option>
-
-    </select> -->
-
-    <select class="form-select font-size-12 select-pim" id="month-filter" onchange="applySelectStyle(this)"
-        style="flex: 1;">
-        <option value=""><?= Yii::t('app', 'Thailand') ?></option>
-        <option value=""><?= Yii::t('app', 'Thailand') ?></option>
-
-    </select>
-
-    <span class="btn font-size-12 justify-content-center d-flex align-items-center custom-button-select"
-        style="flex: 1; text-align: center;" onclick="">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-2"
-            style="cursor: pointer;">
+    <!-- <span class="btn font-size-12 justify-content-center d-flex align-items-center custom-button-select"
+        onclick="filterCountryCompany('<?=$page?>')" style="flex: 1; text-align: center; cursor: pointer;">
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-2">
         <?= Yii::t('app', 'Filter') ?>
+    </span> -->
+    <span class="justify-content-center d-flex align-items-center employee-filter-btn" style="cursor: pointer;"
+        onclick="filterCountryCompany('<?=$page?>')">
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-1">
+        Filter
     </span>
+
 </div>
-
-
-
-<script>
-function applySelectStyle(selectElement) {
-    if (selectElement.value) {
-        selectElement.classList.remove('select-pim');
-        selectElement.classList.add('select-pimselect');
-    } else {
-        selectElement.classList.remove('select-pimselect');
-        selectElement.classList.add('select-pim');
-    }
-}
-</script>
