@@ -54,7 +54,7 @@
 
 .header-crad-company {
     display: flex;
-    max-width: 350px;
+    max-width: 265px;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
