@@ -187,10 +187,11 @@ $page = "grid";
                 ?>
                 <!-- endforeach -->
             </div>
+            <?= $this->render('pagination_page', ['countryId' => $countryId, 'companyId' => $companyId, 'branchId' => $branchId, 'page' => $page, 'numPage' => $numPage]) ?>
         </div>
 
         <!-- pagination_page -->
-        <?= $this->render('pagination_page', ['countryId' => $countryId, 'companyId' => $companyId, 'branchId' => $branchId, 'page' => $page, 'numPage' => $numPage]) ?>
+
 
     </div>
 </div>

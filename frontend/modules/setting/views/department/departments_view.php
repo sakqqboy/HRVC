@@ -78,7 +78,7 @@ $page = 'view';
                         <span class=" font-size-16 text-gray-back mt-12 " style="font-weight: 500; display: flex; align-items: center; gap: 12px;height: 27px;">
                             <?= Yii::t('app', 'Located in') ?>
                             <div class="city-crad-company font-size-14 d-inline-flex pt-0 pb-0" style="height: 27px;font-weight:400;">
-                                <img src="<?= Yii::$app->homeUrl ?>" class="bangladresh-hrvc">
+                                <img src="<?= Yii::$app->homeUrl ?><?= $branches['flag'] ?>" class="bangladresh-hrvc">
                                 <?= $branches['city'] ?>,<?= $branches['countryName'] ?>
                             </div>
                         </span>
