@@ -92,7 +92,7 @@ $this->title = 'KGI Grid View';
             </div>
             <div class="row" style="--bs-gutter-x:0px;">
                 <div class="d-none img-loading text-center" id="img-loading">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/config/loading.gif" class="img-fluid " style="width: 750px;">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Config/loading.gif" class="img-fluid " style="width: 750px;">
                 </div>
             </div>
             <div class="col-12 mt-15 mb-20" id="main-body">

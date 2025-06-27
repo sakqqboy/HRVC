@@ -87,7 +87,7 @@
         <a href="<?= $url ?>/<?= $nextPage ?>"
             class="btn-previous<?= ($currentPage == $totalPage ? '-disable' : '') ?>  text-center align-content-center"
             <?= ($currentPage == $totalPage ? 'disabled' : '') ?>
-            onclick="<?= $currentPage == $totalPage ? 'return false;' : '' ?>"
+            onclick="<?= $currentPage == $totalPage ? 'return false;' : 'javascrip:showLoading()' ?>"
             style="text-decoration: none;<?= $currentPage == $totalPage ? 'pointer-events:none;' : '' ?>">
             <!-- <button class="btn-next"> -->
             <span style="margin-right: 5px;"><?= Yii::t('app', 'Next') ?></span>

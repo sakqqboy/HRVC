@@ -47,7 +47,7 @@ $statusTexArr = Status::allStatusText();
 			</div>
 			<div class="row" style="--bs-gutter-x:0px;">
 				<div class="d-none img-loading text-center" id="img-loading">
-					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/config/loading.gif" class="img-fluid " style="width: 750px;">
+					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Config/loading.gif" class="img-fluid " style="width: 750px;">
 				</div>
 			</div>
 			<div class="row d-flex mb-20" style="--bs-gutter-x:0 !important;" id="main-body">
