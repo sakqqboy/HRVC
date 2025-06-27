@@ -198,7 +198,7 @@ $page = "grid";
 <div class="modal fade" id="departmentModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="row" id="departmentModalBody" style="width: 100%; padding: 50px; gap: 30px;">
+            <div class="row" id="departmentModalBody" style="width: 100%; padding: 50px; gap: 30px;max-height: 800px;">
                 <!-- AJAX content will be injected here -->
             </div>
         </div>

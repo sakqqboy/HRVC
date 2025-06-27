@@ -118,7 +118,7 @@ $page = 'view';
                                     $countrow++;
                                     $departmentId = $department['branchId'] + 543;
                             ?>
-                                    <tr class="tr-font list-table-body" id="department-<?= $department['departmentId'] ?>" style="height:45px; background-color:#F4F6F9 !important;">
+                                    <tr class="tr-font list-table-body" id="department-<?= $department['departmentId'] ?>" style="height:50px; background-color:#F4F6F9 !important;">
                                         <td>
                                             <div class="circle-container ml-15">
                                                 <div class="cycle-current-red">
