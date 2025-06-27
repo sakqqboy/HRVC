@@ -66,10 +66,17 @@
     }
 }
 </style>
-<div class="modal fade" id="update-history-popup" tabindex="-1" aria-labelledby="updateHistoryModalLabel"
+<!-- <div class="modal fade" id="update-history-popup" tabindex="-1" aria-labelledby="updateHistoryModalLabel"
     aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content" style="display: flex; padding: 25px 31px; width: 1560px; gap: 21px;">
+        <div class="modal-content" style="display: flex; padding: 25px 31px; width: 1560px; gap: 21px;"> -->
+
+<div class="modal fade" id="update-history-popup" tabindex="-1" aria-labelledby="updateHistoryModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 1560px;">
+        <!-- ✅ เพิ่ม modal-dialog-centered -->
+        <div class="modal-content" style="padding: 25px 31px; gap: 21px;">
+
             <div class="updatehistory" style="font-size: 30px; text-decoration-line: none;">
                 <span class="modal-title-history" id="updateHistoryModalLabel">
                     <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg" style="width: 26.998px; height: 26.999px;">
