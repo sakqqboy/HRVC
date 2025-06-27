@@ -155,10 +155,13 @@ $page = "grid"
                                                             alt="History" class="pim-icon" style="margin-top: -1px;">
                                                     </a> -->
 
-                                                    <a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
-                                                        class="btn btn-bg-white-xs">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                                            alt="History" class="pim-icon" style="margin-top: -1px;">
+
+                                                    <a class="btn btn-bg-red-xs"
+                                                        href="javascript:deleteCompany(<?= $company['companyId'] ?>)"
+                                                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                                                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                                            alt="History" class="pim-icon" style="margin-top: -3px;">
                                                     </a>
                                                 </li>
                                                 <?php } ?>
@@ -170,13 +173,12 @@ $page = "grid"
                                                             alt="History" class="pim-icon mr-10"
                                                             style="margin-top: -2px;">
                                                     </a> -->
-                                                    <a class="btn btn-bg-red-xs"
-                                                        href="javascript:deleteCompany(<?= $company['companyId'] ?>)"
-                                                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                                                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
-                                                            alt="History" class="pim-icon" style="margin-top: -3px;">
+                                                    <a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                                        class="btn btn-bg-white-xs">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                                            alt="History" class="pim-icon" style="margin-top: -1px;">
                                                     </a>
+
 
                                                 </li>
                                             </ul>

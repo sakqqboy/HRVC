@@ -154,10 +154,12 @@ $page = "grid"
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
                                                             alt="History" class="pim-icon" style="margin-top: -1px;">
                                                     </a> -->
-                                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId'] + 543]) ?>"
-                                                        class="btn btn-bg-white-xs">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                                            alt="History" class="pim-icon" style="margin-top: -1px;">
+                                                    <a class="btn btn-bg-red-xs"
+                                                        href="javascript:deleteBranch(<?= $branch['branchId'] + 543 ?>)"
+                                                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                                                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                                            alt="History" class="pim-icon" style="margin-top: -3px;">
                                                     </a>
                                                 </li>
                                                 <?php } ?>
@@ -171,13 +173,12 @@ $page = "grid"
                                                         <?= Yii::t('app', 'edit') ?>
                                                     </a> -->
 
-                                                    <a class="btn btn-bg-red-xs"
-                                                        href="javascript:deleteBranch(<?= $branch['branchId'] + 543 ?>)"
-                                                        onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                                                        onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
-                                                            alt="History" class="pim-icon" style="margin-top: -3px;">
+                                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId'] + 543]) ?>"
+                                                        class="btn btn-bg-white-xs">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                                            alt="History" class="pim-icon" style="margin-top: -1px;">
                                                     </a>
+
                                                     <!-- <a href="javascript:updateBranch(<?= $branch['branchId'] + 543 ?>)"
                                                         class="btn btn-sm btn-outline-secondary font-size-12 mr-5">
                                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -290,7 +291,7 @@ $page = "grid"
                                                             </button>
                                                             <?php } ?>
                                                             <?php if($branch['totalDepartment'] > 0 && $branch['totalTeam'] == 0) { ?>
-                                                            <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>"
+                                                            <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
                                                                 style="text-decoration: none;">
                                                                 <button type="button" class="btn-create-small"
                                                                     action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
