@@ -42,17 +42,14 @@ $this->title = 'Create Branch';
                             stroke-width: 1px;
                             stroke: var(--Primary-Blue---HRVC, #2580D3);
                             border-radius: 100%;
-                            padding: 20px;
                             text-align: center;
                             cursor: pointer;
                         ">
                             <label for="imageUpload" class="upload-label" style="cursor: pointer;  display: block;">
-
-
                                 <?php
                                 if ($branches["branchImage"] != null) { ?>
                                 <img src="<?= Yii::$app->homeUrl . $branches['branchImage'] ?>"
-                                    class="company-group-picture" id="old-image">
+                                    class="company-group-picture" style="width: 200px; height: 200px;" id="old-image">
                                 <?php
                                 } else { ?>
                                 <img src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"
