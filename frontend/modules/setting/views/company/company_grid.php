@@ -91,7 +91,7 @@ $page = "grid"
                                                 class="card-tcf">
                                             <?php
                                                     } else { ?>
-                                            <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>"
+                                            <img src="<?= Yii::$app->homeUrl . 'image/no-company.svg' ?>"
                                                 class="card-tcf">
                                             <?php
                                                     }

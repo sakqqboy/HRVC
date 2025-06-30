@@ -110,7 +110,7 @@ $page = "list"
                                 class="bangladresh-hrvc mr-10">
                             <?php
                                     } else { ?>
-                            <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>"
+                            <img src="<?= Yii::$app->homeUrl . 'image/no-company.svg' ?>"
                                 class="bangladresh-hrvc mr-10">
                             <?php
                                     }

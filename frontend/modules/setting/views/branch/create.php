@@ -47,8 +47,8 @@ $this->title = 'Create Branch';
                             cursor: pointer;
                         ">
                             <label for="imageUpload" class="upload-label" style="cursor: pointer;  display: block;">
-                                <!-- <img src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"
-                                    style="width: 50px; height: auto;" alt="Upload Icon"> <br><br> -->
+                                <img src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"
+                                    style="width: 50px; height: auto;" alt="Upload Icon"> <br><br>
                                 <span>
                                     <?= Yii::t('app', 'Upload') ?>
                                     <span style="font-size: 13px; color: #666;">
@@ -56,9 +56,9 @@ $this->title = 'Create Branch';
                                     </span>
                                 </span>
                                 <br>
-                                <span
-                                    style="font-size: 13px; color: #666;"><?= Yii::t('app', 'Branch Picture here') ?></span>
-
+                                <span style="font-size: 13px; color: #666;">
+                                    <?= Yii::t('app', 'Branch Picture here') ?>
+                                </span>
                             </label>
                             <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
                                 style="display: none;">

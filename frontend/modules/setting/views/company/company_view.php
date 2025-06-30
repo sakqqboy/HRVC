@@ -59,7 +59,7 @@ $this->title = 'company profile';
                         <img src="<?= Yii::$app->homeUrl . $company['picture'] ?>" class="company-group-picture">
                         <?php
 					} else { ?>
-                        <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="company-group-picture">
+                        <img src="<?= Yii::$app->homeUrl . 'image/no-company.svg' ?>" class="company-group-picture">
                         <?php
 					}
 					?>
@@ -361,8 +361,15 @@ $this->title = 'company profile';
                                 <?php
 									} else {
 									?>
-                                <img src="<?= Yii::$app->homeUrl . $branch['picture'] ?>" class="width-TCF-BD"
+                                <img src="<?= Yii::$app->homeUrl ?>image/no-branch.svg" class="width-TCF-BD"
                                     style="border-radius: 100%;">
+                                <!-- <div class="cycle-current-gray ml-20" style="
+                                width: 55px;
+                                height: 55px;
+                                border-radius: 100%;
+                                ">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
+                                </div> -->
                                 <?php
 									}
 									?>

@@ -84,7 +84,8 @@ $page = "grid"
                                                 class="card-tcf">
                                             <?php
                                                     } else { ?>
-                                            <img src="<?= Yii::$app->homeUrl . $branch['picture'] ?>" class="card-tcf">
+                                            <img src="<?= Yii::$app->homeUrl .'image/no-branch.svg' ?>"
+                                                class="card-tcf">
                                             <?php
                                                     }
                                                 ?>
