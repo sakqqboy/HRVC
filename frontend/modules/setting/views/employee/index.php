@@ -69,7 +69,7 @@ $statusTexArr = Status::allStatusText();
 							$statusClass = "status-badge-intern";
 						}
 						if ($employee["status"] == "Temporary") {
-							$statusClass = "status-badge-temporarye";
+							$statusClass = "status-badge-temporary";
 						}
 						if ($employee["status"] == "Freelance") {
 							$statusClass = "status-badge-freelance";

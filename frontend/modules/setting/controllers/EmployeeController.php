@@ -321,7 +321,7 @@ class EmployeeController extends Controller
                 $pictureProfile->saveAs($pathSave);
                 $employee->picture = 'images/employee/profile/' . $fileName;
             } else {
-                $employee->picture = 'image/user.png';
+                $employee->picture = 'images/employee/status/employee-no-pic.svg';
             }
 
             // Upload Resume
