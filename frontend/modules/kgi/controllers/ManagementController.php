@@ -46,7 +46,7 @@ class ManagementController extends Controller
 		$this->setDefault();
 		return true;
 	}
-	public function actionIndex()
+	public function actionIndex($hash = null)
 	{
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
@@ -98,7 +98,13 @@ class ManagementController extends Controller
 				"type" => $type
 			]));
 		}
+		$currentPage = 1;
+		if (isset($hash) && $hash != '') {
 
+			$pageArr = explode('page', $hash);
+			$currentPage = $pageArr[1];
+		}
+		$limit = 20;
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -111,16 +117,20 @@ class ManagementController extends Controller
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$kgis = curl_exec($api);
 		$kgis = json_decode($kgis, true);
 
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-		$url = 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
+		//$url = 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$companyId = $employee["companyId"];
+		$totalKgi = Kgi::totalKgi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
+		$totalPage = ceil($totalKgi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
+
 		//$branchId = Branch::userBranchId(Yii::$app->user->id);
 
 		return $this->render('index', [
@@ -132,10 +142,14 @@ class ManagementController extends Controller
 			"role" => $role,
 			"userId" => Yii::$app->user->id,
 			"userId" => Yii::$app->user->id,
-			"companyId" => $companyId
+			"companyId" => $companyId,
+			"totalKgi" => $totalKgi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
+			"pagination" => $pagination
 		]);
 	}
-	public function actionGrid()
+	public function actionGrid($hash = null)
 	{
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
@@ -187,6 +201,13 @@ class ManagementController extends Controller
 				"type" => $type
 			]));
 		}
+		$currentPage = 1;
+		if (isset($hash) && $hash != '') {
+			$pageArr = explode('page', $hash);
+			$currentPage = $pageArr[1];
+		}
+		$limit = 20;
+
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -199,7 +220,7 @@ class ManagementController extends Controller
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$kgis = curl_exec($api);
 		$kgis = json_decode($kgis, true);
 		//throw new exception('kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
@@ -209,6 +230,9 @@ class ManagementController extends Controller
 		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$companyId = $employee["companyId"];
+		$totalKgi = Kgi::totalKgi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
+		$totalPage = ceil($totalKgi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
 
 		return $this->render('kgi_grid', [
 			"units" => $units,
@@ -218,7 +242,12 @@ class ManagementController extends Controller
 			"isManager" => $isManager,
 			"role" => $role,
 			"userId" => Yii::$app->user->id,
-			"companyId" => $companyId
+			"companyId" => $companyId,
+			"totalKgi" => $totalKgi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
+			"pagination" => $pagination
+
 		]);
 	}
 	public function actionCreateKgi()
@@ -1047,7 +1076,7 @@ class ManagementController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$companyId = $param["companyId"];
 		$branchId = $param["branchId"];
-		$teamId = $param["teamId"];
+		$teamId = isset($param["teamId"]) ? $param["teamId"] : null;
 		$month = $param["month"];
 		$status = $param["status"];
 		$year = $param["year"];
@@ -1061,6 +1090,11 @@ class ManagementController extends Controller
 			} else {
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
 			}
+		}
+		$currentPage = 1;
+		$limit = 20;
+		if (isset($param["currentPage"])) {
+			$currentPage = $param["currentPage"];
 		}
 		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year;
 
@@ -1095,7 +1129,7 @@ class ManagementController extends Controller
 			//return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
 		//$paramText .= '&&adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
-		$paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
+		$paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId . '&&currentPage=' . $currentPage . '&&limit=' . $limit;
 		//throw new exception($paramText);
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -1130,9 +1164,20 @@ class ManagementController extends Controller
 		} else {
 			$file = "kgi_search_result_grid";
 		}
-		// throw new Exception($paramText);
-		// throw new Exception(print_r($kgis, true));
+		$filter = [
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			"month" => $month,
+			"year" => $year,
+			"status" => $status,
+			"branches" => $branches,
+			"perPage" => 5,
+		];
+		//throw new exception(print_r($kgis, true));
 		$isManager = UserRole::isManager();
+		$totalKgi = $kgis["total"];
+		$totalPage = ceil($totalKgi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
 		return $this->render($file, [
 			"units" => $units,
 			"companies" => $companies,
@@ -1148,7 +1193,12 @@ class ManagementController extends Controller
 			"teams" => $teams,
 			"isManager" => $isManager,
 			"role" => $role,
-			"userId" => Yii::$app->user->id
+			"userId" => Yii::$app->user->id,
+			"pagination" => $pagination,
+			"totalKgi" => $totalKgi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
+			"filter" => $filter
 		]);
 	}
 	public function actionCopyKgi($kgiId)

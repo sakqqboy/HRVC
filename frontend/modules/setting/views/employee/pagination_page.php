@@ -18,7 +18,8 @@
                 "teamId" => $filter["teamId"],
                 "currentPage" => $currentPage - 1,
                 "status" => $filter["status"],
-                "pageType" => $pageType
+                "pageType" => $pageType,
+                "perPage" => $filter["perPage"],
             ]);
             $nextPage = ModelMaster::encodeParams([
                 "companyId" => $filter["companyId"],
@@ -27,7 +28,8 @@
                 "teamId" => $filter["teamId"],
                 "currentPage" => $currentPage + 1,
                 "status" => $filter["status"],
-                "pageType" => $pageType
+                "pageType" => $pageType,
+                "perPage" => $filter["perPage"],
             ]);
         } else {
             $PreviousPage = "page" . ($currentPage - 1);
@@ -36,7 +38,7 @@
     ?>
         <a href="<?= $url ?>/<?= $PreviousPage ?>"
             class="btn-previous<?= ($currentPage == 1 ? '-disable' : '') ?> text-center align-content-center"
-            onclick="<?= $currentPage == 1 ? 'return false;' : '' ?>" style="text-decoration: none;<?= $currentPage == 1 ? 'pointer-events:none;' : '' ?>">
+            onclick="<?= $currentPage == 1 ? 'return false;' : 'javascript:showLoading()' ?>" style="text-decoration: none;<?= $currentPage == 1 ? 'pointer-events:none;' : '' ?>">
             <img src="<?= Yii::$app->homeUrl ?>image/btn-previous<?= ($currentPage == 1 ? '-disable' : '') ?>.svg" style="width: 4.958px; height: 8.5px;">
             <span style="margin-left: 5px;"><?= Yii::t('app', 'Previous') ?></span>
         </a>
@@ -53,7 +55,8 @@
                     "teamId" => $filter["teamId"],
                     "currentPage" => $page,
                     "status" => $filter["status"],
-                    "pageType" => $pageType
+                    "pageType" => $pageType,
+                    "perPage" => $filter["perPage"],
                 ]);
             } else {
                 $directPage = "page" . $page;
@@ -71,7 +74,7 @@
                 </div>
             <?php
             } else { ?>
-                <a href="<?= ($currentPage == $page ? 'javascript:void(0);' : $url . '/' . $directPage) ?>"
+                <a href="<?= ($currentPage == $page ? 'javascript:void(0);' : $url . '/' . $directPage) ?>" onclick="<?= ($currentPage == $page ? 'javascript:void(0);' : 'javascript:showLoading()') ?>"
                     class="<?= ($currentPage == $page ? 'btn btn-bg-blue-xs' : '') ?> font-size-12 pt-0 pb-0 align-content-center"
                     style=" <?= ($currentPage == $page ? 'border: none; border-radius: 4px;width:26px;height:26px;' : 'text-decoration: none;') ?>">
                     <span style=" <?= ($currentPage == $page ? 'color: white; font-weight: 700;' : 'color: black; font-weight: 400;') ?>"><?= $page ?></span>
@@ -84,7 +87,7 @@
         <a href="<?= $url ?>/<?= $nextPage ?>"
             class="btn-previous<?= ($currentPage == $totalPage ? '-disable' : '') ?>  text-center align-content-center"
             <?= ($currentPage == $totalPage ? 'disabled' : '') ?>
-            onclick="<?= $currentPage == $totalPage ? 'return false;' : '' ?>"
+            onclick="<?= $currentPage == $totalPage ? 'return false;' : 'javascrip:showLoading()' ?>"
             style="text-decoration: none;<?= $currentPage == $totalPage ? 'pointer-events:none;' : '' ?>">
             <!-- <button class="btn-next"> -->
             <span style="margin-right: 5px;"><?= Yii::t('app', 'Next') ?></span>

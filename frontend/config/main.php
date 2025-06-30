@@ -144,6 +144,8 @@ return [
                 'setting/title/titles-view/<hash>' => 'setting/title/titles-view',
                 'kpi/management/kpi-search-result/<hash>' => 'kpi/management/kpi-search-result',
                 'kgi/management/kgi-search-result/<hash>' => 'kgi/management/kgi-search-result',
+                'kgi/management/grid/<hash>' => 'kgi/management/grid',
+                'kgi/management/index/<hash>' => 'kgi/management/index',
                 'kgi/management/kgi-kfi/<hash>' => 'kgi/management/kgi-kfi',
                 'kgi/management/kgi-kpi/<hash>' => 'kgi/management/kgi-kpi',
                 'kgi/management/prepare-update/<hash>' => 'kgi/management/prepare-update',

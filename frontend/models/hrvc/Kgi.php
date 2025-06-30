@@ -105,4 +105,80 @@ class Kgi extends \frontend\models\hrvc\master\KgiMaster
         }
         return $show;
     }
+    public static function totalKgi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
+    {
+        $total = 0;
+        if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
+            $kgis = Kgi::find()
+                ->where(["status" => [1, 2, 4]])
+                ->asArray()
+                ->orderBy('createDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if (!empty($supervisorId) || !empty($teamLeaderId) || !empty($staffId)) {
+            if ($supervisorId != '') {
+                $userId = $supervisorId;
+            }
+            if ($teamLeaderId != '') {
+                $userId = $teamLeaderId;
+            }
+            if ($staffId != '') {
+                $userId = $staffId;
+            }
+            $employeeId = Employee::employeeId($userId);
+            $companyId = Employee::EmployeeDetail($employeeId)["companyId"];
+            $kgis = Kgi::find()
+                ->where([
+                    "status" => [1, 2, 4],
+                    "companyId" => $companyId
+                ])
+                ->asArray()
+                ->orderBy('createDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if (count($kgis) > 0) {
+            $total = count($kgis);
+        }
+        return $total;
+    }
+    public static function totalKgiWithFilter($companyId, $branchId, $teamId, $month, $status, $year, $adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
+    {
+        $total = 0;
+        if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
+            $kgis = Kgi::find()
+                ->where(["status" => [1, 2, 4]])
+                ->asArray()
+                ->orderBy('createDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if (!empty($supervisorId) || !empty($teamLeaderId) || !empty($staffId)) {
+            if ($supervisorId != '') {
+                $userId = $supervisorId;
+            }
+            if ($teamLeaderId != '') {
+                $userId = $teamLeaderId;
+            }
+            if ($staffId != '') {
+                $userId = $staffId;
+            }
+            $employeeId = Employee::employeeId($userId);
+            $companyId = Employee::EmployeeDetail($employeeId)["companyId"];
+            $kgis = Kgi::find()
+                ->where([
+                    "status" => [1, 2, 4],
+                    "companyId" => $companyId
+                ])
+                ->asArray()
+                ->orderBy('createDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if (count($kgis) > 0) {
+            $total = count($kgis);
+        }
+        return $total;
+    }
 }

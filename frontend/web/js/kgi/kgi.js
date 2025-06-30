@@ -463,6 +463,7 @@ function kgiFilter() {
 	var year = $("#year-filter").val();
 	var type = $("#type").val();
 	var url = $url + 'kgi/management/search-kgi';
+	showLoading();
 	$.ajax({
 		type: "POST",
 		dataType: 'json',

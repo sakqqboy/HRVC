@@ -4,6 +4,7 @@ namespace backend\models\hrvc;
 
 use Yii;
 use \backend\models\hrvc\master\KgiEmployeeMaster;
+use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
 
@@ -45,19 +46,17 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
             ->asArray()
             ->all();
         $employee = [];
+        $img = "images/employee/status/employee-nopic.svg";
         if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
             foreach ($kgiEmployee as $ke) :
                 if ($ke["picture"] != "") {
-                    $employee[$ke["employeeId"]] = $ke["picture"];
+                    $url = Path::frontendUrl() . $ke["picture"];
+                    $headers = @get_headers($url);
+                    if ($headers && strpos($headers[0], '200') !== false) {
+                        $employee[$ke["employeeId"]] = $ke["picture"];
+                    }
                 } else {
-
-                    $employee[$ke["employeeId"]] = 'image/user.svg';
-                    // if ($ke["gender"] == 1) {
-                    //     $employee[$ke["employeeId"]] = 'image/user.png';
-                    // } else {
-
-                    //     $employee[$ke["employeeId"]] = 'image/lady.jpg';
-                    // }
+                    $employee[$ke["employeeId"]] = $img;
                 }
             endforeach;
         }
@@ -90,13 +89,17 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
                 ->all();
         }
         $employee = [];
+        $img = "images/employee/status/employee-nopic.svg";
         if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
             foreach ($kgiEmployee as $ke) :
                 if ($ke["picture"] != "") {
-                    $employee[$ke["employeeId"]] = $ke["picture"];
+                    $url = Path::frontendUrl() . $ke["picture"];
+                    $headers = @get_headers($url);
+                    if ($headers && strpos($headers[0], '200') !== false) {
+                        $employee[$ke["employeeId"]] = $ke["picture"];
+                    }
                 } else {
-
-                    $employee[$ke["employeeId"]] = 'image/user.svg';
+                    $employee[$ke["employeeId"]] = $img;
                 }
             endforeach;
         }
@@ -125,12 +128,6 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
                     $employee[$ke["employeeId"]]["picture"] = $ke["picture"];
                 } else {
                     $employee[$ke["employeeId"]]["picture"] = 'images/icons/Settings/personblack.svg';
-                    // if ($ke["gender"] == 1) {
-                    //     $employee[$ke["employeeId"]]["picture"] = 'image/user.png';
-                    // } else {
-
-                    //     $employee[$ke["employeeId"]]["picture"] = 'image/lady.jpg';
-                    // }
                 }
                 $employee[$ke["employeeId"]]["name"] = $ke["employeeFirstname"] . ' ' . $ke["employeeSurename"];
                 $employee[$ke["employeeId"]]["title"] = $ke["titleName"];
@@ -264,17 +261,17 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
             ->asArray()
             ->all();
         $employee = [];
+        $img = "images/employee/status/employee-nopic.svg";
         if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
             foreach ($kgiEmployee as $ke) :
                 if ($ke["picture"] != "") {
-                    $employee[$ke["employeeId"]] = $ke["picture"];
-                } else {
-                    if ($ke["gender"] == 1) {
-                        $employee[$ke["employeeId"]] = 'image/user.png';
-                    } else {
-
-                        $employee[$ke["employeeId"]] = 'image/lady.jpg';
+                    $url = Path::frontendUrl() . $ke["picture"];
+                    $headers = @get_headers($url);
+                    if ($headers && strpos($headers[0], '200') !== false) {
+                        $employee[$ke["employeeId"]] = $ke["picture"];
                     }
+                } else {
+                    $employee[$ke["employeeId"]] = $img;
                 }
             endforeach;
         }

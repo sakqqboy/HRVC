@@ -48,4 +48,8 @@ function setPassword(i) {
 function showclickno() {
     $("#showlevel").show();
 }
-
+function showLoading() { 
+    $("#img-loading").addClass('col-12');
+    $("#main-body").addClass('d-none');
+    $("#img-loading").removeClass('d-none');
+}
