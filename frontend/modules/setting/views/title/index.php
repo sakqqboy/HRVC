@@ -65,7 +65,7 @@ $page = "grid";
                                             <div class="name-crad-company">
                                                 <?= $department['departmentName'] ?>
                                             </div>
-                                            <div class="city-crad-company">
+                                            <div class="city-crad-company text-truncate">
                                                 <div class="cycle-current-yellow" style="width: 20px; height: 20px;">
                                                     <img src="<?= Yii::$app->homeUrl . $department['picture'] ?>"
                                                         class="card-tcf">
@@ -73,7 +73,7 @@ $page = "grid";
                                                 <?= Yii::t('app', $department['companyName']) ?>
                                             </div>
                                             <div style="display: flex; gap: 20px; align-items: center;">
-                                                <div class="city-crad-company"
+                                                <div class="city-crad-company text-truncate"
                                                     style="display: flex; align-items: center; gap: 5px;">
                                                     <div class="cycle-current-yellow"
                                                         style="width: 20px; height: 20px;">
@@ -83,7 +83,7 @@ $page = "grid";
                                                     <?= $department['branchName'] ?>,
                                                 </div>
 
-                                                <div class="city-crad-company"
+                                                <div class="city-crad-company text-truncate"
                                                     style="display: flex; align-items: center; gap: 5px;">
                                                     <img src="<?= Yii::$app->homeUrl ?><?= $department['flag'] ?>"
                                                         class="bangladresh-hrvc" style="width: 16px; height: 12px;">

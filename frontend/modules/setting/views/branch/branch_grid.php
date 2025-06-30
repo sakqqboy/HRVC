@@ -14,7 +14,7 @@ $page = "grid"
         <div class="col-8">
             <div class="d-flex align-items-center gap-2">
                 <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" style="width: 24px; height: 24px;">
-                <div class="pim-name-title ml-10">
+                <div class="pim-name-title">
                     <?= Yii::t('app', 'Branches') ?>
                 </div>
                 <?php if($role >= 5) { ?>
