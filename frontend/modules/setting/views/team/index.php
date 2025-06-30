@@ -56,7 +56,7 @@ $page = "grid";
                                                 class="card-tcf">
                                         </div>
                                         <div class="header-crad-company">
-                                            <div class="name-crad-company">
+                                            <div class="name-crad-company text-truncate">
                                                 <?= $department['companyName'] ?>
                                             </div>
                                             <div class="city-crad-company  text-truncate">

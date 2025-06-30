@@ -62,7 +62,7 @@ $page = "grid";
                                                 style="width: 40px; height: 40px;">
                                         </div>
                                         <div class="header-crad-company" style="width: 500px;">
-                                            <div class="name-crad-company">
+                                            <div class="name-crad-company text-truncate">
                                                 <?= $department['departmentName'] ?>
                                             </div>
                                             <div class="city-crad-company text-truncate">

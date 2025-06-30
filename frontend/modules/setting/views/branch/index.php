@@ -98,10 +98,12 @@ $page = "list"
                         <td>
                             <?php
                                     if ($branch["branchImage"] != null) { ?>
-                            <img src="<?= Yii::$app->homeUrl ?><?= $branch['branchImage'] ?>" class="width-aa mr-10">
+                            <img src="<?= Yii::$app->homeUrl ?><?= $branch['branchImage'] ?>"
+                                class="bangladresh-hrvc mr-10">
                             <?php
                                     } else { ?>
-                            <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="width-aa mr-10">
+                            <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>"
+                                class="bangladresh-hrvc mr-10">
                             <?php
                                     }
                                     ?>
