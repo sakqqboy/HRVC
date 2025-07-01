@@ -1,4 +1,23 @@
 <style>
+@media (max-width: 1935px) and (max-height: 950px) {
+    .modal-content {
+        transform: scale(0.95);
+        transform-origin: top left;
+        width: calc(100% / 0.95);
+        /* height: calc(100% / 0.95); */
+        /* overflow: hidden; */
+    }
+
+    .modal-dialog {
+        transform: scale(0.95);
+        transform-origin: top left;
+        width: calc(100% / 0.95);
+        /* height: calc(100% / 0.95); */
+        right: 390px;
+    }
+}
+
+
 @media (max-width: 1735px) and (max-height: 950px) {
     .modal-content {
         transform: scale(0.85);
