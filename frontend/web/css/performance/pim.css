@@ -26,6 +26,12 @@
 	text-transform: capitalize;
 }
 
+.pim-head-icon {
+	width: 26px;
+	height: 24px;
+
+}
+
 .pim-text-back {
 	color: #2580D3;
 	font-family: "SF Pro Display";
@@ -87,10 +93,9 @@
 }
 
 .pim-head-text {
-	font-size: 24px;
-	letter-spacing: 0.2px;
-	font-weight: 500;
-	color: #3C3D48;
+	font-size: clamp(24px, 2vw, 72px);
+	font-weight: 600;
+	color: #30313D;
 }
 
 .pim-table-header {
@@ -1561,7 +1566,7 @@
 	background-color: #2580D3;
 	color: white;
 	border-radius: 3px;
-	padding: 3px 9px 3px 9px;
+	height: 30px;
 	border: 0;
 }
 

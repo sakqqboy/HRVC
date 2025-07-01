@@ -6,9 +6,21 @@ use yii\bootstrap5\ActiveForm;
 $this->title = 'KGI Grid View';
 ?>
 <div class="col-12 mt-70 pt-20">
-    <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="home-icon mr-5" style="margin-top: -3px;">
-        <span class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
+    <div class="d-flex justify-content-start pt-0 pb-0 border" style="line-height: 30px;">
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="pim-head-icon mr-10">
+        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
+        <?php
+        if ($role >= 3) {
+        ?>
+            <a href="<?= Yii::$app->homeUrl ?>kgi/management/create-kgi"
+                class="create-employee-btn">
+                <?= Yii::t('app', 'Create New') ?>
+                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
+                    class="pim-icon ml-3" style="margin-top: -1px;">
+            </a>
+        <?php
+        }
+        ?>
     </div>
     <div class="col-12 mt-10">
         <?= $this->render('header_filter', [
@@ -44,18 +56,7 @@ $this->title = 'KGI Grid View';
                             </div>
                         </div>
                         <div class="col-4 pl-4">
-                            <?php
-                            if ($role >= 3) {
-                            ?>
-                                <a href="<?= Yii::$app->homeUrl ?>kgi/management/create-kgi"
-                                    class="btn-createnew font-size-11" style="position:absolute;text-decoration:none;">
-                                    <?= Yii::t('app', 'Create New') ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
-                                        class="pim-icon ml-3" style="margin-top: -1px;">
-                                </a>
-                            <?php
-                            }
-                            ?>
+
                         </div>
                     </div>
                 </div>
