@@ -418,7 +418,7 @@ $statusTexArr = Status::allStatusText();
                             <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
                                 <?= Yii::t('app', 'Gender') ?>
                             </text>
-                            <select class="form-select" name="gender" id="gender" style="border-left: none;" required>
+                            <select class="form-select" name="gender" id="gender" required>
                                 <option value="" disabled <?= empty($employee['gender']) ? 'selected' : '' ?> hidden
                                     style="color: var(--Helper-Text, #8A8A8A);">
                                     <?= Yii::t('app', 'Select') ?>
