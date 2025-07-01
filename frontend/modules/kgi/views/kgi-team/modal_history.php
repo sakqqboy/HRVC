@@ -20,7 +20,7 @@
 
 @media (max-width: 1735px) and (max-height: 950px) {
     .modal-content {
-        transform: scale(0.85);
+        transform: scale(0.75);
         transform-origin: top left;
         width: calc(100% / 0.85);
         /* height: calc(100% / 0.85); */
@@ -39,7 +39,7 @@
 
 @media (max-width: 1535px) and (max-height: 950px) {
     .modal-content {
-        transform: scale(0.75);
+        transform: scale(0.55);
         transform-origin: top left;
         width: calc(100% / 0.75);
         /* height: calc(100% / 0.75); */
