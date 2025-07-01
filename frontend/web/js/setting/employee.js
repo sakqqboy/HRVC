@@ -509,6 +509,9 @@ function initRadioSelection(containerSelector = '.radio-wrapper') {
                     cycle.appendChild(svg);
 
                     radio.checked = radioValue === selectedValue;
+                    if (radioValue == selectedValue) { 
+                        $("#savePermission").val(selectedValue);
+                    }
                 } else {
                     // รีเซต
                     i.style.background = '#DCDCDC';
@@ -1195,3 +1198,17 @@ function newSearchEmployee(e) {
         filterEmployee();
     }
 }
+$(document).ready(function () {
+  $('#create-employee').on('submit', function (e) {
+      var savePermission = $("#savePermission").val();
+      var isDraf = $("darf").val();
+      if (isDraf != 1) {
+          if (savePermission == "") {
+              alert('Select the System Wide Permission Level');
+              e.preventDefault(); // ป้องกันการ submit
+          }
+      } else { 
+          $('#create-employee').submit();
+      }
+  });
+});
