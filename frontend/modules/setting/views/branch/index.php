@@ -205,7 +205,7 @@ $page = "list"
                             <?= Yii::t('app', 'edit') ?>
                         </a> -->
 
-                        <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
+                        <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId'] + 543]) ?>"
                             class="btn btn-bg-white-xs">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg" alt="History"
                                 class="pim-icon" style="margin-top: -1px;">

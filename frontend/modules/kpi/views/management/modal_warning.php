@@ -1,4 +1,5 @@
-<div class="modal fade pr-0 pl-0" id="warning-kpi" tabindex="-1" aria-labelledby="staticBackdrop4Label" aria-hidden="true">
+<div class="modal fade pr-0 pl-0" id="warning-kpi" tabindex="-1" aria-labelledby="staticBackdrop4Label"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered pr-0 pl-0" style="margin-left:750px;">
         <div class="modal-content" style="border-radius: 8px; padding: 20px;">
             <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
@@ -26,7 +27,7 @@
     </div>
 </div>
 <style>
-    @media (max-width: 1935px) and (max-height: 950px) {
+/* @media (max-width: 1935px) and (max-height: 950px) {
         .modal-content {
             transform: scale(1) !important;
             transform-origin: top left;
@@ -38,5 +39,5 @@
             width: calc(100% / 0.95);
             left: 0;
         }
-    }
+    } */
 </style>
