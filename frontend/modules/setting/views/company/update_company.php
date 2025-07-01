@@ -47,15 +47,14 @@ $this->title = 'New Company';
                             stroke-width: 1px;
                             stroke: var(--Primary-Blue---HRVC, #2580D3);
                             border-radius: 100%;
-                            padding: 20px;
                             text-align: center;
                             cursor: pointer;
                         ">
                         <label for="imageUpload" class="upload-label" style="cursor: pointer;  display: block;">
                             <?php
                             if ($company["picture"] != null) { ?>
-                            <img src="<?= Yii::$app->homeUrl . $company['picture'] ?>" class="company-group-picture"
-                                id="old-image">
+                            <img src="<?= Yii::$app->homeUrl . $company['picture'] ?>"
+                                style="width: 200px; height: 200px;" class="company-group-picture" id="old-image">
                             <?php
                             } else { ?>
                             <img src="<?= Yii::$app->homeUrl . 'image/upload-iconimg.svg' ?>"

@@ -56,9 +56,9 @@ $this->title = 'Create Branch';
                                     </span>
                                 </span>
                                 <br>
-                                <span
-                                    style="font-size: 13px; color: #666;"><?= Yii::t('app', 'Branch Picture here') ?></span>
-
+                                <span style="font-size: 13px; color: #666;">
+                                    <?= Yii::t('app', 'Branch Picture here') ?>
+                                </span>
                             </label>
                             <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
                                 style="display: none;">

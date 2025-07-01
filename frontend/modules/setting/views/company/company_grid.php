@@ -15,7 +15,7 @@ $page = "grid"
             <div class="d-flex align-items-center gap-2">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
                     style="width: 24px; height: 24px;">
-                <div class="pim-name-title ml-10">
+                <div class="pim-name-title">
                     <?= Yii::t('app', 'Company') ?>
                 </div>
                 <?php if($role >= 5 ) { ?>
@@ -82,15 +82,16 @@ $page = "grid"
                                 <!-- ส่วนบน -->
                                 <div class="between-center" style=" gap: 17px; width: 100%;">
                                     <div style="display: flex; align-items: center; gap: 17px;">
-                                        <div class="mid-center"
-                                            style="height: 60px; padding: 20.944px 4.189px; gap: 10.472px;">
+                                        <!-- <div class="mid-center"
+                                            style="height: 60px; padding: 20.944px 4.189px; gap: 10.472px;"> -->
+                                        <div class="mid-center" style=" gap: 10.472px;">
                                             <?php
                                                     if ($company["picture"] != null) { ?>
                                             <img src="<?= Yii::$app->homeUrl ?><?= $company['picture'] ?>"
                                                 class="card-tcf">
                                             <?php
                                                     } else { ?>
-                                            <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>"
+                                            <img src="<?= Yii::$app->homeUrl . 'image/no-company.svg' ?>"
                                                 class="card-tcf">
                                             <?php
                                                     }

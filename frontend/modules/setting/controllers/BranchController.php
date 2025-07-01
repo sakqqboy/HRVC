@@ -691,7 +691,7 @@ class BranchController extends Controller
                     // $group->picture = 'images/group/profile/' . $fileName;
                 }
                 
-                return $this->redirect(Yii::$app->homeUrl . 'setting/branch/index/' . ModelMaster::encodeParams(['companyId' => '']));
+                return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-view/' . ModelMaster::encodeParams(['branchId' => $branchId]));
                 
              
             }
@@ -1012,7 +1012,7 @@ class BranchController extends Controller
                 $branch->save(false);
             }
         
-            return $this->redirect(Yii::$app->homeUrl . 'setting/branch/index/' . ModelMaster::encodeParams(['companyId' => '']));
+            return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-view/' . ModelMaster::encodeParams(['branchId' =>  $branchId]));
         }
         
                 

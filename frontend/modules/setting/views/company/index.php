@@ -15,7 +15,7 @@ $page = "list"
             <div class="d-flex align-items-center gap-2">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
                     style="width: 24px; height: 24px;">
-                <div class="pim-name-title ml-10">
+                <div class="pim-name-title">
                     <?= Yii::t('app', 'Company') ?>
                 </div>
                 <?php if($role >= 5 ) { ?>
@@ -106,10 +106,12 @@ $page = "list"
                         <td>
                             <?php
                                     if ($company["picture"] != null) { ?>
-                            <img src="<?= Yii::$app->homeUrl ?><?= $company['picture'] ?>" class="width-aa mr-10">
+                            <img src="<?= Yii::$app->homeUrl ?><?= $company['picture'] ?>"
+                                class="bangladresh-hrvc mr-10">
                             <?php
                                     } else { ?>
-                            <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="width-aa mr-10">
+                            <img src="<?= Yii::$app->homeUrl . 'image/no-company.svg' ?>"
+                                class="bangladresh-hrvc mr-10">
                             <?php
                                     }
                                     ?>

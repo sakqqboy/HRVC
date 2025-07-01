@@ -13,7 +13,7 @@ $page = "list"
         <div class="col-8">
             <div class=" d-flex align-items-center gap-2">
                 <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" style="width: 24px; height: 24px;">
-                <div class="pim-name-title ml-10">
+                <div class="pim-name-title">
                     <?= Yii::t('app', 'Branches') ?>
                 </div>
                 <?php if($role >= 5) { ?>
@@ -98,10 +98,11 @@ $page = "list"
                         <td>
                             <?php
                                     if ($branch["branchImage"] != null) { ?>
-                            <img src="<?= Yii::$app->homeUrl ?><?= $branch['branchImage'] ?>" class="width-aa mr-10">
+                            <img src="<?= Yii::$app->homeUrl ?><?= $branch['branchImage'] ?>"
+                                class="bangladresh-hrvc mr-10">
                             <?php
                                     } else { ?>
-                            <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="width-aa mr-10">
+                            <img src="<?= Yii::$app->homeUrl . 'image/no-branch.svg' ?>" class="bangladresh-hrvc mr-10">
                             <?php
                                     }
                                     ?>
@@ -204,7 +205,7 @@ $page = "list"
                             <?= Yii::t('app', 'edit') ?>
                         </a> -->
 
-                        <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId']]) ?>"
+                        <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branch['branchId'] + 543]) ?>"
                             class="btn btn-bg-white-xs">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg" alt="History"
                                 class="pim-icon" style="margin-top: -1px;">

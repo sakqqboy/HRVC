@@ -13,12 +13,12 @@ $page = "grid";
         <div class="col-8">
             <div class=" d-flex align-items-center gap-2">
                 <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" style="width: 24px; height: 24px;">
-                <div class="pim-name-title ml-10">
+                <div class="pim-name-title">
                     <?= Yii::t('app', 'Teams') ?>
                 </div>
                 <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(["companyId" => '' , "branchId" => '', "departmentId" => '' ]) ?>"
                     style="text-decoration: none;">
-                    <button type="button" class="btn-create mr-5"
+                    <button type="button" class="btn-create"
                         style="padding: 0px; width: 93px; height:22.5px; font-size: 12px; font-weight: 600;"
                         action="<?= Yii::$app->homeUrl ?>setting/branch/create-branch"><?= Yii::t('app', 'Create New') ?>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
@@ -56,10 +56,10 @@ $page = "grid";
                                                 class="card-tcf">
                                         </div>
                                         <div class="header-crad-company">
-                                            <div class="name-crad-company">
+                                            <div class="name-crad-company text-truncate">
                                                 <?= $department['companyName'] ?>
                                             </div>
-                                            <div class="city-crad-company">
+                                            <div class="city-crad-company  text-truncate">
                                                 <div class="cycle-current-yellow" style="width: 20px; height: 20px;">
                                                     <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
                                                         alt="icon" style="width: 10px; height: 10px;">
@@ -67,7 +67,7 @@ $page = "grid";
                                                 <?= Yii::t('app', $department['branchName']) ?>
                                             </div>
                                             <div style="display: flex; gap: 20px; align-items: center;">
-                                                <div class="city-crad-company"
+                                                <div class="city-crad-company  text-truncate"
                                                     style="display: flex; align-items: center; gap: 5px;">
                                                     <div class="cycle-current-red" style="width: 20px; height: 20px;">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/departments.svg"
@@ -76,7 +76,7 @@ $page = "grid";
                                                     <?= $department['departmentName'] ?>
                                                 </div>
 
-                                                <div class="city-crad-company"
+                                                <div class="city-crad-company  text-truncate"
                                                     style="display: flex; align-items: center; gap: 5px;">
                                                     <img src="<?= Yii::$app->homeUrl ?><?= $department['flag'] ?>"
                                                         class="bangladresh-hrvc" style="width: 16px; height: 12px;">

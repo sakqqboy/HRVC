@@ -24,10 +24,10 @@ use common\models\ModelMaster;
             <?php } ?>
         </div>
         <div class="header-crad-company">
-            <div class="name-crad-company">
+            <div class="name-crad-company text-truncate">
                 <?= $teams['companyName'] ?>
             </div>
-            <div class="city-crad-company">
+            <div class="city-crad-company text-truncate">
                 <div class="cycle-current-yellow" style="width: 20px; height: 20px;">
                     <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon"
                         style="width: 10px; height: 10px;">
@@ -35,7 +35,7 @@ use common\models\ModelMaster;
                 <?= Yii::t('app', $teams['branchName']) ?>
             </div>
             <div style="display: flex; gap: 20px; align-items: center;">
-                <div class="city-crad-company" style="display: flex; align-items: center; gap: 5px;">
+                <div class="city-crad-company text-truncate" style="display: flex; align-items: center; gap: 5px;">
                     <div class="cycle-current-red" style="width: 20px; height: 20px;">
                         <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon"
                             style="width: 10px; height: 10px;">
@@ -43,7 +43,7 @@ use common\models\ModelMaster;
                     <?= $teams['departmentName'] ?>,
                 </div>
 
-                <div class="city-crad-company" style="display: flex; align-items: center; gap: 5px;">
+                <div class="city-crad-company text-truncate" style="display: flex; align-items: center; gap: 5px;">
                     <img src="<?= Yii::$app->homeUrl ?><?= $teams['flag'] ?>" class="bangladresh-hrvc"
                         style="width: 16px; height: 12px;">
                     <?= $teams['city'] ?>,
