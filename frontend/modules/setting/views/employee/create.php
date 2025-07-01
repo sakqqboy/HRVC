@@ -322,17 +322,22 @@ $statusTexArr = Status::allStatusText();
                                     7 => 'System Admin'
                                 ];
 
+                               $required = true;
                                 foreach ($roles as $id => $label) {
                                     $checked = ($selectedRoleId == $id) ? 'checked' : '';
                                     $htmlId = strtolower(str_replace(' ', '', $label));
+                                    $isRequired = $required ? 'required' : ''; // ✅ ใส่ required ตัวแรกเท่านั้น
+                                    $required = false;
+
                                     echo <<<HTML
                                     <div class="radio-item">
-                                        <input type="radio" id="{$htmlId}" name="role" value="{$id}" required {$checked}>
+                                        <input type="radio" id="{$htmlId}" name="role" value="{$id}" {$checked}>
                                         <span class="radio-cycle"></span>
                                         <label for="{$htmlId}">{$label}</label>
                                     </div>
                                     HTML;
                                 }
+
                                 ?>
                             </div>
                         </div>
@@ -418,7 +423,7 @@ $statusTexArr = Status::allStatusText();
                             <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
                                 <?= Yii::t('app', 'Gender') ?>
                             </text>
-                            <select class="form-select" name="gender" id="gender" style="border-left: none;" required>
+                            <select class="form-select" name="gender" id="gender" required>
                                 <option value="" disabled <?= empty($employee['gender']) ? 'selected' : '' ?> hidden
                                     style="color: var(--Helper-Text, #8A8A8A);">
                                     <?= Yii::t('app', 'Select') ?>
@@ -2431,41 +2436,6 @@ $statusTexArr = Status::allStatusText();
         }
     });
 
-    document.getElementById('create-employee').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        if (certificates.length !== cerImages.length || certificates.length !== certificatesFiles.length) {
-            alert("ข้อมูลยังไม่ครบ กรุณาอัปโหลดรูปภาพและไฟล์ certificate ให้ครบทุกอัน");
-            return;
-        }
-
-        const form = e.target;
-        const formData = new FormData(form);
-
-        formData.set('certificateData', JSON.stringify(certificates));
-
-        cerImages.forEach((file, index) => {
-            formData.append(`cerImage[${index}]`, file);
-        });
-
-        certificatesFiles.forEach((file, index) => {
-            formData.append(`certificate[${index}]`, file);
-        });
-
-        fetch(form.action, {
-                method: 'POST',
-                body: formData
-            })
-            .then(res => res.text())
-            .then(result => {
-                console.log("ส่งเรียบร้อย", result);
-                // ทำต่อ เช่น redirect หรือแจ้งเตือน
-            })
-            .catch(err => {
-                console.error("เกิดข้อผิดพลาด", err);
-            });
-    });
-
     const skillPlus = document.getElementById("skill-plus");
 
     document.getElementById("skill").addEventListener("focus", function() {
@@ -2865,6 +2835,49 @@ $statusTexArr = Status::allStatusText();
         }
 
     }
+
+    document.getElementById('create-employee').addEventListener('submit', function(e) {
+
+        const radios = document.querySelectorAll('input[name="role"]');
+        const oneChecked = Array.from(radios).some(r => r.checked);
+
+        if (!oneChecked) {
+            alert("กรุณาเลือก Role อย่างน้อย 1 ตัว");
+            return false;
+        }
+
+        if (certificates.length !== cerImages.length || certificates.length !== certificatesFiles.length) {
+            alert("The information is incomplete. Please upload all photos and certificate files.");
+            return false;
+        }
+
+        const form = e.target;
+        const formData = new FormData(form);
+
+        formData.set('certificateData', JSON.stringify(certificates));
+
+        cerImages.forEach((file, index) => {
+            formData.append(`cerImage[${index}]`, file);
+        });
+
+        certificatesFiles.forEach((file, index) => {
+            formData.append(`certificate[${index}]`, file);
+        });
+
+        fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.text())
+            .then(result => {
+                console.log("ส่งเรียบร้อย", result);
+                // ทำต่อ เช่น redirect หรือแจ้งเตือน
+            })
+            .catch(err => {
+                console.error("เกิดข้อผิดพลาด", err);
+            });
+    });
+
     document.getElementById('saveDraftBtn').addEventListener('click', function(e) {
         e.preventDefault();
         document.getElementById('darf').value = '1'; // set value

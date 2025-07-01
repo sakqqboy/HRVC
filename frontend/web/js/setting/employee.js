@@ -46,7 +46,7 @@ function filterEmployee() {
         type: "POST",
         dataType: 'json',
         url: url,
-        data: { companyId: companyId, branchId: branchId, departmentId: departmentId, teamId: teamId, status: status,pageType:pageType,perPage:perPage },
+        data: { companyId: companyId, branchId: branchId, departmentId: departmentId, teamId: teamId, status: status, pageType: pageType, perPage: perPage },
         success: function (data) {
 
 
@@ -76,24 +76,24 @@ function showAction(employeeId) {
 
 
 }
-function warningDeleteEmployee(employeeId) { 
+function warningDeleteEmployee(employeeId) {
     $("#warning-delete-employee1").modal("show");
     $("#delete1-employee").val(employeeId);
 }
 function deleteEmployee() {
     var url = $url + 'setting/employee/delete-employee';
-    var employeeId=$("#delete1-employee").val();
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: url,
-            data: { employeeId: employeeId },
-            success: function (data) {
-                if (data.status) {
-                    $("#employee-" + employeeId).hide();
-                }
+    var employeeId = $("#delete1-employee").val();
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: url,
+        data: { employeeId: employeeId },
+        success: function (data) {
+            if (data.status) {
+                $("#employee-" + employeeId).hide();
             }
-        });
+        }
+    });
 }
 function checkUploadFile(type) {
     if (![1, 2, 3].includes(type)) return;
@@ -1183,12 +1183,12 @@ function previewFile(id) {
         `;
     }
 }
-function showFillPage() { 
+function showFillPage() {
     $("#actualShow").addClass("d-none");
     $("#show-page-fill").removeClass("d-none");
     $("#per-page").focus();
 }
-function newSearchEmployee(e) { 
+function newSearchEmployee(e) {
     if (e.key === 'Enter' || e.keyCode === 13) {
         var perpage = $("#per-page").val();
         $("#perPage").val(perpage);
