@@ -322,12 +322,15 @@ $statusTexArr = Status::allStatusText();
                                     7 => 'System Admin'
                                 ];
 
+                               $required = true; // ใส่ flag ครั้งเดียวพอ
                                 foreach ($roles as $id => $label) {
                                     $checked = ($selectedRoleId == $id) ? 'checked' : '';
                                     $htmlId = strtolower(str_replace(' ', '', $label));
+                                    $isRequired = $required ? 'required' : ''; // required แค่ตัวแรก
+                                    $required = false; // ปิด flag เพื่อไม่ใส่ตัวต่อ ๆ ไป
                                     echo <<<HTML
                                     <div class="radio-item">
-                                        <input type="radio" id="{$htmlId}" name="role" value="{$id}" required {$checked}>
+                                        <input type="radio" id="{$htmlId}" name="role" value="{$id}" {$checked} {$isRequired}>
                                         <span class="radio-cycle"></span>
                                         <label for="{$htmlId}">{$label}</label>
                                     </div>
