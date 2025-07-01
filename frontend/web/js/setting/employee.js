@@ -1198,17 +1198,18 @@ function newSearchEmployee(e) {
         filterEmployee();
     }
 }
-$(document).ready(function () {
-  $('#create-employee').on('submit', function (e) {
-      var savePermission = $("#savePermission").val();
-      var isDraf = $("darf").val();
-      if (isDraf != 1) {
-          if (savePermission == "") {
-              alert('Select the System Wide Permission Level');
-              e.preventDefault(); // ป้องกันการ submit
-          }
-      } else { 
-          $('#create-employee').submit();
-      }
-  });
-});
+// $(document).ready(function () {
+//   $('#create-employee').on('submit', function (e) {
+//       var savePermission = $("#savePermission").val();
+//       var isDraf = $("darf").val();//ถ้า draf จะเป็น 1
+//       if (isDraf != 1) {//ไม่
+//           if (savePermission == "") {
+//               alert('Select the System Wide Permission Level');
+//               e.preventDefault(); // ป้องกันการ submit
+//           }
+//       } else { 
+          
+//           $('#create-employee').submit();
+//       }
+//   });
+// });

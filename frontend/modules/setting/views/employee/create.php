@@ -2843,9 +2843,13 @@ $statusTexArr = Status::allStatusText();
             const radios = document.querySelectorAll('input[name="role"]');
             const oneChecked = Array.from(radios).some(r => r.checked);
 
-            if (!oneChecked) {
-                alert("กรุณาเลือก Role อย่างน้อย 1 ตัว");
-                return false;
+            var savePermission = $("#savePermission").val();
+            var isDraf = $("darf").val(); //ถ้า draf จะเป็น 1
+            if (isDraf != 1) { //ไม่
+                if (savePermission == "") {
+                    alert('Select the System Wide Permission Level');
+                    e.preventDefault(); // ป้องกันการ submit
+                }
             }
 
             if (certificates.length !== cerImages.length || certificates.length !== certificatesFiles.length) {
