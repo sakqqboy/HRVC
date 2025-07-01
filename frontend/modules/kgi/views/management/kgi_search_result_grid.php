@@ -7,9 +7,8 @@ $this->title = 'KGI Grid View';
 ?>
 <div class="contrainer-body">
     <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
-            style="margin-top: -3px;">
-        <strong class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</strong>
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="pim-icon mr-5" style="margin-top: -3px;">
+        <span class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
     </div>
     <div class="col-12 mt-10">
         <?= $this->render('header_filter', [
@@ -21,7 +20,7 @@ $this->title = 'KGI Grid View';
                     <div class="row">
                         <div class="col-8">
                             <div class="row">
-                                <div class="col-4 pim-type-tab-selected pr-0 pl-0  rounded-top-left">
+                                <div class="col-4 pim-type-tab-selected pr-0 pl-0 rounded-top-left">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg" alt="Company"
                                         class="pim-icon" style="width: 14px;height: 14px;padding-bottom: 4px;">
                                     <?= Yii::t('app', 'Company KGI') ?>
