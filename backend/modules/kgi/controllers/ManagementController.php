@@ -77,6 +77,7 @@ class ManagementController extends Controller
 		$data2 = [];
 		$data3 = [];
 		$data4 = [];
+		$total = 0;
 		if (count($kgis) > 0) {
 			foreach ($kgis as $kgi) :
 				$commonData = [];
@@ -162,12 +163,15 @@ class ManagementController extends Controller
 					} else {
 						$data3[$kgiId] = $commonData;
 					}
+					$total++;
 				}
 			endforeach;
 		}
 
 		$data = $data1 + $data2 + $data3 + $data4;
-		return json_encode($data);
+		$result["data"] = $data;
+		$result["total"] = $total;
+		return json_encode($result);
 	}
 	public function actionKgiDetail($id, $kgiHistoryId)
 	{
@@ -663,7 +667,7 @@ class ManagementController extends Controller
 							"countryName" => Country::countryNameBycompany($kgi['companyId']),
 							"issue" => KgiIssue::lastestIssue($kgi["kgiId"])["issue"],
 							"solution" => KgiIssue::lastestIssue($kgi["kgiId"])["solution"],
-							"employee" => KgiTeam::employeeTeam($kgi['kgiId']),
+							//"employee" => KgiTeam::employeeTeam($kgi['kgiId']),
 							"year" => $kgiHistory["year"],
 							"fromDate" => ModelMaster::engDate($kgiHistory["fromDate"], 2),
 							"toDate" => ModelMaster::engDate($kgiHistory["toDate"], 2),

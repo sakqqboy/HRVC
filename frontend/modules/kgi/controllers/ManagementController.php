@@ -126,7 +126,7 @@ class ManagementController extends Controller
 		$isManager = UserRole::isManager();
 		//$url = 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
-		$companyId = $employee["companyId"];
+		$employeeCompanyId = $employee["companyId"];
 		$totalKgi = Kgi::totalKgi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
 		$totalPage = ceil($totalKgi / $limit);
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
@@ -142,7 +142,7 @@ class ManagementController extends Controller
 			"role" => $role,
 			"userId" => Yii::$app->user->id,
 			"userId" => Yii::$app->user->id,
-			"companyId" => $companyId,
+			"employeeCompanyId" => $employeeCompanyId,
 			"totalKgi" => $totalKgi,
 			"currentPage" => $currentPage,
 			"totalPage" => $totalPage,
@@ -229,7 +229,7 @@ class ManagementController extends Controller
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
-		$companyId = $employee["companyId"];
+		$employeeCompanyId = $employee["companyId"];
 		$totalKgi = Kgi::totalKgi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
 		$totalPage = ceil($totalKgi / $limit);
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
@@ -242,7 +242,7 @@ class ManagementController extends Controller
 			"isManager" => $isManager,
 			"role" => $role,
 			"userId" => Yii::$app->user->id,
-			"companyId" => $companyId,
+			"employeeCompanyId" => $employeeCompanyId,
 			"totalKgi" => $totalKgi,
 			"currentPage" => $currentPage,
 			"totalPage" => $totalPage,
@@ -1160,9 +1160,9 @@ class ManagementController extends Controller
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		if ($type == "list") {
-			$file = "kgi_search_result";
+			$file = "index";
 		} else {
-			$file = "kgi_search_result_grid";
+			$file = "kgi_grid";
 		}
 		$filter = [
 			"companyId" => $companyId,
@@ -1174,6 +1174,8 @@ class ManagementController extends Controller
 			"perPage" => 5,
 		];
 		//throw new exception(print_r($kgis, true));
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$employeeCompanyId = $employee["companyId"];
 		$isManager = UserRole::isManager();
 		$totalKgi = $kgis["total"];
 		$totalPage = ceil($totalKgi / $limit);
@@ -1184,6 +1186,7 @@ class ManagementController extends Controller
 			"months" => $months,
 			"kgis" => $kgis,
 			"companyId" => $companyId,
+			"employeeCompanyId" => $employeeCompanyId,
 			"branchId" => $branchId,
 			"teamId" => $teamId,
 			"month" => $month,

@@ -15,23 +15,26 @@ use frontend\models\hrvc\Team;
                 <option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
             <?php
             }
-            if ($role > 4) {
-            ?>
+            if (isset($companies) && count($companies) > 0) { ?>
                 <option value=""><?= Yii::t('app', 'Company') ?></option>
                 <?php
-                if (isset($companies) && count($companies) > 0) {
-                    foreach ($companies as $company) :
-
+                foreach ($companies as $company) :
+                    if ($role <= 4) {
+                        if (isset($employeeCompanyId) && $employeeCompanyId != "" && $employeeCompanyId == $company["companyId"] && !isset($companyId)) {
                 ?>
-                        <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+                            <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
                         <?php
-
-                        ?>
+                        }
+                    } else { ?>
+                        <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+                    <?php
+                    }
+                    ?>
 
             <?php
-                    endforeach;
-                }
+                endforeach;
             }
+
             ?>
         </select>
     </div>
