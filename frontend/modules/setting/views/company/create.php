@@ -21,7 +21,6 @@ $this->title = 'New Company';
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <div class="company-group-body">
-    <!-- <div class="company-group-edit"> -->
     <div class="contrainer-body">
         <div class="col-12 banner-uploade" id="imagePreviewBanner">
 
@@ -29,14 +28,6 @@ $this->title = 'New Company';
 
         <div class="row mb-100">
             <div class="col-12" style="margin-top:-50px; display: flex;">
-                <!-- <div class="col-10 avatar-upload" style="margin-left:36px;">
-                    <div class="avatar-preview" id="imagePreview" style="background-color: white;">
-                        <label for="imageUpload" class="upload-label">
-                            <img src="<?= Yii::$app->homeUrl ?>image/upload-img.svg" alt="Upload Icon">
-                            <span>Upload</span>
-                        </label>
-                    </div>
-                </div> -->
                 <div class="col-10 mb-15 avatar-upload" style="margin-left:36px;">
                     <div class="avatar-preview" id="imagePreview" style="
                             background-color: white;
@@ -97,24 +88,7 @@ $this->title = 'New Company';
                                         placeholder="<?= Yii::t('app', 'The name you want to show (example,. Google)') ?>"
                                         required>
                                 </div>
-                                <!-- <div class="form-group mb-30">
-                                    <span class="text-danger">* </span><label class="name-text-update"
-                                        for="tagLine">Slogan/Tagline</label>
-                                    <input type="text" class="form-control mt-12" name="tagLine"
-                                        placeholder="Write the Tagline of the group" required>
-                                </div> -->
                                 <div class="form-group mb-30">
-                                    <!-- <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="founded">Founded</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text mt-12"
-                                            style="background-color: #BEDAFF; border-right: none;">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/calendar-blue.svg" alt="Founded"
-                                                style="width: 20px; height: 20px;">
-                                        </span>
-                                        <input type="text" style="border-left: none;" class="form-control mt-12"
-                                            name="founded" placeholder="" required>
-                                    </div> -->
                                     <span class="text-danger">* </span>
                                     <label class="name-text-update"
                                         for="founded"><?= Yii::t('app', 'Founded') ?></label>
@@ -142,9 +116,8 @@ $this->title = 'New Company';
                                     <span class="text-danger">* </span> <label class="name-text-update"
                                         for="director"><?= Yii::t('app', 'Country in Operation') ?>
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
-                                            data-toggle="tooltip" data-placement="top"
-                                            aria-label="<?= Yii::t('app', 'select to country') ?>"
-                                            data-bs-original-title="<?= Yii::t('app', 'select to country') ?>">
+                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                            title="<?= Yii::t('app', 'select to country') ?>">
                                     </label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
@@ -169,13 +142,6 @@ $this->title = 'New Company';
 
                             <!-- Right Column -->
                             <div class="col-md-6">
-                                <!-- <div class="form-group mb-30">
-                                    <span class="text-danger">* </span> <label class="name-text-update"
-                                        for="email">Group
-                                        Email </label>
-                                    <input type="email" class="form-control mt-12" name="email"
-                                        placeholder="Write the email" required>
-                                </div> -->
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update" for="phone">
                                         <?= Yii::t('app', 'Contact/Phone Number') ?>
@@ -289,3 +255,7 @@ $this->title = 'New Company';
 <input type="hidden" name="groupId" value="<?= $groupId + 543 ?>">
 
 <?php ActiveForm::end(); ?>
+
+<!-- <script>
+
+</script> -->
