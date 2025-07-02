@@ -925,14 +925,95 @@ class EmployeeController extends Controller
                                 $imageKey = "cerImageHidden_{$tmpId}";
                                 if (isset($_FILES[$imageKey]) && $_FILES[$imageKey]['error'] === 0) {
                                     $img = $_FILES[$imageKey];
-                                    $ext = pathinfo($img['name'], PATHINFO_EXTENSION);
+                                    $ext = strtolower(pathinfo($img['name'], PATHINFO_EXTENSION));
+                                    $tmpPath = $img['tmp_name'];
+
                                     $imgName = Yii::$app->security->generateRandomString(12) . '.' . $ext;
-                                    $path = Path::getHost() . 'images/certificate/';
-                                    if (!file_exists($path)) {
-                                        mkdir($path, 0777, true);
+                                    $savePath = Path::getHost() . 'images/certificate/';
+
+                                    if (!file_exists($savePath)) {
+                                        mkdir($savePath, 0777, true);
                                     }
-                                    move_uploaded_file($img['tmp_name'], $path . $imgName);
+
+                                    $targetWidth = 176;
+                                    $targetHeight = 176;
+
+                                    // โหลดภาพต้นฉบับ
+                                    switch ($ext) {
+                                        case 'jpg':
+                                        case 'jpeg':
+                                            $srcImage = imagecreatefromjpeg($tmpPath);
+                                            break;
+                                        case 'png':
+                                            $srcImage = imagecreatefrompng($tmpPath);
+                                            break;
+                                        case 'gif':
+                                            $srcImage = imagecreatefromgif($tmpPath);
+                                            break;
+                                        default:
+                                            throw new Exception("Unsupported image format: " . $ext);
+                                    }
+
+                                    // ขนาดต้นฉบับ
+                                    $srcWidth = imagesx($srcImage);
+                                    $srcHeight = imagesy($srcImage);
+
+                                    // สร้างภาพใหม่ขนาด 176x176
+                                    $dstImage = imagecreatetruecolor($targetWidth, $targetHeight);
+
+                                    // ครอบ/ย่อ/กลางภาพให้พอดี
+                                    $srcAspect = $srcWidth / $srcHeight;
+                                    $dstAspect = $targetWidth / $targetHeight;
+
+                                    if ($srcAspect > $dstAspect) {
+                                        // ต้นฉบับกว้างเกิน — crop ด้านข้าง
+                                        $newHeight = $srcHeight;
+                                        $newWidth = $srcHeight * $dstAspect;
+                                        $srcX = ($srcWidth - $newWidth) / 2;
+                                        $srcY = 0;
+                                    } else {
+                                        // ต้นฉบับสูงเกิน — crop ด้านบน-ล่าง
+                                        $newWidth = $srcWidth;
+                                        $newHeight = $srcWidth / $dstAspect;
+                                        $srcX = 0;
+                                        $srcY = ($srcHeight - $newHeight) / 2;
+                                    }
+
+                                    // ย่อและครอบภาพ
+                                    imagecopyresampled($dstImage, $srcImage, 0, 0, $srcX, $srcY, $targetWidth, $targetHeight, $newWidth, $newHeight);
+
+                                    // บันทึกไฟล์
+                                    $saveFilePath = $savePath . $imgName;
+
+                                    switch ($ext) {
+                                        case 'jpg':
+                                        case 'jpeg':
+                                            imagejpeg($dstImage, $saveFilePath, 90); // quality 90
+                                            break;
+                                        case 'png':
+                                            imagepng($dstImage, $saveFilePath);
+                                            break;
+                                        case 'gif':
+                                            imagegif($dstImage, $saveFilePath);
+                                            break;
+                                    }
+
+                                    // ลบ resource ออกจาก memory
+                                    imagedestroy($srcImage);
+                                    imagedestroy($dstImage);
+
+                                    // ใช้ path สำหรับเก็บลง DB
                                     $cerImagePath = 'images/certificate/' . $imgName;
+
+                                    // $img = $_FILES[$imageKey];
+                                    // $ext = pathinfo($img['name'], PATHINFO_EXTENSION);
+                                    // $imgName = Yii::$app->security->generateRandomString(12) . '.' . $ext;
+                                    // $path = Path::getHost() . 'images/certificate/';
+                                    // if (!file_exists($path)) {
+                                    //     mkdir($path, 0777, true);
+                                    // }
+                                    // move_uploaded_file($img['tmp_name'], $path . $imgName);
+                                    // $cerImagePath = 'images/certificate/' . $imgName;
                                 }
                                 // 🔁 บันทึกข้อมูล (Insert ใหม่ หรือ Update ก็ได้)
                                 $certificate = Certificate::findOne(['cerId' => $tmpId]);

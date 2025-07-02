@@ -60,6 +60,10 @@ $page = "list"
             <table id="myTable" class="table align-middle table-spacing">
                 <thead class="table-light">
                     <tr class="table-border-weight">
+                        <th class="text-start" onclick="sortBranch('branchName')">
+                            <?= Yii::t('app', 'Branch') ?>
+                            <img src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;">
+                        </th>
                         <th class="text-start" onclick="sortBranch('companyName')">
                             <?= Yii::t('app', 'Company Name') ?>
                             <img src="<?= Yii::$app->homeUrl ?>image/sorting.svg" style="cursor: pointer;">
@@ -103,6 +107,20 @@ $page = "list"
                             <?php
                                     } else { ?>
                             <img src="<?= Yii::$app->homeUrl . 'image/no-branch.svg' ?>" class="bangladresh-hrvc mr-10">
+                            <?php
+                                    }
+                                    ?>
+                            <?= $branch['branchName'] ?>
+                        </td>
+                        <td>
+                            <?php
+                                    if ($branch["picture"] != null) { ?>
+                            <img src="<?= Yii::$app->homeUrl ?><?= $branch['picture'] ?>"
+                                class="bangladresh-hrvc mr-10">
+                            <?php
+                                    } else { ?>
+                            <img src="<?= Yii::$app->homeUrl . 'image/no-company.svg' ?>"
+                                class="bangladresh-hrvc mr-10">
                             <?php
                                     }
                                     ?>

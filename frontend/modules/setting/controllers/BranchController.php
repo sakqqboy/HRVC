@@ -184,6 +184,52 @@ class BranchController extends Controller
                 // $totalDepartment += count($departments);
 
                 //เก็บค่า
+                // $data[$branch["branchId"]] = [
+                // "branchId" => $branch["branchId"],
+                // "branchName" => $branch["branchName"],
+                // "companyId" => $branch["companyId"],
+                // "description" => $branch["description"],
+                // "status" => $branch["status"],
+                // "createDateTime" => $branch["createDateTime"],
+                // "updateDateTime" => $branch["updateDateTime"],
+                // "financial_start_month" => $branch["financial_start_month"],
+                // "branchImage" => $branch["branchImage"],
+                // "currency_default" => $branch["currency_default"],
+                // "companyName" => $branch["companyName"],
+                // "countryName" => $branch["countryName"],
+                // "picture" => $branch["picture"],
+                // "flag" => $branch["flag"],
+                // "city" => $branch["city"],
+                // "totalDepartment" => count($departments),
+                // "totalTeam" => $totalTeam,
+                // "totalEmployee" => $totalEmployees,
+                // "employees" => $filteredEmployees,
+                // ];
+                // $test = '0';
+                // $filePath =  Yii::$app->homeUrl . $branch["branchImage"];
+                // if (file_exists($filePath)) {
+                //     // ✅ ไฟล์มีอยู่จริง
+                //     // throw new Exception(print_r($filePath, true));
+                //     $pictureUrl = $branch["branchImage"];
+                //     $test ='1';
+                // } else {
+                //     // ❌ ไฟล์ไม่พบ
+                //     // throw new Exception(print_r($branch["picture"], true));
+                //     $pictureUrl = 'image/no-branch.svg';
+                //     $test ='2';
+                // };
+                $relativePath = $branch["branchImage"] ?? '';
+                $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+
+                    if (!empty($relativePath) && file_exists($absolutePath)) {
+                        // ✅ ไฟล์มีอยู่จริงในเครื่องที่รัน (local หรือ server)
+                        $pictureUrl = $branch["branchImage"];
+                    } else {
+                        // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
+                        $pictureUrl = 'image/no-branch.svg';
+                    }
+                // throw new Exception(print_r( $test, true));
+                //เก็บค่า
                 $data[$branch["branchId"]] = [
                 "branchId" => $branch["branchId"],
                 "branchName" => $branch["branchName"],
@@ -193,12 +239,16 @@ class BranchController extends Controller
                 "createDateTime" => $branch["createDateTime"],
                 "updateDateTime" => $branch["updateDateTime"],
                 "financial_start_month" => $branch["financial_start_month"],
-                "branchImage" => $branch["branchImage"],
+                // "branchImage" => $branch["branchImage"],
+                "branchImage" => $pictureUrl,
                 "currency_default" => $branch["currency_default"],
                 "companyName" => $branch["companyName"],
                 "countryName" => $branch["countryName"],
-                "picture" => $branch["picture"],
-                "flag" => $branch["flag"],
+                "picture" => !empty($branch["picture"]) ? $branch["picture"] : "image/no-company.svg",
+                // "picture" =>  !empty($pictureUrl) ? $pictureUrl : "image/no-company.svg",
+                // "picture" =>  $pictureUrl,
+                // "flag" => $branch["flag"],
+                "flag" => !empty($branch["flag"]) ? $branch["flag"] : "image/e-world.svg",
                 "city" => $branch["city"],
                 "totalDepartment" => count($departments),
                 "totalTeam" => $totalTeam,
@@ -297,6 +347,52 @@ class BranchController extends Controller
                 endforeach;
 
                 //เก็บค่า
+                // $data[$branch["branchId"]] = [
+                // "branchId" => $branch["branchId"],
+                // "branchName" => $branch["branchName"],
+                // "companyId" => $branch["companyId"],
+                // "description" => $branch["description"],
+                // "status" => $branch["status"],
+                // "createDateTime" => $branch["createDateTime"],
+                // "updateDateTime" => $branch["updateDateTime"],
+                // "financial_start_month" => $branch["financial_start_month"],
+                // "branchImage" => $branch["branchImage"],
+                // "currency_default" => $branch["currency_default"],
+                // "companyName" => $branch["companyName"],
+                // "countryName" => $branch["countryName"],
+                // "picture" => $branch["picture"],
+                // "flag" => $branch["flag"],
+                // "city" => $branch["city"],
+                // "totalDepartment" => count($departments),
+                // "totalTeam" => $totalTeam,
+                // "totalEmployee" => $totalEmployees,
+                // "employees" => $filteredEmployees,
+                // ];
+                // $test = '0';
+                // $filePath =  Yii::$app->homeUrl . $branch["picture"];
+                // if (file_exists($filePath)) {
+                //     // ✅ ไฟล์มีอยู่จริง
+                //     // throw new Exception(print_r($filePath, true));
+                //     $pictureUrl = $branch["picture"];
+                //     $test ='1';
+                // } else {
+                //     // ❌ ไฟล์ไม่พบ
+                //     // throw new Exception(print_r($branch["picture"], true));
+                //     $pictureUrl = 'image/no-branch.svg';
+                //     $test ='2';
+                // };
+                  $relativePath = $branch["branchImage"] ?? '';
+                    $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+
+                    if (!empty($relativePath) && file_exists($absolutePath)) {
+                        // ✅ ไฟล์มีอยู่จริงในเครื่องที่รัน (local หรือ server)
+                        $pictureUrl = $branch["branchImage"];
+                    } else {
+                        // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
+                        $pictureUrl = 'image/no-branch.svg';
+                    }
+                // throw new Exception(print_r( $test, true));
+                //เก็บค่า
                 $data[$branch["branchId"]] = [
                 "branchId" => $branch["branchId"],
                 "branchName" => $branch["branchName"],
@@ -306,12 +402,16 @@ class BranchController extends Controller
                 "createDateTime" => $branch["createDateTime"],
                 "updateDateTime" => $branch["updateDateTime"],
                 "financial_start_month" => $branch["financial_start_month"],
-                "branchImage" => $branch["branchImage"],
+                // "branchImage" => $branch["branchImage"],
+                "branchImage" => $pictureUrl,
                 "currency_default" => $branch["currency_default"],
                 "companyName" => $branch["companyName"],
                 "countryName" => $branch["countryName"],
-                "picture" => $branch["picture"],
-                "flag" => $branch["flag"],
+                "picture" => !empty($branch["picture"]) ? $branch["picture"] : "image/no-company.svg",
+                // "picture" =>  !empty($pictureUrl) ? $pictureUrl : "image/no-company.svg",
+                // "picture" =>  $pictureUrl,
+                // "flag" => $branch["flag"],
+                "flag" => !empty($branch["flag"]) ? $branch["flag"] : "image/e-world.svg",
                 "city" => $branch["city"],
                 "totalDepartment" => count($departments),
                 "totalTeam" => $totalTeam,
@@ -403,7 +503,31 @@ class BranchController extends Controller
                     $totalTeam += count($teams);
                 endforeach;
                 // $totalDepartment += count($departments);
+                $test = '0';
+                // $relativePath = 'images/branch/profile/b9NYp54V-J.png';
+               $relativePath = $branch["branchImage"] ?? '';
+                    $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
 
+                    if (!empty($relativePath) && file_exists($absolutePath)) {
+                        // ✅ ไฟล์มีอยู่จริงในเครื่องที่รัน (local หรือ server)
+                        $pictureUrl = $branch["branchImage"];
+                    } else {
+                        // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
+                        $pictureUrl = 'image/no-branch.svg';
+                    }
+                // $filePath = 'http://localhost/HRVC/frontend/web/images/branch/profile/b9NYp54V-J.png';
+                // if (file_exists($filePath)) {
+                //     // ✅ ไฟล์มีอยู่จริง
+                //     throw new Exception(print_r($filePath, true));
+                //     $pictureUrl = $branch["branchImage"];
+                //     $test ='1';
+                // } else {
+                //     // ❌ ไฟล์ไม่พบ
+                //     // throw new Exception(print_r($branch["picture"], true));
+                //     $pictureUrl = 'image/no-branch.svg';
+                //     $test ='2';
+                // };
+                // throw new Exception(print_r( $test, true));
                 //เก็บค่า
                 $data[$branch["branchId"]] = [
                 "branchId" => $branch["branchId"],
@@ -414,13 +538,15 @@ class BranchController extends Controller
                 "createDateTime" => $branch["createDateTime"],
                 "updateDateTime" => $branch["updateDateTime"],
                 "financial_start_month" => $branch["financial_start_month"],
-                "branchImage" => $branch["branchImage"],
+                // "branchImage" => $branch["branchImage"],
+                "branchImage" => $pictureUrl,
                 "currency_default" => $branch["currency_default"],
                 "companyName" => $branch["companyName"],
                 "countryName" => $branch["countryName"],
                 "picture" => !empty($branch["picture"]) ? $branch["picture"] : "image/no-company.svg",
                 // "picture" =>  !empty($pictureUrl) ? $pictureUrl : "image/no-company.svg",
-                "flag" => $branch["flag"],
+                // "picture" =>  $pictureUrl,
+                "flag" => !empty($branch["flag"]) ? $branch["flag"] : "image/e-world.svg",
                 "city" => $branch["city"],
                 "totalDepartment" => count($departments),
                 "totalTeam" => $totalTeam,
@@ -430,7 +556,7 @@ class BranchController extends Controller
             endforeach;
         }
 
-        // throw new Exception(print_r($company, true)); // Debug: ดูข้อมูลทั้งหมด
+        // throw new Exception(print_r($data, true)); // Debug: ดูข้อมูลทั้งหมด
 
         return $this->render('branch_grid', [
             "branches" => $data,
@@ -526,6 +652,52 @@ class BranchController extends Controller
                 // $totalDepartment += count($departments);
 
                 //เก็บค่า
+                // $data[$branch["branchId"]] = [
+                // "branchId" => $branch["branchId"],
+                // "branchName" => $branch["branchName"],
+                // "companyId" => $branch["companyId"],
+                // "description" => $branch["description"],
+                // "status" => $branch["status"],
+                // "createDateTime" => $branch["createDateTime"],
+                // "updateDateTime" => $branch["updateDateTime"],
+                // "financial_start_month" => $branch["financial_start_month"],
+                // "branchImage" => $branch["branchImage"],
+                // "currency_default" => $branch["currency_default"],
+                // "companyName" => $branch["companyName"],
+                // "countryName" => $branch["countryName"],
+                // "picture" => $branch["picture"],
+                // "flag" => $branch["flag"],
+                // "city" => $branch["city"],
+                // "totalDepartment" => count($departments),
+                // "totalTeam" => $totalTeam,
+                // "totalEmployee" => $totalEmployees,
+                // "employees" => $filteredEmployees,
+                // ];
+                    $relativePath = $branch["branchImage"] ?? '';
+                    $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+
+                    if (!empty($relativePath) && file_exists($absolutePath)) {
+                        // ✅ ไฟล์มีอยู่จริงในเครื่องที่รัน (local หรือ server)
+                        $pictureUrl = $branch["branchImage"];
+                    } else {
+                        // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
+                        $pictureUrl = 'image/no-branch.svg';
+                    }
+                // $test = '0';
+                // $filePath =  Yii::$app->homeUrl . $branch["branchImage"];
+                // if (file_exists($filePath)) {
+                //     // ✅ ไฟล์มีอยู่จริง
+                //     // throw new Exception(print_r($filePath, true));
+                //     $pictureUrl = $branch["branchImage"];
+                //     $test ='1';
+                // } else {
+                //     // ❌ ไฟล์ไม่พบ
+                //     // throw new Exception(print_r($branch["picture"], true));
+                //     $pictureUrl = 'image/no-branch.svg';
+                //     $test ='2';
+                // };
+                // throw new Exception(print_r( $test, true));
+                //เก็บค่า
                 $data[$branch["branchId"]] = [
                 "branchId" => $branch["branchId"],
                 "branchName" => $branch["branchName"],
@@ -535,12 +707,16 @@ class BranchController extends Controller
                 "createDateTime" => $branch["createDateTime"],
                 "updateDateTime" => $branch["updateDateTime"],
                 "financial_start_month" => $branch["financial_start_month"],
-                "branchImage" => $branch["branchImage"],
+                // "branchImage" => $branch["branchImage"],
+                "branchImage" => $pictureUrl,
                 "currency_default" => $branch["currency_default"],
                 "companyName" => $branch["companyName"],
                 "countryName" => $branch["countryName"],
-                "picture" => $branch["picture"],
-                "flag" => $branch["flag"],
+                "picture" => !empty($branch["picture"]) ? $branch["picture"] : "image/no-company.svg",
+                // "picture" =>  !empty($pictureUrl) ? $pictureUrl : "image/no-company.svg",
+                // "picture" =>  $pictureUrl,
+                // "flag" => $branch["flag"],
+                "flag" => !empty($branch["flag"]) ? $branch["flag"] : "image/e-world.svg",
                 "city" => $branch["city"],
                 "totalDepartment" => count($departments),
                 "totalTeam" => $totalTeam,
