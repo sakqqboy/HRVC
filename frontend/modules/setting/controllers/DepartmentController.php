@@ -507,13 +507,17 @@ class DepartmentController extends Controller
             $branchJson = curl_exec($api);
             $branches = json_decode($branchJson, true);
             $branchName = $branches["branchName"];
+        }else {
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch');
+            $branchJson = curl_exec($api);
+            $branches = json_decode($branchJson, true);
         }
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $group["groupId"]);
         $group = curl_exec($api);
         $group = json_decode($group, true);
 
-        // throw new exception(print_r($group, true));
+        // throw new exception(print_r($branches, true));
 
         // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1'. '&limit=6');
         // $branchJson = curl_exec($api);

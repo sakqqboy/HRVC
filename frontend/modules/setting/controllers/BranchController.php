@@ -1226,16 +1226,16 @@ class BranchController extends Controller
     
         // รับ JSON body โดยตรง
         $data = json_decode(file_get_contents("php://input"), true);
-        $beanchId = isset($data['beanchId']) ? $data['beanchId'] : null;
+        $branchId = isset($data['branchId']) ? $data['branchId'] : null;
     
-        if (!$beanchId) {
-            return ['error' => 'Missing companyId'];
+        if (!$branchId) {
+        return ['error' => 'Missing branchId'];
         }
     
         $api = curl_init();
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false); // ปิดเฉพาะใน dev/localhost
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $beanchId . '&page=1' . '&limit=0');
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $branchId . '&page=1' . '&limit=0');
     
         $response = curl_exec($api);
         curl_close($api);
