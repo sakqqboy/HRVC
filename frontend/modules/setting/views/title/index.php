@@ -86,7 +86,7 @@ $page = "grid";
                                                 <div class="city-crad-company text-truncate"
                                                     style="display: flex; align-items: center; gap: 5px;">
                                                     <img src="<?= Yii::$app->homeUrl ?><?= $department['flag'] ?>"
-                                                        class="bangladresh-hrvc" style="width: 16px; height: 12px;">
+                                                        class="bangladresh-hrvc">
                                                     <?= $department['city'] ?>,
                                                     <?= Yii::t('app', $department['countryName']) ?>
                                                 </div>

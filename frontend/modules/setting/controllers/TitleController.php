@@ -181,11 +181,11 @@ class TitleController extends Controller
                     'branchName' => $row['branchName'],
                     'companyId' => $row['companyId'],
                     'companyName' => $row['companyName'],
-                    'picture' => $row['picture'],
+                    "picture" => !empty($row["picture"]) ? $row["picture"] : "image/no-company.svg",
                     'city' => $row['city'],
                     'countryId' => $row['countryId'],
                     'countryName' => $row['countryName'],
-                    'flag' => $row['flag'],
+                    "flag" => !empty($row["flag"]) ? $row["flag"] : "image/e-world.svg",
                     'titles' => $titles
                 ];
             }
@@ -276,11 +276,11 @@ class TitleController extends Controller
                     'branchName' => $row['branchName'],
                     'companyId' => $row['companyId'],
                     'companyName' => $row['companyName'],
-                    'picture' => $row['picture'],
+                    "picture" => !empty($row["picture"]) ? $row["picture"] : "image/no-company.svg",
                     'city' => $row['city'],
                     'countryId' => $row['countryId'],
                     'countryName' => $row['countryName'],
-                    'flag' => $row['flag'],
+                    "flag" => !empty($row["flag"]) ? $row["flag"] : "image/e-world.svg",
                     'titles' => $titles
                 ];
             }
