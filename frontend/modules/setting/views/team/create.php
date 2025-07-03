@@ -389,10 +389,20 @@ const departmentSpan = departmentSelect?.nextElementSibling;
 
 // โหลด branch ตอนเริ่ม (ถ้ามี companyId)
 const initialCompanyId = '<?= $companyId ?>';
+const initialBranchId = '<?= $branchId ?>';
+// alert(initialBranchId);
+
+
 if (initialCompanyId !== '') {
     // alert('1');
+    loadDepartments(initialBranchId);
 
+}
+
+if (initialCompanyId !== '') {
+    // alert('1');
     loadBranches(initialCompanyId);
+
 } else {
     // alert('2');
 
@@ -471,8 +481,11 @@ function loadBranches(companyId) {
         .catch(error => console.error("Error loading branches:", error));
 }
 
+
 // โหลด department list ตาม branchId
 function loadDepartments(branchId) {
+    departmentSelect.removeAttribute('disabled');
+    if (departmentSpan) departmentSpan.style.backgroundColor = '#fff';
     fetch('<?= Yii::$app->homeUrl ?>setting/branch/branch-department-list', {
             method: 'POST',
             headers: {
