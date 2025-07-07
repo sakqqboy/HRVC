@@ -20,8 +20,8 @@ $page = 'view';
 
     <div class="company-group-edit mt-30" style="height: 110vh">
         <div style="display: flex; align-items: center; gap: 14px;">
-            <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl ?>"
-                style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+            <a href="<?= Yii::$app->request->referrer ?>" style="text-decoration: none; width:66px; height:26px;"
+                class="btn-create-branch">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg"
                     style="width:18px; height:18px; margin-top:-3px;">
                 <?= Yii::t('app', 'Back') ?>
@@ -91,7 +91,7 @@ $page = 'view';
                             style="font-weight: 500; display: flex; align-items: center; gap: 12px;">
                             <?= Yii::t('app', 'Located in') ?>
                             <div class="city-crad-company">
-                                <img src="<?= Yii::$app->homeUrl ?>" class="bangladresh-hrvc">
+                                <img src="<?= Yii::$app->homeUrl . $data['flag']?>" class="bangladresh-hrvc">
                                 <?= $data['city'] ?>,<?= $data['countryName'] ?>
                             </div>
                         </span>
@@ -198,7 +198,6 @@ $page = 'view';
                                                 </button>
                                             </a>
                                             <?php } ?>
-
                                         </div>
                                     </div>
                                 </td>

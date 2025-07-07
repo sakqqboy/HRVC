@@ -45,8 +45,7 @@ $form = ActiveForm::begin([
                 </span>
                 <div class="d-flex mb-20 mt-19" style="align-items: center; gap: 29px; align-self: stretch;">
                     <div class="avatar-preview">
-                        <img src="<?= Yii::$app->homeUrl ?>images/branch/profile/Tp-bPC6u8a.png"
-                            class="cycle-big-image">
+                        <img src="<?= Yii::$app->homeUrl . $group['picture'] ?>" class="cycle-big-image">
                     </div>
                     <div class="start-center">
                         <span class="font-size-20 font-weight-500">
@@ -419,7 +418,7 @@ $form = ActiveForm::begin([
 
 
     document.getElementById('branchSelectId').addEventListener('change', function() {
-        const beanchId = this.value;
+        const branchId = this.value;
 
         // alert(beanchId);
 
@@ -430,7 +429,7 @@ $form = ActiveForm::begin([
                     'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
                 },
                 body: JSON.stringify({
-                    beanchId: beanchId
+                    branchId: branchId
                 })
             })
             .then(response => response.json())
