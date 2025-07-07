@@ -509,7 +509,7 @@ function initRadioSelection(containerSelector = '.radio-wrapper') {
                     cycle.appendChild(svg);
 
                     radio.checked = radioValue === selectedValue;
-                    if (radioValue == selectedValue) { 
+                    if (radioValue == selectedValue) {
                         $("#savePermission").val(selectedValue);
                     }
                 } else {
@@ -1199,17 +1199,92 @@ function newSearchEmployee(e) {
     }
 }
 // $(document).ready(function () {
-//   $('#create-employee').on('submit', function (e) {
-//       var savePermission = $("#savePermission").val();
-//       var isDraf = $("darf").val();//ถ้า draf จะเป็น 1
-//       if (isDraf != 1) {//ไม่
-//           if (savePermission == "") {
-//               alert('Select the System Wide Permission Level');
-//               e.preventDefault(); // ป้องกันการ submit
-//           }
-//       } else { 
-          
-//           $('#create-employee').submit();
-//       }
-//   });
+// $('#create-employee').on('submit', function (e) {
+//     var savePermission = $("#savePermission").val();
+//     var isDraf = $("darf").val();//ถ้า draf จะเป็น 1
+//     if (isDraf != 1) {//ไม่
+//         if (savePermission == "") {
+//             alert('Select the System Wide Permission Level');
+//             e.preventDefault(); // ป้องกันการ submit
+//         }
+//     }
 // });
+// });
+
+// $('#create-employee').on('beforeSubmit', function (e) {
+//     var savePermission = $("#savePermission").val();
+//     var isDraf = $("input[name='darf']").val(); // <== ตรวจสอบ selector ให้ถูกต้อง
+
+//     if (isDraf != 1 && savePermission == "") {
+//         alert('Select the System Wide Permission Level');
+//         return false; // ป้องกันการ submit
+//     }
+
+//     return true; // ให้ submit ปกติ
+// });
+
+$('#create-employee').on('beforeSubmit', function (e) {
+    const radios = document.querySelectorAll('input[name="role"]');
+    const oneChecked = Array.from(radios).some(r => r.checked);
+
+    if (!oneChecked) {
+        alert('Please select a role.');
+        return false;
+    }
+
+    var savePermission = $("#savePermission").val();
+    var isDraf = $("#darf").val(); // ตรวจให้แน่ใจว่า <input id="darf"> มีอยู่จริง
+
+    if (isDraf !== '1') {
+        if (savePermission === "") {
+            alert('Select the System Wide Permission Level');
+            return false;
+        }
+    }
+
+    const checkedModules = document.querySelectorAll('input[name="moduleId[]"]:checked');
+    if (checkedModules.length === 0) {
+        alert('Please select at least one module.');
+        return false;
+    }
+
+    // ตรวจสอบว่า certificates, cerImages, certificatesFiles ถูกประกาศไว้และมีข้อมูล
+    if (
+        certificates.length !== cerImages.length ||
+        certificates.length !== certificatesFiles.length
+    ) {
+        alert("The information is incomplete. Please upload all photos and certificate files.");
+        return false;
+    }
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    formData.set('certificateData', JSON.stringify(certificates));
+
+    cerImages.forEach((file, index) => {
+        formData.append(`cerImage[${index}]`, file);
+    });
+
+    certificatesFiles.forEach((file, index) => {
+        formData.append(`certificate[${index}]`, file);
+    });
+
+    // ส่งแบบ AJAX
+    fetch(form.action, {
+        method: 'POST',
+        body: formData
+    })
+        .then(res => res.text())
+        .then(result => {
+            console.log("ส่งเรียบร้อย", result);
+            // ✅ ทำต่อ เช่น redirect, alert success หรือ reload
+            // window.location.href = "/some-url"; // ตัวอย่าง redirect
+        })
+        .catch(err => {
+            console.error("เกิดข้อผิดพลาด", err);
+        });
+
+    return false; // ❗สำคัญ! เพื่อไม่ให้ form ส่งซ้ำแบบปกติ
+});
+

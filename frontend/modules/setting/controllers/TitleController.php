@@ -181,11 +181,11 @@ class TitleController extends Controller
                     'branchName' => $row['branchName'],
                     'companyId' => $row['companyId'],
                     'companyName' => $row['companyName'],
-                    'picture' => $row['picture'],
+                    "picture" => !empty($row["picture"]) ? $row["picture"] : "image/no-company.svg",
                     'city' => $row['city'],
                     'countryId' => $row['countryId'],
                     'countryName' => $row['countryName'],
-                    'flag' => $row['flag'],
+                    "flag" => !empty($row["flag"]) ? $row["flag"] : "image/e-world.svg",
                     'titles' => $titles
                 ];
             }
@@ -276,11 +276,11 @@ class TitleController extends Controller
                     'branchName' => $row['branchName'],
                     'companyId' => $row['companyId'],
                     'companyName' => $row['companyName'],
-                    'picture' => $row['picture'],
+                    "picture" => !empty($row["picture"]) ? $row["picture"] : "image/no-company.svg",
                     'city' => $row['city'],
                     'countryId' => $row['countryId'],
                     'countryName' => $row['countryName'],
-                    'flag' => $row['flag'],
+                    "flag" => !empty($row["flag"]) ? $row["flag"] : "image/e-world.svg",
                     'titles' => $titles
                 ];
             }
@@ -402,11 +402,11 @@ class TitleController extends Controller
                     "description" => $branch['description'],
                     "companyId" => $company['companyId'],
                     "companyName" => $company['companyName'],
-                    "picture" => $company['picture'],
+                    "picture" => !empty($company["picture"]) ? $company["picture"] : "image/no-company.svg",
                     "city" => $company['city'],
                     "countryId" => $company['countryId'],
                     "countryName" => $country['countryName'],
-                    "flag" => $country['flag'],
+                    "flag" => !empty($country["flag"]) ? $country["flag"] : "image/e-world.svg",
                     // "teams" => $dataTeam
 				];
         
@@ -430,7 +430,7 @@ class TitleController extends Controller
         $branchId = $param["branchId"]?? null;
         $companyId = $param["companyId"] ?? null;
         $titleId = $param["titleId"] ?? null;
-        $groupId = Group::currentGroupId();        // throw new exception(print_r($branchId, true));
+        $groupId = Group::currentGroupId();        
         $typePage ='';
         $companyName = '';
         $branchName = '';
@@ -446,26 +446,18 @@ class TitleController extends Controller
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        // $companies = curl_exec($api);
-        // $companies = json_decode($companies, true);
         if (!empty($titleId)) {
-            // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' . $branchId);
-            // $branchJson = curl_exec($api);
-            // $branches = json_decode($branchJson, true);
             curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-detail?id=' . $titleId);
             $title = curl_exec($api);
             $title = json_decode($title, true);
             $typePage = 'Edit';
             $departmentId = $title["departmentId"];
-            // throw new Exception(print_r($title, true)); // Debug: ดูข้อมูลทั้งหมด
         } 
         
          if (!empty($departmentId)) {
             curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-detail?id=' . $departmentId);
             $departmenJson = curl_exec($api);
             $departmentes = json_decode($departmenJson, true);
-            // throw new Exception(print_r($departmentes, true));
             $departmentName = $departmentes["departmentName"];
             $branchId = $departmentes["branchId"];
         }
@@ -488,17 +480,11 @@ class TitleController extends Controller
             $companies = curl_exec($api);
             $companies = json_decode($companies, true);
         }
-        
- 
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
         $group = curl_exec($api);
         $group = json_decode($group, true);
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
-        // $layer = curl_exec($api);
-        // $layer = json_decode($layer, true);
-
+        // throw new exception(print_r($group, true));
         curl_close($api);
         return $this->render('create', [
             "group" => $group,
@@ -508,12 +494,9 @@ class TitleController extends Controller
             "companyName" => $companyName,
             "branchName" => $branchName,
             "departmentName" => $departmentName,
-            // "departments" => $departments,
-            // "branches" => $branches,
             "companies" => $companies,
             "title" => $title,
-            "typePage" => $typePage,
-            // "layer" => $layer,
+            "typePage" => $typePage
         ]);
     }
     public function actionCheckDupplicateTitle()
@@ -950,11 +933,13 @@ class TitleController extends Controller
                     'branchName' => $row['branchName'],
                     'companyId' => $row['companyId'],
                     'companyName' => $row['companyName'],
-                    'picture' => $row['picture'],
+                    // 'picture' => $row['picture'],
+                    "picture" => !empty($row["picture"]) ? $row["picture"] : "image/no-company.svg",
                     'city' => $row['city'],
                     'countryId' => $row['countryId'],
                     'countryName' => $row['countryName'],
-                    'flag' => $row['flag'],
+                    "flag" => !empty($row["flag"]) ? $row["flag"] : "image/e-world.svg",
+                    // 'flag' => $row['flag'],
                     'titles' => $titles
                 ];
             }

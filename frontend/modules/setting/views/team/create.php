@@ -241,9 +241,10 @@ if (Yii::$app->session->hasFlash('error')) {
     </div>
 </div>
 
-
+<!-- 
 <script>
 const homeUrl = "<?= Yii::$app->homeUrl ?>";
+
 document.getElementById('companySelectId').addEventListener('change', function() {
     const iconImg = document.getElementById('companyIconImg');
     const selectedOption = this.options[this.selectedIndex];
@@ -346,8 +347,6 @@ document.getElementById('companySelectId').addEventListener('change', function()
 document.getElementById('branchSelectId').addEventListener('change', function() {
     const beanchId = this.value;
 
-    // alert(beanchId);
-
     fetch('<?= Yii::$app->homeUrl ?>setting/branch/branch-department-list', {
             method: 'POST',
             headers: {
@@ -375,6 +374,147 @@ document.getElementById('branchSelectId').addEventListener('change', function() 
             }
         });
 });
+</script> -->
+<script>
+const homeUrl = "<?= Yii::$app->homeUrl ?>";
+
+const iconCompany = document.getElementById('companyIconImg');
+const iconBranch = document.getElementById('branchIconImg');
+const iconBranchDiv = document.getElementById('branchIcon');
+const branchSelect = document.getElementById('branchSelectId');
+const branchSpan = branchSelect?.nextElementSibling;
+const companySelect = document.getElementById('companySelectId');
+const departmentSelect = document.getElementById('departmentSelectId');
+const departmentSpan = departmentSelect?.nextElementSibling;
+
+// โหลด branch ตอนเริ่ม (ถ้ามี companyId)
+const initialCompanyId = '<?= $companyId ?>';
+const initialBranchId = '<?= $branchId ?>';
+// alert(initialBranchId);
+
+
+if (initialCompanyId !== '') {
+    // alert('1');
+    loadDepartments(initialBranchId);
+
+}
+
+if (initialCompanyId !== '') {
+    // alert('1');
+    loadBranches(initialCompanyId);
+
+} else {
+    // alert('2');
+
+    // เมื่ อเลือก company
+    companySelect.addEventListener('change', function() {
+        const selectedOption = this.options[this.selectedIndex];
+        const selectedImg = selectedOption.getAttribute('data-img');
+        const selectedValue = this.value;
+
+        if (selectedValue) {
+            iconCompany.src = homeUrl + selectedImg;
+            iconCompany.removeAttribute('style');
+            iconCompany.classList.add('card-tcf');
+        } else {
+            iconCompany.src = homeUrl + 'images/icons/Dark/48px/company.svg';
+        }
+
+        if (branchSpan && branchSpan.classList.contains('input-employee-text')) {
+            branchSpan.style.backgroundColor = '#fff';
+        }
+
+        loadBranches(selectedValue);
+    });
+}
+
+
+// เมื่อเลือก branch
+branchSelect.addEventListener('change', function() {
+    const selectedValue = this.value;
+    if (selectedValue) {
+        iconBranch.src = homeUrl + 'image/branches-black.svg';
+        iconBranchDiv.classList.remove('cycle-current-gray');
+        iconBranchDiv.classList.add('cycle-current-yellow');
+    } else {
+        iconBranchDiv.classList.remove('cycle-current-yellow');
+        iconBranchDiv.classList.add('cycle-current-gray');
+    }
+
+    // เปิด department dropdown
+    departmentSelect.removeAttribute('disabled');
+    if (departmentSpan && departmentSpan.classList.contains('input-group-text')) {
+        departmentSpan.style.backgroundColor = '#fff';
+    }
+    // alert(selectedValue);
+    loadDepartments(selectedValue);
+});
+
+// โหลด branch list ตาม companyId
+function loadBranches(companyId) {
+    branchSelect.removeAttribute('disabled');
+    if (branchSpan) branchSpan.style.backgroundColor = '#fff';
+
+    fetch(homeUrl + 'setting/company/company-branch-list', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
+            },
+            body: JSON.stringify({
+                companyId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            branchSelect.innerHTML =
+                '<option value="" disabled selected hidden><?= Yii::t("app", "Select from a Branch") ?></option>';
+            if (Array.isArray(data)) {
+                data.forEach(branch => {
+                    const option = document.createElement('option');
+                    option.value = branch.branchId;
+                    option.text = branch.branchName;
+                    branchSelect.appendChild(option);
+                });
+            }
+        })
+        .catch(error => console.error("Error loading branches:", error));
+}
+
+
+// โหลด department list ตาม branchId
+function loadDepartments(branchId) {
+    departmentSelect.removeAttribute('disabled');
+    if (departmentSpan) departmentSpan.style.backgroundColor = '#fff';
+    fetch('<?= Yii::$app->homeUrl ?>setting/branch/branch-department-list', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
+            },
+            body: JSON.stringify({
+                branchId: branchId // ✅ ตรงกับ PHP แล้ว
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Fetched data:", data);
+            const departmentSelect = document.querySelector('[name="departmentId"]');
+            departmentSelect.innerHTML =
+                '<option value="" disabled selected hidden><?= Yii::t("app", "Select from the departments") ?></option>';
+
+            if (Array.isArray(data)) {
+                data.forEach(department => {
+                    const option = document.createElement('option');
+                    option.value = department.departmentId;
+                    option.text = department.departmentName;
+                    departmentSelect.appendChild(option);
+                });
+            }
+        })
+        .catch(error => console.error("Error loading departments:", error));
+}
 </script>
+
 
 <?php ActiveForm::end(); ?>

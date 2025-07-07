@@ -201,11 +201,23 @@ class CompanyController extends Controller
 					}
 				}
 
+				$relativePath = $company["picture"] ?? '';
+                $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+
+                    if (!empty($relativePath) && file_exists($absolutePath)) {
+                        // ✅ ไฟล์มีอยู่จริงในเครื่องที่รัน (local หรือ server)
+                        $pictureUrl = $company["picture"];
+                    } else {
+                        // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
+                        $pictureUrl = 'image/no-company.svg';
+                    }
+
 				$data[] = [
 					"about" => $company['about'],
-					"picture" => $company["picture"],
+					// "picture" => !empty($company["picture"]) ? $company["picture"] : "image/no-company.svg",
+					"picture" => $pictureUrl,
 					"companyName" => $company['companyName'],
-					"flag" => $company['flag'],
+					"flag" => !empty($branch["flag"]) ? $company["flag"] : "image/e-world.svg",
 					"city" => $company['city'],
 					"countryName" => $company['countryName'],
 					"companyId" => $company['companyId'],
@@ -335,11 +347,24 @@ class CompanyController extends Controller
 					}
 				}
 
+				$relativePath = $company["picture"] ?? '';
+                $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+
+                    if (!empty($relativePath) && file_exists($absolutePath)) {
+                        // ✅ ไฟล์มีอยู่จริงในเครื่องที่รัน (local หรือ server)
+                        $pictureUrl = $company["picture"];
+                    } else {
+                        // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
+                        $pictureUrl = 'image/no-company.svg';
+                    }
+
+
 				$data[] = [
 					"about" => $company['about'],
-					"picture" => $company["picture"],
+					// "picture" => !empty($company["picture"]) ? $company["picture"] : "image/no-company.svg",
+					"picture" => $pictureUrl,
 					"companyName" => $company['companyName'],
-					"flag" => $company['flag'],
+					"flag" => !empty($company["flag"]) ? $company["flag"] : "image/e-world.svg",
 					"city" => $company['city'],
 					"countryName" => $company['countryName'],
 					"companyId" => $company['companyId'],
@@ -450,13 +475,24 @@ class CompanyController extends Controller
 							->asArray()->column();
 					}
 				}
+				$relativePath = $company["picture"] ?? '';
+                $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+
+                    if (!empty($relativePath) && file_exists($absolutePath)) {
+                        // ✅ ไฟล์มีอยู่จริงในเครื่องที่รัน (local หรือ server)
+                        $pictureUrl = $company["picture"];
+                    } else {
+                        // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
+                        $pictureUrl = 'image/no-company.svg';
+                    }
 
 				//เก็บค่า
 				$data[] = [
 					"about" => $company['about'],
-					"picture" => $company["picture"],
+					// "picture" => !empty($company["picture"]) ? $company["picture"] : "image/no-company.svg",
+					"picture" => $pictureUrl,
 					"companyName" => $company['companyName'],
-					"flag" => $company['flag'],
+					"flag" => !empty($company["flag"]) ? $company["flag"] : "image/e-world.svg",
 					"city" => $company['city'],
 					"countryName" => $company['countryName'],
 					"companyId" => $company['companyId'],
@@ -587,11 +623,23 @@ class CompanyController extends Controller
 					}
 				}
 
+				$relativePath = $company["picture"] ?? '';
+                $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+
+                    if (!empty($relativePath) && file_exists($absolutePath)) {
+                        // ✅ ไฟล์มีอยู่จริงในเครื่องที่รัน (local หรือ server)
+                        $pictureUrl = $company["picture"];
+                    } else {
+                        // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
+                        $pictureUrl = 'image/no-company.svg';
+                    }
+
 				$data[] = [
 					"about" => $company['about'],
-					"picture" => $company["picture"],
+					// "picture" => !empty($company["picture"]) ? $company["picture"] : "image/no-company.svg",
+					"picture" => $pictureUrl,
 					"companyName" => $company['companyName'],
-					"flag" => $company['flag'],
+					"flag" => !empty($company["flag"]) ? $company["flag"] : "image/e-world.svg",
 					"city" => $company['city'],
 					"countryName" => $company['countryName'],
 					"companyId" => $company['companyId'],

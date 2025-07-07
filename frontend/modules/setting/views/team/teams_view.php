@@ -53,7 +53,7 @@ $page = 'view';
                     <img src="<?= Yii::$app->homeUrl . $data['picture'] ?>" class="cycle-big-image"
                         style="max-width: 100px; max-height: 100px;">
                     <?php } else { ?>
-                    <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="cycle-big-image"
+                    <img src="<?= Yii::$app->homeUrl . 'image/no-company.svg' ?>" class="cycle-big-image"
                         style="max-width: 100px; max-height: 100px;">
                     <?php } ?>
                 </div>
@@ -184,7 +184,7 @@ $page = 'view';
                                             <span class="bodyname-crad-company">
                                                 <?= Yii::t('app', 'No Employees Yet') ?>
                                             </span>
-                                            <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $data['companyId'] ]) ?>"
+                                            <a href="<?= Yii::$app->homeUrl ?>setting/employee/create/<?= ModelMaster::encodeParams(['companyId' => $data['companyId'] ]) ?>"
                                                 style="text-decoration: none;">
                                                 <button type="button" class="btn-create-small"
                                                     action="<?= Yii::$app->homeUrl ?>setting/group/create-group">

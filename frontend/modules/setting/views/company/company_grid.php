@@ -264,7 +264,7 @@ $page = "grid"
                                                             </button>
                                                             <?php } ?>
                                                             <?php if($company['totalBranch'] > 0 && $company['totalDepartment'] == 0) { ?>
-                                                            <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
+                                                            <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
                                                                 style="text-decoration: none;">
                                                                 <button type="button" class="btn-create-small"
                                                                     action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
@@ -318,7 +318,7 @@ $page = "grid"
                                                             </button>
                                                             <?php } ?>
                                                             <?php if($company['totalDepartment'] > 0 && $company['totalTeam'] == 0) { ?>
-                                                            <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                                            <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
                                                                 style="text-decoration: none;">
                                                                 <button type="button" class="btn-create-small"
                                                                     action="<?= Yii::$app->homeUrl ?>setting/group/create-group">

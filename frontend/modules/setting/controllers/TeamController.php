@@ -165,11 +165,11 @@ class TeamController extends Controller
                     'branchName' => $row['branchName'],
                     'companyId' => $row['companyId'],
                     'companyName' => $row['companyName'],
-                    'picture' => $row['picture'],
+                    "picture" => !empty($row["picture"]) ? $row["picture"] : "image/no-company.svg",
                     'city' => $row['city'],
                     'countryId' => $row['countryId'],
                     'countryName' => $row['countryName'],
-                    'flag' => $row['flag'],
+                    "flag" => !empty($row["flag"]) ? $row["flag"] : "image/e-world.svg",
                     'teams' => $teams
                 ];
             }
@@ -259,11 +259,11 @@ class TeamController extends Controller
                     'branchName' => $row['branchName'],
                     'companyId' => $row['companyId'],
                     'companyName' => $row['companyName'],
-                    'picture' => $row['picture'],
+                    "picture" => !empty($row["picture"]) ? $row["picture"] : "image/no-company.svg",
                     'city' => $row['city'],
                     'countryId' => $row['countryId'],
                     'countryName' => $row['countryName'],
-                    'flag' => $row['flag'],
+                    "flag" => !empty($row["flag"]) ? $row["flag"] : "image/e-world.svg",
                     'teams' => $teams
                 ];
             }
@@ -294,7 +294,7 @@ class TeamController extends Controller
     public function actionCreate($hash)
     {
         $param = ModelMaster::decodeParams($hash);
-        $departmentId = $param["departmentId"];
+        $departmentId = $param["departmentId"]?? null;
         $branchId = $param["branchId"]?? null;
         $companyId = $param["companyId"] ?? null;
         $groupId = Group::currentGroupId();
