@@ -1,24 +1,26 @@
 .select-pim {
-	padding-top: 2px;
+	padding: 0px 0px 0px 9px;
 	border-radius: 20px;
-	height: 25px;
+	height: 26px;
 	font-family: "SF Pro Display";
-	font-weight: 300;
-	padding-left: 10px;
-	letter-spacing: 0.5px;
+	font-weight: 400;
+	font-size: 14px;
+	width: 95px;
+	border: 0.5px solid #757575;
+	color: #4C4C4C;
 }
 
 .select-pimselect {
-	padding-top: 2px;
+	padding: 0px 0px 0px 9px;
 	border-radius: 20px;
-	height: 25px;
+	height: 26px;
 	font-family: "SF Pro Display";
-	font-weight: 300;
-	padding-left: 10px;
-	letter-spacing: 0.5px;
+	font-weight: 400;
 	border-radius: 67px;
 	border: 0.5px solid #2580D3;
 	background: var(--HRVC---Light-Blue, #D7EBFF);
+	font-size: 14px;
+	width: 95px;
 }
 
 .custom-button-select {

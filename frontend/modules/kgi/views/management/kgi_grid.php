@@ -6,26 +6,25 @@ use yii\bootstrap5\ActiveForm;
 $this->title = 'KGI Grid View';
 ?>
 <div class="col-12 mt-70 pt-20">
-    <div class="d-flex justify-content-start pt-0 pb-0 border" style="line-height: 30px;">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="pim-head-icon mr-10">
+    <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="pim-head-icon mr-11 mt-2">
         <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
         <?php
         if ($role >= 3) {
         ?>
             <a href="<?= Yii::$app->homeUrl ?>kgi/management/create-kgi"
-                class="create-employee-btn">
+                class="create-employee-btn mr-11">
                 <?= Yii::t('app', 'Create New') ?>
-                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
-                    class="pim-icon ml-3" style="margin-top: -1px;">
+                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History" class="create-btn-icon ml-3" style="margin-top: -3px;">
             </a>
         <?php
         }
         ?>
     </div>
+    <?= $this->render('header_filter', [
+        "role" => $role
+    ]) ?>
     <div class="col-12 mt-10">
-        <?= $this->render('header_filter', [
-            "role" => $role
-        ]) ?>
         <div class="bg-white-employee">
             <div class="row" style="--bs-gutter-x:0px;">
                 <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">

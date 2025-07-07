@@ -50,17 +50,19 @@ AppAsset::register($this);
     </header> -->
 
     <main role="main">
-        <div class="menu-left-side">
-            <?= $this->render("@frontend/views/site/menu_left")
-            ?>
-        </div>
-        <div class="main-content">
-            <div class="header-top bg-white">
-                <?= $this->render("@frontend/views/layouts/headernavbar")
+        <div class="d-flex align-items-start justify-content-start">
+            <div class="menu-left-side">
+                <?= $this->render("@frontend/views/site/menu_left")
                 ?>
             </div>
-            <div class="submain-content">
-                <?= $content ?>
+            <div class="main-content d-flex flex-grow-1">
+                <div class="header-top bg-white">
+                    <?= $this->render("@frontend/views/layouts/headernavbar")
+                    ?>
+                </div>
+                <div class="submain-content">
+                    <?= $content ?>
+                </div>
             </div>
         </div>
     </main>

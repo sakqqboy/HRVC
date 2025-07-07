@@ -29,7 +29,11 @@
 .pim-head-icon {
 	width: 26px;
 	height: 24px;
+}
 
+.pim-filter-head-icon {
+	width: 13.5px;
+	height: 13.5px;
 }
 
 .pim-text-back {
@@ -60,11 +64,7 @@
 	height: 15px;
 }
 
-.header-filter-pim {
-	font-size: 16px;
-	font-weight: 400;
-	padding-top: 7px;
-}
+
 
 .pim-body {
 	padding: 2vw 2vw;
@@ -93,7 +93,7 @@
 }
 
 .pim-head-text {
-	font-size: clamp(24px, 2vw, 72px);
+	font-size: clamp(24px, 1.66vw, 72px);
 	font-weight: 600;
 	color: #30313D;
 }
@@ -147,33 +147,104 @@
 	color: #000000;
 }
 
+
+.header-filter-pim {
+	font-size: 16px;
+	font-weight: 400;
+	height: 37px;
+	border-radius: 4px;
+	padding-left: 5px;
+	background-color: white;
+	margin-top: 20px;
+}
+
+.pim-head-upderline {
+	height: 37px;
+	padding-right: 5px;
+	border-bottom: #CBD5E1 solid 3px;
+	border-bottom-left-radius: 4px;
+	position: relative;
+}
+
+.pim-head-upderline2 {
+	height: 37px;
+	border-bottom: #D9D9D9 solid 3px;
+	position: relative;
+	padding-right: 20px;
+}
+
+.pim-type-box {
+	color: #30313D !important;
+	height: 33px;
+	display: flex;
+	margin-top: 4px;
+	justify-content: center;
+	padding-top: 2px;
+}
+
+.pim-center-line {
+	display: flex;
+	height: 22px;
+	align-self: center;
+	border-right: lightgray solid thin;
+	margin-left: 5px;
+	margin-right: 5px;
+
+}
+
+.pim-head-company {
+	font-size: clamp(11px, 0.76vw, 24px);
+	font-weight: 500;
+	min-height: 23px;
+}
+
+.pim-head-branch {
+	font-size: clamp(9px, 0.62vw, 24px);
+	font-weight: 400;
+	min-height: 23px;
+}
+
 .header-kfi-active {
-	text-decoration: none;
-	/* padding: 8px 20px 5px 20px; */
-	padding: 11px 13px;
 	background-color: #ECF0FF;
-	border-bottom: #748EE9 solid 4px;
-	/* border-radius: 5px; */
-	color: #000000;
+	border-bottom: #748EE9 solid 3px;
+	border-bottom-left-radius: 4px;
+	display: flex;
+	min-width: 206px;
+	height: 33px;
+	justify-content: center;
+	margin-top: 4px;
+	padding-top: 3px;
+	font-weight: 700;
+	font-size: 16px;
+
 }
 
 .header-kgi-active {
-	text-decoration: none;
-	/* padding: 8px 30px 5px 30px; */
-	padding: 11px 13px;
 	background-color: #FFF5E0;
-	border-bottom: #FDCA40 solid 4px;
-	/* border-radius: 5px; */
-	color: #000000;
+	border-bottom: #FDCA40 solid 3px;
+	display: flex;
+	min-width: 182px;
+	height: 33px;
+	justify-content: center;
+	margin-top: 4px;
+	padding-top: 3px;
+	font-weight: 700;
+	font-size: 16px;
 }
 
+
 .header-kpi-active {
-	text-decoration: none;
-	padding: 11px 13px;
+
 	background-color: #FFF4F2;
-	border-bottom: #FF715B solid 4px;
-	/* border-radius: 5px; */
-	color: #000000;
+	border-bottom: #FF715B solid 3px;
+	display: flex;
+	min-width: 235px;
+	height: 33px;
+	justify-content: center;
+	margin-top: 4px;
+	padding-top: 3px;
+	font-weight: 700;
+	font-size: 16px;
 }
 
 
@@ -219,8 +290,10 @@
 }
 
 .pim-big-box {
-	border-radius: 10px;
-	padding: 20px 30px 20px 30px;
+	border-radius: 6px;
+	min-height: 144px;
+	padding: 12px;
+
 }
 
 .priority-box {
@@ -374,11 +447,11 @@
 
 
 .pim-name {
-	font-size: 20px;
-	font-weight: 500;
-	padding-left: 20px;
-	margin-top: -5px;
+	font-size: 16px;
+	font-weight: 600;
 	color: #3C3D48;
+	line-height: 11px;
+	max-width: 245px;
 }
 
 .pim-name-history {
@@ -388,6 +461,12 @@
 	font-style: normal;
 	font-weight: 700;
 	line-height: 32.786px;
+}
+
+.assign-on {
+	font-weight: 500;
+	font-size: 12px;
+	color: #3C3D48;
 }
 
 .inprogress-tag {
@@ -1624,22 +1703,33 @@
 }
 
 .pim-type-tab {
+	display: flex;
+	width: 134px;
 	background-color: #F5F5F5;
-	padding-top: 3px;
-	/* padding-bottom: 2px; */
-	font-size: 11px;
-	font-weight: 400;
-	text-align: center;
+	font-size: 14px;
+	font-weight: 500;
+	border-bottom: 2px solid #CBD5E1;
+	height: 28px;
+}
+
+.pim-type-tab img {
+	width: 16px;
+	height: 16px;
 }
 
 .pim-type-tab-selected {
+	display: flex;
+	width: 134px;
 	background-color: #D7EBFF;
 	border-bottom: #2580D3 solid 2px;
-	padding-top: 4px;
-	/* padding-bottom: 2px; */
-	font-size: 11px;
-	font-weight: 400;
-	text-align: center;
+	font-size: 14px;
+	font-weight: 500;
+	height: 28px;
+}
+
+.pim-type-tab-selected img {
+	width: 16px;
+	height: 16px;
 }
 
 .view-tab {

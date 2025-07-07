@@ -8,7 +8,7 @@
 }
 
 .menu-left-side {
-    width: 280px;
+    width: 235px;
     background-color: #072033;
     font-family: 'SF Pro Display', 'sans-serif';
     font-size: 14px;
@@ -19,24 +19,24 @@
     min-height: 100%;
     overflow-y: auto;
     scrollbar-width: none;
-    padding: 64px 10px 20px 10px;
+    padding: 45px 9px 20px 9px;
 }
 
 .main-content {
-    padding-left: 0;
-    position: relative;
-    margin-left: 280px;
+    /* padding-left: 0; */
+    /* position: relative; */
+    margin-left: 235px;
     min-height: 80vh;
-    box-sizing: border-box;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    /* box-sizing: border-box; */
+    /* flex: 1; */
+    /* display: flex; */
+    /* flex-direction: column; */
 }
 
 .header-top {
     top: 0;
     right: 0;
-    width: calc(100% - 280px);
+    width: calc(100% - 235px);
     position: fixed;
     z-index: 5;
     height: 60px;

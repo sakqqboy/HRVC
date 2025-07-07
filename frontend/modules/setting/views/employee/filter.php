@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-end align-items-center  gap-2">
-	<select class="select-pim form-select font-size-12" id="company-team" onchange="javascript:branchCompany()">
+	<select class="select-pim form-select" id="company-team" onchange="javascript:branchCompany()">
 		<?php
 
 		use common\models\ModelMaster;
@@ -28,7 +28,7 @@
 		}
 		?>
 	</select>
-	<select class="select-pim form-select font-size-12" id="branch-team" onchange="javascript:departmentBranch()" <?= $branchId == '' ? 'disabled' : '' ?>>
+	<select class="select-pim form-select" id="branch-team" onchange="javascript:departmentBranch()" <?= $branchId == '' ? 'disabled' : '' ?>>
 		<?php
 		if ($branchId != '') { ?>
 			<option value="<?= $branchId ?>"><?= Branch::findOne($branchId)->branchName ?></option>
@@ -44,7 +44,7 @@
 		}
 		?>
 	</select>
-	<select class="select-pim form-select font-size-12" id="department-team" onchange="javascript:teamDepartment()" <?= $departmentId == '' ? 'disabled' : '' ?>>
+	<select class="select-pim form-select" id="department-team" onchange="javascript:teamDepartment()" <?= $departmentId == '' ? 'disabled' : '' ?>>
 		<?php
 		if ($departmentId != '') { ?>
 			<option value="<?= $departmentId ?>"><?= Department::findOne($departmentId)->departmentName ?></option>
@@ -61,7 +61,7 @@
 		}
 		?>
 	</select>
-	<select class="select-pim form-select font-size-12" id="team-department" <?= $teamId == '' ? 'disabled' : '' ?>>
+	<select class="select-pim form-select" id="team-department" <?= $teamId == '' ? 'disabled' : '' ?>>
 		<?php
 		if ($teamId != '') { ?>
 			<option value="<?= $teamId ?>"><?= Team::findOne($teamId)->teamName ?></option>
@@ -88,7 +88,7 @@
 		$showStatus = '';
 	}
 	?>
-	<select class="select-pim form-select font-size-12 <?= $showStatus ?>" id="status">
+	<select class="select-pim form-select  <?= $showStatus ?>" id="status">
 		<?php
 		if ($status != '') { ?>
 			<option value="<?= $status ?>"><?= (isset($status) && $status != null) ? Status::findOne($status)->statusName : 'Not Set' ?></option>
