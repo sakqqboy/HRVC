@@ -972,18 +972,6 @@ class TitleController extends Controller
     
     public function actionDeleteTitle()
     {
-        // $titleId = $_POST["titleId"];
-        // $title = Title::find()->where(["titleId" => $titleId])->one();
-        // $title->status = 99;
-        // $res["status"] = false;
-        // if ($title->save(false)) {
-        //     $res["status"] = true;
-        // }
-        // if ($_POST["redirect"] == 1) {
-        //     // return $this->redirect($_POST["preUrl"]);
-        //     return $this->redirect(Yii::$app->homeUrl . 'setting/title/index');
-        // }
-        // return json_encode($res);
          Yii::$app->response->format = \yii\web\Response::FORMAT_JSON; // ← สำคัญ!
 
         if (isset($_POST["titleId"])) {
@@ -999,6 +987,9 @@ class TitleController extends Controller
                 $update->updateDateTime = new Expression('NOW()');
 
                 if ($update->save(false)) {
+                    // return [
+                    //         'success' => 'test'
+                    //     ];
                     $departmentId = $update->departmentId;
                     $api = curl_init();
                     curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -1008,14 +999,19 @@ class TitleController extends Controller
                     $titles = json_decode($titles, true);
                     curl_close($api);
 
-                    if($_POST["preUrl"]){
-                                return $this->redirect($_POST["preUrl"]);
-                    }else{
-                        return [
+                    return [
                             'success' => true,
                             'departments' => $titles
                         ];
-                    }
+
+                    // if($_POST["preUrl"]){
+                    //             return $this->redirect($_POST["preUrl"]);
+                    // }else{
+                    //     return [
+                    //         'success' => true,
+                    //         'departments' => $titles
+                    //     ];
+                    // }
 
                    
                 } else {

@@ -389,15 +389,23 @@ function actionSaveTitle(departmentId, titleName) {
 function openModalDeleteTitle(titleId) {
 	// alert(titleId);
 	var url = $url + 'setting/title/modal-delete';
-	alert(url);
+	// alert(url);
 	$.ajax({
 		url: url,
 		type: 'GET',
 		data: { titleId: titleId },
 		success: function (response) {
 			// alert(response);
-			document.getElementById('titleModal').style.opacity = '0.1';
-			document.getElementById('titleModal').style.pointerEvents = 'none';
+			// document.getElementById('titleModal').style.opacity = '0.1';
+			// document.getElementById('titleModal').style.pointerEvents = 'none';
+			// $('#titleModal').modal('hide');
+			// ใส่เนื้อหา HTML ลงใน modal
+			// $('#titleDeleteModal').html(response);
+
+			// // สร้าง modal instance แล้วแสดง
+			// var myModal = new bootstrap.Modal(document.getElementById('titleDeleteModal'));
+			// myModal.show();
+
 			$('#titleDeleteModal').html(response);
 			$('#titleDeleteModal').modal('show');
 		},
@@ -546,26 +554,57 @@ function updateTitleModalContent(titleId) {
 }
 
 
+// function deleteTitle(titleId) {
+// 	// alert(titleId);
+// 	// updateTitleModalContent(titleId);
+// 	var url = $url + 'setting/title/delete-title';
+// 	$.ajax({
+// 		url: url,
+// 		type: 'POST',
+// 		data: { titleId: titleId },
+// 		success: function (response) {
+// 			// สมมุติว่า server ส่ง JSON กลับมา
+// 			// เช่น { success: true, departments: [...] }
+// 			if (response.success && response.departments) {
+// 				alert(response.message || 'สามารถลบได้');
+// 				openCloseTitleModal();
+// 				renderDepartmentList(response.departments); // อัปเดตรายการ department
+// 			} else {
+// 				alert(response.message || 'ไม่สามารถลบได้');
+// 			}
+// 		}
+// 	});
+// }
+
 function deleteTitle(titleId) {
-	// alert(titleId);
-	// updateTitleModalContent(titleId);
 	var url = $url + 'setting/title/delete-title';
+	var preUrl = window.location.href; // หรือจะใช้ค่าอื่นที่คุณต้องการ redirect กลับไป
+
 	$.ajax({
 		url: url,
 		type: 'POST',
-		data: { titleId: titleId },
+		data: {
+			titleId: titleId,
+			preUrl: preUrl // ส่งไปให้ฝั่ง PHP ใช้ ถ้าต้อง redirect
+		},
 		success: function (response) {
-			// สมมุติว่า server ส่ง JSON กลับมา
-			// เช่น { success: true, departments: [...] }
-			if (response.success && response.departments) {
-				openCloseTitleModal();
-				renderDepartmentList(response.departments); // อัปเดตรายการ department
+			if (response.success) {
+				if (response.redirect) {
+					window.location.href = response.redirect;
+				} else {
+					// alert(response.message || 'สามารถลบได้');
+					openCloseTitleModal();
+					if (response.departments) {
+						renderDepartmentList(response.departments);
+					}
+				}
 			} else {
 				alert(response.message || 'ไม่สามารถลบได้');
 			}
 		}
 	});
 }
+
 
 function saveDeleteTitle(titleId, preUrl) {
 	// alert(titleId);

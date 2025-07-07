@@ -404,11 +404,11 @@ class TeamController extends Controller
                     'branchName' => $row['branchName'],
                     'companyId' => $row['companyId'],
                     'companyName' => $row['companyName'],
-                    'picture' => $row['picture'],
+                    "picture" => !empty($row["picture"]) ? $row["picture"] : "image/no-company.svg",
                     'city' => $row['city'],
                     'countryId' => $row['countryId'],
                     'countryName' => $row['countryName'],
-                    'flag' => $row['flag'],
+                    "flag" => !empty($row["flag"]) ? $row["flag"] : "image/e-world.svg",
                     'teams' => $teams
                 ];
             }
@@ -580,11 +580,11 @@ class TeamController extends Controller
                     "description" => $branch['description'],
                     "companyId" => $company['companyId'],
                     "companyName" => $company['companyName'],
-                    "picture" => $company['picture'],
+                    "picture" => !empty($company["picture"]) ? $company["picture"] : "image/no-company.svg",
                     "city" => $company['city'],
                     "countryId" => $company['countryId'],
                     "countryName" => $country['countryName'],
-                    "flag" => $country['flag'],
+                    "flag" => !empty($company["flag"]) ? $company["flag"] : "image/e-world.svg",
                     // "teams" => $dataTeam
 				];
         
