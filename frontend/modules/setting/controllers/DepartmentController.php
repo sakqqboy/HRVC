@@ -301,15 +301,16 @@ class DepartmentController extends Controller
         $branch = json_decode($branch, true);
 
         $relativePath = $branch["branchImage"] ?? '';
-                    $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+        $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
 
-                    if (!empty($relativePath) && file_exists($absolutePath)) {
-                        // ✅ ไฟล์มีอยู่จริงในเครื่องที่รัน (local หรือ server)
-                        $pictureUrl = $branch["branchImage"];
-                    } else {
-                        // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
-                        $pictureUrl = 'image/no-branch.svg';
-                    }
+        if (!empty($relativePath) && file_exists($absolutePath)) {
+            // ✅ ไฟล์มีอยู่จริงในเครื่องที่รัน (local หรือ server)
+            $pictureUrl = $branch["branchImage"];
+        } else {
+            // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
+            $pictureUrl = 'image/no-branch.svg';
+        }
+
         $branch = [
             'branchId' => $branch['branchId'],
             'branchName' => $branch['branchName'],
