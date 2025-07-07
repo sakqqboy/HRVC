@@ -53,7 +53,7 @@ $page = 'view';
                     align-self: stretch;
                     " class="">
                 <div class="avatar-preview">
-                    <?php if ($branches["branchImage"] != null) { ?>
+                    <?php if ($branches["picture"] != null) { ?>
                     <img src="<?= Yii::$app->homeUrl . $branches['picture'] ?>" class="cycle-big-image"
                         style="max-width: 100px; max-height: 100px;">
                     <?php } else { ?>

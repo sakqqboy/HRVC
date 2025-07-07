@@ -795,6 +795,36 @@ class CompanyController extends Controller
         $companyJson = curl_exec($apiCompany);
         $companyBranch = json_decode($companyJson, true);
 
+		
+
+		if (!empty($companyBranch)) {
+			foreach ($companyBranch as $branch) {
+				// $relativePath = 'images/branch/profile/Tp-bPC6u8a.png';
+				$relativePath = $branch["branchImage"] ?? '';
+
+				$absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+				if (!empty($relativePath) && file_exists($absolutePath)) {
+					// ✅ ไฟล์มีอยู่จริงในเครื่องที่รัน (local หรือ server)
+					$pictureUrl = $branch["branchImage"];
+				} else {
+					// ❌ ไม่มีไฟล์ → ใช้รูป default แทน
+					$pictureUrl = 'image/no-branch.svg';
+				}
+				$branchs[] = [
+					'branchId' => $branch['branchId'],
+					'branchName' => $branch['branchName'],
+					'companyId' => $branch['companyId'],
+					'description' => $branch['description'],
+					'status' => $branch['status'],
+					'companyName' => $branch['companyName'],
+					'city' => $branch['city'],
+					"picture" => !empty($branch["picture"]) ? $branch["picture"] : "image/no-company.svg",
+					'branchImage' => $pictureUrl,
+					'flag' => !empty($branch['flag']) ? $branch['flag'] :  'images/e-world.svg',
+				];
+			}
+		}
+
 		// throw new Exception("companyBranch DATA: " . print_r($companyBranch, true));
 
 		curl_close($apiCompany);
@@ -837,7 +867,7 @@ class CompanyController extends Controller
 			"director" => $director,
 			"role" => $role,
 			"employees" => $filteredEmployees,
-			"companyBranch" => $companyBranch
+			"companyBranch" => $branchs
 		]);
 	}
 	public function actionUpdateCompany($hash)
