@@ -177,7 +177,7 @@ class DepartmentController extends Controller
 
         curl_close($api);
 
-        // throw new exception(print_r($data, true));
+        // throw new exception(print_r($branch, true));
 
         return $this->render('index', [
             "data" => $data,
@@ -299,6 +299,34 @@ class DepartmentController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' .  $branchId);
         $branch = curl_exec($api);
         $branch = json_decode($branch, true);
+
+        $relativePath = $branch["branchImage"] ?? '';
+                    $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+
+                    if (!empty($relativePath) && file_exists($absolutePath)) {
+                        // ✅ ไฟล์มีอยู่จริงในเครื่องที่รัน (local หรือ server)
+                        $pictureUrl = $branch["branchImage"];
+                    } else {
+                        // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
+                        $pictureUrl = 'image/no-branch.svg';
+                    }
+        $branch = [
+            'branchId' => $branch['branchId'],
+            'branchName' => $branch['branchName'],
+            'companyId' => $branch['companyId'],
+            'description' => $branch['description'],
+            'status' => $branch['status'],
+            'createDateTime' => $branch['createDateTime'],
+            'updateDateTime' => $branch['updateDateTime'],
+            'branchImage' => $pictureUrl,
+            'currency_default' => $branch['currency_default'],
+            'countryName' => $branch['countryName'],
+            'companyName' => $branch['companyName'],
+            "picture" => !empty($branch["picture"]) ? $branch["picture"] : "image/no-company.svg",
+            "flag" => !empty($branch["flag"]) ? $branch["flag"] : "image/e-world.svg",
+            'city' => $branch['city'],
+        ];
+
         // throw new Exception("branch: " . print_r($branch, true));
 
         // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-page?id=' . $branchId .'&page=1' . '&countryId=0' . '&limit=0');
@@ -320,7 +348,6 @@ class DepartmentController extends Controller
                     ->where(["departmentId" => $departmentId])
                     ->asArray()
                     ->all();
-
 
                 // กรองเฉพาะที่มี picture
                 $filteredEmployees = array_filter($employees, function ($employee) {
@@ -361,7 +388,7 @@ class DepartmentController extends Controller
 
         curl_close($api);
 
-        // throw new Exception("department: " . print_r($data, true));
+        // throw new Exception("department: " . print_r($branch, true));
 
         return $this->renderPartial('modal_department', [
             "company" => $company,
@@ -381,15 +408,10 @@ class DepartmentController extends Controller
 
     public function actionDepartmentsView($hash)
     {
-
         $param = ModelMaster::decodeParams($hash);
 
         $branchId = $param["branchId"];
         $page = $param["nextPage"] ?? 1;
-
-
-
-        // throw new Exception(print_r($param, true)); // Debug: ดูข้อมูลทั้งหมด
 
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -429,9 +451,7 @@ class DepartmentController extends Controller
                     ->where(["departmentId" => $departmentId])
                     ->asArray()
                     ->all();
-
-                // throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
-
+                    
                 // กรองเฉพาะที่มี picture
                 $filteredEmployees = array_filter($employees, function ($employee) {
                     return !empty($employee['picture']);
@@ -586,7 +606,7 @@ class DepartmentController extends Controller
                 Yii::$app->session->setFlash('success', "$successCount department(s) created successfully.");
             }
 
-            return $this->redirect(Yii::$app->homeUrl . 'setting/department/no-department/' . ModelMaster::encodeParams(["branchId" => '']));
+            return $this->redirect(Yii::$app->homeUrl . 'setting/department/departments-view/' . ModelMaster::encodeParams(["branchId" => $branchId]));
         }
     }
 

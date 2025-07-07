@@ -83,7 +83,9 @@ $page = 'view';
                             <?= Yii::t('app', 'Located in') ?>
                             <div class="city-crad-company font-size-14 d-inline-flex pt-0 pb-0"
                                 style="height: 27px;font-weight:400;">
-                                <img src="<?= Yii::$app->homeUrl ?><?= $branches['flag'] ?>" class="bangladresh-hrvc">
+                                <img src="
+                                <?= Yii::$app->homeUrl  ?><?= !empty($branches['flag']) ? $branches['flag'] : 'image/e-world.svg' ?>"
+                                    class="bangladresh-hrvc">
                                 <?= $branches['city'] ?>,<?= $branches['countryName'] ?>
                             </div>
                         </span>

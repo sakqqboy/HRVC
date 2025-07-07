@@ -771,44 +771,17 @@ class TitleController extends Controller
     }
     public function actionSaveUpdateTitle()
     {
+
+        // throw new exception(print_r($_POST, true));
         $titleId = $_POST["titleId"];
         $title = Title::find()->where(["titleId" => $titleId])->one();
-        // throw new Exception(json_encode($_POST));
 
-        /* $oldDepartmentId = $title->departmentId;
-        if ($oldDepartmentId != $_POST["departmentId"]) {
-            DepartmentTitle::deleteAll(["titleId" => $titleId, "departmentId" => $oldDepartmentId]);
-            $departmentTitle = new DepartmentTitle();
-            $departmentTitle->titleId = $titleId;
-            $departmentTitle->departmentId = $_POST["departmentId"];
-            $departmentTitle->status = 1;
-            $departmentTitle->createDateTime = new Expression('NOW()');
-            $departmentTitle->updateDateTime = new Expression('NOW()');
-            $departmentTitle->save(false);
-        }*/
         $title->titleName = $_POST["titleName"];
-        // $title->layerId = $_POST["layer"];
-        // $title->shortTag = $_POST["shortTag"];
-        // $title->departmentId = $_POST["departmentId"];
         $title->jobDescription = $_POST["jobDescription"];
         $title->purpose = $_POST["purpose"];
         $title->keyResponsibility = $_POST["keyResponsibility"];
         $title->status = 1;
         $title->updateDateTime = new Expression('NOW()');
-        // if (isset($_POST["tags"]) && count($_POST["tags"]) > 0) {
-        //     $tags = '';
-        //     foreach ($_POST["tags"] as $tag) :
-        //         $tags .= $tag . ',';
-        //     endforeach;
-        //     if ($tags != '') {
-        //         $tags = substr($tags, 0, -1);
-        //         $title->requireSkill = $tags;
-        //     } else {
-        //         $title->requireSkill = null;
-        //     }
-        // } else {
-        //     $title->requireSkill = null;
-        // }
         $title->save(false);
 
         return $this->redirect($_POST["preUrl"]);

@@ -514,6 +514,22 @@ function loadDepartments(branchId) {
         })
         .catch(error => console.error("Error loading departments:", error));
 }
+
+document.getElementById('departmentSelectId').addEventListener('change', function() {
+    const iconImg = document.getElementById('departmentIconImg');
+    const selectedValue = this.value;
+    const iconDiv = document.getElementById('departmentIcon');
+    if (selectedValue !== '') {
+        iconImg.src = homeUrl + 'image/departments.svg';
+        // alert(selectedValue);
+        iconDiv.classList.remove('cycle-current-gray');
+        iconDiv.classList.add('cycle-current-red');
+
+    } else {
+        iconDiv.classList.remove('cycle-current-red');
+        iconDiv.classList.add('cycle-current-gray');
+    }
+});
 </script>
 
 

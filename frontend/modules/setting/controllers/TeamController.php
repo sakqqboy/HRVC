@@ -682,9 +682,8 @@ class TeamController extends Controller
                 Yii::$app->session->setFlash('success', "$successCount team(s) created successfully.");
             }
         
-            return $this->redirect(Yii::$app->homeUrl . 'setting/team/no-team/' . ModelMaster::encodeParams(["departmentId" => '']));
         }
-
+            return $this->redirect(Yii::$app->homeUrl . 'setting/team/teams-view/' . ModelMaster::encodeParams(["departmentId" => $departmentId]));
     }
     public function actionSaveTeam()
     {
