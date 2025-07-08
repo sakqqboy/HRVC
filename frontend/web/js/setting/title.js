@@ -5,9 +5,18 @@ if (window.location.host == 'localhost') {
 	$baseUrl = window.location.protocol + "//" + window.location.host + '/';
 }
 $url = $baseUrl;
-$('#titleModal').on('hidden.bs.modal', function () {
-	location.reload(); // รีเฟรชหน้า
+
+$('#titleModal').on('hidden.bs.modal', function (e) {
+	if (e.target.id === 'titleModal') {
+		console.log('จริง ๆ ปิด titleModal แล้วจึง reload');
+		location.reload();
+	}
 });
+
+$('#titleDeleteModal').on('hidden.bs.modal', function () {
+	console.log('titleDeleteModal closed');
+});
+
 
 function checkDupplicateTitle() {
 	var titleName = $("#titleName").val();
@@ -324,7 +333,7 @@ function renderTitleList(titles) {
                 </div>
                 <div class="col-2 text-end">
                     <a href="#" style="cursor: pointer;"
-                    onclick="openModalDeleteTitle('${title.titleId}')" class="no-underline icon-delete">
+                    onclick="openModalDeleteTitle('${title.titleId}','')" class="no-underline icon-delete">
                         <img src="${$url}images/icons/Settings/binred.svg" alt="Delete"
                             class="pim-icon bin-icon transition-icon">
                     </a>
@@ -386,26 +395,19 @@ function actionSaveTitle(departmentId, titleName) {
 }
 
 
-function openModalDeleteTitle(titleId) {
+function openModalDeleteTitle(titleId, preUrl) {
 	// alert(titleId);
 	var url = $url + 'setting/title/modal-delete';
 	// alert(url);
 	$.ajax({
 		url: url,
 		type: 'GET',
-		data: { titleId: titleId },
+		data: {
+			titleId: titleId,
+			preUrl: preUrl
+		},
 		success: function (response) {
-			// alert(response);
-			// document.getElementById('titleModal').style.opacity = '0.1';
-			// document.getElementById('titleModal').style.pointerEvents = 'none';
-			// $('#titleModal').modal('hide');
-			// ใส่เนื้อหา HTML ลงใน modal
-			// $('#titleDeleteModal').html(response);
-
-			// // สร้าง modal instance แล้วแสดง
-			// var myModal = new bootstrap.Modal(document.getElementById('titleDeleteModal'));
-			// myModal.show();
-
+			// alert(titleId);
 			$('#titleDeleteModal').html(response);
 			$('#titleDeleteModal').modal('show');
 		},
@@ -509,11 +511,11 @@ function openCloseTitleModal() {
 	$('#titleDeleteModal').modal('hide');
 }
 
-$('#titleDeleteModal').on('hidden.bs.modal', function () {
-	openCloseTitleModal();
-});
+// $('#titleDeleteModal').on('hidden.bs.modal', function () {
+// 	openCloseTitleModal();
+// });
 
-function updateTitleModalContent(titleId) {
+function updateTitleModalContent(titleId, preUrl) {
 	// เปลี่ยน title
 	const modalTitle = document.querySelector('#staticBackdrop4Label');
 	if (modalTitle) {
@@ -536,12 +538,12 @@ function updateTitleModalContent(titleId) {
 		modalFooter.innerHTML = `
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
                 style="width: 100px; display: flex; align-items: center; justify-content: center; background: #2580D3; border: none; color: white;"
-                onclick="openCloseTitleModal()">
+                onclick="">
                 <img src="${$url}images/icons/Settings/cancle.svg" alt="Cancel"
                     style="width: 14px; height: 14px; margin-right: 5px;">
                 Cancel
             </button>
-            <a href="javascript:deleteTitle('${titleId}')" class="btn btn-outline-danger"
+            <a href="javascript:deleteTitle('${titleId}','${preUrl}')" class="btn btn-outline-danger"
                 style="width: 100px; display: flex; align-items: center; justify-content: center; margin-left: 10px;"
                 onmouseover="this.querySelector('.pim-icon').src='${$url}images/icons/Settings/binwhite.svg'"
                 onmouseout="this.querySelector('.pim-icon').src='${$url}images/icons/Settings/binred.svg'">
@@ -554,31 +556,9 @@ function updateTitleModalContent(titleId) {
 }
 
 
-// function deleteTitle(titleId) {
-// 	// alert(titleId);
-// 	// updateTitleModalContent(titleId);
-// 	var url = $url + 'setting/title/delete-title';
-// 	$.ajax({
-// 		url: url,
-// 		type: 'POST',
-// 		data: { titleId: titleId },
-// 		success: function (response) {
-// 			// สมมุติว่า server ส่ง JSON กลับมา
-// 			// เช่น { success: true, departments: [...] }
-// 			if (response.success && response.departments) {
-// 				alert(response.message || 'สามารถลบได้');
-// 				openCloseTitleModal();
-// 				renderDepartmentList(response.departments); // อัปเดตรายการ department
-// 			} else {
-// 				alert(response.message || 'ไม่สามารถลบได้');
-// 			}
-// 		}
-// 	});
-// }
-
-function deleteTitle(titleId) {
+function deleteTitle(titleId, preUrl) {
 	var url = $url + 'setting/title/delete-title';
-	var preUrl = window.location.href; // หรือจะใช้ค่าอื่นที่คุณต้องการ redirect กลับไป
+	// var preUrl = window.location.href; // หรือจะใช้ค่าอื่นที่คุณต้องการ redirect กลับไป
 
 	$.ajax({
 		url: url,
@@ -593,9 +573,11 @@ function deleteTitle(titleId) {
 					window.location.href = response.redirect;
 				} else {
 					// alert(response.message || 'สามารถลบได้');
-					openCloseTitleModal();
-					if (response.departments) {
-						renderDepartmentList(response.departments);
+					// openCloseTitleModal();
+					closeWarningModal()
+					if (response.titles) {
+						console.log(response.titles);
+						renderTitleList(response.titles);
 					}
 				}
 			} else {
@@ -606,23 +588,28 @@ function deleteTitle(titleId) {
 }
 
 
-function saveDeleteTitle(titleId, preUrl) {
+function saveDeleteEditTitle(titleId, preUrl) {
 	// alert(titleId);
-	// updateTitleModalContent(titleId);
-	var url = $url + 'setting/title/delete-title';
-	$.ajax({
-		url: url,
-		type: 'POST',
-		data: { titleId: titleId, preUrl: preUrl },
-		success: function (response) {
-			// สมมุติว่า server ส่ง JSON กลับมา
-			// เช่น { success: true, departments: [...] }
-			// if (response.success && response.departments) {
-			// 	openCloseTitleModal();
-			// 	renderDepartmentList(response.departments); // อัปเดตรายการ department
-			// } else {
-			// 	alert(response.message || 'ไม่สามารถลบได้');
-			// }
-		}
-	});
+	openModalDeleteTitle(titleId, preUrl)
+	// var url = $url + 'setting/title/delete-title';
+	// $.ajax({
+	// 	url: url,
+	// 	type: 'POST',
+	// 	data: { titleId: titleId, preUrl: preUrl },
+	// 	success: function (response) {
+	// 		window.location.href = preUrl;
+	// 	}
+	// });
+}
+
+
+function closeWarningModal() {
+	// event?.preventDefault(); // ป้องกันการรีเฟรชถ้ามี event
+	const modalElement = document.getElementById('titleDeleteModal');
+	const modal = bootstrap.Modal.getInstance(modalElement);
+
+	if (modal) {
+		modal.hide();
+	}
+	// return true;
 }

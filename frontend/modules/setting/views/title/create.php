@@ -283,7 +283,7 @@ $form = ActiveForm::begin([
 
                     <!-- Delete Button (only in Edit mode) -->
                     <?php if ($namePage == "Edit") { ?>
-                    <a href="javascript:saveDeleteTitle('<?= $title['titleId'] ?? '' ?>','<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl ?>')"
+                    <a href="javascript:saveDeleteEditTitle('<?= $title['titleId'] ?? '' ?>','<?= Yii::$app->request->referrer ?>')"
                         class="btn btn-delete-custom d-flex align-items-center"
                         onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                         onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
@@ -313,7 +313,9 @@ $form = ActiveForm::begin([
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="titleDeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdrop4Label" aria-hidden="true">
+    </div>
 
     <script>
     const homeUrl = "<?= Yii::$app->homeUrl ?>";

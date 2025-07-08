@@ -165,8 +165,8 @@ class TitleController extends Controller
                 $departmentId = $row['departmentId'];
                 // $departmentId = "24";
 
-                        //ข้อมูลทีมteamรอง
-                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-department?departmentId=' . '&page=1' . '&limit=0');
+                //ข้อมูลทีมteamรอง
+                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-department?departmentId='. $departmentId . '&page=1' . '&limit=0');
                 $titles = curl_exec($api);
                 $titles = json_decode($titles, true);
 
@@ -322,8 +322,9 @@ class TitleController extends Controller
         $api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        // api
 
+
+        // api
         //ข้อมูลทีมdeparmentเป็นหลัก
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-detail?id=' . $departmentId);
         $department = curl_exec($api);
@@ -560,7 +561,7 @@ class TitleController extends Controller
         //     }
         // }
         if ($title->save(false)) {
-            // $titleId = Yii::$app->db->lastInsertID;
+            $titleId = Yii::$app->db->lastInsertID;
             // $departmentTitle = new DepartmentTitle();
             // $departmentTitle->titleId = $titleId;
             // $departmentTitle->departmentId = $_POST["departmentId"];
@@ -587,7 +588,7 @@ class TitleController extends Controller
             // ]);
         }
 
-        return $this->redirect(Yii::$app->homeUrl . 'setting/title/index');
+        return $this->redirect(Yii::$app->homeUrl . 'setting/title/titles-view/' . ModelMaster::encodeParams(['departmentId' =>  $_POST["departmentId"]]));
     }
 
     public function actionSaveTitle()
@@ -936,10 +937,13 @@ class TitleController extends Controller
     }
     public function actionModalDelete(){
         $titleId = Yii::$app->request->get("titleId");
+        $preUrl = Yii::$app->request->get("preUrl");
+
         // throw new exception(print_r($teamId, true));
 
         return $this -> renderPartial('modal_delete', [
-            "titleId" => $titleId
+            "titleId" => $titleId,
+            "preUrl" =>  $preUrl
         ]);
     }  
     
@@ -949,6 +953,7 @@ class TitleController extends Controller
 
         if (isset($_POST["titleId"])) {
             $titleId = $_POST["titleId"];
+            // $titleId = $_POST["preUrl"];
 
             $update = Title::find()->where([
                 "titleId" => $titleId,
@@ -972,19 +977,23 @@ class TitleController extends Controller
                     $titles = json_decode($titles, true);
                     curl_close($api);
 
-                    return [
-                            'success' => true,
-                            'departments' => $titles
-                        ];
-
-                    // if($_POST["preUrl"]){
-                    //             return $this->redirect($_POST["preUrl"]);
-                    // }else{
-                    //     return [
+                    // return [
                     //         'success' => true,
                     //         'departments' => $titles
                     //     ];
-                    // }
+
+                    if($_POST["preUrl"]){
+                            return [
+                            'success' => true,
+                            'titles' => $titles,
+                            'redirect' => $_POST["preUrl"]
+                        ];
+                    }else{
+                        return [
+                            'success' => true,
+                            'titles' => $titles
+                        ];
+                    }
 
                    
                 } else {
