@@ -1,5 +1,11 @@
+<style>
+.custom-modal-content {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+}
+</style>
 <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" style="border-radius: 8px; padding: 20px; align-items: normal; ">
+    <div class="modal-content custom-modal-content" style="border-radius: 8px; padding: 20px; align-items: normal; ">
         <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
             <h3 class="modal-title" id="staticBackdrop4Label">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/warning.svg" alt="Warning"

@@ -363,13 +363,6 @@ $this->title = 'company profile';
 									?>
                                 <img src="<?= Yii::$app->homeUrl ?>image/no-branch.svg" class="width-TCF-BD"
                                     style="border-radius: 100%;">
-                                <!-- <div class="cycle-current-gray ml-20" style="
-                                width: 55px;
-                                height: 55px;
-                                border-radius: 100%;
-                                ">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                </div> -->
                                 <?php
 									}
 									?>

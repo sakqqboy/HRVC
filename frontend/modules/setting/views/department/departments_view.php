@@ -53,7 +53,7 @@ $page = 'view';
                     align-self: stretch;
                     " class="">
                 <div class="avatar-preview">
-                    <?php if ($branches["branchImage"] != null) { ?>
+                    <?php if ($branches["picture"] != null) { ?>
                     <img src="<?= Yii::$app->homeUrl . $branches['picture'] ?>" class="cycle-big-image"
                         style="max-width: 100px; max-height: 100px;">
                     <?php } else { ?>
@@ -83,7 +83,9 @@ $page = 'view';
                             <?= Yii::t('app', 'Located in') ?>
                             <div class="city-crad-company font-size-14 d-inline-flex pt-0 pb-0"
                                 style="height: 27px;font-weight:400;">
-                                <img src="<?= Yii::$app->homeUrl ?><?= $branches['flag'] ?>" class="bangladresh-hrvc">
+                                <img src="
+                                <?= Yii::$app->homeUrl  ?><?= !empty($branches['flag']) ? $branches['flag'] : 'image/e-world.svg' ?>"
+                                    class="bangladresh-hrvc">
                                 <?= $branches['city'] ?>,<?= $branches['countryName'] ?>
                             </div>
                         </span>

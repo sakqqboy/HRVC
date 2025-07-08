@@ -14,6 +14,8 @@ $this->title = 'Titles';
 $page = "grid";
 
 ?>
+
+
 <!-- <div class="contrainer-body mt-10"> -->
 <div class="mt-60" style="padding: 30px 0px;">
 
@@ -218,5 +220,7 @@ $page = "grid";
     </div>
 </div>
 
-<div class="modal fade" id="titleDeleteModal" tabindex="-2" aria-labelledby="titleDeleteModal" aria-hidden="true">
+<!-- <div class="modal fade" id="titleDeleteModal" tabindex="-3" aria-labelledby="titleDeleteModal" aria-hidden="true"> -->
+<div class="modal fade" id="titleDeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdrop4Label" aria-hidden="true">
 </div>

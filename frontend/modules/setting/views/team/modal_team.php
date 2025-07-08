@@ -44,8 +44,7 @@ use common\models\ModelMaster;
                 </div>
 
                 <div class="city-crad-company text-truncate" style="display: flex; align-items: center; gap: 5px;">
-                    <img src="<?= Yii::$app->homeUrl ?><?= $teams['flag'] ?>" class="bangladresh-hrvc"
-                        style="width: 16px; height: 12px;">
+                    <img src="<?= Yii::$app->homeUrl ?><?= $teams['flag'] ?>" class="bangladresh-hrvc">
                     <?= $teams['city'] ?>,
                     <?= Yii::t('app', $teams['countryName']) ?>
                 </div>

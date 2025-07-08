@@ -771,44 +771,17 @@ class TitleController extends Controller
     }
     public function actionSaveUpdateTitle()
     {
+
+        // throw new exception(print_r($_POST, true));
         $titleId = $_POST["titleId"];
         $title = Title::find()->where(["titleId" => $titleId])->one();
-        // throw new Exception(json_encode($_POST));
 
-        /* $oldDepartmentId = $title->departmentId;
-        if ($oldDepartmentId != $_POST["departmentId"]) {
-            DepartmentTitle::deleteAll(["titleId" => $titleId, "departmentId" => $oldDepartmentId]);
-            $departmentTitle = new DepartmentTitle();
-            $departmentTitle->titleId = $titleId;
-            $departmentTitle->departmentId = $_POST["departmentId"];
-            $departmentTitle->status = 1;
-            $departmentTitle->createDateTime = new Expression('NOW()');
-            $departmentTitle->updateDateTime = new Expression('NOW()');
-            $departmentTitle->save(false);
-        }*/
         $title->titleName = $_POST["titleName"];
-        // $title->layerId = $_POST["layer"];
-        // $title->shortTag = $_POST["shortTag"];
-        // $title->departmentId = $_POST["departmentId"];
         $title->jobDescription = $_POST["jobDescription"];
         $title->purpose = $_POST["purpose"];
         $title->keyResponsibility = $_POST["keyResponsibility"];
         $title->status = 1;
         $title->updateDateTime = new Expression('NOW()');
-        // if (isset($_POST["tags"]) && count($_POST["tags"]) > 0) {
-        //     $tags = '';
-        //     foreach ($_POST["tags"] as $tag) :
-        //         $tags .= $tag . ',';
-        //     endforeach;
-        //     if ($tags != '') {
-        //         $tags = substr($tags, 0, -1);
-        //         $title->requireSkill = $tags;
-        //     } else {
-        //         $title->requireSkill = null;
-        //     }
-        // } else {
-        //     $title->requireSkill = null;
-        // }
         $title->save(false);
 
         return $this->redirect($_POST["preUrl"]);
@@ -972,18 +945,6 @@ class TitleController extends Controller
     
     public function actionDeleteTitle()
     {
-        // $titleId = $_POST["titleId"];
-        // $title = Title::find()->where(["titleId" => $titleId])->one();
-        // $title->status = 99;
-        // $res["status"] = false;
-        // if ($title->save(false)) {
-        //     $res["status"] = true;
-        // }
-        // if ($_POST["redirect"] == 1) {
-        //     // return $this->redirect($_POST["preUrl"]);
-        //     return $this->redirect(Yii::$app->homeUrl . 'setting/title/index');
-        // }
-        // return json_encode($res);
          Yii::$app->response->format = \yii\web\Response::FORMAT_JSON; // ← สำคัญ!
 
         if (isset($_POST["titleId"])) {
@@ -999,6 +960,9 @@ class TitleController extends Controller
                 $update->updateDateTime = new Expression('NOW()');
 
                 if ($update->save(false)) {
+                    // return [
+                    //         'success' => 'test'
+                    //     ];
                     $departmentId = $update->departmentId;
                     $api = curl_init();
                     curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -1008,14 +972,19 @@ class TitleController extends Controller
                     $titles = json_decode($titles, true);
                     curl_close($api);
 
-                    if($_POST["preUrl"]){
-                                return $this->redirect($_POST["preUrl"]);
-                    }else{
-                        return [
+                    return [
                             'success' => true,
                             'departments' => $titles
                         ];
-                    }
+
+                    // if($_POST["preUrl"]){
+                    //             return $this->redirect($_POST["preUrl"]);
+                    // }else{
+                    //     return [
+                    //         'success' => true,
+                    //         'departments' => $titles
+                    //     ];
+                    // }
 
                    
                 } else {

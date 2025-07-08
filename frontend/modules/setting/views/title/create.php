@@ -7,10 +7,10 @@ $namePage = !empty($typePage) ? $typePage : " Create";
 
 $this->title =  $namePage . ' Title';
 
-if($namePage == "Create" ){
-    $urlSubmit = 'setting/title/save-create-title';
+if($namePage == "Edit" ){
+        $urlSubmit = 'setting/title/save-update-title';
 }else{
-    $urlSubmit = 'setting/title/save-update-title';
+        $urlSubmit = 'setting/title/save-create-title';
 }
 
 $form = ActiveForm::begin([
@@ -74,7 +74,7 @@ $form = ActiveForm::begin([
                         </label>
                         <div class="input-group">
                             <input type="text" class="form-control mt-12" name="titleName" id="titleName"
-                                value="<?= $title['titleName'] ?? '';?>" placeholder="Name of The Title">
+                                value="<?= $title['titleName'] ?? '';?>" placeholder="Name of The Title" required>
                         </div>
                     </div>
 
