@@ -192,7 +192,27 @@
 
 }
 
-.pim-head-company {
+.pim-center-line-content {
+	display: flex;
+	height: 86px;
+	align-self: center;
+	border-right: lightgray solid thin;
+	margin-left: 15px;
+	margin-right: 15px;
+
+}
+
+.pim-center-line-content-md {
+	display: flex;
+	height: 56px;
+	align-self: center;
+	border-right: lightgray solid thin;
+	margin-left: 15px;
+	margin-right: 15px;
+
+}
+
+.pim-over .pim-head-company {
 	font-size: clamp(11px, 0.76vw, 24px);
 	font-weight: 500;
 	min-height: 23px;
@@ -379,7 +399,7 @@
 
 .pim-subheader-font {
 	font-size: 14px;
-	letter-spacing: 0.5px;
+	/* letter-spacing: 0.5px; */
 	font-weight: 500;
 	color: gray;
 }
@@ -387,7 +407,7 @@
 .pim-normal-text {
 	font-size: 10px;
 	font-weight: 400;
-	letter-spacing: 0.5px;
+	/* letter-spacing: 0.5px; */
 	color: #000000;
 }
 
@@ -470,15 +490,15 @@
 }
 
 .inprogress-tag {
-	width: 100%;
 	font-weight: 600;
 	font-size: 14px;
 	color: #2F42ED;
 	background-color: #D3D7FF;
 	border: #b4bafa solid thin;
 	border-radius: 24.44px;
-	padding-top: 1px;
-	letter-spacing: 0.3px;
+	width: 110px;
+	max-width: 150px;
+	justify-self: center;
 }
 
 .over-tag {
@@ -489,8 +509,9 @@
 	background-color: #FFD7D7;
 	border: #feb1b1 solid thin;
 	border-radius: 24.44px;
-	padding-top: 1px;
-	letter-spacing: 0.3px;
+	width: 110px;
+	max-width: 150px;
+	justify-self: center;
 }
 
 .complete-tag {
@@ -501,8 +522,9 @@
 	background-color: #DCFFD7;
 	border: #b4f8aa solid thin;
 	border-radius: 24.44px;
-	padding-top: 1px;
-	letter-spacing: 0.3px;
+	width: 110px;
+	max-width: 150px;
+	justify-self: center;
 }
 
 .disable-tag {
@@ -513,8 +535,9 @@
 	background-color: #DCDCDC;
 	border: #C0C0C0 solid thin;
 	border-radius: 24.44px;
-	padding-top: 1px;
-	letter-spacing: 0.3px;
+	width: 110px;
+	max-width: 150px;
+	justify-self: center;
 }
 
 .month-inprogress {
@@ -690,14 +713,9 @@
 
 .over-assignKFI {
 	color: #E05757;
-	leading-trim: both;
-	text-edge: cap;
 	font-family: "SF Pro Display";
-	font-size: 16px;
-	font-style: normal;
+	font-size: 13px;
 	font-weight: 500;
-	line-height: 13.622px;
-	letter-spacing: -0.24px;
 	text-decoration-line: underline;
 	text-decoration-style: solid;
 	text-decoration-skip-ink: none;
@@ -706,26 +724,18 @@
 	text-underline-position: from-font;
 	background-color: #FFD7D7;
 	border-radius: 22.5px;
-	letter-spacing: 0.5px;
 	padding-left: 5px;
 	display: flex;
-	width: 181px;
-	height: 42px;
-	padding: 7px 14px 7px 7px;
+	width: 130px;
+	height: 30px;
 	align-items: center;
-	gap: 8px;
 }
 
 .inprogress-assignKFI {
 	color: var(--IN-Progress-Blue, #2F42ED);
-	leading-trim: both;
-	text-edge: cap;
 	font-family: "SF Pro Display";
-	font-size: 16px;
-	font-style: normal;
+	font-size: 13px;
 	font-weight: 500;
-	line-height: 13.622px;
-	letter-spacing: -0.24px;
 	text-decoration-line: underline;
 	text-decoration-style: solid;
 	text-decoration-skip-ink: none;
@@ -734,26 +744,18 @@
 	text-underline-position: from-font;
 	background-color: #E7EAFF;
 	border-radius: 22.5px;
-	letter-spacing: 0.5px;
 	padding-left: 5px;
 	display: flex;
-	width: 181px;
-	height: 42px;
-	padding: 7px 14px 7px 7px;
+	width: 130px;
+	height: 30px;
 	align-items: center;
-	gap: 8px;
 }
 
 .complete-assignKFI {
 	color: #2D7F06;
-	leading-trim: both;
-	text-edge: cap;
 	font-family: "SF Pro Display";
-	font-size: 16px;
-	font-style: normal;
+	font-size: 13px;
 	font-weight: 500;
-	line-height: 13.622px;
-	letter-spacing: -0.24px;
 	text-decoration-line: underline;
 	text-decoration-style: solid;
 	text-decoration-skip-ink: none;
@@ -762,27 +764,20 @@
 	text-underline-position: from-font;
 	background-color: #DCFFD7;
 	border-radius: 22.5px;
-	letter-spacing: 0.5px;
 	padding-left: 5px;
 	display: flex;
-	width: 181px;
-	height: 42px;
-	padding: 7px 14px 7px 7px;
+	width: 130px;
+	height: 30px;
 	align-items: center;
-	gap: 8px;
 }
 
 
 .disable-assignKFI {
 	color: black;
-	leading-trim: both;
-	text-edge: cap;
 	font-family: "SF Pro Display";
-	font-size: 16px;
+	font-size: 13px;
 	font-style: normal;
 	font-weight: 500;
-	line-height: 13.622px;
-	letter-spacing: -0.24px;
 	text-decoration-line: underline;
 	text-decoration-style: solid;
 	text-decoration-skip-ink: none;
@@ -791,26 +786,18 @@
 	text-underline-position: from-font;
 	background-color: #E3E3E3;
 	border-radius: 22.5px;
-	letter-spacing: 0.5px;
 	padding-left: 5px;
 	display: flex;
-	width: 181px;
-	height: 42px;
-	padding: 7px 14px 7px 7px;
+	width: 130px;
+	height: 30px;
 	align-items: center;
-	gap: 8px;
 }
 
 .yenlow-assignKFI {
 	color: black;
-	leading-trim: both;
-	text-edge: cap;
 	font-family: "SF Pro Display";
-	font-size: 16px;
-	font-style: normal;
+	font-size: 13px;
 	font-weight: 500;
-	line-height: 13.622px;
-	letter-spacing: -0.24px;
 	text-decoration-line: underline;
 	text-decoration-style: solid;
 	text-decoration-skip-ink: none;
@@ -820,16 +807,13 @@
 	background-color: #FFFAED;
 	border: #FFD000 solid thin;
 	border-radius: 22.5px;
-	letter-spacing: 0.5px;
 	padding-left: 5px;
 	display: flex;
-	width: 181px;
-	height: 42px;
-	padding: 7px 14px 7px 7px;
+	width: 130px;
+	height: 30px;
 	align-items: center;
-	gap: 8px;
-}
 
+}
 
 .over-assign {
 	width: 100%;
@@ -1201,6 +1185,7 @@
 
 .load-over {
 	border: 1px solid #E05757;
+
 }
 
 .load-inprogress {
@@ -1250,6 +1235,10 @@
 
 .head-disable {
 	background-color: #C0C0C0;
+}
+
+.head-yellow {
+	background-color: #FFFAED;
 }
 
 .body-letter {
@@ -1308,11 +1297,11 @@
 	font-style: normal;
 	letter-spacing: -0.27px;
 	text-align: center;
-	border-radius: 14px;
+	border-radius: 100%;
 	position: relative;
 	color: var(--HRVC---Text-Black, #30313D);
 	z-index: 3;
-	background: #ffffff;
+	/* background: #ffffff; */
 	font-family: "SF Pro Display";
 	font-weight: 500;
 
@@ -1336,25 +1325,7 @@
 	padding-top: 3px;
 }
 
-.pim-pic-gridKFINum {
-	/* font-family: "SF Pro Display";
-	font-size: 14px !important;
-	font-style: normal;
-	font-weight: 500;
-	text-align: center;
-	position: relative;
-	color: #000000;
-	margin-top: 3px; */
-	background: #ffffff;
-	font-weight: 500;
-	position: relative;
-	text-align: center;
-	width: 44px;
-	height: 44px;
-	border-radius: 22px;
-	padding-top: 5px;
-	/* z-index: 3; */
-}
+
 
 .pim-pic-gridNew {
 	width: 33px;
@@ -1420,8 +1391,8 @@
 .pim-pic-complete img,
 .pim-pic-yenlow img,
 .pim-pic-disable img {
-	width: 12px;
-	height: 14px;
+	width: 22px;
+	height: 22px;
 	object-fit: cover;
 	margin: auto;
 	margin-top: 4px;
@@ -1430,32 +1401,22 @@
 
 
 .pim-pic-yenlowKFI {
-	width: 43px;
-	height: 43px;
-	padding: 12px;
-	/* ความสูงของวงกลมเท่ากับความกว้าง */
+	width: 30px;
+	height: 30px;
+	padding: 0;
 	border-radius: 100%;
-	/* ทำให้เป็นวงกลม */
 	background-color: #FFFAED;
-	/* สีพื้นหลังวงกลม */
 	border: 0.5px solid #FFD000;
-	/* สีขอบของวงกลม */
 	display: flex;
-	/* ใช้ Flexbox */
 	justify-content: center;
-	/* จัดตำแหน่งให้อยู่กึ่งกลางแนวนอน */
 	align-items: center;
-	/* จัดตำแหน่งให้อยู่กึ่งกลางแนวตั้ง */
-	right: 11px;
-	justify-content: center;
-	gap: 10px;
 }
 
 .pim-pic-yenlowKFI img {
-	width: 14.999px;
+	width: 20px;
 	height: 20px;
-	flex-shrink: 0;
-	left: 12px
+	/* flex-shrink: 0;
+	left: 12px */
 }
 
 
@@ -1574,11 +1535,34 @@
 }
 
 .pim-pic-gridKFI {
-	width: 43px;
-	height: 43px;
-	border-radius: 43px;
-	background: url(<path-to-image>) lightgray 50% / cover no-repeat, url(<path-to-image>) lightgray 50% / cover no-repeat, #E1FFD7;
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+	/* background: url(<path-to-image>) lightgray 50% / cover no-repeat, url(<path-to-image>) lightgray 50% / cover no-repeat, #E1FFD7; */
 	border: #FFFFFF solid 0.5px;
+}
+
+.pim-pic-gridKFINum {
+	/* font-family: "SF Pro Display";
+	font-size: 14px !important;
+	font-style: normal;
+	font-weight: 500;
+	text-align: center;
+	position: relative;
+	color: #000000;
+	margin-top: 3px;
+	background: #ffffff; */
+	margin-left: -10px;
+	font-weight: 500;
+	font-size: 18px;
+	position: relative;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+	padding: 0;
+	align-content: center;
+
 }
 
 .pim-picgroup {
@@ -1587,10 +1571,10 @@
 }
 
 .pim-picgroup img {
-	margin-left: 4px;
+	/* margin-left: 4px; */
 	/* ปรับตามความต้องการ */
 	/* หรือ */
-	transform: translateX(-15px);
+	/* transform: translateX(-15px); */
 	/* ปรับขนาดได้ตามต้องการ */
 }
 
@@ -1615,7 +1599,7 @@
 }
 
 .pic-afterKFI {
-	margin-left: -5px;
+	margin-left: -10px;
 	z-index: 3;
 }
 

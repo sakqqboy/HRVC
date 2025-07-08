@@ -134,7 +134,7 @@ $session = Yii::$app->session;
         }
         ?>
     </div>
-    <div class="col-12 mt-20">
+    <div class="col-12 mt-17">
         <div class="btn-group-menu" onclick="javascript:toggleGroupMenuI('financial-system')">
             <div class="row">
                 <div class="col-2 pl-20">
@@ -198,7 +198,7 @@ $session = Yii::$app->session;
             </div>
         </div>
     </div>
-    <div class="col-12 mt-20">
+    <div class="col-12 mt-17">
         <div class="btn-group-menu" onclick="javascript:toggleGroupMenuI('performance-matrices')">
             <div class="row">
                 <div class="col-2 pl-20">
@@ -332,7 +332,7 @@ $session = Yii::$app->session;
             <!-- </div> -->
         </div>
     </div>
-    <div class="col-12 mt-20">
+    <div class="col-12 mt-17">
         <div class="btn-group-menu" onclick="javascript:toggleGroupMenuI('evaluation-system')">
             <div class="row">
                 <div class="col-2 pl-20">
@@ -422,7 +422,7 @@ $session = Yii::$app->session;
             </div>
         </div>
     </div>
-    <div class="col-12 mt-20">
+    <div class="col-12 mt-17">
         <div class="btn-group-menu" onclick="javascript:toggleGroupMenuI('behavioral-evaluation')">
             <div class="row">
                 <div class="col-2 pl-20">
