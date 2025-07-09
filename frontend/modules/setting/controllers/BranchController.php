@@ -515,20 +515,7 @@ class BranchController extends Controller
                         // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
                         $pictureUrl = 'image/no-branch.svg';
                     }
-                // $filePath = 'http://localhost/HRVC/frontend/web/images/branch/profile/b9NYp54V-J.png';
-                // if (file_exists($filePath)) {
-                //     // ✅ ไฟล์มีอยู่จริง
-                //     throw new Exception(print_r($filePath, true));
-                //     $pictureUrl = $branch["branchImage"];
-                //     $test ='1';
-                // } else {
-                //     // ❌ ไฟล์ไม่พบ
-                //     // throw new Exception(print_r($branch["picture"], true));
-                //     $pictureUrl = 'image/no-branch.svg';
-                //     $test ='2';
-                // };
-                // throw new Exception(print_r( $test, true));
-                //เก็บค่า
+
                 $data[$branch["branchId"]] = [
                 "branchId" => $branch["branchId"],
                 "branchName" => $branch["branchName"],
@@ -893,9 +880,45 @@ class BranchController extends Controller
 		$resultCountry = curl_exec($api);
 		$countries = json_decode($resultCountry, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' .  $branchId );
-		$branch = curl_exec($api);
-		$branch = json_decode($branch, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' . $branchId);
+        $response = curl_exec($api);
+        $branchData = json_decode($response, true);
+
+        if (!empty($branchData)) {
+            // สมมติว่า API คืนข้อมูลแบบเป็น associative array ของ branch เดียว
+            $relativePath = $branchData["branchImage"] ?? '';
+            $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+
+            if (!empty($relativePath) && file_exists($absolutePath)) {
+                // ✅ ไฟล์มีอยู่จริง
+                $pictureUrl = $relativePath;
+            } else {
+                // ❌ ไม่มีไฟล์ → ใช้รูป default
+                $pictureUrl = 'image/no-branch.svg';
+            }
+
+            // เตรียมข้อมูล branch ที่พร้อมใช้งาน
+            $branch = [
+                'branchId' => $branchData['branchId'],
+                'branchName' => $branchData['branchName'],
+                'companyId' => $branchData['companyId'],
+                'description' => $branchData['description'],
+                'status' => $branchData['status'],
+                'createDateTime' => $branchData['createDateTime'],
+                'updateDateTime' => $branchData['updateDateTime'],
+                'financial_start_month' => $branchData['financial_start_month'],
+                'financial_description' => $branchData['financial_description'],
+                'branchImage' => $pictureUrl,
+                'currency_default' => $branchData['currency_default'],
+                'countryName' => $branchData['countryName'],
+                'companyName' => $branchData['companyName'],
+                "picture" => !empty($branchData["picture"]) ? $branchData["picture"] : "image/no-company.svg",
+                "flag" => !empty($branchData["flag"]) ? $branchData["flag"] : "image/e-world.svg",
+                'city' => $branchData['city'],
+            ];
+        }
+
+
         // throw new Exception("branch: " . print_r($branch, true));
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-page?id=' . $branchId .'&page=1' . '&countryId=0' . '&limit=5');
@@ -1121,7 +1144,43 @@ class BranchController extends Controller
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' .  $branchId );
 		$branch = curl_exec($api);
-		$branch = json_decode($branch, true);
+		// $branch = json_decode($branch, true);
+         $branchData = json_decode($branch, true);
+
+        if (!empty($branchData)) {
+            // สมมติว่า API คืนข้อมูลแบบเป็น associative array ของ branch เดียว
+            $relativePath = $branchData["branchImage"] ?? '';
+            $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+
+            if (!empty($relativePath) && file_exists($absolutePath)) {
+                // ✅ ไฟล์มีอยู่จริง
+                $pictureUrl = $relativePath;
+            } else {
+                // ❌ ไม่มีไฟล์ → ใช้รูป default
+                // $pictureUrl = 'image/no-branch.svg';
+                $pictureUrl = '';
+            }
+
+            // เตรียมข้อมูล branch ที่พร้อมใช้งาน
+            $branch = [
+                'branchId' => $branchData['branchId'],
+                'branchName' => $branchData['branchName'],
+                'companyId' => $branchData['companyId'],
+                'description' => $branchData['description'],
+                'status' => $branchData['status'],
+                'createDateTime' => $branchData['createDateTime'],
+                'updateDateTime' => $branchData['updateDateTime'],
+                'financial_start_month' => $branchData['financial_start_month'],
+                'financial_description' => $branchData['financial_description'],
+                'branchImage' => $pictureUrl,
+                'currency_default' => $branchData['currency_default'],
+                'countryName' => $branchData['countryName'],
+                'companyName' => $branchData['companyName'],
+                "picture" => !empty($branchData["picture"]) ? $branchData["picture"] : "image/no-company.svg",
+                "flag" => !empty($branchData["flag"]) ? $branchData["flag"] : "image/e-world.svg",
+                'city' => $branchData['city'],
+            ];
+        }
         // throw new Exception("branch: " . print_r($branch, true));
 
 
