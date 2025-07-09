@@ -451,13 +451,47 @@ function renderTeamList(teams) {
         container.insertAdjacentHTML('beforeend', html);
     });
 
-    const targetTeamId = document.getElementById('teamId')?.value;
+    let targetTeamId = document.getElementById('teamId')?.value;
     const targetLi = container.querySelector(`li[data-id="${targetTeamId}"]`);
 
     if (targetTeamId && targetLi) {
         const editBtn = targetLi.querySelector('.icon-edit');
         handleTeamEditClick(null, editBtn);
     }
+}
+
+function updateTeamList(teams) {
+    const container = document.getElementById('schedule-list');
+    container.innerHTML = '';
+
+    if (!Array.isArray(teams)) {
+        console.error('teams is not an array:', teams);
+        return;
+    }
+
+    teams.forEach(team => {
+        const html = `
+        <li class="schedule-item" data-id="${team.teamId}" style="padding: 13px 20px; background-color: #FFFFFF;">
+            <div class="row align-items-center dept-name">
+                <div class="col-10 dept-label" style="font-weight: 600; font-size: 16px;">
+                    ${team.teamName}
+                </div>
+                <div class="col-2 text-end">
+                    <a href="#" style="cursor: pointer;"
+                    onclick="openModalDeleteTeam('${team.teamId}')" class="no-underline icon-delete">
+                        <img src="${$url}images/icons/Settings/binred.svg" alt="Delete"
+                            class="pim-icon bin-icon transition-icon">
+                    </a>
+                    <a href="#" class="no-underline icon-edit" onclick="handleTeamEditClick(event, this)">
+                        <img src="${$url}image/edit-blue.svg" alt="Edit"
+                            class="pim-icon edit-icon transition-icon" style="margin-top: -3px;">
+                        <span class="text-blue edit-label transition-label" style="font-weight: 500;">Edit</span>
+                    </a>
+                </div>
+            </div>
+        </li>`;
+        container.insertAdjacentHTML('beforeend', html);
+    });
 }
 
 
@@ -551,13 +585,17 @@ function handleTeamEditClick(e, element) {
     const input = document.getElementById('editTeamInputlist');
     // input.focus();
     setTimeout(() => {
+        // alert('focus');
+        // if (e != null) {
         input.focus();
         input.setSelectionRange(input.value.length, input.value.length); // ให้เคอร์เซอร์อยู่ท้ายข้อความ
+        // }
     }, 500);
 
     input.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
             // $('#teamModal').modal('hide');
+            // alert('สำเร็จ');
             saveTeamEdit(input.value.trim());
             // location.reload(); // รีเฟรชหน้าทันทีหลังจากกด Enter
         }
@@ -592,7 +630,7 @@ function updateteamName(teamId, teamName) {
         success: function (data) {
             if (data.success && data.teams) {
                 // alert('บันทึกสำเร็จ');
-                renderTeamList(data.teams); // เรียกฟังก์ชันวาด HTML ใหม่
+                updateTeamList(data.teams); // เรียกฟังก์ชันวาด HTML ใหม่
             } else {
                 alert(data.message || 'ไม่สามารถบันทึกได้');
             }
@@ -670,7 +708,7 @@ function deleteTeam(teamId) {
             // เช่น { success: true, departments: [...] }
             if (response.success && response.departments) {
                 openCloseTeamModal();
-                renderDepartmentList(response.departments); // อัปเดตรายการ department
+                renderTeamList(response.departments); // อัปเดตรายการ department
             } else {
                 alert(response.message || 'ไม่สามารถลบได้');
             }

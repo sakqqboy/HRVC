@@ -386,7 +386,7 @@ function updateDepartmentName(departmentId, departmentName) {
         success: function (data) {
             if (data.success && data.departments) {
                 // alert('บันทึกสำเร็จ');
-                renderDepartmentList(data.departments); // เรียกฟังก์ชันวาด HTML ใหม่
+                updateDepartmentList(data.departments); // เรียกฟังก์ชันวาด HTML ใหม่
             } else {
                 // alert('ไม่สามารถบันทึกได้');
                 alert(data.message);
@@ -439,6 +439,45 @@ function renderDepartmentList(departments) {
         const editBtn = targetLi.querySelector('.icon-edit');
         handleDepEditClick(null, editBtn);
     }
+
+}
+
+
+
+function updateDepartmentList(departments) {
+    // alert(departments);
+    const container = document.getElementById('schedule-list');
+
+    container.innerHTML = '';
+    departments.forEach(dept => {
+        const html = `
+        <li class="schedule-item p-0 align-content-center" data-id="${dept.departmentId}" style="height:40px; background-color: #FFFFFF;border-radius:5px;">
+    <div class="row dept-name" style="--bs-gutter-x:0px;">
+        <div class="col-10 dept-label pl-20 align-content-center" style="font-weight: 600; font-size: 16px;">
+            ${dept.departmentName}
+        </div>
+        <div class="col-2 pr-10 pl-0">
+            <div class="row" style="--bs-gutter-x:0px;text-align:center">
+                <div class="col-4 pl-0 pr-0 border-right">
+                    <a href="#" style="cursor: pointer;"
+                        onclick="openModalDeleteDepartment('${dept.departmentId}')" class="no-underline icon-delete">
+                        <img src="${$url}images/icons/Settings/binred.svg" alt="Delete"
+                            class="pim-icon bin-icon transition-icon">
+                    </a>
+                </div>
+                <div class="col-8 pr-0">
+                    <a href="#" class="no-underline icon-edit" onclick="handleDepEditClick(event, this)">
+                        <img src="${$url}image/edit-blue.svg" alt="Edit"
+                            class="pim-icon edit-icon transition-icon" style="">
+                        <span class="text-blue edit-label transition-label font-size-16" style="font-weight: 500;">Edit</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>`;
+        container.insertAdjacentHTML('beforeend', html);
+    });
 
 }
 

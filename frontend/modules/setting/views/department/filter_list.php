@@ -9,15 +9,15 @@ use frontend\models\hrvc\Team;
 ?>
 <div class="d-flex justify-content-end align-items-center  gap-2">
 
-    <select id="countrySelect" class="form-select font-size-12 select-pim" style="border-left: none;" required>
+    <select id="countrySelect" class="form-select font-size-12 select-pim" required>
         <option value="" disabled <?= empty($countryIdOld) ? 'selected' : '' ?> hidden
             style="color: var(--Helper-Text, #8A8A8A);">
             <?= Yii::t('app', 'Country') ?>
         </option>
         <?php foreach ($countries as $countryId => $country) : ?>
-            <option value="<?= $countryId ?>" <?= $countryIdOld == $countryId ? 'selected' : '' ?>>
-                <?= $country ?>
-            </option>
+        <option value="<?= $countryId ?>" <?= $countryIdOld == $countryId ? 'selected' : '' ?>>
+            <?= $country ?>
+        </option>
         <?php endforeach; ?>
     </select>
     <!-- 
@@ -49,7 +49,7 @@ use frontend\models\hrvc\Team;
         id="company-filter" onchange="applySelectStyle(this)">
         <?php
         if (!empty($companyIdOld)) { ?>
-            <option value="<?= $companyIdOld ?>"><?= Company::companyName($companyIdOld) ?></option>
+        <option value="<?= $companyIdOld ?>"><?= Company::companyName($companyIdOld) ?></option>
         <?php
             $branches = Branch::branchInCompany($companyIdOld);
         }
@@ -58,7 +58,7 @@ use frontend\models\hrvc\Team;
         <?php
         if (isset($companies) && count($companies) > 0) {
             foreach ($companies as $company) : ?>
-                <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+        <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
         <?php
             endforeach;
         }
@@ -70,7 +70,7 @@ use frontend\models\hrvc\Team;
         <?php
         if (!empty($branchIdOld)) {
         ?>
-            <option value="<?= $branchIdOld ?>"><?= Branch::branchName($branchIdOld) ?></option>
+        <option value="<?= $branchIdOld ?>"><?= Branch::branchName($branchIdOld) ?></option>
         <?php
             $teams = Team::teamInBranch($branchIdOld);
         }
@@ -79,7 +79,7 @@ use frontend\models\hrvc\Team;
         <?php
         if (isset($branches) && count($branches) > 0) {
             foreach ($branches as $branch) : ?>
-                <option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
+        <option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
         <?php
             endforeach;
         }
