@@ -795,7 +795,8 @@ class CompanyController extends Controller
         $companyJson = curl_exec($apiCompany);
         $companyBranch = json_decode($companyJson, true);
 
-		
+		$branchs = [];
+		$pictureUrl = '';
 
 		if (!empty($companyBranch)) {
 			foreach ($companyBranch as $branch) {

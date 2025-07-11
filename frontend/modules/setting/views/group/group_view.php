@@ -178,23 +178,11 @@ $this->title = 'Group profile';
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-12 mb-3">
                                 <div class="alert alert-secondary-background" style="width: 100%;">
-                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/branch-grid/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
                                         class="text-decoration-none" style="width: 60%;">
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
-                                                    <!-- <div class="cycle-current-yellow">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
-                                                            alt="icon">
-                                                    </div>
-                                                    <div class="cycle-current-yellow">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
-                                                            alt="icon">
-                                                    </div>
-                                                    <div class="cycle-current-yellow">
-                                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
-                                                            alt="icon">
-                                                    </div> -->
                                                     <div
                                                         class="cycle-current-<?= $totalBranches >= 1 ? 'yellow' : 'gray' ?>">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
@@ -225,7 +213,7 @@ $this->title = 'Group profile';
                             </div>
                             <div class="col-lg-4 col-md-6 col-12 mb-3">
                                 <div class="alert alert-secondary-background" style="width: 100%;">
-                                    <a href="<?= Yii::$app->homeUrl ?>setting/department/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>setting/department/index/"
                                         class="text-decoration-none" style="width: 60%;">
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
@@ -258,8 +246,8 @@ $this->title = 'Group profile';
                             </div>
                             <div class="col-lg-4 col-md-6 col-12 mb-3">
                                 <div class="alert alert-secondary-background" style="width: 100%;">
-                                    <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
-                                        class="text-decoration-none" style="width: 60%;">
+                                    <a href="<?= Yii::$app->homeUrl ?>setting/team/index/" class="text-decoration-none"
+                                        style="width: 60%;">
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
@@ -365,7 +353,7 @@ $this->title = 'Group profile';
                                 <?php
 									} else {
 									?>
-                                <img src="<?= Yii::$app->homeUrl . 'image/userProfile.png' ?>" class="width-TCF-BD"
+                                <img src="<?= Yii::$app->homeUrl . 'image/no-company.svg' ?>" class="width-TCF-BD"
                                     style="border-radius: 100%;">
                                 <?php
 									}
@@ -400,7 +388,8 @@ $this->title = 'Group profile';
                     if (count($companyGroup) > 5) {
 					?>
                     <div class="col-12 text-end">
-                        <a href="<?= Yii::$app->homeUrl ?>setting/company/index"> <?= Yii::t('app', 'See All') ?> </a>
+                        <a href="<?= Yii::$app->homeUrl ?>setting/company/company-grid"> <?= Yii::t('app', 'See All') ?>
+                        </a>
                     </div>
                     <?php
                     }
