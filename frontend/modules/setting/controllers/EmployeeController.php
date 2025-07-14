@@ -59,7 +59,7 @@ class EmployeeController extends Controller
             return $this->redirect(Yii::$app->homeUrl . 'site/login');
         }
         $role = UserRole::userRight();
-		if($role >= 5 || $role == 2 ){
+		if($role == 3 || $role == 1 ){
 			return  $this->redirect(Yii::$app->request->referrer);
 		}
         return true; //go to origin request
