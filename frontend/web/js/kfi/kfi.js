@@ -660,7 +660,7 @@ function multiTeam(departmentId) {
 function multiTeamUpdate(departmentId) {
     var sumTeam = totalTeamUpdate(departmentId);
     var totalChecked = $('input[id^="multi-check-team-"]:checked').length;
-    
+
     var multiTeamDepartment = [];
     var i = 0;
     // ตรวจสอบว่าทุกทีมถูกเลือกหรือไม่
@@ -685,7 +685,7 @@ function multiTeamUpdate(departmentId) {
         multiTeamDepartment[i] = $(this).val();
         i++;
     });
-//    alert('totalTeam= '+sumTeam+' totalCheck= '+multiTeamDepartment.length);
+    //    alert('totalTeam= '+sumTeam+' totalCheck= '+multiTeamDepartment.length);
     //alert(sumTeam + '=>' + multiTeamDepartment.length);
     if (sumTeam != multiTeamDepartment.length) {
         $("#multi-check-all-team-" + departmentId + '-update').prop("checked", false);
@@ -1384,9 +1384,11 @@ function updateSelectedDates() {
     let newText = '<span class="calendar-due mr-15" id="calendar-dueterm"></span>';
     let duterm = startDate + ' - ' + endDate;
     let icon = '<i class="fa fa-angle-down" aria-hidden="true" style="position: absolute;right:0;margin-right:15px;"></i>';
-    
-    document.getElementById("multi-due-term").innerHTML = newText + duterm + icon;
-    
+
+    // document.getElementById("multi-due-term").innerHTML = newText + duterm + icon;
+
+    document.getElementById("multi-due-term").innerHTML = duterm + icon;
+
     const images1 = '<img src="' + $url + 'image/calendar-gray.svg' + '" alt="from" class="calendar-due-image">';
     const images2 = '<img src="' + $url + 'image/weld-gray.svg' + '" alt="from" class="calendar-due-image">';
     const images3 = '<img src="' + $url + 'image/calendar-gray.svg' + '" alt="from" class="calendar-due-image">';
@@ -1445,9 +1447,9 @@ function updateLastUpdateDate(dateStr) {
 
     let newText = '<span class="calendar-due mr-50" id="calendar-dueterm-update"></span>';
     let icon = '<i class="fa fa-angle-down" aria-hidden="true" style="position: absolute;right:0;margin-right:15px;"></i>';
-    
+
     document.getElementById("multi-due-update").innerHTML = newText + dateStr + icon;
-    
+
     const images1 = '<img src="' + $url + 'image/calendar-gray.svg' + '" alt="from" class="calendar-due-image">';
     const images2 = '<img src="' + $url + 'image/weld-gray.svg' + '" alt="from" class="calendar-due-image">';
     const images3 = '<img src="' + $url + 'image/calendar-gray.svg' + '" alt="from" class="calendar-due-image">';
@@ -1464,7 +1466,7 @@ function updateLastUpdateDate(dateStr) {
 
     // หากเลือกวันที่แล้ว เปลี่ยนสีพื้นหลังและอัปเดตไอคอน
     if (dateStr) {
-    const calendarDue = document.querySelector('#multi-due-update #calendar-dueterm-update');
+        const calendarDue = document.querySelector('#multi-due-update #calendar-dueterm-update');
         calendarDue.style.backgroundColor = '#D7EBFF';
         calendarDue.style.border = '0.5px solid #BEDAFF';
 
@@ -2226,8 +2228,8 @@ function changeStatus(type) {
         $("#pim-status").addClass('select-create-status');
     }
     if (pimStatus == 2) {
-        if (type == 'kgi') { 
-            var kgiId=$("#kgiId").val();
+        if (type == 'kgi') {
+            var kgiId = $("#kgiId").val();
             var url = $url + 'kgi/management/check-kgi-team';
             $.ajax({
                 type: "POST",
@@ -2237,18 +2239,18 @@ function changeStatus(type) {
                 success: function (data) {
                     if (data.countTeam == 0) {
                         $("#pim-status").addClass('select-complete-status');
-                    } else { 
+                    } else {
                         $("#pim-status").val(1)
                         $("#pim-status").addClass('select-create-status');
                         $("#warning-kgi").modal("show");
                     }
-                
+
                 }
             });
-            
+
         }
-        if (type == 'kpi') { 
-            var kpiId=$("#kpiId").val();
+        if (type == 'kpi') {
+            var kpiId = $("#kpiId").val();
             var url = $url + 'kpi/management/check-kpi-team';
             $.ajax({
                 type: "POST",
@@ -2258,15 +2260,15 @@ function changeStatus(type) {
                 success: function (data) {
                     if (data.countTeam == 0) {
                         $("#pim-status").addClass('select-complete-status');
-                    } else { 
+                    } else {
                         $("#pim-status").val(1)
                         $("#pim-status").addClass('select-create-status');
                         $("#warning-kpi").modal("show");
                     }
-                
+
                 }
             });
-            
+
         }
     }
 }
