@@ -1009,15 +1009,6 @@ class EmployeeController extends Controller
                                     // ใช้ path สำหรับเก็บลง DB
                                     $cerImagePath = 'images/certificate/' . $imgName;
 
-                                    // $img = $_FILES[$imageKey];
-                                    // $ext = pathinfo($img['name'], PATHINFO_EXTENSION);
-                                    // $imgName = Yii::$app->security->generateRandomString(12) . '.' . $ext;
-                                    // $path = Path::getHost() . 'images/certificate/';
-                                    // if (!file_exists($path)) {
-                                    //     mkdir($path, 0777, true);
-                                    // }
-                                    // move_uploaded_file($img['tmp_name'], $path . $imgName);
-                                    // $cerImagePath = 'images/certificate/' . $imgName;
                                 }
                                 // 🔁 บันทึกข้อมูล (Insert ใหม่ หรือ Update ก็ได้)
                                 $certificate = Certificate::findOne(['cerId' => $tmpId]);

@@ -838,26 +838,80 @@ class BranchController extends Controller
                 $branchId = Yii::$app->db->lastInsertID;
                 $branch = Branch::find()->where(["branchId" => $branchId])->one();
 
+                // $fileImage = UploadedFile::getInstanceByName("image");
+                // if (isset($fileImage) && !empty($fileImage)) {
+                //     $path = Path::getHost() . 'images/branch/profile/';
+                //     if (!file_exists($path)) {
+                //         mkdir($path, 0777, true);
+                //     }
+                //     $file = $fileImage->name;
+                //     $filenameArray = explode('.', $file);
+                //     $countArrayFile = count($filenameArray);
+                //     $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+                //     $pathSave = $path . $fileName;
+                //     $fileImage->saveAs($pathSave);
+                //     $branch->branchImage = 'images/branch/profile/' . $fileName;
+                //     $branch->save(false);
+                // }
+
                 $fileImage = UploadedFile::getInstanceByName("image");
                 if (isset($fileImage) && !empty($fileImage)) {
                     $path = Path::getHost() . 'images/branch/profile/';
                     if (!file_exists($path)) {
                         mkdir($path, 0777, true);
                     }
-                    // $oldPathPicture = Path::getHost() . $oldImage;
-                    // if (file_exists($oldPathPicture)) {
-                    //     unlink($oldPathPicture);
-                    // }
+
+                    // สร้างชื่อไฟล์ใหม่
                     $file = $fileImage->name;
                     $filenameArray = explode('.', $file);
-                    $countArrayFile = count($filenameArray);
-                    $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+                    $extension = strtolower(end($filenameArray));
+                    $fileName = Yii::$app->security->generateRandomString(10) . '.' . $extension;
                     $pathSave = $path . $fileName;
-                    $fileImage->saveAs($pathSave);
-                    $branch->branchImage = 'images/branch/profile/' . $fileName;
-                    $branch->save(false);
-                    // $group->picture = 'images/group/profile/' . $fileName;
+
+                    // โหลดรูปจาก temp
+                    $tempPath = $fileImage->tempName;
+                    list($width, $height) = getimagesize($tempPath);
+                    $srcImg = null;
+
+                    // สร้างภาพต้นฉบับจากประเภทไฟล์
+                    if (in_array($extension, ['jpg', 'jpeg'])) {
+                        $srcImg = imagecreatefromjpeg($tempPath);
+                    } elseif ($extension === 'png') {
+                        $srcImg = imagecreatefrompng($tempPath);
+                    } elseif ($extension === 'gif') {
+                        $srcImg = imagecreatefromgif($tempPath);
+                    }
+
+                    if ($srcImg) {
+                        $cropSize = 100;
+                        $dstImg = imagecreatetruecolor($cropSize, $cropSize);
+
+                        // คำนวณ crop ตรงกลางของรูป
+                        $minSize = min($width, $height);
+                        $srcX = round(($width - $minSize) / 2);
+                        $srcY = round(($height - $minSize) / 2);
+
+                        // ครอบและย่อขนาด
+                        imagecopyresampled($dstImg, $srcImg, 0, 0, $srcX, $srcY, $cropSize, $cropSize, $minSize, $minSize);
+
+                        // บันทึกภาพ
+                        if (in_array($extension, ['jpg', 'jpeg'])) {
+                            imagejpeg($dstImg, $pathSave, 90);
+                        } elseif ($extension === 'png') {
+                            imagepng($dstImg, $pathSave);
+                        } elseif ($extension === 'gif') {
+                            imagegif($dstImg, $pathSave);
+                        }
+
+                        imagedestroy($srcImg);
+                        imagedestroy($dstImg);
+
+                        // อัปเดต path รูปในโมเดล
+                        $branch->branchImage = 'images/branch/profile/' . $fileName;
+                        $branch->save(false);
+                    }
                 }
+
                 
                 return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-view/' . ModelMaster::encodeParams(['branchId' => $branchId]));
                 
@@ -1234,22 +1288,77 @@ class BranchController extends Controller
             }
         
             // อัปโหลดรูป
+            // $fileImage = UploadedFile::getInstanceByName("image");
+            // if (isset($fileImage) && !empty($fileImage)) {
+            //     $path = Path::getHost() . 'images/branch/profile/';
+            //     if (!file_exists($path)) {
+            //         mkdir($path, 0777, true);
+            //     }
+        
+            //     $filenameArray = explode('.', $fileImage->name);
+            //     $ext = end($filenameArray);
+            //     $fileName = Yii::$app->security->generateRandomString(10) . '.' . $ext;
+            //     $pathSave = $path . $fileName;
+            //     $fileImage->saveAs($pathSave);
+        
+            //     // เซฟ path รูป
+            //     $branch->branchImage = 'images/branch/profile/' . $fileName;
+            //     $branch->save(false);
+            // }
+
             $fileImage = UploadedFile::getInstanceByName("image");
             if (isset($fileImage) && !empty($fileImage)) {
                 $path = Path::getHost() . 'images/branch/profile/';
                 if (!file_exists($path)) {
                     mkdir($path, 0777, true);
                 }
-        
+
                 $filenameArray = explode('.', $fileImage->name);
-                $ext = end($filenameArray);
+                $ext = strtolower(end($filenameArray));
                 $fileName = Yii::$app->security->generateRandomString(10) . '.' . $ext;
                 $pathSave = $path . $fileName;
-                $fileImage->saveAs($pathSave);
-        
-                // เซฟ path รูป
-                $branch->branchImage = 'images/branch/profile/' . $fileName;
-                $branch->save(false);
+
+                // โหลดภาพจาก temp
+                $tempPath = $fileImage->tempName;
+                list($width, $height) = getimagesize($tempPath);
+                $srcImg = null;
+
+                if (in_array($ext, ['jpg', 'jpeg'])) {
+                    $srcImg = imagecreatefromjpeg($tempPath);
+                } elseif ($ext === 'png') {
+                    $srcImg = imagecreatefrompng($tempPath);
+                } elseif ($ext === 'gif') {
+                    $srcImg = imagecreatefromgif($tempPath);
+                }
+
+                if ($srcImg) {
+                    $cropSize = 100;
+                    $dstImg = imagecreatetruecolor($cropSize, $cropSize);
+
+                    // คำนวณจุด crop ตรงกลาง
+                    $minSize = min($width, $height);
+                    $srcX = round(($width - $minSize) / 2);
+                    $srcY = round(($height - $minSize) / 2);
+
+                    // Crop + Resize
+                    imagecopyresampled($dstImg, $srcImg, 0, 0, $srcX, $srcY, $cropSize, $cropSize, $minSize, $minSize);
+
+                    // บันทึกภาพ
+                    if (in_array($ext, ['jpg', 'jpeg'])) {
+                        imagejpeg($dstImg, $pathSave, 90);
+                    } elseif ($ext === 'png') {
+                        imagepng($dstImg, $pathSave);
+                    } elseif ($ext === 'gif') {
+                        imagegif($dstImg, $pathSave);
+                    }
+
+                    imagedestroy($srcImg);
+                    imagedestroy($dstImg);
+
+                    // เซฟ path รูปลง DB
+                    $branch->branchImage = 'images/branch/profile/' . $fileName;
+                    $branch->save(false);
+                }
             }
         
             return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-view/' . ModelMaster::encodeParams(['branchId' =>  $branchId]));
