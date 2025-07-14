@@ -12,26 +12,6 @@
     border-radius: 6px;
     padding: 6px 5px;
     border-bottom: 4px solid #D9D9D9;
-
-    /* 
-    height: 50px;
-    width: 100%;
-    position: fixed;
-    top: 200px;
-    background-color: white;
-    z-index: 1001;
-    border-radius: 6px;
-    padding: 6px 5px;
-    border-bottom: 4px solid #D9D9D9; */
-
-    /* height: 50px;
-    position: sticky;
-    top: 120px;
-    background-color: white;
-    z-index: 1001;
-    border-radius: 6px;
-    padding: 6px 5px;
-    border-bottom: 4px solid #D9D9D9; */
 }
 
 
@@ -246,6 +226,15 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
+
+.kfi-grid-1 {
+    width: clamp(250px, 17.36vw, 900px);
+}
+
+.kfi-grid-2 {
+    width: clamp(100px, 5.2vw, 300px);
+}
+
 
 @media(max-width: 992px) {
     .pd-Performance {

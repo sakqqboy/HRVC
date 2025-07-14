@@ -1,22 +1,29 @@
+<?php
+
+use frontend\models\hrvc\Company;
+?>
 <select class="select-pim form-select" id="company-filter" onchange="applySelectStyle(this)">
-    <option value=""><?= Yii::t('app', 'Company') ?></option>
     <?php
-    if (isset($companies) && count($companies) > 0) {
-        foreach ($companies as $company) :
-            if ($role <= 4) {
-                if ($companyId == $company["companyId"]) {
+    if (isset($companyId) && $companyId != "") { ?>
+        <option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
+    <?php
+    }
+    if ($role > 4) {
     ?>
-                    <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-                <?php
-                }
-            } else { ?>
+        <option value=""><?= Yii::t('app', 'Company') ?></option>
+        <?php
+        if (isset($companies) && count($companies) > 0) {
+            foreach ($companies as $company) :
+
+        ?>
                 <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-            <?php
-            }
-            ?>
+                <?php
+
+                ?>
 
     <?php
-        endforeach;
+            endforeach;
+        }
     }
     ?>
 </select>

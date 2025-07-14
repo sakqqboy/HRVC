@@ -1381,21 +1381,20 @@ function updateSelectedDates() {
 
     let startDate = window.startDate || (fromDate && fromDate.value !== '' ? fromDate.value : "Start");
     let endDate = window.endDate || (toDate && toDate.value !== '' ? toDate.value : "End");
-
-
-    // อัปเดตข้อความใน multi-due-term
-    document.getElementById("multi-due-term").innerHTML =
-        `${startDate} - ${endDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
-
-
+    let newText = '<span class="calendar-due mr-15" id="calendar-dueterm"></span>';
+    let duterm = startDate + ' - ' + endDate;
+    let icon = '<i class="fa fa-angle-down" aria-hidden="true" style="position: absolute;right:0;margin-right:15px;"></i>';
+    
+    document.getElementById("multi-due-term").innerHTML = newText + duterm + icon;
+    
+    const images1 = '<img src="' + $url + 'image/calendar-gray.svg' + '" alt="from" class="calendar-due-image">';
+    const images2 = '<img src="' + $url + 'image/weld-gray.svg' + '" alt="from" class="calendar-due-image">';
+    const images3 = '<img src="' + $url + 'image/calendar-gray.svg' + '" alt="from" class="calendar-due-image">';
+    $("#calendar-dueterm").html(images1 + images2 + images3);
     // เปลี่ยน style ของ #multi-branch-text
     $("#multi-due-term").css({
         "color": "var(--HRVC---Text-Black, #30313D)",
-        "font-family": '"SF Pro Display"',
-        "font-size": "14px",
-        "font-style": "normal",
         "font-weight": "500",
-        "line-height": "20px"
     });
 
     // อัปเดต hidden inputs
@@ -1406,12 +1405,12 @@ function updateSelectedDates() {
     // ตรวจสอบว่าทั้ง Start Date และ End Date ถูกเลือกแล้ว
     if (window.startDate && window.endDate) {
         // เปลี่ยนแปลงสไตล์ของ <span> เฉพาะใน img-due-term
-        const inputGroupText = document.querySelector('#img-due-term .input-group-text');
-        inputGroupText.style.backgroundColor = '#D7EBFF';
-        inputGroupText.style.border = '0.5px solid #BEDAFF';
+        const calendarDue = document.querySelector('#multi-due-term .calendar-due');
+        calendarDue.style.backgroundColor = '#D7EBFF';
+        calendarDue.style.border = '0.5px solid #BEDAFF';
 
         // อัปเดตไอคอนภายใน <span>
-        const images = inputGroupText.querySelectorAll('img');
+        const images = calendarDue.querySelectorAll('img');
         images[0].src = $url + 'image/calendar-blue.svg';
         images[1].src = $url + 'image/weld.svg';
         images[2].src = $url + 'image/calendar-blue.svg';
@@ -1440,18 +1439,23 @@ flatpickr("#updateDatePicker", {
 
 function updateLastUpdateDate(dateStr) {
     // อัปเดตข้อความใน multi-due-update
-    document.getElementById('multi-due-update').innerHTML =
-        `${dateStr} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+    // document.getElementById('multi-due-update').innerHTML =
+    //     `${dateStr} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
     // เปลี่ยน style ของ #multi-branch-text
+
+    let newText = '<span class="calendar-due mr-50" id="calendar-dueterm-update"></span>';
+    let icon = '<i class="fa fa-angle-down" aria-hidden="true" style="position: absolute;right:0;margin-right:15px;"></i>';
+    
+    document.getElementById("multi-due-update").innerHTML = newText + dateStr + icon;
+    
+    const images1 = '<img src="' + $url + 'image/calendar-gray.svg' + '" alt="from" class="calendar-due-image">';
+    const images2 = '<img src="' + $url + 'image/weld-gray.svg' + '" alt="from" class="calendar-due-image">';
+    const images3 = '<img src="' + $url + 'image/calendar-gray.svg' + '" alt="from" class="calendar-due-image">';
+    $("#calendar-dueterm-update").html(images1 + images2 + images3);
     $("#multi-due-update").css({
         "color": "var(--HRVC---Text-Black, #30313D)",
-        "font-family": '"SF Pro Display"',
-        "font-size": "14px",
-        "font-style": "normal",
         "font-weight": "500",
-        "line-height": "20px"
     });
-
     // ซ่อนปฏิทินหลังจากเลือกวันที่
     document.getElementById('calendar-due-update').style.display = 'none';
 
@@ -1460,11 +1464,12 @@ function updateLastUpdateDate(dateStr) {
 
     // หากเลือกวันที่แล้ว เปลี่ยนสีพื้นหลังและอัปเดตไอคอน
     if (dateStr) {
-        const inputGroupText = document.querySelector('#img-due-update .input-group-text');
-        inputGroupText.style.backgroundColor = '#D7EBFF';
-        inputGroupText.style.border = '0.5px solid #BEDAFF';
+    const calendarDue = document.querySelector('#multi-due-update #calendar-dueterm-update');
+        calendarDue.style.backgroundColor = '#D7EBFF';
+        calendarDue.style.border = '0.5px solid #BEDAFF';
 
-        const images = inputGroupText.querySelectorAll('img');
+        // อัปเดตไอคอนภายใน <span>
+        const images = calendarDue.querySelectorAll('img');
         images[0].src = $url + 'image/calendar-blue.svg';
         images[1].src = $url + 'image/weld.svg';
         images[2].src = $url + 'image/calendar-blue.svg';

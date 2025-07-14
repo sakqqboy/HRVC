@@ -127,15 +127,24 @@ class ManagementController extends Controller
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
 		$isManager = UserRole::isManager();
 		$part = Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
 		//throw new Exception($part);
 		curl_close($api);
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
-		$companyId = $employee["companyId"];
-		//throw new Exception(print_r($kfis, true));
+		$employeeCompanyId = $employee["companyId"];
 
-		// $units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
+
 		$months = ModelMaster::monthFull(1);
 
 		return $this->render('index', [
@@ -146,7 +155,10 @@ class ManagementController extends Controller
 			"isManager" => $isManager,
 			"role" => $role,
 			"userId" => Yii::$app->user->id,
-			"companyId" => $companyId
+			"employeeCompanyId" => $employeeCompanyId,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 	public function actionGrid()
@@ -219,13 +231,26 @@ class ManagementController extends Controller
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
 		curl_close($api);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+
 		// $units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
-		$companyId = $employee["companyId"];
+		$employeeCompanyId = $employee["companyId"];
 
+		$totalBranch = Branch::totalBranch();
 		// throw new Exception(print_r($kfis, true));
 		return $this->render('index_grid', [
 			"companies" => $companies,
@@ -235,7 +260,10 @@ class ManagementController extends Controller
 			"isManager" => $isManager,
 			"role" => $role,
 			"userId" => Yii::$app->user->id,
-			"companyId" => $companyId
+			"employeeCompanyId" => $employeeCompanyId,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 
@@ -352,14 +380,29 @@ class ManagementController extends Controller
 			$units = curl_exec($api);
 			$units = json_decode($units, true);
 
+			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+			$allCompany = curl_exec($api);
+			$allCompany = json_decode($allCompany, true);
+
 			curl_close($api);
 			$data = [];
+
+			$countAllCompany = 0;
+			if (count($allCompany) > 0) {
+				$countAllCompany = count($allCompany);
+				$companyPic = Company::randomPic($allCompany, 3);
+			}
+			$totalBranch = Branch::totalBranch();
+
 			return $this->render('kfi_from', [
 				"role" => $role,
 				"companies" => $companies,
 				"units" => $units,
 				"data" => $data,
-				"statusform" =>  "create"
+				"statusform" =>  "create",
+				"allCompany" => $countAllCompany,
+				"companyPic" => $companyPic,
+				"totalBranch" => $totalBranch
 			]);
 		}
 	}
@@ -910,15 +953,28 @@ class ManagementController extends Controller
 			$teams = curl_exec($api);
 			$teams = json_decode($teams, true);
 		}
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
 
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		if ($type == "list") {
-			$file = "kfi_search_result";
+			$file = "index";
 		} else {
-			$file = "kfi_search_result_grid";
+			$file = "index_grid";
 		}
 		$isManager = UserRole::isManager();
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$employeeCompanyId = $employee["companyId"];
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+
+		$totalBranch = Branch::totalBranch();
 		return $this->render($file, [
 			"units" => $units,
 			"companies" => $companies,
@@ -926,13 +982,16 @@ class ManagementController extends Controller
 			"kfis" => $kfis,
 			"companyId" => $companyId,
 			"branchId" => $branchId,
-			// "teamId" => $teamId,
 			"month" => $month,
 			"status" => $status,
 			"year" => $year,
 			"branches" => $branches,
 			"isManager" => $isManager,
 			"role" => $role,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch,
+			"employeeCompanyId" => $employeeCompanyId
 		]);
 	}
 	public function actionCompanyMultiBranch()
