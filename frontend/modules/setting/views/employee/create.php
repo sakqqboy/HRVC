@@ -768,9 +768,8 @@ $form = ActiveForm::begin([
                                     </option>
                                 </select>
 
-                                <span class="input-group-text"
-                                    style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;"
-                                    onclick="document.getElementById('companySelectId').focus();">
+                                <span class="input-group-text" style="background-color: #e9ecef; border-left: none; gap: 5px; cursor: pointer;
+                                             border-top-right-radius: 8px; border-bottom-right-radius: 8px;">
                                     <div id="teamIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
                                         <img id="teamIconImg" src="<?= Yii::$app->homeUrl ?>image/teams-black.svg"
                                             alt="icon" style="width: 10px; height: 10px;">
@@ -778,6 +777,7 @@ $form = ActiveForm::begin([
                                     <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
                                         style="width: 10px; height: 10px;">
                                 </span>
+
                                 <input type="hidden" name="employeeTeamId" id="employeeTeamId"
                                     value="<?= isset($employee['teamId']) ? $employee['teamId'] : '' ?>">
 
@@ -827,8 +827,6 @@ $form = ActiveForm::begin([
                                     class="form-control">
                             </div>
                         </div>
-
-
                     </div>
 
                     <div class="row">
@@ -1816,7 +1814,7 @@ $form = ActiveForm::begin([
     });
 
     document.getElementById('branchSelectId').addEventListener('change', function() {
-        const beanchId = this.value;
+        const branchId = this.value;
 
         fetch('<?= Yii::$app->homeUrl ?>setting/branch/branch-department-list', {
                 method: 'POST',
@@ -1825,7 +1823,7 @@ $form = ActiveForm::begin([
                     'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
                 },
                 body: JSON.stringify({
-                    beanchId: beanchId
+                    branchId: branchId
                 })
             })
             .then(response => response.json())
