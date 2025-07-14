@@ -45,12 +45,6 @@ class CompanyController extends Controller
 
 	public function actionHeader($id)
 	{
-		// เอาemployeeที่มีสถาณะมากกว่า 3
-		// $headQuater = Company::find()
-		// 	->select('companyId,companyName')
-		// 	->where(["groupId" => $id, "headQuaterId" => null])
-		// 	->asArray()
-		// 	->one();
 		$headQuater =  Employee::find()
 		->select([
 			'employee.employeeId',
@@ -69,14 +63,6 @@ class CompanyController extends Controller
 	}
 	public function actionCompanyBranch($id)
 	{
-		// $branches = [];
-		// $branches = Branch::find()
-		// 	->select('branchId,branchName')
-		// 	->where(["companyId" => $id, "status" => 1])
-		// 	->orderBy('branchName')
-		// 	->asArray()
-		// 	->all();
-
 		$branches = Branch::find()
 		->select([
 			'branch.*',
@@ -98,14 +84,6 @@ class CompanyController extends Controller
 
 	public function actionCompanyBranchFilter($id)
 	{
-		// $branches = [];
-		// $branches = Branch::find()
-		// 	->select('branchId,branchName')
-		// 	->where(["companyId" => $id, "status" => 1])
-		// 	->orderBy('branchName')
-		// 	->asArray()
-		// 	->all();
-
 		$branches = Branch::find()
 		->select([
 			'branch.*',

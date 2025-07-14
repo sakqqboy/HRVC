@@ -699,10 +699,6 @@ class CompanyController extends Controller
 		if (isset($_POST["companyName"]) && trim($_POST["companyName"]) != '') {
 			$company = new Company();
 			$company->companyName = $_POST["companyName"];
-			//$company->tagLine = $_POST["tagLine"];
-			// if (isset($_POST["headQuaterId"])) {
-			// 	$company->headQuaterId = $_POST["headQuaterId"] - 534;
-			// }
 			$company->displayName = $_POST["displayName"];
 			$company->founded = $_POST["founded"];
 			$company->industries = $_POST["industries"];
@@ -713,11 +709,6 @@ class CompanyController extends Controller
 			$company->about = $_POST["about"];
 			$company->groupId = $_POST["groupId"] - 543;
 			$company->directorId = $_POST["directorId"];
-			// $company->socialTag = $_POST["socialTag"];
-			// $company->city = $_POST["city"];
-			// $company->postalCode = $_POST["postalCode"];
-			// $company->website = $_POST["website"];
-			// $company->contact = $_POST["contact"];
 			$company->status = 1;
 			$company->createDateTime = new Expression('NOW()');
 			$company->updateDateTime =  new Expression('NOW()');
@@ -735,20 +726,78 @@ class CompanyController extends Controller
 				$fileBanner->saveAs($pathSave);
 				$company->banner = 'images/company/banner/' . $fileName;
 			}
+			// $fileImage = UploadedFile::getInstanceByName("image");
+			// if (isset($fileImage) && !empty($fileImage)) {
+			// 	$path = Path::getHost() . 'images/company/profile/';
+			// 	if (!file_exists($path)) {
+			// 		mkdir($path, 0777, true);
+			// 	}
+			// 	$file = $fileImage->name;
+			// 	$filenameArray = explode('.', $file);
+			// 	$countArrayFile = count($filenameArray);
+			// 	$fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+			// 	$pathSave = $path . $fileName;
+			// 	$fileImage->saveAs($pathSave);
+			// 	$company->picture = 'images/company/profile/' . $fileName;
+			// }
 			$fileImage = UploadedFile::getInstanceByName("image");
 			if (isset($fileImage) && !empty($fileImage)) {
 				$path = Path::getHost() . 'images/company/profile/';
 				if (!file_exists($path)) {
 					mkdir($path, 0777, true);
 				}
+
+				// เตรียมชื่อไฟล์ใหม่
 				$file = $fileImage->name;
 				$filenameArray = explode('.', $file);
 				$countArrayFile = count($filenameArray);
-				$fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+				$extension = strtolower($filenameArray[$countArrayFile - 1]);
+				$fileName = Yii::$app->security->generateRandomString(10) . '.' . $extension;
 				$pathSave = $path . $fileName;
-				$fileImage->saveAs($pathSave);
-				$company->picture = 'images/company/profile/' . $fileName;
+
+				// โหลดภาพจาก temp path
+				$tempPath = $fileImage->tempName;
+				list($width, $height) = getimagesize($tempPath);
+
+				// สร้างภาพต้นฉบับจาก temp
+				$srcImg = null;
+				if ($extension === 'jpg' || $extension === 'jpeg') {
+					$srcImg = imagecreatefromjpeg($tempPath);
+				} elseif ($extension === 'png') {
+					$srcImg = imagecreatefrompng($tempPath);
+				} elseif ($extension === 'gif') {
+					$srcImg = imagecreatefromgif($tempPath);
+				}
+
+				if ($srcImg) {
+					$cropSize = 131; // ขนาดที่ต้องการ
+					$dstImg = imagecreatetruecolor($cropSize, $cropSize);
+
+					// คำนวณขนาดสี่เหลี่ยมจัตุรัสเล็กสุดตรงกลางภาพ
+					$minSize = min($width, $height);
+					$srcX = round(($width - $minSize) / 2);
+					$srcY = round(($height - $minSize) / 2);
+
+					// crop และ resize
+					imagecopyresampled($dstImg, $srcImg, 0, 0, $srcX, $srcY, $cropSize, $cropSize, $minSize, $minSize);
+
+					// บันทึกไฟล์ภาพที่ถูก crop แล้ว
+					if ($extension === 'jpg' || $extension === 'jpeg') {
+						imagejpeg($dstImg, $pathSave, 90);
+					} elseif ($extension === 'png') {
+						imagepng($dstImg, $pathSave);
+					} elseif ($extension === 'gif') {
+						imagegif($dstImg, $pathSave);
+					}
+
+					imagedestroy($srcImg);
+					imagedestroy($dstImg);
+
+					// บันทึก path ไฟล์ลงใน model
+					$company->picture = 'images/company/profile/' . $fileName;
+				}
 			}
+
 			if ($company->save(false)) {
 				$companyId = Yii::$app->db->lastInsertID;
 				return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-view/' . ModelMaster::encodeParams(["companyId" => $companyId]));
@@ -796,7 +845,7 @@ class CompanyController extends Controller
 		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 		$companyJson = curl_exec($apiCompany);
 		$companyBranch = json_decode($companyJson, true);
-
+		// throw new Exception("companyBranch DATA: " . print_r($companyBranch, true));
 
 		$branchs = [];
 		$pictureUrl = '';
@@ -920,22 +969,6 @@ class CompanyController extends Controller
 			$company = Company::find()->where(["companyId" => $companyId])->one();
 			$oldBanner = $company->banner;
 			$oldImage = $company->picture;
-			// throw new Exception("POST DATA: " . print_r($oldImage, true));
-			// $company->companyName = $_POST["companyName"];
-			// // $company->tagLine = $_POST["tagLine"];
-			// $company->displayName = $_POST["displayName"];
-			// $company->website = $_POST["website"];
-			// $company->location = $_POST["location"];
-			// $company->countryId = $_POST["country"];
-			// $company->city = $_POST["city"];
-			// $company->postalCode = $_POST["postalCode"];
-			// $company->industries = $_POST["industries"];
-			// $company->email = $_POST["email"];
-			// $company->contact = $_POST["contact"];
-			// $company->founded = $_POST["founded"];
-			// $company->director = $_POST["director"];
-			// $company->socialTag = $_POST["socialTag"];
-			// $company->about = $_POST["about"];
 			$company->companyName = $_POST["companyName"];
 			$company->displayName = $_POST["displayName"];
 			$company->founded = $_POST["founded"];
@@ -968,40 +1001,94 @@ class CompanyController extends Controller
 				$fileBanner->saveAs($pathSave);
 				$company->banner = 'images/company/banner/' . $fileName;
 			}
+			// $fileImage = UploadedFile::getInstanceByName("image");
+			// if (isset($fileImage) && !empty($fileImage)) {
+			// 	$path = Path::getHost() . 'images/company/profile/';
+			// 	if (!file_exists($path)) {
+			// 		mkdir($path, 0777, true);
+			// 	}
+			// 	if (!empty($oldImage)) {
+			// 		$oldPathBanner = Path::getHost() . $oldImage;
+			// 		if (file_exists($oldPathBanner) && is_file($oldPathBanner)) {
+			// 			unlink($oldPathBanner);
+			// 		}
+			// 	}
+			// 	$file = $fileImage->name;
+			// 	$filenameArray = explode('.', $file);
+			// 	$fileExt = end($filenameArray);
+			// 	$fileName = Yii::$app->security->generateRandomString(10) . '.' . $fileExt;
+			// 	$pathSave = $path . $fileName;
+
+			// 	$fileImage->saveAs($pathSave);
+			// 	$company->picture = 'images/company/profile/' . $fileName;
+			// }
+
 			$fileImage = UploadedFile::getInstanceByName("image");
 			if (isset($fileImage) && !empty($fileImage)) {
 				$path = Path::getHost() . 'images/company/profile/';
 				if (!file_exists($path)) {
 					mkdir($path, 0777, true);
 				}
+
+				// ลบรูปเก่าถ้ามี
 				if (!empty($oldImage)) {
 					$oldPathBanner = Path::getHost() . $oldImage;
 					if (file_exists($oldPathBanner) && is_file($oldPathBanner)) {
 						unlink($oldPathBanner);
 					}
 				}
+
+				// เตรียมชื่อไฟล์ใหม่
 				$file = $fileImage->name;
 				$filenameArray = explode('.', $file);
-				$fileExt = end($filenameArray);
+				$fileExt = strtolower(end($filenameArray));
 				$fileName = Yii::$app->security->generateRandomString(10) . '.' . $fileExt;
 				$pathSave = $path . $fileName;
 
-				$fileImage->saveAs($pathSave);
-				$company->picture = 'images/company/profile/' . $fileName;
+				// โหลดภาพต้นฉบับจาก temp
+				$tempPath = $fileImage->tempName;
+				list($width, $height) = getimagesize($tempPath);
+				$srcImg = null;
+
+				// สร้าง resource ตามประเภทไฟล์
+				if (in_array($fileExt, ['jpg', 'jpeg'])) {
+					$srcImg = imagecreatefromjpeg($tempPath);
+				} elseif ($fileExt === 'png') {
+					$srcImg = imagecreatefrompng($tempPath);
+				} elseif ($fileExt === 'gif') {
+					$srcImg = imagecreatefromgif($tempPath);
+				}
+
+				if ($srcImg) {
+					$cropSize = 131;
+					$dstImg = imagecreatetruecolor($cropSize, $cropSize);
+
+					// ตัดตรงกลางภาพ (square crop)
+					$minSize = min($width, $height);
+					$srcX = round(($width - $minSize) / 2);
+					$srcY = round(($height - $minSize) / 2);
+
+					// ครอบและปรับขนาด
+					imagecopyresampled($dstImg, $srcImg, 0, 0, $srcX, $srcY, $cropSize, $cropSize, $minSize, $minSize);
+
+					// บันทึกรูปภาพตามชนิด
+					if (in_array($fileExt, ['jpg', 'jpeg'])) {
+						imagejpeg($dstImg, $pathSave, 90);
+					} elseif ($fileExt === 'png') {
+						imagepng($dstImg, $pathSave);
+					} elseif ($fileExt === 'gif') {
+						imagegif($dstImg, $pathSave);
+					}
+
+					imagedestroy($srcImg);
+					imagedestroy($dstImg);
+
+					// อัปเดต path รูปในโมเดล
+					$company->picture = 'images/company/profile/' . $fileName;
+				}
 			}
-			// if (isset($fileImage) && !empty($fileImage)) {
-			// 	$path = Path::getHost() . 'images/company/profile/';
-			// 	if (!file_exists($path)) {
-			// 		mkdir($path, 0777, true);
-			// 	}
-			// 	$file = $fileImage->name;
-			// 	$filenameArray = explode('.', $file);
-			// 	$countArrayFile = count($filenameArray);
-			// 	$fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
-			// 	$pathSave = $path . $fileName;
-			// 	$fileImage->saveAs($pathSave);
-			// 	$company->picture = 'images/company/profile/' . $fileName;
-			// }
+
+			
 			if ($company->save(false)) {
 				return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-view/' . ModelMaster::encodeParams(["companyId" => $companyId]));
 			}

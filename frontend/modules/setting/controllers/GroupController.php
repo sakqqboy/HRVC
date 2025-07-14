@@ -296,19 +296,14 @@ class GroupController extends Controller
             $oldImage = $group->picture;
             $group->groupName = $_POST["groupName"];
             $group->tagLine = $_POST["tagLine"];
-            // $group->headQuaterName = $_POST["headQuaterName"];
             $group->displayName = $_POST["displayName"];
             $group->website = $_POST["website"];
             $group->location = $_POST["location"];
             $group->countryId = $_POST["country"];
-            // $group->city = $_POST["city"];
-            // $group->postalCode = $_POST["postalCode"];
             $group->industries = $_POST["industries"];
             $group->email = $_POST["email"];
-            // $group->contact = $_POST["contact"];
             $group->founded = $_POST["founded"];
             $group->director = $_POST["director"];
-            // $group->socialTag = $_POST["socialTag"];
             $group->socialInstargram = $_POST["instagram"];
             $group->socialFacebook = $_POST["facebook"];
             $group->socialYoutube = $_POST["youtube"];
@@ -335,24 +330,87 @@ class GroupController extends Controller
                 $fileBanner->saveAs($pathSave);
                 $group->banner = 'images/group/banner/' . $fileName;
             }
+            // $fileImage = UploadedFile::getInstanceByName("image");
+            // if (isset($fileImage) && !empty($fileImage)) {
+            //     $path = Path::getHost() . 'images/group/profile/';
+            //     if (!file_exists($path)) {
+            //         mkdir($path, 0777, true);
+            //     }
+            //     $oldPathPicture = Path::getHost() . $oldImage;
+            //     if (file_exists($oldPathPicture)) {
+            //         unlink($oldPathPicture);
+            //     }
+            //     $file = $fileImage->name;
+            //     $filenameArray = explode('.', $file);
+            //     $countArrayFile = count($filenameArray);
+            //     $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+            //     $pathSave = $path . $fileName;
+            //     $fileImage->saveAs($pathSave);
+            //     $group->picture = 'images/group/profile/' . $fileName;
+            // }
             $fileImage = UploadedFile::getInstanceByName("image");
             if (isset($fileImage) && !empty($fileImage)) {
                 $path = Path::getHost() . 'images/group/profile/';
                 if (!file_exists($path)) {
                     mkdir($path, 0777, true);
                 }
+
+                // ลบรูปเก่าถ้ามี
                 $oldPathPicture = Path::getHost() . $oldImage;
                 if (file_exists($oldPathPicture)) {
                     unlink($oldPathPicture);
                 }
+
+                // สร้างชื่อไฟล์ใหม่
                 $file = $fileImage->name;
                 $filenameArray = explode('.', $file);
-                $countArrayFile = count($filenameArray);
-                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+                $extension = strtolower(end($filenameArray)); // นามสกุล เช่น jpg, png
+                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $extension;
                 $pathSave = $path . $fileName;
-                $fileImage->saveAs($pathSave);
-                $group->picture = 'images/group/profile/' . $fileName;
+
+                // โหลดรูปภาพจาก temp
+                $tempPath = $fileImage->tempName;
+
+                // ใช้ GD library เพื่อครอบภาพ
+                list($width, $height) = getimagesize($tempPath);
+                $srcImg = null;
+
+                if ($extension === 'jpg' || $extension === 'jpeg') {
+                    $srcImg = imagecreatefromjpeg($tempPath);
+                } elseif ($extension === 'png') {
+                    $srcImg = imagecreatefrompng($tempPath);
+                } elseif ($extension === 'gif') {
+                    $srcImg = imagecreatefromgif($tempPath);
+                }
+
+                if ($srcImg) {
+                    $cropSize = 135;
+                    $dstImg = imagecreatetruecolor($cropSize, $cropSize);
+
+                    // คำนวณตำแหน่ง crop ให้อยู่ตรงกลางของรูป
+                    $minSize = min($width, $height);
+                    $srcX = round(($width - $minSize) / 2);
+                    $srcY = round(($height - $minSize) / 2);
+
+                    imagecopyresampled($dstImg, $srcImg, 0, 0, $srcX, $srcY, $cropSize, $cropSize, $minSize, $minSize);
+
+                    // บันทึกไฟล์ภาพที่ crop แล้ว
+                    if ($extension === 'jpg' || $extension === 'jpeg') {
+                        imagejpeg($dstImg, $pathSave, 90);
+                    } elseif ($extension === 'png') {
+                        imagepng($dstImg, $pathSave);
+                    } elseif ($extension === 'gif') {
+                        imagegif($dstImg, $pathSave);
+                    }
+
+                    imagedestroy($srcImg);
+                    imagedestroy($dstImg);
+
+                    // อัปเดตชื่อไฟล์ลง model
+                    $group->picture = 'images/group/profile/' . $fileName;
+                }
             }
+
             if ($group->save(false)) {
                 $groupId = $_POST["groupId"] - 543;
                 return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $groupId]));
