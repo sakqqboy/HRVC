@@ -40,7 +40,7 @@ class CompanyController extends Controller
 		}
 		$role = UserRole::userRight();
 		if ($role >= 5) {
-			return Yii::$app->request->referrer;
+			return  $this->redirect(Yii::$app->request->referrer);
 		}
 		return true; //go to origin request
 	}
@@ -48,11 +48,11 @@ class CompanyController extends Controller
 
 	public function actionDisplayCompany()
 	{
+		// throw new exception(print_r('dd', true));
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
 		if (!isset($group) && !empty($group)) {
-			return $this->redirect(Yii::$app->homeUrl . 'setting/group/display_group/');
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/display-group/');
 		}
-
 		$company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
 		if (isset($company) && !empty($company)) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-grid/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
