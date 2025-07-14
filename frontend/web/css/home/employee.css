@@ -187,8 +187,9 @@
     align-items: center;
     position: relative;
     z-index: 1;
-    /* ให้ทับเส้นประ */
-    padding: 5px 10px;
+    height: 26px;
+    padding: 5.811px 9.962px 5.811px 4.151px;
+    /* padding: 5px 10px; */
     border-radius: 20px;
     border: 0.83px solid #BBCDDE;
     background: #DCDCDC;
@@ -333,7 +334,9 @@
     align-items: center;
     position: relative;
     z-index: 1;
-    padding: 5px 10px;
+    /* padding: 5px 10px; */
+    height: 26px;
+    padding: 5.811px 9.962px 5.811px 4.151px;
     border-radius: 20px;
     border: 0.83px solid #BBCDDE;
     background: #DCDCDC;
