@@ -2,6 +2,7 @@
 
 namespace frontend\models\hrvc;
 
+use Exception;
 use Yii;
 use \frontend\models\hrvc\master\CompanyMaster;
 
@@ -62,6 +63,19 @@ class Company extends \frontend\models\hrvc\master\CompanyMaster
         } else {
             return 'images/company/profile/company.svg';
         }
+    }
+    public static function randomPic($allCompany, $total)
+    {
+        $withPicture = array_filter($allCompany, function ($item) {
+            return !empty($item['picture']);
+        });
+        $withPicture = array_values($withPicture);
+        $randomKeys = array_rand($withPicture, min($total, count($withPicture)));
+        $randomKeys = (array) $randomKeys;
+        $randomPictures = array_map(function ($key) use ($withPicture) {
+            return $withPicture[$key]['picture'];
+        }, $randomKeys);
+        return $randomPictures;
     }
 
     public static function totalEmployeeCompany($companyId)

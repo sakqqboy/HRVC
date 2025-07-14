@@ -156,4 +156,11 @@ class Branch extends \frontend\models\hrvc\master\BranchMaster
             return 0;
         }
     }
+    public static function totalBranch()
+    {
+        $branch = Branch::find()->select('branchId')
+            ->where("status=1")
+            ->count();
+        return $branch;
+    }
 }

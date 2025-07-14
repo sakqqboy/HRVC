@@ -135,67 +135,49 @@
 }
 
 .pim-btn-over {
-    font-size: 11px;
-    color: white;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
     background-color: #E05757;
-    padding: 2px 3px 2px 3px;
+    font-size: 11px;
     border-radius: 3px;
     text-decoration: none;
+    color: white;
+    height: 23px;
+    width: 62px;
     cursor: pointer;
-    color: var(--100-white, #FFF);
-    text-align: center;
-    font-family: "SF Pro Display";
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 15.479px;
-    /* 110.567% */
-    letter-spacing: -0.21px;
-    text-transform: capitalize;
 }
 
 .pim-btn-inprogress {
-    font-size: 10px;
-    color: white;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
     background-color: #2F42ED;
-    padding: 2px 3px 2px 3px;
+    font-size: 11px;
     border-radius: 3px;
     text-decoration: none;
+    color: white;
+    height: 23px;
+    width: 62px;
     cursor: pointer;
-    color: var(--100-white, #FFF);
-    text-align: center;
-    font-family: "SF Pro Display";
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 15.479px;
-    /* 110.567% */
-    letter-spacing: -0.21px;
-    text-transform: capitalize;
 
 }
 
 .pim-btn-setup {
-    font-size: 10px;
-    color: white;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
     background-color: #2580D3;
-    padding: 2px 3px 2px 3px;
+    font-size: 11px;
     border-radius: 3px;
     text-decoration: none;
+    color: white;
+    height: 23px;
+    width: 62px;
     cursor: pointer;
-    color: var(--100-white, #FFF);
-    text-align: center;
-    font-family: "SF Pro Display";
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 15.479px;
-    /* 110.567% */
-    letter-spacing: -0.21px;
-    text-transform: capitalize;
 }
 
 .pim-btn-complete {
@@ -220,23 +202,57 @@
 }
 
 .pim-btn-disable {
-    font-size: 11px;
-    color: black;
-    text-align: center;
-    background-color: #C0C0C0;
-    padding: 2px 3px 2px 3px;
+    display: flex;
+    height: 20px;
+    padding-left: 3.5px;
+    padding-right: 3.5px;
+    border: #000 solid thin;
     border-radius: 3px;
-    text-decoration: none;
-    color: var(--100-white, #FFF);
-    text-align: center;
-    font-family: "SF Pro Display";
-    font-size: 14px;
-    font-style: normal;
+    align-items: center;
+    justify-items: center;
+    font-size: 10px;
     font-weight: 500;
-    line-height: 15.479px;
-    /* 110.567% */
-    letter-spacing: -0.21px;
-    text-transform: capitalize;
+    background-color: #818181;
+    color: #000;
+    border: 0.5px solid #CBD5E1;
+    text-decoration: none;
+}
+
+.pim-btn {
+    display: flex;
+    height: 20px;
+    padding-left: 3.5px;
+    padding-right: 3.5px;
+    border-radius: 3px;
+    align-items: center;
+    justify-items: center;
+    font-size: 10px;
+    font-weight: 500;
+    background-color: #FFFFFF;
+    color: #3C3D48;
+    border: 0.5px solid #CBD5E1;
+    text-decoration: none;
+}
+
+.pim-btn-delete {
+    display: flex;
+    height: 20px;
+    padding-left: 3.5px;
+    padding-right: 3.5px;
+    border-radius: 3px;
+    align-items: center;
+    justify-items: center;
+    font-size: 10px;
+    font-weight: 500;
+    background-color: #FFE3E3;
+    color: #3C3D48;
+    border: 0.5px solid #BB2020;
+    text-decoration: none;
+}
+
+.pim-btn-delete:hover {
+    background-color: #E05757;
+    cursor: pointer;
 }
 
 .btn-create {

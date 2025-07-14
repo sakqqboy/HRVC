@@ -369,9 +369,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 32.25px;
-    height: 32.25px;
-    border-radius: 15.75px;
+    width: 28px;
+    height: 28px;
+    border-radius: 100%;
+    font-size: 14px;
     border: 1px solid var(--Blocked-Strock, #818181);
     background: var(--Overall-Blocked, #C3C3C3);
     position: relative;

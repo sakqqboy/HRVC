@@ -31,8 +31,23 @@
         </div>
     </div>
     <div class="d-flex flex-grow-1 pim-head-upderline2 align-items-center justify-content-end">
-        <div class="pim-head-company align-content-center border">All Companies</div>
+        <div class="pim-head-company align-content-center">
+            <?php if (isset($companyPic) && count($companyPic) > 0) {
+                $i = 0;
+                foreach ($companyPic as $picture): ?>
+                    <img src="<?= Yii::$app->homeUrl . $picture ?>" class="pim-header-pic <?= $i > 0 ? 'pim-head-pic-after' : '' ?>">
+            <?php
+                    $i++;
+                endforeach;
+            } ?>
+            <div class="pim-head-num-tag pim-head-pic-after me-1"><?= $allCompany ?></div>
+
+            <span><?= Yii::t('app', 'All Companies') ?> </span>
+        </div>
         <div class="pim-center-line"></div>
-        <div class="pim-head-branch align-content-center border">39 Branches, Multiple Countries</div>
+        <div class="pim-head-branch">
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/global.svg" class="me-1">
+            <?= $totalBranch ?> Branches, Multiple Countries
+        </div>
     </div>
 </div>
