@@ -325,12 +325,6 @@ $this->title = 'company profile';
 
             <div class="col-lg-3 col-md-4 col-12  home-tokyo">
                 <div class="row mt-40">
-                    <!-- <div class="col-12 Group-Information">
-                        <img src="<?= Yii::$app->homeUrl ?>image/branch-icon-black.svg"
-                            style="width: 14px; height: 14px; margin-bottom: 3px; margin-right: 5px; ">
-                        Affiliated Branches
-                        <hr class="hr-group">
-                    </div> -->
                     <div class="row">
                         <div class="col-lg-2 col-md-2 col-12"
                             style="width: 15px; height: 15px; padding-right : 0px; padding-left: 0px; bottom: 5px; ">
