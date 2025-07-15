@@ -1388,6 +1388,11 @@ function updateSelectedDates() {
     // document.getElementById("multi-due-term").innerHTML = newText + duterm + icon;
 
     document.getElementById("multi-due-term").innerHTML = duterm + icon;
+    document.getElementById("due-term-icon-group").style.backgroundColor = "#D7EBFF";
+    document.getElementById("due-term-icon-group").style.border = '0.5px solid #BEDAFF';
+    document.getElementById("start-img-probation").src = $url + 'image/calendar-blue.svg';
+    document.getElementById("weld-img-probation").src = $url + 'image/weld.svg';
+    document.getElementById("end-img-probation").src = $url + 'image/calendar-blue.svg';
 
     const images1 = '<img src="' + $url + 'image/calendar-gray.svg' + '" alt="from" class="calendar-due-image">';
     const images2 = '<img src="' + $url + 'image/weld-gray.svg' + '" alt="from" class="calendar-due-image">';

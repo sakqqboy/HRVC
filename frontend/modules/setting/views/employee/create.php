@@ -848,7 +848,7 @@ $form = ActiveForm::begin([
                             </div>
                             <div class="input-group" id="group-due-term" style="position: relative;">
                                 <span class="input-group-text pb-10 pt-10" id="due-term-icon-group"
-                                    style="background-color: #C3C3C3; border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1; height: 40px;">
+                                    style="background-color: #C3C3C3; border: 0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1; height: 40px;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" data-icon="calendar"
                                         id="start-img-probation" alt="Calendar" style="width: 16px; height: 16px;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" data-icon="weld" alt="Weld"
@@ -856,6 +856,7 @@ $form = ActiveForm::begin([
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" data-icon="calendar"
                                         id="end-img-probation" alt="Calendar" style="width: 16px; height: 16px;">
                                 </span>
+
 
 
                                 <!-- คลิกเปิด calendar -->
