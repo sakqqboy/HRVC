@@ -225,7 +225,18 @@ class ManagementController extends Controller
 		$kgis = json_decode($kgis, true);
 		//throw new exception('kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		//throw new exception(print_r($kgis, true));
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
 		curl_close($api);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
@@ -233,6 +244,7 @@ class ManagementController extends Controller
 		$totalKgi = Kgi::totalKgi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
 		$totalPage = ceil($totalKgi / $limit);
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
+		$totalBranch = Branch::totalBranch();
 
 		return $this->render('kgi_grid', [
 			"units" => $units,
@@ -246,7 +258,10 @@ class ManagementController extends Controller
 			"totalKgi" => $totalKgi,
 			"currentPage" => $currentPage,
 			"totalPage" => $totalPage,
-			"pagination" => $pagination
+			"pagination" => $pagination,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 
 		]);
 	}

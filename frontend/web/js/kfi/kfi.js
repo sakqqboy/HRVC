@@ -1758,6 +1758,7 @@ function kfiFilter() {
     var status = $("#status-filter").val();
     var type = $("#type").val();
     var url = $url + 'kfi/management/search-kfi';
+    showLoading();
     $.ajax({
         type: "POST",
         dataType: 'json',
@@ -2224,6 +2225,8 @@ function changeStatus(type) {
     $("#pim-status").removeClass('select-complete-status');
     if (pimStatus == 1) {
         $("#pim-status").addClass('select-create-status');
+    } else { 
+            $("#pim-status").addClass('select-complete-status');
     }
     if (pimStatus == 2) {
         if (type == 'kgi') { 

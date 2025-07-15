@@ -530,7 +530,19 @@ class ManagementController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
 		curl_close($api);
+		$data = [];
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
 
 		// รวมข้อมูลทั้งหมด
 		$data = array_merge($kfi, $branch, $department);
@@ -544,7 +556,10 @@ class ManagementController extends Controller
 			"kfiBranchText" => $kfiBranchText,
 			"kfiDepartmentText" => $kfiDepartmentText,
 			"kfiId" => $kfiId,
-			"statusform" =>  "update"
+			"statusform" =>  "update",
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 
