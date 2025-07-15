@@ -431,9 +431,11 @@
 /* id 2 */
 .select-blue {
     display: flex;
-    width: 130px;
+    /* width: 130px; */
+    width: clamp(130px, 9.6vw, 300px);
     height: 40px;
     padding: 6px 15px;
+    text-align: center;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -450,9 +452,11 @@
 /* id 3,4 */
 .select-blackblue {
     display: flex;
-    width: 130px;
+    /* width: 130px; */
+    width: clamp(130px, 9.6vw, 300px);
     height: 40px;
     padding: 6px 15px;
+    text-align: center;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -469,9 +473,11 @@
 /* id 5 */
 .select-yellow {
     display: flex;
-    width: 130px;
+    /* width: 130px; */
+    width: clamp(130px, 9.6vw, 300px);
     height: 40px;
     padding: 6px 15px;
+    text-align: center;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -488,9 +494,11 @@
 /* id 6,7 */
 .select-orange {
     display: flex;
-    width: 130px;
+    /* width: 130px; */
+    width: clamp(130px, 9.6vw, 300px);
     height: 40px;
     padding: 6px 15px;
+    text-align: center;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -507,9 +515,11 @@
 /* id 8 */
 .select-pink {
     display: flex;
-    width: 130px;
+    /* width: 130px; */
+    width: clamp(130px, 9.6vw, 300px);
     height: 40px;
     padding: 6px 15px;
+    text-align: center;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -526,9 +536,11 @@
 /* id 9 */
 .select-red {
     display: flex;
-    width: 130px;
+    /* width: 130px; */
+    width: clamp(130px, 9.6vw, 300px);
     height: 40px;
     padding: 6px 15px;
+    text-align: center;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -545,9 +557,11 @@
 /* id 10 */
 .select-whiteorange {
     display: flex;
-    width: 130px;
+    /* width: 130px; */
+    width: clamp(130px, 9.6vw, 300px);
     height: 40px;
     padding: 6px 15px;
+    text-align: center;
     justify-content: center;
     align-items: center;
     gap: 10px;
