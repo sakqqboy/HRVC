@@ -5,7 +5,6 @@ use yii\bootstrap5\ActiveForm;
 
 $this->title = Yii::t('app', 'KFI Grid View');
 ?>
-
 <div class="col-12 mt-70 pt-20">
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="pim-head-icon mr-11 mt-2">
@@ -56,7 +55,12 @@ $this->title = Yii::t('app', 'KFI Grid View');
                 </div>
             </div>
             <input type="hidden" id="type" value="grid">
-            <div class="row mt-40 pl-10 pr-10" style="--bs-gutter-x:0px;">
+            <div class="row" style="--bs-gutter-x:0px;">
+                <div class="d-none img-loading text-center" id="img-loading">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Config/loading.gif" class="img-fluid " style="width: 750px;">
+                </div>
+            </div>
+            <div class="row mt-40 pl-10 pr-10" style="--bs-gutter-x:0px;" id="main-body">
                 <?php
                 if (isset($kfis) && count($kfis) > 0) {
                     foreach ($kfis as $kfiId => $kfi) :

@@ -924,78 +924,48 @@
 	padding-left: 5px;
 }
 
-.yenlow-assignNew {
+.assign-new {
+	display: flex;
+	justify-content: left;
+	align-items: center;
 	font-weight: 500;
-	font-size: 16px;
+	font-size: 13px;
+	border-radius: 20px;
+	width: 115px;
+	height: 24px;
+	line-height: 22px;
+	padding-left: 2px;
+	gap: 6px;
+}
+
+.yenlow-assignNew {
 	border: 0.1px solid #FFD000;
 	background-color: #FFFAED;
-	border-radius: 26.5px;
-	letter-spacing: 0.5px;
-	padding-left: 2px;
-	padding-right: 0px;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	height: 32px;
-
 }
 
 
 .over-assignNew {
-	font-weight: 500;
-	font-size: 16px;
+
 	color: #E05757;
 	background-color: #FFD7D7;
-	border-radius: 26.5px;
-	letter-spacing: 0.5px;
-	padding-left: 3px;
-	padding-right: 0px;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	height: 32px;
+
 }
 
 
 .inprogress-assignNew {
-	font-weight: 500;
-	font-size: 16px;
 	color: #2580D3;
 	background-color: #E7EAFF;
-	border-radius: 26.5px;
-	letter-spacing: 0.5px;
-	padding-left: 3px;
-	padding-right: 0px;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	height: 32px;
 }
 
 .complete-assignNew {
-	font-weight: 500;
-	font-size: 16px;
 	color: #2D7F06;
 	background-color: #DCFFD7;
-	border-radius: 26.5px;
-	letter-spacing: 0.5px;
-	padding-left: 3px;
-	padding-right: 0px;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	height: 32px;
 }
 
 .disable-assignNew {
-	font-weight: 500;
-	font-size: 16px;
 	color: black;
 	background-color: #E3E3E3;
 	border: 0.1px solid #30313D;
-	border-radius: 26.5px;
-	letter-spacing: 0.5px;
-	padding-left: 3px;
-	padding-right: 0px;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	height: 32px;
 }
 
 
@@ -1384,35 +1354,36 @@
 }
 
 .number-tagNew {
-	height: 32px;
-	width: 42.18px;
+	height: 24px;
+	width: 33px;
 	background: #ffffff;
-	font-size: 17.23px !important;
+	font-size: 13px !important;
 	font-weight: 500;
 	letter-spacing: 0.5px;
 	text-align: center;
-	border-radius: 16px;
-	position: relative;
+	align-content: center;
+	border-radius: 12px;
+	line-height: 9px;
 	color: #000000;
-	z-index: 3;
-	padding-left: 0px;
-	padding-right: 0px;
-	margin-left: 5px;
-	padding-top: 3px;
 }
 
 
 
 .pim-pic-gridNew {
-	width: 33px;
-	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
 	border-radius: 100%;
-	border: #FFFFFF solid 0.5px;
 }
 
 .pim-pic-over {
-	width: 33px;
-	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
 	border-radius: 100%;
 	border: #FFFFFF solid 0.5px;
 	background-color: #E05757;
@@ -1421,8 +1392,11 @@
 
 
 .pim-pic-inprogress {
-	width: 33px;
-	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
 	border-radius: 100%;
 	border: #FFFFFF solid 0.5px;
 	background-color: #2F42ED;
@@ -1431,8 +1405,11 @@
 }
 
 .pim-pic-complete {
-	width: 33px;
-	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
 	border-radius: 100%;
 	border: #FFFFFF solid 0.5px;
 	background-color: #2D7F06;
@@ -1441,23 +1418,27 @@
 }
 
 .pim-pic-disable {
-	width: 33px;
-	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
 	border-radius: 100%;
 	border: #30313D solid 0.5px;
 	background-color: #C3C3C3;
-	padding-top: 3px;
 
 }
 
 
 .pim-pic-yenlow {
-	width: 33px;
-	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
 	border-radius: 100%;
 	border: #FFD000 solid 0.5px;
 	background-color: #FFFAED;
-	padding-top: 3px;
 }
 
 
@@ -1467,12 +1448,8 @@
 .pim-pic-complete img,
 .pim-pic-yenlow img,
 .pim-pic-disable img {
-	width: 22px;
-	height: 22px;
-	object-fit: cover;
-	margin: auto;
-	margin-top: 4px;
-	display: block;
+	width: 14px;
+	height: 14px;
 }
 
 
@@ -1639,11 +1616,9 @@
 
 
 .pim-pic-gridNum {
-	margin-left: -3px;
-	width: 33px;
-	height: 33px;
-	border-radius: 100%;
-	margin-top: 3px;
+	width: 32px;
+	height: 24px;
+	border-radius: 12px;
 }
 
 .pim-duedate {
@@ -1655,7 +1630,7 @@
 
 
 .pic-after {
-	margin-left: -5px;
+	margin-left: -10px;
 	z-index: 3;
 }
 
@@ -1755,6 +1730,9 @@
 	font-weight: 500;
 	border-bottom: 2px solid #CBD5E1;
 	height: 28px;
+	color: #000000;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 .pim-type-tab img {
@@ -2199,29 +2177,20 @@ input:checked+.slider:before {
 
 .name-last-update {
 	color: #656565;
-	leading-trim: both;
-	text-edge: cap;
 	font-family: "SF Pro Display";
-	font-size: 14px;
+	font-size: 10px;
 	font-style: normal;
 	font-weight: 400;
-	line-height: 18px;
-	/* 128.573% */
-	letter-spacing: -0.21px;
+	line-height: 10px;
 }
 
 .create-last-update {
 	color: var(--Primary-Blue---HRVC, #2580D3);
 	text-align: right;
-	leading-trim: both;
-	text-edge: cap;
 	font-family: "SF Pro Display";
-	font-size: 16px;
+	font-size: 12px;
 	font-style: normal;
 	font-weight: 500;
-	line-height: 24px;
-	/* 150.002% */
-	letter-spacing: -0.24px;
 	text-decoration-line: underline;
 	text-decoration-style: solid;
 	text-decoration-skip-ink: auto;
@@ -2232,36 +2201,36 @@ input:checked+.slider:before {
 
 .select-create-status {
 	display: flex;
-	width: 130px;
-	height: 40px;
-	padding: 6px 15px;
+	width: 80px;
+	height: 35px;
+	padding: 3px 3px 3px 3px;
 	justify-content: center;
 	align-items: center;
-	gap: 10px;
+	/* gap: 10px; */
 	flex-shrink: 0;
 	border-radius: 24.444px;
 	border: 0.5px solid #2F42ED;
 	background: #E7EAFF;
-	font-size: 14px;
-	font-weight: 600;
+	font-size: 12px;
+	font-weight: 500;
 	font-family: "SF Pro Display";
 	color: #2F42ED;
 }
 
 .select-complete-status {
 	display: flex;
-	width: 130px;
-	height: 40px;
-	padding: 6px 15px;
+	width: 80px;
+	height: 35px;
+	padding: 3px 3px 3px 3px;
 	justify-content: center;
 	align-items: center;
-	gap: 10px;
+	/* gap: 10px; */
 	flex-shrink: 0;
 	border-radius: 24.444px;
 	border: 0.5px solid #2D7F06;
 	background: #E1FFD7;
-	font-size: 14px;
-	font-weight: 600;
+	font-size: 12px;
+	font-weight: 500;
 	font-family: "SF Pro Display";
 	color: #2D7F06;
 }

@@ -281,7 +281,7 @@ if ($DueBehind < 0) {
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group mt-71" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                        <div class="form-group mt-70" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
                                 Select Department/s <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
@@ -325,7 +325,7 @@ if ($DueBehind < 0) {
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4  col-12">
+                    <div class="col-lg-4 pr-20  col-12">
                         <div class="" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
@@ -460,7 +460,6 @@ if ($DueBehind < 0) {
                                 <div id="endDatePicker"></div>
                             </div>
                         </div>
-
                         <div class="form-group mt-37"
                             style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
@@ -492,7 +491,7 @@ if ($DueBehind < 0) {
                             </div>
                         </div>
 
-                        <div class="form-group mt-37"
+                        <div class="form-group mt-27"
                             style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
@@ -513,8 +512,8 @@ if ($DueBehind < 0) {
                             <input type="hidden" name="kfiId" id="kfiId" value="<?= isset($kfiId) ? $kfiId : '' ?>">
                         </div>
 
-                        <div class="d-flex justify-content-between mt-37 gap-1 border" style="--bs-gutter-x:0px;">
-                            <div class="mt-10;" style="width:50%;">
+                        <div class="d-flex mt-30 gap-1" style="--bs-gutter-x:0px;">
+                            <div style="min-width:130px;">
                                 <label class="text-manage-create" for="name">
                                     <span class="text-danger">* </span>
                                     Data Type <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
@@ -531,7 +530,7 @@ if ($DueBehind < 0) {
                             </div>
 
                             <!-- Right side (Success Condition) -->
-                            <div class="mt-10" style="">
+                            <div>
                                 <label class="text-manage-create" for="name">
                                     <span class="text-danger">* </span>
                                     Success Condition <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
@@ -539,7 +538,7 @@ if ($DueBehind < 0) {
                                         title="Define the criteria for success (e.g., Greater Than, Less Than, Equal To) to measure achievement against the target."
                                         alt="Help Icon" class="tootip-icon">
                                 </label>
-                                <select class="" id="code-create" name="code" required>
+                                <select class="form-select" id="code-create" name="code" required>
                                     <option value="">Select</option>
                                     <option value="<" <?= ($selectedCode == '<') ? 'selected' : '' ?>>
                                         &nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;<?= Yii::t('app', 'Result more than target') ?>
@@ -554,9 +553,8 @@ if ($DueBehind < 0) {
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-12 pl-30">
-                        <div class="form-group"
-                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                    <div class="col-lg-4 col-12 pl-20">
+                        <div class="form-group" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;height:59px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
                                 Master Target <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
@@ -566,22 +564,21 @@ if ($DueBehind < 0) {
                             </label>
                             <div class="input-group">
                                 <span class="input-group-text"
-                                    style="background-color:rgb(255, 255, 255); border-right: none; padding: 20px;">
+                                    style="background-color:rgb(255, 255, 255); border-right: none;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/target-blue.svg" alt="LinkedIn"
                                         style="width: 30px; height: 30px;">
                                 </span>
                                 <input type="number" class="form-control text-end" name="amount" step="any"
                                     placeholder="Enter Target Amount"
                                     value="<?= isset($data['targetAmount']) ? $data['targetAmount'] : '' ?>"
-                                    style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
+                                    style="border-left: none; font-size: 22px; font-style: normal; font-weight: 400;"
                                     required>
                             </div>
                         </div>
 
-                        <div class="form-group mt-42"
+                        <div class="form-group mt-60"
                             style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                            <label class="text-manage-create" for="name"
-                                style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                            <label class="text-manage-create" for="name" style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
                                 <div style="flex-grow: 1;">
                                     <span class="text-danger">* </span>
                                     Result <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
@@ -594,9 +591,9 @@ if ($DueBehind < 0) {
                                 </div>
                             </label>
 
-                            <div class="input-group">
+                            <div class="input-group" style="height:70px;">
                                 <span class="input-group-text"
-                                    style="background-color:rgb(255, 255, 255); border-right: none; padding: 20px;">
+                                    style="background-color:rgb(255, 255, 255); border-right: none;">
                                     <img id="result-icon"
                                         src="<?= Yii::$app->homeUrl ?>image/result-<?= isset($data['result']) ? 'blue' : 'gray' ?>.svg"
                                         alt="LinkedIn" style="width: 30px; height: 30px;">
@@ -616,7 +613,7 @@ if ($DueBehind < 0) {
                             </div>
                         </div>
 
-                        <div class="form-group mt-42"
+                        <div class="form-group mt-30"
                             style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name"
                                 style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
@@ -627,23 +624,23 @@ if ($DueBehind < 0) {
                                         title="This is the  Details description for the icon" alt="Help Icon">
                                 </div>
                             </label>
-                            <textarea class="form-control" name="detail" style="height: 165px;"
+                            <textarea class="form-control" name="detail" style="height: 200px;"
                                 rows="4"><?= isset($data['detail']) ? $data['detail'] : '' ?></textarea>
                         </div>
 
-                        <div class="form-group mt-42"
-                            style="display: flex; align-items: flex-end; justify-content: flex-end; gap: 12px; width: 100%;">
+                        <div class="form-group mt-40" style="display: flex; align-items: flex-end; justify-content: flex-end; gap: 5px; width: 100%;">
                             <?php
                             // $status = 'create';
                             // $statusform = 'update';
 
                             if ($statusform == 'update') {
                             ?>
-                                <div style="display: flex;
-                                width: 99px;
-                                height: 40px;
+                                <div class="" style="display: flex;
+                                min-width: 90px;
+                                height: 35px;
                                 flex-direction: column;
                                 align-items: flex-end;
+                                justify-content: center;
                                 ">
                                     <label class="name-last-update">
                                         Last Updated on
@@ -654,8 +651,7 @@ if ($DueBehind < 0) {
                                     </text>
                                 </div>
                                 <div>
-                                    <select
-                                        class="<?= $data['status'] == 1 ? 'select-create-status' : 'select-complete-status' ?>"
+                                    <select class="<?= $data['status'] == 1 ? 'select-create-status' : 'select-complete-status' ?>"
                                         aria-label="Default select example" name="status" id="pim-status"
                                         onchange="javascript:changeStatus()">
                                         <option value="1"
@@ -673,23 +669,23 @@ if ($DueBehind < 0) {
                                 <input type="hidden" name="status" value='1'>
                             <?php } ?>
                             <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="btn-create-cancle"
-                                style="width: 100px;text-decoration: none;">
+                                style="width: 70px;text-decoration: none;height: 35px;font-size:14px !important;">
                                 Cancel
                             </a>
                             <?php
                             if ($statusform == 'update') {
                             ?>
-                                <button type="submit" class="btn-create-update" style="width: 100px;">
+                                <button type="submit" class="btn-create-update" style="width: 80px;height: 35px;font-size:14px !important;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/updatebtn-white.svg" alt="LinkedIn"
-                                        style="width: 16px; height: 16px;">
+                                        style="width: 14px; height: 14px;">
                                     Update
                                 </button>
                             <?php } else { ?>
                                 <!-- ปรับให้ปุ่มนี้เป็น type="submit" -->
-                                <button type="submit" class="btn-create-update" style="width: 100px;">
+                                <button type="submit" class="btn-create-update" style="width:80px;text-decoration: none;height: 35px;font-size:14px !important;">
                                     Create
                                     <img src="<?= Yii::$app->homeUrl ?>image/create-btn-white.svg" alt="LinkedIn"
-                                        style="width: 16px; height: 16px;">
+                                        style="width: 14px; height: 14px;">
                                 </button>
                             <?php } ?>
                         </div>
