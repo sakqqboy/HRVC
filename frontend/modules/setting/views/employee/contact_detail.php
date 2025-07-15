@@ -266,13 +266,13 @@ if (isset($employee['birthDate'])) {
             <div style="flex: 8;">
                 <div class="language-dropdown" style="height: 30px;">
                     <?php
-                    $flag1 = isset($UserLanguage[0]['flag']) ? $UserLanguage[0]['flag'] : '';
+                    $flag1 = isset($UserLanguage[0]['flag']) ? $UserLanguage[0]['flag'] : 'image/e-world.svg';
                     ?>
 
                     <span class="font-size-16 font-weight-500">
                         <img src="<?= Yii::$app->homeUrl . htmlspecialchars($flag1) ?>" alt="Language"
                             style="width: 20px; height: 20px; border: none; border-radius: 100%;">
-                        <?= $UserLanguage[0]['name'] ?? '' ?>
+                        <?= $UserLanguage[0]['name'] ?? '-' ?>
                     </span>
                 </div>
 

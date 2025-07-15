@@ -500,11 +500,13 @@ class EmployeeController extends Controller
         } else {
             $employee["age"] = '-';
         }
+        // $employee["picture"] = '';
         $employee["branchName"] = Branch::branchName($employee['branchId']);
         $employee["departmentName"] =  Department::departmentName($employee['departmentId']);
         $employee["teamName"] =  Team::teamName($employee['teamId']);
         $employee["titleName"] = Title::titleName($employee['titleId']);
         $employee["conditionName"] = EmployeeCondition::conditionName($employee['employeeConditionId']);
+       
         //$employee["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
         //    $status = $employee["status"];
         $employee["status"] = $employee['statusName'];

@@ -98,7 +98,7 @@ $this->title = 'view';
                         style="width: 150px; height: 150px;">
                     <?php
                     } else { ?>
-                    <img src="<?= Yii::$app->homeUrl ?>images/employee/profile/employee-no-image.svg"
+                    <img src="<?= Yii::$app->homeUrl ?>images/employee/status/employee-nopic.svg"
                         class="profile-picture rounded-circle mb-3" alt="User Avatar"
                         style="width: 150px; height: 150px;">
                     <?php
