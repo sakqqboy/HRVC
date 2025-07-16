@@ -459,7 +459,7 @@ function togglePassword() {
     } else {
         passwordInput.type = "password";
         icon.src =
-            $url + "image/e-pass.svg"; // เปลี่ยนเป็น icon ตาเปิด
+            $url + "image/e-pass-close.svg"; // เปลี่ยนเป็น icon ตาเปิด
     }
 }
 

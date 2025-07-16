@@ -7,6 +7,7 @@ use yii\bootstrap5\ActiveForm;
 
 $urlSubmit = '';
 if ($statusfrom == 'Create') {
+    $isDisabled = '';
     $this->title = 'Create Employee';
     $urlSubmit = 'setting/employee/save-create-employee';
 } else {
@@ -259,7 +260,8 @@ $form = ActiveForm::begin([
                                         style="background-color: <?= $isDisabled ? '#e9ecef' : 'white' ?>;
                                                 cursor: <?= $isDisabled ? 'not-allowed' : 'pointer' ?>;
                                                 border-left: none; padding: 3px 10px; width: clamp(35px, 2.56vw, 70px);">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/e-pass.svg" id="toggleIcon"
+                                        <img src="<?= Yii::$app->homeUrl ?>image/e-pass-close.svg" alt="Website"
+                                            id="toggleIcon"
                                             style="width: 16px; height: 16px; opacity: <?= $isDisabled ? '0.5' : '1' ?>;">
                                     </span>
 
@@ -314,8 +316,6 @@ $form = ActiveForm::begin([
                                         }
                                         ?>
                                     </select>
-
-
                                 </div>
                             </div>
                         </div>
