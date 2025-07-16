@@ -201,12 +201,11 @@
 
 .pim-center-line-content {
 	display: flex;
-	height: 70px;
+	height: 100px;
 	align-self: center;
 	border-right: lightgray solid thin;
 	margin-left: 15px;
 	margin-right: 15px;
-
 }
 
 .pim-center-line-content-md {
@@ -355,39 +354,54 @@
 
 .priority-box {
 	background-color: #2580D3;
-	border-radius: 4px;
-	padding-top: 3px;
 	color: white;
-	width: 45px;
-	height: 45px;
-	font-size: 12px;
+	border-radius: 3px;
+	width: 35px;
+	height: 35px;
+	font-size: 9px;
 	font-weight: 400;
-	margin-left: 12px;
+	text-align: center;
+	letter-spacing: 0.3px;
+	margin-top: 3px;
+	padding-bottom: 2px;
+	line-height: 12px;
+	align-content: center;
+	gap: 3px;
+	display: grid
 }
 
 .priority-box-null {
 	background-color: #C3C3C3;
-	border-radius: 4px;
-	padding-top: 3px;
 	color: #30313D;
-	width: 45px;
-	height: 45px;
-	margin-top: 15px;
-	font-size: 12px;
+	width: 35px;
+	height: 35px;
+	font-size: 9px;
 	font-weight: 400;
-	margin-left: 12px;
+	text-align: center;
+	letter-spacing: 0.3px;
+	margin-top: 3px;
+	padding-bottom: 2px;
+	line-height: 12px;
+	align-content: center;
+	gap: 3px;
+	display: grid
 }
 
 .text-priority {
-	font-size: 20px;
-	font-weight: 600;
-	margin-top: -5px;
+	font-size: 15px;
+	line-height: 12px;
+	font-weight: 700;
+	margin-top: 2px;
 }
 
 .priority-star {
-	font-size: 12px;
+	font-size: 11px !important;
 	color: #FFBA00;
-	/* width: 45px; */
+	display: flex;
+	align-items: end;
+	height: 25px;
+	width: 43px;
+	justify-content: space-between;
 }
 
 .pim-small-text {
@@ -404,7 +418,8 @@
 }
 
 .big-star {
-	font-size: 18px;
+	font-size: 16px;
+	align-self: center;
 }
 
 .pim-icon {
@@ -527,6 +542,7 @@
 .assign-on {
 	font-weight: 500;
 	font-size: 12px;
+	line-height: 8px;
 	color: #3C3D48;
 }
 
@@ -930,9 +946,9 @@
 	align-items: center;
 	font-weight: 500;
 	font-size: 12px;
-	letter-spacing: 0.2px;
+	letter-spacing: 0.3px;
 	border-radius: 20px;
-	min-width: 110px;
+	min-width: 115px;
 	height: 24px;
 	line-height: 22px;
 	padding-left: 3px;
@@ -1364,10 +1380,11 @@
 	letter-spacing: 0.5px;
 	text-align: center;
 	align-content: center;
-	border-radius: 10px;
+	border-radius: 14px;
 	line-height: 9px;
 	padding: 0px;
 	color: #000000;
+	cursor: default;
 }
 
 
