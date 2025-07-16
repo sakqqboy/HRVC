@@ -459,7 +459,7 @@ function togglePassword() {
     } else {
         passwordInput.type = "password";
         icon.src =
-            $url + "image/e-pass.svg"; // เปลี่ยนเป็น icon ตาเปิด
+            $url + "image/e-pass-close.svg"; // เปลี่ยนเป็น icon ตาเปิด
     }
 }
 
@@ -1059,6 +1059,17 @@ function flatpickrDate() {
     }
 
 
+}
+
+function clearPasswordOnce(input) {
+    if (!input.dataset.cleared) {
+        input.value = '';
+        input.dataset.cleared = "true"; // ไม่ล้างซ้ำในครั้งต่อไป
+    }
+}
+
+function allowOnlyEngAndNumber(input) {
+    input.value = input.value.replace(/[^a-zA-Z0-9]/g, '');
 }
 
 function changeStatusEmployee() {

@@ -7,9 +7,11 @@ use yii\bootstrap5\ActiveForm;
 
 $urlSubmit = '';
 if ($statusfrom == 'Create') {
+    $isDisabled = '';
     $this->title = 'Create Employee';
     $urlSubmit = 'setting/employee/save-create-employee';
 } else {
+    $isDisabled = $statusfrom == 'Update';
     $this->title = 'Update Employee';
     $urlSubmit = 'setting/employee/save-update-employee';
 }
@@ -211,13 +213,16 @@ $form = ActiveForm::begin([
                                 </text>
                                 <div class="input-group">
                                     <span class="input-group-text"
-                                        style="background-color: white; border-right: none;padding:3px 10px;width:clamp(35px, 2.56vw, 70px);">
+                                        style="background-color: <?= $isDisabled ? '#e9ecef' : 'white' ?>; border-right: none; padding:3px 10px; width:clamp(35px, 2.56vw, 70px); cursor: <?= $isDisabled ? 'not-allowed' : 'default' ?>;">
                                         <img src="<?= Yii::$app->homeUrl ?>image/e-mail.svg" alt="Website"
-                                            style="width: 16px; height: 16px;">
+                                            style="width: 16px; height: 16px; opacity: <?= $isDisabled ? '0.5' : '1' ?>;">
                                     </span>
+
                                     <input type="text" class="form-control font-size-14" id="mailId" name="mailId"
                                         placeholder="kaori@gmail.com" value="<?= $userEmployee['mailId'] ?? '' ?>"
-                                        style="width:clamp(290px, 21.22vw, 560px); border-left: none;" required>
+                                        <?= $isDisabled ? 'readonly' : '' ?>
+                                        style="width:clamp(290px, 21.22vw, 560px); border-left: none; background-color: <?= $isDisabled ? '#e9ecef' : 'white' ?>;"
+                                        required>
                                 </div>
                             </div>
                             <div>
@@ -242,16 +247,24 @@ $form = ActiveForm::begin([
                                         <img src="<?= Yii::$app->homeUrl ?>image/e-lock.svg" alt="Website"
                                             style="width: 16px; height: 16px;">
                                     </span>
+
                                     <input type="password" class="form-control font-size-14" name="password"
                                         id="password" placeholder="<?= Yii::t('app', 'Register Password here') ?>"
                                         value="<?= $userEmployee['password'] ?? '' ?>"
-                                        style="width:clamp(255px, 18.66vw, 560px);border-left: none; border-right: none;"
+                                        style="width:clamp(255px, 18.66vw, 560px); border-left: none; border-right: none;"
+                                        onclick="clearPasswordOnce(this)" oninput="allowOnlyEngAndNumber(this)"
                                         required>
-                                    <span class="input-group-text" onclick="togglePassword()"
-                                        style="background-color: white; cursor: pointer; border-left: none;padding:3px 10px;width:clamp(35px, 2.56vw, 70px);">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/e-pass.svg" id="toggleIcon"
-                                            style="width: 16px; height: 16px;">
+
+                                    <span class="input-group-text" id="togglePasswordBtn"
+                                        <?= $isDisabled ? '' : 'onclick="togglePassword()"' ?>
+                                        style="background-color: <?= $isDisabled ? '#e9ecef' : 'white' ?>;
+                                                cursor: <?= $isDisabled ? 'not-allowed' : 'pointer' ?>;
+                                                border-left: none; padding: 3px 10px; width: clamp(35px, 2.56vw, 70px);">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/e-pass-close.svg" alt="Website"
+                                            id="toggleIcon"
+                                            style="width: 16px; height: 16px; opacity: <?= $isDisabled ? '0.5' : '1' ?>;">
                                     </span>
+
                                 </div>
                             </div>
                             <div>
@@ -303,8 +316,6 @@ $form = ActiveForm::begin([
                                         }
                                         ?>
                                     </select>
-
-
                                 </div>
                             </div>
                         </div>
@@ -1610,6 +1621,17 @@ $form = ActiveForm::begin([
     let uploadedCerFile = null; // สำหรับ cerimage
     let uploadedCertificateFiles = []; // สำหรับ certificate (multiple files)
     let certificates = [];
+    const passwordInput = document.getElementById("password");
+    const toggleBtn = document.getElementById("togglePasswordBtn");
+
+    passwordInput.addEventListener("input", function() {
+        if (toggleBtn.getAttribute("onclick") !== "togglePassword()") {
+            toggleBtn.setAttribute("onclick", "togglePassword()");
+            toggleBtn.style.cursor = "pointer";
+            toggleBtn.style.backgroundColor = "white";
+            document.getElementById("toggleIcon").style.opacity = "1";
+        }
+    });
 
     const homeUrl = "<?= Yii::$app->homeUrl ?>";
     document.getElementById('companySelectId').addEventListener('change', function() {
