@@ -1046,6 +1046,7 @@ function closeCalendarOnDateSelect(datePickerId, calendarId) {
 document.addEventListener('click', function (event) {
     const calendars = [
         { buttonId: 'multi-due-term', calendarId: 'calendar-due-term' },
+        { buttonId: 'multi-due-term-pim', calendarId: 'calendar-due-term' },
         { buttonId: 'multi-due-update', calendarId: 'calendar-due-update' }
     ];
 
@@ -1071,6 +1072,7 @@ document.addEventListener('click', function (event) {
 
 // เรียกใช้งานฟังก์ชันแสดง/ซ่อนปฏิทิน
 toggleCalendar('multi-due-term', 'calendar-due-term');
+toggleCalendar('multi-due-term-pim', 'calendar-due-term');
 toggleCalendar('multi-due-update', 'calendar-due-update');
 
 closeCalendarOnDateSelect("endDatePicker", "calendar-due-term");
@@ -1175,6 +1177,15 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("multi-due-term").innerHTML =
             `${startDate} - ${endDate} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
 
+        let newText = '<span class="calendar-due mr-15" id="calendar-dueterm"></span>';
+        let duterm = startDate + ' - ' + endDate;
+        let icon = '<i class="fa fa-angle-down" aria-hidden="true" style="position: absolute;right:0;margin-right:15px;"></i>';
+
+        document.getElementById("multi-due-term-pim").innerHTML = newText + duterm + icon;
+        const images1 = '<img src="' + $url + 'image/calendar-gray.svg' + '" alt="from" class="calendar-due-image">';
+        const images2 = '<img src="' + $url + 'image/weld-gray.svg' + '" alt="from" class="calendar-due-image">';
+        const images3 = '<img src="' + $url + 'image/calendar-gray.svg' + '" alt="from" class="calendar-due-image">';
+        $("#calendar-dueterm").html(images1 + images2 + images3);
         // เปลี่ยนสไตล์ข้อความ
         $("#multi-due-term").css({
             "color": "var(--HRVC---Text-Black, #30313D)",
@@ -1384,16 +1395,17 @@ function updateSelectedDates() {
     let newText = '<span class="calendar-due mr-15" id="calendar-dueterm"></span>';
     let duterm = startDate + ' - ' + endDate;
     let icon = '<i class="fa fa-angle-down" aria-hidden="true" style="position: absolute;right:0;margin-right:15px;"></i>';
-
-    // document.getElementById("multi-due-term").innerHTML = newText + duterm + icon;
-
-    document.getElementById("multi-due-term").innerHTML = duterm + icon;
-    document.getElementById("due-term-icon-group").style.backgroundColor = "#D7EBFF";
-    document.getElementById("due-term-icon-group").style.border = '0.5px solid #BEDAFF';
-    document.getElementById("start-img-probation").src = $url + 'image/calendar-blue.svg';
-    document.getElementById("weld-img-probation").src = $url + 'image/weld.svg';
-    document.getElementById("end-img-probation").src = $url + 'image/calendar-blue.svg';
-
+    var page = $("#page").val();
+    if (page == "pim") {
+        document.getElementById("multi-due-term").innerHTML = newText + duterm + icon;
+    } else {
+        document.getElementById("multi-due-term").innerHTML = duterm + icon;
+        document.getElementById("due-term-icon-group").style.backgroundColor = "#D7EBFF";
+        document.getElementById("due-term-icon-group").style.border = '0.5px solid #BEDAFF';
+        document.getElementById("start-img-probation").src = $url + 'image/calendar-blue.svg';
+        document.getElementById("weld-img-probation").src = $url + 'image/weld.svg';
+        document.getElementById("end-img-probation").src = $url + 'image/calendar-blue.svg';
+    }
     const images1 = '<img src="' + $url + 'image/calendar-gray.svg' + '" alt="from" class="calendar-due-image">';
     const images2 = '<img src="' + $url + 'image/weld-gray.svg' + '" alt="from" class="calendar-due-image">';
     const images3 = '<img src="' + $url + 'image/calendar-gray.svg' + '" alt="from" class="calendar-due-image">';
