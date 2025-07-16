@@ -243,10 +243,16 @@ $form = ActiveForm::begin([
                                         <img src="<?= Yii::$app->homeUrl ?>image/e-lock.svg" alt="Website"
                                             style="width: 16px; height: 16px;">
                                     </span>
+                                    <!-- <input type="password" class="form-control font-size-14" name="password"
+                                        id="password" placeholder="<?= Yii::t('app', 'Register Password here') ?>"
+                                        value="<?= $userEmployee['password'] ?? '' ?>"
+                                        style="width:clamp(255px, 18.66vw, 560px); border-left: none; border-right: none;"
+                                        onclick="clearPasswordOnce(this)" required> -->
                                     <input type="password" class="form-control font-size-14" name="password"
                                         id="password" placeholder="<?= Yii::t('app', 'Register Password here') ?>"
                                         value="<?= $userEmployee['password'] ?? '' ?>"
                                         style="width:clamp(255px, 18.66vw, 560px); border-left: none; border-right: none;"
+                                        onclick="clearPasswordOnce(this)" oninput="allowOnlyEngAndNumber(this)"
                                         required>
 
                                     <span class="input-group-text" id="togglePasswordBtn"

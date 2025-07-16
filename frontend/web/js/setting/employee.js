@@ -1061,6 +1061,17 @@ function flatpickrDate() {
 
 }
 
+function clearPasswordOnce(input) {
+    if (!input.dataset.cleared) {
+        input.value = '';
+        input.dataset.cleared = "true"; // ไม่ล้างซ้ำในครั้งต่อไป
+    }
+}
+
+function allowOnlyEngAndNumber(input) {
+    input.value = input.value.replace(/[^a-zA-Z0-9]/g, '');
+}
+
 function changeStatusEmployee() {
     const selectElement = document.getElementById('pim-status');
     const selectedId = parseInt(selectElement.value);
