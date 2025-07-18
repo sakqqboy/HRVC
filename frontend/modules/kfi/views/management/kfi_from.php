@@ -450,6 +450,7 @@ if ($DueBehind < 0) {
                                 value="<?= isset($data['fromDate']) ? $data['fromDate'] : '' ?>" required>
                             <input type="hidden" id="toDate" name="toDate"
                                 value="<?= isset($data['toDate']) ? $data['toDate'] : '' ?>" required>
+                            <input type="hidden" id="page" value="pim">
 
                             <!-- Calendar picker -->
                             <div class="calendar-container" id="calendar-due-term"
