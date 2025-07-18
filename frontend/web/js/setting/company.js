@@ -33,8 +33,8 @@ function deleteCompany(companyId) {
 }
 
 function companyBranch() {
+    // alert(companyId);
     var companyId = $("#company").val();
-    //alert(companyId);
     var url = $url + 'setting/company/company-branch';
     $.ajax({
         type: "POST",
@@ -50,6 +50,7 @@ function companyBranch() {
     });
 }
 function companyDepartment() {
+    // alert(companyId);
     var companyId = $("#company").val();
     var url = $url + 'setting/company/company-department';
     $.ajax({

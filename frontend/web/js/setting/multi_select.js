@@ -41,22 +41,22 @@ function deleteTags(id) {
     $("#tag-" + id).remove();
 }
 
-// function applySelectStyle(selectElement) {
-//     alert(selectElement.value);
-//     if (selectElement.value) {
-//         selectElement.classList.remove('select-pim');
-//         selectElement.classList.add('select-pimselect');
-//     } else {
-//         selectElement.classList.remove('select-pimselect');
-//         selectElement.classList.add('select-pim');
-//     }
-// }
+function applySelectStyle(selectElement) {
+    // alert(selectElement.value);
+    if (selectElement.value) {
+        selectElement.classList.remove('select-pim');
+        selectElement.classList.add('select-pimselect');
+    } else {
+        selectElement.classList.remove('select-pimselect');
+        selectElement.classList.add('select-pim');
+    }
+}
 
 
 function applySelectStyleGroup(select) {
     // ตรวจสอบว่า value มีจริง (แม้ว่าเป็น "0" ก็ถือว่า valid)
     const hasValue = select.value !== "" && select.value !== null;
-
+    // alert(select.id);
     // เปลี่ยน class
     if (hasValue) {
         select.classList.remove("select-pim");
@@ -86,17 +86,22 @@ function applySelectStyleGroup(select) {
     }
 
     // กรณีเปลี่ยน Branch
-    if (select.id === "branchSelect") {
-        const departmentSelect = document.getElementById("departmentSelect");
+    if (select.id == "branchSelect" || select.id == "branch-filter") {
+        // alert(select.id);
+        // const departmentSelect = document.getElementById("departmentSelect");
+        const departmentFilter = document.getElementById("department-filter");
 
         if (hasValue) {
-            departmentSelect.disabled = false;
+            // departmentSelect.disabled = false;
+            departmentFilter.disabled = false;
         } else {
-            departmentSelect.disabled = true;
-            departmentSelect.value = "";
+            // departmentSelect.disabled = true;
+            // departmentSelect.value = "";
+            departmentFilter.disabled = true;
+            departmentFilter.value = "";
         }
 
-        applySelectStyleGroup(departmentSelect);
+        applySelectStyleGroup(departmentFilter);
     }
 }
 

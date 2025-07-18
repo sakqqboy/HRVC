@@ -9,7 +9,7 @@ use frontend\models\hrvc\Team;
 ?>
 <div class="d-flex justify-content-end align-items-center  gap-2">
 
-    <select id="countrySelect" class="form-select font-size-12 select-pim" required>
+    <select id="countrySelect" class="font-size-12 select-pim" required>
         <option value="" disabled <?= empty($countryIdOld) ? 'selected' : '' ?> hidden
             style="color: var(--Helper-Text, #8A8A8A);">
             <?= Yii::t('app', 'Country') ?>
@@ -20,33 +20,9 @@ use frontend\models\hrvc\Team;
         </option>
         <?php endforeach; ?>
     </select>
-    <!-- 
-    <select class="form-select font-size-12 <?= !empty($companyIdOld) ? 'select-pimselect' : 'select-pim' ?>"
-        id="company-filter" onchange="applySelectStyle(this)">
-        <?php if (!empty($companyIdOld)) : ?>
-        <option value="<?= $companyIdOld ?>"><?= Company::companyName($companyIdOld) ?></option>
-        <?php endif; ?>
-        <option value=""><?= Yii::t('app', 'Company') ?></option>
-        <?php foreach ($companies as $company) : ?>
-        <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-        <?php endforeach; ?>
-    </select>
 
-    <select class="form-select font-size-12 <?= !empty($branchIdOld) ? 'select-pimselect' : 'select-pim' ?>"
-        id="branch-filter" <?= empty($companyIdOld) ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
-        <?php if (!empty($branchIdOld)) : ?>
-        <option value="<?= $branchIdOld ?>"><?= Branch::branchName($branchIdOld) ?></option>
-        <?php endif; ?>
-        <option value=""><?= Yii::t('app', 'Branch') ?></option>
-        <?php if (!empty($branches)) :
-            foreach ($branches as $branch) : ?>
-        <option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
-        <?php endforeach;
-        endif; ?>
-    </select> -->
-
-    <select class="form-select font-size-12 <?= !empty($companyIdOld) ? 'select-pimselect' : 'select-pim' ?>"
-        id="company-filter" onchange="applySelectStyle(this)">
+    <select class=" font-size-12 <?= !empty($companyIdOld) ? 'select-pimselect' : 'select-pim' ?>" id="company-filter"
+        onchange="applySelectStyle(this)">
         <?php
         if (!empty($companyIdOld)) { ?>
         <option value="<?= $companyIdOld ?>"><?= Company::companyName($companyIdOld) ?></option>
@@ -86,11 +62,6 @@ use frontend\models\hrvc\Team;
         ?>
     </select>
 
-    <!-- <span class="btn font-size-12 justify-content-center d-flex align-items-center custom-button-select"
-        onclick="filterCountryDepartment('<?= $page ?>')" style="flex: 1; text-align: center; cursor: pointer;">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-2">
-        <?= Yii::t('app', 'Filter') ?>
-    </span> -->
     <span class="justify-content-center d-flex align-items-center employee-filter-btn" style="cursor: pointer;"
         onclick="filterCountryDepartment('<?= $page ?>')">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-1">

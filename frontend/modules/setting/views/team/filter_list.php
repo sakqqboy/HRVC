@@ -10,8 +10,8 @@ use frontend\models\hrvc\Team;
 ?>
 <div style="display: flex; justify-content: flex-end; gap: 16px; align-items: center; width: 100%;">
 
-    <select class="form-select font-size-12 <?= !empty($companyIdOld) ? 'select-pimselect' : 'select-pim' ?>"
-        id="company-filter" onchange="applySelectStyle(this)">
+    <select class=" font-size-12 <?= !empty($companyIdOld) ? 'select-pimselect' : 'select-pim' ?>" id="company-filter"
+        onchange="applySelectStyle(this)">
         <?php
             if (!empty($companyIdOld)) { ?>
         <option value="<?= $companyIdOld ?>"><?= Company::companyName($companyIdOld) ?></option>
@@ -66,12 +66,6 @@ use frontend\models\hrvc\Team;
         <?php endforeach; ?>
     </select>
 
-    <!-- 
-    <span class="btn font-size-12 justify-content-center d-flex align-items-center custom-button-select"
-        onclick="filterTeam('<?= $page ?>')" style="flex: 1; text-align: center; cursor: pointer;">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-2">
-        <?= Yii::t('app', 'Filter') ?>
-    </span> -->
 
     <span class="justify-content-center d-flex align-items-center employee-filter-btn" style="cursor: pointer;"
         onclick="filterTeam('<?= $page ?>')">

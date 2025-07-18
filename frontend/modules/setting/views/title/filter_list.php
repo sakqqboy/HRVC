@@ -31,7 +31,7 @@ use frontend\models\hrvc\Team;
     </select>
 
     <select class="form-select font-size-12 <?= !empty($branchIdOld) ? 'select-pimselect' : 'select-pim' ?>"
-        id="branch-filter" <?= empty($companyIdOld) ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
+        id="branch-filter" <?= empty($companyIdOld) ? 'disabled' : '' ?> onchange="applySelectStyleGroup(this)">
         <?php
             if (!empty($branchIdOld)) { 
         ?>
@@ -66,13 +66,6 @@ use frontend\models\hrvc\Team;
         </option>
         <?php endforeach; ?>
     </select>
-
-
-    <!-- <span class="btn font-size-12 justify-content-center d-flex align-items-center custom-button-select"
-        onclick="filterTitle('<?= $page ?>')" style="flex: 1; text-align: center; cursor: pointer;">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-2">
-        <?= Yii::t('app', 'Filter') ?>
-    </span> -->
 
     <span class="justify-content-center d-flex align-items-center employee-filter-btn" style="cursor: pointer;"
         onclick="filterTitle('<?= $page ?>')">
