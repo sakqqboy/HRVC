@@ -236,8 +236,8 @@ class ManagementController extends Controller
 		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
-		$totalKgi = Kgi::totalKgi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
-		$totalPage = ceil($totalKgi / $limit);
+		$totalKpi = Kpi::totalKpi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
+		$totalPage = ceil($totalKpi / $limit);
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
 		$totalBranch = Branch::totalBranch();
 
@@ -252,7 +252,7 @@ class ManagementController extends Controller
             "userId" => Yii::$app->user->id,
             "companyId" => $employeeCompanyId,
             "employeeCompanyId" => $employeeCompanyId,
-			"totalKgi" => $totalKgi,
+			"totalKpi" => $totalKpi,
 			"currentPage" => $currentPage,
 			"totalPage" => $totalPage,
 			"pagination" => $pagination,

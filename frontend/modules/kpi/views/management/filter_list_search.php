@@ -124,7 +124,7 @@ use frontend\models\hrvc\Team;
     <option value="2"><?= Yii::t('app', 'Completed') ?></option>
 </select>
 <span class="justify-content-center d-flex align-items-center employee-filter-btn" style="cursor: pointer;"
-    onclick="javascript:kgiFilter()">
+    onclick="javascript:kpiFilter()">
     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-1">
     <?= Yii::t('app', 'Filter') ?>
 </span>
