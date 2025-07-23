@@ -5,7 +5,7 @@ use yii\bootstrap5\ActiveForm;
 
 $this->title = 'KGI Grid View';
 ?>
-<div class="col-12 mt-70 pt-20">
+<div class="col-12 mt-70 pt-20 pim-content1">
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="pim-head-icon mr-11 mt-2">
         <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
@@ -27,8 +27,8 @@ $this->title = 'KGI Grid View';
         "companyPic" => $companyPic,
         "totalBranch" => $totalBranch
     ]) ?>
-    <div class="col-12 mt-20">
-        <div class="bg-white-employee">
+    <div class="col-12 mt-20" id="box-wrapper">
+        <div class="bg-white-employee" id="pim-content">
             <div class="d-flex pl-10 pr-10 justify-content-left align-content-center mt-5">
                 <div class="pim-type-tab-selected rounded-top-left justify-content-center align-items-center">
                     <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg" alt="Company"
@@ -60,6 +60,7 @@ $this->title = 'KGI Grid View';
 
                     ]) ?>
                     <input type="hidden" id="type" value="grid">
+                    <input type="hidden" id="minPage" value="0">
                 </div>
             </div>
             <div class="row" style="--bs-gutter-x:0px;">
@@ -67,7 +68,7 @@ $this->title = 'KGI Grid View';
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Config/loading.gif" class="img-fluid " style="width: 750px;">
                 </div>
             </div>
-            <div class="row mt-40 pl-10 pr-10" style="--bs-gutter-x:0px;" id="main-body">
+            <div class="row mt-20 pl-10 pr-10 pim-content mb-10" style="--bs-gutter-x:0px;" id="main-body">
                 <?php
                 if (isset($kgis["data"]) && count($kgis["data"]) > 0) {
                     foreach ($kgis["data"] as $kgiId => $kgi) :
@@ -159,7 +160,7 @@ $this->title = 'KGI Grid View';
                                                                 $textAssign = "View Assigned";
                                                                 $url = Yii::$app->homeUrl . 'kgi/view/kgi-history/' . ModelMaster::encodeParams(['kgiId' => $kgiId]);
                                                                 $assignImg = "view";
-                                                                if ($kgi["countEmployee"] == 0 && $colorFormat == 'disable') {
+                                                                if ($kgi["countEmployee"] == 0) {
                                                                     $textAssign = "Not Assign";
                                                                     $url = '#';
                                                                 }
@@ -245,27 +246,27 @@ $this->title = 'KGI Grid View';
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1  d-flex justify-content-end">
-                                                <div class="" style="width:45px;justify-items: center;align-content: center;">
-                                                    <div class="priority-star">
+                                                <div style="width:45px;justify-items: center;align-content: start;display: inline-grid;gap:2px;">
+                                                    <div class="priority-star mt-5">
                                                         <?php
                                                         if ($kgi["priority"] == "A" || $kgi["priority"] == "B") {
                                                         ?>
-                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                                         <?php
                                                         }
                                                         if ($kgi["priority"] == "A" || $kgi["priority"] == "C") {
                                                         ?>
-                                                            <i class="fa fa-star big-star" aria-hidden="true"></i>
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="big-star">
                                                         <?php
                                                         }
                                                         if ($kgi["priority"] == "B") {
                                                         ?>
-                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                                         <?php
                                                         }
                                                         if ($kgi["priority"] == "A") {
                                                         ?>
-                                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                                         <?php
                                                         }
                                                         ?>
@@ -292,6 +293,232 @@ $this->title = 'KGI Grid View';
                                     </div>
                                 </div>
                                 <div class="pim-center-line-content pim-<?= $colorFormat ?>"></div>
+                                <div class="d-flex flex-column kgi-grid-2">
+                                    <div class="status-tag <?= $colorFormat ?>-tag">
+                                        <?= $statusText ?>
+                                    </div>
+                                    <div class="d-grid  pl-10 pr-10 mt-23" style="gap: 7px;">
+                                        <div class="pim-small-text"><?= Yii::t('app', 'Quant Ratio') ?></div>
+                                        <div class="pim-unit-text">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $kgi["quantRatio"] == 1 ? Yii::t('app', 'quantity') : Yii::t('app', 'diamon') ?>.svg"
+                                                style="width:10px;height:10px;">
+                                            <?= $kgi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
+                                        </div>
+                                    </div>
+
+                                    <div class="pim-center-line-width pim-<?= $colorFormat ?> ml-10"></div>
+                                    <div class="d-grid  pl-10 pr-10" style="gap: 7px;">
+                                        <div class="pim-small-text"><?= Yii::t('app', 'Update Interval') ?></div>
+                                        <div class="pim-unit-text">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg" style="width:10px;height:10px;">
+                                            <?= Yii::t('app', $kgi["unit"]) ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pim-center-line-content pim-<?= $colorFormat ?>"></div>
+                                <div class="d-flex flex-column kgi-grid-3">
+                                    <div class="d-flex justify-content-start">
+
+                                        <div class="month-<?= $colorFormat ?> month-period">
+                                            <?= $kgi['month'] == "" ? Yii::t('app', 'Month') : Yii::t('app', $kgi['month']) ?>
+                                        </div>
+                                        <div class="term-<?= $colorFormat ?> term-period">
+                                            <?= $kgi['fromDate'] == "" ? Yii::t('app', 'Not set') : $kgi['fromDate'] ?> -
+                                            <?= $kgi['toDate'] == "" ? Yii::t('app', 'Not set') : $kgi['toDate'] ?>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-10" style="--bs-gutter-x:0px;">
+                                        <div class="col-5 text-start">
+                                            <div class="col-12 pim-small-text">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg"
+                                                    class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
+                                                <?= Yii::t('app', 'Target') ?>
+                                            </div>
+                                            <div class="col-12 number-pim mt-10">
+                                                <?php
+                                                $decimal = explode('.', $kgi["targetAmount"]);
+                                                if (isset($decimal[1])) {
+                                                    if ($decimal[1] == '00') {
+                                                        $show = $decimal[0];
+                                                    } else {
+                                                        $show = $kgi["targetAmount"];
+                                                    }
+                                                } else {
+                                                    $show = $kgi["targetAmount"];
+                                                }
+                                                ?>
+                                                <?= $show ?><?= $kgi["amountType"] == 1 ? '%' : '' ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-2 symbol-pim text-center">
+                                            <div class="col-12 pt-17"><?= $kgi["code"] ?></div>
+                                        </div>
+                                        <div class="col-5  text-end">
+                                            <div class="col-12 pim-small-text" style="justify-content: end !important;">
+                                                <?= Yii::t('app', 'Result') ?>
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg"
+                                                    class="pim-iconKFI" style="margin-top: 1px; margin-left: 3px;">
+                                            </div>
+                                            <div class="col-12 number-pim mt-10">
+                                                <?php
+                                                if ($kgi["result"] != '') {
+                                                    $decimalResult = explode('.', $kgi["result"]);
+                                                    if (isset($decimalResult[1])) {
+
+                                                        if ($decimalResult[1] == '00') {
+                                                            $showResult = number_format($decimalResult[0]);
+                                                        } else {
+                                                            $showResult = number_format($kgi["result"], 2);
+                                                        }
+                                                    } else {
+                                                        $showResult = number_format($kgi["result"]);
+                                                    }
+                                                } else {
+                                                    $showResult = 0;
+                                                }
+                                                ?>
+                                                <?= $showResult ?><?= $kgi["amountType"] == 1 ? '%' : '' ?>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-15" style="--bs-gutter-x:0px;">
+                                            <div class="col-12">
+                                                <?php
+                                                $percent = explode('.', $kgi['ratio']);
+                                                if (isset($percent[0]) && $percent[0] == '0') {
+                                                    if (isset($percent[1])) {
+                                                        if ($percent[1] == '00') {
+                                                            $showPercent = 0;
+                                                        } else {
+                                                            $showPercent = round($kgi['ratio'], 1);
+                                                        }
+                                                    }
+                                                } else {
+                                                    $showPercent = round($kgi['ratio']);
+                                                }
+                                                ?>
+                                                <div class="progress">
+                                                    <div class="progress-bar-<?= $colorFormat ?>"
+                                                        style="width:<?= $showPercent ?>%;"></div>
+                                                    <span
+                                                        class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
+                                                </div>
+                                            </div>
+                                            <div class="row  mt-15" style="--bs-gutter-x:0px;">
+                                                <div class="col-4">
+                                                    <div class="col-12 pim-small-text" style="justify-content: end !important;">
+                                                        <?= Yii::t('app', 'Last Updated on') ?></div>
+                                                    <div class="col-12 text-end pim-duedate mt-5">
+                                                        <?= $kgi['lastestUpdate'] == "" ? 'Not set' : $kgi['lastestUpdate'] ?></div>
+                                                </div>
+                                                <div class="col-4 text-center align-content-center">
+                                                    <?php
+                                                    if ($colorFormat == 'disable' && $role >= 5) {
+                                                    ?>
+                                                        <a href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
+                                                            class="pim-btn-setup">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg" class="mr-3"
+                                                                style="width: 10.42px; height: 10.53px;">
+                                                            <?= Yii::t('app', 'Setup') ?>
+                                                        </a>
+                                                    <?php
+                                                    } else if ($colorFormat == "complete") {
+                                                        // echo Yii::t('app', "Update");
+
+                                                    } else if ($role >= 5) {
+                                                    ?>
+                                                        <a href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
+                                                            class="pim-btn-<?= $colorFormat ?>">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg" class="mr-3"
+                                                                style="width: 10.42px; height: 10.53px;">
+                                                            <?php
+                                                            if ($colorFormat == "over") {
+                                                                echo Yii::t('app', 'Update');
+                                                            } else {
+                                                                echo Yii::t('app', 'Update');
+                                                            }
+                                                            ?>
+                                                        </a>
+                                                    <?php
+                                                    } else { ?>
+                                                        <div class="pim-btn-disable" data-bs-target="#update-kgi-modal">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg"
+                                                                style="width: 10.42px; height: 10.53px;"> <?= Yii::t('app', 'Locked') ?>
+                                                        </div>
+                                                    <?php
+
+                                                    }
+                                                    ?>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="col-12 text-start pim-small-text font-<?= $colorFormat ?>">
+                                                        <?= Yii::t('app', 'Next Update Date') ?></div>
+                                                    <div class="col-12 text-start pim-duedate mt-5">
+                                                        <?= $kgi['nextCheck'] == "" ? 'Not set' : $kgi['nextCheck'] ?></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pim-center-line-content-small pim-<?= $colorFormat ?> mt-20"></div>
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-end">
+                                        <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
+                                            class="btn <?= $colorFormat == 'disable' ? 'pim-btn-disable' : 'pim-btn' ?> mr-5"
+                                            style=" <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
+                                                class="pim-action-icon">
+                                        </a>
+                                        <a href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 2]) ?>"
+                                            class="btn <?= $colorFormat == 'disable' ? 'pim-btn-disable' : 'pim-btn' ?> mr-5"
+                                            style=" <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg" alt="History"
+                                                class="pim-action-icon mr-3"><?= Yii::t('app', 'History') ?>
+                                        </a>
+                                        <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 3]) ?>"
+                                            class="btn <?= $colorFormat == 'disable' ? 'pim-btn-disable' : 'pim-btn' ?> mr-5"
+                                            style=" <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="Chats"
+                                                class="pim-action-icon mr-3"><?= Yii::t('app', 'Chats') ?>
+                                        </a>
+                                        <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 4]) ?>"
+                                            class="btn <?= $colorFormat == 'disable' ? 'pim-btn-disable' : 'pim-btn' ?> mr-5"
+                                            style=" <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/chart.svg" alt="Chart"
+                                                class="pim-action-icon mr-3"><?= Yii::t('app', 'Chart') ?>
+                                        </a>
+                                        <?php
+                                        if ($role >= 5) {
+                                        ?>
+                                            <a class="pim-btn-delete" data-bs-toggle="modal" data-bs-target="#delete-kgi"
+                                                onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
+                                                onmouseover="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                                                onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg"
+                                                    class="pim-action-icon">
+                                            </a>
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="d-flex justify-content-start  mt-10">
+                                        <div class="pr-5" style="width:50%;">
+                                            <div class="head-letter head-<?= $colorFormat ?>">
+                                                <?= Yii::t('app', 'Issue') ?>
+                                            </div>
+                                            <div class="body-letter body-letter-<?= $colorFormat ?>">
+                                                <?= $kgi["issue"] ?>
+                                            </div>
+                                        </div>
+                                        <div class="pl-5" style="width:50%;">
+                                            <div class="head-letter head-<?= $colorFormat ?>">
+                                                <?= Yii::t('app', 'Solution') ?>
+                                            </div>
+                                            <div class="body-letter body-letter-<?= $colorFormat ?>">
+                                                <?= $kgi["solution"] ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -814,6 +1041,7 @@ $this->title = 'KGI Grid View';
                 "filter" => isset($filter) ? $filter : []
             ]);
             ?>
+            <input type="hidden" id="totalPage" value="<?= $totalPage > 1 ? 1 : 0 ?>">
         </div>
     </div>
 

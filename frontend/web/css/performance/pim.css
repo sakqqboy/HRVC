@@ -3,7 +3,7 @@
 	font-weight: 600;
 	color: #3C3D48; */
 	color: #3C3D48;
-	font-family: "SF Pro Display";
+
 	font-size: 18px;
 	font-style: normal;
 	font-weight: 600;
@@ -15,6 +15,29 @@
 	padding: 80px 0px 0px 0px;
 }
 
+.pim-body-fixed {
+	position: fixed;
+	margin-right: 30px;
+	top: 90px;
+	height: 500px;
+}
+
+.pim-content {
+	/* max-height: calc(100vh - 155px); */
+	max-height: calc(100vh - 155px);
+	overflow-y: auto;
+}
+
+.pim-content2 {
+	max-height: calc(100vh - 165px);
+	overflow-y: auto;
+}
+
+.pim-content3 {
+	max-height: calc(100vh - 200px);
+	overflow-y: auto;
+}
+
 .bg-white-pim {
 	background-color: white;
 	border-radius: 10px;
@@ -24,7 +47,7 @@
 
 .pim-name-title {
 	color: #3C3D48;
-	font-family: "SF Pro Display";
+
 	font-size: 24px;
 	font-style: normal;
 	font-weight: 600;
@@ -45,7 +68,7 @@
 
 .pim-text-back {
 	color: #2580D3;
-	font-family: "SF Pro Display";
+
 	font-size: 20px;
 	font-style: normal;
 	font-weight: 600;
@@ -201,9 +224,24 @@
 
 .pim-center-line-content {
 	display: flex;
-	height: 100px;
+	height: 85.7px;
 	align-self: center;
-	border-right: lightgray solid thin;
+	margin-left: 8px;
+	margin-right: 8px;
+}
+
+.pim-center-line-content-small {
+	display: flex;
+	height: 56px;
+	align-self: center;
+	margin-left: 8px;
+	margin-right: 8px;
+}
+
+.pim-center-line-content-KFI {
+	display: flex;
+	height: 85.7px;
+	align-self: center;
 	margin-left: 15px;
 	margin-right: 15px;
 }
@@ -216,6 +254,13 @@
 	margin-left: 8px;
 	margin-right: 8px;
 
+}
+
+.pim-center-line-width {
+	width: 50px;
+	/* border-top: lightgray solid thin; */
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .pim-head-company {
@@ -399,27 +444,55 @@
 	color: #FFBA00;
 	display: flex;
 	align-items: end;
-	height: 25px;
-	width: 43px;
+	width: 38.34px;
 	justify-content: space-between;
 }
 
-.pim-small-text {
+.pim-small-text-kfi {
 	font-size: 12px;
 	font-weight: 400;
 	color: #717171;
 	line-height: 10px;
 }
 
-.pim-unit-text {
+.pim-small-text {
+	font-size: 10px;
+	font-weight: 400;
+	color: #717171;
+	height: 7px;
+	line-height: 15.04px;
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	gap: 4.5px;
+}
+
+.pim-unit-text-kfi {
 	font-size: 14px;
 	font-weight: 600;
 	color: #30313D;
 }
 
+.pim-unit-text {
+	font-size: 12px;
+	font-weight: 600;
+	color: #30313D;
+	height: 9px;
+	line-height: 15.04px;
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	gap: 4.5px;
+}
+
 .big-star {
-	font-size: 16px;
-	align-self: center;
+	width: 15.79px;
+	height: 15.04px;
+}
+
+.default-star {
+	width: 11.28px;
+	height: 10.53px;
 }
 
 .pim-icon {
@@ -436,18 +509,31 @@
 	width: 14px;
 }
 
-
-
-.number-pim {
+.number-pim-KFI {
 	font-size: 14px;
 	color: #3C3D48;
 	font-weight: 700;
 	line-height: 10px;
 }
 
-.symbol-pim {
+.number-pim {
+	font-size: 12px;
+	color: #3C3D48;
+	font-weight: 600;
+	line-height: 10px;
+}
+
+.symbol-pim-KFI {
 	font-size: 16px;
 	font-weight: 800;
+	color: #000000;
+	line-height: 10px;
+	align-content: end;
+}
+
+.symbol-pim {
+	font-size: 12px;
+	font-weight: 600;
 	color: #000000;
 	line-height: 10px;
 	align-content: end;
@@ -527,7 +613,7 @@
 	font-weight: 600;
 	color: #3C3D48;
 	line-height: 15px;
-	max-width: 245px;
+	max-width: 260px;
 }
 
 .pim-name-history {
@@ -546,60 +632,51 @@
 	color: #3C3D48;
 }
 
-.inprogress-tag {
+.status-tag-kfi {
 	width: clamp(100px, 8.94vw, 400px);
 	height: 20px;
 	font-weight: 600;
 	font-size: 12px;
 	text-align: center;
 	align-self: center;
+	border-radius: 24.44px;
+}
+
+.status-tag {
+	width: 100%;
+	height: 18px;
+	font-weight: 600;
+	font-size: 12px;
+	text-align: center;
+	align-self: center;
+	border-radius: 18px;
+}
+
+.inprogress-tag {
 	color: #2F42ED;
 	background-color: #D3D7FF;
 	border: #b4bafa solid thin;
-	border-radius: 24.44px;
 }
 
 .over-tag {
-	width: clamp(100px, 8.94vw, 400px);
-	height: 20px;
-	font-weight: 600;
-	font-size: 12px;
-	text-align: center;
-	align-self: center;
 	color: #E05757;
 	background-color: #FFD7D7;
 	border: #feb1b1 solid thin;
-	border-radius: 24.44px;
 }
 
 .complete-tag {
-	width: clamp(100px, 8.94vw, 400px);
-	height: 20px;
-	font-weight: 600;
-	font-size: 12px;
-	text-align: center;
-	align-self: center;
 	color: #2D7F06;
 	background-color: #DCFFD7;
 	border: #b4f8aa solid thin;
-	border-radius: 24.44px;
 }
 
 .disable-tag {
-	width: 100%;
-	width: clamp(100px, 8.94vw, 400px);
-	height: 20px;
-	font-weight: 600;
-	font-size: 12px;
-	text-align: center;
-	align-self: center;
 	color: #3C3D48;
 	background-color: #DCDCDC;
 	border: #C0C0C0 solid thin;
-	border-radius: 24.44px;
 }
 
-.month-inprogress {
+.month-period-KFI {
 	display: flex;
 	font-size: 13px;
 	font-weight: 500;
@@ -609,50 +686,63 @@
 	width: clamp(70px, 5vw, 210px);
 	align-items: center;
 	justify-content: center;
-	color: white;
+}
+
+.term-period-KFI {
+	font-size: 13px;
+	padding-right: 5px;
+	border-radius: 12.83px;
+	width: clamp(190px, 12.22vw, 400px);
+	margin-left: -20px;
+	padding-left: 22px;
+	font-weight: 600;
+	height: 20px;
+}
+
+.month-period {
+
+	font-size: 10px;
+	font-weight: 500;
+	border-radius: 30px;
+	height: 18px;
+	width: clamp(70px, 5vw, 210px);
+	align-items: center;
+	text-align: center;
+	z-index: 3;
+}
+
+.term-period {
+	display: flex;
+	font-size: 10px;
+	border-radius: 12.83px;
+	width: clamp(188px, 13.76vw, 400px);
+	margin-left: -18px;
+	font-weight: 600;
+	height: 18px;
+	justify-content: center;
+	align-items: center;
+}
+
+.month-inprogress {
 	background-color: #2F42ED;
 	border: #2F42ED solid thin;
+	color: white;
 }
 
 .term-inprogress {
 	color: #2F80ED;
 	background-color: white;
 	border: #2F80ED solid thin;
-	font-size: 13px;
-	padding-right: 5px;
-	border-radius: 12.83px;
-	width: clamp(190px, 12.22vw, 400px);
-	margin-left: -20px;
-	padding-left: 22px;
-	font-weight: 600;
-	height: 20px;
+
 }
 
 .month-over {
-	display: flex;
-	font-size: 13px;
-	font-weight: 500;
-	border-radius: 30px;
-	z-index: 3;
-	height: 20px;
-	width: clamp(70px, 5vw, 210px);
-	align-items: center;
-	justify-content: center;
 	color: white;
 	background-color: #E05757;
 	border: #E05757 solid thin;
 }
 
 .term-over {
-	font-size: 13px;
-	padding-right: 5px;
-	border-radius: 12.83px;
-	width: clamp(190px, 12.22vw, 400px);
-	text-align: center;
-	margin-left: -20px;
-	padding-left: 22px;
-	font-weight: 600;
-	height: 20px;
 	color: #E05757;
 	background-color: white;
 	border: #E05757 solid thin;
@@ -663,55 +753,21 @@
 	color: white;
 	background-color: #2D7F06;
 	border: #2D7F06 solid thin;
-	display: flex;
-	font-size: 13px;
-	font-weight: 500;
-	border-radius: 30px;
-	z-index: 3;
-	height: 20px;
-	width: clamp(70px, 5vw, 210px);
-	align-items: center;
-	justify-content: center;
 }
 
 .term-complete {
 	color: #2D7F06;
 	background-color: white;
 	border: #2D7F06 solid thin;
-	font-size: 13px;
-	padding-right: 5px;
-	border-radius: 12.83px;
-	width: clamp(190px, 12.22vw, 400px);
-	margin-left: -20px;
-	padding-left: 22px;
-	font-weight: 600;
-	height: 20px;
 }
 
 .month-disable {
-	display: flex;
-	font-size: 13px;
-	font-weight: 500;
-	border-radius: 30px;
-	z-index: 3;
-	height: 20px;
-	width: clamp(70px, 5vw, 210px);
-	align-items: center;
-	justify-content: center;
 	color: #ffff;
 	background-color: #636363;
 	border: #636363 solid thin;
 }
 
 .term-disable {
-	font-size: 13px;
-	padding-right: 5px;
-	border-radius: 12.83px;
-	width: clamp(190px, 12.22vw, 400px);
-	margin-left: -20px;
-	padding-left: 22px;
-	font-weight: 600;
-	height: 20px;
 	color: #3C3D48;
 	background-color: #DCDCDC;
 	border: #C0C0C0 solid thin;
@@ -781,7 +837,7 @@
 
 .over-assignKFI {
 	color: #E05757;
-	font-family: "SF Pro Display";
+
 	font-size: 13px;
 	font-weight: 500;
 	text-decoration-line: underline;
@@ -802,7 +858,7 @@
 
 .inprogress-assignKFI {
 	color: var(--IN-Progress-Blue, #2F42ED);
-	font-family: "SF Pro Display";
+
 	font-size: 13px;
 	font-weight: 500;
 	text-decoration-line: underline;
@@ -822,7 +878,7 @@
 
 .complete-assignKFI {
 	color: #2D7F06;
-	font-family: "SF Pro Display";
+
 	font-size: 13px;
 	font-weight: 500;
 	text-decoration-line: underline;
@@ -843,7 +899,7 @@
 
 .disable-assignKFI {
 	color: black;
-	font-family: "SF Pro Display";
+
 	font-size: 13px;
 	font-style: normal;
 	font-weight: 500;
@@ -864,7 +920,7 @@
 
 .yenlow-assignKFI {
 	color: black;
-	font-family: "SF Pro Display";
+
 	font-size: 13px;
 	font-weight: 500;
 	text-decoration-line: underline;
@@ -946,7 +1002,6 @@
 	align-items: center;
 	font-weight: 500;
 	font-size: 12px;
-	letter-spacing: 0.3px;
 	border-radius: 20px;
 	min-width: 115px;
 	height: 24px;
@@ -1193,15 +1248,22 @@
 
 
 .progress {
-	height: 8px;
+	height: 5px;
+	background: #e9e9ea;
+	border-radius: 10px;
+	overflow: visible;
+	position: relative;
+}
+
+.progress-KFI {
+	height: 12px;
 	background: #e9e9ea;
 	border-radius: 12px;
 	overflow: visible;
 	position: relative;
 }
 
-
-.progress .progress-bar-over {
+.progress-bar-over {
 	box-shadow: none;
 	border: none;
 	border-radius: 15px;
@@ -1210,7 +1272,7 @@
 	background: #E05757;
 }
 
-.progress .progress-bar-inprogress {
+.progress-bar-inprogress {
 	box-shadow: none;
 	border: none;
 	border-radius: 15px;
@@ -1219,7 +1281,7 @@
 	background: #2F42ED;
 }
 
-.progress .progress-bar-complete {
+.progress-bar-complete {
 	box-shadow: none;
 	border: none;
 	border-radius: 15px;
@@ -1229,6 +1291,21 @@
 }
 
 .progress-load {
+	background: #ffffff;
+	font-size: 10px !important;
+	font-weight: 500;
+	text-align: center;
+	align-content: center;
+	border-radius: 25px;
+	position: relative;
+	color: #000000;
+	min-width: 35px;
+	height: 15px;
+	margin-top: -5px;
+	margin-left: -3px;
+}
+
+.progress-load-KFI {
 	background: #ffffff;
 	font-size: 12px !important;
 	font-weight: 500;
@@ -1241,13 +1318,6 @@
 	height: 18px;
 	margin-top: -7px;
 	margin-left: -3px;
-	/* padding-top: 2px;
-	padding-bottom: 1px;
-	
-	padding-left: 3px;
-	padding-right: 3px; */
-
-
 }
 
 .load-over {
@@ -1284,8 +1354,9 @@
 	border-top-right-radius: 5px;
 	text-align: left;
 	padding-left: 5px;
-	height: 22px;
-	padding-top: 3px;
+	height: 17px;
+	align-content: center;
+	width: 100%;
 }
 
 .head-over {
@@ -1312,15 +1383,18 @@
 	background-color: white;
 	font-size: 10px;
 	padding-top: 5px;
-	font-weight: 300;
+	font-weight: 400;
 	letter-spacing: 0.5px;
 	color: #000000;
 	border-top: 0px;
 	padding-left: 5px;
 	padding-right: 3px;
-	height: 96px;
+	height: 70px;
+	width: 100%;
 	text-indent: 10px;
 	word-wrap: break-word;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 
 .body-letter-over {
@@ -1366,7 +1440,7 @@
 	position: relative;
 	color: var(--HRVC---Text-Black, #30313D);
 	z-index: 3;
-	font-family: "SF Pro Display";
+
 	font-weight: 500;
 
 }
@@ -1642,12 +1716,18 @@
 }
 
 .pim-duedate {
+	font-size: 11px;
+	line-height: 12px;
+	font-weight: 600;
+	color: #3C3D48;
+}
+
+.pim-duedate-KFI {
 	font-size: 12px;
 	line-height: 12px;
 	font-weight: 500;
 	color: #3C3D48;
 }
-
 
 .pic-after {
 	margin-left: -10px;
@@ -1969,7 +2049,7 @@
 
 .current-ratio {
 	color: var(--HRVC---Text-Black, #30313D);
-	font-family: "SF Pro Display";
+
 	font-size: 18px;
 	font-style: normal;
 	font-weight: 500;
@@ -1979,7 +2059,7 @@
 
 .current-ratio-data {
 	color: var(--HRVC---Light-Text, #94989C);
-	font-family: "SF Pro Display";
+
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 400;
@@ -1995,7 +2075,7 @@
 
 .pim-total-reward {
 	color: #3C3D48;
-	font-family: "SF Pro Display";
+
 	font-size: 22px;
 	font-style: normal;
 	font-weight: 600;
@@ -2005,7 +2085,7 @@
 
 .text-manage-create {
 	color: var(--HRVC---Text-Black, #30313D);
-	font-family: "SF Pro Display";
+
 	/* font-size: 18px; */
 	font-size: clamp(16px, 1.1vw, 26px);
 	font-style: normal;
@@ -2016,7 +2096,7 @@
 
 .sub-manage-create {
 	color: #6A7383;
-	font-family: "SF Pro Display";
+
 	font-size: clamp(12px, 0.83vw, 26px);
 	font-weight: 400;
 	line-height: 10px;
@@ -2045,7 +2125,7 @@
 
 .updatehistory {
 	color: hsla(209, 70%, 49%, 1);
-	font-family: "SF Pro Display";
+
 	font-size: 16px;
 	font-style: normal;
 	font-weight: 500;
@@ -2197,7 +2277,7 @@ input:checked+.slider:before {
 
 .name-last-update {
 	color: #656565;
-	font-family: "SF Pro Display";
+
 	font-size: 10px;
 	font-style: normal;
 	font-weight: 400;
@@ -2207,7 +2287,7 @@ input:checked+.slider:before {
 .create-last-update {
 	color: var(--Primary-Blue---HRVC, #2580D3);
 	text-align: right;
-	font-family: "SF Pro Display";
+
 	font-size: 12px;
 	font-style: normal;
 	font-weight: 500;
@@ -2233,7 +2313,7 @@ input:checked+.slider:before {
 	background: #E7EAFF;
 	font-size: 12px;
 	font-weight: 500;
-	font-family: "SF Pro Display";
+
 	color: #2F42ED;
 }
 
@@ -2251,7 +2331,7 @@ input:checked+.slider:before {
 	background: #E1FFD7;
 	font-size: 12px;
 	font-weight: 500;
-	font-family: "SF Pro Display";
+
 	color: #2D7F06;
 }
 
@@ -2267,7 +2347,7 @@ input:checked+.slider:before {
 	background: var(--Primary-Blue---HRVC, #2580D3);
 	color: #FFF;
 	text-align: center;
-	font-family: "SF Pro Display";
+
 	font-size: 16px;
 	font-style: normal;
 	font-weight: 600;
@@ -2288,7 +2368,7 @@ input:checked+.slider:before {
 	background: var(--100-white, #FFF);
 	color: var(--HRVC---Text-Black, #30313D);
 	text-align: center;
-	font-family: "SF Pro Display";
+
 	font-size: 16px;
 	font-style: normal;
 	font-weight: 600;
@@ -2355,7 +2435,7 @@ input:checked+.slider:before {
 
 .DueBehind {
 	color: var(--HRVC---Text-Black, #30313D);
-	font-family: "SF Pro Display";
+
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 600;
@@ -2376,7 +2456,7 @@ input:checked+.slider:before {
 	background: var(--Primary-Blue---HRVC, #2580D3);
 	color: var(--100-white, #FFF);
 	text-align: center;
-	font-family: "SF Pro Display";
+
 	font-size: 16px;
 	font-style: normal;
 	font-weight: 500;
@@ -2399,7 +2479,7 @@ input:checked+.slider:before {
 	background: var(--100-white, #FFF);
 	color: var(--HRVC---Text-Black, #30313D);
 	text-align: center;
-	font-family: "SF Pro Display";
+
 	font-size: 16px;
 	font-style: normal;
 	font-weight: 500;
@@ -2408,43 +2488,43 @@ input:checked+.slider:before {
 
 .text-gray {
 	color: var(--Helper-Text-Gray, #8A8A8A);
-	font-family: "SF Pro Display";
+
 	font-style: normal;
 }
 
 .text-blue {
 	color: #2580D3;
-	font-family: "SF Pro Display";
+
 	font-style: normal;
 }
 
 .text-black {
 	color: var(--HRVC---Text-Black, #30313D);
-	font-family: "SF Pro Display";
+
 	font-style: normal;
 }
 
 .text-blue-sea {
 	color: var(--HRVC---Text-Black, #2F42ED);
-	font-family: "SF Pro Display";
+
 	font-style: normal;
 }
 
 .text-green {
 	color: var(--HRVC---Text-Black, #2D7F06);
-	font-family: "SF Pro Display";
+
 	font-style: normal;
 }
 
 .text-red {
 	color: var(--HRVC---Text-Black, #E05757);
-	font-family: "SF Pro Display";
+
 	font-style: normal;
 }
 
 .text-orang {
 	color: var(--HRVC---Text-Black, #DD7A01);
-	font-family: "SF Pro Display";
+
 	font-style: normal;
 }
 

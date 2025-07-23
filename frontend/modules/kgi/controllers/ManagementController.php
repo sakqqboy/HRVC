@@ -104,7 +104,7 @@ class ManagementController extends Controller
 			$pageArr = explode('page', $hash);
 			$currentPage = $pageArr[1];
 		}
-		$limit = 20;
+		$limit = 10;
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -351,12 +351,26 @@ class ManagementController extends Controller
 			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
 			$units = curl_exec($api);
 			$units = json_decode($units, true);
+
+			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+			$allCompany = curl_exec($api);
+			$allCompany = json_decode($allCompany, true);
 			curl_close($api);
+
+			$countAllCompany = 0;
+			if (count($allCompany) > 0) {
+				$countAllCompany = count($allCompany);
+				$companyPic = Company::randomPic($allCompany, 3);
+			}
+			$totalBranch = Branch::totalBranch();
 			return $this->render('kgi_form', [
 				"statusform" => 'create',
 				"role" => $role,
 				"companies" => $companies,
-				"units" => $units
+				"units" => $units,
+				"allCompany" => $countAllCompany,
+				"companyPic" => $companyPic,
+				"totalBranch" => $totalBranch
 			]);
 		}
 	}
@@ -737,10 +751,18 @@ class ManagementController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
 		curl_close($api);
-		//throw new exception(print_r($kgiTeam, true));
-		//curl_close($api);
-		//return json_encode($data);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
 		return $this->render('kgi_form', [
 			"statusform" => 'update',
 			"role" => $role,
@@ -751,7 +773,10 @@ class ManagementController extends Controller
 			"kgiDepartmentText" => $kgiDepartmentText,
 			"kgiTeamText" => $kgiTeamText,
 			"kgiId" => $kgiId,
-			"url" => Yii::$app->request->referrer
+			"url" => Yii::$app->request->referrer,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 
 		]);
 	}

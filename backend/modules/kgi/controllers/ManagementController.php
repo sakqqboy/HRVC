@@ -108,15 +108,10 @@ class ManagementController extends Controller
 						sort($selectPic);
 					}
 				}
-				if (strlen($kgi["kgiName"]) > 34) {
-					$kginame = substr($kgi["kgiName"], 0, 34) . '. . .';
-				} else {
-					$kginame = $kgi["kgiName"];
-				}
 				$isOver = ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId']));
 				$kgiId = $kgi["kgiId"];
 				$commonData = [
-					"kgiName" => $kginame,
+					"kgiName" =>  $kgi["kgiName"],
 					"kgiId" => $kgiId,
 					"companyId" => $kgi['companyId'],
 					"companyName" => Company::companyName($kgi["companyId"]),

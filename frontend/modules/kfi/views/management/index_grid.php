@@ -157,15 +157,15 @@ $this->title = Yii::t('app', 'KFI Grid View');
 
                                     </div>
                                 </div>
-                                <div class="pim-center-line-content pim-<?= $colorFormat ?>"></div>
+                                <div class="pim-center-line-content-KFI pim-<?= $colorFormat ?>"></div>
                                 <div class="d-flex flex-column" style="min-height:120px;">
-                                    <div class="<?= $colorFormat ?>-tag">
+                                    <div class="status-tag-kfi <?= $colorFormat ?>-tag">
                                         <?= $statusText ?>
                                     </div>
                                     <div class="d-flex position-relative mx-auto mt-auto mb-auto">
                                         <div class="text-center kfi-grid-2 ">
-                                            <span class="pim-small-text"><?= Yii::t('app', 'Quant Ratio') ?></span>
-                                            <div class="pim-unit-text text-center">
+                                            <span class="pim-small-text-kfi"><?= Yii::t('app', 'Quant Ratio') ?></span>
+                                            <div class="pim-unit-text-kfi text-center">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $kfi["quantRatio"] == 1 ? Yii::t('app', 'quantity') : Yii::t('app', 'diamon') ?>.svg"
                                                     class="pim-iconKFI" style="margin-top: -1px; margin-left: 3px;">
                                                 <?= $kfi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
@@ -173,8 +173,8 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                         </div>
                                         <div class="pim-center-line-content-md pim-<?= $colorFormat ?>"></div>
                                         <div class="text-center kfi-grid-2">
-                                            <span class="pim-small-text"><?= Yii::t('app', 'Update Interval') ?></span>
-                                            <div class="pim-unit-text text-center">
+                                            <span class="pim-small-text-kfi"><?= Yii::t('app', 'Update Interval') ?></span>
+                                            <div class="pim-unit-text-kfi text-center">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/monthly.svg"
                                                     class="pim-iconKFI" style="margin-top: -3px;">
                                                 <?= Yii::t('app', $kfi["unit"]) ?>
@@ -182,15 +182,15 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                         </div>
                                     </div>
                                 </div>
-                                <div class="pim-center-line-content pim-<?= $colorFormat ?>"></div>
+                                <div class="pim-center-line-content-KFI pim-<?= $colorFormat ?>"></div>
                                 <div class="flex-grow-1" style="min-height:120px">
                                     <div class="row" style="--bs-gutter-x:0px;">
                                         <div class="col-6">
                                             <div class="d-flex justify-content-start">
-                                                <div class="month-<?= $colorFormat ?>">
+                                                <div class="month-<?= $colorFormat ?> month-period-KFI">
                                                     <?= $kfi['month'] == "" ? Yii::t('app', 'Month') : Yii::t('app', $kfi['month']) ?>
                                                 </div>
-                                                <div class="term-<?= $colorFormat ?>">
+                                                <div class="term-<?= $colorFormat ?> term-period-KFI">
                                                     <?= $kfi['fromDate'] == "" ? Yii::t('app', 'Not set') : $kfi['fromDate'] ?> -
                                                     <?= $kfi['toDate'] == "" ? Yii::t('app', 'Not set') : $kfi['toDate'] ?>
                                                 </div>
@@ -235,10 +235,10 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                         <div class="col-5 text-start">
                                             <div class="col-12 pim-small-text">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg"
-                                                    class="pim-iconKFI" style="margin-right: 4px;">
+                                                    class="pim-iconKFI" style="margin-top: 1px; margin-right: 3px;">
                                                 <?= Yii::t('app', 'Target') ?>
                                             </div>
-                                            <div class="col-12 number-pim mt-10">
+                                            <div class="col-12 number-pim-KFI mt-10">
                                                 <?php
                                                 $decimal = explode('.', $kfi["target"]);
 
@@ -255,16 +255,16 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                                 <?= $show ?><?= $kfi["amountType"] == 1 ? '%' : '' ?>
                                             </div>
                                         </div>
-                                        <div class="col-2 symbol-pim text-center">
+                                        <div class="col-2 symbol-pim-KFI text-center">
                                             <?= $kfi["code"] ?>
                                         </div>
                                         <div class="col-5  text-end">
-                                            <div class="col-12 pim-small-text">
+                                            <div class="col-12 pim-small-text" style="justify-content: end !important;">
                                                 <?= Yii::t('app', 'Result') ?>
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg"
                                                     class="pim-iconKFI" style="margin-left: 4px;">
                                             </div>
-                                            <div class="col-12 number-pim mt-10">
+                                            <div class="col-12 number-pim-KFI mt-10">
                                                 <?php
                                                 if ($kfi["result"] != '') {
                                                     $decimalResult = explode('.', $kfi["result"]);
@@ -304,18 +304,18 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                                 }
                                             }
                                             ?>
-                                            <div class="progress">
+                                            <div class="progress -KFI">
                                                 <div class="progress-bar-<?= $colorFormat ?>"
                                                     style="width: <?= $showPercent ?>%;"></div>
                                                 <span
-                                                    class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
+                                                    class="progress-load-KFI load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row  mt-10" style="--bs-gutter-x:0px;">
                                         <div class="col-5 pl-5 pr-5">
-                                            <div class="col-12 text-end pim-small-text"><?= Yii::t('app', 'Last Updated on') ?></div>
-                                            <div class="col-12 text-end pim-duedate mt-5">
+                                            <div class="col-12 pim-small-text" style="justify-content: end !important;"><?= Yii::t('app', 'Last Updated on') ?></div>
+                                            <div class="col-12 text-end pim-duedate-KFI mt-5">
                                                 <?= $kfi['lastestUpdate'] == "" ? Yii::t('app', 'Not set') : $kfi['lastestUpdate'] ?>
                                             </div>
                                         </div>
@@ -363,7 +363,7 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                             <div class="col-12 text-start pim-small-text font-<?= $colorFormat ?>">
                                                 <?= Yii::t('app', 'Next Update Date') ?>
                                             </div>
-                                            <div class="col-12 text-start pim-duedate mt-5">
+                                            <div class="col-12 text-start pim-duedate-KFI mt-5">
                                                 <?= $kfi['nextCheck'] == "" ? Yii::t('app', 'Not set') : $kfi['nextCheck'] ?>
                                             </div>
                                         </div>

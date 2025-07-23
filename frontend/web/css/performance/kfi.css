@@ -114,6 +114,63 @@
     text-align: center;
 }
 
+.cycle-current-department {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 100%;
+    border: 1px solid var(--Blocked-Strock, #CBD5E1);
+    background: var(--Overall-Blocked, #E74C3C);
+    position: relative;
+}
+
+.cycle-current-department:not(:last-child) {
+    margin-left: -16px;
+}
+
+.cycle-current-branch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    border-radius: 100%;
+    border: 1px solid var(--Blocked-Strock, #CBD5E1);
+    background: var(--Overall-Blocked, #FED75A);
+    position: relative;
+}
+
+.cycle-current-branch:not(:last-child) {
+    margin-left: -16px;
+}
+
+.cycle-current-team {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 100%;
+    border: 1px solid var(--Blocked-Strock, #CBD5E1);
+    background: var(--Overall-Blocked, #16A085);
+    position: relative;
+    /* z-index: 1; */
+}
+
+
+.cycle-current-team:not(:last-child) {
+    margin-left: -16px;
+}
+
+.cycle-current-branch img,
+.cycle-current-department img,
+.cycle-current-department img {
+    width: 18px;
+    height: 18px;
+}
 
 #visible0 {
     font-size: 12px;
