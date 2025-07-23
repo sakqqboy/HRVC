@@ -409,8 +409,7 @@ $form = ActiveForm::begin([
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <text class="font-size-16 font-weight-500"><span class="text-danger">*
                                 </span><?= Yii::t('app', 'Salutation') ?></text>
-                            <select class="form-select" name="salutation" id="salutation" style="border-left: none;"
-                                required>
+                            <select class="form-select" name="salutation" id="salutation" required>
                                 <option value="" disabled <?= empty($employee['salutation']) ? 'selected' : '' ?> hidden
                                     style="color: var(--Helper-Text, #8A8A8A);">
                                     <?= Yii::t('app', 'Select') ?>
