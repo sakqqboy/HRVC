@@ -1,6 +1,6 @@
 <div style="display: flex; justify-content: flex-end; gap: 16px; align-items: center; width: 100%;">
 
-    <select id="countrySelect" class="form-select font-size-12 select-pim" style="border-left: none;" required>
+    <select id="countrySelect" class="font-size-12 select-pim" required>
         <option value="" disabled <?= empty($selectedCountryId) ? 'selected' : '' ?> hidden
             style="color: var(--Helper-Text, #8A8A8A);">
             <?= Yii::t('app', 'Country') ?>
@@ -12,11 +12,6 @@
         <?php endforeach; ?>
     </select>
 
-    <!-- <span class="btn font-size-12 justify-content-center d-flex align-items-center custom-button-select"
-        onclick="filterCountryCompany('<?=$page?>')" style="flex: 1; text-align: center; cursor: pointer;">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-2">
-        <?= Yii::t('app', 'Filter') ?>
-    </span> -->
     <span class="justify-content-center d-flex align-items-center employee-filter-btn" style="cursor: pointer;"
         onclick="filterCountryCompany('<?=$page?>')">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons me-1">
