@@ -197,8 +197,8 @@ $DueBehind = $targetAmount -  $result;
                                     data-toggle="tooltip" data-placement="top" class="tootip-icon"
                                     title="<?= Yii::t('app', 'Enter the name of your key Performance indicator. This should be clear and specific, such as Number of customer Visits or Number of Cold calls to client') ?>">
                             </label>
-                            <input type="text" class="form-control" id="kfiName" name="kgiName"
-                                value="<?= isset($data['kfiName']) ? htmlspecialchars($data['kfiName']) : '' ?>"
+                            <input type="text" class="form-control" id="kgiName" name="kgiName"
+                                value="<?= isset($data['kgiName']) ? htmlspecialchars($data['kgiName']) : '' ?>"
                                 placeholder="Please Write the Name of Component" required>
                         </div>
                         <div class="form-group mt-37"
@@ -207,7 +207,7 @@ $DueBehind = $targetAmount -  $result;
                                 <span class="text-danger">* </span>
                                 <?= Yii::t('app', 'Select Company') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                    data-placement="top"
+                                    data-placement="top" class="tootip-icon"
                                     title="<?= Yii::t('app', 'Choose the company for which this performance indicator will be tracked. Only one company can be selected at a time to ensure accurate and focused Performance monitoring') ?>"
                                     alt="Help Icon">
                             </label>
@@ -235,16 +235,15 @@ $DueBehind = $targetAmount -  $result;
                                 <span class="text-danger">* </span>
                                 <?= Yii::t('app', 'Select Branch/s ') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                    data-placement="top"
+                                    data-placement="top" class="tootip-icon"
                                     title="<?= Yii::t('app', 'Select the relevant branches where this indicator will be monitored. You can choose multiple branches to track Performance achievement across different locations') ?>"
                                     alt="Help Icon">
                             </label>
                             <div class="form-control d-flex justify-align-content-start" id="multi-branch" style="width: 100%">
-                                <span id="multi-branch-text"><?= Yii::t('app', 'Select Branches') ?></span>
+                                <span id="multi-branch-text" class="align-content-center"><?= Yii::t('app', 'Select Branches') ?></span>
                                 <div class="flex-grow-1 circle-container pl-15 justify-content-end" id="image-branches" data-type="branch" style="display: flex;
                                     align-items: center;
-                                    gap: 5px;
-                                    padding-left: 15px;">
+                                    gap: 5px;">
                                     <div class="cycle-current-gray" id="img-branch-1">
                                         <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
                                     </div>
@@ -262,8 +261,6 @@ $DueBehind = $targetAmount -  $result;
                                 </div>
 
                             </div>
-
-
                             <div class="col-12" <?php if ($statusform == 'update'): ?> id="show-multi-branch-update"
                                 <?php else: ?> id="show-multi-branch" <?php endif; ?> style="position: absolute; top: <?= ($statusform == 'create') ? '80%' : '80%'; ?>; 
                                     left: 0; width: 100%; z-index: 999; background-color: white; 
@@ -275,652 +272,597 @@ $DueBehind = $targetAmount -  $result;
                                 <?php endif; ?>
 
                             </div>
-                            <div>
-
-                            </div>
                         </div>
-                    </div>
-
-                    <div class="form-group mt-37"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                        <label class="text-manage-create" for="name">
-                            <span class="text-danger">* </span>
-                            <?= Yii::t('app', 'Select Department/s') ?>
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                data-placement="top"
-                                title="<?= Yii::t('app', 'Choose the departments that will be responsible for this performance indicator. Multiple departments can be selected for cross-functional Performance tracking.') ?>"
-                                alt="Help Icon">
-                        </label>
-                        <div class="form-control" id="multi-department" style="width: 496px;
-                                display: flex;
-                                align-items: center;
-                                padding: 5px 15px;
-                                border: 1px solid #d1d5db;
-                                border-radius: 5px;
-                                background-color: #fff;
-                                font-size: 14px;
-                                position: relative;">
-                            <span id="multi-department-text" style="flex-grow: 1;
-                                       color: #8a8a8a;
-                                       font-family: SF Pro Display
-                                       , sans-serif;">
-                                <?= Yii::t('app', 'Select Department') ?>
-                            </span>
-                            <div class="circle-container pl-15" id="image-departments" data-type="department" style="display: flex;
-                                    align-items: center;
-                                    gap: 5px;
-                                    padding-left: 15px;">
-                                <div class="cycle-current-gray">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
-                                </div>
-                                <div class="cycle-current-gray">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
-                                </div>
-                                <div class="cycle-current-gray">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
-                                </div>
-                                <div class="cycle-current-gray" style="color: #000; right: 15px;"
-                                    id="department-selected-count">
-                                    00
-                                </div>
-                            </div>
-                            <i class="toggle-icon-department fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
-                        </div>
-
-                        <div class="col-12" <?php if ($statusform == 'update'): ?> id="show-multi-department-update"
-                            <?php else: ?> id="show-multi-department" <?php endif; ?> style="position: absolute; top: 82%; left: 0; width: 98%; z-index: 999; background-color: white; 
-                            border: 1px solid #ced4da; padding: 10px; display: none;">
-                            <?php if ($statusform == 'create'): ?>
-                                <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
-                            <?php else: ?>
-                                <?= $kgiDepartmentText; ?>
-                            <?php endif; ?>
-                        </div>
-
-                        <div>
-
-                        </div>
-                    </div>
-                    <div class="form-group mt-37"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                        <label class="text-manage-create" for="name">
-                            <span class="text-danger">* </span>
-                            <?= Yii::t('app', 'Select Team/s') ?>
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                data-placement="top"
-                                title="<?= Yii::t('app', 'Choose the Team that will be responsible for achieving this performance indicator. Multiple Teams can be selected for collaborative performance achievement.') ?>"
-                                alt="Help Icon">
-                        </label>
-                        <div class="form-control" id="multi-team" style="width: 496px;
-                                display: flex;
-                                align-items: center;
-                                padding: 5px 15px;
-                                border: 1px solid #d1d5db;
-                                border-radius: 5px;
-                                background-color: #fff;
-                                font-size: 14px;
-                                position: relative;">
-                            <span id="multi-team-text" style="flex-grow: 1;
-                                       color: #8a8a8a;
-                                       font-family: SF Pro Display
-                                       , sans-serif;">
-                                <?= Yii::t('app', 'Select Team') ?>
-                            </span>
-                            <div class="circle-container pl-15" id="image-team" data-type="team" style="display: flex;
-                                    align-items: center;
-                                    gap: 5px;
-                                    padding-left: 15px;">
-                                <div class="cycle-current-gray">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
-                                </div>
-                                <div class="cycle-current-gray">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
-                                </div>
-                                <div class="cycle-current-gray">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
-                                </div>
-                                <div class="cycle-current-gray" style="color: #000;  right: 15px;"
-                                    id="team-selected-count">
-                                    00
-                                </div>
-                            </div>
-                            <i class="toggle-icon-team fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
-                        </div>
-                        <div class="col-12" <?php if ($statusform == 'update'): ?> id="show-multi-team-update"
-                            <?php else: ?> id="show-multi-team" <?php endif; ?> style="position: absolute; top: 82%; left: 0; width: 98%; z-index: 999; background-color: white; 
-                           border: 1px solid #ced4da; padding: 10px; display: none;">
-                            <?php if ($statusform == 'create'): ?>
-                                <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
-                            <?php else: ?>
-                                <?= $kgiTeamText; ?>
-                            <?php endif; ?>
-                        </div>
-
-                        <div>
-
-                        </div>
-                    </div>
-                    <div class="form-group mt-37"
-                        style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                        <label class="text-manage-create" for="name">
-                            <span class="text-danger">* </span>
-                            <?= Yii::t('app', 'Determine Priority') ?>
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                data-placement="top"
-                                title="<?= Yii::t('app', 'Select priority between A, B or C, (A is considered as highest priority and C is least) to align with organizational objectives.') ?>"
-                                alt="Help Icon">
-                        </label>
-                        <select class="form-select font-size-13" aria-label="Default select example"
-                            id="priority-update" name="priority">
-                            <option value="">A/B/C</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-12 pr-30">
-            </div>
-            <div class="col-lg-4 col-12 pr-30">
-            </div>
-            <div style="flex: 1;">
-
-
-
-            </div>
-            <div style="flex: 1;">
-                <div class="form-group"
-                    style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                    <label class="text-manage-create" for="name">
-                        <span class="text-danger">* </span>
-                        <?= Yii::t('app', 'Update Interval') ?>
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                            data-placement="top"
-                            title="<?= Yii::t('app', 'Select how frequently this indicator should be updated: Monthly, Quarterly, Half Yearly, or Yearly. This determines the performance review cycle.') ?>"
-                            alt="Help Icon">
-                    </label>
-                    <div class="btn-group col-12" role="group" aria-label="Basic outlined example">
-                        <?php
-                        if (isset($units) && count($units) > 0) {
-                            $i = 1;
-                            foreach ($units as $unit) :
-                                $activeClass = ($unitId == $unit['unitId']) ? 'unit-active' : 'unit-inactive';
-                        ?>
-                                <button type="button" id="unit-<?= $unit['unitId'] ?>"
-                                    class="btn col-3 font-size-12 <?= $activeClass ?>"
-                                    onclick="selectUnit(<?= $unit['unitId'] ?>)">
-                                    <?= Yii::t('app', $unit["unitName"]) ?>
-                                </button>
-                        <?php
-                                $i++;
-                            endforeach;
-                        }
-
-                        // echo  $unitId;
-                        ?>
-                        <input type="hidden" value="<?= $unitId ?>" id="currentUnit" name="unitId" required>
-                        <input type="hidden" value="<?= $unitId ?>" id="previousUnit" required>
-                    </div>
-                </div>
-
-                <div class="form-group mt-37"
-                    style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                    <label class="text-manage-create" for="name">
-                        <span class="text-danger">* </span>
-                        <?= Yii::t('app', 'Month & Year') ?>
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                            data-placement="top"
-                            title="<?= Yii::t('app', 'Select the specific month and year for which youre entering or viewing data. This helps in maintaining chronological records.') ?>"
-                            alt="Help Icon">
-                    </label>
-                    <div class="input-group" style="position: relative;">
-                        <span class="input-group-text pb-10 pt-10"
-                            style="background-color: #C3C3C3;  border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
-                                style="width: 16px; height: 16px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="LinkedIn"
-                                style="width: 16px; height: 16px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
-                                style="width: 16px; height: 16px;">
-                        </span>
-                        <div class="form-control" id="multi-mount-year" name="fromMonthYear"
-                            style="border-radius: 53px 53px 53px 53px; text-align: center; cursor: pointer; position: absolute; width: 100%;"
-                            onclick="openDatePicker()">
-                            Select the Month & Year <i class="fa fa-angle-down pull-right mt-5"
-                                aria-hidden="true"></i>
-                        </div>
-                        <!-- hidden inputs เพื่อเก็บค่า month และ year -->
-                        <input type="hidden" id="hiddenMonth" name="month"
-                            value="<?= htmlspecialchars($data['month'] ?? '') ?>" required>
-                        <input type="hidden" id="hiddenYear" name="year"
-                            value="<?= htmlspecialchars($data['year'] ?? '') ?>" required>
-                    </div>
-
-                    <!-- Popup for Month/Year Selection -->
-                    <div id="monthYearPicker" class="mount-year">
-                        <select id="monthSelect" class="form-select" onchange="closeDatePicker()" required>
-                            <option value="01">January</option>
-                            <option value="02">February</option>
-                            <option value="03">March</option>
-                            <option value="04">April</option>
-                            <option value="05">May</option>
-                            <option value="06">June</option>
-                            <option value="07">July</option>
-                            <option value="08">August</option>
-                            <option value="09">September</option>
-                            <option value="10">October</option>
-                            <option value="11">November</option>
-                            <option value="12">December</option>
-                        </select>
-                        <select id="yearSelect" class="form-select" style="margin-top: 10px;"
-                            onchange="closeDatePicker()" required>
-                            <!-- ปีที่ถูกสร้างจะถูกเพิ่มที่นี่ -->
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group mt-37"
-                    style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                    <label class="text-manage-create" for="name">
-                        <span class="text-danger">* </span>
-                        <?= Yii::t('app', 'Due Term') ?>
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                            data-placement="top"
-                            title="<?= Yii::t('app', 'Set the start and end dates for the performance measurement period. This defines the timeframe for achieving the target.') ?>"
-                            alt="Help Icon">
-                    </label>
-                    <div class="input-group" id="img-due-term" style="position: relative;">
-                        <span class="input-group-text pb-10 pt-10"
-                            style="background-color: #C3C3C3; border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="Calendar"
-                                style="width: 16px; height: 16px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="Weld"
-                                style="width: 16px; height: 16px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="Calendar"
-                                style="width: 16px; height: 16px;">
-                        </span>
-                        <div class="form-control" id="multi-due-term"
-                            style="border-radius: 53px; text-align: center; cursor: pointer; position: absolute; width: 100%;"
-                            onclick="toggleCalendar()">
-                            Select the Due Term Start & End Date <i class="fa fa-angle-down pull-right mt-5"
-                                aria-hidden="true"></i>
-                        </div>
-                    </div>
-                    <!-- hidden inputs เพื่อเก็บค่า month และ year -->
-                    <input type="hidden" id="fromDate" name="fromDate"
-                        value="<?= isset($data['fromDate']) ? $data['fromDate'] : '' ?>" required>
-                    <input type="hidden" id="toDate" name="toDate"
-                        value="<?= isset($data['toDate']) ? $data['toDate'] : '' ?>" required>
-
-                    <!-- Calendar picker -->
-                    <div class="calendar-container" id="calendar-due-term"
-                        style="display: none; position: absolute; margin-top: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 10px; background: #fff; width: 650px; gap: 3px; z-index: 1;">
-                        <!-- ปฏิทินสำหรับวันที่เริ่มต้น -->
-                        <div id="startDatePicker"></div>
-                        <!-- ปฏิทินสำหรับวันที่สิ้นสุด -->
-                        <div id="endDatePicker"></div>
-                    </div>
-                </div>
-
-                <div class="form-group mt-37"
-                    style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                    <label class="text-manage-create" for="name">
-                        <span class="text-danger">* </span>
-                        <?= Yii::t('app', 'Target Due Update Date') ?>
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                            data-placement="top"
-                            title="<?= Yii::t('app', 'Specify the deadline by which the progress must be updated in the system. This ensures regular performance tracking and accountability.') ?>"
-                            alt="Help Icon">
-                    </label>
-                    <div class="input-group" style="position: relative;" id="img-due-update">
-                        <span class="input-group-text pb-10 pt-10"
-                            style="background-color: #C3C3C3    ;  border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
-                                style="width: 16px; height: 16px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="LinkedIn"
-                                style="width: 16px; height: 16px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
-                                style="width: 16px; height: 16px;">
-                        </span>
-                        <div class="form-control" id="multi-due-update"
-                            style="border-radius: 53px 53px 53px 53px; text-align: center; cursor: pointer; position: absolute ; width: 100%; ">
-                            Select the Last Update Date <i class="fa fa-angle-down pull-right mt-5"
-                                aria-hidden="true"></i>
-                        </div>
-                        <input type="hidden" id="nextDate" name="nextCheckDate"
-                            value="<?= isset($data['nextCheck']) ? $data['nextCheck'] : '' ?>">
-                        <!-- <input type="hidden" id="nextDate" name="nextCheckDate"> -->
-                    </div>
-                    <div id="calendar-due-update"
-                        style="position: absolute; margin-top: 75px; padding: 10px; border: 1px solid rgb(221, 221, 221); border-radius: 10px; background: rgb(255, 255, 255); width: 100%; z-index: 1; display: none; justify-content: center; align-items: center;">
-                        <div id="updateDatePicker" style="display: none;"></div>
-                    </div>
-                </div>
-
-                <div class="form-group mt-37"
-                    style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                    <label class="text-manage-create" for="name">
-                        <span class="text-danger">* </span>
-                        <?= Yii::t('app', 'Quant Ratio') ?>
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                            data-placement="top"
-                            title="<?= Yii::t('app', 'Select the measurement unit for your indicator (e.g., score, count, percentage, or rating scale) to ensure consistent performance assessment.') ?>"
-                            alt="Help Icon">
-                    </label>
-                    <select class="form-select" id="quantRatio-create" name="quantRatio" required>
-                        <option value=""><?= Yii::t('app', 'Select the Measurement Unit') ?></option>
-                        <option value="1" <?= ($quantRatio == 1) ? 'selected' : '' ?>>
-                            <?= Yii::t('app', 'Quantity') ?>
-                        </option>
-                        <option value="2" <?= ($quantRatio == 2) ? 'selected' : '' ?>>
-                            <?= Yii::t('app', 'Quality') ?>
-                        </option>
-                    </select>
-                    <input type="hidden" name="kgiId" id="kgiId" value="<?= isset($kgiId) ? $kgiId : '' ?>">
-                </div>
-
-                <div class="form-group mt-37" style="display: flex; gap: 14px; flex-wrap: wrap;">
-                    <!-- Left side (Data Type) -->
-                    <div class="col-lg-6 col-md-6 col-6 mt-10" style="flex-basis: 48%; box-sizing: border-box;">
-                        <label class="text-manage-create" for="name">
-                            <span class="text-danger">* </span>
-                            <?= Yii::t('app', 'Data Type') ?>
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                data-placement="top"
-                                title="<?= Yii::t('app', 'Choose the type of data being tracked (e.g., numerical scores, percentages, ratings) to ensure proper performance measurement.') ?>"
-                                alt="Help Icon">
-                        </label>
-                        <select class="form-select" id="amountType-create" name="amountType" required>
-                            <option value="">Select</option>
-                            <option value="1" <?= ($selectedAmountType == '1') ? 'selected' : '' ?>>%</option>
-                            <option value="2" <?= ($selectedAmountType == '2') ? 'selected' : '' ?>>
-                                <?= Yii::t('app', 'Number') ?></option>
-                        </select>
-                    </div>
-
-                    <!-- Right side (Success Condition) -->
-                    <div class="col-lg-6 col-md-6 col-6 mt-10" style="flex-basis: 48%; box-sizing: border-box;">
-                        <label class="text-manage-create" for="name">
-                            <span class="text-danger">* </span>
-                            <?= Yii::t('app', 'Success Condition') ?>
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                data-placement="top"
-                                title="<?= Yii::t('app', 'Define the criteria for success (e.g., Greater Than, Less Than, Equal To) to measure performance achievement against the target.') ?>"
-                                alt="Help Icon">
-                        </label>
-                        <select class="form-select" id="code-create" name="code" required>
-                            <option value="">Select</option>
-                            <option value="<" <?= ($selectedCode == '<') ? 'selected' : '' ?>>
-                                &nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;<?= Yii::t('app', 'Result more than target') ?>
-                            </option>
-                            <option value="=" <?= ($selectedCode == '=') ? 'selected' : '' ?>>
-                                &nbsp;&nbsp;=&nbsp;&nbsp;<?= Yii::t('app', 'Result equal target') ?>
-                            </option>
-                            <option value=">" <?= ($selectedCode == '>') ? 'selected' : '' ?>>
-                                &nbsp;&nbsp;>&nbsp;&nbsp;<?= Yii::t('app', 'Result less than target') ?>
-                            </option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div style="flex: 1;">
-                <div class="form-group"
-                    style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                    <label class="text-manage-create" for="name">
-                        <span class="text-danger">* </span>
-                        <?= Yii::t('app', 'Master Target') ?>
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                            data-placement="top"
-                            title="<?= Yii::t('app', 'Enter the overall target value that needs to be achieved within the specified period.') ?>"
-                            alt="Help Icon">
-                    </label>
-                    <div class="input-group">
-                        <span class="input-group-text"
-                            style="background-color:rgb(255, 255, 255); border-right: none; padding: 20px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/target-blue.svg" alt="LinkedIn"
-                                style="width: 30px; height: 30px;">
-                        </span>
-                        <input type="number" class="form-control text-end" name="amount" step="any"
-                            placeholder="Enter Target Amount"
-                            value="<?= isset($data['targetAmount']) ? $data['targetAmount'] : '' ?>"
-                            style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
-                            required>
-                    </div>
-                </div>
-
-                <div class="form-group mt-42"
-                    style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                    <label class="text-manage-create" for="name"
-                        style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
-                        <div style="flex-grow: 1;">
-                            <span class="text-danger">* </span>
-                            <?= Yii::t('app', 'Result') ?>
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                data-placement="top"
-                                title="<?= Yii::t('app', 'Historic update contains the update from the team and indivudials if you wish to use your own values, please toggle on Override to put custom numbers ') ?>"
-                                alt="Help Icon">
-                        </div>
-                        <?php
-                        if ($statusform == 'update') {
-                        ?>
-                            <div class="updatehistory" class="updatehistory" style="text-align: right;cursor:pointer;"
-                                data-bs-toggle="modal" data-bs-target="#update-history-popup"
-                                onclick="javascript:kgiUpdateHistory(<?= $kgiId ?>)">
-                                <?php if ($statusform == 'update') { ?>
-                                    <img
-                                        src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
-                                <?php } ?>
-                            </div>
-                        <?php
-                        }
-                        ?>
-                    </label>
-
-                    <div class="input-group">
-                        <span class="input-group-text"
-                            style="background-color:rgb(255, 255, 255); border-right: none; padding: 20px;">
-                            <img id="result-icon"
-                                src="<?= Yii::$app->homeUrl ?>image/result-<?= isset($data['result']) ? 'blue' : 'gray' ?>.svg"
-                                alt="LinkedIn" style="width: 30px; height: 30px;">
-                        </span>
-                        <input type="number" class="form-control text-end" name="result" id="result-update"
-                            value="<?= isset($data['result']) ? $data['result'] : '' ?>"
-                            style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
-                            required step="any" oninput="updateIcon(this);">
-                        <input type="hidden" id="auto-result" value="" name="autoUpdate">
-                        <input type="hidden" id="previous-result"
-                            value="<?= isset($data['result']) ? $data['result'] : '' ?>">
-                    </div>
-
-
-                    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
-                        <?php if ($statusform == 'update') { ?>
-                            <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <label class="switch">
-                                    <input type="checkbox" id="historic-checkbox-kgi"
-                                        onchange="javascript:autoUpdateResult(<?= $kgiId ?>)">
-                                    <span class="slider round"></span>
-                                </label>
-                                <label class="sub-manage-create" id="historic-switch">
-                                    <?= Yii::t('app', 'Historic Update') ?>
-                                </label>
-                            </div>
-                            <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                <label class="switch">
-                                    <input type="checkbox" id="override-checkbox-kgi" checked
-                                        onchange="javascript:overrideUpdate()">
-                                    <span class="slider round"></span>
-                                </label>
-                                <label class="sub-manage-create" id="override-switch">
-                                    <?= Yii::t('app', 'Override') ?>
-                                </label>
-                            </div>
-                        <?php } ?>
-                    </div>
-                </div>
-
-                <div class="form-group mt-42"
-                    style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
-                    <label class="text-manage-create" for="name"
-                        style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
-                        <div style="flex-grow: 1;">
-                            <span class="text-danger">* </span>
-                            <?= Yii::t('app', 'Details') ?>
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                data-placement="top" title="<?= Yii::t('app', '') ?>">
-                        </div>
-                    </label>
-                    <textarea class="form-control" name="detail" style="height: 165px;"
-                        rows="4"><?= isset($data['detail']) ? $data['detail'] : '' ?></textarea>
-                </div>
-
-                <div class="form-group mt-42"
-                    style="display: flex; align-items: flex-end; justify-content: flex-end; gap: 12px; width: 100%;">
-                    <?php
-                    // $status = 'create';
-                    // $statusform = 'update';
-
-                    if ($statusform == 'update') {
-                    ?>
-                        <div
-                            style="display: flex; width: 99px; height: 40px; flex-direction: column; align-items: flex-end;">
-                            <label class="name-last-update">
-                                Last Updated on
+                        <div class="form-group mt-37" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                            <label class="text-manage-create" for="name">
+                                <span class="text-danger">* </span>
+                                <?= Yii::t('app', 'Select Department/s') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" class="tootip-icon"
+                                    title="<?= Yii::t('app', 'Choose the departments that will be responsible for this performance indicator. Multiple departments can be selected for cross-functional Performance tracking.') ?>"
+                                    alt="Help Icon">
                             </label>
-                            <text class="create-last-update">
-                                <?= isset($data['lastUpdate']) ? $data['lastUpdate'] : '' ?>
-                            </text>
+                            <div class="form-control d-flex justify-align-content-start" id="multi-department" style="width: 100%">
+                                <span id="multi-department-text" class="align-content-center" style="flex-grow: 1;color: #8a8a8a;">
+                                    <?= Yii::t('app', 'Select Department') ?>
+                                </span>
+                                <div class="flex-grow-1 circle-container pl-15 justify-content-end" id="image-branches" data-type="branch" style="display: flex;
+                                    align-items: center;
+                                    gap: 5px;">
+                                    <div class="cycle-current-gray" id="img-department-1">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
+                                    </div>
+                                    <div class="cycle-current-gray" id="img-department-2">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
+                                    </div>
+                                    <div class="cycle-current-gray" id="img-department-3">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
+                                    </div>
+                                    <div class="cycle-current-gray" style="color: #000;"
+                                        id="department-selected-count">
+                                        00
+                                    </div>
+                                    <i class="toggle-icon-department fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="col-12" <?php if ($statusform == 'update'): ?> id="show-multi-department-update"
+                                <?php else: ?> id="show-multi-department" <?php endif; ?> style="position: absolute; top: 82%; left: 0; width: 98%; z-index: 999; background-color: white; 
+                            border: 1px solid #ced4da; padding: 10px; display: none;">
+                                <?php if ($statusform == 'create'): ?>
+                                    <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
+                                <?php else: ?>
+                                    <?= $kgiDepartmentText; ?>
+                                <?php endif; ?>
+                            </div>
                         </div>
-                        <div>
-                            <select
-                                class="<?= $data['status'] == 1 ? 'select-create-status' : 'select-complete-status' ?>"
-                                aria-label="Default select example" name="status" id="pim-status"
-                                onchange="javascript:changeStatus('kgi')" required="">
-                                <option value="1"
-                                    <?= isset($data['status']) && $data['status'] == 1 ? 'selected' : '' ?>> In-Progress
+                        <div class="form-group mt-27" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                            <label class="text-manage-create" for="name">
+                                <span class="text-danger">* </span>
+                                <?= Yii::t('app', 'Select Team/s') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" class="tootip-icon"
+                                    title="<?= Yii::t('app', 'Choose the Team that will be responsible for achieving this performance indicator. Multiple Teams can be selected for collaborative performance achievement.') ?>"
+                                    alt="Help Icon">
+                            </label>
+                            <div class="form-control d-flex justify-align-content-start" id="multi-team" style="width: 100%;">
+                                <span id="multi-team-text" class="align-content-center" style="flex-grow: 1;
+                                       color: #8a8a8a;">
+                                    <?= Yii::t('app', 'Select Team') ?>
+                                </span>
+                                <div class="circle-container pl-15" id="image-team" data-type="team" style="display: flex;
+                                    align-items: center;
+                                    gap: 5px;
+                                    padding-left: 15px;">
+                                    <div class="cycle-current-gray" id="img-team-1">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
+                                    </div>
+                                    <div class="cycle-current-gray" id="img-team-2">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
+                                    </div>
+                                    <div class="cycle-current-gray" id="img-team-3">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
+                                    </div>
+                                    <div class="cycle-current-gray" style="color: #000;"
+                                        id="team-selected-count">
+                                        00
+                                    </div>
+                                    <i class="toggle-icon-team fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </div>
+
+                            </div>
+                            <div class="col-12" <?php if ($statusform == 'update'): ?> id="show-multi-team-update"
+                                <?php else: ?> id="show-multi-team" <?php endif; ?> style="position: absolute; top: 82%; left: 0; width: 98%; z-index: 999; background-color: white; 
+                           border: 1px solid #ced4da; padding: 10px; display: none;">
+                                <?php if ($statusform == 'create'): ?>
+                                    <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
+                                <?php else: ?>
+                                    <?= $kgiTeamText; ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="form-group mt-27"
+                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                            <label class="text-manage-create" for="name">
+                                <span class="text-danger">* </span>
+                                <?= Yii::t('app', 'Determine Priority') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" class="tootip-icon"
+                                    title="<?= Yii::t('app', 'Select priority between A, B or C, (A is considered as highest priority and C is least) to align with organizational objectives.') ?>"
+                                    alt="Help Icon">
+                            </label>
+                            <select class="form-select font-size-13" aria-label="Default select example"
+                                id="priority-update" name="priority">
+                                <option value="">A/B/C</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 pr-20  col-12">
+                        <div class="" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                            <label class="text-manage-create" for="name">
+                                <span class="text-danger">* </span>
+                                Update Interval <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                    data-toggle="tooltip" data-placement="top" class="tootip-icon"
+                                    title="Select how frequently this indicator should be updated: Monthly, Quarterly, Half Yearly, or Yearly. This determines the reporting cycle."
+                                    alt="Help Icon">
+                            </label>
+                            <div class="col-12" role="group" aria-label="Basic outlined example">
+                                <div class="row" style="--bs-gutter-x:0px;">
+                                    <?php
+                                    if (isset($units) && count($units) > 0) {
+                                        $i = 1;
+                                        foreach ($units as $unit) :
+                                            $activeClass = ($unitId == $unit['unitId']) ? 'unit-active' : 'unit-inactive';
+                                            if ($i == 1) {
+                                                $radius = "border-left-radius";
+                                            } else if ($i == count($units)) {
+                                                $radius = "border-right-radius";
+                                            } else {
+                                                $radius = "";
+                                            }
+
+                                    ?>
+                                            <div id="unit-<?= $unit['unitId'] ?>"
+                                                class="col-3 font-size-12 <?= $activeClass ?> <?= $radius ?> align-content-center text-center"
+                                                onclick="selectUnit(<?= $unit['unitId'] ?>)">
+                                                <?= Yii::t('app', $unit["unitName"]) ?>
+                                            </div>
+                                    <?php
+                                            $i++;
+                                        endforeach;
+                                    }
+
+                                    // echo  $unitId;
+                                    ?>
+                                </div>
+                                <input type="hidden" value="<?= $unitId ?>" id="currentUnit" name="unit" required>
+                                <input type="hidden" value="<?= $unitId ?>" id="previousUnit" required>
+                            </div>
+                        </div>
+                        <div class="form-group mt-37" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                            <label class="text-manage-create" for="name">
+                                <span class="text-danger">* </span>
+                                <?= Yii::t('app', 'Month & Year') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" class="tootip-icon"
+                                    title="<?= Yii::t('app', 'Select the specific month and year for which youre entering or viewing data. This helps in maintaining chronological records.') ?>"
+                                    alt="Help Icon">
+                            </label>
+                            <div class="input-group" style="position: relative;">
+                                <span class="input-group-text"
+                                    style="background-color: #C3C3C3;  border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1; height:38px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
+                                        style="width: 16px; height: 16px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="LinkedIn"
+                                        style="width: 16px; height: 16px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
+                                        style="width: 16px; height: 16px;">
+                                </span>
+                                <div class="form-control" id="multi-mount-year" name="fromMonthYear"
+                                    style="border-radius: 53px 53px 53px 53px; text-align: center; cursor: pointer; position: absolute; width: 100%;height:38px;"
+                                    onclick="openDatePicker()">
+                                    Select the Month & Year <i class="fa fa-angle-down pull-right mt-5"
+                                        aria-hidden="true"></i>
+                                </div>
+                                <input type="hidden" id="hiddenMonth" name="month"
+                                    value="<?= htmlspecialchars($data['month'] ?? '') ?>" required>
+                                <input type="hidden" id="hiddenYear" name="year"
+                                    value="<?= htmlspecialchars($data['year'] ?? '') ?>" required>
+                            </div>
+                            <div id="monthYearPicker" class="mount-year">
+                                <select id="monthSelect" class="form-select" onchange="closeDatePicker()" required>
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">March</option>
+                                    <option value="04">April</option>
+                                    <option value="05">May</option>
+                                    <option value="06">June</option>
+                                    <option value="07">July</option>
+                                    <option value="08">August</option>
+                                    <option value="09">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                                <select id="yearSelect" class="form-select" style="margin-top: 10px;"
+                                    onchange="closeDatePicker()" required>
+                                    <!-- ปีที่ถูกสร้างจะถูกเพิ่มที่นี่ -->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group mt-37" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                            <label class="text-manage-create" for="name">
+                                <span class="text-danger">* </span>
+                                <?= Yii::t('app', 'Due Term') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" class="tootip-icon"
+                                    title="<?= Yii::t('app', 'Set the start and end dates for the performance measurement period. This defines the timeframe for achieving the target.') ?>"
+                                    alt="Help Icon">
+                            </label>
+                            <div class="col-12" id="img-due-term">
+                                <div class="select-form-pim" id="multi-due-term" onclick="toggleCalendar()">
+                                    <span class="calendar-due mr-3" id="calendar-dueterm">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="from" class="calendar-due-image">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="-" class="calendar-due-image">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to" class="calendar-due-image">
+                                    </span>
+                                    <span class="d-flex" id="due-term-default">
+                                        Select the Due Term Start & End Date
+                                    </span>
+                                    <i class="fa fa-angle-down" aria-hidden="true" style="position: absolute;right:0;margin-right:5px;"></i>
+                                </div>
+
+                            </div>
+                            <!-- hidden inputs เพื่อเก็บค่า month และ year -->
+                            <input type="hidden" id="fromDate" name="fromDate"
+                                value="<?= isset($data['fromDate']) ? $data['fromDate'] : '' ?>" required>
+                            <input type="hidden" id="toDate" name="toDate"
+                                value="<?= isset($data['toDate']) ? $data['toDate'] : '' ?>" required>
+                            <input type="hidden" id="page" value="pim">
+
+                            <!-- Calendar picker -->
+                            <div class="calendar-container" id="calendar-due-term"
+                                style="display: none; position: absolute; margin-top: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 10px; background: #fff; width: 650px; gap: 3px; z-index: 1;">
+                                <!-- ปฏิทินสำหรับวันที่เริ่มต้น -->
+                                <div id="startDatePicker"></div>
+                                <!-- ปฏิทินสำหรับวันที่สิ้นสุด -->
+                                <div id="endDatePicker"></div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-37" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                            <label class="text-manage-create" for="name">
+                                <span class="text-danger">* </span>
+                                <?= Yii::t('app', 'Target Due Update Date') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" class="tootip-icon"
+                                    title="<?= Yii::t('app', 'Specify the deadline by which the progress must be updated in the system. This ensures regular performance tracking and accountability.') ?>"
+                                    alt="Help Icon">
+                            </label>
+                            <div class="col-12" id="img-due-update">
+                                <div class="select-form-pim" id="multi-due-update" onclick="toggleCalendar()">
+                                    <span class="calendar-due mr-3" id="calendar-dueterm-update">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
+                                            style="width: 16px; height: 16px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="LinkedIn"
+                                            style="width: 16px; height: 16px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
+                                            style="width: 16px; height: 16px;">
+                                    </span>
+                                    <span class="d-flex" id="due-update-default">
+                                        Select the Last Update Date
+                                    </span>
+                                    <i class="fa fa-angle-down" aria-hidden="true" style="position: absolute;right:0;margin-right:15px;"></i>
+                                    <input type="hidden" id="nextDate" name="nextCheckDate"
+                                        value="<?= isset($data['nextCheck']) ? $data['nextCheck'] : '' ?>">
+                                </div>
+                            </div>
+                            <div id="calendar-due-update"
+                                style="position: absolute; margin-top: 75px; padding: 10px; border: 1px solid rgb(221, 221, 221); border-radius: 10px; background: rgb(255, 255, 255); width: 100%; z-index: 1; display: none; justify-content: center; align-items: center;">
+                                <div id="updateDatePicker" style="display: none;"></div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-30" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                            <label class="text-manage-create" for="name">
+                                <span class="text-danger">* </span>
+                                <?= Yii::t('app', 'Quant Ratio') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" class="tootip-icon"
+                                    title="<?= Yii::t('app', 'Select the measurement unit for your indicator (e.g., score, count, percentage, or rating scale) to ensure consistent performance assessment.') ?>"
+                                    alt="Help Icon">
+                            </label>
+                            <select class="form-select" id="quantRatio-create" name="quantRatio" required>
+                                <option value=""><?= Yii::t('app', 'Select the Measurement Unit') ?></option>
+                                <option value="1" <?= ($quantRatio == 1) ? 'selected' : '' ?>>
+                                    <?= Yii::t('app', 'Quantity') ?>
                                 </option>
-                                <option value="2"
-                                    <?= isset($data['status']) && $data['status'] == 2 ? 'selected' : '' ?>> Completed
+                                <option value="2" <?= ($quantRatio == 2) ? 'selected' : '' ?>>
+                                    <?= Yii::t('app', 'Quality') ?>
                                 </option>
                             </select>
-
+                            <input type="hidden" name="kgiId" id="kgiId" value="<?= isset($kgiId) ? $kgiId : '' ?>">
                         </div>
-                    <?php
-                    } else {
-                    ?>
-                        <input type="hidden" name="status" value='1'>
-                    <?php } ?>
-                    <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="btn-create-cancle"
-                        style="width: 100px;text-decoration:none;">
-                        <?= Yii::t('app', 'Cancel') ?>
-                    </a>
-                    <?php
-                    if ($statusform == 'update') {
-                    ?>
-                        <button type="submit" class="btn-create-update" style="width: 100px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/updatebtn-white.svg" alt="LinkedIn"
-                                style="width: 16px; height: 16px;">
-                            <?= Yii::t('app', 'Update') ?>
-                        </button>
-                    <?php } else { ?>
-                        <!-- ปรับให้ปุ่มนี้เป็น type="submit" -->
-                        <button type="submit" class="btn-create-update" style="width: 100px;">
-                            <?= Yii::t('app', 'Create') ?>
-                            <img src="<?= Yii::$app->homeUrl ?>image/create-btn-white.svg" alt="LinkedIn"
-                                style="width: 16px; height: 16px;">
-                        </button>
-                    <?php } ?>
-                </div>
 
+                        <div class="d-flex mt-37 gap-1" style="--bs-gutter-x:0px;">
+                            <div style="min-width:130px;">
+                                <label class="text-manage-create" for="name">
+                                    <span class="text-danger">* </span>
+                                    Data Type <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                        data-toggle="tooltip" data-placement="top" class="tootip-icon"
+                                        title="Choose the type of data being tracked (e.g., numbers, percentages, currency) to ensure proper formatting and calculations."
+                                        alt="Help Icon">
+                                </label>
+                                <select class="form-select mt-10" id="amountType-create" name="amountType" required>
+                                    <option value="">Select</option>
+                                    <option value="1" <?= ($selectedAmountType == '1') ? 'selected' : '' ?>>%</option>
+                                    <option value="2" <?= ($selectedAmountType == '2') ? 'selected' : '' ?>>
+                                        <?= Yii::t('app', 'Number') ?></option>
+                                </select>
+                            </div>
+
+                            <!-- Right side (Success Condition) -->
+                            <div>
+                                <label class="text-manage-create" for="name">
+                                    <span class="text-danger">* </span>
+                                    Success Condition <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                        data-toggle="tooltip" data-placement="top"
+                                        title="Define the criteria for success (e.g., Greater Than, Less Than, Equal To) to measure achievement against the target."
+                                        alt="Help Icon" class="tootip-icon">
+                                </label>
+                                <select class="form-select mt-10" id="code-create" name="code" required>
+                                    <option value="">Select</option>
+                                    <option value="<" <?= ($selectedCode == '<') ? 'selected' : '' ?>>
+                                        &nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;<?= Yii::t('app', 'Result more than target') ?>
+                                    </option>
+                                    <option value="=" <?= ($selectedCode == '=') ? 'selected' : '' ?>>
+                                        &nbsp;&nbsp;=&nbsp;&nbsp;<?= Yii::t('app', 'Result equal target') ?>
+                                    </option>
+                                    <option value=">" <?= ($selectedCode == '>') ? 'selected' : '' ?>>
+                                        &nbsp;&nbsp;>&nbsp;&nbsp;<?= Yii::t('app', 'Result less than target') ?>
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-12 pl-20">
+                        <div class="form-group"
+                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                            <label class="text-manage-create" for="name">
+                                <span class="text-danger">* </span>
+                                <?= Yii::t('app', 'Master Target') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                    data-placement="top" class="tootip-icon"
+                                    title="<?= Yii::t('app', 'Enter the overall target value that needs to be achieved within the specified period.') ?>"
+                                    alt="Help Icon">
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text"
+                                    style="background-color:rgb(255, 255, 255); border-right: none; padding: 20px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/target-blue.svg" alt="LinkedIn"
+                                        style="width: 30px; height: 30px;">
+                                </span>
+                                <input type="number" class="form-control text-end" name="amount" step="any"
+                                    placeholder="Enter Target Amount"
+                                    value="<?= isset($data['targetAmount']) ? $data['targetAmount'] : '' ?>"
+                                    style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-42"
+                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                            <label class="text-manage-create" for="name"
+                                style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                                <div style="flex-grow: 1;">
+                                    <span class="text-danger">* </span>
+                                    <?= Yii::t('app', 'Result') ?>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                        data-placement="top" class="tootip-icon"
+                                        title="<?= Yii::t('app', 'Historic update contains the update from the team and indivudials if you wish to use your own values, please toggle on Override to put custom numbers ') ?>"
+                                        alt="Help Icon">
+                                </div>
+                                <?php
+                                if ($statusform == 'update') {
+                                ?>
+                                    <div class="updatehistory" class="updatehistory" style="text-align: right;cursor:pointer;"
+                                        data-bs-toggle="modal" data-bs-target="#update-history-popup"
+                                        onclick="javascript:kgiUpdateHistory(<?= $kgiId ?>)">
+                                        <?php if ($statusform == 'update') { ?>
+                                            <img
+                                                src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
+                                        <?php } ?>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            </label>
+
+                            <div class="input-group">
+                                <span class="input-group-text"
+                                    style="background-color:rgb(255, 255, 255); border-right: none; padding: 20px;">
+                                    <img id="result-icon"
+                                        src="<?= Yii::$app->homeUrl ?>image/result-<?= isset($data['result']) ? 'blue' : 'gray' ?>.svg"
+                                        alt="LinkedIn" style="width: 30px; height: 30px;">
+                                </span>
+                                <input type="number" class="form-control text-end" name="result" id="result-update"
+                                    value="<?= isset($data['result']) ? $data['result'] : '' ?>"
+                                    style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
+                                    required step="any" oninput="updateIcon(this);">
+                                <input type="hidden" id="auto-result" value="" name="autoUpdate">
+                                <input type="hidden" id="previous-result"
+                                    value="<?= isset($data['result']) ? $data['result'] : '' ?>">
+                            </div>
+
+
+                            <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                                <?php if ($statusform == 'update') { ?>
+                                    <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+                                        <label class="switch">
+                                            <input type="checkbox" id="historic-checkbox-kgi"
+                                                onchange="javascript:autoUpdateResult(<?= $kgiId ?>)">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <label class="sub-manage-create" id="historic-switch">
+                                            <?= Yii::t('app', 'Historic Update') ?>
+                                        </label>
+                                    </div>
+                                    <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+                                        <label class="switch">
+                                            <input type="checkbox" id="override-checkbox-kgi" checked
+                                                onchange="javascript:overrideUpdate()">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <label class="sub-manage-create" id="override-switch">
+                                            <?= Yii::t('app', 'Override') ?>
+                                        </label>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-42"
+                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                            <label class="text-manage-create" for="name"
+                                style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                                <div style="flex-grow: 1;">
+                                    <span class="text-danger">* </span>
+                                    <?= Yii::t('app', 'Details') ?>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip" class="tootip-icon"
+                                        data-placement="top" title="<?= Yii::t('app', '') ?>">
+                                </div>
+                            </label>
+                            <textarea class="form-control" name="detail" style="height: 165px;"
+                                rows="4"><?= isset($data['detail']) ? $data['detail'] : '' ?></textarea>
+                        </div>
+
+                        <div class="form-group <?= $statusform == 'update' ? 'mt-40' : 'mt-60' ?>" style="display: flex; align-items: flex-end; justify-content: flex-end; gap: 7px; width: 100%;">
+                            <?php
+                            // $status = 'create';
+                            // $statusform = 'update';
+
+                            if ($statusform == 'update') {
+                            ?>
+                                <div class="" style="display: flex;
+                                min-width: 90px;
+                                height: 35px;
+                                flex-direction: column;
+                                align-items: flex-end;
+                                justify-content: center;
+                                ">
+                                    <label class="name-last-update">
+                                        Last Updated on
+                                    </label>
+                                    <text class="create-last-update">
+                                        <?= isset($data['lastUpdate']) ? $data['lastUpdate'] : '' ?>
+                                    </text>
+                                </div>
+                                <div>
+                                    <select
+                                        class="<?= $data['status'] == 1 ? 'select-create-status' : 'select-complete-status' ?>"
+                                        aria-label="Default select example" name="status" id="pim-status"
+                                        onchange="javascript:changeStatus('kgi')" required="">
+                                        <option value="1"
+                                            <?= isset($data['status']) && $data['status'] == 1 ? 'selected' : '' ?>> In-Progress
+                                        </option>
+                                        <option value="2"
+                                            <?= isset($data['status']) && $data['status'] == 2 ? 'selected' : '' ?>> Completed
+                                        </option>
+                                    </select>
+
+                                </div>
+                            <?php
+                            } else {
+                            ?>
+                                <input type="hidden" name="status" value='1'>
+                            <?php } ?>
+                            <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="btn-create-cancle"
+                                style="width: 70px;text-decoration: none;height: 35px;font-size:14px !important;">
+                                <?= Yii::t('app', 'Cancel') ?>
+                            </a>
+                            <?php
+                            if ($statusform == 'update') {
+                            ?>
+                                <button type="submit" class="btn-create-update" style="width: 80px;height: 35px;font-size:14px !important;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/updatebtn-white.svg" alt="LinkedIn"
+                                        style="width: 16px; height: 16px;">
+                                    <?= Yii::t('app', 'Update') ?>
+                                </button>
+                            <?php } else { ?>
+                                <!-- ปรับให้ปุ่มนี้เป็น type="submit" -->
+                                <button type="submit" class="btn-create-update" style="width:80px;text-decoration: none;height: 35px;font-size:14px !important;">
+                                    <?= Yii::t('app', 'Create') ?>
+                                    <img src="<?= Yii::$app->homeUrl ?>image/create-btn-white.svg" alt="LinkedIn"
+                                        style="width: 16px; height: 16px;">
+                                </button>
+                            <?php } ?>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+            <!-- </form> -->
         </div>
     </div>
-    <!-- </form> -->
-</div>
-</div>
-<?= $this->render('modal_warning') ?>
-<?php if ($statusform == 'update') {
-    //throw new exception(print_r($data, true));
-?>
-    <input type="hidden" value="update" id="acType">
-    <input type="hidden" value="<?= $data["priority"] ?>" id="priority">
-    <input type="hidden" value="<?= isset($url) ? $url : '' ?>" name="url">
-<?php
-} else {
-?>
-    <input type="hidden" value="create" id="acType">
+    <?= $this->render('modal_warning') ?>
+    <?php if ($statusform == 'update') {
+        //throw new exception(print_r($data, true));
+    ?>
+        <input type="hidden" value="update" id="acType">
+        <input type="hidden" value="<?= $data["priority"] ?>" id="priority">
+        <input type="hidden" value="<?= isset($url) ? $url : '' ?>" name="url">
+    <?php
+    } else {
+    ?>
+        <input type="hidden" value="create" id="acType">
 
-<?php } ?>
-<?php ActiveForm::end(); ?>
+    <?php } ?>
+    <?php ActiveForm::end(); ?>
 
-<?= $this->render('modal_history') ?>
+    <?= $this->render('modal_history') ?>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        var statusform = '<?= $statusform ?>';
-        if (statusform === 'update') {
-            var pri = $("#priority").val();
-            branchMultiDepartmentUpdate();
-            var checkedBranchIds = [];
-            var checkedDepartmentIds = [];
-            $('input[name="branch[]"]:checked').each(function() {
-                checkedBranchIds.push($(this).val());
-            });
-            $('input[name="department[]"]:checked').each(function() {
-                checkedDepartmentIds.push($(this).val());
-            });
-            checkedBranchIds.forEach(function(branchId) {
-                departmentMultiTeamUpdate(branchId);
-            });
-            // if (checkedDepartmentIds.length > 0) {
-            // 	checkedDepartmentIds.forEach(function(departmentId) {
-            // 		multiTeamUpdate(departmentId);
-            // 	});
-            // } else {
-            multiteamKgi();
-            // }
-            $("#priority-update").val(pri);
-            let isSubmittingUpdate = false; // ป้องกัน submit ซ้ำ
-            $("#update-kgi").on("beforeSubmit", function(event) {
-                if (isSubmittingUpdate) {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var statusform = '<?= $statusform ?>';
+            if (statusform === 'update') {
+                var pri = $("#priority").val();
+                companyMultiBrachUpdate();
+                branchMultiDepartmentUpdate();
+                //loadDepartment();
+                var checkedBranchIds = [];
+                var checkedDepartmentIds = [];
+                $('input[name="branch[]"]:checked').each(function() {
+                    checkedBranchIds.push($(this).val());
+                });
+                $('input[name="department[]"]:checked').each(function() {
+                    checkedDepartmentIds.push($(this).val());
+                });
+                checkedBranchIds.forEach(function(branchId) {
+                    departmentMultiTeamUpdate(branchId);
+                });
+                multiteamKgi();
+                // }
+                $("#priority-update").val(pri);
+                let isSubmittingUpdate = false; // ป้องกัน submit ซ้ำ
+                $("#update-kgi").on("beforeSubmit", function(event) {
+                    if (isSubmittingUpdate) {
+                        return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
+                    }
+                    isSubmittingUpdate = true;
+                    if (!validateFormKgiUpdate()) {
+                        isSubmittingUpdate = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+                        return false;
+                    }
+                    return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
+                });
+            }
+            // ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
+            function updatePlaceholderColor(selector) {
+                $(selector).on('change', function() {
+                    $(this).css('color', $(this).val() !== "" ? '#30313D' : 'var(--Helper-Text-Gray, #8A8A8A)');
+                });
+            }
+
+            // เรียกใช้งานฟังก์ชันกับ select หลายตัวพร้อมกัน
+            updatePlaceholderColor('#companyId');
+            updatePlaceholderColor('#quantRatio-create');
+            updatePlaceholderColor('#amountType-create');
+            updatePlaceholderColor('#code-create');
+
+            $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
+
+            let isSubmitting = false; // ป้องกัน submit ซ้ำ
+            $("#create-kgi").on("beforeSubmit", function(event) {
+                if (isSubmitting) {
                     return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
                 }
-                isSubmittingUpdate = true;
-                if (!validateFormKgiUpdate()) {
-                    isSubmittingUpdate = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+                isSubmitting = true;
+                if (!validateFormKgi()) {
+                    isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
                     return false;
                 }
                 return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
             });
-        }
-        // ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
-        function updatePlaceholderColor(selector) {
-            $(selector).on('change', function() {
-                $(this).css('color', $(this).val() !== "" ? '#30313D' : 'var(--Helper-Text-Gray, #8A8A8A)');
-            });
-        }
-
-        // เรียกใช้งานฟังก์ชันกับ select หลายตัวพร้อมกัน
-        updatePlaceholderColor('#companyId');
-        updatePlaceholderColor('#quantRatio-create');
-        updatePlaceholderColor('#amountType-create');
-        updatePlaceholderColor('#code-create');
-
-        $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
-
-        let isSubmitting = false; // ป้องกัน submit ซ้ำ
-        $("#create-kgi").on("beforeSubmit", function(event) {
-            if (isSubmitting) {
-                return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
-            }
-            isSubmitting = true;
-            if (!validateFormKgi()) {
-                isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
-                return false;
-            }
-            return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
         });
-    });
-</script>
+    </script>

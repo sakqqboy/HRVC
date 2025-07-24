@@ -449,6 +449,7 @@ class ManagementController extends Controller
 		$textTeam = '';
 		$branchDepartment = [];
 		$acType = $_POST["acType"];
+		//throw new exception(print_r($_POST["multiBranch"], true));
 		if (isset($_POST["multiBranch"]) && count($_POST["multiBranch"]) > 0) {
 			foreach ($_POST["multiBranch"] as $branchId) :
 				if (isset($_POST["multiDepartment"]) && count($_POST["multiDepartment"]) > 0) {
@@ -466,6 +467,7 @@ class ManagementController extends Controller
 				}
 			endforeach;
 		}
+		//throw new exception(print_r($branchDepartment, true));
 		if (count($branchDepartment) > 0) {
 
 			foreach ($branchDepartment as $branchId => $departments) :
