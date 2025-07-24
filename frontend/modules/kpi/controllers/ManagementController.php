@@ -196,6 +196,13 @@ class ManagementController extends Controller
             ]));
         }
 
+        $currentPage = 1;
+		if (isset($hash) && $hash != '') {
+			$pageArr = explode('page', $hash);
+			$currentPage = $pageArr[1];
+		}
+		$limit = 20;
+
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -213,12 +220,27 @@ class ManagementController extends Controller
         $kpis = curl_exec($api);
         $kpis = json_decode($kpis, true);
 
-        curl_close($api);
-        $months = ModelMaster::monthFull(1);
-        $isManager = UserRole::isManager();
-        $employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
-        $companyId = $employee["companyId"];
-        // throw new exception(print_r($kpis, true));
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
+		curl_close($api);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$employeeCompanyId = $employee["companyId"];
+		$totalKpi = Kpi::totalKpi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
+		$totalPage = ceil($totalKpi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
+		$totalBranch = Branch::totalBranch();
+
         // throw new exception(print_r($kpis, true));
         return $this->render('kpi_grid', [
             "units" => $units,
@@ -228,9 +250,18 @@ class ManagementController extends Controller
             "isManager" => $isManager,
             "role" => $role,
             "userId" => Yii::$app->user->id,
-            "companyId" => $companyId
+            "companyId" => $employeeCompanyId,
+            "employeeCompanyId" => $employeeCompanyId,
+			"totalKpi" => $totalKpi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
+			"pagination" => $pagination,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
         ]);
     }
+    
     public function actionCreateKpi()
     {
 
