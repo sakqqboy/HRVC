@@ -261,13 +261,13 @@ if ($DueBehind < 0) {
                             </div>
                             <div class="">
                                 <div class="circle-container pl-15" id="image-branches" data-type="branch">
-                                    <div class="cycle-current-gray">
+                                    <div class="cycle-current-gray" id="img-branch-1">
                                         <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
                                     </div>
-                                    <div class="cycle-current-gray">
+                                    <div class="cycle-current-gray" id="img-branch-2">
                                         <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
                                     </div>
-                                    <div class="cycle-current-gray">
+                                    <div class="cycle-current-gray" id="img-branch-3">
                                         <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
                                     </div>
                                     <div class="cycle-current-gray" style="color: #000;" id="branch-selected-count">
@@ -304,13 +304,13 @@ if ($DueBehind < 0) {
 
                             <div>
                                 <div class="circle-container pl-15" id="image-departments" data-type="department">
-                                    <div class="cycle-current-gray">
+                                    <div class="cycle-current-gray" id="img-department-1">
                                         <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
                                     </div>
-                                    <div class="cycle-current-gray">
+                                    <div class="cycle-current-gray" id="img-department-2">
                                         <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
                                     </div>
-                                    <div class="cycle-current-gray">
+                                    <div class="cycle-current-gray" id="img-department-3">
                                         <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
                                     </div>
                                     <div class="cycle-current-gray" style="color: #000;" id="department-selected-count">
@@ -490,8 +490,7 @@ if ($DueBehind < 0) {
                             </div>
                         </div>
 
-                        <div class="form-group mt-27"
-                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                        <div class="form-group mt-27" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
                                 Quant Ratio <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"

@@ -5,6 +5,7 @@ use frontend\models\hrvc\Department;
 use frontend\models\hrvc\KgiDepartment;
 
 if (isset($d) && count($d) > 0) {
+	$total = 0;
 	foreach ($d as $branchId => $department) : ?>
 		<div class="col-12 multi-select-head pl-10 pt-10 pb-3">
 			<?=
@@ -27,6 +28,7 @@ if (isset($d) && count($d) > 0) {
 				$has = KgiDepartment::isInThisKgi($departmentId, $kgiId);
 				if ($has == 1) {
 					$check = 'checked';
+					$total++;
 				}
 
 			?>
@@ -42,3 +44,4 @@ if (isset($d) && count($d) > 0) {
 	endforeach;
 }
 ?>
+<input type="hidden" id="totalDepartment" value="<?= isset($total) ? $total : 0 ?>">
