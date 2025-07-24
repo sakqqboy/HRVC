@@ -136,14 +136,14 @@ use frontend\models\hrvc\Team;
         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg"
             style="cursor: pointer; margin-top:2px;">
     </a>
-    <a href="<?= Yii::$app->homeUrl . 'kgi/management/index' ?>"
+    <a href="<?= Yii::$app->homeUrl . 'kpi/management/index' ?>"
         class="btn btn-outline-primary font-size-12 pim-change-modes" style="border-color: #CBD5E1 !important;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg"
             style="cursor: pointer; margin-top:2px;">
     </a>
     <?php
     } else { ?>
-    <a href="<?= Yii::$app->homeUrl . 'kgi/management/grid' ?>"
+    <a href="<?= Yii::$app->homeUrl . 'kpi/management/grid' ?>"
         class="btn btn-outline-primary font-size-12 pim-change-modes" style="border-color: #CBD5E1 !important;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg"
             style="cursor: pointer; margin-top:2px;">

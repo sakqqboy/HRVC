@@ -14,8 +14,11 @@ $this->title = 'KPI';
     </div>
     <div class="col-12 mt-10">
         <?= $this->render('header_filter', [
-            "role" => $role
-        ]) ?>
+        "role" => $role,
+        "allCompany" => $allCompany,
+        "companyPic" => $companyPic,
+        "totalBranch" => $totalBranch
+    ]) ?>
         <div class="alert pim-body bg-white mt-10">
             <div class="row sticky-section">
                 <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">

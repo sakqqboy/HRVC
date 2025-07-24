@@ -58,7 +58,6 @@ $this->title = 'KPI Grid View';
                         "yearSelected" => isset($branchId) ? $branchId : null,
                         "role" => $role,
                         "page" => "grid"
-
                     ]) ?>
                     <input type="hidden" id="type" value="grid">
                     <input type="hidden" id="minPage" value="0">
