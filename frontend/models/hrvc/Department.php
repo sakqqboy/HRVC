@@ -38,7 +38,9 @@ class Department extends \frontend\models\hrvc\master\DepartmentMaster
         $departmentName = "";
         if ($departmentId != '') {
             $department = Department::find()->select('departmentName')->where(["departmentId" => $departmentId])->asArray()->one();
+        if ($department && isset($department["departmentName"])) {
             $departmentName = $department["departmentName"];
+        }
         }
         return   $departmentName;
     }
