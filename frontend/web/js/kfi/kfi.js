@@ -1107,12 +1107,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const images1 = '<img src="' + $url + 'image/calendar-blue.svg' + '" alt="from" class="calendar-due-image">';
         const images2 = '<img src="' + $url + 'image/weld.svg' + '" alt="from" class="calendar-due-image">';
         const images3 = '<img src="' + $url + 'image/calendar-blue.svg' + '" alt="from" class="calendar-due-image">';
-    
         if (page == "pim") {
             document.getElementById("multi-due-update").innerHTML = newText + nextDate + icon;
             $("#calendar-dueterm-update").css("backgroundColor", '#D7EBFF');
             $("#calendar-dueterm-update").css("border", '0.5px solid #BEDAFF');
             $("#calendar-dueterm-update").html(images1 + images2 + images3);
+            
             
         } else {
             document.getElementById("multi-due-update").innerHTML =
@@ -1368,32 +1368,32 @@ function updateLastUpdateDate(dateStr) {
     let icon = '<i class="fa fa-angle-down" aria-hidden="true" style="position: absolute;right:0;margin-right:15px;"></i>';
 
     document.getElementById("multi-due-update").innerHTML = newText + dateStr + icon;
-
-    const images1 = '<img src="' + $url + 'image/calendar-gray.svg' + '" alt="from" class="calendar-due-image">';
-    const images2 = '<img src="' + $url + 'image/weld-gray.svg' + '" alt="from" class="calendar-due-image">';
-    const images3 = '<img src="' + $url + 'image/calendar-gray.svg' + '" alt="from" class="calendar-due-image">';
-    $("#calendar-dueterm-update").html(images1 + images2 + images3);
-    $("#multi-due-update").css({
-        "color": "var(--HRVC---Text-Black, #30313D)",
-        "font-weight": "500",
-    });
+    
     // ซ่อนปฏิทินหลังจากเลือกวันที่
-    document.getElementById('calendar-due-update').style.display = 'none';
-
-    document.getElementById('nextDate').value = dateStr;
-
+    
+    $('#nextDate').val(dateStr);
 
     // หากเลือกวันที่แล้ว เปลี่ยนสีพื้นหลังและอัปเดตไอคอน
     if (dateStr) {
-        const calendarDue = document.querySelector('#multi-due-update #calendar-dueterm-update');
-        calendarDue.style.backgroundColor = '#D7EBFF';
-        calendarDue.style.border = '0.5px solid #BEDAFF';
-
-        // อัปเดตไอคอนภายใน <span>
-        const images = calendarDue.querySelectorAll('img');
-        images[0].src = $url + 'image/calendar-blue.svg';
-        images[1].src = $url + 'image/weld.svg';
-        images[2].src = $url + 'image/calendar-blue.svg';
+        var page = $("#page").val();
+        if (page == 'pim') {
+            const images1 = '<img src="' + $url + 'image/calendar-blue.svg' + '" alt="from" class="calendar-due-image">';
+            const images2 = '<img src="' + $url + 'image/weld.svg' + '" alt="from" class="calendar-due-image">';
+            const images3 = '<img src="' + $url + 'image/calendar-blue.svg' + '" alt="from" class="calendar-due-image">';
+            $("#calendar-dueterm-update").css("backgroundColor", '#D7EBFF');
+            $("#calendar-dueterm-update").css("border", '0.5px solid #BEDAFF');
+            $("#calendar-dueterm-update").html(images1 + images2 + images3);
+        } else {
+            const calendarDue = document.querySelector('#multi-due-update #calendar-dueterm-update');
+            calendarDue.style.backgroundColor = '#D7EBFF';
+            calendarDue.style.border = '0.5px solid #BEDAFF';
+            // อัปเดตไอคอนภายใน <span>
+            const images = calendarDue.querySelectorAll('img');
+            images[0].src = $url + 'image/calendar-blue.svg';
+            images[1].src = $url + 'image/weld.svg';
+            images[2].src = $url + 'image/calendar-blue.svg';
+        }
+    document.getElementById('calendar-due-update').style.display = 'none';
     }
 }
 

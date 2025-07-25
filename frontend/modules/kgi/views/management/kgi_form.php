@@ -417,7 +417,7 @@ $DueBehind = $targetAmount -  $result;
                                     // echo  $unitId;
                                     ?>
                                 </div>
-                                <input type="hidden" value="<?= $unitId ?>" id="currentUnit" name="unit" required>
+                                <input type="hidden" value="<?= $unitId ?>" id="currentUnit" name="unitId" required>
                                 <input type="hidden" value="<?= $unitId ?>" id="previousUnit" required>
                             </div>
                         </div>
@@ -534,10 +534,10 @@ $DueBehind = $targetAmount -  $result;
                                         Select the Last Update Date
                                     </span>
                                     <i class="fa fa-angle-down" aria-hidden="true" style="position: absolute;right:0;margin-right:15px;"></i>
-                                    <input type="hidden" id="nextDate" name="nextCheckDate"
-                                        value="<?= isset($data['nextCheck']) ? $data['nextCheck'] : '' ?>">
+
                                 </div>
                             </div>
+                            <input type="hidden" id="nextDate" name="nextCheckDate" value="<?= isset($data['nextCheck']) ? $data['nextCheck'] : '' ?>">
                             <div id="calendar-due-update"
                                 style="position: absolute; margin-top: 75px; padding: 10px; border: 1px solid rgb(221, 221, 221); border-radius: 10px; background: rgb(255, 255, 255); width: 100%; z-index: 1; display: none; justify-content: center; align-items: center;">
                                 <div id="updateDatePicker" style="display: none;"></div>
