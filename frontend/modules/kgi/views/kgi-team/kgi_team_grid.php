@@ -5,75 +5,89 @@ use yii\bootstrap5\ActiveForm;
 
 $this->title = "TEAM KGI";
 ?>
-<div class="contrainer-body">
-    <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5" style="margin-top: -3px;">
-        <strong class="pim-head-text"><?= Yii::t('app', ' Team Key Goal Indicators') ?></strong>
+<div class="col-12 mt-70 pt-20 pim-content1">
+    <div class="d-flex justify-content-start align-items-center  pt-0 pb-0" style="line-height: 30px;">
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg"
+            class="pim-head-icon mr-11 mt-2">
+        <span class="pim-head-text mr-10"><?= Yii::t('app', ' Team Key Goal Indicators') ?></strong></span>
+        <?php
+        if ($role > 3) {
+
+        ?>
+            <div class="d-flex <?= $waitForApprove["totalRequest"] > 0 ? 'approval-box' : 'noapproval-box' ?> text-center">
+                <?php
+                if ($waitForApprove["totalRequest"] > 0) {
+                ?>
+                    <a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve" class="d-flex align-items-center" style="text-decoration: none; color:#000000;">
+                        <span class="approvals-num mr-3"><?= $waitForApprove["totalRequest"] ?></span>
+                        <?= Yii::t('app', 'Approvals') ?>
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approvals.svg" style="width: 16px;height:16px;" class="ml-3">
+                    </a>
+                <?php
+                } else { ?>
+                    <a style=" text-decoration: none;color:#2D7F06;" class="d-flex align-items-center">
+                        <span class="noapprovals-num mr-3"><?= $waitForApprove["totalRequest"] ?></span>
+                        <?= Yii::t('app', 'No Approvals') ?>
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/check.svg" style="width: 16px;height:16px;" class="ml-3">
+                    </a>
+                <?php
+                }
+
+                ?>
+            </div>
+        <?php
+        }
+        ?>
     </div>
-    <div class="col-12 mt-10">
-        <?= $this->render('header_filter', [
-            "role" => $role
-        ]) ?>
-        <div class="alert mt-10 pim-body bg-white">
+
+    <?= $this->render('header_filter', [
+        "role" => $role,
+        "allCompany" => $allCompany,
+        "companyPic" => $companyPic,
+        "totalBranch" => $totalBranch
+    ]) ?>
+    <div class="col-12 mt-20" id="box-wrapper">
+        <div class="bg-white-employee" id="pim-content">
+            <div class="d-flex pl-10 pr-10 justify-content-left align-content-center mt-5">
+                <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="pim-type-tab rounded-top-left justify-content-center align-items-center">
+                    <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg" alt="Company"
+                        style="cursor: pointer;"><?= Yii::t('app', 'Company KGI') ?>
+                </a>
+                <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi-grid" class="pim-type-tab-selected justify-content-center align-items-center">
+                    <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
+                        style="cursor: pointer;"><?= Yii::t('app', 'Team KGI') ?>
+                </a>
+                <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid" class="pim-type-tab justify-content-center align-items-center">
+                    <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self"
+                        style="cursor: pointer;"><?= Yii::t('app', 'Self KGI') ?>
+                </a>
+                <div class="d-flex flex-grow-1 align-items-center justify-content-end  gap-1">
+                    <?php /* $this->render('filter_list_search', [
+                        "companies" => $companies,
+                        "months" => $months,
+                        "companyId" => isset($companyId) ? $companyId : null,
+                        "employeeCompanyId" => $employeeCompanyId,
+                        "branchId" => isset($branchId) ? $branchId : null,
+                        "teamId" => isset($teamId) ? $teamId : null,
+                        "month" => isset($month) ? $month : null,
+                        "status" => isset($status) ? $status : null,
+                        "branches" =>  isset($branches) ? $branches : null,
+                        "teams" =>  isset($teams) ? $teams : null,
+                        "yearSelected" => isset($branchId) ? $branchId : null,
+                        "role" => $role,
+                        "page" => "grid"
+
+                    ])*/ ?>
+                    <input type="hidden" id="type" value="grid">
+                    <input type="hidden" id="minPage" value="0">
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">
                     <div class="row">
-                        <div class="col-8">
-                            <div class="row">
-                                <div class="col-4 pim-type-tab pr-0 pl-0 rounded-top-left">
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="no-underline-black ">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg"
-                                            alt="Company" class="pim-icon"
-                                            style="width: 14px;height: 14px;padding-bottom: 4px;">
-                                        <?= Yii::t('app', 'Company KGI') ?>
-                                    </a>
-                                </div>
-                                <div class="col-4 pr-0 pl-0 pim-type-tab-selected text-center">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
-                                        class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 2px;">
-                                    <?= Yii::t('app', 'Team KGI') ?>
-                                </div>
-                                <div class="col-4 pim-type-tab rounded-top-right">
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid"
-                                        class="no-underline-black">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self"
-                                            class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 3px;">
-                                        <?= Yii::t('app', 'Self KGI') ?>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4 pl-4">
-                            <?php
-                            if ($role > 3) {
-                            ?>
-                                <div class="col-12 <?= $waitForApprove["totalRequest"] > 0 ? 'approval-box' : 'noapproval-box' ?> text-center pr-3" style="margin-top:-3px;">
-                                    <?php
-                                    if ($waitForApprove["totalRequest"] > 0) {
-                                    ?>
-                                        <a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve"
-                                            style="text-decoration: none; color:#000000;">
-                                            <span class="approvals-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
-                                            <?= Yii::t('app', 'Approvals') ?>
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approvals.svg"
-                                                class="first-layer-icon pull-right" style="margin-top:-2px;">
-                                        </a>
-                                    <?php
-                                    } else { ?>
-                                        <a style="text-decoration: none;color:#2D7F06;">
-                                            <span class="noapprovals-num mr-2"><?= $waitForApprove["totalRequest"] ?></span>
-                                            <?= Yii::t('app', 'No Approvals') ?>
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/check.svg"
-                                                class="first-layer-icon pull-right" style="margin-top:-2px;">
-                                        </a>
-                                    <?php
-                                    }
 
-                                    ?>
-                                </div>
-                            <?php
-                            }
-                            ?>
+                        <div class="col-4 pl-4">
+
                         </div>
                     </div>
                 </div>
