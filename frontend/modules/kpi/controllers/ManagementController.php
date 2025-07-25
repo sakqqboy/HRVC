@@ -675,13 +675,13 @@ class ManagementController extends Controller
     }
     public function actionUpdateKpi()
     {
-          throw new Exception(print_r($_POST,true));   
+        //   throw new Exception(print_r($_POST,true));   
         $data = [
             'kpiId' => $_POST["kpiId"],
             'kpiName' => $_POST["kpiName"],
             'company' => $_POST["companyId"],
             'branch' => $_POST["branch"],
-            'unit' => $_POST["unit"],
+            'unit' => $_POST["unitId"],
             'amount' => $_POST["amount"],
             'month' => $_POST["month"],
             'year' => $_POST["year"],
