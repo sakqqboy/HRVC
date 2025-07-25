@@ -294,6 +294,8 @@ class KgiTeamController extends Controller
 			$countAllCompany = count($allCompany);
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$employeeCompanyId = $employee["companyId"];
 
 		//throw new Exception($role);
 		// throw new Exception(print_r($teamKgis,true));
@@ -317,7 +319,8 @@ class KgiTeamController extends Controller
 			"month" => null,
 			"status" => null,
 			"year" => null,
-			"waitForApprove" => $waitForApprove
+			"waitForApprove" => $waitForApprove,
+			"employeeCompanyId" => $employeeCompanyId
 		]);
 	}
 	public function actionSearchKgiTeam()

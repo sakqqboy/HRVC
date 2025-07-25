@@ -96,8 +96,7 @@ use frontend\models\hrvc\Team;
     }
     ?>
 </select>
-<select class="form-select font-size-12 <?= $status != "" ? 'select-pimselect' : 'select-pim' ?>" id="status-filter"
-    onchange="applySelectStyle(this)">
+<select class="form-select font-size-12 <?= $status != "" ? 'select-pimselect' : 'select-pim' ?>" id="status-filter" onchange="applySelectStyle(this)">
     <?php
     if (isset($status) && $status != "") {
         if ($status == 1) {
