@@ -644,29 +644,44 @@ class ManagementController extends Controller
         $companies = curl_exec($api);
         $companies = json_decode($companies, true);
 
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
         curl_close($api);
+        
+        $countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
         // return json_encode($kpiId);
         return $this->render('kpi_from', [
-            "data" => $kpi,
+            "statusform" =>  "update",
             "role" => $role,
-            "units" => $units,
             "companies" => $companies,
+            "units" => $units,
+            "data" => $kpi,
             "kpiBranchText" => $kpiBranchText,
             "kpiDepartmentText" => $kpiDepartmentText,
             "kpiTeamText" => $kpiTeamText,
             "kpiId" => $kpiId,
             "lastUrl" => Yii::$app->request->referrer,
-            "statusform" =>  "update"
+            "allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
+            
         ]);
     }
     public function actionUpdateKpi()
     {
+          throw new Exception(print_r($_POST,true));   
         $data = [
             'kpiId' => $_POST["kpiId"],
             'kpiName' => $_POST["kpiName"],
             'company' => $_POST["companyId"],
             'branch' => $_POST["branch"],
-            'unit' => $_POST["unitId"],
+            'unit' => $_POST["unit"],
             'amount' => $_POST["amount"],
             'month' => $_POST["month"],
             'year' => $_POST["year"],
@@ -685,7 +700,7 @@ class ManagementController extends Controller
             'lastUrl' => $_POST["lastUrl"],
         ];
 
-        //  throw new Exception(print_r($data,true));   
+        //  throw new Exception(print_r($_POST,true));   
 
         $isManager = UserRole::isManager();
         if (isset($_POST["kpiId"]) && $_POST["kpiId"] != "") {
