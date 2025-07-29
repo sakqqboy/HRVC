@@ -511,7 +511,7 @@ $this->title = 'KGI Grid View';
                                             <a class="pim-btn-delete" data-bs-toggle="modal" data-bs-target="#delete-kgi"
                                                 onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
                                                 onmouseover="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                                                onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                                                onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg'">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg"
                                                     class="pim-action-icon">
                                             </a>

@@ -1045,76 +1045,45 @@
 
 .yenlow-teamshow {
 	font-weight: 390;
-	font-size: 13px;
 	border: 0.5px solid #d3d325;
 	border: 0.1px solid #000000;
 	background-color: #FFFAED;
 	border-radius: 26.5px;
-	letter-spacing: 0.5px;
-	padding-left: 3px;
-	padding-top: 2px;
-	padding-bottom: 2px;
 
 }
 
 
 .over-teamshow {
 	font-weight: 400;
-	font-size: 13px;
 	color: #000000;
 	border: 0.5px solid #E05757;
 	background-color: #FFD6D6;
 	border-radius: 26.5px;
-	letter-spacing: 0.5px;
-	padding-left: 5px;
-	padding-right: 0px;
-	padding-top: 2px;
-	padding-bottom: 2px;
 
 }
 
 .inprogress-teamshow {
 	font-weight: 400;
-	font-size: 13px;
 	color: #000000;
 	border: 0.5px solid #2580D3;
 	background-color: #D7EBFF;
-	;
 	border-radius: 26.5px;
-	letter-spacing: 0.5px;
-	padding-left: 5px;
-	padding-right: 0px;
-	padding-top: 2px;
-	padding-bottom: 2px;
 }
 
 .complete-teamshow {
 	font-weight: 400;
-	font-size: 13px;
 	color: #000000;
 	border: 0.5px solid #2D7F06;
 	background-color: #DEFFDF;
-	border-radius: 26.5px;
-	letter-spacing: 0.5px;
-	padding-left: 5px;
-	padding-right: 0px;
-	padding-top: 2px;
-	padding-bottom: 2px;
 }
 
 .disable-teamshow {
 	font-weight: 400;
-	font-size: 13px;
 	color: black;
-	border: 0.5px solid #C3C3C3;
+	/* border: 0.5px solid #C3C3C3; */
 	background-color: #fff;
 	border: 0.1px solid #30313D;
 	border-radius: 26.5px;
-	letter-spacing: 0.5px;
-	padding-left: 5px;
-	padding-right: 0px;
-	padding-top: 2px;
-	padding-bottom: 2px;
 }
 
 .info-assignNew {
@@ -1123,10 +1092,6 @@
 	color: black;
 	background-color: #EDF5FF;
 	border-radius: 26.5px;
-	letter-spacing: 0.5px;
-	padding-left: 5px;
-	padding-top: 2px;
-	padding-bottom: 2px;
 }
 
 .bg-disable-dark {
@@ -1481,7 +1446,6 @@
 	border-radius: 100%;
 	border: #FFFFFF solid 0.5px;
 	background-color: #E05757;
-	padding-top: 3px;
 }
 
 
@@ -1568,18 +1532,17 @@
 
 
 .team-wrapper {
-	height: 32px;
+	height: 20px;
 	max-width: 150px;
 	display: inline-flex;
 	align-items: center;
-	gap: 8px;
-	padding-left: 5px;
-	padding-right: 5px;
+	font-size: 10px;
+	padding: 3px 5px 3px 1px;
 }
 
 .team-wrapper img {
-	width: 19px;
-	height: 19px;
+	width: 15px;
+	height: 15px;
 	vertical-align: middle;
 	object-fit: cover;
 }
@@ -1644,9 +1607,9 @@
 
 /* Icon inside the circle */
 .team-icon {
-	width: 19px;
-	height: 19px;
-	border-radius: 50%;
+	width: 18px;
+	height: 18px;
+	border-radius: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;

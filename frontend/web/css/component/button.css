@@ -201,20 +201,33 @@
 }
 
 .pim-btn-disable {
-    display: flex;
-    height: 20px;
-    padding-left: 3.5px;
-    padding-right: 3.5px;
-    border: #000 solid thin;
-    border-radius: 3px;
-    align-items: center;
-    justify-items: center;
-    font-size: 10px;
-    font-weight: 500;
-    background-color: #818181;
-    color: #000;
+    /* border: #000 solid thin;
+    
+    
     border: 0.5px solid #CBD5E1;
+    text-align: center;
+    padding: 2px 3px 2px 3px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 15.479px;
+    letter-spacing: -0.21px;
+    text-transform: capitalize; */
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    background-color: #818181;
+    font-size: 11px;
+    border-radius: 3px;
     text-decoration: none;
+    color: #000;
+    height: 23px;
+    width: 62px;
+    cursor: pointer;
 }
 
 .pim-btn {
