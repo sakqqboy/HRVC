@@ -248,12 +248,12 @@ if (!$nextCheckDate) {
                                             <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
                                         </div>
                                     <?php }
-                                    if (count($kgiBranch) >= 1) { ?>
+                                    if (count($kgiBranch) >= 2) { ?>
                                         <div class="cycle-current-branch" style="width: 35px; height: 35px;margin-left:-25px;">
                                             <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
                                         </div>
                                     <?php }
-                                    if (count($kgiBranch) >= 1) { ?>
+                                    if (count($kgiBranch) >= 3) { ?>
                                         <div class="cycle-current-branch" style="width: 35px; height: 35px;margin-left:-25px;">
                                             <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
                                         </div>
@@ -291,12 +291,12 @@ if (!$nextCheckDate) {
                                             <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
                                         </div>
                                     <?php }
-                                    if ($totalDepartment >= 1) { ?>
+                                    if ($totalDepartment >= 2) { ?>
                                         <div class="cycle-current-department" style="width: 35px; height: 35px;margin-left:-25px;">
                                             <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
                                         </div>
                                     <?php }
-                                    if ($totalDepartment >= 1) { ?>
+                                    if ($totalDepartment >= 3) { ?>
                                         <div class="cycle-current-department" style="width: 35px; height: 35px;margin-left:-25px;">
                                             <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
                                         </div>
