@@ -2332,4 +2332,38 @@ class EmployeeController extends Controller
         Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
         return $this->renderPartial('role');
     }
+
+    public function actionCompanyMultiBranch()
+	{
+		$companyId = $_POST["companyId"];
+		$acType = $_POST["acType"];
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
+		$branches = curl_exec($api);
+		$branches = json_decode($branches, true);
+		if ($acType == "create") {
+			$branchText = $this->renderAjax('multi_branch', ["branches" => $branches]);
+		} else {
+			$kpiId = $_POST["kpiId"];
+			$branchText = $this->renderAjax('multi_branch_update', [
+				"branches" => $branches,
+				"kpiId" => $kpiId
+			]);
+		}
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-group/company-kpi-group?companyId=' . $companyId);
+		$kpiGroups = curl_exec($api);
+		$kpiGroups = json_decode($kpiGroups, true);
+		$kpiGroup = $this->renderAjax('kpi_group', [
+			"kpiGroup" => $kpiGroups,
+			"kpiId" => 0
+		]);
+
+		curl_close($api);
+		$res["status"] = true;
+		$res["branchText"] = $branchText;
+		$res["kpiGroup"] = $kpiGroup;
+		return json_encode($res);
+	}
 }

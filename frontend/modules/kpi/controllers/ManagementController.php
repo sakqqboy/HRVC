@@ -655,7 +655,7 @@ class ManagementController extends Controller
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
 		$totalBranch = Branch::totalBranch();
-        // return json_encode($kpiId);
+        // return json_encode($kpi);
         return $this->render('kpi_from', [
             "statusform" =>  "update",
             "role" => $role,
@@ -676,29 +676,29 @@ class ManagementController extends Controller
     public function actionUpdateKpi()
     {
         //   throw new Exception(print_r($_POST,true));   
-        $data = [
-            'kpiId' => $_POST["kpiId"],
-            'kpiName' => $_POST["kpiName"],
-            'company' => $_POST["companyId"],
-            'branch' => $_POST["branch"],
-            'unit' => $_POST["unitId"],
-            'amount' => $_POST["amount"],
-            'month' => $_POST["month"],
-            'year' => $_POST["year"],
-            'detail' => $_POST["detail"],
-            'amountType' => $_POST["amountType"],
-            'code' => $_POST["code"],
-            'quanRatio' => $_POST["quantRatio"],
-            'nextCheckDate' => $_POST["nextCheckDate"],
-            'fromDate' => $_POST["fromDate"],
-            'toDate' => $_POST["toDate"],
-            'department' => $_POST["department"],
-            'team' => $_POST["team"],
-            'priority' => $_POST["priority"],
-            'status' => $_POST["status"],
-            'result' => $_POST["result"],
-            'lastUrl' => $_POST["lastUrl"],
-        ];
+        // $data = [
+        //     'kpiId' => $_POST["kpiId"],
+        //     'kpiName' => $_POST["kpiName"],
+        //     'company' => $_POST["companyId"],
+        //     'branch' => $_POST["branch"],
+        //     'unit' => $_POST["unitId"],
+        //     'amount' => $_POST["amount"],
+        //     'month' => $_POST["month"],
+        //     'year' => $_POST["year"],
+        //     'detail' => $_POST["detail"],
+        //     'amountType' => $_POST["amountType"],
+        //     'code' => $_POST["code"],
+        //     'quanRatio' => $_POST["quantRatio"],
+        //     'nextCheckDate' => $_POST["nextCheckDate"],
+        //     'fromDate' => $_POST["fromDate"],
+        //     'toDate' => $_POST["toDate"],
+        //     'department' => $_POST["department"],
+        //     'team' => $_POST["team"],
+        //     'priority' => $_POST["priority"],
+        //     'status' => $_POST["status"],
+        //     'result' => $_POST["result"],
+        //     'lastUrl' => $_POST["url"],
+        // ];
 
         //  throw new Exception(print_r($_POST,true));   
 
@@ -772,7 +772,7 @@ class ManagementController extends Controller
                 if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
                     $this->savekpiTeam($_POST["team"], $kpiId, $_POST["month"], $_POST["year"]);
                 }
-                return $this->redirect($_POST["lastUrl"]);
+                return $this->redirect($_POST["url"]);
             }
         }
         // Yii::$app->getUrlManager()->setBaseUrl(Yii::$app->request->referrer);
@@ -1226,6 +1226,7 @@ class ManagementController extends Controller
         $textTeam = '';
         $branchDepartment = [];
         $acType = $_POST["acType"];
+        //throw new exception(print_r($_POST["multiBranch"], true));
         if (isset($_POST["multiBranch"]) && count($_POST["multiBranch"]) > 0) {
             foreach ($_POST["multiBranch"] as $branchId) :
                 if (isset($_POST["multiDepartment"]) && count($_POST["multiDepartment"]) > 0) {
@@ -1233,6 +1234,7 @@ class ManagementController extends Controller
                         if ($branchId != '') {
                             $department = Department::find()
                                 ->where(["departmentId" => $departmentId, "branchId" => $branchId])
+                                ->andWhere("status!=99")
                                 ->one();
                             if (isset($department) && !empty($department)) {
                                 $branchDepartment[$branchId][$departmentId] = $departmentId;
@@ -1242,6 +1244,7 @@ class ManagementController extends Controller
                 }
             endforeach;
         }
+        //throw new exception(print_r($branchDepartment, true));
         if (count($branchDepartment) > 0) {
 
             foreach ($branchDepartment as $branchId => $departments) :
@@ -1249,6 +1252,7 @@ class ManagementController extends Controller
                 foreach ($departments as $dId => $id) :
                     $teams = Team::find()
                         ->where(["departmentId" => $dId])
+                        ->andWhere("status!=99")
                         ->asArray()
                         ->orderBy("teamName")
                         ->all();

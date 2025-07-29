@@ -5,6 +5,7 @@ use frontend\models\hrvc\Department;
 use frontend\models\hrvc\KpiDepartment;
 
 if (isset($d) && count($d) > 0) {
+		$total = 0;
 	foreach ($d as $branchId => $department) : ?>
 <div class="col-12 multi-select-head pl-10 pt-10 pb-3">
     <?=
@@ -27,6 +28,7 @@ if (isset($d) && count($d) > 0) {
 				$has = KpiDepartment::isInThisKpi($departmentId, $kpiId);
 				if ($has == 1) {
 					$check = 'checked';
+					$total++;
 				}
 			?>
 <div class="col-12 multi-select pl-30 pt-5 pb-5">
@@ -40,3 +42,5 @@ if (isset($d) && count($d) > 0) {
 		endforeach;
 	endforeach;
 }
+?>
+<input type="hidden" id="totalDepartment" value="<?= isset($total) ? $total : 0 ?>">
