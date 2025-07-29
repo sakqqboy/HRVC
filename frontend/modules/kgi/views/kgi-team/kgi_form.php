@@ -197,7 +197,7 @@ if (!$nextCheckDate) {
 
             <div class="contrainer-body-detail mt-10">
                 <div class="row" style="--bs-gutter-x:0px;">
-                    <div class="col-lg-4 col-12 pr-20 border">
+                    <div class="col-lg-4 col-12 pr-20">
                         <div class="" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
