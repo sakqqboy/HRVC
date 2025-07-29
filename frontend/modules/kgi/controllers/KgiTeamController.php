@@ -459,7 +459,18 @@ class KgiTeamController extends Controller
 
 		$unit = Unit::find()->where(["unitId" => $kgi["unitId"]])->asArray()->one();
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
 		curl_close($api);
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
 		return $this->render('kgi_form', [
 			"kgi" => $kgi,
 			"data" => $kgiTeamDetail,
@@ -471,7 +482,10 @@ class KgiTeamController extends Controller
 			"unit"  => $unit,
 			"kgiTeamId"  => $kgiTeamId,
 			"statusform" =>  "update",
-			"url" => Yii::$app->request->referrer
+			"url" => Yii::$app->request->referrer,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 		//$res["kgiTeam"] = $kgiTeam;
 		//return json_encode($res);
