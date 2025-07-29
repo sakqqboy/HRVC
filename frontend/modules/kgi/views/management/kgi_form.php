@@ -37,62 +37,62 @@ $DueBehind = $targetAmount -  $result;
 ?>
 
 <style>
-    input[type="number"]::-webkit-outer-spin-button,
-    input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
-    input[type="number"] {
-        -moz-appearance: textfield;
-        /* สำหรับ Firefox */
-    }
+input[type="number"] {
+    -moz-appearance: textfield;
+    /* สำหรับ Firefox */
+}
 
-    /* เปลี่ยนสีข้อความของ select เมื่อเลือกแล้ว */
-    select.form-select {
-        color: var(--Helper-Text-Gray, #8A8A8A);
-    }
-
-
-    /* เมื่อเลือกแล้วให้ข้อความเป็นสี #30313D */
-    select.form-select:not([value=""]) {
-        color: <?= ($statusform == 'update') ? '#30313D' : 'var(--HRVC---Text-Black, #8A8A8A)';
-                ?>;
-    }
+/* เปลี่ยนสีข้อความของ select เมื่อเลือกแล้ว */
+select.form-select {
+    color: var(--Helper-Text-Gray, #8A8A8A);
+}
 
 
-    /* สไตล์เมื่อไม่ได้เลือก (ข้อความ placeholder) */
-    select.form-select {
-        color: var(--Helper-Text-Gray, #8A8A8A);
-        font-family: "SF Pro Display", sans-serif;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 20px;
-        text-transform: capitalize;
-    }
+/* เมื่อเลือกแล้วให้ข้อความเป็นสี #30313D */
+select.form-select:not([value=""]) {
+    color: <?=($statusform=='update') ? '#30313D': 'var(--HRVC---Text-Black, #8A8A8A)';
+    ?>;
+}
 
-    /* สไตล์เมื่อเลือกตัวเลือกแล้ว */
-    select.form-select option:checked {
-        color: var(--HRVC---Text-Black, #30313D);
-        font-family: "SF Pro Display";
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 20px;
-    }
 
-    /* เพิ่มความสวยงามเมื่อตัวเลือกถูกโฟกัส */
-    select.form-select:focus {
-        color: var(--HRVC---Text-Black, #30313D);
-        font-weight: 500;
-    }
+/* สไตล์เมื่อไม่ได้เลือก (ข้อความ placeholder) */
+select.form-select {
+    color: var(--Helper-Text-Gray, #8A8A8A);
+    font-family: "SF Pro Display", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    text-transform: capitalize;
+}
 
-    /* เมื่อ option เป็น disabled (กรณีเลือกแล้วจะไม่สามารถเลือกได้) */
-    select.form-select option:disabled {
-        color: var(--Helper-Text-Gray, #8A8A8A);
-        font-weight: 500;
-    }
+/* สไตล์เมื่อเลือกตัวเลือกแล้ว */
+select.form-select option:checked {
+    color: var(--HRVC---Text-Black, #30313D);
+    font-family: "SF Pro Display";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+/* เพิ่มความสวยงามเมื่อตัวเลือกถูกโฟกัส */
+select.form-select:focus {
+    color: var(--HRVC---Text-Black, #30313D);
+    font-weight: 500;
+}
+
+/* เมื่อ option เป็น disabled (กรณีเลือกแล้วจะไม่สามารถเลือกได้) */
+select.form-select option:disabled {
+    color: var(--Helper-Text-Gray, #8A8A8A);
+    font-weight: 500;
+}
 </style>
 
 <!-- ลิงก์ไปยัง CSS ของ flatpickr -->
@@ -102,7 +102,8 @@ $DueBehind = $targetAmount -  $result;
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <div class="col-12 mt-70 pt-20">
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="pim-head-icon mr-11 mt-2">
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg"
+            class="pim-head-icon mr-11 mt-2">
         <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
 
     </div>
@@ -126,9 +127,9 @@ $DueBehind = $targetAmount -  $result;
                     </a>
                     <text class="pim-name-title">
                         <?php if ($statusform == 'update') { ?>
-                            <?= Yii::t('app', 'Update Key Goal Indicator') ?>
+                        <?= Yii::t('app', 'Update Key Goal Indicator') ?>
                         <?php } else { ?>
-                            <?= Yii::t('app', 'Create Key Goal Indicator') ?>
+                        <?= Yii::t('app', 'Create Key Goal Indicator') ?>
                         <?php } ?>
                     </text>
                 </div>
@@ -168,14 +169,15 @@ $DueBehind = $targetAmount -  $result;
                                     stroke-dasharray="<?= $percentage ?>, 100" />
 
                                 <!-- Percentage text in the middle -->
-                                <text x="18" y="20.35" text-anchor="middle" dominant-baseline="middle" class="percentage"
-                                    style="font-size: 8px; font-weight: bold; fill: #333;">
+                                <text x="18" y="20.35" text-anchor="middle" dominant-baseline="middle"
+                                    class="percentage" style="font-size: 8px; font-weight: bold; fill: #333;">
                                     <?= $percentage ?>%
                                 </text>
                             </svg>
 
                         </div>
-                        <div style="width: 1px; background-color: #BBCDDE; height: 51px;" class="mr-10 ml-10 d-flex align-items-center border align-self-center"></div>
+                        <div style="width: 1px; background-color: #BBCDDE; height: 51px;"
+                            class="mr-10 ml-10 d-flex align-items-center border align-self-center"></div>
                         <div class="d-flex align-items-center align-self-center">
                             <img src="<?= Yii::$app->homeUrl ?><?= isset($data['result']) ? 'image/result-blue.svg' : 'images/icons/Settings/reward.svg' ?>"
                                 style="width: 40px; height: 40px;">
@@ -190,7 +192,8 @@ $DueBehind = $targetAmount -  $result;
             <div class="contrainer-body-detail mt-10">
                 <div class="row" style="--bs-gutter-x:0px;">
                     <div class="col-lg-4 col-12 pr-30">
-                        <div class="" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                        <div class=""
+                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
                                 Name <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
@@ -221,16 +224,17 @@ $DueBehind = $targetAmount -  $result;
                                     foreach ($companies as $company) :
                                         $selected = (isset($data['companyId']) && $data['companyId'] == $company["companyId"]) ? 'selected' : '';
                                 ?>
-                                        <option value="<?= $company["companyId"] ?>" <?= $selected ?>>
-                                            <?= $company["companyName"] ?>
-                                        </option>
+                                <option value="<?= $company["companyId"] ?>" <?= $selected ?>>
+                                    <?= $company["companyName"] ?>
+                                </option>
                                 <?php
                                     endforeach;
                                 }
                                 ?>
                             </select>
                         </div>
-                        <div class="form-group mt-37" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                        <div class="form-group mt-37"
+                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="my-input">
                                 <span class="text-danger">* </span>
                                 <?= Yii::t('app', 'Select Branch/s ') ?>
@@ -239,9 +243,12 @@ $DueBehind = $targetAmount -  $result;
                                     title="<?= Yii::t('app', 'Select the relevant branches where this indicator will be monitored. You can choose multiple branches to track Performance achievement across different locations') ?>"
                                     alt="Help Icon">
                             </label>
-                            <div class="form-control d-flex justify-align-content-start" id="multi-branch" style="width: 100%">
-                                <span id="multi-branch-text" class="align-content-center"><?= Yii::t('app', 'Select Branches') ?></span>
-                                <div class="flex-grow-1 circle-container pl-15 justify-content-end" id="image-branches" data-type="branch" style="display: flex;
+                            <div class="form-control d-flex justify-align-content-start" id="multi-branch"
+                                style="width: 100%">
+                                <span id="multi-branch-text"
+                                    class="align-content-center"><?= Yii::t('app', 'Select Branches') ?></span>
+                                <div class="flex-grow-1 circle-container pl-15 justify-content-end" id="image-branches"
+                                    data-type="branch" style="display: flex;
                                     align-items: center;
                                     gap: 5px;">
                                     <div class="cycle-current-gray" id="img-branch-1">
@@ -253,8 +260,7 @@ $DueBehind = $targetAmount -  $result;
                                     <div class="cycle-current-gray" id="img-branch-3">
                                         <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
                                     </div>
-                                    <div class="cycle-current-gray" style="color: #000;"
-                                        id="branch-selected-count">
+                                    <div class="cycle-current-gray" style="color: #000;" id="branch-selected-count">
                                         00
                                     </div>
                                     <i class="toggle-icon-branch fa fa-angle-down pull-right" aria-hidden="true"></i>
@@ -266,14 +272,15 @@ $DueBehind = $targetAmount -  $result;
                                     left: 0; width: 100%; z-index: 999; background-color: white; 
                                     border: 1px solid #ced4da; padding: 10px; display: none;">
                                 <?php if ($statusform == 'create'): ?>
-                                    <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
+                                <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
                                 <?php else: ?>
-                                    <?= $kgiBranchText; ?>
+                                <?= $kgiBranchText; ?>
                                 <?php endif; ?>
 
                             </div>
                         </div>
-                        <div class="form-group mt-37" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                        <div class="form-group mt-37"
+                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
                                 <?= Yii::t('app', 'Select Department/s') ?>
@@ -282,11 +289,14 @@ $DueBehind = $targetAmount -  $result;
                                     title="<?= Yii::t('app', 'Choose the departments that will be responsible for this performance indicator. Multiple departments can be selected for cross-functional Performance tracking.') ?>"
                                     alt="Help Icon">
                             </label>
-                            <div class="form-control d-flex justify-align-content-start" id="multi-department" style="width: 100%">
-                                <span id="multi-department-text" class="align-content-center" style="flex-grow: 1;color: #8a8a8a;">
+                            <div class="form-control d-flex justify-align-content-start" id="multi-department"
+                                style="width: 100%">
+                                <span id="multi-department-text" class="align-content-center"
+                                    style="flex-grow: 1;color: #8a8a8a;">
                                     <?= Yii::t('app', 'Select Department') ?>
                                 </span>
-                                <div class="flex-grow-1 circle-container pl-15 justify-content-end" id="image-branches" data-type="branch" style="display: flex;
+                                <div class="flex-grow-1 circle-container pl-15 justify-content-end" id="image-branches"
+                                    data-type="branch" style="display: flex;
                                     align-items: center;
                                     gap: 5px;">
                                     <div class="cycle-current-gray" id="img-department-1">
@@ -298,24 +308,25 @@ $DueBehind = $targetAmount -  $result;
                                     <div class="cycle-current-gray" id="img-department-3">
                                         <img src="<?= Yii::$app->homeUrl ?>image/departments-black.svg" alt="icon">
                                     </div>
-                                    <div class="cycle-current-gray" style="color: #000;"
-                                        id="department-selected-count">
+                                    <div class="cycle-current-gray" style="color: #000;" id="department-selected-count">
                                         00
                                     </div>
-                                    <i class="toggle-icon-department fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                    <i class="toggle-icon-department fa fa-angle-down pull-right"
+                                        aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div class="col-12" <?php if ($statusform == 'update'): ?> id="show-multi-department-update"
                                 <?php else: ?> id="show-multi-department" <?php endif; ?> style="position: absolute; top: 82%; left: 0; width: 98%; z-index: 999; background-color: white; 
                             border: 1px solid #ced4da; padding: 10px; display: none;">
                                 <?php if ($statusform == 'create'): ?>
-                                    <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
+                                <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
                                 <?php else: ?>
-                                    <?= $kgiDepartmentText; ?>
+                                <?= $kgiDepartmentText; ?>
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <div class="form-group mt-27" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                        <div class="form-group mt-27"
+                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
                                 <?= Yii::t('app', 'Select Team/s') ?>
@@ -324,7 +335,8 @@ $DueBehind = $targetAmount -  $result;
                                     title="<?= Yii::t('app', 'Choose the Team that will be responsible for achieving this performance indicator. Multiple Teams can be selected for collaborative performance achievement.') ?>"
                                     alt="Help Icon">
                             </label>
-                            <div class="form-control d-flex justify-align-content-start" id="multi-team" style="width: 100%;">
+                            <div class="form-control d-flex justify-align-content-start" id="multi-team"
+                                style="width: 100%;">
                                 <span id="multi-team-text" class="align-content-center" style="flex-grow: 1;
                                        color: #8a8a8a;">
                                     <?= Yii::t('app', 'Select Team') ?>
@@ -342,8 +354,7 @@ $DueBehind = $targetAmount -  $result;
                                     <div class="cycle-current-gray" id="img-team-3">
                                         <img src="<?= Yii::$app->homeUrl ?>image/teams-black.svg" alt="icon">
                                     </div>
-                                    <div class="cycle-current-gray" style="color: #000;"
-                                        id="team-selected-count">
+                                    <div class="cycle-current-gray" style="color: #000;" id="team-selected-count">
                                         00
                                     </div>
                                     <i class="toggle-icon-team fa fa-angle-down pull-right" aria-hidden="true"></i>
@@ -354,9 +365,9 @@ $DueBehind = $targetAmount -  $result;
                                 <?php else: ?> id="show-multi-team" <?php endif; ?> style="position: absolute; top: 82%; left: 0; width: 98%; z-index: 999; background-color: white; 
                            border: 1px solid #ced4da; padding: 10px; display: none;">
                                 <?php if ($statusform == 'create'): ?>
-                                    <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
+                                <!-- สำหรับโหมด create ให้แสดงกล่องเปล่า -->
                                 <?php else: ?>
-                                    <?= $kgiTeamText; ?>
+                                <?= $kgiTeamText; ?>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -380,7 +391,8 @@ $DueBehind = $targetAmount -  $result;
                         </div>
                     </div>
                     <div class="col-lg-4 pr-20  col-12">
-                        <div class="" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                        <div class=""
+                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
                                 Update Interval <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
@@ -404,11 +416,11 @@ $DueBehind = $targetAmount -  $result;
                                             }
 
                                     ?>
-                                            <div id="unit-<?= $unit['unitId'] ?>"
-                                                class="col-3 font-size-12 <?= $activeClass ?> <?= $radius ?> align-content-center text-center"
-                                                onclick="selectUnit(<?= $unit['unitId'] ?>)">
-                                                <?= Yii::t('app', $unit["unitName"]) ?>
-                                            </div>
+                                    <div id="unit-<?= $unit['unitId'] ?>"
+                                        class="col-3 font-size-12 <?= $activeClass ?> <?= $radius ?> align-content-center text-center"
+                                        onclick="selectUnit(<?= $unit['unitId'] ?>)">
+                                        <?= Yii::t('app', $unit["unitName"]) ?>
+                                    </div>
                                     <?php
                                             $i++;
                                         endforeach;
@@ -421,7 +433,8 @@ $DueBehind = $targetAmount -  $result;
                                 <input type="hidden" value="<?= $unitId ?>" id="previousUnit" required>
                             </div>
                         </div>
-                        <div class="form-group mt-37" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                        <div class="form-group mt-37"
+                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
                                 <?= Yii::t('app', 'Month & Year') ?>
@@ -472,7 +485,8 @@ $DueBehind = $targetAmount -  $result;
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group mt-37" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                        <div class="form-group mt-37"
+                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
                                 <?= Yii::t('app', 'Due Term') ?>
@@ -484,14 +498,18 @@ $DueBehind = $targetAmount -  $result;
                             <div class="col-12" id="img-due-term">
                                 <div class="select-form-pim" id="multi-due-term" onclick="toggleCalendar()">
                                     <span class="calendar-due mr-3" id="calendar-dueterm">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="from" class="calendar-due-image">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="-" class="calendar-due-image">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to" class="calendar-due-image">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="from"
+                                            class="calendar-due-image">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="-"
+                                            class="calendar-due-image">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to"
+                                            class="calendar-due-image">
                                     </span>
                                     <span class="d-flex" id="due-term-default">
                                         Select the Due Term Start & End Date
                                     </span>
-                                    <i class="fa fa-angle-down" aria-hidden="true" style="position: absolute;right:0;margin-right:5px;"></i>
+                                    <i class="fa fa-angle-down" aria-hidden="true"
+                                        style="position: absolute;right:0;margin-right:5px;"></i>
                                 </div>
 
                             </div>
@@ -511,7 +529,8 @@ $DueBehind = $targetAmount -  $result;
                                 <div id="endDatePicker"></div>
                             </div>
                         </div>
-                        <div class="form-group mt-37" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                        <div class="form-group mt-37"
+                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
                                 <?= Yii::t('app', 'Target Due Update Date') ?>
@@ -533,17 +552,20 @@ $DueBehind = $targetAmount -  $result;
                                     <span class="d-flex" id="due-update-default">
                                         Select the Last Update Date
                                     </span>
-                                    <i class="fa fa-angle-down" aria-hidden="true" style="position: absolute;right:0;margin-right:15px;"></i>
+                                    <i class="fa fa-angle-down" aria-hidden="true"
+                                        style="position: absolute;right:0;margin-right:15px;"></i>
 
                                 </div>
                             </div>
-                            <input type="hidden" id="nextDate" name="nextCheckDate" value="<?= isset($data['nextCheck']) ? $data['nextCheck'] : '' ?>">
+                            <input type="hidden" id="nextDate" name="nextCheckDate"
+                                value="<?= isset($data['nextCheck']) ? $data['nextCheck'] : '' ?>">
                             <div id="calendar-due-update"
                                 style="position: absolute; margin-top: 75px; padding: 10px; border: 1px solid rgb(221, 221, 221); border-radius: 10px; background: rgb(255, 255, 255); width: 100%; z-index: 1; display: none; justify-content: center; align-items: center;">
                                 <div id="updateDatePicker" style="display: none;"></div>
                             </div>
                         </div>
-                        <div class="form-group mt-30" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                        <div class="form-group mt-30"
+                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
                                 <?= Yii::t('app', 'Quant Ratio') ?>
@@ -637,22 +659,23 @@ $DueBehind = $targetAmount -  $result;
                                 <div style="flex-grow: 1;">
                                     <span class="text-danger">* </span>
                                     <?= Yii::t('app', 'Result') ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                        data-placement="top" class="tootip-icon"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                        data-toggle="tooltip" data-placement="top" class="tootip-icon"
                                         title="<?= Yii::t('app', 'Historic update contains the update from the team and indivudials if you wish to use your own values, please toggle on Override to put custom numbers ') ?>"
                                         alt="Help Icon">
                                 </div>
                                 <?php
                                 if ($statusform == 'update') {
                                 ?>
-                                    <div class="updatehistory" class="updatehistory" style="text-align: right;cursor:pointer;"
-                                        data-bs-toggle="modal" data-bs-target="#update-history-popup"
-                                        onclick="javascript:kgiUpdateHistory(<?= $kgiId ?>)">
-                                        <?php if ($statusform == 'update') { ?>
-                                            <img
-                                                src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
-                                        <?php } ?>
-                                    </div>
+                                <div class="updatehistory" class="updatehistory"
+                                    style="text-align: right;cursor:pointer;" data-bs-toggle="modal"
+                                    data-bs-target="#update-history-popup"
+                                    onclick="javascript:kgiUpdateHistory(<?= $kgiId ?>)">
+                                    <?php if ($statusform == 'update') { ?>
+                                    <img
+                                        src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
+                                    <?php } ?>
+                                </div>
                                 <?php
                                 }
                                 ?>
@@ -675,28 +698,29 @@ $DueBehind = $targetAmount -  $result;
                             </div>
 
 
-                            <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                            <div
+                                style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
                                 <?php if ($statusform == 'update') { ?>
-                                    <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                        <label class="switch">
-                                            <input type="checkbox" id="historic-checkbox-kgi"
-                                                onchange="javascript:autoUpdateResult(<?= $kgiId ?>)">
-                                            <span class="slider round"></span>
-                                        </label>
-                                        <label class="sub-manage-create" id="historic-switch">
-                                            <?= Yii::t('app', 'Historic Update') ?>
-                                        </label>
-                                    </div>
-                                    <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                                        <label class="switch">
-                                            <input type="checkbox" id="override-checkbox-kgi" checked
-                                                onchange="javascript:overrideUpdate()">
-                                            <span class="slider round"></span>
-                                        </label>
-                                        <label class="sub-manage-create" id="override-switch">
-                                            <?= Yii::t('app', 'Override') ?>
-                                        </label>
-                                    </div>
+                                <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+                                    <label class="switch">
+                                        <input type="checkbox" id="historic-checkbox-kgi"
+                                            onchange="javascript:autoUpdateResult(<?= $kgiId ?>)">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <label class="sub-manage-create" id="historic-switch">
+                                        <?= Yii::t('app', 'Historic Update') ?>
+                                    </label>
+                                </div>
+                                <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+                                    <label class="switch">
+                                        <input type="checkbox" id="override-checkbox-kgi" checked
+                                            onchange="javascript:overrideUpdate()">
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <label class="sub-manage-create" id="override-switch">
+                                        <?= Yii::t('app', 'Override') ?>
+                                    </label>
+                                </div>
                                 <?php } ?>
                             </div>
                         </div>
@@ -708,53 +732,57 @@ $DueBehind = $targetAmount -  $result;
                                 <div style="flex-grow: 1;">
                                     <span class="text-danger">* </span>
                                     <?= Yii::t('app', 'Details') ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip" class="tootip-icon"
-                                        data-placement="top" title="<?= Yii::t('app', '') ?>">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                        data-toggle="tooltip" class="tootip-icon" data-placement="top"
+                                        title="<?= Yii::t('app', '') ?>">
                                 </div>
                             </label>
                             <textarea class="form-control" name="detail" style="height: 165px;"
                                 rows="4"><?= isset($data['detail']) ? $data['detail'] : '' ?></textarea>
                         </div>
 
-                        <div class="form-group <?= $statusform == 'update' ? 'mt-40' : 'mt-60' ?>" style="display: flex; align-items: flex-end; justify-content: flex-end; gap: 7px; width: 100%;">
+                        <div class="form-group <?= $statusform == 'update' ? 'mt-40' : 'mt-60' ?>"
+                            style="display: flex; align-items: flex-end; justify-content: flex-end; gap: 7px; width: 100%;">
                             <?php
                             // $status = 'create';
                             // $statusform = 'update';
 
                             if ($statusform == 'update') {
                             ?>
-                                <div class="" style="display: flex;
+                            <div class="" style="display: flex;
                                 min-width: 90px;
                                 height: 35px;
                                 flex-direction: column;
                                 align-items: flex-end;
                                 justify-content: center;
                                 ">
-                                    <label class="name-last-update">
-                                        Last Updated on
-                                    </label>
-                                    <text class="create-last-update">
-                                        <?= isset($data['lastUpdate']) ? $data['lastUpdate'] : '' ?>
-                                    </text>
-                                </div>
-                                <div>
-                                    <select
-                                        class="<?= $data['status'] == 1 ? 'select-create-status' : 'select-complete-status' ?>"
-                                        aria-label="Default select example" name="status" id="pim-status"
-                                        onchange="javascript:changeStatus('kgi')" required="">
-                                        <option value="1"
-                                            <?= isset($data['status']) && $data['status'] == 1 ? 'selected' : '' ?>> In-Progress
-                                        </option>
-                                        <option value="2"
-                                            <?= isset($data['status']) && $data['status'] == 2 ? 'selected' : '' ?>> Completed
-                                        </option>
-                                    </select>
+                                <label class="name-last-update">
+                                    Last Updated on
+                                </label>
+                                <text class="create-last-update">
+                                    <?= isset($data['lastUpdate']) ? $data['lastUpdate'] : '' ?>
+                                </text>
+                            </div>
+                            <div>
+                                <select
+                                    class="<?= $data['status'] == 1 ? 'select-create-status' : 'select-complete-status' ?>"
+                                    aria-label="Default select example" name="status" id="pim-status"
+                                    onchange="javascript:changeStatus('kgi')" required="">
+                                    <option value="1"
+                                        <?= isset($data['status']) && $data['status'] == 1 ? 'selected' : '' ?>>
+                                        In-Progress
+                                    </option>
+                                    <option value="2"
+                                        <?= isset($data['status']) && $data['status'] == 2 ? 'selected' : '' ?>>
+                                        Completed
+                                    </option>
+                                </select>
 
-                                </div>
+                            </div>
                             <?php
                             } else {
                             ?>
-                                <input type="hidden" name="status" value='1'>
+                            <input type="hidden" name="status" value='1'>
                             <?php } ?>
                             <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="btn-create-cancle"
                                 style="width: 70px;text-decoration: none;height: 35px;font-size:14px !important;">
@@ -763,18 +791,20 @@ $DueBehind = $targetAmount -  $result;
                             <?php
                             if ($statusform == 'update') {
                             ?>
-                                <button type="submit" class="btn-create-update" style="width: 80px;height: 35px;font-size:14px !important;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/updatebtn-white.svg" alt="LinkedIn"
-                                        style="width: 16px; height: 16px;">
-                                    <?= Yii::t('app', 'Update') ?>
-                                </button>
+                            <button type="submit" class="btn-create-update"
+                                style="width: 80px;height: 35px;font-size:14px !important;">
+                                <img src="<?= Yii::$app->homeUrl ?>image/updatebtn-white.svg" alt="LinkedIn"
+                                    style="width: 16px; height: 16px;">
+                                <?= Yii::t('app', 'Update') ?>
+                            </button>
                             <?php } else { ?>
-                                <!-- ปรับให้ปุ่มนี้เป็น type="submit" -->
-                                <button type="submit" class="btn-create-update" style="width:80px;text-decoration: none;height: 35px;font-size:14px !important;">
-                                    <?= Yii::t('app', 'Create') ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>image/create-btn-white.svg" alt="LinkedIn"
-                                        style="width: 16px; height: 16px;">
-                                </button>
+                            <!-- ปรับให้ปุ่มนี้เป็น type="submit" -->
+                            <button type="submit" class="btn-create-update"
+                                style="width:80px;text-decoration: none;height: 35px;font-size:14px !important;">
+                                <?= Yii::t('app', 'Create') ?>
+                                <img src="<?= Yii::$app->homeUrl ?>image/create-btn-white.svg" alt="LinkedIn"
+                                    style="width: 16px; height: 16px;">
+                            </button>
                             <?php } ?>
                         </div>
                     </div>
@@ -788,13 +818,13 @@ $DueBehind = $targetAmount -  $result;
     <?php if ($statusform == 'update') {
         //throw new exception(print_r($data, true));
     ?>
-        <input type="hidden" value="update" id="acType">
-        <input type="hidden" value="<?= $data["priority"] ?>" id="priority">
-        <input type="hidden" value="<?= isset($url) ? $url : '' ?>" name="url">
+    <input type="hidden" value="update" id="acType">
+    <input type="hidden" value="<?= $data["priority"] ?>" id="priority">
+    <input type="hidden" value="<?= isset($url) ? $url : '' ?>" name="url">
     <?php
     } else {
     ?>
-        <input type="hidden" value="create" id="acType">
+    <input type="hidden" value="create" id="acType">
 
     <?php } ?>
     <?php ActiveForm::end(); ?>
@@ -803,66 +833,67 @@ $DueBehind = $targetAmount -  $result;
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            var statusform = '<?= $statusform ?>';
-            if (statusform === 'update') {
-                var pri = $("#priority").val();
-                companyMultiBrachUpdate();
-                branchMultiDepartmentUpdate();
-                //loadDepartment();
-                var checkedBranchIds = [];
-                var checkedDepartmentIds = [];
-                $('input[name="branch[]"]:checked').each(function() {
-                    checkedBranchIds.push($(this).val());
-                });
-                $('input[name="department[]"]:checked').each(function() {
-                    checkedDepartmentIds.push($(this).val());
-                });
-                checkedBranchIds.forEach(function(branchId) {
-                    departmentMultiTeamUpdate(branchId);
-                });
-                multiteamKgi();
-                // }
-                $("#priority-update").val(pri);
-                let isSubmittingUpdate = false; // ป้องกัน submit ซ้ำ
-                $("#update-kgi").on("beforeSubmit", function(event) {
-                    if (isSubmittingUpdate) {
-                        return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
-                    }
-                    isSubmittingUpdate = true;
-                    if (!validateFormKgiUpdate()) {
-                        isSubmittingUpdate = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
-                        return false;
-                    }
-                    return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
-                });
-            }
-            // ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
-            function updatePlaceholderColor(selector) {
-                $(selector).on('change', function() {
-                    $(this).css('color', $(this).val() !== "" ? '#30313D' : 'var(--Helper-Text-Gray, #8A8A8A)');
-                });
-            }
-
-            // เรียกใช้งานฟังก์ชันกับ select หลายตัวพร้อมกัน
-            updatePlaceholderColor('#companyId');
-            updatePlaceholderColor('#quantRatio-create');
-            updatePlaceholderColor('#amountType-create');
-            updatePlaceholderColor('#code-create');
-
-            $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
-
-            let isSubmitting = false; // ป้องกัน submit ซ้ำ
-            $("#create-kgi").on("beforeSubmit", function(event) {
-                if (isSubmitting) {
+    $(document).ready(function() {
+        var statusform = '<?= $statusform ?>';
+        if (statusform === 'update') {
+            var pri = $("#priority").val();
+            companyMultiBrachUpdate();
+            branchMultiDepartmentUpdate();
+            //loadDepartment();
+            var checkedBranchIds = [];
+            var checkedDepartmentIds = [];
+            $('input[name="branch[]"]:checked').each(function() {
+                checkedBranchIds.push($(this).val());
+            });
+            $('input[name="department[]"]:checked').each(function() {
+                checkedDepartmentIds.push($(this).val());
+            });
+            checkedBranchIds.forEach(function(branchId) {
+                departmentMultiTeamUpdate(branchId);
+            });
+            multiteamKgi();
+            // }
+            $("#priority-update").val(pri);
+            let isSubmittingUpdate = false; // ป้องกัน submit ซ้ำ
+            $("#update-kgi").on("beforeSubmit", function(event) {
+                if (isSubmittingUpdate) {
                     return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
                 }
-                isSubmitting = true;
-                if (!validateFormKgi()) {
-                    isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+                isSubmittingUpdate = true;
+                if (!validateFormKgiUpdate()) {
+                    isSubmittingUpdate = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
                     return false;
                 }
                 return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
             });
+        }
+        // ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
+        function updatePlaceholderColor(selector) {
+            $(selector).on('change', function() {
+                $(this).css('color', $(this).val() !== "" ? '#30313D' :
+                    'var(--Helper-Text-Gray, #8A8A8A)');
+            });
+        }
+
+        // เรียกใช้งานฟังก์ชันกับ select หลายตัวพร้อมกัน
+        updatePlaceholderColor('#companyId');
+        updatePlaceholderColor('#quantRatio-create');
+        updatePlaceholderColor('#amountType-create');
+        updatePlaceholderColor('#code-create');
+
+        $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
+
+        let isSubmitting = false; // ป้องกัน submit ซ้ำ
+        $("#create-kgi").on("beforeSubmit", function(event) {
+            if (isSubmitting) {
+                return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
+            }
+            isSubmitting = true;
+            if (!validateFormKgi()) {
+                isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+                return false;
+            }
+            return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
         });
+    });
     </script>

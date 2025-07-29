@@ -35,7 +35,8 @@ $this->title = 'KPI Grid View';
                     <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg" alt="Company"
                         style="cursor: pointer;"><?= Yii::t('app', 'Company KPI') ?>
                 </div>
-                <a class="pim-type-tab justify-content-center align-items-center">
+                <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid"
+                    class="pim-type-tab justify-content-center align-items-center">
                     <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
                         style="cursor: pointer;"><?= Yii::t('app', 'Team KPI') ?>
                 </a>

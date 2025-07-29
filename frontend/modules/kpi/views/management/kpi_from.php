@@ -121,7 +121,6 @@ select.form-select option:disabled {
         "totalBranch" => $totalBranch
     ]) ?>
 
-
     <div class="col-12 mt-20">
         <div class="bg-white-pim pr-30 pl-30">
             <div class="row" style="--bs-gutter-x:0px;">
