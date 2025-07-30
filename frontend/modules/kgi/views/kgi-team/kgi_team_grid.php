@@ -197,7 +197,7 @@ $this->title = "TEAM KGI";
                                                                     $yellow = 1;
                                                                 }
                                                             }
-                                                            if ($role <= 4) {
+                                                            if ($role < 3) {
                                                                 $textAssign = "View Assigned";
                                                                 $url = Yii::$app->homeUrl . 'kgi/kgi-team/kgi-team-history/' . ModelMaster::encodeParams([
                                                                     'kgiTeamId' => $kgiTeamId,
@@ -259,7 +259,7 @@ $this->title = "TEAM KGI";
                                                                     $yellow = 1;
                                                                 }
                                                             }
-                                                            if ($role <= 4) {
+                                                            if ($role <= 3) {
                                                                 $textAssign = "View Assigned";
                                                                 $url = Yii::$app->homeUrl . 'kgi/kgi-team/kgi-team-history/' . ModelMaster::encodeParams([
                                                                     'kgiTeamId' => $kgiTeamId,
@@ -483,8 +483,7 @@ $this->title = "TEAM KGI";
                                             <?php
                                                     } else if ($colorFormat == "complete") {
                                                         // echo Yii::t('app', "Update");
-
-                                                    } else if ($role >= 5) {
+                                                    } else if ($canEdit == 1) {
                                                     ?>
                                             <a href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgi["kgiId"], 'kgiHistoryId' => 0]) ?>"
                                                 class="pim-btn-<?= $colorFormat ?>">
