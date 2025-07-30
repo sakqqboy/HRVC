@@ -10,6 +10,7 @@ use Exception;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
+use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiEmployee;
@@ -594,11 +595,23 @@ class KpiTeamController extends Controller
 		$waitForApprove = json_decode($waitForApprove, true);
 
 		// throw new Exception(print_r($teamKpis, true));
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
 
 		curl_close($api);
 		//throw new Exception($role);
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$employeeCompanyId = $employee["companyId"];
+
 		return $this->render('kpi_team_grid', [
 			"units" => $units,
 			"months" => $months,
@@ -608,13 +621,17 @@ class KpiTeamController extends Controller
 			"isManager" => $isManager,
 			"companies" => $companies,
 			"userTeamId" => $userTeamId,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch,
 			"companyId" => null,
 			"branchId" => null,
 			"teamId" => null,
 			"month" => null,
 			"status" => null,
 			"year" => null,
-			"waitForApprove" => $waitForApprove
+			"waitForApprove" => $waitForApprove,
+			"employeeCompanyId" => $employeeCompanyId
 		]);
 	}
 	public function actionSearchKpiTeam()
