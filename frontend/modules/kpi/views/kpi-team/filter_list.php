@@ -132,7 +132,7 @@ use frontend\models\hrvc\Team;
     <option value="2"><?= Yii::t('app', 'Completed') ?></option>
 </select>
 <span class="justify-content-center d-flex align-items-center employee-filter-btn" style="cursor: pointer;"
-    onclick="javascript:kgiFilterForTeam()">
+    onclick="javascript:kpiFilterForTeam()">
     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons">
 
 </span>
@@ -144,14 +144,14 @@ use frontend\models\hrvc\Team;
         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg"
             style="cursor: pointer; width:15px;height:15px;">
     </a>
-    <a href="<?= Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi' ?>"
+    <a href="<?= Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi' ?>"
         class="btn btn-outline-primary font-size-12 pim-change-modes" style="border-color: #CBD5E1 !important;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg"
             style="cursor: pointer; width:15px;height:15px;">
     </a>
     <?php
     } else { ?>
-    <a href="<?= Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi-grid' ?>"
+    <a href="<?= Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid' ?>"
         class="btn btn-outline-primary font-size-12 pim-change-modes" style="border-color: #CBD5E1 !important;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg"
             style="cursor: pointer; width:15px;height:15px;">

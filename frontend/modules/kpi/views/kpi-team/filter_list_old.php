@@ -1,5 +1,4 @@
 <?php
-<?php
 
 use common\models\ModelMaster;
 use frontend\models\hrvc\Branch;

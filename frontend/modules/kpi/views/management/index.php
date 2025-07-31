@@ -66,11 +66,20 @@ $this->title = 'KPI';
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-12 col-12 pt-1">
-                    <?= $this->render('filter_list', [
+                    <?= $this->render('filter_list_search', [
                         "companies" => $companies,
                         "months" => $months,
+                        "companyId" => isset($companyId) ? $companyId : null,
+                        "employeeCompanyId" => $employeeCompanyId,
+                        "branchId" => isset($branchId) ? $branchId : null,
+                        "teamId" => isset($teamId) ? $teamId : null,
+                        "month" => isset($month) ? $month : null,
+                        "status" => isset($status) ? $status : null,
+                        "branches" =>  isset($branches) ? $branches : null,
+                        "teams" =>  isset($teams) ? $teams : null,
+                        "yearSelected" => isset($branchId) ? $branchId : null,
                         "role" => $role,
-                        "companyId" => $companyId
+                        "page" => "index"
                     ]) ?>
                     <input type="hidden" id="type" value="list">
                 </div>

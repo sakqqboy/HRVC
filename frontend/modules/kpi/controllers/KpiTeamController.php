@@ -191,8 +191,22 @@ class KpiTeamController extends Controller
 		$waitForApprove = curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
 
+		// throw new Exception(print_r($teamKpis, true));
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
 		curl_close($api);
-		// throw new Exception(print_r($teamKpis,true));
+		// throw new Exception($role);
+
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$employeeCompanyId = $employee["companyId"];
 
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
@@ -205,13 +219,17 @@ class KpiTeamController extends Controller
 			"isManager" => $isManager,
 			"companies" => $companies,
 			"userTeamId" => $userTeamId,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch,
 			"companyId" => null,
 			"branchId" => null,
 			"teamId" => null,
 			"month" => null,
 			"status" => null,
 			"year" => null,
-			"waitForApprove" => $waitForApprove
+			"waitForApprove" => $waitForApprove,
+			"employeeCompanyId" => $employeeCompanyId
 
 		]);
 	}
@@ -713,9 +731,21 @@ class KpiTeamController extends Controller
 		$waitForApprove = curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
 
-		curl_close($api);
+		// throw new Exception(print_r($teamKpis, true));
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
 
-		// throw new exception(print_r($teamKpis, true));
+		curl_close($api);
+		//throw new Exception($role);
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$employeeCompanyId = $employee["companyId"];
 
 		if ($type == "list") {
 			$file = "team_kpi";
@@ -734,13 +764,17 @@ class KpiTeamController extends Controller
 			"userTeamId" => $userTeamId,
 			"isManager" => $isManager,
 			"companies" => $companies,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch,
 			"companyId" => $companyId,
 			"branchId" => $branchId,
 			"teamId" => $teamId,
 			"month" => $month,
 			"status" => $status,
 			"year" => $year,
-			"waitForApprove" => $waitForApprove
+			"waitForApprove" => $waitForApprove,
+			"employeeCompanyId" => $employeeCompanyId
 		]);
 	}
 	public function actionPrepareUpdate($hash)
