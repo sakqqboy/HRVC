@@ -473,7 +473,8 @@ $this->title = 'KGI Grid View';
                                                     <div class="col-12 text-start pim-small-text font-<?= $colorFormat ?>">
                                                         <?= Yii::t('app', 'Next Update Date') ?></div>
                                                     <div class="col-12 text-start pim-duedate mt-5">
-                                                        <?= $kgi['nextCheck'] == "" ? 'Not set' : $kgi['nextCheck'] ?></div>
+                                                        <?= $kgi['nextCheck'] == "" ? 'Not set' : $kgi['nextCheck'] ?>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -976,7 +977,8 @@ $this->title = 'KGI Grid View';
                                             <div class="col-12 text-end pim-small-text">
                                                 <?= Yii::t('app', 'Last Updated on') ?></div>
                                             <div class="col-12 text-end pim-duedate">
-                                                <?= $kgi['lastestUpdate'] == "" ? 'Not set' : $kgi['lastestUpdate'] ?></div>
+                                                <?= $kgi['lastestUpdate'] == "" ? 'Not set' : $kgi['lastestUpdate'] ?>
+                                            </div>
                                         </div>
                                         <div class="col-4 text-center mt-16 pt-5">
 
