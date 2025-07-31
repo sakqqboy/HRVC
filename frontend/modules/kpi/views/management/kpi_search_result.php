@@ -68,15 +68,17 @@ $this->title = 'KPI';
                     <?= $this->render('filter_list_search', [
                         "companies" => $companies,
                         "months" => $months,
-                        "companyId" => $companyId,
-                        "branchId" => $branchId,
-                        "teamId" => $teamId,
-                        "month" => $month,
-                        "status" => $status,
-                        "yearSelected" => $year,
-                        "branches" => $branches,
-                        "teams" => $teams,
+                        "companyId" => isset($companyId) ? $companyId : null,
+                        "employeeCompanyId" => $employeeCompanyId,
+                        "branchId" => isset($branchId) ? $branchId : null,
+                        "teamId" => isset($teamId) ? $teamId : null,
+                        "month" => isset($month) ? $month : null,
+                        "status" => isset($status) ? $status : null,
+                        "branches" =>  isset($branches) ? $branches : null,
+                        "teams" =>  isset($teams) ? $teams : null,
+                        "yearSelected" => isset($branchId) ? $branchId : null,
                         "role" => $role,
+                        "page" => "index"
                     ]) ?>
                     <input type="hidden" id="type" value="list">
                 </div>

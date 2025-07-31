@@ -16,8 +16,11 @@ $this->title = "KPI";
 
     <div class="col-12 mt-10">
         <?= $this->render('header_filter', [
-            "role" => $role
-        ]) ?>
+        "role" => $role,
+        "allCompany" => $allCompany,
+        "companyPic" => $companyPic,
+        "totalBranch" => $totalBranch
+    ]) ?>
         <div class="alert mt-10 pim-body bg-white">
             <div class="row sticky-section">
                 <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">
@@ -86,12 +89,18 @@ $this->title = "KPI";
                     <?= $this->render('filter_list', [
                         "companies" => $companies,
                         "months" => $months,
-                        "companyId" => $companyId,
-                        "branchId" => $branchId,
-                        "teamId" => $teamId,
-                        "month" => $month,
-                        "status" => $status,
-                        "year" => $year,
+                        "companyId" => isset($companyId) ? $companyId : null,
+                        "employeeCompanyId" => $employeeCompanyId,
+                        "branchId" => isset($branchId) ? $branchId : null,
+                        "teamId" => isset($teamId) ? $teamId : null,
+                        "month" => isset($month) ? $month : null,
+                        "status" => isset($status) ? $status : null,
+                        "branches" =>  isset($branches) ? $branches : null,
+                        "teams" =>  isset($teams) ? $teams : null,
+                        "yearSelected" => isset($yearSelected) ? $branchId : null,
+                        "role" => $role,
+                        "page" => "grid"
+
                     ]) ?>
                     <input type="hidden" id="type" value="list">
                 </div>
