@@ -552,6 +552,8 @@ if (!$nextCheckDate) {
 
                                 </div>
                             </div>
+                            <input type="hidden" id="nextDate" name="nextDate"
+                                value="<?= isset($data['nextCheckDate']) ? $data['nextCheckDate'] : '' ?>">
                             <div id="calendar-due-update"
                                 style="position: absolute; margin-top: 75px; padding: 10px; border: 1px solid rgb(221, 221, 221); border-radius: 10px; background: rgb(255, 255, 255); width: 100%; z-index: 1; display: none; justify-content: center; align-items: center;">
                                 <div id="updateDatePicker" style="display: none;"></div>
@@ -854,10 +856,6 @@ if (!$nextCheckDate) {
 
         </div>
     </div>
-</div>
-</div>
-<!-- </form> -->
-</div>
 </div>
 
 <input type="hidden" value="update" id="acType">

@@ -2308,7 +2308,7 @@ input:checked+.slider:before {
 	padding: 7px 9px;
 	justify-content: center;
 	align-items: center;
-	gap: 6px;
+	gap: 3px;
 	flex-shrink: 0;
 	border-radius: 3px;
 	border: none;
@@ -2326,9 +2326,9 @@ input:checked+.slider:before {
 .btn-create-cancle {
 	display: flex;
 	padding: 7px 9px;
+	gap: 3px;
 	justify-content: center;
 	align-items: center;
-	gap: 6px;
 	flex-shrink: 0;
 	border-radius: 3px;
 	border: none;
@@ -2336,12 +2336,8 @@ input:checked+.slider:before {
 	background: var(--100-white, #FFF);
 	color: var(--HRVC---Text-Black, #30313D);
 	text-align: center;
-
 	font-size: 16px;
-	font-style: normal;
 	font-weight: 600;
-	line-height: 28px;
-	/* 233.333% */
 }
 
 .contrainer-body-detail {

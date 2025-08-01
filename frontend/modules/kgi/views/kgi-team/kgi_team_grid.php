@@ -226,7 +226,7 @@ $this->title = "TEAM KGI";
                                                                 style="width:20px;height:20px;">
                                                             <a href="<?= $url ?>"
                                                                 class="font-<?= $yellow == 1 ? 'black' : $colorFormat ?>"
-                                                                style="<?= (($kgi["countTeamEmployee"] == 0 || $colorFormat == 'disable') && $role <= 4) ? 'pointer-events: none; color: black; text-decoration: none;' : '' ?>">
+                                                                style="<?= ($colorFormat == 'disable' && $role <= 4) ? 'pointer-events: none; color: black; text-decoration: none;' : '' ?>">
                                                                 <?= $textAssign ?>
                                                             </a>
                                                         </div>
@@ -403,7 +403,7 @@ $this->title = "TEAM KGI";
                                                         $show = number_format($kgi["target"]);
                                                     }
                                                 } else {
-                                                    $show = ""; // หรือค่าที่เหมาะสมกรณีไม่มี target
+                                                    $show = "0"; // หรือค่าที่เหมาะสมกรณีไม่มี target
                                                 }
                                                 ?>
                                                 <?= $show ?><?= $kgi["amountType"] == 1 ? '%' : '' ?>
@@ -473,7 +473,7 @@ $this->title = "TEAM KGI";
                                                 </div>
                                                 <div class="col-4 text-center align-content-center">
                                                     <?php
-                                                    if ($colorFormat == 'disable' && $role >= 5 || ($canEdit == 1)) {
+                                                    if (($colorFormat == 'disable' && $role >= 3) && ($canEdit == 1)) {
                                                     ?>
                                                         <a href="<?= Yii::$app->homeUrl . 'kgi/kgi-team/prepare-update/' . ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId]) ?>"
                                                             class="pim-btn-setup">
