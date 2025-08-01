@@ -855,10 +855,6 @@ if (!$nextCheckDate) {
         </div>
     </div>
 </div>
-</div>
-<!-- </form> -->
-</div>
-</div>
 
 <input type="hidden" value="update" id="acType">
 <input type="hidden" value="kgi-team" id="pimType">
