@@ -492,27 +492,28 @@ class KgiTeamController extends Controller
 	}
 	public function actionUpdateKgiTeam()
 	{
-		$kgiTeamId = $_POST["kgiTeamId"];
+		//throw new exception(print_r(Yii::$app->request->post(), true));
+		$kgiTeamId = Yii::$app->request->post('kgiTeamId');
 		$oldKgiTeam = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->orderBy("")->asArray()->one();
-		$status =  $_POST["status"];
+		$status = Yii::$app->request->post('status');
 		$role = UserRole::userRight();
 		//throw new exception(print_r(Yii::$app->request->post(), true));
 		//throw new exception($oldKgiTeam["target"] . 'เก่าคือ' . $_POST["targetAmount"]);
 		if (isset($oldKgiTeam) && !empty($oldKgiTeam)) {
-			if (($oldKgiTeam["target"] != $_POST["targetAmount"]) && $role == 3) {
+			if (($oldKgiTeam["target"] != Yii::$app->request->post('targetAmount')) && $role == 3) {
 				$status = 88;
 			}
 		}
 		if (isset($_POST["result"])) {
 			$result = $_POST["result"];
 		} else {
-			$result = $_POST["autoUpdate"];
+			$result = Yii::$app->request->post('autoUpdate');;
 		}
 		$kgiTeamHistory = new KgiTeamHistory();
 		$kgiTeamHistory->kgiTeamId = $kgiTeamId;
 		$kgiTeamHistory->result = $result;
-		if (isset($_POST["targetAmount"])) {
-			$kgiTeamHistory->target = $_POST["targetAmount"];
+		if (Yii::$app->request->post('targetAmount')) {
+			$kgiTeamHistory->target = Yii::$app->request->post('targetAmount');
 		} else {
 			$teamKgi = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->one();
 			$kgiTeamHistory->target = $teamKgi["target"];
@@ -531,11 +532,11 @@ class KgiTeamController extends Controller
 		$kgiTeamHistory->updateDateTime = new Expression('NOW()');
 		if ($kgiTeamHistory->save(false)) {
 			$teamKgi = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->one();
-			$teamKgi->status = $_POST["status"];
+			$teamKgi->status = Yii::$app->request->post('status');
 			$teamKgi->month = $_POST["month"];
 			$teamKgi->year = $_POST["year"];
-			if (isset($_POST["targetAmount"]) && $role > 3) { //if changed by over team leader
-				$teamKgi->target = $_POST["targetAmount"];
+			if (Yii::$app->request->post('targetAmount') && $role > 3) { //if changed by over team leader
+				$teamKgi->target = Yii::$app->request->post('targetAmount');
 			}
 			$teamKgi->result = $result;
 			$teamKgi->fromDate = $_POST["fromDate"];
