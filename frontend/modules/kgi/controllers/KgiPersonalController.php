@@ -7,6 +7,7 @@ use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
 use FFI\Exception as FFIException;
+use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
@@ -291,12 +292,24 @@ class KgiPersonalController extends Controller
 			}
 			//throw new Exception(print_r($teams, true));
 		}
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
 
 		curl_close($api);
 		// throw new Exception(print_r($kgis, true));
 
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$employeeCompanyId = $employee["companyId"];
+
 		return $this->render('individual_kgi_grid', [
 			"units" => $units,
 			"companies" => $companies,
@@ -305,6 +318,9 @@ class KgiPersonalController extends Controller
 			"isManager" => $isManager,
 			"role" => $role,
 			"kgis" => $kgis,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch,
 			"userId" => Yii::$app->user->id,
 			"companyId" => null,
 			"branchId" => null,
@@ -312,7 +328,8 @@ class KgiPersonalController extends Controller
 			"month" => null,
 			"status" => null,
 			"year" => null,
-			"waitForApprove" => $waitForApprove
+			"waitForApprove" => $waitForApprove,
+			"employeeCompanyId" => $employeeCompanyId
 
 		]);
 	}
