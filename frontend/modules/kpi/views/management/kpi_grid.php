@@ -458,7 +458,7 @@ $this->title = 'KPI Grid View';
                                             </a>
                                             <?php
                                                     } else { ?>
-                                            <div class="pim-btn-disable" data-bs-target="#update-kpi-modal">
+                                            <div class="pim-btn-lock" data-bs-target="#update-kpi-modal">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg"
                                                     style="width: 10.42px; height: 10.53px;">
                                                 <?= Yii::t('app', 'Locked') ?>
