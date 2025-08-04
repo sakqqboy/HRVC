@@ -389,6 +389,20 @@ class KgiTeamController extends Controller
 		$waitForApprove = curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$employeeCompanyId = $employee["companyId"];
+
 		curl_close($api);
 		//throw new exception(print_r($teamKgis, true));
 		if ($type == "list") {
@@ -415,7 +429,11 @@ class KgiTeamController extends Controller
 			"month" => $month,
 			"status" => $status,
 			"year" => $year,
-			"waitForApprove" => $waitForApprove
+			"waitForApprove" => $waitForApprove,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch,
+			"employeeCompanyId" => $employeeCompanyId
 		]);
 	}
 	public function actionPrepareUpdate($hash)

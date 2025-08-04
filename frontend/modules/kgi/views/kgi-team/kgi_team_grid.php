@@ -79,7 +79,7 @@ $this->title = "TEAM KGI";
                         "status" => isset($status) ? $status : null,
                         "branches" =>  isset($branches) ? $branches : null,
                         "teams" =>  isset($teams) ? $teams : null,
-                        "yearSelected" => isset($yearSelected) ? $branchId : null,
+                        "yearSelected" => isset($yearSelected) ? $yearSelected : null,
                         "role" => $role,
                         "page" => "grid"
 
@@ -515,7 +515,6 @@ $this->title = "TEAM KGI";
                                                     <div class="col-12 text-start pim-duedate mt-5">
                                                         <?= $kgi['nextCheckDate'] == "" ? 'Not set' : $kgi['nextCheckDate'] ?>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -598,7 +597,6 @@ $this->title = "TEAM KGI";
             </div>
         </div>
     </div>
-
 </div>
 <?php
 $form = ActiveForm::begin([

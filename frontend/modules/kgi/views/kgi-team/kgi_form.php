@@ -81,7 +81,6 @@ if (!$nextCheckDate) {
     /* สไตล์เมื่อไม่ได้เลือก (ข้อความ placeholder) */
     select.form-select {
         color: var(--Helper-Text-Gray, #8A8A8A);
-        font-family: "SF Pro Display", sans-serif;
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
@@ -92,7 +91,6 @@ if (!$nextCheckDate) {
     /* สไตล์เมื่อเลือกตัวเลือกแล้ว */
     select.form-select option:checked {
         color: var(--HRVC---Text-Black, #30313D);
-        font-family: "SF Pro Display";
         font-size: 14px;
         font-style: normal;
         font-weight: 500;

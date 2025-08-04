@@ -191,7 +191,7 @@ if ($role == 3) { ?>
 <span class="justify-content-center d-flex align-items-center employee-filter-btn" style="cursor: pointer;"
     onclick="javascript:kgiFilterForEmployee()">
     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons">
-    <?= $role > 3 ? 'Filter' : '' ?>
+    <?= $role >= 5 ? '' : 'Filter' ?>
 </span>
 <div class="btn-group <?= (Yii::$app->controller->action->id == 'draft' || Yii::$app->controller->action->id == 'draft-result') ? 'd-none' : '' ?>" role="group">
     <?php
@@ -216,7 +216,54 @@ if ($role == 3) { ?>
     }
     ?>
 </div>
+<?php
+if ($role >= 5) {
+?>
+    <style>
+        .select-pim {
+            width: 70px;
+            font-size: 10px;
+        }
 
+        .select-pimselect {
+            width: 70px;
+            font-size: 10px;
+        }
+
+        .pim-change-modes {
+            padding: 0px !important;
+            width: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-color: #2F80ED !important;
+            height: 25px;
+        }
+    </style>
+<?php
+} else { ?>
+    <style>
+        .select-pim {
+            width: 85px;
+        }
+
+        .select-pimselect {
+            width: 85px;
+        }
+
+        .pim-change-modes {
+            padding: 0px !important;
+            width: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-color: #2F80ED !important;
+            height: 25px;
+        }
+    </style>
+<?php
+}
+?>
 
 
 <script>
@@ -230,22 +277,3 @@ if ($role == 3) { ?>
         }
     }
 </script>
-<style>
-    .select-pim {
-        width: 85px;
-    }
-
-    .select-pimselect {
-        width: 85px;
-    }
-
-    .pim-change-modes {
-        padding: 0px !important;
-        width: 25px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-color: #2F80ED !important;
-        height: 25px;
-    }
-</style>

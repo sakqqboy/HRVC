@@ -1198,6 +1198,18 @@ class ManagementController extends Controller
 			$teams = curl_exec($api);
 			$teams = json_decode($teams, true);
 		}
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 
 		curl_close($api);
 		$months = ModelMaster::monthFull(1);
@@ -1243,7 +1255,10 @@ class ManagementController extends Controller
 			"totalKgi" => $totalKgi,
 			"currentPage" => $currentPage,
 			"totalPage" => $totalPage,
-			"filter" => $filter
+			"filter" => $filter,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch,
 		]);
 	}
 	public function actionCopyKgi($kgiId)

@@ -364,6 +364,15 @@ class KgiPersonalController extends Controller
 		$kgiTeam = curl_exec($api);
 		$kgiTeam = json_decode($kgiTeam, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
 
 		curl_close($api);
 		$companyId = $kgi["companyId"];
@@ -394,14 +403,14 @@ class KgiPersonalController extends Controller
 			"role" => $role,
 			"unit"  => $unit,
 			"statusform" =>  "update",
-			"url" => Yii::$app->request->referrer
+			"url" => Yii::$app->request->referrer,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch,
 		]);
 	}
 	public function actionSaveUpdatePersonalKgi()
 	{
-
-		// throw new Exception(print_r(Yii::$app->request	->post(), true));
-
 		if (isset($_POST["kgiEmployeeId"])) {
 			$history = KgiEmployeeHistory::find()
 				->where(["kgiEmployeeId" => $_POST["kgiEmployeeId"], "status" => [1, 2, 4]])
@@ -646,6 +655,15 @@ class KgiPersonalController extends Controller
 			}
 			//throw new Exception(print_r($teams, true));
 		}
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
 
 		curl_close($api);
 		if ($type == "list") {
@@ -658,6 +676,9 @@ class KgiPersonalController extends Controller
 		if ($teamId != '') {
 			$employees = Team::employeeInTeamDetail($teamId);
 		}
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$employeeCompanyId = $employee["companyId"];
+
 		return $this->render($file, [
 			"units" => $units,
 			"months" => $months,
@@ -675,7 +696,11 @@ class KgiPersonalController extends Controller
 			"month" => $month,
 			"employeeId" => $employeeId,
 			"employees" => $employees,
-			"waitForApprove" => $waitForApprove
+			"waitForApprove" => $waitForApprove,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch,
+			"employeeCompanyId" => $employeeCompanyId
 		]);
 	}
 	public function actionNextKgiEmployeeHistory()

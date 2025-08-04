@@ -40,7 +40,7 @@ $this->title = 'KGI Grid View';
                     <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
                         style="cursor: pointer;"><?= Yii::t('app', 'Team KGI') ?>
                 </a>
-                <a class="pim-type-tab justify-content-center align-items-center">
+                <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid" class="pim-type-tab justify-content-center align-items-center">
                     <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self"
                         style="cursor: pointer;"><?= Yii::t('app', 'Self KGI') ?>
                 </a>
@@ -56,7 +56,7 @@ $this->title = 'KGI Grid View';
                         "status" => isset($status) ? $status : null,
                         "branches" =>  isset($branches) ? $branches : null,
                         "teams" =>  isset($teams) ? $teams : null,
-                        "yearSelected" => isset($branchId) ? $branchId : null,
+                        "yearSelected" => isset($year) ? $year : null,
                         "role" => $role,
                         "page" => "grid"
 
