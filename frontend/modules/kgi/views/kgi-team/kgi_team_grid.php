@@ -79,7 +79,7 @@ $this->title = "TEAM KGI";
                         "status" => isset($status) ? $status : null,
                         "branches" =>  isset($branches) ? $branches : null,
                         "teams" =>  isset($teams) ? $teams : null,
-                        "yearSelected" => isset($yearSelected) ? $branchId : null,
+                        "yearSelected" => isset($yearSelected) ? $yearSelected : null,
                         "role" => $role,
                         "page" => "grid"
 

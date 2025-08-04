@@ -271,12 +271,25 @@ class AssignController extends Controller
 				// throw new Exception(print_r($_POST["employeeTarget"], true));
 
 				$target = str_replace(",", "", $target);
-
+				$result = 0;
 				if (isset($kgiEmployee) && !empty($kgiEmployee)) {
+					$result = $kgiEmployee->result;
 					if ($kgiEmployee->target != $target && trim($target) != "" && $target != null) {
 						$kgiEmployee->target = $target;
 						$kgiEmployee->updateDateTime = new Expression('NOW()');
-						$kgiEmployee->save(false);
+						if ($kgiEmployee->save(false)) {
+							$KgiEmployeeHistory = new KgiEmployeeHistory();
+							$kgiEmployeeId = Yii::$app->db->lastInsertID;
+							$KgiEmployeeHistory->kgiEmployeeId = $kgiEmployeeId;
+							$KgiEmployeeHistory->target = $target;
+							$KgiEmployeeHistory->month = $_POST["month"];
+							$KgiEmployeeHistory->year = $_POST["year"];
+							$KgiEmployeeHistory->result = $result;
+							$KgiEmployeeHistory->status = 1;
+							$KgiEmployeeHistory->createDateTime = new Expression('NOW()');
+							$KgiEmployeeHistory->updateDateTime = new Expression('NOW()');
+							$KgiEmployeeHistory->save(false);
+						}
 					}
 					if (trim($target) == "" || $target == null) {
 						KgiEmployee::deleteAll([
@@ -292,7 +305,7 @@ class AssignController extends Controller
 						$kgiEmployee->target = $target;
 						$kgiEmployee->month = $_POST["month"];
 						$kgiEmployee->year = $_POST["year"];
-						$kgiEmployee->result = 0;
+						$kgiEmployee->result = $result;
 						$kgiEmployee->status = 1;
 						$kgiEmployee->createDateTime = new Expression('NOW()');
 						$kgiEmployee->updateDateTime = new Expression('NOW()');
@@ -300,10 +313,10 @@ class AssignController extends Controller
 							$KgiEmployeeHistory = new KgiEmployeeHistory();
 							$kgiEmployeeId = Yii::$app->db->lastInsertID;
 							$KgiEmployeeHistory->kgiEmployeeId = $kgiEmployeeId;
-							$KgiEmployeeHistory->target = $targetTeam;
+							$KgiEmployeeHistory->target = $target;
 							$KgiEmployeeHistory->month = $_POST["month"];
 							$KgiEmployeeHistory->year = $_POST["year"];
-							$KgiEmployeeHistory->result = 0;
+							$KgiEmployeeHistory->result = $result;
 							$KgiEmployeeHistory->status = 1;
 							$KgiEmployeeHistory->createDateTime = new Expression('NOW()');
 							$KgiEmployeeHistory->updateDateTime = new Expression('NOW()');

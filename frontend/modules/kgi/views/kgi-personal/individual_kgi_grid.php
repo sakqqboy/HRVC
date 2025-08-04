@@ -1,10 +1,7 @@
 <?php
 
 use common\models\ModelMaster;
-use frontend\models\hrvc\Employee;
-use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiEmployee;
-use frontend\models\hrvc\KgiTeam;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = "INDIVIDUAL KGI";
@@ -354,16 +351,16 @@ $this->title = "INDIVIDUAL KGI";
                                             </div>
                                             <div class="col-12 number-pim mt-10">
                                                 <?php
-                                                if (!empty($kgi["target"]) && is_string($kgi["target"])) {
-                                                    $decimal = explode('.', $kgi["target"]);
+                                                if (!empty($kgi["targetAmount"]) && is_string($kgi["targetAmount"])) {
+                                                    $decimal = explode('.', $kgi["targetAmount"]);
                                                     if (isset($decimal[1])) {
                                                         if ($decimal[1] == '00') {
                                                             $show = number_format($decimal[0]);
                                                         } else {
-                                                            $show = number_format($kgi["target"], 2);
+                                                            $show = number_format($kgi["targetAmount"], 2);
                                                         }
                                                     } else {
-                                                        $show = number_format($kgi["target"]);
+                                                        $show = number_format($kgi["targetAmount"]);
                                                     }
                                                 } else {
                                                     $show = "0"; // หรือค่าที่เหมาะสมกรณีไม่มี target
@@ -500,8 +497,8 @@ $this->title = "INDIVIDUAL KGI";
                                         <?php
                                         }
                                         ?>
-                                        <span class="team-wrapper <?= $colorFormat ?>-teamshow text-start" style="margin-right: 5px; ">
-                                            <span>
+                                        <span class="team-wrapper <?= $colorFormat ?>-teamshow mr-3">
+                                            <span class="mr-1 ml-1 d-flex" style="margin-top: -1px;">
                                                 <img src="<?= Yii::$app->homeUrl . $kgi['picture'] ?>" alt="Team Icon" class="pim-pic-icon">
                                             </span>
                                             <span class="team-name">
