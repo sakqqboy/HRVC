@@ -7,6 +7,7 @@ use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
 use FFI\Exception as FFIException;
+use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
@@ -14,6 +15,7 @@ use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiEmployee;
 use frontend\models\hrvc\KpiEmployeeHistory;
 use frontend\models\hrvc\KpiTeam;
+use frontend\models\hrvc\Team;
 use frontend\models\hrvc\Unit;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
@@ -119,9 +121,10 @@ class KpiPersonalController extends Controller
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
+		$userId = Yii::$app->user->id;
 		$role = UserRole::userRight();
 		$teams = [];
-
+		$userTeamId = Team::userTeam($userId);
 		$session = Yii::$app->session;
 		if ($session->has('kpiEmployee')) {
 			$filter = $session->get('kpiEmployee');
@@ -172,11 +175,25 @@ class KpiPersonalController extends Controller
 				$teams = json_decode($teams, true);
 			}
 		}
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+		
 		curl_close($api);
 		// throw new Exception(print_r($kpis, true));
 
-		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
+		$months = ModelMaster::monthFull(1);
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$employeeCompanyId = $employee["companyId"];
+
 		return $this->render('index', [
 			"units" => $units,
 			"companies" => $companies,
@@ -186,13 +203,18 @@ class KpiPersonalController extends Controller
 			"role" => $role,
 			"kpis" => $kpis,
 			"userId" => Yii::$app->user->id,
+			"userTeamId" => $userTeamId,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch,
 			"month" => null,
 			"status" => null,
 			"year" => null,
 			"companyId" => null,
 			"branchId" => null,
 			"teamId" => null,
-			"waitForApprove" => $waitForApprove
+			"waitForApprove" => $waitForApprove,
+			"employeeCompanyId" => $employeeCompanyId
 
 		]);
 	}
@@ -207,6 +229,8 @@ class KpiPersonalController extends Controller
 		$role = UserRole::userRight();
 		$teams = [];
 		$session = Yii::$app->session;
+		$userTeamId = Team::userTeam($userId);
+
 		if ($session->has('kpiEmployee')) {
 			$filter = $session->get('kpiEmployee');
 			$companyId = isset($filter["companyId"]) && $filter["companyId"] != null ? $filter["companyId"] : null;
@@ -260,9 +284,22 @@ class KpiPersonalController extends Controller
 		}
 		// throw new Exception(print_r($kpis, true));
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
 		curl_close($api);
-		$months = ModelMaster::monthFull(1);
+		//throw new Exception($role);
 		$isManager = UserRole::isManager();
+		$months = ModelMaster::monthFull(1);
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$employeeCompanyId = $employee["companyId"];
 		return $this->render('individual_kpi_grid', [
 			"units" => $units,
 			"companies" => $companies,
@@ -272,13 +309,18 @@ class KpiPersonalController extends Controller
 			"role" => $role,
 			"kpis" => $kpis,
 			"userId" => Yii::$app->user->id,
+			"userTeamId" => $userTeamId,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch,
 			"month" => null,
 			"status" => null,
 			"year" => null,
 			"companyId" => null,
 			"branchId" => null,
 			"teamId" => null,
-			"waitForApprove" => $waitForApprove
+			"waitForApprove" => $waitForApprove,
+			"employeeCompanyId" => $employeeCompanyId
 		]);
 	}
 
@@ -297,29 +339,12 @@ class KpiPersonalController extends Controller
 		} else {
 			$kpiEmployeeHistoryId = 0;
 		}
-		// $kpiEmployeeHistoryId = KpiEmployeeHistory::find()
-		// ->select('kpiEmployeeHistoryId')
-		// ->where(["kpiEmployeeId" => $kpiEmployeeId])
-		// ->orderBy('kpiEmployeeHistoryId DESC')
-		// ->asArray()->one();
 
-		// if(isset($kpiEmployeeHistoryId) && !empty($kpiEmployeeHistoryId)) {
-		// 	$kpiEmployeeHistoryId = $kpiEmployeeHistoryId['kpiEmployeeHistoryId'];
-		// }
-		// throw new Exception($kpiEmployeeHistoryId);
 		$openTab = array_key_exists("openTab", $param) ? $param["openTab"] : 0;
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
-		// $api = curl_init();
-		// curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		// curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . "&&kpiHistoryId=" . $kpiEmployeeHistoryId);
-		// $kpiDetail = curl_exec($api);
-		// $kpiDetail = json_decode($kpiDetail, true);
-		// throw new Exception(print_r($kpiDetail, true));
-
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
