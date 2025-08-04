@@ -67,7 +67,7 @@ class KgiPersonalController extends Controller
 		}
 		return json_encode($employeeTeam);
 	}
-	public function actionEmployeeKgi($userId, $role)
+	public function actionEmployeeKgi($userId, $role, $currentPage, $limit)
 	{
 		$data = [];
 		$data1 = [];
@@ -75,6 +75,7 @@ class KgiPersonalController extends Controller
 		$data3 = [];
 		$data4 = [];
 		$employeeId = Employee::employeeId($userId);
+		$startAt = (($currentPage - 1) * $limit);
 		if ($role <= 3) {
 			$kgiEmployees = KgiEmployee::find()
 				->select('k.kgiName,k.priority,k.quantRatio,k.amountType,k.code,kgi_employee.target,kgi_employee.result,,kgi_employee.updateDateTime,
@@ -84,6 +85,8 @@ class KgiPersonalController extends Controller
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
 				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kgi_employee.employeeId" => $employeeId, "e.status" => [1]])
 				->orderby('k.createDateTime')
+				->offset($startAt)
+				->limit($limit)
 				->asArray()
 				->all();
 		} else {
@@ -95,6 +98,8 @@ class KgiPersonalController extends Controller
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
 				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "e.status" => [1]])
 				->orderby('k.createDateTime')
+				->offset($startAt)
+				->limit($limit)
 				->asArray()
 				->all();
 		}

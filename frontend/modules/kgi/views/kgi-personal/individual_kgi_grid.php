@@ -572,6 +572,17 @@ $this->title = "INDIVIDUAL KGI";
                 }
                 ?>
             </div>
+            <?php
+            echo $this->render('pagination_page', [
+                'totalKgi' => $totalKgi,
+                "currentPage" => $currentPage,
+                'totalPage' => $totalPage,
+                "pagination" => $pagination,
+                "pageType" => "grid",
+                "filter" => isset($filter) ? $filter : []
+            ]);
+            ?>
+            <input type="hidden" id="totalPage" value="<?= $totalPage > 1 ? 1 : 0 ?>">
         </div>
     </div>
 </div>

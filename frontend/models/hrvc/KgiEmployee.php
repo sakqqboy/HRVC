@@ -97,23 +97,24 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
         }
         return $date;
     }
-    public static function countKgiEmployeeInTeam($teamId,$kgiId,$month,$year){
+    public static function countKgiEmployeeInTeam($teamId, $kgiId, $month, $year)
+    {
         $kgiEmployee = kgiEmployee::find()
-        ->select('e.picture,e.employeeId,e.gender,kgi_employee.year,kgi_employee.month')
-        ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-        ->where("kgi_employee.status!=99 and e.status!=99")
-        ->andWhere([
-            "kgi_employee.kgiId" => $kgiId,
-            "e.teamId" => $teamId,
-            "kgi_employee.month" => $month,
-            "kgi_employee.year" => $year
-        ])
-        ->asArray()
-        ->all();
-        $data=[];
-        if(isset($kgiEmployee) && count( $kgiEmployee)>0){
-            $i=0;
-            foreach($kgiEmployee as $employee):
+            ->select('e.picture,e.employeeId,e.gender,kgi_employee.year,kgi_employee.month')
+            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+            ->where("kgi_employee.status!=99 and e.status!=99")
+            ->andWhere([
+                "kgi_employee.kgiId" => $kgiId,
+                "e.teamId" => $teamId,
+                "kgi_employee.month" => $month,
+                "kgi_employee.year" => $year
+            ])
+            ->asArray()
+            ->all();
+        $data = [];
+        if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+            $i = 0;
+            foreach ($kgiEmployee as $employee):
                 if ($employee["picture"] != '') {
                     $img = $employee["picture"];
                 } else {
@@ -123,12 +124,74 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
                         $img = "image/lady.png";
                     }
                 }
-            $data[$i]=$img;
-            $i++;
+                $data[$i] = $img;
+                $i++;
             endforeach;
-        }else{
+        } else {
             return null;
         }
-            return $data;
+        return $data;
+    }
+    public static function totalKgiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employeeId)
+    {
+        $total = 0;
+        if ($adminId != '' || $gmId != '') {
+            $kgis = KgiEmployee::find()
+                ->where(["status" => [1, 2, 4]])
+                ->asArray()
+                ->orderBy('createDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if ($supervisorId != '' || $managerId != '') {
+            if ($supervisorId != '') {
+                $userId = $supervisorId;
+            }
+            if ($managerId != '') {
+                $userId = $managerId;
+            }
+            $employeeId = Employee::employeeId($userId);
+            $companyId = Employee::EmployeeDetail($employeeId)["companyId"];
+            $kgis = KgiEmployee::find()
+                ->where([
+                    "status" => [1, 2, 4],
+                    "employeeId" => $companyId
+                ])
+                ->asArray()
+                ->orderBy('createDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if ($teamLeaderId != '') {
+            $employeeId = Employee::employeeId($teamLeaderId);
+            $teamId = Employee::employeeTeam($employeeId);
+            if (isset($teamId["teamId"])) {
+                $kgis = KgiEmployee::find()
+                    ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+                    ->where([
+                        "status" => [1, 2, 4],
+                        "e.teamId" => $teamId
+                    ])
+                    ->asArray()
+                    ->orderBy('e.employeeFirstname')
+                    ->asArray()
+                    ->all();
+            }
+        }
+        if ($staffId != '') {
+            $kgis = KgiEmployee::find()
+                ->where([
+                    "status" => [1, 2, 4],
+                    "employeeId" => $employeeId
+                ])
+                ->asArray()
+                ->orderBy('createDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if (isset($kgis) && count($kgis) > 0) {
+            $total = count($kgis);
+        }
+        return $total;
     }
 }

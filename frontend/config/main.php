@@ -154,6 +154,7 @@ return [
                 'kgi/assign/assign/<hash>' => 'kgi/assign/assign',
                 'kgi/kgi-group/update/<hash>' => 'kgi/kgi-group/update',
                 'kgi/kgi-team/kgi-team-setting/<hash>' => 'kgi/kgi-team/kgi-team-setting',
+                'kgi/kgi-personal/individual-kgi-grid/<hash>' => 'kgi/kgi-personal/individual-kgi-grid',
                 'kgi/kgi-personal/indivisual-setting/<hash>' => 'kgi/kgi-personal/indivisual-setting',
                 'kgi/kgi-personal/update-personal-kgi/<hash>' => 'kgi/kgi-personal/update-personal-kgi',
                 'kgi/kgi-personal/view-personal-kgi/<hash>' => 'kgi/kgi-personal/view-personal-kgi',
