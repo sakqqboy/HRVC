@@ -145,4 +145,43 @@ class KpiTeam extends \frontend\models\hrvc\master\KpiTeamMaster
         }
         return $date;
     }
+
+    public static function totalKpiTeam($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
+    {
+        $total = 0;
+        if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
+            $kpis = KpiTeam::find()
+                ->where(["status" => [1, 2, 4]])
+                ->asArray()
+                ->orderBy('createDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if (!empty($supervisorId) || !empty($teamLeaderId) || !empty($staffId)) {
+            if ($supervisorId != '') {
+                $userId = $supervisorId;
+            }
+            if ($teamLeaderId != '') {
+                $userId = $teamLeaderId;
+            }
+            if ($staffId != '') {
+                $userId = $staffId;
+            }
+            $employeeId = Employee::employeeId($userId);
+            $companyId = Employee::EmployeeDetail($employeeId)["companyId"];
+            $kpis = KpiTeam::find()
+                ->where([
+                    "status" => [1, 2, 4],
+                    "companyId" => $companyId
+                ])
+                ->asArray()
+                ->orderBy('createDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if (count($kpis) > 0) {
+            $total = count($kpis);
+        }
+        return $total;
+    }
 }

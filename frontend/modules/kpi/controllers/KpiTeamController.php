@@ -569,7 +569,32 @@ class KpiTeamController extends Controller
 		$userId = Yii::$app->user->id;
 		$isAdmin = UserRole::isAdmin();
 		$userBranchId = User::userBranchId();
-
+ 		$adminId = '';
+        $gmId = '';
+        $teamLeaderId = '';
+        $managerId = '';
+        $supervisorId = '';
+        $staffId = '';
+        $companyId = '';
+		if ($role == 7) {
+            $adminId = Yii::$app->user->id;
+        }
+        if ($role == 6) {
+            $gmId = Yii::$app->user->id;
+        }
+        if ($role == 5) {
+            $managerId = Yii::$app->user->id;
+        }
+        if ($role == 4) {
+            $supervisorId = Yii::$app->user->id;
+        }
+        if ($role == 3) {
+            $teamLeaderId = Yii::$app->user->id;
+        }
+        if ($role == 1 || $role == 2) {
+            $staffId = Yii::$app->user->id;
+            //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+        }
 		$userTeamId = Team::userTeam($userId);
 		$session = Yii::$app->session;
 		if ($session->has('kpiTeam')) {
@@ -591,6 +616,12 @@ class KpiTeamController extends Controller
 				"type" => $type
 			]));
 		}
+		$currentPage = 1;
+		if (isset($hash) && $hash != '') {
+			$pageArr = explode('page', $hash);
+			$currentPage = $pageArr[1];
+		}
+		$limit = 20;
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -629,6 +660,10 @@ class KpiTeamController extends Controller
 		}
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
+		$totalKpi = KpiTeam::totalKpiTeam($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
+		$totalPage = ceil($totalKpi / $limit);
+		// throw new Exception(print_r($totalKpi, true));
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
 
 		return $this->render('kpi_team_grid', [
 			"units" => $units,
@@ -649,7 +684,11 @@ class KpiTeamController extends Controller
 			"status" => null,
 			"year" => null,
 			"waitForApprove" => $waitForApprove,
-			"employeeCompanyId" => $employeeCompanyId
+			"employeeCompanyId" => $employeeCompanyId,
+			"totalKpi" => $totalKpi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
+			"pagination" => $pagination
 		]);
 	}
 	public function actionSearchKpiTeam()
