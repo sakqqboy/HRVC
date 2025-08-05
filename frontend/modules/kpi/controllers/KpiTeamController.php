@@ -813,7 +813,6 @@ class KpiTeamController extends Controller
 		$kpiTeam = curl_exec($api);
 		$kpiTeam = json_decode($kpiTeam, true);
 
-		curl_close($api);
 
 		$companyId = $kpi["companyId"];
 		$company = [
@@ -823,9 +822,19 @@ class KpiTeamController extends Controller
 		];
 
 		$unit = Unit::find()->where(["unitId" => $kpi["unitId"]])->asArray()->one();
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
 
+
+		curl_close($api);
 		// throw new exception(print_r($kpiTeamDetail	, true));
-
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
 		return $this->render('kpi_from', [
 			"kpi" => $kpi,
 			"data" => $kpiTeamDetail,
@@ -836,8 +845,11 @@ class KpiTeamController extends Controller
 			"role" => $role,
 			"unit"  => $unit,
 			"kpiTeamId"  => $kpiTeamId,
-			"lastUrl" => Yii::$app->request->referrer,
-			"statusform" =>  "update"
+			"statusform" =>  "update",
+			"url" => Yii::$app->request->referrer,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 	public function actionUpdateKpiTeam()
@@ -845,14 +857,14 @@ class KpiTeamController extends Controller
 
 		$data = [
 			'kpiTeamId' => $_POST["kpiTeamId"],
-			'targetAmount' => $_POST["amount"],
+			'targetAmount' => $_POST["targetAmount"],
 			'status' => $_POST["status"],
 			'result' => $_POST["result"],
 			'month' => $_POST["month"],
 			'year' => $_POST["year"],
 			'toDate' => $_POST["toDate"],
 			'fromDate' => $_POST["fromDate"],
-			'nextCheckDate' => $_POST["nextCheckDate"],
+			'nextCheckDate' => $_POST["nextDate"],
 
 		];
 
@@ -883,7 +895,7 @@ class KpiTeamController extends Controller
 		$role = UserRole::userRight();
 		$status =  $_POST["status"];
 		if (isset($oldKpiTeam) && !empty($oldKpiTeam)) {
-			if (($oldKpiTeam["target"] != $_POST["amount"]) && $role == 3) {
+			if (($oldKpiTeam["target"] != $_POST["targetAmount"]) && $role == 3) {
 				$status = 88;
 			}
 		}
@@ -892,19 +904,19 @@ class KpiTeamController extends Controller
 		$teamkpi->month = $_POST["month"];
 		$teamkpi->year = $_POST["year"];
 		$teamkpi->result = str_replace(",", "",  $_POST["result"]);
-		if (isset($_POST["amount"])) {
-			$teamkpi->target = str_replace(",", "",  $_POST["amount"]);
+		if (isset($_POST["targetAmount"])) {
+			$teamkpi->target = str_replace(",", "",  $_POST["targetAmount"]);
 		}
 		$teamkpi->fromDate = $_POST["fromDate"];
 		$teamkpi->toDate = $_POST["toDate"];
-		$teamkpi->nextCheckDate = $_POST["nextCheckDate"];
+		$teamkpi->nextCheckDate = $_POST["nextDate"];
 		$teamkpi->updateDateTime = new Expression('NOW()');
 		if ($teamkpi->save(false)) {
 			$kpiTeamHistory = new KpiTeamHistory();
 			$kpiTeamHistory->kpiTeamId = $kpiTeamId;
 			$kpiTeamHistory->result = str_replace(",", "",  $_POST["result"]);
-			if (isset($_POST["amount"])) {
-				$kpiTeamHistory->target = str_replace(",", "",  $_POST["amount"]);
+			if (isset($_POST["targetAmount"])) {
+				$kpiTeamHistory->target = str_replace(",", "",  $_POST["targetAmount"]);
 			} else {
 				$teamKpi = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->one();
 				$kpiTeamHistory->target = str_replace(",", "",   $teamKpi["target"]);
@@ -916,7 +928,7 @@ class KpiTeamController extends Controller
 			$kpiTeamHistory->toDate = $_POST["toDate"];
 			$kpiTeamHistory->month = $_POST["month"];
 			$kpiTeamHistory->year = $_POST["year"];
-			$kpiTeamHistory->nextCheckDate = $_POST["nextCheckDate"];
+			$kpiTeamHistory->nextCheckDate = $_POST["nextDate"];
 			$kpiTeamHistory->createrId = Yii::$app->user->id;
 			$kpiTeamHistory->createDateTime = new Expression('NOW()');
 			$kpiTeamHistory->updateDateTime = new Expression('NOW()');
@@ -941,7 +953,7 @@ class KpiTeamController extends Controller
 
 
 		// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
-		return $this->redirect($_POST["lastUrl"]);
+		return $this->redirect($_POST["url"]);
 	}
 	public function actionKpiTeam()
 	{

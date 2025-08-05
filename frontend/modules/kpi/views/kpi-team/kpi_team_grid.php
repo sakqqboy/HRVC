@@ -474,7 +474,7 @@ $this->title = "TEAM KPI";
                                             <?php
                                                     if ($colorFormat == 'disable' && $role >= 5) {
                                                     ?>
-                                            <a href="<?= Yii::$app->homeUrl . 'kpi/management/prepare-update/' . ModelMaster::encodeParams(['kpiId' => $kpi["kpiId"], 'kpiHistoryId' => 0]) ?>"
+                                            <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/prepare-update/<?= ModelMaster::encodeParams(['kpiTeamId' => $kpiTeamId, 'kpiHistoryId' => 0]) ?>"
                                                 class="pim-btn-setup">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                                     class="mr-3" style="width: 10.42px; height: 10.53px;">
@@ -486,7 +486,7 @@ $this->title = "TEAM KPI";
 
                                                     } else if ($role >= 5) {
                                                     ?>
-                                            <a href="<?= Yii::$app->homeUrl . 'kpi/management/prepare-update/' . ModelMaster::encodeParams(['kpiId' => $kpi["kpiId"], 'kpiHistoryId' => 0]) ?>"
+                                            <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/prepare-update/<?= ModelMaster::encodeParams(['kpiTeamId' => $kpiTeamId, 'kpiHistoryId' => 0]) ?>"
                                                 class="pim-btn-<?= $colorFormat ?>">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
                                                     class="mr-3" style="width: 10.42px; height: 10.53px;">

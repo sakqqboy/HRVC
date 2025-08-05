@@ -1,6 +1,6 @@
 <div class="modal fade pr-0 pl-0" id="warning-kpi" tabindex="-1" aria-labelledby="staticBackdrop4Label"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered pr-0 pl-0" style="margin-left:750px;">
+    <div class="modal-dialog modal-dialog-centered pr-0 pl-0" style="margin-left:750px; right: 0px;">
         <div class="modal-content" style="border-radius: 8px; padding: 20px;">
             <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
                 <h3 class="modal-title" id="staticBackdrop4Label" style="display: flex; align-items: center;">
