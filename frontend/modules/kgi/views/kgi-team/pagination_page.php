@@ -15,7 +15,6 @@
                 "companyId" => $filter["companyId"],
                 "branchId" => $filter["branchId"],
                 "teamId" => $filter["teamId"],
-                "employeeId" => $filter["employeeId"],
                 "month" => $filter["month"],
                 "year" => $filter["year"],
                 "currentPage" => $currentPage - 1,
@@ -27,7 +26,6 @@
                 "companyId" => $filter["companyId"],
                 "branchId" => $filter["branchId"],
                 "teamId" => $filter["teamId"],
-                "employeeId" => $filter["employeeId"],
                 "month" => $filter["month"],
                 "year" => $filter["year"],
                 "currentPage" => $currentPage + 1,
@@ -56,7 +54,6 @@
                     "companyId" => $filter["companyId"],
                     "branchId" => $filter["branchId"],
                     "teamId" => $filter["teamId"],
-                    "employeeId" => $filter["employeeId"],
                     "month" => $filter["month"],
                     "year" => $filter["year"],
                     "currentPage" => $page,
@@ -111,7 +108,6 @@
         <input type="hidden" id="companyId" value="<?= $filter["companyId"] ?>">
         <input type="hidden" id="branchId" value="<?= $filter["branchId"] ?>">
         <input type="hidden" id="teamId" value="<?= $filter["teamId"] ?>">
-        <input type="hidden" id="employeeId" value="<?= $filter["employeeId"] ?>">
         <input type="hidden" id="month" value="<?= $filter["month"] ?>">
         <input type="hidden" id="year" value="<?= $filter["year"] ?>">
         <input type="hidden" id="status" value="<?= $filter["status"] ?>">
@@ -205,9 +201,8 @@ $("#gotoPage").on("submit", function(e) {
                 var url = $url + "setting/employee/encode-filter";
                 var companyId = $("#companyId").val();
                 var branchId = $("#branchId").val();
-                var teamId = $("#teamId").val();
-                var employeeId = $("#employeeId").val();
                 var departmentId = $("#departmentId").val();
+                var teamId = $("#teamId").val();
                 var status = $("#status").val();
                 var currentPage = $("#currentPage").val();
                 var pageType = $("#pageType").val();
@@ -223,7 +218,6 @@ $("#gotoPage").on("submit", function(e) {
                         branchId: branchId,
                         departmentId: departmentId,
                         teamId: teamId,
-                        employeeId: employeeId,
                         status: status,
                         currentPage: inputPage,
                         pageType: pageType,

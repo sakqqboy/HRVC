@@ -687,9 +687,9 @@ class ManagementController extends Controller
 								$data3[$kgiId] = $commonData;
 							}
 							$count++;
+							$i++;
 						}
 						$total++;
-						$i++;
 					}
 				}
 

@@ -97,8 +97,8 @@ $this->title = "TEAM KGI";
 
             <div class="row mt-20 pl-10 pr-10 pim-content mb-10" style="--bs-gutter-x:0px;" id="main-body">
                 <?php
-                if (isset($teamKgis) && count($teamKgis) > 0) {
-                    foreach ($teamKgis as $kgiTeamId => $kgi) :
+                if (isset($teamKgis["data"]) && count($teamKgis["data"]) > 0) {
+                    foreach ($teamKgis["data"] as $kgiTeamId => $kgi) :
                         $canEdit = 0;
                         if ($role > 3) {
                             $canEdit = 1;
@@ -595,6 +595,17 @@ $this->title = "TEAM KGI";
                 }
                 ?>
             </div>
+            <?php
+            echo $this->render('pagination_page', [
+                'totalKgi' => $totalKgi,
+                "currentPage" => $currentPage,
+                'totalPage' => $totalPage,
+                "pagination" => $pagination,
+                "pageType" => "grid",
+                "filter" => isset($filter) ? $filter : []
+            ]);
+            ?>
+            <input type="hidden" id="totalPage" value="<?= $totalPage > 1 ? 1 : 0 ?>">
         </div>
     </div>
 </div>

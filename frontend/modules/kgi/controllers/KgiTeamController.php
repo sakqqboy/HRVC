@@ -226,9 +226,34 @@ class KgiTeamController extends Controller
 
 		]);
 	}
-	public function actionTeamKgiGrid()
+	public function actionTeamKgiGrid($hash = null)
 	{
 		$role = UserRole::userRight();
+		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
+		$managerId = '';
+		$supervisorId = '';
+		$staffId = '';
+
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+		}
 		if ($role < 3) {
 			//return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
 		}
@@ -261,15 +286,22 @@ class KgiTeamController extends Controller
 				"type" => $type
 			]));
 		}
+		$currentPage = 1;
+		if (isset($hash) && $hash != '') {
+			$pageArr = explode('page', $hash);
+			$currentPage = $pageArr[1];
+		}
+		$limit = 20;
 
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/all-team-kgi?userId=' . $userId . '&&role=' . $role);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/all-team-kgi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$teamKgis = curl_exec($api);
 		$teamKgis = json_decode($teamKgis, true);
 
+		//throw new exception(count($teamKgis["data"]));
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
@@ -296,11 +328,13 @@ class KgiTeamController extends Controller
 		}
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
-
-		//throw new Exception($role);
-		// throw new Exception(print_r($teamKgis,true));
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
+
+		$totalKgi = KgiTeam::totalKgiTeam($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
+		//throw new exception($totalKgi);
+		$totalPage = ceil($totalKgi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
 		return $this->render('kgi_team_grid', [
 			"units" => $units,
 			"months" => $months,
@@ -320,7 +354,11 @@ class KgiTeamController extends Controller
 			"status" => null,
 			"year" => null,
 			"waitForApprove" => $waitForApprove,
-			"employeeCompanyId" => $employeeCompanyId
+			"employeeCompanyId" => $employeeCompanyId,
+			"totalKgi" => $totalKgi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
+			"pagination" => $pagination,
 		]);
 	}
 	public function actionSearchKgiTeam()

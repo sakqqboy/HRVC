@@ -74,6 +74,7 @@ class KgiPersonalController extends Controller
 		$data2 = [];
 		$data3 = [];
 		$data4 = [];
+		$total = 0;
 		$employeeId = Employee::employeeId($userId);
 		$startAt = (($currentPage - 1) * $limit);
 		if ($role <= 3) {
@@ -199,11 +200,15 @@ class KgiPersonalController extends Controller
 					} else {
 						$data3[$kgiEmployeeId] = $commonData;
 					}
+					$total++;
 				}
 			endforeach;
 		}
+
 		$data = $data1 + $data2 + $data3 + $data4;
-		return json_encode($data);
+		$result["data"] = $data;
+		$result["total"] = $total;
+		return json_encode($result);
 	}
 	public function actionKgiEmployeeDetail($kgiEmployeeId, $kgiEmployeeHistoryId)
 	{
@@ -505,13 +510,14 @@ class KgiPersonalController extends Controller
 						$total++;
 						$i++;
 					}
-					$i++;
 				}
 			endforeach;
 		}
 		//throw new exception(print_r($data1, true));
 		$data = $data1 + $data2 + $data3 + $data4;
-		return json_encode($data);
+		$result["data"] = $data;
+		$result["total"] = $total;
+		return json_encode($result);
 	}
 	public function actionKgiIndividualSummarize($kgiEmployeeId)
 	{

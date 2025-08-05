@@ -36,7 +36,7 @@ class KgiTeam extends \frontend\models\hrvc\master\KgiTeamMaster
     }
     public static function isInThisKgi($teamId, $kgiId)
     {
-        $kgiTeam = KgiTeam::find()->where(["teamId" => $teamId, "kgiId" => $kgiId, "status" => [1,2,4]])->asArray()->one();
+        $kgiTeam = KgiTeam::find()->where(["teamId" => $teamId, "kgiId" => $kgiId, "status" => [1, 2, 4]])->asArray()->one();
         $has = 0;
         if (isset($kgiTeam) && !empty($kgiTeam)) {
             $has = 1;
@@ -144,5 +144,59 @@ class KgiTeam extends \frontend\models\hrvc\master\KgiTeamMaster
             $date = ModelMaster::engDate($kgiHistory["nextCheckDate"], 2);
         }
         return $date;
+    }
+    public static function totalKgiTeam($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employeeId)
+    {
+        $total = 0;
+        if ($adminId != '' || $gmId != '') {
+            $kgis = KgiTeam::find()
+                ->where(["status" => [1, 2, 4]])
+                ->orderBy('updateDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if ($supervisorId != '' || $managerId != '') {
+            $branchId = Employee::EmployeeDetail($employeeId)["branchId"];
+            $kgis = KgiTeam::find()
+                ->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
+                ->JOIN("LEFT JOIN", "employee e", "e.teamId=t.teamId")
+                ->where([
+                    "kgi_team.status" => [1, 2, 4],
+                    "e.branchId" => $branchId
+                ])
+                ->orderBy('kgi_team.updateDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if ($teamLeaderId != '') {
+            $employeeId = Employee::employeeId($teamLeaderId);
+            $teamId = Employee::employeeTeam($employeeId);
+            if (isset($teamId["teamId"])) {
+                $kgis = KgiTeam::find()
+                    ->where([
+                        "status" => [1, 2, 4],
+                        "teamId" => $teamId
+                    ])
+                    ->orderBy('updateDateTime DESC')
+                    ->asArray()
+                    ->all();
+            }
+        }
+        if ($staffId != '') {
+            $employeeId = Employee::employeeId($staffId);
+            $teamId = Employee::employeeTeam($employeeId);
+            $kgis = KgiTeam::find()
+                ->where([
+                    "status" => [1, 2, 4],
+                    "teamId" => $teamId
+                ])
+                ->orderBy('updateDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if (isset($kgis) && count($kgis) > 0) {
+            $total = count($kgis);
+        }
+        return $total;
     }
 }

@@ -214,16 +214,18 @@ class KgiTeamController extends Controller
 		}
 		return json_encode($kgiTeamHistory);
 	}
-	public function actionAllTeamKgi($userId, $role)
+	public function actionAllTeamKgi($userId, $role, $currentPage, $limit)
 	{
 		$data = [];
 		$data1 = [];
 		$data2 = [];
 		$data3 = [];
 		$data4 = [];
+		$total = 0;
 		$employeeId = Employee::employeeId($userId);
 		$employee = Employee::EmployeeDetail($employeeId);
 		$teamId = $employee["teamId"];
+		$startAt = (($currentPage - 1) * $limit);
 		if ($role <= 3) {
 			$kgiTeams = KgiTeam::find()
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,kgi_team.month,kgi_team.year,
@@ -247,20 +249,10 @@ class KgiTeamController extends Controller
 				->all();
 		}
 		if (isset($kgiTeams) && count($kgiTeams) > 0) {
+			$i = 0;
+			$count = 1;
 			foreach ($kgiTeams as $kgiTeam) :
 				$commonData = [];
-				// $kgiTeamHistory = KgiTeamHistory::find()
-				// 	->where(["kgiTeamId" => $kgiTeam["kgiTeamId"], "status" => [1, 2, 4]])
-				// 	->asArray()
-				// 	->orderBy('createDateTime DESC')
-				// 	->one();
-				// if (!isset($kgiTeamHistory) || empty($kgiTeamHistory)) {
-				// 	$kgiTeamHistory = KgiTeam::find()
-				// 		->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
-				// 		->asArray()
-				// 		->orderBy('createDateTime DESC')
-				// 		->one();
-				// }
 				$ratio = 0;
 				if ($kgiTeam["target"] != '' && $kgiTeam["target"] != 0 && $kgiTeam["target"] != null) {
 					if ($kgiTeam["code"] == '<' || $kgiTeam["code"] == '=') {
@@ -342,11 +334,17 @@ class KgiTeamController extends Controller
 					} else {
 						$data3[$kgiTeamId] = $commonData;
 					}
+					$count++;
+					$i++;
+					$total++;
 				}
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
-		return json_encode($data);
+		$data = array_slice($data, $startAt, $limit, true);
+		$result["data"] = $data;
+		$result["total"] = $total;
+		return json_encode($result);
 	}
 	public function actionKgiTeamDetail($kgiTeamId, $kgiTeamHistoryId)
 	{

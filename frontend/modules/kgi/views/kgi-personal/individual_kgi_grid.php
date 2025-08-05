@@ -100,8 +100,8 @@ $this->title = "INDIVIDUAL KGI";
             </div>
             <div class="row mt-20 pl-10 pr-10 pim-content mb-10" style="--bs-gutter-x:0px;" id="main-body">
                 <?php
-                if (isset($kgis) && count($kgis) > 0) {
-                    foreach ($kgis as $kgiEmployeeId => $kgi) :
+                if (isset($kgis["data"]) && count($kgis["data"]) > 0) {
+                    foreach ($kgis["data"] as $kgiEmployeeId => $kgi) :
                         $canEdit = KgiEmployee::canEdit($role, $kgiEmployeeId);
                         if ($kgi["isOver"] == 1) {
                             $class = 'bg-over';

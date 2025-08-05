@@ -634,6 +634,7 @@ class KgiPersonalController extends Controller
 		$employees = [];
 		$teams = [];
 		$role = UserRole::userRight();
+
 		Session::PimEmployeeFilter($companyId, $branchId, $teamId, $employeeId, $month, $year, $status, $type);
 		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
 			if ($type == "list") {
@@ -693,6 +694,17 @@ class KgiPersonalController extends Controller
 			}
 			//throw new Exception(print_r($teams, true));
 		}
+		if ($companyId != "") {
+			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
+			$branches = curl_exec($api);
+			$branches = json_decode($branches, true);
+		}
+		if ($branchId != "") {
+			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-team?id=' . $branchId);
+			$teams = curl_exec($api);
+			$teams = json_decode($teams, true);
+		}
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
 		$allCompany = curl_exec($api);
 		$allCompany = json_decode($allCompany, true);
@@ -709,13 +721,29 @@ class KgiPersonalController extends Controller
 		} else {
 			$file = "individual_kgi_grid";
 		}
-		$months = ModelMaster::monthFull(1);
-		$isManager = UserRole::isManager();
+
 		if ($teamId != '') {
 			$employees = Team::employeeInTeamDetail($teamId);
 		}
+		$filter = [
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			"teamId" => $teamId,
+			"employeeId" => $employeeId,
+			"month" => $month,
+			"year" => $year,
+			"status" => $status,
+			"perPage" => 20,
+		];
+		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
+
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
+
+		$totalKgi = $kgis["total"];
+		$totalPage = ceil($totalKgi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
 
 		return $this->render($file, [
 			"units" => $units,
@@ -738,7 +766,12 @@ class KgiPersonalController extends Controller
 			"allCompany" => $countAllCompany,
 			"companyPic" => $companyPic,
 			"totalBranch" => $totalBranch,
-			"employeeCompanyId" => $employeeCompanyId
+			"employeeCompanyId" => $employeeCompanyId,
+			"pagination" => $pagination,
+			"totalKgi" => $totalKgi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
+			"filter" => $filter
 		]);
 	}
 	public function actionNextKgiEmployeeHistory()

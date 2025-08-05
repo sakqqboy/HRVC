@@ -139,7 +139,7 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
             $kgis = KgiEmployee::find()
                 ->where(["status" => [1, 2, 4]])
                 ->asArray()
-                ->orderBy('createDateTime DESC')
+                ->orderBy('updateDateTime DESC')
                 ->asArray()
                 ->all();
         }
@@ -151,14 +151,15 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
                 $userId = $managerId;
             }
             $employeeId = Employee::employeeId($userId);
-            $companyId = Employee::EmployeeDetail($employeeId)["companyId"];
+            $branchId = Employee::EmployeeDetail($employeeId)["branchId"];
             $kgis = KgiEmployee::find()
+                ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
                 ->where([
-                    "status" => [1, 2, 4],
-                    "employeeId" => $companyId
+                    "kgi_employee.status" => [1, 2, 4],
+                    "e.branchId" => $branchId
                 ])
                 ->asArray()
-                ->orderBy('createDateTime DESC')
+                ->orderBy('kgi_employee.updateDateTime DESC')
                 ->asArray()
                 ->all();
         }
@@ -169,11 +170,11 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
                 $kgis = KgiEmployee::find()
                     ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
                     ->where([
-                        "status" => [1, 2, 4],
+                        "kgi_employee.status" => [1, 2, 4],
                         "e.teamId" => $teamId
                     ])
                     ->asArray()
-                    ->orderBy('e.employeeFirstname')
+                    ->orderBy('kgi_employee.updateDateTime DESC')
                     ->asArray()
                     ->all();
             }
@@ -185,7 +186,7 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
                     "employeeId" => $employeeId
                 ])
                 ->asArray()
-                ->orderBy('createDateTime DESC')
+                ->orderBy('updateDateTime DESC')
                 ->asArray()
                 ->all();
         }

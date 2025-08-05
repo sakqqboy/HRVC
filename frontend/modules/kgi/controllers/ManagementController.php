@@ -241,10 +241,11 @@ class ManagementController extends Controller
 		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
+		$totalBranch = Branch::totalBranch();
+
 		$totalKgi = Kgi::totalKgi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
 		$totalPage = ceil($totalKgi / $limit);
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
-		$totalBranch = Branch::totalBranch();
 
 		return $this->render('kgi_grid', [
 			"units" => $units,
@@ -1225,7 +1226,7 @@ class ManagementController extends Controller
 			"year" => $year,
 			"status" => $status,
 			"branches" => $branches,
-			"perPage" => 5,
+			"perPage" => 20,
 		];
 		//throw new exception(print_r($kgis, true));
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
