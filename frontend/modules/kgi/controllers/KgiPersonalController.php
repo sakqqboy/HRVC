@@ -642,6 +642,11 @@ class KgiPersonalController extends Controller
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi-grid');
 			}
 		}
+		$currentPage = 1;
+		$limit = 20;
+		if (isset($param["currentPage"])) {
+			$currentPage = $param["currentPage"];
+		}
 		if ($employeeId != null) {
 			$userId = User::userIdByEmployeeId($employeeId);
 		} else {
@@ -653,7 +658,7 @@ class KgiPersonalController extends Controller
 		}
 
 		//$paramText = 'month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&userId=' . $userId;
-		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&userId=' . $userId;
+		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&userId=' . $userId . '&&currentPage=' . $currentPage . '&&limit=' . $limit;
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');

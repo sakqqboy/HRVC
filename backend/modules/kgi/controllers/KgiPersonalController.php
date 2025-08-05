@@ -333,14 +333,16 @@ class KgiPersonalController extends Controller
 		}
 		return json_encode($kgiEmployeeHistory);
 	}
-	public function actionKgiPersonalFilter($companyId, $branchId, $teamId, $month, $status, $year, $userId)
+	public function actionKgiPersonalFilter($companyId, $branchId, $teamId, $month, $status, $year, $userId, $currentPage, $limit)
 	{
 		$data = [];
 		$data1 = [];
 		$data2 = [];
 		$data3 = [];
 		$data4 = [];
+		$total = 0;
 		$searchStatus = '';
+		$startAt = (($currentPage - 1) * $limit);
 		if ($status == 1 || $status == 3 || $status == 4) {
 			$searchStatus = 1;
 		}
@@ -368,6 +370,8 @@ class KgiPersonalController extends Controller
 			->all();
 		$data = [];
 		if (isset($kgiEmployees) && count($kgiEmployees) > 0) {
+			$i = 0;
+			$count = 1;
 			foreach ($kgiEmployees as $kgiEmployee) :
 				$commonData = [];
 				$show = 0;
@@ -486,16 +490,22 @@ class KgiPersonalController extends Controller
 						];
 					}
 					if (!empty($commonData)) {
-						if (($kgiEmployeeHistory["fromDate"] == "" || $kgiEmployeeHistory["toDate"] == "") && $isOver == 2) {
-							$data1[$kgiEmployeeId] = $commonData;
-						} elseif ($isOver == 1 && $kgiEmployeeHistory["status"] == 1) {
-							$data2[$kgiEmployeeId] = $commonData;
-						} elseif ($kgiEmployeeHistory["status"] == 2) {
-							$data4[$kgiEmployeeId] = $commonData;
-						} else {
-							$data3[$kgiEmployeeId] = $commonData;
+						if ($i >= $startAt && $count <= $limit) {
+							if (($kgiEmployeeHistory["fromDate"] == "" || $kgiEmployeeHistory["toDate"] == "") && $isOver == 2) {
+								$data1[$kgiEmployeeId] = $commonData;
+							} elseif ($isOver == 1 && $kgiEmployeeHistory["status"] == 1) {
+								$data2[$kgiEmployeeId] = $commonData;
+							} elseif ($kgiEmployeeHistory["status"] == 2) {
+								$data4[$kgiEmployeeId] = $commonData;
+							} else {
+								$data3[$kgiEmployeeId] = $commonData;
+							}
+							$count++;
 						}
+						$total++;
+						$i++;
 					}
+					$i++;
 				}
 			endforeach;
 		}

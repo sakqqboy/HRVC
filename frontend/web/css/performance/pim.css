@@ -647,9 +647,10 @@
 	height: 18px;
 	font-weight: 600;
 	font-size: 12px;
-	text-align: center;
-	align-self: center;
 	border-radius: 18px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .inprogress-tag {

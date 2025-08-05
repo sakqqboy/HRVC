@@ -689,10 +689,10 @@ class ManagementController extends Controller
 							$count++;
 						}
 						$total++;
+						$i++;
 					}
 				}
 
-				$i++;
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
