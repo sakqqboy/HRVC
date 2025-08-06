@@ -109,12 +109,12 @@ class ManagementController extends Controller
                 "type" => $type
             ]));
         }
-         $currentPage = 1;
-		if (isset($hash) && $hash != '') {
-			$pageArr = explode('page', $hash);
-			$currentPage = $pageArr[1];
-		}
-		$limit = 20;
+        $currentPage = 1;
+        if (isset($hash) && $hash != '') {
+            $pageArr = explode('page', $hash);
+            $currentPage = $pageArr[1];
+        }
+        $limit = 20;
 
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -134,25 +134,25 @@ class ManagementController extends Controller
         $kpis = json_decode($kpis, true);
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
+        $allCompany = curl_exec($api);
+        $allCompany = json_decode($allCompany, true);
 
 
-		curl_close($api);
+        curl_close($api);
 
-		$countAllCompany = 0;
-		if (count($allCompany) > 0) {
-			$countAllCompany = count($allCompany);
-			$companyPic = Company::randomPic($allCompany, 3);
-		}
-		$months = ModelMaster::monthFull(1);
-		$isManager = UserRole::isManager();
-		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
-		$employeeCompanyId = $employee["companyId"];
-		$totalKpi = Kpi::totalKpi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
-		$totalPage = ceil($totalKpi / $limit);
-		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
-		$totalBranch = Branch::totalBranch();
+        $countAllCompany = 0;
+        if (count($allCompany) > 0) {
+            $countAllCompany = count($allCompany);
+            $companyPic = Company::randomPic($allCompany, 3);
+        }
+        $months = ModelMaster::monthFull(1);
+        $isManager = UserRole::isManager();
+        $employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+        $employeeCompanyId = $employee["companyId"];
+        $totalKpi = Kpi::totalKpi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
+        $totalPage = ceil($totalKpi / $limit);
+        $pagination = ModelMaster::getPagination($currentPage, $totalPage);
+        $totalBranch = Branch::totalBranch();
 
         // throw new exception(print_r($employeeCompanyId, true));
         return $this->render('index', [
@@ -165,13 +165,13 @@ class ManagementController extends Controller
             "userId" => Yii::$app->user->id,
             "companyId" => $companyId,
             "employeeCompanyId" => $employeeCompanyId,
-			"totalKpi" => $totalKpi,
-			"currentPage" => $currentPage,
-			"totalPage" => $totalPage,
-			"pagination" => $pagination,
-			"allCompany" => $countAllCompany,
-			"companyPic" => $companyPic,
-			"totalBranch" => $totalBranch
+            "totalKpi" => $totalKpi,
+            "currentPage" => $currentPage,
+            "totalPage" => $totalPage,
+            "pagination" => $pagination,
+            "allCompany" => $countAllCompany,
+            "companyPic" => $companyPic,
+            "totalBranch" => $totalBranch
         ]);
 
         // curl_close($api);
@@ -191,7 +191,7 @@ class ManagementController extends Controller
         //     "companyId" => $companyId
         // ]);
     }
-    public function actionGrid()
+    public function actionGrid($hash = null)
     {
         $groupId = Group::currentGroupId();
         if ($groupId == null) {
@@ -246,11 +246,11 @@ class ManagementController extends Controller
         }
 
         $currentPage = 1;
-		if (isset($hash) && $hash != '') {
-			$pageArr = explode('page', $hash);
-			$currentPage = $pageArr[1];
-		}
-		$limit = 20;
+        if (isset($hash) && $hash != '') {
+            $pageArr = explode('page', $hash);
+            $currentPage = $pageArr[1];
+        }
+        $limit = 20;
 
         $api = curl_init();
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -265,30 +265,30 @@ class ManagementController extends Controller
         $units = json_decode($units, true);
 
         //curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index');
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
         $kpis = curl_exec($api);
         $kpis = json_decode($kpis, true);
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
+        $allCompany = curl_exec($api);
+        $allCompany = json_decode($allCompany, true);
 
 
-		curl_close($api);
+        curl_close($api);
 
-		$countAllCompany = 0;
-		if (count($allCompany) > 0) {
-			$countAllCompany = count($allCompany);
-			$companyPic = Company::randomPic($allCompany, 3);
-		}
-		$months = ModelMaster::monthFull(1);
-		$isManager = UserRole::isManager();
-		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
-		$employeeCompanyId = $employee["companyId"];
-		$totalKpi = Kpi::totalKpi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
-		$totalPage = ceil($totalKpi / $limit);
-		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
-		$totalBranch = Branch::totalBranch();
+        $countAllCompany = 0;
+        if (count($allCompany) > 0) {
+            $countAllCompany = count($allCompany);
+            $companyPic = Company::randomPic($allCompany, 3);
+        }
+        $months = ModelMaster::monthFull(1);
+        $isManager = UserRole::isManager();
+        $employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+        $employeeCompanyId = $employee["companyId"];
+        $totalKpi = Kpi::totalKpi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
+        $totalPage = ceil($totalKpi / $limit);
+        $pagination = ModelMaster::getPagination($currentPage, $totalPage);
+        $totalBranch = Branch::totalBranch();
 
         // throw new exception(print_r($employeeCompanyId, true));
         return $this->render('kpi_grid', [
@@ -301,16 +301,16 @@ class ManagementController extends Controller
             "userId" => Yii::$app->user->id,
             "companyId" => $companyId,
             "employeeCompanyId" => $employeeCompanyId,
-			"totalKpi" => $totalKpi,
-			"currentPage" => $currentPage,
-			"totalPage" => $totalPage,
-			"pagination" => $pagination,
-			"allCompany" => $countAllCompany,
-			"companyPic" => $companyPic,
-			"totalBranch" => $totalBranch
+            "totalKpi" => $totalKpi,
+            "currentPage" => $currentPage,
+            "totalPage" => $totalPage,
+            "pagination" => $pagination,
+            "allCompany" => $countAllCompany,
+            "companyPic" => $companyPic,
+            "totalBranch" => $totalBranch
         ]);
     }
-    
+
     public function actionCreateKpi()
     {
 
@@ -645,16 +645,16 @@ class ManagementController extends Controller
         $companies = json_decode($companies, true);
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
+        $allCompany = curl_exec($api);
+        $allCompany = json_decode($allCompany, true);
         curl_close($api);
-        
+
         $countAllCompany = 0;
-		if (count($allCompany) > 0) {
-			$countAllCompany = count($allCompany);
-			$companyPic = Company::randomPic($allCompany, 3);
-		}
-		$totalBranch = Branch::totalBranch();
+        if (count($allCompany) > 0) {
+            $countAllCompany = count($allCompany);
+            $companyPic = Company::randomPic($allCompany, 3);
+        }
+        $totalBranch = Branch::totalBranch();
         // return json_encode($kpi);
         return $this->render('kpi_from', [
             "statusform" =>  "update",
@@ -668,9 +668,9 @@ class ManagementController extends Controller
             "kpiId" => $kpiId,
             "lastUrl" => Yii::$app->request->referrer,
             "allCompany" => $countAllCompany,
-			"companyPic" => $companyPic,
-			"totalBranch" => $totalBranch
-            
+            "companyPic" => $companyPic,
+            "totalBranch" => $totalBranch
+
         ]);
     }
     public function actionUpdateKpi()
@@ -1067,7 +1067,12 @@ class ManagementController extends Controller
                 return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
             }
         }
-        
+        $currentPage = 1;
+        $limit = 20;
+        if (isset($param["currentPage"])) {
+            $currentPage = $param["currentPage"];
+        }
+
         $paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year;
         $role = UserRole::userRight();
         $adminId = '';
@@ -1095,16 +1100,16 @@ class ManagementController extends Controller
             $staffId = Yii::$app->user->id;
             //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
         }
-        
+
         //$paramText .= '&&adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
-        $paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
+        $paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId . '&&currentPage=' . $currentPage . '&&limit=' . $limit;
 
         //throw new exception($paramText);
         $groupId = Group::currentGroupId();
         if ($groupId == null) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
         }
-       
+
         $api = curl_init();
         $currentPage = 1;
         if (isset($hash) && $hash != '') {
@@ -1114,7 +1119,7 @@ class ManagementController extends Controller
             }
         }
         $limit = 20;
-        
+
         curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
@@ -1142,30 +1147,39 @@ class ManagementController extends Controller
         }
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
+        $allCompany = curl_exec($api);
+        $allCompany = json_decode($allCompany, true);
 
         curl_close($api);
         // $months = ModelMaster::monthFull(1);
         if ($type == "list") {
-            $file = "kpi_search_result";
+            $file = "index";
         } else {
-            $file = "kpi_search_result_grid";
+            $file = "kpi_grid";
         }
         // $isManager = UserRole::isManager();
         $countAllCompany = 0;
-		if (count($allCompany) > 0) {
-			$countAllCompany = count($allCompany);
-			$companyPic = Company::randomPic($allCompany, 3);
-		}
-		$months = ModelMaster::monthFull(1);
-		$isManager = UserRole::isManager();
-		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
-		$employeeCompanyId = $employee["companyId"];
-		$totalKpi = Kpi::totalKpi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
-		$totalPage = ceil($totalKpi / $limit);
-		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
-		$totalBranch = Branch::totalBranch();
+        if (count($allCompany) > 0) {
+            $countAllCompany = count($allCompany);
+            $companyPic = Company::randomPic($allCompany, 3);
+        }
+        $months = ModelMaster::monthFull(1);
+        $isManager = UserRole::isManager();
+        $filter = [
+            "companyId" => $companyId,
+            "branchId" => $branchId,
+            "month" => $month,
+            "year" => $year,
+            "status" => $status,
+            "branches" => $branches,
+            "perPage" => 20,
+        ];
+        $employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+        $employeeCompanyId = $employee["companyId"];
+        $totalKpi = Kpi::totalKpi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
+        $totalPage = ceil($totalKpi / $limit);
+        $pagination = ModelMaster::getPagination($currentPage, $totalPage);
+        $totalBranch = Branch::totalBranch();
         //  throw new Exception(print_r($countAllCompany,true));   
         return $this->render($file, [
             "units" => $units,
@@ -1184,13 +1198,14 @@ class ManagementController extends Controller
             "role" => $role,
             "userId" => Yii::$app->user->id,
             "employeeCompanyId" => $employeeCompanyId,
-			"totalKpi" => $totalKpi,
-			"currentPage" => $currentPage,
-			"totalPage" => $totalPage,
-			"pagination" => $pagination,
-			"allCompany" => $countAllCompany,
-			"companyPic" => $companyPic,
-			"totalBranch" => $totalBranch
+            "totalKpi" => $totalKpi,
+            "currentPage" => $currentPage,
+            "totalPage" => $totalPage,
+            "pagination" => $pagination,
+            "allCompany" => $countAllCompany,
+            "companyPic" => $companyPic,
+            "totalBranch" => $totalBranch,
+            "filter" => $filter,
         ]);
     }
     public function actionCompanyMultiBranch()

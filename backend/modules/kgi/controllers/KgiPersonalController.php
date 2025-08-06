@@ -107,18 +107,6 @@ class KgiPersonalController extends Controller
 		if (count($kgiEmployees) > 0) {
 			foreach ($kgiEmployees as $kgiEmployee) :
 				$commonData = [];
-				// $kgiEmployeeHistory = KgiEmployeeHistory::find()
-				// 	->where(["kgiEmployeeId" => $kgi["kgiEmployeeId"], "status" => [1, 2, 4], "month" => $kgi["month"], "year" => $kgi["year"]])
-				// 	->asArray()
-				// 	->orderBy('createDateTime DESC')
-				// 	->one();
-				// if (!isset($kgiEmployeeHistory) || empty($kgiEmployeeHistory)) {
-				// 	$kgiEmployeeHistory = KgiEmployee::find()
-				// 		->where(["kgiEmployeeId" => $kgi["kgiEmployeeId"], "status" => [1, 2, 4], "month" => $kgi["month"], "year" => $kgi["year"]])
-				// 		->asArray()
-				// 		->orderBy('createDateTime DESC')
-				// 		->one();
-				// }
 				$ratio = 0;
 				if ($kgiEmployee["target"] != '' && $kgiEmployee["target"] != 0) {
 					if ($kgiEmployee["code"] == '<' || $kgiEmployee["code"] == '=') {

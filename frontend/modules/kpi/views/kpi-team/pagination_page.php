@@ -14,6 +14,7 @@
             $PreviousPage = ModelMaster::encodeParams([
                 "companyId" => $filter["companyId"],
                 "branchId" => $filter["branchId"],
+                "teamId" => $filter["teamId"],
                 "month" => $filter["month"],
                 "year" => $filter["year"],
                 "currentPage" => $currentPage - 1,
@@ -24,6 +25,7 @@
             $nextPage = ModelMaster::encodeParams([
                 "companyId" => $filter["companyId"],
                 "branchId" => $filter["branchId"],
+                "teamId" => $filter["teamId"],
                 "month" => $filter["month"],
                 "year" => $filter["year"],
                 "currentPage" => $currentPage + 1,
@@ -51,6 +53,7 @@
                 $directPage = ModelMaster::encodeParams([
                     "companyId" => $filter["companyId"],
                     "branchId" => $filter["branchId"],
+                    "teamId" => $filter["teamId"],
                     "month" => $filter["month"],
                     "year" => $filter["year"],
                     "currentPage" => $page,
@@ -104,6 +107,7 @@
     ?>
         <input type="hidden" id="companyId" value="<?= $filter["companyId"] ?>">
         <input type="hidden" id="branchId" value="<?= $filter["branchId"] ?>">
+        <input type="hidden" id="teamId" value="<?= $filter["teamId"] ?>">
         <input type="hidden" id="month" value="<?= $filter["month"] ?>">
         <input type="hidden" id="year" value="<?= $filter["year"] ?>">
         <input type="hidden" id="status" value="<?= $filter["status"] ?>">

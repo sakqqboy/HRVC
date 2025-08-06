@@ -556,7 +556,7 @@ class KpiTeamController extends Controller
 		return json_encode($res);
 	}
 
-	public function actionTeamKpiGrid()
+	public function actionTeamKpiGrid($hash = null)
 	{
 		$role = UserRole::userRight();
 		if ($role < 3) {
@@ -569,32 +569,32 @@ class KpiTeamController extends Controller
 		$userId = Yii::$app->user->id;
 		$isAdmin = UserRole::isAdmin();
 		$userBranchId = User::userBranchId();
- 		$adminId = '';
-        $gmId = '';
-        $teamLeaderId = '';
-        $managerId = '';
-        $supervisorId = '';
-        $staffId = '';
-        $companyId = '';
+		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
+		$managerId = '';
+		$supervisorId = '';
+		$staffId = '';
+		$companyId = '';
 		if ($role == 7) {
-            $adminId = Yii::$app->user->id;
-        }
-        if ($role == 6) {
-            $gmId = Yii::$app->user->id;
-        }
-        if ($role == 5) {
-            $managerId = Yii::$app->user->id;
-        }
-        if ($role == 4) {
-            $supervisorId = Yii::$app->user->id;
-        }
-        if ($role == 3) {
-            $teamLeaderId = Yii::$app->user->id;
-        }
-        if ($role == 1 || $role == 2) {
-            $staffId = Yii::$app->user->id;
-            //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
-        }
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+		}
 		$userTeamId = Team::userTeam($userId);
 		$session = Yii::$app->session;
 		if ($session->has('kpiTeam')) {
@@ -621,12 +621,12 @@ class KpiTeamController extends Controller
 			$pageArr = explode('page', $hash);
 			$currentPage = $pageArr[1];
 		}
-		$limit = 20;
+		$limit = 5;
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$teamKpis = curl_exec($api);
 		$teamKpis = json_decode($teamKpis, true);
 		//throw new Exception('kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role);
@@ -743,11 +743,18 @@ class KpiTeamController extends Controller
 				return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
 			}
 		}
-		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year;
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
+		$currentPage = 1;
+		$limit = 20;
+		if (isset($param["currentPage"])) {
+			$currentPage = $param["currentPage"];
+		}
+		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&currentPage=' . $currentPage . '&&limit=' . $limit;
+		$groupId = Group::currentGroupId();
+
 		$userId = Yii::$app->user->id;
 		$userTeamId = Team::userTeam($userId);
 		//throw new exception('kpi/kpi-team/kpi-team-filter?' . $paramText);
@@ -794,6 +801,18 @@ class KpiTeamController extends Controller
 		$months = ModelMaster::monthFull(1);
 		$role = UserRole::userRight();
 		$isManager = UserRole::isManager();
+		$totalKpi = $teamKpis["total"];
+		$totalPage = ceil($totalKpi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
+		$filter = [
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			"teamId" => $teamId,
+			"month" => $month,
+			"year" => $year,
+			"status" => $status,
+			"perPage" => 20,
+		];
 		return $this->render($file, [
 			"units" => $units,
 			"months" => $months,
@@ -813,7 +832,12 @@ class KpiTeamController extends Controller
 			"status" => $status,
 			"year" => $year,
 			"waitForApprove" => $waitForApprove,
-			"employeeCompanyId" => $employeeCompanyId
+			"employeeCompanyId" => $employeeCompanyId,
+			"filter" => $filter,
+			"pagination" => $pagination,
+			"totalKpi" => $totalKpi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
 		]);
 	}
 	public function actionPrepareUpdate($hash)

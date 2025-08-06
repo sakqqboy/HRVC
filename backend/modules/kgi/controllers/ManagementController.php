@@ -44,8 +44,6 @@ class ManagementController extends Controller
 				->where(["status" => [1, 2, 4]])
 				->asArray()
 				->orderBy('createDateTime DESC')
-				->offset($startAt)
-				->limit($limit)
 				->asArray()
 				->all();
 		}
@@ -69,8 +67,6 @@ class ManagementController extends Controller
 				->asArray()
 				->orderBy('createDateTime DESC')
 				->asArray()
-				->offset($startAt)
-				->limit($limit)
 				->all();
 		}
 		$data1 = [];

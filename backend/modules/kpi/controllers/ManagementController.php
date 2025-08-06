@@ -42,7 +42,7 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class ManagementController extends Controller
 {
-	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
+	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $currentPage, $limit)
 	{
 		if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
 			$kpis = Kpi::find()
@@ -77,6 +77,8 @@ class ManagementController extends Controller
 		$data2 = [];
 		$data3 = [];
 		$data4 = [];
+		$total = 0;
+		$startAt = (($currentPage - 1) * $limit);
 		if (count($kpis) > 0) {
 			foreach ($kpis as $kpi) :
 				$commonData = [];
@@ -156,11 +158,15 @@ class ManagementController extends Controller
 					} else {
 						$data3[$kpiId] = $commonData;
 					}
+					$total++;
 				}
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
-		return json_encode($data);
+		$data = array_slice($data, $startAt, $limit, true);
+		$result["data"] = $data;
+		$result["total"] = $total;
+		return json_encode($result);
 	}
 	public function actionKpiDetail($id, $kpiHistoryId)
 	{
@@ -726,14 +732,16 @@ class ManagementController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionKpiFilter($companyId, $branchId,  $month, $status, $year, $adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
+	public function actionKpiFilter($companyId, $branchId,  $month, $status, $year, $adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $currentPage, $limit)
 	{
 		$data = [];
 		$data1 = [];
 		$data2 = [];
 		$data3 = [];
 		$data4 = [];
+		$total = 0;
 		$searchStatus = '';
+		$startAt = (($currentPage - 1) * $limit);
 		if ($status == 1 || $status == 3 || $status == 4) {
 			$searchStatus = 1;
 		}
@@ -897,13 +905,17 @@ class ManagementController extends Controller
 						} else {
 							$data3[$kpiId] = $commonData;
 						}
+						$total++;
 					}
 				}
 
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
-		return json_encode($data);
+		$data = array_slice($data, $startAt, $limit, true);
+		$result["data"] = $data;
+		$result["total"] = $total;
+		return json_encode($result);
 	}
 	public function actionBranchKpi($branchId)
 	{

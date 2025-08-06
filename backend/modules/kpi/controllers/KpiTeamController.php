@@ -238,7 +238,7 @@ class KpiTeamController extends Controller
 		}
 		return json_encode($kpiTeamHistory);
 	}
-	public function actionAllTeamKpi($userId, $role)
+	public function actionAllTeamKpi($userId, $role, $currentPage, $limit)
 	{
 		$data = [];
 		$data1 = [];
@@ -248,6 +248,8 @@ class KpiTeamController extends Controller
 		$employeeId = Employee::employeeId($userId);
 		$employee = Employee::EmployeeDetail($employeeId);
 		$teamId = $employee["teamId"];
+		$total = 0;
+		$startAt = (($currentPage - 1) * $limit);
 		if ($role <= 3) {
 			$kpiTeams = KpiTeam::find()
 				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,kpi_team.month,kpi_team.year,
@@ -273,19 +275,6 @@ class KpiTeamController extends Controller
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $kpiTeam) :
 				$commonData = [];
-				// $kpiTeamHistory = KpiTeamHistory::find()
-				// 	->where(["kpiTeamId" => $kpiTeam["kpiTeamId"], "status" => [1, 2, 4]])
-				// 	->asArray()
-				// 	->orderBy('year DESC, month DESC,updateDateTime DESC')
-				// 	->one();
-
-				// if (!isset($kpiTeamHistory) || empty($kpiTeamHistory)) {
-				// 	$kpiTeamHistory = KpiTeam::find()
-				// 		->where(["kpiTeamId" => $kpiTeam["kpiTeamId"]])
-				// 		->asArray()
-				// 		->orderBy('createDateTime DESC')
-				// 		->one();
-				// }
 				$ratio = 0;
 				if ($kpiTeam["target"] != '' && $kpiTeam["target"] != 0 && $kpiTeam["target"] != null) {
 					if ($kpiTeam["code"] == '<' || $kpiTeam["code"] == '=') {
@@ -358,19 +347,25 @@ class KpiTeamController extends Controller
 					"lastestUpdate" => ModelMaster::engDate($kpiTeam["updateDateTime"], 2)
 
 				];
-				if (($kpiTeam["fromDate"] == "" || $kpiTeam["toDate"] == "") && $isOver == 2) {
-					$data1[$kpiTeamId] = $commonData;
-				} elseif ($isOver == 1 && $kpiTeam["status"] == 1) {
-					$data2[$kpiTeamId] = $commonData;
-				} elseif ($kpiTeam["status"] == 2) {
-					$data4[$kpiTeamId] = $commonData;
-				} else {
-					$data3[$kpiTeamId] = $commonData;
+				if (!empty($commonData)) {
+					if (($kpiTeam["fromDate"] == "" || $kpiTeam["toDate"] == "") && $isOver == 2) {
+						$data1[$kpiTeamId] = $commonData;
+					} elseif ($isOver == 1 && $kpiTeam["status"] == 1) {
+						$data2[$kpiTeamId] = $commonData;
+					} elseif ($kpiTeam["status"] == 2) {
+						$data4[$kpiTeamId] = $commonData;
+					} else {
+						$data3[$kpiTeamId] = $commonData;
+					}
+					$total++;
 				}
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
-		return json_encode($data);
+		$data = array_slice($data, $startAt, $limit, true);
+		$result["data"] = $data;
+		$result["total"] = $total;
+		return json_encode($result);
 	}
 
 	public function actionEachTeamEmployeeKpi($teamId, $kpiId)
@@ -846,13 +841,14 @@ class KpiTeamController extends Controller
 		}
 		return json_encode($kpiTeamHistory);
 	}
-	public function actionKpiTeamFilter($companyId, $branchId, $teamId, $month, $status, $year)
+	public function actionKpiTeamFilter($companyId, $branchId, $teamId, $month, $status, $year, $currentPage, $limit)
 	{
 		$data = [];
 		$data1 = [];
 		$data2 = [];
 		$data3 = [];
 		$data4 = [];
+		$total = 0;
 		$searchStatus = '';
 		if ($status == 1 || $status == 3 || $status == 4) {
 			$searchStatus = 1;
@@ -860,6 +856,7 @@ class KpiTeamController extends Controller
 		if ($status == 2) {
 			$searchStatus = 2;
 		}
+		$startAt = (($currentPage - 1) * $limit);
 		$kpiTeams = KpiTeam::find()
 			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,kpi_team.updateDateTime,kpi_team.month,kpi_team.year,
 			kpi_team.teamId,kpi_team.target,kpi_team.status,kpi_team.fromDate,kpi_team.toDate,kpi_team.nextCheckDate')
@@ -999,13 +996,16 @@ class KpiTeamController extends Controller
 						} else {
 							$data3[$kpiTeamId] = $commonData;
 						}
+						$total++;
 					}
 				}
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
-		//	throw new exception(print_r($data, true));
-		return json_encode($data);
+		$data = array_slice($data, $startAt, $limit, true);
+		$result["data"] = $data;
+		$result["total"] = $total;
+		return json_encode($result);
 	}
 	public function actionKpiTeamEmployee($kpiId, $month, $year)
 	{

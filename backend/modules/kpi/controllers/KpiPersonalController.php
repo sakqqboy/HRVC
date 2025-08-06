@@ -69,7 +69,7 @@ class KpiPersonalController extends Controller
 		}
 		return json_encode($employeeTeam);
 	}
-	public function actionEmployeeKpi($userId, $role)
+	public function actionEmployeeKpi($userId, $role, $currentPage, $limit)
 	{
 
 		$data = [];
@@ -77,7 +77,9 @@ class KpiPersonalController extends Controller
 		$data2 = [];
 		$data3 = [];
 		$data4 = [];
+		$total = 0;
 		$employeeId = Employee::employeeId($userId);
+		$startAt = (($currentPage - 1) * $limit);
 		if ($role <= 3) {
 			$kpiEmployees = KpiEmployee::find()
 				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,kpi_employee.updateDateTime,kpi_employee.month,kpi_employee.year,
@@ -104,18 +106,6 @@ class KpiPersonalController extends Controller
 		if (count($kpiEmployees) > 0) {
 			foreach ($kpiEmployees as $kpiEmployee) :
 				$commonData = [];
-				// $kpiEmployeeHistory = KpiEmployeeHistory::find()
-				// 	->where(["kpiEmployeeId" => $kpi["kpiEmployeeId"], "status" => [1, 2, 4]])
-				// 	->asArray()
-				// 	->orderBy('month DESC,year DESC,updateDateTime DESC')
-				// 	->one();
-				// if (!isset($kpiEmployeeHistory) || empty($kpiEmployeeHistory)) {
-				// 	$kpiEmployeeHistory = KpiEmployee::find()
-				// 		->where(["kpiEmployeeId" => $kpi["kpiEmployeeId"], "status" => [1, 2, 4]])
-				// 		->asArray()
-				// 		->orderBy('createDateTime DESC')
-				// 		->one();
-				// }
 				$ratio = 0;
 				if ($kpiEmployee["target"] != '' && $kpiEmployee["target"] != 0) {
 					if ($kpiEmployee["code"] == '<' || $kpiEmployee["code"] == '=') {
@@ -202,11 +192,15 @@ class KpiPersonalController extends Controller
 					} else {
 						$data3[$kpiEmployeeId] = $commonData;
 					}
+					$total++;
 				}
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
-		return json_encode($data);
+		$data = array_slice($data, $startAt, $limit, true);
+		$result["data"] = $data;
+		$result["total"] = $total;
+		return json_encode($result);
 	}
 
 
@@ -574,7 +568,7 @@ class KpiPersonalController extends Controller
 		}
 		return json_encode($kpiEmployeeHistory);
 	}
-	public function actionKpiPersonalFilter($companyId, $branchId, $teamId, $month, $status, $year, $userId)
+	public function actionKpiPersonalFilter($companyId, $branchId, $teamId, $month, $status, $year, $userId, $currentPage, $limit)
 	{
 		$data = [];
 		$data1 = [];
@@ -582,12 +576,14 @@ class KpiPersonalController extends Controller
 		$data3 = [];
 		$data4 = [];
 		$searchStatus = '';
+		$total = 0;
 		if ($status == 1 || $status == 3 || $status == 4) {
 			$searchStatus = 1;
 		}
 		if ($status == 2) {
 			$searchStatus = 2;
 		}
+		$startAt = (($currentPage - 1) * $limit);
 		$employeeId = Employee::employeeId2($userId);
 		$kpiEmployees = KpiEmployee::find()
 			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_employee.kpiEmployeeId,k.companyId,kpi_employee.updateDateTime,kpi_employee.month,kpi_employee.year,
@@ -736,12 +732,16 @@ class KpiPersonalController extends Controller
 						} else {
 							$data3[$kpiEmployeeId] = $commonData;
 						}
+						$total++;
 					}
 				}
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
-		return json_encode($data);
+		$data = array_slice($data, $startAt, $limit, true);
+		$result["data"] = $data;
+		$result["total"] = $total;
+		return json_encode($result);
 	}
 	public function actionKpiIndividualSummarize($kpiEmployeeId)
 	{
