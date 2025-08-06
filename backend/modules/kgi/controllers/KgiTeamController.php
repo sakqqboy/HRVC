@@ -447,7 +447,7 @@ class KgiTeamController extends Controller
 			->all();
 		return json_encode($kgiTeamHistory);
 	}
-	public function actionKgiTeamFilter($companyId, $branchId, $teamId, $month, $status, $year)
+	public function actionKgiTeamFilter($companyId, $branchId, $teamId, $month, $status, $year, $currentPage, $limit)
 	{
 		$data = [];
 		$data1 = [];
@@ -461,6 +461,8 @@ class KgiTeamController extends Controller
 		if ($status == 2) {
 			$searchStatus = 2;
 		}
+		$total = 0;
+		$startAt = (($currentPage - 1) * $limit);
 		$kgiTeams = KgiTeam::find()
 			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,kgi_team.updateDateTime,kgi_team.month,kgi_team.year,
 			kgi_team.teamId,kgi_team.target,kgi_team.status,kgi_team.fromDate,kgi_team.toDate,kgi_team.nextCheckDate')
@@ -600,12 +602,16 @@ class KgiTeamController extends Controller
 						} else {
 							$data3[$kgiTeamId] = $commonData;
 						}
+						$total++;
 					}
 				}
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
-		return json_encode($data);
+		$data = array_slice($data, $startAt, $limit, true);
+		$result["data"] = $data;
+		$result["total"] = $total;
+		return json_encode($result);
 	}
 	public function actionEachTeamEmployeeKgi($teamId, $kgiId)
 	{

@@ -206,6 +206,7 @@ class KgiPersonalController extends Controller
 		}
 
 		$data = $data1 + $data2 + $data3 + $data4;
+		$data = array_slice($data, $startAt, $limit, true);
 		$result["data"] = $data;
 		$result["total"] = $total;
 		return json_encode($result);
@@ -495,18 +496,17 @@ class KgiPersonalController extends Controller
 						];
 					}
 					if (!empty($commonData)) {
-						if ($i >= $startAt && $count <= $limit) {
-							if (($kgiEmployeeHistory["fromDate"] == "" || $kgiEmployeeHistory["toDate"] == "") && $isOver == 2) {
-								$data1[$kgiEmployeeId] = $commonData;
-							} elseif ($isOver == 1 && $kgiEmployeeHistory["status"] == 1) {
-								$data2[$kgiEmployeeId] = $commonData;
-							} elseif ($kgiEmployeeHistory["status"] == 2) {
-								$data4[$kgiEmployeeId] = $commonData;
-							} else {
-								$data3[$kgiEmployeeId] = $commonData;
-							}
-							$count++;
+
+						if (($kgiEmployeeHistory["fromDate"] == "" || $kgiEmployeeHistory["toDate"] == "") && $isOver == 2) {
+							$data1[$kgiEmployeeId] = $commonData;
+						} elseif ($isOver == 1 && $kgiEmployeeHistory["status"] == 1) {
+							$data2[$kgiEmployeeId] = $commonData;
+						} elseif ($kgiEmployeeHistory["status"] == 2) {
+							$data4[$kgiEmployeeId] = $commonData;
+						} else {
+							$data3[$kgiEmployeeId] = $commonData;
 						}
+						$count++;
 						$total++;
 						$i++;
 					}
@@ -515,6 +515,7 @@ class KgiPersonalController extends Controller
 		}
 		//throw new exception(print_r($data1, true));
 		$data = $data1 + $data2 + $data3 + $data4;
+		$data = array_slice($data, $startAt, $limit, true);
 		$result["data"] = $data;
 		$result["total"] = $total;
 		return json_encode($result);

@@ -400,11 +400,18 @@ class KgiTeamController extends Controller
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi-grid');
 			}
 		}
-		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year;
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
+		$currentPage = 1;
+		$limit = 20;
+		if (isset($param["currentPage"])) {
+			$currentPage = $param["currentPage"];
+		}
+		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&currentPage=' . $currentPage . '&&limit=' . $limit;
+
+
 		//throw new Exception($paramText);
 		$userId = Yii::$app->user->id;
 		$userTeamId = Team::userTeam($userId);
@@ -431,7 +438,6 @@ class KgiTeamController extends Controller
 		$allCompany = curl_exec($api);
 		$allCompany = json_decode($allCompany, true);
 
-
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
@@ -451,6 +457,19 @@ class KgiTeamController extends Controller
 		$months = ModelMaster::monthFull(1);
 		$role = UserRole::userRight();
 		$isManager = UserRole::isManager();
+		$totalKgi = $teamKgis["total"];
+		$totalPage = ceil($totalKgi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
+		$filter = [
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			"teamId" => $teamId,
+			"month" => $month,
+			"year" => $year,
+			"status" => $status,
+			"perPage" => 20,
+		];
+		//throw new exception($totalKgi);
 
 		return $this->render($file, [
 			"units" => $units,
@@ -471,7 +490,12 @@ class KgiTeamController extends Controller
 			"allCompany" => $countAllCompany,
 			"companyPic" => $companyPic,
 			"totalBranch" => $totalBranch,
-			"employeeCompanyId" => $employeeCompanyId
+			"filter" => $filter,
+			"employeeCompanyId" => $employeeCompanyId,
+			"pagination" => $pagination,
+			"totalKgi" => $totalKgi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
 		]);
 	}
 	public function actionPrepareUpdate($hash)

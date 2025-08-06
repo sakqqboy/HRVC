@@ -164,6 +164,7 @@ class ManagementController extends Controller
 		}
 
 		$data = $data1 + $data2 + $data3 + $data4;
+		$data = array_slice($data, $startAt, $limit, true);
 		$result["data"] = $data;
 		$result["total"] = $total;
 		return json_encode($result);
@@ -676,19 +677,18 @@ class ManagementController extends Controller
 					}
 
 					if (!empty($commonData)) {
-						if ($i >= $startAt && $count <= $limit) {
-							if (($kgi["fromDate"] == "" || $kgi["toDate"] == "") && $isOver == 2) {
-								$data1[$kgiId] = $commonData;
-							} elseif ($isOver == 1 && $kgi["status"] == 1) {
-								$data2[$kgiId] = $commonData;
-							} elseif ($kgi["status"] == 2) {
-								$data4[$kgiId] = $commonData;
-							} else {
-								$data3[$kgiId] = $commonData;
-							}
-							$count++;
-							$i++;
+
+						if (($kgi["fromDate"] == "" || $kgi["toDate"] == "") && $isOver == 2) {
+							$data1[$kgiId] = $commonData;
+						} elseif ($isOver == 1 && $kgi["status"] == 1) {
+							$data2[$kgiId] = $commonData;
+						} elseif ($kgi["status"] == 2) {
+							$data4[$kgiId] = $commonData;
+						} else {
+							$data3[$kgiId] = $commonData;
 						}
+						$count++;
+						$i++;
 						$total++;
 					}
 				}
@@ -696,6 +696,7 @@ class ManagementController extends Controller
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
+		$data = array_slice($data, $startAt, $limit, true);
 		$result["data"] = $data;
 		$result["total"] = $total;
 		return json_encode($result);
