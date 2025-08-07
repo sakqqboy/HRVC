@@ -11,6 +11,7 @@ use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiEmployee;
 use frontend\models\hrvc\KpiEmployeeHistory;
@@ -218,19 +219,49 @@ class KpiPersonalController extends Controller
 
 		]);
 	}
-	public function actionIndividualKpiGrid()
+	public function actionIndividualKpiGrid($hash = null)
 	{
+		$role = UserRole::userRight();
+		if ($role < 3) {
+			//return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
+		}
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
 		$userId = Yii::$app->user->id;
-
-		$role = UserRole::userRight();
-		$teams = [];
+		$isAdmin = UserRole::isAdmin();
+		$userBranchId = User::userBranchId();
 		$session = Yii::$app->session;
+		
+		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
+		$managerId = '';
+		$supervisorId = '';
+		$staffId = '';
+		$companyId = '';
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+		}
 		$userTeamId = Team::userTeam($userId);
-
+		$session = Yii::$app->session;
 		if ($session->has('kpiEmployee')) {
 			$filter = $session->get('kpiEmployee');
 			$companyId = isset($filter["companyId"]) && $filter["companyId"] != null ? $filter["companyId"] : null;
@@ -252,6 +283,12 @@ class KpiPersonalController extends Controller
 				"type" => $type
 			]));
 		}
+		$currentPage = 1;
+		if (isset($hash) && $hash != '') {
+			$pageArr = explode('page', $hash);
+			$currentPage = $pageArr[1];
+		}
+		$limit = 20;
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -264,15 +301,16 @@ class KpiPersonalController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . Yii::$app->user->id . '&&role=' . $role);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . Yii::$app->user->id . '&&role=' . $role. '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$kpis = curl_exec($api);
 		$kpis = json_decode($kpis, true);
 		//throw new exception('kpi/kpi-personal/employee-kpi?userId=' . Yii::$app->user->id . '&&role=' . $role);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/wait-for-approve');
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 		$waitForApprove = curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
-
+		
+		$teams = [];
 		if ($role == 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);
 			if (isset($em) && !empty($em)) {
@@ -283,23 +321,27 @@ class KpiPersonalController extends Controller
 			//throw new Exception(print_r($teams, true));
 		}
 		// throw new Exception(print_r($kpis, true));
-
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
 		$allCompany = curl_exec($api);
 		$allCompany = json_decode($allCompany, true);
-
-		curl_close($api);
-		//throw new Exception($role);
-		$isManager = UserRole::isManager();
-		$months = ModelMaster::monthFull(1);
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
 			$countAllCompany = count($allCompany);
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
+		
+		curl_close($api);
+
+		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
+
+		$totalKpi = KpiEmployee::totalKpiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
+		$totalPage = ceil($totalKpi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
+		// throw new Exception(print_r($totalKpi	, true));
 		return $this->render('individual_kpi_grid', [
 			"units" => $units,
 			"companies" => $companies,
@@ -308,19 +350,23 @@ class KpiPersonalController extends Controller
 			"isManager" => $isManager,
 			"role" => $role,
 			"kpis" => $kpis,
-			"userId" => Yii::$app->user->id,
 			"userTeamId" => $userTeamId,
 			"allCompany" => $countAllCompany,
 			"companyPic" => $companyPic,
 			"totalBranch" => $totalBranch,
-			"month" => null,
-			"status" => null,
-			"year" => null,
+			"userId" => Yii::$app->user->id,
 			"companyId" => null,
 			"branchId" => null,
 			"teamId" => null,
+			"month" => null,
+			"status" => null,
+			"year" => null,
 			"waitForApprove" => $waitForApprove,
-			"employeeCompanyId" => $employeeCompanyId
+			"employeeCompanyId" => $employeeCompanyId,
+			"totalKpi" => $totalKpi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
+			"pagination" => $pagination,
 		]);
 	}
 
