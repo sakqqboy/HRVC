@@ -78,7 +78,7 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
                     }
                 }
             } else { //staff
-                $canEdit = 1; //see only their kgi
+                $canEdit = 1; 
             }
         }
         return $canEdit;
@@ -145,5 +145,69 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
             return null;
         }
             return $data;
+    }
+
+    public static function totalKpiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employeeId)
+    {
+        $total = 0;
+        if ($adminId != '' || $gmId != '') {
+            $kpis = KpiEmployee::find()
+                ->where(["status" => [1, 2, 4]])
+                ->asArray()
+                ->orderBy('updateDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if ($supervisorId != '' || $managerId != '') {
+            if ($supervisorId != '') {
+                $userId = $supervisorId;
+            }
+            if ($managerId != '') {
+                $userId = $managerId;
+            }
+            $employeeId = Employee::employeeId($userId);
+            $branchId = Employee::EmployeeDetail($employeeId)["branchId"];
+            $kpis = KpiEmployee::find()
+                ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+                ->where([
+                    "kpi_employee.status" => [1, 2, 4],
+                    "e.branchId" => $branchId
+                ])
+                ->asArray()
+                ->orderBy('kpi_employee.updateDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if ($teamLeaderId != '') {
+            $employeeId = Employee::employeeId($teamLeaderId);
+            $teamId = Employee::employeeTeam($employeeId);
+            if (isset($teamId["teamId"])) {
+                $kpis = KpiEmployee::find()
+                    ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+                    ->where([
+                        "kpi_employee.status" => [1, 2, 4],
+                        "e.teamId" => $teamId
+                    ])
+                    ->asArray()
+                    ->orderBy('kpi_employee.updateDateTime DESC')
+                    ->asArray()
+                    ->all();
+            }
+        }
+        if ($staffId != '') {
+            $kpis = KpiEmployee::find()
+                ->where([
+                    "status" => [1, 2, 4],
+                    "employeeId" => $employeeId
+                ])
+                ->asArray()
+                ->orderBy('updateDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if (isset($kpis) && count($kpis) > 0) {
+            $total = count($kpis);
+        }
+        return $total;
     }
 }

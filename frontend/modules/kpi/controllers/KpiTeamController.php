@@ -621,7 +621,7 @@ class KpiTeamController extends Controller
 			$pageArr = explode('page', $hash);
 			$currentPage = $pageArr[1];
 		}
-		$limit = 5;
+		$limit = 20;
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
