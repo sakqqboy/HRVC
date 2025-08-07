@@ -138,7 +138,7 @@ $this->title = 'KGI View';
                                 }
                                 ?>
                             </div>
-                            <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?>">
+                            <div class="col-lg-3 pt-10 pim-subheader-font border-right-<?= $colorFormat ?>">
                                 <div class="col-12 font-size-12">Quant Ratio</div>
                                 <div class="col-12 border-bottom-<?= $colorFormat ?> pb-5 pim-duedate">
                                     <i class="fa fa-diamond" aria-hidden="true"></i>
@@ -366,7 +366,8 @@ $form = ActiveForm::begin([
     }
 
     .pim-big-box {
-        height: 125px;
+        height: 110px;
+        padding-top: 5px;
     }
 </style>
 <script>
