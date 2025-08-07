@@ -6,16 +6,20 @@ use yii\bootstrap5\ActiveForm;
 $this->title = 'KGI View';
 ?>
 <script src="https://code.highcharts.com/highcharts.js"></script>
-<div class="contrainer-body">
-    <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
-            style="margin-top: -3px;">
-        <strong class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</strong>
+<div class="col-12 mt-70 pt-20 pim-content1">
+    <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg"
+            class="pim-head-icon mr-11 mt-2">
+        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
     </div>
+    <?= $this->render('kgi_header_filter', [
+        "role" => $role,
+        "allCompany" => $allCompany,
+        "companyPic" => $companyPic,
+        "totalBranch" => $totalBranch
+    ]) ?>
     <div class="col-12 mt-10">
-        <?= $this->render('kgi_header_filter', [
-            "role" => $role
-        ]) ?>
+
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
                 <div class="col-11 pim-name-title pr-0 pl-5 text-start">
@@ -25,51 +29,57 @@ $this->title = 'KGI View';
                     </a>
                     <?= $kgiDetail["kgiName"] ?>
                 </div>
-                <div class="col-1 text-end">
+                <div class="col-1 ">
                     <?php if ($role >= 5) {
                     ?>
-                        <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kgi"
+                        <a class="btn btn-outline-danger d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#delete-kgi"
                             onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
-                            onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                            onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
-                                class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
+                            style="height: 34px;font-size:13px;"
+                            onmouseover="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                            onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg'">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg"
+                                class="pim-action-icon mr-3 mt-3">
                             <?= Yii::t('app', 'Delete') ?>
 
                         </a>
                     <?php } ?>
                 </div>
             </div>
-            <div class="row mt-10">
-                <div class="col-lg-7 col-12">
+            <div class="row mt-10" style=" --bs-gutter-x:0px;">
+                <div class="col-lg-7 col-12 pr-10">
                     <?php
                     if ($kgiDetail["isOver"] == 1 && $kgiDetail["status"] != 2) {
                         $colorFormat = 'over';
+                        $text = 'Due Passed';
                     } else {
                         if ($kgiDetail["status"] == 1) {
                             if ($kgiDetail["isOver"] == 2) {
                                 $colorFormat = 'disable';
+                                $text = 'Not Set';
                             } else {
                                 $colorFormat = 'inprogress';
+                                $text = 'In Progress';
                             }
                         } else {
                             $colorFormat = 'complete';
+                            $text = 'Completed';
                         }
                     }
                     ?>
                     <div class="row">
-                        <div class="col-4 pim-name-detail ">Description</div>
+                        <div class="col-4 pim-name-detail align-items-center ">Description</div>
                         <div class="col-2">
-                            <div class="<?= $colorFormat ?>-tag text-center">
-                                <?= $kgiDetail['status'] == 1 ? Yii::t('app', 'In process') : Yii::t('app', 'Completed') ?>
+                            <div class="status-tag <?= $colorFormat ?>-tag text-center">
+                                <?= Yii::t('app', $text) ?>
+
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="row">
-                                <div class="col-4 month-<?= $colorFormat ?> pt-2">
+                                <div class="col-4 month-period month-<?= $colorFormat ?>">
                                     <?= $kgiDetail['monthFullName'] ?? Yii::t('app', 'Term') ?>
                                 </div>
-                                <div class="col-8 term-<?= $colorFormat ?>  pt-2">
+                                <div class="col-8 term-period term-<?= $colorFormat ?>">
                                     <?= $kgiDetail['fromDate'] == "" ? Yii::t('app', 'Not set') : $kgiDetail['fromDate'] ?>
                                     &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
                                     <?= $kgiDetail['toDate'] == "" ? Yii::t('app', 'Not set') : $kgiDetail['toDate'] ?>
@@ -81,33 +91,32 @@ $this->title = 'KGI View';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5 col-12 pl-20">
+                <div class="col-lg-5 col-12">
                     <div class="col-12 pim-big-box pim-detail-<?= $colorFormat ?>">
                         <div class="row">
                             <div class="col-2 pim-subheader-font border-right-<?= $colorFormat ?>"
                                 style=" display: flex; flex-direction: column; justify-content: center;">
-                                <!-- <div class="row"> -->
-                                <!-- <div class="offset-1 col-11"> -->
-                                <div class="ml-12 priority-star">
+
+                                <div class="priority-star">
                                     <?php
                                     if ($kgiDetail["priority"] == "A" || $kgiDetail["priority"] == "B") {
                                     ?>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     if ($kgiDetail["priority"] == "A" || $kgiDetail["priority"] == "C") {
                                     ?>
-                                        <i class="fa fa-star big-star" aria-hidden="true"></i>
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="big-star">
                                     <?php
                                     }
                                     if ($kgiDetail["priority"] == "B") {
                                     ?>
-                                        <i class="fa fa-star ml-10" aria-hidden="true"></i>
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     if ($kgiDetail["priority"] == "A") {
                                     ?>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     ?>
@@ -115,30 +124,27 @@ $this->title = 'KGI View';
                                 <?php
                                 if ($kgiDetail["priority"] != '') {
                                 ?>
-                                    <div class="col-12 text-center priority-box">
-                                        <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
-                                        <div class="col-12 text-priority"><?= $kgiDetail["priority"] ?></div>
+                                    <div class="priority-box">
+                                        <?= Yii::t('app', 'Priority') ?>
+                                        <span class="text-priority mt-5"><?= $kgiDetail["priority"] ?></span>
                                     </div>
                                 <?php
                                 } else { ?>
-                                    <div class="col-12 text-center priority-box-null">
-                                        <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
-                                        <div class="col-12 text-priority">N/A</div>
+                                    <div class="priority-box-null">
+                                        <?= Yii::t('app', 'Priority') ?>
+                                        <span class="text-priority mt-5">N/A</span>
                                     </div>
                                 <?php
                                 }
                                 ?>
-                                <!-- </div> -->
-                                <!-- </div> -->
-
                             </div>
-                            <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> pl-18">
-                                <div class="col-12">Quant Ratio</div>
+                            <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?>">
+                                <div class="col-12 font-size-12">Quant Ratio</div>
                                 <div class="col-12 border-bottom-<?= $colorFormat ?> pb-5 pim-duedate">
                                     <i class="fa fa-diamond" aria-hidden="true"></i>
                                     <?= $kgiDetail["quantRatio"] == 1 ?  Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
                                 </div>
-                                <div class="col-12 pr-0 pt-5 pl-0"><?= Yii::t('app', 'update Interval') ?></div>
+                                <div class="col-12 pr-0 pt-5 pl-0 font-size-12"><?= Yii::t('app', 'update Interval') ?></div>
                                 <div class="col-12  pim-duedate">
                                     <?= $kgiDetail["unitText"] ?>
                                 </div>
@@ -146,7 +152,7 @@ $this->title = 'KGI View';
                             <div class="col-lg-7 pim-subheader-font pr-15 pl-15">
                                 <div class="row">
                                     <div class="col-5 text-start">
-                                        <div class="col-12"><?= Yii::t('app', 'Target') ?></div>
+                                        <div class="col-12 font-size-12"><?= Yii::t('app', 'Target') ?></div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
                                             $decimal = explode('.', $kgiDetail["targetAmount"]);
@@ -167,7 +173,7 @@ $this->title = 'KGI View';
                                         <div class="col-12 pt-17"><?= $kgiDetail["code"] ?></div>
                                     </div>
                                     <div class="col-5  text-end">
-                                        <div class="col-12"><?= Yii::t('app', 'Result') ?></div>
+                                        <div class="col-12 font-size-12"><?= Yii::t('app', 'Result') ?></div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
                                             if ($kgiDetail["result"] != '') {
@@ -188,7 +194,7 @@ $this->title = 'KGI View';
                                             <?= $showResult ?><?= $kgiDetail["amountType"] == 1 ? '%' : '' ?>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 mt-10">
                                         <?php
                                         $percent = explode('.', $kgiDetail['ratio']);
                                         if (isset($percent[1])) {
@@ -211,8 +217,8 @@ $this->title = 'KGI View';
                                     <div class="col-12 mt-10 align-items-center">
                                         <div class="row">
                                             <div class="col-4 mt-5 pl-0 pr-0 ">
-                                                <div class="col-12 text-end"
-                                                    style="letter-spacing:0.3px;font-size:12px;">
+                                                <div class="col-12 text-end border"
+                                                    style="font-size:10px;">
                                                     <?= Yii::t('app', 'Last Updated on') ?>
                                                 </div>
                                                 <div class="col-12 text-end pim-duedate">
@@ -225,7 +231,7 @@ $this->title = 'KGI View';
                                                 ?>
                                                     <a class="pim-btn-<?= $colorFormat ?>"
                                                         href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
-                                                        style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
+                                                        style="display: flex; justify-content: center; align-items: center;  height: 30px; gap: 3px; flex-shrink: 0;">
                                                         <i class="fa fa-refresh" aria-hidden="true"></i>
                                                         <?= Yii::t('app', 'Update') ?>
                                                     </a>
@@ -233,9 +239,9 @@ $this->title = 'KGI View';
                                                 }
                                                 ?>
                                             </div>
-                                            <div class="col-4 pl-0 pr-5 mt-5 ">
-                                                <div class="col-12 text-start font-<?= $colorFormat ?>"
-                                                    style="letter-spacing:0.3px;font-size:12px;">
+                                            <div class="col-4 pl-0 pr-0 mt-5 ">
+                                                <div class="col-12 text-start border font-<?= $colorFormat ?>"
+                                                    style="font-size:10px;">
                                                     <?= Yii::t('app', 'Next Update Date') ?>
                                                 </div>
                                                 <div class="col-12 text-start pim-duedate">
@@ -323,6 +329,37 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_employee_history') ?>
 
 
+<style>
+    .priority-box {
+        width: 52px;
+        height: 52px;
+        font-size: 12px;
+    }
+
+    .priority-box-null {
+        width: 52px;
+        height: 52px;
+        font-size: 12px;
+    }
+
+    .text-priority {
+        font-size: 18px;
+    }
+
+    .priority-star {
+        width: 52px;
+    }
+
+    .big-star {
+        width: 18px;
+        height: 17px;
+    }
+
+    .default-star {
+        width: 16px;
+        width: 15px;
+    }
+</style>
 <script>
     window.onload = function() {
         let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
