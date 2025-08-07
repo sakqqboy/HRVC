@@ -45,7 +45,7 @@ $this->title = 'KGI View';
                     <?php } ?>
                 </div>
             </div>
-            <div class="row mt-10" style=" --bs-gutter-x:0px;">
+            <div class="row mt-20" style="--bs-gutter-x:0px;">
                 <div class="col-lg-7 col-12 pr-10">
                     <?php
                     if ($kgiDetail["isOver"] == 1 && $kgiDetail["status"] != 2) {
@@ -217,7 +217,7 @@ $this->title = 'KGI View';
                                     <div class="col-12 mt-10 align-items-center">
                                         <div class="row">
                                             <div class="col-4 mt-5 pl-0 pr-0 ">
-                                                <div class="col-12 text-end border"
+                                                <div class="col-12 text-end"
                                                     style="font-size:10px;">
                                                     <?= Yii::t('app', 'Last Updated on') ?>
                                                 </div>
@@ -240,7 +240,7 @@ $this->title = 'KGI View';
                                                 ?>
                                             </div>
                                             <div class="col-4 pl-0 pr-0 mt-5 ">
-                                                <div class="col-12 text-start border font-<?= $colorFormat ?>"
+                                                <div class="col-12 text-start font-<?= $colorFormat ?>"
                                                     style="font-size:10px;">
                                                     <?= Yii::t('app', 'Next Update Date') ?>
                                                 </div>
@@ -256,51 +256,56 @@ $this->title = 'KGI View';
 
                     </div>
                 </div>
-                <div class="col-lg-7">
-                    <div class="row">
-                        <div class="col-2  view-tab-active" id="tab-1"
-                            onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,1)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;" id="tab-1-blue">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-1-black">
-                            <?= Yii::t('app', 'Assigned') ?>
-                        </div>
-                        <div class="col-3  view-tab" id="tab-2" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,2)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;" id="tab-2-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-2-blue">
-                            <?= Yii::t('app', 'Update History') ?>
-                        </div>
-                        <div class="col-2  view-tab" id="tab-3" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,3)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;" id="tab-3-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment-blue.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-3-blue">
-                            <?= Yii::t('app', 'Chats') ?>
-                        </div>
-                        <div class="col-2  view-tab" id="tab-4" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,4)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;" id="tab-4-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-4-blue">
-                            <?= Yii::t('app', 'Chart') ?>
-                        </div>
-                        <div class="col-3  view-tab" id="tab-5" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,5)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;" id="tab-5-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-5-blue">
-                            <?= Yii::t('app', 'Relate KPI') ?>
+            </div>
+            <div class="col-12 mt-20">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="d-flex justify-content-start">
+                            <div class="view-tab-active" id="tab-1" style="border-top-left-radius:5px;border-top-right-radius:5px;"
+                                onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,1)">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.svg" alt="History"
+                                    class="pim-icon " id="tab-1-blue">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg" alt="History"
+                                    class="pim-icon " style="display:none;" id="tab-1-black">
+                                <?= Yii::t('app', 'Assigned') ?>
+                            </div>
+                            <div class="view-tab" id="tab-2" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,2)">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" alt="History"
+                                    class="pim-icon " id="tab-2-black">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.svg" alt="History"
+                                    class="pim-icon " style="display:none;" id="tab-2-blue">
+                                <?= Yii::t('app', 'Update History') ?>
+                            </div>
+                            <div class="view-tab" id="tab-3" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,3)">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="History"
+                                    class="pim-icon " id="tab-3-black">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment-blue.svg" alt="History"
+                                    class="pim-icon " style="display:none;" id="tab-3-blue">
+                                <?= Yii::t('app', 'Chats') ?>
+                            </div>
+                            <div class=" view-tab" id="tab-4" onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,4)">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/chart.svg" alt="History"
+                                    class="pim-icon" id="tab-4-black">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.svg" alt="History"
+                                    class="pim-icon" style="display:none;" id="tab-4-blue">
+                                <?= Yii::t('app', 'Chart') ?>
+                            </div>
+                            <div class="view-tab" id="tab-5" style="border-top-left-radius:5px;border-top-right-radius:5px;"
+                                onclick="javascript:viewTabKgi(<?= $kgiHistoryId ?>,5)">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.svg" alt="History"
+                                    class="pim-icon " id="tab-5-black">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.svg" alt="History"
+                                    class="pim-icon " style="display:none;" id="tab-5-blue">
+                                <?= Yii::t('app', 'Relate KPI') ?>
+                            </div>
                         </div>
                         <input type="hidden" id="currentTab" value="1">
                     </div>
-                </div>
-                <div class="col-lg-5 view-tab">
+                    <div class="col-lg-4">
+                    </div>
                 </div>
             </div>
-            <div class="row mt-10" id="show-content">
+            <div class="row mt-20" id="show-content">
 
             </div>
         </div>
@@ -358,6 +363,10 @@ $form = ActiveForm::begin([
     .default-star {
         width: 16px;
         width: 15px;
+    }
+
+    .pim-big-box {
+        height: 125px;
     }
 </style>
 <script>

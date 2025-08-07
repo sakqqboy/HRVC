@@ -52,6 +52,7 @@
 	font-style: normal;
 	font-weight: 600;
 	line-height: 21.429px;
+	align-content: center;
 	/* 107.143% */
 	text-transform: capitalize;
 }
@@ -618,7 +619,6 @@
 
 .pim-name-history {
 	color: #434343;
-	/* font-family: "SF Pro"; */
 	font-size: 24px;
 	font-style: normal;
 	font-weight: 700;
@@ -1549,22 +1549,20 @@
 }
 
 .team-number-tag {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	background-color: #FFFFFF;
 	font-weight: 700;
-	font-size: 16px;
+	font-size: 12px;
 	text-align: center;
 	border: #CBD5E1 solid 1px;
-	width: 25px;
-	height: 25px;
-	gap: 10px;
-	padding-top: 8px;
-	padding-right: 4px;
-	padding-bottom: 8px;
-	padding-left: 4px;
+	width: 20px;
+	height: 20px;
 	border-radius: 100%;
 	padding: 0px;
-	margin-top: -57px;
-	margin-left: 37px;
+	margin-left: -18px;
+	margin-top: -33px;
 }
 
 .pim-image-AssignMembers {
@@ -1822,15 +1820,20 @@
 }
 
 .view-tab {
+	display: inline-flex;
 	background-color: #FFFFFF;
-	padding-top: 3px;
 	font-size: 16px;
 	text-align: center;
 	cursor: pointer;
 	border-bottom: 2px solid lightgray;
-	letter-spacing: 0.5px;
-	padding-bottom: 2px;
 	font-weight: 400;
+	min-width: 140px;
+	height: 33px;
+	padding-left: 5px;
+	padding-right: 5px;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
 }
 
 .text-align-left {
@@ -1838,35 +1841,36 @@
 }
 
 .view-tab-active {
+	display: inline-flex;
 	background-color: #D7EBFF;
 	border-bottom: #2580D3 solid 2px;
-	padding-top: 3px;
+	color: #2580D3;
 	font-size: 16px;
 	font-weight: 400;
 	text-align: center;
 	cursor: pointer;
-	padding-bottom: 2px;
-	letter-spacing: 0.5px;
-	color: #2580D3;
+	height: 33px;
+	min-width: 140px;
+	padding-left: 5px;
+	padding-right: 5px;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
 }
 
 .sub-tab-active {
 	border-bottom: #2580D3 solid 1px;
-	padding-top: 3px;
-	font-size: 20px;
-	padding-bottom: 2px;
-	letter-spacing: 0.5px;
+	align-content: center;
+	font-size: 16px;
+	height: 36px;
 	color: #2580D3;
 	font-weight: 600;
 }
 
 .sub-tab {
-	padding-top: 3px;
-	font-size: 10px;
 	cursor: pointer;
 	border-bottom: 1px solid lightgray;
-	letter-spacing: 0.5px;
-	padding-bottom: 2px;
+	align-content: center;
 }
 
 .pim-icon {
@@ -2539,7 +2543,6 @@ input:checked+.slider:before {
 
 
 #multi-branch {
-	font-family: "SF Pro Display", sans-serif;
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 20px;
@@ -2549,7 +2552,6 @@ input:checked+.slider:before {
 }
 
 #multi-branch-text {
-	font-family: "SF Pro Display", sans-serif;
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 20px;
@@ -2558,7 +2560,6 @@ input:checked+.slider:before {
 }
 
 #multi-department {
-	font-family: "SF Pro Display", sans-serif;
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 20px;
@@ -2568,7 +2569,6 @@ input:checked+.slider:before {
 }
 
 #multi-department-text {
-	font-family: "SF Pro Display", sans-serif;
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 20px;
@@ -2578,7 +2578,6 @@ input:checked+.slider:before {
 
 
 #multi-mount-year {
-	font-family: "SF Pro Display", sans-serif;
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 20px;
@@ -2588,7 +2587,6 @@ input:checked+.slider:before {
 
 
 #multi-due-term {
-	font-family: "SF Pro Display", sans-serif;
 	align-content: center;
 	font-size: 14px;
 	font-weight: 400;
@@ -2599,7 +2597,6 @@ input:checked+.slider:before {
 
 
 #multi-due-update {
-	font-family: "SF Pro Display", sans-serif;
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 20px;
@@ -2622,51 +2619,47 @@ input:checked+.slider:before {
 }
 
 .small-content-pim {
+	display: flex;
+	height: 70px;
+	width: 100%;
 	border-radius: 6px;
-	padding-top: 9px;
-	padding-bottom: 9px;
-	padding-left: 14px;
-	padding-right: 14px;
-	gap: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
 	border: #F4F6F9 solid thin;
 	font-size: 16px;
 	font-weight: 600;
 
+
 }
 
 .view-back-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	background-color: #2580D3;
 	width: 66px;
-	height: 26px;
+	height: 25px;
+	font-size: 14px;
 	border-radius: 4px;
 	text-align: center;
 	color: white;
-	padding: 3px 5px 3px 5px;
 
 }
 
 .doubleplay-btn {
-	height: 35px;
-	width: 35px;
+	height: 28px;
+	width: 28px;
 	border-radius: 5px;
-	padding-top: 5px;
-	padding-right: 6px;
-	padding-bottom: 8px;
-	padding-left: 6px;
 	border: #CBD5E1 solid thin;
-	text-align: center;
 }
 
 .doubleplay-btn-blue {
-	height: 35px;
-	width: 35px;
+	height: 28px;
+	width: 28px;
 	border-radius: 5px;
-	padding-top: 5px;
-	padding-right: 6px;
-	padding-bottom: 8px;
-	padding-left: 6px;
 	border: #CBD5E1 solid thin;
-	text-align: center;
 	background-color: #2580D3;
 }
 
@@ -2701,7 +2694,6 @@ input:checked+.slider:before {
 
 .percentage-view {
 	fill: #666;
-	font-family: sans-serif;
 	font-size: 0.7em;
 	text-anchor: middle;
 }
