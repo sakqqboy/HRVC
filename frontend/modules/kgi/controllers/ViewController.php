@@ -6,6 +6,8 @@ use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
 use FFI\Exception as FFIException;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kgi;
@@ -290,9 +292,21 @@ class ViewController extends Controller
 		$kgiTeams = curl_exec($api);
 		$kgiTeams = json_decode($kgiTeams, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
 		curl_close($api);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
+		$totalBranch = Branch::totalBranch();
 		// throw new Exception(print_r($kgiDetail, true));
 		return $this->render('kgi_history', [
 			"role" => $role,
@@ -304,7 +318,10 @@ class ViewController extends Controller
 			"units" => $units,
 			"companies" => $companies,
 			"kgiTeams" => $kgiTeams,
-			"kgiHistoryId" => $kgiHistoryId
+			"kgiHistoryId" => $kgiHistoryId,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 	public function actionAllKgiHistory()
