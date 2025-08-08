@@ -60,18 +60,19 @@
     }
 }
 </style>
-</style>
 <div class="">
     <div class="modal fade" id="update-history-popup" tabindex="-1" aria-labelledby="updateHistoryModalLabel"
         aria-hidden="true">
         <div class="modal-dialog custom-update-history-modal">
             <div class="modal-content" style="display: flex; padding: 25px 31px; width: 1560px; gap: 21px;">
-                <div class="updatehistory" style="font-size: 30px; text-decoration-line: none;">
+                <div class="updatehistory"
+                    style="font-size: 30px; text-decoration-line: none; display: flex; justify-content: flex-start; width: 100%; text-align: left; align-items: center;">
                     <span class="modal-title-history" id="updateHistoryModalLabel">
-                        <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"
-                            style="width: 26.998px; height: 26.999px;">
-                        <?= Yii::t('app', 'History Update') ?>
-                    </span>
+                        <span class="modal-title-history" id="updateHistoryModalLabel">
+                            <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"
+                                style="width: 26.998px; height: 26.999px;">
+                            <?= Yii::t('app', 'History Update') ?>
+                        </span>
                 </div>
                 <div class="contrainer-body-detail" id="show-modal-history"
                     style="display: flex; padding: 25px 34px; flex-direction: column; gap: 34px; ">
