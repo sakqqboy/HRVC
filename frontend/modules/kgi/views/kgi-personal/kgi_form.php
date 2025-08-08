@@ -52,90 +52,90 @@ if (!$nextCheckDate) {
 ?>
 
 <style>
-    input[type="number"]::-webkit-outer-spin-button,
-    input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
-    input[type="number"] {
-        -moz-appearance: textfield;
-        /* สำหรับ Firefox */
-    }
+input[type="number"] {
+    -moz-appearance: textfield;
+    /* สำหรับ Firefox */
+}
 
-    /* เปลี่ยนสีข้อความของ select เมื่อเลือกแล้ว */
-    select.form-select {
-        color: var(--Helper-Text-Gray, #8A8A8A);
-    }
-
-
-    /* เมื่อเลือกแล้วให้ข้อความเป็นสี #30313D */
-    select.form-select:not([value=""]) {
-        color: <?= ($statusform == 'update') ? '#30313D' : 'var(--HRVC---Text-Black, #8A8A8A)';
-                ?>;
-    }
+/* เปลี่ยนสีข้อความของ select เมื่อเลือกแล้ว */
+select.form-select {
+    color: var(--Helper-Text-Gray, #8A8A8A);
+}
 
 
-    /* สไตล์เมื่อไม่ได้เลือก (ข้อความ placeholder) */
-    select.form-select {
-        color: var(--Helper-Text-Gray, #8A8A8A);
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 20px;
-        text-transform: capitalize;
-    }
+/* เมื่อเลือกแล้วให้ข้อความเป็นสี #30313D */
+select.form-select:not([value=""]) {
+    color: <?=($statusform=='update') ? '#30313D': 'var(--HRVC---Text-Black, #8A8A8A)';
+    ?>;
+}
 
-    /* สไตล์เมื่อเลือกตัวเลือกแล้ว */
-    select.form-select option:checked {
-        color: var(--HRVC---Text-Black, #30313D);
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 20px;
-    }
 
-    /* เพิ่มความสวยงามเมื่อตัวเลือกถูกโฟกัส */
-    select.form-select:focus {
-        color: var(--HRVC---Text-Black, #30313D);
-        font-weight: 500;
-    }
+/* สไตล์เมื่อไม่ได้เลือก (ข้อความ placeholder) */
+select.form-select {
+    color: var(--Helper-Text-Gray, #8A8A8A);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    text-transform: capitalize;
+}
 
-    /* เมื่อ option เป็น disabled (กรณีเลือกแล้วจะไม่สามารถเลือกได้) */
-    select.form-select option:disabled {
-        color: var(--Helper-Text-Gray, #8A8A8A);
-        font-weight: 500;
-    }
+/* สไตล์เมื่อเลือกตัวเลือกแล้ว */
+select.form-select option:checked {
+    color: var(--HRVC---Text-Black, #30313D);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+}
 
-    .priority-box {
-        width: 52px;
-        height: 52px;
-        font-size: 12px;
-    }
+/* เพิ่มความสวยงามเมื่อตัวเลือกถูกโฟกัส */
+select.form-select:focus {
+    color: var(--HRVC---Text-Black, #30313D);
+    font-weight: 500;
+}
 
-    .priority-box-null {
-        width: 52px;
-        height: 52px;
-        font-size: 12px;
-    }
+/* เมื่อ option เป็น disabled (กรณีเลือกแล้วจะไม่สามารถเลือกได้) */
+select.form-select option:disabled {
+    color: var(--Helper-Text-Gray, #8A8A8A);
+    font-weight: 500;
+}
 
-    .text-priority {
-        font-size: 18px;
-    }
+.priority-box {
+    width: 52px;
+    height: 52px;
+    font-size: 12px;
+}
 
-    .priority-star {
-        width: 52px;
-    }
+.priority-box-null {
+    width: 52px;
+    height: 52px;
+    font-size: 12px;
+}
 
-    .big-star {
-        width: 18px;
-        height: 17px;
-    }
+.text-priority {
+    font-size: 18px;
+}
 
-    .default-star {
-        width: 16px;
-        width: 15px;
-    }
+.priority-star {
+    width: 52px;
+}
+
+.big-star {
+    width: 18px;
+    height: 17px;
+}
+
+.default-star {
+    width: 16px;
+    width: 15px;
+}
 </style>
 
 <!-- ลิงก์ไปยัง CSS ของ flatpickr -->
@@ -146,7 +146,8 @@ if (!$nextCheckDate) {
 
 <div class="col-12 mt-70 pt-20">
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="pim-head-icon mr-11 mt-2">
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg"
+            class="pim-head-icon mr-11 mt-2">
         <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
     </div>
     <?= $this->render('header_filter', [
@@ -209,7 +210,8 @@ if (!$nextCheckDate) {
                                 </text>
                             </svg>
                         </div>
-                        <div style="width: 1px; background-color: #BBCDDE; height: 51px;" class="mr-10 ml-10 d-flex align-items-center border align-self-center"></div>
+                        <div style="width: 1px; background-color: #BBCDDE; height: 51px;"
+                            class="mr-10 ml-10 d-flex align-items-center border align-self-center"></div>
                         <div class="d-flex align-items-center align-self-center">
                             <img src="<?= Yii::$app->homeUrl ?><?= isset($data['result']) ? 'image/result-blue.svg' : 'images/icons/Settings/reward.svg' ?>"
                                 style="width: 40px; height: 40px;">
@@ -223,20 +225,23 @@ if (!$nextCheckDate) {
             <div class="contrainer-body-detail mt-10">
                 <div class="row" style="--bs-gutter-x:0px;">
                     <div class="col-lg-4 col-12 pr-20">
-                        <div class="" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
+                        <div class=""
+                            style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
                                 Name <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                     data-toggle="tooltip" data-placement="top" class="tootip-icon"
                                     title="<?= Yii::t('app', 'Enter the name of your key Performance indicator. This should be clear and specific, such as Number of customer Visits or Number of Cold calls to client') ?>">
                             </label>
-                            <label class="text-black" for="name" style="font-size: 22px; font-weight: 600;line-height:26px;">
+                            <label class="text-black" for="name"
+                                style="font-size: 22px; font-weight: 600;line-height:26px;">
                                 <?= isset($data['kgiName']) ? $data['kgiName'] : '' ?>
                             </label>
                             <label class="text-gray" for="name" style="font-size: 14px; font-weight: 400;">
                                 <?= Yii::t('app', 'KGI Details') ?>
                             </label>
-                            <p id="about-text" style="font-size: 14px; font-weight: 400; max-height: 147px;margin-top:-10px;min-height:100px;">
+                            <p id="about-text"
+                                style="font-size: 14px; font-weight: 400; max-height: 147px;margin-top:-10px;min-height:100px;">
                                 <span id="short-text">
                                     <?= mb_strlen($detail) > $maxLength ? mb_substr($detail, 0, $maxLength) . '...' : $detail ?>
                                 </span>
@@ -245,7 +250,7 @@ if (!$nextCheckDate) {
                                 </span>
 
                                 <?php if (mb_strlen($detail) > $maxLength): ?>
-                                    <button type="button" id="see-more" class="see-more">See More</button>
+                                <button type="button" id="see-more" class="see-more">See More</button>
                                 <?php endif; ?>
                             </p>
                             <div class="form-group start-center mt-40">
@@ -254,8 +259,8 @@ if (!$nextCheckDate) {
                                 </label>
                                 <div class="circle-container mt-14" data-type="branch"
                                     style="display: flex;align-items: center;gap: 5px;">
-                                    <img src="<?= Yii::$app->homeUrl ?><?= $company['companyImg'] ?>" class="pim-pic-gridNew"
-                                        style="width: 43px; height: 43px;" alt="icon">
+                                    <img src="<?= Yii::$app->homeUrl ?><?= $company['companyImg'] ?>"
+                                        class="pim-pic-gridNew" style="width: 43px; height: 43px;" alt="icon">
                                     <text class="text-black" style="font-size: 16px; font-weight: 500;">
                                         <?= Yii::t('app', 'Assigned on') ?>
                                         <?= is_array($company['companyId']) ? '' : 1 ?>
@@ -269,19 +274,21 @@ if (!$nextCheckDate) {
                                 </label>
                                 <div class="circle-container pl-16 mt-14 " style="display: flex;align-items: center;">
                                     <?php if (count($kgiBranch) >= 1) { ?>
-                                        <div class="cycle-current-branch" style="width: 35px; height: 35px;">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                        </div>
+                                    <div class="cycle-current-branch" style="width: 35px; height: 35px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
+                                    </div>
                                     <?php }
                                     if (count($kgiBranch) >= 2) { ?>
-                                        <div class="cycle-current-branch" style="width: 35px; height: 35px;margin-left:-25px;">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                        </div>
+                                    <div class="cycle-current-branch"
+                                        style="width: 35px; height: 35px;margin-left:-25px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
+                                    </div>
                                     <?php }
                                     if (count($kgiBranch) >= 3) { ?>
-                                        <div class="cycle-current-branch" style="width: 35px; height: 35px;margin-left:-25px;">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                        </div>
+                                    <div class="cycle-current-branch"
+                                        style="width: 35px; height: 35px;margin-left:-25px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
+                                    </div>
                                     <?php } ?>
                                     <div class="cycle-current-white"
                                         style="width: 35px; height: 35px; color: #000; right: 5px;">
@@ -312,25 +319,28 @@ if (!$nextCheckDate) {
                                     }
                                     ?>
                                     <?php if ($totalDepartment >= 1) { ?>
-                                        <div class="cycle-current-department" style="width: 35px; height: 35px;">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
-                                        </div>
+                                    <div class="cycle-current-department" style="width: 35px; height: 35px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                                    </div>
                                     <?php }
                                     if ($totalDepartment >= 2) { ?>
-                                        <div class="cycle-current-department" style="width: 35px; height: 35px;margin-left:-25px;">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
-                                        </div>
+                                    <div class="cycle-current-department"
+                                        style="width: 35px; height: 35px;margin-left:-25px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                                    </div>
                                     <?php }
                                     if ($totalDepartment >= 3) { ?>
-                                        <div class="cycle-current-department" style="width: 35px; height: 35px;margin-left:-25px;">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
-                                        </div>
+                                    <div class="cycle-current-department"
+                                        style="width: 35px; height: 35px;margin-left:-25px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                                    </div>
                                     <?php } ?>
                                     <div class="cycle-current-white"
                                         style="width: 35px; height: 35px; color: #000; right: 5px;">
                                         <?= $totalDepartment ?>
                                     </div>
-                                    <text class="text-black" style="font-size: 14px; font-weight: 500;margin-left:-5px;">
+                                    <text class="text-black"
+                                        style="font-size: 14px; font-weight: 500;margin-left:-5px;">
                                         <?= Yii::t('app', 'Assigned on') ?>
                                         <?= $totalDepartment ?>
                                         <?= Yii::t('app', 'Departments') ?>
@@ -346,8 +356,7 @@ if (!$nextCheckDate) {
                                         </div>
                                         <div class="pim-duedate mt-5" style="font-size: 18px; font-weight: 600; ">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $kgi["quantRatio"] == 1 ? 'quantity' : 'diamon' ?>.svg"
-                                                class="pim-iconKFI"
-                                                style="width: 18px; height: 18px;">
+                                                class="pim-iconKFI" style="width: 18px; height: 18px;">
                                             <?= $kgi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
                                         </div>
                                     </div>
@@ -374,26 +383,22 @@ if (!$nextCheckDate) {
                                     <?php
                                     if ($kgi["priority"] == "A" || $kgi["priority"] == "B") {
                                     ?>
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg"
-                                            class="default-star">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     if ($kgi["priority"] == "A" || $kgi["priority"] == "C") {
                                     ?>
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg"
-                                            class="big-star">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="big-star">
                                     <?php
                                     }
                                     if ($kgi["priority"] == "B") {
                                     ?>
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg"
-                                            class="default-star">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     if ($kgi["priority"] == "A") {
                                     ?>
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg"
-                                            class="default-star">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     ?>
@@ -401,16 +406,16 @@ if (!$nextCheckDate) {
                                 <?php
                                 if ($kgi["priority"] != '') {
                                 ?>
-                                    <div class="priority-box">
-                                        <?= Yii::t('app', 'Priority') ?>
-                                        <span class="text-priority mt-5"><?= $kgi["priority"] ?></span>
-                                    </div>
+                                <div class="priority-box">
+                                    <?= Yii::t('app', 'Priority') ?>
+                                    <span class="text-priority mt-5"><?= $kgi["priority"] ?></span>
+                                </div>
                                 <?php
                                 } else { ?>
-                                    <div class="priority-box-null">
-                                        <?= Yii::t('app', 'Priority') ?>
-                                        <span class="text-priority mt-5">N/A</span>
-                                    </div>
+                                <div class="priority-box-null">
+                                    <?= Yii::t('app', 'Priority') ?>
+                                    <span class="text-priority mt-5">N/A</span>
+                                </div>
                                 <?php
                                 }
                                 ?>
@@ -562,19 +567,19 @@ if (!$nextCheckDate) {
                                     align-items: center;
                                     gap: 5px;">
                                 <?php if (count($kgiTeam) >= 1) { ?>
-                                    <div class="cycle-current-team" style="width: 35px; height: 35px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                    </div>
+                                <div class="cycle-current-team" style="width: 35px; height: 35px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                </div>
                                 <?php }
                                 if (count($kgiTeam) >= 1) { ?>
-                                    <div class="cycle-current-team" style="width: 35px; height: 35px;margin-left:-20px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                    </div>
+                                <div class="cycle-current-team" style="width: 35px; height: 35px;margin-left:-20px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                </div>
                                 <?php }
                                 if (count($kgiTeam) >= 1) { ?>
-                                    <div class="cycle-current-team" style="width: 35px; height: 35px;margin-left:-20px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                    </div>
+                                <div class="cycle-current-team" style="width: 35px; height: 35px;margin-left:-20px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                </div>
                                 <?php } ?>
                                 <div class="cycle-current-white"
                                     style="width: 35px; height: 35px; color: #000; right: 3px;">
@@ -593,16 +598,22 @@ if (!$nextCheckDate) {
                             <div class="d-flex">
                                 <div class="pim-picgroup">
                                     <div class="pim-pic-yenlowKFI" style="width: 35px; height: 35px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg" alt="person icon">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
+                                            alt="person icon">
                                     </div>
-                                    <div class="pim-pic-yenlowKFI pic-afterKFI" style="width: 35px; height: 35px;margin-left:-15px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg" alt="person icon">
+                                    <div class="pim-pic-yenlowKFI pic-afterKFI"
+                                        style="width: 35px; height: 35px;margin-left:-15px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
+                                            alt="person icon">
                                     </div>
-                                    <div class="pim-pic-yenlowKFI pic-afterKFI" style="width: 35px; height: 35px;margin-left:-15px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg" alt="person icon">
+                                    <div class="pim-pic-yenlowKFI pic-afterKFI"
+                                        style="width: 35px; height: 35px;margin-left:-15px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/personblack.svg"
+                                            alt="person icon">
                                     </div>
 
-                                    <div class="number-tag load-yenlow head-yellow pim-pic-gridKFINum" style="width: 35px; height: 35px;margin-left:-15px;">
+                                    <div class="number-tag load-yenlow head-yellow pim-pic-gridKFINum"
+                                        style="width: 35px; height: 35px;margin-left:-15px;">
                                         <?= count($data['kgiEmployee']) ?>
                                     </div>
                                     <text class="text-black ml-10" style="font-size: 14px; font-weight: 500;">
@@ -646,9 +657,9 @@ if (!$nextCheckDate) {
                                 <span class="input-group-text"
                                     style="background-color:rgb(255, 255, 255); border-left: none; padding-right: 20px; padding-left: 0px;">
                                     <?php if ($data['amountType'] == '%') { ?>
-                                        <span style="font-size: 22px; font-weight: 600;">
-                                            %
-                                        </span>
+                                    <span style="font-size: 22px; font-weight: 600;">
+                                        %
+                                    </span>
                                     <?php } ?>
                                 </span>
                             </div>
@@ -658,8 +669,8 @@ if (!$nextCheckDate) {
                                 <div style="flex-grow: 1;">
                                     <span class="text-danger">* </span>
                                     <?= Yii::t('app', 'Result') ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                        data-placement="top"
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                        data-toggle="tooltip" data-placement="top"
                                         title="<?= Yii::t('app', 'Historic update contains the update from the team and indivudials if you wish to use your own values, please toggle on Override to put custom numbers ') ?>"
                                         alt="Help Icon">
                                 </div>
@@ -694,45 +705,52 @@ if (!$nextCheckDate) {
                                 </div>
                             </label>
 
-                            <div id="textbox-check-progress" class="textbox-check-<?= (empty($data['status']) || empty($data['nextCheckText'])) ? 'hide' : 'blue' ?>">
+                            <div id="textbox-check-progress"
+                                class="textbox-check-<?= (empty($data['status']) || empty($data['nextCheckText'])) ? 'hide' : 'blue' ?>">
                                 <div class="mid-center">
                                     <?php if ($data['status'] != '2') { ?>
-                                        <input type="checkbox" id="check1" name="status" value="1" class="status-checkbox"
-                                            <?= (isset($data['status']) && $data['status'] == '1' && !empty($data['nextCheckText'])) ? '    checked' : '' ?>
-                                            style="width: 20px; height: 20px;">
+                                    <input type="checkbox" id="check1" name="status" value="1" class="status-checkbox"
+                                        <?= (isset($data['status']) && $data['status'] == '1' && !empty($data['nextCheckText'])) ? '    checked' : '' ?>
+                                        style="width: 20px; height: 20px;">
                                     <?php } ?>
                                 </div>
                                 <div class="mid-center">
-                                    <div id="border-cicle-progress" class="border-cicle  bg-white text-<?= (empty($data['status']) || empty($data['nextCheckText'])) ? 'black' : 'blue-sea' ?>"
+                                    <div id="border-cicle-progress"
+                                        class="border-cicle  bg-white text-<?= (empty($data['status']) || empty($data['nextCheckText'])) ? 'black' : 'blue-sea' ?>"
                                         style="<?= (empty($data['status']) || empty($data['nextCheckText'])) ? 'border: 0.5px solid #30313D;' : 'border: 0.5px solid #2F42ED;' ?>">
                                         <?= Yii::t('app', 'In-Progress') ?>
                                     </div>
                                 </div>
                                 <div class="font-size-11 align-content-center">
-                                    <text id="text-blue" class="text-<?= (empty($data['status']) || empty($data['nextCheckText'])) ? 'black' : 'blue-sea' ?>">
+                                    <text id="text-blue"
+                                        class="text-<?= (empty($data['status']) || empty($data['nextCheckText'])) ? 'black' : 'blue-sea' ?>">
                                         <?= Yii::t('app', "The task is currently being addressed. Ensure it's marked completed before the due date to avoid it being automatically listed as overdue.") ?>
                                     </text>
                                 </div>
                             </div>
-                            <div id="textbox-check-completed" class="textbox-check-<?= (empty($data['status']) || $data['status'] != 2) ? 'hide' : 'green' ?>">
+                            <div id="textbox-check-completed"
+                                class="textbox-check-<?= (empty($data['status']) || $data['status'] != 2) ? 'hide' : 'green' ?>">
                                 <div class="mid-center" style="flex-basis: 5%;">
                                     <input type="checkbox" id="check2" name="status" value="2" class="status-checkbox"
                                         <?= (isset($data['status']) && $data['status'] == '2') ? 'checked' : '' ?>
                                         style="width: 20px; height: 20px;">
                                 </div>
                                 <div class="mid-center">
-                                    <div id="border-cicle-completed" class="border-cicle  bg-white text-<?= (empty($data['status']) || empty($data['nextCheckText']) || $data['status'] != 2) ? 'black' : 'green' ?>"
+                                    <div id="border-cicle-completed"
+                                        class="border-cicle  bg-white text-<?= (empty($data['status']) || empty($data['nextCheckText']) || $data['status'] != 2) ? 'black' : 'green' ?>"
                                         style="<?= (empty($data['status']) || empty($data['nextCheckText']) || $data['status'] != 2) ? 'border: 0.5px solid #30313D;' : 'border: 0.5px solid #2D7F06;' ?>">
                                         <?= Yii::t('app', "Completed") ?>
                                     </div>
                                 </div>
                                 <div class="font-size-11 align-content-center">
-                                    <text id="text-green" class="text-<?= (empty($data['status']) || empty($data['nextCheckText']) || $data['status'] != 2) ? 'black' : 'green' ?>">
+                                    <text id="text-green"
+                                        class="text-<?= (empty($data['status']) || empty($data['nextCheckText']) || $data['status'] != 2) ? 'black' : 'green' ?>">
                                         <?= Yii::t('app', "The Component has not been completed") ?>
                                     </text>
                                 </div>
                             </div>
-                            <div id="textbox-check-warning" style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
+                            <div id="textbox-check-warning"
+                                style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
                                                                         ? 'border: 0.5px solid var(--Progress-Blue, #30313D);'
                                                                         : ($daysLeft == 'Due Pass'
                                                                             ? 'border: 0.5px solid var(--Progress-Blue, #E05757);'
@@ -755,12 +773,12 @@ if (!$nextCheckDate) {
                                                                                 ? 'black'
                                                                                 : ($daysLeft == 'Due Pass'
                                                                                     ? 'red'
-                                                                                    : 'orang') ?>"
-                                        style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
+                                                                                    : 'orang') ?>" style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
                                                     ? 'border: 0.5px solid var(--Progress-Blue, #30313D);'
                                                     : ($daysLeft == 'Due Pass'
                                                         ? 'border: 0.5px solid var(--Progress-Blue, #E05757);'
-                                                        : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?>" for="check3">
+                                                        : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?>"
+                                        for="check3">
 
                                         <?= Yii::t('app', "Due Passed") ?>
                                     </div>
@@ -770,8 +788,7 @@ if (!$nextCheckDate) {
                                                             ? 'black'
                                                             : ($daysLeft == 'Due Pass'
                                                                 ? 'red'
-                                                                : 'orang') ?>" <div
-                                        class="border-cicle bg-white text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
+                                                                : 'orang') ?>" <div class="border-cicle bg-white text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
                                                                                 ? 'black'
                                                                                 : ($daysLeft == 'Due Pass'
                                                                                     ? 'red'
@@ -784,7 +801,8 @@ if (!$nextCheckDate) {
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group mt-30" style="display: flex; align-items: flex-end; justify-content: flex-end; gap: 7px; width: 100%;">
+                        <div class="form-group mt-30"
+                            style="display: flex; align-items: flex-end; justify-content: flex-end; gap: 7px; width: 100%;">
                             <div style="display: flex;
                                 min-width: 90px;
                                 height: 35px;
@@ -801,14 +819,16 @@ if (!$nextCheckDate) {
                             </div>
                             <div>
                                 <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiId' => $data['kgiId'], 'kgiEmployeeHistoryId' => $kgiEmployeeHistoryId, 'kgiEmployeeId' => $kgiEmployeeId]) ?>"
-                                    class=" btn-create-cancle" style="width: 70px;text-decoration: none;height: 35px;font-size:14px !important;">
+                                    class=" btn-create-cancle"
+                                    style="width: 70px;text-decoration: none;height: 35px;font-size:14px !important;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/eye-login.svg" alt="LinkedIn"
                                         style="width: 16px; height: 16px;">
                                     <?= Yii::t('app', 'View') ?>
                                 </a>
                             </div>
 
-                            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid" class="btn-create-cancle"
+                            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid"
+                                class="btn-create-cancle"
                                 style="width: 70px;text-decoration: none;height: 35px;font-size:14px !important;">
                                 <?= Yii::t('app', 'Cancel') ?>
                             </a>
@@ -832,51 +852,52 @@ if (!$nextCheckDate) {
 
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_history') ?>
+<?= $this->render('modal_warning') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        var acType = document.getElementById('acType').value
-        let isSubmitting = false; // ป้องกัน submit ซ้ำ
-        $("#update-personal-kgi").on("beforeSubmit", function(event) {
-            if (isSubmitting) {
-                return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
-            }
-            isSubmitting = true;
-            // alert(acType);
-            if (!validateFormKgiEmployee(acType)) {
-                isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
-                return false;
-            }
-            return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
-        });
-        $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
-    });
-    const seeMoreBtn = document.getElementById("see-more");
-    const aboutText = document.getElementById("about-text");
-
-    <?php if (mb_strlen($detail) > 487): ?>
-        const fullText = `<?= addslashes($detail) ?>`;
-        const shortText = `<?= addslashes(mb_substr($detail, 0, 487)) ?>...`;
-
-        seeMoreBtn.addEventListener("click", function() {
-            if (aboutText.textContent.includes(shortText)) {
-                aboutText.innerHTML = fullText +
-                    `<button id="see-more" class="see-more">See Less</button>`;
-                document.getElementById("see-more").addEventListener("click", toggleText);
-            } else {
-                aboutText.innerHTML = shortText +
-                    `<button id="see-more" class="see-more">See More</button>`;
-                document.getElementById("see-more").addEventListener("click", toggleText);
-            }
-        });
-
-        function toggleText() {
-            if (aboutText.innerHTML.includes(shortText)) {
-                aboutText.innerHTML = fullText + `<button id="see-more" class="see-more">See Less</button>`;
-            } else {
-                aboutText.innerHTML = shortText + `<button id="see-more" class="see-more">See More</button>`;
-            }
-            document.getElementById("see-more").addEventListener("click", toggleText);
+$(document).ready(function() {
+    var acType = document.getElementById('acType').value
+    let isSubmitting = false; // ป้องกัน submit ซ้ำ
+    $("#update-personal-kgi").on("beforeSubmit", function(event) {
+        if (isSubmitting) {
+            return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
         }
-    <?php endif; ?>
+        isSubmitting = true;
+        // alert(acType);
+        if (!validateFormKgiEmployee(acType)) {
+            isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+            return false;
+        }
+        return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
+    });
+    $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
+});
+const seeMoreBtn = document.getElementById("see-more");
+const aboutText = document.getElementById("about-text");
+
+<?php if (mb_strlen($detail) > 487): ?>
+const fullText = `<?= addslashes($detail) ?>`;
+const shortText = `<?= addslashes(mb_substr($detail, 0, 487)) ?>...`;
+
+seeMoreBtn.addEventListener("click", function() {
+    if (aboutText.textContent.includes(shortText)) {
+        aboutText.innerHTML = fullText +
+            `<button id="see-more" class="see-more">See Less</button>`;
+        document.getElementById("see-more").addEventListener("click", toggleText);
+    } else {
+        aboutText.innerHTML = shortText +
+            `<button id="see-more" class="see-more">See More</button>`;
+        document.getElementById("see-more").addEventListener("click", toggleText);
+    }
+});
+
+function toggleText() {
+    if (aboutText.innerHTML.includes(shortText)) {
+        aboutText.innerHTML = fullText + `<button id="see-more" class="see-more">See Less</button>`;
+    } else {
+        aboutText.innerHTML = shortText + `<button id="see-more" class="see-more">See More</button>`;
+    }
+    document.getElementById("see-more").addEventListener("click", toggleText);
+}
+<?php endif; ?>
 </script>

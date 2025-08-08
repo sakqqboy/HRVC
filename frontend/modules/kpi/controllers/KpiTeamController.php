@@ -710,7 +710,32 @@ class KpiTeamController extends Controller
 			"type" => $type
 		]));
 	}
-
+	public function actionAutoResult()
+		{
+			$kpiTeamId = $_POST["kpiTeamId"];
+			$kpiTeam = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->asArray()->one();
+			$year = $kpiTeam["year"];
+			$month = $kpiTeam["month"];
+			$kpiEmployee = KpiEmployee::find()
+				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+				->where([
+					"e.teamId" => $kpiTeam["teamId"],
+					"e.status" => 1,
+					"kpi_employee.status" => [1, 2, 4],
+					"kpi_employee.month" => $month,
+					"kpi_employee.year" => $year
+				])
+				->asArray()
+				->all();
+			$autoResult = 0;
+			if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+				foreach ($kpiEmployee as $kg):
+					$autoResult += $kg["result"];
+				endforeach;
+			}
+			$res["result"] = $autoResult;
+			return json_encode($res);
+		}
 
 	public function actionKpiTeamSearchResult($hash)
 	{

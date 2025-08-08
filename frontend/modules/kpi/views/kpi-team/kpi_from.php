@@ -702,7 +702,7 @@ select.form-select option:disabled {
                                 <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
                                     <label class="switch">
                                         <input type="checkbox" id="historic-checkbox-kpi-team"
-                                            onchange="javascript:autoUpdateResultTeam(<?= $kpiTeamId ?>)">
+                                            onchange="javascript:autoUpdateResultTeamKpi(<?= $kpiTeamId ?>)">
                                         <span class="slider round"></span>
                                     </label>
                                     <label class="sub-manage-create" id="historic-switch">
