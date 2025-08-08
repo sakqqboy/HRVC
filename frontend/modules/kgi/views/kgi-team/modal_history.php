@@ -40,25 +40,6 @@
         padding: 15px;
     }
 }
-
-/* ========== SCALE ONLY MODAL WITH .scaled-modal ========== */
-@media (max-width: 1735px) and (max-height: 950px) {
-    .modal-dialog.scaled-modal {
-        transform: scale(0.85);
-        transform-origin: top left;
-        width: calc(100% / 0.85);
-        left: -300px;
-    }
-}
-
-@media (max-width: 1935px) and (max-height: 950px) {
-    .modal-dialog.scaled-modal {
-        transform: scale(0.95);
-        transform-origin: top left;
-        width: calc(100% / 0.95);
-        right: 390px;
-    }
-}
 </style>
 
 <div class="">
@@ -66,7 +47,8 @@
         aria-hidden="true">
         <div class="modal-dialog custom-update-history-modal">
             <div class="modal-content" style="display: flex; padding: 25px 31px; width: 1560px; gap: 21px;">
-                <div class="updatehistory" style="font-size: 30px; text-decoration-line: none;">
+                <div class="updatehistory"
+                    style="font-size: 30px; text-decoration-line: none; display: flex; justify-content: flex-start; width: 100%; text-align: left; align-items: center;">
                     <span class="modal-title-history" id="updateHistoryModalLabel">
                         <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"
                             style="width: 26.998px; height: 26.999px;">
