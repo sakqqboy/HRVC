@@ -20,16 +20,16 @@ $this->title = 'Company KGI History';
     ]) ?>
     <div class="col-12 mt-20" id="box-wrapper">
         <div class="bg-white-employee">
-            <div class="font-size-12 pim-name pr-0 pl-5 text-start ">
+            <div class="font-size-12 pl-5" style="width: 100%;">
                 <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="mr-5 pim-text-back">
                     <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                     <?= Yii::t('app', 'Back') ?>
                 </a>
-                <span class="">
+                <span class="pim-name">
                     <?= $kgiDetail["kgiName"] ?>
                 </span>
             </div>
-            <div class="row" style="--bs-gutter-x:0px;">
+            <div class="row mt-20" style="--bs-gutter-x:0px;">
                 <?php
                 if (isset($kgis) && count($kgis) > 0) {
                     $i = 0;
@@ -52,37 +52,37 @@ $this->title = 'Company KGI History';
                             <div class="col-lg-4 col-md-6 col-12 pr-0 pl-0">
                                 <div class="pim-big-box-view pim-<?= $colorFormat ?>">
                                     <div class="d-inline-flex w-100">
-                                        <div class="d-flex pim-name-history border"><?= $kgi["month"] ?>
+                                        <div class="d-flex pim-name-history" style="height: 32px;"><?= $kgi["month"] ?>
                                             <?= $kgi["year"] ?>
                                         </div>
                                         <div class="flex-grow-1">
-                                            <div class="d-flex justify-content-end">
+                                            <div class="d-flex justify-content-end" style="height:32px;">
                                                 <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 1, 'kgiHistoryId' => $kgi['kgiHistoryId']]) ?>"
                                                     class="<?= $colorFormat == 'disable' ? 'pim-btn-disable' : 'pim-btn' ?> mr-5"
                                                     style=" <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="View"
-                                                        class="pim-action-icon" style="margin-top: -2px;">
+                                                        class="pim-action-icon">
                                                 </a>
                                                 <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 3, 'kgiHistoryId' => $kgi['kgiHistoryId']]) ?>"
-                                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
-                                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                                    class="<?= $colorFormat == 'disable' ? 'pim-btn-disable' : 'pim-btn' ?> mr-5"
+                                                    style=" <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="Chats"
-                                                        class="pim-action-icon" style="margin-top: -2px;">
+                                                        class="pim-action-icon">
                                                 </a>
                                                 <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 4, 'kgiHistoryId' => $kgi['kgiHistoryId']]) ?>"
-                                                    class="btn <?= $colorFormat == 'disable' ? 'btn-bg-gray-xs' : 'btn-bg-white-xs mr-5' ?> mr-5"
-                                                    style="margin-top: -3px; <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="Chart"
-                                                        class="pim-action-icon" style="margin-top: -2px;">
+                                                    class="<?= $colorFormat == 'disable' ? 'pim-btn-disable' : 'pim-btn' ?>"
+                                                    style=" <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/chart.svg" alt="Chart"
+                                                        class="pim-action-icon">
                                                 </a>
                                                 <?php
                                                 if ($colorFormat == 'disable') {
                                                 ?>
-                                                    <a class="btn btn-bg-blue-xs  mr-5"
+                                                    <a class="btn btn-bg-blue-xs  ml-5"
                                                         href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
                                                         style="margin-top: -3px;">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
-                                                            alt="History" style="margin-top: -2px;" class="pim-icon">
+                                                            alt="History" style="margin-top: -2px;" class="pim-action-icon">
                                                     </a>
                                                 <?php
                                                 }
@@ -91,10 +91,10 @@ $this->title = 'Company KGI History';
                                                 <?php
                                                 if ($i == 0 && $kgi["status"] == 2 && $role >= 4) {
                                                 ?>
-                                                    <a class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;"
+                                                    <a class="pim-btn ml-5"
                                                         onclick="javascript:prepareKgiNextTarget(<?= $kgi['kgiHistoryId'] ?>)">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy.svg" alt="History"
-                                                            style="margin-top: -3px;" class="pim-icon">
+                                                            class="pim-icon">
                                                     </a>
                                                 <?php
                                                 }
@@ -372,3 +372,13 @@ $form = ActiveForm::begin([
 ]) ?>
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_confirm_next') ?>
+<style>
+    .pim-btn {
+        height: 25px;
+        width: 25px;
+        padding: 0px;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+    }
+</style>
