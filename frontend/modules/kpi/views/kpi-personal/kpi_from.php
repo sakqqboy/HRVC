@@ -853,6 +853,7 @@ select.form-select option:disabled {
 
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_history') ?>
+<?= $this->render('modal_warning') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {

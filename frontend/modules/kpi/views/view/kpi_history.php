@@ -6,16 +6,20 @@ use yii\bootstrap5\ActiveForm;
 $this->title = 'KPI View';
 ?>
 <script src="https://code.highcharts.com/highcharts.js"></script>
-<div class="contrainer-body">
-    <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
-            style="margin-top: -3px;">
-        <strong class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</strong>
+<div class="col-12 mt-70 pt-20 pim-content1">
+    <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg"
+            class="pim-head-icon mr-11 mt-2">
+        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
     </div>
+    <?= $this->render('kpi_header_filter', [
+        "role" => $role,
+        "allCompany" => $allCompany,
+        "companyPic" => $companyPic,
+        "totalBranch" => $totalBranch
+    ]) ?>
     <div class="col-12 mt-10">
-        <?= $this->render('kpi_header_filter', [
-            "role" => $role
-        ]) ?>
+
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
                 <div class="col-11 pim-name-title pr-0 pl-5 text-start">
@@ -25,52 +29,57 @@ $this->title = 'KPI View';
                     </a>
                     <?= $kpiDetail["kpiName"] ?>
                 </div>
-                <div class="col-1 text-end">
+                <div class="col-1 ">
                     <?php if ($role >= 5) {
                     ?>
-                        <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kpi"
-                            onclick="javascript:prepareDeleteKpi(<?= $kpiId ?>)"
-                            onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                            onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
-                                class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
-                            <?= Yii::t('app', 'Delete') ?>
+                    <a class="btn btn-outline-danger d-flex justify-content-center" data-bs-toggle="modal"
+                        data-bs-target="#delete-kpi" onclick="javascript:prepareDeletekpi(<?= $kpiId ?>)"
+                        style="height: 34px;font-size:13px;"
+                        onmouseover="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                        onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg'">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg"
+                            class="pim-action-icon mr-3 mt-3">
+                        <?= Yii::t('app', 'Delete') ?>
 
-                        </a>
-                    <?php   }
-                    ?>
+                    </a>
+                    <?php } ?>
                 </div>
             </div>
-            <div class="row mt-10">
-                <div class="col-lg-7 col-12">
+            <div class="row mt-20" style="--bs-gutter-x:0px;">
+                <div class="col-lg-7 col-12 pr-10">
                     <?php
                     if ($kpiDetail["isOver"] == 1 && $kpiDetail["status"] != 2) {
                         $colorFormat = 'over';
+                        $text = 'Due Passed';
                     } else {
                         if ($kpiDetail["status"] == 1) {
                             if ($kpiDetail["isOver"] == 2) {
                                 $colorFormat = 'disable';
+                                $text = 'Not Set';
                             } else {
                                 $colorFormat = 'inprogress';
+                                $text = 'In Progress';
                             }
                         } else {
                             $colorFormat = 'complete';
+                            $text = 'Completed';
                         }
                     }
                     ?>
                     <div class="row">
-                        <div class="col-4 pim-name-detail "><?= Yii::t('app', 'Description') ?></div>
+                        <div class="col-4 pim-name-detail align-items-center ">Description</div>
                         <div class="col-2">
-                            <div class="<?= $colorFormat ?>-tag text-center">
-                                <?= $kpiDetail['status'] == 1 ? Yii::t('app', 'In process') : Yii::t('app', 'Completed') ?>
+                            <div class="status-tag <?= $colorFormat ?>-tag text-center">
+                                <?= Yii::t('app', $text) ?>
+
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="row">
-                                <div class="col-4 month-<?= $colorFormat ?> pt-2">
-                                    <?= $kpiDetail['monthNameFull'] ?? Yii::t('app', 'Term') ?>
+                                <div class="col-4 month-period month-<?= $colorFormat ?>">
+                                    <?= $kpiDetail['monthFullName'] ?? Yii::t('app', 'Term') ?>
                                 </div>
-                                <div class="col-8 term-<?= $colorFormat ?>  pt-2">
+                                <div class="col-8 term-period term-<?= $colorFormat ?>">
                                     <?= $kpiDetail['fromDate'] == "" ? Yii::t('app', 'Not set') : $kpiDetail['fromDate'] ?>
                                     &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
                                     <?= $kpiDetail['toDate'] == "" ? Yii::t('app', 'Not set') : $kpiDetail['toDate'] ?>
@@ -82,33 +91,32 @@ $this->title = 'KPI View';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5 col-12 pl-20">
+                <div class="col-lg-5 col-12">
                     <div class="col-12 pim-big-box pim-detail-<?= $colorFormat ?>">
                         <div class="row">
                             <div class="col-2 pim-subheader-font border-right-<?= $colorFormat ?>"
                                 style=" display: flex; flex-direction: column; justify-content: center;">
-                                <!-- <div class="row">
-                                    <div class="offset-1 col-8"> -->
-                                <div class="ml-12 priority-star">
+
+                                <div class="priority-star">
                                     <?php
                                     if ($kpiDetail["priority"] == "A" || $kpiDetail["priority"] == "B") {
                                     ?>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     if ($kpiDetail["priority"] == "A" || $kpiDetail["priority"] == "C") {
                                     ?>
-                                        <i class="fa fa-star big-star" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="big-star">
                                     <?php
                                     }
                                     if ($kpiDetail["priority"] == "B") {
                                     ?>
-                                        <i class="fa fa-star ml-10" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     if ($kpiDetail["priority"] == "A") {
                                     ?>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     ?>
@@ -116,38 +124,36 @@ $this->title = 'KPI View';
                                 <?php
                                 if ($kpiDetail["priority"] != '') {
                                 ?>
-                                    <div class="col-12 text-center priority-box">
-                                        <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
-                                        <div class="col-12 text-priority"><?= $kpiDetail["priority"] ?></div>
-                                    </div>
+                                <div class="priority-box">
+                                    <?= Yii::t('app', 'Priority') ?>
+                                    <span class="text-priority mt-5"><?= $kpiDetail["priority"] ?></span>
+                                </div>
                                 <?php
                                 } else { ?>
-                                    <div class="col-12 text-center priority-box-null">
-                                        <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
-                                        <div class="col-12 text-priority">N/A</div>
-                                    </div>
+                                <div class="priority-box-null">
+                                    <?= Yii::t('app', 'Priority') ?>
+                                    <span class="text-priority mt-5">N/A</span>
+                                </div>
                                 <?php
                                 }
                                 ?>
-                                <!-- </div>
-                                </div> -->
-
                             </div>
-                            <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> pl-18">
-                                <div class="col-12"><?= Yii::t('app', 'Quant Ratio') ?></div>
+                            <div class="col-lg-3 pt-10 pim-subheader-font border-right-<?= $colorFormat ?>">
+                                <div class="col-12 font-size-12">Quant Ratio</div>
                                 <div class="col-12 border-bottom-<?= $colorFormat ?> pb-5 pim-duedate">
                                     <i class="fa fa-diamond" aria-hidden="true"></i>
-                                    <?= $kpiDetail["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
+                                    <?= $kpiDetail["quantRatio"] == 1 ?  Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
                                 </div>
-                                <div class="col-12 pr-0 pt-5 pl-0"><?= Yii::t('app', 'Update Interval') ?></div>
+                                <div class="col-12 pr-0 pt-5 pl-0 font-size-12"><?= Yii::t('app', 'update Interval') ?>
+                                </div>
                                 <div class="col-12  pim-duedate">
-                                    <?= Yii::t('app', $kpiDetail["unitText"]) ?>
+                                    <?= $kpiDetail["unitText"] ?>
                                 </div>
                             </div>
                             <div class="col-lg-7 pim-subheader-font pr-15 pl-15">
                                 <div class="row">
                                     <div class="col-5 text-start">
-                                        <div class="col-12"><?= Yii::t('app', 'Target') ?></div>
+                                        <div class="col-12 font-size-12"><?= Yii::t('app', 'Target') ?></div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
                                             $decimal = explode('.', $kpiDetail["targetAmount"]);
@@ -168,7 +174,7 @@ $this->title = 'KPI View';
                                         <div class="col-12 pt-17"><?= $kpiDetail["code"] ?></div>
                                     </div>
                                     <div class="col-5  text-end">
-                                        <div class="col-12"><?= Yii::t('app', 'Result') ?></div>
+                                        <div class="col-12 font-size-12"><?= Yii::t('app', 'Result') ?></div>
                                         <div class="col-12 mt-3 number-pim">
                                             <?php
                                             if ($kpiDetail["result"] != '') {
@@ -189,7 +195,7 @@ $this->title = 'KPI View';
                                             <?= $showResult ?><?= $kpiDetail["amountType"] == 1 ? '%' : '' ?>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 mt-10">
                                         <?php
                                         $percent = explode('.', $kpiDetail['ratio']);
                                         if (isset($percent[1])) {
@@ -204,7 +210,7 @@ $this->title = 'KPI View';
                                         ?>
                                         <div class="progress">
                                             <div class="progress-bar-<?= $colorFormat ?>"
-                                                style="width:<?= $showPercent ?>%;  max-width: 100%;"></div>
+                                                style="width:<?= $showPercent ?>%;"></div>
                                             <span
                                                 class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
                                         </div>
@@ -212,8 +218,7 @@ $this->title = 'KPI View';
                                     <div class="col-12 mt-10 align-items-center">
                                         <div class="row">
                                             <div class="col-4 mt-5 pl-0 pr-0 ">
-                                                <div class="col-12 text-end"
-                                                    style="letter-spacing:0.3px;font-size:12px;">
+                                                <div class="col-12 text-end" style="font-size:10px;">
                                                     <?= Yii::t('app', 'Last Updated on') ?>
                                                 </div>
                                                 <div class="col-12 text-end pim-duedate">
@@ -224,23 +229,23 @@ $this->title = 'KPI View';
                                                 <?php
                                                 if ($role > 3  && $kpiDetail["status"] == 1) {
                                                 ?>
-                                                    <a class="pim-btn-<?= $colorFormat ?>"
-                                                        href="<?= Yii::$app->homeUrl ?>kpi/management/prepare-update/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'kpiHistoryId' => 0]) ?>"
-                                                        style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
-                                                        <i class="fa fa-refresh"
-                                                            aria-hidden="true"></i><?= Yii::t('app', 'Update') ?>
-                                                    </a>
+                                                <a class="pim-btn-<?= $colorFormat ?>"
+                                                    href="<?= Yii::$app->homeUrl . 'kpi/management/prepare-update/' . ModelMaster::encodeParams(['kpiId' => $kpiId, 'kpiHistoryId' => 0]) ?>"
+                                                    style="display: flex; justify-content: center; align-items: center;  height: 30px; gap: 3px; flex-shrink: 0;">
+                                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                                    <?= Yii::t('app', 'Update') ?>
+                                                </a>
                                                 <?php
                                                 }
                                                 ?>
                                             </div>
-                                            <div class="col-4 pl-0 pr-5 mt-5 ">
+                                            <div class="col-4 pl-0 pr-0 mt-5 ">
                                                 <div class="col-12 text-start font-<?= $colorFormat ?>"
-                                                    style="letter-spacing:0.3px;font-size:12px;">
+                                                    style="font-size:10px;">
                                                     <?= Yii::t('app', 'Next Update Date') ?>
                                                 </div>
                                                 <div class="col-12 text-start pim-duedate">
-                                                    <?= $kpiDetail['nextCheckText'] == "" ? 'Not set' : $kpiDetail['nextCheckText'] ?>
+                                                    <?= $kpiDetail['nextCheckText'] == "" ?  Yii::t('app', 'Not set') : $kpiDetail['nextCheckText'] ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -251,137 +256,59 @@ $this->title = 'KPI View';
 
                     </div>
                 </div>
-                <div class="col-lg-7">
-                    <div class="row">
-                        <div class="col-2  view-tab-active" id="tab-1"
-                            onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,1)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;" id="tab-1-blue">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-1-black">
-                            <?= Yii::t('app', 'Assigned') ?>
-                        </div>
-                        <div class="col-3  view-tab" id="tab-2" onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,2)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;" id="tab-2-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-2-blue">
-                            <?= Yii::t('app', 'Update History') ?>
-                        </div>
-                        <div class="col-2  view-tab" id="tab-3" onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,3)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;" id="tab-3-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment-blue.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-3-blue">
-                            <?= Yii::t('app', 'Chats') ?>
-                        </div>
-                        <div class="col-2  view-tab" id="tab-4" onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,4)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;" id="tab-4-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-4-blue">
-                            <?= Yii::t('app', 'Chart') ?>
-                        </div>
-                        <div class="col-3  view-tab" id="tab-5" onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,5)">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;" id="tab-5-black">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.svg" alt="History"
-                                class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-5-blue">
-                            <?= Yii::t('app', 'Relate KGI') ?>
+            </div>
+            <div class="col-12 mt-20">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="d-flex justify-content-start">
+                            <div class="view-tab-active" id="tab-1"
+                                style="border-top-left-radius:5px;border-top-right-radius:5px;"
+                                onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,1)">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.svg" alt="History"
+                                    class="pim-icon " id="tab-1-blue">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg" alt="History"
+                                    class="pim-icon " style="display:none;" id="tab-1-black">
+                                <?= Yii::t('app', 'Assigned') ?>
+                            </div>
+                            <div class="view-tab" id="tab-2" onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,2)">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg"
+                                    alt="History" class="pim-icon " id="tab-2-black">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.svg" alt="History"
+                                    class="pim-icon " style="display:none;" id="tab-2-blue">
+                                <?= Yii::t('app', 'Update History') ?>
+                            </div>
+                            <div class="view-tab" id="tab-3" onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,3)">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="History"
+                                    class="pim-icon " id="tab-3-black">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment-blue.svg" alt="History"
+                                    class="pim-icon " style="display:none;" id="tab-3-blue">
+                                <?= Yii::t('app', 'Chats') ?>
+                            </div>
+                            <div class=" view-tab" id="tab-4" onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,4)">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/chart.svg" alt="History"
+                                    class="pim-icon" id="tab-4-black">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.svg" alt="History"
+                                    class="pim-icon" style="display:none;" id="tab-4-blue">
+                                <?= Yii::t('app', 'Chart') ?>
+                            </div>
+                            <div class="view-tab" id="tab-5"
+                                style="border-top-left-radius:5px;border-top-right-radius:5px;"
+                                onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,5)">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.svg" alt="History"
+                                    class="pim-icon " id="tab-5-black">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.svg" alt="History"
+                                    class="pim-icon " style="display:none;" id="tab-5-blue">
+                                <?= Yii::t('app', 'Relate KPI') ?>
+                            </div>
                         </div>
                         <input type="hidden" id="currentTab" value="1">
                     </div>
-                </div>
-                <div class="col-lg-5 view-tab">
+                    <div class="col-lg-4">
+                    </div>
                 </div>
             </div>
-            <div class="row mt-10" id="show-content">
-                <div class="col-lg-6">
-                    <div class="col-12 ligth-gray-box">
-                        <div class="row pl-15 pr-20">
-                            <div class="col-3  sub-tab-active pl-5">
-                                <?= Yii::t('app', 'Assigned Teams') ?>
-                            </div>
-                            <div class="col-9  sub-tab">
-                            </div>
-                        </div>
-                        <div class="col-12 mt-15 pt-0" style="height:295px;overflow-y: auto;">
-                            <div class="row">
-                                <?php
-                                if (isset($kpiTeams) && count($kpiTeams) > 0) {
-                                    $i = 0;
-                                    foreach ($kpiTeams as $teamId => $team): ?>
-                                        <div class="col-lg-6 col-md-6 col-12 mb-10">
-                                            <div class="col-12 small-content bg-white pl-20">
-                                                <div class="row">
-                                                    <div class="col-2  pl-0 pr-0">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg"
-                                                            class="image-AssignMembers">
-                                                    </div>
-                                                    <div class="col-7 pl-10 border-right">
-                                                        <div class="col-12 font-size-12 text-b pr-0">
-                                                            <strong><?= $team['teamName'] ?></strong>
-                                                        </div>
-                                                        <div class="col-12 pim-employee-title"
-                                                            style="font-size: 10px !important;">
-                                                            <?= $team["departmentName"] ?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-2 text-center pr-0 pl-0 pt-8" style="font-weight: 400;">
-                                                        <?= $team['totalEmployee'] ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                <?php
-                                        $i++;
-                                    endforeach;
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="col-12 ligth-gray-box">
-                        <div class="row pl-15 pr-20">
-                            <div class="col-3  sub-tab-active pl-5">
-                                <?= Yii::t('app', 'Assigned Individuals') ?>
-                            </div>
-                            <div class="col-9  sub-tab">
-                            </div>
-                        </div>
-                        <div class="col-12 alert bg-white mt-15 pt-0" style="height:280px;overflow-y: auto;">
-                            <div class="row">
-                                <?php
-                                if (isset($kpiDetail["kpiEmployeeDetail"]) && count($kpiDetail["kpiEmployeeDetail"]) > 0) {
-                                    foreach ($kpiDetail["kpiEmployeeDetail"] as $employeeId => $employee): ?>
-                                        <div class="col-lg-4 col-md-6 col-12 mt-10 pt-0"
-                                            onclick="javascription:openKpiEmployeeView(<?= $employeeId ?>,<?= $kpiId ?>)"
-                                            style="cursor: pointer;">
-                                            <div class="row">
-                                                <div class="col-3 pr-0 pl-0">
-                                                    <img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>"
-                                                        class="image-AssignMembers">
-                                                </div>
-                                                <div class="col-9 pl-10">
-                                                    <div class="col-12 pim-employee-Name pr-0">
-                                                        <strong><?= $employee['name'] ?></strong>
-                                                    </div>
-                                                    <div class="col-12 pim-employee-title">
-                                                        <?= Yii::t('app', $employee['title']) ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                <?php
-                                    endforeach;
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="row mt-20" id="show-content">
+
             </div>
         </div>
     </div>
@@ -409,14 +336,49 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_employee_history') ?>
 
 
+<style>
+.priority-box {
+    width: 52px;
+    height: 52px;
+    font-size: 12px;
+}
+
+.priority-box-null {
+    width: 52px;
+    height: 52px;
+    font-size: 12px;
+}
+
+.text-priority {
+    font-size: 18px;
+}
+
+.priority-star {
+    width: 52px;
+}
+
+.big-star {
+    width: 18px;
+    height: 17px;
+}
+
+.default-star {
+    width: 16px;
+    width: 15px;
+}
+
+.pim-big-box {
+    height: 110px;
+    padding-top: 5px;
+}
+</style>
 <script>
-    // Optionally set a default tab to be active on page load
-    window.onload = function() {
-        let openTab = <?php echo json_encode($openTab); ?>; // PHP value passed to JavaScript
-        if (openTab) {
-            viewTabKpi(<?= $kpiHistoryId ?>, openTab); // Set the tab based on the PHP value
-        } else {
-            viewTabKpi(<?= $kpiHistoryId ?>, 1); // Default to tab 1 if no value is passed
-        }
+window.onload = function() {
+    let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
+    if (openTab) {
+        viewTabKpi(<?= $kpiHistoryId ?>, openTab); // Set the tab based on the PHP value
+    } else {
+        viewTabKpi(<?= $kpiHistoryId ?>, 1); // Default to tab 1 if no value is passed
     }
+}
 </script>

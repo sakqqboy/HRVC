@@ -146,7 +146,7 @@ select.form-select option:disabled {
 <!-- ลิงก์ไปยัง JS ของ flatpickr -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-<div class="contrainer-body">
+<div class="col-12 mt-70 pt-20">
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg"
             class="pim-head-icon mr-11 mt-2">
@@ -702,7 +702,7 @@ select.form-select option:disabled {
                                 <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
                                     <label class="switch">
                                         <input type="checkbox" id="historic-checkbox-kpi-team"
-                                            onchange="javascript:autoUpdateResultTeam(<?= $kpiTeamId ?>)">
+                                            onchange="javascript:autoUpdateResultTeamKpi(<?= $kpiTeamId ?>)">
                                         <span class="slider round"></span>
                                     </label>
                                     <label class="sub-manage-create" id="historic-switch">

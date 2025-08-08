@@ -328,6 +328,28 @@ function setSameKpiTeamRemark(teamId, kpiId) {
 	});
 
 }
+function autoUpdateResultTeamKpi(kpiTeamId) {
+	if ($("#historic-checkbox-kpi-team").prop("checked") == true) {
+		$("#override-checkbox-kpi-team").prop("checked", false);
+
+		var url = $url + 'kpi/kpi-team/auto-result';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kpiTeamId: kpiTeamId },
+			success: function (data) {
+				$("#result-update").val(data.result);
+				$("#auto-result").val(data.result);
+			}
+		});
+		$("#result-update").prop("disabled", true);
+	} else {
+		$("#override-checkbox-kpi-team").prop("checked", true);
+		$("#result-update").val($("#previous-result").val());
+		$("#result-update").prop("disabled", false);
+	}
+}
 function assignKpiTeam(kpiId) {
 	$("#kpiId-team").val(kpiId);
 	var url = $url + 'kpi/kpi-team/assign-kpi-team';
@@ -403,26 +425,26 @@ function checkAllKpiTeam(kpiId) {
 		}
 	});
 }
-function kpiTeamHistoryView(kpiId, teamId) { 
-    var viewType = $("#viewType").val();
-    //alert(viewType);
-var url = $url + 'kpi/view/kpi-team-history-view';
-    $.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: url,
-        data: { teamId: teamId, kpiId: kpiId,viewType:viewType },
-        success: function (data) {
-            if (data.status) {
-                $("#all").css('display', 'none');
-                $("#all").html('');
-                $("#employee-all").css('display', 'none');
-                $("#employee-all").html('');
-                $("#man-check").show();
-                $("#kpi-employee").show();
-                $("#man-check").html(data.history);
-            }
+function kpiTeamHistoryView(kpiId, teamId) {
+	var viewType = $("#viewType").val();
+	//alert(viewType);
+	var url = $url + 'kpi/view/kpi-team-history-view';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { teamId: teamId, kpiId: kpiId, viewType: viewType },
+		success: function (data) {
+			if (data.status) {
+				$("#all").css('display', 'none');
+				$("#all").html('');
+				$("#employee-all").css('display', 'none');
+				$("#employee-all").html('');
+				$("#man-check").show();
+				$("#kpi-employee").show();
+				$("#man-check").html(data.history);
+			}
 
-        }
-    });
+		}
+	});
 }

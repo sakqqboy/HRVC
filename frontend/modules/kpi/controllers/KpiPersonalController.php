@@ -911,10 +911,10 @@ class KpiPersonalController extends Controller
 					$KpiEmployeeHistory->save(false);
 				}
 
-				return $this->redirect($_POST["lastUrl"]);
+				return $this->redirect($_POST["url"]);
 			}
 		} else {
-			return $this->redirect($_POST["lastUrl"]);
+			return $this->redirect($_POST["url"]);
 		}
 	}
 
@@ -995,6 +995,50 @@ class KpiPersonalController extends Controller
 			"kpiEmployeeId" => $kpiEmployeeId,
 			"kpiEmployeeDetail" => $kpiEmployeeDetail,
 			"kpiEmployeeHistory" => $kpiEmployeeHistory
+		]);
+	}
+	public function actionKpiEmployeeHistory($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$kpiEmployeeId = $param["kpiEmployeeId"];
+		$openTab = isset($param["openTab"]) ? $param["openTab"] : 1;
+		$kpiEmployeeHistoryId = $param["kpiEmployeeHistoryId"];
+		$kpiId = $param["kpiId"];
+		$role = UserRole::userRight();
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-employee-detail?kpiEmployeeId=' . $kpiEmployeeId . '&&kpiEmployeeHistoryId=' . $kpiEmployeeHistoryId);
+		$kpiEmployeeDetail = curl_exec($api);
+		$kpiEmployeeDetail = json_decode($kpiEmployeeDetail, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+		curl_close($api);
+		$res["kpiEmployee"] = $kpiEmployeeDetail;
+		$isManager = UserRole::isManager();
+		$months = ModelMaster::monthFull(1);
+		// throw new exception($kpiId);
+		return $this->render('kpi_individual_history', [
+			"role" => $role,
+			"kpiEmployeeDetail" => $kpiEmployeeDetail,
+			"units" => $units,
+			"months" => $months,
+			"isManager" => $isManager,
+			"companies" => $companies,
+			"kpiId" => $kpiId,
+			"kpiEmployeeHistoryId" => $kpiEmployeeHistoryId,
+			"openTab" => $openTab,
+			"kpiEmployeeId" => $kpiEmployeeId
 		]);
 	}
 	public function actionEmployeeProgress()
