@@ -1,75 +1,70 @@
 <style>
-@media (max-width: 1935px) and (max-height: 950px) {
-    .modal-content {
-        transform: scale(0.95);
-        transform-origin: top left;
-        width: calc(100% / 0.95);
-        /* height: calc(100% / 0.95); */
-        /* overflow: hidden; */
-    }
-
-    .modal-dialog {
-        transform: scale(0.95);
-        transform-origin: top left;
-        width: calc(100% / 0.95);
-        /* height: calc(100% / 0.95); */
-        right: 390px;
-    }
+/* ========== DEFAULT MODAL STYLES ========== */
+.modal-dialog.custom-update-history-modal {
+    max-width: 1560px;
+    width: 95%;
+    margin: 1.75rem auto;
 }
 
 
-@media (max-width: 1735px) and (max-height: 950px) {
+.modal-content {
+    width: 100%;
+    height: auto;
+    overflow-y: auto;
+    max-height: 90vh;
+    padding: 25px 31px;
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1200px) {
     .modal-content {
-        transform: scale(0.75);
-        transform-origin: top left;
-        width: calc(100% / 0.85);
-        /* height: calc(100% / 0.85); */
-        /* overflow: hidden; */
+        padding: 20px;
+        gap: 16px;
     }
 
     .modal-dialog {
+        width: 98%;
+    }
+}
+
+@media (max-width: 768px) {
+    .circular-chart-create {
+        width: 60px;
+        height: 60px;
+    }
+
+    .modal-content {
+        padding: 15px;
+    }
+}
+
+/* ========== SCALE ONLY MODAL WITH .scaled-modal ========== */
+@media (max-width: 1735px) and (max-height: 950px) {
+    .modal-dialog.scaled-modal {
         transform: scale(0.85);
         transform-origin: top left;
         width: calc(100% / 0.85);
-        /* height: calc(100% / 0.85); */
-        /* overflow: hidden; */
         left: -300px;
     }
 }
 
-@media (max-width: 1535px) and (max-height: 950px) {
-    .modal-content {
-        transform: scale(0.55);
+@media (max-width: 1935px) and (max-height: 950px) {
+    .modal-dialog.scaled-modal {
+        transform: scale(0.95);
         transform-origin: top left;
-        width: calc(100% / 0.75);
-        /* height: calc(100% / 0.75); */
-        /* overflow: hidden; */
-    }
-
-    .modal-dialog {
-        transform: scale(0.75);
-        transform-origin: top left;
-        width: calc(100% / 0.75);
-        /* height: calc(100% / 0.75); */
-        /* overflow: hidden; */
-        left: -250px;
-    }
-}
-
-@media (max-width: 1335px) and (max-height: 750px) {
-    .modal-content {
-        transform: scale(0.65);
-        transform-origin: top left;
-        width: calc(100% / 0.65);
-        /* height: calc(100% / 0.65); */
-        /* overflow: hidden; */
+        width: calc(100% / 0.95);
+        right: 390px;
     }
 }
 </style>
+
 <div class="">
     <div class="modal fade" id="update-history-popup" tabindex="-1" aria-labelledby="updateHistoryModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog custom-update-history-modal">
             <div class="modal-content" style="display: flex; padding: 25px 31px; width: 1560px; gap: 21px;">
                 <div class="updatehistory" style="font-size: 30px; text-decoration-line: none;">
                     <span class="modal-title-history" id="updateHistoryModalLabel">
