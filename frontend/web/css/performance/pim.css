@@ -398,6 +398,14 @@
 
 }
 
+.pim-big-box-view {
+	border-radius: 6px;
+	height: 350px;
+	width: 100%;
+	padding: 12px;
+
+}
+
 .priority-box {
 	background-color: #2580D3;
 	color: white;

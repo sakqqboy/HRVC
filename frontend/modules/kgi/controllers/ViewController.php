@@ -95,7 +95,20 @@ class ViewController extends Controller
 		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		$kgis = curl_exec($api);
 		$kgis = json_decode($kgis, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
 		curl_close($api);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
 		// throw new Exception(Yii::$app->user->id);
 		//throw new Exception(print_r($kgis, true));
 		$months = ModelMaster::monthFull(1);
@@ -110,7 +123,10 @@ class ViewController extends Controller
 			"units" => $units,
 			"companies" => $companies,
 			"months" => $months,
-			"isManager" => $isManager
+			"isManager" => $isManager,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 
 		]);
 	}
