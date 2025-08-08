@@ -247,6 +247,20 @@ class ViewController extends Controller
 		$kgiEmployeeHistory = curl_exec($api);
 		$kgiEmployeeHistory = json_decode($kgiEmployeeHistory, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
+		curl_close($api);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
+
 		// ตรวจสอบว่า $kgis มีข้อมูล
 		$teamMate = [];
 		$countTeamEmployee = 0;
@@ -269,8 +283,6 @@ class ViewController extends Controller
 				}
 			}
 		}
-		//   throw new Exception(print_r($countTeamEmployee,true));
-		curl_close($api);
 		return $this->render('kgi_employee_history', [
 			"role" => $role,
 			"kgiDetail" => $kgiDetail,
@@ -278,8 +290,10 @@ class ViewController extends Controller
 			"kgiEmployeeId" => $kgiEmployeeId,
 			"kgiId" => $kgiId,
 			"countTeamEmployee" => $countTeamEmployee,
-			"teamMate" => $teamMate
-
+			"teamMate" => $teamMate,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 
 		]);
 	}

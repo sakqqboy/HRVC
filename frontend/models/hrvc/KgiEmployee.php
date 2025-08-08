@@ -127,8 +127,6 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
                 $data[$i] = $img;
                 $i++;
             endforeach;
-        } else {
-            return null;
         }
         return $data;
     }

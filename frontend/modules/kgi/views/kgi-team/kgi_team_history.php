@@ -6,85 +6,92 @@ use yii\bootstrap5\ActiveForm;
 $this->title = 'Team KGI View';
 ?>
 <script src="https://code.highcharts.com/highcharts.js"></script>
-<div class="contrainer-body">
-
-    <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
-            style="margin-top: -3px;">
-        <strong class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</strong>
+<div class="col-12 mt-70 pt-20 pim-content1">
+    <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg"
+            class="pim-head-icon mr-11 mt-2">
+        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
     </div>
-    <div class="col-12 mt-10">
-        <?= $this->render('kgi_header_filter', [
-            "role" => $role
-        ]) ?>
-        <?php
-        if (isset($kgiTeamDetail) && !empty($kgiTeamDetail)) {
-            if ($kgiTeamDetail["isOver"] == 1 && $kgiTeamDetail["status"] != 2) {
-                $colorFormat = 'over';
-            } else {
-                if ($kgiTeamDetail["status"] == 1) {
-                    if ($kgiTeamDetail["isOver"] == 2) {
-                        $colorFormat = 'disable';
-                    } else {
-                        $colorFormat = 'inprogress';
-                    }
+    <?= $this->render('header_filter', [
+        "role" => $role,
+        "allCompany" => $allCompany,
+        "companyPic" => $companyPic,
+        "totalBranch" => $totalBranch
+    ]) ?>
+    <?php
+    if (isset($kgiTeamDetail) && !empty($kgiTeamDetail)) {
+        if ($kgiTeamDetail["isOver"] == 1 && $kgiTeamDetail["status"] != 2) {
+            $colorFormat = 'over';
+            $text = 'Due Passed';
+        } else {
+            if ($kgiTeamDetail["status"] == 1) {
+                if ($kgiTeamDetail["isOver"] == 2) {
+                    $colorFormat = 'disable';
+                    $text = 'Not Set';
                 } else {
-                    $colorFormat = 'complete';
+                    $colorFormat = 'inprogress';
+                    $text = 'In Progress';
                 }
+            } else {
+                $colorFormat = 'complete';
+                $text = 'Completed';
             }
-        ?>
+        }
+    ?>
+        <div class="col-12 mt-10">
             <div class="alert mt-10 pim-body bg-white">
                 <div class="row">
                     <div class="col-9 pim-name-title pr-0 pl-5 text-start">
-                        <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi-grid' ?>"
-                            class="mr-5 pim-text-back">
+                        <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="mr-5 pim-text-back">
                             <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                             <?= Yii::t('app', 'Back') ?>
                         </a>
                         <?= $kgiTeamDetail["kgiName"] ?>
                     </div>
                     <div class="col-3 text-end">
-                        <span class="team-wrapper <?= $colorFormat ?>-teamshow"
-                            style="margin-right: 5px; padding-right: 5px;">
-                            <span class="team-icon pim-team-<?= $colorFormat ?>">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg"
-                                    alt="Team Icon">
+                        <div class="d-flex justify-content-end align-items-end">
+                            <span class="team-wrapper <?= $colorFormat ?>-teamshow"
+                                style="margin-right: 5px; padding-right: 5px;">
+                                <span class="team-icon pim-team-<?= $colorFormat ?>">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat == 'disable' ? 'teamblack' : 'teamwhite' ?>.svg"
+                                        alt="Team Icon">
+                                </span>
+                                <span class="team-name"><?= $kgiTeamDetail["teamName"] ?></span>
                             </span>
-                            <span class="team-name"><?= $kgiTeamDetail["teamName"] ?></span>
-                        </span>
-                        <?php if ($role >= 5) {
-                        ?>
-                            <a class="btn btn-bg-red-xs" data-bs-toggle="modal" data-bs-target="#delete-kgi-team"
-                                onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
-                                onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                                onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="History"
-                                    class="pim-icon" style="margin-top: -3px; width: 12px; height: 14px;">
-                                <?= Yii::t('app', 'Delete') ?>
-
-                            </a>
-                        <?php } ?>
+                            <?php if ($role >= 5) {
+                            ?>
+                                <a class="btn btn-outline-danger d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#delete-kgi"
+                                    onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
+                                    style="height: 25px;font-size:13px;width:60px;"
+                                    onmouseover="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                                    onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg'">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg"
+                                        class="pim-action-icon mr-3">
+                                    <?= Yii::t('app', 'Delete') ?>
+                                </a>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
-                <div class="row mt-10">
-                    <div class="col-lg-7 col-12">
-
+                <div class="row mt-20" style="--bs-gutter-x:0px;">
+                    <div class="col-lg-7 col-12 pr-10">
                         <div class="row">
-                            <div class="col-4 pim-name-detail "><?= Yii::t('app', 'Description') ?></div>
+                            <div class="col-4 pim-name-detail align-items-center ">Description</div>
                             <div class="col-2">
-                                <div class="<?= $colorFormat ?>-tag text-center">
-                                    <?= $kgiTeamDetail['status'] == 1 ? Yii::t('app', 'In process') : Yii::t('app', 'Completed') ?>
+                                <div class="status-tag <?= $colorFormat ?>-tag text-center">
+                                    <?= Yii::t('app', $text) ?>
+
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="row">
-                                    <div class="col-4 month-<?= $colorFormat ?> pt-2">
-                                        <?= $kgiTeamDetail['monthName'] ?? Yii::t('app', 'Term') ?>
+                                    <div class="col-4 month-period month-<?= $colorFormat ?>">
+                                        <?= $kgiTeamDetail['monthFullName'] ?? Yii::t('app', 'Term') ?>
                                     </div>
-                                    <div class="col-8 term-<?= $colorFormat ?>  pt-2">
-                                        <?= $kgiTeamDetail['fromDate'] == "" ? 'Not set' : $kgiTeamDetail['fromDate'] ?>
+                                    <div class="col-8 term-period term-<?= $colorFormat ?>">
+                                        <?= $kgiTeamDetail['fromDate'] == "" ? Yii::t('app', 'Not set') : $kgiTeamDetail['fromDate'] ?>
                                         &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
-                                        <?= $kgiTeamDetail['toDate'] == "" ? 'Not set' : $kgiTeamDetail['toDate'] ?>
+                                        <?= $kgiTeamDetail['toDate'] == "" ? Yii::t('app', 'Not set') : $kgiTeamDetail['toDate'] ?>
                                     </div>
                                 </div>
                             </div>
@@ -93,75 +100,79 @@ $this->title = 'Team KGI View';
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 col-12 pl-20">
+                    <div class="col-lg-5 col-12">
                         <div class="col-12 pim-big-box pim-detail-<?= $colorFormat ?>">
                             <div class="row">
                                 <div class="col-2 pim-subheader-font border-right-<?= $colorFormat ?>"
                                     style=" display: flex; flex-direction: column; justify-content: center;">
-                                    <!-- <div class="row">
-                                    <div class="offset-1 col-8"> -->
-                                    <div class="ml-12 priority-star">
+
+                                    <div class="priority-star">
                                         <?php
                                         if ($kgiTeamDetail["priority"] == "A" || $kgiTeamDetail["priority"] == "B") {
                                         ?>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                         <?php
                                         }
                                         if ($kgiTeamDetail["priority"] == "A" || $kgiTeamDetail["priority"] == "C") {
                                         ?>
-                                            <i class="fa fa-star big-star" aria-hidden="true"></i>
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="big-star">
                                         <?php
                                         }
                                         if ($kgiTeamDetail["priority"] == "B") {
                                         ?>
-                                            <i class="fa fa-star ml-10" aria-hidden="true"></i>
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                         <?php
                                         }
                                         if ($kgiTeamDetail["priority"] == "A") {
                                         ?>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                         <?php
                                         }
                                         ?>
                                     </div>
-                                    <div class="text-center priority-box">
-                                        <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
-                                        <div class="col-12 text-priority"><?= $kgiTeamDetail["priority"] ?></div>
-                                    </div>
-                                    <!-- </div>
-                                </div> -->
-
+                                    <?php
+                                    if ($kgiTeamDetail["priority"] != '') {
+                                    ?>
+                                        <div class="priority-box">
+                                            <?= Yii::t('app', 'Priority') ?>
+                                            <span class="text-priority mt-5"><?= $kgiTeamDetail["priority"] ?></span>
+                                        </div>
+                                    <?php
+                                    } else { ?>
+                                        <div class="priority-box-null">
+                                            <?= Yii::t('app', 'Priority') ?>
+                                            <span class="text-priority mt-5">N/A</span>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
-                                <div class="col-lg-3 pim-subheader-font border-right-<?= $colorFormat ?> pl-18">
-                                    <div class="col-12"><?= Yii::t('app', 'Quant Ratio') ?></div>
+                                <div class="col-lg-3 pt-10 pim-subheader-font border-right-<?= $colorFormat ?>">
+                                    <div class="col-12 font-size-12">Quant Ratio</div>
                                     <div class="col-12 border-bottom-<?= $colorFormat ?> pb-5 pim-duedate">
                                         <i class="fa fa-diamond" aria-hidden="true"></i>
-                                        <?= $kgiTeamDetail["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
+                                        <?= $kgiTeamDetail["quantRatio"] == 1 ?  Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
                                     </div>
-                                    <div class="col-12 pr-0 pt-5 pl-0"><?= Yii::t('app', 'Update interval') ?></div>
+                                    <div class="col-12 pr-0 pt-5 pl-0 font-size-12"><?= Yii::t('app', 'update Interval') ?></div>
                                     <div class="col-12  pim-duedate">
-                                        <?= Yii::t('app', $kgiTeamDetail["unit"]) ?>
+                                        <?= $kgiTeamDetail["unit"] ?>
                                     </div>
                                 </div>
                                 <div class="col-lg-7 pim-subheader-font pr-15 pl-15">
                                     <div class="row">
                                         <div class="col-5 text-start">
-                                            <div class="col-12"><?= Yii::t('app', 'Target') ?></div>
+                                            <div class="col-12 font-size-12"><?= Yii::t('app', 'Target') ?></div>
                                             <div class="col-12 mt-3 number-pim">
                                                 <?php
-                                                if ($kgiTeamDetail["target"] != '') {
-                                                    $decimal = explode('.', $kgiTeamDetail["target"]);
-                                                    if (isset($decimal[1])) {
-                                                        if ($decimal[1] == '00') {
-                                                            $show = number_format($decimal[0]);
-                                                        } else {
-                                                            $show = number_format($kgiTeamDetail["target"]);
-                                                        }
+                                                $decimal = explode('.', $kgiTeamDetail["target"]);
+                                                if (isset($decimal[1])) {
+                                                    if ($decimal[1] == '00') {
+                                                        $show = number_format($decimal[0]);
                                                     } else {
                                                         $show = number_format($kgiTeamDetail["target"]);
                                                     }
                                                 } else {
-                                                    $show = 0;
+                                                    $show = number_format($kgiTeamDetail["target"]);
                                                 }
                                                 ?>
                                                 <?= $show ?><?= $kgiTeamDetail["amountType"] == 1 ? '%' : '' ?>
@@ -171,7 +182,7 @@ $this->title = 'Team KGI View';
                                             <div class="col-12 pt-17"><?= $kgiTeamDetail["code"] ?></div>
                                         </div>
                                         <div class="col-5  text-end">
-                                            <div class="col-12">Result</div>
+                                            <div class="col-12 font-size-12"><?= Yii::t('app', 'Result') ?></div>
                                             <div class="col-12 mt-3 number-pim">
                                                 <?php
                                                 if ($kgiTeamDetail["result"] != '') {
@@ -192,7 +203,7 @@ $this->title = 'Team KGI View';
                                                 <?= $showResult ?><?= $kgiTeamDetail["amountType"] == 1 ? '%' : '' ?>
                                             </div>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-12 mt-10">
                                             <?php
                                             $percent = explode('.', $kgiTeamDetail['ratio']);
                                             if (isset($percent[1])) {
@@ -216,11 +227,11 @@ $this->title = 'Team KGI View';
                                             <div class="row">
                                                 <div class="col-4 mt-5 pl-0 pr-0 ">
                                                     <div class="col-12 text-end"
-                                                        style="letter-spacing:0.3px;font-size:12px;">
+                                                        style="font-size:10px;">
                                                         <?= Yii::t('app', 'Last Updated on') ?>
                                                     </div>
                                                     <div class="col-12 text-end pim-duedate">
-                                                        <?= $kgiTeamDetail['nextCheckText'] == "" ? 'Not set' : $kgiTeamDetail['nextCheckText'] ?>
+                                                        <?= $kgiTeamDetail['nextCheckText'] == "" ? Yii::t('app', 'Not set') : $kgiTeamDetail['nextCheckText'] ?>
                                                     </div>
                                                 </div>
                                                 <div class="col-4 text-center mt-5 pt-6 pl-8 pr-8">
@@ -228,23 +239,22 @@ $this->title = 'Team KGI View';
                                                     if ($role > 3  && $kgiTeamDetail["status"] == 1) {
                                                     ?>
                                                         <a class="pim-btn-<?= $colorFormat ?>"
-                                                            style="display: flex; justify-content: center; align-items: center; padding: 7px 9px;  height: 30px; gap: 6px; flex-shrink: 0;"
-                                                            href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/prepare-update/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiHistoryId' => 0]) ?>">
+                                                            href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
+                                                            style="display: flex; justify-content: center; align-items: center;  height: 30px; gap: 3px; flex-shrink: 0;">
                                                             <i class="fa fa-refresh" aria-hidden="true"></i>
                                                             <?= Yii::t('app', 'Update') ?>
                                                         </a>
                                                     <?php
                                                     }
                                                     ?>
-
                                                 </div>
-                                                <div class="col-4 pl-0 pr-5 mt-5 ">
+                                                <div class="col-4 pl-0 pr-0 mt-5 ">
                                                     <div class="col-12 text-start font-<?= $colorFormat ?>"
-                                                        style="letter-spacing:0.3px;font-size:12px;">
+                                                        style="font-size:10px;">
                                                         <?= Yii::t('app', 'Next Update Date') ?>
                                                     </div>
                                                     <div class="col-12 text-start pim-duedate">
-                                                        <?= $kgiTeamDetail['nextCheckText'] == "" ? Yii::t('app', 'Not set') : $kgiTeamDetail['nextCheckText'] ?>
+                                                        <?= $kgiTeamDetail['nextCheckText'] == "" ?  Yii::t('app', 'Not set') : $kgiTeamDetail['nextCheckText'] ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -252,65 +262,68 @@ $this->title = 'Team KGI View';
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                    <div class="col-lg-7">
-                        <div class="row">
-                            <div class="col-2  view-tab-active" id="tab-1"
-                                onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,1,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.svg" alt="History"
-                                    class="pim-icon mr-5" style="margin-top: -2px;" id="tab-1-blue">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg" alt="History"
-                                    class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-1-black">
-                                <?= Yii::t('app', 'Assigned') ?>
+                </div>
+                <div class="col-12 mt-20">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="d-flex justify-content-start">
+                                <div class="view-tab-active" id="tab-1" style="border-top-left-radius:5px;border-top-right-radius:5px;"
+                                    onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,1,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.svg" alt="History"
+                                        class="pim-icon" style="margin-top: -2px;" id="tab-1-blue">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg" alt="History"
+                                        class="pim-icon" style="margin-top: -2px;display:none;" id="tab-1-black">
+                                    <?= Yii::t('app', 'Assigned') ?>
+                                </div>
+                                <div class="view-tab" id="tab-2"
+                                    onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,2,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" alt="History"
+                                        class="pim-icon" style="margin-top: -2px;" id="tab-2-black">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.svg" alt="History"
+                                        class="pim-icon" style="margin-top: -2px;display:none;" id="tab-2-blue">
+                                    <?= Yii::t('app', 'Update History') ?>
+                                </div>
+                                <div class="view-tab" id="tab-3"
+                                    onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,3,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="History"
+                                        class="pim-icon" style="margin-top: -2px;" id="tab-3-black">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment-blue.svg" alt="History"
+                                        class="pim-icon" style="margin-top: -2px;display:none;" id="tab-3-blue">
+                                    <?= Yii::t('app', 'Chats') ?>
+                                </div>
+                                <div class="view-tab" id="tab-4"
+                                    onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,4,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/chart.svg" alt="History"
+                                        class="pim-icon" style="margin-top: -2px;" id="tab-4-black">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.svg" alt="History"
+                                        class="pim-icon" style="margin-top: -2px;display:none;" id="tab-4-blue">
+                                    <?= Yii::t('app', 'Chart') ?>
+                                </div>
+                                <div class="view-tab" id="tab-5"
+                                    onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,5,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.svg" alt="History"
+                                        class="pim-icon" style="margin-top: -2px;" id="tab-5-black">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.svg" alt="History"
+                                        class="pim-icon" style="margin-top: -2px;display:none;" id="tab-5-blue">
+                                    <?= Yii::t('app', 'Relate KPI') ?>
+                                </div>
+                                <input type="hidden" id="currentTab" value="1">
                             </div>
-                            <div class="col-3  view-tab" id="tab-2"
-                                onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,2,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" alt="History"
-                                    class="pim-icon mr-5" style="margin-top: -2px;" id="tab-2-black">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.svg" alt="History"
-                                    class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-2-blue">
-                                <?= Yii::t('app', 'Update History') ?>
-                            </div>
-                            <div class="col-2  view-tab" id="tab-3"
-                                onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,3,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="History"
-                                    class="pim-icon mr-5" style="margin-top: -2px;" id="tab-3-black">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment-blue.svg" alt="History"
-                                    class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-3-blue">
-                                <?= Yii::t('app', 'Chats') ?>
-                            </div>
-                            <div class="col-2  view-tab" id="tab-4"
-                                onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,4,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg" alt="History"
-                                    class="pim-icon mr-5" style="margin-top: -2px;" id="tab-4-black">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.svg" alt="History"
-                                    class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-4-blue">
-                                <?= Yii::t('app', 'Chart') ?>
-                            </div>
-                            <div class="col-3  view-tab" id="tab-5"
-                                onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,5,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.svg" alt="History"
-                                    class="pim-icon mr-5" style="margin-top: -2px;" id="tab-5-black">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.svg" alt="History"
-                                    class="pim-icon mr-5" style="margin-top: -2px;display:none;" id="tab-5-blue">
-                                <?= Yii::t('app', 'Relate KPI') ?>
-                            </div>
-                            <input type="hidden" id="currentTab" value="1">
                         </div>
-                    </div>
-                    <div class="col-lg-5 view-tab">
+                        <div class="col-lg-4">
+                        </div>
                     </div>
                 </div>
                 <div class="row mt-10" id="show-content">
 
                 </div>
             </div>
-        <?php
-        }
-        ?>
-    </div>
+        </div>
+    <?php
+    }
+    ?>
 </div>
 <input type="hidden" id="kgiId" value="<?= $kgiId ?>">
 <input type="hidden" id="viewType" value="grid">
@@ -334,7 +347,46 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_delete') ?>
 <?php // $this->render('modal_employee_history') 
 ?>
+<style>
+    .priority-box {
+        width: 52px;
+        height: 52px;
+        font-size: 12px;
+    }
 
+    .priority-box-null {
+        width: 52px;
+        height: 52px;
+        font-size: 12px;
+    }
+
+    .text-priority {
+        font-size: 18px;
+    }
+
+    .priority-star {
+        width: 52px;
+    }
+
+    .big-star {
+        width: 18px;
+        height: 17px;
+    }
+
+    .default-star {
+        width: 16px;
+        width: 15px;
+    }
+
+    .pim-big-box {
+        height: 110px;
+        padding-top: 5px;
+    }
+
+    .team-wrapper {
+        height: 25px;
+    }
+</style>
 
 <script>
     window.onload = function() {

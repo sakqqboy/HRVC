@@ -53,7 +53,7 @@ $this->title = 'Company KGI History';
                                 }
                             }
                 ?>
-                            <div class="col-lg-4 col-md-6 col-12 pr-0 pl-0">
+                            <div class="col-lg-4 col-md-6 col-12 p-2">
                                 <div class="pim-big-box-view pim-<?= $colorFormat ?>">
                                     <div class="d-inline-flex" style="width:100%;">
                                         <div class="d-flex pim-name-history" style="height: 32px;"><?= $kgi["month"] ?>
@@ -391,5 +391,6 @@ $form = ActiveForm::begin([
 
     .bg-white-employee {
         min-height: calc(100vh - 200px);
+        padding: 27px 20px 10px 20px;
     }
 </style>

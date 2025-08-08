@@ -19,7 +19,6 @@ $this->title = 'KGI View';
         "totalBranch" => $totalBranch
     ]) ?>
     <div class="col-12 mt-10">
-
         <div class="alert mt-10 pim-body bg-white">
             <div class="row">
                 <div class="col-11 pim-name-title pr-0 pl-5 text-start">
@@ -29,7 +28,7 @@ $this->title = 'KGI View';
                     </a>
                     <?= $kgiDetail["kgiName"] ?>
                 </div>
-                <div class="col-1 ">
+                <div class="col-1">
                     <?php if ($role >= 5) {
                     ?>
                         <a class="btn btn-outline-danger d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#delete-kgi"
@@ -253,7 +252,6 @@ $this->title = 'KGI View';
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
