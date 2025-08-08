@@ -742,6 +742,15 @@ class KpiPersonalController extends Controller
 		$kpiTeam = curl_exec($api);
 		$kpiTeam = json_decode($kpiTeam, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
 
 		curl_close($api);
 		$companyId = $kpi["companyId"];
@@ -752,7 +761,9 @@ class KpiPersonalController extends Controller
 		];
 
 		$unit = Unit::find()->where(["unitId" => $kpi["unitId"]])->asArray()->one();
+
 		$months = ModelMaster::monthFull(1);
+
 		return $this->render('kpi_from', [
 			"kpi" => $kpi,
 			"kpiEmployeeId" => $kpiEmployeeId,
@@ -764,8 +775,11 @@ class KpiPersonalController extends Controller
 			"kpiTeam" => $kpiTeam ?? [],
 			"role" => $role,
 			"unit"  => $unit,
-			"lastUrl" => Yii::$app->request->referrer,
-			"statusform" =>  "update"
+			"statusform" =>  "update",
+			"url" => Yii::$app->request->referrer,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 	public function actionSaveUpdatePersonalKpi()
