@@ -198,6 +198,7 @@ return [
                 'kpi/kpi-team/prepare-update/<hash>' => 'kpi/kpi-team/prepare-update/',
                 'kpi/kpi-personal/kpi-personal-search-result/<hash>' => 'kpi/kpi-personal/kpi-personal-search-result',
                 'kpi/kpi-personal/individual-kpi-grid/<hash>' => 'kpi/kpi-personal/individual-kpi-grid',
+                'kpi/kpi-personal/kpi-employee-history/<hash>' => 'kpi/kpi-personal/kpi-employee-history',
                 'kpi/view/index/<hash>' => 'kpi/view/index',
                 'kpi/view/kpi-team-history/<hash>' => 'kpi/view/kpi-team-history',
                 'kpi/view/kpi-individual-history/<hash>' => 'kpi/view/kpi-individual-history',
