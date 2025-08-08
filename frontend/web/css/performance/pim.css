@@ -400,9 +400,9 @@
 
 .pim-big-box-view {
 	border-radius: 6px;
-	height: 350px;
+	/* height: 275px; */
 	width: 100%;
-	padding: 12px;
+	padding: 10px 15px 15px 15px;
 
 }
 

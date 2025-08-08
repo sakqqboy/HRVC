@@ -153,7 +153,19 @@ class ViewController extends Controller
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
 		curl_close($api);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
 		$kgiHistoryData = [];
 
 		//throw new Exception(print_r($kgiTeamsHistory, true));
@@ -204,7 +216,10 @@ class ViewController extends Controller
 			"months" => $months,
 			"isManager" => $isManager,
 			// "kgiEmployee" => $kgiEmployee,
-			"teamId" => $teamId
+			"teamId" => $teamId,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 	public function actionKgiIndividualHistory($hash)

@@ -156,8 +156,7 @@ $this->title = 'KGI Grid View';
                                                         </div>
                                                     </div>
                                                     <div class="d-flex justify-content-start">
-                                                        <div
-                                                            class="assign-new <?= ($kgi["countEmployee"] == 0 && $colorFormat != 'disable') ? 'yenlow' : $colorFormat ?>-assignNew">
+                                                        <div class="assign-new <?= ($kgi["countEmployee"] == 0 && $colorFormat != 'disable') ? 'yenlow' : $colorFormat ?>-assignNew">
                                                             <?php
                                                             $yellow = 0;
                                                             if ($kgi["countEmployee"] == 0) {
