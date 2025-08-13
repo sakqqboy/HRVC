@@ -1,10 +1,10 @@
 <div class="col-lg-6">
     <div class="col-12 ligth-gray-box">
         <div class="row pl-15 pr-20">
-            <div class="col-3  sub-tab-active pl-5">
+            <div class="col-5  sub-tab-active pl-5">
                 <?= Yii::t('app', 'Update History') ?>
             </div>
-            <div class="col-9  sub-tab">
+            <div class="col-7  sub-tab">
             </div>
         </div>
         <div class="col-12 mt-15 pt-0 alert" style="height:500px;overflow-y: auto;">
@@ -77,10 +77,10 @@
 <div class="col-lg-6">
     <div class="col-12 ligth-gray-box">
         <div class="row pl-15 pr-20">
-            <div class="col-4  sub-tab-active pl-5">
+            <div class="col-5  sub-tab-active pl-5">
                 <?= Yii::t('app', 'Monthly Achievements') ?>
             </div>
-            <div class="col-8  sub-tab">
+            <div class="col-7  sub-tab">
             </div>
         </div>
         <div class="col-12 alert  mt-15 pt-0" style="height:500px;overflow-y: auto;">

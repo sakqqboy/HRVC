@@ -841,7 +841,20 @@ class KgiPersonalController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
 		curl_close($api);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
 		$res["kgiEmployee"] = $kgiEmployeeDetail;
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
@@ -856,7 +869,10 @@ class KgiPersonalController extends Controller
 			"kgiId" => $kgiId,
 			"kgiEmployeeHistoryId" => $kgiEmployeeHistoryId,
 			"openTab" => $openTab,
-			"kgiEmployeeId" => $kgiEmployeeId
+			"kgiEmployeeId" => $kgiEmployeeId,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 	public function actionKgiTeamEmployee()

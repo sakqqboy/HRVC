@@ -14,8 +14,11 @@ $this->title = 'Self KGI View';
         <strong class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</strong>
     </div>
     <div class="col-12 mt-10">
-        <?= $this->render('kgi_header_filter', [
-            "role" => $role
+        <?= $this->render('header_filter', [
+            "role" => $role,
+            "allCompany" => $allCompany,
+            "companyPic" => $companyPic,
+            "totalBranch" => $totalBranch
         ]) ?>
         <?php
         if (isset($kgiEmployeeDetail) && !empty($kgiEmployeeDetail)) {
@@ -344,7 +347,46 @@ $form = ActiveForm::begin([
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_delete') ?>
 
+<style>
+    .priority-box {
+        width: 52px;
+        height: 52px;
+        font-size: 12px;
+    }
 
+    .priority-box-null {
+        width: 52px;
+        height: 52px;
+        font-size: 12px;
+    }
+
+    .text-priority {
+        font-size: 18px;
+    }
+
+    .priority-star {
+        width: 52px;
+    }
+
+    .big-star {
+        width: 18px;
+        height: 17px;
+    }
+
+    .default-star {
+        width: 16px;
+        width: 15px;
+    }
+
+    .pim-big-box {
+        height: 110px;
+        padding-top: 5px;
+    }
+
+    .team-wrapper {
+        height: 25px;
+    }
+</style>
 <script>
     window.onload = function() {
         let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
