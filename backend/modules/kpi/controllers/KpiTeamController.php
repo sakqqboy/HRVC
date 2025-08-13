@@ -451,12 +451,14 @@ class KpiTeamController extends Controller
 
 	public function actionKpiHistory($kpiId, $kpiTeamId, $kpiTeamHistoryId)
 	{
+		// return json_encode('1');
 		if ($kpiTeamHistoryId == 0) {
 			$kpiTeamHistory = KpiTeamHistory::find()
 				->where(["kpiTeamId" => $kpiTeamId, "status" => [1, 2, 4]])
-				->orderBy('year ASC,month ASC,kpiHistoryId DESC')
+				->orderBy('year ASC,month ASC,kpiTeamHistoryId DESC')
 				->asArray()
 				->all();
+				// return json_encode('1');
 		} else {
 			$mainTeamHistory = KpiTeamHistory::find()
 				->where(["kpiTeamHistoryId" => $kpiTeamHistoryId])
@@ -471,16 +473,16 @@ class KpiTeamController extends Controller
 				->asArray()
 				->all();
 		}
-
+		
 		$data = [];
 		if (isset($kpiTeamHistory) && count($kpiTeamHistory) > 0) {
 			foreach ($kpiTeamHistory as $teamhistory) :
 				$time = explode(' ', $teamhistory["createDateTime"]);
 				$employeeId = Employee::employeeId($teamhistory["createrId"]);
 				$data[$teamhistory["kpiTeamHistoryId"]] = [
-					// "title" => $teamhistory["titleProcess"],
-					// "remark" => $teamhistory["remark"],
-					//"result" => $history["result"],
+		// 			// "title" => $teamhistory["titleProcess"],
+		// 			// "remark" => $teamhistory["remark"],
+		// 			//"result" => $history["result"],
 					"picture" => Employee::employeeImage($employeeId),
 					"createDate" => ModelMaster::engDateHr($teamhistory["createDateTime"]),
 					"time" => ModelMaster::timeText($time[1]),
@@ -489,13 +491,11 @@ class KpiTeamController extends Controller
 					"result" => $teamhistory["result"],
 					"month" => $teamhistory["month"],
 					"year" => $teamhistory["year"],
-					"creater" => User::employeeNameByuserId($teamhistory["createrId"]),
+					"creater" => User::employeeNameByuserId($teamhistory["createrId"])
 				];
 			endforeach;
 		}
 		return json_encode($data);
-		// $data = [1,2,3];
-		// return json_encode($data);
 
 	}
 
@@ -647,7 +647,7 @@ class KpiTeamController extends Controller
 		if ($kpiTeamHistoryId == 0) {
 			$kpiTeamHistory = KpiTeamHistory::find()
 				->where(["kpiTeamId" => $kpiTeamId, "status" => [1, 2, 4]])
-				->orderBy('year ASC,month ASC,kpiHistoryId DESC')
+				->orderBy('year ASC,month ASC,kpiTeamHistoryId DESC')
 				->asArray()
 				->all();
 		} else {
@@ -686,6 +686,8 @@ class KpiTeamController extends Controller
 				];
 			endforeach;
 		}
+						// return json_encode('1');
+
 		return json_encode($data);
 	}
 

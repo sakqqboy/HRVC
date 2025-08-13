@@ -274,22 +274,38 @@ class KpiTeamController extends Controller
 		$kpiTeams = curl_exec($api);
 		$kpiTeams = json_decode($kpiTeams, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
 		curl_close($api);
-		$months = ModelMaster::monthFull(1);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
+		$res["kgiTeam"] = $kpiTeamDetail;
 		$isManager = UserRole::isManager();
+		$months = ModelMaster::monthFull(1);
 
 		return $this->render('kpi_team_history', [
 			"role" => $role,
-			"kpiDetail" => $kpiTeamDetail,
-			"openTab" => $openTab,
+			"kpiTeamDetail" => $kpiTeamDetail,
+			"units" => $units,
 			"months" => $months,
 			"isManager" => $isManager,
-			"units" => $units,
 			"companies" => $companies,
 			"kpiId" => $kpiId,
-			"kpiTeamId" => $kpiTeamId,
 			"kpiTeams" => $kpiTeams,
-			"kpiTeamHistoryId" => $kpiTeamHistoryId
+			"kpiTeamHistoryId" => $kpiTeamHistoryId,
+			"openTab" => $openTab,
+			"kpiTeamId" => $kpiTeamId,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
+
 		]);
 	}
 	public function actionKpiTeamEmployee()
@@ -346,7 +362,7 @@ class KpiTeamController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-history?kpiId=' . $kpiId . '&&kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=' . $kpiTeamHistoryId);
 		$history = curl_exec($api);
 		$history = json_decode($history, true);
-		//throw new Exception(print_r($history,true));
+		// throw new Exception(print_r($history,true));
 		curl_close($api);
 		//eturn json_encode($history);
 		$monthDetail = [];
@@ -400,20 +416,20 @@ class KpiTeamController extends Controller
 						$totalCount = count($monthDetail[$ht["year"]][$ht["month"]]);
 						$monthDetail[$ht["year"]][$ht["month"]][$totalCount] = [
 							"creater" => $ht["creater"],
-							"title" => $ht["title"],
+							"title" => isset($ht["title"]) ? $ht["title"] : '',
 							"status" => $ht["status"],
 							"picture" => $ht["picture"],
 							"result" => isset($ht["result"]) ? $ht["result"] : 0,
-							"createDateTime" => $ht["createDateTime"]
+							"createDateTime" => $ht["createDateTime"] ?? null,
 						];
 					} else {
 						$monthDetail[$ht["year"]][$ht["month"]][0] = [
 							"creater" => $ht["creater"],
-							"title" => $ht["title"],
+							"title" => isset($ht["title"]) ? $ht["title"] : '',
 							"status" => $ht["status"],
 							"picture" => $ht["picture"],
 							"result" => isset($ht["result"]) ? $ht["result"] : 0,
-							"createDateTime" => $ht["createDateTime"]
+							"createDateTime" => $ht["createDateTime"] ?? null,
 						];
 						$summarizeMonth[$ht["year"]][$ht["month"]] = [
 							"year" => $ht["year"],
@@ -453,6 +469,7 @@ class KpiTeamController extends Controller
 		// throw new Exception(print_r($history,true));
 		$monthDetail = [];
 		$summarizeMonth = [];
+		$summarizeMonth2 = [];
 		$year = 2024;
 		$months = ModelMaster::month();
 		$monthText = '';
@@ -662,7 +679,7 @@ class KpiTeamController extends Controller
 		$employeeCompanyId = $employee["companyId"];
 		$totalKpi = KpiTeam::totalKpiTeam($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
 		$totalPage = ceil($totalKpi / $limit);
-		// throw new Exception(print_r($totalKpi, true));
+		// throw new Exception(print_r($teamKpis, true));
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
 
 		return $this->render('kpi_team_grid', [

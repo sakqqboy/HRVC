@@ -7,7 +7,7 @@
             <div class="col-9  sub-tab">
             </div>
         </div>
-        <div class="col-12 alert mt-15 pt-0" style="height:500px;overflow-y: auto;">
+        <div class="col-12 mt-15 pt-0 alert" style="height:500px;overflow-y: auto;">
             <div class="row">
                 <div class="col-12">
                     <?php
@@ -52,7 +52,7 @@
                             </div>
                             <div class="col-4 pr-20">
                                 <div class="col-12 font-b font-size-12 text-end">
-                                    <?= number_format($info["result"] == '' ? '0' : $info["result"], 2) ?>
+                                    <?= number_format($info["result"] ?? 0, 2) ?>
                                 </div>
                                 <div class="col-12 pim-employee-title text-end" style="font-size: 10px !important;">
                                     <?= Yii::t('app', 'Updated Result') ?>
@@ -83,7 +83,7 @@
             <div class="col-8  sub-tab">
             </div>
         </div>
-        <div class="col-12 alert mt-15 pt-0" style="height:500px;overflow-y: auto;">
+        <div class="col-12 alert  mt-15 pt-0" style="height:500px;overflow-y: auto;">
             <div class="col-12 font-size-12">
                 <div class="row">
                     <div class="col-8"></div>
@@ -102,7 +102,7 @@
                 <div class="col-12 small-content bg-white  <?= $i > 0 ? 'mt-10' : '' ?> pt-8 pb-8">
                     <div class="row">
                         <div class="col-8 font-size-12 font-b pl-10">
-                            <?= Yii::t('app', $detail["month"]) ?> <?= $detail["year"] ?>
+                            <?= $detail["month"] ?> <?= $detail["year"] ?>
                         </div>
                         <div class="col-4 font-size-12 text-center">
                             <?= number_format($detail["target"], 2) ?> /
