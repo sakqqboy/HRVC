@@ -760,11 +760,11 @@ class ViewController extends Controller
 
 
 		$ghp = [];
-		if (count($kgiHasKpi) > 0) {
-			foreach ($kgiHasKpi as $gp):
-				$ghp[$gp["kgiId"]] = 1;
-			endforeach;
-		}
+		// if (count($kgiHasKpi) > 0) {
+		// 	foreach ($kgiHasKpi as $gp):
+		// 		$ghp[$gp["kgiId"]] = 1;
+		// 	endforeach;
+		// }
 
 		curl_close($api);
 
@@ -773,7 +773,8 @@ class ViewController extends Controller
 			"kpiId" => $kpiId,
 			"kpiDetail" => $kpiDetail,
 			"kgis" => $kgis,
-			"ghp" => $ghp
+			"ghp" => $ghp,
+			"role" => $role
 		]);
 
 		return json_encode($res);
