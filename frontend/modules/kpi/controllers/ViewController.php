@@ -40,6 +40,15 @@ class ViewController extends Controller
 	public function actionIndex($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		if (isset($param["kgiHistoryId"])) {
+			$kgiHistoryId = $param["kgiHistoryId"];
+		} else {
+			$kgiHistoryId = 0;
+		}
 		$kpiId = $param["kpiId"];
 		$role = UserRole::userRight();
 		$adminId = '';
@@ -76,21 +85,50 @@ class ViewController extends Controller
 		$kpiDetail = curl_exec($api);
 		$kpiDetail = json_decode($kpiDetail, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$companies = curl_exec($api);
+		$companies = json_decode($companies, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-summarize?kpiId=' . $kpiId);
 		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		$kpis = curl_exec($api);
 		$kpis = json_decode($kpis, true);
-		curl_close($api);
-		// throw new Exception(print_r($kpis, true));
 
-		//throw new Exception($kpiId);
-		// throw new Exception(print_r($kpis, true));
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+		
+
+		curl_close($api);
+		
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
+		// throw new Exception(Yii::$app->user->id);
+		//throw new Exception(print_r($kgis, true));
+		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
+		// throw new Exception(print_r($kgis,true));
 
 		return $this->render('kpi_view', [
 			"role" => $role,
 			"kpiDetail" => $kpiDetail,
 			"kpis" => $kpis,
-			"kpiId" => $kpiId
+			"kpiId" => $kpiId,
+			"units" => $units,
+			"companies" => $companies,
+			"months" => $months,
+			"isManager" => $isManager,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 	public function actionKpiTeamHistory($hash)
