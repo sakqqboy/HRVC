@@ -109,11 +109,8 @@ class ViewController extends Controller
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
 		$totalBranch = Branch::totalBranch();
-		// throw new Exception(Yii::$app->user->id);
-		//throw new Exception(print_r($kgis, true));
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-		// throw new Exception(print_r($kgis,true));
 
 		return $this->render('kgi_view', [
 			"role" => $role,
@@ -126,8 +123,7 @@ class ViewController extends Controller
 			"isManager" => $isManager,
 			"allCompany" => $countAllCompany,
 			"companyPic" => $companyPic,
-			"totalBranch" => $totalBranch
-
+			"totalBranch" => $totalBranch,
 		]);
 	}
 	public function actionKgiTeamHistory($hash)

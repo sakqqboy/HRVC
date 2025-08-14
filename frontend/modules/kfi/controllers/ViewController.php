@@ -8,6 +8,8 @@ use frontend\models\hrvc\Kfi;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -83,8 +85,20 @@ class ViewController extends Controller
 		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 		$kfis = curl_exec($api);
 		$kfis = json_decode($kfis, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
 		curl_close($api);
-		// throw new Exception(print_r($kfis, true));
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
 
 		return $this->render('kfi_view', [
 			"role" => $role,
@@ -94,7 +108,10 @@ class ViewController extends Controller
 			"companies" => $companies,
 			"units" => $units,
 			"months" => $months,
-			"isManager" => $isManager
+			"isManager" => $isManager,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 	public function actionKfiHistory($hash)
