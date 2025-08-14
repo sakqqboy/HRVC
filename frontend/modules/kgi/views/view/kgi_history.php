@@ -94,8 +94,7 @@ $this->title = 'KGI View';
                     <div class="col-12 pim-big-box pim-detail-<?= $colorFormat ?>">
                         <div class="row">
                             <div class="col-2 pim-subheader-font border-right-<?= $colorFormat ?>"
-                                style=" display: flex; flex-direction: column; justify-content: center;">
-
+                                style=" display: flex; flex-direction: column; align-items: center;justify-content:center;">
                                 <div class="priority-star">
                                     <?php
                                     if ($kgiDetail["priority"] == "A" || $kgiDetail["priority"] == "B") {

@@ -16,7 +16,7 @@
             </div>
         </div>
     </div>
-    <div class="col-12 mt-15 pt-0" style="height:500px;overflow-y: auto;">
+    <div class="col-12 mt-15 pt-0" style="height:400px;overflow-y: auto;">
         <div class="row">
             <?php
             $allTeam2 = "";
