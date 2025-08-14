@@ -7,7 +7,7 @@
             <div class="col-7  sub-tab">
             </div>
         </div>
-        <div class="col-12 mt-15 pt-0 alert" style="height:500px;overflow-y: auto;">
+        <div class="col-12 mt-15 pt-0 alert" style="height:400px;overflow-y: auto;">
             <div class="row">
                 <div class="col-12">
                     <?php
@@ -29,8 +29,8 @@
                                 ?>
                                         <div class="col-12 small-content bg-white pl-10 <?= $j > 0 ? 'mt-10' : '' ?>">
                                             <div class="row">
-                                                <div class="col-4">
-                                                    <div class="col-12 font-size-12 pl-0 pt-3 font-b">
+                                                <div class="col-4 align-content-center">
+                                                    <div class="col-12 font-size-12 font-b">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/check-black.svg"
                                                             class="pim-icon mr-3" style="margin-top: -3px;">
                                                         <?php
@@ -46,11 +46,11 @@
                                                         <?= $info["createDateTime"] ?>
                                                     </div>
                                                 </div>
-                                                <div class="col-4 font-size-12 pt-10 pl-0 text-center">
+                                                <div class="col-4 font-size-12 align-content-center text-center">
                                                     <img src="<?= Yii::$app->homeUrl ?><?= $info['picture'] ?>" class="pim-pic-grid mr-5">
                                                     <?= $info["creater"] ?>
                                                 </div>
-                                                <div class="col-4 pr-20">
+                                                <div class="col-4 align-content-center pr-20">
                                                     <div class="col-12 font-b font-size-12 text-end">
                                                         <?= number_format($info["result"], 2) ?>
                                                     </div>
@@ -77,13 +77,13 @@
 <div class="col-lg-6">
     <div class="col-12 ligth-gray-box">
         <div class="row pl-15 pr-20">
-            <div class="col-5  sub-tab-active pl-5">
+            <div class="col-6  sub-tab-active pl-5">
                 <?= Yii::t('app', 'Monthly Achievements') ?>
             </div>
-            <div class="col-7  sub-tab">
+            <div class="col-6  sub-tab">
             </div>
         </div>
-        <div class="col-12 alert  mt-15 pt-0" style="height:500px;overflow-y: auto;">
+        <div class="col-12 alert  mt-15 pt-0 alert" style="height:500px;overflow-y: auto;">
             <div class="col-12 font-size-12">
                 <div class="row">
                     <div class="col-8"></div>

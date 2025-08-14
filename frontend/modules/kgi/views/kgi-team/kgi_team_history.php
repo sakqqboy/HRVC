@@ -42,7 +42,7 @@ $this->title = 'Team KGI View';
             <div class="alert mt-10 pim-body bg-white">
                 <div class="row">
                     <div class="col-9 pim-name-title pr-0 pl-5 text-start">
-                        <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="mr-5 pim-text-back">
+                        <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : 'kgi-team/team-kgi-grid' ?>" class="mr-5 pim-text-back">
                             <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                             <?= Yii::t('app', 'Back') ?>
                         </a>
@@ -58,7 +58,8 @@ $this->title = 'Team KGI View';
                                 </span>
                                 <span class="team-name"><?= $kgiTeamDetail["teamName"] ?></span>
                             </span>
-                            <?php if ($role >= 5) {
+                            <?php
+                            if ($role >= 5) {
                             ?>
                                 <a class="btn btn-outline-danger d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#delete-kgi"
                                     onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
@@ -104,8 +105,7 @@ $this->title = 'Team KGI View';
                         <div class="col-12 pim-big-box pim-detail-<?= $colorFormat ?>">
                             <div class="row">
                                 <div class="col-2 pim-subheader-font border-right-<?= $colorFormat ?>"
-                                    style=" display: flex; flex-direction: column; justify-content: center;">
-
+                                    style=" display: flex; flex-direction: column; align-items: center;justify-content:center;">
                                     <div class="priority-star">
                                         <?php
                                         if ($kgiTeamDetail["priority"] == "A" || $kgiTeamDetail["priority"] == "B") {
