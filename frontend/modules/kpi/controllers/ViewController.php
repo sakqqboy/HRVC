@@ -146,6 +146,10 @@ class ViewController extends Controller
 		$kpiTeamsHistory = curl_exec($api);
 		$kpiTeamsHistory = json_decode($kpiTeamsHistory, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . "&&kpiHistoryId=0");
 		$kpiDetail = curl_exec($api);
 		$kpiDetail = json_decode($kpiDetail, true);
@@ -154,9 +158,22 @@ class ViewController extends Controller
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
 		curl_close($api);
+		
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
 		$kpiHistoryData = [];
 
+		//throw new Exception(print_r($kgiTeamsHistory, true));
 		if (!empty($kpiTeamsHistory)) {
 			// $kpiHistoryData = 1;
 			foreach ($kpiTeamsHistory as $year => $months) {
@@ -188,20 +205,15 @@ class ViewController extends Controller
 						"isOver" => $history['isOver'] ?? null,
 						"fromDate" => $history['fromDate'] ?? null,
 						"toDate" => $history['toDate'] ?? null,
-						"kpiEmployee" => KpiEmployee::countKpiEmployeeInTeam($teamId, $kpiId, $year, $month)
+						"kpiEmployee" => KpiEmployee::countKpiEmployeeInTeam($teamId, $kpiId, $year, $month),
+						"countTeam" => $history["countTeam"] ?? 0
 					];
 				}
 			}
 		}
-
-		// Debug ค่าที่ได้
-		// throw new Exception(print_r($kpiTeamsHistory, true));
-
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
-		// $kpiEmployee = KpiEmployee::countKpiEmployeeInTeam($teamId,$kpiId,$year,$month);
 		//   throw new Exception(print_r($kpiTeamsHistory,true));
-
 		return $this->render('kpi_team_history', [
 			"role" => $role,
 			"kpiDetail" => $kpiDetail,
@@ -212,7 +224,10 @@ class ViewController extends Controller
 			"isManager" => $isManager,
 			"months" => $months,
 			// "kpiEmployee" => $kpiEmployee,
-			"teamId" => $teamId
+			"teamId" => $teamId,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 	public function actionKpiIndividualHistory($hash)
