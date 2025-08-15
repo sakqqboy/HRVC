@@ -38,7 +38,7 @@ function viewTabKpi(kpiHistoryId, tabId) {
 					$('#kpi-employee').css("display", 'none');
 					$("#viewType").val('list');
 				}
-				
+
 			}
 		});
 	}
@@ -169,6 +169,59 @@ function validateFormKpi(acType) {
 	}
 }
 
+function prepareKpiNextTarget(kgiHistoryId) {
+	// alert(kgiHistoryId);
+	$("#copy").modal('show');
+	$("#kgiHistoryId").val(kgiHistoryId);
+}
+function prepareKpiTeamNextTarget(kgiTeamHistoryId) {
+	$("#copy").modal('show');
+	$("#kgiTeamHistoryId").val(kgiTeamHistoryId);
+}
+function prepareKpiEmployeeNextTarget(kgiEmployeeHistoryId) {
+	$("#copy").modal('show');
+	$("#kgiEmployeeHistoryId").val(kgiEmployeeHistoryId);
+}
+function kpiNextTarget() {
+	var kgiHistoryId = $("#kgiHistoryId").val();
+	var url = $url + 'kgi/management/next-kgi-history';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kgiHistoryId: kgiHistoryId },
+		success: function (data) {
+
+		}
+	});
+}
+function kpiTeamNextTarget() {
+	var kgiTeamHistoryId = $("#kgiTeamHistoryId").val();
+	var url = $url + 'kgi/kgi-team/next-kgi-team-history';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kgiTeamHistoryId: kgiTeamHistoryId },
+		success: function (data) {
+
+		}
+	});
+}
+function kpiEmployeeNextTarget() {
+	var kgiEmployeeHistoryId = $("#kgiEmployeeHistoryId").val();
+	var url = $url + 'kgi/kgi-personal/next-kgi-employee-history';
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kgiEmployeeHistoryId: kgiEmployeeHistoryId },
+		success: function (data) {
+
+		}
+	});
+}
+
 function companyMultiBrachKpi() {
 	var acType = $("#acType").val();
 	var companyId = acType == "update" ? $("#companyId").val() : $("#companyId").val();
@@ -283,9 +336,9 @@ document.getElementById('check2').addEventListener('change', function () {
 
 	if (this.checked) {
 		// alert("1"); // แสดง Alert เมื่อกดเลือก check2
-		if (pimType == 'kgi-team') { 
+		if (pimType == 'kgi-team') {
 			var kgiTeamId = $("#kgiTeamId").val();
-            var kgiId=$("#kgiId").val();
+			var kgiId = $("#kgiId").val();
 			var url = $url + 'kgi/kgi-team/check-kgi-employee';
 			var change = 0;
 			$.ajax({
@@ -299,13 +352,13 @@ document.getElementById('check2').addEventListener('change', function () {
 					} else {
 						change = 1;
 					}
-                
+
 				}
 			});
 		}
-		if (pimType == 'kpi-team') { 
+		if (pimType == 'kpi-team') {
 			var kpiTeamId = $("#kpiTeamId").val();
-            var kpiId=$("#kpiId").val();
+			var kpiId = $("#kpiId").val();
 			var url = $url + 'kpi/kpi-team/check-kpi-employee';
 			var change = 0;
 			$.ajax({
@@ -319,7 +372,7 @@ document.getElementById('check2').addEventListener('change', function () {
 					} else {
 						change = 1;
 					}
-                
+
 				}
 			});
 		}
@@ -342,9 +395,9 @@ document.getElementById('check2').addEventListener('change', function () {
 				textgreen.classList.remove('text-black');
 				textgreen.classList.add('text-green'); // เปลี่ยนสีข้อความ
 			}
-		} else { 
+		} else {
 			$("#warning-kpi").modal("show");
-			this.checked=false;
+			this.checked = false;
 		}
 
 	} else {

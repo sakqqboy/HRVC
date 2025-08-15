@@ -119,7 +119,7 @@ $this->title = 'Team KPI History';
                             <div>
                                 <div class="assign-new <?= $colorFormat ?>-assignNew">
                                     <div class="pim-picgroup">
-                                        <?php if (count($kpi["kpiEmployee"]) != 0) {
+                                        <?php if (!empty($kpi["kpiEmployee"]) && is_array($kpi["kpiEmployee"]) && count($kpi["kpiEmployee"]) != 0) {
                                                         $totalPic = count($kpi["kpiEmployee"]) >= 3 ? 3 : count($kpi["kpiEmployee"]);
 
                                                         if (isset($kpi['kpiEmployee'][0])) {
@@ -155,7 +155,7 @@ $this->title = 'Team KPI History';
                                                     endfor;
                                                     ?>
                                         <div class="number-tagNew  load-<?= $colorFormat ?>  pic-after">
-                                            <?= count($kpi["kpiEmployee"]) ?>
+                                            <?= count($kpi["kpiEmployee"] ?? []) ?>
                                         </div>
                                     </div>
                                     <div class="border-right-<?= $colorFormat ?> ml-5 mr-3" style="height:23px;"></div>
@@ -165,7 +165,9 @@ $this->title = 'Team KPI History';
                                     <a href="<?= Yii::$app->homeUrl ?>kpi/assign/assign/<?= ModelMaster::encodeParams(['kpiId' => $kpiId, 'companyId' => $kpiDetail['companyId'], 'kpiTeamHistoryId' => $kpi['kpiTeamHistoryId'],]) ?>"
                                         class="font-<?= $colorFormat ?>"
                                         style="text-decoration: none; font-size: 12px; font-weight: 600;">
-                                        <?= count($kpi["kpiEmployee"]) > 0 ? Yii::t('app', 'Assigned Person') : Yii::t('app', 'Assign Person') ?>
+                                        <?= (is_countable($kpi["kpiEmployee"]) && count($kpi["kpiEmployee"]) > 0) 
+                                            ? Yii::t('app', 'Assigned Person') 
+                                            : Yii::t('app', 'Assign Person') ?>
                                     </a>
                                     <?php
                                                 } else {

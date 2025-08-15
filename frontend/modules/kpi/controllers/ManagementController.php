@@ -591,7 +591,7 @@ class ManagementController extends Controller
 
         $param = ModelMaster::decodeParams($hash);
         $kpiId =  $param['kpiId'];
-        // throw new Exception($kpiId);
+        // throw new Exception(print_r($param, true));
 
         if (!$kpiId || !is_numeric($kpiId)) {
             throw new Exception("Invalid kpi ID.");
@@ -772,9 +772,10 @@ class ManagementController extends Controller
                 if (isset($_POST["team"]) && count($_POST["team"]) > 0) {
                     $this->savekpiTeam($_POST["team"], $kpiId, $_POST["month"], $_POST["year"]);
                 }
-                return $this->redirect($_POST["url"]);
+                // return $this->redirect($_POST["url"]);
             }
         }
+        return $this->redirect($_POST["url"]);
         // Yii::$app->getUrlManager()->setBaseUrl(Yii::$app->request->referrer);
     }
     public function actionHistory()
