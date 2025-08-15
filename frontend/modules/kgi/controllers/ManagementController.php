@@ -95,7 +95,8 @@ class ManagementController extends Controller
 				"month" => $month,
 				"status" => $status,
 				"year" => $year,
-				"type" => $type
+				"type" => $type,
+
 			]));
 		}
 		$currentPage = 1;
@@ -121,9 +122,21 @@ class ManagementController extends Controller
 		$kgis = curl_exec($api);
 		$kgis = json_decode($kgis, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
 		curl_close($api);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
+		$totalBranch = Branch::totalBranch();
 		//$url = 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
@@ -146,7 +159,10 @@ class ManagementController extends Controller
 			"totalKgi" => $totalKgi,
 			"currentPage" => $currentPage,
 			"totalPage" => $totalPage,
-			"pagination" => $pagination
+			"pagination" => $pagination,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 	public function actionGrid($hash = null)

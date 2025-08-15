@@ -5,7 +5,7 @@ use yii\bootstrap5\ActiveForm;
 
 $this->title = Yii::t('app', 'KFI Grid View');
 ?>
-<div class="col-12 mt-70 pt-20">
+<div class="col-12 mt-70 pt-20 pim-content1">
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="pim-head-icon mr-11 mt-2">
         <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
@@ -27,8 +27,8 @@ $this->title = Yii::t('app', 'KFI Grid View');
         "companyPic" => $companyPic,
         "totalBranch" => $totalBranch
     ]) ?>
-    <div class="col-12 mt-20">
-        <div class="bg-white-employee">
+    <div class="col-12 mt-20" id="box-wrapper">
+        <div class="bg-white-employee" id="pim-content">
             <div class="d-flex pl-10 pr-10 justify-content-left align-content-center mt-5">
                 <div class="pim-type-tab-selected rounded-top-left justify-content-center align-items-center">
                     <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
@@ -55,12 +55,13 @@ $this->title = Yii::t('app', 'KFI Grid View');
                 </div>
             </div>
             <input type="hidden" id="type" value="grid">
+            <input type="hidden" id="minPage" value="0">
             <div class="row" style="--bs-gutter-x:0px;">
                 <div class="d-none img-loading text-center" id="img-loading">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Config/loading.gif" class="img-fluid " style="width: 750px;">
                 </div>
             </div>
-            <div class="row mt-40 pl-10 pr-10" style="--bs-gutter-x:0px;" id="main-body">
+            <div class="row mt-20 pl-10 pr-10 pim-content mb-10" style="--bs-gutter-x:0px;" id="main-body">
                 <?php
                 if (isset($kfis) && count($kfis) > 0) {
                     foreach ($kfis as $kfiId => $kfi) :

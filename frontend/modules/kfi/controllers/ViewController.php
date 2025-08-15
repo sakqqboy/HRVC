@@ -147,7 +147,19 @@ class ViewController extends Controller
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
 		curl_close($api);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
 		// throw new Exception(print_r($kfiDetail, true));
@@ -160,7 +172,10 @@ class ViewController extends Controller
 			"isManager" => $isManager,
 			"units" => $units,
 			"companies" => $companies,
-			"kfiHistoryId" => $kfiHistoryId
+			"kfiHistoryId" => $kfiHistoryId,
+			"totalBranch" => $totalBranch,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
 		]);
 	}
 	public function actionDeleteKfi()

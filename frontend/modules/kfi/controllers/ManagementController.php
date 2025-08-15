@@ -172,7 +172,6 @@ class ManagementController extends Controller
 			"totalBranch" => $totalBranch,
 			"allCompany" => $countAllCompany,
 			"companyPic" => $companyPic,
-			"totalBranch" => $totalBranch
 		]);
 	}
 	public function actionGrid()

@@ -6,62 +6,47 @@ use yii\bootstrap5\ActiveForm;
 
 $this->title = "KGI";
 ?>
-<div class="contrainer-body">
-    <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
-            style="margin-top: -3px;">
-        <strong class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</strong>
+<div class="col-12 mt-70 pt-20 pim-content1">
+    <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg"
+            class="pim-head-icon mr-11 mt-2">
+        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
+        <?php
+        if ($role >= 3) {
+        ?>
+            <a href="<?= Yii::$app->homeUrl ?>kgi/management/create-kgi" class="create-employee-btn mr-11">
+                <?= Yii::t('app', 'Create New') ?>
+                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
+                    class="create-btn-icon ml-3" style="margin-top: -3px;">
+            </a>
+        <?php
+        }
+        ?>
     </div>
-    <div class="col-12 mt-10">
-        <?= $this->render('header_filter', [
-            "role" => $role
-        ]) ?>
-        <div class="alert pim-body bg-white mt-10">
-            <div class="row sticky-section">
-                <div class="col-lg-4 col-md-6 col-12  pr-0 pt-1">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="row">
-                                <div class="col-4 pim-type-tab-selected pr-0 pl-0 rounded-top-left">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg" alt="Company"
-                                        class="pim-icon" style="width: 14px;height: 14px;padding-bottom: 4px;">
-                                    <?= Yii::t('app', 'Company KGI') ?>
-                                </div>
-                                <div class="col-4 pim-type-tab pr-0 pl-0">
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi"
-                                        class="no-underline-black ">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
-                                            class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 2px;">
-                                        <?= Yii::t('app', 'Team KGI') ?>
-                                    </a>
-                                </div>
-                                <div class="col-4 pim-type-tab pr-0 pl-0 rounded-top-right">
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi"
-                                        class="no-underline-black">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self"
-                                            class="pim-icon" style="width: 13px;height: 13px;padding-bottom: 3px;">
-                                        <?= Yii::t('app', 'Self KGI') ?>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4 pl-4">
-                            <?php
-                            if ($role >= 3) {
-                            ?>
-                                <a href="<?= Yii::$app->homeUrl ?>kgi/management/create-kgi"
-                                    class="btn-createnew font-size-11" style="position:absolute;text-decoration:none;">
-                                    <?= Yii::t('app', 'Create New') ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="History"
-                                        class="pim-icon ml-3" style="margin-top: -1px;">
-                                </a>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                    </div>
+    <?= $this->render('header_filter', [
+        "role" => $role,
+        "allCompany" => $allCompany,
+        "companyPic" => $companyPic,
+        "totalBranch" => $totalBranch
+    ]) ?>
+    <div class="col-12 mt-20" id="box-wrapper">
+        <div class="bg-white-employee" id="pim-content">
+            <div class="d-flex pl-10 pr-10 justify-content-left align-content-center mt-5">
+                <div class="pim-type-tab-selected rounded-top-left justify-content-center align-items-center">
+                    <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg" alt="Company"
+                        style="cursor: pointer;"><?= Yii::t('app', 'Company KGI') ?>
                 </div>
-                <div class="col-lg-7 col-md-12 col-12 pt-1">
+                <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/team-kgi"
+                    class="pim-type-tab justify-content-center align-items-center">
+                    <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
+                        style="cursor: pointer;"><?= Yii::t('app', 'Team KGI') ?>
+                </a>
+                <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi" class="pim-type-tab justify-content-center align-items-center">
+                    <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self"
+                        style="cursor: pointer;"><?= Yii::t('app', 'Self KGI') ?>
+                </a>
+                <div class="d-flex flex-grow-1 align-items-center justify-content-end  gap-1">
+
                     <?= $this->render('filter_list_search', [
                         "companies" => $companies,
                         "months" => $months,
@@ -75,21 +60,10 @@ $this->title = "KGI";
                         "teams" =>  isset($teams) ? $teams : null,
                         "yearSelected" => isset($branchId) ? $branchId : null,
                         "role" => $role,
+                        "page" => "list"
                     ]) ?>
                     <input type="hidden" id="type" value="list">
-                </div>
-                <div class="col-lg-1 col-md-6 col-12 pr-0 text-end">
-                    <div class="btn-group" role="group">
-                        <a href="<?= Yii::$app->homeUrl . 'kgi/management/grid' ?>"
-                            class="btn btn-outline-primary font-size-12 pim-change-modes">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg"
-                                style="cursor: pointer;">
-                        </a>
-                        <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg"
-                                style="cursor: pointer;">
-                        </a>
-                    </div>
+                    <input type="hidden" id="minPage" value="0">
                 </div>
             </div>
             <div class="row" style="--bs-gutter-x:0px;">
@@ -97,7 +71,7 @@ $this->title = "KGI";
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Config/loading.gif" class="img-fluid " style="width: 750px;">
                 </div>
             </div>
-            <div class="col-12 mt-15 mb-20" id="main-body">
+            <div class="row mt-20 pl-10 pr-10 pim-content mb-10" style="--bs-gutter-x:0px;" id="main-body">
                 <div class="row">
                     <table class="">
                         <thead>
@@ -223,9 +197,10 @@ $this->title = "KGI";
                                         </td>
                                         <td class="text-center">
                                             <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
-                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -1px;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/eye.svg" alt="History"
-                                                    class="pim-icon" style="margin-top: -1px;">
+                                                class="<?= $colorFormat == 'disable' ? 'pim-btn-disable' : 'pim-btn' ?> pr-0 pl-0"
+                                                style=" <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?> width: 25px;display: flex;justify-content: center;ustify-self: center;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
+                                                    class="">
                                             </a>
                                             <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kgiId ?>"
                                                 data-bs-toggle="dropdown">
@@ -341,47 +316,46 @@ $this->title = "KGI";
             ]);
             ?>
         </div>
+        <input type="hidden" value="create" id="acType">
+        <?php
+        $form = ActiveForm::begin([
+            'id' => 'create-kgi',
+            'method' => 'post',
+            'options' => [
+                'enctype' => 'multipart/form-data',
+            ],
+            'action' => Yii::$app->homeUrl . 'kgi/management/create-kgi'
+
+        ]); ?>
+        <?= $this->render('modal_create', [
+            "units" => $units,
+            "companies" => $companies,
+            "months" => $months
+        ]) ?>
+        <?php ActiveForm::end(); ?>
+
+        <?php
+        $form = ActiveForm::begin([
+            'id' => 'update-kgi',
+            'method' => 'post',
+            'options' => [
+                'enctype' => 'multipart/form-data',
+            ],
+            'action' => Yii::$app->homeUrl . 'kgi/management/update-kgi'
+
+        ]); ?>
+        <?= $this->render('modal_update', [
+            "units" => $units,
+            "companies" => $companies,
+            "months" => $months,
+            "isManager" => $isManager
+        ]) ?>
+        <?php ActiveForm::end(); ?>
+        <?= $this->render('modal_view') ?>
+
     </div>
-    <input type="hidden" value="create" id="acType">
-    <?php
-    $form = ActiveForm::begin([
-        'id' => 'create-kgi',
-        'method' => 'post',
-        'options' => [
-            'enctype' => 'multipart/form-data',
-        ],
-        'action' => Yii::$app->homeUrl . 'kgi/management/create-kgi'
-
-    ]); ?>
-    <?= $this->render('modal_create', [
-        "units" => $units,
-        "companies" => $companies,
-        "months" => $months
-    ]) ?>
-    <?php ActiveForm::end(); ?>
-
-    <?php
-    $form = ActiveForm::begin([
-        'id' => 'update-kgi',
-        'method' => 'post',
-        'options' => [
-            'enctype' => 'multipart/form-data',
-        ],
-        'action' => Yii::$app->homeUrl . 'kgi/management/update-kgi'
-
-    ]); ?>
-    <?= $this->render('modal_update', [
-        "units" => $units,
-        "companies" => $companies,
-        "months" => $months,
-        "isManager" => $isManager
-    ]) ?>
-    <?php ActiveForm::end(); ?>
-    <?= $this->render('modal_view') ?>
-
-</div>
-<?= $this->render('modal_delete') ?>
-<?= $this->render('modal_issue') ?>
-<?= $this->render('modal_team_history') ?>
-<?= $this->render('modal_employee_history') ?>
-<?= $this->render('modal_kfi') ?>
+    <?= $this->render('modal_delete') ?>
+    <?= $this->render('modal_issue') ?>
+    <?= $this->render('modal_team_history') ?>
+    <?= $this->render('modal_employee_history') ?>
+    <?= $this->render('modal_kfi') ?>
