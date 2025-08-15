@@ -1118,18 +1118,51 @@ class KpiPersonalController extends Controller
 	}
 	public function actionKpiPersonalSearchResult($hash)
 	{
+		$role = UserRole::userRight();
 		$param = ModelMaster::decodeParams($hash);
 		$month = $param["month"];
 		$status = $param["status"];
 		$year = $param["year"];
 		$type = $param["type"];
 		$employeeId = $param["employeeId"];
-		$companyId = $param["companyId"];
 		$branchId = $param["branchId"];
 		$teamId = $param["teamId"];
 		$employees = [];
 		$teams = [];
-		$role = UserRole::userRight();
+		$userId = Yii::$app->user->id;
+		$isAdmin = UserRole::isAdmin();
+		$userBranchId = User::userBranchId();
+		$session = Yii::$app->session;
+		
+		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
+		$managerId = '';
+		$supervisorId = '';
+		$staffId = '';
+		$companyId = '';
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+		}
+		$userTeamId = Team::userTeam($userId);
+		$session = Yii::$app->session;
+
 		Session::PimEmployeeFilter($companyId, $branchId, $teamId, $employeeId, $month, $year, $status, $type);
 		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
 
@@ -1159,10 +1192,20 @@ class KpiPersonalController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
+		$units = curl_exec($api);
+		$units = json_decode($units, true);
+		
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
+		$currentPage = 1;
+		if (isset($hash) && $hash != '') {
+			$pageArr = explode('page', $hash);
+			$currentPage = $pageArr[1];
+		}
+		$limit = 20;
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-personal-filter?' . $paramText);
 		$kpis = curl_exec($api);
 		$kpis = json_decode($kpis, true);
@@ -1180,16 +1223,36 @@ class KpiPersonalController extends Controller
 			}
 			//throw new Exception(print_r($teams, true));
 		}
-		curl_close($api);
 		//throw new exception(print_r($teamKpis, true));
 		if ($type == "list") {
 			$file = "index";
 		} else {
 			$file = "individual_kpi_grid";
 		}
+
+		// throw new Exception(print_r($kpis, true));
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		
+		curl_close($api);
+
 		$months = ModelMaster::monthFull(1);
-		$role = UserRole::userRight();
 		$isManager = UserRole::isManager();
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$employeeCompanyId = $employee["companyId"];
+
+		$totalKpi = KpiEmployee::totalKpiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
+		$totalPage = ceil($totalKpi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
+		// throw new Exception(print_r($totalKpi	, true));
+		
 		return $this->render($file, [
 			"companies" => $companies,
 			"teams" => $teams,
@@ -1197,16 +1260,26 @@ class KpiPersonalController extends Controller
 			"kpis" => $kpis,
 			"role" => $role,
 			"userId" => $userId,
+			"units" => $units,
+			"companyPic" => $companyPic,
+			"allCompany" => $countAllCompany,
 			"isManager" => $isManager,
 			"status" => $status,
 			"year" => $year,
+			"totalBranch" => $totalBranch,
+			"userTeamId" => $userTeamId,
 			"companyId" => $companyId,
 			"branchId" => $branchId,
 			"teamId" => $teamId,
 			"month" => $month,
 			"employeeId" => $employeeId,
 			"employees" => $employees,
-			"waitForApprove" => $waitForApprove
+			"waitForApprove" => $waitForApprove,
+			"employeeCompanyId" => $employeeCompanyId,
+			"totalKpi" => $totalKpi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
+			"pagination" => $pagination,
 		]);
 	}
 	public function actionNextKpiEmployeeHistory()
