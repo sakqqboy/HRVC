@@ -35,6 +35,7 @@ $sumvalue = isset($data['sumresult']) ? $data['sumresult'] : 0;
 $targetAmount = $data['targetAmount'] ?? 0;
 $kpiHistoryId = $data['kpiHistoryId'] ?? 0;
 $DueBehind = $targetAmount -  $result;
+$url = $_SERVER['HTTP_REFERER'] ?? '';
 if ($DueBehind < 0) {
     $DueBehind = 0;
 }

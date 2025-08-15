@@ -412,8 +412,20 @@ class KpiPersonalController extends Controller
 		$kpiTeams = curl_exec($api);
 		$kpiTeams = json_decode($kpiTeams, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
 
 		curl_close($api);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
+		$res["kpiEmployee"] = $kpiEmployeeDetail;
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
 		// throw new Exception(print_r($kpiTeams, true));
@@ -428,7 +440,10 @@ class KpiPersonalController extends Controller
 			"companies" => $companies,
 			"kpiTeams" => $kpiTeams,
 			"kpiEmployeeHistoryId" => $kpiEmployeeHistoryId,
-			"kpiEmployeeId" => $kpiEmployeeId
+			"kpiEmployeeId" => $kpiEmployeeId,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 
@@ -591,11 +606,8 @@ class KpiPersonalController extends Controller
 	public function actionKpiChart()
 	{
 		$kpiId = $_POST["kpiId"];
-		$kpiEmployeeId = $_POST["kpiEmployeeId"];
 		$kpiEmployeeHistoryId = $_POST["kpiEmployeeHistoryId"];
-
-		// return json_encode($kpiId);
-
+		$kpiEmployeeId = $_POST["kpiEmployeeId"];
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -605,7 +617,6 @@ class KpiPersonalController extends Controller
 		$history = json_decode($history, true);
 		curl_close($api);
 		// throw new Exception(print_r($history,true));
-
 		$monthDetail = [];
 		$summarizeMonth = [];
 		$year = 2024;
@@ -1023,8 +1034,21 @@ class KpiPersonalController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
+		
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
 		curl_close($api);
-		$res["kpiEmployee"] = $kpiEmployeeDetail;
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
+		$res["kgiEmployee"] = $kpiEmployeeHistoryId;
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
 		// throw new exception($kpiId);
@@ -1038,7 +1062,10 @@ class KpiPersonalController extends Controller
 			"kpiId" => $kpiId,
 			"kpiEmployeeHistoryId" => $kpiEmployeeHistoryId,
 			"openTab" => $openTab,
-			"kpiEmployeeId" => $kpiEmployeeId
+			"kpiEmployeeId" => $kpiEmployeeId,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 	public function actionEmployeeProgress()

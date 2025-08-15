@@ -209,7 +209,7 @@ class KpiPersonalController extends Controller
 		if ($kpiEmployeeHistoryId == 0) {
 			$kpiEmployeeHistory = KpiEmployeeHistory::find()
 				->where(["kpiEmployeeId" => $kpiEmployeeId, "status" => [1, 2, 4]])
-				->orderBy('year ASC,month ASC,kpiHistoryId DESC')
+				->orderBy('year ASC,month ASC,kpiEmployeeHistoryId DESC')
 				->asArray()
 				->all();
 		} else {
@@ -236,6 +236,7 @@ class KpiPersonalController extends Controller
 					// "title" => $teamhistory["titleProcess"],
 					// "remark" => $teamhistory["remark"],
 					//"result" => $history["result"],
+					"title" => $employeehistory["detail"],
 					"picture" => Employee::employeeImage($employeehistory),
 					"createDate" => ModelMaster::engDateHr($employeehistory["createDateTime"]),
 					"time" => ModelMaster::timeText($time[1]),
@@ -245,6 +246,7 @@ class KpiPersonalController extends Controller
 					"month" => $employeehistory["month"],
 					"year" => $employeehistory["year"],
 					"creater" => User::employeeNameByuserId($employeehistory["createrId"]),
+					"createDateTime" => ModelMaster::monthDateYearTime($employeehistory["createDateTime"])
 				];
 			endforeach;
 		}
@@ -346,7 +348,7 @@ class KpiPersonalController extends Controller
 		if ($kpiEmployeeHistoryId == 0) {
 			$kpiEmployeeHistory = KpiEmployeeHistory::find()
 				->where(["kpiEmployeeId" => $kpiEmployeeId, "status" => [1, 2, 4]])
-				->orderBy('year ASC,month ASC,kpiHistoryId DESC')
+				->orderBy('year ASC,month ASC,kpiEmployeeHistoryId DESC')
 				->asArray()
 				->all();
 		} else {

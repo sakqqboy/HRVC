@@ -252,8 +252,23 @@ class ViewController extends Controller
 		$kpis = curl_exec($api);
 		$kpis = json_decode($kpis, true);
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
+		curl_close($api);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		
+		$totalBranch = Branch::totalBranch();
 		$teamMate = [];
 		$countTeamEmployee = 0;
+		
 
 		if (is_array($kpis) && !empty($kpis)) {
 			foreach ($kpis as $key => $value) {
@@ -282,7 +297,10 @@ class ViewController extends Controller
 			"kpiId" =>  $kpiId,
 			"kpiEmployeeId" =>  $kpiEmployeeId,
 			"teamMate" =>  $teamMate,
-			"countTeamEmployee" =>  $countTeamEmployee
+			"countTeamEmployee" =>  $countTeamEmployee,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 	public function actionKpiHistory($hash)
