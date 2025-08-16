@@ -406,11 +406,11 @@ $this->title = 'KGI Grid View';
                                                         if ($percent[1] == '00') {
                                                             $showPercent = 0;
                                                         } else {
-                                                            $showPercent = round($kgi['ratio'], 1);
+                                                            $showPercent = round((float)$kgi['ratio'], 1);
                                                         }
                                                     }
                                                 } else {
-                                                    $showPercent = round($kgi['ratio']);
+                                                    $showPercent = round((float)$kgi['ratio']);
                                                 }
                                                 ?>
                                                 <div class="progress">

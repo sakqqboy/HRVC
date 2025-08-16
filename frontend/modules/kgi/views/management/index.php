@@ -71,8 +71,8 @@ $this->title = "KGI";
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Config/loading.gif" class="img-fluid " style="width: 750px;">
                 </div>
             </div>
-            <div class="row mt-20 pl-10 pr-10 pim-content mb-10" style="--bs-gutter-x:0px;" id="main-body">
-                <div class="row">
+            <div class="col-12 mt-20 pl-10 pr-10 pim-content mb-10" id="main-body">
+                <div class="row" style="--bs-gutter-x:0px;">
                     <table class="">
                         <thead>
                             <tr class="pim-table-header">
@@ -195,106 +195,108 @@ $this->title = "KGI";
                                         <td class="<?= $kgi['isOver'] == 1 ? 'text-danger' : '' ?>">
                                             <?= $kgi["status"] == 1 ? $kgi["nextCheck"] : '' ?>
                                         </td>
-                                        <td class="text-center">
-                                            <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
-                                                class="<?= $colorFormat == 'disable' ? 'pim-btn-disable' : 'pim-btn' ?> pr-0 pl-0"
-                                                style=" <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?> width: 25px;display: flex;justify-content: center;ustify-self: center;">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
-                                                    class="">
-                                            </a>
-                                            <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kgiId ?>"
-                                                data-bs-toggle="dropdown">
-                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
-                                                    class="icon-table on-cursor">
-                                            </span>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kgiId ?>">
-                                                <?php
-                                                if ($colorFormat == "complete") {
-                                                    // echo Yii::t('app', "Update");
+                                        <td>
+                                            <div class="d-inline-flex">
+                                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>"
+                                                    class="<?= $colorFormat == 'disable' ? 'pim-btn-disable' : 'pim-btn' ?> pr-0 pl-0"
+                                                    style=" <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?> width: 25px;display: flex;justify-content: center;justify-self: center;">
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
+                                                        class="">
+                                                </a>
+                                                <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kgiId ?>"
+                                                    data-bs-toggle="dropdown">
+                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
+                                                        class="icon-table on-cursor">
+                                                </span>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-<?= $kgiId ?>">
+                                                    <?php
+                                                    if ($colorFormat == "complete") {
+                                                        // echo Yii::t('app', "Update");
 
-                                                } else if ($role >= 5) {
-                                                ?>
-                                                    <li class="pl-4 pr-4" style="display: <?= $display ?>;">
+                                                    } else if ($role >= 5) {
+                                                    ?>
+                                                        <li class="pl-4 pr-4" style="display: <?= $display ?>;">
+                                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                                href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
+                                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                                                    alt="History" alt="Chart" class="pim-icon mr-10"
+                                                                    style="margin-top: -2px;">
+                                                                <?= Yii::t('app', 'Update') ?>
+                                                            </a>
+                                                        </li>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                    <li class="pl-4 pr-4" data-bs-toggle="modal">
                                                         <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                            href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
-                                                            class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                                            href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 2]) ?>"
+                                                            class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
                                                                 alt="History" alt="Chart" class="pim-icon mr-10"
                                                                 style="margin-top: -2px;">
-                                                            <?= Yii::t('app', 'Update') ?>
-                                                        </a>
-                                                    </li>
-                                                <?php
-                                                }
-                                                ?>
-                                                <li class="pl-4 pr-4" data-bs-toggle="modal">
-                                                    <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                        href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 2]) ?>"
-                                                        class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
-                                                            alt="History" alt="Chart" class="pim-icon mr-10"
-                                                            style="margin-top: -2px;">
-                                                        <?= Yii::t('app', 'History') ?>
-                                                    </a>
-                                                </li>
-                                                <li class="pl-4 pr-4" data-bs-toggle="modal">
-                                                    <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                        href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 3]) ?>"
-                                                        class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
-                                                            alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                        <?= Yii::t('app', 'Chats') ?>
-                                                    </a>
-                                                </li>
-                                                <li class="pl-4 pr-4" data-bs-toggle="modal">
-                                                    <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                        href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 4]) ?>"
-                                                        class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
-                                                            alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                        <?= Yii::t('app', 'Chart') ?>
-                                                    </a>
-                                                </li>
-                                                <?php
-                                                if ($role >= 5) {
-                                                ?>
-                                                    <li class="pl-4 pr-4" data-bs-toggle="modal">
-                                                        <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                            href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>"
-                                                            class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                                            <i class="fa fa-users pim-icon mr-10" aria-hidden="true" alt="Chart"
-                                                                style="margin-top: -2px;"></i>
-                                                            <?= Yii::t('app', 'Team') ?>
+                                                            <?= Yii::t('app', 'History') ?>
                                                         </a>
                                                     </li>
                                                     <li class="pl-4 pr-4" data-bs-toggle="modal">
                                                         <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                            href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"], "save" => 0]) ?>"
-                                                            class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                                            <i class="fa fa-user pim-icon mr-10" aria-hidden="true" alt="Chart"
-                                                                style="margin-top: -2px;"></i>
-                                                            <?= Yii::t('app', 'Person') ?>
+                                                            href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 3]) ?>"
+                                                            class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
+                                                                alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                            <?= Yii::t('app', 'Chats') ?>
                                                         </a>
                                                     </li>
-                                                <?php
-                                                }
-                                                ?>
-                                                <?php
-                                                if ($role >= 5) {
-                                                ?>
-                                                    <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#delete-kgi"
-                                                        onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" title="Delete">
-                                                        <a class="dropdown-itemNEW pl-4 pr-25" href="#">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
-                                                                alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
-                                                            <?= Yii::t('app', 'Delete') ?>
+                                                    <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                                        <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                            href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 4]) ?>"
+                                                            class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
+                                                                alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                            <?= Yii::t('app', 'Chart') ?>
                                                         </a>
                                                     </li>
-                                                <?php
-                                                }
-                                                ?>
+                                                    <?php
+                                                    if ($role >= 5) {
+                                                    ?>
+                                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                                href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>"
+                                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                                                <i class="fa fa-users pim-icon mr-10" aria-hidden="true" alt="Chart"
+                                                                    style="margin-top: -2px;"></i>
+                                                                <?= Yii::t('app', 'Team') ?>
+                                                            </a>
+                                                        </li>
+                                                        <li class="pl-4 pr-4" data-bs-toggle="modal">
+                                                            <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
+                                                                href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"], "save" => 0]) ?>"
+                                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                                                <i class="fa fa-user pim-icon mr-10" aria-hidden="true" alt="Chart"
+                                                                    style="margin-top: -2px;"></i>
+                                                                <?= Yii::t('app', 'Person') ?>
+                                                            </a>
+                                                        </li>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                    <?php
+                                                    if ($role >= 5) {
+                                                    ?>
+                                                        <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#delete-kgi"
+                                                            onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" title="Delete">
+                                                            <a class="dropdown-itemNEW pl-4 pr-25" href="#">
+                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
+                                                                    alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                                <?= Yii::t('app', 'Delete') ?>
+                                                            </a>
+                                                        </li>
+                                                    <?php
+                                                    }
+                                                    ?>
 
-                                            </ul>
+                                                </ul>
+                                            </div>
                                         </td>
                                     </tr>
                             <?php

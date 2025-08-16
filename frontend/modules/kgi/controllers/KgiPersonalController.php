@@ -299,7 +299,7 @@ class KgiPersonalController extends Controller
 		$units = json_decode($units, true);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		//throw new exception('kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role);
+		//throw new exception('kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$kgis = curl_exec($api);
 		$kgis = json_decode($kgis, true);
 

@@ -303,8 +303,8 @@ class KgiTeamController extends Controller
 					"code" => $kgiTeam["code"],
 					"month" =>  ModelMaster::monthEng($kgiTeam['month'], 1),
 					"year" => $kgiTeam['year'],
-					"fromDate" => ModelMaster::engDate($kgiTeam["fromDate"], 2),
-					"toDate" => ModelMaster::engDate($kgiTeam["toDate"], 2),
+					"fromDate" => $kgiTeam["fromDate"] == '' ? '' : ModelMaster::engDate($kgiTeam["fromDate"], 2),
+					"toDate" => $kgiTeam["toDate"] == '' ? '' : ModelMaster::engDate($kgiTeam["toDate"], 2),
 					"periodCheck" => ModelMaster::engDate(KgiTeam::lastestCheckDate($kgiTeam["kgiTeamId"]), 2), //lastest check date
 					"nextCheckDate" =>  ModelMaster::engDate($kgiTeam["nextCheckDate"], 2),
 					"status" => $kgiTeam["status"],
