@@ -55,7 +55,7 @@ class ManagementController extends Controller
         $this->setDefault();
         return true;
     }
-    public function actionIndex()
+    public function actionIndex($hash = null)
     {
         $groupId = Group::currentGroupId();
         if ($groupId == null) {
@@ -88,7 +88,12 @@ class ManagementController extends Controller
             $staffId = Yii::$app->user->id;
             //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
         }
-
+        $currentPage = 1;
+        if (isset($hash) && $hash != '') {
+            $pageArr = explode('page', $hash);
+            $currentPage = $pageArr[1];
+        }
+        $limit = 20;
         $session = Yii::$app->session;
         if ($session->has('kpi')) {
             $filter = $session->get('kpi');
@@ -128,7 +133,7 @@ class ManagementController extends Controller
         $units = curl_exec($api);
         $units = json_decode($units, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
         //curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index');
         $kpis = curl_exec($api);
         $kpis = json_decode($kpis, true);
@@ -410,7 +415,20 @@ class ManagementController extends Controller
             $units = curl_exec($api);
             $units = json_decode($units, true);
 
+            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+            $allCompany = curl_exec($api);
+            $allCompany = json_decode($allCompany, true);
+
+
             curl_close($api);
+
+            $countAllCompany = 0;
+            if (count($allCompany) > 0) {
+                $countAllCompany = count($allCompany);
+                $companyPic = Company::randomPic($allCompany, 3);
+            }
+            $totalBranch = Branch::totalBranch();
+
             $data = [];
             return $this->render('kpi_from', [
                 "role" => $role,
@@ -418,7 +436,10 @@ class ManagementController extends Controller
                 "units" => $units,
                 "data" => $data,
                 "lastUrl" => Yii::$app->request->referrer,
-                "statusform" =>  "create"
+                "statusform" =>  "create",
+                "allCompany" => $countAllCompany,
+                "companyPic" => $companyPic,
+                "totalBranch" => $totalBranch
             ]);
         }
     }

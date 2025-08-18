@@ -313,7 +313,7 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row  mt-10" style="--bs-gutter-x:0px;">
+                                    <div class="row  mt-20" style="--bs-gutter-x:0px;">
                                         <div class="col-5 pl-5 pr-5">
                                             <div class="col-12 pim-small-text" style="justify-content: end !important;"><?= Yii::t('app', 'Last Updated on') ?></div>
                                             <div class="col-12 text-end pim-duedate-KFI mt-5">

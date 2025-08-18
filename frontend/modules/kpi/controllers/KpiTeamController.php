@@ -139,10 +139,35 @@ class KpiTeamController extends Controller
 		$res["history"] = $teamText;
 		return json_encode($res);
 	}
-	public function actionTeamKpi()
+	public function actionTeamKpi($hash = null)
 	{
 		$role = UserRole::userRight();
-
+		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
+		$managerId = '';
+		$supervisorId = '';
+		$staffId = '';
+		$companyId = '';
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
+		}
 		$userId = Yii::$app->user->id;
 		$isAdmin = UserRole::isAdmin();
 		$userBranchId = User::userBranchId();
@@ -171,11 +196,17 @@ class KpiTeamController extends Controller
 				"type" => $type
 			]));
 		}
+		$currentPage = 1;
+		if (isset($hash) && $hash != '') {
+			$pageArr = explode('page', $hash);
+			$currentPage = $pageArr[1];
+		}
+		$limit = 20;
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$teamKpis = curl_exec($api);
 		$teamKpis = json_decode($teamKpis, true);
 
@@ -210,6 +241,9 @@ class KpiTeamController extends Controller
 
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
+		$totalKpi = KpiTeam::totalKpiTeam($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
+		$totalPage = ceil($totalKpi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
 		return $this->render('team_kpi', [
 			"units" => $units,
 			"months" => $months,
@@ -229,7 +263,11 @@ class KpiTeamController extends Controller
 			"status" => null,
 			"year" => null,
 			"waitForApprove" => $waitForApprove,
-			"employeeCompanyId" => $employeeCompanyId
+			"employeeCompanyId" => $employeeCompanyId,
+			"totalKpi" => $totalKpi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
+			"pagination" => $pagination,
 
 		]);
 	}
@@ -677,7 +715,7 @@ class KpiTeamController extends Controller
 		}
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
-		$totalKpi = KpiTeam::totalKpiTeam($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
+		$totalKpi = KpiTeam::totalKpiTeam($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
 		$totalPage = ceil($totalKpi / $limit);
 		// throw new Exception(print_r($teamKpis, true));
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
