@@ -62,6 +62,22 @@
     background-color: #ffff;
 }
 
+.pim-btn-blue {
+    display: flex;
+    height: 20px;
+    padding-left: 3.5px;
+    padding-right: 3.5px;
+    border-radius: 3px;
+    align-items: center;
+    justify-items: center;
+    font-size: 10px;
+    font-weight: 500;
+    background-color: #2580D3;
+    color: #000;
+    border: 0.5px solid #2580D3;
+    text-decoration: none;
+}
+
 .btn-bg-blue-xs {
     border: lightgray solid thin;
     text-align: center;
@@ -71,9 +87,6 @@
     min-width: 34px;
     border-radius: 3px;
     padding: 5px 5px 5px 5px;
-    /* padding-left: 3px;
-    padding-top: 0px;
-    padding-right: 3px; */
     background: var(--Primary-Blue---HRVC, #2580D3);
 }
 
