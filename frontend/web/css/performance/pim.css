@@ -23,9 +23,9 @@
 }
 
 .pim-content {
-	/* max-height: calc(100vh - 155px); */
 	max-height: calc(100vh - 155px);
-	overflow-y: auto;
+	/* min-height: calc(100vh - 300px); */
+	/* overflow-y: auto; */
 }
 
 .pim-content2 {
@@ -152,6 +152,10 @@
 	font-size: 11px;
 	letter-spacing: 0.5px;
 	color: #000000;
+}
+
+.pim-table {
+	min-height: calc(100vh - 252px);
 }
 
 .related-table-background {

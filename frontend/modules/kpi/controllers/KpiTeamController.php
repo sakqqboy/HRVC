@@ -646,7 +646,7 @@ class KpiTeamController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$teamKpis = curl_exec($api);
 		$teamKpis = json_decode($teamKpis, true);
-		//throw new Exception('kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role);
+		//throw new Exception('kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
 		$units = curl_exec($api);
@@ -728,31 +728,31 @@ class KpiTeamController extends Controller
 		]));
 	}
 	public function actionAutoResult()
-		{
-			$kpiTeamId = $_POST["kpiTeamId"];
-			$kpiTeam = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->asArray()->one();
-			$year = $kpiTeam["year"];
-			$month = $kpiTeam["month"];
-			$kpiEmployee = KpiEmployee::find()
-				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
-				->where([
-					"e.teamId" => $kpiTeam["teamId"],
-					"e.status" => 1,
-					"kpi_employee.status" => [1, 2, 4],
-					"kpi_employee.month" => $month,
-					"kpi_employee.year" => $year
-				])
-				->asArray()
-				->all();
-			$autoResult = 0;
-			if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
-				foreach ($kpiEmployee as $kg):
-					$autoResult += $kg["result"];
-				endforeach;
-			}
-			$res["result"] = $autoResult;
-			return json_encode($res);
+	{
+		$kpiTeamId = $_POST["kpiTeamId"];
+		$kpiTeam = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->asArray()->one();
+		$year = $kpiTeam["year"];
+		$month = $kpiTeam["month"];
+		$kpiEmployee = KpiEmployee::find()
+			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+			->where([
+				"e.teamId" => $kpiTeam["teamId"],
+				"e.status" => 1,
+				"kpi_employee.status" => [1, 2, 4],
+				"kpi_employee.month" => $month,
+				"kpi_employee.year" => $year
+			])
+			->asArray()
+			->all();
+		$autoResult = 0;
+		if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+			foreach ($kpiEmployee as $kg):
+				$autoResult += $kg["result"];
+			endforeach;
 		}
+		$res["result"] = $autoResult;
+		return json_encode($res);
+	}
 
 	public function actionKpiTeamSearchResult($hash)
 	{

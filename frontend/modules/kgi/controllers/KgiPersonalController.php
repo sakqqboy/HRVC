@@ -128,7 +128,7 @@ class KgiPersonalController extends Controller
 		}
 		return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
 	}
-	public function actionIndividualKgi()
+	public function actionIndividualKgi($hash = null)
 	{
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
@@ -144,6 +144,12 @@ class KgiPersonalController extends Controller
 		$managerId = '';
 		$supervisorId = '';
 		$staffId = Yii::$app->user->id;
+		$currentPage = 1;
+		if (isset($hash) && $hash != '') {
+			$pageArr = explode('page', $hash);
+			$currentPage = $pageArr[1];
+		}
+		$limit = 20;
 
 		$session = Yii::$app->session;
 		if ($session->has('kgiEmployee')) {
@@ -179,7 +185,7 @@ class KgiPersonalController extends Controller
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$kgis = curl_exec($api);
 		$kgis = json_decode($kgis, true);
 
@@ -196,10 +202,24 @@ class KgiPersonalController extends Controller
 			}
 			//throw new Exception(print_r($teams, true));
 		}
-		curl_close($api);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
 
+		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
+		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		$employeeCompanyId = $employee["companyId"];
+		$totalKgi = KgiEmployee::totalKgiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
+		$totalPage = ceil($totalKgi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
 
 		// throw new Exception(print_r($waitForApprove,true));
 
@@ -218,7 +238,22 @@ class KgiPersonalController extends Controller
 			"companyId" => null,
 			"branchId" => null,
 			"teamId" => null,
-			"waitForApprove" => $waitForApprove
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch,
+			"userId" => Yii::$app->user->id,
+			"companyId" => null,
+			"branchId" => null,
+			"teamId" => null,
+			"month" => null,
+			"status" => null,
+			"year" => null,
+			"waitForApprove" => $waitForApprove,
+			"employeeCompanyId" => $employeeCompanyId,
+			"totalKgi" => $totalKgi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
+			"pagination" => $pagination,
 
 		]);
 	}

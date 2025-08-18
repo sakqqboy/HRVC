@@ -276,7 +276,7 @@ $this->title = "TEAM KGI";
                                                             <a class=" dropdown-itemNEWS pl-4 pr-20 mb-5"
                                                                 href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/prepare-update/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiHistoryId' => 0]) ?>">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                                                    alt="edit" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                                    alt="edit" class="pim-action-icon mr-5">
                                                                 <?= Yii::t('app', 'Edit') ?>
                                                             </a>
                                                         </li>
@@ -289,7 +289,7 @@ $this->title = "TEAM KGI";
                                                             style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
                                                             href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-team-history/<?= ModelMaster::encodeParams(['kgiId' => $kgi['kgiId'], "kgiTeamId" => $kgiTeamId, "teamId" => $kgi['teamId']]) ?>">
                                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
-                                                                alt="Chats" class="pim-icon mr-10">
+                                                                alt="Chats" class="pim-action-icon mr-5">
                                                             <?= Yii::t('app', 'History') ?>
                                                         </a>
                                                     </li>
@@ -298,7 +298,7 @@ $this->title = "TEAM KGI";
                                                             style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
                                                             href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiTeamHistoryId' => 0, 'kgiId' => $kgi["kgiId"], 'openTab' => 3]) ?>">
                                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
-                                                                alt="Chats" class="pim-icon mr-10">
+                                                                alt="Chats" class="pim-action-icon mr-5">
                                                             <?= Yii::t('app', 'Chats') ?>
                                                         </a>
                                                     </li>
@@ -306,8 +306,8 @@ $this->title = "TEAM KGI";
                                                         <a class="dropdown-itemNEWS pl-4 pr-20"
                                                             style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
                                                             href="<?= Yii::$app->homeUrl ?>kgi/kgi-team/kgi-team-history/<?= ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId, 'kgiTeamHistoryId' => 0, 'kgiId' => $kgi["kgiId"], 'openTab' => 4]) ?>">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
-                                                                alt="Chats" class="pim-icon mr-10">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/chart.svg"
+                                                                alt="Chats" class="pim-action-icon mr-5">
                                                             <?= Yii::t('app', 'Chart') ?>
                                                         </a>
                                                     </li>
@@ -315,11 +315,11 @@ $this->title = "TEAM KGI";
                                                     <?php
                                                     if ($role >= 5) {
                                                     ?>
-                                                        <li class="pl-4 pr-4" data-bs-toggle="modal" data-bs-target="#delete-kgi-team"
+                                                        <li class="pl-4 pr-4 mt-5" data-bs-toggle="modal" data-bs-target="#delete-kgi-team"
                                                             onclick="javascript:prepareDeleteKgiTeam(<?= $kgiTeamId ?>)" title="Delete">
                                                             <a class="dropdown-itemNEW pl-4 pr-25" href="#">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
-                                                                    alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                                    alt="Delete" class="pim-action-icon mr-5">
                                                                 <?= Yii::t('app', 'Delete') ?>
                                                             </a>
                                                         </li>
@@ -332,6 +332,7 @@ $this->title = "TEAM KGI";
                                     </tr>
 
                             <?php
+
                                 endforeach;
                             }
                             ?>
@@ -376,3 +377,8 @@ $form = ActiveForm::begin([
 <?= $this->render('modal_issue') ?>
 
 <?= $this->render('modal_delete') ?>
+<style>
+    .bg-white-employee {
+        min-height: calc(100vh - 200px);
+    }
+</style>
