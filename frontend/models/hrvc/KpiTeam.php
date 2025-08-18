@@ -146,7 +146,7 @@ class KpiTeam extends \frontend\models\hrvc\master\KpiTeamMaster
         return $date;
     }
 
-    public static function totalKpiTeam($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
+    public static function totalKpiTeam($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employeeId)
     {
         $total = 0;
         if ($adminId != '' || $gmId != '') {
@@ -157,7 +157,6 @@ class KpiTeam extends \frontend\models\hrvc\master\KpiTeamMaster
                 ->all();
         }
         if ($supervisorId != '' || $managerId != '') {
-            $employeeId = Employee::employeeId($supervisorId == '' ? $managerId : $supervisorId);
             $branchId = Employee::EmployeeDetail($employeeId)["branchId"];
             $kpis = KpiTeam::find()
                 ->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")

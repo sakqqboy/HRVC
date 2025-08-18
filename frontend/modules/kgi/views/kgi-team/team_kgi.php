@@ -58,10 +58,9 @@ $this->title = "TEAM KGI";
                     <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg" alt="Company"
                         style="cursor: pointer;"><?= Yii::t('app', 'Company KGI') ?>
                 </a>
-                <a
-                    class="pim-type-tab-selected justify-content-center align-items-center">
-                    <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
-                        style="cursor: pointer;"><?= Yii::t('app', 'Team KGI') ?>
+                <a class="pim-type-tab-selected justify-content-center align-items-center">
+                    <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team">
+                    <?= Yii::t('app', 'Team KGI') ?>
                 </a>
                 <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi"
                     class="pim-type-tab justify-content-center align-items-center">
@@ -346,7 +345,7 @@ $this->title = "TEAM KGI";
                 "currentPage" => $currentPage,
                 'totalPage' => $totalPage,
                 "pagination" => $pagination,
-                "pageType" => "grid",
+                "pageType" => "list",
                 "filter" => isset($filter) ? $filter : []
             ]);
             ?>

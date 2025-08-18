@@ -630,3 +630,8 @@ $form = ActiveForm::begin([
 ]) ?>
 <?= $this->render('modal_issue') ?>
 <?= $this->render('modal_delete') ?>
+<style>
+    .bg-white-employee {
+        min-height: calc(100vh - 200px);
+    }
+</style>

@@ -217,7 +217,7 @@ $this->title = "KGI";
                                                         <li class="pl-4 pr-4" style="display: <?= $display ?>;">
                                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                                 href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
-                                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
+                                                                class="btn btn-bg-white-xs mr-5">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
                                                                     alt="History" alt="Chart" class="pim-action-icon mr-5">
                                                                 <?= Yii::t('app', 'Update') ?>
@@ -229,6 +229,7 @@ $this->title = "KGI";
                                                     <li class="pl-4 pr-4" data-bs-toggle="modal">
                                                         <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                             href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 2]) ?>"
+                                                            style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
                                                             class="btn btn-bg-white-xs">
                                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
                                                                 alt="History" alt="Chart" class="pim-action-icon mr-5">
@@ -238,6 +239,7 @@ $this->title = "KGI";
                                                     <li class="pl-4 pr-4" data-bs-toggle="modal">
                                                         <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                             href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 3]) ?>"
+                                                            style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
                                                             class="btn btn-bg-white-xs">
                                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
                                                                 alt="Chart" class="pim-action-icon mr-5">
@@ -247,6 +249,7 @@ $this->title = "KGI";
                                                     <li class="pl-4 pr-4" data-bs-toggle="modal">
                                                         <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                             href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 4]) ?>"
+                                                            style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
                                                             class="btn btn-bg-white-xs">
                                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/chart.svg"
                                                                 alt="Chart" class="pim-action-icon mr-5">
@@ -259,6 +262,7 @@ $this->title = "KGI";
                                                         <li class="pl-4 pr-4" data-bs-toggle="modal">
                                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                                 href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>"
+                                                                style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
                                                                 class="btn btn-bg-white-xs">
                                                                 <i class="fa fa-users ppim-action-icon mr-5" aria-hidden="true" alt="Chart"
                                                                     s></i>
@@ -268,6 +272,7 @@ $this->title = "KGI";
                                                         <li class="pl-4 pr-4" data-bs-toggle="modal">
                                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                                 href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"], "save" => 0]) ?>"
+                                                                style="<?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>"
                                                                 class="btn btn-bg-white-xs">
                                                                 <i class="fa fa-user pim-action-icon mr-5" aria-hidden="true" alt="Chart"></i>
                                                                 <?= Yii::t('app', 'Person') ?>
@@ -352,8 +357,14 @@ $this->title = "KGI";
         <?= $this->render('modal_view') ?>
 
     </div>
-    <?= $this->render('modal_delete') ?>
-    <?= $this->render('modal_issue') ?>
-    <?= $this->render('modal_team_history') ?>
-    <?= $this->render('modal_employee_history') ?>
-    <?= $this->render('modal_kfi') ?>
+</div>
+<?= $this->render('modal_delete') ?>
+<?= $this->render('modal_issue') ?>
+<?= $this->render('modal_team_history') ?>
+<?= $this->render('modal_employee_history') ?>
+<?= $this->render('modal_kfi') ?>
+<style>
+    .bg-white-employee {
+        min-height: calc(100vh - 200px);
+    }
+</style>
