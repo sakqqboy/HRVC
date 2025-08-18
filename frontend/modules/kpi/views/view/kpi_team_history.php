@@ -84,9 +84,8 @@ $this->title = 'Team KPI History';
                                     <?php
                                                 if ($colorFormat == 'disable') {
                                                 ?>
-                                    <a class="btn btn-bg-blue-xs  ml-5"
-                                        href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/prepare-update/<?= ModelMaster::encodeParams(['kpiTeamId' => $kpiTeamId, 'kpiHistoryId' => 0]) ?>"
-                                        style="margin-top: -3px;">
+                                    <a class="btn pim-btn-blue  ml-5"
+                                        href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/prepare-update/<?= ModelMaster::encodeParams(['kpiTeamId' => $kpiTeamId, 'kpiHistoryId' => 0]) ?>">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                             alt="History" style="margin-top: -2px;" class="pim-action-icon">
                                     </a>

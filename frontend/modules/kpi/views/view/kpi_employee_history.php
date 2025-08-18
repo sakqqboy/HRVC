@@ -82,9 +82,8 @@ $this->title = 'Self KPI History';
                                     <?php
                                                 if ($colorFormat == 'disable') {
                                                 ?>
-                                    <a class="btn btn-bg-blue-xs  ml-5"
-                                        href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId]) ?>"
-                                        style="margin-top: -3px;">
+                                    <a class="btn pim-btn-blue  ml-5"
+                                        href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/update-personal-kpi/<?= ModelMaster::encodeParams(['kpiEmployeeId' => $kpiEmployeeId]) ?>">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
                                             alt="History" style="margin-top: -2px;" class="pim-action-icon">
                                     </a>
