@@ -36,7 +36,7 @@ class KpiTeam extends \frontend\models\hrvc\master\KpiTeamMaster
     }
     public static function isInThisKpi($teamId, $kpiId)
     {
-        $kpiTeam = kpiTeam::find()->where(["teamId" => $teamId, "kpiId" => $kpiId, "status" => [1,2,4]])->asArray()->one();
+        $kpiTeam = kpiTeam::find()->where(["teamId" => $teamId, "kpiId" => $kpiId, "status" => [1, 2, 4]])->asArray()->one();
         $has = 0;
         if (isset($kpiTeam) && !empty($kpiTeam)) {
             $has = 1;
@@ -149,37 +149,54 @@ class KpiTeam extends \frontend\models\hrvc\master\KpiTeamMaster
     public static function totalKpiTeam($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
     {
         $total = 0;
-        if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
+        if ($adminId != '' || $gmId != '') {
             $kpis = KpiTeam::find()
                 ->where(["status" => [1, 2, 4]])
-                ->asArray()
-                ->orderBy('createDateTime DESC')
+                ->orderBy('updateDateTime DESC')
                 ->asArray()
                 ->all();
         }
-        if (!empty($supervisorId) || !empty($teamLeaderId) || !empty($staffId)) {
-            if ($supervisorId != '') {
-                $userId = $supervisorId;
+        if ($supervisorId != '' || $managerId != '') {
+            $employeeId = Employee::employeeId($supervisorId == '' ? $managerId : $supervisorId);
+            $branchId = Employee::EmployeeDetail($employeeId)["branchId"];
+            $kpis = KpiTeam::find()
+                ->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
+                ->JOIN("LEFT JOIN", "employee e", "e.teamId=t.teamId")
+                ->where([
+                    "kpi_team.status" => [1, 2, 4],
+                    "e.branchId" => $branchId
+                ])
+                ->orderBy('kpi_team.updateDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if ($teamLeaderId != '') {
+            $employeeId = Employee::employeeId($teamLeaderId);
+            $teamId = Employee::employeeTeam($employeeId);
+            if (isset($teamId["teamId"])) {
+                $kpis = KpiTeam::find()
+                    ->where([
+                        "status" => [1, 2, 4],
+                        "teamId" => $teamId
+                    ])
+                    ->orderBy('updateDateTime DESC')
+                    ->asArray()
+                    ->all();
             }
-            if ($teamLeaderId != '') {
-                $userId = $teamLeaderId;
-            }
-            if ($staffId != '') {
-                $userId = $staffId;
-            }
-            $employeeId = Employee::employeeId($userId);
-            $companyId = Employee::EmployeeDetail($employeeId)["companyId"];
+        }
+        if ($staffId != '') {
+            $employeeId = Employee::employeeId($staffId);
+            $teamId = Employee::employeeTeam($employeeId);
             $kpis = KpiTeam::find()
                 ->where([
                     "status" => [1, 2, 4],
-                    "companyId" => $companyId
+                    "teamId" => $teamId
                 ])
-                ->asArray()
-                ->orderBy('createDateTime DESC')
+                ->orderBy('updateDateTime DESC')
                 ->asArray()
                 ->all();
         }
-        if (count($kpis) > 0) {
+        if (isset($kpis) && count($kpis) > 0) {
             $total = count($kpis);
         }
         return $total;

@@ -58,7 +58,7 @@ $this->title = "KGI";
                         "status" => isset($status) ? $status : null,
                         "branches" =>  isset($branches) ? $branches : null,
                         "teams" =>  isset($teams) ? $teams : null,
-                        "yearSelected" => isset($branchId) ? $branchId : null,
+                        "yearSelected" => isset($year) ? $year : null,
                         "role" => $role,
                         "page" => "list"
                     ]) ?>
@@ -203,8 +203,7 @@ $this->title = "KGI";
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
                                                         class="">
                                                 </a>
-                                                <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kgiId ?>"
-                                                    data-bs-toggle="dropdown">
+                                                <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kgiId ?>" data-bs-toggle="dropdown">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
                                                         class="icon-table on-cursor">
                                                 </span>
@@ -220,8 +219,7 @@ $this->title = "KGI";
                                                                 href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
                                                                 class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                                                    alt="History" alt="Chart" class="pim-icon mr-10"
-                                                                    style="margin-top: -2px;">
+                                                                    alt="History" alt="Chart" class="pim-action-icon mr-5">
                                                                 <?= Yii::t('app', 'Update') ?>
                                                             </a>
                                                         </li>
@@ -231,28 +229,27 @@ $this->title = "KGI";
                                                     <li class="pl-4 pr-4" data-bs-toggle="modal">
                                                         <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                             href="<?= Yii::$app->homeUrl ?>kgi/view/index/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 2]) ?>"
-                                                            class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
+                                                            class="btn btn-bg-white-xs">
                                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/history.svg"
-                                                                alt="History" alt="Chart" class="pim-icon mr-10"
-                                                                style="margin-top: -2px;">
+                                                                alt="History" alt="Chart" class="pim-action-icon mr-5">
                                                             <?= Yii::t('app', 'History') ?>
                                                         </a>
                                                     </li>
                                                     <li class="pl-4 pr-4" data-bs-toggle="modal">
                                                         <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                             href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 3]) ?>"
-                                                            class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
+                                                            class="btn btn-bg-white-xs">
                                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg"
-                                                                alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                                alt="Chart" class="pim-action-icon mr-5">
                                                             <?= Yii::t('app', 'Chats') ?>
                                                         </a>
                                                     </li>
                                                     <li class="pl-4 pr-4" data-bs-toggle="modal">
                                                         <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                             href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'openTab' => 4]) ?>"
-                                                            class="btn btn-bg-white-xs mr-4" style="margin-top: -3px;">
-                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart.svg"
-                                                                alt="Chart" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                            class="btn btn-bg-white-xs">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/chart.svg"
+                                                                alt="Chart" class="pim-action-icon mr-5">
                                                             <?= Yii::t('app', 'Chart') ?>
                                                         </a>
                                                     </li>
@@ -262,18 +259,17 @@ $this->title = "KGI";
                                                         <li class="pl-4 pr-4" data-bs-toggle="modal">
                                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                                 href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"]]) ?>"
-                                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                                                <i class="fa fa-users pim-icon mr-10" aria-hidden="true" alt="Chart"
-                                                                    style="margin-top: -2px;"></i>
+                                                                class="btn btn-bg-white-xs">
+                                                                <i class="fa fa-users ppim-action-icon mr-5" aria-hidden="true" alt="Chart"
+                                                                    s></i>
                                                                 <?= Yii::t('app', 'Team') ?>
                                                             </a>
                                                         </li>
                                                         <li class="pl-4 pr-4" data-bs-toggle="modal">
                                                             <a class="dropdown-itemNEWS pl-4  pr-20 mb-5"
                                                                 href="<?= Yii::$app->homeUrl ?>kgi/assign/assign/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, "companyId" => $kgi["companyId"], "save" => 0]) ?>"
-                                                                class="btn btn-bg-white-xs mr-5" style="margin-top: -3px;">
-                                                                <i class="fa fa-user pim-icon mr-10" aria-hidden="true" alt="Chart"
-                                                                    style="margin-top: -2px;"></i>
+                                                                class="btn btn-bg-white-xs">
+                                                                <i class="fa fa-user pim-action-icon mr-5" aria-hidden="true" alt="Chart"></i>
                                                                 <?= Yii::t('app', 'Person') ?>
                                                             </a>
                                                         </li>
@@ -287,7 +283,7 @@ $this->title = "KGI";
                                                             onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)" title="Delete">
                                                             <a class="dropdown-itemNEW pl-4 pr-25" href="#">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/delete.svg"
-                                                                    alt="Delete" class="pim-icon mr-10" style="margin-top: -2px;">
+                                                                    alt="Delete" class="pim-action-icon mr-5">
                                                                 <?= Yii::t('app', 'Delete') ?>
                                                             </a>
                                                         </li>
