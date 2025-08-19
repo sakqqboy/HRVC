@@ -298,7 +298,7 @@ $this->title = 'KPI View';
                                     class="pim-icon " id="tab-5-black">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.svg" alt="History"
                                     class="pim-icon " style="display:none;" id="tab-5-blue">
-                                <?= Yii::t('app', 'Relate KPI') ?>
+                                <?= Yii::t('app', 'Relate KGI') ?>
                             </div>
                         </div>
                         <input type="hidden" id="currentTab" value="1">

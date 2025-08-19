@@ -33,3 +33,12 @@
         </div>
     </div>
 </div>
+
+<script>
+var deleteModal = document.getElementById('delete-kpi-employee');
+deleteModal.addEventListener('show.bs.modal', function(event) {
+    var button = event.relatedTarget; // ปุ่มที่กด
+    var kpiEmployeeId = button.getAttribute('data-id'); // ดึงค่า data-id
+    document.getElementById('kpiEmployeeId-modal').value = kpiEmployeeId;
+});
+</script>
