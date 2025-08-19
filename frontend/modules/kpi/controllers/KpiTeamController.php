@@ -209,7 +209,7 @@ class KpiTeamController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$teamKpis = curl_exec($api);
 		$teamKpis = json_decode($teamKpis, true);
-
+		//throw new exception('kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
 		$units = curl_exec($api);
 		$units = json_decode($units, true);

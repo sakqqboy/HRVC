@@ -64,6 +64,7 @@ function kpiFilterForEmployee() {
 	var type = $("#type").val();
 	var employeeId = $("#employee-filter").val();
 	var url = $url + 'kpi/kpi-personal/search-kpi-personal';
+	showLoading();
 	$.ajax({
 		type: "POST",
 		dataType: 'json',

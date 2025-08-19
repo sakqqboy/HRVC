@@ -73,6 +73,7 @@ $this->title = "Individual KPI";
                         "month" => $month,
                         "status" => $status,
                         "role" => $role,
+                        "year" => $year,
                         "companyId" => $companyId,
                         "branchId" => $branchId,
                         "teamId" => $teamId,

@@ -101,4 +101,17 @@ class Employee extends \backend\models\hrvc\master\EmployeeMaster
         }
         return $img;
     }
+    public static function employeeTeamId($employeeId)
+    {
+        $employee = Employee::find()
+            ->select('teamId')
+            ->where(["employeeId" => $employeeId])
+            ->asArray()
+            ->one();
+        if (isset($employee) && !empty($employee)) {
+            return $employee["teamId"];
+        } else {
+            return '';
+        }
+    }
 }

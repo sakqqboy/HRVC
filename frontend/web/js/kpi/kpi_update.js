@@ -346,6 +346,7 @@ function kpiFilter() {
 	var year = $("#year-filter").val();
 	var type = $("#type").val();
 	var url = $url + 'kpi/management/search-kpi';
+	showLoading();
 	$.ajax({
 		type: "POST",
 		dataType: 'json',

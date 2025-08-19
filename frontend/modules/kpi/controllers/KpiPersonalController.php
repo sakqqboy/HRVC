@@ -345,7 +345,6 @@ class KpiPersonalController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$kpis = curl_exec($api);
 		$kpis = json_decode($kpis, true);
-		//throw new exception('kpi/kpi-personal/employee-kpi?userId=' . Yii::$app->user->id . '&&role=' . $role);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 		$waitForApprove = curl_exec($api);
@@ -1242,11 +1241,10 @@ class KpiPersonalController extends Controller
 		$companies = json_decode($companies, true);
 
 		$currentPage = 1;
-		if (isset($hash) && $hash != '') {
-			$pageArr = explode('page', $hash);
-			$currentPage = $pageArr[1];
-		}
 		$limit = 20;
+		if (isset($param["currentPage"])) {
+			$currentPage = $param["currentPage"];
+		}
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-personal-filter?' . $paramText);
 		$kpis = curl_exec($api);
 		$kpis = json_decode($kpis, true);

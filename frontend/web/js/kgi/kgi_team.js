@@ -116,6 +116,7 @@ function kgiFilterForTeam() {
     var year = $("#year-filter").val();
     var type = $("#type").val();
     var url = $url + 'kgi/kgi-team/search-kgi-team';
+    showLoading();
     $.ajax({
         type: "POST",
         dataType: 'json',

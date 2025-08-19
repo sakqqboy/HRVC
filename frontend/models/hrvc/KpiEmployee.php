@@ -78,13 +78,14 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
                     }
                 }
             } else { //staff
-                $canEdit = 1; 
+                $canEdit = 1;
             }
         }
         return $canEdit;
     }
 
-    public static function employeeKpiTeamId($kpiEmployeeId) {
+    public static function employeeKpiTeamId($kpiEmployeeId)
+    {
         $teamId = KpiEmployee::find()
             ->select('kpi_team.kpiTeamId')
             ->JOIN("LEFT JOIN", "employee", "employee.employeeId = kpi_employee.employeeId")
@@ -92,10 +93,10 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
             ->where(["kpi_employee.kpiEmployeeId" => $kpiEmployeeId])
             ->asArray()
             ->one();
-    
+
         return $teamId["kpiTeamId"] ?? 0; // ถ้าไม่มีค่าให้คืนค่า 0
     }
-    
+
 
 
     public static function nextCheckDate($kpiEmployeeId)
@@ -112,7 +113,8 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
         }
         return $date;
     }
-    public static function countKpiEmployeeInTeam($teamId,$kpiId,$year,$month){
+    public static function countKpiEmployeeInTeam($teamId, $kpiId, $year, $month)
+    {
         $kpiEmployee = KpiEmployee::find()
             ->select('e.picture,e.employeeId,e.gender,kpi_employee.year,kpi_employee.month')
             ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
@@ -125,10 +127,10 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
             ])
             ->asArray()
             ->all();
-        $data=[];
-        if(isset($kpiEmployee) && count( $kpiEmployee)>0){
-            $i=0;
-            foreach($kpiEmployee as $employee):
+        $data = [];
+        if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+            $i = 0;
+            foreach ($kpiEmployee as $employee):
                 if ($employee["picture"] != '') {
                     $img = $employee["picture"];
                 } else {
@@ -138,13 +140,13 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
                         $img = "image/lady.png";
                     }
                 }
-            $data[$i]=$img;
-            $i++;
+                $data[$i] = $img;
+                $i++;
             endforeach;
-        }else{
+        } else {
             return null;
         }
-            return $data;
+        return $data;
     }
 
     public static function totalKpiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employeeId)
@@ -183,9 +185,11 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
             $teamId = Employee::employeeTeam($employeeId);
             if (isset($teamId["teamId"])) {
                 $kpis = KpiEmployee::find()
+                    ->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_employee.kpiId")
                     ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
                     ->where([
                         "kpi_employee.status" => [1, 2, 4],
+                        "k.status" => [1, 2, 4],
                         "e.teamId" => $teamId
                     ])
                     ->asArray()

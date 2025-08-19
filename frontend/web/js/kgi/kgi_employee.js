@@ -35,6 +35,7 @@ function kgiFilterForEmployee() {
 	var type = $("#type").val();
 	var employeeId = $("#employee-filter").val();
 	var url = $url + 'kgi/kgi-personal/search-kgi-personal';
+	showLoading();
 	$.ajax({
 		type: "POST",
 		dataType: 'json',

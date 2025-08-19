@@ -80,7 +80,7 @@ class KpiPersonalController extends Controller
 		$total = 0;
 		$employeeId = Employee::employeeId($userId);
 		$startAt = (($currentPage - 1) * $limit);
-		if ($role <= 3) {
+		if ($role < 3) {
 			$kpiEmployees = KpiEmployee::find()
 				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,kpi_employee.updateDateTime,kpi_employee.month,kpi_employee.year,
 			kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
@@ -88,6 +88,18 @@ class KpiPersonalController extends Controller
 				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
 				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kpi_employee.employeeId" => $employeeId])
+				->orderby('k.createDateTime')
+				->asArray()
+				->all();
+		} else if ($role == 3) {
+			$teamId = Employee::employeeTeamId($employeeId);
+			$kpiEmployees = KpiEmployee::find()
+				->select('k.kpiName,k.priority,k.quantRatio,k.amountType,k.code,kpi_employee.target,kpi_employee.result,kpi_employee.updateDateTime,kpi_employee.month,kpi_employee.year,
+			kpi_employee.status,kpi_employee.employeeId,k.unitId,kpi_employee.month,kpi_employee.year,k.kpiId,k.companyId,e.teamId,e.picture,
+			kpi_employee.kpiEmployeeId,e.employeeFirstname,e.employeeSurename,kpi_employee.fromDate,kpi_employee.toDate,kpi_employee.nextCheckDate')
+				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
+				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "e.teamId" => $teamId])
 				->orderby('k.createDateTime')
 				->asArray()
 				->all();
