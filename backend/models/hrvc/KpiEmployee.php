@@ -301,8 +301,9 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
     {
         $kpiEmployee = KpiEmployee::find()
             ->select('e.picture,e.employeeId,e.gender,kpi_employee.year,kpi_employee.month')
+            ->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_employee.kpiId")
             ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
-            ->where("kpi_employee.status!=99 and e.status!=99")
+            ->where("kpi_employee.status!=99 and e.status!=99 and k.status!=99")
             ->andWhere([
                 "kpi_employee.kpiId" => $kpiId,
                 "e.teamId" => $teamId,

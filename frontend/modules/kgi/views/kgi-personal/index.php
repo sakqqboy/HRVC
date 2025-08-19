@@ -166,7 +166,7 @@ $this->title = "Individual KGI";
                                     </td>
                                     <td>
                                         <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
-                                            <?= count($kgi["employee"]) ?>
+                                            <?= $kgi["countTeamEmployee"] ?>
                                         </div>
                                     </td>
                                     </td>

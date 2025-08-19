@@ -337,7 +337,7 @@ class KpiTeamController extends Controller
 					"ratio" => number_format($ratio, 2),
 					// "isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeamHistory['kpiTeamId'])),
 					"isOver" => $isOver,
-					"employee" => KpiTeam::kpiTeamEmployee($kpiTeam['kpiId'], $teamId),
+					//"employee" => KpiTeam::kpiTeamEmployee($kpiTeam['kpiId'], $teamId),
 					"countTeam" => KpiTeam::kpiTeam($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
 					"amountType" => $kpiTeam["amountType"],
 					"issue" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["issue"],
@@ -458,7 +458,7 @@ class KpiTeamController extends Controller
 				->orderBy('year ASC,month ASC,kpiTeamHistoryId DESC')
 				->asArray()
 				->all();
-				// return json_encode('1');
+			// return json_encode('1');
 		} else {
 			$mainTeamHistory = KpiTeamHistory::find()
 				->where(["kpiTeamHistoryId" => $kpiTeamHistoryId])
@@ -473,16 +473,16 @@ class KpiTeamController extends Controller
 				->asArray()
 				->all();
 		}
-		
+
 		$data = [];
 		if (isset($kpiTeamHistory) && count($kpiTeamHistory) > 0) {
 			foreach ($kpiTeamHistory as $teamhistory) :
 				$time = explode(' ', $teamhistory["createDateTime"]);
 				$employeeId = Employee::employeeId($teamhistory["createrId"]);
 				$data[$teamhistory["kpiTeamHistoryId"]] = [
-		// 			// "title" => $teamhistory["titleProcess"],
-		// 			// "remark" => $teamhistory["remark"],
-		// 			//"result" => $history["result"],
+					// 			// "title" => $teamhistory["titleProcess"],
+					// 			// "remark" => $teamhistory["remark"],
+					// 			//"result" => $history["result"],
 					"picture" => Employee::employeeImage($employeeId),
 					"createDate" => ModelMaster::engDateHr($teamhistory["createDateTime"]),
 					"time" => ModelMaster::timeText($time[1]),
@@ -496,7 +496,6 @@ class KpiTeamController extends Controller
 			endforeach;
 		}
 		return json_encode($data);
-
 	}
 
 
@@ -686,7 +685,7 @@ class KpiTeamController extends Controller
 				];
 			endforeach;
 		}
-						// return json_encode('1');
+		// return json_encode('1');
 
 		return json_encode($data);
 	}

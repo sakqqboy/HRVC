@@ -158,7 +158,7 @@ $this->title = "Individual KPI";
                                     </td>
                                     <td class="text-center">
                                         <div class="col-5 number-tagNew  <?= 'load-' . $colorFormat ?> ">
-                                            <?= count($kpi["employee"]) ?>
+                                            <?= $kpi["countTeamEmployee"] ?>
                                         </div>
                                     </td>
                                     <td>

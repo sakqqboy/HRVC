@@ -196,7 +196,7 @@ class KpiPersonalController extends Controller
 		$kpis = curl_exec($api);
 		$kpis = json_decode($kpis, true);
 
-
+		//throw new exception(print_r($kpis, true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/wait-for-approve');
 		$waitForApprove = curl_exec($api);

@@ -154,7 +154,8 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
         $total = 0;
         if ($adminId != '' || $gmId != '') {
             $kpis = KpiEmployee::find()
-                ->where(["status" => [1, 2, 4]])
+                ->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_employee.kpiId")
+                ->where("kpi_employee.status!=99 and k.status!=99")
                 ->asArray()
                 ->orderBy('updateDateTime DESC')
                 ->asArray()
@@ -170,9 +171,11 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
             $employeeId = Employee::employeeId($userId);
             $branchId = Employee::EmployeeDetail($employeeId)["branchId"];
             $kpis = KpiEmployee::find()
+                ->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_employee.kpiId")
                 ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
                 ->where([
                     "kpi_employee.status" => [1, 2, 4],
+                    "k.status" => [1, 2, 4],
                     "e.branchId" => $branchId
                 ])
                 ->asArray()
@@ -200,9 +203,11 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
         }
         if ($staffId != '') {
             $kpis = KpiEmployee::find()
+                ->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_employee.kpiId")
                 ->where([
-                    "status" => [1, 2, 4],
-                    "employeeId" => $employeeId
+                    "kpi_employee.status" => [1, 2, 4],
+                    "kpi_employee.employeeId" => $employeeId,
+                    "k.status" => [1, 2, 4],
                 ])
                 ->asArray()
                 ->orderBy('updateDateTime DESC')

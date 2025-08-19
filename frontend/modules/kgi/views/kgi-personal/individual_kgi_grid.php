@@ -404,6 +404,7 @@ $this->title = "Individual KGI";
                                         <div class="row mt-15" style="--bs-gutter-x:0px;">
                                             <div class="col-12">
                                                 <?php
+                                                $showPercent = 0;
                                                 $percent = explode('.', $kgi['ratio']);
                                                 if (isset($percent[0]) && $percent[0] == '0') {
                                                     if (isset($percent[1])) {
