@@ -49,7 +49,8 @@ $this->title = "Individual KGI";
         "role" => $role,
         "allCompany" => $allCompany,
         "companyPic" => $companyPic,
-        "totalBranch" => $totalBranch
+        "totalBranch" => $totalBranch,
+        "page" => 'list'
     ]) ?>
     <div class="col-12 mt-20" id="box-wrapper">
         <div class="bg-white-employee" id="pim-content">

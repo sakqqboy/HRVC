@@ -3,7 +3,7 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = "TEAM KPI";
+$this->title = "Team KPI";
 ?>
 <div class="col-12 mt-70 pt-20 pim-content1">
     <div class="d-flex justify-content-start align-items-center  pt-0 pb-0" style="line-height: 30px;">
@@ -47,7 +47,8 @@ $this->title = "TEAM KPI";
         "role" => $role,
         "allCompany" => $allCompany,
         "companyPic" => $companyPic,
-        "totalBranch" => $totalBranch
+        "totalBranch" => $totalBranch,
+        "page" => 'grid'
     ]) ?>
     <div class="col-12 mt-20" id="box-wrapper">
         <div class="bg-white-employee" id="pim-content">
@@ -125,7 +126,7 @@ $this->title = "TEAM KPI";
                             }
                         }
                 ?>
-                        <div class="col-12 mt-10 mb-5 pim-big-box pim-<?= $colorFormat ?>" id="kpi-team-<?= $kpiTeamId ?>">
+                        <div class="col-12  mb-25 pim-big-box pim-<?= $colorFormat ?>" id="kpi-team-<?= $kpiTeamId ?>">
                             <div class="d-flex justify-content-start align-content-start">
                                 <div class="kfi-grid-1" style="min-height:120px;">
                                     <div class="text-truncate pim-name"><?= $kpi["kpiName"] ?></div>

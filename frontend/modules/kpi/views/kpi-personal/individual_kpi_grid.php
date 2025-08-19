@@ -4,7 +4,7 @@ use common\models\ModelMaster;
 use frontend\models\hrvc\KpiEmployee;
 use yii\bootstrap5\ActiveForm;
 // $totalkpi = 0;
-$this->title = "INDIVIDUAL KPI";
+$this->title = "Individual KPI";
 ?>
 <div class="col-12 mt-70 pt-20 pim-content1">
     <div class="d-flex justify-content-start align-items-center  pt-0 pb-0" style="line-height: 30px;">
@@ -48,7 +48,8 @@ $this->title = "INDIVIDUAL KPI";
         "role" => $role,
         "allCompany" => $allCompany,
         "companyPic" => $companyPic,
-        "totalBranch" => $totalBranch
+        "totalBranch" => $totalBranch,
+        "page" => 'grid'
     ]) ?>
     <div class="col-12 mt-20" id="box-wrapper">
         <div class="bg-white-employee" id="pim-content">
@@ -83,7 +84,7 @@ $this->title = "INDIVIDUAL KPI";
                         "teams" =>  isset($teams) ? $teams : null,
                         "yearSelected" => isset($year) ? $year : null,
                         "role" => $role,
-                        "page" => "list",
+                        "page" => "grid",
                         "employeeId" => isset($employeeId) ? $employeeId : '',
                         "employees" => isset($employees) ? $employees : []
 

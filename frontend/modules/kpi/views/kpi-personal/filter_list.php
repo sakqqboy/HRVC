@@ -140,7 +140,7 @@ use frontend\models\hrvc\Team;
     role="group">
     <?php
     if ($page == 'grid') { ?>
-        <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+        <a class="btn btn-primary font-size-12 pim-change-modes">
             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg"
                 style="cursor: pointer; width:15px;height:15px;">
         </a>
@@ -156,7 +156,7 @@ use frontend\models\hrvc\Team;
             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg"
                 style="cursor: pointer; width:15px;height:15px;">
         </a>
-        <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+        <a class="btn btn-primary font-size-12 pim-change-modes">
             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg"
                 style="cursor: pointer; width:15px;height:15px;">
         </a>

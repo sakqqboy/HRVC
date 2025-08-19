@@ -4,7 +4,7 @@ use frontend\models\hrvc\KpiTeam;
 use yii\bootstrap5\ActiveForm;
 use common\models\ModelMaster;
 
-$this->title = "TEAM KPI";
+$this->title = "Team KPI";
 ?>
 
 <div class="col-12 mt-70 pt-20 pim-content1">
@@ -48,7 +48,8 @@ $this->title = "TEAM KPI";
         "role" => $role,
         "allCompany" => $allCompany,
         "companyPic" => $companyPic,
-        "totalBranch" => $totalBranch
+        "totalBranch" => $totalBranch,
+        "page" => 'list'
     ]) ?>
     <div class="col-12 mt-20" id="box-wrapper">
         <div class="bg-white-employee" id="pim-content">
@@ -267,7 +268,7 @@ $this->title = "TEAM KPI";
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
                                                         class="">
                                                 </a>
-                                                <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kpi['isOver'] ?>"
+                                                <span class="dropdown mt-2" href="#" id="dropdownMenuLink-<?= $kpi['isOver'] ?>"
                                                     data-bs-toggle="dropdown">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
                                                         class="icon-table on-cursor">
