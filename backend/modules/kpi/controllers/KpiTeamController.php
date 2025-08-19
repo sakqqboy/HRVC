@@ -333,7 +333,7 @@ class KpiTeamController extends Controller
 					"kpiTeamHistoryId" => 0,
 					"flag" => Country::countryFlagBycompany($kpiTeam["companyId"]),
 					"countryName" => Country::countryNameBycompany($kpiTeam['companyId']),
-					"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
+					//"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
 					"ratio" => number_format($ratio, 2),
 					// "isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeamHistory['kpiTeamId'])),
 					"isOver" => $isOver,
