@@ -45,7 +45,8 @@ $this->title = 'KGI KPI';
                 </div>
                 <div class="col-12 diamond-con-Backdrop3 mt-10">
                     <i class="fa fa-diamond" aria-hidden="true"></i>
-                    <span id="quanRatioHistory"><?= $kgiDetail["quantRatio"] == 1 ? Yii::t('app', "Quantity") : Yii::t('app', "Quality") ?></span>
+                    <span
+                        id="quanRatioHistory"><?= $kgiDetail["quantRatio"] == 1 ? Yii::t('app', "Quantity") : Yii::t('app', "Quality") ?></span>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-3 text-center">
@@ -112,21 +113,21 @@ $this->title = 'KGI KPI';
                 if (isset($kgiHasKpi) && count($kgiHasKpi) > 0) {
                     $a = 1;
                     foreach ($kgiHasKpi as $kpi) : ?>
-                        <tr>
-                            <td>
-                                <?= $a ?>.
-                                <span class="font-b" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#kpi-view"
-                                    onclick="javascript:kpiHistory(<?= $kpi['kpiId'] ?>)">
-                                    <?= $kpi["kpiName"] ?>
-                                </span>
-                            </td>
-                            <td><?php // number_format($kpi["targetAmount"], 2) 
+                <tr>
+                    <td>
+                        <?= $a ?>.
+                        <span class="font-b" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#kpi-view"
+                            onclick="javascript:kpiHistory(<?= $kpi['kpiId'] ?>)">
+                            <?= $kpi["kpiName"] ?>
+                        </span>
+                    </td>
+                    <td><?php // number_format($kpi["targetAmount"], 2) 
                                 ?></td>
-                            <td><?= ModelMaster::shotMonthText($kpi["month"]) ?></td>
-                            <td><?= Unit::unitName($kpi["unitId"]) ?></td>
-                            <td>
-                                <div class="col-12" style="line-height: 30px;">
-                                    <?php
+                    <td><?= ModelMaster::shotMonthText($kpi["month"]) ?></td>
+                    <td><?= Unit::unitName($kpi["unitId"]) ?></td>
+                    <td>
+                        <div class="col-12" style="line-height: 30px;">
+                            <?php
                                     $kpiBranch = KpiBranch::kpiBranch($kpi["kpiId"]);
                                     if (isset($kpiBranch) && count($kpiBranch) > 0) {
                                         $i = 1;
@@ -139,19 +140,19 @@ $this->title = 'KGI KPI';
                                         endforeach;
                                     }
                                     ?>
-                                </div>
-                            </td>
-                        </tr>
+                        </div>
+                    </td>
+                </tr>
 
-                    <?php
+                <?php
                         $a++;
                     endforeach;
                 } else { ?>
-                    <tr style="line-height: 60px;">
-                        <td class="text-center font-size-16" colspan="8">
-                            <?= Yii::t('app', 'There are no related KPI for this KGI') ?>.
-                        </td>
-                    </tr>
+                <tr style="line-height: 60px;">
+                    <td class="text-center font-size-16" colspan="8">
+                        <?= Yii::t('app', 'There are no related KPI for this KGI') ?>.
+                    </td>
+                </tr>
                 <?php
                 }
                 ?>
@@ -168,116 +169,119 @@ $this->title = 'KGI KPI';
         if (isset($kgiHasKpi) && count($kgiHasKpi) > 0) {
             $i = 1;
         ?>
-            <table class="table table-borderless">
-                <thead>
-                    <tr class="pim-table-header text-center">
-                        <th class="text-start" style="border-top-left-radius: 4px;border-bottom-left-radius: 4px;"><?= Yii::t('app', 'RELATED KEY PERFORMANCE INDICATOR') ?></th>
-                        <th><?= Yii::t('app', 'MONTH') ?></th>
-                        <th><?= Yii::t('app', 'UNIT') ?></th>
-                        <th><?= Yii::t('app', 'TARGET') ?></th>
-                        <th><?= Yii::t('app', 'CODE') ?></th>
-                        <th><?= Yii::t('app', 'RATIO') ?></th>
-                        <th style="width: 10%;"><?= Yii::t('app', 'TEAM') ?></th>
-                        <th style="border-top-right-radius: 4px;border-bottom-right-radius: 4px;" class="text-end">
-                            <?php if ($role >= 5) { ?>
-                                <a class="btn-blue-sm font-size-12 text-center no-underline" id="editRelateKpi"
-                                    style="padding-left: 10px;padding-right:10px;display:<?= count($kgiHasKpi) == 0 ? 'none' : '' ?>"
-                                    href="javascript:showEditRelateKpi(1,<?= $kgiId ?>)">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/edit.svg" alt=""
-                                        class="pim-icon mr-3" style="margin-top: -1px;"><?= Yii::t('app', 'Add') ?>/<?= Yii::t('app', 'Remove') ?>
-                                </a>
-                            <?php } ?>
-                            <a class="btn-blue-sm font-size-12 text-center no-underline  mr-5 pl-10 pr-10"
-                                id="saveRelateKpi" style="display:none;"
-                                href="javascript:showEditRelateKpi(2,<?= $kgiId ?>)">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt=""
-                                    class="pim-icon mr-3" style="margin-top: -1px;"> <?= Yii::t('app', 'Save') ?>
-                            </a>
-                            <a class="btn-red-sm font-size-12 text-center no-underlinepl-10 pr-10" id="cancelRelateKpi"
-                                style="display:none;" href="javascript:showEditRelateKpi(0,<?= $kgiId ?>)"><?= Yii::t('app', 'Cancel') ?></a>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="kgiHasKpi">
-                    <?php
+        <table class="table table-borderless">
+            <thead>
+                <tr class="pim-table-header text-center">
+                    <th class="text-start" style="border-top-left-radius: 4px;border-bottom-left-radius: 4px;">
+                        <?= Yii::t('app', 'RELATED KEY PERFORMANCE INDICATOR') ?></th>
+                    <th><?= Yii::t('app', 'MONTH') ?></th>
+                    <th><?= Yii::t('app', 'UNIT') ?></th>
+                    <th><?= Yii::t('app', 'TARGET') ?></th>
+                    <th><?= Yii::t('app', 'CODE') ?></th>
+                    <th><?= Yii::t('app', 'RATIO') ?></th>
+                    <th style="width: 10%;"><?= Yii::t('app', 'TEAM') ?></th>
+                    <th style="border-top-right-radius: 4px;border-bottom-right-radius: 4px;" class="text-end">
+                        <?php if ($role >= 5) { ?>
+                        <a class="btn-blue-sm font-size-12 text-center no-underline" id="editRelateKpi"
+                            style="padding-left: 10px;padding-right:10px;display:<?= count($kgiHasKpi) == 0 ? 'none' : '' ?>"
+                            href="javascript:showEditRelateKpi(1,<?= $kgiId ?>)">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/edit.svg" alt=""
+                                class="pim-icon mr-3"
+                                style="margin-top: -1px;"><?= Yii::t('app', 'Add') ?>/<?= Yii::t('app', 'Remove') ?>
+                        </a>
+                        <?php } ?>
+                        <a class="btn-blue-sm font-size-12 text-center no-underline  mr-5 pl-10 pr-10"
+                            id="saveRelateKpi" style="display:none;"
+                            href="javascript:showEditRelateKpi(2,<?= $kgiId ?>)">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt=""
+                                class="pim-icon mr-3" style="margin-top: -1px;"> <?= Yii::t('app', 'Save') ?>
+                        </a>
+                        <a class="btn-red-sm font-size-12 text-center no-underlinepl-10 pr-10" id="cancelRelateKpi"
+                            style="display:none;"
+                            href="javascript:showEditRelateKpi(0,<?= $kgiId ?>)"><?= Yii::t('app', 'Cancel') ?></a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="kgiHasKpi">
+                <?php
                     foreach ($kgiHasKpi as $kpiId => $kpi):
                     ?>
-                        <tr height="10">
-                        </tr>
-                        <tr id="kpi-<?= $kpiId ?>" class="text-center pim-table-text related-table-background">
-                            <td class="text-start font-b pt-10 text-primary"
-                                style="border-top-left-radius: 3px;border-bottom-left-radius: 3px;letter-spacing:0.5px;">
-                                <?= $i ?>.
-                                <?= $kpi["kpiName"] ?>
-                            </td>
-                            <td><?= $kpi["month"] ?></td>
-                            <td><?= Yii::t('app', $kpi["unit"]) ?></td>
-                            <td class="text-end"><?= $kpi["targetAmount"] ?></td>
-                            <td><?= $kpi["code"] ?></td>
-                            <td><?= $kpi["ratio"] ?></td>
-                            <td>
-                                <div class="col-12 info-assign  pt-5 pb-2" style="margin-top: -3px;">
-                                    <div class="row">
-                                        <div class="col-4 text-end">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png"
-                                                class="first-layer-icon ml-3" style="margin-top: -4px;">
-                                        </div>
-                                        <div class="col-3 number-tag load-info pr-3 pl-3 pt-1">
-                                            <?= $kpi["countTeam"] ?>
-                                        </div>
-
-                                        <div class="col-3  text-center pl-0 pr-0">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down-darkblue.png"
-                                                style="width:10px;height:7px;margin-top:-4px;cursor:pointer;"
-                                                onclick="javascript:showTeamKpi(<?= $kpiId ?>,1)" id="show-<?= $kpiId ?>">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/up-darkblue.png"
-                                                style="display: none;width:10px;height:7px;margin-top:-4px;cursor:pointer;"
-                                                onclick="javascript:showTeamKpi(<?= $kpiId ?>,0)" id="hide-<?= $kpiId ?>">
-                                        </div>
-                                    </div>
+                <tr height="10">
+                </tr>
+                <tr id="kpi-<?= $kpiId ?>" class="text-center pim-table-text related-table-background">
+                    <td class="text-start font-b pt-10 text-primary"
+                        style="border-top-left-radius: 3px;border-bottom-left-radius: 3px;letter-spacing:0.5px;">
+                        <?= $i ?>.
+                        <?= $kpi["kpiName"] ?>
+                    </td>
+                    <td><?= $kpi["month"] ?></td>
+                    <td><?= Yii::t('app', $kpi["unit"]) ?></td>
+                    <td class="text-end"><?= $kpi["targetAmount"] ?></td>
+                    <td><?= $kpi["code"] ?></td>
+                    <td><?= $kpi["ratio"] ?></td>
+                    <td>
+                        <div class="col-12 info-assign  pt-5 pb-2" style="margin-top: -3px;">
+                            <div class="row">
+                                <div class="col-4 text-end">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png"
+                                        class="first-layer-icon ml-3" style="margin-top: -4px;">
                                 </div>
-                            </td>
-                            <td style="border-top-right-radius: 3px;border-bottom-right-radius: 3px;">
-                                <div class="col-12 pt-3" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/detail.png" class="icon-table">
-                                    <?= Yii::t('app', 'Detail') ?>
+                                <div class="col-3 number-tag load-info pr-3 pl-3 pt-1">
+                                    <?= $kpi["countTeam"] ?>
                                 </div>
-                            </td>
-                        </tr>
-                        <tr id="kpi-team-<?= $kpiId ?>" style="display:none;">
 
-                        </tr>
-                    <?php
+                                <div class="col-3  text-center pl-0 pr-0">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down-darkblue.png"
+                                        style="width:10px;height:7px;margin-top:-4px;cursor:pointer;"
+                                        onclick="javascript:showTeamKpi(<?= $kpiId ?>,1)" id="show-<?= $kpiId ?>">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/up-darkblue.png"
+                                        style="display: none;width:10px;height:7px;margin-top:-4px;cursor:pointer;"
+                                        onclick="javascript:showTeamKpi(<?= $kpiId ?>,0)" id="hide-<?= $kpiId ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="border-top-right-radius: 3px;border-bottom-right-radius: 3px;">
+                        <div class="col-12 pt-3" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/detail.png" class="icon-table">
+                            <?= Yii::t('app', 'Detail') ?>
+                        </div>
+                    </td>
+                </tr>
+                <tr id="kpi-team-<?= $kpiId ?>" style="display:none;">
+
+                </tr>
+                <?php
                         $i++;
                     endforeach;
 
                     ?>
-                </tbody>
+            </tbody>
 
-            </table>
+        </table>
         <?php
         } else {
         ?>
-            <div class="col-12 on-data-box mt-10 text-center">
-                <div class="col-12">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/no-data.svg" class="no-data-img">
-                </div>
-                <div class="col-12 font-size-16 font-b mt-5">
-                    <?= Yii::t('app', 'Looks like there are no KPIs linked to this component yet') ?>.
-                </div>
-                <div class="col-12 mt-10 text-secondary">
-                    <?= Yii::t('app', 'Click “Add KPI” to associate relevant metrics and track performance effectively') ?>.
-                </div>
-                <div class="col-12 mt-10">
-                    <?php if ($role >= 5) { ?>
-                        <a href="javascript:showEditRelateKpi(1,<?= $kgiId ?>)" class="btn-blue font-size-14 no-underline">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-circle.svg" class="pim-icon mr-3"
-                                style="margin-top: -1px;">
-                            <?= Yii::t('app', 'Add KPI') ?>
-                        </a>
-                    <?php } ?>
-                </div>
+        <div class="col-12 on-data-box mt-10 text-center">
+            <div class="col-12">
+                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/no-data.svg" class="no-data-img">
             </div>
+            <div class="col-12 font-size-16 font-b mt-5">
+                <?= Yii::t('app', 'Looks like there are no KPIs linked to this component yet') ?>.
+            </div>
+            <div class="col-12 mt-10 text-secondary">
+                <?= Yii::t('app', 'Click “Add KPI” to associate relevant metrics and track performance effectively') ?>.
+            </div>
+            <div class="col-12 mt-10">
+                <?php if ($role >= 5) { ?>
+                <a href="javascript:showEditRelateKpi(1,<?= $kgiId ?>)" class="btn-blue font-size-14 no-underline">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-circle.svg" class="pim-icon mr-3"
+                        style="margin-top: -1px;">
+                    <?= Yii::t('app', 'Add KPI') ?>
+                </a>
+                <?php } ?>
+            </div>
+        </div>
         <?php
         }
         ?>
