@@ -652,7 +652,7 @@ select.form-select option:disabled {
                                 </span>
                                 <input type="number" class="form-control text-end" name="targetAmount" step="any"
                                     placeholder="Enter Target Amount"
-                                    value="<?= isset($data['target']) ? $data['target'] : '' ?>"
+                                    value="<?= isset($data['targetAmount']) ? $data['targetAmount'] : '' ?>"
                                     style="border-left: none; border-right: none; font-size: 22px; font-style: normal; padding-right: 3px; font-weight: 600;"
                                     required>
                                 <span class="input-group-text"

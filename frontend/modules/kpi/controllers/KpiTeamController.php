@@ -956,6 +956,7 @@ class KpiTeamController extends Controller
 		$kpiTeam = curl_exec($api);
 		$kpiTeam = json_decode($kpiTeam, true);
 
+		// throw new Exception(print_r($kpi, true));
 
 		$companyId = $kpi["companyId"];
 		$company = [
