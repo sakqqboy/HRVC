@@ -11,7 +11,7 @@ use frontend\models\hrvc\Team;
     onchange="applySelectStyle(this)">
     <?php
     if (isset($companyId) && $companyId != "") { ?>
-    <option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
+        <option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
     <?php
         $branches = Branch::branchInCompany($companyId);
     }
@@ -20,7 +20,7 @@ use frontend\models\hrvc\Team;
     <?php
     if (isset($companies) && count($companies) > 0) {
         foreach ($companies as $company) : ?>
-    <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+            <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
     <?php
         endforeach;
     }
@@ -30,7 +30,7 @@ use frontend\models\hrvc\Team;
     <?= $companyId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
     <?php
     if (isset($branchId) && $branchId != "") { ?>
-    <option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>
+        <option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>
     <?php
         $teams = Team::teamInBranch($branchId);
     }
@@ -39,7 +39,7 @@ use frontend\models\hrvc\Team;
     <?php
     if (isset($branches) && count($branches) > 0) {
         foreach ($branches as $branch) : ?>
-    <option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
+            <option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
     <?php
         endforeach;
     }
@@ -50,14 +50,14 @@ use frontend\models\hrvc\Team;
     <?= $branchId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
     <?php
     if (isset($teamId) && $teamId != "") { ?>
-    <option value="<?= $teamId ?>"><?= Team::teamName($teamId) ?></option>
+        <option value="<?= $teamId ?>"><?= Team::teamName($teamId) ?></option>
     <?php
     } ?>
     <option value=""><?= Yii::t('app', 'Team') ?></option>
     <?php
     if (isset($teams) && count($teams) > 0) {
         foreach ($teams as $team) : ?>
-    <option value="<?= $team['teamId'] ?>"><?= $team['teamName'] ?></option>
+            <option value="<?= $team['teamId'] ?>"><?= $team['teamName'] ?></option>
     <?php
         endforeach;
     }
@@ -67,7 +67,7 @@ use frontend\models\hrvc\Team;
     onchange="applySelectStyle(this)">
     <?php
     if (isset($month) && $month != "") { ?>
-    <option value="<?= $month ?>"><?= ModelMaster::monthFull()[$month] ?></option>
+        <option value="<?= $month ?>"><?= ModelMaster::monthFull()[$month] ?></option>
     <?php
     }
     ?>
@@ -75,7 +75,7 @@ use frontend\models\hrvc\Team;
     <?php
     if (isset($months) && count($months) > 0) {
         foreach ($months as $value => $month) : ?>
-    <option value="<?= $value ?>"><?= Yii::t('app', $month) ?></option>
+            <option value="<?= $value ?>"><?= Yii::t('app', $month) ?></option>
     <?php
         endforeach;
     }
@@ -85,7 +85,7 @@ use frontend\models\hrvc\Team;
     onchange="applySelectStyle(this)">
     <?php
     if (isset($yearSelected) && $year != "") { ?>
-    <option value="<?= $yearSelected ?>"><?= $yearSelected ?></option>
+        <option value="<?= $yearSelected ?>"><?= $yearSelected ?></option>
     <?php
     }
     ?>
@@ -96,7 +96,7 @@ use frontend\models\hrvc\Team;
     while ($i < 20) {
         if ($yearList != $yearSelected) {
     ?>
-    <option value="<?= $yearList ?>"><?= $yearList ?></option>
+            <option value="<?= $yearList ?>"><?= $yearList ?></option>
     <?php
         }
         $yearList += 1;
@@ -121,7 +121,7 @@ use frontend\models\hrvc\Team;
             $text = 'Not Set';
         }
     ?>
-    <option value="<?= $status ?>"><?= $text ?></option>
+        <option value="<?= $status ?>"><?= $text ?></option>
     <?php
     }
     ?>
@@ -140,58 +140,58 @@ use frontend\models\hrvc\Team;
     role="group">
     <?php
     if ($page == 'grid') { ?>
-    <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg"
-            style="cursor: pointer; width:15px;height:15px;">
-    </a>
-    <a href="<?= Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi' ?>"
-        class="btn btn-outline-primary font-size-12 pim-change-modes" style="border-color: #CBD5E1 !important;">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg"
-            style="cursor: pointer; width:15px;height:15px;">
-    </a>
+        <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg"
+                style="cursor: pointer; width:15px;height:15px;">
+        </a>
+        <a href="<?= Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi' ?>"
+            class="btn btn-outline-primary font-size-12 pim-change-modes" style="border-color: #CBD5E1 !important;">
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg"
+                style="cursor: pointer; width:15px;height:15px;">
+        </a>
     <?php
     } else { ?>
-    <a href="<?= Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid' ?>"
-        class="btn btn-outline-primary font-size-12 pim-change-modes" style="border-color: #CBD5E1 !important;">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg"
-            style="cursor: pointer; width:15px;height:15px;">
-    </a>
-    <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg"
-            style="cursor: pointer; width:15px;height:15px;">
-    </a>
+        <a href="<?= Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid' ?>"
+            class="btn btn-outline-primary font-size-12 pim-change-modes" style="border-color: #CBD5E1 !important;">
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg"
+                style="cursor: pointer; width:15px;height:15px;">
+        </a>
+        <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg"
+                style="cursor: pointer; width:15px;height:15px;">
+        </a>
     <?php
     }
     ?>
 </div>
 
 <script>
-function applySelectStyle(selectElement) {
-    if (selectElement.value) {
-        selectElement.classList.remove('select-pim');
-        selectElement.classList.add('select-pimselect');
-    } else {
-        selectElement.classList.remove('select-pimselect');
-        selectElement.classList.add('select-pim');
+    function applySelectStyle(selectElement) {
+        if (selectElement.value) {
+            selectElement.classList.remove('select-pim');
+            selectElement.classList.add('select-pimselect');
+        } else {
+            selectElement.classList.remove('select-pimselect');
+            selectElement.classList.add('select-pim');
+        }
     }
-}
 </script>
 <style>
-.select-pim {
-    width: 85px;
-}
+    .select-pim {
+        width: 85px;
+    }
 
-.select-pimselect {
-    width: 85px;
-}
+    .select-pimselect {
+        width: 85px;
+    }
 
-.pim-change-modes {
-    padding: 0px !important;
-    width: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-color: #2F80ED !important;
-    height: 25px;
-}
+    .pim-change-modes {
+        padding: 0px !important;
+        width: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-color: #2F80ED !important;
+        height: 25px;
+    }
 </style>

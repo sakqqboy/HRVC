@@ -237,7 +237,7 @@ $this->title = "Individual KGI";
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
                                                     class="">
                                             </a>
-                                            <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kgiEmployeeId ?>" data-bs-toggle="dropdown">
+                                            <span class="dropdown mt-2" href="#" id="dropdownMenuLink-<?= $kgiEmployeeId ?>" data-bs-toggle="dropdown">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
                                                     class="icon-table on-cursor">
                                             </span>

@@ -116,7 +116,7 @@ class KpiPersonalController extends Controller
 		return json_encode($res);
 	}
 
-	public function actionIndividualKpi()
+	public function actionIndividualKpi($hash = null)
 	{
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
@@ -148,6 +148,37 @@ class KpiPersonalController extends Controller
 				"type" => $type
 			]));
 		}
+		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
+		$managerId = '';
+		$supervisorId = '';
+		$staffId = '';
+		$companyId = '';
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+		}
+		$currentPage = 1;
+		if (isset($hash) && $hash != '') {
+			$pageArr = explode('page', $hash);
+			$currentPage = $pageArr[1];
+		}
+		$limit = 20;
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
@@ -160,9 +191,12 @@ class KpiPersonalController extends Controller
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . Yii::$app->user->id . '&&role=' . $role);
+		//throw new exception('kpi/kpi-personal/employee-kpi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$kpis = curl_exec($api);
 		$kpis = json_decode($kpis, true);
+
+
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/wait-for-approve');
 		$waitForApprove = curl_exec($api);
@@ -180,7 +214,7 @@ class KpiPersonalController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
 		$allCompany = curl_exec($api);
 		$allCompany = json_decode($allCompany, true);
-		
+
 		curl_close($api);
 		// throw new Exception(print_r($kpis, true));
 
@@ -194,6 +228,9 @@ class KpiPersonalController extends Controller
 		}
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
+		$totalKpi = KpiEmployee::totalKpiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
+		$totalPage = ceil($totalKpi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
 
 		return $this->render('index', [
 			"units" => $units,
@@ -215,7 +252,11 @@ class KpiPersonalController extends Controller
 			"branchId" => null,
 			"teamId" => null,
 			"waitForApprove" => $waitForApprove,
-			"employeeCompanyId" => $employeeCompanyId
+			"employeeCompanyId" => $employeeCompanyId,
+			"totalKpi" => $totalKpi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
+			"pagination" => $pagination,
 
 		]);
 	}
@@ -233,7 +274,7 @@ class KpiPersonalController extends Controller
 		$isAdmin = UserRole::isAdmin();
 		$userBranchId = User::userBranchId();
 		$session = Yii::$app->session;
-		
+
 		$adminId = '';
 		$gmId = '';
 		$teamLeaderId = '';
@@ -301,7 +342,7 @@ class KpiPersonalController extends Controller
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . Yii::$app->user->id . '&&role=' . $role. '&&currentPage=' . $currentPage . '&&limit=' . $limit);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$kpis = curl_exec($api);
 		$kpis = json_decode($kpis, true);
 		//throw new exception('kpi/kpi-personal/employee-kpi?userId=' . Yii::$app->user->id . '&&role=' . $role);
@@ -309,7 +350,7 @@ class KpiPersonalController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 		$waitForApprove = curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
-		
+
 		$teams = [];
 		if ($role == 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);
@@ -330,7 +371,7 @@ class KpiPersonalController extends Controller
 			$countAllCompany = count($allCompany);
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
-		
+
 		curl_close($api);
 
 		$months = ModelMaster::monthFull(1);
@@ -1034,7 +1075,7 @@ class KpiPersonalController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
-		
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
 		$allCompany = curl_exec($api);
 		$allCompany = json_decode($allCompany, true);
@@ -1133,7 +1174,7 @@ class KpiPersonalController extends Controller
 		$isAdmin = UserRole::isAdmin();
 		$userBranchId = User::userBranchId();
 		$session = Yii::$app->session;
-		
+
 		$adminId = '';
 		$gmId = '';
 		$teamLeaderId = '';
@@ -1195,7 +1236,7 @@ class KpiPersonalController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
 		$units = curl_exec($api);
 		$units = json_decode($units, true);
-		
+
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$companies = curl_exec($api);
 		$companies = json_decode($companies, true);
@@ -1240,7 +1281,7 @@ class KpiPersonalController extends Controller
 			$countAllCompany = count($allCompany);
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
-		
+
 		curl_close($api);
 
 		$months = ModelMaster::monthFull(1);
@@ -1252,7 +1293,7 @@ class KpiPersonalController extends Controller
 		$totalPage = ceil($totalKpi / $limit);
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
 		// throw new Exception(print_r($totalKpi	, true));
-		
+
 		return $this->render($file, [
 			"companies" => $companies,
 			"teams" => $teams,

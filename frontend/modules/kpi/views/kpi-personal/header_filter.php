@@ -11,7 +11,7 @@
         </div>
         <div class="pim-center-line"></div>
         <div class="pim-type-box" style="min-width:182px;">
-            <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" style="text-decoration: none;color: #3C3D48;">
+            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/individual-kgi-grid" style="text-decoration: none;color: #3C3D48;">
                 <span>
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KGI.svg"
                         class="mr-5 pim-filter-head-icon">
@@ -21,7 +21,7 @@
         </div>
         <div class="pim-center-line"></div>
         <div class="header-kpi-active">
-            <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" style="text-decoration: none;color: #30313D;">
+            <a style="text-decoration: none;color: #30313D;">
                 <span>
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KPI.svg"
                         class="mr-5 pim-filter-head-icon">
@@ -35,8 +35,8 @@
             <?php if (isset($companyPic) && count($companyPic) > 0) {
                 $i = 0;
                 foreach ($companyPic as $picture): ?>
-            <img src="<?= Yii::$app->homeUrl . $picture ?>"
-                class="pim-header-pic <?= $i > 0 ? 'pim-head-pic-after' : '' ?>">
+                    <img src="<?= Yii::$app->homeUrl . $picture ?>"
+                        class="pim-header-pic <?= $i > 0 ? 'pim-head-pic-after' : '' ?>">
             <?php
                     $i++;
                 endforeach;
