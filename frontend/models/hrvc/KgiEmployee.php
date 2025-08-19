@@ -135,7 +135,8 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
         $total = 0;
         if ($adminId != '' || $gmId != '') {
             $kgis = KgiEmployee::find()
-                ->where(["status" => [1, 2, 4]])
+                ->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_employee.kgiId")
+                ->where("kgi_employee.status!=99 and k.status!=99")
                 ->asArray()
                 ->orderBy('updateDateTime DESC')
                 ->asArray()
@@ -151,9 +152,11 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
             $employeeId = Employee::employeeId($userId);
             $branchId = Employee::EmployeeDetail($employeeId)["branchId"];
             $kgis = KgiEmployee::find()
+                ->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_employee.kgiId")
                 ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
                 ->where([
                     "kgi_employee.status" => [1, 2, 4],
+                    "k.status" => [1, 2, 4],
                     "e.branchId" => $branchId
                 ])
                 ->asArray()
@@ -166,9 +169,11 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
             $teamId = Employee::employeeTeam($employeeId);
             if (isset($teamId["teamId"])) {
                 $kgis = KgiEmployee::find()
+                    ->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_employee.kgiId")
                     ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
                     ->where([
                         "kgi_employee.status" => [1, 2, 4],
+                        "k.status" => [1, 2, 4],
                         "e.teamId" => $teamId
                     ])
                     ->asArray()
@@ -179,9 +184,11 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
         }
         if ($staffId != '') {
             $kgis = KgiEmployee::find()
+                ->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_employee.kgiId")
                 ->where([
-                    "status" => [1, 2, 4],
-                    "employeeId" => $employeeId
+                    "kgi_employee.status" => [1, 2, 4],
+                    "kgi_employee.employeeId" => $employeeId,
+                    "k.status" => [1, 2, 4],
                 ])
                 ->asArray()
                 ->orderBy('updateDateTime DESC')
