@@ -65,6 +65,15 @@
         /* overflow: hidden; */
     }
 }
+
+/* ทำให้ icon responsive */
+.icon-responsive {
+    width: 1.2em;
+    /* ขึ้นกับขนาด font ของปุ่ม */
+    height: 1.2em;
+    max-width: 100%;
+    height: auto;
+}
 </style>
 <!-- <div class="modal fade" id="update-history-popup" tabindex="-1" aria-labelledby="updateHistoryModalLabel"
     aria-hidden="true">
@@ -128,9 +137,10 @@
                                 </text>
                             </svg>
                         </div>
-                        <button type="button" class="btn-accept" data-bs-dismiss="modal">
-                            <img src="<?= Yii::$app->homeUrl ?>image/check-box.svg" style="width: 18px; height: 18px;">
-                            Accept As Final Result
+                        <button type="button" class="btn-accept d-flex align-items-center gap-2"
+                            data-bs-dismiss="modal">
+                            <img src="<?= Yii::$app->homeUrl ?>image/check-box.svg" class="icon-responsive">
+                            <span>Accept As Final Result</span>
                         </button>
                     </div>
                 </div>
