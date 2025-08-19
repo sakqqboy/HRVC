@@ -2429,7 +2429,7 @@ input:checked+.slider:before {
 
 .btn-accept {
 	display: flex;
-	width: 201px;
+	/* width: 201px; */
 	height: 40px;
 	padding: 7px 9px;
 	justify-content: center;
