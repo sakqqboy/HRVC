@@ -2307,6 +2307,31 @@ class ManagementController extends Controller
         }
         return json_encode($res);
     }
+    public function actionAutoResult()
+	{
+		$kpiId = $_POST["kpiId"];
+		$kpi = Kpi::find()->where(["kpiId" => $kpiId])->asArray()->one();
+		$year = $kpi["year"];
+		$month = $kpi["month"];
+		$kpiTeam = KpiTeam::find()
+			->select('kpiTeamId,result')
+			->where([
+				"kpiId" => $kpiId,
+				"status" => [1, 2, 4],
+				"month" => $month,
+				"year" => $year
+			])
+			->asArray()
+			->all();
+		$autoResult = 0;
+		if (isset($kpiTeam) && count($kpiTeam) > 0) {
+			foreach ($kpiTeam as $kg):
+				$autoResult += $kg["result"];
+			endforeach;
+		}
+		$res["result"] = $autoResult;
+		return json_encode($res);
+	}
     public function actionCheckKpiTeam()
     {
         $kpiId = $_POST["kpiId"];

@@ -27,6 +27,36 @@ function companyMultiBrachUpdateKPI() {
 		}
 	});
 }
+function autoUpdateResultKpi(kpiId) {
+	if ($("#historic-checkbox-kpi").prop("checked") == true) {
+		//if (confirm('Are you sure to use the summarize data from Team KPI?')) {
+		$("#override-checkbox-kpi").prop("checked", false);
+		var url = $url + 'kpi/management/auto-result';
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { kpiId: kpiId },
+			success: function (data) {
+				// alert(data.result);
+				$("#resultKPI-update").val(data.result);
+				$("#autoKPI-result").val(data.result);
+			}
+		});
+		// alert("1");
+		$("#resultKPI-update").prop("disabled", true);
+		//} else {
+		//$("#override-checkbox-kgi").prop("checked", true);
+		//$("#historic-checkbox-kgi").prop("checked", false);
+		//$("#result-update").prop("disabled", false);
+		//}
+		//cal
+	} else {
+		$("#override-checkbox-kpi").prop("checked", true);
+		$("#resultKPI-update").val($("#previous-result").val());
+		$("#resultKPI-update").prop("disabled", false);
+	}
+}
 function checkAllBranchUpdateKPI() {
 	var sumBranch = totalBranchUpdate();
 	//alert(sumBranch);
