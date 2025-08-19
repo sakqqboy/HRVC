@@ -798,14 +798,16 @@ select.form-select option:disabled {
                             <?php
                         if ($statusform == 'update') {
                         ?>
-                            <button type="submit" class="btn-create-update" style="width: 100px;">
+                            <button type="submit" class="btn-create-update"
+                                style="width: 80px;height: 35px;font-size:14px !important;">
                                 <img src="<?= Yii::$app->homeUrl ?>image/updatebtn-white.svg" alt="LinkedIn"
                                     style="width: 16px; height: 16px;">
                                 <?= Yii::t('app', 'Update') ?>
                             </button>
                             <?php } else { ?>
                             <!-- ปรับให้ปุ่มนี้เป็น type="submit" -->
-                            <button type="submit" class="btn-create-update" style="width: 100px;">
+                            <button type="submit" class="btn-create-update"
+                                style="width:80px;text-decoration: none;height: 35px;font-size:14px !important;">
                                 <?= Yii::t('app', 'Create') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>image/create-btn-white.svg" alt="LinkedIn"
                                     style="width: 16px; height: 16px;">

@@ -273,7 +273,7 @@ class ManagementController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
         $kpis = curl_exec($api);
         $kpis = json_decode($kpis, true);
-
+// throw new exception(print_r($kpis, true));
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
         $allCompany = curl_exec($api);
         $allCompany = json_decode($allCompany, true);
@@ -295,7 +295,7 @@ class ManagementController extends Controller
         $pagination = ModelMaster::getPagination($currentPage, $totalPage);
         $totalBranch = Branch::totalBranch();
 
-        // throw new exception(print_r($employeeCompanyId, true));
+        // throw new exception(print_r($kpis, true));
         return $this->render('kpi_grid', [
             "units" => $units,
             "companies" => $companies,

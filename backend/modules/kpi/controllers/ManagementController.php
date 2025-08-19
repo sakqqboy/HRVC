@@ -44,12 +44,14 @@ class ManagementController extends Controller
 {
 	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $currentPage, $limit)
 	{
+		
 		if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
 			$kpis = Kpi::find()
 				->where(["status" => [1, 2, 4]])
 				->orderBy('createDateTime DESC')
 				->asArray()
 				->all();
+				// return json_encode($kpis);
 		}
 		if (!empty($supervisorId) || !empty($teamLeaderId) || !empty($staffId)) {
 			if ($supervisorId != '') {
@@ -72,6 +74,7 @@ class ManagementController extends Controller
 				->asArray()
 				->all();
 		}
+
 		$data = [];
 		$data1 = [];
 		$data2 = [];
@@ -114,6 +117,7 @@ class ManagementController extends Controller
 				}
 				$isOver = ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpi['kpiId']));
 				$kpiId = $kpi["kpiId"];
+				// return json_encode($kpi);
 				$commonData = [
 					"kpiName" => $kpiName,
 					"companyName" => Company::companyName($kpi["companyId"]),
@@ -125,7 +129,7 @@ class ManagementController extends Controller
 					"quantRatio" => $kpi["quantRatio"],
 					"targetAmount" => number_format($kpi["targetAmount"], 2),
 					"code" => $kpi["code"],
-					"result" => number_format($kpi["result"], 2),
+					"result" => number_format((float)($kpi["result"] ?? 0), 2),
 					"unit" => Unit::unitName($kpi["unitId"]),
 					"month" => ModelMaster::monthEng($kpi['month'], 1),
 					"monthNumber" => $kpi["month"],
@@ -148,6 +152,8 @@ class ManagementController extends Controller
 					"amountType" => $kpi["amountType"],
 					"lastestUpdate" => ModelMaster::engDate($kpi["updateDateTime"], 2)
 				];
+																	// return json_encode($commonData);
+
 				if (!empty($commonData)) {
 					if (($kpi["fromDate"] == "" || $kpi["toDate"] == "") && $isOver == 2) {
 						$data1[$kpiId] = $commonData;
