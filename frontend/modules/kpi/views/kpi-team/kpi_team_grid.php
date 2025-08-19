@@ -559,7 +559,7 @@ $this->title = "TEAM KPI";
                                         if ($role >= 5) {
                                         ?>
                                 <a class="pim-btn-delete" data-bs-toggle="modal" data-bs-target="#delete-kpi-team"
-                                    onclick="javascript:prepareDeletekpiTeam(<?= $kpiTeamId ?>)"
+                                    data-id="<?= $kpiTeamId ?>"
                                     onmouseover="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                     onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg'">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg"

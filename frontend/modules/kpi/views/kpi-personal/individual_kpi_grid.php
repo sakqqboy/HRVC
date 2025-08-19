@@ -539,8 +539,8 @@ $this->title = "INDIVIDUAL KPI";
                                 <?php
                                         if ($role >= 5) {
                                         ?>
-                                <a class="pim-btn-delete" data-bs-toggle="modal" data-bs-target="#delete-kpi-team"
-                                    onclick="javascript:prepareDeletekpiEmployee(<?= $kpiEmployeeId ?>)"
+                                <a class="pim-btn-delete" data-bs-toggle="modal" data-bs-target="#delete-kpi-employee"
+                                    data-id="<?= $kpiEmployeeId ?>"
                                     onmouseover="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                     onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg'">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg"

@@ -1,3 +1,13 @@
+<style>
+.delete-btn .pim-icon {
+    content: url('<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg');
+    transition: 0.2s;
+}
+
+.delete-btn:hover .pim-icon {
+    content: url('<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg');
+}
+</style>
 <div class="modal fade" id="delete-kpi-team" tabindex="-1" aria-labelledby="staticBackdrop4Label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="border-radius: 8px; padding: 20px;">
@@ -21,15 +31,24 @@
                     <?= Yii::t('app', 'Cancel') ?>
                 </button>
                 <input type="hidden" id="kpiTeamId-modal" value="">
-                <a href="javascript:deleteKpiTeam()" class="btn btn-outline-danger"
+                <button type="button" class="btn btn-outline-danger delete-btn"
                     style="width: 100px; display: flex; align-items: center; justify-content: center; margin-left: 10px;"
-                    onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                    onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
+                    onclick="deleteKpiTeam()">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg" alt="Delete" class="pim-icon"
                         style="width: 14px; height: 14px; margin-right: 5px;">
                     <?= Yii::t('app', 'Delete') ?>
-                </a>
+                </button>
+
             </div>
         </div>
     </div>
 </div>
+
+<script>
+var deleteModal = document.getElementById('delete-kpi-team');
+deleteModal.addEventListener('show.bs.modal', function(event) {
+    var button = event.relatedTarget; // ปุ่มที่กด
+    var kpiTeamId = button.getAttribute('data-id'); // ดึงค่า data-id
+    document.getElementById('kpiTeamId-modal').value = kpiTeamId;
+});
+</script>
