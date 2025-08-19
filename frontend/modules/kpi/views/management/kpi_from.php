@@ -695,11 +695,11 @@ select.form-select option:disabled {
                                         src="<?= Yii::$app->homeUrl ?>image/result-<?= isset($data['result']) ? 'blue' : 'gray' ?>.svg"
                                         alt="LinkedIn" style="width: 30px; height: 30px;">
                                 </span>
-                                <input type="number" class="form-control text-end" name="result" id="result-update"
+                                <input type="number" class="form-control text-end" name="result" id="resultKPI-update"
                                     value="<?= isset($data['result']) ? $data['result'] : '' ?>"
                                     style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
                                     required step="any" oninput="updateIcon(this);">
-                                <input type="hidden" id="auto-result" value="" name="autoUpdate">
+                                <input type="hidden" id="autoKPI-result" value="" name="autoUpdate">
                                 <input type="hidden" id="previous-result"
                                     value="<?= isset($data['result']) ? $data['result'] : '' ?>">
                             </div>
@@ -711,7 +711,7 @@ select.form-select option:disabled {
                                 <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
                                     <label class="switch">
                                         <input type="checkbox" id="historic-checkbox-kpi"
-                                            onchange="javascript:autoUpdateResult(<?= $kpiId ?>)">
+                                            onchange="javascript:autoUpdateResultKpi(<?= $kpiId ?>)">
                                         <span class="slider round"></span>
                                     </label>
                                     <label class="sub-manage-create" id="historic-switch">
