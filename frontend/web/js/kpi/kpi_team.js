@@ -287,7 +287,7 @@ function kpiFilterForTeam() {
 	});
 }
 function prepareDeleteKpiTeam(kpiTeamId) {
-	alert(kpiTeamId);
+	// alert(kpiTeamId);
 	$("#delete-kpi-team").modal('show');
 	$("#kpiTeamId-modal").val(kpiTeamId);
 }
@@ -295,7 +295,7 @@ function deleteKpiTeam() {
 	// alert(kpiTeamId);
 	var kpiTeamId = $("#kpiTeamId-modal").val();
 	var url = $url + 'kpi/kpi-team/delete-kpi-team';
-	alert(kpiTeamId);
+	// alert(kpiTeamId);
 	$.ajax({
 		type: "POST",
 		dataType: 'json',
