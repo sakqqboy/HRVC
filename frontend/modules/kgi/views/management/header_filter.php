@@ -1,7 +1,12 @@
+<?php
+if (!isset($page)) {
+    $page = 'grid';
+}
+?>
 <div class="d-flex header-filter-pim">
     <div class="pim-head-upderline d-flex align-items-start justify-content-start">
         <div class="pim-type-box" style="min-width:206px;">
-            <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" style="text-decoration: none;color: #30313D;">
+            <a href="<?= Yii::$app->homeUrl ?>kfi/management/<?= $page == 'grid' ? 'grid' : 'index' ?>" style="text-decoration: none;color: #30313D;">
                 <span>
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KFI.svg"
                         class="mr-5 pim-filter-head-icon">
@@ -11,7 +16,7 @@
         </div>
         <div class="pim-center-line"></div>
         <div class="header-kgi-active">
-            <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" style="text-decoration: none;color: #3C3D48;">
+            <a style="text-decoration: none;color: #3C3D48;">
                 <span>
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KGI.svg"
                         class="mr-5 pim-filter-head-icon">
@@ -21,7 +26,7 @@
         </div>
         <div class="pim-center-line"></div>
         <div class="pim-type-box" style="min-width:235px;">
-            <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" style="text-decoration: none;color: #30313D;">
+            <a href="<?= Yii::$app->homeUrl ?>kpi/management/<?= $page == 'grid' ? 'grid' : 'index' ?>" style="text-decoration: none;color: #30313D;">
                 <span>
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KPI.svg"
                         class="mr-5 pim-filter-head-icon">

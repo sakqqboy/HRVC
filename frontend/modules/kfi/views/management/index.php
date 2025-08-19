@@ -25,7 +25,8 @@ $this->title = 'KFI';
         "role" => $role,
         "allCompany" => $allCompany,
         "companyPic" => $companyPic,
-        "totalBranch" => $totalBranch
+        "totalBranch" => $totalBranch,
+        "page" => 'list'
     ]) ?>
     <div class="col-12 mt-20">
         <div class="bg-white-employee">

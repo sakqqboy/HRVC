@@ -4,7 +4,7 @@ use common\models\ModelMaster;
 use frontend\models\hrvc\Kgi;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = "KGI";
+$this->title = "Company KGI";
 ?>
 <div class="col-12 mt-70 pt-20 pim-content1">
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
@@ -27,7 +27,8 @@ $this->title = "KGI";
         "role" => $role,
         "allCompany" => $allCompany,
         "companyPic" => $companyPic,
-        "totalBranch" => $totalBranch
+        "totalBranch" => $totalBranch,
+        "page" => 'list'
     ]) ?>
     <div class="col-12 mt-20" id="box-wrapper">
         <div class="bg-white-employee" id="pim-content">
@@ -203,7 +204,7 @@ $this->title = "KGI";
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" alt="History"
                                                         class="">
                                                 </a>
-                                                <span class="dropdown" href="#" id="dropdownMenuLink-<?= $kgiId ?>" data-bs-toggle="dropdown">
+                                                <span class="dropdown mt-2" href="#" id="dropdownMenuLink-<?= $kgiId ?>" data-bs-toggle="dropdown">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/3Dot.svg"
                                                         class="icon-table on-cursor">
                                                 </span>
