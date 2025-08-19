@@ -2332,6 +2332,47 @@ class ManagementController extends Controller
 		$res["result"] = $autoResult;
 		return json_encode($res);
 	}
+    public function actionKpiUpdateHistory()
+	{
+		$kpiId = $_POST["kpiId"];
+		$month = $_POST["month"];
+		$year = $_POST["year"];
+		$res = [];
+		$role = UserRole::userRight();
+
+		$teamId = Team::userTeam(Yii::$app->user->id);
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
+		$kpi = curl_exec($api);
+		$kpi = json_decode($kpi, true);
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-history-team?kpiId=' . $kpiId . '&&month=' . $month . '&&year=' . $year);
+		$kpiHistoryTeam = curl_exec($api);
+		$kpiHistoryTeam = json_decode($kpiHistoryTeam, true);
+        
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-history-employee?kpiId=' . $kpiId . '&&month=' . $month . '&&year=' . $year);
+		$kpiHistoryEmployee = curl_exec($api);
+		$kpiHistoryEmployee = json_decode($kpiHistoryEmployee, true);
+        // throw new exception(print_r($kpiHistoryEmployee, true));
+
+		curl_close($api);
+		$res["month"] = $kpi["monthNameFull"];
+		$res["year"] = $kpi["year"];
+		$res["fromDate"] = $kpi["fromDateDetail"];
+		$res["toDate"] = $kpi["toDateDetail"];
+		$res["target"] = number_format($kpi["targetAmount"]);
+		$res["result"] = number_format($kpi["result"]);
+		$res["ratio"] = (int)$kpi["ratio"];
+		$res["dueBehide"] = 100 - (int)$kpi["ratio"];
+
+		$teamText = $this->renderAjax('team_history', ["kpiHistoryTeam" => $kpiHistoryTeam]);
+		$individualText = $this->renderAjax('individual_history', ["kpiHistoryEmployee" => $kpiHistoryEmployee, "role" => $role, "teamId" => $teamId]);
+		$res["teamText"] = $teamText;
+		$res["individualText"] = $individualText;
+		return json_encode($res);
+	}
     public function actionCheckKpiTeam()
     {
         $kpiId = $_POST["kpiId"];

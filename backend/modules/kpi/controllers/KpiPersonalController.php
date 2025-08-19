@@ -255,90 +255,145 @@ class KpiPersonalController extends Controller
 
 
 
-	public function actionKpiHistoryEmployee($kpiId, $month, $year, $kpiEmployeeId)
+	public function actionKpiHistoryEmployee($kpiId, $month, $year)
 	{
-		$data = [];
+		// $data = [];
 
-		$kpiHistory = (new Query())
-			->select([
-				'keh.kpiEmployeeHistoryId',
-				'keh.kpiEmployeeId',
-				'keh.result',
-				'keh.target',
-				'keh.createDateTime',
-				'keh.status AS history_status',
-				'keh.createrId',
-				'keh.updateDateTime',
-				'ke.employeeId',
-				'ke.kpiId',
-				'ke.month',
-				'ke.year',
-				'CONCAT(e.employeeFirstname, " ", e.employeeSurename) AS employeeFullname',
-				'e.picture',
-				't.teamId',
-				't.teamName'
+		// $kpiHistory = (new Query())
+		// 	->select([
+		// 		'keh.kpiEmployeeHistoryId',
+		// 		'keh.kpiEmployeeId',
+		// 		'keh.result',
+		// 		'keh.target',
+		// 		'keh.createDateTime',
+		// 		'keh.status AS history_status',
+		// 		'keh.createrId',
+		// 		'keh.updateDateTime',
+		// 		'ke.employeeId',
+		// 		'ke.kpiId',
+		// 		'ke.month',
+		// 		'ke.year',
+		// 		'CONCAT(e.employeeFirstname, " ", e.employeeSurename) AS employeeFullname',
+		// 		'e.picture',
+		// 		't.teamId',
+		// 		't.teamName'
+		// 	])
+		// 	->from('kpi_employee_history keh')
+		// 	->innerJoin(
+		// 		[
+		// 			'latest' => (new Query())
+		// 				->select(['kpiEmployeeId', 'MAX(updateDateTime) AS latest_update'])
+		// 				->from('kpi_employee_history')
+		// 				->groupBy('kpiEmployeeId')
+		// 		],
+		// 		'keh.kpiEmployeeId = latest.kpiEmployeeId AND keh.updateDateTime = latest.latest_update'
+		// 	)
+		// 	->innerJoin('kpi_employee ke', 'keh.kpiEmployeeId = ke.kpiEmployeeId')
+		// 	->innerJoin('employee e', 'ke.employeeId = e.employeeId')
+		// 	->innerJoin('team t', 'e.teamId = t.teamId')
+		// 	->innerJoin('kpi_history kh', 'kh.kpiId = ke.kpiId')
+		// 	->where(['keh.status' => [1, 2, 3]])
+		// 	->andWhere(['ke.status' => [1, 2, 3]])
+		// 	->andWhere(['ke.kpiId' => $kpiId])
+		// 	->andWhere(['ke.month' => $month])
+		// 	->andWhere(['ke.year' => $year])
+		// 	->andWhere(['e.status' => 1])
+		// 	->groupBy([
+		// 		'keh.kpiEmployeeHistoryId',
+		// 		'keh.kpiEmployeeId',
+		// 		'keh.result',
+		// 		'keh.target',
+		// 		'keh.createDateTime',
+		// 		'keh.status',
+		// 		'keh.createrId',
+		// 		'keh.updateDateTime',
+		// 		'ke.employeeId',
+		// 		'ke.kpiId',
+		// 		'ke.month',
+		// 		'ke.year',
+		// 		'employeeFullname',
+		// 		'e.picture',
+		// 		't.teamId',
+		// 		't.teamName'
+		// 	])
+		// 	->all();
+
+		// $data = [];
+		// if (isset($kpiHistory) && count($kpiHistory) > 0) {
+		// 	foreach ($kpiHistory as $history) :
+		// 		$time = explode(' ', $history["createDateTime"]);
+		// 		$employeeId = Employee::employeeId($history["createrId"]);
+		// 		$data[$history["kpiEmployeeHistoryId"]] = [
+		// 			"createrId" => $history["createrId"],
+		// 			"result" => $history["result"],
+		// 			"creater" => User::employeeNameByuserId($history["createrId"]),
+		// 			"teamName" => $history["teamName"],
+		// 			"picture" => Employee::employeeImage($employeeId),
+		// 			"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
+		// 			"time" => ModelMaster::timeText($time[1]),
+		// 			"status" => $history["history_status"],
+		// 			"target" => $history["target"],
+		// 			"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
+		// 		];
+		// 	endforeach;
+		// }
+
+		// return json_encode($data);
+		$kpiEmployee = KpiEmployee::find()
+			->where([
+				"kpiId" => $kpiId,
+				"status" => [1, 2, 4],
+				"month" => $month != '' ? $month : 0,
+				"year" => $year != '' ? $year : 0,
 			])
-			->from('kpi_employee_history keh')
-			->innerJoin(
-				[
-					'latest' => (new Query())
-						->select(['kpiEmployeeId', 'MAX(updateDateTime) AS latest_update'])
-						->from('kpi_employee_history')
-						->groupBy('kpiEmployeeId')
-				],
-				'keh.kpiEmployeeId = latest.kpiEmployeeId AND keh.updateDateTime = latest.latest_update'
-			)
-			->innerJoin('kpi_employee ke', 'keh.kpiEmployeeId = ke.kpiEmployeeId')
-			->innerJoin('employee e', 'ke.employeeId = e.employeeId')
-			->innerJoin('team t', 'e.teamId = t.teamId')
-			->innerJoin('kpi_history kh', 'kh.kpiId = ke.kpiId')
-			->where(['keh.status' => [1, 2, 3]])
-			->andWhere(['ke.status' => [1, 2, 3]])
-			->andWhere(['ke.kpiId' => $kpiId])
-			->andWhere(['ke.month' => $month])
-			->andWhere(['ke.year' => $year])
-			->andWhere(['ke.kpiEmployeeId' => $kpiEmployeeId])
-			->andWhere(['e.status' => 1])
-			->groupBy([
-				'keh.kpiEmployeeHistoryId',
-				'keh.kpiEmployeeId',
-				'keh.result',
-				'keh.target',
-				'keh.createDateTime',
-				'keh.status',
-				'keh.createrId',
-				'keh.updateDateTime',
-				'ke.employeeId',
-				'ke.kpiId',
-				'ke.month',
-				'ke.year',
-				'employeeFullname',
-				'e.picture',
-				't.teamId',
-				't.teamName'
-			])
+			->orderBy("updateDateTime DESC")
+			->asArray()
 			->all();
-
 		$data = [];
-		if (isset($kpiHistory) && count($kpiHistory) > 0) {
-			foreach ($kpiHistory as $history) :
-				$time = explode(' ', $history["createDateTime"]);
-				$employeeId = Employee::employeeId($history["createrId"]);
-				$data[$history["kpiEmployeeHistoryId"]] = [
-					"createrId" => $history["createrId"],
-					"result" => $history["result"],
-					"creater" => User::employeeNameByuserId($history["createrId"]),
-					"teamName" => $history["teamName"],
-					"picture" => Employee::employeeImage($employeeId),
-					"createDate" => ModelMaster::engDateHr($history["createDateTime"]),
-					"time" => ModelMaster::timeText($time[1]),
-					"status" => $history["history_status"],
-					"target" => $history["target"],
-					"createDateTime" => ModelMaster::monthDateYearTime($history["createDateTime"])
-				];
+		if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+			foreach ($kpiEmployee as $kt):
+				$kpiEmployeeHistory = KpiEmployeeHistory::find()
+					->where([
+						"kpiEmployeeId" => $kt["kpiEmployeeId"],
+						"status" => [1, 2, 4],
+						"month" => $month != '' ? $month : 0,
+						"year" => $year != '' ? $year : 0,
+					])
+					->orderBy('createDateTime DESC')
+					->asArray()
+					->one();
+				$employee = Employee::find()->where(["employeeId" => $kt["employeeId"]])->asArray()->one();
+				$teamName = Team::teamName($employee["teamId"]);
+				$employeeId = $kt["employeeId"];
+				if (isset($kpiEmployeeHistory) && !empty($kpiEmployeeHistory)) {
+					$time = explode(' ', $kpiEmployeeHistory["createDateTime"]);
+					$data[$kt["kpiEmployeeId"]] = [
+						"result" => $kpiEmployeeHistory["result"],
+						"creater" => $employee["employeeFirstname"] . ' ' . $employee["employeeSurename"],
+						"teamName" => $teamName,
+						"teamId" => $employee["teamId"],
+						"picture" => Employee::employeeImage($employeeId),
+						"time" => ModelMaster::timeText($time[1]),
+						"status" => $kpiEmployeeHistory["status"],
+						"target" => $kpiEmployeeHistory["target"],
+						"createDateTime" => ModelMaster::monthDateYearTime($kpiEmployeeHistory["createDateTime"])
+					];
+				} else {
+					$time = explode(' ', $kt["createDateTime"]);
+					$data[$kt["kpiEmployeeId"]] = [
+						"result" => $kt["result"],
+						"creater" => $employee["employeeFirstname"] . ' ' . $employee["employeeSurename"],
+						"teamName" => $teamName,
+						"teamId" => $employee["teamId"],
+						"picture" => Employee::employeeImage($employeeId),
+						"time" => ModelMaster::timeText($time[1]),
+						"status" => $kt["status"],
+						"target" => $kt["target"],
+						"createDateTime" => ModelMaster::monthDateYearTime($kt["createDateTime"])
+					];
+				}
 			endforeach;
 		}
-
 		return json_encode($data);
 	}
 
