@@ -484,3 +484,27 @@ document.getElementById("statusForm")?.addEventListener("submit", function (even
 	}
 });
 
+function kpiUpdateHistory(kpiId) {
+
+	var url = $url + 'kpi/management/kpi-update-history';
+	var month = $("#hiddenMonth").val();
+	var year = $("#hiddenYear").val();
+	$.ajax({
+		type: "POST",
+		dataType: 'json',
+		url: url,
+		data: { kpiId: kpiId, month: month, year: year },
+		success: function (data) {
+			// alert(data.teamText);
+			$("#month-year").html(data.month + ' ' + data.year);
+			$("#formattedRange").html(data.fromDate + ' - ' + data.toDate);
+			$("#Target").html(data.target);
+			$("#Result").html(' / ' + data.result);
+			$("#DueBehind").html(data.dueBehide + '%');
+			$(".percentage").html(data.ratio + '%');
+			$(".circle").attr("stroke-dasharray", data.ratio + ",100");
+			$("#history-list-team").html(data.teamText);
+			$("#history-list-creater").html(data.individualText);
+		}
+	});
+}

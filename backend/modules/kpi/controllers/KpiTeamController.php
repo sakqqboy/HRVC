@@ -586,16 +586,63 @@ class KpiTeamController extends Controller
 		return json_encode($data);
 	}
 
-	public function actionKpiHistoryTeam($kpiId, $month, $year, $teamId)
+	public function actionKpiHistoryTeam($kpiId, $month, $year)
 	{
 
-		$kpiTeam = kpiTeam::find()
+		// $kpiTeam = kpiTeam::find()
+		// 	->where([
+		// 		"kpiId" => $kpiId,
+		// 		"status" => [1, 2, 4],
+		// 		"month" => $month != '' ? $month : 0,
+		// 		"year" => $year != '' ? $year : 0,
+		// 	])
+		// 	->orderBy("updateDateTime DESC")
+		// 	->asArray()
+		// 	->all();
+		// $data = [];
+		// if (isset($kpiTeam) && count($kpiTeam) > 0) {
+		// 	foreach ($kpiTeam as $kt):
+		// 		$kpiTeamHistory = KpiTeamHistory::find()
+		// 			->where([
+		// 				"kpiTeamId" => $kt["kpiTeamId"],
+		// 				"status" => [1, 2, 4]
+		// 			])
+		// 			->orderBy('createDateTime DESC')
+		// 			->asArray()
+		// 			->one();
+		// 		if (isset($kpiTeamHistory) && !empty($kpiTeamHistory)) {
+		// 			$time = explode(' ', $kpiTeamHistory["createDateTime"]);
+		// 			$data[$kt["kpiTeamId"]] = [
+		// 				"teamName" => Team::teamName($kt["teamId"]),
+		// 				"createDate" => ModelMaster::engDateHr($kpiTeamHistory["createDateTime"]),
+		// 				"time" => ModelMaster::timeText($time[1] ?? '00:00'),
+		// 				"target" => $kpiTeamHistory["target"] ?? '0.00',
+		// 				"result" => $kpiTeamHistory["result"] ?? '0.00',
+		// 				"createDateTime" => ModelMaster::monthDateYearTime($kpiTeamHistory["createDateTime"]),
+		// 				"departmentName" => Department::teamDepartment($kt["teamId"])
+		// 			];
+		// 		} else {
+		// 			$time = explode(' ', $kt["createDateTime"]);
+		// 			$data[$kt["kpiTeamId"]] = [
+		// 				//"creater" => User::employeeNameByuserId($history["createrId"]),
+		// 				"teamName" => Team::teamName($kt["teamId"]),
+		// 				"createDate" => ModelMaster::engDateHr($kt["createDateTime"]),
+		// 				"time" => ModelMaster::timeText($time[1] ?? '00:00'),
+		// 				"target" => $kt["target"] ?? '0.00',
+		// 				"result" => $kt["result"] ?? '0.00',
+		// 				"createDateTime" => ModelMaster::monthDateYearTime($kt["createDateTime"]),
+		// 				"departmentName" => Department::teamDepartment($kt["teamId"])
+		// 			];
+		// 		}
+		// 	endforeach;
+		// }
+		// return json_encode($data);
+		$kpiTeam = KpiTeam::find()
 			->where([
 				"kpiId" => $kpiId,
-				"month" => $month,
-				"year" => $year,
-				"teamId" => $teamId,
-				"status" => [1, 2, 4]
+				"status" => [1, 2, 4],
+				"month" => $month != '' ? $month : 0,
+				"year" => $year != '' ? $year : 0,
 			])
 			->orderBy("updateDateTime DESC")
 			->asArray()
@@ -603,10 +650,12 @@ class KpiTeamController extends Controller
 		$data = [];
 		if (isset($kpiTeam) && count($kpiTeam) > 0) {
 			foreach ($kpiTeam as $kt):
-				$kpiTeamHistory = KpiTeamHistory::find()
+				$kpiTeamHistory = kpiTeamHistory::find()
 					->where([
 						"kpiTeamId" => $kt["kpiTeamId"],
-						"status" => [1, 2, 4]
+						"status" => [1, 2, 4],
+						"month" => $month != '' ? $month : 0,
+						"year" => $year != '' ? $year : 0,
 					])
 					->orderBy('createDateTime DESC')
 					->asArray()
@@ -625,7 +674,6 @@ class KpiTeamController extends Controller
 				} else {
 					$time = explode(' ', $kt["createDateTime"]);
 					$data[$kt["kpiTeamId"]] = [
-						//"creater" => User::employeeNameByuserId($history["createrId"]),
 						"teamName" => Team::teamName($kt["teamId"]),
 						"createDate" => ModelMaster::engDateHr($kt["createDateTime"]),
 						"time" => ModelMaster::timeText($time[1] ?? '00:00'),
