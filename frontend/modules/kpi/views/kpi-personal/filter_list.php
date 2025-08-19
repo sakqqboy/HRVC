@@ -3,71 +3,129 @@
 use common\models\ModelMaster;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
+use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Team;
 
 ?>
+<?php
+if ($role > 3) {
+?>
+    <select class="form-select font-size-12 <?= $companyId != "" ? 'select-pimselect' : 'select-pim' ?>"
+        id="company-filter" onchange="applySelectStyle(this)">
+        <?php
+        if (isset($companyId) && $companyId != "") { ?>
+            <option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
+        <?php
+            $branches = Branch::branchInCompany($companyId);
+        }
+        ?>
+        <option value=""><?= Yii::t('app', 'Company') ?></option>
+        <?php
+        if (isset($companies) && count($companies) > 0) {
+            foreach ($companies as $company) : ?>
+                <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
+        <?php
+            endforeach;
+        }
+        ?>
+    </select>
+    <select class="form-select font-size-12 <?= $branchId != "" ? 'select-pimselect' : 'select-pim' ?>" id="branch-filter"
+        <?= $companyId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
+        <?php
+        if (isset($branchId) && $branchId != "") { ?>
+            <option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>
+        <?php
+            $teams = Team::teamInBranch($branchId);
+        }
+        ?>
+        <option value=""><?= Yii::t('app', 'Branch') ?></option>
+        <?php
+        if (isset($branches) && count($branches) > 0) {
+            foreach ($branches as $branch) : ?>
+                <option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
+        <?php
+            endforeach;
+        }
+        ?>
 
-<select class="form-select font-size-12 <?= $companyId != "" ? 'select-pimselect' : 'select-pim' ?>" id="company-filter"
-    onchange="applySelectStyle(this)">
-    <?php
-    if (isset($companyId) && $companyId != "") { ?>
-        <option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
-    <?php
-        $branches = Branch::branchInCompany($companyId);
-    }
-    ?>
-    <option value=""><?= Yii::t('app', 'Company') ?></option>
-    <?php
-    if (isset($companies) && count($companies) > 0) {
-        foreach ($companies as $company) : ?>
-            <option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-    <?php
-        endforeach;
-    }
-    ?>
-</select>
-<select class="form-select font-size-12 <?= $branchId != "" ? 'select-pimselect' : 'select-pim' ?>" id="branch-filter"
-    <?= $companyId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
-    <?php
-    if (isset($branchId) && $branchId != "") { ?>
-        <option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>
-    <?php
-        $teams = Team::teamInBranch($branchId);
-    }
-    ?>
-    <option value=""><?= Yii::t('app', 'Branch') ?></option>
-    <?php
-    if (isset($branches) && count($branches) > 0) {
-        foreach ($branches as $branch) : ?>
-            <option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
-    <?php
-        endforeach;
-    }
-    ?>
+    </select>
+    <select class="form-select font-size-12 <?= $teamId != "" ? 'select-pimselect' : 'select-pim' ?>" id="team-filter"
+        <?= $branchId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
+        <?php
+        if (isset($teamId) && $teamId != "") { ?>
+            <option value="<?= $teamId ?>"><?= Team::teamName($teamId) ?></option>
+        <?php
+        } ?>
+        <option value=""><?= Yii::t('app', 'Team') ?></option>
+        <?php
 
-</select>
-<select class="form-select font-size-12 <?= $teamId != "" ? 'select-pimselect' : 'select-pim' ?>" id="team-filter"
-    <?= $branchId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
-    <?php
-    if (isset($teamId) && $teamId != "") { ?>
-        <option value="<?= $teamId ?>"><?= Team::teamName($teamId) ?></option>
-    <?php
-    } ?>
-    <option value=""><?= Yii::t('app', 'Team') ?></option>
-    <?php
-    if (isset($teams) && count($teams) > 0) {
-        foreach ($teams as $team) : ?>
-            <option value="<?= $team['teamId'] ?>"><?= $team['teamName'] ?></option>
-    <?php
-        endforeach;
-    }
-    ?>
-</select>
+        if (isset($teams) && count($teams) > 0) {
+            foreach ($teams as $team) : ?>
+                <option value="<?= $team['teamId'] ?>"><?= $team['teamName'] ?></option>
+        <?php
+            endforeach;
+        }
+        ?>
+    </select>
+<?php
+}
+if (isset($teamId) && $teamId != null) {
+    $disabled = '';
+} else {
+    $disabled = "disabled";
+}
+if ($role >= 3) { ?>
+    <select class="form-select font-size-12 <?= $employeeId != "" ? 'select-pimselect' : 'select-pim' ?>"
+        id="employee-filter" <?= $disabled ?> onchange="applySelectStyle(this)">
+        <?php
+        if (isset($employeeId) && $employeeId != null) { ?>
+            <option value="<?= $employeeId ?>"><?= Employee::employeeName($employeeId) ?></option>
+        <?php
+        }
+        ?>
+        <option value=""><?= Yii::t('app', 'Employee') ?></option>
+        <?php
+        if (isset($employees) && count($employees) > 0) {
+            foreach ($employees as $employee) : ?>
+                <option value="<?= $employee['employeeId'] ?>"><?= $employee["employeeFirstname"] ?>
+                    <?= $employee["employeeSurename"] ?></option>
+        <?php
+            endforeach;
+        }
+        ?>
+    </select>
+<?php
+}
+
+if ($role == 3) { ?>
+    <select class="form-select font-size-12 <?= $teamId != "" ? 'select-pimselect' : 'select-pim' ?>" id=" team-filter"
+        onchange="applySelectStyle(this)">
+        <?php
+        if (isset($teamId) && $teamId != "") { ?>
+            <option value="<?= $teamId ?>"><?= Team::teamName($teamId) ?></option>
+        <?php
+        } ?>
+        <option value=""><?= Yii::t('app', 'Team') ?></option>
+        <?php
+        if (isset($teams) && count($teams) > 0) {
+
+            foreach ($teams as $team) : ?>
+                <option value="<?= $team['teamId'] ?>"><?= $team['teamName'] ?></option>
+        <?php
+            endforeach;
+        }
+        ?>
+    </select>
+<?php
+
+}
+?>
 <select class="form-select font-size-12 <?= $month != "" ? 'select-pimselect' : 'select-pim' ?>" id="month-filter"
     onchange="applySelectStyle(this)">
     <?php
+
     if (isset($month) && $month != "") { ?>
-        <option value="<?= $month ?>"><?= ModelMaster::monthFull()[$month] ?></option>
+        <option value="<?= $month ?>"><?= Yii::t('app',  ModelMaster::monthFull()[$month]) ?></option>
     <?php
     }
     ?>
@@ -81,25 +139,23 @@ use frontend\models\hrvc\Team;
     }
     ?>
 </select>
-<select class="form-select font-size-12 <?= $yearSelected != '' ? 'select-pimselect' : 'select-pim' ?>" id="year-filter"
+<select class="form-select font-size-12 <?= $year != "" ? 'select-pimselect' : 'select-pim' ?>" id="year-filter"
     onchange="applySelectStyle(this)">
     <?php
-    if (isset($yearSelected) && $year != "") { ?>
-        <option value="<?= $yearSelected ?>"><?= $yearSelected ?></option>
+    if (isset($year) && $year != "") { ?>
+        <option value="<?= $year ?>"><?= $year ?></option>
     <?php
     }
     ?>
     <option value=""><?= Yii::t('app', 'Year') ?></option>
     <?php
-    $yearList = 2022;
+    $year = 2022;
     $i = 1;
     while ($i < 20) {
-        if ($yearList != $yearSelected) {
     ?>
-            <option value="<?= $yearList ?>"><?= $yearList ?></option>
+        <option value="<?= $year ?>"><?= $year ?></option>
     <?php
-        }
-        $yearList += 1;
+        $year += 1;
         $i++;
     }
     ?>
@@ -131,39 +187,84 @@ use frontend\models\hrvc\Team;
     <option value="4"><?= Yii::t('app', 'Not Set') ?></option>
     <option value="2"><?= Yii::t('app', 'Completed') ?></option>
 </select>
-<span class="justify-content-center d-flex align-items-center employee-filter-btn" style="cursor: pointer;"
-    onclick="javascript:kpiFilterForTeam()">
-    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons">
 
+<span class="justify-content-center d-flex align-items-center employee-filter-btn" style="cursor: pointer;"
+    onclick="javascript:kpiFilterForEmployee()">
+    <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/FilterWhite.svg" class="pim-search-icons">
+    <?= $role >= 5 ? '' : 'Filter' ?>
 </span>
-<div class="btn-group <?= (Yii::$app->controller->action->id == 'draft' || Yii::$app->controller->action->id == 'draft-result') ? 'd-none' : '' ?>"
-    role="group">
+<div class="btn-group <?= (Yii::$app->controller->action->id == 'draft' || Yii::$app->controller->action->id == 'draft-result') ? 'd-none' : '' ?>" role="group">
     <?php
     if ($page == 'grid') { ?>
-        <a class="btn btn-primary font-size-12 pim-change-modes">
-            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg"
-                style="cursor: pointer; width:15px;height:15px;">
+        <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridwhite.svg" style="cursor: pointer; width:15px;height:15px;">
         </a>
         <a href="<?= Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi' ?>"
             class="btn btn-outline-primary font-size-12 pim-change-modes" style="border-color: #CBD5E1 !important;">
-            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg"
-                style="cursor: pointer; width:15px;height:15px;">
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listblack.svg" style="cursor: pointer; width:15px;height:15px;">
         </a>
     <?php
     } else { ?>
         <a href="<?= Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid' ?>"
             class="btn btn-outline-primary font-size-12 pim-change-modes" style="border-color: #CBD5E1 !important;">
-            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg"
-                style="cursor: pointer; width:15px;height:15px;">
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/gridblack.svg" style="cursor: pointer; width:15px;height:15px;">
         </a>
-        <a class="btn btn-primary font-size-12 pim-change-modes">
-            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg"
-                style="cursor: pointer; width:15px;height:15px;">
+        <a href="#" class="btn btn-primary font-size-12 pim-change-modes">
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/listwhite.svg" style="cursor: pointer; width:15px;height:15px;">
         </a>
     <?php
     }
     ?>
 </div>
+<?php
+if ($role >= 5) {
+?>
+    <style>
+        .select-pim {
+            width: 70px;
+            font-size: 10px;
+        }
+
+        .select-pimselect {
+            width: 70px;
+            font-size: 10px;
+        }
+
+        .pim-change-modes {
+            padding: 0px !important;
+            width: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-color: #2F80ED !important;
+            height: 25px;
+        }
+    </style>
+<?php
+} else { ?>
+    <style>
+        .select-pim {
+            width: 85px;
+        }
+
+        .select-pimselect {
+            width: 85px;
+        }
+
+        .pim-change-modes {
+            padding: 0px !important;
+            width: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-color: #2F80ED !important;
+            height: 25px;
+        }
+    </style>
+<?php
+}
+?>
+
 
 <script>
     function applySelectStyle(selectElement) {
@@ -176,22 +277,3 @@ use frontend\models\hrvc\Team;
         }
     }
 </script>
-<style>
-    .select-pim {
-        width: 85px;
-    }
-
-    .select-pimselect {
-        width: 85px;
-    }
-
-    .pim-change-modes {
-        padding: 0px !important;
-        width: 25px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-color: #2F80ED !important;
-        height: 25px;
-    }
-</style>

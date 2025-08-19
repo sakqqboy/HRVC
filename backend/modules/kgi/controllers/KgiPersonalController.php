@@ -86,8 +86,6 @@ class KgiPersonalController extends Controller
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
 				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kgi_employee.employeeId" => $employeeId, "e.status" => [1]])
 				->orderby('k.createDateTime')
-				->offset($startAt)
-				->limit($limit)
 				->asArray()
 				->all();
 		} else {
@@ -99,8 +97,6 @@ class KgiPersonalController extends Controller
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
 				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "e.status" => [1]])
 				->orderby('k.createDateTime')
-				->offset($startAt)
-				->limit($limit)
 				->asArray()
 				->all();
 		}

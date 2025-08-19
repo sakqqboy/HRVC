@@ -276,6 +276,7 @@ function kpiFilterForTeam() {
 	var year = $("#year-filter").val();
 	var type = $("#type").val();
 	var url = $url + 'kpi/kpi-team/search-kpi-team';
+	showLoading();
 	$.ajax({
 		type: "POST",
 		dataType: 'json',

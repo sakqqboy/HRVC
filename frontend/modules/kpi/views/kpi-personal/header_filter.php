@@ -16,7 +16,7 @@ if (!isset($page)) {
         </div>
         <div class="pim-center-line"></div>
         <div class="pim-type-box" style="min-width:182px;">
-            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/<?= $page == 'grid' ? 'individual-kgi-gri' : 'individual-kgi' ?>" style="text-decoration: none;color: #3C3D48;">
+            <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/<?= $page == 'grid' ? 'individual-kgi-grid' : 'individual-kgi' ?>" style="text-decoration: none;color: #3C3D48;">
                 <span>
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/KGI.svg"
                         class="mr-5 pim-filter-head-icon">

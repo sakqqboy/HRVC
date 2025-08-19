@@ -58,10 +58,8 @@ $this->title = "Team KPI";
                     <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg" alt="Company"
                         style="cursor: pointer;"><?= Yii::t('app', 'Company KPI') ?>
                 </a>
-                <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid"
-                    class="pim-type-tab-selected justify-content-center align-items-center">
-                    <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
-                        style="cursor: pointer;"><?= Yii::t('app', 'Team KPI') ?>
+                <a class="pim-type-tab-selected justify-content-center align-items-center">
+                    <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"><?= Yii::t('app', 'Team KPI') ?>
                 </a>
                 <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi-grid"
                     class="pim-type-tab justify-content-center align-items-center">

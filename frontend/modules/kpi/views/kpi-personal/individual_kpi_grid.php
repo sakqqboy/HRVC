@@ -64,10 +64,9 @@ $this->title = "Individual KPI";
                     <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"
                         style="cursor: pointer;"><?= Yii::t('app', 'Team KPI') ?>
                 </a>
-                <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi-grid"
-                    class="pim-type-tab-selected justify-content-center align-items-center">
-                    <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self"
-                        style="cursor: pointer;"><?= Yii::t('app', 'Self KPI') ?>
+                <a class="pim-type-tab-selected justify-content-center align-items-center">
+                    <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self">
+                    <?= Yii::t('app', 'Self KPI') ?>
                 </a>
                 <div class="d-flex flex-grow-1 align-items-center justify-content-end  gap-1">
                     <?= $this->render('filter_list', [
