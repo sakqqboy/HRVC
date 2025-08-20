@@ -61,13 +61,12 @@ $this->title = 'Team KGI View';
                             <?php
                             if ($role >= 5) {
                             ?>
-                                <a class="btn btn-outline-danger d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#delete-kgi"
-                                    onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
+                                <a class="btn btn-outline-danger d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#delete-kgi-team"
+                                    onclick="javascript:prepareDeleteKgiTeam(<?= $kgiTeamId ?>)"
                                     style="height: 25px;font-size:13px;width:60px;"
                                     onmouseover="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                     onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg'">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg"
-                                        class="pim-action-icon mr-3">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg" class="pim-action-icon mr-3" style="margin-top: -1px;">
                                     <?= Yii::t('app', 'Delete') ?>
                                 </a>
                             <?php } ?>
@@ -272,41 +271,41 @@ $this->title = 'Team KGI View';
                                 <div class="view-tab-active" id="tab-1" style="border-top-left-radius:5px;border-top-right-radius:5px;"
                                     onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,1,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-blue.svg" alt="History"
-                                        class="pim-icon" style="margin-top: -2px;" id="tab-1-blue">
+                                        class="pim-icon" id="tab-1-blue">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.svg" alt="History"
-                                        class="pim-icon" style="margin-top: -2px;display:none;" id="tab-1-black">
+                                        class="pim-icon" style="display:none;" id="tab-1-black">
                                     <?= Yii::t('app', 'Assigned') ?>
                                 </div>
                                 <div class="view-tab" id="tab-2"
                                     onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,2,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-black.svg" alt="History"
-                                        class="pim-icon" style="margin-top: -2px;" id="tab-2-black">
+                                        class="pim-icon" id="tab-2-black">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh-blue.svg" alt="History"
-                                        class="pim-icon" style="margin-top: -2px;display:none;" id="tab-2-blue">
+                                        class="pim-icon" style="display:none;" id="tab-2-blue">
                                     <?= Yii::t('app', 'Update History') ?>
                                 </div>
                                 <div class="view-tab" id="tab-3"
                                     onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,3,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment.svg" alt="History"
-                                        class="pim-icon" style="margin-top: -2px;" id="tab-3-black">
+                                        class="pim-icon" id="tab-3-black">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/comment-blue.svg" alt="History"
-                                        class="pim-icon" style="margin-top: -2px;display:none;" id="tab-3-blue">
+                                        class="pim-icon" style="display:none;" id="tab-3-blue">
                                     <?= Yii::t('app', 'Chats') ?>
                                 </div>
                                 <div class="view-tab" id="tab-4"
                                     onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,4,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/chart.svg" alt="History"
-                                        class="pim-icon" style="margin-top: -2px;" id="tab-4-black">
+                                        class="pim-icon" id="tab-4-black">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/chart-blue.svg" alt="History"
-                                        class="pim-icon" style="margin-top: -2px;display:none;" id="tab-4-blue">
+                                        class="pim-icon" style="display:none;" id="tab-4-blue">
                                     <?= Yii::t('app', 'Chart') ?>
                                 </div>
                                 <div class="view-tab" id="tab-5"
                                     onclick="javascript:viewTabTeamKgi(<?= $kgiTeamHistoryId ?>,5,<?= $kgiId ?>,<?= $kgiTeamId ?>)">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate.svg" alt="History"
-                                        class="pim-icon" style="margin-top: -2px;" id="tab-5-black">
+                                        class="pim-icon" id="tab-5-black">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/relate-blue.svg" alt="History"
-                                        class="pim-icon" style="margin-top: -2px;display:none;" id="tab-5-blue">
+                                        class="pim-icon" style="display:none;" id="tab-5-blue">
                                     <?= Yii::t('app', 'Relate KPI') ?>
                                 </div>
                                 <input type="hidden" id="currentTab" value="1">
@@ -316,7 +315,7 @@ $this->title = 'Team KGI View';
                         </div>
                     </div>
                 </div>
-                <div class="row mt-10" id="show-content">
+                <div class="row mt-20" id="show-content">
 
                 </div>
             </div>

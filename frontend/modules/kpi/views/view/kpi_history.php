@@ -19,9 +19,8 @@ $this->title = 'KPI View';
         "totalBranch" => $totalBranch
     ]) ?>
     <div class="col-12 mt-10">
-
         <div class="alert mt-10 pim-body bg-white">
-            <div class="row">
+            <div class="row" style="--bs-gutter-x:0px;">
                 <div class="col-11 pim-name-title pr-0 pl-5 text-start">
                     <a href="<?= Yii::$app->homeUrl ?>kpi/management/grid" class="mr-5 pim-text-back">
                         <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
@@ -29,19 +28,18 @@ $this->title = 'KPI View';
                     </a>
                     <?= $kpiDetail["kpiName"] ?>
                 </div>
-                <div class="col-1 ">
+                <div class="col-1" style="justify-items: end;">
                     <?php if ($role >= 5) {
                     ?>
-                    <a class="btn btn-outline-danger d-flex justify-content-center" data-bs-toggle="modal"
-                        data-bs-target="#delete-kpi" onclick="javascript:prepareDeletekpi(<?= $kpiId ?>)"
-                        style="height: 34px;font-size:13px;"
-                        onmouseover="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                        onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg'">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg"
-                            class="pim-action-icon mr-3 mt-3">
-                        <?= Yii::t('app', 'Delete') ?>
+                        <a class="btn btn-outline-danger d-flex justify-content-center align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#delete-kpi" onclick="javascript:prepareDeletekpi(<?= $kpiId ?>)"
+                            style="height: 25px;font-size:13px;width:60px;"
+                            onmouseover="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
+                            onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg'">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg" class="pim-action-icon mr-3" style="margin-top: -1px;">
+                            <?= Yii::t('app', 'Delete') ?>
 
-                    </a>
+                        </a>
                     <?php } ?>
                 </div>
             </div>
@@ -95,28 +93,27 @@ $this->title = 'KPI View';
                     <div class="col-12 pim-big-box pim-detail-<?= $colorFormat ?>">
                         <div class="row">
                             <div class="col-2 pim-subheader-font border-right-<?= $colorFormat ?>"
-                                style=" display: flex; flex-direction: column; justify-content: center;">
-
+                                style=" display: flex; flex-direction: column; align-items: center;justify-content:center;">
                                 <div class="priority-star">
                                     <?php
                                     if ($kpiDetail["priority"] == "A" || $kpiDetail["priority"] == "B") {
                                     ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     if ($kpiDetail["priority"] == "A" || $kpiDetail["priority"] == "C") {
                                     ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="big-star">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="big-star">
                                     <?php
                                     }
                                     if ($kpiDetail["priority"] == "B") {
                                     ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     if ($kpiDetail["priority"] == "A") {
                                     ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     ?>
@@ -124,16 +121,16 @@ $this->title = 'KPI View';
                                 <?php
                                 if ($kpiDetail["priority"] != '') {
                                 ?>
-                                <div class="priority-box">
-                                    <?= Yii::t('app', 'Priority') ?>
-                                    <span class="text-priority mt-5"><?= $kpiDetail["priority"] ?></span>
-                                </div>
+                                    <div class="priority-box">
+                                        <?= Yii::t('app', 'Priority') ?>
+                                        <span class="text-priority mt-5"><?= $kpiDetail["priority"] ?></span>
+                                    </div>
                                 <?php
                                 } else { ?>
-                                <div class="priority-box-null">
-                                    <?= Yii::t('app', 'Priority') ?>
-                                    <span class="text-priority mt-5">N/A</span>
-                                </div>
+                                    <div class="priority-box-null">
+                                        <?= Yii::t('app', 'Priority') ?>
+                                        <span class="text-priority mt-5">N/A</span>
+                                    </div>
                                 <?php
                                 }
                                 ?>
@@ -229,12 +226,12 @@ $this->title = 'KPI View';
                                                 <?php
                                                 if ($role > 3  && $kpiDetail["status"] == 1) {
                                                 ?>
-                                                <a class="pim-btn-<?= $colorFormat ?>"
-                                                    href="<?= Yii::$app->homeUrl . 'kpi/management/prepare-update/' . ModelMaster::encodeParams(['kpiId' => $kpiId, 'kpiHistoryId' => 0]) ?>"
-                                                    style="display: flex; justify-content: center; align-items: center;  height: 30px; gap: 3px; flex-shrink: 0;">
-                                                    <i class="fa fa-refresh" aria-hidden="true"></i>
-                                                    <?= Yii::t('app', 'Update') ?>
-                                                </a>
+                                                    <a class="pim-btn-<?= $colorFormat ?>"
+                                                        href="<?= Yii::$app->homeUrl . 'kpi/management/prepare-update/' . ModelMaster::encodeParams(['kpiId' => $kpiId, 'kpiHistoryId' => 0]) ?>"
+                                                        style="display: flex; justify-content: center; align-items: center;  height: 30px; gap: 3px; flex-shrink: 0;">
+                                                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                                                        <?= Yii::t('app', 'Update') ?>
+                                                    </a>
                                                 <?php
                                                 }
                                                 ?>
@@ -337,48 +334,48 @@ $form = ActiveForm::begin([
 
 
 <style>
-.priority-box {
-    width: 52px;
-    height: 52px;
-    font-size: 12px;
-}
+    .priority-box {
+        width: 52px;
+        height: 52px;
+        font-size: 12px;
+    }
 
-.priority-box-null {
-    width: 52px;
-    height: 52px;
-    font-size: 12px;
-}
+    .priority-box-null {
+        width: 52px;
+        height: 52px;
+        font-size: 12px;
+    }
 
-.text-priority {
-    font-size: 18px;
-}
+    .text-priority {
+        font-size: 18px;
+    }
 
-.priority-star {
-    width: 52px;
-}
+    .priority-star {
+        width: 52px;
+    }
 
-.big-star {
-    width: 18px;
-    height: 17px;
-}
+    .big-star {
+        width: 18px;
+        height: 17px;
+    }
 
-.default-star {
-    width: 16px;
-    width: 15px;
-}
+    .default-star {
+        width: 16px;
+        width: 15px;
+    }
 
-.pim-big-box {
-    height: 110px;
-    padding-top: 5px;
-}
+    .pim-big-box {
+        height: 110px;
+        padding-top: 5px;
+    }
 </style>
 <script>
-window.onload = function() {
-    let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
-    if (openTab) {
-        viewTabKpi(<?= $kpiHistoryId ?>, openTab); // Set the tab based on the PHP value
-    } else {
-        viewTabKpi(<?= $kpiHistoryId ?>, 1); // Default to tab 1 if no value is passed
+    window.onload = function() {
+        let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
+        if (openTab) {
+            viewTabKpi(<?= $kpiHistoryId ?>, openTab); // Set the tab based on the PHP value
+        } else {
+            viewTabKpi(<?= $kpiHistoryId ?>, 1); // Default to tab 1 if no value is passed
+        }
     }
-}
 </script>

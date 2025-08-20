@@ -20,7 +20,7 @@ $this->title = 'KGI View';
     ]) ?>
     <div class="col-12 mt-10">
         <div class="alert mt-10 pim-body bg-white">
-            <div class="row">
+            <div class="row" style="--bs-gutter-x:0px;">
                 <div class="col-11 pim-name-title pr-0 pl-5 text-start">
                     <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="mr-5 pim-text-back">
                         <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
@@ -28,16 +28,15 @@ $this->title = 'KGI View';
                     </a>
                     <?= $kgiDetail["kgiName"] ?>
                 </div>
-                <div class="col-1">
+                <div class="col-1" style="justify-items: end;">
                     <?php if ($role >= 5) {
                     ?>
-                        <a class="btn btn-outline-danger d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#delete-kgi"
+                        <a class="btn btn-outline-danger d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#delete-kgi"
                             onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
-                            style="height: 34px;font-size:13px;"
+                            style="height: 25px;font-size:13px;width:60px;"
                             onmouseover="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                             onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg'">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg"
-                                class="pim-action-icon mr-3 mt-3">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg" class="pim-action-icon mr-3" style="margin-top: -1px;">
                             <?= Yii::t('app', 'Delete') ?>
 
                         </a>
