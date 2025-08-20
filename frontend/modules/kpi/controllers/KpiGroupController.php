@@ -20,22 +20,26 @@ class KpiGroupController extends Controller
 {
 	public function beforeAction($action)
 	{
-		if (!Yii::$app->user->id) {
-			return $this->redirect(Yii::$app->homeUrl . 'site/login');
+		if (Yii::$app->user->id == '') {
+			Yii::$app->response->redirect(Yii::$app->homeUrl . 'site/login');
+			return false;
 		}
 		$isManager = UserRole::isManager();
 		if ($isManager == 0) {
-			return $this->redirect(Yii::$app->homeUrl . 'kgi/management/index');
+			Yii::$app->response->redirect(Yii::$app->homeUrl . 'kgi/management/index');
+			return false;
 		}
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
-			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+			Yii::$app->response->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+			return false;
 		}
 		$role = UserRole::userRight();
 		if ($role < 3) {
-			return $this->redirect(Yii::$app->homeUrl . 'kgi/management/index');
+			Yii::$app->response->redirect(Yii::$app->homeUrl . 'kgi/management/index');
+			return false;
 		}
-		return true;
+		return parent::beforeAction($action);
 	}
 	public function actionIndex()
 	{

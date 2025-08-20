@@ -5,6 +5,7 @@ namespace frontend\modules\kpi\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use frontend\models\hrvc\UserRole;
+use Yii;
 use yii\web\Controller;
 
 /**
@@ -16,6 +17,14 @@ class ChartController extends Controller
      * Renders the index view for the module
      * @return string
      */
+    public function beforeAction($action)
+    {
+        if (Yii::$app->user->id == '') {
+            Yii::$app->response->redirect(Yii::$app->homeUrl . 'site/login');
+            return false;
+        }
+        return parent::beforeAction($action);
+    }
     public function actionIndex()
     {
         return $this->render('index');

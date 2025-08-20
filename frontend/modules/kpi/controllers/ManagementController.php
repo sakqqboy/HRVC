@@ -49,11 +49,12 @@ class ManagementController extends Controller
      */
     public function beforeAction($action)
     {
-        if (!Yii::$app->user->id) {
-            return $this->redirect(Yii::$app->homeUrl . 'site/login');
+        if (Yii::$app->user->id == '') {
+            Yii::$app->response->redirect(Yii::$app->homeUrl . 'site/login');
+            return false;
         }
         $this->setDefault();
-        return true;
+        return parent::beforeAction($action);
     }
     public function actionIndex($hash = null)
     {
@@ -273,7 +274,7 @@ class ManagementController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
         $kpis = curl_exec($api);
         $kpis = json_decode($kpis, true);
-// throw new exception(print_r($kpis, true));
+        // throw new exception(print_r($kpis, true));
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
         $allCompany = curl_exec($api);
         $allCompany = json_decode($allCompany, true);
@@ -2308,71 +2309,71 @@ class ManagementController extends Controller
         return json_encode($res);
     }
     public function actionAutoResult()
-	{
-		$kpiId = $_POST["kpiId"];
-		$kpi = Kpi::find()->where(["kpiId" => $kpiId])->asArray()->one();
-		$year = $kpi["year"];
-		$month = $kpi["month"];
-		$kpiTeam = KpiTeam::find()
-			->select('kpiTeamId,result')
-			->where([
-				"kpiId" => $kpiId,
-				"status" => [1, 2, 4],
-				"month" => $month,
-				"year" => $year
-			])
-			->asArray()
-			->all();
-		$autoResult = 0;
-		if (isset($kpiTeam) && count($kpiTeam) > 0) {
-			foreach ($kpiTeam as $kg):
-				$autoResult += $kg["result"];
-			endforeach;
-		}
-		$res["result"] = $autoResult;
-		return json_encode($res);
-	}
+    {
+        $kpiId = $_POST["kpiId"];
+        $kpi = Kpi::find()->where(["kpiId" => $kpiId])->asArray()->one();
+        $year = $kpi["year"];
+        $month = $kpi["month"];
+        $kpiTeam = KpiTeam::find()
+            ->select('kpiTeamId,result')
+            ->where([
+                "kpiId" => $kpiId,
+                "status" => [1, 2, 4],
+                "month" => $month,
+                "year" => $year
+            ])
+            ->asArray()
+            ->all();
+        $autoResult = 0;
+        if (isset($kpiTeam) && count($kpiTeam) > 0) {
+            foreach ($kpiTeam as $kg):
+                $autoResult += $kg["result"];
+            endforeach;
+        }
+        $res["result"] = $autoResult;
+        return json_encode($res);
+    }
     public function actionKpiUpdateHistory()
-	{
-		$kpiId = $_POST["kpiId"];
-		$month = $_POST["month"];
-		$year = $_POST["year"];
-		$res = [];
-		$role = UserRole::userRight();
+    {
+        $kpiId = $_POST["kpiId"];
+        $month = $_POST["month"];
+        $year = $_POST["year"];
+        $res = [];
+        $role = UserRole::userRight();
 
-		$teamId = Team::userTeam(Yii::$app->user->id);
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
-		$kpi = curl_exec($api);
-		$kpi = json_decode($kpi, true);
+        $teamId = Team::userTeam(Yii::$app->user->id);
+        $api = curl_init();
+        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
+        $kpi = curl_exec($api);
+        $kpi = json_decode($kpi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-history-team?kpiId=' . $kpiId . '&&month=' . $month . '&&year=' . $year);
-		$kpiHistoryTeam = curl_exec($api);
-		$kpiHistoryTeam = json_decode($kpiHistoryTeam, true);
-        
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-history-employee?kpiId=' . $kpiId . '&&month=' . $month . '&&year=' . $year);
-		$kpiHistoryEmployee = curl_exec($api);
-		$kpiHistoryEmployee = json_decode($kpiHistoryEmployee, true);
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-history-team?kpiId=' . $kpiId . '&&month=' . $month . '&&year=' . $year);
+        $kpiHistoryTeam = curl_exec($api);
+        $kpiHistoryTeam = json_decode($kpiHistoryTeam, true);
+
+        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/kpi-history-employee?kpiId=' . $kpiId . '&&month=' . $month . '&&year=' . $year);
+        $kpiHistoryEmployee = curl_exec($api);
+        $kpiHistoryEmployee = json_decode($kpiHistoryEmployee, true);
         // throw new exception(print_r($kpiHistoryEmployee, true));
 
-		curl_close($api);
-		$res["month"] = $kpi["monthNameFull"];
-		$res["year"] = $kpi["year"];
-		$res["fromDate"] = $kpi["fromDateDetail"];
-		$res["toDate"] = $kpi["toDateDetail"];
-		$res["target"] = number_format($kpi["targetAmount"]);
-		$res["result"] = number_format($kpi["result"]);
-		$res["ratio"] = (int)$kpi["ratio"];
-		$res["dueBehide"] = 100 - (int)$kpi["ratio"];
+        curl_close($api);
+        $res["month"] = $kpi["monthNameFull"];
+        $res["year"] = $kpi["year"];
+        $res["fromDate"] = $kpi["fromDateDetail"];
+        $res["toDate"] = $kpi["toDateDetail"];
+        $res["target"] = number_format($kpi["targetAmount"]);
+        $res["result"] = number_format($kpi["result"]);
+        $res["ratio"] = (int)$kpi["ratio"];
+        $res["dueBehide"] = 100 - (int)$kpi["ratio"];
 
-		$teamText = $this->renderAjax('team_history', ["kpiHistoryTeam" => $kpiHistoryTeam]);
-		$individualText = $this->renderAjax('individual_history', ["kpiHistoryEmployee" => $kpiHistoryEmployee, "role" => $role, "teamId" => $teamId]);
-		$res["teamText"] = $teamText;
-		$res["individualText"] = $individualText;
-		return json_encode($res);
-	}
+        $teamText = $this->renderAjax('team_history', ["kpiHistoryTeam" => $kpiHistoryTeam]);
+        $individualText = $this->renderAjax('individual_history', ["kpiHistoryEmployee" => $kpiHistoryEmployee, "role" => $role, "teamId" => $teamId]);
+        $res["teamText"] = $teamText;
+        $res["individualText"] = $individualText;
+        return json_encode($res);
+    }
     public function actionCheckKpiTeam()
     {
         $kpiId = $_POST["kpiId"];
