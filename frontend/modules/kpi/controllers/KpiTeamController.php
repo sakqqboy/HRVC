@@ -612,9 +612,6 @@ class KpiTeamController extends Controller
 	public function actionTeamKpiGrid($hash = null)
 	{
 		$role = UserRole::userRight();
-		if ($role < 3) {
-			//return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
-		}
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');

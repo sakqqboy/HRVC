@@ -540,7 +540,7 @@ $this->title = "Individual KGI";
                                         <?php
                                         if ($role >= 5) {
                                         ?>
-                                            <a class="pim-btn-delete" data-bs-toggle="modal" data-bs-target="#delete-kgi-team"
+                                            <a class="pim-btn-delete" data-bs-toggle="modal" data-bs-target="#delete-kgi-employee"
                                                 onclick="javascript:prepareDeleteKgiEmployee(<?= $kgiEmployeeId ?>)"
                                                 onmouseover="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                                                 onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg'">
