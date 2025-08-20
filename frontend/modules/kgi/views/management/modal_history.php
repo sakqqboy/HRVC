@@ -1,68 +1,57 @@
 <style>
+/* Default */
+#update-history-popup .modal-dialog,
+#update-history-popup .modal-content {
+    transform-origin: top left;
+}
+
+/* ขนาดจอใหญ่ */
 @media (max-width: 1935px) and (max-height: 950px) {
-    .modal-content {
+
+    #update-history-popup .modal-dialog,
+    #update-history-popup .modal-content {
         transform: scale(0.95);
-        transform-origin: top left;
         width: calc(100% / 0.95);
-        /* height: calc(100% / 0.95); */
-        /* overflow: hidden; */
     }
 
-    .modal-dialog {
-        transform: scale(0.95);
-        transform-origin: top left;
-        width: calc(100% / 0.95);
-        /* height: calc(100% / 0.95); */
+    #update-history-popup .modal-dialog {
         right: 390px;
     }
 }
 
-
+/* จอเล็กลง */
 @media (max-width: 1735px) and (max-height: 950px) {
-    .modal-content {
+    #update-history-popup .modal-content {
         transform: scale(0.75);
-        transform-origin: top left;
         width: calc(100% / 0.85);
-        /* height: calc(100% / 0.85); */
-        /* overflow: hidden; */
     }
 
-    .modal-dialog {
+    #update-history-popup .modal-dialog {
         transform: scale(0.85);
-        transform-origin: top left;
         width: calc(100% / 0.85);
-        /* height: calc(100% / 0.85); */
-        /* overflow: hidden; */
-        left: -300px;
+        left: -200px;
     }
 }
 
+/* จอเล็กกว่านี้ */
 @media (max-width: 1535px) and (max-height: 950px) {
-    .modal-content {
+    #update-history-popup .modal-content {
         transform: scale(0.55);
-        transform-origin: top left;
         width: calc(100% / 0.75);
-        /* height: calc(100% / 0.75); */
-        /* overflow: hidden; */
     }
 
-    .modal-dialog {
+    #update-history-popup .modal-dialog {
         transform: scale(0.75);
-        transform-origin: top left;
         width: calc(100% / 0.75);
-        /* height: calc(100% / 0.75); */
-        /* overflow: hidden; */
         left: -250px;
     }
 }
 
+/* จอเล็กมาก */
 @media (max-width: 1335px) and (max-height: 750px) {
-    .modal-content {
+    #update-history-popup .modal-content {
         transform: scale(0.65);
-        transform-origin: top left;
         width: calc(100% / 0.65);
-        /* height: calc(100% / 0.65); */
-        /* overflow: hidden; */
     }
 }
 </style>
