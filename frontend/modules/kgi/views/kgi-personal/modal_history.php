@@ -1,62 +1,57 @@
 <style>
-/* ========== DEFAULT MODAL STYLES ========== */
-.modal-dialog.custom-update-history-modal {
-    max-width: 1560px;
-    width: 95%;
-    margin: 1.75rem auto;
+/* Default */
+#update-history-popup .modal-dialog,
+#update-history-popup .modal-content {
+    transform-origin: top left;
 }
 
-
-.modal-content {
-    width: 100%;
-    height: auto;
-    overflow-y: auto;
-    max-height: 90vh;
-    padding: 25px 31px;
-    display: flex;
-    flex-direction: column;
-    gap: 21px;
-}
-
-/* ========== RESPONSIVE ========== */
-@media (max-width: 1200px) {
-    .modal-content {
-        padding: 20px;
-        gap: 16px;
-    }
-
-    .modal-dialog {
-        width: 98%;
-    }
-}
-
-@media (max-width: 768px) {
-    .circular-chart-create {
-        width: 60px;
-        height: 60px;
-    }
-
-    .modal-content {
-        padding: 15px;
-    }
-}
-
-/* ========== SCALE ONLY MODAL WITH .scaled-modal ========== */
-@media (max-width: 1735px) and (max-height: 950px) {
-    .modal-dialog.scaled-modal {
-        transform: scale(0.85);
-        transform-origin: top left;
-        width: calc(100% / 0.85);
-        left: -300px;
-    }
-}
-
+/* ขนาดจอใหญ่ */
 @media (max-width: 1935px) and (max-height: 950px) {
-    .modal-dialog.scaled-modal {
+
+    #update-history-popup .modal-dialog,
+    #update-history-popup .modal-content {
         transform: scale(0.95);
-        transform-origin: top left;
         width: calc(100% / 0.95);
+    }
+
+    #update-history-popup .modal-dialog {
         right: 390px;
+    }
+}
+
+/* จอเล็กลง */
+@media (max-width: 1735px) and (max-height: 950px) {
+    #update-history-popup .modal-content {
+        transform: scale(0.75);
+        width: calc(100% / 0.85);
+    }
+
+    #update-history-popup .modal-dialog {
+        transform: scale(0.85);
+        width: calc(100% / 0.85);
+        left: -200px;
+    }
+}
+
+/* จอเล็กกว่านี้ */
+@media (max-width: 1535px) and (max-height: 950px) {
+    #update-history-popup .modal-content {
+        transform: scale(0.55);
+        width: calc(100% / 0.75);
+    }
+
+    #update-history-popup .modal-dialog {
+        transform: scale(0.75);
+        width: calc(100% / 0.75);
+        left: -250px;
+    }
+}
+
+/* จอเล็กมาก */
+@media (max-width: 1335px) and (max-height: 750px) {
+    #update-history-popup .modal-content {
+        transform: scale(0.65);
+        width: calc(100% / 0.65);
     }
 }
 </style>
@@ -66,8 +61,7 @@
         aria-hidden="true">
         <div class="modal-dialog custom-update-history-modal">
             <div class="modal-content" style="display: flex; padding: 25px 31px; width: 1560px; gap: 21px;">
-                <div class="updatehistory"
-                    style="font-size: 30px; text-decoration-line: none; display: flex; justify-content: flex-start; width: 100%; text-align: left; align-items: center;">
+                <div class="updatehistory" style="font-size: 30px; text-decoration-line: none;">
                     <span class="modal-title-history" id="updateHistoryModalLabel">
                         <span class="modal-title-history" id="updateHistoryModalLabel">
                             <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"
