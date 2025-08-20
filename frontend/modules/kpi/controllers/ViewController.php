@@ -32,10 +32,11 @@ class ViewController extends Controller
 {
 	public function beforeAction($action)
 	{
-		if (!Yii::$app->user->id) {
-			return $this->redirect(Yii::$app->homeUrl . 'site/login');
+		if (Yii::$app->user->id == '') {
+			Yii::$app->response->redirect(Yii::$app->homeUrl . 'site/login');
+			return false;
 		}
-		return true;
+		return parent::beforeAction($action);
 	}
 	public function actionIndex($hash)
 	{
@@ -101,10 +102,10 @@ class ViewController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
 		$allCompany = curl_exec($api);
 		$allCompany = json_decode($allCompany, true);
-		
+
 
 		curl_close($api);
-		
+
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
 			$countAllCompany = count($allCompany);
@@ -163,7 +164,7 @@ class ViewController extends Controller
 		$allCompany = json_decode($allCompany, true);
 
 		curl_close($api);
-		
+
 
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
@@ -264,11 +265,11 @@ class ViewController extends Controller
 			$countAllCompany = count($allCompany);
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
-		
+
 		$totalBranch = Branch::totalBranch();
 		$teamMate = [];
 		$countTeamEmployee = 0;
-		
+
 
 		if (is_array($kpis) && !empty($kpis)) {
 			foreach ($kpis as $key => $value) {

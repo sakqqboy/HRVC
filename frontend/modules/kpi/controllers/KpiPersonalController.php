@@ -33,14 +33,11 @@ class KpiPersonalController extends Controller
 {
 	public function beforeAction($action)
 	{
-		if (!Yii::$app->user->id) {
-			return $this->redirect(Yii::$app->homeUrl . 'site/login');
+		if (Yii::$app->user->id == '') {
+			Yii::$app->response->redirect(Yii::$app->homeUrl . 'site/login');
+			return false;
 		}
-		$groupId = Group::currentGroupId();
-		if ($groupId == null) {
-			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
-		}
-		return true;
+		return parent::beforeAction($action);
 	}
 	public function actionIndivisualSetting($hash)
 	{
