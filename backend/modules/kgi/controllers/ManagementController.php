@@ -36,7 +36,7 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class ManagementController extends Controller
 {
-	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $currentPage, $limit)
+	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $currentPage = null, $limit = null)
 	{
 		$startAt = (($currentPage - 1) * $limit);
 		if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
@@ -160,7 +160,9 @@ class ManagementController extends Controller
 		}
 
 		$data = $data1 + $data2 + $data3 + $data4;
-		$data = array_slice($data, $startAt, $limit, true);
+		if (isset($limit)) {
+			$data = array_slice($data, $startAt, $limit, true);
+		}
 		$result["data"] = $data;
 		$result["total"] = $total;
 		return json_encode($result);
@@ -757,14 +759,14 @@ class ManagementController extends Controller
 	public function actionKgiHasKpi($kgiId)
 	{
 		$kgiHasKpi = KgiHasKpi::find()
-			->select('kpi.kpiName,kpi.kpiId,kpi.unitId,kpi.targetAmount,kpi.month,kpi.code,kpi.result')
+			->select('kpi.kpiName,kpi.kpiId,kpi.unitId,kpi.targetAmount,kpi.month,kpi.year,kpi.code,kpi.result')
 			->JOIN("LEFT JOIN", "kpi", "kpi.kpiId=kgi_has_kpi.kpiId")
 			->JOIN("LEFT JOIN", "kgi", "kgi.kgiId=kgi_has_kpi.kgiId")
 			->where([
 				"kgi_has_kpi.kgiId" => $kgiId,
 				"kgi_has_kpi.status" => 1,
-				"kgi.status" => [1, 2],
-				"kpi.status" => [1, 2]
+				"kgi.status" => [1, 2, 4],
+				"kpi.status" => [1, 2, 4]
 			])
 			->asArray()
 			->all();

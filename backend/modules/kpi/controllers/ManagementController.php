@@ -42,16 +42,16 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class ManagementController extends Controller
 {
-	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $currentPage, $limit)
+	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $currentPage = null, $limit = null)
 	{
-		
+
 		if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
 			$kpis = Kpi::find()
 				->where(["status" => [1, 2, 4]])
 				->orderBy('createDateTime DESC')
 				->asArray()
 				->all();
-				// return json_encode($kpis);
+			// return json_encode($kpis);
 		}
 		if (!empty($supervisorId) || !empty($teamLeaderId) || !empty($staffId)) {
 			if ($supervisorId != '') {
@@ -152,7 +152,7 @@ class ManagementController extends Controller
 					"amountType" => $kpi["amountType"],
 					"lastestUpdate" => ModelMaster::engDate($kpi["updateDateTime"], 2)
 				];
-																	// return json_encode($commonData);
+				// return json_encode($commonData);
 
 				if (!empty($commonData)) {
 					if (($kpi["fromDate"] == "" || $kpi["toDate"] == "") && $isOver == 2) {
@@ -169,7 +169,9 @@ class ManagementController extends Controller
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
-		$data = array_slice($data, $startAt, $limit, true);
+		if (isset($limit)) {
+			$data = array_slice($data, $startAt, $limit, true);
+		}
 		$result["data"] = $data;
 		$result["total"] = $total;
 		return json_encode($result);
@@ -937,8 +939,8 @@ class ManagementController extends Controller
 			->where([
 				"kgi_has_kpi.kpiId" => $kpiId,
 				"kgi_has_kpi.status" => 1,
-				"kgi.status" => [1, 2],
-				"kpi.status" => [1, 2]
+				"kgi.status" => [1, 2, 4],
+				"kpi.status" => [1, 2, 4]
 			])
 			//->groupBy('kgi_has_kpi.kgiId')
 			->asArray()

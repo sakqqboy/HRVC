@@ -702,9 +702,9 @@ class ViewController extends Controller
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
-		$kpis = curl_exec($api);
-		$kpis = json_decode($kpis, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		// $kpis = curl_exec($api);
+		// $kpis = json_decode($kpis, true);
 
 
 		$ghp = [];
@@ -720,7 +720,7 @@ class ViewController extends Controller
 			"kgiHasKpi" => $kgiHasKpi,
 			"kgiId" => $kgiId,
 			"kgiDetail" => $kgiDetail,
-			"kpis" => $kpis,
+			//"kpis" => $kpis,
 			"ghp" => $ghp,
 			"role" => $role
 		]);

@@ -72,7 +72,7 @@ if (isset($kpis) && count($kpis) > 0) { ?>
 				endforeach;
 			}
 			$i = count($kgiHasKpi) + 1;
-			foreach ($kpis as $kpiId => $kpi):
+			foreach ($kpis["data"] as $kpiId => $kpi):
 				if (!isset($selected[$kpiId])) {
 
 				?>
