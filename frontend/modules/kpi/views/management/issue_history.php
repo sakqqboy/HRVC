@@ -19,6 +19,9 @@ if (isset($kpiIssue) && count($kpiIssue) > 0) {
 				<div class="row">
 					<div class="col-10 pr-0">
 						<?= $issue['issue'] ?>
+						<div class="col-12 mt-5" style="text-indent: 30px;">
+							<?= $issue['description'] ?>
+						</div>
 					</div>
 					<div class="col-2 pl-0 pr-0 middle">
 						<?php
@@ -66,8 +69,8 @@ if (isset($kpiIssue) && count($kpiIssue) > 0) {
 										if ($data["file"] != "") {
 											$fileSize = filesize($data["file"]) / 1000000;
 										?>
-											<a href="<?= Yii::$app->homeUrl . $data['file'] ?>" target="_blank" class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
-												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
+											<a href="<?= Yii::$app->homeUrl . $data['file'] ?>" target="_blank" class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;">
+												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon mr-3">
 												<?= Yii::t('app', 'Attachment') ?>
 											</a>
 										<?php
@@ -87,15 +90,15 @@ if (isset($kpiIssue) && count($kpiIssue) > 0) {
 		<div class="col-12 mb-10" style="display:none;" id="answer-site-<?= $kpiIssueId ?>">
 			<div id="fileName-<?= $kpiIssueId ?>" class="col-12 text-end font-size-12"></div>
 			<textarea name="" class="form-control font-size-12" id="answer-<?= $kpiIssueId ?>" style="height: 80px;"></textarea>
-			<div class="col-12 text-end">
-				<label for="attachKpiFileAnswer-<?= $kpiIssueId ?>" class="mt-2" style="cursor: pointer;">
-					<a class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
-						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
+			<div class="d-flex text-end mt-10 justify-content-end gap-1">
+				<label for="attachKpiFileAnswer-<?= $kpiIssueId ?>" style="cursor: pointer;">
+					<a class="pim-btn" style="font-size: 10px;font-weight:300;height:20px;">
+						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon mr-3">
 						<?= Yii::t('app', 'Attachment') ?>
 					</a>
 				</label>
 				<input id="attachKpiFileAnswer-<?= $kpiIssueId ?>" accept=".pdf" type="file" style="display: none;" name="attachKpiFileAnswer-<?= $kpiIssueId ?>" onchange="javascript:showSelectFileNameKpi(<?= $kpiIssueId ?>)">
-				<a href="javascript:answerKpiIssue(<?= $kpiIssueId ?>)" class="btn-reply font-size-10 mt-5 mb-10 no-underline" style="height: 25px;">
+				<a href="javascript:answerKpiIssue(<?= $kpiIssueId ?>)" class="btn-reply font-size-10 no-underline">
 					<?= Yii::t('app', 'Reply Issue') ?>
 				</a>
 			</div>

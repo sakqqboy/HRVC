@@ -66,7 +66,10 @@
 						}
 			?>
 
-						<div class="col-12 mt-5 small-content-pim pr-0 <?= $i == 0 ? 'selectedTeam' : 'bg-white' ?>" style="cursor: pointer;" onclick="javascript:showTeamEmployeeUpdate(<?= $team['teamId'] ?>,<?= $kgiId ?>,'<?= $kgh['month'] ?>','<?= $kgh['year'] ?>',<?= $kgh['kgiTeamHistoryId'] ?>)" id="historyMonthYear-<?= $kgh['kgiTeamHistoryId'] ?>">
+						<div class="col-12 mt-5 small-content-pim pr-0 <?= $i == 0 ? 'selectedTeam' : 'bg-white' ?>"
+							style="cursor: pointer;"
+							onclick="javascript:showTeamEmployeeUpdate(<?= $team['teamId'] ?>,<?= $kgiId ?>,'<?= $kgh['month'] ?>','<?= $kgh['year'] ?>',<?= $kgh['kgiTeamHistoryId'] ?>)"
+							id="historyMonthYear-<?= $kgh['kgiTeamHistoryId'] ?>">
 							<div class="row" style="--bs-gutter-x:0px;width:100%;">
 								<div class="col-4 align-content-center ">
 									<div class="col-12 font-size-14 text-b" style="font-weight: 600;">

@@ -69,8 +69,8 @@ if (isset($kgiIssue) && count($kgiIssue) > 0) {
 										if ($data["file"] != "") {
 											$fileSize = filesize($data["file"]) / 1000000;
 										?>
-											<a href="<?= Yii::$app->homeUrl . $data['file'] ?>" target="_blank" class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
-												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
+											<a href="<?= Yii::$app->homeUrl . $data['file'] ?>" target="_blank" class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;">
+												<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon mr-3">
 												<?= Yii::t('app', 'Attachment') ?>
 											</a>
 										<?php
@@ -90,15 +90,15 @@ if (isset($kgiIssue) && count($kgiIssue) > 0) {
 		<div class="col-12 mb-10" style="display:none;" id="answer-site-<?= $kgiIssueId ?>">
 			<div id="fileName-<?= $kgiIssueId ?>" class="col-12 text-end font-size-12"></div>
 			<textarea name="" class="form-control font-size-12" id="answer-<?= $kgiIssueId ?>" style="height: 80px;"></textarea>
-			<div class="col-12 text-end">
-				<label for="attachKgiFileAnswer-<?= $kgiIssueId ?>" class="mt-2" style="cursor: pointer;">
-					<a class="btn btn-bg-white-xs pb-0 pt-3" style="font-size: 10px;font-weight:300;margin:auto;">
-						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon" style="margin-top:-5px;">
+			<div class="d-flex text-end mt-10 justify-content-end gap-1">
+				<label for="attachKgiFileAnswer-<?= $kgiIssueId ?>" style="cursor: pointer;">
+					<a class="pim-btn" style="font-size: 10px;font-weight:300;height:20px;">
+						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/clip.png" class="attach-icon mr-3">
 						<?= Yii::t('app', 'Attachment') ?>
 					</a>
 				</label>
 				<input id="attachKgiFileAnswer-<?= $kgiIssueId ?>" accept=".pdf" type="file" style="display: none;" name="attachKgiFileAnswer-<?= $kgiIssueId ?>" onchange="javascript:showSelectFileNameKgi(<?= $kgiIssueId ?>)">
-				<a href="javascript:answerKgiIssue(<?= $kgiIssueId ?>)" class="btn-reply font-size-10 mt-5 mb-10 no-underline" style="height: 25px;">
+				<a href="javascript:answerKgiIssue(<?= $kgiIssueId ?>)" class="btn-reply font-size-10 no-underline">
 					<?= Yii::t('app', 'Reply Issue') ?>
 				</a>
 			</div>

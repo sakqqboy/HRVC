@@ -35,7 +35,7 @@
 												<img src="<?= Yii::$app->homeUrl ?><?= $em['picture'] ?>" class="pim-image-AssignMembers">
 											</div>
 											<div class="col-6">
-												<div class="col-12 font-size-16 text-b" style="font-weight: 600;">
+												<div class="col-12 font-size-16 text-b text-truncate" style="font-weight: 600;">
 													<?= $em['employeeName'] ?>
 												</div>
 												<div class="col-12" style="font-size: 14px !important;font-weight: 400;color:#656565;">

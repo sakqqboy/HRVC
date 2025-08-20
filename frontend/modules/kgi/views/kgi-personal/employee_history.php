@@ -24,7 +24,7 @@
 									<img src="<?= Yii::$app->homeUrl ?><?= $kgh['picture'] ?>" class="pim-image-AssignMembers">
 								</div>
 								<div class="col-5 pl-5 align-content-center">
-									<div class="col-12 font-size-16 text-b" style="font-weight: 400;">
+									<div class="col-12 font-size-16 text-b text-truncate" style="font-weight: 400;">
 										<?= $kgh['employeeName'] ?>
 									</div>
 									<div class="col-12" style="font-size: 14px !important;font-weight: 600;color:#656565;">
@@ -60,7 +60,7 @@
 									</a>
 									<img src="<?= Yii::$app->homeUrl ?><?= $kgh['picture'] ?>" class="pim-image-AssignMembers ml-10 mr-10">
 
-									<span class="font-size-16 text-b" style="font-weight: 600;">
+									<span class="font-size-16 text-b text-truncate" style="font-weight: 600;">
 										<?= $kgh['employeeName'] ?>
 									</span>
 								</div>
