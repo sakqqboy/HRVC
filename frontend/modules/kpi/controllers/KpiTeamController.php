@@ -620,7 +620,6 @@ class KpiTeamController extends Controller
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
 		$userId = Yii::$app->user->id;
-		throw new exception(Yii::$app->user->id);
 		$isAdmin = UserRole::isAdmin();
 		$userBranchId = User::userBranchId();
 		$adminId = '';
