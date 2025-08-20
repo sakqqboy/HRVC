@@ -13,7 +13,7 @@
 
         use yii\bootstrap5\ActiveForm;
         ?>
-        <div class="col-12 alert bg-white mt-15 pt-15 pr-30 pl-30" style="height:500px;overflow-y: auto;">
+        <div class="col-12 alert bg-white mt-15 pt-15 pr-30 pl-30" style="height:400px;overflow-y: auto;">
             <div class="row">
                 <div class="col-12 head-gray-box pt-0">
                     <span class=" head-gray-box-text"><?= Yii::t('app', 'Headline') ?></span>
@@ -60,7 +60,7 @@
             <div class="col-6  sub-tab">
             </div>
         </div>
-        <div class="col-12 alert bg-white mt-15 pt-10 pr-10 pl-10" style="height:500px;overflow-y: auto;">
+        <div class="col-12 alert bg-white mt-15 pt-10 pr-10 pl-10" style="height:400px;overflow-y: auto;">
             <div class="col-12 pim-name-detail">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/warning-full.png" class="pim-icon mr-3" style="margin-top: -6px;">
                 <?= $kpiName ?>

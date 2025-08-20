@@ -83,7 +83,7 @@
             <div class="col-6  sub-tab">
             </div>
         </div>
-        <div class="col-12 alert  mt-15 pt-0 alert" style="height:500px;overflow-y: auto;">
+        <div class="col-12 alert  mt-15 pt-0 alert" style="height:400px;overflow-y: auto;">
             <div class="col-12 font-size-12">
                 <div class="row">
                     <div class="col-8"></div>

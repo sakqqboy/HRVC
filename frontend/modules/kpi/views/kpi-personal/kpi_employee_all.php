@@ -6,7 +6,7 @@
 		<div class="col-6 sub-tab">
 		</div>
 	</div>
-	<div class="col-12 alert  mt-15 pt-0" style="height:500px;overflow-y: auto;">
+	<div class="col-12  mt-15 pt-0" style="height:400px;overflow-y: auto;">
 
 		<?php
 
@@ -29,12 +29,12 @@
 							foreach ($employee as $employeeId => $em):
 						?>
 								<div class="col-12 mb-15">
-									<div class="col-12 small-content-pim bg-white" style="cursor: pointer;">
-										<div class="row">
-											<div class="col-1 pr-0 pl-0 text-center pt-5">
+									<div class="small-content-pim bg-white" style="cursor: pointer;">
+										<div class="row" style="--bs-gutter-x:0px;width:100%;">
+											<div class="col-1 pr-0 pl-0 text-center align-content-center">
 												<img src="<?= Yii::$app->homeUrl ?><?= $em['picture'] ?>" class="pim-image-AssignMembers">
 											</div>
-											<div class="col-6">
+											<div class="col-5 pl-5 align-content-center">
 												<div class="col-12 font-size-16 text-b text-truncate" style="font-weight: 600;">
 													<?= $em['employeeName'] ?>
 												</div>
@@ -42,7 +42,7 @@
 													<?= $em["title"] == '' ? 'Not set' : $em["title"] ?>
 												</div>
 											</div>
-											<div class="col-5 text-center text-end">
+											<div class="col-6 text-end align-content-center pr-10">
 												<div class="col-12 font-size-18 text-b pr-0 text-end">
 													<span style="font-size: 18px !important;font-weight: 500;"><?= $em['result'] ?></span>
 													<span style="font-size: 18px !important;font-weight: 700;color:#2580D3;"> / <?= $em["target"] ?></span>

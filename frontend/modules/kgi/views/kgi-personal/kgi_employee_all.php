@@ -6,7 +6,7 @@
 		<div class="col-6 sub-tab">
 		</div>
 	</div>
-	<div class="col-12  mt-15 pt-0" style="min-height:400px;overflow-y: auto;">
+	<div class="col-12  mt-15 pt-0" style="height:400px;overflow-y: auto;">
 
 		<?php
 
