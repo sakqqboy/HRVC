@@ -133,10 +133,6 @@ class ManagementController extends Controller
 
 		$isManager = UserRole::isManager();
 		$part = Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
-		//throw new Exception($part);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
 
 
 		curl_close($api);
@@ -149,11 +145,7 @@ class ManagementController extends Controller
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
 
-		$countAllCompany = 0;
-		if (count($allCompany) > 0) {
-			$countAllCompany = count($allCompany);
-			$companyPic = Company::randomPic($allCompany, 3);
-		}
+
 		$totalBranch = Branch::totalBranch();
 
 		$months = ModelMaster::monthFull(1);
@@ -170,8 +162,6 @@ class ManagementController extends Controller
 			"allCompany" => $countAllCompany,
 			"companyPic" => $companyPic,
 			"totalBranch" => $totalBranch,
-			"allCompany" => $countAllCompany,
-			"companyPic" => $companyPic,
 		]);
 	}
 	public function actionGrid()

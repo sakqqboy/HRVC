@@ -2045,7 +2045,7 @@ function allEmployeesCheck(teamId) {
     } else {
         checkAllCheckbox.checked = false;
         checkAllLabel.classList.remove('minus');
-        checkAllLabel.style.top = "3px"; // เพิ่ม margin-top ถ้าไม่มีการเลือก
+    //    checkAllLabel.style.top = "3px"; // เพิ่ม margin-top ถ้าไม่มีการเลือก
         // alert(0);
     }
 }
@@ -2062,13 +2062,13 @@ function checkAllEmployees(teamId) {
             checkbox.checked = true; // เลือกทั้งหมด
         });
         checkAllLabel.classList.remove('minus'); // ลบเครื่องหมายลบ
-        checkAllLabel.style.top = "0px"; // เอา margin-top ออกถ้าบางตัวถูกเลือก
+        //checkAllLabel.style.top = "0px"; // เอา margin-top ออกถ้าบางตัวถูกเลือก
     } else {
         checkboxes.forEach(function (checkbox) {
             checkbox.checked = false; // ยกเลิกการเลือกทั้งหมด
         });
         checkAllLabel.classList.remove('minus'); // ลบเครื่องหมายลบ
-        checkAllLabel.style.top = "0px"; // เอา margin-top ออกถ้าบางตัวถูกเลือก
+        //checkAllLabel.style.top = "0px"; // เอา margin-top ออกถ้าบางตัวถูกเลือก
     }
 
     // เรียกใช้ allEmployeesCheck เพื่ออัปเดตสถานะของ Check All

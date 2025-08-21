@@ -5,6 +5,8 @@ namespace frontend\modules\kfi\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\UserRole;
 use Yii;
@@ -70,9 +72,18 @@ class AssignController extends Controller
 		$kfiTeamEmployee = curl_exec($api);
 		$kfiTeamEmployee = json_decode($kfiTeamEmployee, true);
 
-
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
 
 		curl_close($api);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
 
 		//throw new Exception(print_r($kfiTeamEmployee, true));
 		return $this->render('assign', [
@@ -83,7 +94,10 @@ class AssignController extends Controller
 			"text" => $text,
 			"kfiTeamEmployee" => $kfiTeamEmployee,
 			"companyId" => $companyId,
-			"url" => $url
+			"url" => $url,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch,
 		]);
 	}
 }

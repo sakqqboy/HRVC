@@ -32,14 +32,16 @@
 
 
 .custom-checkbox {
-    display: none;
+    /* display: none; */
+    visibility: hidden;
     /* ซ่อน checkbox */
 }
 
 .custom-checkbox-label {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
+    line-height: 14px;
     width: 14px;
     height: 14px;
     border: 0.5px solid #2580D3;
@@ -61,13 +63,16 @@
 .custom-checkbox:checked+.custom-checkbox-label::before {
     content: "✔";
     color: white;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 /* เมื่อสถานะเป็นลบ (บางรายการไม่ได้เลือก) */
 .custom-checkbox-label.minus::before {
     content: "━";
-    font-size: 5px;
+    font-size: 6px;
+    display: flex;
+    align-items: center;
+    line-height: 14px;
     font-weight: bold;
     /* padding-top: 4px; */
     color: #2580D3;
