@@ -29,7 +29,7 @@
                 ?>
                         <div class="col-6 mb-15">
                             <div class="small-content-pim bg-white" style="cursor: pointer;"
-                                onclick="javascript:showTeamEmployee1(<?= $teamId ?>)" id="selectTeam1-<?= $teamId ?>">
+                                onclick="javascript:showKpiTeamEmployee1(<?= $teamId ?>)" id="selectTeam1-<?= $teamId ?>">
                                 <div class="pr-0 pl-0 d-flex align-items-center" style="width: 20%;">
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/team.svg"
                                         style="margin-left: -3px;width:40px;height:40px;">

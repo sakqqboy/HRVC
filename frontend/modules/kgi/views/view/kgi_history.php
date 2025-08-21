@@ -38,9 +38,10 @@ $this->title = 'KGI View';
                             onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg'">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg" class="pim-action-icon mr-3" style="margin-top: -1px;">
                             <?= Yii::t('app', 'Delete') ?>
-
                         </a>
-                    <?php } ?>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
             <div class="row mt-20" style="--bs-gutter-x:0px;">

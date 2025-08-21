@@ -24,7 +24,7 @@
                 foreach ($kpiTeams as $teamId => $team):
             ?>
                     <div class="col-12 mb-15">
-                        <div class="small-content-pim bg-white " style="cursor: pointer;" onclick="javascript:showTeamEmployee2(<?= $teamId ?>)" id="selectTeam2-<?= $teamId ?>">
+                        <div class="small-content-pim bg-white " style="cursor: pointer;" onclick="javascript:showKpiTeamEmployee2(<?= $teamId ?>)" id="selectTeam2-<?= $teamId ?>">
                             <div class="pr-0 pl-0 d-flex align-items-center" style="width: 10%;">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/team.svg" class="" style="width:40px;height:40px;">
                                 <div class="team-number-tag"><?= $team["totalEmployee"] ?></div>

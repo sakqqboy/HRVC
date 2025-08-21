@@ -20,30 +20,29 @@ $this->title = 'KFI View';
     ]) ?>
     <div class="col-12 mt-10">
         <div class="alert mt-10 pim-body bg-white">
-            <div class="row">
-                <div class="col-11 pim-name-title pr-0 pl-5 text-start">
-                    <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kfi/management/grid' ?>"
-                        class="pim-text-back mr-13">
+            <div class="row" style="--bs-gutter-x:0px;">
+                <div class="col-11 pim-name-title pr-0 pl-5 text-start text-truncate">
+                    <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kfi/management/grid' ?>" class="mr-5 pim-text-back">
                         <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                         <?= Yii::t('app', 'Back') ?>
                     </a>
                     <?= $kfiDetail["kfiName"] ?>
                 </div>
-                <?php if ($role >= 5) {
-                ?>
-                    <div class="col-1">
-                        <a class="btn btn-outline-danger d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
-                            onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)" style="height: 34px;font-size:13px;"
+                <div class="col-1" style="justify-items: end;">
+                    <?php if ($role >= 5) {
+                    ?>
+                        <a class="btn btn-outline-danger d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop4"
+                            onclick="javascript:prepareDeleteKfi(<?= $kfiId ?>)"
+                            style="height: 25px;font-size:13px;width:60px;"
                             onmouseover="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                             onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg'">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg"
-                                class="pim-action-icon mr-3 mt-3">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg" class="pim-action-icon mr-3" style="margin-top: -1px;">
                             <?= Yii::t('app', 'Delete') ?>
                         </a>
-                    </div>
-                <?php
-                }
-                ?>
+                    <?php
+                    }
+                    ?>
+                </div>
             </div>
             <div class="row mt-20" style="--bs-gutter-x:0px;">
                 <div class="col-lg-7 col-12 pr-10">
@@ -94,118 +93,117 @@ $this->title = 'KFI View';
                 <div class="col-lg-5 col-12">
                     <div class="col-12 pim-big-box pim-detail-<?= $colorFormat ?>">
                         <div class="row">
-                            <div class="col-lg-4 p pt-10 pim-subheader-font border-right-<?= $colorFormat ?>"">
-                        
-                            <div class=" col-12"><?= Yii::t('app', 'Quant Ratio') ?></div>
-                            <div class="col-12 border-bottom-<?= $colorFormat ?> pb-5 pim-duedate">
-                                <i class="fa fa-diamond" aria-hidden="true"></i>
-                                <?= $kfiDetail["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
+                            <div class="col-lg-4 p pt-10 pim-subheader-font border-right-<?= $colorFormat ?>">
+                                <div class=" col-12"><?= Yii::t('app', 'Quant Ratio') ?></div>
+                                <div class="col-12 border-bottom-<?= $colorFormat ?> pb-5 pim-duedate">
+                                    <i class="fa fa-diamond" aria-hidden="true"></i>
+                                    <?= $kfiDetail["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
+                                </div>
+                                <div class="col-12 pr-0 pt-5 pl-0"><?= Yii::t('app', 'Update Interval') ?></div>
+                                <div class="col-12  pim-duedate">
+                                    <?= Yii::t('app', $kfiDetail["unit"]) ?>
+                                </div>
                             </div>
-                            <div class="col-12 pr-0 pt-5 pl-0"><?= Yii::t('app', 'Update Interval') ?></div>
-                            <div class="col-12  pim-duedate">
-                                <?= Yii::t('app', $kfiDetail["unit"]) ?>
-                            </div>
-                        </div>
-                        <div class="col-lg-8 pim-subheader-font pr-15 pl-15">
-                            <div class="row">
-                                <div class="col-5 text-start">
-                                    <div class="col-12 font-size-12"><?= Yii::t('app', 'Target') ?></div>
-                                    <div class="col-12 mt-3 number-pim">
-                                        <?php
-                                        $decimal = explode('.', $kfiDetail["targetAmount"]);
-                                        if (isset($decimal[1])) {
-                                            if ($decimal[1] == '00') {
-                                                $show =  number_format($decimal[0]);
+                            <div class="col-lg-8 pim-subheader-font pr-15 pl-15">
+                                <div class="row">
+                                    <div class="col-5 text-start">
+                                        <div class="col-12 font-size-12"><?= Yii::t('app', 'Target') ?></div>
+                                        <div class="col-12 mt-3 number-pim">
+                                            <?php
+                                            $decimal = explode('.', $kfiDetail["targetAmount"]);
+                                            if (isset($decimal[1])) {
+                                                if ($decimal[1] == '00') {
+                                                    $show =  number_format($decimal[0]);
+                                                } else {
+                                                    $show = number_format($kfiDetail["targetAmount"]);
+                                                }
                                             } else {
                                                 $show = number_format($kfiDetail["targetAmount"]);
                                             }
-                                        } else {
-                                            $show = number_format($kfiDetail["targetAmount"]);
-                                        }
-                                        ?>
-                                        <?= $show ?><?= $kfiDetail["amountType"] == 1 ? '%' : '' ?>
+                                            ?>
+                                            <?= $show ?><?= $kfiDetail["amountType"] == 1 ? '%' : '' ?>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-2 symbol-pim text-center">
-                                    <div class="col-12 pt-17"><?= $kfiDetail["code"] ?></div>
-                                </div>
-                                <div class="col-5  text-end">
-                                    <div class="col-12 font-size-12"><?= Yii::t('app', 'Result') ?></div>
-                                    <div class="col-12 mt-3 number-pim">
-                                        <?php
-                                        if ($kfiDetail["result"] != '') {
-                                            $decimalResult = explode('.', $kfiDetail["result"]);
-                                            if (isset($decimalResult[1])) {
-                                                if ($decimalResult[1] == '00') {
-                                                    $showResult = number_format($decimalResult[0]);
+                                    <div class="col-2 symbol-pim text-center">
+                                        <div class="col-12 pt-17"><?= $kfiDetail["code"] ?></div>
+                                    </div>
+                                    <div class="col-5  text-end">
+                                        <div class="col-12 font-size-12"><?= Yii::t('app', 'Result') ?></div>
+                                        <div class="col-12 mt-3 number-pim">
+                                            <?php
+                                            if ($kfiDetail["result"] != '') {
+                                                $decimalResult = explode('.', $kfiDetail["result"]);
+                                                if (isset($decimalResult[1])) {
+                                                    if ($decimalResult[1] == '00') {
+                                                        $showResult = number_format($decimalResult[0]);
+                                                    } else {
+                                                        $showResult = number_format($kfiDetail["result"], 2);
+                                                    }
                                                 } else {
-                                                    $showResult = number_format($kfiDetail["result"], 2);
+                                                    $showResult = number_format($kfiDetail["result"]);
                                                 }
                                             } else {
-                                                $showResult = number_format($kfiDetail["result"]);
+                                                $showResult = 0;
+                                            }
+                                            ?>
+                                            <?= $showResult ?><?= $kfiDetail["amountType"] == 1 ? '%' : '' ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-10">
+                                        <?php
+                                        $percent = explode('.', $kfiDetail['ratio']);
+                                        if (isset($percent[0]) && $percent[0] == '0') {
+                                            if (isset($percent[1])) {
+                                                if ($percent[1] == '00') {
+                                                    $showPercent = 0;
+                                                } else {
+                                                    $showPercent = round($kfiDetail['ratio'], 1);
+                                                }
                                             }
                                         } else {
-                                            $showResult = 0;
+                                            $showPercent = round($kfiDetail['ratio']);
                                         }
                                         ?>
-                                        <?= $showResult ?><?= $kfiDetail["amountType"] == 1 ? '%' : '' ?>
-                                    </div>
-                                </div>
-                                <div class="col-12 mt-10">
-
-                                    <?php
-                                    $percent = explode('.', $kfiDetail['ratio']);
-                                    if (isset($percent[0]) && $percent[0] == '0') {
-                                        if (isset($percent[1])) {
-                                            if ($percent[1] == '00') {
-                                                $showPercent = 0;
-                                            } else {
-                                                $showPercent = round($kfiDetail['ratio'], 1);
-                                            }
-                                        }
-                                    } else {
-                                        $showPercent = round($kfiDetail['ratio']);
-                                    }
-                                    ?>
-                                    <div class="progress">
-                                        <div class="progress-bar-<?= $colorFormat ?>"
-                                            style="width:<?= $showPercent ?>%;"></div>
-                                        <span
-                                            class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
-                                    </div>
-                                </div>
-                                <div class="col-12 mt-10 align-items-center">
-                                    <div class="row">
-                                        <div class="col-4 mt-5 pl-0 pr-0 ">
-                                            <div class="col-12 text-end"
-                                                style="font-size:10px;">
-                                                <?= Yii::t('app', 'Last Updated on') ?>
-                                            </div>
-                                            <div class="col-12 text-end pim-duedate">
-                                                <?= $kfiDetail['nextCheck'] == "" ? Yii::t('app', 'Not set') : $kfiDetail['nextCheck'] ?>
-                                            </div>
+                                        <div class="progress">
+                                            <div class="progress-bar-<?= $colorFormat ?>"
+                                                style="width:<?= $showPercent ?>%;"></div>
+                                            <span
+                                                class="progress-load load-<?= $colorFormat ?>"><?= $showPercent ?>%</span>
                                         </div>
-                                        <div class="col-4 text-center mt-5 pt-6 pl-8 pr-8">
-                                            <?php
-                                            if ($role > 3  && $kfiDetail["status"] == 1) {
-                                            ?>
-                                                <a class="pim-btn-<?= $colorFormat ?>"
-                                                    href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'kfiHistoryId' => 0]) ?>"
-                                                    style="display: flex; justify-content: center; align-items: center;  height: 30px; gap: 3px; flex-shrink: 0;">
-                                                    <i class="fa fa-refresh" aria-hidden="true"></i>
-                                                    <?= Yii::t('app', 'Update') ?>
-                                                </a>
-                                            <?php
-                                            }
-                                            ?>
-                                        </div>
-                                        <div class="col-4 pl-0 pr-0 mt-5 ">
-                                            <div class="col-12 text-start font-<?= $colorFormat ?>"
-                                                style="font-size:10px;">
-                                                <?= Yii::t('app', 'Next Update Date') ?>
+                                    </div>
+                                    <div class="col-12 mt-10 align-items-center">
+                                        <div class="row">
+                                            <div class="col-4 mt-5 pl-0 pr-0 ">
+                                                <div class="col-12 text-end"
+                                                    style="font-size:10px;">
+                                                    <?= Yii::t('app', 'Last Updated on') ?>
+                                                </div>
+                                                <div class="col-12 text-end pim-duedate">
+                                                    <?= $kfiDetail['nextCheck'] == "" ? Yii::t('app', 'Not set') : $kfiDetail['nextCheck'] ?>
+                                                </div>
                                             </div>
-                                            <div class="col-12 text-start pim-duedate">
-                                                <?= $kfiDetail['nextCheck'] == "" ? Yii::t('app', 'Not set') : $kfiDetail['nextCheck'] ?>
+                                            <div class="col-4 text-center mt-5 pt-6 pl-8 pr-8">
+                                                <?php
+                                                if ($role > 3  && $kfiDetail["status"] == 1) {
+                                                ?>
+                                                    <a class="pim-btn-<?= $colorFormat ?>"
+                                                        href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'kfiHistoryId' => 0]) ?>"
+                                                        style="display: flex; justify-content: center; align-items: center;  height: 30px; gap: 3px; flex-shrink: 0;">
+                                                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                                                        <?= Yii::t('app', 'Update') ?>
+                                                    </a>
+                                                <?php
+                                                }
+                                                ?>
+                                            </div>
+                                            <div class="col-4 pl-0 pr-0 mt-5 ">
+                                                <div class="col-12 text-start font-<?= $colorFormat ?>"
+                                                    style="font-size:10px;">
+                                                    <?= Yii::t('app', 'Next Update Date') ?>
+                                                </div>
+                                                <div class="col-12 text-start pim-duedate">
+                                                    <?= $kfiDetail['nextCheck'] == "" ? Yii::t('app', 'Not set') : $kfiDetail['nextCheck'] ?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -213,7 +211,6 @@ $this->title = 'KFI View';
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="col-12 mt-20">
@@ -253,7 +250,7 @@ $this->title = 'KFI View';
                             <input type="hidden" id="currentTab" value="1">
                         </div>
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-3">
                     </div>
                 </div>
             </div>
@@ -261,71 +258,71 @@ $this->title = 'KFI View';
 
             </div>
         </div>
-
     </div>
-    <input type="hidden" id="kfiId" value="<?= $kfiId ?>">
-    <?php
-    $form = ActiveForm::begin([
-        'id' => 'update-kfi',
-        'method' => 'post',
-        'options' => [
-            'enctype' => 'multipart/form-data',
-        ],
-        'action' => Yii::$app->homeUrl . 'kfi/management/save-update-kfi'
+</div>
+<input type="hidden" id="kfiId" value="<?= $kfiId ?>">
+<?php
+$form = ActiveForm::begin([
+    'id' => 'update-kfi',
+    'method' => 'post',
+    'options' => [
+        'enctype' => 'multipart/form-data',
+    ],
+    'action' => Yii::$app->homeUrl . 'kfi/management/save-update-kfi'
 
-    ]); ?>
-    <?= $this->render('modal_update_kfi', [
-        "units" => $units,
-        "companies" => $companies,
-        "months" => $months,
-        "isManager" => $isManager
-    ]) ?>
-    <?php ActiveForm::end(); ?>
-    <?= $this->render('modal_delete') ?>
-    <?= $this->render('modal_employee_history') ?>
-    <style>
-        .priority-box {
-            width: 52px;
-            height: 52px;
-            font-size: 12px;
-        }
+]); ?>
+<?= $this->render('modal_update_kfi', [
+    "units" => $units,
+    "companies" => $companies,
+    "months" => $months,
+    "isManager" => $isManager
+]) ?>
+<?php ActiveForm::end(); ?>
+<?= $this->render('modal_delete') ?>
+<?= $this->render('modal_employee_history') ?>
+<style>
+    .priority-box {
+        width: 52px;
+        height: 52px;
+        font-size: 12px;
+    }
 
-        .priority-box-null {
-            width: 52px;
-            height: 52px;
-            font-size: 12px;
-        }
+    .priority-box-null {
+        width: 52px;
+        height: 52px;
+        font-size: 12px;
+    }
 
-        .text-priority {
-            font-size: 18px;
-        }
+    .text-priority {
+        font-size: 18px;
+    }
 
-        .priority-star {
-            width: 52px;
-        }
+    .priority-star {
+        width: 52px;
+    }
 
-        .big-star {
-            width: 18px;
-            height: 17px;
-        }
+    .big-star {
+        width: 18px;
+        height: 17px;
+    }
 
-        .default-star {
-            width: 16px;
-            width: 15px;
-        }
+    .default-star {
+        width: 16px;
+        width: 15px;
+    }
 
-        .pim-big-box {
-            height: 110px;
-            padding-top: 5px;
+    .pim-big-box {
+        height: 110px;
+        padding-top: 5px;
+    }
+</style>
+<script>
+    window.onload = function() {
+        let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
+        if (openTab) {
+            viewTabKfi(<?= $kfiHistoryId ?>, openTab); // Set the tab based on the PHP value
+        } else {
+            viewTabKfi(<?= $kfiHistoryId ?>, 1); // Default to tab 1 if no value is passed
         }
-    </style>
-    <script>
-        window.onload = function() {
-            let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
-            if (openTab) {
-                viewTabKfi(<?= $kfiHistoryId ?>, openTab); // Set the tab based on the PHP value
-            } else {
-                viewTabKfi(<?= $kfiHistoryId ?>, 1); // Default to tab 1 if no value is passed
-            }
-        }
-    </script>
+    }
+</script>

@@ -90,8 +90,8 @@
     background-color: #F9F9F9;
     border: #A6CAFC dashed 1px;
     border-radius: 6px;
-    min-height: 550px;
-    padding-top: 150px;
+    height: 400px;
+    align-content: center;
 }
 
 .no-data-img {

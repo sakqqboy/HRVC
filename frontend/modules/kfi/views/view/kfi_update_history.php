@@ -1,4 +1,4 @@
-<div class="col-lg-6 pl-0">
+<div class="col-lg-6">
     <div class="col-12 ligth-gray-box">
         <div class="row pl-15 pr-20">
             <div class="col-6  sub-tab-active pl-5">

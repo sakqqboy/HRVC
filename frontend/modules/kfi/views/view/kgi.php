@@ -1,5 +1,5 @@
 <?php
-if (isset($kgis) && count($kgis) > 0) { ?>
+if (isset($kgis["data"]) && count($kgis["data"]) > 0) { ?>
 
 	<table class="table table-borderless">
 		<thead>
@@ -12,10 +12,16 @@ if (isset($kgis) && count($kgis) > 0) { ?>
 				<th><?= Yii::t('app', 'RATIO') ?></th>
 				<th style="width: 10%;"><?= Yii::t('app', 'TEAM') ?></th>
 				<th style="border-top-right-radius: 4px;border-bottom-right-radius: 4px;" class="text-end">
-					<a class="btn-blue-sm font-size-12 text-center no-underline mr-5 pl-10 pr-10" id="saveRelateKgi" href="javascript:showEditRelateKgi(2,<?= $kfiId ?>)">
-						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt="" class="pim-icon mr-3" style="margin-top: -1px;"> <?= Yii::t('app', 'Save') ?>
-					</a>
-					<a class="btn-red-sm font-size-12 text-center no-underline pl-10 pr-10" id="cancelRelateKgi" href="javascript:showEditRelateKgi(0,<?= $kfiId ?>)"><?= Yii::t('app', 'Cancel') ?></a>
+					<div class="d-flex">
+						<a class="btn-blue-sm font-size-10 text-center no-underline mr-3" style="padding:5px;"
+							id="saveRelateKgi" href="javascript:showEditRelateKgi(2,<?= $kfiId ?>)">
+							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt=""
+								class="" style="margin-top: -1px; width:14px;height:14px;"> <?= Yii::t('app', 'Save') ?>
+						</a>
+						<a class="btn-red-sm font-size-10 text-center no-underline pr-5 pl-5" style="padding:5px;"
+							id="cancelRelateKgi" href="javascript:showEditRelateKgi(0,<?= $kfiId ?>)"><?= Yii::t('app', 'Cancel') ?>
+						</a>
+					</div>
 				</th>
 			</tr>
 		</thead>
@@ -72,7 +78,7 @@ if (isset($kgis) && count($kgis) > 0) { ?>
 				endforeach;
 			}
 			$i = count($kfiHasKgi) + 1;
-			foreach ($kgis as $kgiId => $kgi):
+			foreach ($kgis["data"] as $kgiId => $kgi):
 				if (!isset($selected[$kgiId])) {
 				?>
 					<tr height="10">

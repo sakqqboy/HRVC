@@ -501,9 +501,9 @@ class ViewController extends Controller
 		$kfiDetail = curl_exec($api);
 		$kfiDetail = json_decode($kfiDetail, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
-		$kgis = curl_exec($api);
-		$kgis = json_decode($kgis, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		// $kgis = curl_exec($api);
+		// $kgis = json_decode($kgis, true);
 
 
 		$ghp = [];
@@ -519,7 +519,7 @@ class ViewController extends Controller
 			"kfiHasKgi" => $kfiHasKgi,
 			"kfiId" => $kfiId,
 			"kfiDetail" => $kfiDetail,
-			"kgis" => $kgis,
+			//"kgis" => $kgis,
 			"ghp" => $ghp,
 			"role" => $role
 		]);
