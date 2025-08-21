@@ -6,7 +6,7 @@ if (isset($kfiTeamEmployee) && count($kfiTeamEmployee) > 0) {
             <div class="col-12 bg-header-assign  pr-8 mt-10 pt-5 pb-5" id="team-employee-<?= $teamId ?>">
                 <div class="row" style="--bs-gutter-x:0px;">
                     <div class="col-7 font-size-12">
-                        <div class="d-inline-flex" style="height:20px;align-items: center;">
+                        <div class="d-inline-flex mr-5" style="height:20px;align-items: center;">
                             <input type="checkbox" class="check-all-<?= $teamId ?> custom-checkbox" id="check-all-<?= $teamId ?>" onclick="checkAllEmployees(<?= $teamId ?>)">
                             <label for="check-all-<?= $teamId ?>" class="custom-checkbox-label"></label>
                         </div>
@@ -36,19 +36,19 @@ if (isset($kfiTeamEmployee) && count($kfiTeamEmployee) > 0) {
                         <div class="row">
                             <div class="col-5 font-size-12 pt-5">
                                 <div class="row" style="--bs-gutter-x:0px;">
-                                    <div class="col-2 flex-all-center pb-5">
+                                    <div class="col-2  pr-10 d-flex align-items-center justify-content-end">
                                         <input type="checkbox" class="from-check employee-checkbox-<?= $teamId ?>"
                                             <?= $employee["checked"] ?> name="employee[<?= $employeeId ?>]"
                                             id="employee-checkbox-<?= $employeeId ?>">
                                     </div>
-                                    <div class="col-10 pb-5  d-flex align-items-center ">
+                                    <div class="col-10 pb-5  d-flex align-items-center">
                                         <img src="<?= Yii::$app->homeUrl ?><?= $employee["picture"] ?>" class="employee-pic-circle mr-10">
                                         <b><?= $employee["employeeFirstname"] ?> <?= $employee["employeeSurename"] ?></b>
                                     </div>
 
                                 </div>
                             </div>
-                            <div class="col-7 font-size-12  d-flex align-items-center pb-5">
+                            <div class="col-7 font-size-12 d-flex align-items-center">
                                 <?= Yii::t('app', $employee["titleName"]) ?>
                             </div>
                         </div>
