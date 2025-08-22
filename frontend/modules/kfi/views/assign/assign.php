@@ -33,9 +33,8 @@ $this->title = 'Assign KFI';
     <div class="col-12 mt-20" id="box-wrapper">
         <div class="bg-white-employee" id="pim-content">
             <div class="row" style="--bs-gutter-x:0px;">
-                <div class="col-6 text-truncate pim-name-title">
+                <div class="col-6 text-truncate pim-name-title border">
                     <a href="<?= $url ?>" class="font-size-12 mr-10" style="text-decoration: none;">
-                        <!-- <i class="fa fa-caret-left mr-3" aria-hidden="true"></i> -->
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg" class="mr-3" style="margin-top: -4px;">
                         <text class="pim-text-back">
                             <?= Yii::t('app', 'Back') ?>

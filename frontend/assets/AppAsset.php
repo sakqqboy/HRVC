@@ -62,6 +62,7 @@ class AppAsset extends AssetBundle
         'css/performance/kfi.css',
         'css/performance/kfi-grid.css',
         'css/performance/kgi-grid.css',
+        'css/performance/assign.css',
         'css/modal/modal.css',
         'css/modal/modal-kpi.css',
         'css/performance/kgiteam-grid.css',

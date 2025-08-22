@@ -1767,13 +1767,13 @@
 }
 
 .assign-target {
-	width: 100%;
+	width: 150px;
 	background-color: white;
 	border-radius: 3px;
 	border: lightgray solid thin;
 	padding-left: 5px;
 	padding-right: 5px;
-	min-height: 28px;
+	height: 28px;
 }
 
 .assign-target:focus {
@@ -1788,7 +1788,6 @@
 
 .label-switch {
 	color: #2580D3;
-	margin-left: -50px;
 }
 
 .employee-pic-circle {

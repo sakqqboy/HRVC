@@ -5,6 +5,8 @@ namespace frontend\modules\kgi\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
@@ -28,10 +30,12 @@ class AssignController extends Controller
 {
 	public function beforeAction($action)
 	{
+
 		if (Yii::$app->user->id == '') {
 			Yii::$app->response->redirect(Yii::$app->homeUrl . 'site/login');
 			return false;
 		}
+
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			Yii::$app->response->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
@@ -39,7 +43,7 @@ class AssignController extends Controller
 		}
 		$role = UserRole::userRight();
 		if ($role < 3) {
-			Yii::$app->response->redirect(Yii::$app->homeUrl . 'kgi/management/index');
+			Yii::$app->response->redirect(Yii::$app->homeUrl . 'kfi/management/index');
 			return false;
 		}
 		return parent::beforeAction($action);
@@ -104,18 +108,26 @@ class AssignController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/company-team?id=' . $companyId);
 		$teams = curl_exec($api);
 		$teams = json_decode($teams, true);
-		//throw new Exception(print_r($teams, true));
 
-
-		//throw new Exception(print_r($param, true));
 		$text = '';
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-employee?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
 		$kgiTeamEmployee = curl_exec($api);
 		$kgiTeamEmployee = json_decode($kgiTeamEmployee, true);
-		//throw new Exception(print_r($kgiTeamEmployee, true));
+
+
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
 
 		curl_close($api);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
 		return $this->render('assign', [
 			"role" => $role,
 			"kgiTeams" => $kgiTeams,
@@ -127,8 +139,9 @@ class AssignController extends Controller
 			"companyId" => $companyId,
 			"userTeamId" => $teamId,
 			"url" => $url,
-			// "month" => $month,
-			// "year" => $year
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch,
 		]);
 	}
 	public function actionEmployeeInTeamTarget() //
