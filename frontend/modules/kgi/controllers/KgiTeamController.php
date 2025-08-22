@@ -624,60 +624,66 @@ class KgiTeamController extends Controller
 	}
 	public function actionUpdateKgiTeam()
 	{
-		//throw new exception(print_r(Yii::$app->request->post(), true));
-		$kgiTeamId = Yii::$app->request->post('kgiTeamId');
-		$oldKgiTeam = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->orderBy("")->asArray()->one();
-		$status = Yii::$app->request->post('status');
-		$role = UserRole::userRight();
-		//throw new exception(print_r(Yii::$app->request->post(), true));
-		//throw new exception($oldKgiTeam["target"] . 'เก่าคือ' . $_POST["targetAmount"]);
-		if (isset($oldKgiTeam) && !empty($oldKgiTeam)) {
-			if (($oldKgiTeam["target"] != Yii::$app->request->post('targetAmount')) && $role == 3) {
+		// throw new exception(print_r(Yii::$app->request->post(), true));
+		$post = Yii::$app->request->post();
+
+		$kgiTeamId = $post['kgiTeamId'] ?? null;
+		$status    = $post['status'] ?? 1;
+		$role      = UserRole::userRight();
+
+		// หา record เดิมของ KgiTeam
+		$oldKgiTeam = KgiTeam::find()
+			->where(["kgiTeamId" => $kgiTeamId])
+			->asArray()
+			->one();
+
+		// ถ้า target เปลี่ยน และ role = 3 → เปลี่ยน status เป็น 88
+		if ($oldKgiTeam && $role == 3) {
+			if (($oldKgiTeam["target"] ?? null) != ($post['targetAmount'] ?? null)) {
 				$status = 88;
 			}
 		}
-		if (isset($_POST["result"])) {
-			$result = $_POST["result"];
-		} else {
-			$result = Yii::$app->request->post('autoUpdate');;
-		}
+
+		// set result
+		$result = $post["result"] ?? ($post["autoUpdate"] ?? 0);
+
+		// สร้าง history ใหม่
 		$kgiTeamHistory = new KgiTeamHistory();
-		$kgiTeamHistory->kgiTeamId = $kgiTeamId;
-		$kgiTeamHistory->result = $result;
-		if (Yii::$app->request->post('targetAmount')) {
-			$kgiTeamHistory->target = Yii::$app->request->post('targetAmount');
-		} else {
-			$teamKgi = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->one();
-			$kgiTeamHistory->target = $teamKgi["target"];
-			$teamKgi->save(false);
-		}
-		// $kgiTeamHistory->status = $_POST["status"];
-		$kgiTeamHistory->status = $status;
-		$kgiTeamHistory->month = $_POST["month"];
-		$kgiTeamHistory->year = $_POST["year"];
-		$kgiTeamHistory->fromDate = $_POST["fromDate"];
-		$kgiTeamHistory->toDate = $_POST["toDate"];
-		$kgiTeamHistory->nextCheckDate = $_POST["nextDate"];
-		//$kgiTeamHistory->detail = $_POST["remark"];
-		$kgiTeamHistory->createrId = Yii::$app->user->id;
+		$kgiTeamHistory->kgiTeamId     = $kgiTeamId;
+		$kgiTeamHistory->result        = $result;
+		$kgiTeamHistory->target        = $post['targetAmount'] ?? ($oldKgiTeam["targetAmount"] ?? 0);
+		$kgiTeamHistory->status        = $status;
+		$kgiTeamHistory->month         = $post["month"] ?? null;
+		$kgiTeamHistory->year          = $post["year"] ?? null;
+		$kgiTeamHistory->fromDate      = $post["fromDate"] ?? null;
+		$kgiTeamHistory->toDate        = $post["toDate"] ?? null;
+		$kgiTeamHistory->nextCheckDate = $post["nextDate"] ?? null;
+		$kgiTeamHistory->createrId     = Yii::$app->user->id;
 		$kgiTeamHistory->createDateTime = new Expression('NOW()');
 		$kgiTeamHistory->updateDateTime = new Expression('NOW()');
+
 		if ($kgiTeamHistory->save(false)) {
 			$teamKgi = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->one();
-			$teamKgi->status = Yii::$app->request->post('status');
-			$teamKgi->month = $_POST["month"];
-			$teamKgi->year = $_POST["year"];
-			if (Yii::$app->request->post('targetAmount') && $role > 3) { //if changed by over team leader
-				$teamKgi->target = Yii::$app->request->post('targetAmount');
+
+			if ($teamKgi) {
+				$teamKgi->status        = $status;
+				$teamKgi->month         = $post["month"] ?? null;
+				$teamKgi->year          = $post["year"] ?? null;
+				if (!empty($post['targetAmount']) && $role > 3) {
+					// อัปเดต target เฉพาะกรณี role > 3
+					$teamKgi->target = $post['targetAmount'];
+				}
+				$teamKgi->result        = $result;
+				$teamKgi->fromDate      = $post["fromDate"] ?? null;
+				$teamKgi->toDate        = $post["toDate"] ?? null;
+				$teamKgi->nextCheckDate = $post["nextDate"] ?? null;
+				$teamKgi->updateDateTime = new Expression('NOW()');
+				$teamKgi->save(false);
 			}
-			$teamKgi->result = $result;
-			$teamKgi->fromDate = $_POST["fromDate"];
-			$teamKgi->toDate = $_POST["toDate"];
-			$teamKgi->nextCheckDate = $_POST["nextDate"];
-			$teamKgi->updateDateTime = new Expression('NOW()');
-			$teamKgi->save(false);
 		}
-		return $this->redirect($_POST["url"]);
+
+		return $this->redirect($post["url"] ?? ['index']);
+
 		//return $this->redirect('team-kgi');
 	}
 	public function actionKgiTeamView()
