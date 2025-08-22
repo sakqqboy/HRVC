@@ -399,7 +399,9 @@ class ManagementController extends Controller
                     $this->saveKpiTeam($_POST["team"], $kpiId, $_POST["month"], $_POST["year"]);
                 }
 
-                return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
+                // return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
+                return $this->redirect(Yii::$app->homeUrl . 'kpi/assign/assign/' . ModelMaster::encodeParams(["kpiId" => $kpiId, "companyId" => $_POST["companyId"], "month" => $_POST["month"], "year" => $_POST["year"]]));
+
             }
         } else {
             $role = UserRole::userRight();
