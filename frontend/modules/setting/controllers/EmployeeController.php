@@ -69,36 +69,37 @@ class EmployeeController extends Controller
     {
         $param = ModelMaster::decodeParams($hash);
         $departmentId = $param["departmentId"] ?? 0;
-        // throw new exception(print_r($branchId, true));
+        // throw new exception(print_r($departmentId, true));
 
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
-        if (!isset($group) && !empty($group)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+        if (!isset($group) && empty($group)) {
+            // return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+            return $this->redirect(Yii::$app->homeUrl . 'setting/group/display-group/');
         }
 
         $company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
-        if (!isset($company) && !empty($company)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/company/create-company/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
+        if (!isset($company) && empty($company)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/company/display-company/');
         }
 
         $branch = Branch::find()->select('branchId')->where(["status" => 1])->asArray()->one();
-        if (!isset($branch) && !empty($branch)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/branch/create-branch/' . ModelMaster::encodeParams(["companyId" => '']));
+        if (!isset($branch) && empty($branch)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/branch/no-branch/'. ModelMaster::encodeParams(["companyId" => '']));
         }
 
         $department = Department::find()->select('departmentId')->where(["status" => 1])->asArray()->one();
-        if (!isset($department) && !empty($department)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/department/create-department/');
+        if (!isset($department) && empty($department)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/department/no-department/'. ModelMaster::encodeParams(["companyId" => '']));
         }
 
         $team = Team::find()->select('teamId')->where(["status" => 1])->asArray()->one();
-        if (!isset($team) && !empty($team)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/department/create-team/');
+        if (!isset($team) && empty($team)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/team/no-team/'. ModelMaster::encodeParams(["companyId" => '']));
         }
 
-        $employee = Employee::find()->select('employeeId')->where(["status" => 0])->asArray()->one();
+        $employee = Employee::find()->select('employeeId')->where(["status" => 1])->asArray()->one();
         if (isset($employee) && !empty($employee)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/team/index-grid/');
+            return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/'. ModelMaster::encodeParams(["companyId" => '']));
         }
 
         return $this->render('no_employee', [
@@ -275,44 +276,54 @@ class EmployeeController extends Controller
     }
     public function actionSaveCreateEmployee()
     {
+            // throw new Exception(print_r($_POST, true));
 
-        if (isset($_POST["employeeFirstname"]) && trim($_POST["employeeFirstname"]) !== '') {
+        if (!empty($_POST["status"])) {
             $employee = new Employee();
-            $employee->employeeConditionId = $_POST["status"];
-            $employee->employeeNumber = $_POST["employeeId"];
-            $employee->defaultLanguage = $_POST["defaultLanguage"];
-            $employee->salutation = $_POST["salutation"];
-            $employee->gender = $_POST["gender"];
-            $employee->employeeFirstname = $_POST["employeeFirstname"];
-            $employee->employeeSurename = $_POST["employeeSurename"];
-            $employee->nationalityId = $_POST["nationalityId"];
-            $employee->telephoneNumber = $_POST["telephoneNumber"];
-            $employee->emergencyTel = $_POST["emergencyTel"];
-            $employee->address1 = $_POST["address1"];
-            $employee->email = $_POST["email"];
-            $employee->maritalStatus = $_POST["maritalStatus"];
-            $employee->birthDate = date("Y-m-d", strtotime($_POST["birthDate"]));
-            $employee->companyId = $_POST["companyId"];
-            $employee->branchId = $_POST["branchId"];
-            $employee->departmentId = $_POST["departmentId"];
-            $employee->teamId = $_POST["teamId"];
-            $employee->companyEmail = $_POST["companyEmail"];
-            $employee->hireDate = date("Y-m-d", strtotime($_POST["hiringDate"]));
-            $employee->probationStatus = $_POST["overrideProbationEmployee"];
-            $employee->probationStart = date("Y-m-d", strtotime($_POST["fromDate"]));
-            $employee->probationEnd = date("Y-m-d", strtotime($_POST["toDate"]));
-            $employee->titleId = $_POST["titleId"];
-            $employee->remark = $_POST["remark"];
-            $employee->skills = $_POST["skills"];
-            $employee->contact = $_POST["linkedin"];
+            $employee->employeeConditionId = $_POST["status"] ?? '';
+            $employee->employeeNumber      = $_POST["employeeId"] ?? '';
+            $employee->defaultLanguage     = $_POST["defaultLanguage"] ?? '';
+            $employee->salutation          = $_POST["salutation"] ?? '';
+            $employee->gender = ($_POST["gender"] ?? '') !== '' ? $_POST["gender"] : 0;
+            $employee->employeeFirstname   = $_POST["employeeFirstname"] ?? '';
+            $employee->employeeSurename    = $_POST["employeeSurename"] ?? '';
+            $employee->nationalityId       = $_POST["nationalityId"] ?? '';
+            $employee->telephoneNumber     = $_POST["telephoneNumber"] ?? '';
+            $employee->emergencyTel        = $_POST["emergencyTel"] ?? '';
+            $employee->address1            = $_POST["address1"] ?? '';
+            $employee->email               = $_POST["email"] ?? '';
+            $employee->maritalStatus       = $_POST["maritalStatus"] ?? '';
+            $employee->birthDate           = !empty($_POST["birthDate"]) 
+                                                ? date("Y-m-d", strtotime($_POST["birthDate"])) 
+                                                : null;
+            $employee->companyId = !empty($_POST["companyId"]) ? $_POST["companyId"] : 0; // 0 = ค่า default
+            $employee->branchId  = !empty($_POST["branchId"]) ? $_POST["branchId"] : 0; // 0 = ค่า default          = $_POST["branchId"] ?? '0';
+            $employee->departmentId  = !empty($_POST["departmentId"]) ? $_POST["departmentId"] : 0; // 0 = ค่า default      = $_POST["departmentId"] ?? '0';
+            $employee->teamId        = !empty($_POST["teamId"]) ? $_POST["teamId"] : 0; // 0 = ค่า default      = $_POST["teamId"] ?? '0';
+            $employee->companyEmail        = $_POST["companyEmail"] ?? '';
+            $employee->hireDate            = !empty($_POST["hiringDate"]) 
+                                                ? date("Y-m-d", strtotime($_POST["hiringDate"])) 
+                                                : null;
+            $employee->probationStatus     = $_POST["overrideProbationEmployee"] ?? '';
+            $employee->probationStart      = !empty($_POST["fromDate"]) 
+                                                ? date("Y-m-d", strtotime($_POST["fromDate"])) 
+                                                : null;
+            $employee->probationEnd        = !empty($_POST["toDate"]) 
+                                                ? date("Y-m-d", strtotime($_POST["toDate"])) 
+                                                : null;
+            $employee->titleId   = !empty($_POST["titleId"]) ? $_POST["titleId"] : 0; // 0 = ค่า default           = $_POST["titleId"] ?? '';
+            $employee->remark              = $_POST["remark"] ?? '';
+            $employee->skills              = $_POST["skills"] ?? '';
+            $employee->contact             = $_POST["linkedin"] ?? '';
             if ($_POST["darf"] == 1) {
+                //draf
                 $employee->status = 2;
             } else {
-                $employee->status = 100;
+                //publish
+                $employee->status = 1;
             }
             $employee->createDateTime = new Expression('NOW()');
             $employee->updateDateTime = new Expression('NOW()');
-
             // Upload Profile Image
             $pictureProfile = UploadedFile::getInstanceByName("image");
             if ($pictureProfile) {
@@ -452,32 +463,44 @@ class EmployeeController extends Controller
 
                     // UserLanguage
                     // 1. เตรียมภาษาและระดับที่จับคู่กัน
-                    $languages = [
-                        ['language' => $_POST['mainLanguage'], 'level' => $_POST['lavelLanguage']],
-                    ];
-                    // 2. เพิ่มข้อมูลภาษาและระดับอื่น ๆ ถ้ามี
+                   $languages = [];
+
+                    // 1. เช็คก่อนว่ามี mainLanguage และ lavelLanguage มั้ย
+                    if (!empty($_POST['mainLanguage']) && !empty($_POST['lavelLanguage'])) {
+                        $languages[] = [
+                            'language' => $_POST['mainLanguage'],
+                            'level'    => $_POST['lavelLanguage']
+                        ];
+                    }
+
+                    // 2. เพิ่มข้อมูลภาษาและระดับอื่น ๆ ถ้ามี (mainLanguage1..3)
                     for ($i = 1; $i <= 3; $i++) {
                         if (!empty($_POST["mainLanguage$i"]) && !empty($_POST["lavelLanguage$i"])) {
                             $languages[] = [
                                 'language' => $_POST["mainLanguage$i"],
-                                'level' => $_POST["lavelLanguage$i"]
+                                'level'    => $_POST["lavelLanguage$i"]
                             ];
                         }
                     }
-                    // 3. วนลูปบันทึก
-                    foreach ($languages as $lang) {
-                        $userLang = new UserLanguage();
-                        $userLang->userId = $user->userId;
-                        $userLang->languageId = $lang['language'];
-                        $userLang->lavel = $lang['level'];
-                        $userLang->createDateTime = new \yii\db\Expression('NOW()');
-                        $userLang->updateDateTime = new \yii\db\Expression('NOW()');
-                        $userLang->save(false);
+
+                    // 3. ถ้ามีจริง ๆ ค่อยวนลูปบันทึก
+                    if (!empty($languages)) {
+                        foreach ($languages as $lang) {
+                            $userLang = new UserLanguage();
+                            $userLang->userId = $user->userId;
+                            $userLang->languageId = $lang['language'];
+                            $userLang->lavel = $lang['level'];
+                            $userLang->createDateTime = new \yii\db\Expression('NOW()');
+                            $userLang->updateDateTime = new \yii\db\Expression('NOW()');
+                            $userLang->save(false);
+                        }
                     }
+
                 }
             }
-            return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
         }
+                    return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
+
     }
 
     public function actionEmployeeProfile($hash)

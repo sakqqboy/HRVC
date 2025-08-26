@@ -88,28 +88,29 @@ class DepartmentController extends Controller
     public function actionNoDepartment($hash)
     {
         $param = ModelMaster::decodeParams($hash);
-        $branchId = $param["branchId"];
         // throw new exception(print_r($branchId, true));
 
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
-        if (!isset($group) && !empty($group)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+        if (!isset($group) && empty($group)) {
+            // return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+            return $this->redirect(Yii::$app->homeUrl . 'setting/group/display-group/');
         }
 
         $company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
-        if (!isset($company) && !empty($company)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/company/create-company/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
+        if (!isset($company) && empty($company)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/company/display-company/');
         }
 
         $branch = Branch::find()->select('branchId')->where(["status" => 1])->asArray()->one();
-        if (!isset($branch) && !empty($branch)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/branch/create-branch/' . ModelMaster::encodeParams(["companyId" => '']));
+        if (!isset($branch) && empty($branch)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/branch/no-branch/'. ModelMaster::encodeParams(["companyId" => '']));
         }
 
         $department = Department::find()->select('departmentId')->where(["status" => 1])->asArray()->one();
         if (isset($department) && !empty($department)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/department/index/');
         }
+        $branchId = $param["branchId"] ?? '';
 
         return $this->render('no_department', [
             "branchId" => $branchId,

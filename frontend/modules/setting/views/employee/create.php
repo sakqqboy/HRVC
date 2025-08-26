@@ -925,8 +925,16 @@ $form = ActiveForm::begin([
                                 <?= Yii::t('app', 'Employee’s Title') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
                                     data-placement="top" aria-label="<?= Yii::t('app', 'Employee’s Title') ?>"
-                                    data-bs-original-title="<?= Yii::t('app', 'Employee’s Title') ?>">
+                                    data-bs-original-title="<?= Yii::t('app', 'Employee’s Title') ?>"><span
+                                    class="text-gray font-size-13 font-weight-400 mr-12">
+                                    <?= Yii::t('app', 'Can’t find the title?') ?></span>
+                                <a href="<?= Yii::$app->homeUrl ?>setting/title/create/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>"
+                                    class="text-blue font-size-13 font-weight-500">
+                                    <?= Yii::t('app', 'Register Title Here') ?> <img
+                                        src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
+                                        style="cursor: pointer;"></a>
                             </label>
+
 
                             <div class="input-group">
                                 <select id="titleSelectId" class="form-select"
@@ -2932,9 +2940,11 @@ $form = ActiveForm::begin([
     // });
 
     document.getElementById('saveDraftBtn').addEventListener('click', function(e) {
+        // alert('d');
         e.preventDefault();
         document.getElementById('darf').value = '1'; // set value
-        // document.getElementById('create-employee').submit(); // submit form
+        // alert('d');
+        document.getElementById('create-employee').submit(); // submit form
     });
     </script>
 

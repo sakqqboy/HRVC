@@ -1,0 +1,5 @@
+ALTER TABLE `hrvc`.`company` 
+CHANGE COLUMN `director` `director` VARCHAR(100) NULL ;
+
+ALTER TABLE `hrvc`.`company` 
+CHANGE COLUMN `director` `director` BIGINT(20) NULL DEFAULT NULL ;

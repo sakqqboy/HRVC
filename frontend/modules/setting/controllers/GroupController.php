@@ -81,7 +81,7 @@ class GroupController extends Controller
             // $group->postalCode = $_POST["postalCode"];
             $group->industries = $_POST["industries"];
             $group->email = $_POST["email"];
-            // $group->contact = $_POST["contact"];
+            $group->contact = $_POST["contact"];
             $group->founded = $_POST["founded"];
             $group->director = $_POST["director"];
             // $group->socialTag = $_POST["socialTag"];

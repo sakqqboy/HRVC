@@ -94,13 +94,14 @@ class BranchController extends Controller
         $companyId = $param["companyId"];
 
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
-        if (!isset($group) && !empty($group)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+        if (!isset($group) && empty($group)) {
+            // return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+            return $this->redirect(Yii::$app->homeUrl . 'setting/group/display-group/');
         }
 
         $company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
-        if (!isset($company) && !empty($company)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/company/create-company/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
+        if (!isset($company) && empty($company)) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/company/display-company/');
         }
 
         $branch = Branch::find()->select('branchId')->where(["status" => 1])->asArray()->one();

@@ -4,9 +4,9 @@ use common\models\ModelMaster;
 
 $this->title = "Branch";
 ?>
-<div class="container-body submain-background mid-center">
+<div class="background-main-whilte mid-center">
     <div class="mid-center max-background"
-        style="height: 780px;
+        style="
 padding: 30px; gap: 7.721px; flex-shrink: 0;border-radius: 7.721px;border: 1.544px dashed var(--Stroke-Bluish-Gray, #BBCDDE);background: #F9F9F9;">
         <img src="<?= Yii::$app->homeUrl . 'image/no-employee.svg' ?>">
         <span class="name-sub-tokyo">

@@ -20,8 +20,8 @@ $this->title = 'New Company';
 <!-- Bootstrap JS (รวม Popper แล้วใน Bootstrap 5) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<div class="company-group-body">
-    <div class="contrainer-body">
+<div class="background-main-whilte">
+    <div class="background-main-whilte">
         <div class="col-12 banner-uploade" id="imagePreviewBanner">
 
         </div>

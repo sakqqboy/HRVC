@@ -5,7 +5,7 @@ use frontend\models\hrvc\Company;
 
 $this->title = 'Group profile';
 ?>
-<div class="company-group-body mt-50">
+<div class="background-main-whilte mt-50">
     <div class="contrainer-body company-group-content" style="margin-top: -10px;">
         <div class="row">
             <div class="col-12" style="height: 180px;">
@@ -178,7 +178,7 @@ $this->title = 'Group profile';
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-12 mb-3">
                                 <div class="alert alert-secondary-background" style="width: 100%;">
-                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/branch-grid/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>setting/branch/no-branch/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
                                         class="text-decoration-none" style="width: 60%;">
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
@@ -213,7 +213,7 @@ $this->title = 'Group profile';
                             </div>
                             <div class="col-lg-4 col-md-6 col-12 mb-3">
                                 <div class="alert alert-secondary-background" style="width: 100%;">
-                                    <a href="<?= Yii::$app->homeUrl ?>setting/department/index/"
+                                    <a href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
                                         class="text-decoration-none" style="width: 60%;">
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
@@ -246,8 +246,8 @@ $this->title = 'Group profile';
                             </div>
                             <div class="col-lg-4 col-md-6 col-12 mb-3">
                                 <div class="alert alert-secondary-background" style="width: 100%;">
-                                    <a href="<?= Yii::$app->homeUrl ?>setting/team/index/" class="text-decoration-none"
-                                        style="width: 60%;">
+                                    <a href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
+                                        class="text-decoration-none" style="width: 60%;">
                                         <div class="row align-items-center">
                                             <div class="col-lg-8 col-md-8 col-8 text-left">
                                                 <div class="circle-container">
@@ -279,7 +279,7 @@ $this->title = 'Group profile';
                             </div>
                             <div class="col-lg-4 col-md-6 col-12 mb-3">
                                 <div class="alert alert-secondary-background" style="width: 100%;">
-                                    <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
                                         class="text-decoration-none" style="width: 60%;">
                                         <div class="row align-items-center">
                                             <div class="col-8">

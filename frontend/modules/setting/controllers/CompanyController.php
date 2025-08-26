@@ -50,7 +50,7 @@ class CompanyController extends Controller
 	{
 		// throw new exception(print_r('dd', true));
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
-		if (!isset($group) && !empty($group)) {
+		if (!isset($group) || empty($group)) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/display-group/');
 		}
 		$company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
