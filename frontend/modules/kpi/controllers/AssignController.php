@@ -6,6 +6,7 @@ use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\Branch;
+use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\KgiEmployee;
@@ -134,7 +135,18 @@ class AssignController extends Controller
 		}*/
 		// throw new Exception(print_r($kpiTeamEmployee, true));	
 
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
 		curl_close($api);
+
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$totalBranch = Branch::totalBranch();
 		return $this->render('assign', [
 			"role" => $role,
 			"kpiTeams" => $kpiTeams,
@@ -145,7 +157,10 @@ class AssignController extends Controller
 			"kpiTeamEmployee" => $kpiTeamEmployee,
 			"companyId" => $companyId,
 			"userTeamId" => $teamId,
-			"url" => $url
+			"url" => $url,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch,
 		]);
 	}
 	public function actionEmployeeInTeamTarget()
