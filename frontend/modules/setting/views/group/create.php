@@ -21,7 +21,7 @@ $this->title = 'Create Group';
 
 <link rel="stylesheet" href="<?= Yii::$app->homeUrl ?>assets/bootstrap4/css/bootstrap.min.css">
 <div class="company-group-edit">
-    <div class="contrainer-body">
+    <div class="background-main-whilte">
         <div class="col-12 banner-uploade" id="imagePreviewBanner">
 
         </div>
@@ -194,7 +194,7 @@ $this->title = 'Create Group';
                                 <div class="form-group mb-30">
                                     <span class="text-danger">* </span> <label class="name-text-update" for="phone">
                                         <?= Yii::t('app', 'Contact/Phone Number') ?> </label>
-                                    <input type="text" class="form-control mt-12" name="phone"
+                                    <input type="text" class="form-control mt-12" name="contact"
                                         placeholder="<?= Yii::t('app', 'Write the phone number') ?>" required
                                         pattern="[0-9+\-]+" title="กรุณากรอกเฉพาะตัวเลข, + และ -"
                                         oninput="this.value = this.value.replace(/[^0-9+\-]/g, '');">

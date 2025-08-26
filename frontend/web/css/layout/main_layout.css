@@ -33,6 +33,17 @@
     /* flex-direction: column; */
 }
 
+.background-main-whilte {
+    background-color: white;
+    margin-left: -28px;
+    margin-right: -28px;
+    margin-top: 40px;
+    height: auto;
+    min-height: 95vh;
+    /* เต็มหน้าจอในแนวตั้ง */
+    padding: 30px;
+}
+
 .header-top {
     top: 0;
     right: 0;
