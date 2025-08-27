@@ -159,6 +159,7 @@ document.getElementById('titleName').addEventListener('keydown', function(event)
 
 
 document.getElementById('titleName').addEventListener('focus', function() {
+    // alert('blur');
     const hint = document.getElementById('hintText');
     hint.style.backgroundColor = '#2580D3';
     hint.style.color = 'white';
@@ -181,6 +182,7 @@ document.getElementById('titleName').addEventListener('focus', function() {
 });
 
 document.getElementById('titleName').addEventListener('blur', function() {
+    // alert('blur');
     const hint = document.getElementById('hintText');
     hint.style.backgroundColor = '';
     hint.style.color = '';

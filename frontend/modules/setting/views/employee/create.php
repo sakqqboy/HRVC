@@ -100,25 +100,6 @@ $form = ActiveForm::begin([
                                 style="color: var(--Helper-Text, #8A8A8A);">
                                 <?= Yii::t('app', 'Select') ?>
                             </option>
-
-                            <!-- ปรับเอามาจากสเตตัส ปรับคอนโทรเลอร์ตอนเชฟด้วย และ ทำรอโหลดน้า ปรับนาวิเกชั้นเน็ก -->
-                            <?php
-                            // if (!empty($conditions)) {
-                            //     $selectedId = $employee['employeeConditionId'] ?? null;
-                            //     foreach ($conditions as $c) {
-                            //         $selected = ($c['employeeConditionId'] == $selectedId) ? 'selected' : '';
-                            //         echo '<option value="' . $c['employeeConditionId'] . '" ' . $selected . '>' . Yii::t('app', $c['employeeConditionName']) . '</option>';
-                            //     }
-                            // }
-                            ?>
-                            <!-- <?php
-                                    if (count($statusTexArr) > 0) {
-                                        foreach ($statusTexArr as $statusId => $status): ?>
-                            <option value="<?= $statusId ?>"><?= Yii::t('app', $status["statusName"]) ?>
-                                <?php
-                                        endforeach;
-                                    }
-                                ?> -->
                             <?php
                             if (!empty($statusTexArr)) {
                                 $selectedId = $employee['employeeConditionId'] ?? null;
@@ -289,8 +270,6 @@ $form = ActiveForm::begin([
                                 <div class="input-group">
                                     <span class="input-group-text"
                                         style="background-color: white; border-right: none;padding:3px 10px;width:clamp(35px, 2.56vw, 70px);">
-                                        <!-- <img class="cycle-current" src="<?= Yii::$app->homeUrl ?>image/e-world.svg"
-                                            id="flag-dl" alt="Website" style="width: 20px; height: 20px; border: none;"> -->
                                         <img class="cycle-current" id="flag-dl"
                                             src="<?= Yii::$app->homeUrl . htmlspecialchars($flag) ?>" alt="Website"
                                             style="width: 16px; height: 16px; border: none;">
