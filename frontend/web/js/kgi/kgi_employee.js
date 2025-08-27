@@ -68,14 +68,85 @@ function assignKgiToEmployeeInTeam(teamId, kgiId) {
 		$("#employee-in-team-" + teamId).remove();
 	}
 }
+$(document).ready(function () {
+	$(".numberOnly").on("keydown", function (e) {
+		var oneDot = 1;
+		var number = 1;
+		var symbol = 1;
+		if ((e.key === "." || e.keyCode === 190 || e.keyCode === 110)) {
+			if ($(this).val().indexOf(".") === -1) {
+				if ($(this).val() === "") {
+					oneDot = 0;
+				}
+			} else {
+				oneDot = 0;
+			}
+		}
+		if ((e.keyCode >= 48 && e.keyCode <= 57) || // แถวบนคีย์บอร์ด
+			(e.keyCode >= 96 && e.keyCode <= 105)) { // Numpad
+			number = 1;
+		} else {
+			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||        // key ที่อนุญาตพิเศษ เช่น Backspace, Delete, Tab, Escape, Enter, ลูกศร
+				// Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+				(e.keyCode === 65 && (e.ctrlKey || e.metaKey)) ||
+				(e.keyCode === 67 && (e.ctrlKey || e.metaKey)) ||
+				(e.keyCode === 86 && (e.ctrlKey || e.metaKey)) ||
+				(e.keyCode === 88 && (e.ctrlKey || e.metaKey)) ||
+				// home, end, left, right
+				(e.keyCode >= 35 && e.keyCode <= 39)) {
+				symbol = 1;
+			} else {
+				number = 0;
+				symbol = 0;
+			}
+		}
 
+		if (number === 0 || oneDot === 0 || symbol === 0) {
+			e.preventDefault();
+		} else {
+			return;
+		}
+	});
+	$(".numberOnly").on("paste", function (e) {
+			let pasteData = (e.originalEvent || e).clipboardData.getData('text');
+
+			// regex: อนุญาตเฉพาะตัวเลข และจุดทศนิยมครั้งเดียว
+			if (!/^\d*\.?\d*$/.test(pasteData)) {
+				e.preventDefault();
+			}
+	});
+	$(".teamTarget").on("keydown", function (e) {
+		if (e.key == 'Enter') {
+			// $(".teamTarget").each(function (index, element) {
+			// 	console.log(index, $(element).val());
+			// });
+			let currentIndex = $(".teamTarget").index(this);
+			let nextIndex = currentIndex + 1;
+	
+			if ($(".teamTarget").eq(nextIndex) !== -1) {
+				$(".teamTarget").eq(nextIndex).focus();
+			}
+			e.preventDefault();
+		}
+	});
+});
 function calculateEmployeeTargetValue(teamId) {
 	var total = 0;
-	$('input[id="employee-target-' + teamId + '"]').each(function () {
-		let currentValue = $(this).val().replace(',', '');
-		total = total + parseFloat(currentValue);
-	});
-	$("#total-team-target-" + teamId).html(total.toLocaleString());
+	var inputVal = $("#teamTarget-" + teamId).val();
+	
+	
+	if ($("#team-" + teamId).is(":checked") == false && inputVal != "") {
+		$("#team-" + teamId).click();
+	} else { 
+		$('input[id="employee-target-' + teamId + '"]').each(function () {
+			if ($(this).val() != '') {
+				let currentValue = $(this).val().replace(',', '');
+				total = total + parseFloat(currentValue);
+			}
+		});
+	}
+	$("#total-team-target-" + teamId).html(total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+	
 }
 
 function checkEnter(event, employeeId, teamId) {

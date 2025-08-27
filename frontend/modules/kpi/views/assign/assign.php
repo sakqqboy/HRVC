@@ -2,29 +2,35 @@
 
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'KPI Grid View';
+$this->title = 'Assign KPI';
 ?>
-<div class="contrainer-body">
-    <?php if (Yii::$app->session->hasFlash('alert-kpi')) : ?>
+<?php if (Yii::$app->session->hasFlash('alert-kpi')) : ?>
+
     <script>
-    window.onload = function() {
-        $('.alert-box-info').slideDown(500);
-        setTimeout(function() {
-            $('.alert-box-info').fadeOut(300);
-        }, 3000);
-    }
+        window.onload = function() {
+            $('.alert-box-info').slideDown(500);
+            setTimeout(function() {
+                $('.alert-box-info').fadeOut(300);
+            }, 3000);
+        }
     </script>
-    <?php endif; ?>
-    <div class="col-12">
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.png" class="home-icon mr-5"
-            style="margin-top: -3px;">
-        <strong class="pim-head-text"> Performance Indicator Matrices (PIM)</strong>
+
+<?php endif; ?>
+
+
+<div class="col-12 mt-70 pt-20 pim-content1" onload="showAlertBox()">
+    <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg"
+            class="pim-head-icon mr-11 mt-2">
+        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
     </div>
-    <div class="col-12 mt-10">
-        <?= $this->render('header_filter', [
-            "role" => $role
-        ]) ?>
-    </div>
+    <?= $this->render('header_filter', [
+        "role" => $role,
+        "allCompany" => $allCompany,
+        "companyPic" => $companyPic,
+        "totalBranch" => $totalBranch,
+        "page" => 'grid'
+    ]) ?>
     <?php
     $form = ActiveForm::begin([
         'id' => 'update-kpi-team-employee',
@@ -36,246 +42,257 @@ $this->title = 'KPI Grid View';
 
     ]); ?>
 
-    <div class="alert mt-10 pim-body bg-white">
-        <div class="row">
-            <div class="col-5">
-                <div class="row">
-                    <div class="col-10 font-size-12 pim-name pr-0 pl-5 text-start">
-                        <a href="<?= $url ?>" class="mr-5 font-size-12" style="text-decoration: none;">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg">
-                            <text class="pim-text-back">
-                                <?= Yii::t('app', 'Back') ?>
-                            </text>
-                        </a>
-                        <input type="hidden" id="url" name="url" value="<?= $url ?>">
-                        <span class="">
+    <div class="col-12 mt-20" id="box-wrapper">
+        <div class="bg-white-employee" id="pim-content">
+            <div class="row" style="--bs-gutter-x:10px;">
+                <div class="col-lg-5 col-12"><!-- left => select team -->
+                    <div class="row" style="--bs-gutter-x:0px;">
+                        <div class="col-lg-9 text-truncate font-size-16 font-weight-600" style="line-height: 21px;align-content:center;">
+                            <a href="<?= $url ?>" class="font-size-12 mr-10 font-weight-600" style="text-decoration: none;">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg" class="mr-3" style="margin-top: -4px;">
+                                <text class="pim-text-back">
+                                    <?= Yii::t('app', 'Back') ?>
+                                </text>
+                            </a>
+                            <input type="hidden" id="url" name="url" value="<?= $url ?>">
                             <?= $kpiDetail["kpiName"] ?>
-                        </span>
-                    </div>
-                    <div class="col-2 text-end">
-                        <button class="btn-create font-size-12" style="text-decoration: none;" type="submit">
-                            <?= Yii::t('app', 'Save') ?>
-                        </button>
-                    </div>
-                </div>
-                <div class="col-12  ligth-gray-box mt-10 mb-10">
-                    <div class="col-12 bg-white pl-8 pr-8 mt-8 mb-10">
-                        <div class="row">
-                            <div class="col-6 font-size-12 pt-5 pb-3"><b><?= Yii::t('app', 'Assign Team') ?></b></div>
-                            <div class="col-6 text-end  font-size-12 pt-5 pb-3">
-                                <b><?= Yii::t('app', 'ALLOCATE TARGET') ?></b>
-                            </div>
                         </div>
-                    </div>
-                    <?php
-                    $totalTeam = 0;
-                    $totalTarget = 0;
-                    if (isset($teams) && count($teams) > 0) {
-                        foreach ($teams as $team):
-                            $target = 0;
-                            $checked = "";
-                            if (isset($kpiTeams) && count($kpiTeams) > 0) {
-                                foreach ($kpiTeams as $kpiTeamId => $kpiTeam):
-                                    if ($kpiTeam["teamId"] == $team['teamId']) {
-                                        $target = $kpiTeam["target"];
-                                        $checked = "checked";
-                                        $totalTeam++;
-                                        $totalTarget += $target;
+                        <div class="col-lg-3 text-end" style="line-height: 21px;align-content:center;">
+                            <button class="btn-create font-size-12 ml-10" style="text-decoration: none;" type="submit">
+                                <div class="ml-7 mr-7" style="gap: 5px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/save-whiet.svg" style="width:15px;margin-top:-3px;">
+                                    <?= Yii::t('app', 'Save') ?>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="col-12  ligth-gray-box mt-10 mb-10" style="height: 400px;overflow-y:auto;">
+                            <div class="col-12 bg-white pl-8 pr-8 mt-8 mb-10">
+                                <div class="row" style="--bs-gutter-x:0px;">
+                                    <div class="col-6 font-size-12 pt-5 pb-3"><b><?= Yii::t('app', 'Assign Team') ?></b></div>
+                                    <div class="col-6 text-end  font-size-12 pt-5 pb-3">
+                                        <b><?= Yii::t('app', 'ALLOCATE') ?> &nbsp;&nbsp;<?= Yii::t('app', 'TARGET') ?></b>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                            $totalTeam = 0;
+                            $totalTarget = 0;
+                            if (isset($teams) && count($teams) > 0) {
+                                foreach ($teams as $team):
+                                    $target = 0;
+                                    $checked = "";
+                                    if (isset($kpiTeams) && count($kpiTeams) > 0) {
+                                        foreach ($kpiTeams as $kpiTeamId => $kpiTeam):
+                                            if ($kpiTeam["teamId"] == $team['teamId']) {
+                                                $target = $kpiTeam["target"];
+                                                $checked = "checked";
+                                                $totalTeam++;
+                                                $totalTarget += $target;
+                                            }
+                                        endforeach;
                                     }
+                                    if ($role == 3 && $team["teamId"] != $userTeamId) {
+                                        $disableTeam = "disabled";
+                                    } else {
+                                        $disableTeam = "";
+                                    }
+                            ?>
+                                    <div class="assign-team">
+                                        <div class="">
+                                            <input type="checkbox" name="team[<?= $team['teamId'] ?>]"
+                                                id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check <?= $role == 3 ? 'd-none' : '' ?>"
+                                                value="<?= $team['teamId'] ?>"
+                                                onclick="javasript:assignKpiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kpiId ?>)">
+                                            <!--kpi_employee-->
+                                            <?php
+                                            if ($role <= 3 && $checked == "checked") { ?>
+                                                <i class="fa fa-check-square text-primary" aria-hidden="true"></i>
+                                            <?php
+                                            }
+                                            if ($role <= 3 && $checked == '') { ?>
+                                                <i class="fa fa-check-square text-primary invisible" aria-hidden="true"></i>
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="cycle-pim-assign-team">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                        </div>
+
+                                        <div class="font-size-12 " style="width:160px;line-height:12px;">
+                                            <b><?= $team["teamName"] ?></b>
+                                            <div class="font-size-10 text-truncate " style="width:150px;">
+                                                <?= $team["departmentName"] ?>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1  text-end">
+                                            <?php
+                                            if ($disableTeam == "") {
+                                            ?>
+                                                <input type="text" class="assign-target text-end font-size-12"
+                                                    value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
+                                                    name="teamTarget[<?= $team['teamId'] ?>]" placeholder="0.00">
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <input type="text" placeholder="0.00" class="assign-target text-end font-size-12"
+                                                    value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
+                                                    name="teamTarget[<?= $team['teamId'] ?>]" <?= $disableTeam ?>>
+                                                <input type="hidden" value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
+                                                    name="teamTarget[<?= $team['teamId'] ?>]">
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                            <?php
                                 endforeach;
                             }
-                            if ($role == 3 && $team["teamId"] != $userTeamId) {
-                                $disableTeam = "disabled";
+                            if ($totalTeam > 0) {
+                                $teamAverage = $totalTarget / $totalTeam;
                             } else {
-                                $disableTeam = "";
+                                $teamAverage = 0;
                             }
-                    ?>
-                    <div class="col-12 bg-white mb-10 pb-0 pt-0 pr-8">
-                        <div class="row">
-                            <div class="col-1 text-end pr-0 pl-0 pt-12">
-                                <input type="checkbox" name="team[<?= $team['teamId'] ?>]"
-                                    id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check"
-                                    value="<?= $team['teamId'] ?>"
-                                    onclick="javasript:assignKpiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kpiId ?>)"
-                                    style="display: <?= $role == 3 ? 'none' : '' ?>;">
-                                <!--kpi_employee-->
-                                <?php
-                                        if ($role == 3 && $checked == "checked") { ?>
-                                <i class="fa fa-check-square text-primary" aria-hidden="true"></i>
-                                <?php
-                                        }
-                                        ?>
-                            </div>
-                            <div class="col-2 pr-5 pl-0 text-end pt-3 pb-3">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.png" style="width:40px;">
-                            </div>
-                            <div class="col-5 pl-0 pt-3 ">
-                                <span class="font-size-12"><b><?= $team["teamName"] ?></b></span>
-                                <div class="col-12 font-size-10" style="margin-top: -5px;">
-                                    <?= $team["departmentName"] ?></div>
-                            </div>
-                            <div class="col-4 pt-9">
-                                <?php
-                                        if ($disableTeam == "") {
-                                        ?>
-                                <input type="text" placeholder="0.00" class="assign-target text-end font-size-12"
-                                    value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
-                                    name="teamTarget[<?= $team['teamId'] ?>]">
-                                <?php
-                                        } else {
-                                        ?>
-                                <input type="text" placeholder="0.00" class="assign-target text-end font-size-12"
-                                    value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
-                                    name="teamTarget[<?= $team['teamId'] ?>]" <?= $disableTeam ?>>
-                                <input type="hidden" value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
-                                    name="teamTarget[<?= $team['teamId'] ?>]">
-                                <?php
-                                        }
-                                        ?>
-                            </div>
+                            ?>
                         </div>
                     </div>
+                </div>
+                <div class="col-lg-7 col-12"><!-- right => select each person in  team -->
                     <?php
-                        endforeach;
-                    }
-                    if ($totalTeam > 0) {
-                        $teamAverage = $totalTarget / $totalTeam;
+                    if ($kpiTeamEmployee["base"]["totalTargetAll"] > $kpiDetail["targetAmount"]) {
+                        if ($kpiDetail["targetAmount"] > 0) {
+                            $percentage = (($kpiTeamEmployee["base"]["totalTargetAll"] / $kpiDetail["targetAmount"]) * 100) - 100;
+                        } else {
+                            $percentage = 0;
+                        }
+                        $isMoreSet = 1;
                     } else {
-                        $teamAverage = 0;
+                        if ($kpiDetail["targetAmount"] > 0) {
+                            $percentage = 100 - (($kpiTeamEmployee["base"]["totalTargetAll"] / $kpiDetail["targetAmount"]) * 100);
+                        } else {
+                            $percentage = 0;
+                        }
+                        $isMoreSet = 0;
+                        if ($kpiTeamEmployee["base"]["totalTargetAll"] == $kpiDetail["targetAmount"]) {
+                            $percentage = 0;
+                            $isMoreSet = "-";
+                        }
                     }
                     ?>
-                </div>
-            </div>
-            <?php
-            if ($kpiTeamEmployee["base"]["totalTargetAll"] > $kpiDetail["targetAmount"]) {
-                if ($kpiDetail["targetAmount"] > 0) {
-                    $percentage = (($kpiTeamEmployee["base"]["totalTargetAll"] / $kpiDetail["targetAmount"]) * 100) - 100;
-                } else {
-                    $percentage = 0;
-                }
-                $isMoreSet = 1;
-            } else {
-                if ($kpiDetail["targetAmount"] > 0) {
-                    $percentage = 100 - (($kpiTeamEmployee["base"]["totalTargetAll"] / $kpiDetail["targetAmount"]) * 100);
-                } else {
-                    $percentage = 0;
-                }
-                $isMoreSet = 0;
-                if ($kpiTeamEmployee["base"]["totalTargetAll"] == $kpiDetail["targetAmount"]) {
-                    $percentage = 0;
-                    $isMoreSet = "-";
-                }
-            }
-            ?>
-            <div class="col-7">
-                <div class="row">
-                    <div class="col-3 font-size-12 border-right pt-5 pl-5 pr-0 text-center">
-                        <?= Yii::t('app', 'Average/Team') ?> <span
-                            class="font-size-12 ml-5"><b><?= number_format($teamAverage) ?></b></span>
-                    </div>
-                    <div class="alert-box-info text-center">
-                        S A V E D ! ! !
-                    </div>
-                    <div class="col-4 font-size-12 border-right  pt-5 pl-0 pr-0 text-center">
-                        <?= Yii::t('app', 'Average/Individual') ?> <span
-                            class="font-size-12 ml-5"><b><?= number_format($kpiTeamEmployee["base"]["averageTarget"]) ?></b></span>
-                    </div>
-                    <div class="col-3 text-center font-size-12 border-right">
-                        <div class="row">
-                            <div class="col-8">
-                                <span
-                                    class="font-size-12"><b><?= number_format($kpiTeamEmployee["base"]["totalTargetAll"]) ?></b></span>
-                                <div class="col-12 font-size-10" style="margin-top: -5px;">Assigned</div>
+                    <div class="d-flex" style="width:100%;height:30px;">
+                        <div class="summarize-assign border-right" style="width:25%;">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/curve.svg" class="pim-icon mr-5" alt="icon">
+                            <?= Yii::t('app', 'Avg') ?>/<?= Yii::t('app', 'Team') ?>
+                            <span class="font-size-12 ms-auto mr-5"><b><?= number_format($teamAverage) ?></b></span>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" alt="icon" style="width:14px;height:14px;cursor:pointer;">
+                        </div>
+                        <div class="alert-box-info text-center">
+                            S A V E D ! ! !
+                        </div>
+                        <div class="summarize-assign border-right" style="width:34%;">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/curve.svg" class="pim-icon mr-5" alt="icon">
+                            <?= Yii::t('app', 'Avg') ?>/<?= Yii::t('app', 'Individual') ?>
+                            <span class="font-size-12 ms-auto mr-5"><b><?= number_format($kpiTeamEmployee["base"]["averageTarget"]) ?></b></span>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" alt="icon" style="width:14px;height:14px;cursor:pointer;">
+                        </div>
+                        <div class="summarize-assign border-right" style="width:25%;">
+                            <div class="align-content-center text-center" style="line-height:14px;">
+                                <span class="font-size-12"><b><?= number_format($kpiTeamEmployee["base"]["totalTargetAll"]) ?></b></span>
+                                <div class="col-12 font-size-10"><?= Yii::t('app', 'Total Assigned Target') ?></div>
                             </div>
-                            <div class="col-4  pr-0 pl-0 text-center mt-5 font-size-11">
+                            <div class="align-content-center text-center ms-auto">
                                 <?php
                                 if ($isMoreSet == "1") {
                                 ?>
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-up.png"
-                                    style="width:10px;margin-top:-3px;" class="mr-2">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-up.svg" style="width:8px;">
                                 <?php
                                 }
                                 if ($isMoreSet == "0") {
                                 ?>
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-down.png"
-                                    style="width:10px;margin-top:-3px;" class="mr-2">
+                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-down.svg" style="width:8px;">
                                 <?php
                                 }
                                 ?>
                                 <?= number_format($percentage, 1) ?>%
                             </div>
-                        </div>
 
-                    </div>
-                    <div class="col-2 text-center pt-0">
-                        <div class="row">
+                        </div>
+                        <div class="flex-grow-1 align-content-center text-center" style="line-height:14px;">
                             <span class="font-size-12"><b><?= number_format($kpiDetail["targetAmount"]) ?></b></span>
-                            <div class="col-12 font-size-10" style="margin-top: -5px;">
+                            <div class="font-size-10">
                                 <?= Yii::t('app', 'Master & Target') ?></div>
                         </div>
+
                     </div>
-                </div>
-                <div class="col-12 ligth-gray-box mb-10 mt-7">
-                    <div class="col-12 bg-white pl-8 pr-8 mt-8 mb-10">
-                        <div class="row">
-                            <div class="col-5 font-size-12 pt-5 pb-3"><b><?= Yii::t('app', 'Assign Individuals') ?></b>
+                    <div class="col-12 ligth-gray-box mb-10 mt-7" style="height: 400px;overflow-y:auto;">
+                        <div class="col-12 bg-white pl-8 pr-8 mt-8 mb-10">
+                            <div class="row">
+                                <div class="col-5 font-size-12 pt-5 pb-3"><b><?= Yii::t('app', 'Assign Individuals') ?></b></div>
+                                <div class="col-3 font-size-12 pt-5 pb-3 text-center">
+                                    <?= Yii::t('app', 'ALLOCATE') ?> &nbsp;&nbsp;<?= Yii::t('app', 'TARGET') ?>
+                                </div>
+                                <div class="col-4 font-size-12 pt-5 pb-3 text-center"><?= Yii::t('app', 'REMARKS') ?></div>
                             </div>
-                            <div class="col-3 font-size-12 pt-5 pb-3 text-center">
-                                <?= Yii::t('app', 'ALLOCATE TARGET') ?></div>
-                            <div class="col-4 font-size-12 pt-5 pb-3 text-center"><?= Yii::t('app', 'REMARKS') ?></div>
+                        </div>
+                        <div class="col-12 pr-0 pl-0 pt-0" id="team-employee-target">
+                            <?= $this->render('employee_team', [
+                                "kpiTeamEmployee" => $kpiTeamEmployee,
+                                "role" => $role,
+                                "userTeamId" => $userTeamId
+                            ]) ?>
                         </div>
                     </div>
-                    <div class="col-12 pr-0 pl-0" id="team-employee-target">
-                        <?= $this->render('employee_team', [
-                            "kpiTeamEmployee" => $kpiTeamEmployee,
-                            "role" => $role,
-                            "userTeamId" => $userTeamId
-                        ]) ?>
-                    </div>
-
                 </div>
             </div>
         </div>
     </div>
-    <input type="hidden" name="kpiId" value="<?= $kpiId ?>">
-    <input type="hidden" name="companyId" value="<?= $companyId ?>">
-    <input type="hidden" name="month" value="<?= $kpiDetail["month"] ?>">
-    <input type="hidden" name="year" value="<?= $kpiDetail["year"] ?>">
-    <?php ActiveForm::end(); ?>
 </div>
-
-
+<input type="hidden" name="kpiId" value="<?= $kpiId ?>">
+<input type="hidden" name="companyId" value="<?= $companyId ?>">
+<input type="hidden" name="month" value="<?= $kpiDetail["month"] ?>" id="month">
+<input type="hidden" name="year" value="<?= $kpiDetail["year"] ?>" id="year">
+<?php ActiveForm::end(); ?>
+</div>
+<?php
+//if ($save == 1) {
+?>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // ดักจับเหตุการณ์การกดปุ่ม Enter
-    document.querySelectorAll('.assign-target').forEach(function(input, index) {
-        input.addEventListener('keydown', function(event) {
-            // เช็คถ้ากดปุ่ม Enter
-            if (event.key == 'Enter') {
-                event.preventDefault(); // ป้องกันการส่งฟอร์ม
+    document.addEventListener("DOMContentLoaded", function() {
+        // ดักจับเหตุการณ์การกดปุ่ม Enter
+        document.querySelectorAll('.assign-target').forEach(function(input, index) {
+            input.addEventListener('keydown', function(event) {
+                // เช็คถ้ากดปุ่ม Enter
+                if (event.key == 'Enter') {
+                    event.preventDefault(); // ป้องกันการส่งฟอร์ม
 
-                // หาค่าของ teamId จาก input field
-                const teamId = input.name.match(/\d+/)[0];
+                    // หาค่าของ teamId จาก input field
+                    const teamId = input.name.match(/\d+/)[0];
 
-                // หาค่า checkbox ที่เกี่ยวข้อง
-                const checkbox = document.getElementById('team-' + teamId);
+                    // หาค่า checkbox ที่เกี่ยวข้อง
+                    const checkbox = document.getElementById('team-' + teamId);
 
-                // ตรวจสอบสถานะของ checkbox
-                if (checkbox && !checkbox.checked) {
-                    checkbox.checked = true; // หาก checkbox ยังไม่ถูกเลือกให้เลือก
-                    // เรียกใช้ฟังก์ชัน assignKgiToEmployeeInTeam หลังจากเลือก checkbox
-                    if (checkbox && checkbox.checked) {
-                        assignKgiToEmployeeInTeam(teamId, <?= $kpiId ?>); // เรียกฟังก์ชัน
+                    // ตรวจสอบสถานะของ checkbox
+                    if (checkbox && !checkbox.checked) {
+                        checkbox.checked = true; // หาก checkbox ยังไม่ถูกเลือกให้เลือก
+                        // เรียกใช้ฟังก์ชัน assignKpiToEmployeeInTeam หลังจากเลือก checkbox
+                        if (checkbox && checkbox.checked) {
+                            assignKpiToEmployeeInTeam(teamId, <?= $kpiId ?>); // เรียกฟังก์ชัน
+                        }
+                    }
+
+                    // หาตำแหน่งของ textbox ถัดไป
+                    const nextInput = document.querySelectorAll('.assign-target')[index + 1];
+                    if (nextInput) {
+                        nextInput.focus(); // ส่งเคอร์เซอร์ไปที่ textbox ถัดไป
                     }
                 }
-
-                // หาตำแหน่งของ textbox ถัดไป
-                const nextInput = document.querySelectorAll('.assign-target')[index + 1];
-                if (nextInput) {
-                    nextInput.focus(); // ส่งเคอร์เซอร์ไปที่ textbox ถัดไป
-                }
-            }
+            });
         });
     });
-});
 </script>
+
+
+
+<?php
+//}
+?>

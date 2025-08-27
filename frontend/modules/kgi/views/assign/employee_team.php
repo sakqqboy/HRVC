@@ -12,7 +12,6 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
             //throw new Exception(print_r($kgiEmployee["team"], true));
 ?>
             <div class="pim-assign-employee-header" id="team-employee-<?= $teamId ?>">
-
                 <div class="font-size-12">
                     <div class="cycle-pim-assign-team" style="height: 25px;width:25px;">
                         <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon" style="height: 14px;width:14px;">
@@ -100,7 +99,7 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
                                 <?php
                                 if ($show == 1) {
                                 ?>
-                                    <input type="text" class="assign-target text-end" name="employeeTarget[<?= $employeeId ?>]"
+                                    <input type="text" class="assign-target text-end numberOnly" name="employeeTarget[<?= $employeeId ?>]"
                                         placeholder="0.00" style="height: 28px;width:130px;"
                                         value="<?= $employee['target'] != "" ? number_format($employee['target'], 2) : '' ?>"
                                         id="employee-target-<?= $teamId ?>"
@@ -143,34 +142,3 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
     endforeach;
 }
 ?>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // ดักจับเหตุการณ์การกดปุ่ม Enter
-        document.querySelectorAll('.assign-target').forEach(function(input, index) {
-            input.addEventListener('keydown', function(event) {
-
-                if (event.key == 'Enter') {
-
-                    event.preventDefault(); // ป้องกันการส่งฟอร์ม
-
-                    const employeeId = input.name.match(/\d+/)[0];
-
-                    const checkbox = document.getElementById('employee-' + employeeId);
-
-                    if (checkbox && !checkbox.checked) {
-                        checkbox.checked = true; // หาก checkbox ยังไม่ถูกเลือกให้เลือก
-                    }
-
-                    // // หาตำแหน่งของ textbox ถัดไป
-                    const nextInput = document.querySelectorAll('.assign-target')[index + 1];
-                    if (nextInput) {
-                        nextInput.focus(); // ส่งเคอร์เซอร์ไปที่ textbox ถัดไป
-                    }
-                }
-            });
-        });
-    });
-</script>
-<style>
-
-</style>

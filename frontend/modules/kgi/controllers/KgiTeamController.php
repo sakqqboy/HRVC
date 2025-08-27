@@ -971,7 +971,7 @@ class KgiTeamController extends Controller
 		$kgiTeamDetail = curl_exec($api);
 		$kgiTeamDetail = json_decode($kgiTeamDetail, true);
 
-		// throw new exception(print_r($kgiTeamDetail, true));
+		//throw new exception('kgi/kgi-team/kgi-team-detail?kgiTeamId=' . $kgiTeamId . '&&kgiTeamHistoryId=' . $kgiTeamHistoryId);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
 		$units = curl_exec($api);

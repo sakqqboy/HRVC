@@ -11,116 +11,121 @@ if (isset($kpiTeamEmployee) && count($kpiTeamEmployee) > 0) {
         if (isset($kpiEmployee["team"])) {
             //throw new Exception(print_r($kpiEmployee["team"], true));
 ?>
-            <div class="col-12 bg-header-assign pb-0 pt-0 pr-8 mt-10" id="team-employee-<?= $teamId ?>">
-                <div class="row">
-                    <div class="col-5 font-size-12 pt-5 pb-3">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-black.png" style="width:15px;margin-top:-3px;"
-                            class="ml-5 mr-5">
-                        <b><?= $kpiEmployee["team"]["teamName"] ?>, </b><span
-                            class="col-12 font-size-10"><?= $kpiEmployee["team"]["departmentName"] ?></span>
+            <div class="pim-assign-employee-header" id="team-employee-<?= $teamId ?>">
+
+                <div class="font-size-12">
+                    <div class="cycle-pim-assign-team" style="height: 25px;width:25px;">
+                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon" style="height: 14px;width:14px;">
                     </div>
-                    <div class="col-3 font-size-12 pt-5 pb-3 text-center">
-                        <b><span
-                                id="total-team-target-<?= $teamId ?>"><?= number_format($kpiEmployee["team"]["totalTeamTarget"], 2) ?></span></b>
+                </div>
+                <div class="font-size-10" style="width:33%;">
+                    <b><?= $kpiEmployee["team"]["teamName"] ?>, </b>
+                    <span class="font-size-10"><?= $kpiEmployee["team"]["departmentName"] ?></span>
+                </div>
+                <div class="d-flex font-size-12" style="width:26%;">
+                    <div class="me-auto pl-5">
+                        <b><span id="total-team-target-<?= $teamId ?>"><?= number_format($kpiEmployee["team"]["totalTeamTarget"], 2) ?></span></b>
+                    </div>
+                    <div class="text-end">
                         <?php
                         if ($kpiEmployee["team"]["isMore"] == '1') {
                         ?>
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-up.svg" style="width:8px;margin-top:-3px;"
-                                class="ml-5">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-up.svg" style="width:8px;">
                         <?php
                         }
                         if ($kpiEmployee["team"]["isMore"] == '0') {
                         ?>
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-down.svg" style="width:8px;margin-top:-3px;"
-                                class="ml-5">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-equal.svg" style="width:8px;">
+                        <?php
+                        }
+                        if ($kpiEmployee["team"]["isMore"] == '-1') {
+                        ?>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/arrow-down.svg" style="width:8px;">
                         <?php
                         }
                         ?>
                         <span class="font-size-10"><?= number_format($kpiEmployee["team"]["percentage"]) ?> %</span>
                     </div>
-                    <div class="col-4 font-size-12 pt-5 pb-3 text-center">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
-                            <label class="label-switch" for="flexSwitchCheckDefault">Set Remark For All</label>
-                        </div>
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/blue-down.png"
-                            style="width:15px;margin-top:-22px;float:right;cursor:pointer;" class="ml-5"
-                            onclick="javascript:showEmployeeTeamTarget(<?= $teamId ?>)" id="show-<?= $teamId ?>">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/blue-up.png"
-                            style="width:15px;margin-top:-22px;float:right;display:none;cursor:pointer;" class="ml-5"
-                            onclick="javascript:hideEmployeeTeamTarget(<?= $teamId ?>)" id="hide-<?= $teamId ?>">
+                </div>
+                <div class="d-flex flex-grow-1 justify-content-start font-size-12  pl-10">
+                    <div class="form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
                     </div>
+                    <label class="label-switch" for="flexSwitchCheckDefault">Set Remark For All</label>
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/blue-down.png" class="ms-auto" style="width:15px;height:17px;cursor:pointer;"
+                        onclick="javascript:showEmployeeTeamTarget(<?= $teamId ?>)" id="show-<?= $teamId ?>">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/blue-up.png" class="ms-auto"
+                        style="width:15px;height:17px;display:none;cursor:pointer;"
+                        onclick="javascript:hideEmployeeTeamTarget(<?= $teamId ?>)" id="hide-<?= $teamId ?>">
                 </div>
             </div>
         <?php
         }
         ?>
-        <div class="col-12 pr-0 pl-0" id="employee-in-team-<?= $teamId ?>" style="display:none;">
+        <div class="col-12 pr-0 pl-0 mb-10" id="employee-in-team-<?= $teamId ?>" style="display:none;">
             <?php
             if (isset($kpiEmployee["employee"]) && count($kpiEmployee["employee"]) > 0) {
                 foreach ($kpiEmployee["employee"] as $employeeId => $employee):
             ?>
-                    <div class="col-12 bg-white border-bottom">
-                        <div class="row">
-                            <div class="col-5 font-size-12 pt-5">
-                                <div class="row">
-                                    <div class="col-2 text-center pr-0 pl-0 pt-10">
+                    <div class="col-12 bg-white border-bottom pl-10" style="height:40px;align-content: center;">
+                        <div class="row" style="--bs-gutter-x:0px;">
+                            <div class="col-5 font-size-12" style="align-content:center;">
+                                <div class="row" style="--bs-gutter-x:0px;">
+                                    <div class="col-1 text-center" style="align-content: center;">
                                         <?php
                                         if ($show == 1) {
                                         ?>
-                                            <input type="checkbox" id="employee-<?= $employeeId ?>" class="from-check ml-10"
+                                            <input type="checkbox" id="employee-<?= $employeeId ?>" class="from-check"
                                                 <?= $employee["checked"] ?>>
                                             <?php
                                         } else {
                                             if ($employee["checked"] == "checked") {
                                             ?>
-                                                <i class="fa fa-check-square text-primary font-size-16 ml-10" aria-hidden="true"></i>
+                                                <i class="fa fa-check-square text-primary font-size-16" aria-hidden="true"></i>
                                         <?php
                                             }
                                         }
                                         ?>
                                     </div>
-                                    <div class="col-2 pr-5 pl-0 text-center">
+                                    <div class="col-2 text-center">
                                         <img src="<?= Yii::$app->homeUrl ?><?= $employee["picture"] ?>" class="employee-pic-circle">
                                     </div>
-                                    <div class="col-8 pl-5 pt-5">
+                                    <div class="col-9" style="align-content: center;">
                                         <span class="font-size-12"><b><?= $employee["employeeFirstname"] ?>
                                                 <?= $employee["employeeSurename"] ?></b></span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-3 font-size-12 text-center pt-5">
+                            <div class="col-3 font-size-12 text-center" style="align-content:center;">
                                 <?php
                                 if ($show == 1) {
                                 ?>
                                     <input type="text" class="assign-target text-end" name="employeeTarget[<?= $employeeId ?>]"
-                                        placeholder="0.00" style="height: 30px;"
+                                        placeholder="0.00" style="height: 28px;width:130px;"
                                         value="<?= $employee['target'] != "" ? number_format($employee['target'], 2) : '' ?>"
                                         id="employee-target-<?= $teamId ?>"
                                         onkeyup="javascript:calculateEmployeeTargetValue(<?= $teamId ?>)">
                                 <?php
                                 } else { ?>
                                     <input type="text" class="assign-target text-end" name="employeeTarget[<?= $employeeId ?>]"
-                                        placeholder="0.00" style="height: 30px;"
+                                        placeholder="0.00" style="height: 28px;width:130px;"
                                         value="<?= $employee['target'] != "" ? number_format($employee['target'], 2) : '' ?>"
                                         id="employee-target-<?= $teamId ?>" disabled>
-                                    <input type="hidden" name="employeeTarget[<?= $employeeId ?>]" placeholder="0.00" style="height: 30px;"
+                                    <input type="hidden" name="employeeTarget[<?= $employeeId ?>]" placeholder="0.00"
                                         value="<?= $employee['target'] != "" ? number_format($employee['target'], 2) : '' ?>"
                                         id="employee-target-<?= $teamId ?>">
                                 <?php
                                 }
                                 ?>
                             </div>
-                            <div class="col-4 font-size-12 text-center pt-5">
+                            <div class="col-4 font-size-12 text-center pr-5 pl-5" style="display:flex;align-items:center">
                                 <?php
                                 if ($show == 1) {
                                 ?>
-                                    <textarea type="text" class="assign-target" name="employeeRemark[<?= $employeeId ?>]"
-                                        style="height: 30px;"></textarea>
+                                    <textarea type="text" class="assign-target" name="employeeRemark[<?= $employeeId ?>]" style="height: 30px;width:100%;"></textarea>
                                 <?php
                                 } else { ?>
-                                    <textarea type="text" class="assign-target" name="employeeRemark[<?= $employeeId ?>]"
-                                        style="height: 30px;" disabled></textarea>
+                                    <textarea type="text" class="assign-target" name="employeeRemark[<?= $employeeId ?>]" style="height: 30px;width:100%;" disabled></textarea>
                                     <input type="hidden" name="employeeRemark[<?= $employeeId ?>]">
                                 <?php
                                 }
@@ -134,11 +139,10 @@ if (isset($kpiTeamEmployee) && count($kpiTeamEmployee) > 0) {
             ?>
         </div>
 <?php
+
     endforeach;
 }
 ?>
-
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // ดักจับเหตุการณ์การกดปุ่ม Enter
@@ -167,3 +171,6 @@ if (isset($kpiTeamEmployee) && count($kpiTeamEmployee) > 0) {
         });
     });
 </script>
+<style>
+
+</style>
