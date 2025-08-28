@@ -130,7 +130,7 @@ $this->title = 'Assign KGI';
                                             if ($disableTeam == "") {
                                             ?>
                                                 <input type="text" class="assign-target text-end font-size-12 numberOnly teamTarget"
-                                                    value="<?= $target > 0 ? number_format($target, 2) : '' ?>" onkeyup="javasript:calculateEmployeeTargetValue(<?= $team['teamId'] ?>);"
+                                                    value="<?= $target > 0 ? number_format($target, 2) : '' ?>" onkeyup="javasript:calculateEmployeeTargetValue(event,<?= $team['teamId'] ?>);"
                                                     name="teamTarget[<?= $team['teamId'] ?>]" placeholder="0.00" id="teamTarget-<?= $team['teamId'] ?>">
                                             <?php
                                             } else {
@@ -247,7 +247,7 @@ $this->title = 'Assign KGI';
         </div>
     </div>
 </div>
-<input type="hidden" name="kgiId" value="<?= $kgiId ?>">
+<input type="hidden" name="kgiId" value="<?= $kgiId ?>" id="kgiId">
 <input type="hidden" name="companyId" value="<?= $companyId ?>">
 <input type="hidden" name="month" value="<?= $kgiDetail["month"] ?>" id="month">
 <input type="hidden" name="year" value="<?= $kgiDetail["year"] ?>" id="year">
