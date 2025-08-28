@@ -463,6 +463,8 @@ function handleTitleEditClick(e, element) {
 	});
 
 	input.addEventListener('blur', function () {
+		// alert('blur');
+		saveTitleEdit(input.value.trim());
 		cancelEdit(input.value.trim());
 	});
 	const targetDeptIdInput = document.getElementById('departmentId');

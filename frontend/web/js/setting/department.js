@@ -529,6 +529,7 @@ function handleDepEditClick(e, element) {
     });
 
     input.addEventListener('blur', function () {
+        saveDeptEdit(input.value.trim());
         cancelEdit(input.value.trim());
     });
     const targetDeptIdInput = document.getElementById('departmentId');

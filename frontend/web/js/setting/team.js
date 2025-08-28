@@ -602,6 +602,7 @@ function handleTeamEditClick(e, element) {
     });
 
     input.addEventListener('blur', function () {
+        saveTeamEdit(input.value.trim());
         cancelEdit(input.value.trim());
     });
     const targetDeptIdInput = document.getElementById('departmentId');
