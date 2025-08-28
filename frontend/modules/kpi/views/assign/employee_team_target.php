@@ -38,10 +38,10 @@
             <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
         </div>
         <label class="label-switch" for="flexSwitchCheckDefault">Set Remark For All</label>
-        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/blue-down.png" class="ms-auto" style="width:15px;height:17px;cursor:pointer;display:none;"
+        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/blue-down.png" class="ms-auto" style="width:15px;height:17px;cursor:pointer;"
             onclick="javascript:showEmployeeTeamTarget(<?= $teamId ?>)" id="show-<?= $teamId ?>">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/blue-up.png" class="ms-auto"
-            style="width:15px;height:17px;cursor:pointer;"
+            style="width:15px;height:17px;display:none;cursor:pointer;"
             onclick="javascript:hideEmployeeTeamTarget(<?= $teamId ?>)" id="hide-<?= $teamId ?>">
     </div>
 </div>
@@ -50,14 +50,15 @@
     if (isset($employeeTeamTarget["employee"]) && count($employeeTeamTarget["employee"]) > 0) {
         $i = 0;
         foreach ($employeeTeamTarget["employee"] as $employeeId => $employee):
-            $i += 1;
     ?>
             <div class="col-12 bg-white border-bottom pl-10" style="height:40px;align-content: center;">
                 <div class="row" style="--bs-gutter-x:0px;">
                     <div class="col-5 font-size-12" style="align-content:center;">
                         <div class="row" style="--bs-gutter-x:0px;">
                             <div class="col-1 text-center" style="align-content: center;">
+
                                 <input type="checkbox" id="employee-<?= $employeeId ?>" class="from-check" <?= $employee["checked"] ?>>
+
                             </div>
                             <div class="col-2 text-center">
                                 <img src="<?= Yii::$app->homeUrl ?><?= $employee["picture"] ?>" class="employee-pic-circle">
@@ -69,20 +70,18 @@
                         </div>
                     </div>
                     <div class="col-3 font-size-12 text-center" style="align-content:center;">
-                        <input type="text" class="assign-target text-end input-<?= $teamId ?>-<?= $i ?>" name="employeeTarget[<?= $employeeId ?>]"
+                        <input type="text" class="assign-target text-end numberOnly employeeTarget employee-target-<?= $teamId ?> employee-<?= $teamId ?>-<?= $i ?>"
+                            name="employeeTarget[<?= $employeeId ?>]"
                             placeholder="0.00" style="height: 28px;width:130px;"
-                            value="<?= isset($employee['target']) && is_numeric($employee['target']) ? number_format($employee['target'], 2) : '' ?>"
-                            id="employee-target-<?= $teamId ?>"
-                            onkeyup="javascript:calculateEmployeeTargetValue(<?= $teamId ?>)"
-                            onkeydown="javascript:checkEnterTextArea(event,<?= $employeeId ?>,<?= $teamId ?>,<?= $i ?>)">
+                            value="<?= $employee['target'] != "" ? number_format($employee['target'], 2) : '' ?>"
+                            id="employee-target-<?= $employeeId ?>"
+                            onkeyup="javascript:updateEmployeeTerget(event,<?= $teamId ?>,<?= $employeeId ?>)">
                     </div>
                     <div class="col-4 font-size-12 text-center pr-5 pl-5" style="display:flex;align-items:center">
-                        <textarea type="text" class="assign-target input-<?= $teamId ?>-<?= $i + 1 ?>"
+                        <textarea type="text" class="assign-target remark-<?= $teamId ?>-<?= $i ?>" id="employee-remark-<?= $employeeId ?>" name="employeeRemark[<?= $employeeId ?>]"
                             style="height: 30px;width:100%;"
-                            name="employeeRemark[<?= $employeeId ?>]" style="height: 30px;"
-                            onkeydown="javascript:checkEnterTextArea(event,<?= $employeeId ?>,<?= $teamId ?>,<?= $i + 1 ?>)"></textarea>
+                            onkeydown="javascript:checkEnter(event,<?= $teamId ?>,<?= $i ?>)"></textarea>
                     </div>
-
                 </div>
             </div>
     <?php

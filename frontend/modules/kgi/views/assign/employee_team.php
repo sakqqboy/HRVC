@@ -64,6 +64,7 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
         <div class="col-12 pr-0 pl-0 mb-10" id="employee-in-team-<?= $teamId ?>" style="display:none;">
             <?php
             if (isset($kgiEmployee["employee"]) && count($kgiEmployee["employee"]) > 0) {
+                $i = 0;
                 foreach ($kgiEmployee["employee"] as $employeeId => $employee):
             ?>
                     <div class="col-12 bg-white border-bottom pl-10" style="height:40px;align-content: center;">
@@ -99,7 +100,7 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
                                 <?php
                                 if ($show == 1) {
                                 ?>
-                                    <input type="text" class="assign-target text-end numberOnly employeeTarget employee-target-<?= $teamId ?>"
+                                    <input type="text" class="assign-target text-end numberOnly employeeTarget employee-target-<?= $teamId ?> employee-<?= $teamId ?>-<?= $i ?>"
                                         name="employeeTarget[<?= $employeeId ?>]"
                                         placeholder="0.00" style="height: 28px;width:130px;"
                                         value="<?= $employee['target'] != "" ? number_format($employee['target'], 2) : '' ?>"
@@ -123,12 +124,12 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
                                 <?php
                                 if ($show == 1) {
                                 ?>
-                                    <textarea type="text" class="assign-target" id="employee-remark-<?= $employeeId ?>" name="employeeRemark[<?= $employeeId ?>]"
+                                    <textarea type="text" class="assign-target remark-<?= $teamId ?>-<?= $i ?>" id="employee-remark-<?= $employeeId ?>" name="employeeRemark[<?= $employeeId ?>]"
                                         style="height: 30px;width:100%;"
-                                        onkeydown="javascript:checkEnter(event)"></textarea>
+                                        onkeydown="javascript:checkEnter(event,<?= $teamId ?>,<?= $i ?>)"></textarea>
                                 <?php
                                 } else { ?>
-                                    <textarea type="text" class="assign-target" id="employee-remark-<?= $employeeId ?>" name="employeeRemark[<?= $employeeId ?>]" style="height: 30px;width:100%;" disabled></textarea>
+                                    <textarea type=" text" class="assign-target" id="employee-remark-<?= $employeeId ?>" name="employeeRemark[<?= $employeeId ?>]" style="height: 30px;width:100%;" disabled></textarea>
                                     <input type="hidden" name="employeeRemark[<?= $employeeId ?>]">
                                 <?php
                                 }
@@ -137,6 +138,7 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
                         </div>
                     </div>
             <?php
+                    $i++;
                 endforeach;
             }
             ?>

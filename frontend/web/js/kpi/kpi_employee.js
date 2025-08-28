@@ -204,6 +204,7 @@ function assignKpiToEmployeeInTeam(teamId, kpiId) {
 		$("#employee-in-team-" + teamId).remove();
 	}
 }
+
 function showKpiTeamEmployee1(teamId) {
 	var teamStr = $("#allTeam1").val();
 	var teamArr = teamStr.split(",");

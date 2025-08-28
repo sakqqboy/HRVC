@@ -50,17 +50,14 @@
     if (isset($employeeTeamTarget["employee"]) && count($employeeTeamTarget["employee"]) > 0) {
         $i = 0;
         foreach ($employeeTeamTarget["employee"] as $employeeId => $employee):
-            $i += 1;
     ?>
-
-
             <div class="col-12 bg-white border-bottom pl-10" style="height:40px;align-content: center;">
                 <div class="row" style="--bs-gutter-x:0px;">
                     <div class="col-5 font-size-12" style="align-content:center;">
                         <div class="row" style="--bs-gutter-x:0px;">
                             <div class="col-1 text-center" style="align-content: center;">
 
-                                <input type="checkbox" id="employee-<?= $employeeId ?>" class="from-check" <?= $employee["checked"] ?>>
+                                <input type="checkbox" id="employee-<?= $employeeId ?> employee-<?= $teamId ?>-<?= $i ?>" class="from-check" <?= $employee["checked"] ?>>
 
                             </div>
                             <div class="col-2 text-center">
@@ -73,8 +70,7 @@
                         </div>
                     </div>
                     <div class="col-3 font-size-12 text-center" style="align-content:center;">
-
-                        <input type="text" class="assign-target text-end numberOnly employeeTarget employee-target-<?= $teamId ?>"
+                        <input type="text" class="assign-target text-end numberOnly employeeTarget employee-target-<?= $teamId ?> employee-<?= $teamId ?>-<?= $i ?>"
                             name="employeeTarget[<?= $employeeId ?>]"
                             placeholder="0.00" style="height: 28px;width:130px;"
                             value="<?= $employee['target'] != "" ? number_format($employee['target'], 2) : '' ?>"
@@ -82,11 +78,9 @@
                             onkeyup="javascript:updateEmployeeTerget(event,<?= $teamId ?>,<?= $employeeId ?>)">
                     </div>
                     <div class="col-4 font-size-12 text-center pr-5 pl-5" style="display:flex;align-items:center">
-
-                        <textarea type="text" class="assign-target" id="employee-remark-<?= $employeeId ?>" name="employeeRemark[<?= $employeeId ?>]"
+                        <textarea type="text" class="assign-target remark-<?= $teamId ?>-<?= $i ?>" id="employee-remark-<?= $employeeId ?>" name="employeeRemark[<?= $employeeId ?>]"
                             style="height: 30px;width:100%;"
-                            onkeydown="javascript:checkEnter(event)"></textarea>
-
+                            onkeydown="javascript:checkEnter(event,<?= $teamId ?>,<?= $i ?>)"></textarea>
                     </div>
                 </div>
             </div>

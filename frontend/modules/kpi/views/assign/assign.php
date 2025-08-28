@@ -102,7 +102,7 @@ $this->title = 'Assign KPI';
                                             <input type="checkbox" name="team[<?= $team['teamId'] ?>]"
                                                 id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check <?= $role == 3 ? 'd-none' : '' ?>"
                                                 value="<?= $team['teamId'] ?>"
-                                                onclick="javasript:assignKpiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kpiId ?>)">
+                                                onclick="javascript:assignKpiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kpiId ?>)">
                                             <!--kpi_employee-->
                                             <?php
                                             if ($role <= 3 && $checked == "checked") { ?>
@@ -129,9 +129,9 @@ $this->title = 'Assign KPI';
                                             <?php
                                             if ($disableTeam == "") {
                                             ?>
-                                                <input type="text" class="assign-target text-end font-size-12"
-                                                    value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
-                                                    name="teamTarget[<?= $team['teamId'] ?>]" placeholder="0.00">
+                                                <input type="text" class="assign-target text-end font-size-12 numberOnly teamTarget"
+                                                    value="<?= $target > 0 ? number_format($target, 2) : '' ?>" onkeyup="javascript:calculateEmployeeTargetValue(event,<?= $team['teamId'] ?>)"
+                                                    name="teamTarget[<?= $team['teamId'] ?>]" placeholder="0.00" id="teamTarget-<?= $team['teamId'] ?>">
                                             <?php
                                             } else {
                                             ?>
@@ -139,7 +139,7 @@ $this->title = 'Assign KPI';
                                                     value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
                                                     name="teamTarget[<?= $team['teamId'] ?>]" <?= $disableTeam ?>>
                                                 <input type="hidden" value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
-                                                    name="teamTarget[<?= $team['teamId'] ?>]">
+                                                    name="teamTarget[<?= $team['teamId'] ?>]" id="teamTarget-<?= $team['teamId'] ?>">
                                             <?php
                                             }
                                             ?>
@@ -247,52 +247,8 @@ $this->title = 'Assign KPI';
         </div>
     </div>
 </div>
-<input type="hidden" name="kpiId" value="<?= $kpiId ?>">
+<input type="hidden" name="kpiId" value="<?= $kpiId ?>" id="kpiId">
 <input type="hidden" name="companyId" value="<?= $companyId ?>">
 <input type="hidden" name="month" value="<?= $kpiDetail["month"] ?>" id="month">
 <input type="hidden" name="year" value="<?= $kpiDetail["year"] ?>" id="year">
 <?php ActiveForm::end(); ?>
-</div>
-<?php
-//if ($save == 1) {
-?>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // ดักจับเหตุการณ์การกดปุ่ม Enter
-        document.querySelectorAll('.assign-target').forEach(function(input, index) {
-            input.addEventListener('keydown', function(event) {
-                // เช็คถ้ากดปุ่ม Enter
-                if (event.key == 'Enter') {
-                    event.preventDefault(); // ป้องกันการส่งฟอร์ม
-
-                    // หาค่าของ teamId จาก input field
-                    const teamId = input.name.match(/\d+/)[0];
-
-                    // หาค่า checkbox ที่เกี่ยวข้อง
-                    const checkbox = document.getElementById('team-' + teamId);
-
-                    // ตรวจสอบสถานะของ checkbox
-                    if (checkbox && !checkbox.checked) {
-                        checkbox.checked = true; // หาก checkbox ยังไม่ถูกเลือกให้เลือก
-                        // เรียกใช้ฟังก์ชัน assignKpiToEmployeeInTeam หลังจากเลือก checkbox
-                        if (checkbox && checkbox.checked) {
-                            assignKpiToEmployeeInTeam(teamId, <?= $kpiId ?>); // เรียกฟังก์ชัน
-                        }
-                    }
-
-                    // หาตำแหน่งของ textbox ถัดไป
-                    const nextInput = document.querySelectorAll('.assign-target')[index + 1];
-                    if (nextInput) {
-                        nextInput.focus(); // ส่งเคอร์เซอร์ไปที่ textbox ถัดไป
-                    }
-                }
-            });
-        });
-    });
-</script>
-
-
-
-<?php
-//}
-?>

@@ -148,6 +148,11 @@ $(document).ready(function () {
 			e.preventDefault();
 		}
 	});
+	$("#update-kpi-team-employee").on("keydown", function (e) { 
+		if (e.key == 'Enter' && $(e.target).is(".assign-target")) {
+			e.preventDefault();
+		}
+	});
 });
 function assignKgiToEmployeeInTeam(teamId, kgiId) {//เมื่อคลิกที่ checkbox
 	var url = $url + 'kgi/assign/employee-in-team-target';
@@ -212,12 +217,10 @@ var total = 0;
 	$("#total-team-target-" + teamId).html(total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
 }
 
-function checkEnter(event) {
-	if (event.key === 'Enter') {
-		var nextIndex = $("#nextIndex").val();
-		if ($(".employeeTarget").eq(nextIndex) !== -1) {
-			$(".employeeTarget").eq(nextIndex).focus();
-		}
+function checkEnter(event, teamId, index) {
+	if (event.key === "Enter") {
+		var nextIndex = index + 1;
+		$(".employee-" + teamId + '-' + nextIndex).focus();
 		event.preventDefault();
 	}
 	
