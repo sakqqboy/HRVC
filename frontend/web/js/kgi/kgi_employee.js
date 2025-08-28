@@ -46,28 +46,7 @@ function kgiFilterForEmployee() {
 		}
 	});
 }
-function assignKgiToEmployeeInTeam(teamId, kgiId) {
-	var url = $url + 'kgi/assign/employee-in-team-target';
-	var month = $("#month").val();
-	var year = $("#year").val();
-	if ($("#team-" + teamId).prop("checked") == true) {
-		$.ajax({
-			type: "POST",
-			dataType: 'json',
-			url: url,
-			data: { teamId: teamId, kgiId: kgiId,year:year,month:month },
-			success: function (data) {
-				if (data.status) {
-					$("#team-employee-target").append(data.textHtml);
-				}
-			}
-		});
-	} else {
 
-		$("#team-employee-" + teamId).remove();
-		$("#employee-in-team-" + teamId).remove();
-	}
-}
 $(document).ready(function () {
 	$(".numberOnly").on("keydown", function (e) {
 		var oneDot = 1;
@@ -122,22 +101,57 @@ $(document).ready(function () {
 			// });
 			let currentIndex = $(".teamTarget").index(this);
 			let nextIndex = currentIndex + 1;
-	
+			var currentId = $(this).attr("id");
+			var teamId = currentId.split("-")[1];
+			var kgiId = $("#kgiId").val();
+			if ($(this).val() !== "") {
+				$("#team-" + teamId).prop("checked", true);
+				//assignKgiToEmployeeInTeam(teamId, kgiId);
+			} 
 			if ($(".teamTarget").eq(nextIndex) !== -1) {
 				$(".teamTarget").eq(nextIndex).focus();
 			}
 			e.preventDefault();
 		}
+		
+	});
+	$("#update-kgi-team-employee").on("keydown", function (e) { 
+		if (e.key == 'Enter' && $(e.target).is(".assign-target")) {
+			e.preventDefault();
+		}
 	});
 });
-function calculateEmployeeTargetValue(teamId) {
+function assignKgiToEmployeeInTeam(teamId, kgiId) {//เมื่อคลิกที่ checkbox
+	var url = $url + 'kgi/assign/employee-in-team-target';
+	var month = $("#month").val();
+	var year = $("#year").val();
+	if ($("#team-" + teamId).prop("checked") == true) {
+		$.ajax({
+			type: "POST",
+			dataType: 'json',
+			url: url,
+			data: { teamId: teamId, kgiId: kgiId,year:year,month:month },
+			success: function (data) {
+				if (data.status) {
+					$("#team-employee-target").append(data.textHtml);
+				}
+			}
+		});
+	} else {
+
+		$("#team-employee-" + teamId).remove();
+		$("#employee-in-team-" + teamId).remove();
+	}
+}
+function calculateEmployeeTargetValue(e,teamId) {//เมื่อปล่อยปุ่ม
 	var total = 0;
 	var inputVal = $("#teamTarget-" + teamId).val();
-	
-	
-	if ($("#team-" + teamId).is(":checked") == false && inputVal != "") {
-		$("#team-" + teamId).click();
+	if ($("#team-" + teamId).is(":checked") == false && inputVal !== "") {
+		$("#team-" + teamId).prop("checked", true);
 	} else { 
+		if (inputVal == "") { 
+			$("#team-" + teamId).prop("checked", false);
+		}
 		$('input[id="employee-target-' + teamId + '"]').each(function () {
 			if ($(this).val() != '') {
 				let currentValue = $(this).val().replace(',', '');
