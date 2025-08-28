@@ -33,9 +33,10 @@ $this->title = 'Assign KFI';
     <div class="col-12 mt-20" id="box-wrapper">
         <div class="bg-white-employee" id="pim-content">
             <div class="row" style="--bs-gutter-x:0px;">
-                <div class="col-6 text-truncate pim-name-title border">
+                <div class="col-6 text-truncate pim-name-title">
                     <a href="<?= $url ?>" class="font-size-12 mr-10" style="text-decoration: none;">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg" class="mr-3" style="margin-top: -4px;">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg" class="mr-3"
+                            style="margin-top: -4px;">
                         <text class="pim-text-back">
                             <?= Yii::t('app', 'Back') ?>
                         </text>
@@ -46,7 +47,8 @@ $this->title = 'Assign KFI';
                 <div class="col-6 text-end">
                     <button class="btn-create font-size-12 ml-10" style="text-decoration: none;" type="submit">
                         <div class="ml-7 mr-7" style="gap: 5px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/save-whiet.svg" style="width:15px;margin-top:-3px;">
+                            <img src="<?= Yii::$app->homeUrl ?>image/save-whiet.svg"
+                                style="width:15px;margin-top:-3px;">
                             <?= Yii::t('app', 'Save') ?>
                         </div>
                     </button>
