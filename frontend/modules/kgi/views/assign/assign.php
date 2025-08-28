@@ -102,7 +102,7 @@ $this->title = 'Assign KGI';
                                             <input type="checkbox" name="team[<?= $team['teamId'] ?>]"
                                                 id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check <?= $role == 3 ? 'd-none' : '' ?>"
                                                 value="<?= $team['teamId'] ?>"
-                                                onclick="javasript:assignKgiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kgiId ?>)">
+                                                onclick="javascript:assignKgiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kgiId ?>)">
                                             <!--kgi_employee-->
                                             <?php
                                             if ($role <= 3 && $checked == "checked") { ?>
@@ -130,7 +130,7 @@ $this->title = 'Assign KGI';
                                             if ($disableTeam == "") {
                                             ?>
                                                 <input type="text" class="assign-target text-end font-size-12 numberOnly teamTarget"
-                                                    value="<?= $target > 0 ? number_format($target, 2) : '' ?>" onkeyup="javasript:calculateEmployeeTargetValue(event,<?= $team['teamId'] ?>);"
+                                                    value="<?= $target > 0 ? number_format($target, 2) : '' ?>" onkeyup="javascript:calculateEmployeeTargetValue(event,<?= $team['teamId'] ?>)"
                                                     name="teamTarget[<?= $team['teamId'] ?>]" placeholder="0.00" id="teamTarget-<?= $team['teamId'] ?>">
                                             <?php
                                             } else {

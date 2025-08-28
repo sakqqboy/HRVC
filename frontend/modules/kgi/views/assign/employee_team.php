@@ -99,20 +99,22 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
                                 <?php
                                 if ($show == 1) {
                                 ?>
-                                    <input type="text" class="assign-target text-end numberOnly" name="employeeTarget[<?= $employeeId ?>]"
+                                    <input type="text" class="assign-target text-end numberOnly employeeTarget employee-target-<?= $teamId ?>"
+                                        name="employeeTarget[<?= $employeeId ?>]"
                                         placeholder="0.00" style="height: 28px;width:130px;"
                                         value="<?= $employee['target'] != "" ? number_format($employee['target'], 2) : '' ?>"
-                                        id="employee-target-<?= $teamId ?>"
-                                        onkeyup="javascript:calculateEmployeeTargetValue(<?= $teamId ?>)">
+                                        id="employee-target-<?= $employeeId ?>"
+                                        onkeyup="javascript:updateEmployeeTerget(event,<?= $teamId ?>,<?= $employeeId ?>)">
                                 <?php
                                 } else { ?>
-                                    <input type="text" class="assign-target text-end" name="employeeTarget[<?= $employeeId ?>]"
+                                    <input type="text" class="assign-target text-end employee-target-<?= $teamId ?>" name="employeeTarget[<?= $employeeId ?>]"
                                         placeholder="0.00" style="height: 28px;width:130px;"
                                         value="<?= $employee['target'] != "" ? number_format($employee['target'], 2) : '' ?>"
-                                        id="employee-target-<?= $teamId ?>" disabled>
+                                        id="employee-target-<?= $employeeId ?>" disabled>
                                     <input type="hidden" name="employeeTarget[<?= $employeeId ?>]" placeholder="0.00"
                                         value="<?= $employee['target'] != "" ? number_format($employee['target'], 2) : '' ?>"
-                                        id="employee-target-<?= $teamId ?>">
+                                        class="employee-target-<?= $teamId ?>"
+                                        id="employee-target-<?= $employeeId ?>">
                                 <?php
                                 }
                                 ?>
@@ -121,10 +123,12 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
                                 <?php
                                 if ($show == 1) {
                                 ?>
-                                    <textarea type="text" class="assign-target" name="employeeRemark[<?= $employeeId ?>]" style="height: 30px;width:100%;"></textarea>
+                                    <textarea type="text" class="assign-target" id="employee-remark-<?= $employeeId ?>" name="employeeRemark[<?= $employeeId ?>]"
+                                        style="height: 30px;width:100%;"
+                                        onkeydown="javascript:checkEnter(event)"></textarea>
                                 <?php
                                 } else { ?>
-                                    <textarea type="text" class="assign-target" name="employeeRemark[<?= $employeeId ?>]" style="height: 30px;width:100%;" disabled></textarea>
+                                    <textarea type="text" class="assign-target" id="employee-remark-<?= $employeeId ?>" name="employeeRemark[<?= $employeeId ?>]" style="height: 30px;width:100%;" disabled></textarea>
                                     <input type="hidden" name="employeeRemark[<?= $employeeId ?>]">
                                 <?php
                                 }
@@ -142,3 +146,4 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
     endforeach;
 }
 ?>
+<input type="hidden" id="nextIndex" value="0">
