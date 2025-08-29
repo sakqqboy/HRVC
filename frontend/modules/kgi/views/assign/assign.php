@@ -100,7 +100,7 @@ $this->title = 'Assign KGI';
                                     <div class="assign-team">
                                         <div class="">
                                             <input type="checkbox" name="team[<?= $team['teamId'] ?>]"
-                                                id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check <?= $role == 3 ? 'd-none' : '' ?>"
+                                                id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check <?= $role <= 3 ? 'd-none' : '' ?>"
                                                 value="<?= $team['teamId'] ?>"
                                                 onclick="javascript:assignKgiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kgiId ?>)">
                                             <!--kgi_employee-->

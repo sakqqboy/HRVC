@@ -102,7 +102,7 @@ class AssignController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-each-unit?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
 		$kgiTeams = curl_exec($api);
 		$kgiTeams = json_decode($kgiTeams, true);
-		//throw new Exception(print_r($kgiTeams, true));
+		//throw new Exception('kgi/kgi-team/kgi-team-each-unit?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
 
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/company-team?id=' . $companyId);
