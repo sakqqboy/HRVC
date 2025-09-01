@@ -152,7 +152,6 @@ class BranchController extends Controller
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch?page=1' . '&limit=7');
         $branchJson = curl_exec($api);
         $branches = json_decode($branchJson, true);
-        throw new Exception(print_r($branches, true));
 
         curl_close($api);
 
