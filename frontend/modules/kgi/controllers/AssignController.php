@@ -96,12 +96,13 @@ class AssignController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=" . $kgiHistoryId);
 		$kgiDetail = curl_exec($api);
 		$kgiDetail = json_decode($kgiDetail, true);
-		//throw new Exception(print_r($kgiDetail, true));
+		//throw new Exception($kgiHistoryId);
 
 		//throw new Exception($kgiDetail["month"] . '=' . $kgiDetail["year"] . $kgiId);
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-each-unit?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
 		$kgiTeams = curl_exec($api);
 		$kgiTeams = json_decode($kgiTeams, true);
+		//throw new Exception(print_r($kgiTeams, true));
 		//throw new Exception('kgi/kgi-team/kgi-team-each-unit?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
 
 
@@ -114,7 +115,7 @@ class AssignController extends Controller
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-employee?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
 		$kgiTeamEmployee = curl_exec($api);
 		$kgiTeamEmployee = json_decode($kgiTeamEmployee, true);
-
+		//throw new Exception(print_r($kgiTeamEmployee, true));
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
 		$allCompany = curl_exec($api);

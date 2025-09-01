@@ -287,7 +287,11 @@ class KgiTeamController extends Controller
 		$managerId = '';
 		$supervisorId = '';
 		$staffId = '';
-
+		// if (function_exists('curl_init')) {
+		// 	throw new Exception("cURL พร้อมใช้งานบนเว็บ");
+		// } else {
+		// 	throw new Exception("cURL ไม่ได้เปิดบนเว็บ");
+		// }
 		if ($role == 7) {
 			$adminId = Yii::$app->user->id;
 		}
@@ -355,19 +359,19 @@ class KgiTeamController extends Controller
 
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
+		$units = \curl_exec($api);
 		$units = json_decode($units, true);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
+		$companies = \curl_exec($api);
 		$companies = json_decode($companies, true);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
-		$waitForApprove = curl_exec($api);
+		$waitForApprove = \curl_exec($api);
 		$waitForApprove = json_decode($waitForApprove, true);
 
 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
+		$allCompany = \curl_exec($api);
 		$allCompany = json_decode($allCompany, true);
 
 
@@ -603,6 +607,7 @@ class KgiTeamController extends Controller
 			$countAllCompany = count($allCompany);
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
+		throw new exception(print_r($kgiTeamDetail, true));
 		return $this->render('kgi_form', [
 			"kgi" => $kgi,
 			"data" => $kgiTeamDetail,

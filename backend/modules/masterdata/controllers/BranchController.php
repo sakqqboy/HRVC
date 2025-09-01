@@ -6,7 +6,11 @@ use backend\models\hrvc\Branch;
 use backend\models\hrvc\Department;
 use backend\models\hrvc\Team;
 use Exception;
+use Yii;
 use yii\web\Controller;
+use yii\filters\Cors;
+use yii\web\Response;
+use yii\web\UnauthorizedHttpException;
 
 /**
  * Default controller for the `masterdata` module
@@ -19,6 +23,22 @@ header("Pragma: no-cache");
 class BranchController extends Controller
 {
 
+	public function beforeAction($action)
+	{
+		$authHeader = Yii::$app->request->getHeaders()->get('TcgHrvcAuthorization');
+
+		if (!$authHeader || $authHeader !== '9f1b3c4d5e6a7b8c9d0e1f2a3b4c5d6e') {
+			Yii::$app->response->format = Response::FORMAT_JSON;
+			Yii::$app->response->statusCode = 401;
+			Yii::$app->response->data = [
+				'status' => 'error',
+				'message' => 'Invalid or missing token.'
+			];
+			return false;
+		}
+
+		return parent::beforeAction($action);
+	}
 	public function actionIndex()
 	{
 		// return $this->render('index');
@@ -36,7 +56,7 @@ class BranchController extends Controller
 			->all();
 		return json_encode($branch);
 	}
-	
+
 	public function actionActiveBranch($page = null, $limit = null)
 	{
 		// $branch = Branch::find()
@@ -47,31 +67,31 @@ class BranchController extends Controller
 		// 	->orderBy('c.companyName')
 		// 	->asArray()->all();
 
-			$offset = ($page - 1) * $limit;
+		$offset = ($page - 1) * $limit;
 
-			$branch = [];
-			
-			$query = Branch::find()
-				->select('branch.*, co.countryName, c.companyName, c.picture, co.flag, c.city')
-				->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId')
-				->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
-				->where(['branch.status' => 1]);
-	
-			// if ($limit > 0) {
-			if (!empty($limit)) {
-				$query ->offset($offset)
+		$branch = [];
+
+		$query = Branch::find()
+			->select('branch.*, co.countryName, c.companyName, c.picture, co.flag, c.city')
+			->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId')
+			->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
+			->where(['branch.status' => 1]);
+
+		// if ($limit > 0) {
+		if (!empty($limit)) {
+			$query->offset($offset)
 				->limit($limit);
-			}
-	
-			$branch = $query
-				->orderBy('c.companyName')
-				->asArray()
-				->all();
+		}
+
+		$branch = $query
+			->orderBy('c.companyName')
+			->asArray()
+			->all();
 
 		return json_encode($branch);
 	}
-	
-	public function actionActiveBranchFilter($id, $countryId,$companyId, $page,$limit)
+
+	public function actionActiveBranchFilter($id, $countryId, $companyId, $page, $limit)
 	{
 
 		$offset = ($page - 1) * $limit;
@@ -84,7 +104,7 @@ class BranchController extends Controller
 		// 	->where(["branch.status" => 1])
 		// 	->orderBy('c.companyName')
 		// 	->asArray()->all();
-		
+
 		$query = Branch::find()
 			->select('branch.*, co.countryName, c.companyName, c.picture, co.flag, c.city')
 			->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId')
@@ -106,90 +126,90 @@ class BranchController extends Controller
 			->asArray()
 			->all();
 
-	
-			
-		return json_encode($branch);	
+
+
+		return json_encode($branch);
 	}
 
 
-		
-    public function actionBranchPage($page,$countryId,$companyId ,$limit)
-    {
-        
-        $query = Branch::find()
+
+	public function actionBranchPage($page, $countryId, $companyId, $limit)
+	{
+
+		$query = Branch::find()
 			->select('branch.*, co.countryName, c.companyName, c.picture, co.flag, c.city')
 			->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId')
 			->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
 			->where(['branch.status' => 1]);
 
 		if (!empty($countryId)) {
-				$query->andWhere(["c.countryId" => $countryId]);
-        }
+			$query->andWhere(["c.countryId" => $countryId]);
+		}
 
 		if (!empty($companyId)) {
-            $query->andWhere(["branch.companyId" => $companyId]);
-        }
-    
-        $totalRows = $query->count(); // นับหลังจากใส่เงื่อนไขทั้งหมดแล้ว
-    
-        $totalPages = ceil($totalRows / $limit);
-    
-        return json_encode([
-            'totalPages' => $totalPages,
-            'totalRows' => $totalRows,
-            'perPage' => $limit,
-            'nowPage' => $page
-        ]);
-    }
+			$query->andWhere(["branch.companyId" => $companyId]);
+		}
 
-	public function actionBranchPageFilter($page,$countryId,$companyId,$branchId ,$limit)
-    {
-        
-        $query = Branch::find()
+		$totalRows = $query->count(); // นับหลังจากใส่เงื่อนไขทั้งหมดแล้ว
+
+		$totalPages = ceil($totalRows / $limit);
+
+		return json_encode([
+			'totalPages' => $totalPages,
+			'totalRows' => $totalRows,
+			'perPage' => $limit,
+			'nowPage' => $page
+		]);
+	}
+
+	public function actionBranchPageFilter($page, $countryId, $companyId, $branchId, $limit)
+	{
+
+		$query = Branch::find()
 			->select('branch.*, co.countryName, c.companyName, c.picture, co.flag, c.city')
 			->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId')
 			->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
 			->where(['branch.status' => 1]);
 
 		if (!empty($countryId)) {
-				$query->andWhere(["c.countryId" => $countryId]);
-        }
+			$query->andWhere(["c.countryId" => $countryId]);
+		}
 
 		if (!empty($companyId)) {
-            $query->andWhere(["branch.companyId" => $companyId]);
-        }
+			$query->andWhere(["branch.companyId" => $companyId]);
+		}
 
 		if (!empty($branchId)) {
-            $query->andWhere(["branch.branchId" => $branchId]);
-        }
-    
-        $totalRows = $query->count(); // นับหลังจากใส่เงื่อนไขทั้งหมดแล้ว
-    
-        $totalPages = ceil($totalRows / $limit);
-    
-        return json_encode([
-            'totalPages' => $totalPages,
-            'totalRows' => $totalRows,
-            'perPage' => $limit,
-            'nowPage' => $page
-        ]);
-    }
+			$query->andWhere(["branch.branchId" => $branchId]);
+		}
+
+		$totalRows = $query->count(); // นับหลังจากใส่เงื่อนไขทั้งหมดแล้ว
+
+		$totalPages = ceil($totalRows / $limit);
+
+		return json_encode([
+			'totalPages' => $totalPages,
+			'totalRows' => $totalRows,
+			'perPage' => $limit,
+			'nowPage' => $page
+		]);
+	}
 
 	public function actionBranchDetail($id)
 	{
 		$branch = [];
 		$branch = Branch::find()
-		->select('branch.*, co.countryName, c.companyName, c.picture, co.flag, c.city')
-		->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId') // join กับตาราง company
-		->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId') // join กับตาราง country ผ่าน company
-		->where(["branchId" => $id]) // หา branch ตาม id
-		->asArray() // เอาผลลัพธ์มาแบบ array (ไม่ใช่ object)
-		->orderBy('branchName') // เรียงตาม branchName (แต่จริงๆมัน .one() เลยไม่มีผล)
-		->one(); // เอามาแค่ 1 record
+			->select('branch.*, co.countryName, c.companyName, c.picture, co.flag, c.city')
+			->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId') // join กับตาราง company
+			->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId') // join กับตาราง country ผ่าน company
+			->where(["branchId" => $id]) // หา branch ตาม id
+			->asArray() // เอาผลลัพธ์มาแบบ array (ไม่ใช่ object)
+			->orderBy('branchName') // เรียงตาม branchName (แต่จริงๆมัน .one() เลยไม่มีผล)
+			->one(); // เอามาแค่ 1 record
 
 		return json_encode($branch);
 	}
-	
+
 	public function actionBranchTeam($id)
 	{
 		$team = [];
@@ -227,9 +247,9 @@ class BranchController extends Controller
 		if (isset($department) && count($department) > 0) {
 			foreach ($department as $dep) :
 				$departments[$dep["departmentId"]] = [
-							"departmentId" => $dep['departmentId'],
-							"departmentName" => $dep["departmentName"]
-						];
+					"departmentId" => $dep['departmentId'],
+					"departmentName" => $dep["departmentName"]
+				];
 			endforeach;
 		}
 		return json_encode($departments);

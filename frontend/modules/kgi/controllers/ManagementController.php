@@ -759,6 +759,7 @@ class ManagementController extends Controller
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
+
 		$role = UserRole::userRight();
 		$api = curl_init();
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
@@ -1959,10 +1960,30 @@ class ManagementController extends Controller
 				}
 			endforeach;
 		}
+		$api = curl_init();
+		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
+		$allCompany = curl_exec($api);
+		$allCompany = json_decode($allCompany, true);
+
+
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		//$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+
+		curl_close($api);
 		return $this->render('wait_approve1', [
 			"role" => $role,
 			"teamKgis" => $teamKgis,
 			"employeeKgis" => $employeeKgis,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 	public function actionWaitApproveKgiPersonal()
