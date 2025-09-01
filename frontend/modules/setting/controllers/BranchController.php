@@ -6,6 +6,7 @@ use common\helpers\Path;
 use common\models\hrvc\Company;
 use common\models\ModelMaster;
 use Exception;
+use frontend\components\Api;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Department;
 use frontend\models\hrvc\DepartmentTitle;
@@ -129,13 +130,11 @@ class BranchController extends Controller
         $totalEmployees = 0;
         $totalDepartment = 0;
         $totalTeam = 0;
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_HTTPHEADER, [
-            "Content-Type: application/json",
-            "TcgHrvcAuthorizatioe:9f1b3c4d5e6a7b8c9d0e1f2a3b4c5d6e"
-        ]);
+
+
+
+        $branches = Api::connectApi(Path::Api() . 'masterdata/branch/active-branch?page=1' . '&limit=7');
+        $countries = Api::connectApi(Path::Api() . 'masterdata/country/company-country');
 
         curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
         $result1 = curl_exec($api);
