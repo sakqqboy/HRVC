@@ -7,6 +7,7 @@ use common\helpers\Session;
 use common\models\ModelMaster;
 use DateTime;
 use Exception;
+use frontend\components\Api;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
@@ -111,32 +112,16 @@ class ManagementController extends Controller
 				"type" => $type
 			]));
 		}
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
-		$kfis = curl_exec($api);
-		$kfis = json_decode($kfis, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
-		$units = json_decode($units, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
-
+		$kfis = Api::connectApi(Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$isManager = UserRole::isManager();
 		$part = Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
 
 
-		curl_close($api);
 
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
@@ -217,31 +202,11 @@ class ManagementController extends Controller
 				"type" => $type
 			]));
 		}
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-
-		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
-		$kfis = curl_exec($api);
-		$kfis = json_decode($kfis, true);
-		// throw new Exception(Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
-		$units = json_decode($units, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
-
-
-		curl_close($api);
-
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$kfis = Api::connectApi(Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
 			$countAllCompany = count($allCompany);
@@ -372,23 +337,10 @@ class ManagementController extends Controller
 		} else {
 			$role = UserRole::userRight();
 			$groupId = Group::currentGroupId();
-			$api = curl_init();
-			curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-			curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-			$companies = curl_exec($api);
-			$companies = json_decode($companies, true);
-
-			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-			$units = curl_exec($api);
-			$units = json_decode($units, true);
-
-			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-			$allCompany = curl_exec($api);
-			$allCompany = json_decode($allCompany, true);
-
-			curl_close($api);
+			$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+			$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
+			$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 			$data = [];
 
 			$countAllCompany = 0;
@@ -491,22 +443,11 @@ class ManagementController extends Controller
 		$role = UserRole::userRight();
 		$groupId = Group::currentGroupId();
 
-		$api = curl_init();
-
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		// ดึงข้อมูล KFI
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&kfiHistoryId=" . $kfiHistoryId);
-		$kfi = curl_exec($api);
-		$kfi = json_decode($kfi, true);
-
+		$kfi = Api::connectApi(Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&kfiHistoryId=" . $kfiHistoryId);
 		$companyId = $kfi["companyId"];
+		$kfiBranch = Api::connectApi(Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 
-		// ดึงข้อมูลสาขา
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
-		$kfiBranch = curl_exec($api);
-		$kfiBranch = json_decode($kfiBranch, true);
+
 
 		$kfiBranchText = $this->renderAjax('multi_branch_update', [
 			"branches" => $kfiBranch,
@@ -514,31 +455,17 @@ class ManagementController extends Controller
 		]);
 
 		$branch["textBranch"] = $kfiBranchText;
-		// ดึงข้อมูลแผนก
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-department?id=' . $kfiId);
-		$kfiDepartment = curl_exec($api);
-		$kfiDepartment = json_decode($kfiDepartment, true);
 
+		$kfiDepartment = Api::connectApi(Path::Api() . 'kfi/management/kfi-department?id=' . $kfiId);
 		$kfiDepartmentText = $this->renderAjax('multi_department_update', [
 			"d" => $kfiDepartment,
 			"kfiId" => $kfiId
 		]);
 
 		$department["textDepartment"] = $kfiDepartmentText;
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
-		$units = json_decode($units, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
-
-		curl_close($api);
+		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$data = [];
 
 		$countAllCompany = 0;
@@ -547,11 +474,7 @@ class ManagementController extends Controller
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
 		$totalBranch = Branch::totalBranch();
-
-		// รวมข้อมูลทั้งหมด
 		$data = array_merge($kfi, $branch, $department);
-
-		// เรนเดอร์หน้า 'create' และส่งข้อมูลไปแสดงผล
 		return $this->render('kfi_from', [
 			"data" => $data,
 			"role" => $role,
@@ -676,25 +599,14 @@ class ManagementController extends Controller
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
+		$kfi = Api::connectApi(Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
+		$history = Api::connectApi(Path::Api() . 'kfi/management/kfi-history?kfiId=' . $kfiId);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
-		$kfi = curl_exec($api);
-		$kfi = json_decode($kfi, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-history?kfiId=' . $kfiId);
-		$history = curl_exec($api);
-		$history = json_decode($history, true);
-		curl_close($api);
-		//throw new exception(print_r($history, true));
 
 		$historyText = $this->renderAjax('history', [
 			"history" => $history
 		]);
-		//throw new exception(print_r($kfi, true));
 		$res["kfi"] = $kfi;
 		$res["history"] = $historyText;
 		$res["status"] = true;
@@ -712,13 +624,8 @@ class ManagementController extends Controller
 	{
 		$companyId = $_POST["companyId"];
 		$text = "<option value=''>Select Branch</option>";
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
-		$branch = curl_exec($api);
-		$branch = json_decode($branch, true);
-		curl_close($api);
+
+		$branch = Api::connectApi(Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
 		$res["status"] = false;
 		if (isset($branch) && count($branch) > 0) {
 			$res["status"] = true;
@@ -734,13 +641,8 @@ class ManagementController extends Controller
 	{
 		$branchId = $_POST["branchId"];
 		$text = "<option value=''>Select Department</option>";
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $branchId);
-		$departments = curl_exec($api);
-		$departments = json_decode($departments, true);
-		curl_close($api);
+		$departments = Api::connectApi(Path::Api() . 'masterdata/department/branch-department?id=' . $branchId);
+
 		$res["status"] = false;
 		if (isset($departments) && count($departments) > 0) {
 			$res["status"] = true;
@@ -757,23 +659,10 @@ class ManagementController extends Controller
 		$userId = Yii::$app->user->id;
 		$employeeId = User::employeeIdFromUserId($userId);
 		$kfiId = $_POST["kfiId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$kfi = Api::connectApi(Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
+		$kfiIssue = Api::connectApi(Path::Api() . 'kfi/management/kfi-issue?kfiId=' . $kfiId);
+		$profile = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
-		$kfi = curl_exec($api);
-		$kfi = json_decode($kfi, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-issue?kfiId=' . $kfiId);
-		$kfiIssue = curl_exec($api);
-		$kfiIssue = json_decode($kfiIssue, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-		$profile = curl_exec($api);
-		$profile = json_decode($profile, true);
-
-		curl_close($api);
 		$res["status"] = true;
 		$res["issueText"] = $this->renderAjax('kfi_issue', [
 			"kfiIssue" => $kfiIssue,
@@ -944,39 +833,19 @@ class ManagementController extends Controller
 			//return $this->redirect(Yii::$app->homeUrl);
 		}
 		$paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
-		//throw new Exception($paramText);
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-filter?' . $paramText);
-		$kfis = curl_exec($api);
-		$kfis = json_decode($kfis, true);
-		//throw new exception($paramText);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
-		$units = json_decode($units, true);
+		$kfis = Api::connectApi(Path::Api() . 'kfi/management/kfi-filter?' . $paramText);
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 
 		if ($companyId != "") {
-			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
-			$branches = curl_exec($api);
-			$branches = json_decode($branches, true);
+			$branches = Api::connectApi(Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
 		}
 		if ($branchId != "") {
-			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-team?id=' . $branchId);
-			$teams = curl_exec($api);
-			$teams = json_decode($teams, true);
+			$teams = Api::connectApi(Path::Api() . 'masterdata/branch/branch-team?id=' . $branchId);
 		}
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
-
-		curl_close($api);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$months = ModelMaster::monthFull(1);
 		if ($type == "list") {
 			$file = "index";
@@ -1017,13 +886,8 @@ class ManagementController extends Controller
 	{
 		$companyId = $_POST["companyId"];
 		$acType = $_POST["acType"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$branches = Api::connectApi(Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
-		$branches = curl_exec($api);
-		$branches = json_decode($branches, true);
 		if ($acType == "create") {
 			$branchText = $this->renderAjax('multi_branch', ["branches" => $branches]);
 		} else {
@@ -1033,7 +897,6 @@ class ManagementController extends Controller
 				"kfiId" => $kfiId
 			]);
 		}
-		curl_close($api);
 		$res["status"] = true;
 		$res["branchText"] = $branchText;
 		return json_encode($res);
@@ -1129,17 +992,10 @@ class ManagementController extends Controller
 			$staffId = Yii::$app->user->id;
 			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$kfis = Api::connectApi(Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 
-		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
-		$kfis = curl_exec($api);
-		$kfis = json_decode($kfis, true);
 
 		$isManager = UserRole::isManager();
-		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		return $this->render('assign', [
 			"months" => $months,
@@ -1152,21 +1008,12 @@ class ManagementController extends Controller
 	{
 		$companyId = $_POST["companyId"];
 		$kfiId = $_POST["kfiId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
-		$branches = curl_exec($api);
-		$branches = json_decode($branches, true);
+		$branches = Api::connectApi(Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 		$textBranch = "";
 		$textBranch .= $this->renderAjax('company_branch', ["branches" => $branches, "kfiId" => $kfiId]);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
-		$kfi = curl_exec($api);
-		$kfi = json_decode($kfi, true);
-
-		curl_close($api);
+		$kfi = Api::connectApi(Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 		$res["kfiName"] = $kfi["kfiName"];
 		$res["companyName"] = $kfi["companyName"];
 		$res["textBranch"] = $textBranch;
@@ -1408,15 +1255,9 @@ class ManagementController extends Controller
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
-		//throw new exception($paramText);
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$kfis = Api::connectApi(Path::Api() . 'kfi/management/kfi-filter?' . $paramText);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-filter?' . $paramText);
-		$kfis = curl_exec($api);
-		$kfis = json_decode($kfis, true);
-		curl_close($api);
+
 		//throw new exception(print_r($kfis, true));
 		$kfiText = $this->renderAjax('assign_search', [
 			"kfis" => $kfis
@@ -1429,17 +1270,8 @@ class ManagementController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$kfiId = $param["kfiId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-has-kgi?kfiId=' . $kfiId);
-		$kfiHasKgi = curl_exec($api);
-		$kfiHasKgi = json_decode($kfiHasKgi, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
-		$kfiDetail = curl_exec($api);
-		$kfiDetail = json_decode($kfiDetail, true);
-		curl_close($api);
+		$kfiHasKgi = Api::connectApi(Path::Api() . 'kfi/management/kfi-has-kgi?kfiId=' . $kfiId);
+		$kfiDetail = Api::connectApi(Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 		return $this->render('kfi_kgi', [
 			"kfiHasKgi" => $kfiHasKgi,
 			"kfiId" => $kfiId,
@@ -1450,14 +1282,7 @@ class ManagementController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$kfiId = $param["kfiId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-branch?kfiId=' . $kfiId);
-		$kfiBranch = curl_exec($api);
-		$kfiBranch = json_decode($kfiBranch, true);
-
-		curl_close($api);
+		$kfiBranch = Api::connectApi(Path::Api() . 'kfi/management/kfi-branch?kfiId=' . $kfiId);
 		$kfiName = Kfi::kfiName($kfiId);
 		return $this->render('assign_kgi', [
 			"kfiBranch" => $kfiBranch,
@@ -1469,14 +1294,8 @@ class ManagementController extends Controller
 	{
 		$branchId = $_POST["branchId"];
 		$kfiId = $_POST["kfiId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$kgiBranch = Api::connectApi(Path::Api() . 'kgi/management/branch-kgi?branchId=' . $branchId);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/branch-kgi?branchId=' . $branchId);
-		$kgiBranch = curl_exec($api);
-		$kgiBranch = json_decode($kgiBranch, true);
-		curl_close($api);
 		$kgiText = $this->renderAjax('branch_kgi', [
 			"kgiBranch" => $kgiBranch,
 			"branchId" => $branchId,
@@ -1523,17 +1342,8 @@ class ManagementController extends Controller
 	public function actionRelatedKgi()
 	{
 		$kfiId = $_POST["kfiId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-has-kgi?kfiId=' . $kfiId);
-		$kfiHasKgi = curl_exec($api);
-		$kfiHasKgi = json_decode($kfiHasKgi, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
-		$kfiDetail = curl_exec($api);
-		$kfiDetail = json_decode($kfiDetail, true);
-		curl_close($api);
+		$kfiHasKgi = Api::connectApi(Path::Api() . 'kfi/management/kfi-has-kgi?kfiId=' . $kfiId);
+		$kfiDetail = Api::connectApi(Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 		$text = $this->renderAjax('kfi_has_kgi', [
 			"kfiHasKgi" => $kfiHasKgi
 		]);
@@ -1545,29 +1355,16 @@ class ManagementController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$kfiId = $param["kfiId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
-		$kfi = curl_exec($api);
-		$kfi = json_decode($kfi, true);
 
-
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-history?kfiId=' . $kfiId);
-		$history = curl_exec($api);
-		$history = json_decode($history, true);
+		$kfi = Api::connectApi(Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
+		$history = Api::connectApi(Path::Api() . 'kfi/management/kfi-history?kfiId=' . $kfiId);
 		$res["historyText"] = $this->renderAjax('history', ["history" => $history]);
+		$kfiIssue = Api::connectApi(Path::Api() . 'kfi/management/kfi-issue?kfiId=' . $kfiId);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-issue?kfiId=' . $kfiId);
-		$kfiIssue = curl_exec($api);
-		$kfiIssue = json_decode($kfiIssue, true);
 		$res["issueText"] =  $this->renderAjax('kfi_issue_detail', [
 			"kfiIssue" => $kfiIssue,
 			"kfiId" => $kfiId,
 		]);
-
-		curl_close($api);
 
 		$role = UserRole::userRight();
 		return $this->render('kfi_detail', [

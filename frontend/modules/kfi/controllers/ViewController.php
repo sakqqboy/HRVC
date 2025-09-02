@@ -8,6 +8,7 @@ use frontend\models\hrvc\Kfi;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\components\Api;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Group;
@@ -62,36 +63,17 @@ class ViewController extends Controller
 			$staffId = Yii::$app->user->id;
 			//return $this->redirect(Yii::$app->homeUrl);
 		}
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$kfiDetail = Api::connectApi(Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
-		$kfiDetail = curl_exec($api);
-		$kfiDetail = json_decode($kfiDetail, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
-		$units = json_decode($units, true);
 
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-history-summarize?kfiId=' . $kfiId);
-		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
-		$kfis = curl_exec($api);
-		$kfis = json_decode($kfis, true);
+		$kfis = Api::connectApi(Path::Api() . 'kfi/management/kfi-history-summarize?kfiId=' . $kfiId);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
-
-
-		curl_close($api);
 
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
@@ -130,29 +112,11 @@ class ViewController extends Controller
 		} else {
 			$kfiHistoryId = 0;
 		}
-		//throw new Exception($kfiHistoryId);
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$kfiDetail = Api::connectApi(Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=" . $kfiHistoryId);
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=" . $kfiHistoryId);
-		$kfiDetail = curl_exec($api);
-		$kfiDetail = json_decode($kfiDetail, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
-		$units = json_decode($units, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
-
-
-		curl_close($api);
 
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
@@ -162,7 +126,7 @@ class ViewController extends Controller
 		$totalBranch = Branch::totalBranch();
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-		// throw new Exception(print_r($kfiDetail, true));
+
 		return $this->render('kfi_history', [
 			"role" => $role,
 			"kfiDetail" => $kfiDetail,
@@ -191,14 +155,8 @@ class ViewController extends Controller
 	{
 		$kfiId = $_POST["kfiId"];
 		$res["kfiEmployeeTeam"] = "";
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$kfiDetail = Api::connectApi(Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
-		$kfiDetail = curl_exec($api);
-		$kfiDetail = json_decode($kfiDetail, true);
-		curl_close($api);
 		$res["kfiEmployeeTeam"] = $this->renderAjax("kfi_employee", [
 			"kfiDetail" => $kfiDetail
 
@@ -209,14 +167,7 @@ class ViewController extends Controller
 	{
 		$kfiId = $_POST["kfiId"];
 		$kfiHistoryId = $_POST["kfiHistoryId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-history?kfiId=' . $kfiId . "&&kfiHistoryId=" . $kfiHistoryId);
-		$history = curl_exec($api);
-		$history = json_decode($history, true);
-		curl_close($api);
+		$history = Api::connectApi(Path::Api() . 'kfi/management/kfi-history?kfiId=' . $kfiId . "&&kfiHistoryId=" . $kfiHistoryId);
 		$monthDetail = [];
 		$summarizeMonth = [];
 		$res["monthlyDetailHistoryText"] = "";
@@ -339,14 +290,7 @@ class ViewController extends Controller
 	{
 		$kfiId = $_POST["kfiId"];
 		$kfiHistoryId = $_POST["kfiHistoryId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-history-for-chart?kfiId=' . $kfiId . "&&kfiHistoryId=" . $kfiHistoryId);
-		$history = curl_exec($api);
-		$history = json_decode($history, true);
-		curl_close($api);
+		$history = Api::connectApi(Path::Api() . 'kfi/management/kfi-history-for-chart?kfiId=' . $kfiId . "&&kfiHistoryId=" . $kfiHistoryId);
 		$monthDetail = [];
 		$summarizeMonth = [];
 		//$year = 2024;
@@ -490,20 +434,9 @@ class ViewController extends Controller
 			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
 		}
 		$kfiId = $_POST["kfiId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-has-kgi?kfiId=' . $kfiId);
-		$kfiHasKgi = curl_exec($api);
-		$kfiHasKgi = json_decode($kfiHasKgi, true);
+		$kfiHasKgi = Api::connectApi(Path::Api() . 'kfi/management/kfi-has-kgi?kfiId=' . $kfiId);
+		$kfiDetail = Api::connectApi(Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId . "&&kfiHistoryId=0");
-		$kfiDetail = curl_exec($api);
-		$kfiDetail = json_decode($kfiDetail, true);
-
-		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
-		// $kgis = curl_exec($api);
-		// $kgis = json_decode($kgis, true);
 
 
 		$ghp = [];
@@ -512,8 +445,6 @@ class ViewController extends Controller
 				$ghp[$fg["kgiId"]] = 1;
 			endforeach;
 		}
-
-		curl_close($api);
 
 		$res["kgi"] = $this->renderAjax('kfi_kgi', [
 			"kfiHasKgi" => $kfiHasKgi,
@@ -555,31 +486,11 @@ class ViewController extends Controller
 			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
 		}
 		$kfiId = $_POST["kfiId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-has-kgi?kfiId=' . $kfiId);
-		$kfiHasKgi = curl_exec($api);
-		$kfiHasKgi = json_decode($kfiHasKgi, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?id=' . $kfiId . "&&kfiHistoryId=0");
-		$kfiDetail = curl_exec($api);
-		$kfiDetail = json_decode($kfiDetail, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
-		$kgis = curl_exec($api);
-		$kgis = json_decode($kgis, true);
-
+		$kfiHasKgi = Api::connectApi(Path::Api() . 'kfi/management/kfi-has-kgi?kfiId=' . $kfiId);
+		$kfiDetail = Api::connectApi(Path::Api() . 'kfi/management/kfi-detail?id=' . $kfiId . "&&kfiHistoryId=0");
+		$kgis = Api::connectApi(Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 
 		$ghp = [];
-		// if (count($kgiHasKpi) > 0) {
-		// 	foreach ($kgiHasKpi as $gp):
-		// 		$ghp[$gp["kpiId"]] = 1;
-		// 	endforeach;
-		// }
-
-		curl_close($api);
 
 		$res["kgi"] = $this->renderAjax('kgi', [
 			"kfiHasKgi" => $kfiHasKgi,

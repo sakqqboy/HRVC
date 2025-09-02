@@ -4,6 +4,7 @@ namespace frontend\modules\kfi\controllers;
 
 use common\helpers\Path;
 use common\models\ModelMaster;
+use frontend\components\Api;
 use frontend\models\hrvc\UserRole;
 use yii\web\Controller;
 
@@ -25,19 +26,10 @@ class ChartController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $kfiId = $param["kfiId"];
         $role = UserRole::userRight();
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
-        $kfiDetail = curl_exec($api);
-        $kfiDetail = json_decode($kfiDetail, true);
+        $kfiDetail = Api::connectApi(Path::Api() . 'kfi/management/kfi-detail?kfiId=' . $kfiId);
+        $history = Api::connectApi(Path::Api() . 'kfi/management/kfi-history?kfiId=' . $kfiId);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/kfi-history?kfiId=' . $kfiId);
-        $history = curl_exec($api);
-        $history = json_decode($history, true);
-
-        curl_close($api);
         $monthDetail = [];
         $summarizeMonth = [];
         $year = 2024;
