@@ -18,15 +18,11 @@ use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\UploadedFile;
+use frontend\components\Api;
 
 /**
  * Default controller for the `setting` module
  */
-// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-// header("Cache-Control: post-check=0, pre-check=0", false);
-// header("Pragma: no-cache");
 class CompanyController extends Controller
 {
 	/**
@@ -90,8 +86,6 @@ class CompanyController extends Controller
 		$page = Yii::$app->request->post('page');
 		$nextPage = Yii::$app->request->post('nextPage');
 
-		// throw new exception(print_r($nextPage, true));
-
 		$url =  ModelMaster::encodeParams(['countryId' => $countryId, 'nextPage' => $nextPage]);
 
 		if ($page == 'grid') {
@@ -123,7 +117,6 @@ class CompanyController extends Controller
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
-			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
 		}
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
 		if (!isset($group) && !empty($group)) {
@@ -132,30 +125,22 @@ class CompanyController extends Controller
 
 		$company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
 		if (!isset($company) && !empty($company)) {
-			// throw new Exception(print_r($company, true));
 			return $this->redirect(Yii::$app->homeUrl . 'setting/company/display-company/');
 		}
 
 
 		$groupId = $group["groupId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$companies = Api::connectApi(
+			Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1&limit=7'
+		);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1' . '&limit=7');
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-		//throw new exception(print_r($companies, true));
+		$numPage = Api::connectApi(
+			Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=1&countryId=&limit=7'
+		);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=1' . '&countryId=' . '&limit=7');
-		$numPage = curl_exec($api);
-		$numPage = json_decode($numPage, true);
-		// throw new exception(print_r($numPage, true));
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
-		$result1 = curl_exec($api);
-		$countries = json_decode($result1, true);
-
+		$countries = Api::connectApi(
+			Path::Api() . 'masterdata/country/company-country'
+		);
 
 		$data = [];
 		if (!empty($companies)) {
@@ -167,8 +152,6 @@ class CompanyController extends Controller
 					->asArray()
 					->all();
 
-				// throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
-
 				// กรองเฉพาะที่มี picture
 				$filteredEmployees = array_filter($employees, function ($employee) {
 					return !empty($employee['picture']);
@@ -176,9 +159,6 @@ class CompanyController extends Controller
 
 				// รีเซ็ต index และเลือกแค่ 3 คนแรก
 				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
-
-				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
-
 
 				$branchIds = Branch::find()->select('branchId')
 					->where(["companyId" => $companyId, "status" => 1])
@@ -216,7 +196,6 @@ class CompanyController extends Controller
 
 				$data[] = [
 					"about" => $company['about'],
-					// "picture" => !empty($company["picture"]) ? $company["picture"] : "image/no-company.svg",
 					"picture" => $pictureUrl,
 					"companyName" => $company['companyName'],
 					"flag" => !empty($branch["flag"]) ? $company["flag"] : "image/e-world.svg",
@@ -232,7 +211,6 @@ class CompanyController extends Controller
 			endforeach;
 		}
 
-		curl_close($api);
 		return $this->render('index', [
 			"companies" => $data,
 			"groupId" => $groupId,
@@ -267,9 +245,7 @@ class CompanyController extends Controller
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
-			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
 		}
-		// throw new exception(print_r($nextPage, true));
 
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
 		if (!isset($group) && !empty($group)) {
@@ -278,30 +254,28 @@ class CompanyController extends Controller
 
 		$company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
 		if (!isset($company) && !empty($company)) {
-			// throw new Exception(print_r($company, true));
 			return $this->redirect(Yii::$app->homeUrl . 'setting/company/display-company/');
 		}
 
 
 		$groupId = $group["groupId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$companies = Api::connectApi(
+			Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId .
+			'&countryId=' . $countryId .
+			'&page=' . $nextPage .
+			'&limit=7'
+		);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId . '&page=' . $nextPage . '&limit=7');
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-		//throw new exception(print_r($companies, true));
+		$numPage = Api::connectApi(
+			Path::Api() . 'masterdata/group/company-page?id=' . $groupId .
+			'&page=' . $nextPage .
+			'&countryId=' . $countryId .
+			'&limit=7'
+		);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=' . $nextPage . '&countryId=' . $countryId . '&limit=7');
-		$numPage = curl_exec($api);
-		$numPage = json_decode($numPage, true);
-		// throw new exception(print_r($numPage, true));
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
-		$result1 = curl_exec($api);
-		$countries = json_decode($result1, true);
-
+		$countries = Api::connectApi(
+			Path::Api() . 'masterdata/country/company-country'
+		);
 
 		$data = [];
 		if (!empty($companies)) {
@@ -313,8 +287,6 @@ class CompanyController extends Controller
 					->asArray()
 					->all();
 
-				// throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
-
 				// กรองเฉพาะที่มี picture
 				$filteredEmployees = array_filter($employees, function ($employee) {
 					return !empty($employee['picture']);
@@ -322,9 +294,6 @@ class CompanyController extends Controller
 
 				// รีเซ็ต index และเลือกแค่ 3 คนแรก
 				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
-
-				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
-
 
 				$branchIds = Branch::find()->select('branchId')
 					->where(["companyId" => $companyId, "status" => 1])
@@ -360,10 +329,8 @@ class CompanyController extends Controller
 					$pictureUrl = 'image/no-company.svg';
 				}
 
-
 				$data[] = [
 					"about" => $company['about'],
-					// "picture" => !empty($company["picture"]) ? $company["picture"] : "image/no-company.svg",
 					"picture" => $pictureUrl,
 					"companyName" => $company['companyName'],
 					"flag" => !empty($company["flag"]) ? $company["flag"] : "image/e-world.svg",
@@ -379,7 +346,6 @@ class CompanyController extends Controller
 			endforeach;
 		}
 
-		curl_close($api);
 		return $this->render('index', [
 			"companies" => $data,
 			"groupId" => $groupId,
@@ -392,7 +358,6 @@ class CompanyController extends Controller
 
 	public function actionCompanyGrid()
 	{
-
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
 		if (!isset($group) && !empty($group)) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
@@ -415,31 +380,24 @@ class CompanyController extends Controller
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
-			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
 		}
 		$groupId = $group["groupId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1' . '&limit=6');
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
+		$companies = Api::connectApi(
+			Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1&limit=6'
+		);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=1' . '&countryId=' . '&limit=6');
-		$numPage = curl_exec($api);
-		$numPage = json_decode($numPage, true);
-		// throw new exception(print_r($numPage, true));
+		$numPage = Api::connectApi(
+			Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=1&countryId=&limit=6'
+		);
 
-		if ($companies === false) {
-			throw new Exception('API Error: ' . curl_error($api));
+		$countries = Api::connectApi(
+			Path::Api() . 'masterdata/country/company-country'
+		);
+
+		// ถ้าจะเช็ค error ให้ทำหลังจากดึงข้อมูล
+		if (!$companies) {
+			throw new Exception('API Error: ไม่สามารถดึงข้อมูล company-group ได้');
 		}
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
-		$result1 = curl_exec($api);
-		$countries = json_decode($result1, true);
-
-		curl_close($api);
-		// throw new Exception(print_r($companies, true)); // Debug: ดูข้อมูลทั้งหมด
 
 		$data = [];
 		if (!empty($companies)) {
@@ -491,7 +449,6 @@ class CompanyController extends Controller
 				//เก็บค่า
 				$data[] = [
 					"about" => $company['about'],
-					// "picture" => !empty($company["picture"]) ? $company["picture"] : "image/no-company.svg",
 					"picture" => $pictureUrl,
 					"companyName" => $company['companyName'],
 					"flag" => !empty($company["flag"]) ? $company["flag"] : "image/e-world.svg",
@@ -520,17 +477,9 @@ class CompanyController extends Controller
 
 	public function actionCompanyGridFilter($hash)
 	{
-		// throw new Exception(print_r($countryId, true));
-		// $countryId = Yii::$app->request->post('countryId');
 		$param = ModelMaster::decodeParams($hash);
 		$countryId = $param["countryId"];
 		$nextPage = $param["nextPage"];
-
-		// if (Yii::$app->request->isPost && Yii::$app->request->post('countryId') !== null) {
-		// 	$countryId = Yii::$app->request->post('countryId');
-		// 	// throw new Exception(print_r($countryId, true));
-		// }
-
 		$group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
 		if (!isset($group) && !empty($group)) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
@@ -553,31 +502,19 @@ class CompanyController extends Controller
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
-			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
 		}
 		$groupId = $group["groupId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId . '&page=' . $nextPage . '&limit=6');
-		$companies = curl_exec($api);
+		$companies = Api::connectApi(
+    	Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId . '&page=' . $nextPage . '&limit=6'
+		);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=' . $nextPage . '&countryId=' . $countryId . '&limit=6');
-		$numPage = curl_exec($api);
-		$numPage = json_decode($numPage, true);
-		// throw new exception(print_r($numPage, true));
+		$numPage = Api::connectApi(
+			Path::Api() . 'masterdata/group/company-page?id=' . $groupId . '&page=' . $nextPage . '&countryId=' . $countryId . '&limit=6'
+		);
 
-		if ($companies === false) {
-			throw new Exception('API Error: ' . curl_error($api));
-		}
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/company-country');
-		$result1 = curl_exec($api);
-		$countries = json_decode($result1, true);
-
-		$companies = json_decode($companies, true);
-		curl_close($api);
-		// throw new Exception(print_r($companies, true)); // Debug: ดูข้อมูลทั้งหมด
+		$countries = Api::connectApi(
+			Path::Api() . 'masterdata/country/company-country'
+		);
 
 		$data = [];
 		if (!empty($companies)) {
@@ -589,8 +526,6 @@ class CompanyController extends Controller
 					->asArray()
 					->all();
 
-				// throw new Exception(print_r($employees, true)); // Debug: ดูข้อมูลทั้งหมด
-
 				// กรองเฉพาะที่มี picture
 				$filteredEmployees = array_filter($employees, function ($employee) {
 					return !empty($employee['picture']);
@@ -598,9 +533,6 @@ class CompanyController extends Controller
 
 				// รีเซ็ต index และเลือกแค่ 3 คนแรก
 				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
-
-				// throw new Exception(print_r($filteredEmployees, true)); // Debug: ดูเฉพาะ 3 คนที่มี picture
-
 
 				$branchIds = Branch::find()->select('branchId')
 					->where(["companyId" => $companyId, "status" => 1])
@@ -638,7 +570,6 @@ class CompanyController extends Controller
 
 				$data[] = [
 					"about" => $company['about'],
-					// "picture" => !empty($company["picture"]) ? $company["picture"] : "image/no-company.svg",
 					"picture" => $pictureUrl,
 					"companyName" => $company['companyName'],
 					"flag" => !empty($company["flag"]) ? $company["flag"] : "image/e-world.svg",
@@ -668,22 +599,13 @@ class CompanyController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$groupId = $param["groupId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$countries = Api::connectApi(
+    		Path::Api() . 'masterdata/country/active-country'
+		);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
-		$result1 = curl_exec($api);
-		$countries = json_decode($result1, true);
-
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/header?id=' . $groupId);
-		$headQuater = curl_exec($api);
-		$headQuater = json_decode($headQuater, true);
-
-		// throw new Exception(print_r($headQuater, true));
-
-		curl_close($api);
+		$headQuater = Api::connectApi(
+			Path::Api() . 'masterdata/company/header?id=' . $groupId
+		);
 
 		return $this->render('create', [
 			"countries" => $countries,
@@ -693,9 +615,6 @@ class CompanyController extends Controller
 	}
 	public function actionSaveCreateCompany()
 	{
-
-		// throw new Exception("POST DATA: " . print_r($_POST, true));
-
 		if (isset($_POST["companyName"]) && trim($_POST["companyName"]) != '') {
 			$company = new Company();
 			$company->companyName = $_POST["companyName"];
@@ -726,27 +645,14 @@ class CompanyController extends Controller
 				$fileBanner->saveAs($pathSave);
 				$company->banner = 'images/company/banner/' . $fileName;
 			}
-			// $fileImage = UploadedFile::getInstanceByName("image");
-			// if (isset($fileImage) && !empty($fileImage)) {
-			// 	$path = Path::getHost() . 'images/company/profile/';
-			// 	if (!file_exists($path)) {
-			// 		mkdir($path, 0777, true);
-			// 	}
-			// 	$file = $fileImage->name;
-			// 	$filenameArray = explode('.', $file);
-			// 	$countArrayFile = count($filenameArray);
-			// 	$fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
-			// 	$pathSave = $path . $fileName;
-			// 	$fileImage->saveAs($pathSave);
-			// 	$company->picture = 'images/company/profile/' . $fileName;
-			// }
+			
 			$fileImage = UploadedFile::getInstanceByName("image");
 			if (isset($fileImage) && !empty($fileImage)) {
 				$path = Path::getHost() . 'images/company/profile/';
 				if (!file_exists($path)) {
 					mkdir($path, 0777, true);
 				}
-
+				
 				// เตรียมชื่อไฟล์ใหม่
 				$file = $fileImage->name;
 				$filenameArray = explode('.', $file);
@@ -824,35 +730,32 @@ class CompanyController extends Controller
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
-			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
 		}
 
 		$param = ModelMaster::decodeParams($hash);
 		$companyId = $param["companyId"];
-		$apiCompany = curl_init();
-		curl_setopt($apiCompany, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($apiCompany, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
-		$groupJson = curl_exec($apiCompany);
-		$company = json_decode($groupJson, true);
-		$directorId = $company["directorId"];
-
-		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $directorId);
-		$groupJson = curl_exec($apiCompany);
-		$director = json_decode($groupJson, true);
-
-		// curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/group/company-branch?id=' . $companyId . '&page=1' . '&limit=7');
-		curl_setopt($apiCompany, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
-		$companyJson = curl_exec($apiCompany);
-		$companyBranch = json_decode($companyJson, true);
-		// throw new Exception("companyBranch DATA: " . print_r($companyBranch, true));
-
 		$branchs = [];
 		$pictureUrl = '';
 
+		$company = Api::connectApi(
+			Path::Api() . 'masterdata/company/company-detail?id=' . $companyId
+		);
+
+		$directorId = $company["directorId"] ?? null;
+
+		$director = [];
+		if ($directorId) {
+			$director = Api::connectApi(
+				Path::Api() . 'masterdata/employee/employee-detail?id=' . $directorId
+			);
+		}
+
+		$companyBranch = Api::connectApi(
+			Path::Api() . 'masterdata/company/company-branch?id=' . $companyId
+		);
+
 		if (!empty($companyBranch)) {
 			foreach ($companyBranch as $branch) {
-				// $relativePath = 'images/branch/profile/Tp-bPC6u8a.png';
 				$relativePath = $branch["branchImage"] ?? '';
 
 				$absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
@@ -877,10 +780,6 @@ class CompanyController extends Controller
 				];
 			}
 		}
-
-		// throw new Exception("companyBranch DATA: " . print_r($companyBranch, true));
-
-		curl_close($apiCompany);
 
 		$totalDepartment = 0;
 		$totalTeam = 0;
@@ -928,31 +827,21 @@ class CompanyController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$companyId = $param["companyId"];
 
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$countries = Api::connectApi(
+			Path::Api() . 'masterdata/country/active-country'
+		);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
-		$resultCountry = curl_exec($api);
-		$countries = json_decode($resultCountry, true);
+		$company = Api::connectApi(
+			Path::Api() . 'masterdata/company/company-detail?id=' . $companyId
+		);
 
+		$headQuater = Api::connectApi(
+			Path::Api() . 'masterdata/company/header?id=' . $company['groupId']
+		);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
-		$company = curl_exec($api);
-		$company = json_decode($company, true);
-
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/header?id=' . $company['groupId']);
-		$headQuater = curl_exec($api);
-		$headQuater = json_decode($headQuater, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $company["countryId"]);
-		$resultCountryDetail = curl_exec($api);
-		$companyCountry = json_decode($resultCountryDetail, true);
-
-		curl_close($api);
-
-		// throw new Exception("Company: " . print_r($company, true));
+		$companyCountry = Api::connectApi(
+			Path::Api() . 'masterdata/country/country-detail?id=' . $company['countryId']
+		);
 
 		return $this->render('update_company', [
 			"countries" => $countries,
@@ -963,7 +852,6 @@ class CompanyController extends Controller
 	}
 	public function actionSaveUpdateCompany()
 	{
-		// throw new Exception("POST DATA: " . print_r($_POST["director"], true));
 		if (isset($_POST["companyId"])) {
 			$companyId = $_POST["companyId"] - 543;
 			$company = Company::find()->where(["companyId" => $companyId])->one();
@@ -979,7 +867,6 @@ class CompanyController extends Controller
 			$company->location = $_POST["location"];
 			$company->about = $_POST["about"];
 			$company->directorId = $_POST["directorId"];
-
 			$company->status = 1;
 			$company->createDateTime = new Expression('NOW()');
 			$company->updateDateTime =  new Expression('NOW()');
@@ -1001,28 +888,7 @@ class CompanyController extends Controller
 				$fileBanner->saveAs($pathSave);
 				$company->banner = 'images/company/banner/' . $fileName;
 			}
-			// $fileImage = UploadedFile::getInstanceByName("image");
-			// if (isset($fileImage) && !empty($fileImage)) {
-			// 	$path = Path::getHost() . 'images/company/profile/';
-			// 	if (!file_exists($path)) {
-			// 		mkdir($path, 0777, true);
-			// 	}
-			// 	if (!empty($oldImage)) {
-			// 		$oldPathBanner = Path::getHost() . $oldImage;
-			// 		if (file_exists($oldPathBanner) && is_file($oldPathBanner)) {
-			// 			unlink($oldPathBanner);
-			// 		}
-			// 	}
-			// 	$file = $fileImage->name;
-			// 	$filenameArray = explode('.', $file);
-			// 	$fileExt = end($filenameArray);
-			// 	$fileName = Yii::$app->security->generateRandomString(10) . '.' . $fileExt;
-			// 	$pathSave = $path . $fileName;
-
-			// 	$fileImage->saveAs($pathSave);
-			// 	$company->picture = 'images/company/profile/' . $fileName;
-			// }
-
+			
 			$fileImage = UploadedFile::getInstanceByName("image");
 			if (isset($fileImage) && !empty($fileImage)) {
 				$path = Path::getHost() . 'images/company/profile/';
@@ -1098,14 +964,9 @@ class CompanyController extends Controller
 	{
 		$companyId = $_POST["companyId"];
 		$text = "<option value=''>Select Branch</option>";
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
-		$branch = curl_exec($api);
-		$branch = json_decode($branch, true);
-
-		curl_close($api);
+		$branch = Api::connectApi(
+    Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId
+		);
 
 		$res["status"] = false;
 		if (isset($branch) && count($branch) > 0) {
@@ -1196,13 +1057,9 @@ class CompanyController extends Controller
 	public function actionCompanyDepartment()
 	{
 		$companyId = $_POST["companyId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/company-department?id=' . $companyId);
-		$departments = curl_exec($api);
-		$departments = json_decode($departments, true);
-		curl_close($api);
+		$departments = Api::connectApi(
+			Path::Api() . 'masterdata/department/company-department?id=' . $companyId
+		);
 		$option = '<option value="">Department</option>';
 		$res["status"] = false;
 		$res["department"] = '';
@@ -1222,21 +1079,18 @@ class CompanyController extends Controller
 
 		// รับ JSON body โดยตรง
 		$data = json_decode(file_get_contents("php://input"), true);
-		$companyId = isset($data['companyId']) ? $data['companyId'] : null;
+		$companyId = $data['companyId'] ?? null;
 
 		if (!$companyId) {
 			return ['error' => 'Missing companyId'];
 		}
 
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, false); // ปิดเฉพาะใน dev/localhost
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
+		// ใช้ Api::connectApi แทน curl
+		$branches = Api::connectApi(
+			Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId
+		);
 
-		$response = curl_exec($api);
-		curl_close($api);
-
-		$branches = json_decode($response, true);
 		return $branches;
+
 	}
 }

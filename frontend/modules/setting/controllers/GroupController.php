@@ -16,15 +16,11 @@ use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\UploadedFile;
+use frontend\components\Api;
 
 /**
  * Default controller for the `setting` module
  */
-// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-// header("Cache-Control: post-check=0, pre-check=0", false);
-// header("Pragma: no-cache");
 class GroupController extends Controller
 {
     /**
@@ -63,28 +59,21 @@ class GroupController extends Controller
     public function actionCreateGroup()
     {
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
-        // if (isset($group) && !empty($group)) {
-        //     return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
-        // }
+ 
         if (isset($_POST["groupName"]) && trim($_POST["groupName"]) != '') {
-            // throw new Exception('POST DATA: ' . print_r($_POST, true));
-
+ 
             $group = new Group();
             $group->groupName = $_POST["groupName"];
             $group->tagLine = $_POST["tagLine"];
-            // $group->headQuaterName = $_POST["headQuaterName"];
             $group->displayName = $_POST["displayName"];
             $group->website = $_POST["website"];
             $group->location = $_POST["location"];
             $group->countryId = $_POST["country"];
-            // $group->city = $_POST["city"];
-            // $group->postalCode = $_POST["postalCode"];
             $group->industries = $_POST["industries"];
             $group->email = $_POST["email"];
             $group->contact = $_POST["contact"];
             $group->founded = $_POST["founded"];
             $group->director = $_POST["director"];
-            // $group->socialTag = $_POST["socialTag"];
             $group->socialInstargram = $_POST["instagram"];
             $group->socialFacebook = $_POST["facebook"];
             $group->socialYoutube = $_POST["youtube"];
@@ -127,14 +116,9 @@ class GroupController extends Controller
                 return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $groupId]));
             }
         }
-        //
-        $ch1 = curl_init();
-        curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($ch1, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch1, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
-        $result1 = curl_exec($ch1);
-        curl_close($ch1);
-        $countries = json_decode($result1, true);
+
+       $countries = Api::connectApi(Path::Api() . 'masterdata/country/active-country');
+
         return $this->render('create', [
             "countries" => $countries
         ]);
@@ -166,23 +150,12 @@ class GroupController extends Controller
         }
         if ($role == 1 || $role == 2) {
             $staffId = Yii::$app->user->id;
-            //return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
-        }
+         }
 
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
-        $groupJson = curl_exec($api);
-        $group = json_decode($groupJson, true);
-        // throw new Exception(print_r($group,true));
+        $group = Api::connectApi(Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
 
+        $companyGroup = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1&limit=7');
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1' . '&limit=7');
-        $companyJson = curl_exec($api);
-        $companyGroup = json_decode($companyJson, true);
-
-        curl_close($api);
         $employees = Employee::find()->select('employeeId')->where(["status" => 1])->all();
         $companies = Company::find()->where(["groupId" => $groupId, "status" => 1])->asArray()->all();
         if (isset($companies) && count($companies) > 0) {
@@ -202,15 +175,7 @@ class GroupController extends Controller
                                 ->where(["departmentId" => $department["departmentId"], "status" => 1])
                                 ->asArray()
                                 ->all();
-                            // if (isset($teams) && count($teams) > 0) {
-                            //     foreach ($teams as $team) :
-                            //         $employees = Employee::find()
-                            //             ->where(["status" => 1, "teamId" => $team["teamId"]])
-                            //             ->asArray()
-                            //             ->all();
-                            //         $totalEmployees += count($employees);
-                            //     endforeach;
-                            // }
+                            
                             $totalTeam += count($teams);
                         endforeach;
                         $totalDepartment += count($departments);
@@ -236,12 +201,8 @@ class GroupController extends Controller
         $filteredEmployees = array_slice($filteredEmployees, 0, 3);
 
         // แสดงผลลัพธ์
-        // print_r($filteredEmployees);
-
         $totalEmployees = count($employees);
         $branches = Branch::find()->select('branchId')->where(["status" => 1])->all();
-
-        // throw new Exception(print_r($filteredEmployees,true));
 
         return $this->render('group_view', [
             "group" => $group,
@@ -259,24 +220,15 @@ class GroupController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $groupId = $param["groupId"];
 
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        // ดึงข้อมูลประเทศทั้งหมด
+        $countries = Api::connectApi(Path::Api() . 'masterdata/country/active-country');
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
-        $resultCountry = curl_exec($api);
-        $countries = json_decode($resultCountry, true);
+        // ดึงรายละเอียดกลุ่ม
+        $group = Api::connectApi(Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
 
+        // ดึงรายละเอียดประเทศของกลุ่ม
+        $groupCountry = Api::connectApi(Path::Api() . 'masterdata/country/country-detail?id=' . $group['countryId']);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
-        $groupJson = curl_exec($api);
-        $group = json_decode($groupJson, true);
-        // throw new Exception(print_r($group,true));
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/country-detail?id=' . $group["countryId"]);
-        $resultCountryDetail = curl_exec($api);
-        $groupCountry = json_decode($resultCountryDetail, true);
-
-        curl_close($api);
         return $this->render('update_group', [
             "countries" => $countries,
             "group" => $group,
@@ -285,11 +237,6 @@ class GroupController extends Controller
     }
     public function actionSaveUpdateGroup()
     {
-        // echo '<pre>';
-        // print_r($_POST);
-        // echo '</pre>';
-
-        // exit;
         if (isset($_POST["groupName"]) && trim($_POST["groupName"]) != '') {
             $group = Group::find()->where(["groupId" => $_POST["groupId"] - 543])->one();
             $oldBanner = $group->banner;
@@ -330,24 +277,7 @@ class GroupController extends Controller
                 $fileBanner->saveAs($pathSave);
                 $group->banner = 'images/group/banner/' . $fileName;
             }
-            // $fileImage = UploadedFile::getInstanceByName("image");
-            // if (isset($fileImage) && !empty($fileImage)) {
-            //     $path = Path::getHost() . 'images/group/profile/';
-            //     if (!file_exists($path)) {
-            //         mkdir($path, 0777, true);
-            //     }
-            //     $oldPathPicture = Path::getHost() . $oldImage;
-            //     if (file_exists($oldPathPicture)) {
-            //         unlink($oldPathPicture);
-            //     }
-            //     $file = $fileImage->name;
-            //     $filenameArray = explode('.', $file);
-            //     $countArrayFile = count($filenameArray);
-            //     $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
-            //     $pathSave = $path . $fileName;
-            //     $fileImage->saveAs($pathSave);
-            //     $group->picture = 'images/group/profile/' . $fileName;
-            // }
+            
             $fileImage = UploadedFile::getInstanceByName("image");
             if (isset($fileImage) && !empty($fileImage)) {
                 $path = Path::getHost() . 'images/group/profile/';

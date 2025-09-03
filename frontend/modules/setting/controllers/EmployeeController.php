@@ -38,15 +38,11 @@ use yii\data\Pagination;
 use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\UploadedFile;
+use frontend\components\Api;
 
 /**
  * Default controller for the `setting` module
  */
-// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-// header("Cache-Control: post-check=0, pre-check=0", false);
-// header("Pragma: no-cache");
 class EmployeeController extends Controller
 {
     /**
@@ -69,11 +65,9 @@ class EmployeeController extends Controller
     {
         $param = ModelMaster::decodeParams($hash);
         $departmentId = $param["departmentId"] ?? 0;
-        // throw new exception(print_r($departmentId, true));
 
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
         if (!isset($group) && empty($group)) {
-            // return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/display-group/');
         }
 
@@ -124,17 +118,14 @@ class EmployeeController extends Controller
         if ($groupId == null) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
         }
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/all-employee-detail?companyId=' . $companyId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-        $employees = curl_exec($api);
-        $employees = json_decode($employees, true);
+        $employees = Api::connectApi(
+            Path::Api() . 'masterdata/employee/all-employee-detail?companyId=' . $companyId . '&currentPage=' . $currentPage . '&limit=' . $limit
+        );
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        $companies = curl_exec($api);
-        $companies = json_decode($companies, true);
-        curl_close($api);
+        $companies = Api::connectApi(
+            Path::Api() . 'masterdata/group/company-group?id=' . $groupId
+        );
+
         $totalEmployee = Employee::totalEmployee($companyId);
         $totalDraft = Employee::totalDraft($companyId);
         $totalPage = ceil($totalEmployee / 15);
@@ -164,17 +155,14 @@ class EmployeeController extends Controller
             $currentPage = $page[1];
         }
         $companyId = null;
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/all-employee-detail?companyId=' . $companyId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-        $employees = curl_exec($api);
-        $employees = json_decode($employees, true);
+        $employees = Api::connectApi(
+            Path::Api() . 'masterdata/employee/all-employee-detail?companyId=' . $companyId . '&currentPage=' . $currentPage . '&limit=' . $limit
+        );
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        $companies = curl_exec($api);
-        $companies = json_decode($companies, true);
-        curl_close($api);
+        $companies = Api::connectApi(
+            Path::Api() . 'masterdata/group/company-group?id=' . $groupId
+        );
+
         $totalEmployee = Employee::totalEmployee($companyId);
         $totalDraft = Employee::totalDraft($companyId);
         $totalPage = ceil($totalEmployee / 15);
@@ -196,67 +184,17 @@ class EmployeeController extends Controller
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
         }
         $groupId = $group["groupId"];
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
-        $countries = curl_exec($api);
-        $countries = json_decode($countries, true);
-        // throw new Exception(print_r($countries, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        $companies = curl_exec($api);
-        $companies = json_decode($companies, true);
-        // throw new Exception(print_r($companies, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-list');
-        $titles = curl_exec($api);
-        $titles = json_decode($titles, true);
-        // throw new Exception(print_r($titles, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/status/active-status');
-        $status = curl_exec($api);
-        $status = json_decode($status, true);
-        // throw new Exception(print_r($status, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee-condition/active-condition');
-        $conditions = curl_exec($api);
-        $conditions = json_decode($conditions, true);
-        // throw new Exception(print_r($conditions, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/role/active-role');
-        $roles = curl_exec($api);
-        $roles = json_decode($roles, true);
-        // throw new Exception(print_r($roles, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team-position/index');
-        $teamPosition = curl_exec($api);
-        $teamPosition = json_decode($teamPosition, true);
-        // throw new Exception(print_r($teamPosition, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/all-country');
-        $nationalities = curl_exec($api);
-        $nationalities = json_decode($nationalities, true);
-        // throw new Exception(print_r($nationalities, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/default-language');
-        $language = curl_exec($api);
-        $language = json_decode($language, true);
-        // curl_close($api);
-        // throw new Exception(print_r($language, true));\
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/main-language');
-        $mainLanguage = curl_exec($api);
-        $mainLanguage = json_decode($mainLanguage, true);
-        // curl_close($api);
-        // throw new Exception(print_r($mainLanguage, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/module-role');
-        $module = curl_exec($api);
-        $module = json_decode($module, true);
-        curl_close($api);
-        // throw new Exception(print_r($module, true));
-
+        $countries      = Api::connectApi(Path::Api() . 'masterdata/country/active-country');
+        $companies      = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        $titles         = Api::connectApi(Path::Api() . 'masterdata/title/title-list');
+        $status         = Api::connectApi(Path::Api() . 'masterdata/status/active-status');
+        $conditions     = Api::connectApi(Path::Api() . 'masterdata/employee-condition/active-condition');
+        $roles          = Api::connectApi(Path::Api() . 'masterdata/role/active-role');
+        $teamPosition   = Api::connectApi(Path::Api() . 'masterdata/team-position/index');
+        $nationalities  = Api::connectApi(Path::Api() . 'masterdata/country/all-country');
+        $language       = Api::connectApi(Path::Api() . 'masterdata/employee/default-language');
+        $mainLanguage   = Api::connectApi(Path::Api() . 'masterdata/employee/main-language');
+        $module         = Api::connectApi(Path::Api() . 'masterdata/employee/module-role');
 
         return $this->render('create', [
             "groupId" => $groupId,
@@ -276,8 +214,6 @@ class EmployeeController extends Controller
     }
     public function actionSaveCreateEmployee()
     {
-            // throw new Exception(print_r($_POST, true));
-
         if (!empty($_POST["status"])) {
             $employee = new Employee();
             $employee->employeeConditionId = $_POST["status"] ?? '';
@@ -507,14 +443,7 @@ class EmployeeController extends Controller
     {
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
-        // throw new Exception(print_r($employeeId, true));
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-        $employee = curl_exec($api);
-        $employee = json_decode($employee, true);
-        curl_close($api);
+        $employee = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
         if ($employee["birthDate"] != '') {
             $year = date('Y');
             $birthDateArr = explode('-', $employee["birthDate"]);
@@ -523,18 +452,13 @@ class EmployeeController extends Controller
         } else {
             $employee["age"] = '-';
         }
-        // $employee["picture"] = '';
         $employee["branchName"] = Branch::branchName($employee['branchId']);
         $employee["departmentName"] =  Department::departmentName($employee['departmentId']);
         $employee["teamName"] =  Team::teamName($employee['teamId']);
         $employee["titleName"] = Title::titleName($employee['titleId']);
         $employee["conditionName"] = EmployeeCondition::conditionName($employee['employeeConditionId']);
        
-        //$employee["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
-        //    $status = $employee["status"];
         $employee["status"] = $employee['statusName'];
-        //    $employee["statusId"] = $status;
-        // throw new Exception(print_r($employee, true));
         return $this->render('employee_profile', [
             "employee" => $employee,
             "employeeId" => $employeeId
@@ -568,7 +492,6 @@ class EmployeeController extends Controller
     }
     public function saveRole($roles, $userId)
     {
-        // throw new Exception(print_r($roles, true));
         UserRole::deleteAll(["userId" => $userId]);
         foreach ($roles as $role) :
             $userRole = new UserRole();
@@ -614,101 +537,27 @@ class EmployeeController extends Controller
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
         }
         $groupId = $group["groupId"];
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-        // throw new Exception(print_r($employeeId, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-update?id=' . $employeeId);
-        $employee = curl_exec($api);
-        $employee = json_decode($employee, true);
-        // throw new Exception(print_r($employee, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId);
-        $userEmployee = curl_exec($api);
-        $userEmployee = json_decode($userEmployee, true);
-        // throw new Exception(print_r($userEmployee, true));
+        $employee       = Api::connectApi(Path::Api() . 'masterdata/employee/employee-update?id=' . $employeeId);
+        $userEmployee   = Api::connectApi(Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId);
 
         $userId = $userEmployee['userId'] ?? '';
-        // throw new Exception(print_r($userId, true));
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-role?id=' . $userId);
-        $userRole = curl_exec($api);
-        $userRole = json_decode($userRole, true);
-        // throw new Exception(print_r($userRole, true));
+        $userRole       = Api::connectApi(Path::Api() . 'masterdata/employee/user-role?id=' . $userId);
+        $userAccess     = Api::connectApi(Path::Api() . 'masterdata/employee/user-access?id=' . $userId);
+        $userCertificate= Api::connectApi(Path::Api() . 'masterdata/employee/user-certificate?id=' . $userId);
+        $userLanguage   = Api::connectApi(Path::Api() . 'masterdata/employee/user-language?id=' . $userId);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-access?id=' . $userId);
-        $userAccess = curl_exec($api);
-        $userAccess = json_decode($userAccess, true);
-        // throw new Exception(print_r($userAccess, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-certificate?id=' . $userId);
-        $UserCertificate = curl_exec($api);
-        $UserCertificate = json_decode($UserCertificate, true);
-        // throw new Exception(print_r($UserCertificate, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-language?id=' . $userId);
-        $UserLanguage = curl_exec($api);
-        $UserLanguage = json_decode($UserLanguage, true);
-        // throw new Exception(print_r($UserLanguage, true));
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/active-country');
-        $countries = curl_exec($api);
-        $countries = json_decode($countries, true);
-        // throw new Exception(print_r($countries, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        $companies = curl_exec($api);
-        $companies = json_decode($companies, true);
-        // throw new Exception(print_r($companies, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-list');
-        $titles = curl_exec($api);
-        $titles = json_decode($titles, true);
-        // throw new Exception(print_r($titles, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/status/active-status');
-        $status = curl_exec($api);
-        $status = json_decode($status, true);
-        // throw new Exception(print_r($status, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee-condition/active-condition');
-        $conditions = curl_exec($api);
-        $conditions = json_decode($conditions, true);
-        // throw new Exception(print_r($conditions, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/role/active-role');
-        $roles = curl_exec($api);
-        $roles = json_decode($roles, true);
-        // throw new Exception(print_r($roles, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team-position/index');
-        $teamPosition = curl_exec($api);
-        $teamPosition = json_decode($teamPosition, true);
-        // throw new Exception(print_r($teamPosition, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/all-country');
-        $nationalities = curl_exec($api);
-        $nationalities = json_decode($nationalities, true);
-        // throw new Exception(print_r($nationalities, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/default-language');
-        $language = curl_exec($api);
-        $language = json_decode($language, true);
-        // throw new Exception(print_r($language, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/main-language');
-        $mainLanguage = curl_exec($api);
-        $mainLanguage = json_decode($mainLanguage, true);
-        // curl_close($api);
-        // throw new Exception(print_r($mainLanguage, true));
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/module-role');
-        $module = curl_exec($api);
-        $module = json_decode($module, true);
-        curl_close($api);
-        // throw new Exception(print_r($module, true));
+        $countries      = Api::connectApi(Path::Api() . 'masterdata/country/company-country');
+        $companies      = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        $titles         = Api::connectApi(Path::Api() . 'masterdata/title/title-list');
+        $status         = Api::connectApi(Path::Api() . 'masterdata/status/active-status');
+        $conditions     = Api::connectApi(Path::Api() . 'masterdata/employee-condition/active-condition');
+        $roles          = Api::connectApi(Path::Api() . 'masterdata/role/active-role');
+        $teamPosition   = Api::connectApi(Path::Api() . 'masterdata/team-position/index');
+        $nationalities  = Api::connectApi(Path::Api() . 'masterdata/country/all-country');
+        $language       = Api::connectApi(Path::Api() . 'masterdata/employee/default-language');
+        $mainLanguage   = Api::connectApi(Path::Api() . 'masterdata/employee/main-language');
+        $module         = Api::connectApi(Path::Api() . 'masterdata/employee/module-role');
 
 
         return $this->render('create', [
@@ -730,8 +579,8 @@ class EmployeeController extends Controller
             "userId" => $userId,
             "userRole" => $userRole,
             "userAccess" => $userAccess,
-            "userCertificate" => $UserCertificate,
-            "userLanguage" => $UserLanguage,
+            "userCertificate" => $userCertificate,
+            "userLanguage" => $userLanguage,
             "statusfrom" => 'Update'
         ]);
     }
@@ -748,17 +597,13 @@ class EmployeeController extends Controller
             $currentPage = $page[1];
         }
         $companyId = null;
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-draft?companyId=' . $companyId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-        $employees = curl_exec($api);
-        $employees = json_decode($employees, true);
+       $employees = Api::connectApi(
+            Path::Api() . 'masterdata/employee/employee-draft?companyId=' . $companyId . '&&currentPage=' . $currentPage . '&&limit=' . $limit
+        );
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        $companies = curl_exec($api);
-        $companies = json_decode($companies, true);
-        curl_close($api);
+        $companies = Api::connectApi(
+            Path::Api() . 'masterdata/group/company-group?id=' . $groupId
+        );
 
         $totalEmployee = Employee::totalDraft($companyId); //total draft
         $totalPage = ceil($totalEmployee / 15);
@@ -774,8 +619,6 @@ class EmployeeController extends Controller
     }
     public function actionSaveUpdateEmployee()
     {
-
-        // throw new exception(print_r(Yii::$app->request->post(), true));
 
         if (isset($_POST["employeeFirstname"]) && trim($_POST["employeeSurename"] != '')) {
             $userId =  $_POST["userId"];
@@ -812,7 +655,6 @@ class EmployeeController extends Controller
                 $employee->skills = $_POST["skills"];
                 $employee->contact = $_POST["linkedin"];
                 $employee->status = $_POST["status"];
-                // $employee->status = ($_POST["darf"] == 1) ? 2 : 100;
                 $employee->updateDateTime = new Expression('NOW()');
 
                 $pictureProfile = UploadedFile::getInstanceByName("image");
@@ -853,7 +695,6 @@ class EmployeeController extends Controller
                     $fileResume->saveAs($pathSave);
                     $employee->resume = 'files/resume/' . $fileName;
                 }
-                // throw new exception(print_r($file, true));
 
                 $fileAgreement = UploadedFile::getInstanceByName("agreement");
                 if (isset($fileAgreement) && !empty($fileAgreement)) {
@@ -873,7 +714,6 @@ class EmployeeController extends Controller
                     $pathSave = $path . $fileName;
                     $fileAgreement->saveAs($pathSave);
                     $employee->employeeAgreement = 'files/agreement/' . $fileName;
-                    // throw new exception(print_r($employee->employeeAgreement, true));
                 }
 
                 if ($employee->save(false)) {
@@ -907,7 +747,6 @@ class EmployeeController extends Controller
 
                         // ลบ access เดิมทั้งหมดของ user
                         UserAccess::deleteAll(['userId' => $user->userId]);
-                        // UserAccess::updateAll(["status" => 99],["userId" => $userId]);
                         if (!empty($_POST["moduleId"]) && is_array($_POST["moduleId"])) {
                             foreach ($_POST["moduleId"] as $moduleId) {
                                 $access = new UserAccess();
@@ -1058,7 +897,6 @@ class EmployeeController extends Controller
                                     $certificate->cerImage = $cerImagePath;
                                 }
                                 $certificate->updateDateTime = new \yii\db\Expression('NOW()');
-                                // throw new exception(print_r( $certificate->cerName, true));
 
                                 $certificate->save(false); // ✅ บันทึก
 
@@ -1159,33 +997,40 @@ class EmployeeController extends Controller
         $teams = [];
         $groupId = Group::currentGroupId();
         $employeeFilter = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&departmentId=' . $departmentId . '&&teamId=' . $teamId . '&&status=' . $status . '&&currentPage=' . $currentPage . '&&limit=' . $limit;
-        //throw new exception($employeeFilter);
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-filter?' . $employeeFilter);
-        $employees = curl_exec($api);
-        $employees = json_decode($employees, true);
+        // ดึงข้อมูลพนักงานตาม filter
+        $employees = Api::connectApi(Path::Api() . 'masterdata/employee/employee-filter?' . $employeeFilter);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        $companies = curl_exec($api);
-        $companies = json_decode($companies, true);
-        //throw new exception($companyId);
-        if ($companyId != '') {
-            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
-            $branches = curl_exec($api);
-            $branches = json_decode($branches, true);
-            // throw new exception(print_r($branches, true));
+        // ดึงข้อมูลบริษัทในกลุ่ม
+        $companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+
+        // ถ้ามี companyId ดึง branch ของบริษัทนั้น
+        $branches = [];
+        if (!empty($companyId)) {
+            $branches = Api::connectApi(Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
         }
-        if ($branchId != '') {
-            $departments = Department::find()->select('departmentId,departmentName')
-                ->where(["branchId" => $branchId, "status" => 1])->asArray()->orderBy('departmentName')->all();
+
+        // ถ้ามี branchId ดึง department ของ branch นั้น
+        $departments = [];
+        if (!empty($branchId)) {
+            $departments = Department::find()
+                ->select(['departmentId','departmentName'])
+                ->where(["branchId" => $branchId, "status" => 1])
+                ->asArray()
+                ->orderBy('departmentName')
+                ->all();
         }
-        if ($departmentId != '') {
-            $teams = Team::find()->select('teamId,teamName')
-                ->where(["departmentId" => $departmentId, "status" => 1])->asArray()->orderBy('teamName')->all();
+
+        // ถ้ามี departmentId ดึง team ของ department นั้น
+        $teams = [];
+        if (!empty($departmentId)) {
+            $teams = Team::find()
+                ->select(['teamId','teamName'])
+                ->where(["departmentId" => $departmentId, "status" => 1])
+                ->asArray()
+                ->orderBy('teamName')
+                ->all();
         }
-        curl_close($api);
+
 
         $totalEmployee = Employee::totalEmployeeWithFilter($companyId, $branchId, $departmentId, $teamId, $status);
         $totalDraft = Employee::totalDraft($companyId);
@@ -1272,33 +1117,39 @@ class EmployeeController extends Controller
         $teams = [];
         $groupId = Group::currentGroupId();
         $employeeFilter = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&departmentId=' . $departmentId . '&&teamId=' . $teamId . '&&currentPage=' . $currentPage . '&&limit=' . $limit;
-        //throw new exception($employeeFilter);
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/draft-filter?' . $employeeFilter); //draft
-        $employees = curl_exec($api);
-        $employees = json_decode($employees, true);
+        // ดึงข้อมูลพนักงาน draft ตาม filter
+        $employees = Api::connectApi(Path::Api() . 'masterdata/employee/draft-filter?' . $employeeFilter);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        $companies = curl_exec($api);
-        $companies = json_decode($companies, true);
-        //throw new exception($companyId);
-        if ($companyId != '') {
-            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
-            $branches = curl_exec($api);
-            $branches = json_decode($branches, true);
-            // throw new exception(print_r($branches, true));
+        // ดึงข้อมูลบริษัทในกลุ่ม
+        $companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+
+        // ถ้ามี companyId ดึง branch ของบริษัทนั้น
+        $branches = [];
+        if (!empty($companyId)) {
+            $branches = Api::connectApi(Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
         }
-        if ($branchId != '') {
-            $departments = Department::find()->select('departmentId,departmentName')
-                ->where(["branchId" => $branchId, "status" => 1])->asArray()->orderBy('departmentName')->all();
+
+        // ถ้ามี branchId ดึง department ของ branch นั้น
+        $departments = [];
+        if (!empty($branchId)) {
+            $departments = Department::find()
+                ->select(['departmentId','departmentName'])
+                ->where(["branchId" => $branchId, "status" => 1])
+                ->asArray()
+                ->orderBy('departmentName')
+                ->all();
         }
-        if ($departmentId != '') {
-            $teams = Team::find()->select('teamId,teamName')
-                ->where(["departmentId" => $departmentId, "status" => 1])->asArray()->orderBy('teamName')->all();
+
+        // ถ้ามี departmentId ดึง team ของ department นั้น
+        $teams = [];
+        if (!empty($departmentId)) {
+            $teams = Team::find()
+                ->select(['teamId','teamName'])
+                ->where(["departmentId" => $departmentId, "status" => 1])
+                ->asArray()
+                ->orderBy('teamName')
+                ->all();
         }
-        curl_close($api);
 
         $totalEmployee = Employee::totalDraftWithFilter($companyId, $branchId, $departmentId, $teamId);
         $totalDraft = Employee::totalDraft($companyId);
@@ -1366,17 +1217,11 @@ class EmployeeController extends Controller
         $certificate = null;
 
         $cert = $certData ? json_decode($certData, true) : [];
-        // throw new Exception(print_r($cert['id'], true));
 
         if (is_array($cert) && isset($cert['id']) && !empty($cert['id'])) {
-            $api = curl_init();
-            curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-            curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/certificate-detail?id=' . $cert['id']);
-
-            $certificate = curl_exec($api);
-            $certificate = json_decode($certificate, true);
-            curl_close($api);
+            $certificate = Api::connectApi(
+                Path::Api() . 'masterdata/employee/certificate-detail?id=' . $cert['id']
+            );
         } else {
             // คุณอาจจะต้อง log หรือแจ้งว่าไม่มี cert['id']
             Yii::error('Invalid cert data: ' . print_r($cert, true));
@@ -1422,7 +1267,6 @@ class EmployeeController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];;
         $userId = $param["userId"];
-        // throw new Exception(print_r($userId, true));
 
         Employee::updateAll(["status" => 99], ["employeeId" => $employeeId]);
         User::updateAll(["status" => 99], ["employeeId" => $employeeId]);
@@ -1430,9 +1274,6 @@ class EmployeeController extends Controller
         UserAccess::updateAll(["status" => 99], ["userId" => $userId]);
 
         return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
-
-        // $res["status"] = true;
-        // return json_encode($res);
     }
     public function actionMultiDeleteEmployee()
     {
@@ -1760,8 +1601,6 @@ class EmployeeController extends Controller
                 ->where([
                     "employeeFirstname" => $firstName,
                     "employeeSurename" => $sureName,
-                    // "employeeNumber" => $code,
-                    // "companyId" => $companyId,
                 ])
                 ->andwhere("status!=99")
                 ->one();
@@ -1836,7 +1675,6 @@ class EmployeeController extends Controller
             ->all();
         $gender[0] = "Male";
         $gender[1] = "Female";
-        //throw new exception(print_r($titles, true));
         $htmlExcel = $this->renderPartial('export', [
             "companies" => $companies,
             "branches" => $branches,
@@ -1881,7 +1719,6 @@ class EmployeeController extends Controller
                 $spreadsheet->getSheetByName('Worksheet')
             )
         );
-        //  $spreadsheet->getActiveSheet()->setTitle('employee');
 
         $spreadsheet->setActiveSheetIndex(1);
         $folderName = "export";
@@ -1904,13 +1741,10 @@ class EmployeeController extends Controller
         $employeeId = $param["employeeId"];
         $type = $param["export"] ?? '0';
 
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-        $employee = curl_exec($api);
-        $employee = json_decode($employee, true);
-        curl_close($api);
+        $employee = Api::connectApi(
+            Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId
+        );
+
         if ($employee["birthDate"] != '') {
             $year = date('Y');
             $birthDateArr = explode('-', $employee["birthDate"]);
@@ -1925,12 +1759,9 @@ class EmployeeController extends Controller
         $employee["titleName"] = Title::titleName($employee['titleId']);
         $employee["conditionName"] = EmployeeCondition::conditionName($employee['employeeConditionId']);
         $employee["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
-        //throw new exception(print_r($employee, true));
         $content = $this->renderPartial('export_employee', ["employee" => $employee]);
         $options = new Options();
 
-        //$options->set('defaultFont', 'sans-serif');
-        //$options->set('Sofia', 'sans-serif');
         $options->set('isRemoteEnabled', true);
         $dompdf = new Dompdf($options);
         $dompdf->loadHtml($content);
@@ -2017,9 +1848,6 @@ class EmployeeController extends Controller
     }
     public function saveUserRole($userId, $roleId)
     {
-        //UserRole::deleteAll(["userId" => $userId]);
-        //$role = Role::find()->select('roleId')->where(["roleName" => $roleName])->asArray()->one();
-        //if (isset($role) && !empty($role)) {
         $userRole = new UserRole();
         $userRole->userId = $userId;
         $userRole->roleId = $roleId;
@@ -2027,7 +1855,6 @@ class EmployeeController extends Controller
         $userRole->createDateTime = new Expression('NOW()');
         $userRole->updateDateTime = new Expression('NOW()');
         $userRole->save(false);
-        //}
     }
     public function actionResetPassword()
     {
@@ -2053,7 +1880,6 @@ class EmployeeController extends Controller
             ->where(["titleName" => $titleName, "status" => 1])
             ->asArray()
             ->all();
-        //throw new Exception(print_r($titles, true));
         $titleIds = [];
         $res = [];
         $employeeId = [];
@@ -2077,7 +1903,6 @@ class EmployeeController extends Controller
         if (count($employeeId) > 0) {
             $res["status"] = true;
             $res["employeeId"] = $employeeId;
-            //throw new Exception(print_r($employeeId, true));
         } else {
             $res["status"] = false;
         }
@@ -2092,7 +1917,6 @@ class EmployeeController extends Controller
             ->where(["departmentName" => $departmentName, "status" => 1])
             ->asArray()
             ->all();
-        //throw new Exception(print_r($titles, true));
         $departmentIds = [];
         $res = [];
         $employeeIds = [];
@@ -2126,7 +1950,6 @@ class EmployeeController extends Controller
         if (count($employeeIds) > 0) {
             $res["status"] = true;
             $res["employeeIds"] = $employeeIds;
-            //throw new Exception(print_r($employeeId, true));
         } else {
             $res["status"] = false;
         }
@@ -2135,13 +1958,10 @@ class EmployeeController extends Controller
     public function actionEmployeeDetail2()
     {
         $employeeId = $_POST["employeeId"];
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-        $employee = curl_exec($api);
-        $employee = json_decode($employee, true);
-        curl_close($api);
+        $employee = Api::connectApi(
+            Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId
+        );
+
         return json_encode($employee);
     }
     public function actionUpdateEmployeeStatus()
@@ -2168,37 +1988,28 @@ class EmployeeController extends Controller
         Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-        $employee = curl_exec($api);
-        $employee = json_decode($employee, true);
+        $employee = Api::connectApi(
+            Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId
+        );
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId);
-        $userEmployee = curl_exec($api);
-        $userEmployee = json_decode($userEmployee, true);
-        // throw new Exception(print_r($userEmployee, true));
+        $userEmployee = Api::connectApi(
+            Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId
+        );
 
         $userId = $userEmployee['userId'] ?? '';
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-language?id=' . $userId);
-        $UserLanguage = curl_exec($api);
-        $UserLanguage = json_decode($UserLanguage, true);
-        // throw new Exception(print_r($UserLanguage, true));
+        $UserLanguage = Api::connectApi(
+            Path::Api() . 'masterdata/employee/user-language?id=' . $userId
+        );
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/country/all-country');
-        $nationalities = curl_exec($api);
-        $nationalities = json_decode($nationalities, true);
-        // throw new Exception(print_r($nationalities, true));
+        $nationalities = Api::connectApi(
+            Path::Api() . 'masterdata/country/all-country'
+        );
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/main-language');
-        $mainLanguage = curl_exec($api);
-        $mainLanguage = json_decode($mainLanguage, true);
-        // throw new Exception(print_r($mainLanguage, true));
+        $mainLanguage = Api::connectApi(
+            Path::Api() . 'masterdata/employee/main-language'
+        );
 
-        curl_close($api);
-        // throw new Exception(print_r($employee, true));
 
         return $this->renderPartial('contact_detail', [
             'employee' => $employee,
@@ -2216,53 +2027,41 @@ class EmployeeController extends Controller
         Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        $employee = Api::connectApi(
+            Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId
+        );
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-        $employee = curl_exec($api);
-        $employee = json_decode($employee, true);
         $companyId = $employee['companyId'] ?? '';
         $branchId = $employee['branchId'] ?? '';
         $departmentId = $employee['departmentId'] ?? '';
         $teamId = $employee['teamId'] ?? '';
         $titleId = $employee['titleId'] ?? '';
-        // throw new Exception(print_r($companyId, true));
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
-        $company = curl_exec($api);
-        $company = json_decode($company, true);
-        // throw new Exception(print_r($company, true));
+        $company = Api::connectApi(
+            Path::Api() . 'masterdata/company/company-detail?id=' . $companyId
+        );
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-detail?id=' . $branchId);
-        $branch = curl_exec($api);
-        $branch = json_decode($branch, true);
-        // throw new Exception(print_r($branch, true));
+        $branch = Api::connectApi(
+            Path::Api() . 'masterdata/branch/branch-detail?id=' . $branchId
+        );
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-detail?id=' . $departmentId);
-        $department = curl_exec($api);
-        $department = json_decode($department, true);
-        // throw new Exception(print_r($department, true));
+        $department = Api::connectApi(
+            Path::Api() . 'masterdata/department/department-detail?id=' . $departmentId
+        );
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/team-detail?id=' . $teamId);
-        $team = curl_exec($api);
-        $team = json_decode($team, true);
-        // throw new Exception(print_r($team, true));
+        $team = Api::connectApi(
+            Path::Api() . 'masterdata/team/team-detail?id=' . $teamId
+        );
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/title/title-detail?id=' . $titleId);
-        $title = curl_exec($api);
-        $title = json_decode($title, true);
-        // throw new Exception(print_r($title, true));
+        $title = Api::connectApi(
+            Path::Api() . 'masterdata/title/title-detail?id=' . $titleId
+        );
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId);
-        $userEmployee = curl_exec($api);
-        $userEmployee = json_decode($userEmployee, true);
-        // throw new Exception(print_r($userEmployee, true));
+        $userEmployee = Api::connectApi(
+            Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId
+        );
 
         $userId = $userEmployee['userId'] ?? '';
-
-        curl_close($api);
 
         return $this->renderPartial('work_detail', [
             'employee' => $employee,
@@ -2282,14 +2081,9 @@ class EmployeeController extends Controller
         Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-        $employee = curl_exec($api);
-        $employee = json_decode($employee, true);
-        curl_close($api);
+        $employee = Api::connectApi(
+            Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId
+        );
 
         return $this->renderPartial('attachments', [
             'employee' => $employee,
@@ -2302,29 +2096,20 @@ class EmployeeController extends Controller
         Yii::$app->response->format = \yii\web\Response::FORMAT_HTML;
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        $employee = Api::connectApi(
+            Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId
+        );
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-        $employee = curl_exec($api);
-        $employee = json_decode($employee, true);
-        // throw new Exception(print_r($employee, true));
-
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId);
-        $userEmployee = curl_exec($api);
-        $userEmployee = json_decode($userEmployee, true);
-        // throw new Exception(print_r($userEmployee, true));
+        $userEmployee = Api::connectApi(
+            Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId
+        );
 
         $userId = $userEmployee['userId'] ?? '';
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/user-certificate?id=' . $userId);
-        $UserCertificate = curl_exec($api);
-        $UserCertificate = json_decode($UserCertificate, true);
-        // throw new Exception(print_r($UserCertificate, true));
+        $UserCertificate = Api::connectApi(
+            Path::Api() . 'masterdata/employee/user-certificate?id=' . $userId
+        );
 
-        curl_close($api);
         return $this->renderPartial('certificates', [
             'employee' => $employee,
             'userEmployee' => $userEmployee,
@@ -2360,30 +2145,25 @@ class EmployeeController extends Controller
 	{
 		$companyId = $_POST["companyId"];
 		$acType = $_POST["acType"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
-		$branches = curl_exec($api);
-		$branches = json_decode($branches, true);
-		if ($acType == "create") {
-			$branchText = $this->renderAjax('multi_branch', ["branches" => $branches]);
-		} else {
-			$kpiId = $_POST["kpiId"];
-			$branchText = $this->renderAjax('multi_branch_update', [
-				"branches" => $branches,
-				"kpiId" => $kpiId
-			]);
-		}
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-group/company-kpi-group?companyId=' . $companyId);
-		$kpiGroups = curl_exec($api);
-		$kpiGroups = json_decode($kpiGroups, true);
-		$kpiGroup = $this->renderAjax('kpi_group', [
-			"kpiGroup" => $kpiGroups,
-			"kpiId" => 0
-		]);
+		$branches = Api::connectApi(Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 
-		curl_close($api);
+        if ($acType == "create") {
+            $branchText = $this->renderAjax('multi_branch', ["branches" => $branches]);
+        } else {
+            $kpiId = $_POST["kpiId"];
+            $branchText = $this->renderAjax('multi_branch_update', [
+                "branches" => $branches,
+                "kpiId" => $kpiId
+            ]);
+        }
+
+        $kpiGroups = Api::connectApi(Path::Api() . 'kpi/kpi-group/company-kpi-group?companyId=' . $companyId);
+
+        $kpiGroup = $this->renderAjax('kpi_group', [
+            "kpiGroup" => $kpiGroups,
+            "kpiId" => 0
+        ]);
+
 		$res["status"] = true;
 		$res["branchText"] = $branchText;
 		$res["kpiGroup"] = $kpiGroup;
