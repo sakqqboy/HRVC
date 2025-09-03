@@ -6,7 +6,7 @@ use common\helpers\Path;
 use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
-use FFI\Exception as FFIException;
+use frontend\components\Api;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Employee;
@@ -19,16 +19,10 @@ use frontend\models\hrvc\Team;
 use frontend\models\hrvc\Unit;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
-use SebastianBergmann\Type\NullType;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
 
-// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-// header("Cache-Control: post-check=0, pre-check=0", false);
-// header("Pragma: no-cache");
 class KgiPersonalController extends Controller
 {
 	public function beforeAction($action)
@@ -47,21 +41,10 @@ class KgiPersonalController extends Controller
 		if ($role < 3) {
 			return $this->redirect(Yii::$app->homeUrl . 'kgi/management/index');
 		}
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$kgiEmployees = Api::connectApi(Path::Api() . 'kgi/kgi-personal/kgi-team-employee?kgiId=' . $kgiId);
+		$kgiDetail = Api::connectApi(Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-team-employee?kgiId=' . $kgiId);
-		$kgiEmployees = curl_exec($api);
-		$kgiEmployees = json_decode($kgiEmployees, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
-		$kgiDetail = curl_exec($api);
-		$kgiDetail = json_decode($kgiDetail, true);
-
-		curl_close($api);
-
-		//throw new Exception(print_r($kgiEmployees, true));
 		return $this->render('indivisual_setting', [
 			"kgiDetail" => $kgiDetail,
 			"kgiId" => $kgiId,
@@ -170,46 +153,27 @@ class KgiPersonalController extends Controller
 				"type" => $type
 			]));
 		}
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
+		$kgis = Api::connectApi(Path::Api() . 'kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
+		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
-		$units = json_decode($units, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		$kgis = curl_exec($api);
-		$kgis = json_decode($kgis, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
-		$waitForApprove = curl_exec($api);
-		$waitForApprove = json_decode($waitForApprove, true);
 
 		if ($role == 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);
 			if (isset($em) && !empty($em)) {
-				curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-team?id=' . $em["branchId"]);
-				$teams = curl_exec($api);
-				$teams = json_decode($teams, true);
+				$teams = Api::connectApi(Path::Api() . 'masterdata/branch/branch-team?id=' . $em["branchId"]);
 			}
-			//throw new Exception(print_r($teams, true));
 		}
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
+
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
 			$countAllCompany = count($allCompany);
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
-
-		curl_close($api);
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
@@ -217,8 +181,6 @@ class KgiPersonalController extends Controller
 		$totalKgi = KgiEmployee::totalKgiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
 		$totalPage = ceil($totalKgi / $limit);
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
-
-		// throw new Exception(print_r($waitForApprove,true));
 
 		return $this->render('index', [
 			"units" => $units,
@@ -318,49 +280,27 @@ class KgiPersonalController extends Controller
 		}
 		$limit = 20;
 
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
+		$kgis = Api::connectApi(Path::Api() . 'kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
+		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
-		$units = json_decode($units, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		//throw new exception('kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		$kgis = curl_exec($api);
-		$kgis = json_decode($kgis, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
-		$waitForApprove = curl_exec($api);
-		$waitForApprove = json_decode($waitForApprove, true);
 
 		if ($role == 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);
 			if (isset($em) && !empty($em)) {
-				curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-team?id=' . $em["branchId"]);
-				$teams = curl_exec($api);
-				$teams = json_decode($teams, true);
+				$teams = Api::connectApi(Path::Api() . 'masterdata/branch/branch-team?id=' . $em["branchId"]);
 			}
 			//throw new Exception(print_r($teams, true));
 		}
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
+
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
 			$countAllCompany = count($allCompany);
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
-
-		curl_close($api);
-		// throw new Exception(print_r($kgis, true));
-
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
@@ -403,42 +343,21 @@ class KgiPersonalController extends Controller
 		$kgiEmployeeId = $param["kgiEmployeeId"];
 		$role = UserRole::userRight();
 
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$kgiEmployeeDetail = Api::connectApi(Path::Api() . 'kgi/kgi-personal/kgi-employee-detail?kgiEmployeeId=' . $kgiEmployeeId . '&&kgiEmployeeHistoryId=0');
+		$kgi = Api::connectApi(Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiEmployeeDetail['kgiId'] . '&&kgiHistoryId=0');
+		$kgiBranch = Api::connectApi(Path::Api() . 'kgi/management/kgi-branch?id=' . $kgiEmployeeDetail["kgiId"]);
+		$kgiDepartment = Api::connectApi(Path::Api() . 'kgi/management/kgi-department?id=' . $kgiEmployeeDetail['kgiId']);
+		$kgiTeam = Api::connectApi(Path::Api() . 'kgi/management/kgi-team?id=' . $kgiEmployeeDetail['kgiId']);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-employee-detail?kgiEmployeeId=' . $kgiEmployeeId . '&&kgiEmployeeHistoryId=0');
-		$kgiEmployeeDetail = curl_exec($api);
-		$kgiEmployeeDetail = json_decode($kgiEmployeeDetail, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiEmployeeDetail['kgiId'] . '&&kgiHistoryId=0');
-		$kgi = curl_exec($api);
-		$kgi = json_decode($kgi, true);
 
-		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kgi["companyId"]);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-branch?id=' . $kgiEmployeeDetail["kgiId"]);
-		$kgiBranch = curl_exec($api);
-		$kgiBranch = json_decode($kgiBranch, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-department?id=' . $kgiEmployeeDetail['kgiId']);
-		$kgiDepartment = curl_exec($api);
-		$kgiDepartment = json_decode($kgiDepartment, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-team?id=' . $kgiEmployeeDetail['kgiId']);
-		$kgiTeam = curl_exec($api);
-		$kgiTeam = json_decode($kgiTeam, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
 			$countAllCompany = count($allCompany);
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
-
-		curl_close($api);
 		$companyId = $kgi["companyId"];
 		$company = [
 			"companyId" => $kgi["companyId"],
@@ -449,12 +368,6 @@ class KgiPersonalController extends Controller
 		$unit = Unit::find()->where(["unitId" => $kgi["unitId"]])->asArray()->one();
 
 		$months = ModelMaster::monthFull(1);
-		// throw new Exception(print_r($kgiEmployeeId, true));
-		// return $this->render('update_personal_kgi', [
-		// 	"kgiEmployeeId" => $kgiEmployeeId,
-		// 	"kgiEmployeeDetail" => $kgiEmployeeDetail,
-		// 	"months" => $months
-		// ]);
 		return $this->render('kgi_form', [
 			"kgi" => $kgi,
 			"kgiEmployeeId" => $kgiEmployeeId,
@@ -573,19 +486,9 @@ class KgiPersonalController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		//   throw new Exception(print_r($param,true));
 		$kgiEmployeeId = $param["kgiEmployeeId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$kgiEmployeeDetail = Api::connectApi(Path::Api() . 'kgi/kgi-personal/kgi-employee-detail?kgiEmployeeId=' . $kgiEmployeeId . '&&kgiEmployeeHistoryId=0');
+		$kgiEmployeeHistory = Api::connectApi(Path::Api() . 'kgi/kgi-personal/kgi-employee-history?kgiEmployeeId=' . $kgiEmployeeId);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-employee-detail?kgiEmployeeId=' . $kgiEmployeeId . '&&kgiEmployeeHistoryId=0');
-		$kgiEmployeeDetail = curl_exec($api);
-		$kgiEmployeeDetail = json_decode($kgiEmployeeDetail, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-employee-history?kgiEmployeeId=' . $kgiEmployeeId);
-		$kgiEmployeeHistory = curl_exec($api);
-		$kgiEmployeeHistory = json_decode($kgiEmployeeHistory, true);
-
-		curl_close($api);
 		return $this->render('personal_view', [
 			"kgiEmployeeId" => $kgiEmployeeId,
 			"kgiEmployeeDetail" => $kgiEmployeeDetail,
@@ -596,24 +499,11 @@ class KgiPersonalController extends Controller
 	{
 		$kgiId = $_POST["kgiId"];
 		$employeeId = $_POST["employeeId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-		$employeeDetail = curl_exec($api);
-		$employeeDetail = json_decode($employeeDetail, true);
-
-
+		$employeeDetail = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
 		$kgi = Kgi::find()->select('kgiName')->where(["kgiId" => $kgiId])->asArray()->one();
+		$kgiEmployeeHistory = Api::connectApi(Path::Api() . 'kgi/kgi-personal/kgi-employee-history-view?kgiId=' . $kgiId . '&&employeeId=' . $employeeId);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-employee-history-view?kgiId=' . $kgiId . '&&employeeId=' . $employeeId);
-		$kgiEmployeeHistory = curl_exec($api);
-		$kgiEmployeeHistory = json_decode($kgiEmployeeHistory, true);
-		curl_close($api);
-		//throw new Exception(print_r($kgiTeamHistory, true));
 		$teamText = $this->renderAjax('employee_progress', ["kgiEmployeeHistory" => $kgiEmployeeHistory]);
-		//throw new Exception($teamText);
 		$res["employeeName"] = $employeeDetail["employeeFirstname"] . ' ' . $employeeDetail["employeeSurename"];
 		$res["kgiName"] = $kgi["kgiName"];
 		$res["history"] = $teamText;
@@ -622,7 +512,6 @@ class KgiPersonalController extends Controller
 	public function actionDeleteKgiEmployee()
 	{
 		$kgiEmployeeId = $_POST["kgiEmployeeId"];
-		// throw new Exception($kgiEmployeeId);
 		KgiEmployee::updateAll(["status" => 99], ["kgiEmployeeId" => $kgiEmployeeId]);
 		KgiEmployeeHistory::updateAll(["status" => 99], ["kgiEmployeeId" => $kgiEmployeeId]);
 		$res["status"] = true;
@@ -690,56 +579,31 @@ class KgiPersonalController extends Controller
 			}
 		}
 
-		//$paramText = 'month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&userId=' . $userId;
 		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&userId=' . $userId . '&&currentPage=' . $currentPage . '&&limit=' . $limit;
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
 		//throw new exception($paramText);
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$kgis = Api::connectApi(Path::Api() . 'kgi/kgi-personal/kgi-personal-filter?' . $paramText);
+		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-personal-filter?' . $paramText);
-		$kgis = curl_exec($api);
-		$kgis = json_decode($kgis, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
-		$units = json_decode($units, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
-		$waitForApprove = curl_exec($api);
-		$waitForApprove = json_decode($waitForApprove, true);
 
 		if ($role >= 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);
 			if (isset($em) && !empty($em)) {
-				curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-team?id=' . $em["branchId"]);
-				$teams = curl_exec($api);
-				$teams = json_decode($teams, true);
+				$teams = Api::connectApi(Path::Api() . 'masterdata/branch/branch-team?id=' . $em["branchId"]);
 			}
-			//throw new Exception(print_r($teams, true));
 		}
 		if ($companyId != "") {
-			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
-			$branches = curl_exec($api);
-			$branches = json_decode($branches, true);
+			$branches = Api::connectApi(Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
 		}
 		if ($branchId != "") {
-			curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/branch-team?id=' . $branchId);
-			$teams = curl_exec($api);
-			$teams = json_decode($teams, true);
+			$teams = Api::connectApi(Path::Api() . 'masterdata/branch/branch-team?id=' . $branchId);
 		}
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
@@ -747,7 +611,6 @@ class KgiPersonalController extends Controller
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
 
-		curl_close($api);
 		if ($type == "list") {
 			$file = "index";
 		} else {
@@ -859,27 +722,10 @@ class KgiPersonalController extends Controller
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-employee-detail?kgiEmployeeId=' . $kgiEmployeeId . '&&kgiEmployeeHistoryId=' . $kgiEmployeeHistoryId);
-		$kgiEmployeeDetail = curl_exec($api);
-		$kgiEmployeeDetail = json_decode($kgiEmployeeDetail, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
-		$units = json_decode($units, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
-
-
-		curl_close($api);
+		$kgiEmployeeDetail = Api::connectApi(Path::Api() . 'kgi/kgi-personal/kgi-employee-detail?kgiEmployeeId=' . $kgiEmployeeId . '&&kgiEmployeeHistoryId=' . $kgiEmployeeHistoryId);
+		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
@@ -890,7 +736,6 @@ class KgiPersonalController extends Controller
 		$res["kgiEmployee"] = $kgiEmployeeDetail;
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
-		// throw new exception($kgiId);
 		return $this->render('kgi_employee_history', [
 			"role" => $role,
 			"kgiEmployeeDetail" => $kgiEmployeeDetail,
@@ -918,19 +763,9 @@ class KgiPersonalController extends Controller
 		$kgiTeam = KgiTeam::find()
 			->select('kgiTeamId')
 			->where(["kgiId" => $kgiId, "teamId" => $employeeTeam["teamId"]])->asArray()->one();
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$kgiTeams = Api::connectApi(Path::Api() . 'kgi/kgi-team/kgi-team-summarize?kgiId=' . $kgiId);
+		$kgiDetail = Api::connectApi(Path::Api() . 'kgi/kgi-personal/assigned-kgi-employee?kgiId=' . $kgiId . '&&kgiHistoryId=0');
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-summarize?kgiId=' . $kgiId);
-		$kgiTeams = curl_exec($api);
-		$kgiTeams = json_decode($kgiTeams, true);
-
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/assigned-kgi-employee?kgiId=' . $kgiId . "&&kgiHistoryId=0");
-		$kgiDetail = curl_exec($api);
-		$kgiDetail = json_decode($kgiDetail, true);
-		curl_close($api);
 		$res["kgiEmployeeTeam"] = $this->renderAjax("kgi_employee_team_all", [
 			"kgiTeams" => $kgiTeams,
 			"kgiDetail" => $kgiDetail,
@@ -943,14 +778,7 @@ class KgiPersonalController extends Controller
 	{
 		$kgiEmployeeId = $_POST["kgiEmployeeId"];
 		$kgiEmployeeHistoryId = $_POST["kgiEmployeeHistoryId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-employee-history2?kgiEmployeeId=' . $kgiEmployeeId . '&&kgiEmployeeHistoryId=' . $kgiEmployeeHistoryId);
-		$history = curl_exec($api);
-		$history = json_decode($history, true);
-		curl_close($api);
+		$history = Api::connectApi(Path::Api() . 'kgi/kgi-personal/kgi-employee-history2?kgiEmployeeId=' . $kgiEmployeeId . '&&kgiEmployeeHistoryId=' . $kgiEmployeeHistoryId);
 		$monthDetail = [];
 		$summarizeMonth = [];
 		//throw new Exception(print_r($history, true));
@@ -1075,15 +903,9 @@ class KgiPersonalController extends Controller
 		$teamId = $_POST["teamId"];
 		$month = $_POST["month"];
 		$year = $_POST["year"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-each-team-employee-history?kgiId=' . $kgiId . '&&teamId=' . $teamId . '&&month=' . $month . '&&year=' . $year);
-		$kgiTeamEmployeeHistory = curl_exec($api);
-		$kgiTeamEmployeeHistory = json_decode($kgiTeamEmployeeHistory, true);
-		curl_close($api);
-		//throw new exception('kgi/kgi-personal/kgi-each-team-employee-history?kgiId=' . $kgiId . '&&teamId=' . $teamId . '&&month=' . $month . '&&year=' . $year);
+		$kgiTeamEmployeeHistory = Api::connectApi(Path::Api() . 'kgi/kgi-personal/kgi-each-team-employee-history?kgiId=' . $kgiId . '&&teamId=' . $teamId . '&&month=' . $month . '&&year=' . $year);
+
 		$employeeHistory = $this->renderAjax('employee_history', ["kgiTeamEmployeeHistory" => $kgiTeamEmployeeHistory, "month" => $month, "year" => $year]);
 		$res["status"] = true;
 		$res["employeeHistory"] = $employeeHistory;
@@ -1094,15 +916,9 @@ class KgiPersonalController extends Controller
 		$kgiId = $_POST["kgiId"];
 		$kgiEmployeeHistoryId = $_POST["kgiEmployeeHistoryId"];
 		$kgiEmployeeId = $_POST["kgiEmployeeId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-history?kgiId=' . $kgiId);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-personal/kgi-employee-history-for-chart?kgiEmployeeHistoryId=' . $kgiEmployeeHistoryId . '&&kgiEmployeeId=' . $kgiEmployeeId);
-		$history = curl_exec($api);
-		$history = json_decode($history, true);
-		curl_close($api);
+		$history = Api::connectApi(Path::Api() . 'kgi/kgi-personal/kgi-employee-history-for-chart?kgiEmployeeHistoryId=' . $kgiEmployeeHistoryId . '&&kgiEmployeeId=' . $kgiEmployeeId);
+
 		$monthDetail = [];
 		$summarizeMonth = [];
 		$summarizeMonth2 = [];
@@ -1112,8 +928,8 @@ class KgiPersonalController extends Controller
 		$targetText = "";
 		$resultText = "";
 		$result = [];
-		//ksort($month);
 		$res["monthlyDetailHistoryText"] = "";
+
 		if ($kgiEmployeeHistoryId != 0) {
 			$kgiHistory = KgiEmployeeHistory::find()
 				->where(["kgiEmployeeHistoryId" => $kgiEmployeeHistoryId])
@@ -1125,7 +941,7 @@ class KgiPersonalController extends Controller
 			$year = '';
 			$month = '';
 		}
-		//throw new exception(print_r($history, true));
+
 		if (isset($history) && count($history) > 0) {
 			$i = 0;
 			foreach ($history as $kgiEmployeeHistoryId => $ht):
@@ -1179,6 +995,7 @@ class KgiPersonalController extends Controller
 				$i++;
 			endforeach;
 		}
+
 		$summarizeMonth2 = array_slice($summarizeMonth2, -8);
 		foreach ($summarizeMonth2 as $index => $data):
 			$target[$index] = $data["target"];
@@ -1191,14 +1008,17 @@ class KgiPersonalController extends Controller
 				$monthText .= '';
 			}
 		endforeach;
+
 		$monthText = substr($monthText, 0, -1);
 		$targetText = substr($targetText, 0, -1);
 		$resultText = substr($resultText, 0, -1);
+
 		$res["kgiChart"] = $this->renderAjax('kgi_chart', [
 			"month" => $monthText,
 			"target" => $targetText,
 			"result" => $resultText
 		]);
+
 		return json_encode($res);
 	}
 }

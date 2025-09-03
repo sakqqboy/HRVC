@@ -4,6 +4,7 @@ namespace frontend\modules\kgi\controllers;
 
 use common\helpers\Path;
 use common\models\ModelMaster;
+use frontend\components\Api;
 use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\web\Controller;
@@ -34,19 +35,9 @@ class ChartController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $kgiId = $param["kgiId"];
         $role = UserRole::userRight();
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        $kgiDetail = Api::connectApi(Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
+        $history = Api::connectApi(Path::Api() . 'kgi/management/kgi-history?kgiId=' . $kgiId);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId);
-        $kgiDetail = curl_exec($api);
-        $kgiDetail = json_decode($kgiDetail, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-history?kgiId=' . $kgiId);
-        $history = curl_exec($api);
-        $history = json_decode($history, true);
-
-        curl_close($api);
         $monthDetail = [];
         $summarizeMonth = [];
         $year = 2024;
