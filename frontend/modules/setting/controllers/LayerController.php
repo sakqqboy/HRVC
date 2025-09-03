@@ -11,15 +11,11 @@ use frontend\models\hrvc\SubLayer;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
+use frontend\components\Api;
 
 /**
  * Default controller for the `setting` module
  */
-// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-// header("Cache-Control: post-check=0, pre-check=0", false);
-// header("Pragma: no-cache");
 class LayerController extends Controller
 {
 	public function beforeAction($action)
@@ -31,18 +27,9 @@ class LayerController extends Controller
 	}
 	public function actionIndex()
 	{
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$layers = Api::connectApi(Path::Api() . 'masterdata/layer/all-layer');
+		$branches = Api::connectApi(Path::Api() . 'masterdata/branch/active-branch');
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
-		$layers = curl_exec($api);
-		$layers = json_decode($layers, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch');
-		$branches = curl_exec($api);
-		$branches = json_decode($branches, true);
-		curl_close($api);
 		return $this->render('index', [
 			"layers" => $layers,
 			"branches" => $branches,
@@ -54,14 +41,8 @@ class LayerController extends Controller
 		$departmentId = $_POST["departmentId"];
 		$branchId = $_POST["branchId"];
 		$departments = [];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$layers = Api::connectApi(Path::Api() . 'masterdata/layer/all-layer');
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
-		$layers = curl_exec($api);
-		$layers = json_decode($layers, true);
-		curl_close($api);
 		$text = $this->renderAjax('filter_result', [
 			"layers" => $layers,
 			"branchId" => $branchId,
@@ -78,22 +59,10 @@ class LayerController extends Controller
 		$branchId = $param["branchId"];
 		$departmentId = $param["departmentId"];
 		$departments = [];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$layers = Api::connectApi(Path::Api() . 'masterdata/layer/all-layer');
+		$branches = Api::connectApi(Path::Api() . 'masterdata/branch/active-branch');
+		$departments = Api::connectApi(Path::Api() . 'masterdata/department/branch-department?id=' . $branchId);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/layer/all-layer');
-		$layers = curl_exec($api);
-		$layers = json_decode($layers, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/active-branch');
-		$branches = curl_exec($api);
-		$branches = json_decode($branches, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/branch-department?id=' . $branchId);
-		$departments = curl_exec($api);
-		$departments = json_decode($departments, true);
-		curl_close($api);
 		return $this->render('index', [
 			"layers" => $layers,
 			"branches" => $branches,
