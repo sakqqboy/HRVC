@@ -5,6 +5,7 @@ namespace frontend\modules\kgi\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\components\Api;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
@@ -89,40 +90,13 @@ class AssignController extends Controller
 			return $this->redirect(Yii::$app->homeUrl . 'kgi/management/index');
 		}
 
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=" . $kgiHistoryId);
-		$kgiDetail = curl_exec($api);
-		$kgiDetail = json_decode($kgiDetail, true);
-		//throw new Exception($kgiHistoryId);
-
-		//throw new Exception($kgiDetail["month"] . '=' . $kgiDetail["year"] . $kgiId);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-each-unit?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
-		$kgiTeams = curl_exec($api);
-		$kgiTeams = json_decode($kgiTeams, true);
-		//throw new Exception(print_r($kgiTeams, true));
-		//throw new Exception('kgi/kgi-team/kgi-team-each-unit?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
-
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/company-team?id=' . $companyId);
-		$teams = curl_exec($api);
-		$teams = json_decode($teams, true);
+		$kgiDetail = Api::connectApi(Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . "&&kgiHistoryId=" . $kgiHistoryId);
+		$kgiTeams = Api::connectApi(Path::Api() . 'kgi/kgi-team/kgi-team-each-unit?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
+		$teams = Api::connectApi(Path::Api() . 'masterdata/team/company-team?id=' . $companyId);
+		$kgiTeamEmployee = Api::connectApi(Path::Api() . 'kgi/kgi-team/kgi-team-employee?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 
 		$text = '';
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/kgi-team-employee?kgiId=' . $kgiId . '&&month=' . $kgiDetail["month"] . '&&year=' . $kgiDetail["year"]);
-		$kgiTeamEmployee = curl_exec($api);
-		$kgiTeamEmployee = json_decode($kgiTeamEmployee, true);
-		//throw new Exception(print_r($kgiTeamEmployee, true));
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
-
-		curl_close($api);
-
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
 			$countAllCompany = count($allCompany);
@@ -151,21 +125,9 @@ class AssignController extends Controller
 		$kgiId = $_POST["kgiId"];
 		$month = $_POST["month"];
 		$year = $_POST["year"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-team/each-team-employee-kgi?kgiId=' . $kgiId . '&&teamId=' . $teamId);
-		$employeeTeamTarget = curl_exec($api);
-		$employeeTeamTarget = json_decode($employeeTeamTarget, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/team-detail?id=' . $teamId);
-		$teamDetail = curl_exec($api);
-		$teamDetail = json_decode($teamDetail, true);
-
-
-		//throw new Exception(print_r($employeeTeamTarget, true));
-		curl_close($api);
+		$employeeTeamTarget = Api::connectApi(Path::Api() . 'kgi/kgi-team/each-team-employee-kgi?kgiId=' . $kgiId . '&&teamId=' . $teamId);
+		$teamDetail = Api::connectApi(Path::Api() . 'masterdata/team/team-detail?id=' . $teamId);
 
 		if (isset($employeeTeamTarget) && count($employeeTeamTarget) > 0) {
 			$text = $this->renderAjax('employee_team_target', [

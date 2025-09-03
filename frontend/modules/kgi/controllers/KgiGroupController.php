@@ -5,6 +5,7 @@ namespace frontend\modules\kgi\controllers;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\components\Api;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\KgiGroup;
 use frontend\models\hrvc\UserRole;
@@ -44,14 +45,8 @@ class KgiGroupController extends Controller
 	}
 	public function actionIndex()
 	{
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$kgiGroups = Api::connectApi(Path::Api() . 'kgi/kgi-group/index');
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-group/index');
-		$kgiGroups = curl_exec($api);
-		$kgiGroups = json_decode($kgiGroups, true);
-		curl_close($api);
 
 		return $this->render('index', [
 			"kgiGroups" => $kgiGroups
@@ -78,12 +73,7 @@ class KgiGroupController extends Controller
 			}
 		}
 		$groupId = Group::currentGroupId();
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$months = ModelMaster::monthFull(1);
 		return $this->render('create', [
 			"companies" => $companies,
@@ -95,17 +85,9 @@ class KgiGroupController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$kgiGroupId = $param["kgiGroupId"];
 		$groupId = Group::currentGroupId();
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kgi/kgi-group/kgi-group-detail?kgiGroupId=' . $kgiGroupId);
-		$kgiGroup = curl_exec($api);
-		$kgiGroup = json_decode($kgiGroup, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
+		$kgiGroup = Api::connectApi(Path::Api() . 'kgi/kgi-group/kgi-group-detail?kgiGroupId=' . $kgiGroupId);
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 
-		curl_close($api);
 		return $this->render('update', [
 			"kgiGroup" => $kgiGroup,
 			"companies" => $companies
