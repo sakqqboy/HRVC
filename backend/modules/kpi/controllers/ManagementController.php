@@ -31,6 +31,9 @@ use backend\models\hrvc\UserRole;
 use yii\db\Expression;
 use yii\db\Query;
 use yii\web\Controller;
+use Yii;
+use yii\web\Response;
+use common\helpers\Athorize;
 
 /**
  * Default controller for the `masterdata` module
@@ -42,6 +45,21 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class ManagementController extends Controller
 {
+	public function beforeAction($action)
+	{
+		$authHeader = Yii::$app->request->getHeaders()->get('TcgHrvcAuthorization');
+		$check = Athorize::CheckRequest($authHeader);
+		if ($check == 0) {
+			Yii::$app->response->format = Response::FORMAT_JSON;
+			Yii::$app->response->statusCode = 401;
+			Yii::$app->response->data = [
+				'status' => 'error',
+				'message' => 'Invalid or missing token.'
+			];
+			return false;
+		}
+		return parent::beforeAction($action);
+	}
 	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $currentPage = null, $limit = null)
 	{
 

@@ -7,6 +7,7 @@ use common\helpers\Path;
 use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
+use frontend\components\Api;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
@@ -25,11 +26,6 @@ use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
 
-// header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-// header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-// header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-// header("Cache-Control: post-check=0, pre-check=0", false);
-// header("Pragma: no-cache");
 class KpiTeamController extends Controller
 {
 	public function beforeAction($action)
@@ -45,22 +41,12 @@ class KpiTeamController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$role = UserRole::userRight();
-		if ($role < 3) {
-			return $this->redirect(Yii::$app->homeUrl . 'kpi/management/index');
-		}
+		if ($role < 3) return $this->redirect(Yii::$app->homeUrl . 'kpi/management/index');
+
 		$kpiId = $param["kpiId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		$kpiTeams = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-team?kpiId=' . $kpiId);
+		$kpiDetail = Api::connectApi(Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team?kpiId=' . $kpiId);
-		$kpiTeams = curl_exec($api);
-		$kpiTeams = json_decode($kpiTeams, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
-		$kpiDetail = curl_exec($api);
-		$kpiDetail = json_decode($kpiDetail, true);
-		curl_close($api);
 		return $this->render('kpi_team_setting', [
 			"kpiTeams" => $kpiTeams,
 			"kpiDetail" => $kpiDetail,
@@ -68,6 +54,7 @@ class KpiTeamController extends Controller
 			"role" => $role
 		]);
 	}
+
 	public function actionSetTeamTarget()
 	{
 		if (isset($_POST["kpiId"])) {
@@ -116,27 +103,18 @@ class KpiTeamController extends Controller
 	{
 		$kpiId = $_POST["kpiId"];
 		$teamId = $_POST["teamId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/team-detail?id=' . $teamId);
-		$teamDetail = curl_exec($api);
-		$teamDetail = json_decode($teamDetail, true);
 
-
+		$teamDetail = Api::connectApi(Path::Api() . 'masterdata/team/team-detail?id=' . $teamId);
 		$kpi = Kpi::find()->select('kpiName')->where(["kpiId" => $kpiId])->asArray()->one();
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-history?kpiId=' . $kpiId . '&&teamId=' . $teamId);
-		$kpiTeamHistory = curl_exec($api);
-		$kpiTeamHistory = json_decode($kpiTeamHistory, true);
-		curl_close($api);
-		//throw new Exception(print_r($kpiTeamHistory, true));
+		$kpiTeamHistory = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-team-history?kpiId=' . $kpiId . '&&teamId=' . $teamId);
+
 		$teamText = $this->renderAjax('team_progress', ["kpiTeamHistory" => $kpiTeamHistory]);
-		//throw new Exception($teamText);
 		$res["teamName"] = $teamDetail["teamName"];
 		$res["kpiName"] = $kpi["kpiName"];
 		$res["history"] = $teamText;
 		return json_encode($res);
 	}
+
 	public function actionTeamKpi($hash = null)
 	{
 		$role = UserRole::userRight();
@@ -147,25 +125,12 @@ class KpiTeamController extends Controller
 		$supervisorId = '';
 		$staffId = '';
 		$companyId = '';
-		if ($role == 7) {
-			$adminId = Yii::$app->user->id;
-		}
-		if ($role == 6) {
-			$gmId = Yii::$app->user->id;
-		}
-		if ($role == 5) {
-			$managerId = Yii::$app->user->id;
-		}
-		if ($role == 4) {
-			$supervisorId = Yii::$app->user->id;
-		}
-		if ($role == 3) {
-			$teamLeaderId = Yii::$app->user->id;
-		}
-		if ($role == 1 || $role == 2) {
-			$staffId = Yii::$app->user->id;
-			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
-		}
+		if ($role == 7) $adminId = Yii::$app->user->id;
+		if ($role == 6) $gmId = Yii::$app->user->id;
+		if ($role == 5) $managerId = Yii::$app->user->id;
+		if ($role == 4) $supervisorId = Yii::$app->user->id;
+		if ($role == 3) $teamLeaderId = Yii::$app->user->id;
+		if ($role == 1 || $role == 2) $staffId = Yii::$app->user->id;
 		$userId = Yii::$app->user->id;
 		$isAdmin = UserRole::isAdmin();
 		$userBranchId = User::userBranchId();
@@ -177,12 +142,12 @@ class KpiTeamController extends Controller
 		$session = Yii::$app->session;
 		if ($session->has('kpiTeam')) {
 			$filter = $session->get('kpiTeam');
-			$companyId = isset($filter["companyId"]) && $filter["companyId"] != null ? $filter["companyId"] : null;
-			$branchId = isset($filter["branchId"]) && $filter["branchId"] != null ? $filter["branchId"] : null;
-			$teamId = isset($filter["teamId"]) && $filter["teamId"] != null ? $filter["teamId"] : null;
-			$month = isset($filter["month"]) && $filter["month"] != null ? $filter["month"] : null;
-			$status = isset($filter["status"]) && $filter["status"] != null ? $filter["status"] : null;
-			$year = isset($filter["year"]) && $filter["year"] != null ? $filter["year"] : null;
+			$companyId = $filter["companyId"] ?? null;
+			$branchId = $filter["branchId"] ?? null;
+			$teamId = $filter["teamId"] ?? null;
+			$month = $filter["month"] ?? null;
+			$status = $filter["status"] ?? null;
+			$year = $filter["year"] ?? null;
 			$type = "list";
 			return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/kpi-team-search-result/' . ModelMaster::encodeParams([
 				"companyId" => $companyId,
@@ -195,38 +160,17 @@ class KpiTeamController extends Controller
 			]));
 		}
 		$currentPage = 1;
-		if (isset($hash) && $hash != '') {
+		if ($hash && $hash != '') {
 			$pageArr = explode('page', $hash);
 			$currentPage = $pageArr[1];
 		}
 		$limit = 20;
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		$teamKpis = curl_exec($api);
-		$teamKpis = json_decode($teamKpis, true);
-		//throw new exception('kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
-		$units = json_decode($units, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/wait-for-approve?branchId='  . $userBranchId . '&&isAdmin=' . $isAdmin);
-		$waitForApprove = curl_exec($api);
-		$waitForApprove = json_decode($waitForApprove, true);
-
-		// throw new Exception(print_r($teamKpis, true));
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
-
-		curl_close($api);
-		// throw new Exception($role);
+		$teamKpis = Api::connectApi(Path::Api() . 'kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
+		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-team/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = 0;
@@ -236,12 +180,12 @@ class KpiTeamController extends Controller
 		}
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
-
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
 		$totalKpi = KpiTeam::totalKpiTeam($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
 		$totalPage = ceil($totalKpi / $limit);
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
+
 		return $this->render('team_kpi', [
 			"units" => $units,
 			"months" => $months,
@@ -266,9 +210,9 @@ class KpiTeamController extends Controller
 			"currentPage" => $currentPage,
 			"totalPage" => $totalPage,
 			"pagination" => $pagination,
-
 		]);
 	}
+
 	public function actionKpiTeamHistory($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
@@ -279,43 +223,13 @@ class KpiTeamController extends Controller
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
-		if (isset($param["kpiTeamHistoryId"])) {
-			$kpiTeamHistoryId = $param["kpiTeamHistoryId"];
-		} else {
-			$kpiTeamHistoryId = 0;
-		}
-
+		$kpiTeamHistoryId = isset($param["kpiTeamHistoryId"]) ? $param["kpiTeamHistoryId"] : 0;
 		$openTab = array_key_exists("openTab", $param) ? $param["openTab"] : 0;
-		$groupId = Group::currentGroupId();
-		if ($groupId == null) {
-			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
-		}
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-detail?kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=' . $kpiTeamHistoryId);
-		$kpiTeamDetail = curl_exec($api);
-		$kpiTeamDetail = json_decode($kpiTeamDetail, true);
-		// throw new Exception(print_r($kpiTeamDetail,true));
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
-		$units = json_decode($units, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
-		$kpiTeams = curl_exec($api);
-		$kpiTeams = json_decode($kpiTeams, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
-
-		curl_close($api);
-
+		$kpiTeamDetail = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-team-detail?kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=' . $kpiTeamHistoryId);
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
+		$kpiTeams = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
 			$countAllCompany = count($allCompany);
@@ -325,7 +239,6 @@ class KpiTeamController extends Controller
 		$res["kgiTeam"] = $kpiTeamDetail;
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
-
 		return $this->render('kpi_team_history', [
 			"role" => $role,
 			"kpiTeamDetail" => $kpiTeamDetail,
@@ -341,66 +254,38 @@ class KpiTeamController extends Controller
 			"allCompany" => $countAllCompany,
 			"companyPic" => $companyPic,
 			"totalBranch" => $totalBranch
-
 		]);
 	}
+
 	public function actionKpiTeamEmployee()
 	{
 		$kpiId = $_POST["kpiId"];
 		if (isset($_POST["kpiTeamId"])) {
 			$kpiTeamId = $_POST["kpiTeamId"];
-			// ดำเนินการต่อเมื่อมีค่า
 		} else {
-			// echo "ค่า kpiTeamId ไม่มีอยู่ใน POST";
 			$kpiEmployeeId = $_POST["kpiEmployeeId"];
 			$kpiTeamId  =  KpiEmployee::employeeKpiTeamId($kpiEmployeeId);
 		}
 		$month = $_POST["month"];
 		$year = $_POST["year"];
-
 		$res["kpiEmployeeTeam"] = "";
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
-		$kpiTeams = curl_exec($api);
-		$kpiTeams = json_decode($kpiTeams, true);
-
-		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-each-team-employee?kpiTeamId=' . $kpiTeamId);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-personal/assigned-kpi-employee?kpiId=' . $kpiId . "&&kpiHistoryId=0");
-		$kpiDetail = curl_exec($api);
-		$kpiDetail = json_decode($kpiDetail, true);
-
-		curl_close($api);
-
-		//throw new Exception(print_r($kpiDetail, true));
-
+		$kpiTeams = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
+		$kpiDetail = Api::connectApi(Path::Api() . 'kpi/kpi-personal/assigned-kpi-employee?kpiId=' . $kpiId . "&&kpiHistoryId=0");
 		$res["kpiEmployeeTeam"] = $this->renderAjax("kpi_employee_team_all", [
 			"kpiTeams" => $kpiTeams,
 			"kpiDetail" => $kpiDetail,
 			"kpiId" => $kpiId
-
 		]);
 		return json_encode($res);
 	}
+
 
 	public function actionAllKpiHistory()
 	{
 		$kpiTeamHistoryId = $_POST["kpiTeamHistoryId"];
 		$kpiId = $_POST["kpiId"];
 		$kpiTeamId = $_POST["kpiTeamId"];
-
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-history?kpiId=' . $kpiId . '&&kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=' . $kpiTeamHistoryId);
-		$history = curl_exec($api);
-		$history = json_decode($history, true);
-		// throw new Exception(print_r($history,true));
-		curl_close($api);
-		//eturn json_encode($history);
+		$history = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-history?kpiId=' . $kpiId . '&&kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=' . $kpiTeamHistoryId);
 		$monthDetail = [];
 		$summarizeMonth = [];
 		$res["monthlyDetailHistoryText"] = "";
@@ -482,9 +367,9 @@ class KpiTeamController extends Controller
 				"summarizeMonth" => $summarizeMonth
 			]);
 		}
-
 		return json_encode($res);
 	}
+
 
 
 	public function actionKpiChart()
@@ -492,17 +377,7 @@ class KpiTeamController extends Controller
 		$kpiTeamHistoryId = $_POST["kpiTeamHistoryId"];
 		$kpiId = $_POST["kpiId"];
 		$kpiTeamId = $_POST["kpiTeamId"];
-
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-history-for-chart?kpiId=' . $kpiId . '&&kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=' . $kpiTeamHistoryId);
-		$history = curl_exec($api);
-		$history = json_decode($history, true);
-		curl_close($api);
-		// throw new Exception($kpiTeamHistoryId);
-		// throw new Exception(print_r($history,true));
+		$history = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-history-for-chart?kpiId=' . $kpiId . '&&kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=' . $kpiTeamHistoryId);
 		$monthDetail = [];
 		$summarizeMonth = [];
 		$summarizeMonth2 = [];
@@ -513,7 +388,6 @@ class KpiTeamController extends Controller
 		$targetText = "";
 		$resultText = "";
 		$result = [];
-		//ksort($month);
 		$res["monthlyDetailHistoryText"] = "";
 		if ($kpiTeamHistoryId != 0) {
 			$kpiTeamHistory = KpiTeamHistory::find()
@@ -536,7 +410,7 @@ class KpiTeamController extends Controller
 								$summarizeMonth[$ht["year"]][$ht["month"]] = [
 									"year" => $ht["year"],
 									"month" => ModelMaster::fullMonthText($ht["month"]),
-									"result" => $ht["result"] ?? 0, // ใช้ ?? กำหนดค่าเริ่มต้น
+									"result" => $ht["result"] ?? 0,
 									"target" => $ht["target"] ?? 0,
 									"kpiHistoryId" => $kpiHistoryId
 								];
@@ -588,8 +462,6 @@ class KpiTeamController extends Controller
 				$i++;
 			endforeach;
 		}
-
-
 		$summarizeMonth2 = array_slice($summarizeMonth2, -8);
 		foreach ($summarizeMonth2 as $index => $data):
 			$target[$index] = $data["target"];
@@ -643,7 +515,6 @@ class KpiTeamController extends Controller
 		}
 		if ($role == 1 || $role == 2) {
 			$staffId = Yii::$app->user->id;
-			//return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
 		}
 		$userTeamId = Team::userTeam($userId);
 		$session = Yii::$app->session;
@@ -672,34 +543,11 @@ class KpiTeamController extends Controller
 			$currentPage = $pageArr[1];
 		}
 		$limit = 20;
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		$teamKpis = curl_exec($api);
-		$teamKpis = json_decode($teamKpis, true);
-		//throw new Exception('kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
-		$units = json_decode($units, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/wait-for-approve?branchId='  . $userBranchId . '&&isAdmin=' . $isAdmin);
-		$waitForApprove = curl_exec($api);
-		$waitForApprove = json_decode($waitForApprove, true);
-
-		// throw new Exception(print_r($teamKpis, true));
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
-
-		curl_close($api);
-		//throw new Exception($role);
+		$teamKpis = Api::connectApi(Path::Api() . 'kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
+		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-team/wait-for-approve?branchId='  . $userBranchId . '&&isAdmin=' . $isAdmin);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$isManager = UserRole::isManager();
 		$months = ModelMaster::monthFull(1);
 		$totalBranch = Branch::totalBranch();
@@ -712,9 +560,7 @@ class KpiTeamController extends Controller
 		$employeeCompanyId = $employee["companyId"];
 		$totalKpi = KpiTeam::totalKpiTeam($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
 		$totalPage = ceil($totalKpi / $limit);
-		// throw new Exception(print_r($teamKpis, true));
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
-
 		return $this->render('kpi_team_grid', [
 			"units" => $units,
 			"months" => $months,
@@ -741,6 +587,7 @@ class KpiTeamController extends Controller
 			"pagination" => $pagination
 		]);
 	}
+
 	public function actionSearchKpiTeam()
 	{
 		$companyId = isset($_POST["companyId"]) && $_POST["companyId"] != null ? $_POST["companyId"] : null;
@@ -828,37 +675,13 @@ class KpiTeamController extends Controller
 			$currentPage = $param["currentPage"];
 		}
 		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&currentPage=' . $currentPage . '&&limit=' . $limit;
-		$groupId = Group::currentGroupId();
-
 		$userId = Yii::$app->user->id;
 		$userTeamId = Team::userTeam($userId);
-		//throw new exception('kpi/kpi-team/kpi-team-filter?' . $paramText);
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-filter?' . $paramText);
-		$teamKpis = curl_exec($api);
-		$teamKpis = json_decode($teamKpis, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-		$units = curl_exec($api);
-		$units = json_decode($units, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/wait-for-approve?branchId='  . $userBranchId . '&&isAdmin=' . $isAdmin);
-		$waitForApprove = curl_exec($api);
-		$waitForApprove = json_decode($waitForApprove, true);
-
-		// throw new Exception(print_r($teamKpis, true));
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
-
-		curl_close($api);
-		//throw new Exception($role);
+		$teamKpis = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-team-filter?' . $paramText);
+		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-team/wait-for-approve?branchId='  . $userBranchId . '&&isAdmin=' . $isAdmin);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
@@ -867,12 +690,7 @@ class KpiTeamController extends Controller
 		}
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
-
-		if ($type == "list") {
-			$file = "team_kpi";
-		} else {
-			$file = "kpi_team_grid";
-		}
+		$file = $type == "list" ? "team_kpi" : "kpi_team_grid";
 		$months = ModelMaster::monthFull(1);
 		$role = UserRole::userRight();
 		$isManager = UserRole::isManager();
@@ -915,59 +733,25 @@ class KpiTeamController extends Controller
 			"totalPage" => $totalPage,
 		]);
 	}
+
 	public function actionPrepareUpdate($hash)
 	{
-		// $kpiTeamId = $_GET["kpiTeamId"];
 		$param = ModelMaster::decodeParams($hash);
 		$role = UserRole::userRight();
-
 		$kpiTeamId = $param["kpiTeamId"];
-
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-detail?kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=0');
-		$kpiTeamDetail = curl_exec($api);
-		$kpiTeamDetail = json_decode($kpiTeamDetail, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiTeamDetail['kpiId'] . '&&kpiHistoryId=0');
-		$kpi = curl_exec($api);
-		$kpi = json_decode($kpi, true);
-
-		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-branch?id=' . $kpi["companyId"]);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-branch?id=' . $kpiTeamDetail["kpiId"]);
-		$kpiBranch = curl_exec($api);
-		$kpiBranch = json_decode($kpiBranch, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-department?id=' . $kpiTeamDetail['kpiId']);
-		$kpiDepartment = curl_exec($api);
-		$kpiDepartment = json_decode($kpiDepartment, true);
-
-		// throw new Exception(print_r($kpiDepartment, true));
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-team?id=' . $kpiTeamDetail['kpiId']);
-		$kpiTeam = curl_exec($api);
-		$kpiTeam = json_decode($kpiTeam, true);
-
-		// throw new Exception(print_r($kpi, true));
-
+		$kpiTeamDetail = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-team-detail?kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=0');
+		$kpi = Api::connectApi(Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiTeamDetail['kpiId'] . '&&kpiHistoryId=0');
+		$kpiBranch = Api::connectApi(Path::Api() . 'kpi/management/kpi-branch?id=' . $kpiTeamDetail["kpiId"]);
+		$kpiDepartment = Api::connectApi(Path::Api() . 'kpi/management/kpi-department?id=' . $kpiTeamDetail['kpiId']);
+		$kpiTeam = Api::connectApi(Path::Api() . 'kpi/management/kpi-team?id=' . $kpiTeamDetail['kpiId']);
 		$companyId = $kpi["companyId"];
 		$company = [
 			"companyId" => $kpi["companyId"],
 			"companyName" => Company::companyName($kpi["companyId"]),
 			"companyImg" => Company::companyImage($kpi["companyId"]),
 		];
-
 		$unit = Unit::find()->where(["unitId" => $kpi["unitId"]])->asArray()->one();
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/all-company');
-		$allCompany = curl_exec($api);
-		$allCompany = json_decode($allCompany, true);
-
-
-		curl_close($api);
-		// throw new exception(print_r($kpiTeamDetail	, true));
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
@@ -993,7 +777,6 @@ class KpiTeamController extends Controller
 	}
 	public function actionUpdateKpiTeam()
 	{
-
 		$data = [
 			'kpiTeamId' => $_POST["kpiTeamId"],
 			'targetAmount' => $_POST["targetAmount"],
@@ -1004,28 +787,9 @@ class KpiTeamController extends Controller
 			'toDate' => $_POST["toDate"],
 			'fromDate' => $_POST["fromDate"],
 			'nextCheckDate' => $_POST["nextDate"],
-
 		];
-
-
-
-		//  throw new Exception(print_r($data,true));
-		//เมื่อกดอัพเดต 
-		// อัพเดต KpiTeam จากนั้น อัพเดต KpiTeamHistory โดยเช็คเงื่อนไขดังนี้
-		// ให้อินเสริท KpiTeam และ KpiTeamHistory ปกติ ให้เดือน + 1  เอาไปค้นหาใน KpiTeamHistory ด้วย kpiTeamId  เดือน + 1 สเตตัส 5
-		//เช็คว่าสเตตัสเป็น 2 และ มี ใน KpiTeamHistory ไหม ถ้ามี ให้อัพเดต 5 เป็น 1  ด้วย
-
-		//สมมุต เดือนนี้ 03 มี สเตตัส 5 ในเดือน 04 และกดอัพเดต เดือน 04 มา 
-		//มันจะอินเสริจ เดือน 04 อันใหม่ก่อนแล้วจากนั้นค่อยไปอัพเดต 04 สเตตัส 5 อีกที 
-		//ผลลัพมันจะกลายเป็น เดือน 04 สเตตัส 1 สองอันใน KpiTeamHistory
-
-		//วิธีแก้ถ้ามีเดือนกับปีอยู่แล้ว ให้หน้าฟรอมแก้ไขไม่ได้ แต่ถ้าไม่มีให้แก่ไขได้ เฉพาะทีม
-
-
 		$nextMonth = $data['month'] + 1;
 		$nextYear = $data['year'];
-
-		// ถ้าเดือนเกิน 12 ให้กลับไปเป็น 1 และเพิ่มปี
 		if ($nextMonth > 12) {
 			$nextMonth = 1;
 			$nextYear++;
@@ -1033,11 +797,6 @@ class KpiTeamController extends Controller
 		$kpiTeamId = $_POST["kpiTeamId"];
 		$role = UserRole::userRight();
 		$status =  $_POST["status"];
-		if (isset($oldKpiTeam) && !empty($oldKpiTeam)) {
-			if (($oldKpiTeam["target"] != $_POST["targetAmount"]) && $role == 3) {
-				$status = 88;
-			}
-		}
 		$teamkpi = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->one();
 		$teamkpi->status = $_POST["status"];
 		$teamkpi->month = $_POST["month"];
@@ -1072,10 +831,9 @@ class KpiTeamController extends Controller
 			$kpiTeamHistory->createDateTime = new Expression('NOW()');
 			$kpiTeamHistory->updateDateTime = new Expression('NOW()');
 			if ($kpiTeamHistory->save(false)) {
-				//check ว่า มีอันนี้ที่เป็นสเตตัส 5 ในเดือนที่มากกว่า ที่ส่งมา +1 และปีปัจจุบัน รึยัง ถ้ามีแล้วให้อัพเดต 5 เป็น 1
 				$kpiTeamHistory = KpiTeamHistory::find()
 					->where(["kpiTeamId" => $kpiTeamId, "status" => 5, "month" => $nextMonth, "year" => $nextYear])
-					->one(); // ไม่ใช้ asArray() เพื่อให้เป็น object				
+					->one();
 				if ($kpiTeamHistory !== null && $status == 2) {
 					$teamkpi->month = $kpiTeamHistory->month;
 					$teamkpi->year = $kpiTeamHistory->year;
@@ -1085,15 +843,11 @@ class KpiTeamController extends Controller
 					$kpiTeamHistory->updateDateTime = new Expression('NOW()');
 					$kpiTeamHistory->save(false);
 				}
-				// throw new Exception(print_r($kpiTeamHistory, true));	
-
 			}
 		}
-
-
-		// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid');
 		return $this->redirect($_POST["url"]);
 	}
+
 	public function actionKpiTeam()
 	{
 		$kpiId = $_POST["kpiId"];
@@ -1132,28 +886,12 @@ class KpiTeamController extends Controller
 		$role = UserRole::userRight();
 		$userId = Yii::$app->user->id;
 		$teamId = Team::userTeam($userId);
-
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
 		if ($role >= 4) {
-			curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-employee?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year);
-			$history = curl_exec($api);
-			$history = json_decode($history, true);
+			$history = Api::connectApi(Path::Api() . 'kpi/management/kpi-history-employee?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year);
 		} else {
-			curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-history-employee?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year . '&teamId=' . $teamId);
-			$history = curl_exec($api);
-			$history = json_decode($history, true);
+			$history = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-history-employee?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year . '&teamId=' . $teamId);
 		}
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history-team?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year);
-		$historyTeam = curl_exec($api);
-		$historyTeam = json_decode($historyTeam, true);
-
-		curl_close($api);
-		// throw new Exception(print_r($history,true));
-
+		$historyTeam = Api::connectApi(Path::Api() . 'kpi/management/kpi-history-team?kpiId='  . $kpiId . '&month=' . $month . '&year=' . $year);
 		$data = [
 			"percentage" => $percentage,
 			"result" => $result,
@@ -1166,11 +904,6 @@ class KpiTeamController extends Controller
 			"history" => $history,
 			"historyTeam" => $historyTeam
 		];
-
-		// throw new Exception(print_r($data,true));
-
-
-
 		header("Content-Type: application/json");
 		echo json_encode($data);
 		exit;
@@ -1178,21 +911,8 @@ class KpiTeamController extends Controller
 	public function actionKpiTeamView()
 	{
 		$kpiTeamId = $_POST["kpiTeamId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-detail?kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=0');
-		$kpiTeam = curl_exec($api);
-		$kpiTeam = json_decode($kpiTeam, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-history-view?kpiTeamId=' . $kpiTeamId);
-		$kpiTeamHistory = curl_exec($api);
-		$kpiTeamHistory = json_decode($kpiTeamHistory, true);
-
-		curl_close($api);
-
-		//throw new Exception(print_r($kpiTeamHistory, true));
+		$kpiTeam = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-team-detail?kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=0');
+		$kpiTeamHistory = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-team-history-view?kpiTeamId=' . $kpiTeamId);
 		$teamText = $this->renderAjax('team_history', ["kpiTeamHistory" => $kpiTeamHistory]);
 		$res["kpiTeam"] = $kpiTeam;
 		$res["history"] = $teamText;
@@ -1212,26 +932,14 @@ class KpiTeamController extends Controller
 		} else {
 			$res["status"] = false;
 		}
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-detail?kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=0');
-		$kpiTeam = curl_exec($api);
-		$kpiTeam = json_decode($kpiTeam, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team-history-view?kpiTeamId=' . $kpiTeamId);
-		$kpiTeamHistory = curl_exec($api);
-		$kpiTeamHistory = json_decode($kpiTeamHistory, true);
-
-		curl_close($api);
-
-		//throw new exception($kpiTeamId);
+		$kpiTeam = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-team-detail?kpiTeamId=' . $kpiTeamId . '&&kpiTeamHistoryId=0');
+		$kpiTeamHistory = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-team-history-view?kpiTeamId=' . $kpiTeamId);
 		$teamText = $this->renderAjax('team_history', ["kpiTeamHistory" => $kpiTeamHistory]);
 		$res["kpiTeam"] = $kpiTeam;
 		$res["history"] = $teamText;
 		return json_encode($res);
 	}
+
 	public function actionAssignKpiTeam()
 	{
 		$kpiId = $_POST["kpiId"];
@@ -1402,11 +1110,6 @@ class KpiTeamController extends Controller
 						$kpiEmpoyeeHistory->status = $status;
 						$kpiEmpoyeeHistory->save(false);
 						$empoyee->save(false);
-						// if ($kpiEmpoyeeHistory->save(false)) {
-						// 	$empoyee -> updateDateTime = new Expression('NOW()');
-						// 	$empoyee -> save(false);
-						// }
-
 					}
 				endforeach;
 			}
@@ -1418,18 +1121,7 @@ class KpiTeamController extends Controller
 	public function actionKpiTeamUpdate()
 	{
 		$kpiId = $_POST["kpiId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/kpi-team/kpi-team?kpiId=' . $kpiId);
-		$kpiTeams = curl_exec($api);
-		$kpiTeams = json_decode($kpiTeams, true);
-
-
-		curl_close($api);
-		//	throw new Exception(print_r($kpiTeams, true));
-
+		$kpiTeams = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-team?kpiId=' . $kpiId);
 		$allDepartment = [];
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $kgt):
@@ -1461,6 +1153,7 @@ class KpiTeamController extends Controller
 		$res["countTeam"] = count($kpiTeams);
 		return json_encode($res);
 	}
+
 	public function actionCheckKpiEmployee()
 	{
 		$kpiTeamId = $_POST["kpiTeamId"];

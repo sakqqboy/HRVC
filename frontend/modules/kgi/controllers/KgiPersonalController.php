@@ -153,6 +153,7 @@ class KgiPersonalController extends Controller
 				"type" => $type
 			]));
 		}
+
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$kgis = Api::connectApi(Path::Api() . 'kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);

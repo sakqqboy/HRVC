@@ -4,6 +4,7 @@ namespace frontend\modules\kpi\controllers;
 
 use common\helpers\Path;
 use common\models\ModelMaster;
+use frontend\components\Api;
 use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\web\Controller;
@@ -34,19 +35,10 @@ class ChartController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $kpiId = $param["kpiId"];
         $role = UserRole::userRight();
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
-        $kpiDetail = curl_exec($api);
-        $kpiDetail = json_decode($kpiDetail, true);
+        $kpiDetail = Api::connectApi(Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
+        $history = Api::connectApi(Path::Api() . 'kpi/management/kpi-history?kpiId=' . $kpiId);
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'kpi/management/kpi-history?kpiId=' . $kpiId);
-        $history = curl_exec($api);
-        $history = json_decode($history, true);
-
-        curl_close($api);
         $monthDetail = [];
         $summarizeMonth = [];
         $year = 2024;
@@ -56,7 +48,6 @@ class ChartController extends Controller
         $targetText = "";
         $resultText = "";
         $result = [];
-
 
         if (isset($history) && count($history) > 0) {
             foreach ($history as $kpiHistoryId => $ht):
@@ -71,6 +62,7 @@ class ChartController extends Controller
                 }
             endforeach;
         }
+
         foreach ($months as $index => $month):
             if (isset($summarizeMonth[$year][$index])) {
                 $target[$index] = $summarizeMonth[$year][$index]["target"];
@@ -83,6 +75,7 @@ class ChartController extends Controller
             $resultText .= $result[$index] . ',';
             $monthText .= '"' . $month . '",';
         endforeach;
+
         $monthText = substr($monthText, 0, -1);
         $targetText = substr($targetText, 0, -1);
         $resultText = substr($resultText, 0, -1);

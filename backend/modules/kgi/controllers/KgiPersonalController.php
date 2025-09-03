@@ -15,9 +15,12 @@ use backend\models\hrvc\KgiTeam;
 use backend\models\hrvc\Team;
 use backend\models\hrvc\Unit;
 use backend\models\hrvc\User;
+use common\helpers\Athorize;
 use common\models\ModelMaster;
 use Exception;
+use Yii;
 use yii\web\Controller;
+use yii\web\Response;
 
 header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
@@ -26,6 +29,21 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class KgiPersonalController extends Controller
 {
+	public function beforeAction($action)
+	{
+		$authHeader = Yii::$app->request->getHeaders()->get('TcgHrvcAuthorization');
+		$check = Athorize::CheckRequest($authHeader);
+		if ($check == 0) {
+			Yii::$app->response->format = Response::FORMAT_JSON;
+			Yii::$app->response->statusCode = 401;
+			Yii::$app->response->data = [
+				'status' => 'error',
+				'message' => 'Invalid or missing token.'
+			];
+			return false;
+		}
+		return parent::beforeAction($action);
+	}
 	public function actionKgiTeamEmployee($kgiId)
 	{
 		$kgiTeams = KgiTeam::find()
