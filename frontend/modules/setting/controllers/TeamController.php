@@ -572,13 +572,9 @@ class TeamController extends Controller
                 $team->updateDateTime = new Expression('NOW()');
     
                 if ($team->save()) {
-                    $api = curl_init();
-                    curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-                    curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' .  $departmentId . '&page=1' . '&limit=0');
-                    $teams = curl_exec($api);
-                    $teams = json_decode($teams, true);
-                    curl_close($api);
+                    $teams = Api::connectApi(
+                        Path::Api() . 'masterdata/team/department-team?id=' . $departmentId . '&page=1&limit=0'
+                    );
 
                     return [
                         'success' => true,
@@ -624,13 +620,9 @@ class TeamController extends Controller
 
                 if ($team->save(false)) {
                     // ดึงข้อมูล teams ล่าสุดกลับมา
-                    $api = curl_init();
-                    curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-                    curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' .  $departmentId . '&page=1'. '&limit=0');
-                    $teams = curl_exec($api);
-                    $teams = json_decode($teams, true);
-                    curl_close($api);
+                    $teams = Api::connectApi(
+                        Path::Api() . 'masterdata/team/department-team?id=' . $departmentId . '&page=1&limit=0'
+                    );
 
                     return [
                         'success' => true,
@@ -665,13 +657,10 @@ class TeamController extends Controller
             $team->status = 1;
             $team->updateDateTime = new Expression('NOW()');
             if ($team->save(false)) {
-                $api = curl_init();
-                curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-                curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/team-detail?id=' . $teamId);
-                $teamDetail = curl_exec($api);
-                $teamDetail = json_decode($teamDetail, true);
-                curl_close($api);
+                 $teamDetail = Api::connectApi(
+                    Path::Api() . 'masterdata/team/team-detail?id=' . $teamId
+                );
+
                 $textUpdateTeam = $this->renderAjax('update_team', [
                     "teamId" => $teamId,
                     "team" => $teamDetail
@@ -684,16 +673,6 @@ class TeamController extends Controller
     }
     public function actionDeleteTeam()
     {
-        // $teamId = $_POST["teamId"] - 543;
-        // $team = Team::find()->where(["teamId" => $teamId])->one();
-        // $team->status = 99;
-
-        // if ($team->save(false)) {
-        //     $res["status"] = true;
-        // } else {
-        //     $res["status"] = false;
-        // }
-        // return json_encode($res);
          Yii::$app->response->format = \yii\web\Response::FORMAT_JSON; // ← สำคัญ!
 
         if (isset($_POST["teamId"])) {
@@ -710,13 +689,9 @@ class TeamController extends Controller
 
                 if ($update->save(false)) {
                     $departmentId = $update->departmentId;
-                    $api = curl_init();
-                    curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-                    curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/department-team?id=' .  $departmentId . '&page=1'. '&limit=0');
-                    $teams = curl_exec($api);
-                    $teams = json_decode($teams, true);
-                    curl_close($api);
+                    $teams = Api::connectApi(
+                        Path::Api() . 'masterdata/team/department-team?id=' . $departmentId . '&page=1&limit=0'
+                    );
 
                     return [
                         'success' => true,
@@ -762,42 +737,40 @@ class TeamController extends Controller
         $totalDepartment = 0;
         $totalBranch = 0;
 
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+        if (!empty($companyId)) {
+            // ดึงข้อมูลบริษัท
+            $company = Api::connectApi(Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
 
+            // ดึงข้อมูลสาขาของบริษัท
+            $branches = Api::connectApi(Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
 
-
-        if ($companyId != '') {
-            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/company/company-detail?id=' . $companyId);
-            $company = curl_exec($api);
-            $company = json_decode($company, true);
-
-            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId);
-            $branches = curl_exec($api);
-            $branches = json_decode($branches, true);
             $branchess = Branch::find()
                 ->where(["status" => 1, "companyId" => $companyId])
                 ->asArray()
                 ->all();
         } else {
-            curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/team/all-teams-detail');
+            // ถ้าไม่มี companyId
             $branches = [];
+            Api::connectApi(Path::Api() . 'masterdata/team/all-teams-detail'); // เรียก API แต่ไม่ได้ใช้ผลลัพธ์
+
             $branchess = Branch::find()
                 ->where(["status" => 1])
                 ->asArray()
                 ->all();
         }
-        if ($branchId != '') {
-            $departments = Department::find()->select('departmentId,departmentName')
-                ->where(["branchId" => $branchId, "status" => 1])->asArray()->orderBy('departmentName')->all();
+        if (!empty($branchId)) {
+            $departments = Department::find()
+                ->select('departmentId,departmentName')
+                ->where(["branchId" => $branchId, "status" => 1])
+                ->asArray()
+                ->orderBy('departmentName')
+                ->all();
         } else {
             $departments = [];
         }
 
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        $companies = curl_exec($api);
-        $companies = json_decode($companies, true);
+        // ดึงข้อมูล Group → Company
+        $companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 
         $teams = Team::find()->select('team.*,d.departmentName,c.companyName,b.branchName,co.flag,co.countryName')
             ->JOIN("LEFT JOIN", "department d", "d.departmentId=team.departmentId")
@@ -819,7 +792,7 @@ class TeamController extends Controller
             ->asArray()
             ->orderBy('team.teamName')
             ->all();
-        curl_close($api);
+        
         if (isset($branchess) && count($branchess) > 0) {
             foreach ($branchess as $branch) :
                 $departments = Department::find()
@@ -845,7 +818,7 @@ class TeamController extends Controller
             endforeach;
         }
         $totalBranch = count($branchess);
-        // throw new Exception(print_r($teams, true));
+        
         return $this->render('search_result', [
             "companies" => $companies,
             "allTeams" => $teams,
@@ -859,162 +832,4 @@ class TeamController extends Controller
             "totalEmployee" => $totalEmployee,
         ]);
     }
-    // public function actionImport()
-    // {
-    //     $error = [];
-    //     $isError = 0;
-    //     $correct = [];
-    //     $success = 0;
-    //     $totalError = 0;
-    //     //throw new Exception(print_r(Yii::$app->request->post(), true));
-    //     // if (isset($_POST["employeeFile"])) {
-
-    //     $imageObj = UploadedFile::getInstanceByName("teamFile");
-    //     if (isset($imageObj) && !empty($imageObj)) {
-    //         $urlFolder = Path::getHost() . 'file/import/team';
-    //         if (!file_exists($urlFolder)) {
-    //             mkdir($urlFolder, 0777, true);
-    //         }
-    //         $file = $imageObj->name;
-    //         $filenameArray = explode('.', $file);
-    //         $countArrayFile = count($filenameArray);
-    //         $fileType = $filenameArray[$countArrayFile - 1];
-    //         if ($fileType == 'xlsx' || $fileType == 'xls') {
-
-    //             $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
-    //             $pathSave = $urlFolder . '/' . $fileName;
-    //             if ($imageObj->saveAs($pathSave)) {
-
-    //                 $reader = new Xlsx();
-    //                 $spreadsheet = $reader->load($pathSave);
-    //                 $sheetData = $spreadsheet->getActiveSheet()->toArray();
-    //                 // unset($sheetData[0]);
-    //                 $i = 0;
-    //                 $transaction = Yii::$app->db->beginTransaction();
-    //                 foreach ($sheetData as $data) :
-    //                     $layerId = '';
-    //                     $departmentId = '';
-    //                     $isError = 0;
-    //                     $error[$i] = "";
-    //                     if ($i >= 1) {
-
-    //                         // throw new exception('2222');
-    //                         if (trim($data[0]) == "") {
-    //                             $isError = 1;
-    //                             $error[$i] .= '- Team name<br>';
-    //                         }
-    //                         if (trim($data[1]) == "") {
-    //                             $isError = 1;
-    //                             $error[$i] .= '- Please select department<br>';
-    //                         } else {
-    //                             $departmentId = Department::branchNameWithDepartmentName($data[1]);
-    //                             if ($departmentId == "") {
-    //                                 $isError = 1;
-    //                                 $error[$i] .= '- Department not found, need to contact administrator<br>';
-    //                             }
-    //                         }
-    //                         if ($isError == 0) {
-    //                             $team = new Team();
-    //                             $team->teamName = $data[0];
-    //                             $team->departmentId =  $departmentId;
-    //                             $team->status = 1;
-    //                             $team->createDateTime = new Expression('NOW()');
-    //                             $team->updateDateTime = new Expression('NOW()');
-    //                             if ($team->save(false)) {
-    //                                 $success++;
-    //                                 $correct[$i] = [
-    //                                     "name" => $data[0],
-    //                                     "department" => $data[1],
-    //                                 ];
-    //                             }
-    //                         }
-    //                     }
-    //                     if ($isError == 0) {
-    //                         $totalError++;
-    //                         unset($error[$i]); // if there is no error delete this index
-    //                     }
-    //                     $i++;
-    //                 endforeach;
-    //                 if (count($error) == 0) {
-    //                     $transaction->commit();
-    //                 } else {
-    //                     $transaction->rollBack();
-    //                 }
-    //             }
-    //         } else {
-    //             $error[0] = "Please select .xlsx or .xls file";
-    //         }
-
-    //         unlink($pathSave);
-    //     }
-    //     return $this->render('import', [
-    //         "errors" => $error,
-    //         "success" => $success,
-    //         "corrects" => $correct
-    //     ]);
-    // }
-    // public function actionExport()
-    // {
-    //     $departments = Department::find()
-    //         ->select('departmentName,branchId')
-    //         ->where(["status" => 1])
-    //         ->asArray()
-    //         ->orderBy('departmentName')
-    //         ->all();
-    //     $de = [];
-    //     if (isset($departments) && count($departments) > 0) {
-    //         $i = 0;
-    //         foreach ($departments as $d) :
-    //             $de[$i] = $d["departmentName"] . "(Branch::" . Branch::branchName($d["branchId"]) . ")";
-    //             $i++;
-    //         endforeach;
-    //     }
-
-    //     $htmlExcel = $this->renderPartial('export', [
-    //         "departments" => $de,
-
-    //     ]);
-    //     $urlFolder = Path::getHost() . 'file/import/team/';
-    //     $fileName = 'team.xlsx';
-    //     $filePath = $urlFolder . $fileName;
-    //     $reader = new Xlsx();
-
-
-    //     $spreadsheet = new Spreadsheet;
-    //     $reader2 = new Html();
-
-    //     $spreadsheet->createSheet();
-
-    //     $reader2->setSheetIndex(1);
-    //     $spreadsheet = $reader2->loadFromString($htmlExcel);
-    //     $spreadsheet->getActiveSheet(1)->setTitle('data');
-
-    //     $spreadsheet1 = $reader->load($filePath);
-    //     $reader2->setSheetIndex(0);
-    //     $clonedWorksheet = clone $spreadsheet1->getSheetByName('team');
-    //     $clonedWorksheet->setTitle('team');
-    //     $spreadsheet->addExternalSheet($clonedWorksheet);
-    //     $fileName = 'Import Team format' . date('Y-m-d');
-    //     $spreadsheet->removeSheetByIndex(
-    //         $spreadsheet->getIndex(
-    //             $spreadsheet->getSheetByName('Worksheet')
-    //         )
-    //     );
-    //     //  $spreadsheet->getActiveSheet()->setTitle('employee');
-
-    //     $spreadsheet->setActiveSheetIndex(1);
-    //     $folderName = "export";
-    //     $urlFolder = Path::getHost() . 'file/' . $folderName . "/" . $fileName;
-    //     $folder_path = Path::getHost() . 'file/' . $folderName;
-    //     $files = glob($folder_path . '/*');
-    //     foreach ($files as $file) {
-    //         if (is_file($file)) {
-    //             unlink($file);
-    //         }
-    //     }
-
-    //     $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-    //     $writer->save($urlFolder);
-    //     return Yii::$app->response->sendFile($urlFolder, $fileName . '.xlsx');
-    // }
 }

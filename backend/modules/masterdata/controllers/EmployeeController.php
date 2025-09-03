@@ -21,6 +21,8 @@ use common\models\ModelMaster;
 use Exception;
 use frontend\models\hrvc\User;
 use yii\web\Controller;
+use Yii;
+use yii\web\Response;
 
 /**
  * Default controller for the `masterdata` module
@@ -32,6 +34,23 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class EmployeeController extends Controller
 {
+	public function beforeAction($action)
+	{
+		$authHeader = Yii::$app->request->getHeaders()->get('TcgHrvcAuthorization');
+
+		if (!$authHeader || $authHeader !== '9f1b3c4d5e6a7b8c9d0e1f2a3b4c5d6e') {
+			Yii::$app->response->format = Response::FORMAT_JSON;
+			Yii::$app->response->statusCode = 401;
+			Yii::$app->response->data = [
+				'status' => 'error',
+				'message' => 'Invalid or missing token.'
+			];
+			return false;
+		}
+
+		return parent::beforeAction($action);
+	}
+	
 	public function actionEmployeeDetail($id)
 	{
 		$employee = Employee::find()

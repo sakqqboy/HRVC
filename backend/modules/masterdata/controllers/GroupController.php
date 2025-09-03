@@ -7,7 +7,8 @@ use backend\models\hrvc\Country;
 use backend\models\hrvc\Group;
 use Exception;
 use yii\web\Controller;
-
+use Yii;
+use yii\web\Response;
 /**
  * Default controller for the `masterdata` module
  */
@@ -22,6 +23,22 @@ class GroupController extends Controller
      * Renders the index view for the module
      * @return string
      */
+    public function beforeAction($action)
+	{
+		$authHeader = Yii::$app->request->getHeaders()->get('TcgHrvcAuthorization');
+
+		if (!$authHeader || $authHeader !== '9f1b3c4d5e6a7b8c9d0e1f2a3b4c5d6e') {
+			Yii::$app->response->format = Response::FORMAT_JSON;
+			Yii::$app->response->statusCode = 401;
+			Yii::$app->response->data = [
+				'status' => 'error',
+				'message' => 'Invalid or missing token.'
+			];
+			return false;
+		}
+
+		return parent::beforeAction($action);
+	}
     public function actionIndex()
     {
         return $this->render('index');
