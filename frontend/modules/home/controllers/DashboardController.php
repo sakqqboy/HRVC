@@ -6,6 +6,7 @@ use common\helpers\Path;
 use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
+use frontend\components\Api;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\EmployeePimWeight;
 use frontend\models\hrvc\Frame;
@@ -36,40 +37,16 @@ class DashboardController extends Controller
     }
     public function actionIndex()
     {
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
         $employeeId = User::employeeIdFromUserId();
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-        $employee = curl_exec($api);
-        $employee = json_decode($employee, true);
-
+        $employee = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
         $termId = FrameTerm::currentTermId($employee["companyId"], $employee["branchId"]);
-
-        //$termId = 20;
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/employee-evaluator?employeeId=' . $employeeId . '&&termId=' . $termId);
-        $evaluator = curl_exec($api);
-        $evaluator = json_decode($evaluator, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
-        $terms = curl_exec($api);
-        $terms = json_decode($terms, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/eva/employee-pim?employeeId=' . $employeeId . '&&termId=' . $termId);
-        $employeePim = curl_exec($api);
-        $employeePim = json_decode($employeePim, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/eva/all-current-term?employeeId=' . $employeeId . '&&companyId=' . $employee["companyId"] . '&&branchId=' . $employee["branchId"]);
-        $allCurrentTerm = curl_exec($api);
-        $allCurrentTerm = json_decode($allCurrentTerm, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/eva/subordinate-current-term?evaluatorId=' .  $employeeId);
-        $subordinateTerm = curl_exec($api);
-        $subordinateTerm = json_decode($subordinateTerm, true);
-
+        $evaluator = Api::connectApi(Path::Api() . 'evaluation/environment/employee-evaluator?employeeId=' . $employeeId . '&&termId=' . $termId);
+        $terms = Api::connectApi(Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
+        $employeePim = Api::connectApi(Path::Api() . 'evaluation/eva/employee-pim?employeeId=' . $employeeId . '&&termId=' . $termId);
+        $allCurrentTerm = Api::connectApi(Path::Api() . 'evaluation/eva/all-current-term?employeeId=' . $employeeId . '&&companyId=' . $employee["companyId"] . '&&branchId=' . $employee["branchId"]);
+        $subordinateTerm = Api::connectApi(Path::Api() . 'evaluation/eva/subordinate-current-term?evaluatorId=' .  $employeeId);
         $frameId = $terms["frameId"];
         $frameName = Frame::frameName($frameId);
-        // throw new exception(print_r($subordinateTerm, true));
         return $this->render('index', [
             "employee" => $employee,
             "evaluator" => $evaluator,
@@ -81,6 +58,7 @@ class DashboardController extends Controller
             "subordinateTerm" => $subordinateTerm
         ]);
     }
+
     public function actionKfiId()
     {
         $kfiId = $_POST["id"];
@@ -275,76 +253,28 @@ class DashboardController extends Controller
 
     public function actionChartDashbord()
     {
-        $currentCategory = $_POST['currentCategory'] ?? '';  // Default to empty if not set
-        $type = $_POST['type'] ?? '';  // Default to empty if not set
+        $currentCategory = $_POST['currentCategory'] ?? '';
+        $type = $_POST['type'] ?? '';
         $userId = Yii::$app->user->id;
         $Id = User::employeeIdFromUserId($userId);
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $Id);
-        $employeeProfile = curl_exec($api);
-        $employeeProfile = json_decode($employeeProfile, true);
-
+        $employeeProfile = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $Id);
         $companyId = $employeeProfile['companyId'];
         $teamId = $employeeProfile['teamId'];
         $employeeId = $employeeProfile['employeeId'];
-
-        // throw new Exception("Company ID: {$companyId}, Team ID: {$teamId}, Employee ID: {$employeeId}");
-
-        // $groupId = Group::currentGroupId();
-        // $role = UserRole::userRight();
-        // Your logic here to generate the response ($res)
         $res = [];
-
         if ($currentCategory && $type) {
-            // Process data based on currentCategory and type
-            // Example:
             $res['category'] = $currentCategory;
             $res['type'] = $type;
-
             if ($type == 'KFI') {
-                $currentIndex = 0;
-            } else if ($type == 'KPI') {
-                $currentIndex = 1;
-            } else if ($type == 'KGI') {
-                $currentIndex = 2;
-            }
-
-            // Add data based on the category and type
-            // This is just an example; replace with your Performance logic
-            if ($type == 'KFI') {
-
-                //เรียก api ดึงดาต้ามา ใส่ในอาเรย์ก่อนresไป 
-                // เรียก API ดึงข้อมูลมา
-                curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/chart-kfi?currentCategory=' . $currentCategory . '&&companyId=' . $companyId . '&&teamId=' . $teamId . '&&employeeId=' . $employeeId);
-                $chartKFI = curl_exec($api);
-                $chartKFI = json_decode($chartKFI, true); // แปลง JSON เป็น Array
-                // throw new Exception(print_r($chartKFI,true));
-                // ตรวจสอบข้อมูลจาก API
-                $performanceData = isset($chartKFI['performance']) ? $chartKFI['performance'] : [];
-
-                // throw new Exception(print_r($performanceData,true));
-                // ตรวจสอบและเติม 0 ให้ข้อมูล Performance ให้ครบ 12 ตัว
+                $chartKFI = Api::connectApi(Path::Api() . 'home/dashbord/chart-kfi?currentCategory=' . $currentCategory . '&&companyId=' . $companyId . '&&teamId=' . $teamId . '&&employeeId=' . $employeeId);
+                $performanceData = $chartKFI['performance'] ?? [];
                 $finalPerformanceData = [];
                 for ($i = 1; $i <= 12; $i++) {
-                    $finalPerformanceData[] = isset($performanceData[$i]) ? $performanceData[$i] : 0;
+                    $finalPerformanceData[] = $performanceData[$i] ?? 0;
                 }
-
-                // ลบค่า 0 ที่อยู่ท้ายลิสต์ออก
                 while (!empty($finalPerformanceData) && end($finalPerformanceData) === 0) {
                     array_pop($finalPerformanceData);
                 }
-                // print_r($finalPerformanceData);
-
-                // throw new Exception(print_r($finalPerformanceData,true));
-
-                // $finalPerformanceData = [79, 64, 25, 40, 60] ;
-
-
-                // throw new Exception(print_r($finalPerformanceData,true));
-                // สร้างข้อมูลสำหรับกราฟ
                 $res['data'] = [
                     [
                         'title' => "KFI Performance",
@@ -352,94 +282,59 @@ class DashboardController extends Controller
                             [
                                 'type' => 'areaspline',
                                 'name' => 'Performance',
-                                'data' => $finalPerformanceData, // ชุดข้อมูล Performance
+                                'data' => $finalPerformanceData,
                                 'color' => '#748EE9',
                                 'fillOpacity' => 0.5,
                                 'lineWidth' => 2,
-                                'marker' => [
-                                    'enabled' => true
-                                ],
+                                'marker' => ['enabled' => true],
                                 'visible' => true,
-                                // 'enableMouseTracking' => false, // เปิดให้แสดง tooltip เมื่อเอาเมาส์ไปชี้
                                 'showInLegend' => true
                             ],
                             [
                                 'type' => 'line',
                                 'name' => 'Result',
-                                'data' => $finalPerformanceData, // ชุดข้อมูล Performance
-                                'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
-                                'lineWidth' => 0, // ไม่แสดงเส้น
-                                'marker' => [
-                                    'enabled' => false, // ไม่แสดงจุด
-                                ],
-                                'showInLegend' => false, // ไม่แสดงใน Legend
-                                'enableMouseTracking' => true, // เปิดการติดตามเมาส์
+                                'data' => $finalPerformanceData,
+                                'color' => 'transparent',
+                                'lineWidth' => 0,
+                                'marker' => ['enabled' => false],
+                                'showInLegend' => false,
+                                'enableMouseTracking' => true
                             ],
                             [
                                 'type' => 'line',
                                 'name' => 'Gap',
-                                'data' => array_map(function ($value) {
-                                    return  $value - 100;
-                                }, $finalPerformanceData), // คำนวณ Gap
-                                'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
-                                'lineWidth' => 0, // ไม่แสดงเส้น
-                                'marker' => [
-                                    'enabled' => false,
-                                    'radius' => 0 // ✅ ปิด marker
-                                ],
-                                'halo' => null, // ✅ ปิด halo
-                                'showInLegend' => false, // ไม่แสดงใน Legend
-                                'enableMouseTracking' => true, // เปิดการติดตามเมาส์
+                                'data' => array_map(fn($v) => $v - 100, $finalPerformanceData),
+                                'color' => 'transparent',
+                                'lineWidth' => 0,
+                                'marker' => ['enabled' => false],
+                                'showInLegend' => false,
+                                'enableMouseTracking' => true
                             ],
                             [
                                 'type' => 'line',
                                 'name' => 'Max',
-                                'data' => array_fill(0, 12, 100.0), // ชุดข้อมูล Gap เป็น 100 ตลอด 12 จุด
+                                'data' => array_fill(0, 12, 100.0),
                                 'color' => '#748EE9',
                                 'lineWidth' => 2,
-                                'marker' => [
-                                    'enabled' => false,
-                                    'radius' => 0 // ✅ ปิด marker
-                                ],
-                                'halo' => null, // ✅ ปิด halo
+                                'marker' => ['enabled' => false],
+                                'halo' => null,
                                 'visible' => true,
-                                'enableMouseTracking' => false, // เปิดให้แสดง tooltip เมื่อเอาเมาส์ไปชี้
-                                'showInLegend' => false,
-                            ],
-                        ],
-                    ],
+                                'enableMouseTracking' => false,
+                                'showInLegend' => false
+                            ]
+                        ]
+                    ]
                 ];
-
-                // throw new Exception(print_r($res['data'],true));
-
-
             } elseif ($type == 'KGI') {
-                // throw new Exception("Company ID: {$companyId}, Team ID: {$teamId}, Employee ID: {$employeeId}");
-
-                // $url = Path::Api() .'home/dashbord/chart-kgi?currentCategory=' . $currentCategory . '&companyId=' . $companyId . '&teamId=' . $teamId . '&employeeId=' . $employeeId;
-                // throw new Exception($url);
-
-                curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/chart-kgi?currentCategory=' . $currentCategory . '&companyId=' . $companyId . '&teamId=' . $teamId . '&employeeId=' . $employeeId);
-                // curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/chart-kgi?currentCategory=company&companyId=3&teamId=38&employeeId=266');
-                $chartKGI = curl_exec($api);
-                $chartKGI = json_decode($chartKGI, true); // แปลง JSON เป็น Array
-                // throw new Exception(print_r($chartKGI,true));
-
-                // ตรวจสอบข้อมูลจาก API
-                $performanceData = isset($chartKGI['performance']) ? $chartKGI['performance'] : [];
-
-                // throw new Exception(print_r($chartKGI['performance'],true));
-                // ตรวจสอบและเติม 0 ให้ข้อมูล Performance ให้ครบ 12 ตัว
+                $chartKGI = Api::connectApi(Path::Api() . 'home/dashbord/chart-kgi?currentCategory=' . $currentCategory . '&companyId=' . $companyId . '&teamId=' . $teamId . '&employeeId=' . $employeeId);
+                $performanceData = $chartKGI['performance'] ?? [];
                 $finalPerformanceData = [];
-                for ($i = 1; $i <= 12; $i++) { // เปลี่ยน $i เริ่มจาก 1 ถึง 12
-                    $finalPerformanceData[] = isset($performanceData[$i]) ? $performanceData[$i] : 0;
+                for ($i = 1; $i <= 12; $i++) {
+                    $finalPerformanceData[] = $performanceData[$i] ?? 0;
                 }
-
                 while (!empty($finalPerformanceData) && end($finalPerformanceData) === 0) {
                     array_pop($finalPerformanceData);
                 }
-
-
                 $res['data'] = [
                     [
                         'title' => "KGI Performance",
@@ -447,82 +342,58 @@ class DashboardController extends Controller
                             [
                                 'type' => 'areaspline',
                                 'name' => 'Performance',
-                                'data' => $finalPerformanceData, // ชุดข้อมูล Performance
+                                'data' => $finalPerformanceData,
                                 'color' => '#FFBA00',
                                 'fillOpacity' => 0.4,
                                 'lineWidth' => 2,
-                                'marker' => [
-                                    'enabled' => true
-                                ],
+                                'marker' => ['enabled' => true],
                                 'visible' => true,
-                                // 'enableMouseTracking' => false, // เปิดให้แสดง tooltip เมื่อเอาเมาส์ไปชี้
-                                'showInLegend' => true,
+                                'showInLegend' => true
                             ],
                             [
                                 'type' => 'line',
                                 'name' => 'Result',
-                                'data' => $finalPerformanceData, // ชุดข้อมูล Performance
-                                'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
-                                'lineWidth' => 0, // ไม่แสดงเส้น
-                                'marker' => [
-                                    'enabled' => false, // ไม่แสดงจุด
-                                ],
-                                'showInLegend' => false, // ไม่แสดงใน Legend
-                                'enableMouseTracking' => true, // เปิดการติดตามเมาส์
+                                'data' => $finalPerformanceData,
+                                'color' => 'transparent',
+                                'lineWidth' => 0,
+                                'marker' => ['enabled' => false],
+                                'showInLegend' => false,
+                                'enableMouseTracking' => true
                             ],
                             [
                                 'type' => 'line',
                                 'name' => 'Gap',
-                                'data' => array_map(function ($value) {
-                                    return $value - 100;
-                                }, $finalPerformanceData), // คำนวณ Gap
-                                'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
-                                'lineWidth' => 0, // ไม่แสดงเส้น
-                                'marker' => [
-                                    'enabled' => false, // ไม่แสดงจุด
-                                ],
-                                'showInLegend' => false, // ไม่แสดงใน Legend
-                                'enableMouseTracking' => true, // เปิดการติดตามเมาส์
+                                'data' => array_map(fn($v) => $v - 100, $finalPerformanceData),
+                                'color' => 'transparent',
+                                'lineWidth' => 0,
+                                'marker' => ['enabled' => false],
+                                'showInLegend' => false,
+                                'enableMouseTracking' => true
                             ],
                             [
                                 'type' => 'line',
                                 'name' => 'Max',
-                                'data' => array_fill(0, 12, 100.0), // ชุดข้อมูล Max เป็น 100 ตลอด 12 จุด
+                                'data' => array_fill(0, 12, 100.0),
                                 'color' => '#FFD000',
                                 'lineWidth' => 4,
-                                'marker' => [
-                                    'enabled' => false,
-                                ],
+                                'marker' => ['enabled' => false],
                                 'visible' => true,
-                                'enableMouseTracking' => false, // เปิดให้แสดง tooltip เมื่อเอาเมาส์ไปชี้
-                                'showInLegend' => false,
-                            ],
-                        ],
-                    ],
+                                'enableMouseTracking' => false,
+                                'showInLegend' => false
+                            ]
+                        ]
+                    ]
                 ];
             } elseif ($type == 'KPI') {
-
-
-                curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/chart-kpi?currentCategory=' . $currentCategory . '&companyId=' . $companyId . '&teamId=' . $teamId . '&employeeId=' . $employeeId);
-                // curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/chart-kgi?currentCategory=company&companyId=3&teamId=38&employeeId=266');
-                $chartKGI = curl_exec($api);
-                $chartKGI = json_decode($chartKGI, true); // แปลง JSON เป็น Array
-                // throw new Exception(print_r($chartKGI,true));
-
-                // ตรวจสอบข้อมูลจาก API
-                $performanceData = isset($chartKGI['performance']) ? $chartKGI['performance'] : [];
-
-                // throw new Exception(print_r($chartKGI['performance'],true));
-                // ตรวจสอบและเติม 0 ให้ข้อมูล Performance ให้ครบ 12 ตัว
+                $chartKPI = Api::connectApi(Path::Api() . 'home/dashbord/chart-kpi?currentCategory=' . $currentCategory . '&companyId=' . $companyId . '&teamId=' . $teamId . '&employeeId=' . $employeeId);
+                $performanceData = $chartKPI['performance'] ?? [];
                 $finalPerformanceData = [];
-                for ($i = 1; $i <= 12; $i++) { // เปลี่ยน $i เริ่มจาก 1 ถึง 12
-                    $finalPerformanceData[] = isset($performanceData[$i]) ? $performanceData[$i] : 0;
+                for ($i = 1; $i <= 12; $i++) {
+                    $finalPerformanceData[] = $performanceData[$i] ?? 0;
                 }
-
                 while (!empty($finalPerformanceData) && end($finalPerformanceData) === 0) {
                     array_pop($finalPerformanceData);
                 }
-
                 $res['data'] = [
                     [
                         'title' => "KPI Performance",
@@ -530,67 +401,52 @@ class DashboardController extends Controller
                             [
                                 'type' => 'areaspline',
                                 'name' => 'Performance',
-                                'data' => $finalPerformanceData, // ชุดข้อมูล Performance
+                                'data' => $finalPerformanceData,
                                 'color' => '#F20',
                                 'fillOpacity' => 0.4,
                                 'lineWidth' => 2,
-                                'marker' => [
-                                    'enabled' => true
-                                ],
+                                'marker' => ['enabled' => true],
                                 'visible' => true,
-                                // 'enableMouseTracking' => false, // เปิดให้แสดง tooltip เมื่อเอาเมาส์ไปชี้
-                                'showInLegend' => true,
+                                'showInLegend' => true
                             ],
                             [
                                 'type' => 'line',
                                 'name' => 'Result',
-                                'data' => $finalPerformanceData, // ชุดข้อมูล Performance
-                                'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
-                                'lineWidth' => 0, // ไม่แสดงเส้น
-                                'marker' => [
-                                    'enabled' => false, // ไม่แสดงจุด
-                                ],
-                                'showInLegend' => false, // ไม่แสดงใน Legend
-                                'enableMouseTracking' => true, // เปิดการติดตามเมาส์
+                                'data' => $finalPerformanceData,
+                                'color' => 'transparent',
+                                'lineWidth' => 0,
+                                'marker' => ['enabled' => false],
+                                'showInLegend' => false,
+                                'enableMouseTracking' => true
                             ],
                             [
                                 'type' => 'line',
                                 'name' => 'Gap',
-                                'data' => array_map(function ($value) {
-                                    return $value - 100;
-                                }, $finalPerformanceData), // คำนวณ Gap
-                                'color' => 'transparent', // ทำให้เส้นมองไม่เห็น
-                                'lineWidth' => 0, // ไม่แสดงเส้น
-                                'marker' => [
-                                    'enabled' => false, // ไม่แสดงจุด
-                                ],
-                                'showInLegend' => false, // ไม่แสดงใน Legend
-                                'enableMouseTracking' => true, // เปิดการติดตามเมาส์
+                                'data' => array_map(fn($v) => $v - 100, $finalPerformanceData),
+                                'color' => 'transparent',
+                                'lineWidth' => 0,
+                                'marker' => ['enabled' => false],
+                                'showInLegend' => false,
+                                'enableMouseTracking' => true
                             ],
                             [
                                 'type' => 'line',
                                 'name' => 'Gap',
-                                'data' => array_fill(0, 12, 100.0), // ชุดข้อมูล Gap เป็น 100 ตลอด 12 จุด
+                                'data' => array_fill(0, 12, 100.0),
                                 'color' => '#FF715B',
                                 'lineWidth' => 4,
-                                'marker' => [
-                                    'enabled' => false,
-                                ],
+                                'marker' => ['enabled' => false],
                                 'visible' => true,
-                                'enableMouseTracking' => false, // เปิดให้แสดง tooltip เมื่อเอาเมาส์ไปชี้
-                                'showInLegend' => false,
-                            ],
-                        ],
-                    ],
+                                'enableMouseTracking' => false,
+                                'showInLegend' => false
+                            ]
+                        ]
+                    ]
                 ];
             }
-            curl_close($api);
         }
-
-        // Return the result as a JSON response
         return json_encode($res);
     }
-
 
     public function actionUpcomingSchedule()
     {
@@ -598,28 +454,11 @@ class DashboardController extends Controller
         $userId = Yii::$app->user->id;
         $Id = User::employeeIdFromUserId($userId);
         $role = UserRole::userRight();
-
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $Id);
-        $employeeProfile = curl_exec($api);
-        $employeeProfile = json_decode($employeeProfile, true);
-
+        $employeeProfile = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $Id);
         $companyId = $employeeProfile['companyId'];
         $teamId = $employeeProfile['teamId'];
         $employeeId = $employeeProfile['employeeId'];
-        // throw new Exception("Company ID: {$companyId}, Team ID: {$teamId}, Employee ID: {$employeeId}");
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/upcoming-schedule?id=' . $Id . '&role=' . $role . '&companyId=' . $companyId . '&teamId=' . $teamId . '&employeeId=' . $employeeId);
-        $upcoming = curl_exec($api);
-        $upcoming = json_decode($upcoming, true);
-        // throw new Exception(print_r($upcoming,true));
-
-        curl_close($api);
-
-        // throw new Exception(print_r($upcoming,true));
+        $upcoming = Api::connectApi(Path::Api() . 'home/dashbord/upcoming-schedule?id=' . $Id . '&role=' . $role . '&companyId=' . $companyId . '&teamId=' . $teamId . '&employeeId=' . $employeeId);
         return json_encode($upcoming);
     }
 }

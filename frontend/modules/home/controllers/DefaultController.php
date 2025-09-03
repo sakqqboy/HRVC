@@ -9,6 +9,7 @@ use common\helpers\Path;
 use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
+use frontend\components\Api;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\UserRole;
 
@@ -36,24 +37,8 @@ class DefaultController extends Controller
         $userId = Yii::$app->user->id;
         $employeeId = User::employeeIdFromUserId($userId);
         $role = UserRole::userRight();
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-        $employeeProfile = curl_exec($api);
-        $employeeProfile = json_decode($employeeProfile, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/default/pending-approval?role=' . $role . '&&employeeId=' . $employeeId);
-        $pendingApprove = curl_exec($api);
-        $pendingApprove = json_decode($pendingApprove, true);
-        // throw new \Exception(print_r($employeeProfile, true));
-
-        // curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/profile?employeeId=' . $employeeId);
-        // $employeeProfile = curl_exec($api);
-        // $employeeProfile = json_decode($employeeProfile, true);
-        curl_close($api);
-
+        $employeeProfile = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+        $pendingApprove = Api::connectApi(Path::Api() . 'home/default/pending-approval?role=' . $role . '&&employeeId=' . $employeeId);
         return $this->render('dashboard', [
             'employeeProfile' => $employeeProfile,
             'userId' => $userId,
@@ -69,26 +54,11 @@ class DefaultController extends Controller
         if ($groupId == null) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
         }
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/dashbord-company?companyId=' . $companyId);
-        $dashbordCompany = curl_exec($api);
-        $dashbordCompany = json_decode($dashbordCompany, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        $companies = curl_exec($api);
-        $companies = json_decode($companies, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-        $units = curl_exec($api);
-        $units = json_decode($units, true);
-
-        curl_close($api);
-
+        $dashbordCompany = Api::connectApi(Path::Api() . 'home/dashbord/dashbord-company?companyId=' . $companyId);
+        $companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        $units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
         $months = ModelMaster::monthFull(1);
         $isManager = UserRole::isManager();
-
         return $this->renderPartial('dashbord_tabs_content', [
             'tab' => 'company',
             'contentDetail' => $dashbordCompany,
@@ -100,6 +70,7 @@ class DefaultController extends Controller
         ]);
     }
 
+
     public function actionTeamTab()
     {
         $teamId = $_POST['teamId'];
@@ -109,29 +80,11 @@ class DefaultController extends Controller
         if ($groupId == null) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
         }
-        //         // throw new Exception( $teamId);
-
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/dashbord-team?teamId=' . $teamId . '&&userId=' . $userId . '&&role=' . $role);
-        $dashbordTeam = curl_exec($api);
-        $dashbordTeam = json_decode($dashbordTeam, true);
-
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        $companies = curl_exec($api);
-        $companies = json_decode($companies, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-        $units = curl_exec($api);
-        $units = json_decode($units, true);
-
-        curl_close($api);
-
+        $dashbordTeam = Api::connectApi(Path::Api() . 'home/dashbord/dashbord-team?teamId=' . $teamId . '&&userId=' . $userId . '&&role=' . $role);
+        $companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        $units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
         $months = ModelMaster::monthFull(1);
         $isManager = UserRole::isManager();
-        // throw new Exception($role);
         return $this->renderPartial('dashbord_tabs_content', [
             'tab' => 'team',
             'contentDetail' => $dashbordTeam,
@@ -141,8 +94,6 @@ class DefaultController extends Controller
             "isManager" => $isManager,
             "role" => $role
         ]);
-
-        // return json_encode($role);
     }
 
     public function actionSelfTab()
@@ -151,31 +102,14 @@ class DefaultController extends Controller
         $userId = Yii::$app->user->id;
         $groupId = Group::currentGroupId();
         $role = UserRole::userRight();
-        // throw new Exception( $employeeId);
         if ($groupId == null) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
         }
-        $api = curl_init();
-        curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'home/dashbord/dashbord-employee?employeeId=' . $employeeId . '&&userId=' . $userId . '&&role=' . $role);
-        $dashbordEmployee = curl_exec($api);
-        $dashbordEmployee = json_decode($dashbordEmployee, true);
-
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-        $companies = curl_exec($api);
-        $companies = json_decode($companies, true);
-
-        curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/unit/all-unit');
-        $units = curl_exec($api);
-        $units = json_decode($units, true);
-
-        curl_close($api);
-
+        $dashbordEmployee = Api::connectApi(Path::Api() . 'home/dashbord/dashbord-employee?employeeId=' . $employeeId . '&&userId=' . $userId . '&&role=' . $role);
+        $companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+        $units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
         $months = ModelMaster::monthFull(1);
         $isManager = UserRole::isManager();
-
         return $this->renderPartial('dashbord_tabs_content', [
             'tab' => 'self',
             'contentDetail' => $dashbordEmployee,
