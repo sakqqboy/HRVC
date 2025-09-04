@@ -542,10 +542,10 @@ class EmployeeController extends Controller
 
         $userId = $userEmployee['userId'] ?? '';
 
-        $userRole       = Api::connectApi(Path::Api() . 'masterdata/employee/user-role?id=' . $userId);
-        $userAccess     = Api::connectApi(Path::Api() . 'masterdata/employee/user-access?id=' . $userId);
-        $userCertificate= Api::connectApi(Path::Api() . 'masterdata/employee/user-certificate?id=' . $userId);
-        $userLanguage   = Api::connectApi(Path::Api() . 'masterdata/employee/user-language?id=' . $userId);
+        $userRole       = Api::connectApi(Path::Api() . 'masterdata/employee/user-role?id=' . $employeeId);
+        $userAccess     = Api::connectApi(Path::Api() . 'masterdata/employee/user-access?id=' . $employeeId);
+        $userCertificate= Api::connectApi(Path::Api() . 'masterdata/employee/user-certificate?id=' . $employeeId);
+        $userLanguage   = Api::connectApi(Path::Api() . 'masterdata/employee/user-language?id=' . $employeeId);
 
         $countries      = Api::connectApi(Path::Api() . 'masterdata/country/company-country');
         $companies      = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
@@ -1999,7 +1999,7 @@ class EmployeeController extends Controller
         $userId = $userEmployee['userId'] ?? '';
 
         $UserLanguage = Api::connectApi(
-            Path::Api() . 'masterdata/employee/user-language?id=' . $userId
+            Path::Api() . 'masterdata/employee/user-language?id=' . $employeeId
         );
 
         $nationalities = Api::connectApi(
@@ -2107,7 +2107,7 @@ class EmployeeController extends Controller
         $userId = $userEmployee['userId'] ?? '';
 
         $UserCertificate = Api::connectApi(
-            Path::Api() . 'masterdata/employee/user-certificate?id=' . $userId
+            Path::Api() . 'masterdata/employee/user-certificate?id=' . $employeeId
         );
 
         return $this->renderPartial('certificates', [
