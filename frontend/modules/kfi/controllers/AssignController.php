@@ -9,6 +9,7 @@ use frontend\components\Api;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\Kfi;
 use frontend\models\hrvc\UserRole;
 use Yii;
 use yii\db\Expression;
@@ -81,5 +82,9 @@ class AssignController extends Controller
 			"companyPic" => $companyPic,
 			"totalBranch" => $totalBranch,
 		]);
+	}
+	public function actionResetAssign()
+	{
+		$kfis = Kfi::find()->where("status!=99")->all();
 	}
 }

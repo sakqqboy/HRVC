@@ -36,6 +36,7 @@ use frontend\models\hrvc\KpiSolution;
 use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\KpiTeamHistory;
 use frontend\modules\kfi\kfi as KfiKfi;
+use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
 
@@ -500,5 +501,371 @@ class DefaultController extends Controller
             endforeach;
         }
         //    throw new exception(print_r($kfiEmployee, true));
+    }
+    public function actionUpdateToCurrentAssign()
+    {
+        $kgi = Kgi::find()->where(1)->all();
+        if (isset($kgi) && count($kgi) > 0) {
+            foreach ($kgi as $k):
+                $month = $k->month;
+                $year = $k->year;
+                $currentStatus = $k->status;
+                $kgiId = $k->kgiId;
+                $currentKgiHistory = KgiHistory::find()
+                    ->where(["kgiId" => $kgiId, "month" => $month, "year" => $year, "status" => $currentStatus])
+                    ->orderBy("createDateTime DESC")
+                    ->one();
+                if (isset($currentKgiHistory)) {
+                    $currentKgiHistoryId = $currentKgiHistory->kgiHistoryId;
+                } else {
+                    $kgiHistory = new KgiHistory();
+                    $kgiHistory->kgiId = $kgiId;
+                    $kgiHistory->unitId = $k->unitId;
+                    $kgiHistory->targetAmount = $k->targetAmount;
+                    $kgiHistory->description = $k->kgiDetail;
+                    $kgiHistory->quantRatio = $k->quantRatio;
+                    $kgiHistory->priority = $k->priority;
+                    $kgiHistory->amountType = $k->amountType;
+                    $kgiHistory->code = $k->code;
+                    $kgiHistory->status = $currentStatus;
+                    $kgiHistory->year = $k->year;
+                    $kgiHistory->month = $k->month;
+                    $kgiHistory->createrId = Yii::$app->user->id;
+                    $kgiHistory->createDateTime = new Expression('NOW()');
+                    $kgiHistory->updateDateTime = new Expression('NOW()');
+                    $kgiHistory->fromDate = $k->fromDate;
+                    $kgiHistory->toDate = $k->toDate;
+                    $kgiHistory->save(false);
+                    $currentKgiHistoryId = Yii::$app->db->lastInsertID;
+                }
+                $kgiHistory = KgiHistory::find()
+                    ->where("kgiId=$kgiId and kgiHistoryId!=$currentKgiHistoryId and status!=99")
+                    ->all();
+                if (isset($kgiHistory) && count($kgiHistory) > 0) {
+                    foreach ($kgiHistory as $kg):
+                        $kg->status = 2;
+                        $kg->save(false);
+                    endforeach;
+                }
+
+                $kgiTeam = KgiTeam::find()->where(["kgiId" => $kgiId])->all();
+                if (isset($kgiTeam) && count($kgiTeam) > 0) {
+                    foreach ($kgiTeam as $kg):
+                        $currentKgiTeamHistory = KgiTeamHistory::find()
+                            ->where(["kgiTeamId" => $kg->kgiTeamId, "month" => $month, "year" => $year, "status" => $currentStatus])
+                            ->orderBy("createDateTime DESC")
+                            ->one();
+                        if (isset($currentKgiTeamHistory)) {
+                            $currentKgiTeamHistoryId = $currentKgiTeamHistory->kgiTeamHistoryId;
+                        } else {
+                            $KgiTeamHistory = new KgiTeamHistory();
+                            $KgiTeamHistory->kgiTeamId = $kg->kgiTeamId;
+                            $KgiTeamHistory->target = null;
+                            $KgiTeamHistory->month = $month;
+                            $KgiTeamHistory->year = $year;
+                            $KgiTeamHistory->result = 0;
+                            $KgiTeamHistory->status = $currentStatus;
+                            $KgiTeamHistory->fromDate = $k->fromDate;
+                            $KgiTeamHistory->toDate = $k->toDate;
+                            $KgiTeamHistory->createDateTime = new Expression('NOW()');
+                            $KgiTeamHistory->updateDateTime = new Expression('NOW()');
+                            $KgiTeamHistory->save(false);
+                            $currentKgiTeamHistoryId = Yii::$app->db->lastInsertID;
+                        }
+                        $kgiTeamHistory = KgiTeamHistory::find()->where("kgiTeamId=$kg->kgiTeamId and kgiTeamHistoryId!=$currentKgiTeamHistoryId and status!=99")->all();
+                        if (isset($kgiTeamHistory) && count($kgiTeamHistory) > 0) {
+                            foreach ($kgiTeamHistory as $kgh):
+                                $kgh->status = 2;
+                                $kgh->save(false);
+                            endforeach;
+                        }
+                        $kg->month = $month;
+                        $kg->year = $year;
+                        $kg->fromDate = $k->fromDate;
+                        $kg->toDate = $k->toDate;
+                        $kg->status = $currentStatus;
+                        $kg->save(false);
+                    endforeach;
+                }
+                $kgiEmployee = KgiEmployee::find()->where(["kgiId" => $kgiId])->all();
+                if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+                    foreach ($kgiEmployee as $kg):
+                        $currentKgiEmployeeHistory = KgiEmployeeHistory::find()
+                            ->where(["kgiEmployeeId" => $kg->kgiEmployeeId, "month" => $month, "year" => $year, "status" => $currentStatus])
+                            ->orderBy("createDateTime DESC")
+                            ->one();
+                        if (isset($currentKgiEmployeeHistory)) {
+                            $currentKgiEmployeeHistoryId = $currentKgiEmployeeHistory->kgiEmployeeHistoryId;
+                        } else {
+                            $KgiEmployeeHistory = new KgiEmployeeHistory();
+                            $KgiEmployeeHistory->kgiEmployeeId = $kg->kgiEmployeeId;
+                            $KgiEmployeeHistory->target = null;
+                            $KgiEmployeeHistory->month = $month;
+                            $KgiEmployeeHistory->year = $year;
+                            $KgiEmployeeHistory->result = 0;
+                            $KgiEmployeeHistory->status = $currentStatus;
+                            $KgiEmployeeHistory->fromDate = $k->fromDate;
+                            $KgiEmployeeHistory->toDate = $k->toDate;
+                            $KgiEmployeeHistory->createDateTime = new Expression('NOW()');
+                            $KgiEmployeeHistory->updateDateTime = new Expression('NOW()');
+                            $KgiEmployeeHistory->save(false);
+                            $currentKgiEmployeeHistoryId = Yii::$app->db->lastInsertID;
+                        }
+                        $kgiEmployeeHistory = KgiEmployeeHistory::find()->where("kgiEmployeeId=$kg->kgiEmployeeId and kgiEmployeeHistoryId!=$currentKgiEmployeeHistoryId and status!=99")->all();
+                        if (isset($kgiEmployeeHistory) && count($kgiEmployeeHistory) > 0) {
+                            foreach ($kgiEmployeeHistory as $kgh):
+                                $kgh->status = 2;
+                                $kgh->save(false);
+                            endforeach;
+                        }
+                        $kg->month = $month;
+                        $kg->year = $year;
+                        $kg->fromDate = $k->fromDate;
+                        $kg->toDate = $k->toDate;
+                        $kg->status = $currentStatus;
+                        $kg->save(false);
+                        $employeeId = $kg->employeeId;
+                        $teamId = Employee::employeeTeam($employeeId)["teamId"];
+                        if ($teamId) {
+                            $kgiTeamD = KgiTeam::find()->where(["kgiId" => $kgiId, "teamId" => $teamId])
+                                ->andWhere("status!=99")
+                                ->one();
+                            if (!isset($kgiTeamD) || empty($kgiTeamD)) {
+                                KgiEmployee::deleteAll(["kgiId" => $kgiId, "employeeId" => $employeeId]);
+                                KgiEmployeeHistory::deleteAll(["kgiEmployeeId" => $kg->kgiEmployeeId]);
+                            }
+                        }
+                    endforeach;
+                }
+            endforeach;
+        }
+
+
+        $kpi = Kpi::find()->where(1)->all();
+        if (isset($kpi) && count($kpi) > 0) {
+            foreach ($kpi as $k):
+                $month = $k->month;
+                $year = $k->year;
+                $currentStatus = $k->status;
+                $kpiId = $k->kpiId;
+                $currentKpiHistory = KpiHistory::find()
+                    ->where(["kpiId" => $kpiId, "month" => $month, "year" => $year, "status" => $currentStatus])
+                    ->orderBy("createDateTime DESC")
+                    ->one();
+                if (isset($currentKpiHistory)) {
+                    $currentKpiHistoryId = $currentKpiHistory->kpiHistoryId;
+                } else {
+                    $kpiHistory = new KpiHistory();
+                    $kpiHistory->kpiId = $kpiId;
+                    $kpiHistory->unitId = $k->unitId;
+                    $kpiHistory->targetAmount = $k->targetAmount;
+                    $kpiHistory->description = $k->kpiDetail;
+                    $kpiHistory->quantRatio = $k->quantRatio;
+                    $kpiHistory->priority = $k->priority;
+                    $kpiHistory->amountType = $k->amountType;
+                    $kpiHistory->code = $k->code;
+                    $kpiHistory->status = $currentStatus;
+                    $kpiHistory->year = $k->year;
+                    $kpiHistory->month = $k->month;
+                    $kpiHistory->createrId = Yii::$app->user->id;
+                    $kpiHistory->createDateTime = new Expression('NOW()');
+                    $kpiHistory->updateDateTime = new Expression('NOW()');
+                    $kpiHistory->fromDate = $k->fromDate;
+                    $kpiHistory->toDate = $k->toDate;
+                    $kpiHistory->save(false);
+                    $currentKpiHistoryId = Yii::$app->db->lastInsertID;
+                }
+                $kpiHistory = KpiHistory::find()
+                    ->where("kpiId=$kpiId and kpiHistoryId!=$currentKpiHistoryId and status!=99")
+                    ->all();
+                if (isset($kpiHistory) && count($kpiHistory) > 0) {
+                    foreach ($kpiHistory as $kg):
+                        $kg->status = 2;
+                        $kg->save(false);
+                    endforeach;
+                }
+
+                $kpiTeam = KpiTeam::find()->where(["kpiId" => $kpiId])->all();
+                if (isset($kpiTeam) && count($kpiTeam) > 0) {
+                    foreach ($kpiTeam as $kg):
+                        $currentKpiTeamHistory = KpiTeamHistory::find()
+                            ->where(["kpiTeamId" => $kg->kpiTeamId, "month" => $month, "year" => $year, "status" => $currentStatus])
+                            ->orderBy("createDateTime DESC")
+                            ->one();
+                        if (isset($currentKpiTeamHistory)) {
+                            $currentKpiTeamHistoryId = $currentKpiTeamHistory->kpiTeamHistoryId;
+                        } else {
+                            $KpiTeamHistory = new KpiTeamHistory();
+                            $KpiTeamHistory->kpiTeamId = $kg->kpiTeamId;
+                            $KpiTeamHistory->target = null;
+                            $KpiTeamHistory->month = $month;
+                            $KpiTeamHistory->year = $year;
+                            $KpiTeamHistory->result = 0;
+                            $KpiTeamHistory->status = $currentStatus;
+                            $KpiTeamHistory->fromDate = $k->fromDate;
+                            $KpiTeamHistory->toDate = $k->toDate;
+                            $KpiTeamHistory->createDateTime = new Expression('NOW()');
+                            $KpiTeamHistory->updateDateTime = new Expression('NOW()');
+                            $KpiTeamHistory->save(false);
+                            $currentKpiTeamHistoryId = Yii::$app->db->lastInsertID;
+                        }
+                        $kpiTeamHistory = KpiTeamHistory::find()->where("kpiTeamId=$kg->kpiTeamId and kpiTeamHistoryId!=$currentKpiTeamHistoryId and status!=99")->all();
+                        if (isset($kpiTeamHistory) && count($kpiTeamHistory) > 0) {
+                            foreach ($kpiTeamHistory as $kgh):
+                                $kgh->status = 2;
+                                $kgh->save(false);
+                            endforeach;
+                        }
+                        $kg->month = $month;
+                        $kg->year = $year;
+                        $kg->fromDate = $k->fromDate;
+                        $kg->toDate = $k->toDate;
+                        $kg->status = $currentStatus;
+                        $kg->save(false);
+                    endforeach;
+                }
+                $kpiEmployee = KpiEmployee::find()->where(["kpiId" => $kpiId])->all();
+                if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+                    foreach ($kpiEmployee as $kg):
+                        $currentKpiEmployeeHistory = KpiEmployeeHistory::find()
+                            ->where(["kpiEmployeeId" => $kg->kpiEmployeeId, "month" => $month, "year" => $year, "status" => $currentStatus])
+                            ->orderBy("createDateTime DESC")
+                            ->one();
+                        if (isset($currentKpiEmployeeHistory)) {
+                            $currentKpiEmployeeHistoryId = $currentKpiEmployeeHistory->kpiEmployeeHistoryId;
+                        } else {
+                            $KpiEmployeeHistory = new KpiEmployeeHistory();
+                            $KpiEmployeeHistory->kpiEmployeeId = $kg->kpiEmployeeId;
+                            $KpiEmployeeHistory->target = null;
+                            $KpiEmployeeHistory->month = $month;
+                            $KpiEmployeeHistory->year = $year;
+                            $KpiEmployeeHistory->result = 0;
+                            $KpiEmployeeHistory->status = $currentStatus;
+                            $KpiEmployeeHistory->fromDate = $k->fromDate;
+                            $KpiEmployeeHistory->toDate = $k->toDate;
+                            $KpiEmployeeHistory->createDateTime = new Expression('NOW()');
+                            $KpiEmployeeHistory->updateDateTime = new Expression('NOW()');
+                            $KpiEmployeeHistory->save(false);
+                            $currentKpiEmployeeHistoryId = Yii::$app->db->lastInsertID;
+                        }
+                        $kpiEmployeeHistory = KpiEmployeeHistory::find()->where("kpiEmployeeId=$kg->kpiEmployeeId and kpiEmployeeHistoryId!=$currentKpiEmployeeHistoryId and status!=99")->all();
+                        if (isset($kpiEmployeeHistory) && count($kpiEmployeeHistory) > 0) {
+                            foreach ($kpiEmployeeHistory as $kgh):
+                                $kgh->status = 2;
+                                $kgh->save(false);
+                            endforeach;
+                        }
+                        $kg->month = $month;
+                        $kg->year = $year;
+                        $kg->fromDate = $k->fromDate;
+                        $kg->toDate = $k->toDate;
+                        $kg->status = $currentStatus;
+                        $kg->save(false);
+                        $employeeId = $kg->employeeId;
+                        $teamId = Employee::employeeTeam($employeeId)["teamId"];
+                        if ($teamId) {
+                            $kpiTeamD = KpiTeam::find()->where(["kpiId" => $kpiId, "teamId" => $teamId])
+                                ->andWhere("status!=99")
+                                ->one();
+                            if (!isset($kpiTeamD) || empty($kpiTeamD)) {
+                                KpiEmployee::deleteAll(["kpiId" => $kpiId, "employeeId" => $employeeId]);
+                                KpiEmployeeHistory::deleteAll(["kpiEmployeeId" => $kg->kpiEmployeeId]);
+                            }
+                        }
+                    endforeach;
+                }
+            endforeach;
+        }
+        $kgiHis = KgiHistory::find()->where(1)->all();
+        if (isset($kgiHis) && count($kgiHis) > 0) {
+            foreach ($kgiHis as $kh):
+                $kgi = Kgi::find()->where(["kgiId" => $kh->kgiId])->one();
+                if (!isset($kgi) || empty($kgi)) {
+                    $kh->delete(false);
+                }
+            endforeach;
+        }
+        $kgiTeam = KgiTeam::find()->where(1)->all();
+        if (isset($kgiTeam) && count($kgiTeam) > 0) {
+            foreach ($kgiTeam as $kt):
+                $kgi = Kgi::find()->where(["kgiId" => $kt->kgiId])->one();
+                if (!isset($kgi) || empty($kgi)) {
+                    $kt->delete(false);
+                }
+            endforeach;
+        }
+        $kgiTeamHistory = KgiTeamHistory::find()->where(1)->all();
+        if (isset($kgiTeamHistory) && count($kgiTeamHistory) > 0) {
+            foreach ($kgiTeamHistory as $kth):
+                $kgiTeam = KgiTeam::find()->where(["kgiTeamId" => $kth->kgiTeamId])->one();
+                if (!isset($kgiTeam) || empty($kgiTeam)) {
+                    $kth->delete(false);
+                }
+            endforeach;
+        }
+        $kgiEmployee = KgiEmployee::find()->where(1)->all();
+        if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
+            foreach ($kgiEmployee as $ke):
+                $kgi = Kgi::find()->where(["kgiId" => $ke->kgiId])->one();
+                if (!isset($kgi) || empty($kgi)) {
+                    $ke->delete(false);
+                }
+            endforeach;
+        }
+        $kgiEmployeeHistory = KgiEmployeeHistory::find()->where(1)->all();
+        if (isset($kgiEmployeeHistory) && count($kgiEmployeeHistory) > 0) {
+            foreach ($kgiEmployeeHistory as $kte):
+                $kgiEmployee = KgiEmployee::find()->where(["kgiEmployeeId" => $kte->kgiEmployeeId])->one();
+                if (!isset($kgiEmployee) || empty($kgiEmployee)) {
+                    $kte->delete(false);
+                }
+            endforeach;
+        }
+
+        $kpiHis = KpiHistory::find()->where(1)->all();
+        if (isset($kpiHis) && count($kpiHis) > 0) {
+            foreach ($kpiHis as $kh):
+                $kpi = Kpi::find()->where(["kpiId" => $kh->kpiId])->one();
+                if (!isset($kpi) || empty($kpi)) {
+                    $kh->delete(false);
+                }
+            endforeach;
+        }
+        $kpiTeam = KpiTeam::find()->where(1)->all();
+        if (isset($kpiTeam) && count($kpiTeam) > 0) {
+            foreach ($kpiTeam as $kt):
+                $kpi = Kpi::find()->where(["kpiId" => $kt->kpiId])->one();
+                if (!isset($kpi) || empty($kpi)) {
+                    $kt->delete(false);
+                }
+            endforeach;
+        }
+        $kpiTeamHistory = KpiTeamHistory::find()->where(1)->all();
+        if (isset($kpiTeamHistory) && count($kpiTeamHistory) > 0) {
+            foreach ($kpiTeamHistory as $kth):
+                $kpiTeam = KpiTeam::find()->where(["kpiTeamId" => $kth->kpiTeamId])->one();
+                if (!isset($kpiTeam) || empty($kpiTeam)) {
+                    $kth->delete(false);
+                }
+            endforeach;
+        }
+        $kpiEmployee = KpiEmployee::find()->where(1)->all();
+        if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
+            foreach ($kpiEmployee as $ke):
+                $kpi = Kpi::find()->where(["kpiId" => $ke->kpiId])->one();
+                if (!isset($kpi) || empty($kpi)) {
+                    $ke->delete(false);
+                }
+            endforeach;
+        }
+        $kpiEmployeeHistory = KpiEmployeeHistory::find()->where(1)->all();
+        if (isset($kpiEmployeeHistory) && count($kpiEmployeeHistory) > 0) {
+            foreach ($kpiEmployeeHistory as $kte):
+                $kpiEmployee = KpiEmployee::find()->where(["kpiEmployeeId" => $kte->kpiEmployeeId])->one();
+                if (!isset($kpiEmployee) || empty($kpiEmployee)) {
+                    $kte->delete(false);
+                }
+            endforeach;
+        }
     }
 }
