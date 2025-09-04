@@ -54,6 +54,8 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
                     $headers = @get_headers($url);
                     if ($headers && strpos($headers[0], '200') !== false) {
                         $employee[$ke["employeeId"]] = $ke["picture"];
+                    } else {
+                        $employee[$ke["employeeId"]] = $img;
                     }
                 } else {
                     $employee[$ke["employeeId"]] = $img;
@@ -97,6 +99,8 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
                     $headers = @get_headers($url);
                     if ($headers && strpos($headers[0], '200') !== false) {
                         $employee[$ke["employeeId"]] = $ke["picture"];
+                    } else {
+                        $employee[$ke["employeeId"]] = $img;
                     }
                 } else {
                     $employee[$ke["employeeId"]] = $img;
