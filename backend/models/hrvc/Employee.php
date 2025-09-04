@@ -47,6 +47,10 @@ class Employee extends \backend\models\hrvc\master\EmployeeMaster
     {
         return array_merge(parent::attributeLabels(), []);
     }
+    public function getUser()
+    {
+        return $this->hasOne(User::class, ['employeeId' => 'employeeId']);
+    }
     public static function EmployeeDetail($employeeId)
     {
         $employee = Employee::find()->where(["employeeId" => $employeeId])->asArray()->one();
