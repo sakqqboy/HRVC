@@ -404,9 +404,11 @@ class EmployeeController extends Controller
 
 	public function actionUserRole($id)
 	{
+		$employee = Employee::findOne($id);
+		$userId=$employee->user->userId;
 		$userRole = UserRole::find()
 			->select(['userRoleId', 'roleid', 'userId AS role'])
-			->where(['userId' => $id])
+			->where(['userId' => $userId])
 			->asArray()
 			->one();
 
@@ -416,9 +418,11 @@ class EmployeeController extends Controller
 
 	public function actionUserAccess($id)
 	{
+		$employee = Employee::findOne($id);
+		$userId=$employee->user->userId;
 		$userAccess = UserAccess::find()
 			->select(['acessId', 'moduleId', 'userId'])
-			->where(['userId' => $id])
+			->where(['userId' => $userId])
 			->asArray()
 			->all();
 
@@ -426,6 +430,8 @@ class EmployeeController extends Controller
 	}
 	public function actionUserCertificate($id)
 	{
+		$employee = Employee::findOne($id);
+		$userId=$employee->user->userId;
 		$certificates = Certificate::find()
 			->select([
 				'cerId',
@@ -439,7 +445,7 @@ class EmployeeController extends Controller
 				'certificate',
 				'cerImage'
 			])
-			->where(['userId' => $id])
+			->where(['userId' => $userId])
 			->asArray()
 			->all();
 
@@ -458,6 +464,9 @@ class EmployeeController extends Controller
 
 	public function actionUserLanguage($id)
 	{
+		$employee = Employee::findOne($id);
+		$userId=$employee->user->userId;
+
 		$Languages = UserLanguage::find()
 			->alias('u') // alias สำหรับ user_language
 			->select([
@@ -471,7 +480,7 @@ class EmployeeController extends Controller
 			])
 			->leftJoin('language l', 'l.languageId = u.languageId') // JOIN กับ default_language ก่อน
 			->leftJoin('country c', 'c.countryId = l.countryId') // แล้วค่อย JOIN กับ country
-			->where(['u.userId' => $id])
+			->where(['u.userId' => $userId])
 			->asArray()
 			->all();
 
