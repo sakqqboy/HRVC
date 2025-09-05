@@ -140,7 +140,7 @@
 
 .small-text-tr {
     color: var(--Icon-Gray, #666);
-    font-family: "SF Pro Display";
+
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -160,7 +160,7 @@
     color: var(--Icon-Gray, #666);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -173,7 +173,7 @@
     color: var(--HRVC---Text-Black, #30313D);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -188,7 +188,7 @@
     color: #2F42ED;
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
@@ -201,7 +201,7 @@
     color: var(--HRVC---Text-Black, #30313D);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
@@ -214,7 +214,7 @@
     color: #FF715B;
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
@@ -228,7 +228,7 @@
     text-align: right;
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -243,7 +243,7 @@
     color: var(--HRVC---Text-Black, #30313D);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
@@ -291,14 +291,9 @@
 /* Cards */
 .dashboard-kfi-card {
     border-radius: 0 0 10px 10px;
-    /* ใช้ radius เฉพาะมุมล่าง */
     border: 1px solid #748EE9;
     background: #ECF0FF;
-    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
-    /* display: flex; */
-    /* flex-direction: column;
-    align-items: center; */
-    width: 350px;
+    /* width: 350px; */
     height: 400px;
     padding-bottom: 389px;
 }
@@ -307,7 +302,7 @@
     border-radius: 10px 10px 0 0;
     /* ใช้ radius เฉพาะมุมล่าง */
     height: 11px;
-    width: 350px;
+    /* width: 350px; */
     flex-shrink: 0;
     background: #748EE9;
 
@@ -317,10 +312,8 @@
 .dashboard-kgi-card {
     background-color: #FFF7E0;
     border-radius: 0 0 10px 10px;
-    /* ใช้ radius เฉพาะมุมล่าง */
     border: 1.166px solid #FDCA40;
-    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
-    width: 350px;
+    /* width: 350px; */
     height: 400px;
     padding-bottom: 389px;
 }
@@ -329,7 +322,7 @@
     border-radius: 10px 10px 0 0;
     /* ใช้ radius เฉพาะมุมล่าง */
     height: 11px;
-    width: 350px;
+    /* width: 350px; */
     flex-shrink: 0;
     background: #FDCA40;
 
@@ -342,7 +335,7 @@
     /* ใช้ radius เฉพาะมุมล่าง */
     border: 1.166px solid #FF715B;
     /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
-    width: 350px;
+    /* width: 350px; */
     height: 400px;
     padding-bottom: 389px;
 }
@@ -351,7 +344,7 @@
     border-radius: 10px 10px 0 0;
     /* ใช้ radius เฉพาะมุมล่าง */
     height: 11px;
-    width: 350px;
+    /* width: 350px; */
     flex-shrink: 0;
     background: #FF715B;
 
@@ -369,7 +362,6 @@
     text-align: center;
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
     font-size: 32px;
     font-style: normal;
     font-weight: 600;
@@ -383,7 +375,7 @@
     color: var(--HRVC---Text-Black, #30313D);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
@@ -393,7 +385,7 @@
 
 .total-achievement {
     color: var(--Icon-Gray, #666);
-    font-family: "SF Pro Display";
+
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -416,7 +408,7 @@
     color: var(--HRVC---Text-Black, #30313D);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 13px;
     font-style: normal;
     font-weight: 500;
@@ -428,7 +420,7 @@
     color: var(--Icon-Gray, #666);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
@@ -439,7 +431,7 @@
 
 .k-total {
     color: var(--HRVC---Text-Black, #30313D);
-    font-family: "SF Pro Display";
+
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
@@ -480,7 +472,7 @@
     flex-shrink: 0;
     padding: 3px 3px 3px 3px;
     text-align: center;
-    font-family: "SF Pro Display";
+
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -525,7 +517,7 @@
     color: var(--HRVC---Text-Black, #30313D);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
@@ -620,7 +612,7 @@ h6.dashboard-kpi-title {
     border: 1px solid #e9ecef;
     border-radius: 8px;
     text-align: left;
-    padding: 32px 16px 32px 33px;
+    padding: 32px 16px 32px 20px;
     margin-bottom: 20px;
 }
 
@@ -660,7 +652,7 @@ h6.dashboard-kpi-title {
     font-weight: 500;
     margin-bottom: 10px;
     line-height: normal;
-    font-family: "SF Pro Display";
+
     color: var(--HRVC---Text-Black, #30313D);
     leading-trim: both;
     text-edge: cap;
@@ -671,7 +663,7 @@ h6.dashboard-kpi-title {
     color: var(--Icon-Gray, #666);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -684,7 +676,7 @@ h6.dashboard-kpi-title {
     color: var(--Icon-Gray, #666);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -698,7 +690,7 @@ h6.dashboard-kpi-title {
     color: var(--HRVC---Text-Black, #30313D);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -738,7 +730,7 @@ h6.dashboard-kpi-title {
     color: #2580D3;
     text-align: center;
     font-feature-settings: 'salt' on, 'liga' off;
-    font-family: "SF Pro Display";
+
     font-size: 14.627px;
     font-style: normal;
     font-weight: 500;
@@ -1015,7 +1007,7 @@ h6.dashboard-kpi-title {
     flex-shrink: 0;
     border-radius: 17px;
     color: #000;
-    font-family: "SF Pro Display";
+
     font-size: 16px;
     font-style: normal;
     font-weight: 500;

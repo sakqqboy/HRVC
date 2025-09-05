@@ -2,38 +2,38 @@
 $this->title = "Dashboard";
 ?>
 <style>
-@media (max-width: 1735px) and (max-height: 950px) {
-    .dashboard-container {
-        transform: scale(0.85);
-        transform-origin: top left;
-        width: calc(100vw / 0.85);
-        height: calc(100vh / 0.85);
-        /* overflow: hidden; */
-        /* box-sizing: border-box; */
+    @media (max-width: 1735px) and (max-height: 950px) {
+        .dashboard-container {
+            transform: scale(0.85);
+            transform-origin: top left;
+            width: calc(100vw / 0.85);
+            height: calc(100vh / 0.85);
+            /* overflow: hidden; */
+            /* box-sizing: border-box; */
+        }
     }
-}
 
-@media (max-width: 1535px) and (max-height: 950px) {
-    .dashboard-container {
-        transform: scale(0.75);
-        transform-origin: top left;
-        width: calc(100% / 0.75);
-        height: calc(100% / 0.75);
-        /* overflow: hidden; */
+    @media (max-width: 1535px) and (max-height: 950px) {
+        .dashboard-container {
+            transform: scale(0.75);
+            transform-origin: top left;
+            width: calc(100% / 0.75);
+            height: calc(100% / 0.75);
+            /* overflow: hidden; */
+        }
     }
-}
 
-@media (max-width: 1335px) and (max-height: 750px) {
-    .dashboard-container {
-        transform: scale(0.65);
-        transform-origin: top left;
-        width: calc(100% / 0.65);
-        height: calc(100% / 0.65);
-        margin-left: -2px;
+    @media (max-width: 1335px) and (max-height: 750px) {
+        .dashboard-container {
+            transform: scale(0.65);
+            transform-origin: top left;
+            width: calc(100% / 0.65);
+            height: calc(100% / 0.65);
+            margin-left: -2px;
 
-        /* overflow: hidden; */
+            /* overflow: hidden; */
+        }
     }
-}
 </style>
 <div class="dashboard-container mt-50">
     <div class="row pl-4">
