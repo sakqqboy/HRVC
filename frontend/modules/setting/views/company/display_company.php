@@ -5,7 +5,7 @@ use common\models\ModelMaster;
 <div class="background-main-whilte mid-center">
     <div class="mid-center max-background"
         style="
-padding: 30px; gap: 7.721px; flex-shrink: 0;border-radius: 7.721px;border: 1.544px dashed var(--Stroke-Bluish-Gray, #BBCDDE);background: #F9F9F9;">
+padding: 30px; gap: 7.721px; flex-shrink: 0;border-radius: 7.721px;border: 1.544px dashed var(--Stroke-Bluish-Gray, #BBCDDE);background: #F9F9F9; min-height: 800px;">
         <img src="<?= Yii::$app->homeUrl . 'image/no-group.svg' ?>">
         <span class="title-create-text">
             <?= Yii::t('app', 'Add a company to begin setting up your system!') ?></span>
