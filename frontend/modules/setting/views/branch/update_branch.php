@@ -2,10 +2,10 @@
 use yii\bootstrap5\ActiveForm;
 use common\models\ModelMaster;
 
-$this->title = 'Create Branch';
+$this->title = 'Update Branch';
 ?>
 <?php $form = ActiveForm::begin([
-	'id' => 'create-branch',
+	'id' => 'update-branch',
 	'method' => 'post',
 	'options' => [
 		'enctype' => 'multipart/form-data',
@@ -22,7 +22,7 @@ $this->title = 'Create Branch';
                 style="width:18px; height:18px; margin-top:-3px;">
             <?= Yii::t('app', 'Back') ?>
         </a>
-        <?= Yii::t('app', 'Create Branch') ?>
+        <?= Yii::t('app', 'Update Branch') ?>
     </div>
 
     <div class="mid-center max-background mt-18" style="height: 780px;
@@ -122,8 +122,8 @@ $this->title = 'Create Branch';
                 </a>
 
                 <button type="submit" class="btn-save-group">
-                    <?= Yii::t('app', 'Create') ?>
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="LinkedIn"
+                    <?= Yii::t('app', 'Save') ?>
+                    <img src="<?= Yii::$app->homeUrl ?>image/save-icon.svg" alt="LinkedIn"
                         style="width: 20px; height: 20px;">
                 </button>
             </div>
