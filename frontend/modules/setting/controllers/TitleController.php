@@ -681,14 +681,19 @@ class TitleController extends Controller
                 $countTitle = count($titles);
             }
         }
+        //  return $this->renderPartial('modal_title', [
+        //     "departmentId" => $departmentId
+        // ]);
+        // throw new Exception(json_encode($data));
         
         return $this->renderPartial('modal_title', [
-            "title" => $data,
+            "title" => $data[$departmentsId], // ส่ง array ของ department โดยตรง
             "role" => $role,
             "countTitle" => $countTitle,
             "titleId" => $titleId,
             "nextPage" => 1
-        ]); 
+        ]);
+
     }
     public function actionModalDelete(){
         $titleId = Yii::$app->request->get("titleId");
