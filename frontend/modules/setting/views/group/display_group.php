@@ -1,6 +1,8 @@
 <?php
 
 use common\models\ModelMaster;
+$this->title = "Group";
+
 ?>
 <div class="background-main-whilte mid-center">
     <div class="mid-center max-background"

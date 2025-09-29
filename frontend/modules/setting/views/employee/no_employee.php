@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 
-$this->title = "Branch";
+$this->title = "Employee";
 ?>
 <div class="background-main-whilte mid-center">
     <div class="mid-center max-background"
