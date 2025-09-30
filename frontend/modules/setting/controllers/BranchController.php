@@ -1135,7 +1135,7 @@ class BranchController extends Controller
         // รับ JSON body โดยตรง
         $data = json_decode(file_get_contents("php://input"), true);
         $branchId = isset($data['branchId']) ? $data['branchId'] : null;
-
+        // return ['error' => 'test'];
         if (!$branchId) {
             return ['error' => 'Missing branchId'];
         }
@@ -1144,7 +1144,6 @@ class BranchController extends Controller
             Path::Api() . 'masterdata/department/branch-department?id=' . $branchId
             . '&page=1&limit=0'
         );
-
         return $branches;
     }
 }
