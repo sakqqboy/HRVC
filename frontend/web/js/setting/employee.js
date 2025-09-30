@@ -679,6 +679,7 @@ function loadTeamsSelect(departmentId) {
 function loadTitlesSelect(departmentId) {
     const employeeTitleId = document.getElementById('employeeTitleId');
     const titleId = parseInt(employeeTitleId?.value || 0);
+    // alert(departmentId);
 
     fetch($url + 'setting/department/department-title-list', {
         method: 'POST',

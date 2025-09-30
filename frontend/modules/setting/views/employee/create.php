@@ -1731,6 +1731,7 @@ $form = ActiveForm::begin([
         const iconImg = document.getElementById('titleIconImg');
         const selectedValue = this.value;
         const iconDiv = document.getElementById('titleIcon');
+        // alert(selectedValue);
         if (selectedValue !== '') {
             iconImg.src = homeUrl + 'images/icons/white-icons/MasterSetting/title.svg';
             iconDiv.classList.remove('cycle-current-gray');
