@@ -1275,6 +1275,32 @@ class EmployeeController extends Controller
 
         return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
     }
+    public function actionDeleteEmployeeScript()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+    $request = Yii::$app->request;
+    $employeeId = $request->post('employeeId', null);
+
+    if (!$employeeId) {
+        return ['status' => false, 'message' => 'ไม่พบ employeeId'];
+    }
+
+    // หา userId จาก employeeId
+    $user = User::find()->where(['employeeId' => $employeeId])->one();
+    $userId = $user ? $user->userId : null;
+
+    // อัพเดต status = 99
+    Employee::updateAll(["status" => 99], ["employeeId" => $employeeId]);
+    User::updateAll(["status" => 99], ["employeeId" => $employeeId]);
+
+    if ($userId) {
+        UserRole::updateAll(["status" => 99], ["userId" => $userId]);
+        UserAccess::updateAll(["status" => 99], ["userId" => $userId]);
+    }
+
+    return ['status' => true];
+    }
     public function actionMultiDeleteEmployee()
     {
 
