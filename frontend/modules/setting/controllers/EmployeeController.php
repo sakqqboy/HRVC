@@ -305,20 +305,21 @@ class EmployeeController extends Controller
 
                 $user = new User();
                 $user->employeeId = $employee->employeeId;
-                $user->username =  $_POST["mailId"];    // หรือใช้ companyEmail แทน
+                $user->username =  $_POST["mailId"] ?? '';   // หรือใช้ companyEmail แทน
                 $user->password_hash = Yii::$app->security->generatePasswordHash($_POST["password"]); // เข้ารหัสแบบ secure
                 $user->createDateTime = new Expression('NOW()');
                 $user->updateDateTime = new Expression('NOW()');
                 if ($user->save(false)) {
+                    if (!empty($_POST["role"])) {
                     // UserRole
                     $role = new UserRole();
                     $role->userId = $user->userId;
-                    $role->roleId = $_POST["role"];
+                    $role->roleId = $_POST["role"] ?? '';
                     $role->status = 1;
                     $role->createDateTime = new Expression('NOW()');
                     $role->updateDateTime = new Expression('NOW()');
                     $role->save(false); // ✅ สำคัญ!
-
+                    }
                     // UserAccess
                     if (!empty($_POST["moduleId"]) && is_array($_POST["moduleId"])) {
                         foreach ($_POST["moduleId"] as $moduleId) {
@@ -435,7 +436,16 @@ class EmployeeController extends Controller
                 }
             }
         }
-                    return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
+        if ($_POST["darf"] == 1) {
+            return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
+
+        }else{
+            return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-profile/' . ModelMaster::encodeParams([
+            "employeeId" => $employee->employeeId
+        ]));
+        }
+
+       
 
     }
 
