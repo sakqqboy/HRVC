@@ -253,7 +253,7 @@ class EmployeeController extends Controller
             $employee->contact             = $_POST["linkedin"] ?? '';
             if ($_POST["darf"] == 1) {
                 //draf
-                $employee->status = 2;
+                $employee->status = 100;
             } else {
                 //publish
                 $employee->status = 1;
@@ -462,11 +462,30 @@ class EmployeeController extends Controller
         } else {
             $employee["age"] = '-';
         }
-        $employee["branchName"] = Branch::branchName($employee['branchId']);
-        $employee["departmentName"] =  Department::departmentName($employee['departmentId']);
-        $employee["teamName"] =  Team::teamName($employee['teamId']);
-        $employee["titleName"] = Title::titleName($employee['titleId']);
-        $employee["conditionName"] = EmployeeCondition::conditionName($employee['employeeConditionId']);
+        $employee = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+
+        // throw new Exception(print_r($employee, true));
+
+        if (!empty($employee['branchId']) && $employee['branchId'] != 0) {
+            $employee["branchName"] = Branch::branchName($employee['branchId']);
+        }
+
+        if (!empty($employee['departmentId']) && $employee['departmentId'] != 0) {
+            $employee["departmentName"] = Department::departmentName($employee['departmentId']);
+        }
+
+        if (!empty($employee['teamId']) && $employee['teamId'] != 0) {
+            $employee["teamName"] = Team::teamName($employee['teamId']);
+        }
+
+        if (!empty($employee['titleId']) && $employee['titleId'] != 0) {
+            $employee["titleName"] = Title::titleName($employee['titleId']);
+        }
+
+        if (!empty($employee['employeeConditionId']) && $employee['employeeConditionId'] != 0) {
+            $employee["conditionName"] = EmployeeCondition::conditionName($employee['employeeConditionId']);
+        }
+
        
         $employee["status"] = $employee['statusName'];
         return $this->render('employee_profile', [
