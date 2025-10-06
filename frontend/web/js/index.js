@@ -3,6 +3,7 @@ function readURL(input) {
         var reader = new FileReader();
         reader.onload = function (e) {
             $("#old-image").hide();
+            $("#imageUploadIcon").hide();
             $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
             $('#imagePreview').hide();
             $('#imagePreview').fadeIn(650);
@@ -48,7 +49,7 @@ function setPassword(i) {
 function showclickno() {
     $("#showlevel").show();
 }
-function showLoading() { 
+function showLoading() {
     $("#img-loading").addClass('col-12');
     $("#main-body").addClass('d-none');
     $("#img-loading").removeClass('d-none');
@@ -59,7 +60,7 @@ $(window).on('scroll', function () {
     const offset = box.offset().top;
     const scrollY = $(window).scrollTop();
     var fag = $("#minPage").val();
-    var totalPage=$("#totalPage").val();
+    var totalPage = $("#totalPage").val();
     if (scrollY >= offset - 70) {
         if (fag == 0) {
             box.addClass('mt-30');
@@ -72,19 +73,19 @@ $(window).on('scroll', function () {
             }
             $("#minPage").val(1);
         }
-    
-    } else { 
+
+    } else {
         if (scrollY < offset - 120) {
             box.removeClass('mt-30');
             $("#pim-content").removeClass('pt-10');
             if (totalPage == 0) {
                 $("#main-body").removeClass("pim-content2");
-            } else { 
-                    $("#main-body").removeClass("pim-content3");
+            } else {
+                $("#main-body").removeClass("pim-content3");
             }
             $("#main-body").addClass("pim-content");
             $("#minPage").val(0);
         }
-    } 
-        
+    }
+
 });

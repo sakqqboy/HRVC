@@ -196,7 +196,7 @@ $statusTexArr = Status::allStatusText();
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/mail-gray.svg"
                                                 class="profile-icon">
                                         </div>
-                                        <div class="profile-employee-email text-truncate flex-grow-1"
+                                        <div class="profile-employee-email text-truncate"
                                             title="<?= $employee['email'] ?>" style="position: relative;">
                                             <?= $employee["email"] ?>
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy-gray.svg"
