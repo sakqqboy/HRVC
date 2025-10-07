@@ -76,8 +76,8 @@ $this->title = 'KFI';
                         </thead>
                         <tbody>
                             <?php
-                            if (isset($kfis) && count($kfis) > 0) {
-                                foreach ($kfis as $kfiId => $kfi) :
+                            if (isset($kfis["data"]) && count($kfis["data"]) > 0) {
+                                foreach ($kfis["data"] as $kfiId => $kfi) :
                                     if ($kfi["isOver"] == 1 && $kfi["status"] != 2) {
                                         $colorFormat = 'over';
                                         $statusText = 'Due Passed';

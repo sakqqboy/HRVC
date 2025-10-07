@@ -13,7 +13,7 @@
 				if (isset($kfiDetail["kfiEmployeeDetail"]) && count($kfiDetail["kfiEmployeeDetail"]) > 0) {
 					foreach ($kfiDetail["kfiEmployeeDetail"] as $employeeId => $employee): ?>
 						<!-- <div class="col-lg-3 col-md-4 col-12 mt-10 pt-0" onclick="javascription:openEmployeeView(134,31)" style="cursor: pointer;"> -->
-						<div class="col-3">
+						<div class="col-3 mb-15">
 							<div class="d-flex">
 								<div class=" mr-3">
 									<img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>" class="image-AssignMembers" style="width:40px;height:40px;">

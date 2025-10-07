@@ -2,6 +2,7 @@
 
 namespace common\helpers;
 
+use Exception;
 use Yii;
 
 class Session
@@ -12,6 +13,8 @@ class Session
 		$employeeId = null;
 		$session = Yii::$app->session;
 		$session->open();
+		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&active=';
+		//throw new Exception($paramText);
 		if ($companyId == "" && $branchId == "" && $month == "" && $status == "" && $year == "") {
 			if ($session->has('kfi')) {
 				$session->remove('kfi');

@@ -50,7 +50,7 @@ $this->title = Yii::t('app', 'KFI Grid View');
                         "month" => isset($month) ? $month : null,
                         "status" => isset($status) ? $status : null,
                         "branches" =>  isset($branches) ? $branches : null,
-                        "yearSelected" => isset($branchId) ? $branchId : null,
+                        "yearSelected" => isset($year) ? $year : null,
 
                     ]) ?>
                 </div>
@@ -64,8 +64,8 @@ $this->title = Yii::t('app', 'KFI Grid View');
             </div>
             <div class="row mt-20 pl-10 pr-10 pim-content mb-10" style="--bs-gutter-x:0px;" id="main-body">
                 <?php
-                if (isset($kfis) && count($kfis) > 0) {
-                    foreach ($kfis as $kfiId => $kfi) :
+                if (isset($kfis["data"]) && count($kfis["data"]) > 0) {
+                    foreach ($kfis["data"] as $kfiId => $kfi) :
                         if ($kfi["isOver"] == 1 && $kfi["status"] != 2) {
                             $colorFormat = 'over';
                             $statusText = 'Due Passed';
@@ -136,19 +136,28 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/assign-<?= $kfi["countEmployee"] == 0 ? 'yenlow' : $colorFormat ?>.svg" style="width:22px;height:22px;">
                                                         <a href="<?= Yii::$app->homeUrl ?>kfi/assign/assign/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, "companyId" => $kfi['companyId']]) ?>"
                                                             class="font-<?= $kfi["countEmployee"] == 0 ? 'black' : $colorFormat ?> ml-8">
-                                                            <?php echo $kfi["countEmployee"] == 0 ?  Yii::t('app', 'Assign Person') :  Yii::t('app', 'Change Assign'); ?>
+                                                            <?= $kfi["countEmployee"] == 0 ?  Yii::t('app', 'Assign Person') :  Yii::t('app', 'Change Assign'); ?>
                                                         </a>
                                                     <?php
                                                     } else { ?>
-
                                                         <div class="circle-eye bg-<?= $kfi["countEmployee"] == 0 ? 'yellow' : $colorFormat ?>-dark">
                                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/<?= $colorFormat != 'disable' && $kfi["countEmployee"] != 0 ? 'eyewhite.svg' : 'eye.svg' ?>"
                                                                 class="home-icon" style="width:16px; height:16px;">
                                                         </div>
-                                                        <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(["kfiId" => $kfiId, 'openTab' => 1]) ?>"
-                                                            class="font-<?= $kfi["countEmployee"] == 0 ? 'black' : $colorFormat ?> ml-8">
-                                                            <?php echo $kfi["countEmployee"] == 0 ? Yii::t('app', 'View Assign') :  Yii::t('app', 'View Assign'); ?>
-                                                        </a>
+                                                        <?php
+                                                        if ($kfi["countEmployee"] == 0) { ?>
+                                                            <span class="font-<?= $kfi["countEmployee"] == 0 ? 'black' : $colorFormat ?> ml-8">
+                                                                <?= Yii::t('app', 'Not Assign') ?>
+                                                            </span>
+                                                        <?php
+                                                        } else { ?>
+                                                            <a href="<?= Yii::$app->homeUrl ?>kfi/view/kfi-history/<?= ModelMaster::encodeParams(["kfiId" => $kfiId, 'openTab' => 1]) ?>"
+                                                                class="font-<?= $kfi["countEmployee"] == 0 ? 'black' : $colorFormat ?> ml-8">
+                                                                <?= Yii::t('app', 'View Assign') ?>
+                                                            </a>
+                                                        <?php }
+                                                        ?>
+
 
                                                     <?php
                                                     }
@@ -351,8 +360,7 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                                 </a>
                                             <?php
                                             } else { ?>
-                                                <div class="pim-btn-disable"
-                                                    style="display: flex; justify-content: center; align-items: center; padding: 7px 9px; height: 30px; gap: 6px; flex-shrink: 0;">
+                                                <div class="pim-btn-lock">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/locked.svg"
                                                         style="width: 10.42px; height: 10.53px;"> <?= Yii::t('app', 'Locked') ?>
                                                 </div>
@@ -379,6 +387,17 @@ $this->title = Yii::t('app', 'KFI Grid View');
                 }
                 ?>
             </div>
+            <?php
+            echo $this->render('pagination_page', [
+                'totalKfi' => $totalKfi,
+                "currentPage" => $currentPage,
+                'totalPage' => $totalPage,
+                "pagination" => $pagination,
+                "pageType" => "grid",
+                "filter" => isset($filter) ? $filter : []
+            ]);
+            ?>
+            <input type="hidden" id="totalPage" value="<?= $totalPage > 1 ? 1 : 0 ?>">
         </div>
         <input type="hidden" value="create" id="acType">
         <?php $form = ActiveForm::begin([

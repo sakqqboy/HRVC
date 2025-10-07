@@ -1,5 +1,7 @@
 <?php
 
+use common\models\ModelMaster;
+use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 ?>
 <select class="select-pim form-select" id="company-filter" onchange="applySelectStyle(this)">
@@ -28,32 +30,60 @@ use frontend\models\hrvc\Company;
     ?>
 </select>
 
-<select class="select-pim form-select" id="branch-filter" disabled
-    onchange="applySelectStyle(this)">
-    <option value=""><?= Yii::t('app', 'Branch') ?></option>
+<select class="select-pim form-select" id="branch-filter" <?= $companyId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
+    <?php
+    if (isset($branchId) && $branchId != "") { ?>
+        <option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>
+    <?php
+    }
+    ?>
+    <option value="">Branch</option>
+    <?php
+    if (isset($branches) && count($branches) > 0) {
+        foreach ($branches as $branch) : ?>
+            <option value="<?= $branch['branchId'] ?>"><?= $branch['branchName'] ?></option>
+    <?php
+        endforeach;
+    }
+    ?>
 </select>
 
 <select class="select-pim form-select" id="month-filter" onchange="applySelectStyle(this)">
+    <?php
+    if (isset($month) && $month != "") { ?>
+        <option value="<?= $month ?>"><?= Yii::t('app', ModelMaster::monthFull()[$month]) ?></option>
+    <?php
+    }
+    ?>
     <option value=""><?= Yii::t('app', 'Month') ?></option>
     <?php
     if (isset($months) && count($months) > 0) {
         foreach ($months as $value => $month) : ?>
-            <option value="<?= $value ?>"><?= Yii::t('app', $month) ?></option>
-    <?php endforeach;
+            <option value="<?= $value ?>"><?= $month ?></option>
+    <?php
+        endforeach;
     }
     ?>
 </select>
 
 
 <select class="select-pim form-select" id="year-filter" onchange="applySelectStyle(this)">
+    <?php
+    if (isset($yearSelected) && $yearSelected != "") { ?>
+        <option value="<?= $yearSelected ?>"><?= $yearSelected ?></option>
+    <?php
+    }
+    ?>
     <option value=""><?= Yii::t('app', 'Year') ?></option>
     <?php
     $year = 2022;
     $i = 1;
     while ($i < 20) {
+        if ($year != $yearSelected) {
     ?>
-        <option value="<?= $year ?>"><?= $year ?></option>
+            <option value="<?= $year ?>"><?= $year ?></option>
     <?php
+        }
         $year += 1;
         $i++;
     }

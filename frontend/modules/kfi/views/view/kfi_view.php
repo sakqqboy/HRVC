@@ -43,7 +43,7 @@ $this->title = 'Company KFI History';
                                 if ($kfi["status"] == 1) {
                                     if ($kfi["isOver"] == 2) {
                                         $colorFormat = 'disable';
-                                        $statusText = "DNot Set";
+                                        $statusText = "Not Set";
                                     } else {
                                         $colorFormat = 'inprogress';
                                         $statusText = "In Progress";
@@ -84,11 +84,9 @@ $this->title = 'Company KFI History';
                                                 <?php
                                                 if ($colorFormat == 'disable') {
                                                 ?>
-                                                    <a class="btn btn-bg-blue-xs  ml-5"
-                                                        href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'kfiHistoryId' => $kfi['kfiHistoryId']]) ?>"
-                                                        style="margin-top: -3px;">
+                                                    <a class="pim-btn-blue  ml-5" href="<?= Yii::$app->homeUrl ?>kfi/management/update-kfi/<?= ModelMaster::encodeParams(['kfiId' => $kfiId, 'kfiHistoryId' => $kfi['kfiHistoryId']]) ?>">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/setupwhite.svg"
-                                                            alt="History" style="margin-top: -2px;" class="pim-action-icon">
+                                                            alt="History" class="pim-action-icon">
                                                     </a>
                                                 <?php
                                                 }

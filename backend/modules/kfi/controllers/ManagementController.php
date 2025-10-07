@@ -51,13 +51,15 @@ class ManagementController extends Controller
 		}
 		return parent::beforeAction($action);
 	}
-	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
+	public function actionIndex($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $currentPage = null, $limit = null)
 	{
+		$startAt = (($currentPage - 1) * $limit);
 		$data = [];
 		$data1 = [];
 		$data2 = [];
 		$data3 = [];
 		$data4 = [];
+		$total = 0;
 		if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
 			$kfis = Kfi::find()
 				->where(["status" => [1, 2, 4]])
@@ -209,12 +211,18 @@ class ManagementController extends Controller
 					} else {
 						$data3[$kfiId] = $commonData;
 					}
+					$total++;
 				}
 
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
-		return json_encode($data);
+		if (isset($limit)) {
+			$data = array_slice($data, $startAt, $limit, true);
+		}
+		$result["data"] = $data;
+		$result["total"] = $total;
+		return json_encode($result);
 	}
 	public function actionKfiDetail($kfiId, $kfiHistoryId)
 	{
@@ -522,13 +530,15 @@ class ManagementController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionKfiFilter($companyId, $branchId, $month, $status, $year, $active, $adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
+	public function actionKfiFilter($companyId, $branchId, $month, $status, $year, $active, $adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $currentPage, $limit)
 	{
+		$startAt = (($currentPage - 1) * $limit);
 		$data = [];
 		$data1 = [];
 		$data2 = [];
 		$data3 = [];
 		$data4 = [];
+		$total = 0;
 		$searchStatus = '';
 		if ($status == 1 || $status == 3 || $status == 4) {
 			$searchStatus = 1;
@@ -703,14 +713,17 @@ class ManagementController extends Controller
 						} else {
 							$data3[$kfiId] = $commonData;
 						}
+						$total++;
 					}
 				}
 
 			endforeach;
 		}
 		$data = $data1 + $data2 + $data3 + $data4;
-
-		return json_encode($data);
+		$data = array_slice($data, $startAt, $limit, true);
+		$result["data"] = $data;
+		$result["total"] = $total;
+		return json_encode($result);
 	}
 	public function actionKfiHasKgi($kfiId)
 	{

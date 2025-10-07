@@ -150,7 +150,7 @@ class ManagementController extends Controller
 			"totalBranch" => $totalBranch,
 		]);
 	}
-	public function actionGrid()
+	public function actionGrid($hash = null)
 	{
 		$groupId = Group::currentGroupId();
 		$role = UserRole::userRight();
@@ -202,9 +202,15 @@ class ManagementController extends Controller
 				"type" => $type
 			]));
 		}
+		$currentPage = 1;
+		if (!empty($hash)) {
+			$pageArr = explode('page', $hash);
+			$currentPage = $pageArr[1];
+		}
+		$limit = 20;
 
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$kfis = Api::connectApi(Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		$kfis = Api::connectApi(Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$countAllCompany = 0;
@@ -221,6 +227,10 @@ class ManagementController extends Controller
 
 		$totalBranch = Branch::totalBranch();
 		// throw new Exception(print_r($kfis, true));
+		$totalKfi = Kfi::totalKfi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
+		$totalPage = ceil($totalKfi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
+
 		return $this->render('index_grid', [
 			"companies" => $companies,
 			"units" => $units,
@@ -232,7 +242,11 @@ class ManagementController extends Controller
 			"employeeCompanyId" => $employeeCompanyId,
 			"allCompany" => $countAllCompany,
 			"companyPic" => $companyPic,
-			"totalBranch" => $totalBranch
+			"totalBranch" => $totalBranch,
+			"totalKfi" => $totalKfi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
+			"pagination" => $pagination,
 		]);
 	}
 
@@ -799,6 +813,8 @@ class ManagementController extends Controller
 				return $this->redirect(Yii::$app->homeUrl . 'kfi/management/grid');
 			}
 		}
+		$currentPage = isset($param["currentPage"]) ? $param["currentPage"] : 1;
+		$limit = 20;
 		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&active=';
 
 		$groupId = Group::currentGroupId();
@@ -807,32 +823,14 @@ class ManagementController extends Controller
 		}
 		//throw new exception($paramText);
 		$role = UserRole::userRight();
-		$adminId = '';
-		$gmId = '';
-		$teamLeaderId = '';
-		$managerId = '';
-		$supervisorId = '';
-		$staffId = '';
-		if ($role == 7) {
-			$adminId = Yii::$app->user->id;
-		}
-		if ($role == 6) {
-			$gmId = Yii::$app->user->id;
-		}
-		if ($role == 5) {
-			$managerId = Yii::$app->user->id;
-		}
-		if ($role == 4) {
-			$supervisorId = Yii::$app->user->id;
-		}
-		if ($role == 3) {
-			$teamLeaderId = Yii::$app->user->id;
-		}
-		if ($role == 1 || $role == 2) {
-			$staffId = Yii::$app->user->id;
-			//return $this->redirect(Yii::$app->homeUrl);
-		}
-		$paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId;
+		$adminId = $gmId = $teamLeaderId = $managerId = $supervisorId = $staffId = '';
+		if ($role == 7) $adminId = Yii::$app->user->id;
+		if ($role == 6) $gmId = Yii::$app->user->id;
+		if ($role == 5) $managerId = Yii::$app->user->id;
+		if ($role == 4) $supervisorId = Yii::$app->user->id;
+		if ($role == 3) $teamLeaderId = Yii::$app->user->id;
+		if ($role == 1 || $role == 2) $staffId = Yii::$app->user->id;
+		$paramText .= '&&adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId . '&&currentPage=' . $currentPage . '&&limit=' . $limit;
 
 
 		$kfis = Api::connectApi(Path::Api() . 'kfi/management/kfi-filter?' . $paramText);
@@ -852,6 +850,16 @@ class ManagementController extends Controller
 		} else {
 			$file = "index_grid";
 		}
+		$filter = [
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			"month" => $month,
+			"year" => $year,
+			"status" => $status,
+			"branches" => $branches,
+			"perPage" => 20,
+		];
+
 		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
@@ -863,6 +871,10 @@ class ManagementController extends Controller
 		}
 
 		$totalBranch = Branch::totalBranch();
+		$totalKfi = $kfis["total"];
+		$totalPage = ceil($totalKfi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
+
 		return $this->render($file, [
 			"units" => $units,
 			"companies" => $companies,
@@ -879,7 +891,12 @@ class ManagementController extends Controller
 			"allCompany" => $countAllCompany,
 			"companyPic" => $companyPic,
 			"totalBranch" => $totalBranch,
-			"employeeCompanyId" => $employeeCompanyId
+			"employeeCompanyId" => $employeeCompanyId,
+			"pagination" => $pagination,
+			"totalKfi" => $totalKfi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
+			"filter" => $filter,
 		]);
 	}
 	public function actionCompanyMultiBranch()

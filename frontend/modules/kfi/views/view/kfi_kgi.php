@@ -92,10 +92,12 @@ $this->title = 'KGI KPI';
                                 </div>
                             </td>
                             <td style="border-top-right-radius: 3px;border-bottom-right-radius: 3px;">
-                                <div class="col-12 pt-3" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/detail.png" class="icon-table">
-                                    <?= Yii::t('app', 'Detail') ?>
-                                </div>
+                                <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>" target="_blank" class="no-underline ">
+                                    <div class="col-12 pt-3" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/detail.png" class="icon-table">
+                                        <?= Yii::t('app', 'Detail') ?>
+                                    </div>
+                                </a>
                             </td>
                         </tr>
                         <tr id="kgi-team-<?= $kgiId ?>" style="display:none;">

@@ -43,4 +43,41 @@ class Kfi extends \frontend\models\hrvc\master\KfiMaster
         $kfi = Kfi::find()->where(["kfiId" => $kfiId])->asArray()->one();
         return $kfi["kfiName"];
     }
+    public static function totalKfi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId)
+    {
+        $total = 0;
+        if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
+            $kfis = Kfi::find()
+                ->where(["status" => [1, 2, 4]])
+                ->asArray()
+                ->orderBy('createDateTime DESC')
+                ->asArray()
+                ->all();
+        } else {
+            if ($supervisorId != '') {
+                $userId = $supervisorId;
+            }
+            if ($teamLeaderId != '') {
+                $userId = $teamLeaderId;
+            }
+            if ($staffId != '') {
+                $userId = $staffId;
+            }
+            $employeeId = Employee::employeeId($userId);
+            $companyId = Employee::EmployeeDetail($employeeId)["companyId"];
+            $kfis = Kfi::find()
+                ->where([
+                    "status" => [1, 2, 4],
+                    "companyId" => $companyId
+                ])
+                ->asArray()
+                ->orderBy('createDateTime DESC')
+                ->asArray()
+                ->all();
+        }
+        if (count($kfis) > 0) {
+            $total = count($kfis);
+        }
+        return $total;
+    }
 }

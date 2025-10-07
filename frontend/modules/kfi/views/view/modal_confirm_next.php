@@ -3,7 +3,6 @@
         <div class="modal-content">
             <div class="modal-header" style="border-bottom:none;">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
             </div>
             <div class="col-6 text-start font-b font-size-18 pl-15" style="margin-top: -35px;">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/warning.svg" alt="History"
@@ -11,7 +10,6 @@
                 <?= Yii::t('app', 'Copy Notice') ?>
             </div>
             <div class="modal-body">
-
                 <div class="col-12 text-start">
                     <?= Yii::t('app', "When copying PIM content, all existing values be carried forward to the next month, except for the
                     results. To update the target, please make
