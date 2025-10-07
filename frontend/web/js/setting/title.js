@@ -260,8 +260,8 @@ function openPopupModalTitle(url) {
 		url: url,
 		type: 'GET',
 		success: function (response) {
+			// alert(response);
 			$('#titleModalBody').html(response);
-
 			$('#titleDeleteModal').html('');
 			$('#titleModal').modal('show');
 		},

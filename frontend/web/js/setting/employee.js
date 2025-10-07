@@ -81,8 +81,9 @@ function warningDeleteEmployee(employeeId) {
     $("#delete1-employee").val(employeeId);
 }
 function deleteEmployee() {
-    var url = $url + 'setting/employee/delete-employee';
+    var url = $url + 'setting/employee/delete-employee-script';
     var employeeId = $("#delete1-employee").val();
+
     $.ajax({
         type: "POST",
         dataType: 'json',
@@ -91,7 +92,15 @@ function deleteEmployee() {
         success: function (data) {
             if (data.status) {
                 $("#employee-" + employeeId).hide();
+                var modalEl = document.getElementById('warning-delete-employee1');
+                var modal = bootstrap.Modal.getInstance(modalEl);
+                modal.hide();
+            } else {
+                alert("ไม่สามารถลบพนักงานได้");
             }
+        },
+        error: function () {
+            alert("เกิดข้อผิดพลาดในการเชื่อมต่อเซิร์ฟเวอร์");
         }
     });
 }
@@ -679,6 +688,7 @@ function loadTeamsSelect(departmentId) {
 function loadTitlesSelect(departmentId) {
     const employeeTitleId = document.getElementById('employeeTitleId');
     const titleId = parseInt(employeeTitleId?.value || 0);
+    // alert(departmentId);
 
     fetch($url + 'setting/department/department-title-list', {
         method: 'POST',

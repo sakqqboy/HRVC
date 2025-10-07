@@ -1,0 +1,11 @@
+ALTER TABLE `hrvc`.`group` 
+MODIFY COLUMN `contact` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL AFTER `email`;
+
+
+ALTER TABLE `hrvc`.`group` 
+MODIFY COLUMN `contact` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL AFTER `email`,
+ADD COLUMN `socialInstargram` varchar(255) NULL AFTER `banner`
+ADD COLUMN `socialFacebook` varchar(255) NULL AFTER `socialInstargram`
+ADD COLUMN `socialYoutube` varchar(255) NULL AFTER `socialFacebook`
+ADD COLUMN `socialLinkin` varchar(255) NULL AFTER `socialYoutube`,
+ADD COLUMN `socialX` varchar(255) NULL AFTER `socialLinkin`;

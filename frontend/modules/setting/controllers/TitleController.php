@@ -617,25 +617,27 @@ class TitleController extends Controller
         $request = Yii::$app->request;
         $body = json_decode($request->getRawBody(), true);
         $titleId = $body['titleId'] ?? null;
-		$paramId =  ModelMaster::encodeParams(['departmentId' => '', 'titleId' => $titleId]);
+
+        $paramId = ModelMaster::encodeParams([
+            'departmentId' => '',
+            'titleId' => $titleId
+        ]);
 
         if (!$titleId) {
             return ['error' => 'Missing titleId'];
         }
 
-        $titleResponse = Api::connectApi(Path::Api() . 'masterdata/title/title-detail?id=' . $titleId);
+        $title = Api::connectApi(Path::Api() . 'masterdata/title/title-detail?id=' . $titleId);
 
-        $title = json_decode($titleResponse, true);
-            return [
-                'titleName' => $title['titleName'] ?? '',
-                'purpose' => $title['purpose'] ?? '',
-                'jobDescription' => $title['jobDescription'] ?? '',
-                'keyResponsibility' => $title['keyResponsibility'] ?? '',
-                'paramId' => $paramId ?? '',
-            ];
+        // ไม่ต้อง json_decode อีก เพราะ $title เป็น array แล้ว
+        return [
+            'titleName' => $title['titleName'] ?? '',
+            'purpose' => $title['purpose'] ?? '',
+            'jobDescription' => $title['jobDescription'] ?? '',
+            'keyResponsibility' => $title['keyResponsibility'] ?? '',
+            'paramId' => $paramId ?? '',
+        ];
     }
-
-
     public function actionModalTitle($hash)
     {
         $param = ModelMaster::decodeParams($hash);
@@ -681,14 +683,19 @@ class TitleController extends Controller
                 $countTitle = count($titles);
             }
         }
+        //  return $this->renderPartial('modal_title', [
+        //     "departmentId" => $departmentId
+        // ]);
+        // throw new Exception(json_encode($data));
         
         return $this->renderPartial('modal_title', [
-            "title" => $data,
+            "title" => $data[$departmentsId], // ส่ง array ของ department โดยตรง
             "role" => $role,
             "countTitle" => $countTitle,
             "titleId" => $titleId,
             "nextPage" => 1
-        ]); 
+        ]);
+
     }
     public function actionModalDelete(){
         $titleId = Yii::$app->request->get("titleId");

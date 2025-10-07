@@ -800,6 +800,7 @@ class DepartmentController extends Controller
         ]);
         return json_encode($res);
     }
+    
     public function actionSaveDepartmentTitle()
     {
         $departmentId = $_POST["departmentId"] - 543;
@@ -1044,7 +1045,7 @@ class DepartmentController extends Controller
             Path::Api() . 'masterdata/department/department-title?id=' . $departmentId
         );
 
-        $title = json_decode($titles, true); // decode ครั้งเดียวพอ
-        return $title;
+        // $title = json_decode($titles, true); // decode ครั้งเดียวพอ
+        return $titles;
     }
 }

@@ -1731,6 +1731,7 @@ $form = ActiveForm::begin([
         const iconImg = document.getElementById('titleIconImg');
         const selectedValue = this.value;
         const iconDiv = document.getElementById('titleIcon');
+        // alert(selectedValue);
         if (selectedValue !== '') {
             iconImg.src = homeUrl + 'images/icons/white-icons/MasterSetting/title.svg';
             iconDiv.classList.remove('cycle-current-gray');
@@ -2238,6 +2239,7 @@ $form = ActiveForm::begin([
         // เอา disabled ออกจาก select สาขา
         if (selectedBranchId !== null) {
             branchSelect.removeAttribute('disabled');
+            // alert(selectedBranchId);
 
             // เปลี่ยนสี background ของ span ถ้ามี
             const branchSpan = branchSelect.nextElementSibling;
@@ -2312,7 +2314,7 @@ $form = ActiveForm::begin([
                 if (departmentSpan && departmentSpan.classList.contains('input-group-text')) {
                     departmentSpan.style.backgroundColor = '#fff';
                 }
-
+                // alert(selectedBranchId);
                 fetch('<?= Yii::$app->homeUrl ?>setting/branch/branch-department-list', {
                         method: 'POST',
                         headers: {
@@ -2320,16 +2322,18 @@ $form = ActiveForm::begin([
                             'X-CSRF-Token': '<?= Yii::$app->request->csrfToken ?>'
                         },
                         body: JSON.stringify({
-                            beanchId: selectedBranchId
+                            branchId: selectedBranchId
                         })
                     })
                     .then(response => response.json())
                     .then(data => {
+
                         const departmentSelect = document.getElementById('departmentSelectId');
 
                         departmentSelect.innerHTML =
                             '<option value="" disabled selected hidden><?= Yii::t("app", "In which Department?") ?></option>';
-
+                        // alert(data);
+                        // alert(JSON.stringify(data));
                         if (Array.isArray(data)) {
                             data.forEach(branch => {
                                 const option = document.createElement('option');

@@ -2,12 +2,12 @@
 
 use common\models\ModelMaster;
 
-$this->title = "Branch";
+$this->title = "Employee";
 ?>
 <div class="background-main-whilte mid-center">
     <div class="mid-center max-background"
         style="
-padding: 30px; gap: 7.721px; flex-shrink: 0;border-radius: 7.721px;border: 1.544px dashed var(--Stroke-Bluish-Gray, #BBCDDE);background: #F9F9F9;">
+padding: 30px; gap: 7.721px; flex-shrink: 0;border-radius: 7.721px;border: 1.544px dashed var(--Stroke-Bluish-Gray, #BBCDDE);background: #F9F9F9; min-height: 800px;">
         <img src="<?= Yii::$app->homeUrl . 'image/no-employee.svg' ?>">
         <span class="name-sub-tokyo">
             <?= Yii::t('app', 'An email has been sent to the employee’s inbox') ?></span>
