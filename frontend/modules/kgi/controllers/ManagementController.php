@@ -1865,10 +1865,7 @@ class ManagementController extends Controller
 	public function actionNextKgiHistory()
 	{
 		$kgiHistoryId = $_POST["kgiHistoryId"];
-		//   throw new Exception($kgiHistoryId);
 		$currentHistory = KgiHistory::find()->where(["kgiHistoryId" => $kgiHistoryId])->asArray()->one();
-
-		//   throw new Exception(print_r($currentHistory,true));
 		$kgiId = $currentHistory["kgiId"];
 		$unit = Unit::find()->where(["unitId" => $currentHistory["unitId"]])->asArray()->one();
 		if ($currentHistory["month"] != "" && $currentHistory["year"] != "") {
@@ -1879,6 +1876,9 @@ class ManagementController extends Controller
 			$nextMonth = null;
 			$nextYear = null;
 		}
+
+		$currentHistory = KgiHistory::find()->where(["kgiHistoryId" => $kgiHistoryId])->asArray()->one();
+		//throw new Exception(print_r($currentHistory, true));
 		$kgiHistory = new KgiHistory();
 		$kgiHistory->kgiId = $currentHistory["kgiId"];
 		$kgiHistory->createrId = Yii::$app->user->id;
@@ -1907,7 +1907,6 @@ class ManagementController extends Controller
 			$kgi->fromDate = null;
 			$kgi->updateDateTime = new Expression('NOW()');
 			if ($kgi->save(false)) {
-
 				$oldKgiTeams = KgiTeam::find()->where([
 					"kgiId" => $kgiId,
 					"month" => $currentHistory["month"],
@@ -1946,7 +1945,7 @@ class ManagementController extends Controller
 									$team->year = $nextYear;
 									$team->fromDate = null;
 									$team->toDate = null;
-									$team->NextCheckDate = null;
+									$team->nextCheckDate = null;
 									$team->result = 0.00;
 									$status = 1;
 								}
@@ -1958,7 +1957,7 @@ class ManagementController extends Controller
 								$newHistory->month = $nextMonth;
 								$newHistory->year = $nextYear;
 								$newHistory->createrId = Yii::$app->user->id;
-								$newHistory->status = $status;
+								$newHistory->status = 1;
 								$newHistory->createDateTime = new Expression('NOW()');
 								$newHistory->updateDateTime = new Expression('NOW()');
 								if ($newHistory->save(false)) {
@@ -1967,36 +1966,37 @@ class ManagementController extends Controller
 										->leftJoin("employee", "employee.employeeId = kgi_employee.employeeId")
 										->where(["kgi_employee.kgiId" => $team->kgiId, "employee.teamId" => $team->teamId, "kgi_employee.status" => [1, 2, 4]])
 										->all();
-
-									foreach ($KgiEmployee as $empoyee) :
-										if ($empoyee->month  == $nextMonth && $empoyee->year  == $nextYear) {
-										} else {
-											if ($empoyee->status == 1) {
-												$status = 5;
+									if (isset($KgiEmployee) && count($KgiEmployee) > 0) {
+										foreach ($KgiEmployee as $empoyee) :
+											if ($empoyee->month  == $nextMonth && $empoyee->year  == $nextYear) {
+											} else {
+												// if ($empoyee->status == 1) {
+												// 	$status = 5;
+												// }
+												if ($empoyee->status == 2) {
+													$status = 1;
+													$empoyee->status = 1;
+													$empoyee->month = $nextMonth;
+													$empoyee->year = $nextYear;
+													$empoyee->fromDate = null;
+													$empoyee->toDate = null;
+													$empoyee->nextCheckDate = null;
+													$empoyee->result = 0.00;
+												}
+												$KgiEmployeeHistory = new KgiEmployeeHistory();
+												$KgiEmployeeHistory->kgiEmployeeId = $empoyee->kgiEmployeeId;
+												$KgiEmployeeHistory->createrId = Yii::$app->user->id;
+												$KgiEmployeeHistory->month = $nextMonth;
+												$KgiEmployeeHistory->year = $nextYear;
+												$KgiEmployeeHistory->createDateTime = new Expression('NOW()');
+												$KgiEmployeeHistory->updateDateTime = new Expression('NOW()');
+												$KgiEmployeeHistory->detail = "auto set from company kgi";
+												$KgiEmployeeHistory->status = 1;
+												$KgiEmployeeHistory->save(false);
+												$empoyee->save(false);
 											}
-											if ($empoyee->status == 2) {
-												$status = 1;
-												$empoyee->status = 1;
-												$empoyee->month = $nextMonth;
-												$empoyee->year = $nextYear;
-												$empoyee->fromDate = null;
-												$empoyee->toDate = null;
-												$empoyee->NextCheckDate = null;
-												$empoyee->result = 0.00;
-											}
-											$KgiEmployeeHistory = new KgiEmployeeHistory();
-											$KgiEmployeeHistory->kgiEmployeeId = $empoyee->kgiEmployeeId;
-											$KgiEmployeeHistory->createrId = Yii::$app->user->id;
-											$KgiEmployeeHistory->month = $nextMonth;
-											$KgiEmployeeHistory->year = $nextYear;
-											$KgiEmployeeHistory->createDateTime = new Expression('NOW()');
-											$KgiEmployeeHistory->updateDateTime = new Expression('NOW()');
-											$KgiEmployeeHistory->detail = "auto set from company kpi";
-											$KgiEmployeeHistory->status = $status;
-											$KgiEmployeeHistory->save(false);
-											$empoyee->save(false);
-										}
-									endforeach;
+										endforeach;
+									}
 								}
 								$team->save(false);
 							}
@@ -2011,7 +2011,7 @@ class ManagementController extends Controller
 			}
 		}
 		// return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
-		return $this->redirect(Yii::$app->request->referrer);
+		return $this->redirect(Yii::$app->homeUrl . 'kgi/view/index/' . ModelMaster::encodeParams(["kgiId" => $kgiId]));
 	}
 	public function actionChanngeTeamTargetReason()
 	{
@@ -2087,10 +2087,16 @@ class ManagementController extends Controller
 		$kgiTeam = KgiTeam::find()->where(["kgiId" => $kgiId, "status" => 1])->asArray()->all();
 		$res = [];
 		$res["status"] = true;
-		if (isset($kgiTeam) && count($kgiTeam) > 0) {
-			$res["count"] = count($kgiTeam);
+		if (isset($kgiTeam) && count($kgiTeam) > 0) { //ยังมีคนไม่อัพเดทเป็น complete
+			$res["countTeam"] = count($kgiTeam);
 		} else {
-			$res["count"] = 0;
+			// $kgiTeam2 = KgiTeam::find()->where(["kgiId" => $kgiId, "status" => 2])->asArray()->all(); 
+			// if (isset($kgiTeam2) && count($kgiTeam2) > 0) {// ถ้ายังมี ที่ไม่เสร็จ และ ที่เสร็จแล้วมีหรือไม่
+			// 	$res["count"] =0;
+			// }else{
+
+			// }
+			$res["countTeam"] = 0;
 		}
 		return json_encode($res);
 	}

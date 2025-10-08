@@ -1,10 +1,10 @@
 <style>
-.modal-dialog.warning-kpi-modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-}
+    .modal-dialog.warning-kpi-modal {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
 </style>
 <div class="modal fade pr-0 pl-0" id="warning-kpi" tabindex="-1" aria-labelledby="staticBackdrop4Label"
     aria-hidden="true">
@@ -24,7 +24,7 @@
             </div>
             <div class="modal-body text-start mt-20" style="font-size: 24px; color: #6c757d; padding-top: 10px;line-height: 35px;
                     letter-spacing: 0.5px;">
-                <?= Yii::t('app', "There are some persons in team who have not updated the status to completed yet, in order for to completed, all members must update the status of this personal kpi to complete!") ?>.
+                <?= Yii::t('app', "There are some persons in team who have not updated the status to completed yet, in order for to completed, all members must update the status of this personal kgi to complete!") ?>.
             </div>
             <div class="modal-footer text-end w-100 pt-0 pb-0" style="border-top: none;">
                 <a class="btn btn-outline-danger text-center pt-0 pb-0" data-bs-dismiss="modal" aria-label="Close"

@@ -446,30 +446,22 @@ class KgiTeamController extends Controller
 
 	public function actionUpdateKgiTeam()
 	{
-		// throw new exception(print_r(Yii::$app->request->post(), true));
-		$post = Yii::$app->request->post();
 
+		$post = Yii::$app->request->post();
+		//throw new exception(print_r($post, true));
 		$kgiTeamId = $post['kgiTeamId'] ?? null;
 		$status    = $post['status'] ?? 1;
 		$role      = UserRole::userRight();
-
-		// หา record เดิมของ KgiTeam
 		$oldKgiTeam = KgiTeam::find()
 			->where(["kgiTeamId" => $kgiTeamId])
 			->asArray()
 			->one();
-
-		// ถ้า target เปลี่ยน และ role = 3 → เปลี่ยน status เป็น 88
 		if ($oldKgiTeam && $role == 3) {
 			if (($oldKgiTeam["target"] ?? null) != ($post['targetAmount'] ?? null)) {
 				$status = 88;
 			}
 		}
-
-		// set result
 		$result = $post["result"] ?? ($post["autoUpdate"] ?? 0);
-
-		// สร้าง history ใหม่
 		$kgiTeamHistory = new KgiTeamHistory();
 		$kgiTeamHistory->kgiTeamId     = $kgiTeamId;
 		$kgiTeamHistory->result        = $result;
@@ -483,8 +475,7 @@ class KgiTeamController extends Controller
 		$kgiTeamHistory->createrId     = Yii::$app->user->id;
 		$kgiTeamHistory->createDateTime = new Expression('NOW()');
 		$kgiTeamHistory->updateDateTime = new Expression('NOW()');
-
-		if ($kgiTeamHistory->save(false)) {
+		if ($kgiTeamHistory->save()) {
 			$teamKgi = KgiTeam::find()->where(["kgiTeamId" => $kgiTeamId])->one();
 
 			if ($teamKgi) {
@@ -504,7 +495,7 @@ class KgiTeamController extends Controller
 			}
 		}
 
-		return $this->redirect($post["url"] ?? ['index']);
+		return $this->redirect($post["url"] ?? Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi-grid');
 
 		//return $this->redirect('team-kgi');
 	}
@@ -1219,6 +1210,7 @@ class KgiTeamController extends Controller
 			->where([
 				"e.teamId" => $kgiTeam["teamId"],
 				"e.status" => 1,
+				"kgi_employee.kgiId" => $kgiTeam["kgiId"],
 				"kgi_employee.status" => [1, 2, 4],
 				"kgi_employee.month" => $month,
 				"kgi_employee.year" => $year
@@ -1230,6 +1222,8 @@ class KgiTeamController extends Controller
 			foreach ($kgiEmployee as $kg):
 				$autoResult += $kg["result"];
 			endforeach;
+		} else {
+			$res["result"] = '';
 		}
 		$res["result"] = $autoResult;
 		return json_encode($res);

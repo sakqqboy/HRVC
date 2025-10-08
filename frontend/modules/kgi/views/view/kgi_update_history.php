@@ -42,7 +42,7 @@
                                                         ?>
                                                         <span><?= Yii::t('app', $statusText) ?></span>
                                                     </div>
-                                                    <div class="col-12 pim-employee-title" style="font-size: 10px !important;">
+                                                    <div class="col-12 pim-employee-title" style="font-size: 10px !important;letter-spacing: -0.1px">
                                                         <?= $info["createDateTime"] ?>
                                                     </div>
                                                 </div>

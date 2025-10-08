@@ -4,7 +4,7 @@ use common\models\ModelMaster;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
 ?>
-<select class="select-pim form-select" id="company-filter" onchange="applySelectStyle(this)">
+<select class="form-select <?= $companyId != "" ? 'select-pimselect' : 'select-pim' ?>" id="company-filter" onchange="applySelectStyle(this)">
     <?php
     if (isset($companyId) && $companyId != "") { ?>
         <option value="<?= $companyId ?>"><?= Company::companyName($companyId) ?></option>
@@ -30,7 +30,7 @@ use frontend\models\hrvc\Company;
     ?>
 </select>
 
-<select class="select-pim form-select" id="branch-filter" <?= $companyId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
+<select class="form-select <?= $branchId != "" ? 'select-pimselect' : 'select-pim' ?>" id="branch-filter" <?= $companyId == "" ? 'disabled' : '' ?> onchange="applySelectStyle(this)">
     <?php
     if (isset($branchId) && $branchId != "") { ?>
         <option value="<?= $branchId ?>"><?= Branch::branchName($branchId) ?></option>
@@ -48,7 +48,7 @@ use frontend\models\hrvc\Company;
     ?>
 </select>
 
-<select class="select-pim form-select" id="month-filter" onchange="applySelectStyle(this)">
+<select class="form-select <?= $month != "" ? 'select-pimselect' : 'select-pim' ?>" id="month-filter" onchange="applySelectStyle(this)">
     <?php
     if (isset($month) && $month != "") { ?>
         <option value="<?= $month ?>"><?= Yii::t('app', ModelMaster::monthFull()[$month]) ?></option>
@@ -67,7 +67,7 @@ use frontend\models\hrvc\Company;
 </select>
 
 
-<select class="select-pim form-select" id="year-filter" onchange="applySelectStyle(this)">
+<select class="form-select <?= $yearSelected != "" ? 'select-pimselect' : 'select-pim' ?>" id="year-filter" onchange="applySelectStyle(this)">
     <?php
     if (isset($yearSelected) && $yearSelected != "") { ?>
         <option value="<?= $yearSelected ?>"><?= $yearSelected ?></option>
@@ -89,7 +89,26 @@ use frontend\models\hrvc\Company;
     }
     ?>
 </select>
-<select class="select-pim form-select" id="status-filter" onchange="applySelectStyle(this)">
+<select class="form-select <?= $status != "" ? 'select-pimselect' : 'select-pim' ?>" id="status-filter" onchange="applySelectStyle(this)">
+    <?php
+    if (isset($status) && $status != "") {
+        if ($status == 1) {
+            $text = 'In Progress';
+        }
+        if ($status == 2) {
+            $text = 'Completed';
+        }
+        if ($status == 3) {
+            $text = 'Due Passed';
+        }
+        if ($status == 4) {
+            $text = 'Not Set';
+        }
+    ?>
+        <option value="<?= $status ?>"><?= $text ?></option>
+    <?php
+    }
+    ?>
     <option value=""><?= Yii::t('app', 'Status') ?></option>
     <option value="1"><?= Yii::t('app', 'In Progress') ?></option>
     <option value="3"><?= Yii::t('app', 'Due Passed') ?></option>

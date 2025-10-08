@@ -95,7 +95,7 @@ $this->title = 'Company KGI History';
                                                 if ($i == 0 && $kgi["status"] == 2 && $role >= 4) {
                                                 ?>
                                                     <a class="pim-btn ml-5"
-                                                        onclick="javascript:prepareKgiNextTarget(<?= $kgi['kgiHistoryId'] ?>)">
+                                                        onclick="javascript:prepareKgiNextTarget(<?= $kgi['kgiHistoryId'] ?>)" style="cursor:pointer;">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy.svg"
                                                             alt="History" class="pim-action-icon">
                                                     </a>
@@ -338,7 +338,7 @@ $this->title = 'Company KGI History';
     </div>
 </div>
 <?php
-$form = ActiveForm::begin([
+/*$form = ActiveForm::begin([
     'id' => 'update-kgi',
     'method' => 'post',
     'options' => [
@@ -346,14 +346,15 @@ $form = ActiveForm::begin([
     ],
     'action' => Yii::$app->homeUrl . 'kgi/management/update-kgi'
 
-]); ?>
-<?= $this->render('modal_update_kgi', [
+]); */ ?>
+<?php /* $this->render('modal_update_kgi', [
     "units" => $units,
     "companies" => $companies,
     "months" => $months,
     "isManager" => $isManager
-]) ?>
-<?php ActiveForm::end(); ?>
+])*/ ?>
+<?php //ActiveForm::end(); 
+?>
 <?= $this->render('modal_confirm_next') ?>
 <style>
     .pim-btn {

@@ -70,9 +70,9 @@ $this->title = 'KGI KPI';
                             <td><?= $kgi["code"] ?></td>
                             <td><?= $kgi["ratio"] ?></td>
                             <td>
-                                <div class="col-12 info-assign  pt-5 pb-2" style="margin-top: -3px;">
+                                <div class="col-12 info-assign" style="margin-top: -3px;">
                                     <div class="row">
-                                        <div class="col-4 text-end">
+                                        <div class="col-5 text-end" style="align-content:center;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png"
                                                 class="first-layer-icon ml-3" style="margin-top: -4px;">
                                         </div>
@@ -80,7 +80,7 @@ $this->title = 'KGI KPI';
                                             <?= $kgi["countTeam"] ?>
                                         </div>
 
-                                        <div class="col-3  text-center pl-0 pr-0">
+                                        <div class="col-4  text-center pl-0 pr-0" style="align-content:center;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down-darkblue.png"
                                                 style="width:10px;height:7px;margin-top:-4px;cursor:pointer;"
                                                 onclick="javascript:showTeamKgi(<?= $kgiId ?>,1)" id="show-<?= $kgiId ?>">
@@ -93,7 +93,7 @@ $this->title = 'KGI KPI';
                             </td>
                             <td style="border-top-right-radius: 3px;border-bottom-right-radius: 3px;">
                                 <a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>" target="_blank" class="no-underline ">
-                                    <div class="col-12 pt-3" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
+                                    <div class="col-12 pt-4 pb-4" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/detail.png" class="icon-table">
                                         <?= Yii::t('app', 'Detail') ?>
                                     </div>

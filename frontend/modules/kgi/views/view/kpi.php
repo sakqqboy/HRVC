@@ -1,4 +1,7 @@
 <?php
+
+use common\models\ModelMaster;
+
 if (isset($kpis) && count($kpis) > 0) { ?>
 
 	<table class="table table-borderless">
@@ -13,7 +16,7 @@ if (isset($kpis) && count($kpis) > 0) { ?>
 				<th style="width: 10%;"><?= Yii::t('app', 'TEAM') ?></th>
 				<th style="border-top-right-radius: 4px;border-bottom-right-radius: 4px;" class="text-end">
 					<a class="btn-blue-sm font-size-12 text-center no-underline mr-5 pl-10 pr-10" id="saveRelateKpi" href="javascript:showEditRelateKpi(2,<?= $kgiId ?>)">
-						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt="" class="pim-icon mr-3" style="margin-top: -1px;"> Save
+						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt="" class="mr-3" style="margin-top: -1px; width: 16px;"> Save
 					</a>
 					<a class="btn-red-sm font-size-12 text-center no-underline pl-10 pr-10" id="cancelRelateKpi" href="javascript:showEditRelateKpi(0,<?= $kgiId ?>)"><?= Yii::t('app', 'Cancel') ?></a>
 				</th>
@@ -40,27 +43,29 @@ if (isset($kpis) && count($kpis) > 0) { ?>
 						<td><?= $kpi["code"] ?></td>
 						<td><?= $kpi["ratio"] ?></td>
 						<td>
-							<div class="col-12 info-assign  pt-5 pb-2" style="margin-top: -3px;">
+							<div class="col-12 info-assign" style="margin-top: -3px;">
 								<div class="row">
-									<div class="col-4 text-end">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png" class="first-layer-icon ml-3" style="margin-top: -4px;">
+									<div class="col-5 text-end" style="align-content:center;">
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png" class="first-layer-icon ml-3">
 									</div>
 									<div class="col-3 number-tag load-info pr-3 pl-3 pt-1">
 										<?= $kpi["countTeam"] ?>
 									</div>
 
-									<div class="col-3  text-center pl-0 pr-0">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down-darkblue.png" style="width:10px;height:7px;margin-top:-4px;cursor:pointer;" onclick="javascript:showTeamKpi(<?= $kpiId ?>,1)" id="show-<?= $kpiId ?>">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/up-darkblue.png" style="display: none;width:10px;height:7px;margin-top:-4px;cursor:pointer;" onclick="javascript:showTeamKpi(<?= $kpiId ?>,0)" id="hide-<?= $kpiId ?>">
+									<div class="col-4  text-center pl-0 pr-0" style="align-content:center;">
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down-darkblue.png" style="width:10px;height:7px;cursor:pointer;" onclick="javascript:showTeamKpi(<?= $kpiId ?>,1)" id="show-<?= $kpiId ?>">
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/up-darkblue.png" style="display: none;width:10px;height:7px;cursor:pointer;" onclick="javascript:showTeamKpi(<?= $kpiId ?>,0)" id="hide-<?= $kpiId ?>">
 									</div>
 								</div>
 							</div>
 						</td>
 						<td style="border-top-right-radius: 3px;border-bottom-right-radius: 3px;">
-							<div class="col-12 pt-3" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
-								<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/detail.png" class="icon-table">
-								Detail
-							</div>
+							<a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>" target="_blank" class="no-underline ">
+								<div class="col-12 pt-4 pb-4" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
+									<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/detail.png" class="icon-table">
+									Detail
+								</div>
+							</a>
 						</td>
 					</tr>
 					<tr id="kpi-team-<?= $kpiId ?>" style="display:none;">
@@ -90,27 +95,29 @@ if (isset($kpis) && count($kpis) > 0) { ?>
 						<td><?= $kpi["code"] ?></td>
 						<td><?= $kpi["ratio"] ?></td>
 						<td>
-							<div class="col-12 info-assign  pt-5 pb-2" style="margin-top: -3px;">
+							<div class="col-12 info-assign" style="margin-top: -3px;">
 								<div class="row">
-									<div class="col-4 text-end">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png" class="first-layer-icon ml-3" style="margin-top: -4px;">
+									<div class="col-5 text-end" style="align-content:center;">
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png" class="first-layer-icon ml-3">
 									</div>
 									<div class="col-3 number-tag load-info pr-3 pl-3 pt-1">
 										<?= $kpi["countTeam"] ?>
 									</div>
 
-									<div class="col-3  text-center pl-0 pr-0">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down-darkblue.png" style="width:10px;height:7px;margin-top:-4px;cursor:pointer;" onclick="javascript:showTeamKpi(<?= $kpiId ?>,1)" id="show-<?= $kpiId ?>">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/up-darkblue.png" style="display: none;width:10px;height:7px;margin-top:-4px;cursor:pointer;" onclick="javascript:showTeamKpi(<?= $kpiId ?>,0)" id="hide-<?= $kpiId ?>">
+									<div class="col-4  text-center pl-0 pr-0" style="align-content:center;">
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down-darkblue.png" style="width:10px;height:7px;cursor:pointer;" onclick="javascript:showTeamKpi(<?= $kpiId ?>,1)" id="show-<?= $kpiId ?>">
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/up-darkblue.png" style="display: none;width:10px;height:7px;cursor:pointer;" onclick="javascript:showTeamKpi(<?= $kpiId ?>,0)" id="hide-<?= $kpiId ?>">
 									</div>
 								</div>
 							</div>
 						</td>
 						<td style="border-top-right-radius: 3px;border-bottom-right-radius: 3px;">
-							<div class="col-12 pt-3" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
-								<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/detail.png" class="icon-table">
-								<?= Yii::t('app', 'Detail') ?>
-							</div>
+							<a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>" target="_blank" class="no-underline ">
+								<div class="col-12  pt-4 pb-4" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
+									<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/detail.png" class="icon-table">
+									<?= Yii::t('app', 'Detail') ?>
+								</div>
+							</a>
 						</td>
 					</tr>
 					<tr id="kpi-team-<?= $kpiId ?>" style="display:none;">

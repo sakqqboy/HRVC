@@ -1,15 +1,7 @@
-<style>
-.modal-dialog.warning-kgi-modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-}
-</style>
 <div class="modal fade pr-0 pl-0" id="warning-kgi" tabindex="-1" aria-labelledby="staticBackdrop4Label"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered warning-kgi-modal pr-0 pl-0" style="right : 0px">
-        <div class="modal-content" style="border-radius: 8px; padding: 20px; width:800px;">
+        <div class="modal-content" style="border-radius: 8px; padding: 20px; width:1200px;">
             <div class="d-flex" style="border-bottom: none; padding-bottom: 0;width:100%">
                 <div class="modal-title pull-left font-size-36" id="staticBackdrop4Label"
                     style="display: flex; align-items: center;">
@@ -22,7 +14,7 @@
                 </div>
 
             </div>
-            <div class="modal-body text-start mt-20" style="font-size: 24px; color: #6c757d; padding-top: 10px;line-height: 35px;
+            <div class="modal-body text-start mt-20" style="font-size: 20px; color: #6c757d; padding-top: 10px;line-height: 35px;
                     letter-spacing: 0.5px;">
                 <?= Yii::t('app', "There are some persons in team who have not updated the status to completed yet, in order for to completed, all members must update the status of this personal kgi to complete!") ?>.
             </div>

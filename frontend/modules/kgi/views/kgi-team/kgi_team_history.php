@@ -235,12 +235,12 @@ $this->title = 'Team KGI View';
                                                 </div>
                                                 <div class="col-4 text-center mt-5 pt-6 pl-8 pr-8">
                                                     <?php
-                                                    if ($role > 3  && $kgiTeamDetail["status"] == 1) {
+                                                    if ($role >= 3  && $kgiTeamDetail["status"] == 1) {
                                                     ?>
                                                         <a class="pim-btn-<?= $colorFormat ?>"
-                                                            href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>"
-                                                            style="display: flex; justify-content: center; align-items: center;  height: 30px; gap: 3px; flex-shrink: 0;">
-                                                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                                                            href="<?= Yii::$app->homeUrl . 'kgi/management/prepare-update/' . ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiHistoryId' => 0]) ?>">
+                                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/refresh.svg"
+                                                                class="mr-3" style="width: 10.42px; height: 10.53px;">
                                                             <?= Yii::t('app', 'Update') ?>
                                                         </a>
                                                     <?php

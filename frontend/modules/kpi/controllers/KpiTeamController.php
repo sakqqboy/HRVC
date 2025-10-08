@@ -619,6 +619,7 @@ class KpiTeamController extends Controller
 				"e.teamId" => $kpiTeam["teamId"],
 				"e.status" => 1,
 				"kpi_employee.status" => [1, 2, 4],
+				"kpi_employee.kpiId" => $kpiTeam["kpiId"],
 				"kpi_employee.month" => $month,
 				"kpi_employee.year" => $year
 			])
@@ -629,6 +630,8 @@ class KpiTeamController extends Controller
 			foreach ($kpiEmployee as $kg):
 				$autoResult += $kg["result"];
 			endforeach;
+		} else {
+			$res["result"] = '';
 		}
 		$res["result"] = $autoResult;
 		return json_encode($res);
@@ -777,56 +780,58 @@ class KpiTeamController extends Controller
 	}
 	public function actionUpdateKpiTeam()
 	{
+		$post = Yii::$app->request->post();
 		$data = [
-			'kpiTeamId' => $_POST["kpiTeamId"],
-			'targetAmount' => $_POST["targetAmount"],
-			'status' => $_POST["status"],
-			'result' => $_POST["result"],
-			'month' => $_POST["month"],
-			'year' => $_POST["year"],
-			'toDate' => $_POST["toDate"],
-			'fromDate' => $_POST["fromDate"],
-			'nextCheckDate' => $_POST["nextDate"],
+			'kpiTeamId' => $post["kpiTeamId"],
+			'targetAmount' => $post["targetAmount"],
+			'status' => $post["status"],
+			'result' => $post["result"] ?? ($post["autoUpdate"] ?? 0),
+			'month' => $post["month"],
+			'year' => $post["year"],
+			'toDate' => $post["toDate"],
+			'fromDate' => $post["fromDate"],
+			'nextCheckDate' => $post["nextDate"],
 		];
+		$result = $post["result"] ?? ($post["autoUpdate"] ?? 0);
 		$nextMonth = $data['month'] + 1;
 		$nextYear = $data['year'];
 		if ($nextMonth > 12) {
 			$nextMonth = 1;
 			$nextYear++;
 		}
-		$kpiTeamId = $_POST["kpiTeamId"];
+		$kpiTeamId = $post["kpiTeamId"];
 		$role = UserRole::userRight();
-		$status =  $_POST["status"];
+		$status =  $post["status"];
 		$teamkpi = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->one();
-		$teamkpi->status = $_POST["status"];
-		$teamkpi->month = $_POST["month"];
-		$teamkpi->year = $_POST["year"];
-		$teamkpi->result = str_replace(",", "",  $_POST["result"]);
-		if (isset($_POST["targetAmount"])) {
-			$teamkpi->target = str_replace(",", "",  $_POST["targetAmount"]);
+		$teamkpi->status = $post["status"];
+		$teamkpi->month = $post["month"];
+		$teamkpi->year = $post["year"];
+		$teamkpi->result = str_replace(",", "",  $result);
+		if (isset($post["targetAmount"])) {
+			$teamkpi->target = str_replace(",", "",  $post["targetAmount"]);
 		}
-		$teamkpi->fromDate = $_POST["fromDate"];
-		$teamkpi->toDate = $_POST["toDate"];
-		$teamkpi->nextCheckDate = $_POST["nextDate"];
+		$teamkpi->fromDate = $post["fromDate"];
+		$teamkpi->toDate = $post["toDate"];
+		$teamkpi->nextCheckDate = $post["nextDate"];
 		$teamkpi->updateDateTime = new Expression('NOW()');
-		if ($teamkpi->save(false)) {
+		if ($teamkpi->save()) {
 			$kpiTeamHistory = new KpiTeamHistory();
 			$kpiTeamHistory->kpiTeamId = $kpiTeamId;
-			$kpiTeamHistory->result = str_replace(",", "",  $_POST["result"]);
-			if (isset($_POST["targetAmount"])) {
-				$kpiTeamHistory->target = str_replace(",", "",  $_POST["targetAmount"]);
+			$kpiTeamHistory->result = str_replace(",", "",  $result);
+			if (isset($post["targetAmount"])) {
+				$kpiTeamHistory->target = str_replace(",", "",  $post["targetAmount"]);
 			} else {
 				$teamKpi = KpiTeam::find()->where(["kpiTeamId" => $kpiTeamId])->one();
 				$kpiTeamHistory->target = str_replace(",", "",   $teamKpi["target"]);
 				$teamKpi->save(false);
 			}
 			$kpiTeamHistory->status = $status;
-			$kpiTeamHistory->month = $_POST["month"];
-			$kpiTeamHistory->fromDate = $_POST["fromDate"];
-			$kpiTeamHistory->toDate = $_POST["toDate"];
-			$kpiTeamHistory->month = $_POST["month"];
-			$kpiTeamHistory->year = $_POST["year"];
-			$kpiTeamHistory->nextCheckDate = $_POST["nextDate"];
+			$kpiTeamHistory->month = $post["month"];
+			$kpiTeamHistory->fromDate = $post["fromDate"];
+			$kpiTeamHistory->toDate = $post["toDate"];
+			$kpiTeamHistory->month = $post["month"];
+			$kpiTeamHistory->year = $post["year"];
+			$kpiTeamHistory->nextCheckDate = $post["nextDate"];
 			$kpiTeamHistory->createrId = Yii::$app->user->id;
 			$kpiTeamHistory->createDateTime = new Expression('NOW()');
 			$kpiTeamHistory->updateDateTime = new Expression('NOW()');
@@ -845,7 +850,7 @@ class KpiTeamController extends Controller
 				}
 			}
 		}
-		return $this->redirect($_POST["url"]);
+		return $this->redirect($post["url"]);
 	}
 
 	public function actionKpiTeam()

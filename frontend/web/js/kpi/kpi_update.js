@@ -39,8 +39,12 @@ function autoUpdateResultKpi(kpiId) {
 			data: { kpiId: kpiId },
 			success: function (data) {
 				// alert(data.result);
-				$("#resultKPI-update").val(data.result);
-				$("#autoKPI-result").val(data.result);
+				if (data.result != '') {
+					$("#resultKPI-update").val(data.result);
+					$("#autoKPI-result").val(data.result);
+				} else {
+					alert('This KPI did not assign to your team member.');
+				}
 			}
 		});
 		// alert("1");
