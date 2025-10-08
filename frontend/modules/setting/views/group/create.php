@@ -54,31 +54,6 @@ $this->title = 'Create Group';
                     </div>
                 </div>
 
-                <!-- <div class="col-10 mb-15 avatar-upload" style="margin-left:36px;">
-                    <div class="avatar-preview" id="imagePreview" style="
-                            background-color: white;
-                            fill: #FFF;
-                            stroke-width: 1px;
-                            stroke: var(--Primary-Blue---HRVC, #2580D3);
-                            border-radius: 100%;
-                            padding: 20px;
-                            text-align: center;
-                            cursor: pointer;
-                        ">
-                        <label for="imageUpload" class="upload-label" style="cursor: pointer; display: block;">
-                            <img src="<?= Yii::$app->homeUrl . 'image/upload-iconimg.svg' ?>"
-                                style="width: 50px; height: auto;" alt="Upload Icon"> <br><br>
-                            <span style=""><?= Yii::t('app', 'Upload') ?><span style="font-size: 13px; color: #666;"> or
-                                    Drop </span></span><br>
-                            <span style="font-size: 13px; color: #666;">Branch Picture here</span>
-
-                        </label>
-                        <input type=" file" name="image" id="imageUpload" class="upload up upload-checklist"
-                            style="display: none;" />
-                    </div>
-                </div> -->
-
-
                 <div class="col-2 mb-15" style="display: flex; justify-content: center;  align-items: center; ">
                     <!-- ลบระยะห่างระหว่างรูปและรายละเอียด -->
                     <span class="fileUpload btn" style="padding: 0;">
