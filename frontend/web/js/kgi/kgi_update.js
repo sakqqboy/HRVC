@@ -11,6 +11,7 @@ function companyMultiBrachUpdate() {
 	clearEveryShow();
 	var acType = $("#acType").val();
 	var kgiId = $("#kgiId").val();
+	
 	var url = $url + 'kgi/management/company-multi-branch';
 	$.ajax({
 		type: "POST",

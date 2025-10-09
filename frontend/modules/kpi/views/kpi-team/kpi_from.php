@@ -1,7 +1,7 @@
 <?php
 
 use common\models\ModelMaster;
-use yii\bootstrap5\ActiveForm;
+use yii\widgets\ActiveForm;
 
 $parturl = 'kpi/kpi-team/update-kpi-team';
 $this->title = 'Update Team KPI';
@@ -877,7 +877,7 @@ if (!$nextCheckDate) {
 
 <input type="hidden" value="update" id="acType">
 <input type="hidden" value="kpi-team" id="pimType">
-<input type="hidden" id="kpiTeamId" name="kpiTeamId" value="<?= isset($kpiTeamId) ? $kpiTeamId : '' ?>" required>
+<input type="hidden" id="kpiTeamId" name="kpiTeamId" value="<?= isset($kpiTeamId) ? $kpiTeamId : '' ?>">
 <input type="hidden" value="<?= $url ?>" name="url" id="url">
 
 <?php ActiveForm::end(); ?>

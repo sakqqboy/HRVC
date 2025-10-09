@@ -1,6 +1,6 @@
 <?php
 
-use yii\bootstrap5\ActiveForm;
+use yii\widgets\ActiveForm;
 
 if ($statusform == 'update') {
     $parturl = 'kgi/management/update-kgi';

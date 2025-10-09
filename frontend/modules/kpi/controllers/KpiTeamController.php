@@ -13,6 +13,10 @@ use frontend\models\hrvc\Company;
 use frontend\models\hrvc\Department;
 use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
+use frontend\models\hrvc\Kgi;
+use frontend\models\hrvc\KgiEmployee;
+use frontend\models\hrvc\KgiHistory;
+use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiEmployee;
 use frontend\models\hrvc\KpiEmployeeHistory;
@@ -781,8 +785,9 @@ class KpiTeamController extends Controller
 	public function actionUpdateKpiTeam()
 	{
 		$post = Yii::$app->request->post();
+		//throw new Exception(print_r($post, true));
 		$data = [
-			'kpiTeamId' => $post["kpiTeamId"],
+			'kpiTeamId' => $post["kpiTeamId"] ?? null,
 			'targetAmount' => $post["targetAmount"],
 			'status' => $post["status"],
 			'result' => $post["result"] ?? ($post["autoUpdate"] ?? 0),
@@ -814,7 +819,7 @@ class KpiTeamController extends Controller
 		$teamkpi->toDate = $post["toDate"];
 		$teamkpi->nextCheckDate = $post["nextDate"];
 		$teamkpi->updateDateTime = new Expression('NOW()');
-		if ($teamkpi->save()) {
+		if ($teamkpi->save(false)) {
 			$kpiTeamHistory = new KpiTeamHistory();
 			$kpiTeamHistory->kpiTeamId = $kpiTeamId;
 			$kpiTeamHistory->result = str_replace(",", "",  $result);
@@ -1178,5 +1183,207 @@ class KpiTeamController extends Controller
 			$res["status"] = false;
 		}
 		return json_encode($res);
+	}
+	public function actionRecheck()
+	{
+		// $teamKpi = KpiTeam::find()->where("status!=99")->orderBy('kpiTeamId')->asArray()->all();
+		// $data = [];
+		// if (count($teamKpi) > 0) {
+		// 	foreach ($teamKpi as $kpi):
+		// 		$kpiTeamHistory = kpiTeamHistory::find()
+		// 			->where(["kpiTeamId" => $kpi["kpiTeamId"]])
+		// 			->andWhere("status!=99")
+		// 			->orderBy('year DESC,month DESC,createDateTime DESC')
+		// 			->asArray()
+		// 			->one();
+		// 		if (isset($kpiTeamHistory) && !empty($kpiTeamHistory)) {
+		// 			if ($kpi["status"] != $kpiTeamHistory["status"])
+		// 				$data[$kpiTeamHistory["kpiTeamHistoryId"]] = [
+		// 					"kpiTeamId" => $kpi["kpiTeamId"],
+		// 					"KpiTeamStatus" => $kpi["status"],
+		// 					"HistoryStatus" => $kpiTeamHistory["status"]
+		// 				];
+		// 		}
+		// 	endforeach;
+		// }
+		$dataKPI = [];
+		$dataKpiTeam = [];
+		$dataKpiEmployee = [];
+		$kpis = Kpi::find()->where("status!=99")->orderBy('kpiId')->asArray()->all();
+		if (count($kpis) > 0) {
+			$i = 1;
+			$e = 1;
+			$t = 1;
+			foreach ($kpis as $kpi):
+				$subQuery = KpiHistory::find()
+					->select('year,month,MAX(createDateTime) as lastest')
+					->where(["kpiId" => $kpi["kpiId"]])
+					->andWhere(['!=', 'status', 99])
+					->groupBy(['year', 'month']);
+				$kpiHistory = KpiHistory::find()
+					->alias('kh')
+					->innerJoin(
+						['t' => $subQuery],
+						"kh.year=t.year and kh.month=t.month and kh.createDateTime=t.lastest"
+					)
+					->where(["kh.kpiId" => $kpi["kpiId"]])
+					->andWhere(['!=', 'kh.status', 99])
+					->orderBy(['kh.year' => SORT_DESC, 'kh.month' => SORT_DESC])
+					->asArray()
+					->all();
+				if (isset($kpiHistory) && count($kpiHistory) > 0) {
+					foreach ($kpiHistory as $history):
+						if (($kpi["month"] != $history["month"] || $kpi["year"] != $history["year"]) && $history["kpiHistoryId"] == 1) {
+							$dataKPI[$i] = [
+								"kpiId" => $kpi["kpiId"],
+								"kpiHistoryId" => $history["kpiHistoryId"],
+								"cYear" => $kpi["year"],
+								"cMonth" => $kpi["month"],
+								"year" => $history["year"],
+								"month" => $history["month"],
+								"kpiStatus" => $kpi["status"],
+								"kpiHistoryStatus" => $history["status"],
+							];
+							$i++;
+						}
+					endforeach;
+				}
+				$kpiTeam = KpiTeam::find()->where(["kpiId" => $kpi["kpiId"]])
+					->andWhere(['!=', 'status', 99])
+					->asArray()->all();
+				if (count($kpiTeam) > 0) {
+					foreach ($kpiTeam as $kt):
+						if (($kpi["month"] != $kt["month"] || $kpi["year"] != $kt["year"])) {
+							$dataKpiTeam[$t] = [
+								"kpiId" => $kpi["kpiId"],
+								"kpiTeamId" => $kt["kpiTeamId"],
+								"cYear" => $kpi["year"],
+								"cMonth" => $kpi["month"],
+								"year" => $kt["year"],
+								"month" => $kt["month"],
+								"kpiStatus" => $kpi["status"],
+								"kpiHistoryStatus" => $kt["status"],
+							];
+							$t++;
+						}
+					endforeach;
+				}
+				$kpiEmployee = KpiEmployee::find()->where(["kpiId" => $kpi["kpiId"]])
+					->andWhere(['!=', 'status', 99])
+					->asArray()->all();
+				if (count($kpiEmployee) > 0) {
+					foreach ($kpiEmployee as $ke):
+						if (($kpi["month"] != $ke["month"] || $kpi["year"] != $ke["year"])) {
+							$dataKpiEmployee[$t] = [
+								"kpiId" => $kpi["kpiId"],
+								"kpiEmployeeId" => $ke["kpiEmployeeId"],
+								"cYear" => $kpi["year"],
+								"cMonth" => $kpi["month"],
+								"year" => $ke["year"],
+								"month" => $ke["month"],
+								"kpiStatus" => $kpi["status"],
+								"kpiHistoryStatus" => $ke["status"],
+							];
+							$t++;
+						}
+					endforeach;
+				}
+
+			endforeach;
+		}
+		$dataKGI = [];
+		$dataKgiTeam = [];
+		$dataKgiEmployee = [];
+		$kgis = Kgi::find()->where("status!=99")->orderBy('kgiId')->asArray()->all();
+		if (count($kgis) > 0) {
+			$i = 1;
+			$t = 1;
+			$e = 1;
+			foreach ($kgis as $kgi):
+				$subQuery = KgiHistory::find()
+					->select('year,month,MAX(createDateTime) as lastest')
+					->where(["kgiId" => $kgi["kgiId"]])
+					->andWhere(['!=', 'status', 99])
+					->groupBy(['year', 'month']);
+				$kgiHistory = KgiHistory::find()
+					->alias('kh')
+					->innerJoin(
+						['t' => $subQuery],
+						"kh.year=t.year and kh.month=t.month and kh.createDateTime=t.lastest"
+					)
+					->where(["kh.kgiId" => $kgi["kgiId"]])
+					->andWhere(['!=', 'kh.status', 99])
+					->orderBy(['kh.year' => SORT_DESC, 'kh.month' => SORT_DESC])
+					->asArray()
+					->all();
+				if (isset($kgiHistory) && count($kgiHistory) > 0) {
+					foreach ($kgiHistory as $history):
+						if (($kgi["month"] != $history["month"] || $kgi["year"] != $history["year"]) && $history["kgiHistoryId"] == 1) {
+							$dataKGI[$i] = [
+								"kgiId" => $kgi["kgiId"],
+								"kgiHistoryId" => $history["kgiHistoryId"],
+								"cYear" => $kgi["year"],
+								"cMonth" => $kgi["month"],
+								"year" => $history["year"],
+								"month" => $history["month"],
+								"kgiStatus" => $kgi["status"],
+								"kgiHistoryStatus" => $history["status"],
+							];
+							$i++;
+						}
+					endforeach;
+				}
+				$kgiTeam = KgiTeam::find()->where(["kgiId" => $kgi["kgiId"]])
+					->andWhere(['!=', 'status', 99])
+					->asArray()->all();
+				if (count($kgiTeam) > 0) {
+					foreach ($kgiTeam as $kt):
+						if (($kgi["month"] != $kt["month"] || $kgi["year"] != $kt["year"])) {
+							$dataKgiTeam[$t] = [
+								"kgiId" => $kgi["kgiId"],
+								"kgiTeamId" => $kt["kgiTeamId"],
+								"cYear" => $kgi["year"],
+								"cMonth" => $kgi["month"],
+								"year" => $kt["year"],
+								"month" => $kt["month"],
+								"kgiStatus" => $kgi["status"],
+								"kgiHistoryStatus" => $kt["status"],
+							];
+							$t++;
+						}
+					endforeach;
+				}
+				$kgiEmployee = KgiEmployee::find()->where(["kgiId" => $kgi["kgiId"]])
+					->andWhere(['!=', 'status', 99])
+					->asArray()->all();
+				if (count($kgiEmployee) > 0) {
+					foreach ($kgiEmployee as $ke):
+						if (($kgi["month"] != $ke["month"] || $kgi["year"] != $ke["year"])) {
+							$dataKgiEmployee[$e] = [
+								"kgiId" => $kgi["kgiId"],
+								"kgiEmployeeId" => $ke["kgiEmployeeId"],
+								"cYear" => $kgi["year"],
+								"cMonth" => $kgi["month"],
+								"year" => $ke["year"],
+								"month" => $ke["month"],
+								"kgiStatus" => $kgi["status"],
+								"kgiHistoryStatus" => $ke["status"],
+							];
+							$e++;
+						}
+					endforeach;
+				}
+
+			endforeach;
+		}
+
+		return $this->render('text', [
+			"dataKPI" => $dataKPI,
+			"dataKpiTeam" => $dataKpiTeam,
+			"dataKpiEmployee" => $dataKpiEmployee,
+			"dataKGI" => $dataKGI,
+			"dataKgiTeam" => $dataKgiTeam,
+			"dataKgiEmployee" => $dataKgiEmployee
+		]);
 	}
 }

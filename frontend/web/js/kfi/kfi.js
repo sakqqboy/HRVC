@@ -1131,14 +1131,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // เปลี่ยนแปลงสไตล์ของ <span> input-group-text
         const inputGroupText = document.querySelector('#img-due-update .input-group-text');
-        inputGroupText.style.backgroundColor = '#D7EBFF';
-        inputGroupText.style.border = '0.5px solid #BEDAFF';
-
-        // อัปเดตไอคอนภายใน <span>
-        const images = inputGroupText.querySelectorAll('img');
-        images[0].src = $url + 'image/calendar-blue.svg';
-        images[1].src = $url + 'image/weld.svg';
-        images[2].src = $url + 'image/calendar-blue.svg';
+        if (inputGroupText) {
+            inputGroupText.style.backgroundColor = '#D7EBFF';
+            inputGroupText.style.border = '0.5px solid #BEDAFF';
+        
+            // อัปเดตไอคอนภายใน <span>
+            const images = inputGroupText.querySelectorAll('img');
+            if (images) {
+                images[0].src = $url + 'image/calendar-blue.svg';
+                images[1].src = $url + 'image/weld.svg';
+                images[2].src = $url + 'image/calendar-blue.svg';
+            }
+        }
     }
 
 });
@@ -2183,6 +2187,7 @@ function changeStatus(type) {
                         $("#pim-status").addClass('select-complete-status');
                     } else {
                         $("#pim-status").val(1)
+                        $("#pim-status").removeClass('select-complete-status');
                         $("#pim-status").addClass('select-create-status');
                         $("#warning-kpi").modal("show");
                     }

@@ -94,7 +94,7 @@ $this->title = 'Company KPI History';
                                                 <?php
                                                 if ($i == 0 && $kpi["status"] == 2 && $role >= 4) {
                                                 ?>
-                                                    <a class="pim-btn ml-5"
+                                                    <a class="pim-btn ml-5" style="cursor: pointer;"
                                                         onclick="javascript:prepareKpiNextTarget(<?= $kpi['kpiHistoryId'] ?>)">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/coppy.svg"
                                                             alt="History" class="pim-action-icon">
@@ -338,24 +338,6 @@ $this->title = 'Company KPI History';
         </div>
     </div>
 </div>
-<?= $this->render('modal_confirm_next') ?>
-<?php
-$form = ActiveForm::begin([
-    'id' => 'update-kpi',
-    'method' => 'post',
-    'options' => [
-        'enctype' => 'multipart/form-data',
-    ],
-    'action' => Yii::$app->homeUrl . 'kpi/management/update-kpi'
-
-]); ?>
-<?= $this->render('modal_update_kpi', [
-    "units" => $units,
-    "companies" => $companies,
-    "months" => $months,
-    "isManager" => $isManager
-]) ?>
-<?php ActiveForm::end(); ?>
 <?= $this->render('modal_confirm_next') ?>
 <style>
     .pim-btn {

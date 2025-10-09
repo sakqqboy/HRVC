@@ -1,7 +1,6 @@
 <?php
 
 use common\models\ModelMaster;
-use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Company KPI';
 ?>
@@ -97,7 +96,7 @@ $this->title = 'Company KPI';
                         <div class="col-12 mb-25 pim-big-box pim-<?= $colorFormat ?>" id="kpi-<?= $kpiId ?>">
                             <div class="d-flex justify-content-start align-content-start">
                                 <div class="kfi-grid-1" style="min-height:120px;">
-                                    <div class="text-truncate pim-name"><?= $kpi["kpiName"] ?></div>
+                                    <div class="text-truncate pim-name" title='<?= $kpi["kpiName"] ?>'><?= $kpi["kpiName"] ?></div>
                                     <div class="mt-20">
                                         <div class="assign-on">
                                             <?= Yii::t('app', 'Assigned on') ?>
@@ -566,42 +565,7 @@ $this->title = 'Company KPI';
 
 </div>
 <?= $this->render('modal_view') ?>
-
 <input type="hidden" value="create" id="acType">
-<?php
-$form = ActiveForm::begin([
-    'id' => 'create-kpi',
-    'method' => 'post',
-    'options' => [
-        'enctype' => 'multipart/form-data',
-    ],
-    'action' => Yii::$app->homeUrl . 'kpi/management/create-kpi'
-
-]); ?>
-<?= $this->render('modal_create', [
-    "units" => $units,
-    "companies" => $companies,
-    "months" => $months
-]) ?>
-<?php ActiveForm::end(); ?>
-
-<?php
-$form = ActiveForm::begin([
-    'id' => 'update-kpi',
-    'method' => 'post',
-    'options' => [
-        'enctype' => 'multipart/form-data',
-    ],
-    'action' => Yii::$app->homeUrl . 'kpi/management/update-kpi'
-
-]); ?>
-<?= $this->render('modal_update', [
-    "units" => $units,
-    "companies" => $companies,
-    "months" => $months,
-    "isManager" => $isManager
-]) ?>
-<?php ActiveForm::end(); ?>
 <?= $this->render('modal_delete') ?>
 <?= $this->render('modal_issue') ?>
 <?= $this->render('modal_team_history') ?>

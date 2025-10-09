@@ -1800,6 +1800,7 @@ class ManagementController extends Controller
     {
         $kpiHistoryId = $_POST["kpiHistoryId"];
         $currentHistory = KpiHistory::find()->where(["kpiHistoryId" => $kpiHistoryId])->asArray()->one();
+        $kpiId = $currentHistory["kpiId"];
         $unit = Unit::find()->where(["unitId" => $currentHistory["unitId"]])->asArray()->one();
         if ($currentHistory["month"] != "" && $currentHistory["year"] != "") {
             $nextTargetMonthYear = ModelMaster::nextTargetMonthYear($unit["unitName"], $currentHistory["month"], $currentHistory["year"]);
@@ -1837,24 +1838,22 @@ class ManagementController extends Controller
             $kpi->result = 0.00;
             $kpi->updateDateTime = new Expression('NOW()');
             if ($kpi->save(false)) {
-
-                $kpiTeam = KpiTeam::find()->where(["kpiId" => $currentHistory["kpiId"], "status" => [1, 2, 4]])->all();
+                $kpiTeam = KpiTeam::find()->where(["kpiId" => $currentHistory["kpiId"], "status" => 2])->all();
                 foreach ($kpiTeam as $team) :
                     if ($team->month  == $nextMonth && $team->year  == $nextYear) {
                     } else {
-                        if ($team->status == 1) {
-                            $status = 5;
-                        }
-                        if ($team->status == 2) {
-                            $status = 1;
-                            $team->status = 1;
-                            $team->month = $nextMonth;
-                            $team->year = $nextYear;
-                            $team->fromDate = null;
-                            $team->toDate = null;
-                            $team->NextCheckDate = null;
-                            $team->result = 0.00;
-                        }
+                        // if ($team->status == 1) {
+                        //     $status = 5;
+                        // }
+                        // if ($team->status == 2) {
+                        $team->status = 1;
+                        $team->month = $nextMonth;
+                        $team->year = $nextYear;
+                        $team->fromDate = null;
+                        $team->toDate = null;
+                        $team->nextCheckDate = null;
+                        $team->result = 0.00;
+                        //    }
                         $kpiTeamHistory = new kpiTeamHistory();
                         $kpiTeamHistory->kpiTeamId = $team->kpiTeamId;
                         $kpiTeamHistory->createrId = Yii::$app->user->id;
@@ -1863,28 +1862,28 @@ class ManagementController extends Controller
                         $kpiTeamHistory->createDateTime = new Expression('NOW()');
                         $kpiTeamHistory->updateDateTime = new Expression('NOW()');
                         $kpiTeamHistory->detail = "auto set from company kpi";
-                        $kpiTeamHistory->status =  $status;
+                        $kpiTeamHistory->status = 1;
                         $kpiTeamHistory->save(false);
                         $team->save(false);
                     }
                 endforeach;
-                $kpiEmployee = KpiEmployee::find()->where(["kpiId" => $currentHistory["kpiId"], "status" => [1, 2, 4]])->all();
+                $kpiEmployee = KpiEmployee::find()->where(["kpiId" => $currentHistory["kpiId"], "status" => 2])->all();
                 foreach ($kpiEmployee as $employee) :
                     if ($employee->month  == $nextMonth && $employee->year  == $nextYear) {
                     } else {
-                        if ($employee->status == 1) {
-                            $statusEmployee = 5;
-                        }
-                        if ($employee->status == 2) {
-                            $statusEmployee = 1;
-                            $employee->status = 1;
-                            $employee->month = $nextMonth;
-                            $employee->year = $nextYear;
-                            $employee->fromDate = null;
-                            $employee->toDate = null;
-                            $employee->NextCheckDate = null;
-                            $employee->result = 0.00;
-                        }
+                        // if ($employee->status == 1) {
+                        //     $statusEmployee = 5;
+                        // }
+                        // if ($employee->status == 2) {
+                        // $statusEmployee = 1;
+                        $employee->status = 1;
+                        $employee->month = $nextMonth;
+                        $employee->year = $nextYear;
+                        $employee->fromDate = null;
+                        $employee->toDate = null;
+                        $employee->nextCheckDate = null;
+                        $employee->result = 0.00;
+                        // }
                         $kpiEmployeeHistory = new kpiEmployeeHistory();
                         $kpiEmployeeHistory->kpiEmployeeId = $employee->kpiEmployeeId;
                         $kpiEmployeeHistory->createrId = Yii::$app->user->id;
@@ -1893,15 +1892,15 @@ class ManagementController extends Controller
                         $kpiEmployeeHistory->createDateTime = new Expression('NOW()');
                         $kpiEmployeeHistory->updateDateTime = new Expression('NOW()');
                         $kpiEmployeeHistory->detail = "auto set from company kpi";
-                        $kpiEmployeeHistory->status =  $statusEmployee;
+                        $kpiEmployeeHistory->status = 1;
                         $kpiEmployeeHistory->save(false);
-                        $team->save(false);
+                        $employee->save(false);
                     }
                 endforeach;
             }
         }
-        // return $this->redirect(Yii::$app->homeUrl . 'kpi/management/grid');
-        return $this->redirect(Yii::$app->request->referrer);
+
+        return $this->redirect(Yii::$app->homeUrl . 'kpi/view/index/' . ModelMaster::encodeParams(["kpiId" => $kpiId]));
     }
     public function actionChanngeTeamTargetReason()
     {
@@ -1975,9 +1974,9 @@ class ManagementController extends Controller
         $res = [];
         $res["status"] = true;
         if (isset($kpiTeam) && count($kpiTeam) > 0) {
-            $res["count"] = count($kpiTeam);
+            $res["countTeam"] = count($kpiTeam);
         } else {
-            $res["count"] = 0;
+            $res["countTeam"] = 0;
         }
         return json_encode($res);
     }

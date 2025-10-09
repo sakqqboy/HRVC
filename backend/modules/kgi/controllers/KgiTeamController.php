@@ -297,16 +297,11 @@ class KgiTeamController extends Controller
 						sort($selectPic);
 					}
 				}
-				if (strlen($kgiTeam["kgiName"]) > 34) {
-					$kginame = substr($kgiTeam["kgiName"], 0, 34) . '. . .';
-				} else {
-					$kginame = $kgiTeam["kgiName"];
-				}
-				//$isOver = ModelMaster::isOverDuedate(KgiTeam::nextCheckDate($kgiTeam['kgiTeamId']));
+
 				$isOver = ModelMaster::isOverDuedate($kgiTeam['nextCheckDate']);
 				$kgiTeamId = $kgiTeam["kgiTeamId"];
 				$commonData = [
-					"kgiName" => $kginame,
+					"kgiName" => $kgiTeam["kgiName"],
 					"kgiId" => $kgiTeam["kgiId"],
 					"teamId" => $kgiTeam["teamId"],
 					"companyName" => Company::companyName($kgiTeam["companyId"]),

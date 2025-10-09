@@ -319,15 +319,11 @@ class KpiTeamController extends Controller
 						sort($selectPic);
 					}
 				}
-				if (strlen($kpiTeam["kpiName"]) > 34) {
-					$kpiName = substr($kpiTeam["kpiName"], 0, 34) . '. . .';
-				} else {
-					$kpiName = $kpiTeam["kpiName"];
-				}
+
 				$isOver = ModelMaster::isOverDuedate($kpiTeam['nextCheckDate']);
 				$kpiTeamId = $kpiTeam["kpiTeamId"];
 				$commonData = [
-					"kpiName" => $kpiName,
+					"kpiName" => $kpiTeam["kpiName"],
 					"kpiId" => $kpiTeam["kpiId"],
 					"teamId" => $kpiTeam["teamId"],
 					"companyName" => Company::companyName($kpiTeam["companyId"]),
@@ -347,15 +343,11 @@ class KpiTeamController extends Controller
 					"periodCheck" => ModelMaster::engDate(KpiTeam::lastestCheckDate($kpiTeam["kpiTeamId"]), 2), //lastest check date
 					"nextCheckDate" =>  ModelMaster::engDate($kpiTeam["nextCheckDate"], 2),
 					"status" => $kpiTeam["status"],
-					//"kpiTeamHistoryId" => $kpiTeamHistory["kpiTeamHistoryId"] ?? 0,
 					"kpiTeamHistoryId" => 0,
 					"flag" => Country::countryFlagBycompany($kpiTeam["companyId"]),
 					"countryName" => Country::countryNameBycompany($kpiTeam['companyId']),
-					//"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
 					"ratio" => number_format($ratio, 2),
-					// "isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeamHistory['kpiTeamId'])),
 					"isOver" => $isOver,
-					//"employee" => KpiTeam::kpiTeamEmployee($kpiTeam['kpiId'], $teamId),
 					"countTeam" => KpiTeam::kpiTeam($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
 					"amountType" => $kpiTeam["amountType"],
 					"issue" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["issue"],
@@ -989,11 +981,6 @@ class KpiTeamController extends Controller
 							sort($selectPic);
 						}
 					}
-					if (strlen($kpiTeam["kpiName"]) > 34) {
-						$kpiName = substr($kpiTeam["kpiName"], 0, 34) . '. . .';
-					} else {
-						$kpiName = $kpiTeam["kpiName"];
-					}
 					if ($kpiTeam["status"] == 2) {
 						$isOver = 0;
 					} else {
@@ -1017,7 +1004,7 @@ class KpiTeamController extends Controller
 					}
 					if ($show == 1) {
 						$commonData = [
-							"kpiName" => $kpiName,
+							"kpiName" => $kpiTeam["kpiName"],
 							"kpiId" => $kpiTeam["kpiId"],
 							"teamId" => $kpiTeam["teamId"],
 							"companyName" => Company::companyName($kpiTeam["companyId"]),

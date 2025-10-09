@@ -7,6 +7,8 @@
 use frontend\assets\AppAsset;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\NavBar;
+use yii\helpers\Html as HelpersHtml;
+use yii\web\View;
 
 AppAsset::register($this);
 ?>
@@ -21,10 +23,28 @@ AppAsset::register($this);
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
+    <?= HelpersHtml::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-
-
+    <?php
+    $js = <<<JS
+$(document).ajaxSend(function(event, jqxhr, settings) {
+    if (!settings.data) {
+        settings.data = '';
+    }
+    var csrfParam = $('meta[name="csrf-param"]').attr('content');
+    var csrfToken = $('meta[name="csrf-token"]').attr('content');
+    if (settings.type === 'POST' && csrfParam && csrfToken) {
+        if (typeof settings.data === 'string') {
+            settings.data += '&' + encodeURIComponent(csrfParam) + '=' + encodeURIComponent(csrfToken);
+        } else if (typeof settings.data === 'object') {
+            settings.data[csrfParam] = csrfToken;
+        }
+    }
+});
+JS;
+    $this->registerJs($js, \yii\web\View::POS_END);
+    ?>
 
 </head>
 

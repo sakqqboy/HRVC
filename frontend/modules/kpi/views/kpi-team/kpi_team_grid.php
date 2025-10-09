@@ -127,7 +127,7 @@ $this->title = "Team KPI";
                         <div class="col-12  mb-25 pim-big-box pim-<?= $colorFormat ?>" id="kpi-team-<?= $kpiTeamId ?>">
                             <div class="d-flex justify-content-start align-content-start">
                                 <div class="kfi-grid-1" style="min-height:120px;">
-                                    <div class="text-truncate pim-name"><?= $kpi["kpiName"] ?></div>
+                                    <div class="text-truncate pim-name pointer-event" title='<?= $kpi["kpiName"] ?>'><?= $kpi["kpiName"] ?></div>
                                     <div class="mt-20">
                                         <div class="assign-on">
                                             <?= Yii::t('app', 'Assigned on') ?>

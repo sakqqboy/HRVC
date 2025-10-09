@@ -169,11 +169,11 @@ function validateFormKpi(acType) {
 	}
 }
 
-function prepareKpiNextTarget(kgiHistoryId) {
-	// alert(kgiHistoryId);
-	$("#copy").modal('show');
-	$("#kgiHistoryId").val(kgiHistoryId);
-}
+// function prepareKpiNextTarget(kgiHistoryId) {
+// 	// alert(kgiHistoryId);
+// 	$("#copy").modal('show');
+// 	$("#kgiHistoryId").val(kgiHistoryId);
+// }
 function prepareKpiTeamNextTarget(kgiTeamHistoryId) {
 	$("#copy").modal('show');
 	$("#kgiTeamHistoryId").val(kgiTeamHistoryId);
@@ -182,19 +182,19 @@ function prepareKpiEmployeeNextTarget(kgiEmployeeHistoryId) {
 	$("#copy").modal('show');
 	$("#kgiEmployeeHistoryId").val(kgiEmployeeHistoryId);
 }
-function kpiNextTarget() {
-	var kgiHistoryId = $("#kgiHistoryId").val();
-	var url = $url + 'kgi/management/next-kgi-history';
-	$.ajax({
-		type: "POST",
-		dataType: 'json',
-		url: url,
-		data: { kgiHistoryId: kgiHistoryId },
-		success: function (data) {
+// function kpiNextTarget() {
+// 	var kgiHistoryId = $("#kgiHistoryId").val();
+// 	var url = $url + 'kgi/management/next-kgi-history';
+// 	$.ajax({
+// 		type: "POST",
+// 		dataType: 'json',
+// 		url: url,
+// 		data: { kgiHistoryId: kgiHistoryId },
+// 		success: function (data) {
 
-		}
-	});
-}
+// 		}
+// 	});
+// }
 function kpiTeamNextTarget() {
 	var kgiTeamHistoryId = $("#kgiTeamHistoryId").val();
 	var url = $url + 'kgi/kgi-team/next-kgi-team-history';
