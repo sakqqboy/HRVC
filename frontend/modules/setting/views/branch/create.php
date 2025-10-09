@@ -79,21 +79,6 @@ $this->title = 'Create Branch';
                                 data-placement="top" aria-label="<?= Yii::t('app', 'select to country') ?>"
                                 data-bs-original-title="<?= Yii::t('app', 'Select to Company') ?>">
                         </label>
-                        <!-- <div class="col-12 font-b" style="width: 330px;">
-                            <?php if (isset($companyId) && $companyId != ''): ?>
-                            <input type="hidden" id="company" name="companyId" value="<?= $company['companyId'] ?>">
-                            <?= $company['companyName'] ?>
-                            <?php else: ?>
-                            <select class="form-select" id="company" name="companyId">
-                                <option value=""><?= Yii::t('app', 'Select Company') ?></option>
-                                <?php if (isset($companies) && count($companies) > 0): ?>
-                                <?php foreach ($companies as $c): ?>
-                                <option value="<?= $c['companyId'] ?>"><?= $c['companyName'] ?></option>
-                                <?php endforeach; ?>
-                                <?php endif; ?>
-                            </select>
-                            <?php endif; ?>
-                        </div> -->
                         <div class="input-group" style="width: 330px;">
                             <?php if (isset($companyId) && $companyId != '') {?>
                             <div class="col-12 font-b" style="width: 330px;">
