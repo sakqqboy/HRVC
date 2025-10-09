@@ -11,7 +11,7 @@ $this->title = 'Company KPI';
             class="pim-head-icon mr-11 mt-2">
         <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
         <?php
-        if ($role >= 3) {
+        if ($role > 3) {
         ?>
             <a href="<?= Yii::$app->homeUrl ?>kpi/management/create-kpi" class="create-employee-btn mr-11">
                 <?= Yii::t('app', 'Create New') ?>

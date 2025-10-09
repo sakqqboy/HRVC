@@ -52,90 +52,90 @@ if (!$nextCheckDate) {
 ?>
 
 <style>
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-input[type="number"] {
-    -moz-appearance: textfield;
-    /* สำหรับ Firefox */
-}
+    input[type="number"] {
+        -moz-appearance: textfield;
+        /* สำหรับ Firefox */
+    }
 
-/* เปลี่ยนสีข้อความของ select เมื่อเลือกแล้ว */
-select.form-select {
-    color: var(--Helper-Text-Gray, #8A8A8A);
-}
-
-
-/* เมื่อเลือกแล้วให้ข้อความเป็นสี #30313D */
-select.form-select:not([value=""]) {
-    color: <?=($statusform=='update') ? '#30313D': 'var(--HRVC---Text-Black, #8A8A8A)';
-    ?>;
-}
+    /* เปลี่ยนสีข้อความของ select เมื่อเลือกแล้ว */
+    select.form-select {
+        color: var(--Helper-Text-Gray, #8A8A8A);
+    }
 
 
-/* สไตล์เมื่อไม่ได้เลือก (ข้อความ placeholder) */
-select.form-select {
-    color: var(--Helper-Text-Gray, #8A8A8A);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px;
-    text-transform: capitalize;
-}
+    /* เมื่อเลือกแล้วให้ข้อความเป็นสี #30313D */
+    select.form-select:not([value=""]) {
+        color: <?= ($statusform == 'update') ? '#30313D' : 'var(--HRVC---Text-Black, #8A8A8A)';
+                ?>;
+    }
 
-/* สไตล์เมื่อเลือกตัวเลือกแล้ว */
-select.form-select option:checked {
-    color: var(--HRVC---Text-Black, #30313D);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px;
-}
 
-/* เพิ่มความสวยงามเมื่อตัวเลือกถูกโฟกัส */
-select.form-select:focus {
-    color: var(--HRVC---Text-Black, #30313D);
-    font-weight: 500;
-}
+    /* สไตล์เมื่อไม่ได้เลือก (ข้อความ placeholder) */
+    select.form-select {
+        color: var(--Helper-Text-Gray, #8A8A8A);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        text-transform: capitalize;
+    }
 
-/* เมื่อ option เป็น disabled (กรณีเลือกแล้วจะไม่สามารถเลือกได้) */
-select.form-select option:disabled {
-    color: var(--Helper-Text-Gray, #8A8A8A);
-    font-weight: 500;
-}
+    /* สไตล์เมื่อเลือกตัวเลือกแล้ว */
+    select.form-select option:checked {
+        color: var(--HRVC---Text-Black, #30313D);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+    }
 
-.priority-box {
-    width: 52px;
-    height: 52px;
-    font-size: 12px;
-}
+    /* เพิ่มความสวยงามเมื่อตัวเลือกถูกโฟกัส */
+    select.form-select:focus {
+        color: var(--HRVC---Text-Black, #30313D);
+        font-weight: 500;
+    }
 
-.priority-box-null {
-    width: 52px;
-    height: 52px;
-    font-size: 12px;
-}
+    /* เมื่อ option เป็น disabled (กรณีเลือกแล้วจะไม่สามารถเลือกได้) */
+    select.form-select option:disabled {
+        color: var(--Helper-Text-Gray, #8A8A8A);
+        font-weight: 500;
+    }
 
-.text-priority {
-    font-size: 18px;
-}
+    .priority-box {
+        width: 52px;
+        height: 52px;
+        font-size: 12px;
+    }
 
-.priority-star {
-    width: 52px;
-}
+    .priority-box-null {
+        width: 52px;
+        height: 52px;
+        font-size: 12px;
+    }
 
-.big-star {
-    width: 18px;
-    height: 17px;
-}
+    .text-priority {
+        font-size: 18px;
+    }
 
-.default-star {
-    width: 16px;
-    width: 15px;
-}
+    .priority-star {
+        width: 52px;
+    }
+
+    .big-star {
+        width: 18px;
+        height: 17px;
+    }
+
+    .default-star {
+        width: 16px;
+        width: 15px;
+    }
 </style>
 
 <!-- ลิงก์ไปยัง CSS ของ flatpickr -->
@@ -250,7 +250,7 @@ select.form-select option:disabled {
                                 </span>
 
                                 <?php if (mb_strlen($detail) > $maxLength): ?>
-                                <button type="button" id="see-more" class="see-more">See More</button>
+                                    <button type="button" id="see-more" class="see-more">See More</button>
                                 <?php endif; ?>
                             </p>
                             <div class="form-group start-center mt-40">
@@ -274,21 +274,21 @@ select.form-select option:disabled {
                                 </label>
                                 <div class="circle-container pl-16 mt-14 " style="display: flex;align-items: center;">
                                     <?php if (count($kgiBranch) >= 1) { ?>
-                                    <div class="cycle-current-branch" style="width: 35px; height: 35px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                    </div>
+                                        <div class="cycle-current-branch" style="width: 35px; height: 35px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
+                                        </div>
                                     <?php }
                                     if (count($kgiBranch) >= 2) { ?>
-                                    <div class="cycle-current-branch"
-                                        style="width: 35px; height: 35px;margin-left:-25px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                    </div>
+                                        <div class="cycle-current-branch"
+                                            style="width: 35px; height: 35px;margin-left:-25px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
+                                        </div>
                                     <?php }
                                     if (count($kgiBranch) >= 3) { ?>
-                                    <div class="cycle-current-branch"
-                                        style="width: 35px; height: 35px;margin-left:-25px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                    </div>
+                                        <div class="cycle-current-branch"
+                                            style="width: 35px; height: 35px;margin-left:-25px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
+                                        </div>
                                     <?php } ?>
                                     <div class="cycle-current-white"
                                         style="width: 35px; height: 35px; color: #000; right: 5px;">
@@ -319,21 +319,21 @@ select.form-select option:disabled {
                                     }
                                     ?>
                                     <?php if ($totalDepartment >= 1) { ?>
-                                    <div class="cycle-current-department" style="width: 35px; height: 35px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
-                                    </div>
+                                        <div class="cycle-current-department" style="width: 35px; height: 35px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                                        </div>
                                     <?php }
                                     if ($totalDepartment >= 2) { ?>
-                                    <div class="cycle-current-department"
-                                        style="width: 35px; height: 35px;margin-left:-25px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
-                                    </div>
+                                        <div class="cycle-current-department"
+                                            style="width: 35px; height: 35px;margin-left:-25px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                                        </div>
                                     <?php }
                                     if ($totalDepartment >= 3) { ?>
-                                    <div class="cycle-current-department"
-                                        style="width: 35px; height: 35px;margin-left:-25px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
-                                    </div>
+                                        <div class="cycle-current-department"
+                                            style="width: 35px; height: 35px;margin-left:-25px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                                        </div>
                                     <?php } ?>
                                     <div class="cycle-current-white"
                                         style="width: 35px; height: 35px; color: #000; right: 5px;">
@@ -383,22 +383,22 @@ select.form-select option:disabled {
                                     <?php
                                     if ($kgi["priority"] == "A" || $kgi["priority"] == "B") {
                                     ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     if ($kgi["priority"] == "A" || $kgi["priority"] == "C") {
                                     ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="big-star">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="big-star">
                                     <?php
                                     }
                                     if ($kgi["priority"] == "B") {
                                     ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     if ($kgi["priority"] == "A") {
                                     ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     ?>
@@ -406,16 +406,16 @@ select.form-select option:disabled {
                                 <?php
                                 if ($kgi["priority"] != '') {
                                 ?>
-                                <div class="priority-box">
-                                    <?= Yii::t('app', 'Priority') ?>
-                                    <span class="text-priority mt-5"><?= $kgi["priority"] ?></span>
-                                </div>
+                                    <div class="priority-box">
+                                        <?= Yii::t('app', 'Priority') ?>
+                                        <span class="text-priority mt-5"><?= $kgi["priority"] ?></span>
+                                    </div>
                                 <?php
                                 } else { ?>
-                                <div class="priority-box-null">
-                                    <?= Yii::t('app', 'Priority') ?>
-                                    <span class="text-priority mt-5">N/A</span>
-                                </div>
+                                    <div class="priority-box-null">
+                                        <?= Yii::t('app', 'Priority') ?>
+                                        <span class="text-priority mt-5">N/A</span>
+                                    </div>
                                 <?php
                                 }
                                 ?>
@@ -567,19 +567,19 @@ select.form-select option:disabled {
                                     align-items: center;
                                     gap: 5px;">
                                 <?php if (count($kgiTeam) >= 1) { ?>
-                                <div class="cycle-current-team" style="width: 35px; height: 35px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                </div>
+                                    <div class="cycle-current-team" style="width: 35px; height: 35px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                    </div>
                                 <?php }
                                 if (count($kgiTeam) >= 1) { ?>
-                                <div class="cycle-current-team" style="width: 35px; height: 35px;margin-left:-20px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                </div>
+                                    <div class="cycle-current-team" style="width: 35px; height: 35px;margin-left:-20px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                    </div>
                                 <?php }
                                 if (count($kgiTeam) >= 1) { ?>
-                                <div class="cycle-current-team" style="width: 35px; height: 35px;margin-left:-20px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                </div>
+                                    <div class="cycle-current-team" style="width: 35px; height: 35px;margin-left:-20px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                    </div>
                                 <?php } ?>
                                 <div class="cycle-current-white"
                                     style="width: 35px; height: 35px; color: #000; right: 3px;">
@@ -657,9 +657,9 @@ select.form-select option:disabled {
                                 <span class="input-group-text"
                                     style="background-color:rgb(255, 255, 255); border-left: none; padding-right: 20px; padding-left: 0px;">
                                     <?php if ($data['amountType'] == '%') { ?>
-                                    <span style="font-size: 22px; font-weight: 600;">
-                                        %
-                                    </span>
+                                        <span style="font-size: 22px; font-weight: 600;">
+                                            %
+                                        </span>
                                     <?php } ?>
                                 </span>
                             </div>
@@ -678,7 +678,7 @@ select.form-select option:disabled {
                                     data-bs-toggle="modal" data-bs-target="#update-history-popup"
                                     onclick="javascript:kgiUpdateHistory(<?= $data['kgiId'] ?>)">
                                     <img
-                                        src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
+                                        src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"> <?= Yii::t('app', 'Update History') ?>
                                 </div>
                             </label>
                             <div class="input-group">
@@ -709,9 +709,9 @@ select.form-select option:disabled {
                                 class="textbox-check-<?= (empty($data['status']) || empty($data['nextCheckText'])) ? 'hide' : 'blue' ?>">
                                 <div class="mid-center">
                                     <?php if ($data['status'] != '2') { ?>
-                                    <input type="checkbox" id="check1" name="status" value="1" class="status-checkbox"
-                                        <?= (isset($data['status']) && $data['status'] == '1' && !empty($data['nextCheckText'])) ? '    checked' : '' ?>
-                                        style="width: 20px; height: 20px;">
+                                        <input type="checkbox" id="check1" name="status" value="1" class="status-checkbox"
+                                            <?= (isset($data['status']) && $data['status'] == '1' && !empty($data['nextCheckText'])) ? '    checked' : '' ?>
+                                            style="width: 20px; height: 20px;">
                                     <?php } ?>
                                 </div>
                                 <div class="mid-center">
@@ -751,10 +751,10 @@ select.form-select option:disabled {
                             </div>
                             <div id="textbox-check-warning"
                                 style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
-                                                                        ? 'border: 0.5px solid var(--Progress-Blue, #30313D);'
-                                                                        : ($daysLeft == 'Due Pass'
-                                                                            ? 'border: 0.5px solid var(--Progress-Blue, #E05757);'
-                                                                            : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?> font-size: 14px; font-weight: 600;"
+                                            ? 'border: 0.5px solid var(--Progress-Blue, #30313D);'
+                                            : ($daysLeft == 'Due Pass'
+                                                ? 'border: 0.5px solid var(--Progress-Blue, #E05757);'
+                                                : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?> font-size: 14px; font-weight: 600;"
                                 class="textbox-check-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
                                                             ? 'hide'
                                                             : ($daysLeft == 'Due Pass'
@@ -774,10 +774,10 @@ select.form-select option:disabled {
                                                                                 : ($daysLeft == 'Due Pass'
                                                                                     ? 'red'
                                                                                     : 'orang') ?>" style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
-                                                    ? 'border: 0.5px solid var(--Progress-Blue, #30313D);'
-                                                    : ($daysLeft == 'Due Pass'
-                                                        ? 'border: 0.5px solid var(--Progress-Blue, #E05757);'
-                                                        : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?>"
+                                                                                                                ? 'border: 0.5px solid var(--Progress-Blue, #30313D);'
+                                                                                                                : ($daysLeft == 'Due Pass'
+                                                                                                                    ? 'border: 0.5px solid var(--Progress-Blue, #E05757);'
+                                                                                                                    : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?>"
                                         for="check3">
 
                                         <?= Yii::t('app', "Due Passed") ?>
@@ -789,10 +789,10 @@ select.form-select option:disabled {
                                                             : ($daysLeft == 'Due Pass'
                                                                 ? 'red'
                                                                 : 'orang') ?>" <div class="border-cicle bg-white text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
-                                                                                ? 'black'
-                                                                                : ($daysLeft == 'Due Pass'
-                                                                                    ? 'red'
-                                                                                    : 'orang') ?>">
+                                                                                                                            ? 'black'
+                                                                                                                            : ($daysLeft == 'Due Pass'
+                                                                                                                                ? 'red'
+                                                                                                                                : 'orang') ?>">
                                         <?= (isset($daysLeft) && $daysLeft == 'Due Pass') ?
                                             Yii::t('app', "The component was overdue and revert back to completed") :
                                             Yii::t('app', "This task component be automatically become due passed within 30 Days, if you
@@ -847,6 +847,7 @@ select.form-select option:disabled {
 </div>
 <input type="hidden" value="<?= isset($url) ? $url : '' ?>" name="url">
 <input type="hidden" value="update" id="acType">
+<input type="hidden" value="kgi-employee" id="pimType">
 <input type="hidden" id="kgiEmployeeId" name="kgiEmployeeId" value="<?= isset($kgiEmployeeId) ? $kgiEmployeeId : '' ?>"
     required>
 
@@ -855,49 +856,49 @@ select.form-select option:disabled {
 <?= $this->render('modal_warning') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
-    var acType = document.getElementById('acType').value
-    let isSubmitting = false; // ป้องกัน submit ซ้ำ
-    $("#update-personal-kgi").on("beforeSubmit", function(event) {
-        if (isSubmitting) {
-            return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
-        }
-        isSubmitting = true;
-        // alert(acType);
-        if (!validateFormKgiEmployee(acType)) {
-            isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
-            return false;
-        }
-        return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
+    $(document).ready(function() {
+        var acType = document.getElementById('acType').value
+        let isSubmitting = false; // ป้องกัน submit ซ้ำ
+        $("#update-personal-kgi").on("beforeSubmit", function(event) {
+            if (isSubmitting) {
+                return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
+            }
+            isSubmitting = true;
+            // alert(acType);
+            if (!validateFormKgiEmployee(acType)) {
+                isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+                return false;
+            }
+            return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
+        });
+        $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
     });
-    $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
-});
-const seeMoreBtn = document.getElementById("see-more");
-const aboutText = document.getElementById("about-text");
+    const seeMoreBtn = document.getElementById("see-more");
+    const aboutText = document.getElementById("about-text");
 
-<?php if (mb_strlen($detail) > 487): ?>
-const fullText = `<?= addslashes($detail) ?>`;
-const shortText = `<?= addslashes(mb_substr($detail, 0, 487)) ?>...`;
+    <?php if (mb_strlen($detail) > 487): ?>
+        const fullText = `<?= addslashes($detail) ?>`;
+        const shortText = `<?= addslashes(mb_substr($detail, 0, 487)) ?>...`;
 
-seeMoreBtn.addEventListener("click", function() {
-    if (aboutText.textContent.includes(shortText)) {
-        aboutText.innerHTML = fullText +
-            `<button id="see-more" class="see-more">See Less</button>`;
-        document.getElementById("see-more").addEventListener("click", toggleText);
-    } else {
-        aboutText.innerHTML = shortText +
-            `<button id="see-more" class="see-more">See More</button>`;
-        document.getElementById("see-more").addEventListener("click", toggleText);
-    }
-});
+        seeMoreBtn.addEventListener("click", function() {
+            if (aboutText.textContent.includes(shortText)) {
+                aboutText.innerHTML = fullText +
+                    `<button id="see-more" class="see-more">See Less</button>`;
+                document.getElementById("see-more").addEventListener("click", toggleText);
+            } else {
+                aboutText.innerHTML = shortText +
+                    `<button id="see-more" class="see-more">See More</button>`;
+                document.getElementById("see-more").addEventListener("click", toggleText);
+            }
+        });
 
-function toggleText() {
-    if (aboutText.innerHTML.includes(shortText)) {
-        aboutText.innerHTML = fullText + `<button id="see-more" class="see-more">See Less</button>`;
-    } else {
-        aboutText.innerHTML = shortText + `<button id="see-more" class="see-more">See More</button>`;
-    }
-    document.getElementById("see-more").addEventListener("click", toggleText);
-}
-<?php endif; ?>
+        function toggleText() {
+            if (aboutText.innerHTML.includes(shortText)) {
+                aboutText.innerHTML = fullText + `<button id="see-more" class="see-more">See Less</button>`;
+            } else {
+                aboutText.innerHTML = shortText + `<button id="see-more" class="see-more">See More</button>`;
+            }
+            document.getElementById("see-more").addEventListener("click", toggleText);
+        }
+    <?php endif; ?>
 </script>

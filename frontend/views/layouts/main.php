@@ -18,7 +18,7 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <link rel="shortcut icon" href="<?= Yii::$app->request->baseUrl; ?>/image/logo-hrvc.png?v=1" type="image/x-icon" />
-    <link href="https://fonts.cdnfonts.com/css/sf-pro-display?styles=98774,98777" rel="stylesheet">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>

@@ -311,9 +311,13 @@ function autoUpdateResultTeam(kgiTeamId) {
 				dataType: 'json',
 				url: url,
 				data: { kgiTeamId: kgiTeamId },
-				success: function (data) {
-					$("#result-update").val(data.result);
-					$("#auto-result").val(data.result);
+                success: function (data) {
+                    if (data.result != '') {
+                        $("#result-update").val(data.result);
+                        $("#auto-result").val(data.result);
+                    } else { 
+                        alert('This KGI did not assign to your team member.');
+                    }
 				}
 			});
 			$("#result-update").prop("disabled", true);

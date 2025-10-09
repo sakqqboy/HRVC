@@ -471,7 +471,7 @@ $this->title = "Team KPI";
                                                 </div>
                                                 <div class="col-4 text-center align-content-center">
                                                     <?php
-                                                    if ($colorFormat == 'disable' && $role >= 5) {
+                                                    if (($colorFormat == 'disable' && $role >= 3) && ($canEdit == 1)) {
                                                     ?>
                                                         <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/prepare-update/<?= ModelMaster::encodeParams(['kpiTeamId' => $kpiTeamId, 'kpiHistoryId' => 0]) ?>"
                                                             class="pim-btn-setup">
@@ -483,7 +483,7 @@ $this->title = "Team KPI";
                                                     } else if ($colorFormat == "complete") {
                                                         // echo Yii::t('app', "Update");
 
-                                                    } else if ($role >= 5) {
+                                                    } else if ($canEdit == 1) {
                                                     ?>
                                                         <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/prepare-update/<?= ModelMaster::encodeParams(['kpiTeamId' => $kpiTeamId, 'kpiHistoryId' => 0]) ?>"
                                                             class="pim-btn-<?= $colorFormat ?>">

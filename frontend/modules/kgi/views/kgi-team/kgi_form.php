@@ -679,7 +679,7 @@ if (!$nextCheckDate) {
                                     data-bs-toggle="modal" data-bs-target="#update-history-popup"
                                     onclick="javascript:kgiUpdateHistory(<?= $data['kgiId'] ?>)">
                                     <img
-                                        src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
+                                        src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"> <?= Yii::t('app', 'Update History') ?>
                                 </div>
                             </label>
                             <div class="input-group">
@@ -875,7 +875,7 @@ if (!$nextCheckDate) {
 
 <input type="hidden" value="update" id="acType">
 <input type="hidden" value="kgi-team" id="pimType">
-<input type="hidden" id="kgiTeamId" name="kgiTeamId" value="<?= isset($kgiTeamId) ? $kgiTeamId : '' ?>" required>
+<input type="hidden" id="kgiTeamId" name="kgiTeamId" value="<?= isset($kgiTeamId) ? $kgiTeamId : '' ?>">
 <input type="hidden" value="<?= isset($url) ? $url : '' ?>" name="url">
 
 <?php ActiveForm::end(); ?>

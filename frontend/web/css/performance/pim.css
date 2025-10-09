@@ -1006,7 +1006,7 @@
 	background-color: #EDF5FF;
 	border-radius: 26.5px;
 	letter-spacing: 0.5px;
-	padding-left: 5px;
+	padding: 3px 5px;
 }
 
 .assign-new {
@@ -1414,13 +1414,16 @@
 
 .number-tag {
 	font-style: normal;
-	text-align: center;
 	border-radius: 100%;
 	position: relative;
 	color: var(--HRVC---Text-Black, #30313D);
 	z-index: 3;
-
 	font-weight: 500;
+	width: 25px;
+	height: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
 }
 
@@ -1511,6 +1514,17 @@
 	border-radius: 100%;
 	border: #FFD000 solid 0.5px;
 	background-color: #FFFAED;
+}
+
+.pim-pic-info {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	border-radius: 100%;
+	border: #FFFFFF solid 0.5px;
+	background-color: #5b9dee;
 }
 
 
@@ -2428,22 +2442,17 @@ input:checked+.slider:before {
 
 .btn-accept {
 	display: flex;
-	/* width: 201px; */
 	height: 40px;
-	padding: 7px 9px;
 	justify-content: center;
 	align-items: center;
-	gap: 6px;
+	gap: 5px;
 	border-radius: 3px;
 	border: none;
 	background: var(--Primary-Blue---HRVC, #2580D3);
 	color: var(--100-white, #FFF);
-	text-align: center;
-
-	font-size: 16px;
+	font-size: 14px;
 	font-style: normal;
 	font-weight: 500;
-	line-height: 36px;
 	/* 225% */
 }
 

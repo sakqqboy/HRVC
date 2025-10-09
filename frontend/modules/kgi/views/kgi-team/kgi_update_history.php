@@ -29,8 +29,8 @@
                                 ?>
                                         <div class="col-12 small-content bg-white pl-10 <?= $j > 0 ? 'mt-10' : '' ?>">
                                             <div class="row">
-                                                <div class="col-4 align-content-center">
-                                                    <div class="col-12 font-size-12 font-b">
+                                                <div class="col-4">
+                                                    <div class="col-12 font-size-12 pl-0 pt-3 font-b">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/check-black.svg"
                                                             class="pim-icon mr-3" style="margin-top: -3px;">
                                                         <?php
@@ -42,15 +42,15 @@
                                                         ?>
                                                         <span><?= Yii::t('app', $statusText) ?></span>
                                                     </div>
-                                                    <div class="col-12 pim-employee-title" style="font-size: 10px !important;">
+                                                    <div class="col-12 pim-employee-title" style="font-size: 10px !important;letter-spacing: -0.1px">
                                                         <?= $info["createDateTime"] ?>
                                                     </div>
                                                 </div>
-                                                <div class="col-4 font-size-12 align-content-center text-center">
+                                                <div class="col-4 font-size-12 pt-10 pl-0 text-center">
                                                     <img src="<?= Yii::$app->homeUrl ?><?= $info['picture'] ?>" class="pim-pic-grid mr-5">
                                                     <?= $info["creater"] ?>
                                                 </div>
-                                                <div class="col-4 align-content-center pr-20">
+                                                <div class="col-4 pr-20">
                                                     <div class="col-12 font-b font-size-12 text-end">
                                                         <?= number_format($info["result"], 2) ?>
                                                     </div>

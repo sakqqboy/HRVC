@@ -64,7 +64,6 @@ $DueBehind = $targetAmount -  $result;
     /* สไตล์เมื่อไม่ได้เลือก (ข้อความ placeholder) */
     select.form-select {
         color: var(--Helper-Text-Gray, #8A8A8A);
-        font-family: "SF Pro Display", sans-serif;
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
@@ -75,7 +74,6 @@ $DueBehind = $targetAmount -  $result;
     /* สไตล์เมื่อเลือกตัวเลือกแล้ว */
     select.form-select option:checked {
         color: var(--HRVC---Text-Black, #30313D);
-        font-family: "SF Pro Display";
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
@@ -664,8 +662,7 @@ $DueBehind = $targetAmount -  $result;
                                         data-bs-target="#update-history-popup"
                                         onclick="javascript:kgiUpdateHistory(<?= $kgiId ?>)">
                                         <?php if ($statusform == 'update') { ?>
-                                            <img
-                                                src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"><?= Yii::t('app', 'Update History') ?>
+                                            <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"> <?= Yii::t('app', 'Update History') ?>
                                         <?php } ?>
                                     </div>
                                 <?php
@@ -819,73 +816,75 @@ $DueBehind = $targetAmount -  $result;
         <input type="hidden" value="create" id="acType">
 
     <?php } ?>
-    <?php ActiveForm::end(); ?>
-
     <?= $this->render('modal_history') ?>
+</div>
+<?php ActiveForm::end(); ?>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            var statusform = '<?= $statusform ?>';
-            if (statusform === 'update') {
-                var pri = $("#priority").val();
-                companyMultiBrachUpdate();
-                branchMultiDepartmentUpdate();
-                //loadDepartment();
-                var checkedBranchIds = [];
-                var checkedDepartmentIds = [];
-                $('input[name="branch[]"]:checked').each(function() {
-                    checkedBranchIds.push($(this).val());
-                });
-                $('input[name="department[]"]:checked').each(function() {
-                    checkedDepartmentIds.push($(this).val());
-                });
-                checkedBranchIds.forEach(function(branchId) {
-                    departmentMultiTeamUpdate(branchId);
-                });
-                multiteamKgi();
-                // }
-                $("#priority-update").val(pri);
-                let isSubmittingUpdate = false; // ป้องกัน submit ซ้ำ
-                $("#update-kgi").on("beforeSubmit", function(event) {
-                    if (isSubmittingUpdate) {
-                        return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
-                    }
-                    isSubmittingUpdate = true;
-                    if (!validateFormKgiUpdate()) {
-                        isSubmittingUpdate = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
-                        return false;
-                    }
-                    return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
-                });
-            }
-            // ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
-            function updatePlaceholderColor(selector) {
-                $(selector).on('change', function() {
-                    $(this).css('color', $(this).val() !== "" ? '#30313D' :
-                        'var(--Helper-Text-Gray, #8A8A8A)');
-                });
-            }
 
-            // เรียกใช้งานฟังก์ชันกับ select หลายตัวพร้อมกัน
-            updatePlaceholderColor('#companyId');
-            updatePlaceholderColor('#quantRatio-create');
-            updatePlaceholderColor('#amountType-create');
-            updatePlaceholderColor('#code-create');
 
-            $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
-
-            let isSubmitting = false; // ป้องกัน submit ซ้ำ
-            $("#create-kgi").on("beforeSubmit", function(event) {
-                if (isSubmitting) {
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var statusform = '<?= $statusform ?>';
+        if (statusform === 'update') {
+            var pri = $("#priority").val();
+            companyMultiBrachUpdate();
+            branchMultiDepartmentUpdate();
+            //loadDepartment();
+            var checkedBranchIds = [];
+            var checkedDepartmentIds = [];
+            $('input[name="branch[]"]:checked').each(function() {
+                checkedBranchIds.push($(this).val());
+            });
+            $('input[name="department[]"]:checked').each(function() {
+                checkedDepartmentIds.push($(this).val());
+            });
+            checkedBranchIds.forEach(function(branchId) {
+                departmentMultiTeamUpdate(branchId);
+            });
+            multiteamKgi();
+            // }
+            $("#priority-update").val(pri);
+            let isSubmittingUpdate = false; // ป้องกัน submit ซ้ำ
+            $("#update-kgi").on("beforeSubmit", function(event) {
+                if (isSubmittingUpdate) {
                     return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
                 }
-                isSubmitting = true;
-                if (!validateFormKgi()) {
-                    isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+                isSubmittingUpdate = true;
+                if (!validateFormKgiUpdate()) {
+                    isSubmittingUpdate = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
                     return false;
                 }
                 return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
             });
+        }
+        // ฟังก์ชันเปลี่ยนสีของ placeholder เมื่อมีการเลือกค่า
+        function updatePlaceholderColor(selector) {
+            $(selector).on('change', function() {
+                $(this).css('color', $(this).val() !== "" ? '#30313D' :
+                    'var(--Helper-Text-Gray, #8A8A8A)');
+            });
+        }
+
+        // เรียกใช้งานฟังก์ชันกับ select หลายตัวพร้อมกัน
+        updatePlaceholderColor('#companyId');
+        updatePlaceholderColor('#quantRatio-create');
+        updatePlaceholderColor('#amountType-create');
+        updatePlaceholderColor('#code-create');
+
+        $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
+
+        let isSubmitting = false; // ป้องกัน submit ซ้ำ
+        $("#create-kgi").on("beforeSubmit", function(event) {
+            if (isSubmitting) {
+                return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
+            }
+            isSubmitting = true;
+            if (!validateFormKgi()) {
+                isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+                return false;
+            }
+            return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
         });
-    </script>
+    });
+</script>

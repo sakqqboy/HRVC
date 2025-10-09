@@ -216,7 +216,7 @@ class ViewController extends Controller
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$kgiTeams = Api::connectApi(Path::Api() . 'kgi/kgi-team/kgi-team-summarize?kgiId=' . $kgiId);
 		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
-
+		//throw new exception(print_r($kgiDetail, true));
 		$countAllCompany = count($allCompany);
 		$companyPic = $countAllCompany > 0 ? Company::randomPic($allCompany, 3) : [];
 		$months = ModelMaster::monthFull(1);
