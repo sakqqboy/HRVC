@@ -1,4 +1,5 @@
 <div class="col-12 mt-70 pt-20 pim-content1">
+	Some Kpi History status not update
 	<?php
 	if (count($dataKPI) > 0) { ?>
 		<p><b>Some Kpi History status not update</b></p>
