@@ -143,7 +143,8 @@ class KpiTeamController extends Controller
 	public function actionKpiTeam2($kpiId)
 	{
 		$kpiTeams = KpiTeam::find()
-			->select('kpi_team.teamId,t.teamName,kpi_team.target,kpi_team.remark,kpi_team.result,kpi_team.kpiTeamId,kpi_team.kpiId,k.code,t.departmentId,kpi_team.month,kpi_team.year')
+			->select('kpi_team.teamId,t.teamName,kpi_team.target,kpi_team.remark,kpi_team.result,kpi_team.kpiTeamId,kpi_team.kpiId,k.code,t.departmentId,
+			kpi_team.month,kpi_team.year,kpi_team.nextCheckDate,kpi_team.status,kpi_team.fromDate,kpi_team.toDate')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
 			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
 			->where(["kpi_team.status" => [1, 2, 4]])
@@ -154,25 +155,13 @@ class KpiTeamController extends Controller
 		$data = [];
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $kpiTeam) :
-				$kpiTeamHistory = KpiTeamHistory::find()
-					->where(["kpiTeamId" => $kpiTeam["kpiTeamId"]])
-					->asArray()
-					->orderBy('createDateTime DESC')
-					->one();
-				if (!isset($kpiTeamHistory) || empty($kpiTeamHistory)) {
-					$kpiTeamHistory = KpiTeam::find()
-						->where(["kpiTeamId" => $kpiTeam["kpiTeamId"]])
-						->asArray()
-						->orderBy('createDateTime DESC')
-						->one();
-				}
 				$ratio = 0;
 				if ($kpiTeam["target"] != '' && $kpiTeam["target"] != 0 && $kpiTeam["target"] != null) {
 					if ($kpiTeam["code"] == '<' || $kpiTeam["code"] == '=') {
-						$ratio = ($kpiTeamHistory["result"] / $kpiTeam["target"]) * 100;
+						$ratio = ($kpiTeam["result"] / $kpiTeam["target"]) * 100;
 					} else {
-						if ($kpiTeamHistory["result"] != '' && $kpiTeamHistory["result"] != 0) {
-							$ratio = ($kpiTeam["target"] / $kpiTeamHistory["result"]) * 100;
+						if ($kpiTeam["result"] != '' && $kpiTeam["result"] != 0) {
+							$ratio = ($kpiTeam["target"] / $kpiTeam["result"]) * 100;
 						} else {
 							$ratio = 0;
 						}
@@ -196,32 +185,21 @@ class KpiTeamController extends Controller
 				}
 				$data[$kpiTeam["kpiTeamId"]] = [
 					"teamId" => $kpiTeam["teamId"],
-
 					"teamName" => Team::teamName($kpiTeam["teamId"]),
-					//"quantRatio" => $kpiTeam["quantRatio"],
-					"target" => $kpiTeam["target"],
-					"result" => $kpiTeamHistory["result"],
 					"departmentName" => Department::departmentName($kpiTeam["departmentId"]),
-					//"code" => $kpiTeam["code"],
-					"month" =>  ModelMaster::monthEng($kpiTeamHistory['month'], 1),
-					"year" => $kpiTeamHistory['year'],
-					"fromDate" => ModelMaster::engDate($kpiTeamHistory["fromDate"], 2),
-					"toDate" => ModelMaster::engDate($kpiTeamHistory["toDate"], 2),
+					"target" => $kpiTeam["target"],
+					"result" => $kpiTeam["result"],
+					"month" =>  ModelMaster::monthEng($kpiTeam['month'], 1),
+					"year" => $kpiTeam['year'],
+					"fromDate" => ModelMaster::engDate($kpiTeam["fromDate"], 2),
+					"toDate" => ModelMaster::engDate($kpiTeam["toDate"], 2),
 					"periodCheck" => ModelMaster::engDate(KpiTeam::lastestCheckDate($kpiTeam["kpiTeamId"]), 2), //lastest check date
-					"nextCheckDate" =>  ModelMaster::engDate($kpiTeamHistory["nextCheckDate"], 2),
-					"status" => $kpiTeamHistory["status"],
-					//"flag" => Country::countryFlagBycompany($kpiTeam["companyId"]),
-					//"kpiEmployee" => KpiEmployee::kpiEmployee($kpiTeam["kpiId"]),
+					"nextCheckDate" =>  ModelMaster::engDate($kpiTeam["nextCheckDate"], 2),
 					"ratio" => number_format($ratio, 2),
-					//"isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeam['kpiTeamId'])),
-					//"employee" => KpiTeam::kpiTeamEmployee($kpiTeam['kpiId'], $teamId),
+					"status" => $kpiTeam["status"],
 					"countTeam" => KpiTeam::kpiTeam($kpiTeam["kpiId"], $kpiTeam["month"], $kpiTeam["year"]),
-					//"amountType" => $kpiTeam["amountType"],
-					//"issue" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["issue"],
-					//"solution" => KpiIssue::lastestIssue($kpiTeam["kpiId"])["solution"],
 					"countTeamEmployee" => $countTeamEmployee,
 					"kpiEmployeeSelect" => $selectPic,
-
 				];
 			endforeach;
 		}

@@ -36,13 +36,13 @@ $this->title = 'KGI KPI';
                                 style="padding-left: 10px;padding-right:10px;display:<?= count($kfiHasKgi) == 0 ? 'none' : '' ?>"
                                 href="javascript:showEditRelateKgi(1,<?= $kfiId ?>)">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/edit.svg" alt=""
-                                    class="pim-icon mr-3" style="margin-top: -1px;"><?= Yii::t('app', 'Add') ?>/<?= Yii::t('app', 'Remove') ?>
+                                    class="create-btn-icon mr-3" style="margin-top: -3px;width:16px;height:16px;"><?= Yii::t('app', 'Add') ?>/<?= Yii::t('app', 'Remove') ?>
                             </a>
                             <a class="btn-blue-sm font-size-12 text-center no-underline  mr-5 pl-10 pr-10"
                                 id="saveRelateKgi" style="display:none;"
                                 href="javascript:showEditRelateKgi(2,<?= $kfiId ?>)">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt=""
-                                    class="pim-icon mr-3" style="margin-top: -1px;"> <?= Yii::t('app', 'Save55') ?>
+                                    class="pim-icon mr-3" style="margin-top: -1px;"> <?= Yii::t('app', 'Save') ?>
                             </a>
                             <a class="btn-red-sm font-size-12 text-center no-underline pl-10 pr-10" id="cancelRelateKgi"
                                 style="display:none;" href="javascript:showEditRelateKgi(0,<?= $kfiId ?>)"><?= Yii::t('app', 'Cancel') ?></a>
@@ -59,10 +59,12 @@ $this->title = 'KGI KPI';
                         <tr id="kgi-<?= $kgiId ?>" class="text-center pim-table-text related-table-background">
                             <td class="text-start font-b pt-10"
                                 style="border-top-left-radius: 3px;border-bottom-left-radius: 3px;letter-spacing:0.5px;">
-                                <input type="checkbox" id="check-relate-kgi" class="checkbox-sm mr-5" style="display:none;"
-                                    value="<?= $kgiId ?>" name="kgi" <?= isset($ghp[$kgiId]) ? 'checked' : '' ?>>
-                                <?= $i ?>.
-                                <?= $kgi["kgiName"] ?>
+                                <div class="text-truncate" style="max-width:300px;" title="<?= $kgi["kgiName"] ?>">
+                                    <input type="checkbox" id="check-relate-kgi" class="checkbox-sm mr-5" style="display:none;"
+                                        value="<?= $kgiId ?>" name="kgi" <?= isset($ghp[$kgiId]) ? 'checked' : '' ?>>
+                                    <?= $i ?>.
+                                    <?= $kgi["kgiName"] ?>
+                                </div>
                             </td>
                             <td><?= Yii::t('app', $kgi["month"]) ?></td>
                             <td><?= Yii::t('app', $kgi["unit"]) ?></td>
@@ -71,8 +73,8 @@ $this->title = 'KGI KPI';
                             <td><?= $kgi["ratio"] ?></td>
                             <td>
                                 <div class="col-12 info-assign" style="margin-top: -3px;">
-                                    <div class="row">
-                                        <div class="col-5 text-end" style="align-content:center;">
+                                    <div class="row" style="--bs-gutter-x:0px;">
+                                        <div class="col-4 pr-0 pl-0" style="align-content:center;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png"
                                                 class="first-layer-icon ml-3" style="margin-top: -4px;">
                                         </div>
@@ -80,7 +82,7 @@ $this->title = 'KGI KPI';
                                             <?= $kgi["countTeam"] ?>
                                         </div>
 
-                                        <div class="col-4  text-center pl-0 pr-0" style="align-content:center;">
+                                        <div class="col-4  text-end pl-0 pr-5" style="align-content:center;">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down-darkblue.png"
                                                 style="width:10px;height:7px;margin-top:-4px;cursor:pointer;"
                                                 onclick="javascript:showTeamKgi(<?= $kgiId ?>,1)" id="show-<?= $kgiId ?>">

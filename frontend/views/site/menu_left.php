@@ -30,100 +30,100 @@ $session = Yii::$app->session;
         $role = UserRole::userRight();
         if ($role >= 2) {
         ?>
-        <div class="btn-group-menu" onclick="javascript:toggleGroupMenuI('group-management')">
-            <div class="row">
-                <div class="col-2 pl-20">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/group.svg"
-                        class="home-icon" style="margin-top: -3px;">
-                </div>
-                <div class="col-8 text-start pr-0 pl-5"><?= Yii::t('app', 'Group Management') ?></div>
-                <div class="col-2 pr-0 pl-5 text-start">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon"
-                        style="margin-top: -3px;cursor: pointer;display:<?= $session->has('group-management') ? '' : 'none' ?>;"
-                        id="group-management-hide">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon"
-                        style="margin-top: -3px;cursor: pointer;display:<?= $session->has('group-management') ? 'none' : '' ?>"
-                        id="group-management-show">
+            <div class="btn-group-menu" onclick="javascript:toggleGroupMenuI('group-management')">
+                <div class="row">
+                    <div class="col-2 pl-20">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/group.svg"
+                            class="home-icon" style="margin-top: -3px;">
+                    </div>
+                    <div class="col-8 text-start pr-0 pl-5"><?= Yii::t('app', 'Group Management') ?></div>
+                    <div class="col-2 pr-0 pl-5 text-start">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/4.svg" class="home-icon"
+                            style="margin-top: -3px;cursor: pointer;display:<?= $session->has('group-management') ? '' : 'none' ?>;"
+                            id="group-management-hide">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/7.svg" class="home-icon"
+                            style="margin-top: -3px;cursor: pointer;display:<?= $session->has('group-management') ? 'none' : '' ?>"
+                            id="group-management-show">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="group-management" style="display:<?= $session->has('group-management') ? '' : 'none' ?>;">
-            <?php
+            <div id="group-management" style="display:<?= $session->has('group-management') ? '' : 'none' ?>;">
+                <?php
                 if ($role >= 5) {
                 ?>
-            <div class="col-12 first-layer-manu">
-                <a href="<?= Yii::$app->homeUrl ?>setting/group/display-group" class="no-underline">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/group.svg"
-                        class="first-layer-icon" style="margin-top: -3px;">
-                    <?= Yii::t('app', 'Group Configuration') ?>
-                </a>
-            </div>
-            <div class="col-12 first-layer-manu">
-                <a href="<?= Yii::$app->homeUrl ?>setting/company/display-company" class="no-underline">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/company.svg"
-                        class="first-layer-icon" style="margin-top: -3px;">
+                    <div class="col-12 first-layer-manu">
+                        <a href="<?= Yii::$app->homeUrl ?>setting/group/display-group" class="no-underline">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/group.svg"
+                                class="first-layer-icon" style="margin-top: -3px;">
+                            <?= Yii::t('app', 'Group Configuration') ?>
+                        </a>
+                    </div>
+                    <div class="col-12 first-layer-manu">
+                        <a href="<?= Yii::$app->homeUrl ?>setting/company/display-company" class="no-underline">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/company.svg"
+                                class="first-layer-icon" style="margin-top: -3px;">
 
-                    <?= Yii::t('app', 'Company Information') ?>
-                </a>
-            </div>
-            <div class="col-12 first-layer-manu">
-                <a href="<?= Yii::$app->homeUrl ?>setting/branch/no-branch/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
-                    class="no-underline">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/branch.svg"
-                        class="first-layer-icon" style="margin-top: -3px;">
-                    <?= Yii::t('app', 'Branch') ?>
-                </a>
-            </div>
-            <div class="col-12 first-layer-manu">
-                <a href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['branchId' => '']) ?>"
-                    class="no-underline">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/department.svg"
-                        class="first-layer-icon" style="margin-top: -3px;">
-                    <?= Yii::t('app', 'Department') ?>
-                </a>
-            </div>
-            <div class="col-12 first-layer-manu">
-                <a href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>"
-                    class="no-underline">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/team.svg"
-                        class="first-layer-icon" style="margin-top: -3px;">
-                    <?= Yii::t('app', 'Team') ?>
-                </a>
-            </div>
-            <?php
+                            <?= Yii::t('app', 'Company Information') ?>
+                        </a>
+                    </div>
+                    <div class="col-12 first-layer-manu">
+                        <a href="<?= Yii::$app->homeUrl ?>setting/branch/no-branch/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
+                            class="no-underline">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/others/branch.svg"
+                                class="first-layer-icon" style="margin-top: -3px;">
+                            <?= Yii::t('app', 'Branch') ?>
+                        </a>
+                    </div>
+                    <div class="col-12 first-layer-manu">
+                        <a href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['branchId' => '']) ?>"
+                            class="no-underline">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/department.svg"
+                                class="first-layer-icon" style="margin-top: -3px;">
+                            <?= Yii::t('app', 'Department') ?>
+                        </a>
+                    </div>
+                    <div class="col-12 first-layer-manu">
+                        <a href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>"
+                            class="no-underline">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/team.svg"
+                                class="first-layer-icon" style="margin-top: -3px;">
+                            <?= Yii::t('app', 'Team') ?>
+                        </a>
+                    </div>
+                <?php
                 }
                 $isHr = UserRole::isHr();
                 if ($isHr == 1 || $role >= 5) {
                 ?>
-            <div class="col-12 first-layer-manu">
-                <a href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
-                    class="no-underline">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/my_portal.svg"
-                        class="first-layer-icon" style="margin-top: -3px;">
-                    <?= Yii::t('app', 'Employee') ?>
-                </a>
-            </div>
-            <?php
+                    <div class="col-12 first-layer-manu">
+                        <a href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
+                            class="no-underline">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/my_portal.svg"
+                                class="first-layer-icon" style="margin-top: -3px;">
+                            <?= Yii::t('app', 'Employee') ?>
+                        </a>
+                    </div>
+                <?php
                 }
                 if ($role >= 5) {
                 ?>
-            <div class="col-12 first-layer-manu">
-                <a href="<?= Yii::$app->homeUrl ?>setting/title/no-title/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>"
-                    class="no-underline">
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/title.svg"
-                        class="first-layer-icon" style="margin-top: -3px;">
-                    <?= Yii::t('app', 'Title') ?>
-                </a>
-            </div>
-            <?php
+                    <div class="col-12 first-layer-manu">
+                        <a href="<?= Yii::$app->homeUrl ?>setting/title/no-title/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>"
+                            class="no-underline">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/title.svg"
+                                class="first-layer-icon" style="margin-top: -3px;">
+                            <?= Yii::t('app', 'Title') ?>
+                        </a>
+                    </div>
+                <?php
                 }
                 ?>
-        </div>
+            </div>
         <?php
         }
         ?>
     </div>
-    <div class="col-12 mt-17">
+    <div class="col-12 mt-17 d-none">
         <div class="btn-group-menu" onclick="javascript:toggleGroupMenuI('financial-system')">
             <div class="row">
                 <div class="col-2 pl-20">
@@ -321,7 +321,7 @@ $session = Yii::$app->session;
             <!-- </div> -->
         </div>
     </div>
-    <div class="col-12 mt-17">
+    <div class="col-12 mt-17 d-none">
         <div class="btn-group-menu" onclick="javascript:toggleGroupMenuI('evaluation-system')">
             <div class="row">
                 <div class="col-2 pl-20">
@@ -411,7 +411,7 @@ $session = Yii::$app->session;
             </div>
         </div>
     </div>
-    <div class="col-12 mt-17">
+    <div class="col-12 mt-17 d-none">
         <div class="btn-group-menu" onclick="javascript:toggleGroupMenuI('behavioral-evaluation')">
             <div class="row">
                 <div class="col-2 pl-20">

@@ -7,7 +7,7 @@ use frontend\models\hrvc\Unit;
 $this->title = 'KGI KPI';
 ?>
 
-<div class="alert col-12" style=" height: 400px;overflow-y: auto;">
+<div class="col-12" style=" height: 400px;overflow-y: auto;">
     <div class="alert-box text-center">
         <?= Yii::t('app', 'S A V E D ! ! !') ?>
     </div>
@@ -42,8 +42,10 @@ $this->title = 'KGI KPI';
                             <tr id="kgi-<?= $kgiId ?>" class="text-center pim-table-text related-table-background">
                                 <td class="text-start font-b pt-10"
                                     style="border-top-left-radius: 3px;border-bottom-left-radius: 3px;letter-spacing:0.5px;">
-                                    <?= $i ?>.
-                                    <?= $kgi["kgiName"] ?>
+                                    <div class="text-truncate" style="max-width:300px;" title="<?= $kgi["kgiName"] ?>">
+                                        <?= $i ?>.
+                                        <?= $kgi["kgiName"] ?>
+                                    </div>
                                 </td>
                                 <td><?= Yii::t('app', $kgi["month"]) ?></td>
                                 <td><?= Yii::t('app', $kgi["unit"]) ?></td>
@@ -51,9 +53,9 @@ $this->title = 'KGI KPI';
                                 <td><?= $kgi["code"] ?></td>
                                 <td><?= $kgi["ratio"] ?></td>
                                 <td>
-                                    <div class="col-12 info-assign  pt-5 pb-2" style="margin-top: -3px;">
-                                        <div class="row">
-                                            <div class="col-4 text-end">
+                                    <div class="col-12 info-assign" style="margin-top: -3px;">
+                                        <div class="row" style="--bs-gutter-x:0px;">
+                                            <div class="col-4 pr-0 pl-0" style="align-content:center;">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png"
                                                     class="first-layer-icon ml-3" style="margin-top: -4px;">
                                             </div>
@@ -61,7 +63,7 @@ $this->title = 'KGI KPI';
                                                 <?= $kgi["countTeam"] ?>
                                             </div>
 
-                                            <div class="col-3  text-center pl-0 pr-0">
+                                            <div class="col-4  text-end pl-0 pr-5" style="align-content:center;">
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down-darkblue.png"
                                                     style="width:10px;height:7px;margin-top:-4px;cursor:pointer;"
                                                     onclick="javascript:showTeamKgi(<?= $kgiId ?>,1)" id="show-<?= $kgiId ?>">

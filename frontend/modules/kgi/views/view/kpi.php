@@ -33,9 +33,11 @@ if (isset($kpis) && count($kpis) > 0) { ?>
 					</tr>
 					<tr id="kpi-<?= $kpiId ?>" class="text-center pim-table-text related-table-background">
 						<td class="text-start font-b pt-10 text-primary" style="border-top-left-radius: 3px;border-bottom-left-radius: 3px;letter-spacing:0.5px;">
-							<input type="checkbox" id="check-relate-kpi" class="checkbox-sm mr-5" value="<?= $kpiId ?>" name="kpi" <?= isset($kgiHasKpi[$kpiId]) ? 'checked' : '' ?>>
-							<?= $i ?>.
-							<?= $kpi["kpiName"] ?>
+							<div class="text-truncate" style="max-width:300px;" title="<?= $kpi["kpiName"] ?>">
+								<input type="checkbox" id="check-relate-kpi" class="checkbox-sm mr-5" value="<?= $kpiId ?>" name="kpi" <?= isset($kgiHasKpi[$kpiId]) ? 'checked' : '' ?>>
+								<?= $i ?>.
+								<?= $kpi["kpiName"] ?>
+							</div>
 						</td>
 						<td><?= $kpi["month"] ?></td>
 						<td><?= Yii::t('app', $kpi["unit"]) ?></td>
@@ -44,20 +46,22 @@ if (isset($kpis) && count($kpis) > 0) { ?>
 						<td><?= $kpi["ratio"] ?></td>
 						<td>
 							<div class="col-12 info-assign" style="margin-top: -3px;">
-								<div class="row">
-									<div class="col-5 text-end" style="align-content:center;">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png" class="first-layer-icon ml-3">
+								<div class="row" style="--bs-gutter-x:0px;">
+									<div class="col-4 pr-0 pl-0" style="align-content:center;">
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png"
+											class="first-layer-icon ml-3" style="margin-top: -4px;">
 									</div>
 									<div class="col-3 number-tag load-info pr-3 pl-3 pt-1">
 										<?= $kpi["countTeam"] ?>
 									</div>
 
-									<div class="col-4  text-center pl-0 pr-0" style="align-content:center;">
+									<div class="col-4  text-end pl-0 pr-5" style="align-content:center;">
 										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down-darkblue.png" style="width:10px;height:7px;cursor:pointer;" onclick="javascript:showTeamKpi(<?= $kpiId ?>,1)" id="show-<?= $kpiId ?>">
 										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/up-darkblue.png" style="display: none;width:10px;height:7px;cursor:pointer;" onclick="javascript:showTeamKpi(<?= $kpiId ?>,0)" id="hide-<?= $kpiId ?>">
 									</div>
 								</div>
 							</div>
+
 						</td>
 						<td style="border-top-right-radius: 3px;border-bottom-right-radius: 3px;">
 							<a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>" target="_blank" class="no-underline ">
@@ -85,9 +89,11 @@ if (isset($kpis) && count($kpis) > 0) { ?>
 					</tr>
 					<tr id="kpi-<?= $kpiId ?>" class="text-center pim-table-text related-table-background">
 						<td class="text-start font-b pt-10 <?= isset($kgiHasKpi[$kpiId]) ? 'text-primary' : '' ?>" style="border-top-left-radius: 3px;border-bottom-left-radius: 3px;letter-spacing:0.5px;">
-							<input type="checkbox" id="check-relate-kpi" class="checkbox-sm mr-5" value="<?= $kpiId ?>" name="kpi" <?= isset($kgiHasKpi[$kpiId]) ? 'checked' : '' ?>>
-							<?= $i ?>.
-							<?= $kpi["kpiName"] ?>
+							<div class="text-truncate" style="max-width:300px;" title="<?= $kpi["kpiName"] ?>">
+								<input type="checkbox" id="check-relate-kpi" class="checkbox-sm mr-5" value="<?= $kpiId ?>" name="kpi" <?= isset($kgiHasKpi[$kpiId]) ? 'checked' : '' ?>>
+								<?= $i ?>.
+								<?= $kpi["kpiName"] ?>
+							</div>
 						</td>
 						<td><?= Yii::t('app', $kpi["month"]) ?></td>
 						<td><?= Yii::t('app', $kpi["unit"]) ?></td>
@@ -96,15 +102,16 @@ if (isset($kpis) && count($kpis) > 0) { ?>
 						<td><?= $kpi["ratio"] ?></td>
 						<td>
 							<div class="col-12 info-assign" style="margin-top: -3px;">
-								<div class="row">
-									<div class="col-5 text-end" style="align-content:center;">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png" class="first-layer-icon ml-3">
+								<div class="row" style="--bs-gutter-x:0px;">
+									<div class="col-4 pr-0 pl-0" style="align-content:center;">
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png"
+											class="first-layer-icon ml-3" style="margin-top: -4px;">
 									</div>
 									<div class="col-3 number-tag load-info pr-3 pl-3 pt-1">
 										<?= $kpi["countTeam"] ?>
 									</div>
 
-									<div class="col-4  text-center pl-0 pr-0" style="align-content:center;">
+									<div class="col-4  text-end pl-0 pr-5" style="align-content:center;">
 										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down-darkblue.png" style="width:10px;height:7px;cursor:pointer;" onclick="javascript:showTeamKpi(<?= $kpiId ?>,1)" id="show-<?= $kpiId ?>">
 										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/up-darkblue.png" style="display: none;width:10px;height:7px;cursor:pointer;" onclick="javascript:showTeamKpi(<?= $kpiId ?>,0)" id="hide-<?= $kpiId ?>">
 									</div>

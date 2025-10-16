@@ -39,9 +39,11 @@ if (isset($kgis["data"]) && count($kgis["data"]) > 0) { ?>
 					</tr>
 					<tr id="kgi-<?= $kgiId ?>" class="text-center pim-table-text related-table-background">
 						<td class="text-start font-b pt-10 text-primary" style="border-top-left-radius: 3px;border-bottom-left-radius: 3px;letter-spacing:0.5px;">
-							<input type="checkbox" id="check-relate-kgi" class="checkbox-sm mr-5" value="<?= $kgiId ?>" name="kgi" checked>
-							<?= $i ?>.
-							<?= $kgi["kgiName"] ?>
+							<div class="text-truncate" style="max-width:300px;" title="<?= $kgi["kgiName"] ?>">
+								<input type="checkbox" id="check-relate-kgi" class="checkbox-sm mr-5" value="<?= $kgiId ?>" name="kgi" checked>
+								<?= $i ?>.
+								<?= $kgi["kgiName"] ?>
+							</div>
 						</td>
 						<td><?= Yii::t('app', $kgi["month"]) ?></td>
 						<td><?= Yii::t('app', $kgi["unit"]) ?></td>
@@ -49,18 +51,22 @@ if (isset($kgis["data"]) && count($kgis["data"]) > 0) { ?>
 						<td><?= $kgi["code"] ?></td>
 						<td><?= $kgi["ratio"] ?></td>
 						<td>
-							<div class="col-12 info-assign  pt-5 pb-2" style="margin-top: -3px;">
-								<div class="row">
-									<div class="col-4 text-end">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png" class="first-layer-icon ml-3" style="margin-top: -4px;">
+							<div class="col-12 info-assign" style="margin-top: -3px;">
+								<div class="row" style="--bs-gutter-x:0px;">
+									<div class="col-4 pr-0 pl-0" style="align-content:center;">
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png"
+											class="first-layer-icon ml-3" style="margin-top: -4px;">
 									</div>
 									<div class="col-3 number-tag load-info pr-3 pl-3 pt-1">
 										<?= $kgi["countTeam"] ?>
 									</div>
-
-									<div class="col-3  text-center pl-0 pr-0">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down-darkblue.png" style="width:10px;height:7px;margin-top:-4px;cursor:pointer;" onclick="javascript:showTeamKgi(<?= $kgiId ?>,1)" id="show-<?= $kgiId ?>">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/up-darkblue.png" style="display: none;width:10px;height:7px;margin-top:-4px;cursor:pointer;" onclick="javascript:showTeamKgi(<?= $kgiId ?>,0)" id="hide-<?= $kgiId ?>">
+									<div class="col-4  text-end pl-0 pr-5" style="align-content:center;">
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down-darkblue.png"
+											style="width:10px;height:7px;margin-top:-4px;cursor:pointer;"
+											onclick="javascript:showTeamKgi(<?= $kgiId ?>,1)" id="show-<?= $kgiId ?>">
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/up-darkblue.png"
+											style="display: none;width:10px;height:7px;margin-top:-4px;cursor:pointer;"
+											onclick="javascript:showTeamKgi(<?= $kgiId ?>,0)" id="hide-<?= $kgiId ?>">
 									</div>
 								</div>
 							</div>
@@ -90,9 +96,11 @@ if (isset($kgis["data"]) && count($kgis["data"]) > 0) { ?>
 					</tr>
 					<tr id="kgi-<?= $kgiId ?>" class="text-center pim-table-text related-table-background">
 						<td class="text-start font-b pt-10" style="border-top-left-radius: 3px;border-bottom-left-radius: 3px;letter-spacing:0.5px;">
-							<input type="checkbox" id="check-relate-kgi" class="checkbox-sm mr-5" value="<?= $kgiId ?>" name="kgi">
-							<?= $i ?>.
-							<?= $kgi["kgiName"] ?>
+							<div class="text-truncate" style="max-width:300px;" title="<?= $kgi["kgiName"] ?>">
+								<input type="checkbox" id="check-relate-kgi" class="checkbox-sm mr-5" value="<?= $kgiId ?>" name="kgi">
+								<?= $i ?>.
+								<?= $kgi["kgiName"] ?>
+							</div>
 						</td>
 						<td><?= Yii::t('app', $kgi["month"]) ?></td>
 						<td><?= Yii::t('app', $kgi["unit"]) ?></td>
@@ -101,17 +109,22 @@ if (isset($kgis["data"]) && count($kgis["data"]) > 0) { ?>
 						<td><?= $kgi["ratio"] ?></td>
 						<td>
 							<div class="col-12 info-assign" style="margin-top: -3px;">
-								<div class="row">
-									<div class="col-5 text-end" style="align-content:center;">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png" class="first-layer-icon ml-3" style="margin-top: -4px;">
+								<div class="row" style="--bs-gutter-x:0px;">
+									<div class="col-4 pr-0 pl-0" style="align-content:center;">
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team-dark-blue.png"
+											class="first-layer-icon ml-3" style="margin-top: -4px;">
 									</div>
 									<div class="col-3 number-tag load-info pr-3 pl-3 pt-1">
 										<?= $kgi["countTeam"] ?>
 									</div>
 
-									<div class="col-4  text-center pl-0 pr-0" style="align-content:center;">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down-darkblue.png" style="width:10px;height:7px;margin-top:-4px;cursor:pointer;" onclick="javascript:showTeamKgi(<?= $kgiId ?>,1)" id="show-<?= $kgiId ?>">
-										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/up-darkblue.png" style="display: none;width:10px;height:7px;margin-top:-4px;cursor:pointer;" onclick="javascript:showTeamKgi(<?= $kgiId ?>,0)" id="hide-<?= $kgiId ?>">
+									<div class="col-4  text-end pl-0 pr-5" style="align-content:center;">
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/down-darkblue.png"
+											style="width:10px;height:7px;margin-top:-4px;cursor:pointer;"
+											onclick="javascript:showTeamKgi(<?= $kgiId ?>,1)" id="show-<?= $kgiId ?>">
+										<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/up-darkblue.png"
+											style="display: none;width:10px;height:7px;margin-top:-4px;cursor:pointer;"
+											onclick="javascript:showTeamKgi(<?= $kgiId ?>,0)" id="hide-<?= $kgiId ?>">
 									</div>
 								</div>
 							</div>

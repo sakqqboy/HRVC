@@ -130,7 +130,8 @@ class KgiTeamController extends Controller
 	public function actionKgiTeam2($kgiId)
 	{
 		$kgiTeams = KgiTeam::find()
-			->select('kgi_team.teamId,t.teamName,kgi_team.target,kgi_team.remark,kgi_team.result,kgi_team.kgiTeamId,kgi_team.kgiId,k.code,t.departmentId')
+			->select('kgi_team.teamId,t.teamName,kgi_team.target,kgi_team.remark,kgi_team.result,kgi_team.kgiTeamId,kgi_team.kgiId,k.code,t.departmentId,
+			kgi_team.month,kgi_team.year,kgi_team.nextCheckDate,kgi_team.status,kgi_team.fromDate,kgi_team.toDate')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
 			->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
 			->where(["kgi_team.status" => [1, 2, 4]])
@@ -141,25 +142,25 @@ class KgiTeamController extends Controller
 		$data = [];
 		if (isset($kgiTeams) && count($kgiTeams) > 0) {
 			foreach ($kgiTeams as $kgiTeam) :
-				$kgiTeamHistory = KgiTeamHistory::find()
-					->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
-					->asArray()
-					->orderBy('createDateTime DESC')
-					->one();
-				if (!isset($kgiTeamHistory) || empty($kgiTeamHistory)) {
-					$kgiTeamHistory = KgiTeam::find()
-						->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
-						->asArray()
-						->orderBy('createDateTime DESC')
-						->one();
-				}
+				// $kgiTeamHistory = KgiTeamHistory::find()
+				// 	->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
+				// 	->asArray()
+				// 	->orderBy('createDateTime DESC')
+				// 	->one();
+				// if (!isset($kgiTeamHistory) || empty($kgiTeamHistory)) {
+				// 	$kgiTeamHistory = KgiTeam::find()
+				// 		->where(["kgiTeamId" => $kgiTeam["kgiTeamId"]])
+				// 		->asArray()
+				// 		->orderBy('createDateTime DESC')
+				// 		->one();
+				// }
 				$ratio = 0;
 				if ($kgiTeam["target"] != '' && $kgiTeam["target"] != 0 && $kgiTeam["target"] != null) {
 					if ($kgiTeam["code"] == '<' || $kgiTeam["code"] == '=') {
-						$ratio = ($kgiTeamHistory["result"] / $kgiTeam["target"]) * 100;
+						$ratio = ($kgiTeam["result"] / $kgiTeam["target"]) * 100;
 					} else {
-						if ($kgiTeamHistory["result"] != '' && $kgiTeamHistory["result"] != 0) {
-							$ratio = ($kgiTeam["target"] / $kgiTeamHistory["result"]) * 100;
+						if ($kgiTeam["result"] != '' && $kgiTeam["result"] != 0) {
+							$ratio = ($kgiTeam["target"] / $kgiTeam["result"]) * 100;
 						} else {
 							$ratio = 0;
 						}
@@ -167,7 +168,7 @@ class KgiTeamController extends Controller
 				} else {
 					$ratio = 0;
 				}
-				$teamEmployee = KgiEmployee::countKgiFromTeam($kgiTeam["kgiId"], $kgiTeam["teamId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]);
+				$teamEmployee = KgiEmployee::countKgiFromTeam($kgiTeam["kgiId"], $kgiTeam["teamId"], $kgiTeam["month"], $kgiTeam["year"]);
 				$countTeamEmployee = count($teamEmployee);
 				$selectPic = [];
 				if ($countTeamEmployee >= 3) {
@@ -186,16 +187,16 @@ class KgiTeamController extends Controller
 					"teamName" => Team::teamName($kgiTeam["teamId"]),
 					"departmentName" => Department::departmentName($kgiTeam["departmentId"]),
 					"target" => $kgiTeam["target"],
-					"result" => $kgiTeamHistory["result"],
-					"month" =>  ModelMaster::monthEng($kgiTeamHistory['month'], 1),
-					"year" => $kgiTeamHistory['year'],
-					"fromDate" => ModelMaster::engDate($kgiTeamHistory["fromDate"], 2),
-					"toDate" => ModelMaster::engDate($kgiTeamHistory["toDate"], 2),
+					"result" => $kgiTeam["result"],
+					"month" =>  ModelMaster::monthEng($kgiTeam['month'], 1),
+					"year" => $kgiTeam['year'],
+					"fromDate" => ModelMaster::engDate($kgiTeam["fromDate"], 2),
+					"toDate" => ModelMaster::engDate($kgiTeam["toDate"], 2),
 					"periodCheck" => ModelMaster::engDate(KgiTeam::lastestCheckDate($kgiTeam["kgiTeamId"]), 2), //lastest check date
-					"nextCheckDate" =>  ModelMaster::engDate($kgiTeamHistory["nextCheckDate"], 2),
+					"nextCheckDate" =>  ModelMaster::engDate($kgiTeam["nextCheckDate"], 2),
 					"ratio" => number_format($ratio, 2),
-					"status" => $kgiTeamHistory["status"],
-					"countTeam" => KgiTeam::kgiTeam($kgiTeam["kgiId"], $kgiTeamHistory["month"], $kgiTeamHistory["year"]),
+					"status" => $kgiTeam["status"],
+					"countTeam" => KgiTeam::kgiTeam($kgiTeam["kgiId"], $kgiTeam["month"], $kgiTeam["year"]),
 					"countTeamEmployee" => $countTeamEmployee,
 					"kgiEmployeeSelect" => $selectPic,
 				];
