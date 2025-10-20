@@ -454,14 +454,23 @@ class EmployeeController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
         $employee = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-        if ($employee["birthDate"] != '') {
+        // if ($employee["birthDate"] != '') {
+        //     $year = date('Y');
+        //     $birthDateArr = explode('-', $employee["birthDate"]);
+        //     $birthYear = (int)$birthDateArr[0];
+        //     $employee["age"] = (int)$year - (int)$birthYear;
+        // } else {
+        //     $employee["age"] = '-';
+        // }
+        if (!empty($employee["birthDate"])) {   // ตรวจสอบว่ามีค่าและไม่ว่าง
             $year = date('Y');
             $birthDateArr = explode('-', $employee["birthDate"]);
             $birthYear = (int)$birthDateArr[0];
-            $employee["age"] = (int)$year - (int)$birthYear;
+            $employee["age"] = (int)$year - $birthYear;
         } else {
             $employee["age"] = '-';
         }
+
         $employee = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
 
         // throw new Exception(print_r($employee, true));

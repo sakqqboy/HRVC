@@ -171,6 +171,7 @@ document.getElementById('teamName').addEventListener('keydown', function(event) 
             // ส่งค่าใหม่ไปบันทึก
             // alert('Save');
             actionSaveTeam(departmentId, teamName);
+            this.value = "";
             $("#no-existing").hide();
         }
     }

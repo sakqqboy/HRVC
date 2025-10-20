@@ -55,14 +55,13 @@ $this->title = 'New Company';
                 </div>
 
                 <div class="col-2" style="display: flex; justify-content: center;  align-items: center; ">
-                    <!-- ลบระยะห่างระหว่างรูปและรายละเอียด -->
                     <span class="fileUpload btn" style="padding: 0;">
                         <div id="upload" class="uplode-btn-group">
                             <img src="<?= Yii::$app->homeUrl ?>image/upload-white.svg" alt="Upload Icon">
                             <?= Yii::t('app', 'Update') ?>
                         </div>
                         <input type="file" name="imageUploadBanner" id="imageUploadBanner"
-                            class="upload up upload-checklist" id="up" />
+                            class="upload up upload-checklist" />
                     </span>
                 </div>
             </div>
@@ -256,7 +255,3 @@ $this->title = 'New Company';
 <input type="hidden" name="groupId" value="<?= $groupId + 543 ?>">
 
 <?php ActiveForm::end(); ?>
-
-<!-- <script>
-
-</script> -->

@@ -1,17 +1,17 @@
 <?php
 
 use common\models\ModelMaster;
-use yii\bootstrap5\ActiveForm;
+use yii\widgets\ActiveForm;
 
 $this->title = 'New Company';
 ?>
 <?php $form = ActiveForm::begin([
-	'id' => 'create-group',
-	'method' => 'post',
-	'options' => [
-		'enctype' => 'multipart/form-data',
-	],
-	'action' => Yii::$app->homeUrl . 'setting/company/save-update-company'
+    'id' => 'create-group',
+    'method' => 'post',
+    'options' => [
+        'enctype' => 'multipart/form-data',
+    ],
+    'action' => Yii::$app->homeUrl . 'setting/company/save-update-company'
 
 ]); ?>
 
@@ -23,11 +23,11 @@ $this->title = 'New Company';
     <div class="contrainer-body">
         <div class="col-12 banner-uploade" id="imagePreviewBanner">
             <?php
-			if ($company["banner"] != null) { ?>
-            <img src="<?= Yii::$app->homeUrl . $company['banner'] ?>" class="sad-1" id="old-banner">
+            if ($company["banner"] != null) { ?>
+                <img src="<?= Yii::$app->homeUrl . $company['banner'] ?>" class="sad-1" id="old-banner">
             <?php
-			}
-			?>
+            }
+            ?>
         </div>
 
         <div class="row mb-100">
@@ -53,16 +53,16 @@ $this->title = 'New Company';
                         <label for="imageUpload" class="upload-label" style="cursor: pointer;  display: block;">
                             <?php
                             if ($company["picture"] != null) { ?>
-                            <img src="<?= Yii::$app->homeUrl . $company['picture'] ?>"
-                                style="width: 200px; height: 200px;" class="company-group-picture" id="old-image">
+                                <img src="<?= Yii::$app->homeUrl . $company['picture'] ?>"
+                                    style="width: 200px; height: 200px;" class="company-group-picture" id="old-image">
                             <?php
                             } else { ?>
-                            <img src="<?= Yii::$app->homeUrl . 'image/upload-iconimg.svg' ?>"
-                                style="width: 50px; height: auto;" alt="Upload Icon"> <br><br>
-                            <span style=""><?= Yii::t('app', 'Upload') ?><span style="font-size: 13px; color: #666;">
-                                    <?= Yii::t('app', 'or Drop') ?></span></span><br>
-                            <span
-                                style="font-size: 13px; color: #666;"><?= Yii::t('app', 'Branch Picture here') ?></span>
+                                <img src="<?= Yii::$app->homeUrl . 'image/upload-iconimg.svg' ?>"
+                                    style="width: 50px; height: auto;" alt="Upload Icon"> <br><br>
+                                <span style=""><?= Yii::t('app', 'Upload') ?><span style="font-size: 13px; color: #666;">
+                                        <?= Yii::t('app', 'or Drop') ?></span></span><br>
+                                <span
+                                    style="font-size: 13px; color: #666;"><?= Yii::t('app', 'Branch Picture here') ?></span>
                             <?php
                             }
                             ?>
@@ -159,7 +159,7 @@ $this->title = 'New Company';
                                             <option value="<?= $companyCountry['countryId'] ?>">
                                                 <?= $companyCountry['countryName'] ?></option>
                                             <?php foreach ($countries as $countryId => $country) : ?>
-                                            <option value="<?= $countryId ?>"><?= $country ?></option>
+                                                <option value="<?= $countryId ?>"><?= $country ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -217,10 +217,10 @@ $this->title = 'New Company';
                                                 <?= Yii::t('app', 'Select from employees') ?>
                                             </option>
                                             <?php foreach ($headQuater as $user): ?>
-                                            <option value="<?= $user['employeeId'] ?>"
-                                                <?= isset($company['directorId']) && $company['directorId'] == $user['employeeId'] ? 'selected' : '' ?>>
-                                                <?= $user['employeeFirstname'] . ' ' . $user['employeeSurename'] ?>
-                                            </option>
+                                                <option value="<?= $user['employeeId'] ?>"
+                                                    <?= isset($company['directorId']) && $company['directorId'] == $user['employeeId'] ? 'selected' : '' ?>>
+                                                    <?= $user['employeeFirstname'] . ' ' . $user['employeeSurename'] ?>
+                                                </option>
                                             <?php endforeach; ?>
 
                                         </select>
@@ -254,7 +254,7 @@ $this->title = 'New Company';
                             <div class="alert alert-secondary" role="alert"
                                 style="font-size: 14px; background-color: transparent; border: 0; ">
                                 <textarea style="height: 527px;" name="about"
-                                    class="form-control"><?= Yii::t('app', $company['about'] ) ?></textarea>
+                                    class="form-control"><?= Yii::t('app', $company['about']) ?></textarea>
 
                             </div>
                             <div class="col-12 text-end mt-10 pr-13">

@@ -200,7 +200,7 @@ $form = ActiveForm::begin([
                                     </span>
 
                                     <input type="text" class="form-control font-size-14" id="mailId" name="mailId"
-                                        placeholder="kaori@gmail.com" value="<?= $userEmployee['mailId'] ?? '' ?>"
+                                        placeholder="sample@gmail.com" value="<?= $userEmployee['mailId'] ?? '' ?>"
                                         <?= $isDisabled ? 'readonly' : '' ?>
                                         style="width:clamp(290px, 21.22vw, 560px); border-left: none; background-color: <?= $isDisabled ? '#e9ecef' : 'white' ?>;"
                                         required>
@@ -527,7 +527,8 @@ $form = ActiveForm::begin([
                     </div>
                     <div class="row">
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                            <text class="font-size-16 font-weight-500">
+                                <!-- <span class="text-danger">* </span> -->
                                 <?= Yii::t('app', 'Personal Email') ?>
                             </text>
                             <div class="input-group">
@@ -536,8 +537,8 @@ $form = ActiveForm::begin([
                                         style="width: 20px; height: 20px;">
                                 </span>
                                 <input type="text" name="email" id="email" class="form-control"
-                                    placeholder="kaori@gmail.com" style=" border-left: none;"
-                                    value="<?= $employee['email'] ?? '' ?>" required>
+                                    placeholder="sample@gmail.com" style=" border-left: none;"
+                                    value="<?= $employee['email'] ?? '' ?>" >
                             </div>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
@@ -782,7 +783,7 @@ $form = ActiveForm::begin([
                                         style="width: 20px; height: 20px;">
                                 </span>
                                 <input type="text" style="border-left: none;" name="companyEmail" id="companyEmail"
-                                    class="form-control" placeholder="kaori@gmail.com"
+                                    class="form-control" placeholder="sample@gmail.com"
                                     value="<?= isset($employee['companyEmail']) ? $employee['companyEmail'] : '' ?>"
                                     required>
                             </div>
@@ -921,7 +922,7 @@ $form = ActiveForm::begin([
                                     name="titleId" data-company-branch="title" required disabled>
                                     <option value="" disabled selected hidden
                                         style="color: var(--Helper-Text, #8A8A8A);">
-                                        <?= Yii::t('app', 'What your his/her Tile?') ?>
+                                        <?= Yii::t('app', 'What your his/her Title?') ?>
                                     </option>
                                     <!-- options will be populated dynamically -->
                                 </select>

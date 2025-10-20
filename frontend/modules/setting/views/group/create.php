@@ -176,7 +176,8 @@ $this->title = 'Create Group';
                                 </div>
 
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span><label class="name-text-update"
+                                    <!-- <span class="text-danger">* </span> -->
+                                    <label class="name-text-update"
                                         for="linkedin"><?= Yii::t('app', 'LinkedIn Link') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
@@ -187,12 +188,13 @@ $this->title = 'Create Group';
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
                                             name="linkedin"
                                             placeholder="<?= Yii::t('app', 'Copy & Paste the Group LinkedIn Link here') ?>"
-                                            required>
+                                            >
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span><label class="name-text-update" for="twitter">
+                                    <!-- <span class="text-danger">* </span> -->
+                                    <label class="name-text-update" for="twitter">
                                         <?= Yii::t('app', 'X (Twitter) Link') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
@@ -203,12 +205,13 @@ $this->title = 'Create Group';
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
                                             name="twitter"
                                             placeholder="<?= Yii::t('app', 'Copy & Paste the Group X (Twitter) Link here') ?>"
-                                            required>
+                                            >
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span><label class="name-text-update"
+                                    <!-- <span class="text-danger">* </span> -->
+                                    <label class="name-text-update"
                                         for="facebook"><?= Yii::t('app', 'Facebook Link') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
@@ -219,12 +222,13 @@ $this->title = 'Create Group';
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
                                             name="facebook"
                                             placeholder="<?= Yii::t('app', 'Copy & Paste the Group Facebook Link here') ?>"
-                                            required>
+                                            >
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span><label class="name-text-update"
+                                    <!-- <span class="text-danger">* </span> -->
+                                    <label class="name-text-update"
                                         for="instagram"><?= Yii::t('app', 'Instagram Link') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
@@ -235,12 +239,12 @@ $this->title = 'Create Group';
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
                                             name="instagram"
                                             placeholder="<?= Yii::t('app', 'Copy & Paste the Group Instagram Link here') ?>"
-                                            required>
+                                            >
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span>
+                                    <!-- <span class="text-danger">* </span> -->
                                     <label class="name-text-update" for="youtube"><?= Yii::t('app', 'YouTube Link') ?>
                                     </label>
                                     <div class="input-group">
@@ -252,12 +256,13 @@ $this->title = 'Create Group';
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
                                             name="youtube"
                                             placeholder="<?= Yii::t('app', 'Copy & Paste the Group YouTube Link here') ?>"
-                                            required>
+                                            >
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span> <label class="name-text-update"
+                                    <!-- <span class="text-danger">* </span>  -->
+                                    <label class="name-text-update"
                                         for="director"><?= Yii::t('app', 'Website Link ') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
@@ -268,7 +273,7 @@ $this->title = 'Create Group';
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
                                             name="website"
                                             placeholder="<?= Yii::t('app', 'Copy & Paste the Group YouTube Link here') ?>"
-                                            required>
+                                            >
                                     </div>
                                 </div>
 

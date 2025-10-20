@@ -35,7 +35,7 @@ class CompanyController extends Controller
 			return $this->redirect(Yii::$app->homeUrl . 'site/login');
 		}
 		$role = UserRole::userRight();
-		if($role <= 3 ){
+		if ($role <= 3) {
 			return  $this->redirect(Yii::$app->request->referrer);
 		}
 		return true; //go to origin request
@@ -261,16 +261,16 @@ class CompanyController extends Controller
 		$groupId = $group["groupId"];
 		$companies = Api::connectApi(
 			Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId .
-			'&countryId=' . $countryId .
-			'&page=' . $nextPage .
-			'&limit=7'
+				'&countryId=' . $countryId .
+				'&page=' . $nextPage .
+				'&limit=7'
 		);
 
 		$numPage = Api::connectApi(
 			Path::Api() . 'masterdata/group/company-page?id=' . $groupId .
-			'&page=' . $nextPage .
-			'&countryId=' . $countryId .
-			'&limit=7'
+				'&page=' . $nextPage .
+				'&countryId=' . $countryId .
+				'&limit=7'
 		);
 
 		$countries = Api::connectApi(
@@ -505,7 +505,7 @@ class CompanyController extends Controller
 		}
 		$groupId = $group["groupId"];
 		$companies = Api::connectApi(
-    	Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId . '&page=' . $nextPage . '&limit=6'
+			Path::Api() . 'masterdata/group/company-group-filter?id=' . $groupId . '&countryId=' . $countryId . '&page=' . $nextPage . '&limit=6'
 		);
 
 		$numPage = Api::connectApi(
@@ -600,7 +600,7 @@ class CompanyController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$groupId = $param["groupId"];
 		$countries = Api::connectApi(
-    		Path::Api() . 'masterdata/country/active-country'
+			Path::Api() . 'masterdata/country/active-country'
 		);
 
 		$headQuater = Api::connectApi(
@@ -645,14 +645,14 @@ class CompanyController extends Controller
 				$fileBanner->saveAs($pathSave);
 				$company->banner = 'images/company/banner/' . $fileName;
 			}
-			
+
 			$fileImage = UploadedFile::getInstanceByName("image");
 			if (isset($fileImage) && !empty($fileImage)) {
 				$path = Path::getHost() . 'images/company/profile/';
 				if (!file_exists($path)) {
 					mkdir($path, 0777, true);
 				}
-				
+
 				// เตรียมชื่อไฟล์ใหม่
 				$file = $fileImage->name;
 				$filenameArray = explode('.', $file);
@@ -707,7 +707,11 @@ class CompanyController extends Controller
 			if ($company->save(false)) {
 				$companyId = Yii::$app->db->lastInsertID;
 				return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-view/' . ModelMaster::encodeParams(["companyId" => $companyId]));
+			}else{
+				throw new exception('Recording failed ');
 			}
+		} else {
+			throw new exception('This Name does not exist');
 		}
 	}
 	public function actionCompanyView($hash)
@@ -852,6 +856,7 @@ class CompanyController extends Controller
 	}
 	public function actionSaveUpdateCompany()
 	{
+
 		if (isset($_POST["companyId"])) {
 			$companyId = $_POST["companyId"] - 543;
 			$company = Company::find()->where(["companyId" => $companyId])->one();
@@ -877,9 +882,16 @@ class CompanyController extends Controller
 					mkdir($path, 0777, true);
 				}
 				$oldPathBanner = Path::getHost() . $oldBanner;
-				if (file_exists($oldPathBanner)) {
-					unlink($oldPathBanner,);
+				// if (file_exists($oldPathBanner)) {
+				// 	unlink($oldPathBanner,);
+				// }
+
+				// $oldPathBanner = Yii::getAlias('@frontend/web/') . $model->banner;
+
+				if (!empty($model->banner) && file_exists($oldPathBanner) && is_file($oldPathBanner)) {
+					unlink($oldPathBanner);
 				}
+
 				$file = $fileBanner->name;
 				$filenameArray = explode('.', $file);
 				$countArrayFile = count($filenameArray);
@@ -888,7 +900,7 @@ class CompanyController extends Controller
 				$fileBanner->saveAs($pathSave);
 				$company->banner = 'images/company/banner/' . $fileName;
 			}
-			
+
 			$fileImage = UploadedFile::getInstanceByName("image");
 			if (isset($fileImage) && !empty($fileImage)) {
 				$path = Path::getHost() . 'images/company/profile/';
@@ -954,10 +966,14 @@ class CompanyController extends Controller
 				}
 			}
 
-			
+
 			if ($company->save(false)) {
 				return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-view/' . ModelMaster::encodeParams(["companyId" => $companyId]));
+			} else {
+				throw new exception('Recording failed ');
 			}
+		} else {
+			throw new exception('This ID does not exist');
 		}
 	}
 	public function actionCompanyBranch()
@@ -965,7 +981,7 @@ class CompanyController extends Controller
 		$companyId = $_POST["companyId"];
 		$text = "<option value=''>Select Branch</option>";
 		$branch = Api::connectApi(
-    Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId
+			Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId
 		);
 
 		$res["status"] = false;
@@ -1091,6 +1107,5 @@ class CompanyController extends Controller
 		);
 
 		return $branches;
-
 	}
 }
