@@ -2,6 +2,7 @@
 
 namespace frontend\models\hrvc;
 
+use common\helpers\Path;
 use Exception;
 use Yii;
 use \frontend\models\hrvc\master\CompanyMaster;
@@ -104,5 +105,18 @@ class Company extends \frontend\models\hrvc\master\CompanyMaster
             ->asArray()
             ->one();
         return $employee["companyId"];
+    }
+    public  static function companyPicture($picture)
+    {
+
+        $url = Path::frontendUrl() . $picture;
+        $headers = @get_headers($url);
+
+        if ($picture != '' && $headers && strpos($headers[0], '200') !== false) {
+            $img = $picture;
+        } else {
+            $img = 'image/userProfile.png';
+        }
+        return $img;
     }
 }

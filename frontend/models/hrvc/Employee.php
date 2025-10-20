@@ -4,6 +4,7 @@ namespace frontend\models\hrvc;
 
 use Yii;
 use \frontend\models\hrvc\master\EmployeeMaster;
+use common\helpers\Path;
 
 /**
  * This is the model class for table "employee".
@@ -193,5 +194,25 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
     {
         $employee = Employee::find()->where(["employeeId" => $employeeId])->asArray()->one();
         return $employee;
+    }
+    public static function employeeImage($employeeId)
+    {
+        $employee = Employee::find()
+            ->select('picture')
+            ->where(["employeeId" => $employeeId])
+            ->asArray()
+            ->one();
+        $img = "images/employee/status/employee-nopic.svg";
+        if (!empty($employee) && !empty($employee["picture"])) {
+            $url = Path::frontendUrl() . $employee["picture"];
+
+            // ดึง headers
+            $headers = @get_headers($url);
+
+            if ($headers !== false && strpos($headers[0], '200') !== false) {
+                $img = $employee["picture"];
+            }
+        }
+        return $img;
     }
 }

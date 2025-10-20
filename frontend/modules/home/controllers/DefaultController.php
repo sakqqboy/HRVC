@@ -10,6 +10,8 @@ use common\helpers\Session;
 use common\models\ModelMaster;
 use Exception;
 use frontend\components\Api;
+use frontend\models\hrvc\Company;
+use frontend\models\hrvc\Employee;
 use frontend\models\hrvc\Group;
 use frontend\models\hrvc\UserRole;
 
@@ -38,9 +40,42 @@ class DefaultController extends Controller
         $employeeId = User::employeeIdFromUserId($userId);
         $role = UserRole::userRight();
         $employeeProfile = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+        // throw new Exception(print_r($employeeProfile, true));
+        if (!isset($employeeData)) {
+            $employeeData = [
+                'employeeId' => $employeeProfile['employeeId'],
+                'employeeNumber' => $employeeProfile['employeeNumber'],
+                'employeeFirstname' => $employeeProfile['employeeFirstname'],
+                'employeeSurename' => $employeeProfile['employeeSurename'],
+                'email' => $employeeProfile['email'],
+                'companyId' => $employeeProfile['companyId'],
+                'branchId' => $employeeProfile['branchId'],
+                'departmentId' => $employeeProfile['departmentId'],
+                'titleId' => $employeeProfile['titleId'],
+                'teamId' => $employeeProfile['teamId'],
+                'joinDate' => $employeeProfile['joinDate'],
+                'hireDate' => $employeeProfile['hireDate'],
+                'picture' => Employee::employeeImage($employeeProfile["employeeId"]),
+                'employeeAgreement' => !empty($employeeProfile['employeeAgreement'])
+                    ? $employeeProfile['employeeAgreement']
+                    : null,
+                'status' => $employeeProfile['status'],
+                'companyName' => $employeeProfile['companyName'],
+                'companyPicture' => Company::companyPicture($employeeProfile["cPicture"]),
+                'countryName' => $employeeProfile['countryName'],
+                'flag' => !empty($employeeProfile['flag'])
+                    ? $employeeProfile['flag']
+                    : 'images/flag/svg/default.svg',
+                'titleName' => $employeeProfile['titleName'],
+                'employeeConditionName' => $employeeProfile['employeeConditionName'],
+                'statusName' => $employeeProfile['statusName'],
+                'city' => $employeeProfile['city'],
+                'shortTag' => $employeeProfile['shortTag'],
+            ];
+        }
         $pendingApprove = Api::connectApi(Path::Api() . 'home/default/pending-approval?role=' . $role . '&&employeeId=' . $employeeId);
         return $this->render('dashboard', [
-            'employeeProfile' => $employeeProfile,
+            'employeeProfile' => $employeeData,
             'userId' => $userId,
             'pendingApprove' => $pendingApprove
         ]);

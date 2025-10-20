@@ -73,11 +73,11 @@
     <div style="flex: 2;">
         <div class="text-start">
             <div class="d-flex align-items-center">
-                <!-- รูปโปรไฟล์ -->
-                <img src="<?= Yii::$app->homeUrl ?>images/testimg/TCF.svg" class="profile-picture rounded-circle mb-3"
-                    alt="User Avatar" style="width: 60px;">
+                <!-- รูปบริษัท -->
+                <img src="<?= Yii::$app->homeUrl ?><?= $employeeProfile['companyPicture'] ?>" class="profile-picture rounded-circle mb-3"
+                    alt="" style="width: 60px;">
 
-                <!-- ข้อมูลโปรไฟล์ -->
+                <!-- ข้อมูลบริษัท -->
                 <div class="ms-3">
                     <h6 class="profile-name small mb-0 text-start"><?= $employeeProfile['companyName'] ?></h6>
                     <p class="profile-role text-muted small mb-0 text-start">
