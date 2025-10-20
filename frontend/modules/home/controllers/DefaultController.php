@@ -41,7 +41,6 @@ class DefaultController extends Controller
         $role = UserRole::userRight();
         $employeeProfile = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
         // throw new Exception(print_r($employeeProfile, true));
-        if (!isset($employeeData)) {
             $employeeData = [
                 'employeeId' => $employeeProfile['employeeId'],
                 'employeeNumber' => $employeeProfile['employeeNumber'],
@@ -72,7 +71,6 @@ class DefaultController extends Controller
                 'city' => $employeeProfile['city'],
                 'shortTag' => $employeeProfile['shortTag'],
             ];
-        }
         $pendingApprove = Api::connectApi(Path::Api() . 'home/default/pending-approval?role=' . $role . '&&employeeId=' . $employeeId);
         return $this->render('dashboard', [
             'employeeProfile' => $employeeData,

@@ -1270,14 +1270,15 @@ $('#create-employee').on('beforeSubmit', function (e) {
     }
 
     // ตรวจสอบว่า certificates, cerImages, certificatesFiles ถูกประกาศไว้และมีข้อมูล
-    if (
-        certificates.length !== cerImages.length ||
-        certificates.length !== certificatesFiles.length
-    ) {
-        alert("The information is incomplete. Please upload all photos and certificate files.");
-        return false;
+    if(cerImages){
+        if (
+            certificates.length !== cerImages.length ||
+            certificates.length !== certificatesFiles.length
+        ) {
+            alert("The information is incomplete. Please upload all photos and certificate files.");
+            return false;
+        }
     }
-
     const form = e.target;
     const formData = new FormData(form);
 
