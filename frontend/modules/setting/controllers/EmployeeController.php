@@ -822,8 +822,8 @@ class EmployeeController extends Controller
                     $password = $_POST["password"] ?? null;
                     if (!empty($password)) {
                         // ถ้ายังไม่มี password หรือ validate ไม่ผ่าน ให้ตั้ง password ใหม่
-                        if (empty($user->password_hash) || !Yii::$app->security->validatePassword($password, $user->password_hash)) {
-                            $user->password_hash = Yii::$app->security->generatePasswordHash($password);
+                        if (empty($user->password_hash) || md5($password, $user->password_hash)) {
+                            $user->password_hash = md5($password);
                         }
                     }
                     $user->updateDateTime = new Expression('NOW()');
