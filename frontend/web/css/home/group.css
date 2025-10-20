@@ -119,6 +119,35 @@
     background: #F4F6F9;
     height: 201.128px;
 }
+/* .banner-uploade {
+    width: 100%;
+    height: 250px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    background-color: #f9f9f9;
+    cursor: grab;
+} */
+
+.banner-uploade img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    user-select: none;
+    pointer-events: none;
+    height: 100%;
+    width: auto;
+    transform-origin: center;
+    transition: transform 0.1s ease-out;
+    object-fit: cover;          /* 🔹 ครอบเต็มกรอบ (ไม่ยืด, ไม่ซ้ำ) */
+    object-position: center;    /* 🔹 เริ่มจากตรงกลาง */
+}
+#imagePreviewBanner {
+    background-repeat: no-repeat;
+    background-size: cover;          /* ครอบเต็มกรอบแบบไม่ยืด */
+    background-position: center;     /* จัดให้อยู่ตรงกลาง */
+}
 
 .avatar-upload .avatar-preview {
     width: 200px;

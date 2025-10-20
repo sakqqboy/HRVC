@@ -707,7 +707,11 @@ class CompanyController extends Controller
 			if ($company->save(false)) {
 				$companyId = Yii::$app->db->lastInsertID;
 				return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-view/' . ModelMaster::encodeParams(["companyId" => $companyId]));
+			}else{
+				throw new exception('Recording failed ');
 			}
+		} else {
+			throw new exception('This Name does not exist');
 		}
 	}
 	public function actionCompanyView($hash)
@@ -878,9 +882,16 @@ class CompanyController extends Controller
 					mkdir($path, 0777, true);
 				}
 				$oldPathBanner = Path::getHost() . $oldBanner;
-				if (file_exists($oldPathBanner)) {
-					unlink($oldPathBanner,);
+				// if (file_exists($oldPathBanner)) {
+				// 	unlink($oldPathBanner,);
+				// }
+
+				// $oldPathBanner = Yii::getAlias('@frontend/web/') . $model->banner;
+
+				if (!empty($model->banner) && file_exists($oldPathBanner) && is_file($oldPathBanner)) {
+					unlink($oldPathBanner);
 				}
+
 				$file = $fileBanner->name;
 				$filenameArray = explode('.', $file);
 				$countArrayFile = count($filenameArray);
