@@ -82,6 +82,20 @@ $session = Yii::$app->session;
                             <?= Yii::t('app', 'Department') ?>
                         </a>
                     </div>
+                    <?php
+                    if ($role >= 5) {
+                    ?>
+                        <div class="col-12 first-layer-manu">
+                            <a href="<?= Yii::$app->homeUrl ?>setting/title/no-title/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>"
+                                class="no-underline">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/title.svg"
+                                    class="first-layer-icon" style="margin-top: -3px;">
+                                <?= Yii::t('app', 'Title') ?>
+                            </a>
+                        </div>
+                    <?php
+                    }
+                    ?>
                     <div class="col-12 first-layer-manu">
                         <a href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>"
                             class="no-underline">
@@ -101,18 +115,6 @@ $session = Yii::$app->session;
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/BehavioralEvaluation/my_portal.svg"
                                 class="first-layer-icon" style="margin-top: -3px;">
                             <?= Yii::t('app', 'Employee') ?>
-                        </a>
-                    </div>
-                <?php
-                }
-                if ($role >= 5) {
-                ?>
-                    <div class="col-12 first-layer-manu">
-                        <a href="<?= Yii::$app->homeUrl ?>setting/title/no-title/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>"
-                            class="no-underline">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/MasterSetting/title.svg"
-                                class="first-layer-icon" style="margin-top: -3px;">
-                            <?= Yii::t('app', 'Title') ?>
                         </a>
                     </div>
                 <?php
