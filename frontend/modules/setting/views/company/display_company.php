@@ -1,6 +1,7 @@
 <?php
 
 use common\models\ModelMaster;
+
 $this->title = "Company";
 
 ?>
@@ -15,7 +16,7 @@ padding: 30px; gap: 7.721px; flex-shrink: 0;border-radius: 7.721px;border: 1.544
             <?= Yii::t('app', 'All companies will be part of the group, and branches will be linked to their respective companies.') ?>
         </span>
         <a href="<?= Yii::$app->homeUrl ?>setting/company/create/<?= ModelMaster::encodeParams(['groupId' => $groupId]) ?>"
-            class="btn-update-group" style="width: 10%;">
+            class="btn-update-group pr-5 pl-5">
             <?= Yii::t('app', 'Create The Company') ?>
             <img src="<?= Yii::$app->homeUrl . 'images/icons/Settings/plus.svg' ?>">
         </a>
