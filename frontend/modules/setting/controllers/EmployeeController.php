@@ -454,6 +454,58 @@ class EmployeeController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
         $employee = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+        $employeeData = [
+            'employeeId' => $employee['employeeId'] ?? null,
+            'employeeNumber' => $employee['employeeNumber'] ?? '-',
+            'employeeFirstname' => $employee['employeeFirstname'] ?? '-',
+            'employeeSurename' => $employee['employeeSurename'] ?? '-',
+            'employeeNickname' => $employee['employeeNickname'] ?? '',
+            'gender' => $employee['gender'] ?? null,
+            'email' => $employee['email'] ?? '-',
+            'companyEmail' => $employee['companyEmail'] ?? '-',
+            'telephoneNumber' => $employee['telephoneNumber'] ?? '-',
+            'emergencyTel' => $employee['emergencyTel'] ?? '-',
+            'companyId' => $employee['companyId'] ?? null,
+            'branchId' => $employee['branchId'] ?? null,
+            'departmentId' => $employee['departmentId'] ?? null,
+            'titleId' => $employee['titleId'] ?? null,
+            'teamId' => $employee['teamId'] ?? null,
+            'teamPositionId' => $employee['teamPositionId'] ?? null,
+            'joinDate' => $employee['joinDate'] ?? null,
+            'hireDate' => $employee['hireDate'] ?? null,
+            'countryId' => $employee['countryId'] ?? null,
+            'employeeConditionId' => $employee['employeeConditionId'] ?? null,
+            'address1' => $employee['address1'] ?? '',
+            'address2' => $employee['address2'] ?? '',
+
+            // ✅ ใช้ฟังก์ชันของคุณโดยตรง (จัดการ default ภายในเอง)
+            'picture' => Employee::employeeImage($employee["employeeId"] ?? null),
+
+            'nationalityId' => $employee['nationalityId'] ?? null,
+            'contact' => $employee['contact'] ?? '',
+            'workingTime' => $employee['workingTime'] ?? '',
+            'employeeAgreement' => !empty($employee['employeeAgreement'])
+                ? $employee['employeeAgreement']
+                : null,
+            'spoken' => $employee['spoken'] ?? '',
+            'remark' => $employee['remark'] ?? '',
+            'status' => $employee['status'] ?? '-',
+            'createDateTime' => $employee['createDateTime'] ?? '',
+            'updateDateTime' => $employee['updateDateTime'] ?? '',
+            'companyName' => $employee['companyName'] ?? '-',
+            'countryName' => $employee['countryName'] ?? '-',
+            'flag' => !empty($employee['flag'])
+                ? $employee['flag']
+                : 'images/flag/svg/default.svg',
+            'titleName' => $employee['titleName'] ?? '-',
+            'branchName' => $employee['branchName'] ?? '-',
+            'employeeConditionName' => $employee['employeeConditionName'] ?? '-',
+            'statusName' => $employee['statusName'] ?? '-',
+            'nationalityName' => $employee['nationalityName'] ?? '-',
+            'city' => $employee['city'] ?? '-',
+            'shortTag' => $employee['shortTag'] ?? '',
+        ];
+
         // if ($employee["birthDate"] != '') {
         //     $year = date('Y');
         //     $birthDateArr = explode('-', $employee["birthDate"]);
@@ -496,9 +548,14 @@ class EmployeeController extends Controller
         }
 
        
-        $employee["status"] = $employee['statusName'];
+        if (!empty($employee) && isset($employee['statusName'])) {
+            $employee["status"] = $employee['statusName'];
+        } else {
+            $employee["status"] = '-'; // หรือค่าที่ต้องการตั้งค่าเริ่มต้น
+        }
+
         return $this->render('employee_profile', [
-            "employee" => $employee,
+            "employee" => $employeeData,
             "employeeId" => $employeeId
         ]);
     }
