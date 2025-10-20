@@ -142,7 +142,9 @@
     transition: transform 0.1s ease-out;
     object-fit: cover;          /* 🔹 ครอบเต็มกรอบ (ไม่ยืด, ไม่ซ้ำ) */
     object-position: center;    /* 🔹 เริ่มจากตรงกลาง */
+    
 }
+
 #imagePreviewBanner {
     background-repeat: no-repeat;
     background-size: cover;          /* ครอบเต็มกรอบแบบไม่ยืด */

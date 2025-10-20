@@ -255,7 +255,3 @@ $this->title = 'New Company';
 <input type="hidden" name="groupId" value="<?= $groupId + 543 ?>">
 
 <?php ActiveForm::end(); ?>
-
-<!-- <script>
-
-</script> -->
