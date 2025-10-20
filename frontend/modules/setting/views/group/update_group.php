@@ -228,7 +228,8 @@ $this->title = 'Update Group';
                                 </div>
 
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span><label class="name-text-update"
+                                    <!-- <span class="text-danger">* </span> -->
+                                    <label class="name-text-update"
                                         for="linkedin"><?= Yii::t('app', 'LinkedIn Link') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
@@ -239,12 +240,13 @@ $this->title = 'Update Group';
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
                                             name="linkedin" value="<?= $group['socialLinkin'] ?>"
                                             placeholder="<?= Yii::t('app', 'Copy & Paste the Group LinkedIn Link here') ?>"
-                                            required>
+                                            >
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span><label class="name-text-update" for="twitter">
+                                    <!-- <span class="text-danger">* </span> -->
+                                    <label class="name-text-update" for="twitter">
                                         <?= Yii::t('app', 'X (Twitter) Link') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
@@ -255,12 +257,13 @@ $this->title = 'Update Group';
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
                                             name="twitter" value="<?= $group['socialX'] ?>"
                                             placeholder="<?= Yii::t('app', 'Copy & Paste the Group X (Twitter) Link here') ?>"
-                                            required>
+                                            >
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span><label class="name-text-update"
+                                    <!-- <span class="text-danger">* </span> -->
+                                    <label class="name-text-update"
                                         for="facebook"><?= Yii::t('app', 'Facebook Link') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
@@ -271,12 +274,13 @@ $this->title = 'Update Group';
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
                                             name="facebook" value="<?= $group['socialFacebook'] ?>"
                                             placeholder="<?= Yii::t('app', 'Copy & Paste the Group Facebook Link here') ?>"
-                                            required>
+                                            >
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span><label class="name-text-update"
+                                    <!-- <span class="text-danger">* </span> -->
+                                    <label class="name-text-update"
                                         for="instagram"><?= Yii::t('app', 'Instagram Link') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
@@ -287,12 +291,12 @@ $this->title = 'Update Group';
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
                                             name="instagram" value="<?= $group['socialInstargram'] ?>"
                                             placeholder="<?= Yii::t('app', 'Copy & Paste the Group Instagram Link here') ?>"
-                                            required>
+                                            >
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span>
+                                    <!-- <span class="text-danger">* </span> -->
                                     <label class="name-text-update" for="youtube"><?= Yii::t('app', 'YouTube Link') ?>
                                     </label>
                                     <div class="input-group">
@@ -304,12 +308,13 @@ $this->title = 'Update Group';
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
                                             name="youtube" value="<?= $group['socialYoutube'] ?>"
                                             placeholder="<?= Yii::t('app', 'Copy & Paste the Group YouTube Link here') ?>"
-                                            required>
+                                            >
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-30">
-                                    <span class="text-danger">* </span> <label class="name-text-update"
+                                    <!-- <span class="text-danger">* </span>  -->
+                                    <label class="name-text-update"
                                         for="director"><?= Yii::t('app', 'Website Link ') ?></label>
                                     <div class="input-group">
                                         <span class="input-group-text mt-12"
@@ -320,7 +325,7 @@ $this->title = 'Update Group';
                                         <input type="text" style="border-left: none;" class="form-control mt-12"
                                             name="website" value="<?= $group['website'] ?>"
                                             placeholder="<?= Yii::t('app', 'Copy & Paste the Group YouTube Link here') ?>"
-                                            required>
+                                            >
                                     </div>
                                 </div>
 

@@ -156,16 +156,27 @@ $this->title = 'Group profile';
                         </div>
 
                         <div class="col-12 mt-10 text-end">
-                            <img src="<?= Yii::$app->homeUrl ?>image/icon-x<?= empty($group["socialX"]) ? '-off' : '' ?>.svg"
-                                style="width: 24px; height: 24.6px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/icon-in<?= empty($group["socialLinkin"]) ? '-off' : '' ?>.svg"
-                                style="width: 24px; height: 24.6px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/icon-yt<?= empty($group["socialYoutube"]) ? '-off' : '' ?>.svg"
-                                style="width: 24px; height: 24.6px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/icon-face<?= empty($group["socialFacebook"]) ? '-off' : '' ?>.svg"
-                                style="width: 24px; height: 24.6px;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/icon-ig<?= empty($group["socialInstargram"]) ? '-off' : '' ?>.svg"
-                                style="width: 24px; height: 24.6px;">
+                           <?php
+                            $socials = [
+                                "socialX" => "icon-x",
+                                "socialLinkin" => "icon-in",
+                                "socialYoutube" => "icon-yt",
+                                "socialFacebook" => "icon-face",
+                                "socialInstargram" => "icon-ig"
+                            ];
+
+                            foreach($socials as $key => $icon) {
+                                $url = !empty($group[$key]) ? $group[$key] : "";
+                                $offClass = empty($group[$key]) ? '-off' : '';
+                                if($url): ?>
+                                    <a class="d-inline-block" href="<?= $url ?>" target="_blank">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/<?= $icon ?><?= $offClass ?>.svg" style="width:24px;height:24.6px;">
+                                    </a>
+                                <?php else: ?>
+                                    <img src="<?= Yii::$app->homeUrl ?>image/<?= $icon ?><?= $offClass ?>.svg" style="width:24px;height:24.6px;">
+                                <?php endif;
+                            }
+                            ?>
                         </div>
                     </div>
 

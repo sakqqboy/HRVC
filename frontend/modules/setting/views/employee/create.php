@@ -527,7 +527,8 @@ $form = ActiveForm::begin([
                     </div>
                     <div class="row">
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                            <text class="font-size-16 font-weight-500">
+                                <!-- <span class="text-danger">* </span> -->
                                 <?= Yii::t('app', 'Personal Email') ?>
                             </text>
                             <div class="input-group">
@@ -537,7 +538,7 @@ $form = ActiveForm::begin([
                                 </span>
                                 <input type="text" name="email" id="email" class="form-control"
                                     placeholder="kaori@gmail.com" style=" border-left: none;"
-                                    value="<?= $employee['email'] ?? '' ?>" required>
+                                    value="<?= $employee['email'] ?? '' ?>" >
                             </div>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">

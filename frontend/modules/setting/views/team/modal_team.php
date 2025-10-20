@@ -170,6 +170,7 @@ document.getElementById('teamName').addEventListener('keydown', function(event) 
         if (teamName !== '') {
             // ส่งค่าใหม่ไปบันทึก
             // alert('Save');
+            this.value = "";
             actionSaveTeam(departmentId, teamName);
             $("#no-existing").hide();
         }
