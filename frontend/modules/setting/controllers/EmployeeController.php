@@ -269,12 +269,7 @@ class EmployeeController extends Controller
                 }
                 $fileName = Yii::$app->security->generateRandomString(10) . '.' . $pictureProfile->extension;
                 $pathSave = $path . $fileName;
-                // $pictureProfile->saveAs($pathSave);
-                if ($pictureProfile->saveAs($pathSave)) {
-                    throw new Exception('save');
-                } else {
-                     throw new Exception('dont save');
-                }
+                $pictureProfile->saveAs($pathSave);
                 $employee->picture = 'images/employee/profile/' . $fileName;
             } else {
                 $employee->picture = 'images/employee/status/employee-no-pic.svg';
