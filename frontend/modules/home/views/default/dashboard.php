@@ -37,7 +37,7 @@ $this->title = "Dashboard";
 </style>
 <div class="dashboard-container mt-50">
     <div class="row pl-4">
-        <div class="aler pim-body bg-white" style="margin-top: -10px;">
+        <div class="alert pim-body bg-white" style="margin-top: -10px;">
             <!-- <div id="screen-size" style="font-size: 16px; color: #333;">แสดงขนาดหน้าจอ</div> -->
 
             <div class="row">

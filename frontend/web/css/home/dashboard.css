@@ -445,7 +445,7 @@
     position: relative;
     max-width: 100%;
     /* จำกัดขนาดให้ไม่เกินพื้นที่ */
-    overflow: hidden;
+    /* overflow: hidden; */
     /* ป้องกันการล้น */
 }
 
@@ -936,9 +936,37 @@ h6.dashboard-kpi-title {
 }
 
 /* Graph Area */
-.chart-graph {
+/* .chart-graph {
     width: 100%;
     height: 400px;
+} */
+
+.chart-graph,
+#container {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 400px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: block;
+  box-sizing: border-box;
+}
+
+.highcharts-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.highcharts-root {
+  width: 100% !important;
+}
+
+.highcharts-background {
+  width: 100% !important;
 }
 
 /* Company Info */
