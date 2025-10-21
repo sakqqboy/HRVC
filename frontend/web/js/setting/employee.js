@@ -482,18 +482,21 @@ function initRadioSelection(containerSelector = '.radio-wrapper') {
     container.querySelectorAll('.radio-item').forEach(item => {
         item.addEventListener('click', () => {
             const clickedRadio = item.querySelector('input[type="radio"]');
-            const selectedValue = parseInt(clickedRadio.value);
+             const selectedValue = parseInt(clickedRadio.value);
+            const selectedId = parseInt(clickedRadio.id);
 
             container.querySelectorAll('.radio-item').forEach(i => {
                 const radio = i.querySelector('input[type="radio"]');
-                const radioValue = parseInt(radio.value);
+                 const radioValue = parseInt(radio.value);
+                const radioId = parseInt(radio.id);
                 const cycle = i.querySelector('.radio-cycle');
 
                 // ลบ svg ติ๊กถูก เดิม
                 const existingSvg = cycle.querySelector('.check-svg');
                 if (existingSvg) existingSvg.remove();
 
-                if (radioValue <= selectedValue) {
+                // if (radioValue <= selectedValue) {
+                    if (radioId <= selectedId) {
                     // ปรับสีและใส่ svg
                     i.style.background = '#FFFFFF';
                     i.style.borderColor = '#BBCDDE';

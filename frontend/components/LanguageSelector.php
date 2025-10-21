@@ -2,6 +2,7 @@
 
 namespace frontend\components;
 
+use Yii;
 use yii\base\BootstrapInterface;
 use yii\web\Cookie;
 use yii\base\Exception;
@@ -25,6 +26,7 @@ class LanguageSelector implements BootstrapInterface
             $cookies->add(new Cookie([
                 'name' => 'language',
                 'value' => $languageNew,
+                'client' => isset(Yii::$app->user->id) ? Yii::$app->user->id : null,
                 'expire' => time() + 60 * 60 * 24 * 30, // 30 days
             ])); //สร้าง cookie language ใหม่ให้มีระยะเวลา 30 วัน ตรงนี้ตั้งค่าได้ตามต้องการ
             $app->language = $languageNew; //กำหนดค่าภาษาให้กับ app หลัก

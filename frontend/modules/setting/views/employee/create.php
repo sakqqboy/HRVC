@@ -309,28 +309,63 @@ $form = ActiveForm::begin([
 
                             <div class="radio-wrapper">
                                 <?php
+                                // $roles = [
+                                //     1 => 'Staff',
+                                //     2 => 'Team Leader',
+                                //     3 => 'HR',
+                                //     4 => 'Manager',
+                                //     5 => 'General Manager',
+                                //     6 => 'Admin',
+                                //     7 => 'System Admin'
+                                // ];
                                 $roles = [
-                                    1 => 'Staff',
-                                    2 => 'Team Leader',
-                                    3 => 'HR',
-                                    4 => 'Manager',
-                                    5 => 'General Manager',
-                                    6 => 'Admin',
-                                    7 => 'System Admin'
+                                    1 => [
+                                        'roleName' => 'Staff',
+                                        "value" => 7
+                                    ],
+                                    2 => [
+                                        'roleName' => 'Team Leader',
+                                        "value" => 5
+                                    ],
+                                    3 => [
+                                        'roleName' => 'HR',
+                                        "value" => 6
+                                    ],
+                                    4 => [
+                                        'roleName' => 'Manager',
+                                        "value" => 4
+                                    ],
+                                    5 => [
+                                        'roleName' => 'General Manager',
+                                        "value" => 3
+                                    ],
+                                    6 => [
+                                        'roleName' => 'Admin',
+                                        "value" => 2
+                                    ],
+                                    7 => [
+                                        'roleName' => 'System Admin',
+                                        "value" => 1
+                                    ]
                                 ];
 
                                 $required = true;
                                 foreach ($roles as $id => $label) {
-                                    $checked = ($selectedRoleId == $id) ? 'checked' : '';
-                                    $htmlId = strtolower(str_replace(' ', '', $label));
+                                    // $checked = ($selectedRoleId == $id) ? 'checked' : '';
+                                    // $htmlId = strtolower(str_replace(' ', '', $label));
+                                    // $isRequired = $required ? 'required' : ''; // ✅ ใส่ required ตัวแรกเท่านั้น
+                                    // $required = false;
+
+                                    $checked = ($selectedRoleId == $label['value']) ? 'checked' : '';
+                                    $htmlId = $id;
                                     $isRequired = $required ? 'required' : ''; // ✅ ใส่ required ตัวแรกเท่านั้น
                                     $required = false;
 
                                     echo <<<HTML
                                     <div class="radio-item">
-                                        <input type="radio" id="{$htmlId}" name="role" value="{$id}" {$checked}>
+                                        <input type="radio" id="{$htmlId}" name="role" value="{$label['value']}" {$checked}>
                                         <span class="radio-cycle"></span>
-                                        <label for="{$htmlId}">{$label}</label>
+                                        <label for="{$htmlId}">{$label['roleName']}</label>
                                     </div>
                                     HTML;
                                 }
