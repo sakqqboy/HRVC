@@ -55,9 +55,9 @@ class EmployeeController extends Controller
             return $this->redirect(Yii::$app->homeUrl . 'site/login');
         }
         $role = UserRole::userRight();
-		if($role == 3 || $role == 1 ){
-			return  $this->redirect(Yii::$app->request->referrer);
-		}
+        if ($role == 3 || $role == 1) {
+            return  $this->redirect(Yii::$app->request->referrer);
+        }
         return true; //go to origin request
     }
 
@@ -78,22 +78,22 @@ class EmployeeController extends Controller
 
         $branch = Branch::find()->select('branchId')->where(["status" => 1])->asArray()->one();
         if (!isset($branch) && empty($branch)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/branch/no-branch/'. ModelMaster::encodeParams(["companyId" => '']));
+            return $this->redirect(Yii::$app->homeUrl . 'setting/branch/no-branch/' . ModelMaster::encodeParams(["companyId" => '']));
         }
 
         $department = Department::find()->select('departmentId')->where(["status" => 1])->asArray()->one();
         if (!isset($department) && empty($department)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/department/no-department/'. ModelMaster::encodeParams(["companyId" => '']));
+            return $this->redirect(Yii::$app->homeUrl . 'setting/department/no-department/' . ModelMaster::encodeParams(["companyId" => '']));
         }
 
         $team = Team::find()->select('teamId')->where(["status" => 1])->asArray()->one();
         if (!isset($team) && empty($team)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/team/no-team/'. ModelMaster::encodeParams(["companyId" => '']));
+            return $this->redirect(Yii::$app->homeUrl . 'setting/team/no-team/' . ModelMaster::encodeParams(["companyId" => '']));
         }
 
         $employee = Employee::find()->select('employeeId')->where(["status" => 1])->asArray()->one();
         if (isset($employee) && !empty($employee)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/'. ModelMaster::encodeParams(["companyId" => '']));
+            return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
         }
 
         return $this->render('no_employee', [
@@ -229,24 +229,24 @@ class EmployeeController extends Controller
             $employee->address1            = $_POST["address1"] ?? '';
             $employee->email               = $_POST["email"] ?? '';
             $employee->maritalStatus       = $_POST["maritalStatus"] ?? '';
-            $employee->birthDate           = !empty($_POST["birthDate"]) 
-                                                ? date("Y-m-d", strtotime($_POST["birthDate"])) 
-                                                : null;
+            $employee->birthDate           = !empty($_POST["birthDate"])
+                ? date("Y-m-d", strtotime($_POST["birthDate"]))
+                : null;
             $employee->companyId = !empty($_POST["companyId"]) ? $_POST["companyId"] : 0; // 0 = ค่า default
             $employee->branchId  = !empty($_POST["branchId"]) ? $_POST["branchId"] : 0; // 0 = ค่า default          = $_POST["branchId"] ?? '0';
             $employee->departmentId  = !empty($_POST["departmentId"]) ? $_POST["departmentId"] : 0; // 0 = ค่า default      = $_POST["departmentId"] ?? '0';
             $employee->teamId        = !empty($_POST["teamId"]) ? $_POST["teamId"] : 0; // 0 = ค่า default      = $_POST["teamId"] ?? '0';
             $employee->companyEmail        = $_POST["companyEmail"] ?? '';
-            $employee->hireDate            = !empty($_POST["hiringDate"]) 
-                                                ? date("Y-m-d", strtotime($_POST["hiringDate"])) 
-                                                : null;
+            $employee->hireDate            = !empty($_POST["hiringDate"])
+                ? date("Y-m-d", strtotime($_POST["hiringDate"]))
+                : null;
             $employee->probationStatus     = $_POST["overrideProbationEmployee"] ?? '';
-            $employee->probationStart      = !empty($_POST["fromDate"]) 
-                                                ? date("Y-m-d", strtotime($_POST["fromDate"])) 
-                                                : null;
-            $employee->probationEnd        = !empty($_POST["toDate"]) 
-                                                ? date("Y-m-d", strtotime($_POST["toDate"])) 
-                                                : null;
+            $employee->probationStart      = !empty($_POST["fromDate"])
+                ? date("Y-m-d", strtotime($_POST["fromDate"]))
+                : null;
+            $employee->probationEnd        = !empty($_POST["toDate"])
+                ? date("Y-m-d", strtotime($_POST["toDate"]))
+                : null;
             $employee->titleId   = !empty($_POST["titleId"]) ? $_POST["titleId"] : 0; // 0 = ค่า default           = $_POST["titleId"] ?? '';
             $employee->remark              = $_POST["remark"] ?? '';
             $employee->skills              = $_POST["skills"] ?? '';
@@ -306,19 +306,19 @@ class EmployeeController extends Controller
                 $user = new User();
                 $user->employeeId = $employee->employeeId;
                 $user->username =  $_POST["mailId"] ?? '';   // หรือใช้ companyEmail แทน
-                $user->password_hash = Yii::$app->security->generatePasswordHash($_POST["password"]); // เข้ารหัสแบบ secure
+                $user->password_hash = md5($_POST["password"]); // เข้ารหัส
                 $user->createDateTime = new Expression('NOW()');
                 $user->updateDateTime = new Expression('NOW()');
                 if ($user->save(false)) {
                     if (!empty($_POST["role"])) {
-                    // UserRole
-                    $role = new UserRole();
-                    $role->userId = $user->userId;
-                    $role->roleId = $_POST["role"] ?? '';
-                    $role->status = 1;
-                    $role->createDateTime = new Expression('NOW()');
-                    $role->updateDateTime = new Expression('NOW()');
-                    $role->save(false); // ✅ สำคัญ!
+                        // UserRole
+                        $role = new UserRole();
+                        $role->userId = $user->userId;
+                        $role->roleId = $_POST["role"] ?? '';
+                        $role->status = 1;
+                        $role->createDateTime = new Expression('NOW()');
+                        $role->updateDateTime = new Expression('NOW()');
+                        $role->save(false); // ✅ สำคัญ!
                     }
                     // UserAccess
                     if (!empty($_POST["moduleId"]) && is_array($_POST["moduleId"])) {
@@ -400,7 +400,7 @@ class EmployeeController extends Controller
 
                     // UserLanguage
                     // 1. เตรียมภาษาและระดับที่จับคู่กัน
-                   $languages = [];
+                    $languages = [];
 
                     // 1. เช็คก่อนว่ามี mainLanguage และ lavelLanguage มั้ย
                     if (!empty($_POST['mainLanguage']) && !empty($_POST['lavelLanguage'])) {
@@ -432,21 +432,16 @@ class EmployeeController extends Controller
                             $userLang->save(false);
                         }
                     }
-
                 }
             }
         }
         if ($_POST["darf"] == 1) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
-
-        }else{
+        } else {
             return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-profile/' . ModelMaster::encodeParams([
-            "employeeId" => $employee->employeeId
-        ]));
+                "employeeId" => $employee->employeeId
+            ]));
         }
-
-       
-
     }
 
     public function actionEmployeeProfile($hash)
@@ -546,14 +541,6 @@ class EmployeeController extends Controller
         if (!empty($employee['employeeConditionId']) && $employee['employeeConditionId'] != 0) {
             $employee["conditionName"] = EmployeeCondition::conditionName($employee['employeeConditionId']);
         }
-
-       
-        if (!empty($employee) && isset($employee['statusName'])) {
-            $employee["status"] = $employee['statusName'];
-        } else {
-            $employee["status"] = '-'; // หรือค่าที่ต้องการตั้งค่าเริ่มต้น
-        }
-
         return $this->render('employee_profile', [
             "employee" => $employeeData,
             "employeeId" => $employeeId
@@ -639,7 +626,7 @@ class EmployeeController extends Controller
 
         $userRole       = Api::connectApi(Path::Api() . 'masterdata/employee/user-role?id=' . $employeeId);
         $userAccess     = Api::connectApi(Path::Api() . 'masterdata/employee/user-access?id=' . $employeeId);
-        $userCertificate= Api::connectApi(Path::Api() . 'masterdata/employee/user-certificate?id=' . $employeeId);
+        $userCertificate = Api::connectApi(Path::Api() . 'masterdata/employee/user-certificate?id=' . $employeeId);
         $userLanguage   = Api::connectApi(Path::Api() . 'masterdata/employee/user-language?id=' . $employeeId);
 
         $countries      = Api::connectApi(Path::Api() . 'masterdata/country/company-country');
@@ -692,7 +679,7 @@ class EmployeeController extends Controller
             $currentPage = $page[1];
         }
         $companyId = null;
-       $employees = Api::connectApi(
+        $employees = Api::connectApi(
             Path::Api() . 'masterdata/employee/employee-draft?companyId=' . $companyId . '&&currentPage=' . $currentPage . '&&limit=' . $limit
         );
 
@@ -716,6 +703,7 @@ class EmployeeController extends Controller
     {
 
         if (isset($_POST["employeeFirstname"]) && trim($_POST["employeeSurename"] != '')) {
+            // throw new exception(print_r(Yii::$app->request->post(), true));
             $userId =  $_POST["userId"];
             $employee = Employee::find()->where(["employeeId" => $_POST["emId"]])->one();
             if ($employee) {
@@ -819,13 +807,16 @@ class EmployeeController extends Controller
                         $user->createDateTime = new Expression('NOW()'); // แค่ตอนสร้างใหม่
                     }
                     $user->username = $_POST["mailId"];
-                    $password = $_POST["password"] ?? null;
-                    if (!empty($password)) {
-                        // ถ้ายังไม่มี password หรือ validate ไม่ผ่าน ให้ตั้ง password ใหม่
-                        if (empty($user->password_hash) || md5($password, $user->password_hash)) {
-                            $user->password_hash = md5($password);
-                        }
+                    $password = $_POST["password"];
+                    if ($password != $user->password_hash) {
+                        $user->password_hash = md5($password);
                     }
+                    // if (!empty($password)) {
+                    //     // ถ้ายังไม่มี password หรือ validate ไม่ผ่าน ให้ตั้ง password ใหม่
+                    //     if (empty($user->password_hash) || !Yii::$app->security->validatePassword($password, $user->password_hash)) {
+                    //         $user->password_hash = Yii::$app->security->generatePasswordHash($password);
+                    //     }
+                    // }
                     $user->updateDateTime = new Expression('NOW()');
                     if ($user->save(false)) {
                         // UserRole
@@ -967,7 +958,6 @@ class EmployeeController extends Controller
 
                                     // ใช้ path สำหรับเก็บลง DB
                                     $cerImagePath = 'images/certificate/' . $imgName;
-
                                 }
                                 // 🔁 บันทึกข้อมูล (Insert ใหม่ หรือ Update ก็ได้)
                                 $certificate = Certificate::findOne(['cerId' => $tmpId]);
@@ -1108,7 +1098,7 @@ class EmployeeController extends Controller
         $departments = [];
         if (!empty($branchId)) {
             $departments = Department::find()
-                ->select(['departmentId','departmentName'])
+                ->select(['departmentId', 'departmentName'])
                 ->where(["branchId" => $branchId, "status" => 1])
                 ->asArray()
                 ->orderBy('departmentName')
@@ -1119,7 +1109,7 @@ class EmployeeController extends Controller
         $teams = [];
         if (!empty($departmentId)) {
             $teams = Team::find()
-                ->select(['teamId','teamName'])
+                ->select(['teamId', 'teamName'])
                 ->where(["departmentId" => $departmentId, "status" => 1])
                 ->asArray()
                 ->orderBy('teamName')
@@ -1228,7 +1218,7 @@ class EmployeeController extends Controller
         $departments = [];
         if (!empty($branchId)) {
             $departments = Department::find()
-                ->select(['departmentId','departmentName'])
+                ->select(['departmentId', 'departmentName'])
                 ->where(["branchId" => $branchId, "status" => 1])
                 ->asArray()
                 ->orderBy('departmentName')
@@ -1239,7 +1229,7 @@ class EmployeeController extends Controller
         $teams = [];
         if (!empty($departmentId)) {
             $teams = Team::find()
-                ->select(['teamId','teamName'])
+                ->select(['teamId', 'teamName'])
                 ->where(["departmentId" => $departmentId, "status" => 1])
                 ->asArray()
                 ->orderBy('teamName')
@@ -1374,27 +1364,27 @@ class EmployeeController extends Controller
     {
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-    $request = Yii::$app->request;
-    $employeeId = $request->post('employeeId', null);
+        $request = Yii::$app->request;
+        $employeeId = $request->post('employeeId', null);
 
-    if (!$employeeId) {
-        return ['status' => false, 'message' => 'ไม่พบ employeeId'];
-    }
+        if (!$employeeId) {
+            return ['status' => false, 'message' => 'ไม่พบ employeeId'];
+        }
 
-    // หา userId จาก employeeId
-    $user = User::find()->where(['employeeId' => $employeeId])->one();
-    $userId = $user ? $user->userId : null;
+        // หา userId จาก employeeId
+        $user = User::find()->where(['employeeId' => $employeeId])->one();
+        $userId = $user ? $user->userId : null;
 
-    // อัพเดต status = 99
-    Employee::updateAll(["status" => 99], ["employeeId" => $employeeId]);
-    User::updateAll(["status" => 99], ["employeeId" => $employeeId]);
+        // อัพเดต status = 99
+        Employee::updateAll(["status" => 99], ["employeeId" => $employeeId]);
+        User::updateAll(["status" => 99], ["employeeId" => $employeeId]);
 
-    if ($userId) {
-        UserRole::updateAll(["status" => 99], ["userId" => $userId]);
-        UserAccess::updateAll(["status" => 99], ["userId" => $userId]);
-    }
+        if ($userId) {
+            UserRole::updateAll(["status" => 99], ["userId" => $userId]);
+            UserAccess::updateAll(["status" => 99], ["userId" => $userId]);
+        }
 
-    return ['status' => true];
+        return ['status' => true];
     }
     public function actionMultiDeleteEmployee()
     {
@@ -2263,10 +2253,10 @@ class EmployeeController extends Controller
     }
 
     public function actionCompanyMultiBranch()
-	{
-		$companyId = $_POST["companyId"];
-		$acType = $_POST["acType"];
-		$branches = Api::connectApi(Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
+    {
+        $companyId = $_POST["companyId"];
+        $acType = $_POST["acType"];
+        $branches = Api::connectApi(Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 
         if ($acType == "create") {
             $branchText = $this->renderAjax('multi_branch', ["branches" => $branches]);
@@ -2285,9 +2275,9 @@ class EmployeeController extends Controller
             "kpiId" => 0
         ]);
 
-		$res["status"] = true;
-		$res["branchText"] = $branchText;
-		$res["kpiGroup"] = $kpiGroup;
-		return json_encode($res);
-	}
+        $res["status"] = true;
+        $res["branchText"] = $branchText;
+        $res["kpiGroup"] = $kpiGroup;
+        return json_encode($res);
+    }
 }

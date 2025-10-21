@@ -27,7 +27,7 @@ function searchWord() {
 		$("#word-result").html('');
 	}
 }
-function deleteTran(translatorId) { 
+function deleteTran(translatorId) {
 	var url = $url + 'language/default/delete-translate';
 	if (confirm('Are you sure to delete this translate?')) {
 		$.ajax({
