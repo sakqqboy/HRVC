@@ -65,7 +65,7 @@ $form = ActiveForm::begin([
 <div class="company-group-body mt-50 border" style="margin-left: -30px;margin-right: -30px;">
     <div class=" company-group-edit bg-white">
         <div class=" d-flex align-items-center gap-2">
-            <a href="javascript:history.back()" style="text-decoration: none; width:66px; height:26px;"
+            <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl . 'setting/employee/index' ?>" style="text-decoration: none; width:66px; height:26px;"
                 class="btn-create-branch">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg"
                     style="width:18px; height:18px; margin-top:-3px;">
@@ -298,7 +298,7 @@ $form = ActiveForm::begin([
                             </div>
                         </div>
 
-                        <?php $selectedRoleId = $userRole['roleid'] ?? null; ?>
+                        <?php $selectedRoleId = $userRole['roleId'] ?? null; ?>
 
                         <div class="w-100">
                             <div class="w-100">

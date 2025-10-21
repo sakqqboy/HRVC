@@ -102,7 +102,7 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function actionIndex($hash)
+    public function actionIndex($hash = false)
     {
 
         $param = ModelMaster::decodeParams($hash);
@@ -621,10 +621,9 @@ class EmployeeController extends Controller
         $groupId = $group["groupId"];
         $employee       = Api::connectApi(Path::Api() . 'masterdata/employee/employee-update?id=' . $employeeId);
         $userEmployee   = Api::connectApi(Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId);
-
         $userId = $userEmployee['userId'] ?? '';
-
         $userRole       = Api::connectApi(Path::Api() . 'masterdata/employee/user-role?id=' . $employeeId);
+        //throw new exception(print_r($userRole, true));
         $userAccess     = Api::connectApi(Path::Api() . 'masterdata/employee/user-access?id=' . $employeeId);
         $userCertificate = Api::connectApi(Path::Api() . 'masterdata/employee/user-certificate?id=' . $employeeId);
         $userLanguage   = Api::connectApi(Path::Api() . 'masterdata/employee/user-language?id=' . $employeeId);

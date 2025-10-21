@@ -19,7 +19,7 @@ use backend\models\hrvc\UserLanguage;
 use backend\models\hrvc\UserRole;
 use common\models\ModelMaster;
 use Exception;
-use frontend\models\hrvc\User;
+use backend\models\hrvc\User;
 use yii\web\Controller;
 use Yii;
 use yii\web\Response;
@@ -50,7 +50,7 @@ class EmployeeController extends Controller
 
 		return parent::beforeAction($action);
 	}
-	
+
 	public function actionEmployeeDetail($id)
 	{
 		$employee = Employee::find()
@@ -405,9 +405,9 @@ class EmployeeController extends Controller
 	public function actionUserRole($id)
 	{
 		$employee = Employee::findOne($id);
-		$userId=$employee->user->userId;
+		$userId = $employee->user->userId;
 		$userRole = UserRole::find()
-			->select(['userRoleId', 'roleid', 'userId AS role'])
+			->select(['userRoleId', 'roleId', 'userId AS role'])
 			->where(['userId' => $userId])
 			->asArray()
 			->one();
@@ -419,7 +419,7 @@ class EmployeeController extends Controller
 	public function actionUserAccess($id)
 	{
 		$employee = Employee::findOne($id);
-		$userId=$employee->user->userId;
+		$userId = $employee->user->userId;
 		$userAccess = UserAccess::find()
 			->select(['acessId', 'moduleId', 'userId'])
 			->where(['userId' => $userId])
@@ -431,7 +431,7 @@ class EmployeeController extends Controller
 	public function actionUserCertificate($id)
 	{
 		$employee = Employee::findOne($id);
-		$userId=$employee->user->userId;
+		$userId = $employee->user->userId;
 		$certificates = Certificate::find()
 			->select([
 				'cerId',
@@ -465,7 +465,7 @@ class EmployeeController extends Controller
 	public function actionUserLanguage($id)
 	{
 		$employee = Employee::findOne($id);
-		$userId=$employee->user->userId;
+		$userId = $employee->user->userId;
 
 		$Languages = UserLanguage::find()
 			->alias('u') // alias สำหรับ user_language
