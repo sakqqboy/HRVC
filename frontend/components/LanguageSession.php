@@ -7,13 +7,15 @@ use Yii;
 
 class LanguageSession
 {
-	public static function userDefaultLanguage()
+
+	public static function setLanguageSelect($type)
 	{
-		$cookie = Yii::$app->request->cookies;
-		if (!$cookie->has('language')) {
-			$language = $cookie->getValue('language');
-		} else {
-			$language = "en-US";
+		$session = Yii::$app->session;
+		$session->open();
+		if (isset(Yii::$app->user->id)) {
+			$session->set('currentType', [
+				"value" => $type,
+			]);
 		}
 	}
 }
