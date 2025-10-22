@@ -198,10 +198,12 @@ if (isset($employee['birthDate'])) {
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500">
-                    <?= $employee['emergencyTel'] ?? '-' ?>
+                <?= !empty($employee['emergencyTel']) ? htmlspecialchars($employee['emergencyTel']) : '-' ?>
+                    <?php if (!empty($employee['emergencyTel'])): ?>
                     <img src="<?= Yii::$app->homeUrl ?>image/coppy.svg"
                         onclick="javascript:copyToClipboard(<?= $employee['emergencyTel'] ?? '-' ?>)"
                         style="width: 10.884px; height: 12px;">
+                    <?php endif; ?>
                 </span>
             </div>
         </div>
@@ -216,10 +218,12 @@ if (isset($employee['birthDate'])) {
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500">
-                    <?= $employee['companyEmail'] ?? '-' ?>
+                    <?= !empty($employee['companyEmail']) ? htmlspecialchars($employee['companyEmail']) : '-' ?>
+                    <?php if (!empty($employee['companyEmail'])): ?>
                     <img src="<?= Yii::$app->homeUrl ?>image/coppy.svg"
                         onclick="javascript:copyToClipboard('<?= $employee['companyEmail'] ?? '-' ?>')"
                         style="width: 10.884px; height: 12px;">
+                    <?php endif; ?>
                 </span>
             </div>
         </div>
@@ -234,10 +238,12 @@ if (isset($employee['birthDate'])) {
             </div>
             <div style="flex: 8;">
                 <span class="font-size-16 font-weight-500">
-                    <?= $employee['email'] ?? '-' ?>
+                    <?= !empty($employee['email']) ? htmlspecialchars($employee['email']) : '-' ?>
+                    <?php if (!empty($employee['email'])): ?>
                     <img src="<?= Yii::$app->homeUrl ?>image/coppy.svg"
                         onclick="javascript:copyToClipboard('<?= $employee['email'] ?? '-' ?>')"
                         style="width: 10.884px; height: 12px;">
+                         <?php endif; ?>
                 </span>
             </div>
         </div>
@@ -252,7 +258,9 @@ if (isset($employee['birthDate'])) {
                 </span>
             </div>
             <div style="flex: 8;">
-                <span class="font-size-16 font-weight-500"><?= $employee['address1'] ?? '-' ?></span>
+                <span class="font-size-16 font-weight-500">
+                <?= !empty($employee['address1']) ? htmlspecialchars($employee['address1']) : '-' ?>
+            </span>
             </div>
         </div>
 
@@ -287,30 +295,33 @@ if (isset($employee['birthDate'])) {
                 </span>
             </div>
             <div style="display: flex; flex: 8; align-items: center;">
-                <?php if (!empty($UserLanguage[1]['name'])): ?>
                 <div class="language-dropdown mr-25" style="height: 30px;">
-                    <?php
-                    $flag1 = isset($UserLanguage[1]['flag']) ? $UserLanguage[1]['flag'] : '';
-                    ?>
+                <?php if (!empty($UserLanguage[1]['name'] ?? '')): ?>
+                    <?php $flag1 = $UserLanguage[1]['flag'] ?? ''; ?>
                     <span class="font-size-16 font-weight-500">
-                        <img src="<?= Yii::$app->homeUrl . htmlspecialchars($flag1) ?>" alt="Language"
+                        <img src="<?= Yii::$app->homeUrl . htmlspecialchars($flag1) ?>" 
+                            alt="Language"
                             style="width: 20px; height: 20px; border: none; border-radius: 100%;">
-                        <?= $UserLanguage[1]['name'] ?? '-' ?>
+                        <?= htmlspecialchars($UserLanguage[1]['name']) ?>
                     </span>
-                </div>
+                <?php else: ?>
+                    <span class="font-size-16 font-weight-500">-</span>
                 <?php endif; ?>
-                <?php if (!empty($UserLanguage[2]['name'])): ?>
-                <div class="language-dropdown mr-25" style="height: 30px;">
-                    <?php
-                    $flag1 = isset($UserLanguage[2]['flag']) ? $UserLanguage[2]['flag'] : '';
-                ?>
+            </div>
+
+            <div class="language-dropdown mr-25" style="height: 30px;">
+                <?php if (!empty($UserLanguage[2]['name'] ?? '')): ?>
+                    <?php $flag2 = $UserLanguage[2]['flag'] ?? ''; ?>
                     <span class="font-size-16 font-weight-500">
-                        <img src="<?= Yii::$app->homeUrl . htmlspecialchars($flag1) ?>" alt="Language"
+                        <img src="<?= Yii::$app->homeUrl . htmlspecialchars($flag2) ?>" 
+                            alt="Language"
                             style="width: 20px; height: 20px; border: none; border-radius: 100%;">
-                        <?= $UserLanguage[2]['name'] ?? '' ?>
+                        <?= htmlspecialchars($UserLanguage[2]['name']) ?>
                     </span>
-                </div>
+                <?php else: ?>
+                    <span class="font-size-16 font-weight-500">-</span>
                 <?php endif; ?>
+            </div>
 
             </div>
         </div>
@@ -343,7 +354,7 @@ if (isset($employee['birthDate'])) {
                 </span>
             </div>
             <div style="flex: 8;">
-                <span class="font-size-16 font-weight-500"><?= $employee['remark'] ?? '-' ?></span>
+                <span class="font-size-16 font-weight-500"><?= !empty($employee['remark']) ? htmlspecialchars($employee['remark']) : '-' ?></span>
             </div>
         </div>
     </div>
