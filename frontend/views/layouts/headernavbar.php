@@ -1,6 +1,7 @@
 <?php
 
 use common\models\ModelMaster;
+use frontend\models\hrvc\DefaultLanguage;
 use frontend\models\hrvc\User;
 
 
@@ -64,7 +65,10 @@ use frontend\models\hrvc\User;
             if ($cookie->has('language')) {
                 $language = $cookie->getValue('language');
             } else {
-                $language = "en-US";
+                $language = DefaultLanguage::userDefaultLanguage();
+                if ($language == '') {
+                    $language = "en-US";
+                }
             }
         }
         switch ($language) {
