@@ -405,7 +405,7 @@ $form = ActiveForm::begin([
             </div>
 
             <!-- Contact & Personal Details -->
-            <div>
+            <div class="mt-60">
                 <div>
                     <!-- head -->
                     <span class="font-size-16 font-weight-600">
@@ -489,7 +489,8 @@ $form = ActiveForm::begin([
                                 value="<?= $employee['employeeSurename'] ?? '' ?>" required>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                            <text class="font-size-16 font-weight-500">
+                                <!-- <span class="text-danger">* </span> -->
                                 <?= Yii::t('app', 'Nationality') ?>
                             </text>
                             <div class="input-group">
@@ -513,7 +514,7 @@ $form = ActiveForm::begin([
                                 </span>
 
                                 <select class="form-select" name="nationalityId" id="nationalityId"
-                                    style="border-left: none;" required>
+                                    style="border-left: none;">
                                     <option value="" disabled <?= empty($employee['nationalityId']) ? 'selected' : '' ?>
                                         hidden style="color: var(--Helper-Text, #8A8A8A);">
                                         <?= Yii::t('app', 'Select Nationality') ?>
@@ -576,7 +577,8 @@ $form = ActiveForm::begin([
                             </div>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                            <text class="font-size-16 font-weight-500">
+                                <!-- <span class="text-danger">* </span> -->
                                 <?= Yii::t('app', 'Marital Status') ?>
                             </text>
                             <div class="input-group">
@@ -585,7 +587,7 @@ $form = ActiveForm::begin([
                                         style="width: 20px; height: 20px;">
                                 </span>
                                 <select class="form-select" name="maritalStatus" id="maritalStatus"
-                                    style="border-left: none;" required>
+                                    style="border-left: none;" >
                                     <option value="" disabled <?= empty($employee['maritalStatus']) ? 'selected' : '' ?>
                                         hidden style="color: var(--Helper-Text, #8A8A8A);">
                                         <?= Yii::t('app', 'Select') ?>
@@ -614,7 +616,8 @@ $form = ActiveForm::begin([
                             </div>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <label class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                            <label class="font-size-16 font-weight-500">
+                                <!-- <span class="text-danger">* </span> -->
                                 <?= Yii::t('app', 'Date of Birth') ?>
                             </label>
                             <div class="input-group" id="group-birtdate" style="position: relative;">
@@ -649,7 +652,7 @@ $form = ActiveForm::begin([
             </div>
 
             <!-- Work Details -->
-            <div>
+            <div class="mt-60">
                 <div class="between-center">
                     <!-- head -->
                     <div>
@@ -808,7 +811,8 @@ $form = ActiveForm::begin([
                             </div>
                         </div>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                            <text class="font-size-16 font-weight-500">
+                                <!-- <span class="text-danger">* </span> -->
                                 <?= Yii::t('app', 'Work Email') ?>
                             </text>
                             <div class="input-group">
@@ -819,7 +823,7 @@ $form = ActiveForm::begin([
                                 <input type="text" style="border-left: none;" name="companyEmail" id="companyEmail"
                                     class="form-control" placeholder="sample@gmail.com"
                                     value="<?= isset($employee['companyEmail']) ? $employee['companyEmail'] : '' ?>"
-                                    required>
+                                    >
                             </div>
                         </div>
 
@@ -919,11 +923,11 @@ $form = ActiveForm::begin([
             </div>
 
             <!-- Job Description -->
-            <div>
+            <div class="mt-60">
                 <div>
                     <!-- head -->
                     <span class="font-size-16 font-weight-600">
-                        <?= Yii::t('app', 'Job Description') ?>
+                        <?= Yii::t('app', 'Designation & Job Description') ?>
                     </span>
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
                         data-placement="top" aria-label="<?= Yii::t('app', 'Job Description') ?>"
@@ -940,8 +944,9 @@ $form = ActiveForm::begin([
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
                                     data-placement="top" aria-label="<?= Yii::t('app', 'Employee’s Title') ?>"
                                     data-bs-original-title="<?= Yii::t('app', 'Employee’s Title') ?>"><span
-                                    class="text-gray font-size-13 font-weight-400 mr-12">
+                                    class="text-gray font-size-13 font-weight-400 mr-12 ml-12">
                                     <?= Yii::t('app', 'Can’t find the title?') ?></span>
+
                                 <a href="<?= Yii::$app->homeUrl ?>setting/title/create/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>"
                                     class="text-blue font-size-13 font-weight-500">
                                     <?= Yii::t('app', 'Register Title Here') ?> <img
@@ -1325,7 +1330,7 @@ $form = ActiveForm::begin([
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12 " style="border-right:lightgray solid thin;">
                             <span class=" font-size-16 font-weight-500">
-                                <span class="text-danger">* </span>
+                                <!-- <span class="text-danger">* </span> -->
                                 <?= Yii::t('app', 'Certificate Achievements') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
                                     data-placement="top" aria-label="<?= Yii::t('app', 'Certificate Achievements') ?>"
@@ -1349,7 +1354,7 @@ $form = ActiveForm::begin([
                         <div class="col-lg-6 col-md-6 col-12 pl-40">
                             <div class="company-group-edit bg-white">
                                 <span class=" font-size-16 font-weight-500">
-                                    <span class="text-danger">* </span>
+                                    <!-- <span class="text-danger">* </span> -->
                                     <?= Yii::t('app', 'Skill Tags') ?>
                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                         data-toggle="tooltip" data-placement="top"
@@ -1413,7 +1418,8 @@ $form = ActiveForm::begin([
                         <!-- body -->
                         <div class="row">
                             <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                                <text class="font-size-16 font-weight-500"><span class="text-danger">*</span>
+                                <text class="font-size-16 font-weight-500">
+                                    <!-- <span class="text-danger">*</span> -->
                                     <?= Yii::t('app', 'Primary Language Spoken') ?>
                                 </text>
                                 <div class="input-group">
@@ -1443,7 +1449,7 @@ $form = ActiveForm::begin([
                                     ?>
 
                                     <select class="form-select" style="width: 290.59px; border-left: none;"
-                                        id="mainLanguage" name="mainLanguage" required="">
+                                        id="mainLanguage" name="mainLanguage">
                                         <option value="" disabled <?= $selectedLanguageId ? '' : 'selected' ?> hidden
                                             style="color: var(--Helper-Text, #8A8A8A); ">
                                             <?= Yii::t('app', 'Select preferred language') ?>
@@ -1469,14 +1475,15 @@ $form = ActiveForm::begin([
                                 </div>
                             </div>
                             <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                                <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                <text class="font-size-16 font-weight-500">
+                                    <!-- <span class="text-danger">* </span> -->
                                     <?= Yii::t('app', 'Level of Proficiency') ?>
                                 </text>
                                 <?php
                                 // ดึงค่าภาษาเริ่มต้นจาก array ตำแหน่งที่ 0 (ถ้ามี)
                                 $selectedLanguageId = isset($userLanguage[0]['lavel']) ? $userLanguage[0]['lavel'] : '';
                                 ?>
-                                <select class="form-select" name="lavelLanguage" id="lavelLanguage" required>
+                                <select class="form-select" name="lavelLanguage" id="lavelLanguage" >
                                     <option value="" disabled <?= $selectedLanguageId ? '' : 'selected' ?> hidden
                                         style="color: var(--Helper-Text, #8A8A8A);">
                                         <?= Yii::t('app', 'Select') ?>
