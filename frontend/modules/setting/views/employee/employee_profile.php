@@ -1,8 +1,10 @@
 <?php
 
 use common\models\ModelMaster;
+use frontend\models\hrvc\Status;
 
 $this->title = 'view';
+$statusTexArr = Status::allStatusText();
 ?>
 <style>
 .menu-item {
@@ -107,54 +109,64 @@ $this->title = 'view';
                     <?php
 						// $statusClass = "status-badge-full-time";
                         $statusClass = "status-badge-full-time";
-						if ($employee["status"] == "Full-Time") {
+						if ($employee["status"] == "1") {
 							$statusClass = "status-badge-full-time";
                             $statusClass = "background: #2580D3;";
 						}
-						if ($employee["status"] == "Probationary") {
+						if ($employee["status"] == "2") {
 							$statusClass = "status-badge-probationary";
                             $statusClass = "background: #20598D;";
 						}
-						if ($employee["status"] == "Part-Time") {
+						if ($employee["status"] == "3") {
 							$statusClass = "status-badge-part-Time";
                             $statusClass = "background: #20598D;";
 						}
-						if ($employee["status"] == "Intern") {
+						if ($employee["status"] == "4") {
 							$statusClass = "status-badge-intern";
                             $statusClass = "background: #FFE100;";
 						}
-						if ($employee["status"] == "Temporary") {
+						if ($employee["status"] == "5") {
 							$statusClass = "status-badge-temporarye";
                             $statusClass = "background: #FF9D00;";
 						}
-						if ($employee["status"] == "Freelance") {
+						if ($employee["status"] == "6") {
 							$statusClass = "status-badge-freelance";
                             $statusClass = "background: #FF9D00;";
 						}
-						if ($employee["status"] == "Suspended") {
+						if ($employee["status"] == "7") {
 							$statusClass = "status-badge-sspended";
                             $statusClass = "background: #E05757;";
 						}
-						if ($employee["status"] == "Resigned") {
+						if ($employee["status"] == "8") {
 							$statusClass = "status-badge-resigned";
                             $statusClass = "background: #EC1D42;";
 						}
-						if ($employee["status"] == "Lay off") {
+						if ($employee["status"] == "9") {
 							$statusClass = "status-badge-layoff";
                             $statusClass = "background: #FF9D00;";
 						}
-						if ($employee["status"] == "not set") {
+						if ($employee["status"] == "") {
 							$statusClass = "status-badge-notset";
                             $statusClass = "background: #2580D3;";
 						}
-						//throw new exception(print_r($employees, true));
 				?>
-                    <!-- <span class="<?=$statusClass?>">
-                        <?= $employee['status'] ?>
-                    </span> -->
+
                     <span class="condition-name badge position-absolute bottom-0 start-50 translate-middle-x"
                         style="<?= $statusClass ?>">
-                        <?= $employee['status'] ?>
+                       <?php
+                        $statusId = $employee['status'] ?? null;
+
+                        if (!empty($statusTexArr) && $statusId !== null) {
+                            // เช็กว่ามี statusId ใน array ไหม
+                            if (isset($statusTexArr[$statusId])) {
+                                echo Yii::t('app', $statusTexArr[$statusId]['statusName']);
+                            } else {
+                                echo '-'; // ถ้า statusId ไม่มีใน array
+                            }
+                        } else {
+                            echo '-'; // ถ้า employee status ไม่มีค่า
+                        }
+                        ?>
                     </span>
                 </div>
 

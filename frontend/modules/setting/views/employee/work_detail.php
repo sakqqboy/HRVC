@@ -175,14 +175,14 @@ if (!empty($employee['probationEnd'])) {
                             <span
                                 class="font-size-16 font-weight-500 mb-22"><?= Yii::t('app', 'Purpose of the Job') ?></span>
                             <span class="font-size-14 font-weight-400">
-                                <?= nl2br(htmlspecialchars($title['purpose'])) ?>
+                                <?= !empty($title['purpose'] ?? '') ? nl2br(htmlspecialchars($title['purpose'])) : '-' ?>
                             </span>
                         </div>
                         <div class="row">
                             <span
                                 class="font-size-16 font-weight-500 mb-22"><?= Yii::t('app', 'Core Responsibility') ?></span>
                             <span class="font-size-14 font-weight-400">
-                                <?= nl2br(htmlspecialchars($title['jobDescription'])) ?>
+                                <?= !empty($title['purpose'] ?? '') ? nl2br(htmlspecialchars($title['jobDescription'])) : '-' ?>
                             </span>
                         </div>
                     </div>
@@ -190,7 +190,7 @@ if (!empty($employee['probationEnd'])) {
                         <span
                             class="font-size-16 font-weight-500 mb-22"><?= Yii::t('app', 'Key Responsibility') ?></span>
                         <span class="font-size-14 font-weight-400">
-                            <?= nl2br(htmlspecialchars($title['keyResponsibility'])) ?>
+                            <?= !empty($title['purpose'] ?? '') ? nl2br(htmlspecialchars($title['keyResponsibility'])) : '-' ?>
                         </span>
                     </div>
                 </div>
