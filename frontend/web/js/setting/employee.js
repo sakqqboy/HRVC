@@ -1273,7 +1273,8 @@ $('#create-employee').on('beforeSubmit', function (e) {
     }
 
     // ตรวจสอบว่า certificates, cerImages, certificatesFiles ถูกประกาศไว้และมีข้อมูล
-    if(cerImages){
+    //    if(cerImages){
+    if (typeof cerImages !== 'undefined' && cerImages.length > 0) {
         if (
             certificates.length !== cerImages.length ||
             certificates.length !== certificatesFiles.length
@@ -1281,15 +1282,14 @@ $('#create-employee').on('beforeSubmit', function (e) {
             alert("The information is incomplete. Please upload all photos and certificate files.");
             return false;
         }
+        cerImages.forEach((file, index) => {
+            formData.append(`cerImage[${index}]`, file);
+        });
     }
+//    }
     const form = e.target;
     const formData = new FormData(form);
-
     formData.set('certificateData', JSON.stringify(certificates));
-
-    cerImages.forEach((file, index) => {
-        formData.append(`cerImage[${index}]`, file);
-    });
 
     certificatesFiles.forEach((file, index) => {
         formData.append(`certificate[${index}]`, file);
