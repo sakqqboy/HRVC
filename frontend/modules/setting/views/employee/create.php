@@ -248,7 +248,8 @@ $form = ActiveForm::begin([
                                 </div>
                             </div>
                             <div>
-                                <text class="font-size-16 font-weight-500"><span class="text-danger">* </span>
+                                <text class="font-size-16 font-weight-500">
+                                    <!-- <span class="text-danger">* </span> -->
                                     <?php
                                     $flag = 'image/e-world.svg'; // default fallback flag
 
@@ -276,7 +277,7 @@ $form = ActiveForm::begin([
 
                                     <select class="form-select font-size-14"
                                         style="width:clamp(290px, 21.22vw, 560px); border-left: none;"
-                                        id="defaultLanguage" name="defaultLanguage" required>
+                                        id="defaultLanguage" name="defaultLanguage" >
                                         <option value="" disabled hidden
                                             <?= empty($employee['defaultLanguage']) ? 'selected' : '' ?>
                                             style="color: var(--Helper-Text, #8A8A8A);">
@@ -689,7 +690,7 @@ $form = ActiveForm::begin([
                             </text>
                             <div class="input-group">
                                 <select class="form-select" id="companySelectId" name="companyId"
-                                    style="appearance: none; background-image: none;">
+                                    style="appearance: none; background-image: none;" require>
                                     <option value=""><?= Yii::t('app', 'Which Company your are is working in ? ') ?>
                                     </option>
                                     <?php if (isset($companies) && count($companies) > 0): ?>
@@ -861,7 +862,7 @@ $form = ActiveForm::begin([
 
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <div style="display: flex;  align-items: center; gap: 5px;">
-                                <span class="text-danger">* </span>
+                                <!-- <span class="text-danger">* </span> -->
                                 <label class="switch">
                                     <input type="checkbox" id="override-probation-employee"
                                         <?= (isset($employee['overrideProbationEmployee']) && $employee['overrideProbationEmployee'] == 1) ? 'checked' : '' ?>>
@@ -939,8 +940,8 @@ $form = ActiveForm::begin([
                     <div class="row">
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <label class="font-size-16 font-weight-500">
-                                <span class="text-danger">*</span>
-                                <?= Yii::t('app', 'Employee’s Title') ?>
+                                <!-- <span class="text-danger">*</span> -->
+                                <?= Yii::t('app', 'Employee’s Designation / Position') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
                                     data-placement="top" aria-label="<?= Yii::t('app', 'Employee’s Title') ?>"
                                     data-bs-original-title="<?= Yii::t('app', 'Employee’s Title') ?>"><span
@@ -958,7 +959,7 @@ $form = ActiveForm::begin([
                             <div class="input-group">
                                 <select id="titleSelectId" class="form-select"
                                     style="border-right: none; width: 239px; appearance: none; background-image: none;"
-                                    name="titleId" data-company-branch="title" required disabled>
+                                    name="titleId" data-company-branch="title" disabled>
                                     <option value="" disabled selected hidden
                                         style="color: var(--Helper-Text, #8A8A8A);">
                                         <?= Yii::t('app', 'What your his/her Title?') ?>

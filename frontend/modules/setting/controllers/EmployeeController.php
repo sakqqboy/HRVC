@@ -709,34 +709,34 @@ class EmployeeController extends Controller
                 $oldPicture = $employee->picture;
                 $oldResume = $employee->resume;
                 $oldAgreement = $employee->employeeAgreement;
-                $employee->employeeConditionId = $_POST["status"];
-                $employee->employeeNumber = $_POST["employeeId"];
-                $employee->defaultLanguage = $_POST["defaultLanguage"];
-                $employee->salutation = $_POST["salutation"];
-                $employee->gender = $_POST["gender"];
-                $employee->employeeFirstname = $_POST["employeeFirstname"];
-                $employee->employeeSurename = $_POST["employeeSurename"];
-                $employee->nationalityId = $_POST["nationalityId"];
-                $employee->telephoneNumber = $_POST["telephoneNumber"];
-                $employee->emergencyTel = $_POST["emergencyTel"];
-                $employee->address1 = $_POST["address1"];
-                $employee->email = $_POST["email"];
-                $employee->maritalStatus = $_POST["maritalStatus"];
-                $employee->birthDate = date("Y-m-d", strtotime($_POST["birthDate"]));
-                $employee->companyId = $_POST["companyId"];
-                $employee->branchId = $_POST["branchId"];
-                $employee->departmentId = $_POST["departmentId"];
-                $employee->teamId = $_POST["teamId"];
-                $employee->companyEmail = $_POST["companyEmail"];
-                $employee->hireDate = date("Y-m-d", strtotime($_POST["hiringDate"]));
-                $employee->probationStatus = $_POST["overrideProbationEmployee"];
-                $employee->probationStart = date("Y-m-d", strtotime($_POST["fromDate"]));
-                $employee->probationEnd = date("Y-m-d", strtotime($_POST["toDate"]));
-                $employee->titleId = $_POST["titleId"];
-                $employee->remark = $_POST["remark"];
-                $employee->skills = $_POST["skills"];
-                $employee->contact = $_POST["linkedin"];
-                $employee->status = $_POST["status"];
+                $employee->employeeConditionId = $_POST["status"] ?? "";
+                $employee->employeeNumber = $_POST["employeeId"] ?? "";
+                $employee->defaultLanguage = $_POST["defaultLanguage"] ?? "";
+                $employee->salutation = $_POST["salutation"] ?? "";
+                $employee->gender = $_POST["gender"] ?? "";
+                $employee->employeeFirstname = $_POST["employeeFirstname"] ?? "";
+                $employee->employeeSurename = $_POST["employeeSurename"] ?? "";
+                $employee->nationalityId = $_POST["nationalityId"] ?? "";
+                $employee->telephoneNumber = $_POST["telephoneNumber"] ?? "";
+                $employee->emergencyTel = $_POST["emergencyTel"] ?? "";
+                $employee->address1 = $_POST["address1"] ?? "";
+                $employee->email = $_POST["email"] ?? "";
+                $employee->maritalStatus = $_POST["maritalStatus"] ?? "";
+                $employee->birthDate = !empty($_POST["birthDate"]) ? date("Y-m-d", strtotime($_POST["birthDate"])) : "";
+                $employee->companyId = $_POST["companyId"] ?? "";
+                $employee->branchId = $_POST["branchId"] ?? "";
+                $employee->departmentId = $_POST["departmentId"] ?? "";
+                $employee->teamId = $_POST["teamId"] ?? "";
+                $employee->companyEmail = $_POST["companyEmail"] ?? "";
+                $employee->hireDate = !empty($_POST["hiringDate"]) ? date("Y-m-d", strtotime($_POST["hiringDate"])) : "";
+                $employee->probationStatus = $_POST["overrideProbationEmployee"] ?? "";
+                $employee->probationStart = !empty($_POST["fromDate"]) ? date("Y-m-d", strtotime($_POST["fromDate"])) : "";
+                $employee->probationEnd = !empty($_POST["toDate"]) ? date("Y-m-d", strtotime($_POST["toDate"])) : "";
+                $employee->titleId = !empty($_POST["titleId"]) ? $_POST["titleId"] : 0;
+                $employee->remark = $_POST["remark"] ?? "";
+                $employee->skills = $_POST["skills"] ?? "";
+                $employee->contact = $_POST["linkedin"] ?? "";
+                $employee->status = $_POST["status"] ?? "";
                 $employee->updateDateTime = new Expression('NOW()');
 
                 $pictureProfile = UploadedFile::getInstanceByName("image");
@@ -987,31 +987,34 @@ class EmployeeController extends Controller
                             }
                         }
 
-                        // UserLanguage
-                        // 1. เตรียมภาษาและระดับที่จับคู่กัน
-                        $languages = [
-                            ['language' => $_POST['mainLanguage'], 'level' => $_POST['lavelLanguage']],
-                        ];
-                        // 2. เพิ่มข้อมูลภาษาและระดับอื่น ๆ ถ้ามี
-                        for ($i = 1; $i <= 3; $i++) {
-                            if (!empty($_POST["mainLanguage$i"]) && !empty($_POST["lavelLanguage$i"])) {
-                                $languages[] = [
-                                    'language' => $_POST["mainLanguage$i"],
-                                    'level' => $_POST["lavelLanguage$i"]
-                                ];
-                            }
-                        }
-                        // 3. วนลูปบันทึก
-                        UserLanguage::deleteAll(['userId' => $userId]);
+                        if (!empty($_POST['mainLanguage']) && !empty($_POST['lavelLanguage'])) {                            
 
-                        foreach ($languages as $lang) {
-                            $userLang = new UserLanguage();
-                            $userLang->userId = $userId;
-                            $userLang->languageId = $lang['language'];
-                            $userLang->lavel = $lang['level'];
-                            $userLang->createDateTime = new \yii\db\Expression('NOW()');
-                            $userLang->updateDateTime = new \yii\db\Expression('NOW()');
-                            $userLang->save(false);
+                            // UserLanguage
+                            // 1. เตรียมภาษาและระดับที่จับคู่กัน
+                            $languages = [
+                                ['language' => $_POST['mainLanguage'], 'level' => $_POST['lavelLanguage']],
+                            ];
+                            // 2. เพิ่มข้อมูลภาษาและระดับอื่น ๆ ถ้ามี
+                            for ($i = 1; $i <= 3; $i++) {
+                                if (!empty($_POST["mainLanguage$i"]) && !empty($_POST["lavelLanguage$i"])) {
+                                    $languages[] = [
+                                        'language' => $_POST["mainLanguage$i"],
+                                        'level' => $_POST["lavelLanguage$i"]
+                                    ];
+                                }
+                            }
+                            // 3. วนลูปบันทึก
+                            UserLanguage::deleteAll(['userId' => $userId]);
+
+                            foreach ($languages as $lang) {
+                                $userLang = new UserLanguage();
+                                $userLang->userId = $userId;
+                                $userLang->languageId = $lang['language'];
+                                $userLang->lavel = $lang['level'];
+                                $userLang->createDateTime = new \yii\db\Expression('NOW()');
+                                $userLang->updateDateTime = new \yii\db\Expression('NOW()');
+                                $userLang->save(false);
+                            }
                         }
                     }
                 }
