@@ -58,6 +58,7 @@
 
 }
 
+
 .hrvc-head-name {
     color: #e1e2e4;
     text-decoration: none;
@@ -65,6 +66,13 @@
 }
 
 .no-underline {
+    text-decoration: none;
+    color: white;
+}
+
+.no-underline:hover,
+.no-underline:focus,
+.no-underline:active {
     text-decoration: none;
     color: white;
 }
