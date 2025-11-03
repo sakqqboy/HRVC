@@ -57,34 +57,36 @@ function showLoading() {
 
 $(window).on('scroll', function () {
     const box = $('#box-wrapper');
-    const offset = box.offset().top;
-    const scrollY = $(window).scrollTop();
-    var fag = $("#minPage").val();
-    var totalPage = $("#totalPage").val();
-    if (scrollY >= offset - 70) {
-        if (fag == 0) {
-            box.addClass('mt-30');
-            $("#pim-content").addClass('pt-10');
-            $("#main-body").removeClass("pim-content");
-            if (totalPage == 0) {
-                $("#main-body").addClass("pim-content2");
-            } else {
-                $("#main-body").addClass("pim-content3");
+    if (typeof box !== 'undefined' && box.length > 0) {
+        const offset = box.offset().top;
+        const scrollY = $(window).scrollTop();
+        var fag = $("#minPage").val();
+        var totalPage = $("#totalPage").val();
+        if (scrollY >= offset - 70) {
+            if (fag == 0) {
+                box.addClass('mt-30');
+                $("#pim-content").addClass('pt-10');
+                $("#main-body").removeClass("pim-content");
+                if (totalPage == 0) {
+                    $("#main-body").addClass("pim-content2");
+                } else {
+                    $("#main-body").addClass("pim-content3");
+                }
+                $("#minPage").val(1);
             }
-            $("#minPage").val(1);
-        }
 
-    } else {
-        if (scrollY < offset - 120) {
-            box.removeClass('mt-30');
-            $("#pim-content").removeClass('pt-10');
-            if (totalPage == 0) {
-                $("#main-body").removeClass("pim-content2");
-            } else {
-                $("#main-body").removeClass("pim-content3");
+        } else {
+            if (scrollY < offset - 120) {
+                box.removeClass('mt-30');
+                $("#pim-content").removeClass('pt-10');
+                if (totalPage == 0) {
+                    $("#main-body").removeClass("pim-content2");
+                } else {
+                    $("#main-body").removeClass("pim-content3");
+                }
+                $("#main-body").addClass("pim-content");
+                $("#minPage").val(0);
             }
-            $("#main-body").addClass("pim-content");
-            $("#minPage").val(0);
         }
     }
 

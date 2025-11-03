@@ -38,15 +38,59 @@ class CountryController extends Controller
         }
         return json_encode($country);
     }
-      public function actionAllCountry()
+    public function actionAllCountry()
     {
         $countries = Country::find()->select('countryId,countryName,flag')->where(["status" => 1])->asArray()->orderBy('countryName')->all();
         return json_encode($countries);
     }
+    public function actionNationality()
+    {
+        $nation = Nationality::find()
+            ->select('nationality.numCode,nationality.nationalityName,c.countryId,c.countryName,c.flag')
+            ->JOIN("LEFT JOIN", "country c", "c.countryName=nationality.shortName")
+            ->where(1)->orderBy('nationality.nationalityName')->asArray()->all();
+        $data = [];
+        if (isset($nation) && count($nation) > 0) {
+            foreach ($nation as $n) :
+                $data[$n["numCode"]] = [
+                    "nationalityId" => $n["numCode"],
+                    "nationalityName" => $n["nationalityName"],
+                    "CountryId" => $n["countryId"],
+                    "CountryName" => $n["countryName"],
+                    "flag" => $n["flag"]
+                ];
+            endforeach;
+        }
+
+        return json_encode($data);
+    }
+    public function actionNationalityDetail($id)
+    {
+        $data = [];
+        if ($id != '') {
+            $nationality = Nationality::find()
+                ->select('nationality.numCode,nationality.nationalityName,c.countryId,c.countryName,c.flag')
+                ->JOIN("LEFT JOIN", "country c", "c.countryName=nationality.shortName")
+                ->where(["nationality.numCode" => $id])->asArray()->one();
+
+            if (isset($nationality) && !empty($nationality)) {
+                $data = [
+                    "numCode" => $nationality["numCode"],
+                    "nationalityId" => $nationality["numCode"],
+                    "nationalityName" => $nationality["nationalityName"],
+                    "CountryId" => $nationality["countryId"],
+                    "CountryName" => $nationality["countryName"],
+                    "flag" => $nationality["flag"]
+                ];
+            }
+        }
+
+        return json_encode($data);
+    }
     public function actionCompanyCountry()
     {
         $country = [];
-        $countries = Country::find()->select('countryId,countryName,flag')->where(["status" => 1,"hasBranch" => 1])->asArray()->orderBy('countryName')->all();
+        $countries = Country::find()->select('countryId,countryName,flag')->where(["status" => 1, "hasBranch" => 1])->asArray()->orderBy('countryName')->all();
         //throw new Exception(print_r($countries, true));
         if (isset($countries) && count($countries) > 0) {
             foreach ($countries as $c) :
@@ -65,11 +109,6 @@ class CountryController extends Controller
             ->asArray()
             ->one();
         return json_encode($country);
-    }
-    public function actionNationality()
-    {
-        $nation = Nationality::find()->select('numCode,nationalityName')->where(1)->asArray()->orderBy('nationalityName')->all();
-        return json_encode($nation);
     }
     public function actionAllCurrency()
     {

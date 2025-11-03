@@ -252,7 +252,7 @@ $form = ActiveForm::begin([
                                     <!-- <span class="text-danger">* </span> -->
                                     <?php
                                     $flag = 'image/e-world.svg'; // default fallback flag
-
+                                    //throw new exception(print_r($languages, true));
                                     if (!empty($employee['defaultLanguage']) && !empty($languages)) {
                                         foreach ($languages as $lang) {
                                             if ($employee['defaultLanguage'] == $lang['languageId']) {
@@ -277,7 +277,7 @@ $form = ActiveForm::begin([
 
                                     <select class="form-select font-size-14"
                                         style="width:clamp(290px, 21.22vw, 560px); border-left: none;"
-                                        id="defaultLanguage" name="defaultLanguage" >
+                                        id="defaultLanguage" name="defaultLanguage">
                                         <option value="" disabled hidden
                                             <?= empty($employee['defaultLanguage']) ? 'selected' : '' ?>
                                             style="color: var(--Helper-Text, #8A8A8A);">
@@ -498,14 +498,17 @@ $form = ActiveForm::begin([
                                 <span class="input-group-text" style="background-color: white; border-right: none;">
                                     <?php
                                     $flag = 'image/e-world.svg'; // default fallback flag
+                                    // throw new exception(print_r)
+                                    if (!empty($employee['nationalityId']) && isset($nationalities[$employee['nationalityId']])) {
+                                        // foreach ($nationalities as $nation) {
+                                        //     if ($employee['defaultLanguage'] == $nation['countryId']) {
+                                        $flag = $nationalities[$employee['nationalityId']]["flag"];
 
-                                    if (!empty($employee['nationalityId']) && !empty($nationalities)) {
-                                        foreach ($nationalities as $nation) {
-                                            if ($employee['defaultLanguage'] == $nation['countryId']) {
-                                                $flag = !empty($nation['flag']) ? $nation['flag'] : 'image/e-world.svg';
-                                                break;
-                                            }
-                                        }
+                                        //         break;
+                                        //     }
+                                        // }
+                                    } else {
+                                        $flag = !empty($nation['flag']) ? $nation['flag'] : 'image/e-world.svg';
                                     }
                                     // echo $flag ;
                                     ?>
@@ -522,12 +525,12 @@ $form = ActiveForm::begin([
                                     </option>
                                     <?php
                                     if (isset($nationalities) && count($nationalities) > 0) {
-                                        foreach ($nationalities as $nation) :
-                                            $selected = ($employee['nationalityId'] ?? '') == $nation['countryId'] ? 'selected' : '';
+                                        foreach ($nationalities as $numCode => $nation) :
+                                            $selected = ($employee['nationalityId'] ?? '') == $numCode ? 'selected' : '';
                                     ?>
-                                            <option value="<?= $nation['countryId'] ?>" data-flag="<?= $nation['flag'] ?>"
+                                            <option value="<?= $numCode ?>" data-flag="<?= $nation['flag'] ?>"
                                                 <?= $selected ?>>
-                                                <?= $nation['countryName'] ?>
+                                                <?= $nation['nationalityName'] ?>
                                             </option>
                                     <?php
                                         endforeach;
@@ -588,7 +591,7 @@ $form = ActiveForm::begin([
                                         style="width: 20px; height: 20px;">
                                 </span>
                                 <select class="form-select" name="maritalStatus" id="maritalStatus"
-                                    style="border-left: none;" >
+                                    style="border-left: none;">
                                     <option value="" disabled <?= empty($employee['maritalStatus']) ? 'selected' : '' ?>
                                         hidden style="color: var(--Helper-Text, #8A8A8A);">
                                         <?= Yii::t('app', 'Select') ?>
@@ -823,8 +826,7 @@ $form = ActiveForm::begin([
                                 </span>
                                 <input type="text" style="border-left: none;" name="companyEmail" id="companyEmail"
                                     class="form-control" placeholder="sample@gmail.com"
-                                    value="<?= isset($employee['companyEmail']) ? $employee['companyEmail'] : '' ?>"
-                                    >
+                                    value="<?= isset($employee['companyEmail']) ? $employee['companyEmail'] : '' ?>">
                             </div>
                         </div>
 
@@ -1484,7 +1486,7 @@ $form = ActiveForm::begin([
                                 // ดึงค่าภาษาเริ่มต้นจาก array ตำแหน่งที่ 0 (ถ้ามี)
                                 $selectedLanguageId = isset($userLanguage[0]['lavel']) ? $userLanguage[0]['lavel'] : '';
                                 ?>
-                                <select class="form-select" name="lavelLanguage" id="lavelLanguage" >
+                                <select class="form-select" name="lavelLanguage" id="lavelLanguage">
                                     <option value="" disabled <?= $selectedLanguageId ? '' : 'selected' ?> hidden
                                         style="color: var(--Helper-Text, #8A8A8A);">
                                         <?= Yii::t('app', 'Select') ?>

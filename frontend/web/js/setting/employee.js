@@ -1274,7 +1274,7 @@ $('#create-employee').on('beforeSubmit', function (e) {
 
     // ตรวจสอบว่า certificates, cerImages, certificatesFiles ถูกประกาศไว้และมีข้อมูล
     //    if(cerImages){
-    if (typeof cerImages !== 'undefined' && cerImages.length > 0) {
+    if (typeof cerImages !== 'undefined' && cerImages.length > 0 && typeof certificatesFiles !== 'undefined' && certificatesFiles.length > 0) {
         if (
             certificates.length !== cerImages.length ||
             certificates.length !== certificatesFiles.length
@@ -1285,31 +1285,32 @@ $('#create-employee').on('beforeSubmit', function (e) {
         cerImages.forEach((file, index) => {
             formData.append(`cerImage[${index}]`, file);
         });
+    
     }
-//    }
-    const form = e.target;
-    const formData = new FormData(form);
-    formData.set('certificateData', JSON.stringify(certificates));
-
-    certificatesFiles.forEach((file, index) => {
-        formData.append(`certificate[${index}]`, file);
-    });
-
-    // ส่งแบบ AJAX
-    fetch(form.action, {
-        method: 'POST',
-        body: formData
-    })
-        .then(res => res.text())
-        .then(result => {
-            console.log("ส่งเรียบร้อย", result);
-            // ✅ ทำต่อ เช่น redirect, alert success หรือ reload
-            // window.location.href = "/some-url"; // ตัวอย่าง redirect
-        })
-        .catch(err => {
-            console.error("เกิดข้อผิดพลาด", err);
+        const form = e.target;
+        const formData = new FormData(form);
+        formData.set('certificateData', JSON.stringify(certificates));
+    if (typeof certificatesFiles !== 'undefined' && certificatesFiles.length > 0) {
+        certificatesFiles.forEach((file, index) => {
+            formData.append(`certificate[${index}]`, file);
         });
-
-    return false; // ❗สำคัญ! เพื่อไม่ให้ form ส่งซ้ำแบบปกติ
+    }
+        // ส่งแบบ AJAX
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.text())
+            .then(result => {
+                console.log("ส่งเรียบร้อย", result);
+                // ✅ ทำต่อ เช่น redirect, alert success หรือ reload
+                // window.location.href = "/some-url"; // ตัวอย่าง redirect
+            })
+            .catch(err => {
+                console.error("เกิดข้อผิดพลาด", err);
+            });
+    
+    
+    //return false; // ❗สำคัญ! เพื่อไม่ให้ form ส่งซ้ำแบบปกติ
 });
 

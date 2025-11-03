@@ -449,6 +449,7 @@ class EmployeeController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
         $employee = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+
         $employeeData = [
             'employeeId' => $employee['employeeId'] ?? null,
             'employeeNumber' => $employee['employeeNumber'] ?? '-',
@@ -501,6 +502,7 @@ class EmployeeController extends Controller
             'shortTag' => $employee['shortTag'] ?? '',
         ];
 
+
         // if ($employee["birthDate"] != '') {
         //     $year = date('Y');
         //     $birthDateArr = explode('-', $employee["birthDate"]);
@@ -543,7 +545,7 @@ class EmployeeController extends Controller
         }
         return $this->render('employee_profile', [
             "employee" => $employeeData,
-            "employeeId" => $employeeId
+            "employeeId" => $employeeId,
         ]);
     }
 
@@ -635,7 +637,7 @@ class EmployeeController extends Controller
         $conditions     = Api::connectApi(Path::Api() . 'masterdata/employee-condition/active-condition');
         $roles          = Api::connectApi(Path::Api() . 'masterdata/role/active-role');
         $teamPosition   = Api::connectApi(Path::Api() . 'masterdata/team-position/index');
-        $nationalities  = Api::connectApi(Path::Api() . 'masterdata/country/all-country');
+        $nationalities  = Api::connectApi(Path::Api() . 'masterdata/country/nationality');
         $language       = Api::connectApi(Path::Api() . 'masterdata/employee/default-language');
         $mainLanguage   = Api::connectApi(Path::Api() . 'masterdata/employee/main-language');
         $module         = Api::connectApi(Path::Api() . 'masterdata/employee/module-role');
@@ -987,7 +989,7 @@ class EmployeeController extends Controller
                             }
                         }
 
-                        if (!empty($_POST['mainLanguage']) && !empty($_POST['lavelLanguage'])) {                            
+                        if (!empty($_POST['mainLanguage']) && !empty($_POST['lavelLanguage'])) {
 
                             // UserLanguage
                             // 1. เตรียมภาษาและระดับที่จับคู่กัน
@@ -2114,11 +2116,10 @@ class EmployeeController extends Controller
         $UserLanguage = Api::connectApi(
             Path::Api() . 'masterdata/employee/user-language?id=' . $employeeId
         );
-
-        $nationalities = Api::connectApi(
-            Path::Api() . 'masterdata/country/all-country'
-        );
-
+        $nationality = Api::connectApi(Path::Api() . 'masterdata/country/nationality-detail?id=' . $employee['nationalityId'] ?? '');
+        // $nationalities = Api::connectApi(
+        //     Path::Api() . 'masterdata/country/all-country'
+        // );
         $mainLanguage = Api::connectApi(
             Path::Api() . 'masterdata/employee/main-language'
         );
@@ -2128,10 +2129,11 @@ class EmployeeController extends Controller
             'employee' => $employee,
             'userEmployee' => $userEmployee,
             'UserLanguage' =>  $UserLanguage,
-            'nationalities' => $nationalities,
+            //'nationalities' => $nationalities,
             'mainLanguage' => $mainLanguage,
             'employeeId' => $employeeId,
-            'userId' => $userId
+            'userId' => $userId,
+            "nationality" => $nationality
         ]);
     }
 
