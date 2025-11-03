@@ -64,7 +64,7 @@ $statusTexArr = Status::allStatusText();
 							$statusClass = "status-badge-probationary";
 						}
 						if ($employee["status"] == "Part-Time") {
-							$statusClass = "status-badge-part-Time";
+							$statusClass = "status-badge-part-time";
 						}
 						if ($employee["status"] == "Intern") {
 							$statusClass = "status-badge-intern";
