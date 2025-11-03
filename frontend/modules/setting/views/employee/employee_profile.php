@@ -5,6 +5,11 @@ use frontend\models\hrvc\Status;
 
 $this->title = 'view';
 $statusTexArr = Status::allStatusText();
+if (!empty($statusPage)) {
+    $url = Yii::$app->homeUrl . 'setting/employee/index/';
+} else {
+    $url = 'javascript:history.back()';
+}
 ?>
 <style>
 .menu-item {
@@ -44,7 +49,7 @@ $statusTexArr = Status::allStatusText();
     <div class="between-center mt-20" style="width: 100%;">
         <div class="col-8">
             <div class=" d-flex align-items-center gap-2">
-                <a href="javascript:history.back()" style="text-decoration: none; width:66px; height:26px;"
+                <a href="<?= $url ?>" style="text-decoration: none; width:66px; height:26px;"
                     class="btn-create-branch">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg"
                         style="width:18px; height:18px; margin-top:-3px;">
@@ -193,7 +198,7 @@ $statusTexArr = Status::allStatusText();
                 <div class="menu-item font-size-16 font-weight-400" data-target="certificates">
                     <?= Yii::t('app', 'Certificates and Skill Tags') ?>
                 </div>
-                <div class="menu-item font-size-16 font-weight-400" data-target="performance">
+                <!-- <div class="menu-item font-size-16 font-weight-400" data-target="performance">
                     <?= Yii::t('app', 'Performance') ?>
                 </div>
                 <div class="menu-item font-size-16 font-weight-400" data-target="evaluation">
@@ -204,7 +209,7 @@ $statusTexArr = Status::allStatusText();
                 </div>
                 <div class="menu-item font-size-16 font-weight-400" data-target="role">
                     <?= Yii::t('app', 'Role & Permission') ?>
-                </div>
+                </div> -->
             </div>
 
         </div>

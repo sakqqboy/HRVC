@@ -448,6 +448,7 @@ class EmployeeController extends Controller
     {
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
+        $statusPage = isset($param["update"]) ? $param["update"] : '';
         $employee = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
         $employeeData = [
             'employeeId' => $employee['employeeId'] ?? null,
@@ -543,7 +544,8 @@ class EmployeeController extends Controller
         }
         return $this->render('employee_profile', [
             "employee" => $employeeData,
-            "employeeId" => $employeeId
+            "employeeId" => $employeeId,
+            "statusPage" => $statusPage
         ]);
     }
 
@@ -1021,7 +1023,8 @@ class EmployeeController extends Controller
             }
         }
         return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-profile/' . ModelMaster::encodeParams([
-            "employeeId" => $_POST["emId"]
+            "employeeId" => $_POST["emId"],
+            "update" => "update"
         ]));
     }
     public function actionFilterEmployee()
