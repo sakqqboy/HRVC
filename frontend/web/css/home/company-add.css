@@ -82,7 +82,7 @@
 
 .btn-update-group {
     display: flex;
-    height: 30px;
+    height: 40px;
     /* padding: 9.75px 10.5px; */
     justify-content: center;
     align-items: center;
@@ -92,7 +92,7 @@
     color: #FFF;
     text-align: center;
     font-family: "SF Pro Display";
-    font-size: 11.571px;
+    font-size: 19px;
     font-style: normal;
     font-weight: 500;
     line-height: 27px;

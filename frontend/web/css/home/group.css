@@ -257,7 +257,7 @@
 .name-full-tokyo {
     color: var(--HRVC---Light-Text, #94989C);
     font-family: "SF Pro Display";
-    font-size: 20px;
+    font-size: 28px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -266,7 +266,7 @@
 .name-sub-tokyo {
     color: var(--HRVC---Text-Black, #30313D);
     font-family: "SF Pro Display";
-    font-size: 24px;
+    font-size: 32px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -276,7 +276,7 @@
 .tokyo-small {
     color: #3C3D48;
     font-family: "SF Pro Display";
-    font-size: 14px;
+    font-size: 22px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -307,7 +307,7 @@
     /* padding-left: 40px; */
     color: #3C3D48;
     font-family: "SF Pro Display";
-    font-size: 14px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -318,7 +318,7 @@
     color: var(--HRVC---Text-Black, #30313D);
     text-align: right;
     font-family: "SF Pro Display";
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -328,7 +328,7 @@
 .name-director {
     color: var(--Primary-Blue---HRVC, #2580D3);
     font-family: "SF Pro Display";
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
@@ -650,7 +650,7 @@
     font-size: 13px; */
     color: var(--HRVC---Text-Black, #30313D);
     font-family: "SF Pro Display";
-    font-size: 12px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -659,7 +659,7 @@
 .city-group {
     color: var(--HRVC---Text-Black, #30313D);
     font-family: "SF Pro Display";
-    font-size: 9px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -685,7 +685,7 @@
     cursor: pointer;
     color: var(--Primary-Blue---HRVC, #2580D3);
     font-family: "SF Pro Display";
-    font-size: 10.5px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: 13.928px;
@@ -699,7 +699,7 @@
 .text-name-current {
     color: var(--HRVC---Text-Black, #30313D);
     font-family: "SF Pro Display";
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: 14.464px;
@@ -709,7 +709,7 @@
 .text-see-all {
     color: var(--Primary-Blue---HRVC, #2580D3);
     font-family: "SF Pro Display";
-    font-size: 10.5px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: 14.464px;
@@ -731,7 +731,7 @@
 }
 
 .address-box0 {
-    font-size: 14px;
+    font-size: 16px;
     display: block;
     white-space: normal;
     /* ข้อความจะแบ่งบรรทัดอัตโนมัติ */
@@ -761,13 +761,11 @@
 
 .box-27 {
     color: #3C3D48;
-    leading-trim: both;
-    text-edge: cap;
     font-family: "SF Pro Display";
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 12.75px;
+    /* line-height: 12.75px; */
     text-align: end;
     /* 106.25% */
     /* 106.25% */
@@ -775,8 +773,6 @@
 
 .Affiliated0 {
     color: var(--HRVC---Text-Black, #30313D);
-    leading-trim: both;
-    text-edge: cap;
     font-family: "SF Pro Display";
     font-size: 12px;
     font-style: normal;

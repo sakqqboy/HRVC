@@ -47,7 +47,7 @@ $this->title = 'Group profile';
             <?php if($role >= 5 ) { ?>
             <div class="col-2 tcg-edit0" style="display: flex; justify-content: flex-end;">
                 <a href="<?= Yii::$app->homeUrl ?>setting/group/update-group/<?= ModelMaster::encodeParams(['groupId' => $group['groupId']]) ?>"
-                    class="btn-update-group" style="width: 60%;">
+                    class="btn-update-group" style="width: 70%;">
                     <img src="<?= Yii::$app->homeUrl . 'image/refresh-white.svg' ?>">
                     <?= Yii::t('app', 'Update Information') ?>
                 </a>
@@ -138,7 +138,7 @@ $this->title = 'Group profile';
                     <!-- Right Column -->
                     <div class="col-lg-6 col-md-6 col-12 box-about0">
                         <div class="row about-section">
-                            <div class="col-12 about-name">
+                            <div class="col-12 Group-Information">
                                 <span><?= Yii::t('app', 'About us') ?></span>
                                 <hr class="hr-group">
                             </div>
@@ -336,10 +336,10 @@ $this->title = 'Group profile';
                         style="width: 15px; height: 15px; padding-right : 0px; padding-left: 0px; bottom: 5px; ">
                         <img src="<?= Yii::$app->homeUrl ?>image/companies.svg" style="width: 15px; height: 15px;">
                     </div>
-                    <div class="col-lg-9 col-md-7 col-12 Affiliated0">
+                    <div class="col-lg-9 col-md-7 col-12 Group-Information">
                         <?= Yii::t('app', 'Affiliated Companies') ?>
                     </div>
-                    <div class="col-lg-1 col-md-3 col-12 box-27">
+                    <div class="col-lg-2 col-md-3 col-12 text-end box-27">
                         <?= count($companyGroup) ?>
                     </div>
                 </div>
