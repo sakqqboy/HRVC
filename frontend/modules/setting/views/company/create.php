@@ -46,7 +46,7 @@ $this->title = 'New Company';
                             <span style=""><?= Yii::t('app', 'Upload') ?><span style="font-size: 13px; color: #666;">
                                     <?= Yii::t('app', 'or Drop') ?></span></span><br>
                             <span
-                                style="font-size: 13px; color: #666;"><?= Yii::t('app', 'Branch Picture here') ?></span>
+                                style="font-size: 13px; color: #666;"><?= Yii::t('app', 'Company Picture here') ?></span>
 
                         </label>
                         <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
@@ -222,7 +222,7 @@ $this->title = 'New Company';
                     <div class="row">
                         <div class="name-text-update">
                             <span class="profile-moon">*</span>
-                            <?= Yii::t('app', 'Group Description') ?>
+                            <?= Yii::t('app', 'Company Description') ?>
                         </div>
                         <div>
                             <div class="alert alert-secondary" role="alert"
