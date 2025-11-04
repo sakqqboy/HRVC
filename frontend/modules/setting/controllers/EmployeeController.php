@@ -191,7 +191,7 @@ class EmployeeController extends Controller
         $conditions     = Api::connectApi(Path::Api() . 'masterdata/employee-condition/active-condition');
         $roles          = Api::connectApi(Path::Api() . 'masterdata/role/active-role');
         $teamPosition   = Api::connectApi(Path::Api() . 'masterdata/team-position/index');
-        $nationalities  = Api::connectApi(Path::Api() . 'masterdata/country/all-country');
+        $nationalities  = Api::connectApi(Path::Api() . 'masterdata/country/nationality');
         $language       = Api::connectApi(Path::Api() . 'masterdata/employee/default-language');
         $mainLanguage   = Api::connectApi(Path::Api() . 'masterdata/employee/main-language');
         $module         = Api::connectApi(Path::Api() . 'masterdata/employee/module-role');
@@ -439,7 +439,8 @@ class EmployeeController extends Controller
             return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
         } else {
             return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-profile/' . ModelMaster::encodeParams([
-                "employeeId" => $employee->employeeId
+                "employeeId" => $employee->employeeId,
+                "update" => "update"
             ]));
         }
     }
@@ -1814,7 +1815,7 @@ class EmployeeController extends Controller
         $filePath = $urlFolder . $fileName;
         $reader = new Xlsx();
 
-
+        //throw new exception($filePath);
         $spreadsheet = new Spreadsheet;
         $reader2 = new Html();
 
@@ -1828,9 +1829,10 @@ class EmployeeController extends Controller
         $reader2->setSheetIndex(0);
         $clonedWorksheet = clone $spreadsheet1->getSheetByName('employee');
         $clonedWorksheet->setTitle('employee');
+
         $spreadsheet->addExternalSheet($clonedWorksheet);
 
-        $fileName = 'Register Employees-' . date('Y-m-d');
+        $fileName2 = 'Register Employees-' . date('Y-m-d');
 
         $spreadsheet->removeSheetByIndex(
             $spreadsheet->getIndex(
@@ -1840,7 +1842,7 @@ class EmployeeController extends Controller
 
         $spreadsheet->setActiveSheetIndex(1);
         $folderName = "export";
-        $urlFolder = Path::getHost() . 'file/' . $folderName . "/" . $fileName;
+        $urlFolder = Path::getHost() . 'file/' . $folderName . "/" . $fileName2;
         $folder_path = Path::getHost() . 'file/' . $folderName;
         $files = glob($folder_path . '/*');
         foreach ($files as $file) {
@@ -1851,7 +1853,7 @@ class EmployeeController extends Controller
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save($urlFolder);
-        return Yii::$app->response->sendFile($urlFolder, $fileName . '.xlsx');
+        return Yii::$app->response->sendFile($urlFolder, $fileName2 . '.xlsx');
     }
     public function actionExportEmployee($hash)
     {

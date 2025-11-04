@@ -3,45 +3,45 @@
 use common\models\ModelMaster;
 use frontend\models\hrvc\Status;
 
-$this->title = 'view';
+$this->title = $employee["employeeFirstname"] . ' Profile';
 $statusTexArr = Status::allStatusText();
-if (!empty($statusPage)) {
+if (!empty($statusPage) || Yii::$app->request->referrer == '') {
     $url = Yii::$app->homeUrl . 'setting/employee/index/';
 } else {
     $url = 'javascript:history.back()';
 }
 ?>
 <style>
-.menu-item {
-    padding: 10px 15px;
-    transition: background-color 0.2s;
-}
+    .menu-item {
+        padding: 10px 15px;
+        transition: background-color 0.2s;
+    }
 
-.menu-item:hover {
-    background-color: #e0f0ff;
-}
+    .menu-item:hover {
+        background-color: #e0f0ff;
+    }
 
-.active-menu {
-    color: var(--Primary-Blue---HRVC, #2580D3);
-    font-weight: bold;
-    border-right: 5px solid var(--Primary-Blue---HRVC, #2580D3);
-    border-radius: 0;
-    background-color: transparent;
-    /* ไม่ต้องเปลี่ยนพื้นหลัง */
-}
+    .active-menu {
+        color: var(--Primary-Blue---HRVC, #2580D3);
+        font-weight: bold;
+        border-right: 5px solid var(--Primary-Blue---HRVC, #2580D3);
+        border-radius: 0;
+        background-color: transparent;
+        /* ไม่ต้องเปลี่ยนพื้นหลัง */
+    }
 
-.action-employee-btn {
-    background-color: white;
-    color: #2580D3;
-    min-height: 30px;
-    border-radius: 66px;
-    padding-left: 9px;
-    padding-right: 9px;
-    font-size: 14px;
-    font-weight: 600;
-    border: 0.5px #2580D3 solid;
-    text-decoration: none;
-}
+    .action-employee-btn {
+        background-color: white;
+        color: #2580D3;
+        min-height: 30px;
+        border-radius: 66px;
+        padding-left: 9px;
+        padding-right: 9px;
+        font-size: 14px;
+        font-weight: 600;
+        border: 0.5px #2580D3 solid;
+        text-decoration: none;
+    }
 </style>
 
 <div class="contrainer-body mt-10">
@@ -49,6 +49,7 @@ if (!empty($statusPage)) {
     <div class="between-center mt-20" style="width: 100%;">
         <div class="col-8">
             <div class=" d-flex align-items-center gap-2">
+
                 <a href="<?= $url ?>" style="text-decoration: none; width:66px; height:26px;"
                     class="btn-create-branch">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg"
@@ -100,65 +101,65 @@ if (!empty($statusPage)) {
                 <div class="text-center position-relative ">
                     <?php
                     if (isset($employee) && $employee["picture"] != null) { ?>
-                    <img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>"
-                        class="profile-picture rounded-circle mb-3" alt="User Avatar"
-                        style="width: 150px; height: 150px;">
+                        <img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>"
+                            class="profile-picture rounded-circle mb-3" alt="User Avatar"
+                            style="width: 150px; height: 150px;">
                     <?php
                     } else { ?>
-                    <img src="<?= Yii::$app->homeUrl ?>images/employee/status/employee-nopic.svg"
-                        class="profile-picture rounded-circle mb-3" alt="User Avatar"
-                        style="width: 150px; height: 150px;">
+                        <img src="<?= Yii::$app->homeUrl ?>images/employee/status/employee-nopic.svg"
+                            class="profile-picture rounded-circle mb-3" alt="User Avatar"
+                            style="width: 150px; height: 150px;">
                     <?php
                     }
                     ?>
                     <?php
-						// $statusClass = "status-badge-full-time";
+                    // $statusClass = "status-badge-full-time";
+                    $statusClass = "status-badge-full-time";
+                    if ($employee["status"] == "1") {
                         $statusClass = "status-badge-full-time";
-						if ($employee["status"] == "1") {
-							$statusClass = "status-badge-full-time";
-                            $statusClass = "background: #2580D3;";
-						}
-						if ($employee["status"] == "2") {
-							$statusClass = "status-badge-probationary";
-                            $statusClass = "background: #20598D;";
-						}
-						if ($employee["status"] == "3") {
-							$statusClass = "status-badge-part-Time";
-                            $statusClass = "background: #20598D;";
-						}
-						if ($employee["status"] == "4") {
-							$statusClass = "status-badge-intern";
-                            $statusClass = "background: #FFE100;";
-						}
-						if ($employee["status"] == "5") {
-							$statusClass = "status-badge-temporarye";
-                            $statusClass = "background: #FF9D00;";
-						}
-						if ($employee["status"] == "6") {
-							$statusClass = "status-badge-freelance";
-                            $statusClass = "background: #FF9D00;";
-						}
-						if ($employee["status"] == "7") {
-							$statusClass = "status-badge-sspended";
-                            $statusClass = "background: #E05757;";
-						}
-						if ($employee["status"] == "8") {
-							$statusClass = "status-badge-resigned";
-                            $statusClass = "background: #EC1D42;";
-						}
-						if ($employee["status"] == "9") {
-							$statusClass = "status-badge-layoff";
-                            $statusClass = "background: #FF9D00;";
-						}
-						if ($employee["status"] == "") {
-							$statusClass = "status-badge-notset";
-                            $statusClass = "background: #2580D3;";
-						}
-				?>
+                        $statusClass = "background: #2580D3;";
+                    }
+                    if ($employee["status"] == "2") {
+                        $statusClass = "status-badge-probationary";
+                        $statusClass = "background: #20598D;";
+                    }
+                    if ($employee["status"] == "3") {
+                        $statusClass = "status-badge-part-Time";
+                        $statusClass = "background: #20598D;";
+                    }
+                    if ($employee["status"] == "4") {
+                        $statusClass = "status-badge-intern";
+                        $statusClass = "background: #FFE100;";
+                    }
+                    if ($employee["status"] == "5") {
+                        $statusClass = "status-badge-temporarye";
+                        $statusClass = "background: #FF9D00;";
+                    }
+                    if ($employee["status"] == "6") {
+                        $statusClass = "status-badge-freelance";
+                        $statusClass = "background: #FF9D00;";
+                    }
+                    if ($employee["status"] == "7") {
+                        $statusClass = "status-badge-sspended";
+                        $statusClass = "background: #E05757;";
+                    }
+                    if ($employee["status"] == "8") {
+                        $statusClass = "status-badge-resigned";
+                        $statusClass = "background: #EC1D42;";
+                    }
+                    if ($employee["status"] == "9") {
+                        $statusClass = "status-badge-layoff";
+                        $statusClass = "background: #FF9D00;";
+                    }
+                    if ($employee["status"] == "") {
+                        $statusClass = "status-badge-notset";
+                        $statusClass = "background: #2580D3;";
+                    }
+                    ?>
 
                     <span class="condition-name badge position-absolute bottom-0 start-50 translate-middle-x"
                         style="<?= $statusClass ?>">
-                       <?php
+                        <?php
                         $statusId = $employee['status'] ?? null;
 
                         if (!empty($statusTexArr) && $statusId !== null) {
@@ -221,58 +222,58 @@ if (!empty($statusPage)) {
     </div>
 </div>
 <script>
-const employeeId = <?= $employeeId ?>;
+    const employeeId = <?= $employeeId ?>;
 
-const urlMap = {
-    contact: '<?= Yii::$app->homeUrl ?>setting/employee/contact-detail/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
-    work: '<?= Yii::$app->homeUrl ?>setting/employee/work-detail/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
-    attachments: '<?= Yii::$app->homeUrl ?>setting/employee/attachments/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
-    certificates: '<?= Yii::$app->homeUrl ?>setting/employee/certificates/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
-    performance: '<?= Yii::$app->homeUrl ?>setting/employee/performance/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
-    evaluation: '<?= Yii::$app->homeUrl ?>setting/employee/evaluation/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
-    salary: '<?= Yii::$app->homeUrl ?>setting/employee/salary/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
-    role: '<?= Yii::$app->homeUrl ?>setting/employee/role/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
-};
+    const urlMap = {
+        contact: '<?= Yii::$app->homeUrl ?>setting/employee/contact-detail/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+        work: '<?= Yii::$app->homeUrl ?>setting/employee/work-detail/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+        attachments: '<?= Yii::$app->homeUrl ?>setting/employee/attachments/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+        certificates: '<?= Yii::$app->homeUrl ?>setting/employee/certificates/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+        performance: '<?= Yii::$app->homeUrl ?>setting/employee/performance/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+        evaluation: '<?= Yii::$app->homeUrl ?>setting/employee/evaluation/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+        salary: '<?= Yii::$app->homeUrl ?>setting/employee/salary/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+        role: '<?= Yii::$app->homeUrl ?>setting/employee/role/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>',
+    };
 
-const menuItems = document.querySelectorAll('.menu-item');
-const detailBox = document.getElementById('menu-profile-detail');
+    const menuItems = document.querySelectorAll('.menu-item');
+    const detailBox = document.getElementById('menu-profile-detail');
 
-function loadMenu(targetKey) {
-    const url = urlMap[targetKey];
+    function loadMenu(targetKey) {
+        const url = urlMap[targetKey];
 
-    if (!url) {
-        detailBox.innerHTML = '<p>ไม่พบเนื้อหา</p>';
-        return;
+        if (!url) {
+            detailBox.innerHTML = '<p>ไม่พบเนื้อหา</p>';
+            return;
+        }
+
+        menuItems.forEach(i => i.classList.remove('active-menu'));
+
+        const activeItem = document.querySelector(`.menu-item[data-target="${targetKey}"]`);
+        if (activeItem) {
+            activeItem.classList.add('active-menu');
+        }
+
+        fetch(url)
+            .then(response => response.text())
+            .then(html => {
+                detailBox.innerHTML = html;
+            })
+            .catch(error => {
+                detailBox.innerHTML = '<p>เกิดข้อผิดพลาดในการโหลดข้อมูล</p>';
+                console.error(error);
+            });
     }
 
-    menuItems.forEach(i => i.classList.remove('active-menu'));
-
-    const activeItem = document.querySelector(`.menu-item[data-target="${targetKey}"]`);
-    if (activeItem) {
-        activeItem.classList.add('active-menu');
-    }
-
-    fetch(url)
-        .then(response => response.text())
-        .then(html => {
-            detailBox.innerHTML = html;
-        })
-        .catch(error => {
-            detailBox.innerHTML = '<p>เกิดข้อผิดพลาดในการโหลดข้อมูล</p>';
-            console.error(error);
+    menuItems.forEach(item => {
+        item.style.cursor = 'pointer';
+        item.addEventListener('click', () => {
+            const target = item.getAttribute('data-target');
+            loadMenu(target);
         });
-}
-
-menuItems.forEach(item => {
-    item.style.cursor = 'pointer';
-    item.addEventListener('click', () => {
-        const target = item.getAttribute('data-target');
-        loadMenu(target);
     });
-});
 
-// 🟦 โหลดเมนูแรกเมื่อหน้าโหลดเสร็จ
-document.addEventListener('DOMContentLoaded', function() {
-    loadMenu('contact'); // หรือเปลี่ยนเป็นเมนูอื่นที่คุณต้องการให้เริ่มแสดง
-});
+    // 🟦 โหลดเมนูแรกเมื่อหน้าโหลดเสร็จ
+    document.addEventListener('DOMContentLoaded', function() {
+        loadMenu('contact'); // หรือเปลี่ยนเป็นเมนูอื่นที่คุณต้องการให้เริ่มแสดง
+    });
 </script>

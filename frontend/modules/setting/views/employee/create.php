@@ -375,7 +375,7 @@ $form = ActiveForm::begin([
                             </div>
                         </div>
 
-                        <div class="w-100">
+                        <div class="">
                             <div class="w-100">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
                                     data-placement="top" aria-label="<?= Yii::t('app', 'Module Access') ?>"
