@@ -992,7 +992,8 @@ class EmployeeController extends Controller
 
                             }
                         }
-
+                        // throw new exception(print_r(Yii::$app->request->post(), true));
+                        // throw new exception(print_r($_POST['mainLanguage'], true));
                         if (!empty($_POST['mainLanguage']) && !empty($_POST['lavelLanguage'])) {
 
                             // UserLanguage

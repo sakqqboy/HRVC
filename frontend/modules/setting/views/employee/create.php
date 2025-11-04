@@ -1452,7 +1452,7 @@ $form = ActiveForm::begin([
                                     ?>
 
                                     <select class="form-select" style="width: 290.59px; border-left: none;"
-                                        id="mainLanguage" name=" ">
+                                        id="mainLanguage" name="mainLanguage">
                                         <option value="" disabled <?= $selectedLanguageId ? '' : 'selected' ?> hidden
                                             style="color: var(--Helper-Text, #8A8A8A); ">
                                             <?= Yii::t('app', 'Select preferred language') ?>
@@ -2663,7 +2663,7 @@ $form = ActiveForm::begin([
                         style="width: 20px; height: 20px; border: none;">
                 </span>
                 <select class="form-select" style="border-left: none;"
-                    id="mainLanguage${additionalLangCount - 1}" name="mainLanguage${additionalLangCount - 1}" required
+                    id="mainLanguage${additionalLangCount - 1}" name="mainLanguage${additionalLangCount - 1}"
                     onchange="handleLanguageChange(${additionalLangCount - 1})">
                     <option value="" disabled hidden style="color: var(--Helper-Text, #8A8A8A);">
                         <?= Yii::t('app', 'Select Additional Language') ?>
@@ -2691,7 +2691,7 @@ $form = ActiveForm::begin([
                         style="width: 20px; height: 20px; border: none;">
                 </span>
                 <select class="form-select" style="border-left: none;"
-                    id="mainLanguage${additionalLangCount}" name="mainLanguage${additionalLangCount}" required
+                    id="mainLanguage${additionalLangCount}" name="mainLanguage${additionalLangCount}"
                     onchange="handleLanguageChange(${additionalLangCount})">
                     <option value="" disabled hidden style="color: var(--Helper-Text, #8A8A8A);">
                         <?= Yii::t('app', 'Select Additional Language') ?>
