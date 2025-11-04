@@ -72,13 +72,7 @@
     padding-top: 30px;
 }
 
-.sad-1 {
-    width: 1480px;
-    height: 201.128px;
-    border-radius: 10px;
-    /* background: url(<path-to-image>) lightgray 0px -28.074px / 100% 124.599% no-repeat; */
-    flex-shrink: 0;
-}
+
 
 .btn-update-group {
     display: flex;

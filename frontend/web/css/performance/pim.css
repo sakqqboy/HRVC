@@ -2744,7 +2744,7 @@ input:checked+.slider:before {
 		/* position: relative; */
 		/* เพิ่ม position relative เพื่อให้ sticky-section ทำงาน */
 		height: auto;
-		max-height: 50vh;
+		/* max-height: 50vh; */
 	}
 
 	.pim-body {
@@ -2779,7 +2779,7 @@ input:checked+.slider:before {
 
 	.submain-content {
 		height: auto;
-		max-height: 50vh;
+		/* max-height: 50vh; */
 	}
 
 	.pim-body {
@@ -2875,7 +2875,7 @@ input:checked+.slider:before {
 
 	.submain-content {
 		height: auto;
-		max-height: 50vh;
+		/* max-height: 50vh; */
 	}
 
 	.row-box {

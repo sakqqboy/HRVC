@@ -38,7 +38,8 @@ class LanguageSelector implements BootstrapInterface
         }
         if (isset($language) && $language !== null) {
             if (!in_array($language, $this->supportedLanguages)) { //ตรวจสอบว่า language ที่ส่งมาตรงกับที่ตั้งค่าไว้หรือเปล่า
-                throw new Exception('Invalid your selected language.'); //ถ้าไม่มี language ในรายการก็ exception
+                //throw new Exception('Invalid your selected language.' . $language); //ถ้าไม่มี language ในรายการก็ exception
+                throw new Exception(print_r($this->supportedLanguages, true));
             }
             $cookies->add(new Cookie([
                 'name' => 'language',
