@@ -1474,7 +1474,6 @@ $form = ActiveForm::begin([
                                         }
                                         ?>
                                     </select>
-
                                 </div>
                             </div>
                             <div class="col-4 d-flex flex-column" style="gap: 12px;">
@@ -1486,6 +1485,7 @@ $form = ActiveForm::begin([
                                 // ดึงค่าภาษาเริ่มต้นจาก array ตำแหน่งที่ 0 (ถ้ามี)
                                 $selectedLanguageId = isset($userLanguage[0]['lavel']) ? $userLanguage[0]['lavel'] : '';
                                 ?>
+                                <div class="d-flex align-items-center">
                                 <select class="form-select" name="lavelLanguage" id="lavelLanguage">
                                     <option value="" disabled <?= $selectedLanguageId ? '' : 'selected' ?> hidden
                                         style="color: var(--Helper-Text, #8A8A8A);">
@@ -1514,9 +1514,15 @@ $form = ActiveForm::begin([
                                         <?= Yii::t('app', 'Native') ?>
                                     </option>
                                 </select>
-
-
+                                <img id="deleteLanguageBtn"
+                                src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                class="pim-icon ml-5 mt-5 "
+                                style="width:21px;height:21px; cursor:pointer;"
+                                data-user-id="<?= Yii::$app->user->id ?? '' ?>" />
+                                 
+                                </div>
                             </div>
+
                             <div class="col-4 d-flex flex-column" style="gap: 12px;">
                                 <text class="font-size-16 font-weight-500">
                                     <?= Yii::t('app', 'Linkedin Link') ?>
@@ -1557,16 +1563,24 @@ $form = ActiveForm::begin([
                                         <?= Yii::t('app', 'Additional Languages Level') ?>
                                     </span>
 
-                                    <div id="ald">
-                                        <span id="lockId-1"
-                                            class="input-group-text d-flex justify-content-center align-items-center mt-12"
-                                            style="background-color: #e9ecef; height: 40px;">
-                                            <?= Yii::t('app', 'Add additional Language First') ?>
-                                        </span>
+                                    <div id="ald"  >
+                                        <div class="d-flex align-items-center">
+                                            <span id="lockId-1"
+                                                class="input-group-text d-flex justify-content-center align-items-center mt-12"
+                                                style="background-color: #e9ecef; height: 40px; width: 100%;">
+                                                <?= Yii::t('app', 'Add additional Language First') ?>
+                                            </span>
+                                            <img id="deleteLanguageBtn-1"
+                                            src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                            class="pim-icon mt-17 ml-5  "
+                                            style="width:21px;height:21px; cursor:pointer;"
+                                            data-user-id="<?= Yii::$app->user->id ?? '' ?>" />
+                                        </div>
                                     </div>
-
+                                    
                                 </div>
                                 <div class="col-4 d-flex flex-column" style="gap: 12px;">
+                                    <!-- <img src="<?= Yii::$app->homeUrl ?>/images/icons/Settings/bin.svg" class="pim-icon" style="width:16px;height:16px;"> -->
                                 </div>
                             </div>
                         </div>
@@ -2448,6 +2462,8 @@ $form = ActiveForm::begin([
             updateMultiDueTermState();
             changeStatusEmployee()
             changeSelectFlag()
+            toggleDeleteButton();
+
 
             const loadedCertificates = <?= json_encode($userCertificate) ?>;
             // console.log(loadedCertificates);
@@ -2647,7 +2663,7 @@ $form = ActiveForm::begin([
                         style="width: 20px; height: 20px; border: none;">
                 </span>
                 <select class="form-select" style="border-left: none;"
-                    id="mainLanguage${additionalLangCount - 1}" name="mainLanguage${additionalLangCount - 1}" required
+                    id="mainLanguage${additionalLangCount - 1}" name="mainLanguage${additionalLangCount - 1}"
                     onchange="handleLanguageChange(${additionalLangCount - 1})">
                     <option value="" disabled hidden style="color: var(--Helper-Text, #8A8A8A);">
                         <?= Yii::t('app', 'Select Additional Language') ?>
@@ -2675,7 +2691,7 @@ $form = ActiveForm::begin([
                         style="width: 20px; height: 20px; border: none;">
                 </span>
                 <select class="form-select" style="border-left: none;"
-                    id="mainLanguage${additionalLangCount}" name="mainLanguage${additionalLangCount}" required
+                    id="mainLanguage${additionalLangCount}" name="mainLanguage${additionalLangCount}"
                     onchange="handleLanguageChange(${additionalLangCount})">
                     <option value="" disabled hidden style="color: var(--Helper-Text, #8A8A8A);">
                         <?= Yii::t('app', 'Select Additional Language') ?>
@@ -2725,13 +2741,21 @@ $form = ActiveForm::begin([
                 const noId = additionalLangCount - 1; // 0 1 2 3
                 if (additionalLangCount >= 3) { //2 3
                     const lockSpan =
-                        `
-            <span id="lockId-${noId}"
-                class="input-group-text d-flex justify-content-center align-items-center mt-12"
-                style="background-color: #e9ecef; height: 40px;">
-                Add additional Language First
-            </span>
-            `; // lockId สร้าง 2 3 เพราะ 1 มีอยุ่แแล้ว แต่ 1 นั้น = 2 ในดาต้า = ต้องสร้างดาต้า ที่ 3 กับ 4 ใน lockId 2 กับ 3  lockId ก้จะมี 1 2 3
+                    `
+                    <div class="d-flex align-items-center">
+                        <span id="lockId-${noId}"
+                            class="input-group-text d-flex justify-content-center align-items-center mt-12"
+                            style="background-color: #e9ecef; height: 40px;  width: 100%;">
+                            Add additional Language First
+                        </span>
+                        <img id="deleteLanguageBtn-${noId}"
+                                            src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                            class="pim-icon mt-17 ml-5 "
+                                            style="width:21px;height:21px; cursor:pointer;"
+                                            data-user-id="<?= Yii::$app->user->id ?? '' ?>" />
+                    </div>
+                    `; 
+            // lockId สร้าง 2 3 เพราะ 1 มีอยุ่แแล้ว แต่ 1 นั้น = 2 ในดาต้า = ต้องสร้างดาต้า ที่ 3 กับ 4 ใน lockId 2 กับ 3  lockId ก้จะมี 1 2 3
                     document.getElementById('ald').insertAdjacentHTML('beforeend', lockSpan);
                     // alert('lockId2');
                     // alert(noId); //1,2
@@ -2745,11 +2769,18 @@ $form = ActiveForm::begin([
             <?php elseif ($statusfrom === 'Create'): ?>
                 if (additionalLangCount >= 2) {
                     const lockSpan = `
+          <div class="d-flex align-items-center">
             <span id="lockId-${additionalLangCount}"
                 class="input-group-text d-flex justify-content-center align-items-center mt-12"
-                style="background-color: #e9ecef; height: 40px;">
+                style="background-color: #e9ecef; height: 40px;  width: 100%;">
                 Add additional Language First
             </span>
+             <img id="deleteLanguageBtn-${additionalLangCount}"
+                                src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                class="pim-icon mt-17 ml-5 "
+                                style="width:21px;height:21px; cursor:pointer;"
+                                data-user-id="<?= Yii::$app->user->id ?? '' ?>" />
+          </div>
             `;
                     document.getElementById('ald').insertAdjacentHTML('beforeend', lockSpan);
                 }
@@ -2769,6 +2800,7 @@ $form = ActiveForm::begin([
             const lang2 = document.getElementById('mainLanguage2');
             const lang3 = document.getElementById('mainLanguage3');
             // alert('ee');
+            toggleDeleteButton();
 
             function isDuplicate(value, others) {
                 if (!value) return false;
@@ -2813,7 +2845,7 @@ $form = ActiveForm::begin([
                     }
 
                     lockSpan.outerHTML = `
-            <select class="form-select mt-12" name="lavelLanguage${no}" id="lavelLanguage${no}" required>
+            <select class="form-select mt-12" name="lavelLanguage${no}" id="lavelLanguage${no}">
                 ${options}
             </select>
         `;
@@ -2903,69 +2935,156 @@ $form = ActiveForm::begin([
 
         }
 
-        // $('#create-employee').on('submit', function(e) {
-        //     var savePermission = $("#savePermission").val();
-        //     var isDraf = $("darf").val(); //ถ้า draf จะเป็น 1
-        //     if (isDraf != 1) { //ไม่
-        //         if (savePermission == "") {
-        //             alert('Select the System Wide Permission Level');
-        //             e.preventDefault(); // ป้องกันการ submit
-        //         }
-        //     } else {
+        $(function(){
+            $('#deleteLanguageBtn').on('click', function(e){
+                e.preventDefault();
+                const userId = $(this).data('user-id') || '';
+                const employeeId = $('#emId').val();
+                const languageId = $('#mainLanguage').val() || '';
+                const level = $('#lavelLanguage').val() || '';
+                const csrfParam = $('meta[name="csrf-param"]').attr('content');
+                const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-        //         $('#create-employee').submit();
-        //     }
-        // });
+                const url = $url + 'setting/employee/delete-language';
 
-        // document.getElementById('create-employee').addEventListener('submit', function(e) {
-        //     e.preventDefault(); // ป้องกันการ submit
+                // ส่ง ajax แบบ form-encoded (ง่าย)
+                const postData = {
+                    id: employeeId,           
+                    idlanguage: languageId,   
+                    level: level
+                };
+                // เพิ่ม CSRF ถ้ามี
+                if (csrfParam && csrfToken) {
+                    postData[csrfParam] = csrfToken;
+                }
 
-        //     const radios = document.querySelectorAll('input[name="role"]');
-        //     const oneChecked = Array.from(radios).some(r => r.checked);
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: postData,
+                    dataType: 'json',
+                    success: function(response) {
+                        // ตรวจผลจาก backend
+                        if (response && response.success) {
+                            // เคลียร์ select ให้เป็น placeholder / ค่าเริ่มต้น
+                            $('#mainLanguage').prop('selectedIndex', 0);
+                            $('#lavelLanguage').prop('selectedIndex', 0);
 
-        //     var savePermission = $("#savePermission").val();
-        //     var isDraf = $("#darf").val(); //ถ้า draf จะเป็น 1
-        //     if (isDraf !== '1') { //ไม่
-        //         if (savePermission == "") {
-        //             alert('Select the System Wide Permission Level');
-        //             // return;
-        //         }
-        //     }
-        //     // alert('1');
+                            // ถ้าคุณใช้ select ที่มี placeholder hidden option ให้เรียก trigger change ถ้าจำเป็น
+                            $('#mainLanguage, #lavelLanguage').trigger('change');
+                             toggleDeleteButton();
 
-        //     if (certificates.length !== cerImages.length || certificates.length !== certificatesFiles.length) {
-        //         alert("The information is incomplete. Please upload all photos and certificate files.");
-        //         // return false;
-        //     }
+                            // console.log('Deleted successfully:', response);
+                            // alert(response.message || 'Deleted successfully');
+                        } else {
+                            console.warn('Delete failed:', response);
+                            alert(response.message || 'Delete failed');
+                        }
+                        // alert(1);
+                    },
+                    error: function(xhr, status, error) {
+                        // แสดงข้อมูลละเอียดเพื่อดีบัก
+                        console.error('AJAX error - status:', status, 'error:', error);
+                        console.error('XHR.status:', xhr.status);
+                        console.error('XHR.responseText:', xhr.responseText);
+                        alert('An error occurred. Check console (F12) for details.');
 
-        //     const form = e.target;
-        //     const formData = new FormData(form);
+                        // ถ้าต้องการให้ user เห็นข้อความจาก backend (ถ้ามี)
+                        try {
+                            var json = JSON.parse(xhr.responseText);
+                            if (json.message) alert('Server says: ' + json.message);
+                        } catch (e) {
+                            // not JSON — ignore
+                        }
+                    }
+                });
+            });
 
-        //     formData.set('certificateData', JSON.stringify(certificates));
+    $(document).on('click', '[id^="deleteLanguageBtn-"]', function (e) {
+        e.preventDefault();
 
-        //     cerImages.forEach((file, index) => {
-        //         formData.append(`cerImage[${index}]`, file);
-        //     });
+        const $btn = $(this);
+        const index = $btn.attr('id').split('-')[1]; // เช่น "1", "2", "3"
+        const employeeId = $('#emId').val();
 
-        //     certificatesFiles.forEach((file, index) => {
-        //         formData.append(`certificate[${index}]`, file);
-        //     });
+        const languageId = $('#mainLanguage' + index).val() || '';
+        const level = $('#lavelLanguage' + index).val() || '';
 
-        //     fetch(form.action, {
-        //             method: 'POST',
-        //             body: formData
-        //         })
-        //         .then(res => res.text())
-        //         .then(result => {
-        //             console.log("ส่งเรียบร้อย", result);
-        //             // ทำต่อ เช่น redirect หรือแจ้งเตือน
-        //         })
-        //         .catch(err => {
-        //             console.error("เกิดข้อผิดพลาด", err);
-        //         });
-        //     // return false;
-        //     // alert('1');
-        // });
+        const csrfParam = $('meta[name="csrf-param"]').attr('content');
+        const csrfToken = $('meta[name="csrf-token"]').attr('content');
+        const url = $url + 'setting/employee/delete-language';
+
+        const postData = {
+            id: employeeId,
+            idlanguage: languageId,
+            level: level
+        };
+        if (csrfParam && csrfToken) postData[csrfParam] = csrfToken;
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: postData,
+            dataType: 'json',
+            success: function (response) {
+                if (response && response.success) {
+
+                    // ✅ รีเซ็ต select ของชุดนั้น
+                    $('#mainLanguage' + index).prop('selectedIndex', 0);
+                    $('#lavelLanguage' + index).prop('selectedIndex', 0);
+                    $('#mainLanguage' + index + ', #lavelLanguage' + index).trigger('change');
+
+                    // ✅ เปลี่ยนธงของชุดนั้นกลับโลก
+                    $('#flag-ml-' + index).attr('src', '<?= Yii::$app->homeUrl ?>image/e-world.svg');
+
+                    // ✅ ซ่อนปุ่มที่กด
+                    $btn.fadeOut(200);
+
+                    console.log('Deleted successfully (set ' + index + '):', response);
+                } else {
+                    // alert(response.message || 'Delete failed');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error deleting:', xhr.responseText);
+                alert('An error occurred. Check console.');
+            }
+        });
+    });
+
+        });
+
+        function toggleDeleteButton() {
+            const mainVal = $('#mainLanguage').val();
+            const mainVal1 = $('#mainLanguage1').val();
+            const mainVal2 = $('#mainLanguage2').val();
+
+            // ถ้าไม่มีค่าทั้งคู่ -> ซ่อน
+            if (!mainVal) {
+                $('#deleteLanguageBtn').hide();
+                $('#flag-ml').attr('src', '<?= Yii::$app->homeUrl ?>image/e-world.svg');
+            } else {
+                $('#deleteLanguageBtn').show();
+            }
+            if (!mainVal1) {
+                $('#deleteLanguageBtn-1').hide();
+                $('#flag-ml1').attr('src', '<?= Yii::$app->homeUrl ?>image/e-world.svg');
+            } else {
+                $('#deleteLanguageBtn-1').show();
+            }
+            if (!mainVal2) {
+                $('#deleteLanguageBtn-2').hide();
+                $('#flag-ml2').attr('src', '<?= Yii::$app->homeUrl ?>image/e-world.svg');
+            } else {
+                $('#deleteLanguageBtn-2').show();
+            }
+        }
+
+        // ✅ ตรวจทุกครั้งที่มีการเปลี่ยน select ใด select หนึ่ง
+        $('#mainLanguage, #lavelLanguage').on('change', function () {
+            toggleDeleteButton();
+        });
+
 
         document.getElementById('saveDraftBtn').addEventListener('click', function(e) {
             // alert('d');
@@ -2974,6 +3093,7 @@ $form = ActiveForm::begin([
             // alert('d');
             document.getElementById('create-employee').submit(); // submit form
         });
+        
     </script>
 
     <?php ActiveForm::end(); ?>

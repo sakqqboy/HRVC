@@ -140,15 +140,34 @@ class BranchController extends Controller
 
                 $branchId = $branch['branchId'];
                 $employees = Employee::find()
-                    ->where(["branchId" => $branchId, "status" => 1])
-                    ->asArray()
-                    ->all();
-                // กรองเฉพาะที่มี picture
-                $filteredEmployees = array_filter($employees, function ($employee) {
-                    return !empty($employee['picture']);
-                });
-                // รีเซ็ต index และเลือกแค่ 3 คนแรก
-                $filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+                ->where(["branchId" => $branchId, "status" => 1])
+                ->asArray()
+                ->all();
+
+            // ✅ กรองเฉพาะที่มี picture และไฟล์มีอยู่จริง
+            $filteredEmployees = array_filter($employees, function ($employee) {
+                $relativePath = $employee["picture"] ?? '';
+                $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+
+                return !empty($relativePath) && file_exists($absolutePath);
+            });
+
+            // ✅ รีเซ็ต index และเลือกแค่ 3 คนแรก
+            $filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+
+            // ✅ เซ็ต default ถ้าไม่มีใครมีรูป
+            foreach ($filteredEmployees as &$employee) {
+                $relativePath = $employee["picture"] ?? '';
+                $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+
+                if (!empty($relativePath) && file_exists($absolutePath)) {
+                    $employee['pictureUrl'] = $employee["picture"];
+                } else {
+                    $employee['pictureUrl'] = 'image/no-employee.svg';
+                }
+            }
+            // unset($employee); // Good practice after foreach reference
+
 
                 // นับจำนวน
                 $departments = Department::find()
@@ -183,6 +202,18 @@ class BranchController extends Controller
                     $pictureUrl = 'image/no-branch.svg';
                 }
 
+                // ✅ เช็คไฟล์รูปของ branch
+                $branchPicRelative = $branch["picture"] ?? '';
+                $branchPicAbsolute = Yii::getAlias('@webroot') . '/' . ltrim($branchPicRelative, '/');
+
+                if (!empty($branchPicRelative) && file_exists($branchPicAbsolute)) {
+                    $branchPictureUrl = $branchPicRelative;
+                } else {
+                    $branchPictureUrl = "image/no-company.svg";
+                }
+
+                
+
                 //เก็บค่า
                 $data[$branch["branchId"]] = [
                     "branchId" => $branch["branchId"],
@@ -197,7 +228,7 @@ class BranchController extends Controller
                     "currency_default" => $branch["currency_default"],
                     "companyName" => $branch["companyName"],
                     "countryName" => $branch["countryName"],
-                    "picture" => !empty($branch["picture"]) ? $branch["picture"] : "image/no-company.svg",
+                    "picture" => !empty($branchPictureUrl) ? $branchPictureUrl : "image/no-company.svg",
                     "flag" => !empty($branch["flag"]) ? $branch["flag"] : "image/e-world.svg",
                     "city" => $branch["city"],
                     "totalDepartment" => count($departments),

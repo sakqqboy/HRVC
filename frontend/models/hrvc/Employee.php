@@ -46,6 +46,10 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
     {
         return array_merge(parent::attributeLabels(), []);
     }
+    public function getUser()
+    {
+        return $this->hasOne(User::class, ['employeeId' => 'employeeId']);
+    }
     public static function calculateDate($joinDate)
     {
         $today = date("Y-m-d");

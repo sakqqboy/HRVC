@@ -79,7 +79,7 @@ $this->title = 'company profile';
             <div class="col-lg-2  tcg-edit0" style="display: flex; justify-content: flex-end;">
                 <?php if($role >= 5){ ?>
                 <a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
-                    class="btn-update-group" style="width: 60%;">
+                    class="btn-update-group" style="width: 70%;">
                     <img src="<?= Yii::$app->homeUrl ?>image/refresh-white.svg">
                     <?= Yii::t('app', 'Update Information') ?>
                 </a>
@@ -131,7 +131,7 @@ $this->title = 'company profile';
                                         style="width: 9.333px; height: 12px;">
                                 </div>
                                 <div class="col-11 address-box text-wrap ">
-                                    <?= $company["location"] ?>
+                                    <?= !empty($company["location"]) ? $company["location"] : '-' ?> 
                                 </div>
                             </div>
                             <div class="col-lg-2">
@@ -140,7 +140,7 @@ $this->title = 'company profile';
                                 <?= Yii::t('app', 'Founded') ?>
                             </div>
                             <div class="col-lg-8 col-md-6 col-12 name-head0 mt-7">
-                                <?= $company["founded"] ?>
+                                <?= !empty($company["founded"]) ? $company["founded"] : '-' ?>                                
                             </div>
                             <div class="col-lg-2">
                             </div>
@@ -148,7 +148,7 @@ $this->title = 'company profile';
                                 <?= Yii::t('app', 'Industry') ?>
                             </div>
                             <div class="col-lg-8 col-md-6 col-12 name-head0 mt-7">
-                                <?= $company["industries"] ?>
+                                <?= !empty($company["industries"]) ? $company["industries"] : '-' ?>
                             </div>
                         </div>
                         <div class="col-12 Group-Information mt-36">
@@ -164,7 +164,7 @@ $this->title = 'company profile';
                             <div class="col-lg-8 col-md-6 col-12 name-head0 d-flex align-items-center">
                                 <span class="address-box0 pr-5"
                                     style="color: var(--Primary-Blue---HRVC, #2580D3); text-decoration-line: underline;">
-                                    <?= $company["email"] ?>
+                                    <?= !empty($company["email"]) ? $company["email"] : '-' ?>
                                 </span>
                                 <img src="<?= Yii::$app->homeUrl ?>image/coppy.svg"
                                     onclick="javascript:copyToClipboard('<?= $company['email'] ?>')"
@@ -177,7 +177,7 @@ $this->title = 'company profile';
                             </div>
                             <div class="col-lg-8 col-md-6 col-12 name-head0 mt-7 d-flex align-items-center">
                                 <span class="address-box0  pr-5">
-                                    <?= $company["contact"] ?>
+                                    <?= !empty($company["contact"]) ? $company["contact"] : '-' ?>
                                 </span>
                                 <img src="<?= Yii::$app->homeUrl ?>image/coppy.svg"
                                     onclick="javascript:copyToClipboard('<?= $company['contact'] ?>')"
@@ -191,7 +191,7 @@ $this->title = 'company profile';
                             <div class="col-lg-8 col-md-6 col-12 name-head0 mt-7">
                                 <span class="address-box0 pr-5"
                                     style="color: var(--Primary-Blue---HRVC, #2580D3); text-decoration-line: underline;">
-                                    <?= $company["website"] ?>
+                                    <?= !empty($company["website"]) ? $company["website"] : '-' ?>
                                 </span>
                             </div>
                         </div>
@@ -202,8 +202,7 @@ $this->title = 'company profile';
                             <hr class="hr-group">
                         </div>
                         <div class="col-12 detail-tokyo mt-10">
-                            <?= $company["about"] ?>
-
+                            <?= !empty($company["about"]) ? $company["about"] : '-' ?>
                         </div>
 
                     </div>

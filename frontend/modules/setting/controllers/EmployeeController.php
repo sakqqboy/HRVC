@@ -2,6 +2,7 @@
 
 namespace frontend\modules\setting\controllers;
 
+use Codeception\Exception\ExtensionException;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use DateTime;
@@ -991,7 +992,8 @@ class EmployeeController extends Controller
 
                             }
                         }
-
+                        // throw new exception(print_r(Yii::$app->request->post(), true));
+                        // throw new exception(print_r($_POST['mainLanguage'], true));
                         if (!empty($_POST['mainLanguage']) && !empty($_POST['lavelLanguage'])) {
 
                             // UserLanguage
@@ -1353,6 +1355,55 @@ class EmployeeController extends Controller
             echo json_encode(['status' => 'error', 'message' => 'Delete failed']);
         }
     }
+
+    public function actionDeleteLanguage()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $request = Yii::$app->request;
+
+        $id = $request->post('id'); // employeeId ไม่ใช่ userId
+        $languageId = $request->post('idlanguage');
+        $level = $request->post('level');
+
+        $employee = Employee::findOne($id);
+
+        if (!$employee) {
+            return ['success' => false, 'message' => 'Employee not found.'];
+        }
+
+        // หา userId อย่างปลอดภัย
+        $userId = null;
+        // 1) ถ้ามีคอลัมน์ userId ใน model ให้ใช้ตรง ๆ
+        if (isset($employee->userId) && $employee->userId) {
+            $userId = $employee->userId;
+        } else {
+            // 2) ถ้ามี relation getUser() ให้ใช้ relation แต่เช็คก่อนว่ามี method
+            if (method_exists($employee, 'getUser')) {
+                $user = $employee->user; // ใช้ relation
+                if ($user && isset($user->userId)) {
+                    $userId = $user->userId;
+                }
+            }
+        }
+
+        $model =  UserLanguage::findOne([
+            'userId' => $userId,
+            'languageId' => $languageId,
+            'lavel' => $level,
+        ]);
+        if (!$model) {
+            return ['success' => true, 'message' => 'No matching record found.'];
+        }
+        try {
+            $model->delete();
+            return ['success' => true, 'message' => 'Language entry deleted.'];
+        } catch (\Exception $e) {
+            \Yii::error($e->getMessage());
+            return ['success' => false, 'message' => 'Delete failed.'];
+        }
+        return 1;
+    }
+
 
 
     public function actionDeleteEmployee($hash)
@@ -2289,4 +2340,6 @@ class EmployeeController extends Controller
         $res["kpiGroup"] = $kpiGroup;
         return json_encode($res);
     }
+
+    
 }

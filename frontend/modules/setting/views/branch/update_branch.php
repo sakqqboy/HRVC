@@ -103,13 +103,12 @@ $this->title = 'Update Branch';
                     </div>
                 </div>
                 <div class="between-column">
-                    <label for="exampleFormControlInput1" class="form-label font-size-12 font-b">
-                        <span class="text-danger">* </span>
+                    <label class="form-label font-size-12 font-b">
+                        <!-- <span class="text-danger">* </span> -->
                         <?= Yii::t('app', 'Branch Description') ?>
                     </label>
                     <textarea style="height: 390px; width: 398px;" class="form-control" name="description"
-                        id="description"
-                        placeholder="Write the description of the Branch"><?= $branches['description'] ?></textarea>
+                        id="description" placeholder="Write the description of the Branch"><?= $branches['description'] ?></textarea>
                 </div>
             </div>
             <div class="col-12 text-end mt-10">
