@@ -1269,7 +1269,7 @@ $form = ActiveForm::begin([
                                                 <input type="hidden" id="agreementPath" value="<?= $agreementPath ?>">
                                                 <a class="no-underline " href="#" onclick="removeFile(2); return false;">
                                                     <img id="bin-file2" class="mt-5 ml-9"
-                                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                                        src="<?= Yii::$app->homeUrl ?>/images/icons/Settings/binred.svg"
                                                         alt="icon" style="width: 28px; height: 28px;">
                                                 </a>
                                                 <a class="no-underline " href="#" onclick="resetUpload(2); return false;">
@@ -1515,7 +1515,7 @@ $form = ActiveForm::begin([
                                     </option>
                                 </select>
                                 <img id="deleteLanguageBtn"
-                                src="<?= Yii::$app->homeUrl ?>/images/icons/Settings/bin.svg"
+                                src="<?= Yii::$app->homeUrl ?>/images/icons/Settings/binred.svg"
                                 class="pim-icon ml-5 "
                                 style="width:16px;height:16px; cursor:pointer;"
                                 data-user-id="<?= Yii::$app->user->id ?? '' ?>" />
@@ -1571,7 +1571,7 @@ $form = ActiveForm::begin([
                                                 <?= Yii::t('app', 'Add additional Language First') ?>
                                             </span>
                                             <img id="deleteLanguageBtn-1"
-                                            src="<?= Yii::$app->homeUrl ?>/images/icons/Settings/bin.svg"
+                                            src="<?= Yii::$app->homeUrl ?>/images/icons/Settings/binred.svg"
                                             class="pim-icon mt-12 ml-5 "
                                             style="width:16px;height:16px; cursor:pointer;"
                                             data-user-id="<?= Yii::$app->user->id ?? '' ?>" />
@@ -2776,7 +2776,7 @@ $form = ActiveForm::begin([
                 Add additional Language First
             </span>
              <img id="deleteLanguageBtn-${additionalLangCount}"
-                                src="<?= Yii::$app->homeUrl ?>/images/icons/Settings/bin.svg"
+                                src="<?= Yii::$app->homeUrl ?>/images/icons/Settings/binred.svg"
                                 class="pim-icon mt-12 ml-5 "
                                 style="width:16px;height:16px; cursor:pointer;"
                                 data-user-id="<?= Yii::$app->user->id ?? '' ?>" />
