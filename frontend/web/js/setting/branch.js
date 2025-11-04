@@ -185,12 +185,13 @@ function updateBranch(branchId) {
         }
     });
 }
-$("#update-branch").click(function (e) {
+$("#btn-update-branch").click(function (e) {
     var url = $url + 'setting/branch/save-update-branch';
     var branchName = $("#branchName").val();
     var branchId = $("#branchId").val();
     var companyId = $("#company").val();
     var description = $("#description").val();
+
     if ($.trim(branchName) == '') {
         alert("Branch name can not be null");
     } else {
@@ -216,6 +217,7 @@ $("#update-branch").click(function (e) {
         });
     }
 });
+
 $("#reset-branch").click(function (e) {
     $("#branchId").val('');
     $("#branchName").val('');
