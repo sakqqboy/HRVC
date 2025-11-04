@@ -333,6 +333,8 @@ $this->title = 'Group Profile';
                 if (isset($companyGroup) && count($companyGroup) > 0) {
                     $i = 0;
                     foreach ($companyGroup as $company) :
+                        if ($i >= 7)
+                            break;
                 ?>
                         <div class="col-12 mb-10">
                             <a href="<?= Yii::$app->homeUrl . 'setting/company/company-view/' . ModelMaster::encodeParams([
@@ -387,7 +389,7 @@ $this->title = 'Group Profile';
                         $i++;
                     endforeach;
                 }
-                if (count($companyGroup) > 5) {
+                if (count($companyGroup) > 7) {
                     ?>
                     <div class="col-12 text-end font-size-14">
                         <a href="<?= Yii::$app->homeUrl ?>setting/company/company-grid"> <?= Yii::t('app', 'See All') ?>
