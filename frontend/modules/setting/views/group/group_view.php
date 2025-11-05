@@ -7,8 +7,6 @@ $this->title = 'Group Profile';
 ?>
 
 <div class="col-12 mt-60 pt-10 bg-white">
-
-
     <div class="d-flex" style="height: 159px;">
         <?php
         if ($group["banner"] != null) { ?>
@@ -47,7 +45,7 @@ $this->title = 'Group Profile';
         <?php if ($role >= 5) { ?>
             <div class="flex-grow-1" style="display: flex;justify-content: end;align-items: end;">
                 <a href="<?= Yii::$app->homeUrl ?>setting/group/update-group/<?= ModelMaster::encodeParams(['groupId' => $group['groupId']]) ?>"
-                    class="d-flex align-items-center create-employee-btn justify-content-center" style="min-width: 150px;font-size:12px;">
+                    class="create-employee-btn" style="min-width: 150px;font-size:12px;">
                     <img src="<?= Yii::$app->homeUrl . 'image/refresh-white.svg' ?>" class="mr-3">
                     <?= Yii::t('app', 'Update Information') ?>
                 </a>

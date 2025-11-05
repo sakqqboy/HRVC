@@ -5,19 +5,17 @@ use yii\bootstrap5\ActiveForm;
 $this->title = 'New Company';
 ?>
 <?php $form = ActiveForm::begin([
-	'id' => 'create-group',
-	'method' => 'post',
-	'options' => [
-		'enctype' => 'multipart/form-data',
-	],
-	'action' => Yii::$app->homeUrl . 'setting/company/save-create-company'
+    'id' => 'create-group',
+    'method' => 'post',
+    'options' => [
+        'enctype' => 'multipart/form-data',
+    ],
+    'action' => Yii::$app->homeUrl . 'setting/company/save-create-company'
 
 ]); ?>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-<!-- Bootstrap JS (รวม Popper แล้วใน Bootstrap 5) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <div class="background-main-whilte">
@@ -132,7 +130,7 @@ $this->title = 'New Company';
                                                 <?= Yii::t('app', 'e.g., ASEAN, North America, Europe') ?>
                                             </option>
                                             <?php foreach ($countries as $countryId => $country) : ?>
-                                            <option value="<?= $countryId ?>"><?= $country ?></option>
+                                                <option value="<?= $countryId ?>"><?= $country ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -188,9 +186,9 @@ $this->title = 'New Company';
                                                 <?= Yii::t('app', 'Select from employees') ?>
                                             </option>
                                             <?php foreach ($headQuater as $user): ?>
-                                            <option value="<?= $user['employeeId'] ?>">
-                                                <?= $user['employeeFirstname'] . ' ' . $user['employeeSurename'] ?>
-                                            </option>
+                                                <option value="<?= $user['employeeId'] ?>">
+                                                    <?= $user['employeeFirstname'] . ' ' . $user['employeeSurename'] ?>
+                                                </option>
                                             <?php endforeach; ?>
 
                                         </select>

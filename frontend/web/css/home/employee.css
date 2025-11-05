@@ -918,9 +918,13 @@
 }
 
 .create-employee-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #2580D3;
     font-size: 14px;
     font-weight: 600;
+    letter-spacing: 0px;
     border-radius: 3px;
     color: white;
     text-decoration: none;
@@ -928,6 +932,10 @@
     text-align: center;
     min-width: 115px;
     min-height: 30px;
+}
+
+.create-employee-btn:hover {
+    color: white;
 }
 
 .export-employee-btn {

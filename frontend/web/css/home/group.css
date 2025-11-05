@@ -45,13 +45,13 @@
 
 .avatar-upload {
     position: relative;
-    max-width: 135px;
+    max-width: 160px;
     /* margin: -75px auto; */
 }
 
 .avatar-upload-preview {
     position: relative;
-    max-width: 135px;
+    max-width: 154px;
     /* margin: 55px auto; */
 }
 
@@ -59,6 +59,14 @@
     position: relative;
     display: flex;
     align-items: center;
+}
+
+.create-group-banner {
+    width: 60px !important;
+    height: 60px !important;
+    justify-self: anchor-center;
+    align-self: anchor-center;
+    z-index: -1;
 }
 
 .input-wrapper img {
@@ -98,6 +106,38 @@
     /* 233.333% */
 }
 
+.btn-save-group-new {
+    display: flex;
+    min-width: 77.36px;
+    min-height: 31px;
+    padding: 7px 9px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 3px;
+    border: 0.5px solid var(--Primary-Blue---HRVC, #2580D3);
+    background: var(--Primary-Blue---HRVC, #2580D3);
+    color: var(--100-white, #FFF);
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.btn-cancel-group-new {
+    display: flex;
+    min-width: 77.36px;
+    min-height: 31px;
+    padding: 7px 9px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 3px;
+    border: 0.5px solid var(--HRVC---Light-Text, #94989C);
+    background: var(--100-white, #FFF);
+    font-size: 12px;
+    font-weight: 500;
+}
+
 .btn-cancel-group {
     /* display: flex; */
     width: 100px;
@@ -112,11 +152,13 @@
     background: var(--100-white, #FFF);
 }
 
+
+
 .banner-uploade {
     border-radius: 4.744px;
     border: 0.949px dashed var(--Stroke-Bluish-Gray, #BBCDDE);
     background: #F4F6F9;
-    height: 201.128px;
+    height: 152px;
 }
 
 /* .banner-uploade {
@@ -156,8 +198,8 @@
 }
 
 .avatar-upload .avatar-preview {
-    width: 200px;
-    height: 200px;
+    width: 154px;
+    height: 149px;
     border-radius: 50%;
     background-size: cover;
     background-position: center;
@@ -176,19 +218,19 @@
 }
 
 .avatar-upload .avatar-preview .upload-label {
-    display: flex;
+    /* display: flex; */
     flex-direction: row;
     /* เปลี่ยนจาก column เป็น row */
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    font-size: 16px;
+    /* gap: 8px; */
+    font-size: 13px;
     cursor: pointer;
     color: var(--Primary-Blue---HRVC, #2580D3);
 
     font-style: normal;
     font-weight: 500;
-    line-height: 25.264px;
+    line-height: 14px;
 }
 
 
@@ -209,22 +251,23 @@
 
 .update-group-body {
     display: flex;
-    padding: 30px 33px;
+    padding: 30px 30px;
     justify-content: space-between;
     /* align-items: flex-start; */
     /* gap: 10px; */
     flex-shrink: 0;
     border-radius: 10px;
     background: var(--Background-Blue, #F4F6F9);
+    margin-bottom: 3px;
 }
 
 .name-text-update {
     color: var(--HRVC---Text-Black, #30313D);
 
-    font-size: 18px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
-    line-height: 19.286px;
+    line-height: 14.92px;
     /* 107.143% */
 }
 
