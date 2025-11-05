@@ -33,9 +33,9 @@ class GroupController extends Controller
             return $this->redirect(Yii::$app->homeUrl . 'site/login');
         }
         $role = UserRole::userRight();
-		if($role <= 3 ){
-			return  $this->redirect(Yii::$app->request->referrer);
-		}
+        if ($role <= 3) {
+            return  $this->redirect(Yii::$app->request->referrer);
+        }
         return true; //go to origin request
     }
     public function actionIndex()
@@ -50,7 +50,7 @@ class GroupController extends Controller
         if (isset($group) && !empty($group)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $group["groupId"]]));
         }
-        
+
         return $this->render('display_group', [
             "role" => $role
         ]);
@@ -59,9 +59,9 @@ class GroupController extends Controller
     public function actionCreateGroup()
     {
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
- 
+
         if (isset($_POST["groupName"]) && trim($_POST["groupName"]) != '') {
- 
+
             $group = new Group();
             $group->groupName = $_POST["groupName"];
             $group->tagLine = $_POST["tagLine"];
@@ -118,7 +118,7 @@ class GroupController extends Controller
             }
         }
 
-       $countries = Api::connectApi(Path::Api() . 'masterdata/country/active-country');
+        $countries = Api::connectApi(Path::Api() . 'masterdata/country/active-country');
 
         return $this->render('create', [
             "countries" => $countries
@@ -151,13 +151,13 @@ class GroupController extends Controller
         }
         if ($role == 1 || $role == 2) {
             $staffId = Yii::$app->user->id;
-         }
+        }
 
         $group = Api::connectApi(Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
 
-        $companyGroup = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1&limit=7');
+        $companyGroup = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1');
 
-        $employees = Employee::find()->select('employeeId')->where(["status" => 1])->all();
+        // $employees = Employee::find()->select('employeeId')->where(["status" => 1])->all();
         $companies = Company::find()->where(["groupId" => $groupId, "status" => 1])->asArray()->all();
         if (isset($companies) && count($companies) > 0) {
             foreach ($companies as $company) :
@@ -176,7 +176,6 @@ class GroupController extends Controller
                                 ->where(["departmentId" => $department["departmentId"], "status" => 1])
                                 ->asArray()
                                 ->all();
-                            
                             $totalTeam += count($teams);
                         endforeach;
                         $totalDepartment += count($departments);
@@ -186,20 +185,44 @@ class GroupController extends Controller
             endforeach;
         }
         $employees = Employee::find()
-        ->where(["status" => 1])
-        ->asArray()
-        ->all();
+            ->select('picture')
+            ->where(["status" => 1])
+            ->asArray()
+            ->all();
 
         // กรองข้อมูลที่ picture ไม่เป็นค่าว่าง
-        $filteredEmployees = array_filter($employees, function($employee) {
-            return !empty($employee['picture']);
-        });
-
+        $selectPic = [];
+        $img = [];
+        if (count($employees) >= 3) {
+            $randomEmpployee = array_rand($employees, 3);
+            $selectPic[0] = $employees[$randomEmpployee[0]];
+            $selectPic[1] = $employees[$randomEmpployee[1]];
+            $selectPic[2] = $employees[$randomEmpployee[2]];
+        } else {
+            if (count($employees) > 0) {
+                $selectPic = $employees;
+                sort($selectPic);
+            }
+        }
+        $i = 0;
+        if (count($selectPic) > 0) {
+            foreach ($selectPic as $pic):
+                $img[$i] = 'images/employee/status/employee-nopic.svg';
+                if (!empty($pic['picture'])) {
+                    $file = Path::getHost() . $pic["picture"];
+                    if (file_exists($file)) {
+                        $img[$i] = $pic["picture"];
+                    }
+                }
+                $i++;
+            endforeach;
+        }
+        //throw new Exception(print_r($companyGroup, true));
         // จัดเรียงผลลัพธ์ให้อยู่ในอาเรย์ที่มีแค่ 3 ตัวแรก
-        $filteredEmployees = array_values($filteredEmployees); // ใช้ array_values เพื่อรีเซ็ต index ของอาเรย์
+        // $filteredEmployees = array_values($filteredEmployees); // ใช้ array_values เพื่อรีเซ็ต index ของอาเรย์
 
         // เลือกแค่ 3 ตัวแรก
-        $filteredEmployees = array_slice($filteredEmployees, 0, 3);
+        // $filteredEmployees = array_slice($filteredEmployees, 0, 3);
 
         // แสดงผลลัพธ์
         $totalEmployees = count($employees);
@@ -213,7 +236,7 @@ class GroupController extends Controller
             "totalDepartment" => $totalDepartment,
             "totalTeam" => $totalTeam,
             "role" => $role,
-            "employees" => $filteredEmployees
+            "employees" => $img
         ]);
     }
     public function actionUpdateGroup($hash)
@@ -279,7 +302,7 @@ class GroupController extends Controller
                 $fileBanner->saveAs($pathSave);
                 $group->banner = 'images/group/banner/' . $fileName;
             }
-            
+
             $fileImage = UploadedFile::getInstanceByName("image");
             if (isset($fileImage) && !empty($fileImage)) {
                 $path = Path::getHost() . 'images/group/profile/';

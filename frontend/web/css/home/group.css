@@ -1,5 +1,7 @@
 .sad-1 {
     width: 100%;
+    height: 159px;
+    border-radius: 8px;
     object-position: top center;
     object-fit: cover;
     max-inline-size: 100%;
@@ -12,9 +14,6 @@
     padding-left: 1010px;
 }
 
-.tcg-edit0 {
-    text-align: end;
-}
 
 
 /* body {
@@ -46,14 +45,14 @@
 
 .avatar-upload {
     position: relative;
-    max-width: 200px;
-    margin: -75px auto;
+    max-width: 135px;
+    /* margin: -75px auto; */
 }
 
 .avatar-upload-preview {
     position: relative;
-    max-width: 200px;
-    margin: 55px auto;
+    max-width: 135px;
+    /* margin: 55px auto; */
 }
 
 .input-wrapper {
@@ -91,7 +90,7 @@
     background: var(--Primary-Blue---HRVC, #2580D3);
     color: var(--100-white, #FFF);
     text-align: center;
-    font-family: "SF Pro Display";
+
     font-size: 15.429px;
     font-style: normal;
     font-weight: 500;
@@ -119,6 +118,7 @@
     background: #F4F6F9;
     height: 201.128px;
 }
+
 /* .banner-uploade {
     width: 100%;
     height: 250px;
@@ -140,15 +140,19 @@
     width: auto;
     transform-origin: center;
     transition: transform 0.1s ease-out;
-    object-fit: cover;          /* 🔹 ครอบเต็มกรอบ (ไม่ยืด, ไม่ซ้ำ) */
-    object-position: center;    /* 🔹 เริ่มจากตรงกลาง */
-    
+    object-fit: cover;
+    /* 🔹 ครอบเต็มกรอบ (ไม่ยืด, ไม่ซ้ำ) */
+    object-position: center;
+    /* 🔹 เริ่มจากตรงกลาง */
+
 }
 
 #imagePreviewBanner {
     background-repeat: no-repeat;
-    background-size: cover;          /* ครอบเต็มกรอบแบบไม่ยืด */
-    background-position: center;     /* จัดให้อยู่ตรงกลาง */
+    background-size: cover;
+    /* ครอบเต็มกรอบแบบไม่ยืด */
+    background-position: center;
+    /* จัดให้อยู่ตรงกลาง */
 }
 
 .avatar-upload .avatar-preview {
@@ -181,7 +185,7 @@
     font-size: 16px;
     cursor: pointer;
     color: var(--Primary-Blue---HRVC, #2580D3);
-    font-family: "SF Pro Display";
+
     font-style: normal;
     font-weight: 500;
     line-height: 25.264px;
@@ -216,7 +220,7 @@
 
 .name-text-update {
     color: var(--HRVC---Text-Black, #30313D);
-    font-family: "SF Pro Display";
+
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
@@ -236,7 +240,7 @@
 .title-create-text {
     color: var(--HRVC---Text-Black, #30313D);
     text-align: center;
-    font-family: "SF Pro Display";
+
     font-size: 22px;
     font-style: normal;
     font-weight: 600;
@@ -247,7 +251,7 @@
     width: 513px;
     color: #939393;
     text-align: center;
-    font-family: "SF Pro Display";
+
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -255,35 +259,29 @@
 }
 
 .name-full-tokyo {
-    color: var(--HRVC---Light-Text, #94989C);
-    font-family: "SF Pro Display";
-    font-size: 28px;
-    font-style: normal;
+    color: #94989C;
+    font-size: 18px;
     font-weight: 400;
-    line-height: normal;
 }
 
 .name-sub-tokyo {
-    color: var(--HRVC---Text-Black, #30313D);
-    font-family: "SF Pro Display";
-    font-size: 32px;
-    font-style: normal;
+    color: #30313D;
+    font-size: 26px;
+    line-height: 26px;
     font-weight: 500;
-    line-height: normal;
 }
 
 
 .tokyo-small {
     color: #3C3D48;
-    font-family: "SF Pro Display";
-    font-size: 22px;
-    font-style: normal;
+    font-size: 14px;
+    line-height: 16px;
     font-weight: 400;
-    line-height: normal;
 }
 
 .all-information {
     font-size: 14px;
+    padding-right: 10px;
 }
 
 .hr-group {
@@ -291,7 +289,7 @@
     /* ลบเส้น default */
     border-top: 0.5px solid var(--Stroke-Bluish-Gray, #BBCDDE);
     /* กำหนดความหนาและสีของเส้น */
-    margin-top: 10px;
+    margin-top: 5px;
     /* ปรับระยะขอบถ้าจำเป็น */
 }
 
@@ -304,31 +302,23 @@
 }
 
 .Group-Information {
-    /* padding-left: 40px; */
     color: #3C3D48;
-    font-family: "SF Pro Display";
-    font-size: 18px;
-    font-style: normal;
+    font-size: 13px;
     font-weight: 500;
-    line-height: normal;
-    text-transform: capitalize;
 }
 
 .name-head {
     color: var(--HRVC---Text-Black, #30313D);
-    text-align: right;
-    font-family: "SF Pro Display";
-    font-size: 16px;
-    font-style: normal;
+    font-size: 12px;
+    line-height: 16px;
     font-weight: 500;
-    line-height: normal;
-    text-align: end;
+    text-align: right;
+    align-content: center;
 }
 
 .name-director {
     color: var(--Primary-Blue---HRVC, #2580D3);
-    font-family: "SF Pro Display";
-    font-size: 16px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
@@ -355,9 +345,18 @@
     object-fit: cover;
 }
 
+.director-pic {
+    width: 22.5px;
+    width: 22.5px;
+}
+
 .name-head0 {
-    text-align: start;
-    word-wrap: break-word;
+    text-align: left;
+    align-content: center;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 400;
+    color: #30313D;
 }
 
 .number-bold {
@@ -560,7 +559,6 @@
 
 
 .number-current {
-    font-size: 16px;
     background: #FFF;
     border-radius: 15.75px;
     border: 0.75px solid #3C3D48;
@@ -573,8 +571,7 @@
     /* ซ้อนทับกับวงกลมก่อนหน้า */
     z-index: 2;
     color: var(--HRVC---Text-Black, #30313D);
-    font-family: "SF Pro Display";
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -599,7 +596,7 @@
     /* ซ้อนทับกับวงกลมก่อนหน้า */
     z-index: 2;
     color: var(--HRVC---Text-Black, #30313D);
-    font-family: "SF Pro Display";
+
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
@@ -615,7 +612,7 @@
     color: #3C3D48;
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
@@ -629,8 +626,8 @@
 }
 
 .width-TCF-BD {
-    width: 55px;
-    height: 55px;
+    width: 45px;
+    height: 45px;
     border-radius: 100%;
 }
 
@@ -649,20 +646,17 @@
     /* font-weight: 600;
     font-size: 13px; */
     color: var(--HRVC---Text-Black, #30313D);
-    font-family: "SF Pro Display";
-    font-size: 18px;
-    font-style: normal;
+    padding-left: 8px;
+    font-size: 13px;
     font-weight: 500;
-    line-height: normal;
+    line-height: 18px;
 }
 
 .city-group {
     color: var(--HRVC---Text-Black, #30313D);
-    font-family: "SF Pro Display";
-    font-size: 12px;
-    font-style: normal;
+    font-size: 11px;
+    padding-left: 8px;
     font-weight: 400;
-    line-height: normal;
     letter-spacing: -0.135px;
 }
 
@@ -684,8 +678,8 @@
     text-decoration: underline;
     cursor: pointer;
     color: var(--Primary-Blue---HRVC, #2580D3);
-    font-family: "SF Pro Display";
-    font-size: 14px;
+
+    font-size: 12px;
     font-style: normal;
     font-weight: 500;
     line-height: 13.928px;
@@ -698,8 +692,8 @@
 
 .text-name-current {
     color: var(--HRVC---Text-Black, #30313D);
-    font-family: "SF Pro Display";
-    font-size: 16px;
+
+    font-size: 12px;
     font-style: normal;
     font-weight: 500;
     line-height: 14.464px;
@@ -708,8 +702,8 @@
 
 .text-see-all {
     color: var(--Primary-Blue---HRVC, #2580D3);
-    font-family: "SF Pro Display";
-    font-size: 14px;
+
+    font-size: 11px;
     font-style: normal;
     font-weight: 500;
     line-height: 14.464px;
@@ -731,10 +725,7 @@
 }
 
 .address-box0 {
-    font-size: 16px;
-    display: block;
-    white-space: normal;
-    /* ข้อความจะแบ่งบรรทัดอัตโนมัติ */
+    font-size: 12px;
 }
 
 .text-wrap {
@@ -747,23 +738,24 @@
 }
 
 .detail-tokyo {
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: 0.5px;
-    line-height: 23px;
+    line-height: 18px;
     word-wrap: break-word;
-    padding-right: 15px;
+    padding-right: 10px;
+    padding-left: 10px;
     text-indent: 20px;
 }
 
 .box-about0 {
-    padding-left: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .box-27 {
     color: #3C3D48;
-    font-family: "SF Pro Display";
-    font-size: 16px;
-    font-style: normal;
+
+    font-size: 13px;
     font-weight: 500;
     /* line-height: 12.75px; */
     text-align: end;
@@ -773,7 +765,7 @@
 
 .Affiliated0 {
     color: var(--HRVC---Text-Black, #30313D);
-    font-family: "SF Pro Display";
+
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
@@ -845,24 +837,12 @@
         margin-top: -5px;
     }
 
-    .tcg-edit0 {
-        margin-top: -40px;
-    }
+    /* 
 
     .name-head {
         text-align: center;
         margin-top: 30px;
-    }
-
-    .name-head0 {
-        text-align: center;
-        word-wrap: break-word;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        /* เพิ่มระยะห่างระหว่างไอคอนกับข้อความ */
-    }
+    } */
 
     .address-box {
         text-align: center;
@@ -882,10 +862,6 @@
         /* ข้อความจะแบ่งบรรทัดอัตโนมัติ */
     }
 
-    .Group-Information {
-        margin-top: 30px;
-    }
-
     .about-name {
         margin-top: 30px;
     }
@@ -894,10 +870,10 @@
         padding-left: 20px;
     }
 
-    .home-tokyo {
+    /* .home-tokyo {
         margin-left: 30px;
         margin-top: 30px;
-    }
+    } */
 
     .width-TCF-BD {
         width: 60%;
@@ -915,15 +891,8 @@
 
     .box-27 {
         color: #3C3D48;
-        leading-trim: both;
-        text-edge: cap;
-        font-family: "SF Pro Display";
         font-size: 12px;
-        font-style: normal;
         font-weight: 500;
-        line-height: 12.75px;
-        /* 106.25% */
-        /* 106.25% */
     }
 
     .numberemployees {
