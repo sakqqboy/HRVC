@@ -6,7 +6,7 @@ use frontend\models\hrvc\UserRole;
 
 $session = Yii::$app->session;
 ?>
-<div class="col-12">
+<div class="col-12" style="min-height:calc(100vh - 60px);">
     <div class="col-12">
         <a href="<?= Yii::$app->homeUrl ?>site/index">
             <div class="col-12">
@@ -511,7 +511,7 @@ $session = Yii::$app->session;
             </div>
         </div>
     </div>
-    <div class="col-12 mt-20 mb-10">
+    <div class="d-flex" style="width:100%;bottom:0;position:absolute;">
         <div class="btn-hrvc-home">
             <a href="<?= Yii::$app->homeUrl ?>language/default/index" class="text-light" style="text-decoration: none;">
                 <span>
