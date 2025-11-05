@@ -1,5 +1,5 @@
 .select-pim {
-	padding: 0px 0px 0px 9px;
+	padding: 0px 20px 0px 9px;
 	border-radius: 20px;
 	height: 26px;
 	font-weight: 400;
@@ -7,6 +7,8 @@
 	width: 90px;
 	border: 0.5px solid #757575;
 	color: #4C4C4C;
+	white-space: nowrap;      /* ไม่ให้ขึ้นบรรทัดใหม่ */
+    text-overflow: ellipsis;  /* แสดง ... */
 }
 
 .select-pimselect {

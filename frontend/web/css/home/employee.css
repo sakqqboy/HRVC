@@ -1064,6 +1064,8 @@
     border: 1px solid #BBCDDE;
     padding: 27px 10px 10px 10px;
     margin-bottom: 3px;
+    /* position: relative; */
+    z-index: 0;
 }
 
 /* .input-group-text.active {
