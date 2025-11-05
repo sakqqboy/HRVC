@@ -10,7 +10,6 @@
 .menu-left-side {
     width: 235px;
     background-color: #072033;
-    /* font-family: 'SF Pro Display', 'sans-serif'; */
     font-size: 14px;
     top: 0;
     left: 0;
@@ -20,6 +19,7 @@
     overflow-y: auto;
     scrollbar-width: none;
     padding: 45px 9px 20px 9px;
+    z-index: 100;
 }
 
 .main-content {
