@@ -10,6 +10,13 @@
 	white-space: nowrap;      /* ไม่ให้ขึ้นบรรทัดใหม่ */
     text-overflow: ellipsis;  /* แสดง ... */
 }
+.select-pim:focus,
+.select-pim:focus-visible,
+.select-pim:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #000000 !important; /* ป้องกัน border เปลี่ยนเป็นฟ้า */
+}
 
 .select-pimselect {
 	padding: 0px 0px 0px 9px;
@@ -21,8 +28,16 @@
 	background: var(--HRVC---Light-Blue, #D7EBFF);
 	font-size: 14px;
 	width: 95px;
+	white-space: nowrap;      /* ไม่ให้ขึ้นบรรทัดใหม่ */
+    text-overflow: ellipsis;  /* แสดง ... */
 }
-
+.select-pimselect:focus,
+.select-pimselect:focus-visible,
+.select-pimselect:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #2580D3 !important; /* ป้องกัน border เปลี่ยนเป็นฟ้า */
+}
 .custom-button-select {
 	/* --bs-btn-padding-x: 2.0rem; */
 	--bs-btn-padding-y: 0.16rem;
