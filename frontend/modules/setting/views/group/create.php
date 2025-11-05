@@ -118,7 +118,7 @@ $this->title = 'Create Group';
                     <input type="text" class="form-control mt-12" name="location"
                         placeholder="<?= Yii::t('app', 'Write the address line') ?>">
                 </div>
-                <div class="form-group mb-30">
+                <div class="form-group">
                     <label class="name-text-update"
                         for="email"><?= Yii::t('app', 'Group Email') ?>
                     </label>
@@ -241,7 +241,7 @@ $this->title = 'Create Group';
                     </div>
                 </div>
 
-                <div class="form-group mb-30">
+                <div class="form-group">
                     <!-- <span class="text-danger">* </span> -->
                     <label class="name-text-update" for="youtube"><?= Yii::t('app', 'YouTube Link') ?>
                     </label>
@@ -256,9 +256,6 @@ $this->title = 'Create Group';
                             placeholder="<?= Yii::t('app', 'Copy & Paste the Group YouTube Link here') ?>">
                     </div>
                 </div>
-
-
-
             </div>
             <div class="col-lg-4 col-md-6 col-12 pl-15">
                 <div class="form-group mb-30">
