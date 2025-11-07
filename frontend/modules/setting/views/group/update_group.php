@@ -112,6 +112,7 @@ $this->title = 'Update Group';
                         <input type="text" id="founded" name="founded" class="form-control mt-12"
                             placeholder="Select date" value="<?= $group['founded'] ?>">
                     </div>
+
                 </div>
                 <div class="form-group mb-30">
                     <span class="text-danger">* </span><label class="name-text-update"
@@ -124,9 +125,11 @@ $this->title = 'Update Group';
                     <label class="name-text-update"
                         for="director"><?= Yii::t('app', 'Head of Group') ?>
                     </label>
-                    <input type="text" class="form-control mt-12" name="director"
-                        value="<?= $group['director'] ?>"
+                    <input type="text" class="form-control mt-12" name="directorName" id="searchDirector"
+                        value="<?= $group['directorName'] ?? '' ?>"
                         placeholder="<?= Yii::t('app', 'Write the name of director (firstname lastname)') ?>">
+                    <input type="hidden" id="director" name="director" value="<?= $group['director'] ?? '' ?>">
+                    <div class="director-list" id="director-list"></div>
                 </div>
                 <div class="form-group mb-30">
                     <label class="name-text-update"
@@ -275,9 +278,9 @@ $this->title = 'Update Group';
                 <!-- </div> -->
                 <input type="hidden" name="groupId" value="<?= $group['groupId'] + 543 ?>">
                 <div class="d-flex justify-content-end align-items-end gap-2" style="height: 85px;">
-                    <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group"
+                    <a href="<?= Yii::$app->homeUrl ?>setting/group/display-group"
                         style="text-decoration: none;">
-                        <button type="button" class="btn-cancel-group-new" action="<?= Yii::$app->homeUrl ?>setting/group/create-group">Cancel</button>
+                        <button type="button" class="btn-cancel-group-new">Cancel</button>
                     </a>
 
                     <button type="submit" class="btn-save-group-new">

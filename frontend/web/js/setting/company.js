@@ -83,8 +83,25 @@ function getOrdinalSuffix(day) {
 
 flatpickr("#founded", {
     dateFormat: "Y-m-d", // format ที่ส่งไป server
+    maxDate: "today",
     altInput: true,
-    altFormat:"F Y", // ชั่วคราว จะเปลี่ยนทีหลัง
+    altFormat: "j F Y", // ชั่วคราว จะเปลี่ยนทีหลัง
+    // defaultDate: document.querySelector("#founded").value, // โหลดค่าจาก input
+    onReady: function (selectedDates, dateStr, instance) {
+        console.log(selectedDates);
+        if (selectedDates.length > 0) {
+            const d = selectedDates[0];
+            if (!d) { return };
+            const day = d.getDate();
+            const month = d.toLocaleString('default', {
+                month: 'long'
+            });
+            const year = d.getFullYear();
+            const suffix = getOrdinalSuffix(day);
+            const formatted = `${day}${suffix} ${month} ${year}`;
+            instance.altInput.value = formatted;
+        }
+    },
     onChange: function (selectedDates, dateStr, instance) {
         if (selectedDates.length > 0) {
             const d = selectedDates[0];

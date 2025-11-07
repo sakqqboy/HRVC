@@ -9,6 +9,7 @@ $this->title = 'Create Group';
     'method' => 'post',
     'options' => [
         'enctype' => 'multipart/form-data',
+        'autocomplete' => 'off'
     ],
 ]); ?>
 <!-- 1. Flatpickr CSS + JS -->

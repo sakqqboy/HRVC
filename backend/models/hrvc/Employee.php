@@ -118,4 +118,26 @@ class Employee extends \backend\models\hrvc\master\EmployeeMaster
             return '';
         }
     }
+    public static function director($employeeId)
+    {
+        $director = [];
+        if ($employeeId != '') {
+            $employee = Employee::find()
+                ->select('employeeFirstname,employeeSurename,picture')
+                ->where(["employeeId" => $employeeId])
+                ->asArray()
+                ->one();
+            $img = "images/employee/status/employee-nopic.svg";
+            if (isset($employee) && $employee["picture"] != null) {
+                $url = Path::frontendUrl() . $employee["picture"];
+                $headers = @get_headers($url);
+                if ($headers !== false && strpos($headers[0], '200') !== false) {
+                    $img = $employee["picture"];
+                }
+            }
+            $director["directorName"] = $employee["employeeFirstname"] . " " . $employee["employeeSurename"];
+            $director["directorPicture"] = $img;
+        }
+        return $director;
+    }
 }
