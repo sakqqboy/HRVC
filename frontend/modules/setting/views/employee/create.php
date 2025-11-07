@@ -375,7 +375,7 @@ $form = ActiveForm::begin([
                             </div>
                         </div>
 
-                        <div class="">
+                        <div class="w-100">
                             <div class="w-100">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
                                     data-placement="top" aria-label="<?= Yii::t('app', 'Module Access') ?>"
@@ -2958,46 +2958,48 @@ $form = ActiveForm::begin([
                     postData[csrfParam] = csrfToken;
                 }
 
-                $.ajax({
-                    url: url,
-                    type: 'POST',
-                    data: postData,
-                    dataType: 'json',
-                    success: function(response) {
-                        // ตรวจผลจาก backend
-                        if (response && response.success) {
-                            // เคลียร์ select ให้เป็น placeholder / ค่าเริ่มต้น
-                            $('#mainLanguage').prop('selectedIndex', 0);
-                            $('#lavelLanguage').prop('selectedIndex', 0);
+                
 
-                            // ถ้าคุณใช้ select ที่มี placeholder hidden option ให้เรียก trigger change ถ้าจำเป็น
-                            $('#mainLanguage, #lavelLanguage').trigger('change');
-                             toggleDeleteButton();
+                // $.ajax({
+                //     url: url,
+                //     type: 'POST',
+                //     data: postData,
+                //     dataType: 'json',
+                //     success: function(response) {
+                //         // ตรวจผลจาก backend
+                //         if (response && response.success) {
+                //             // เคลียร์ select ให้เป็น placeholder / ค่าเริ่มต้น
+                //             $('#mainLanguage').prop('selectedIndex', 0);
+                //             $('#lavelLanguage').prop('selectedIndex', 0);
 
-                            // console.log('Deleted successfully:', response);
-                            // alert(response.message || 'Deleted successfully');
-                        } else {
-                            console.warn('Delete failed:', response);
-                            alert(response.message || 'Delete failed');
-                        }
-                        // alert(1);
-                    },
-                    error: function(xhr, status, error) {
-                        // แสดงข้อมูลละเอียดเพื่อดีบัก
-                        console.error('AJAX error - status:', status, 'error:', error);
-                        console.error('XHR.status:', xhr.status);
-                        console.error('XHR.responseText:', xhr.responseText);
-                        alert('An error occurred. Check console (F12) for details.');
+                //             // ถ้าคุณใช้ select ที่มี placeholder hidden option ให้เรียก trigger change ถ้าจำเป็น
+                //             $('#mainLanguage, #lavelLanguage').trigger('change');
+                //              toggleDeleteButton();
 
-                        // ถ้าต้องการให้ user เห็นข้อความจาก backend (ถ้ามี)
-                        try {
-                            var json = JSON.parse(xhr.responseText);
-                            if (json.message) alert('Server says: ' + json.message);
-                        } catch (e) {
-                            // not JSON — ignore
-                        }
-                    }
-                });
+                //             // console.log('Deleted successfully:', response);
+                //             // alert(response.message || 'Deleted successfully');
+                //         } else {
+                //             console.warn('Delete failed:', response);
+                //             alert(response.message || 'Delete failed');
+                //         }
+                //         // alert(1);
+                //     },
+                //     error: function(xhr, status, error) {
+                //         // แสดงข้อมูลละเอียดเพื่อดีบัก
+                //         console.error('AJAX error - status:', status, 'error:', error);
+                //         console.error('XHR.status:', xhr.status);
+                //         console.error('XHR.responseText:', xhr.responseText);
+                //         alert('An error occurred. Check console (F12) for details.');
+
+                //         // ถ้าต้องการให้ user เห็นข้อความจาก backend (ถ้ามี)
+                //         try {
+                //             var json = JSON.parse(xhr.responseText);
+                //             if (json.message) alert('Server says: ' + json.message);
+                //         } catch (e) {
+                //             // not JSON — ignore
+                //         }
+                //     }
+                // });
             });
 
     $(document).on('click', '[id^="deleteLanguageBtn-"]', function (e) {
