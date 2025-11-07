@@ -68,7 +68,7 @@ function companyDepartment() {
 }
 
 function getOrdinalSuffix(day) {
-    if (day > 3 && day < 21) return 'th';
+    //if (day > 3 && day < 21) return 'th';
     switch (day % 10) {
         case 1:
             return 'st';
@@ -84,7 +84,7 @@ function getOrdinalSuffix(day) {
 flatpickr("#founded", {
     dateFormat: "Y-m-d", // format ที่ส่งไป server
     altInput: true,
-    altFormat: "F Y", // ชั่วคราว จะเปลี่ยนทีหลัง
+    altFormat:"F Y", // ชั่วคราว จะเปลี่ยนทีหลัง
     onChange: function (selectedDates, dateStr, instance) {
         if (selectedDates.length > 0) {
             const d = selectedDates[0];
@@ -98,7 +98,8 @@ flatpickr("#founded", {
             const formatted = `${suffix} ${month} ${year}`;
             instance.altInput.value = formatted;
         }
-    }
+    },
+    
 });
 
 

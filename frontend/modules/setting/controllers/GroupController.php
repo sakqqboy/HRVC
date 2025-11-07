@@ -58,10 +58,11 @@ class GroupController extends Controller
 
     public function actionCreateGroup()
     {
-        $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
-
+        $currentGroup = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
+        // if (isset($currentGroup) && !empty($currentGroup)) {
+        //     return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $currentGroup["groupId"]]));
+        // }
         if (isset($_POST["groupName"]) && trim($_POST["groupName"]) != '') {
-
             $group = new Group();
             $group->groupName = $_POST["groupName"];
             $group->tagLine = $_POST["tagLine"];

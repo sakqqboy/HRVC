@@ -1,6 +1,6 @@
 <?php
 
-use yii\bootstrap5\ActiveForm;
+use yii\widgets\ActiveForm;
 
 $this->title = 'Create Group';
 ?>
@@ -13,9 +13,8 @@ $this->title = 'Create Group';
 ]); ?>
 <!-- 1. Flatpickr CSS + JS -->
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<link rel="stylesheet" href="<?php // Yii::$app->homeUrl 
-                                ?>assets/bootstrap4/css/bootstrap.min.css"> -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>-->
+<link rel="stylesheet" href="<?= Yii::$app->homeUrl ?>assets/bootstrap4/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -23,20 +22,19 @@ $this->title = 'Create Group';
 
 <div class="col-12 mt-60 pt-10 bg-white">
     <div class="d-flex banner-uploade" id="imagePreviewBanner">
-        <img src="<?= Yii::$app->homeUrl ?>images/group/banner/group-banner.svg" class="create-group-banner">
+        <img src="<?= Yii::$app->homeUrl ?>images/group/banner/group-banner.svg" class="create-group-banner" id="old-banner">
     </div>
     <div class="d-flex justify-content-start" style="margin-top: -100px;">
         <div class="ml-35 avatar-upload">
             <div class="avatar-preview" id="imagePreview" style="
-                            background-color: white;
+                                background-color: white;
                             fill: #FFF;
                             stroke-width: 1px;
                             stroke: var(--Primary-Blue---HRVC, #2580D3);
                             border-radius: 100%;
-                            padding: 20px;
                             text-align: center;
                             cursor: pointer;
-                        ">
+                            padding:0px;">
                 <label for="imageUpload" class="upload-label" id="imageUploadIcon" style="cursor: pointer;">
                     <img src="<?= Yii::$app->homeUrl . 'image/upload-iconimg.svg' ?>" style="width: 37px; height: 37px;" alt="Upload Icon">
                     <div class="mt-10"><?= Yii::t('app', 'Upload') ?>
@@ -44,9 +42,9 @@ $this->title = 'Create Group';
                     </div>
                     <span style="font-size: 13px; color: #838383;"><?= Yii::t('app', 'Group Picture here') ?></span>
                 </label>
-                <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
-                    style="display: none;" />
             </div>
+            <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
+                style="display: none;" />
         </div>
         <div class="flex-grow-1 pr-10" style="display: flex;justify-content: end;align-items: center;">
             <!-- ลบระยะห่างระหว่างรูปและรายละเอียด -->
@@ -86,18 +84,15 @@ $this->title = 'Create Group';
                 <div class="form-group mb-30">
                     <label class="name-text-update"
                         for="founded"><?= Yii::t('app', 'Founded') ?></label>
-
                     <div class="input-group">
-                        <span class="input-group-text mt-12"
+                        <span class="input-group-text founded-icon mt-12"
                             style="background-color: #BEDAFF; border-right: none;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/calendar-blue.svg" alt="Founded"
-                                style="width: 20px; height: 20px;">
+                            <img src="<?= Yii::$app->homeUrl ?>image/calendar-blue.svg" alt="Founded" style="width: 20px; height: 20px;">
                         </span>
                         <input type="text" id="founded" name="founded"
                             class="form-control mt-12 text-center" placeholder="Select date"
                             style="text-align: center;">
                     </div>
-
                 </div>
                 <div class="form-group mb-30">
                     <span class="text-danger">* </span><label class="name-text-update"
@@ -109,8 +104,8 @@ $this->title = 'Create Group';
                     <label class="name-text-update"
                         for="director"><?= Yii::t('app', 'Head of Group') ?>
                     </label>
-                    <input type="text" class="form-control mt-12" name="director"
-                        placeholder="<?= Yii::t('app', 'Write the name of Group') ?>">
+                    <input type="text" class="form-control mt-12" name="director" disabled
+                        placeholder="<?= Yii::t('app', 'After adding employees') ?>">
                 </div>
                 <div class="form-group mb-30">
                     <label class="name-text-update"
@@ -148,7 +143,7 @@ $this->title = 'Create Group';
                     <div class="input-group">
                         <span class="input-group-text mt-12"
                             style="background-color: white; border-right: none;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/web-gray.svg" alt="Website"
+                            <img src="<?= Yii::$app->homeUrl ?>image/world.svg" alt="Website"
                                 style="width: 20px; height: 20px;">
                         </span>
                         <select class="form-select mt-12" style="border-left: none;" name="country"
@@ -169,12 +164,12 @@ $this->title = 'Create Group';
                     <div class="input-group">
                         <span class="input-group-text mt-12"
                             style="background-color: white; border-right: none;">
-                            <img src="<?= Yii::$app->homeUrl ?>image/web-image.svg" alt="Website"
+                            <img src="<?= Yii::$app->homeUrl ?>image/web-gray.svg" alt="Website"
                                 style="width: 20px; height: 20px;">
                         </span>
                         <input type="text" style="border-left: none;" class="form-control mt-12"
                             name="website"
-                            placeholder="<?= Yii::t('app', 'Copy & Paste the Group YouTube Link here') ?>">
+                            placeholder="<?= Yii::t('app', 'Paste the website Link here') ?>">
                     </div>
                 </div>
 
@@ -220,8 +215,7 @@ $this->title = 'Create Group';
                                 style="width: 20px; height: 20px;">
                         </span>
                         <input type="text" style="border-left: none;" class="form-control mt-12"
-                            name="facebook"
-                            placeholder="<?= Yii::t('app', 'Copy & Paste the Group Facebook Link here') ?>">
+                            name="facebook" placeholder="<?= Yii::t('app', 'Copy & Paste the Group Facebook Link here') ?>">
                     </div>
                 </div>
 
@@ -236,8 +230,7 @@ $this->title = 'Create Group';
                                 style="width: 20px; height: 20px;">
                         </span>
                         <input type="text" style="border-left: none;" class="form-control mt-12"
-                            name="instagram"
-                            placeholder="<?= Yii::t('app', 'Copy & Paste the Group Instagram Link here') ?>">
+                            name="instagram" placeholder="<?= Yii::t('app', 'Copy & Paste the Group Instagram Link here') ?>">
                     </div>
                 </div>
 
@@ -329,5 +322,31 @@ $this->title = 'Create Group';
 
     .form-select option {
         color: #212529;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        outline: none;
+        /* เอาเส้นสีน้ำเงิน default ออก */
+        border: 1px solid #a8a9aaff;
+        /* เปลี่ยนเป็นสีหลักของเว็บ */
+        box-shadow: 0 0 5px rgba(241, 245, 251, 0.5);
+
+        /* เงาเล็ก ๆ รอบ input */
+        /* transition: all 0.2s ease-in-out; */
+    }
+
+    .input-group-text {
+
+        padding: 6px 0px 6px 10px;
+    }
+
+    .form-control,
+    .form-select {
+        padding-left: 12px;
+    }
+
+    .founded-icon {
+        padding-right: 10px;
     }
 </style>
