@@ -2875,7 +2875,6 @@ $form = ActiveForm::begin([
                     if (val1 && isDuplicate(val1, valsOther)) {
                         alert('Language Duplicate');
                         lang1.value = "";
-                        
                     }
                 } else {
                     // alert('โหลดlockId-1');
