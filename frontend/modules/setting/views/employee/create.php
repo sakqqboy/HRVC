@@ -1662,6 +1662,7 @@ $form = ActiveForm::begin([
             </div>
         </div>
     </div>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="radioHighlight.js"></script>
     <script>
@@ -1670,6 +1671,8 @@ $form = ActiveForm::begin([
         let certificates = [];
         const passwordInput = document.getElementById("password");
         const toggleBtn = document.getElementById("togglePasswordBtn");
+        const languageIdsFromPHP = <?= json_encode(array_column($userLanguage ?? [], 'languageId')) ?>;
+        const HOME_URL = "<?= Yii::$app->homeUrl ?>";
 
         passwordInput.addEventListener("input", function() {
             if (toggleBtn.getAttribute("onclick") !== "togglePassword()") {
@@ -2511,11 +2514,15 @@ $form = ActiveForm::begin([
                 updateHiddenInput();
             }
 
-            const userLanguage = <?= json_encode($userLanguage ?? []) ?>;
+            // const userLanguage = <?= json_encode($userLanguage ?? []) ?>;
+            const userLanguage = (<?= json_encode($userLanguage ?? []) ?> || []).slice(1);
+            // const userLanguage = (<?= json_encode($userLanguage ?? []) ?> || []).slice(0, -1);
 
+            // alert(userLanguage.length);
             if (Array.isArray(userLanguage) && userLanguage.length > 0) {
                 userLanguage.forEach(lang => {
                     // console.log(userLanguage);
+                    // alert(lang.languageId);
                     addAdditionalLanguage(lang.languageId);
                 });
             }
@@ -2610,31 +2617,21 @@ $form = ActiveForm::begin([
 
         function addAdditionalLanguage(selectedValue = "") {
             // console.log(additionalLangCount);
-
+            // alert(selectedValue);
+            //  alert(additionalLangCount);
             if (additionalLangCount >= maxAdditionalLangs) return;
             // ตรวจสอบ select ก่อนหน้าว่ามีค่าแล้วหรือไม่ (ถ้ามีแล้วไม่เพิ่ม)
             
             if (additionalLangCount > 0) {
                 const previousSelect = document.getElementById(`mainLanguage${additionalLangCount}`);
+                // alert(previousSelect.value);
                 if (previousSelect && previousSelect.value === "") {
                     return;
                 }
             }
 
-
-            if (additionalLangCount == 1) {
-                <?php
-                $LanguageId = isset($userLanguage[1]['languageId']) ? $userLanguage[1]['languageId'] : '';
-                ?>
-            } else if (additionalLangCount == 2) {
-                <?php
-                $LanguageId = isset($userLanguage[2]['languageId']) ? $userLanguage[2]['languageId'] : '';
-                ?>
-            } else if (additionalLangCount == 3) {
-                <?php
-                $LanguageId = isset($userLanguage[3]['languageId']) ? $userLanguage[3]['languageId'] : '';
-                ?>
-            }
+            // alert(additionalLangCount);
+            
             additionalLangCount++;
 
             const userLanguage = <?= json_encode($userLanguage) ?>;
@@ -2643,7 +2640,7 @@ $form = ActiveForm::begin([
             let languageId = '';
             let flag = 'image/e-world.svg';
             if (userLanguage.length >= additionalLangCount) {
-                languageId = userLanguage[additionalLangCount - 1]?.languageId || '';
+                languageId = userLanguage[additionalLangCount]?.languageId || '';
             }
 
             if (languageId) {
@@ -2652,26 +2649,27 @@ $form = ActiveForm::begin([
                     flag = lang.flag;
                 }
             }
-
+            // alert(languageId);
             // console.log("LanguageId:", languageId);
             // console.log("Flag URL:", flag);
 
-            console.log(additionalLangCount);
+            // console.log(additionalLangCount);
+            
             
             let langHtml = '';
             <?php if ($statusfrom === 'Update'): ?>
+                
                 langHtml = `
                     <div class="input-group mt-12">
                         <span class="input-group-text" style="background-color: white; border-right: none;">
                             <img class="cycle-current" id="flag-ml${additionalLangCount}" src="<?= Yii::$app->homeUrl ?>${flag}" alt="Website"
                                 style="width: 20px; height: 20px; border: none;">
+                                <?php echo $LanguageId ; ?>
                         </span>
                         <select class="form-select" style="border-left: none;"
-                            id="mainLanguage${additionalLangCount}" name="mainLanguage${additionalLangCount - 1}"
+                            id="mainLanguage${additionalLangCount}" name="mainLanguage${additionalLangCount}"
                             onchange="handleLanguageChange(${additionalLangCount})">
-                            <option value="" disabled hidden style="color: var(--Helper-Text, #8A8A8A);">
-                                <?= Yii::t('app', 'Select Additional Language') ?>
-                            </option>
+                            <option value="" disabled hidden><?= Yii::t('app','Select Additional Language') ?></option>
                             <?php if (isset($mainLanguage) && count($mainLanguage) > 0): ?>
                                 <?php foreach ($mainLanguage as $lang):
                                     $selected = ($lang['LanguageId'] == $LanguageId) ? 'selected' : '';
@@ -2686,7 +2684,8 @@ $form = ActiveForm::begin([
                         </select>
                     </div>
                 `;
-
+            // let ddd = <?= json_encode($LanguageId) ?>;
+            // alert(ddd);
             <?php else: ?>
                 langHtml = `
                     <div class="input-group mt-12">
@@ -2698,7 +2697,7 @@ $form = ActiveForm::begin([
                             id="mainLanguage${additionalLangCount}" name="mainLanguage${additionalLangCount}"
                             onchange="handleLanguageChange(${additionalLangCount})">
                             <?php if (isset($mainLanguage) && count($mainLanguage) > 0): ?>
-                                <option value="" selected>Select Additional Language</option>
+                                <option value="" selected><?= Yii::t('app','Select Additional Language') ?></option>
                                 <?php foreach ($mainLanguage as $lang):
                                     $selected = ($lang['LanguageId'] == $LanguageId) ? 'selected' : '';
                                 ?>
@@ -2716,15 +2715,25 @@ $form = ActiveForm::begin([
 
 
             <?php if ($statusfrom === 'Update'): ?>
-                if (additionalLangCount >= 1) {
+                if (additionalLangCount >= 0) {
                     document.getElementById('al').insertAdjacentHTML('beforeend', langHtml);
-                    // ตั้งค่าที่เลือกให้ select ตัวล่าสุด ถ้ามี
-                    if (selectedValue) {
-                        const currentSelect = document.getElementById(`mainLanguage${additionalLangCount-1}`);
-                        if (currentSelect) {
-                            currentSelect.value = selectedValue;
-                        }
+                    const sel = document.getElementById(`mainLanguage${additionalLangCount}`);
+                    if (sel) {
+                    if (languageId) sel.value = String(languageId);
+                    else sel.selectedIndex = 0; // placeholder
+
+                    const opt = sel.options[sel.selectedIndex];
+                    const flagUrl = opt?.getAttribute('data-flag') || 'image/e-world.svg';
+                    const img = document.getElementById(`flag-ml${additionalLangCount}`);
+                    if (img) img.src = flagUrl.startsWith('http') ? flagUrl : HOME_URL + flagUrl;
                     }
+                    // ตั้งค่าที่เลือกให้ select ตัวล่าสุด ถ้ามี
+                    // if (selectedValue) {
+                    //     const currentSelect = document.getElementById(`mainLanguage${additionalLangCount}`);
+                    //     if (currentSelect) {
+                    //         currentSelect.value = selectedValue;
+                    //     }
+                    // }
                 }
             <?php elseif ($statusfrom === 'Create'): ?>
                 // ตั้งค่าที่เลือกให้ select ตัวล่าสุด ถ้ามี
@@ -2909,8 +2918,11 @@ $form = ActiveForm::begin([
                 if (selectElement && flagImg) {
                     // console.log(selectElement);
                     // console.log(flagImg);
-                    selectElement.addEventListener('change', function() {
-                        const selectedOption = this.options[this.selectedIndex];
+                    
+                    // selectElement.addEventListener('change', function() {
+                        // alert(this.selectedIndex);
+                        // const selectedOption = this.options[this.selectedIndex];
+                        const selectedOption = selectElement.options[selectElement.selectedIndex];
                         const flagUrl = selectedOption.getAttribute('data-flag');
                         if (flagUrl) {
                             // alert('1');
@@ -2919,7 +2931,7 @@ $form = ActiveForm::begin([
                             // alert('2');
                             flagImg.src = homeUrl + 'image/e-world.svg';
                         }
-                    });
+                    // });
                 }
             }
 
@@ -2932,15 +2944,16 @@ $form = ActiveForm::begin([
                     // console.log(flagImg);
 
                     // ไม่ต้องใช้ getElementById อีกครั้ง!
-                    selectElement.addEventListener('change', function() {
-                        const selectedOption = this.options[this.selectedIndex];
+                    // selectElement.addEventListener('change', function() {
+                        // const selectedOption = this.options[this.selectedIndex];
+                        const selectedOption = selectElement.options[selectElement.selectedIndex];
                         const flagUrl = selectedOption.getAttribute('data-flag');
                         if (flagUrl) {
                             flagImg.src = homeUrl + flagUrl;
                         } else {
                             flagImg.src = homeUrl + 'image/e-world.svg';
                         }
-                    });
+                    // });
                 }
             }
 
