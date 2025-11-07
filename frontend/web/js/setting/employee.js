@@ -1125,8 +1125,6 @@ function changeStatusEmployee() {
     selectElement.className = newClass;
 }
 
-
-
 function changeSelectFlag() {
 
     document.getElementById('nationalityId').addEventListener('change', function () {
@@ -1314,3 +1312,74 @@ $('#create-employee').on('beforeSubmit', function (e) {
     //return false; // ❗สำคัญ! เพื่อไม่ให้ form ส่งซ้ำแบบปกติ
 });
 
+$("#searchDirector").on("keyup", function (e) {
+    var name = $("#searchDirector").val();
+    var url = $url + 'setting/group/director-list';
+    if ($.trim(name) == '') {
+        $("#director-list").css('display', 'none');
+    } else {
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: url,
+            data: { name: name },
+            success: function (data) {
+                if (data.status) {
+                    $("#director-list").html(data.directorList);
+                    $("#director-list").css('display', 'block');
+                
+                }
+
+            }
+        });
+        
+    }
+});
+$(document).on('keydown', function (e) {
+
+    let boxes = $('.director-box');
+    let current = $('.director-box.hover');
+    let index = boxes.index(current);
+
+    if (e.key === 'ArrowDown') {
+            $('#searchDirector').blur();
+        e.preventDefault(); // ป้องกัน scroll หน้าเว็บ
+        if (index < boxes.length - 1) {
+            boxes.removeClass('hover');
+            boxes.eq(index + 1).addClass('hover');
+        } else {
+            // ถ้าอยู่สุดท้ายแล้วให้กลับไปตัวแรก
+            boxes.removeClass('hover');
+            boxes.eq(0).addClass('hover');
+        }
+    }
+    if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (index > 0) {
+            boxes.removeClass('hover');
+            boxes.eq(index - 1).addClass('hover');
+        } else {
+            boxes.removeClass('hover');
+            boxes.last().addClass('hover');
+        }
+    }
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        let selected = $('.director-box.hover');
+        if (selected.length) {
+            selected.trigger('click'); // 👉 เรียก event click ของ div ปัจจุบัน
+        }
+    }
+});
+$('#searchDirector').on('focus', function () {
+    let boxes = $('.director-box');
+    let current = $('.director-box.hover');
+    let index = boxes.index(current);
+    boxes.removeClass('hover');
+});
+function selectDirector(employeeId) { 
+    $("#director").val(employeeId);
+    var employeeName = $("#director-" + employeeId).text();
+    $("#searchDirector").val(employeeName);
+    $("#director-list").css('display', 'none');
+}

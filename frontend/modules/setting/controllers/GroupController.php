@@ -74,7 +74,7 @@ class GroupController extends Controller
             $group->email = $_POST["email"];
             $group->contact = $_POST["contact"];
             $group->founded = $_POST["founded"];
-            $group->director = $_POST["director"];
+            // $group->director = $_POST["director"];
             $group->socialInstargram = $_POST["instagram"] ?? "";
             $group->socialFacebook   = $_POST["facebook"] ?? "";
             $group->socialYoutube    = $_POST["youtube"] ?? "";
@@ -127,7 +127,6 @@ class GroupController extends Controller
     }
     public function actionGroupView($hash)
     {
-
         $param = ModelMaster::decodeParams($hash);
         $groupId = $param["groupId"];
         $totalBranches = 0;
@@ -155,7 +154,7 @@ class GroupController extends Controller
         }
 
         $group = Api::connectApi(Path::Api() . 'masterdata/group/group-detail?id=' . $groupId);
-
+        //throw new Exception(print_r($group, true));
         $companyGroup = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId . '&page=1');
 
         // $employees = Employee::find()->select('employeeId')->where(["status" => 1])->all();
@@ -275,7 +274,7 @@ class GroupController extends Controller
             $group->industries = $_POST["industries"];
             $group->email = $_POST["email"];
             $group->founded = $_POST["founded"];
-            $group->director = $_POST["director"];
+            $group->director = $_POST["director"] ?? null;
             $group->socialInstargram = $_POST["instagram"] ?? "";
             $group->socialFacebook   = $_POST["facebook"] ?? "";
             $group->socialYoutube    = $_POST["youtube"] ?? "";
@@ -292,7 +291,7 @@ class GroupController extends Controller
                     mkdir($path, 0777, true);
                 }
                 $oldPathBanner = Path::getHost() . $oldBanner;
-                if (file_exists($oldPathBanner)) {
+                if (file_exists($oldPathBanner) && $oldBanner != '') {
                     unlink($oldPathBanner);
                 }
                 $file = $fileBanner->name;
@@ -313,7 +312,7 @@ class GroupController extends Controller
 
                 // ลบรูปเก่าถ้ามี
                 $oldPathPicture = Path::getHost() . $oldImage;
-                if (file_exists($oldPathPicture)) {
+                if (file_exists($oldPathPicture) && $oldImage != '') {
                     unlink($oldPathPicture);
                 }
 
@@ -372,6 +371,55 @@ class GroupController extends Controller
                 return $this->redirect(Yii::$app->homeUrl . 'setting/group/group-view/' . ModelMaster::encodeParams(["groupId" => $groupId]));
             }
         }
+    }
+    public function actionDirectorList()
+    {
+        $name = $_POST["name"];
+        $nameArray = explode(' ', $name);
+        $sql1 = [];
+        $sql2 = [];
+        $sql = [];
+        $res = [];
+        $firstname = $nameArray[0] ?? '';
+        $surename = $nameArray[1] ?? '';
+        if ($firstname != '') {
+            $sql1 = ['LIKE', 'e.employeeFirstname', $firstname . '%', false];
+            $sql = $sql1;
+        }
+        if ($surename != '') {
+            $sql2 = ['LIKE', 'e.employeeSurename', $surename . '%', false];
+            $sql = ['and', $sql1, $sql2];
+        }
+        if (!empty($sql)) {
+            $employees = Employee::find()
+                ->alias('e')
+                ->select('e.employeeId,e.employeeFirstname,e.employeeSurename')
+                ->JOIN("LEFT JOIN", "user u", "u.employeeId=e.employeeId")
+                ->JOIN("LEFT JOIN", "user_role ur", "u.userId=ur.userId")
+                ->where($sql)
+                ->andWhere("ur.roleId<4 and e.status!=99")
+                ->orderBy('e.employeeFirstname')
+                ->asArray()
+                ->all();
+
+            $textEmployee = "";
+            //throw new Exception(print_r($employees, true));
+            if (isset($employees) && count($employees) > 0) {
+                $i = 1;
+                foreach ($employees as $employee):
+                    $employeeId = $employee["employeeId"];
+                    $employeeFirstname = $employee["employeeFirstname"];
+                    $employeeSurename = $employee["employeeSurename"];
+                    $textEmployee .= "<div class='director-box' id='director-" . $employeeId . "' onclick='javascript:selectDirector(" . $employeeId . ")'>$employeeFirstname $employeeSurename</div>";
+                    $i++;
+                endforeach;
+            } else {
+                $textEmployee = "<div class='director-box text-center'>Not found</div>";
+            }
+        }
+        $res["status"] = true;
+        $res["directorList"] = $textEmployee;
+        return json_encode($res);
     }
     public function actionFontSize()
     {

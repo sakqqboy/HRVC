@@ -64,12 +64,22 @@ $this->title = 'Group Profile';
                         <div class="col-lg-4 col-6 name-head">
                             <?= Yii::t('app', 'Group Director/ Chairman') ?>
                         </div>
-                        <div class="col-lg-8 col-6 name-director text-truncate pl-20 pr-5">
+                        <div class="col-lg-8 col-6 name-director text-truncate pl-20 pr-5 align-content-center">
+                            <?php
+                            if (isset($group["directorName"])) {
+                                $directorName = $group["directorName"]; ?>
+                                <img src="<?= Yii::$app->homeUrl ?><?= $group['directorPicture'] ?>" alt="Group Image" class="mr-5 director-pic">
+                                <a href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => $group['director']]) ?>">
+                                    <?= $directorName ?>
+                                </a>
+                            <?php
+                            } else { ?>
+                                Not set
+                            <?php
+                            }
+                            ?>
 
-                            <img src="<?= Yii::$app->homeUrl ?>image/Mask-group.png" alt="Group Image" class="mr-5 director-pic">
-                            <a href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => 23]) ?>">
-                                <span class="d-inline-block ml-10"><?= $group["director"] ?></span>
-                            </a>
+
                         </div>
                         <div class="col-lg-4 col-6 name-head mt-10">
                             <?= Yii::t('app', 'Headquarter Address') ?>
