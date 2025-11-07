@@ -96,13 +96,13 @@ $form = ActiveForm::begin([
                         <select class="form-control select-employee-status" aria-label="Default select example"
                             name="status" id="pim-status" onchange="javascript:changeStatusEmployee()" required>
                             <option value="" disabled hidden
-                                <?= empty($employee['employeeConditionId']) ? 'selected' : '' ?>
+                                <?= empty($employee['status']) ? 'selected' : '' ?>
                                 style="color: var(--Helper-Text, #8A8A8A);">
                                 <?= Yii::t('app', 'Select') ?>
                             </option>
                             <?php
                             if (!empty($statusTexArr)) {
-                                $selectedId = $employee['employeeConditionId'] ?? null;
+                                $selectedId = $employee['status'] ?? null;
                                 foreach ($statusTexArr as $statusId => $status) {
                                     $selected = ($statusId == $selectedId) ? 'selected' : '';
                                     echo '<option value="' . $statusId . '" ' . $selected . '>' . Yii::t('app', $status["statusName"]) . '</option>';

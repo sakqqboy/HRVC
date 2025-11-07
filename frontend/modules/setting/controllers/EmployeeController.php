@@ -629,7 +629,7 @@ class EmployeeController extends Controller
         $userEmployee   = Api::connectApi(Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId);
         $userId = $userEmployee['userId'] ?? '';
         $userRole       = Api::connectApi(Path::Api() . 'masterdata/employee/user-role?id=' . $employeeId);
-        //throw new exception(print_r($userRole, true));
+      
         $userAccess     = Api::connectApi(Path::Api() . 'masterdata/employee/user-access?id=' . $employeeId);
         $userCertificate = Api::connectApi(Path::Api() . 'masterdata/employee/user-certificate?id=' . $employeeId);
         $userLanguage   = Api::connectApi(Path::Api() . 'masterdata/employee/user-language?id=' . $employeeId);
@@ -646,7 +646,7 @@ class EmployeeController extends Controller
         $mainLanguage   = Api::connectApi(Path::Api() . 'masterdata/employee/main-language');
         $module         = Api::connectApi(Path::Api() . 'masterdata/employee/module-role');
 
-
+//   throw new exception(print_r($employee, true));
         return $this->render('create', [
             "groupId" => $groupId,
             "employeeId" => $employeeId,
