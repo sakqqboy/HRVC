@@ -2631,22 +2631,7 @@ $form = ActiveForm::begin([
             }
 
             // alert(additionalLangCount);
-            // if (additionalLangCount == 0) {
-            //     <?php
-            //     $LanguageId = isset($userLanguage[1]['languageId']) ? $userLanguage[1]['languageId'] : '';
-            //     ?>
-            //     console.log("PHP value:", "<?= $userLanguage[1]['languageId'] ?>");
-            // } else if (additionalLangCount == 1) {
-            //     <?php
-            //     $LanguageId = isset($userLanguage[2]['languageId']) ? $userLanguage[2]['languageId'] : '';
-            //     ?>
-            //     console.log("PHP value:", "<?= $userLanguage[2]['languageId'] ?>");
-            // } 
-            // else if (additionalLangCount == 3) {
-            //     <?php
-            //     $LanguageId = isset($userLanguage[3]['languageId']) ? $userLanguage[3]['languageId'] : '';
-            //     ?>
-            // }
+            
             additionalLangCount++;
 
             const userLanguage = <?= json_encode($userLanguage) ?>;
