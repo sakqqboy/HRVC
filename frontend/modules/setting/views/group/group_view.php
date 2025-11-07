@@ -159,8 +159,7 @@ $this->title = 'Group Profile';
                                     ? mb_substr(Yii::t('app', $group["about"]), 0, 800) . '...'
                                     : Yii::t('app', $group["about"]) ?>
                                 <?php if (mb_strlen(Yii::t('app', $group["about"])) > 800): ?>
-                                    <button id="see-more"
-                                        class="see-more"><span><?= Yii::t('app', 'See More') ?></span></button>
+                                    <button id="see-more" class="see-more"><span><?= Yii::t('app', 'See More') ?></span></button>
                                 <?php endif; ?>
                             </span>
                         </div>
@@ -430,26 +429,27 @@ $this->title = 'Group Profile';
         <?php if (mb_strlen($group["about"]) > 200): ?>
             const fullText = `<?= addslashes($group["about"]) ?>`;
             const shortText = `<?= addslashes(mb_substr($group["about"], 0, 200)) ?>...`;
+            if (seeMoreBtn) {
+                seeMoreBtn.addEventListener("click", function() {
+                    if (aboutText.textContent.includes(shortText)) {
+                        aboutText.innerHTML = fullText +
+                            `<button id="see-more" class="see-more">See Less</button>`;
+                        document.getElementById("see-more").addEventListener("click", toggleText);
+                    } else {
+                        aboutText.innerHTML = shortText +
+                            `<button id="see-more" class="see-more">See More</button>`;
+                        document.getElementById("see-more").addEventListener("click", toggleText);
+                    }
+                });
 
-            seeMoreBtn.addEventListener("click", function() {
-                if (aboutText.textContent.includes(shortText)) {
-                    aboutText.innerHTML = fullText +
-                        `<button id="see-more" class="see-more">See Less</button>`;
-                    document.getElementById("see-more").addEventListener("click", toggleText);
-                } else {
-                    aboutText.innerHTML = shortText +
-                        `<button id="see-more" class="see-more">See More</button>`;
+                function toggleText() {
+                    if (aboutText.innerHTML.includes(shortText)) {
+                        aboutText.innerHTML = fullText + `<button id="see-more" class="see-more">See Less</button>`;
+                    } else {
+                        aboutText.innerHTML = shortText + `<button id="see-more" class="see-more">See More</button>`;
+                    }
                     document.getElementById("see-more").addEventListener("click", toggleText);
                 }
-            });
-
-            function toggleText() {
-                if (aboutText.innerHTML.includes(shortText)) {
-                    aboutText.innerHTML = fullText + `<button id="see-more" class="see-more">See Less</button>`;
-                } else {
-                    aboutText.innerHTML = shortText + `<button id="see-more" class="see-more">See More</button>`;
-                }
-                document.getElementById("see-more").addEventListener("click", toggleText);
             }
         <?php endif; ?>
     });

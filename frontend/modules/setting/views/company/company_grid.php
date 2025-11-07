@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 
-$this->title = 'company';
+$this->title = 'Company';
 $page = "grid"
 ?>
 
@@ -345,7 +345,7 @@ $page = "grid"
                                                                 <div class="circle-container">
                                                                     <?php if (count($company['employees']) >= 1) { ?>
                                                                         <div class="cycle-image mr-3">
-                                                                            <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][0]['picture'] ?>"
+                                                                            <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][0] ?>"
                                                                                 alt="icon">
                                                                         </div>
                                                                     <?php } else { ?>
@@ -356,7 +356,7 @@ $page = "grid"
                                                                     <?php } ?>
                                                                     <?php if (count($company['employees']) >= 2) { ?>
                                                                         <div class="cycle-image mr-3">
-                                                                            <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][1]['picture'] ?>"
+                                                                            <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][1] ?>"
                                                                                 alt="icon">
                                                                         </div>
                                                                     <?php } else { ?>
@@ -367,7 +367,7 @@ $page = "grid"
                                                                     <?php } ?>
                                                                     <?php if (count($company['employees']) >= 3) { ?>
                                                                         <div class="cycle-image mr-3">
-                                                                            <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][2]['picture'] ?>"
+                                                                            <img src="<?= Yii::$app->homeUrl ?><?php echo $company['employees'][2] ?>"
                                                                                 alt="icon">
                                                                         </div>
                                                                     <?php } else { ?>
@@ -454,3 +454,9 @@ $page = "grid"
 
     </div>
 </div>
+<style>
+    .cycle-current-gray {
+        width: 32.25px;
+        height: 32.25px;
+    }
+</style>
