@@ -405,15 +405,43 @@ class CompanyController extends Controller
 				$companyId = $company['companyId'];
 				$employees = Employee::find()
 					->where(["companyId" => $companyId])
+					->andWhere("status!=99")
 					->asArray()
 					->all();
-				// กรองเฉพาะที่มี picture
-				$filteredEmployees = array_filter($employees, function ($employee) {
-					return !empty($employee['picture']);
-				});
-				// รีเซ็ต index และเลือกแค่ 3 คนแรก
-				$filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
-				$totalEmployee = Employee::find()->where(["companyId" => $companyId, "status" => 1])->count();
+				// // กรองเฉพาะที่มี picture
+				// $filteredEmployees = array_filter($employees, function ($employee) {
+				// 	return !empty($employee['picture']);
+				// });
+				// // รีเซ็ต index และเลือกแค่ 3 คนแรก
+				// $filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+				$totalEmployee = count($employees);
+
+				$selectPic = [];
+				$img = [];
+				if (count($employees) >= 3) {
+					$randomEmpployee = array_rand($employees, 3);
+					$selectPic[0] = $employees[$randomEmpployee[0]];
+					$selectPic[1] = $employees[$randomEmpployee[1]];
+					$selectPic[2] = $employees[$randomEmpployee[2]];
+				} else {
+					if (count($employees) > 0) {
+						$selectPic = $employees;
+						sort($selectPic);
+					}
+				}
+				$i = 0;
+				if (count($selectPic) > 0) {
+					foreach ($selectPic as $pic):
+						$img[$i] = 'images/employee/status/employee-nopic.svg';
+						if (!empty($pic['picture'])) {
+							$file = Path::getHost() . $pic["picture"];
+							if (file_exists($file)) {
+								$img[$i] = $pic["picture"];
+							}
+						}
+						$i++;
+					endforeach;
+				}
 
 				//นับจำนวน
 				$branchIds = Branch::find()->select('branchId')
@@ -459,11 +487,13 @@ class CompanyController extends Controller
 					"totalDepartment" => count($departments),
 					"totalTeam" => count($teams),
 					"totalEmployee" => $totalEmployee,
-					"employees" => $filteredEmployees
+					// "employees" => $filteredEmployees
+					"employees" => $img
+
 				];
 			endforeach;
 		}
-
+		//throw new exception(print_r($data, true));
 		return $this->render('company_grid', [
 			"companies" => $data,
 			"role" => $role,
@@ -627,7 +657,7 @@ class CompanyController extends Controller
 			$company->location = $_POST["location"];
 			$company->about = $_POST["about"];
 			$company->groupId = $_POST["groupId"] - 543;
-			$company->directorId = $_POST["directorId"];
+			$company->directorId = $_POST["directorId"] ?? null;
 			$company->status = 1;
 			$company->createDateTime = new Expression('NOW()');
 			$company->updateDateTime =  new Expression('NOW()');
@@ -707,7 +737,7 @@ class CompanyController extends Controller
 			if ($company->save(false)) {
 				$companyId = Yii::$app->db->lastInsertID;
 				return $this->redirect(Yii::$app->homeUrl . 'setting/company/company-view/' . ModelMaster::encodeParams(["companyId" => $companyId]));
-			}else{
+			} else {
 				throw new exception('Recording failed ');
 			}
 		} else {

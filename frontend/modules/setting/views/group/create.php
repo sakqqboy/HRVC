@@ -254,8 +254,6 @@ $this->title = 'Create Group';
             <div class="col-lg-4 col-md-6 col-12 pl-15">
                 <div class="form-group mb-30">
                     <input type="hidden" name="groupId">
-
-                    <!-- <div class="alert alert-secondary" role="alert" style="font-size: 14px; background-color: transparent; border: 0; "> -->
                     <label class="name-text-update" for="groupDescription"><?= Yii::t('app', 'Group Description') ?></label>
                     <textarea style="height: 655px;" name="about" class="form-control mt-12" id="groupDescription"
                         placeholder="<?= Yii::t('app', 'Write the description of the group') ?>"></textarea>
