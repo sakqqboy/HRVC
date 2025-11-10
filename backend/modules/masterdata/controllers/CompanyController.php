@@ -5,10 +5,12 @@ namespace backend\modules\masterdata\controllers;
 use backend\models\hrvc\Branch;
 use backend\models\hrvc\Company;
 use backend\models\hrvc\Employee;
+use common\helpers\Path;
 use Exception;
 use yii\web\Controller;
 use Yii;
 use yii\web\Response;
+
 /**
  * Default controller for the `masterdata` module
  */
@@ -53,44 +55,63 @@ class CompanyController extends Controller
 			->where(["companyId" => $id])
 			->asArray()
 			->one();
+
+		if (isset($company) && !empty($company)) {
+			$banner = 'image/company.jpg';
+			$picture = 'image/no-company.svg';
+			if ($company["banner"] != null) {
+				$file = Path::frontendUrl() . $company["banner"];
+				if (file_exists($file)) {
+					$banner = $company["banner"];
+				}
+			}
+			if ($company["picture"] != null) {
+				$file = Path::frontendUrl() . $company["picture"];
+				if (file_exists($file)) {
+					$picture = $company["picture"];
+				}
+			}
+			$company["banner"] = $banner;
+			$company["picture"] = $picture;
+		}
 		return json_encode($company);
 	}
 
 	public function actionHeader($id)
 	{
 		$headQuater =  Employee::find()
-		->select([
-			'employee.employeeId',
-			'employee.employeeFirstname',
-			'employee.employeeSurename',
-			'ur.userId'
-		])
-		->innerJoin('user u', 'employee.employeeId = u.employeeId')
-		->innerJoin('user_role ur', 'ur.userId = u.userId')
-		->where(['<=', 'roleId', 3])
-		->groupBy('ur.userId')
-		->asArray()
-		->all();
-			
+			->select([
+				'employee.employeeId',
+				'employee.employeeFirstname',
+				'employee.employeeSurename',
+				'ur.userId'
+			])
+			->innerJoin('user u', 'employee.employeeId = u.employeeId')
+			->innerJoin('user_role ur', 'ur.userId = u.userId')
+			->where(['<=', 'roleId', 3])
+			->groupBy('ur.userId')
+			->asArray()
+			->all();
+
 		return json_encode($headQuater);
 	}
 	public function actionCompanyBranch($id)
 	{
 		$branches = Branch::find()
-		->select([
-			'branch.*',
-			'co.countryName',
-			'c.companyName',
-			'c.picture',
-			'co.flag',
-			'c.city'
-		])
-		->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId')
-		->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
-		->where(['branch.companyId' => $id])
-		->orderBy(['c.companyName' => SORT_ASC])
-		->asArray()
-		->all();
+			->select([
+				'branch.*',
+				'co.countryName',
+				'c.companyName',
+				'c.picture',
+				'co.flag',
+				'c.city'
+			])
+			->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId')
+			->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
+			->where(['branch.companyId' => $id])
+			->orderBy(['c.companyName' => SORT_ASC])
+			->asArray()
+			->all();
 
 		return json_encode($branches);
 	}
@@ -98,20 +119,20 @@ class CompanyController extends Controller
 	public function actionCompanyBranchFilter($id)
 	{
 		$branches = Branch::find()
-		->select([
-			'branch.*',
-			'co.countryName',
-			'c.companyName',
-			'c.picture',
-			'co.flag',
-			'c.city'
-		])
-		->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId')
-		->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
-		->where(['branch.companyId' => $id])
-		->orderBy(['c.companyName' => SORT_ASC])
-		->asArray()
-		->all();
+			->select([
+				'branch.*',
+				'co.countryName',
+				'c.companyName',
+				'c.picture',
+				'co.flag',
+				'c.city'
+			])
+			->join('LEFT JOIN', 'company c', 'branch.companyId = c.companyId')
+			->join('LEFT JOIN', 'country co', 'co.countryId = c.countryId')
+			->where(['branch.companyId' => $id])
+			->orderBy(['c.companyName' => SORT_ASC])
+			->asArray()
+			->all();
 
 		return json_encode($branches);
 	}
@@ -125,11 +146,11 @@ class CompanyController extends Controller
 	// 	// }else{
 	// 	//     $limit = 6;
 	// 	// }
-	
+
 	// 	// $limit = 6;
-	
+
 	// 	$offset = ($page - 1) * $limit;
-	
+
 	// 	$query = Company::find()
 	// 		->select('company.companyName, company.companyId, company.city, c.countryName,
 	// 				  company.picture, company.headQuaterId, company.industries, g.groupName, 
@@ -137,18 +158,18 @@ class CompanyController extends Controller
 	// 		->join("LEFT JOIN", "country c", "c.countryId = company.countryId")
 	// 		->join("LEFT JOIN", "`group` g", "g.groupId = company.groupId")
 	// 		->where(["company.groupId" => $id, "company.status" => 1]);
-	
+
 	// 	if (!empty($countryId)) {
 	// 		$query->andWhere(["company.countryId" => $countryId]);
 	// 	}
-	
+
 	// 	$company = $query
 	// 		->offset($offset)
 	// 		->limit($limit)
 	// 		->orderBy('company.companyName')
 	// 		->asArray()
 	// 		->all();
-	
+
 	// 	return json_encode($company);
 	// }
 }

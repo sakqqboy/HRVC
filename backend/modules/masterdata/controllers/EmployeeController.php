@@ -67,6 +67,12 @@ class EmployeeController extends Controller
 			->where(["employee.employeeId" => $id])
 			->asArray()
 			->one();
+		if (isset($employee) && !empty($employee)) {
+			$director = Employee::director($employee["employeeId"]);
+			if (!empty($director)) {
+				$employee["directorPicture"] = $director["directorPicture"];
+			}
+		}
 		return json_encode($employee);
 	}
 	public function actionAllEmployeeDetail($companyId, $currentPage, $limit)

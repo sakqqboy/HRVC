@@ -69,7 +69,8 @@ $this->title = 'Group Profile';
                             if (isset($group["directorName"])) {
                                 $directorName = $group["directorName"]; ?>
                                 <img src="<?= Yii::$app->homeUrl ?><?= $group['directorPicture'] ?>" alt="Group Image" class="mr-5 director-pic">
-                                <a href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => $group['director']]) ?>">
+                                <a href="<?= Yii::$app->homeUrl ?>setting/employee/employee-profile/<?= ModelMaster::encodeParams(['employeeId' => $group['director']]) ?>"
+                                    class="head-name-link">
                                     <?= $directorName ?>
                                 </a>
                             <?php
@@ -78,8 +79,6 @@ $this->title = 'Group Profile';
                             <?php
                             }
                             ?>
-
-
                         </div>
                         <div class="col-lg-4 col-6 name-head mt-10">
                             <?= Yii::t('app', 'Headquarter Address') ?>
@@ -287,8 +286,7 @@ $this->title = 'Group Profile';
                             </a>
                         </div>
                         <div class="col-lg-4 col-md-6 col-12 mb-20">
-                            <a href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"
-                                class="text-decoration-none">
+                            <a href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => '']) ?>" class="text-decoration-none">
                                 <div class="row align-items-center" style="--bs-gutter-x:0px;">
                                     <div class="col-12 text-left pl-35 d-flex">
                                         <div class="circle-container-img">
@@ -322,10 +320,6 @@ $this->title = 'Group Profile';
         <!-- <hr class="hr-group-vertical"> -->
         <div class="col-lg-3 col-md-6 col-12 pl-10">
             <div class="row" style="--bs-gutter-x:0px;">
-                <!-- <div class="col-lg-2 col-md-2 col-12"
-                    style="width: 15px; height: 15px; padding-right : 0px; padding-left: 0px; bottom: 5px; ">
-                    <img src="<?= Yii::$app->homeUrl ?>image/companies.svg" style="width: 15px; height: 15px;">
-                </div> -->
                 <div class="col-10 Group-Information">
                     <img src="<?= Yii::$app->homeUrl ?>image/companies.svg" class="mr-10" style="width: 15px; height: 15px;">
                     <?= Yii::t('app', 'Affiliated Companies') ?>

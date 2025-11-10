@@ -415,7 +415,6 @@ class CompanyController extends Controller
 				// // รีเซ็ต index และเลือกแค่ 3 คนแรก
 				// $filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
 				$totalEmployee = count($employees);
-
 				$selectPic = [];
 				$img = [];
 				if (count($employees) >= 3) {
@@ -790,15 +789,12 @@ class CompanyController extends Controller
 
 		if (!empty($companyBranch)) {
 			foreach ($companyBranch as $branch) {
-				$relativePath = $branch["branchImage"] ?? '';
-
-				$absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
-				if (!empty($relativePath) && file_exists($absolutePath)) {
-					// ✅ ไฟล์มีอยู่จริงในเครื่องที่รัน (local หรือ server)
-					$pictureUrl = $branch["branchImage"];
-				} else {
-					// ❌ ไม่มีไฟล์ → ใช้รูป default แทน
-					$pictureUrl = 'image/no-branch.svg';
+				$pictureUrl = 'image/no-branch.svg';
+				if (!empty($branch["branchImage"])) {
+					$file = Path::getHost() . $branch["branchImage"];
+					if (file_exists($file)) {
+						$pictureUrl = $branch["branchImage"];
+					}
 				}
 				$branchs[] = [
 					'branchId' => $branch['branchId'],
@@ -808,7 +804,7 @@ class CompanyController extends Controller
 					'status' => $branch['status'],
 					'companyName' => $branch['companyName'],
 					'city' => $branch['city'],
-					"picture" => !empty($branch["picture"]) ? $branch["picture"] : "image/no-company.svg",
+					//"picture" => !empty($branch["picture"]) ? $branch["picture"] : "image/no-company.svg",
 					'branchImage' => $pictureUrl,
 					'flag' => !empty($branch['flag']) ? $branch['flag'] :  'images/e-world.svg',
 				];
@@ -820,15 +816,43 @@ class CompanyController extends Controller
 		$branch = Branch::find()->select('branchId')->where(["companyId" => $companyId, "status" => 1])->asArray()->all();
 
 		$employees = Employee::find()->where(["companyId" => $companyId])->all();
-		$filteredEmployees = array_filter($employees, function ($employee) {
-			return !empty($employee['picture']);
-		});
+		// $filteredEmployees = array_filter($employees, function ($employee) {
+		// 	return !empty($employee['picture']);
+		// });
 
 		// จัดเรียงผลลัพธ์ให้อยู่ในอาเรย์ที่มีแค่ 3 ตัวแรก
-		$filteredEmployees = array_values($filteredEmployees); // ใช้ array_values เพื่อรีเซ็ต index ของอาเรย์
+		// $filteredEmployees = array_values($filteredEmployees); // ใช้ array_values เพื่อรีเซ็ต index ของอาเรย์
 
-		// เลือกแค่ 3 ตัวแรก
-		$filteredEmployees = array_slice($filteredEmployees, 0, 3);
+		//  เลือกแค่ 3 ตัวแรก
+		// $filteredEmployees = array_slice($filteredEmployees, 0, 3);
+
+		$totalEmployee = count($employees);
+		$selectPic = [];
+		$img = [];
+		if (count($employees) >= 3) {
+			$randomEmpployee = array_rand($employees, 3);
+			$selectPic[0] = $employees[$randomEmpployee[0]];
+			$selectPic[1] = $employees[$randomEmpployee[1]];
+			$selectPic[2] = $employees[$randomEmpployee[2]];
+		} else {
+			if (count($employees) > 0) {
+				$selectPic = $employees;
+				sort($selectPic);
+			}
+		}
+		$i = 0;
+		if (count($selectPic) > 0) {
+			foreach ($selectPic as $pic):
+				$img[$i] = 'images/employee/status/employee-nopic.svg';
+				if (!empty($pic['picture'])) {
+					$file = Path::getHost() . $pic["picture"];
+					if (file_exists($file)) {
+						$img[$i] = $pic["picture"];
+					}
+				}
+				$i++;
+			endforeach;
+		}
 
 		if (isset($branch) && count($branch) > 0) {
 			foreach ($branch as $b) :
@@ -852,7 +876,7 @@ class CompanyController extends Controller
 			"totalEmployee" => $totalEmployee,
 			"director" => $director,
 			"role" => $role,
-			"employees" => $filteredEmployees,
+			"employees" => $img,
 			"companyBranch" => $branchs
 		]);
 	}
