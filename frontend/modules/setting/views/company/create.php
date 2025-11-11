@@ -191,11 +191,11 @@ $this->title = 'New Company';
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-12 pl-15">
-                <div class="form-group mb-30">
+                <div class="form-group mb-20">
                     <input type="hidden" name="groupId">
                     <label class="name-text-update" for="groupDescription"><?= Yii::t('app', 'Company Description') ?></label>
                     <textarea style="height: 527px;" name="about"
-                        placeholder="Write the description of the Company" class="form-control"></textarea>
+                        placeholder="Write the description of the Company" class="form-control mt-12"></textarea>
                 </div>
                 <div class="d-flex justify-content-end align-items-end gap-2" style="height: 85px;">
                     <a href="<?= Yii::$app->homeUrl ?>setting/company/company-grid"

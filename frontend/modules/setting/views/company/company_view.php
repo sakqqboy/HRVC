@@ -18,7 +18,7 @@ $this->title = 'Company profile';
 
     <div class="company-group-edit mt-20">
         <div style="display: flex; align-items: end; gap: 14px;">
-            <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl ?>"
+            <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl . 'setting/company/company-grid' ?>"
                 style="text-decoration: none;" class="create-employee-btn">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" class="mr-3"
                     style="width:18px; height:18px;">

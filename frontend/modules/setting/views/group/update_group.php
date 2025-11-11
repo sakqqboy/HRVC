@@ -48,7 +48,7 @@ $this->title = 'Update Group';
                             text-align: center;
                             cursor: pointer;
                             padding:0px;
-                            background-image:url(<?= $group["picture"] != null ? Yii::$app->homeUrl . $group['picture'] : "" ?>);
+                            background-image:url(<?= !empty($group["picture"]) ? Yii::$app->homeUrl . $group['picture'] : "" ?>);
                         '>
                 <label for="imageUpload" class="upload-label" id="imageUploadIcon" style="cursor: pointer;width:100%;opacity:<?= $group["picture"] != null ? 0 : 1 ?>;">
                     <img src="<?= Yii::$app->homeUrl . 'image/upload-iconimg.svg' ?>" style="width: 37px; height: 37px;" alt="Upload Icon">
