@@ -93,7 +93,7 @@ class Employee extends \backend\models\hrvc\master\EmployeeMaster
             ->asArray()
             ->one();
         $img = "images/employee/status/employee-nopic.svg";
-        if (isset($employee) && $employee["picture"] != null) {
+        if (isset($employee) && !empty($employee["picture"])) {
             $url = Path::frontendUrl() . $employee["picture"];
 
             // ดึง headers
