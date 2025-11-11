@@ -783,6 +783,7 @@ class CompanyController extends Controller
 			);
 		}
 
+		// throw new exception(print_r($company, true));
 		$companyBranch = Api::connectApi(
 			Path::Api() . 'masterdata/company/company-branch?id=' . $companyId
 		);

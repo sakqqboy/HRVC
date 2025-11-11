@@ -59,15 +59,17 @@ class CompanyController extends Controller
 		if (isset($company) && !empty($company)) {
 			$banner = 'image/company.jpg';
 			$picture = 'image/no-company.svg';
-			if ($company["banner"] != null) {
-				$file = Path::frontendUrl() . $company["banner"];
-				if (file_exists($file)) {
+			if ($company["banner"] != '') {
+				$url1 = Path::frontendUrl() . $company["banner"];
+				$headers = @get_headers($url1);
+				if ($headers !== false && strpos($headers[0], '200') !== false) {
 					$banner = $company["banner"];
 				}
 			}
-			if ($company["picture"] != null) {
-				$file = Path::frontendUrl() . $company["picture"];
-				if (file_exists($file)) {
+			if ($company["picture"] != '') {
+				$url2 = Path::frontendUrl() . $company["picture"];
+				$headers2 = @get_headers($url2);
+				if ($headers2 !== false && strpos($headers2[0], '200') !== false) {
 					$picture = $company["picture"];
 				}
 			}
