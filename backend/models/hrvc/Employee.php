@@ -128,15 +128,19 @@ class Employee extends \backend\models\hrvc\master\EmployeeMaster
                 ->asArray()
                 ->one();
             $img = "images/employee/status/employee-nopic.svg";
-            if (isset($employee) && !empty($employee["picture"])) {
-                $url = Path::frontendUrl() . $employee["picture"];
-                $headers = @get_headers($url);
-                if ($headers !== false && strpos($headers[0], '200') !== false) {
-                    $img = $employee["picture"];
+            if (isset($employee) && !empty($employee)) {
+                if (isset($employee["picture"]) &&  $employee["picture"] != '') {
+                    $url = Path::frontendUrl() . $employee["picture"];
+                    $headers = @get_headers($url);
+                    if ($headers !== false && strpos($headers[0], '200') !== false) {
+                        $img = $employee["picture"];
+                    }
                 }
-
                 $director["directorName"] = $employee["employeeFirstname"] . " " . $employee["employeeSurename"];
                 $director["directorPicture"] = $img;
+            } else {
+                $director["directorName"] = '';
+                $director["directorPicture"] = '';
             }
         }
         return $director;
