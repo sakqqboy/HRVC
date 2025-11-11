@@ -49,7 +49,7 @@ class GroupController extends Controller
     {
         $group = [];
         $group = Group::find()->where(["groupId" => $id])->asArray()->one();
-        if (isset($group) && !empty($group) && $group["director"] != null) {
+        if (isset($group) && !empty($group) && $group["director"] != '') {
             $director = Employee::director($group["director"]);
             if (!empty($director)) {
                 $group["directorName"] = $director["directorName"];

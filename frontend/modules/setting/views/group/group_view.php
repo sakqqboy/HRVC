@@ -9,7 +9,7 @@ $this->title = 'Group Profile';
 <div class="col-12 mt-60 pt-10 bg-white">
     <div class="d-flex" style="height: 159px;">
         <?php
-        if (isset($group["banner"]) && $group["banner"] != null) { ?>
+        if (isset($group["banner"]) && !empty($group["banner"])) { ?>
             <img src="<?= Yii::$app->homeUrl . $group['banner'] ?>" class="sad-1">
         <?php
         } else { ?>
@@ -24,7 +24,7 @@ $this->title = 'Group Profile';
         <div class="ml-35">
             <div class="avatar-upload-preview">
                 <div class="avatar-preview">
-                    <?php if ($group["picture"] != null) { ?>
+                    <?php if (isset($group["picture"]) && !empty($group["picture"])) { ?>
                         <img src="<?= Yii::$app->homeUrl . $group['picture'] ?>" class="company-group-picture">
                     <?php } else { ?>
                         <img src="<?= Yii::$app->homeUrl . 'image/groupProfile.jpg' ?>" class="company-group-picture">
