@@ -134,9 +134,10 @@ class Employee extends \backend\models\hrvc\master\EmployeeMaster
                 if ($headers !== false && strpos($headers[0], '200') !== false) {
                     $img = $employee["picture"];
                 }
+
+                $director["directorName"] = $employee["employeeFirstname"] . " " . $employee["employeeSurename"];
+                $director["directorPicture"] = $img;
             }
-            $director["directorName"] = $employee["employeeFirstname"] . " " . $employee["employeeSurename"];
-            $director["directorPicture"] = $img;
         }
         return $director;
     }
