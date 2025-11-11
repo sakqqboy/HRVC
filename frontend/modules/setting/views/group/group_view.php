@@ -9,7 +9,7 @@ $this->title = 'Group Profile';
 <div class="col-12 mt-60 pt-10 bg-white">
     <div class="d-flex" style="height: 159px;">
         <?php
-        if ($group["banner"] != null) { ?>
+        if (isset($group["banner"]) && $group["banner"] != null) { ?>
             <img src="<?= Yii::$app->homeUrl . $group['banner'] ?>" class="sad-1">
         <?php
         } else { ?>
