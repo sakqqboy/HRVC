@@ -1,20 +1,21 @@
 <?php
+
 use yii\bootstrap5\ActiveForm;
 use common\models\ModelMaster;
 
 $this->title = 'Create Branch';
 ?>
 <?php $form = ActiveForm::begin([
-	'id' => 'create-branch',
-	'method' => 'post',
-	'options' => [
-		'enctype' => 'multipart/form-data',
-	],
-	'action' => Yii::$app->homeUrl . 'setting/branch/save-create-branch'
+    'id' => 'create-branch',
+    'method' => 'post',
+    'options' => [
+        'enctype' => 'multipart/form-data',
+    ],
+    'action' => Yii::$app->homeUrl . 'setting/branch/save-create-branch'
 
 ]); ?>
 
-<div class="container-body submain-background mid-center">
+<div class="col-12 mt-60 pt-10 bg-white">
     <div class="col-12 pim-name-title" style="display: flex; align-items: center; gap: 14px;">
         <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl ?>"
             style="text-decoration: none;width:66px;height:26px;" class="btn-create-branch">
@@ -25,13 +26,7 @@ $this->title = 'Create Branch';
         <?= Yii::t('app', 'Create Branch') ?>
     </div>
 
-    <div class="mid-center max-background mt-18" style="height: 780px;
-        padding: 23.209px 25.53px;
-        gap: 7.721px; 
-        flex-shrink: 0; 
-        border-radius: 7.721px;
-        background: #F4F6F9;
-        ">
+    <div class="mid-center max-background mt-18 create-form">
         <div class="mid-center" style="gap: 23.209px;">
             <div class="center-center" style=" gap: 49.514px; flex-shrink: 0;">
                 <div class="mid-center">
@@ -80,92 +75,163 @@ $this->title = 'Create Branch';
                                 data-bs-original-title="<?= Yii::t('app', 'Select to Company') ?>">
                         </label>
                         <div class="input-group" style="width: 330px;">
-                            <?php if (isset($companyId) && $companyId != '') {?>
-                            <div class="col-12 font-b" style="width: 330px;">
-                                <input type="hidden" id="company" name="companyId" value="<?= $company['companyId'] ?>">
-                                <?= $company['companyName'] ?>
-                            </div>
-                            <?php }else{?>
-                            <select class="form-select" id="company" name="companyId"
-                                style="appearance: none; background-image: none;">
-                                <option value=""><?= Yii::t('app', 'Select Company') ?></option>
-                                <?php if (isset($companies) && count($companies) > 0): ?>
-                                <?php foreach ($companies as $c): ?>
-                                <option value="<?= $c['companyId'] ?>" data-img="<?= $c['picture'] ?>">
-                                    <?= $c['companyName'] ?>
-                                </option>
-                                <?php endforeach; ?>
-                                <?php endif; ?>
-                            </select>
-
-                            <span class="input-employee-text"
-                                style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
-                                onclick="document.getElementById('company').focus();">
-                                <div id="companyIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
-                                    <img id="companyIconImg"
-                                        src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="icon"
-                                        style="width: 10px; height: 10px;">
+                            <?php if (isset($companyId) && $companyId != '') { ?>
+                                <div class="col-12 font-b" style="width: 330px;">
+                                    <input type="hidden" id="company" name="companyId" value="<?= $company['companyId'] ?>">
+                                    <?= $company['companyName'] ?>
                                 </div>
-                                <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
-                                    style="width: 10px; height: 10px;">
-                            </span>
-                            <?php }?>
+                            <?php } else { ?>
+                                <select class="form-select" id="company" name="companyId"
+                                    style="appearance: none; background-image: none;">
+                                    <option value=""><?= Yii::t('app', 'Select Company') ?></option>
+                                    <?php if (isset($companies) && count($companies) > 0): ?>
+                                        <?php foreach ($companies as $c): ?>
+                                            <option value="<?= $c['companyId'] ?>" data-img="<?= $c['picture'] ?>">
+                                                <?= $c['companyName'] ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </select>
+
+                                <span class="input-employee-text"
+                                    style="background-color: #fff; border-left: none; gap: 5px; cursor: pointer;"
+                                    onclick="document.getElementById('company').focus();">
+                                    <div id="companyIcon" class="cycle-current-gray" style="width: 20px; height: 20px;">
+                                        <img id="companyIconImg"
+                                            src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" alt="icon"
+                                            style="width: 10px; height: 10px;">
+                                    </div>
+                                    <img src="<?= Yii::$app->homeUrl ?>image/drop-down.svg" alt="Dropdown"
+                                        style="width: 10px; height: 10px;">
+                                </span>
+                            <?php } ?>
 
                         </div>
                     </div>
                 </div>
                 <div class="between-column">
                     <label for="exampleFormControlInput1" class="form-label font-size-12 font-b">
-                        <!-- <span class="text-danger">* </span> -->
                         <?= Yii::t('app', 'Branch Description') ?>
                     </label>
                     <textarea style="height: 390px; width: 398px;" class="form-control" name="description"
                         id="description" placeholder="Write the description of the Branch"></textarea>
-                </div>
-            </div>
-            <div class="col-12 text-end mt-10">
-                <input type="hidden" id="branchId" value="">
-                <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
-                    <button type="button" class="btn-cancel-group"
-                        action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
-                        <?= Yii::t('app', 'Cancel') ?>
-                    </button>
-                </a>
+                    <div class="d-flex justify-content-end align-items-end gap-2" style="height: 60px;width:100%;">
+                        <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl . 'setting/branch/branch-grid' ?>"
+                            style="text-decoration: none;">
+                            <button type="button" class="btn-cancel-group-new">Cancel</button>
+                        </a>
 
-                <button type="submit" class="btn-save-group">
-                    <?= Yii::t('app', 'Create') ?>
-                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="LinkedIn"
-                        style="width: 20px; height: 20px;">
-                </button>
+                        <button type="submit" class="btn-save-group-new">
+                            Create <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="LinkedIn" style="width: 13px; height: 14px;">
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
+
     </div>
 </div>
 
 <?php ActiveForm::end(); ?>
 
 <script>
-const homeUrl = "<?= Yii::$app->homeUrl ?>";
-const companySelect = document.getElementById('company');
-const iconDiv = document.getElementById('companyIcon');
-const iconImg = document.getElementById('companyIconImg');
-document.getElementById('company').addEventListener('change', function() {
-    // alert('1');
-    const selectedOption = this.options[this.selectedIndex];
-    const selectedImg = selectedOption.getAttribute('data-img');
-    const selectedValue = this.value;
+    const homeUrl = "<?= Yii::$app->homeUrl ?>";
+    const companySelect = document.getElementById('company');
     const iconDiv = document.getElementById('companyIcon');
-    if (selectedValue !== '') {
-        // alert(selectedValue);
-        // iconDiv.classList.remove('cycle-current-gray');
-        // iconDiv.classList.add('cycle-current-blue');
-        iconImg.src = homeUrl + selectedImg;
-        iconImg.removeAttribute('style');
-        iconImg.classList.add('card-tcf');
-    } else {
-        // iconDiv.classList.remove('cycle-current-blue');
-        // iconDiv.classList.add('cycle-current-gray');
-        iconImg.src = '<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg';
-    }
-});
+    const iconImg = document.getElementById('companyIconImg');
+    document.getElementById('company').addEventListener('change', function() {
+        // alert('1');
+        const selectedOption = this.options[this.selectedIndex];
+        const selectedImg = selectedOption.getAttribute('data-img');
+        const selectedValue = this.value;
+        const iconDiv = document.getElementById('companyIcon');
+        if (selectedValue !== '') {
+            // alert(selectedValue);
+            // iconDiv.classList.remove('cycle-current-gray');
+            // iconDiv.classList.add('cycle-current-blue');
+            iconImg.src = homeUrl + selectedImg;
+            iconImg.removeAttribute('style');
+            iconImg.classList.add('card-tcf');
+        } else {
+            // iconDiv.classList.remove('cycle-current-blue');
+            // iconDiv.classList.add('cycle-current-gray');
+            iconImg.src = '<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg';
+        }
+    });
 </script>
+<style>
+    .submain-content {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 30px;
+        padding-right: 30px;
+        min-height: 100vh;
+        /* flex: 1; */
+        background-color: white;
+    }
+
+    .create-employee-btn {
+        min-width: 78px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .text-danger {
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    input::placeholder {
+        font-size: 14px;
+        font-weight: 400;
+        color: #8A8A8A;
+        ;
+    }
+
+    textarea::placeholder {
+        font-size: 14px;
+        font-weight: 400;
+        color: #8A8A8A;
+        ;
+    }
+
+    .form-select {
+        color: #8A8A8A;
+        font-size: 14px;
+    }
+
+    .form-select:valid {
+        color: #212529;
+    }
+
+    .form-select option {
+        color: #212529;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        outline: none;
+        /* เอาเส้นสีน้ำเงิน default ออก */
+        border: 1px solid #a8a9aaff;
+        /* เปลี่ยนเป็นสีหลักของเว็บ */
+        box-shadow: 0 0 5px rgba(241, 245, 251, 0.5);
+
+        /* เงาเล็ก ๆ รอบ input */
+        /* transition: all 0.2s ease-in-out; */
+    }
+
+    .input-group-text {
+
+        padding: 6px 0px 6px 10px;
+    }
+
+    .form-control,
+    .form-select {
+        padding-left: 12px;
+    }
+
+    .founded-icon {
+        padding-right: 10px;
+    }
+</style>

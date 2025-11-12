@@ -6,7 +6,6 @@ $this->title = 'Company profile';
 ?>
 
 <div class="col-12 mt-60 pt-20">
-
     <div class="col-12">
         <div class=" d-flex align-items-center gap-2">
             <img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg" style="width: 24px; height: 24px;">
@@ -15,8 +14,7 @@ $this->title = 'Company profile';
             </div>
         </div>
     </div>
-
-    <div class="company-group-edit mt-20">
+    <div class="company-group-edit mt-20 mb-3">
         <div style="display: flex; align-items: end; gap: 14px;">
             <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl . 'setting/company/company-grid' ?>"
                 style="text-decoration: none;" class="create-employee-btn">

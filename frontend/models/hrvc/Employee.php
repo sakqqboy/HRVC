@@ -5,6 +5,7 @@ namespace frontend\models\hrvc;
 use Yii;
 use \frontend\models\hrvc\master\EmployeeMaster;
 use common\helpers\Path;
+use Exception;
 
 /**
  * This is the model class for table "employee".
@@ -215,6 +216,40 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
 
             if ($headers !== false && strpos($headers[0], '200') !== false) {
                 $img = $employee["picture"];
+            }
+        }
+        return $img;
+    }
+    public static function employeeThreeImage($employees)
+    {
+        $selectPic = [];
+        $img = [];
+        if (isset($employees) && count($employees) > 0) {
+
+            if (count($employees) >= 3) {
+                $randomEmpployee = array_rand($employees, 3);
+                $selectPic[0] = $employees[$randomEmpployee[0]];
+                $selectPic[1] = $employees[$randomEmpployee[1]];
+                $selectPic[2] = $employees[$randomEmpployee[2]];
+            } else {
+                if (count($employees) > 0) {
+                    $selectPic = $employees;
+                    sort($selectPic);
+                }
+            }
+
+            $i = 0;
+            if (count($selectPic) > 0) {
+                foreach ($selectPic as $pic):
+                    $img[$i] = 'images/employee/status/employee-nopic.svg';
+                    if (isset($pic['picture']) && !empty($pic['picture'])) {
+                        $file = Path::getHost() . $pic["picture"];
+                        if (file_exists($file)) {
+                            $img[$i] = $pic["picture"];
+                        }
+                    }
+                    $i++;
+                endforeach;
             }
         }
         return $img;

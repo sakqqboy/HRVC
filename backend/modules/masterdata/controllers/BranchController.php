@@ -39,13 +39,14 @@ class BranchController extends Controller
 
 		return parent::beforeAction($action);
 	}
-	
+
 	public function actionIndex()
 	{
 		// return $this->render('index');
 	}
-	public function actionCompanyBranch($id) //companyId
+	public function actionCompanyBranch($id, $page = null, $limit = null) //companyId
 	{
+		$offset = ($page - 1) * $limit;
 		$branch = [];
 		$branch = Branch::find()
 			->select('branch.*,co.countryName,c.companyName,c.picture,co.flag,c.city')
@@ -54,6 +55,8 @@ class BranchController extends Controller
 			->where(["branch.status" => 1, "branch.companyId" => $id])
 			->orderBy('branch.branchName')
 			->asArray()
+			->offset($offset)
+			->limit($limit)
 			->all();
 		return json_encode($branch);
 	}

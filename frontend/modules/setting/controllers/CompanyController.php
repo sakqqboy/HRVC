@@ -549,32 +549,7 @@ class CompanyController extends Controller
 					->asArray()
 					->all();
 				$totalEmployee = count($employees);
-				$selectPic = [];
-				$img = [];
-				if (count($employees) >= 3) {
-					$randomEmpployee = array_rand($employees, 3);
-					$selectPic[0] = $employees[$randomEmpployee[0]];
-					$selectPic[1] = $employees[$randomEmpployee[1]];
-					$selectPic[2] = $employees[$randomEmpployee[2]];
-				} else {
-					if (count($employees) > 0) {
-						$selectPic = $employees;
-						sort($selectPic);
-					}
-				}
-				$i = 0;
-				if (count($selectPic) > 0) {
-					foreach ($selectPic as $pic):
-						$img[$i] = 'images/employee/status/employee-nopic.svg';
-						if (!empty($pic['picture'])) {
-							$file = Path::getHost() . $pic["picture"];
-							if (file_exists($file)) {
-								$img[$i] = $pic["picture"];
-							}
-						}
-						$i++;
-					endforeach;
-				}
+				$img = Employee::employeeThreeImage($employees);
 
 				$branchIds = Branch::find()->select('branchId')
 					->where(["companyId" => $companyId, "status" => 1])

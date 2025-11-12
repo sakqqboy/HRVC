@@ -62,7 +62,7 @@ class BranchController extends Controller
         } else if ($page == 'list') {
             return $this->redirect(Yii::$app->homeUrl . 'setting/branch/index-filter/' . $url);
         } else {
-            return "eror";
+            return "error";
         }
     }
 
@@ -96,6 +96,7 @@ class BranchController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $companyId = $param["companyId"];
 
+        //throw new exception($companyId);
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
         if (!isset($group) && empty($group)) {
             // return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
@@ -106,13 +107,17 @@ class BranchController extends Controller
         if (!isset($company) && empty($company)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/company/display-company/');
         }
-
-        $branch = Branch::find()->select('branchId')->where(["status" => 1])->asArray()->one();
-        if (isset($branch) && !empty($branch)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-grid/' . ModelMaster::encodeParams(["companyId" => '']));
+        if (isset($companyId) && $companyId != '') {
+            $branch = Branch::find()->select('branchId')->where(["companyId" => $companyId, "status" => 1])->asArray()->one();
+            if (isset($branch) && !empty($branch)) {
+                return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-grid/' . ModelMaster::encodeParams(["companyId" => $companyId]));
+            }
+        } else {
+            $branch = Branch::find()->select('branchId')->where(["status" => 1])->asArray()->one();
+            if (isset($branch) && !empty($branch)) {
+                return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-grid/' . ModelMaster::encodeParams(["companyId" => '']));
+            }
         }
-
-
         return $this->render('no_branch', [
             "companyId" => $companyId,
 
@@ -130,7 +135,7 @@ class BranchController extends Controller
 
         $branches = Api::connectApi(Path::Api() . 'masterdata/branch/active-branch?page=1' . '&limit=7');
         $countries = Api::connectApi(Path::Api() . 'masterdata/country/company-country');
-        $company = Api::connectApi( Path::Api() . 'masterdata/company/all-company');
+        $company = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
         $numPage = Api::connectApi(Path::Api() . 'masterdata/branch/branch-page?page=1' . '&countryId=0' . '&companyId=0' . '&limit=7');
         $branches = Api::connectApi(Path::Api() . 'masterdata/branch/active-branch?page=1' . '&limit=7');
 
@@ -140,33 +145,33 @@ class BranchController extends Controller
 
                 $branchId = $branch['branchId'];
                 $employees = Employee::find()
-                ->where(["branchId" => $branchId, "status" => 1])
-                ->asArray()
-                ->all();
+                    ->where(["branchId" => $branchId, "status" => 1])
+                    ->asArray()
+                    ->all();
 
-            // ✅ กรองเฉพาะที่มี picture และไฟล์มีอยู่จริง
-            $filteredEmployees = array_filter($employees, function ($employee) {
-                $relativePath = $employee["picture"] ?? '';
-                $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+                // ✅ กรองเฉพาะที่มี picture และไฟล์มีอยู่จริง
+                $filteredEmployees = array_filter($employees, function ($employee) {
+                    $relativePath = $employee["picture"] ?? '';
+                    $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
 
-                return !empty($relativePath) && file_exists($absolutePath);
-            });
+                    return !empty($relativePath) && file_exists($absolutePath);
+                });
 
-            // ✅ รีเซ็ต index และเลือกแค่ 3 คนแรก
-            $filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+                // ✅ รีเซ็ต index และเลือกแค่ 3 คนแรก
+                $filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
 
-            // ✅ เซ็ต default ถ้าไม่มีใครมีรูป
-            foreach ($filteredEmployees as &$employee) {
-                $relativePath = $employee["picture"] ?? '';
-                $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+                // ✅ เซ็ต default ถ้าไม่มีใครมีรูป
+                foreach ($filteredEmployees as &$employee) {
+                    $relativePath = $employee["picture"] ?? '';
+                    $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
 
-                if (!empty($relativePath) && file_exists($absolutePath)) {
-                    $employee['pictureUrl'] = $employee["picture"];
-                } else {
-                    $employee['pictureUrl'] = 'image/no-employee.svg';
+                    if (!empty($relativePath) && file_exists($absolutePath)) {
+                        $employee['pictureUrl'] = $employee["picture"];
+                    } else {
+                        $employee['pictureUrl'] = 'image/no-employee.svg';
+                    }
                 }
-            }
-            // unset($employee); // Good practice after foreach reference
+                // unset($employee); // Good practice after foreach reference
 
 
                 // นับจำนวน
@@ -190,7 +195,7 @@ class BranchController extends Controller
                     }
                     $totalTeam += count($teams);
                 endforeach;
-                
+
                 $relativePath = $branch["branchImage"] ?? '';
                 $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
 
@@ -212,7 +217,7 @@ class BranchController extends Controller
                     $branchPictureUrl = "image/no-company.svg";
                 }
 
-                
+
 
                 //เก็บค่า
                 $data[$branch["branchId"]] = [
@@ -275,17 +280,17 @@ class BranchController extends Controller
 
         $numPage = Api::connectApi(
             Path::Api() . 'masterdata/branch/branch-page?page=' . $nextPage
-            . '&countryId=' . $countryId
-            . '&companyId=' . $companyId
-            . '&limit=7'
+                . '&countryId=' . $countryId
+                . '&companyId=' . $companyId
+                . '&limit=7'
         );
 
         $branches = Api::connectApi(
             Path::Api() . 'masterdata/branch/active-branch-filter?id=1'
-            . '&page=' . $nextPage
-            . '&countryId=' . $countryId
-            . '&companyId=' . $companyId
-            . '&limit=6'
+                . '&page=' . $nextPage
+                . '&countryId=' . $countryId
+                . '&companyId=' . $companyId
+                . '&limit=6'
         );
 
         $data = [];
@@ -372,16 +377,17 @@ class BranchController extends Controller
         ]);
     }
 
-    function actionBranchGrid()
+    function actionBranchGrid($hash)
     {
-
         $totalEmployees = 0;
         $totalDepartment = 0;
         $totalTeam = 0;
+        $param = ModelMaster::decodeParams($hash);
+        $companyId = $param["companyId"];
         $role = UserRole::userRight();
 
         $countries = Api::connectApi(
-    Path::Api() . 'masterdata/country/company-country'
+            Path::Api() . 'masterdata/country/company-country'
         );
 
         $company = Api::connectApi(
@@ -389,12 +395,17 @@ class BranchController extends Controller
         );
 
         $numPage = Api::connectApi(
-            Path::Api() . 'masterdata/branch/branch-page?page=1&countryId=0&companyId=0&limit=6'
+            Path::Api() . 'masterdata/branch/branch-page?page=1&countryId=0&companyId=' . $companyId . '&limit=6'
         );
-
-        $branches = Api::connectApi(
-            Path::Api() . 'masterdata/branch/active-branch?page=1&limit=6'
-        );
+        if ($companyId == '') {
+            $branches = Api::connectApi(
+                Path::Api() . 'masterdata/branch/active-branch?page=1&limit=6'
+            );
+        } else {
+            $branches = Api::connectApi(
+                Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId . '&&page=1&limit=6'
+            );
+        }
 
         $data = [];
         if (isset($branches) && count($branches) > 0) {
@@ -402,17 +413,19 @@ class BranchController extends Controller
 
                 $branchId = $branch['branchId'];
                 $employees = Employee::find()
-                    ->where(["branchId" => $branchId, "status" => 1])
+                    ->where(["branchId" => $branchId])
+                    ->andWhere("status!=99")
                     ->asArray()
                     ->all();
-                // กรองเฉพาะที่มี picture
-                $filteredEmployees = array_filter($employees, function ($employee) {
-                    return !empty($employee['picture']);
-                });
-                // รีเซ็ต index และเลือกแค่ 3 คนแรก
-                $filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
 
-                // นับจำนวน
+
+                // $filteredEmployees = array_filter($employees, function ($employee) {
+                //     return !empty($employee['picture']);
+                // });
+                // $filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
+                $img = [];
+                $img = Employee::employeeThreeImage($employees);
+                //throw new exception(print_r($img, true));
                 $departments = Department::find()
                     ->where(["branchId" => $branch["branchId"], "status" => 1])
                     ->asArray()
@@ -463,7 +476,7 @@ class BranchController extends Controller
                     "totalDepartment" => count($departments),
                     "totalTeam" => $totalTeam,
                     "totalEmployee" => $totalEmployees,
-                    "employees" => $filteredEmployees,
+                    "employees" => $img,
                 ];
             endforeach;
         }
@@ -474,7 +487,7 @@ class BranchController extends Controller
             "countries" => $countries,
             "company" => $company,
             "countryId" => 0,
-            "companyId" => 0,
+            "companyId" => $companyId,
             "numPage" => $numPage
 
         ]);
@@ -493,7 +506,7 @@ class BranchController extends Controller
         $role = UserRole::userRight();
 
         $countries = Api::connectApi(
-    Path::Api() . 'masterdata/country/company-country'
+            Path::Api() . 'masterdata/country/company-country'
         );
 
         $company = Api::connectApi(
@@ -502,17 +515,17 @@ class BranchController extends Controller
 
         $numPage = Api::connectApi(
             Path::Api() . 'masterdata/branch/branch-page?page=' . $nextPage
-            . '&countryId=' . $countryId
-            . '&companyId=' . $companyId
-            . '&limit=7'
+                . '&countryId=' . $countryId
+                . '&companyId=' . $companyId
+                . '&limit=7'
         );
 
         $branches = Api::connectApi(
             Path::Api() . 'masterdata/branch/active-branch-filter?id='
-            . '&page=' . $nextPage
-            . '&countryId=' . $countryId
-            . '&companyId=' . $companyId
-            . '&limit=6'
+                . '&page=' . $nextPage
+                . '&countryId=' . $countryId
+                . '&companyId=' . $companyId
+                . '&limit=6'
         );
 
         $data = [];
@@ -525,13 +538,8 @@ class BranchController extends Controller
                     ->asArray()
                     ->all();
                 // กรองเฉพาะที่มี picture
-                $filteredEmployees = array_filter($employees, function ($employee) {
-                    return !empty($employee['picture']);
-                });
-                // รีเซ็ต index และเลือกแค่ 3 คนแรก
-                $filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
-
-                // นับจำนวน
+                $img = [];
+                $img = Employee::employeeThreeImage($employees);
                 $departments = Department::find()
                     ->where(["branchId" => $branch["branchId"], "status" => 1])
                     ->asArray()
@@ -552,7 +560,7 @@ class BranchController extends Controller
                     }
                     $totalTeam += count($teams);
                 endforeach;
-               
+
                 $relativePath = $branch["branchImage"] ?? '';
                 $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
 
@@ -563,7 +571,7 @@ class BranchController extends Controller
                     // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
                     $pictureUrl = 'image/no-branch.svg';
                 }
-              
+
                 //เก็บค่า
                 $data[$branch["branchId"]] = [
                     "branchId" => $branch["branchId"],
@@ -584,7 +592,7 @@ class BranchController extends Controller
                     "totalDepartment" => count($departments),
                     "totalTeam" => $totalTeam,
                     "totalEmployee" => $totalEmployees,
-                    "employees" => $filteredEmployees,
+                    "employees" => $img,
                 ];
             endforeach;
         }
@@ -691,7 +699,7 @@ class BranchController extends Controller
             if ($branch->save(false)) {
                 $branchId = Yii::$app->db->lastInsertID;
                 $branch = Branch::find()->where(["branchId" => $branchId])->one();
-             
+
                 $fileImage = UploadedFile::getInstanceByName("image");
                 if (isset($fileImage) && !empty($fileImage)) {
                     $path = Path::getHost() . 'images/branch/profile/';
@@ -762,7 +770,7 @@ class BranchController extends Controller
         $param = ModelMaster::decodeParams($hash);
         $branchId = $param["branchId"];
 
-        
+
         $countries = Api::connectApi(
             Path::Api() . 'masterdata/country/active-country'
         );
@@ -805,15 +813,15 @@ class BranchController extends Controller
             ];
         }
 
-    $numPage = Api::connectApi(
-    Path::Api() . 'masterdata/department/department-page?id=' . $branchId
-        . '&page=1&countryId=0&limit=5'
-    );
+        $numPage = Api::connectApi(
+            Path::Api() . 'masterdata/department/department-page?id=' . $branchId
+                . '&page=1&countryId=0&limit=5'
+        );
 
-    $departments = Api::connectApi(
-        Path::Api() . 'masterdata/department/branch-department?id=' . $branchId
-        . '&page=1&limit=5'
-    );
+        $departments = Api::connectApi(
+            Path::Api() . 'masterdata/department/branch-department?id=' . $branchId
+                . '&page=1&limit=5'
+        );
 
         $data = [];
         if (!empty($departments)) {
@@ -895,16 +903,16 @@ class BranchController extends Controller
         // ดึงข้อมูลจำนวนหน้าแผนก
         $numPage = Api::connectApi(
             Path::Api() . 'masterdata/department/department-page?id=' . $branchId
-            . '&page=' . $nextPage
-            . '&countryId=0&limit=5'
+                . '&page=' . $nextPage
+                . '&countryId=0&limit=5'
         );
 
         // ดึงข้อมูลแผนกในสาขา
         $departments = Api::connectApi(
             Path::Api() . 'masterdata/department/branch-department-filter?id=' . $branchId
-            . '&companyId=' . $branch["companyId"]
-            . '&page=' . $nextPage
-            . '&limit=5'
+                . '&companyId=' . $branch["companyId"]
+                . '&page=' . $nextPage
+                . '&limit=5'
         );
 
         $data = [];
@@ -1047,7 +1055,6 @@ class BranchController extends Controller
             "countries" => $countries,
             "branches" => $branch
         ]);
-
     }
     public function actionSaveUpdateBranch()
     {
@@ -1173,7 +1180,7 @@ class BranchController extends Controller
 
         $branches = Api::connectApi(
             Path::Api() . 'masterdata/department/branch-department?id=' . $branchId
-            . '&page=1&limit=0'
+                . '&page=1&limit=0'
         );
         return $branches;
     }

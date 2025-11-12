@@ -70,20 +70,9 @@ $page = "grid"
                         <div class="col-lg-6 col-md-5 col-sm-3 col-12" id="company-<?php echo $company['companyId'] ?>">
                             <div class="card-comany">
                                 <div class="card-body" style="background: #F9FBFF;  border-radius: 5px;">
-                                    <!-- <div style="display: flex;
-                            height: 100%;
-                            flex-direction: column;
-                            justify-content: space-between;
-                            align-items: center;
-                            flex-shrink: 0;
-                            align-self: stretch;"> -->
-                                    <div class="between-center"
-                                        style="flex-direction: column; height: 100%; gap: 20px;  align-self: stretch;">
-                                        <!-- ส่วนบน -->
+                                    <div class="between-center" style="flex-direction: column; height: 100%; gap: 20px;  align-self: stretch;">
                                         <div class="between-center" style=" gap: 17px; width: 100%;">
                                             <div style="display: flex; align-items: center; gap: 17px;">
-                                                <!-- <div class="mid-center"
-                                            style="height: 60px; padding: 20.944px 4.189px; gap: 10.472px;"> -->
                                                 <div class="mid-center" style=" gap: 10.472px;">
                                                     <?php
                                                     if ($company["picture"] != null) { ?>
@@ -110,24 +99,14 @@ $page = "grid"
                                             </div>
                                             <div style="margin-bottom: 30px;">
                                                 <?php if ($company['totalBranch'] > 0) { ?>
-                                                    <a href="
-                                        <?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                                    <a href="<?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
                                                         class="btn btn-bg-white-xs mr-5" style="margin-top: 3px; ">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
                                                             alt="History" class="pim-icon" style="margin-top: -1px;">
                                                     </a>
                                                 <?php } else { ?>
-                                                    <!-- <a class="btn btn-bg-red-xs mr-5"
-                                            href="javascript:deleteCompany(<?= $company['companyId'] ?>)"
-                                            style="margin-top: 3px;"
-                                            onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
-                                            onmouseout="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg'">
-                                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
-                                                alt="History" class="pim-icon" style="margin-top: -3px;">
-                                        </a> -->
 
-                                                    <a href="
-                                        <?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                                    <a href="<?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
                                                         class="btn btn-bg-white-xs mr-5" style="margin-top: 3px; ">
                                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
                                                             alt="History" class="pim-icon" style="margin-top: -1px;">
@@ -142,21 +121,6 @@ $page = "grid"
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
                                                         <?php if ($company['totalBranch'] == 0) { ?>
                                                             <li class="pl-9 pr-9 mb-9">
-                                                                <!-- <a href="<?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
-                                                        class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                        style="margin-top: -3px;">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
-                                                            alt="History" class="pim-icon mr-10"
-                                                            style="margin-top: -2px;">
-                                                    </a> -->
-                                                                <!-- 
-                                                    <a href="<?= Yii::$app->homeUrl ?>setting/company/company-view/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
-                                                        class="btn btn-bg-white-xs">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
-                                                            alt="History" class="pim-icon" style="margin-top: -1px;">
-                                                    </a> -->
-
-
                                                                 <a class="btn btn-bg-red-xs"
                                                                     href="javascript:deleteCompany(<?= $company['companyId'] ?>)"
                                                                     onmouseover="this.querySelector('.pim-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
@@ -167,20 +131,11 @@ $page = "grid"
                                                             </li>
                                                         <?php } ?>
                                                         <li class="pl-9 pr-9 ">
-                                                            <!-- <a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
-                                                        class="dropdown-itemNEWS pl-4  pr-20 mb-5"
-                                                        style="margin-top: -1px; ">
-                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                                            alt="History" class="pim-icon mr-10"
-                                                            style="margin-top: -2px;">
-                                                    </a> -->
                                                             <a href="<?= Yii::$app->homeUrl ?>setting/company/update-company/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
                                                                 class="btn btn-bg-white-xs">
                                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
                                                                     alt="History" class="pim-icon" style="margin-top: -1px;">
                                                             </a>
-
-
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -189,14 +144,12 @@ $page = "grid"
 
                                         <!-- ส่วนล่าง -->
                                         <?php if ($company['totalBranch'] > 0) { ?>
-                                            <div style="align-self: stretch; ">
+                                            <div style="align-self: stretch;">
                                                 <span class="detailname-crad-company">
                                                     <?= Yii::t('app', 'Quick Details') ?>
                                                 </span>
-                                                <div style=" margin-left: 20px; margin-top: 10px; ">
-
-                                                    <div
-                                                        style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; width: 100%;">
+                                                <div style=" margin-left: 20px; margin-top: 10px;">
+                                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; width: 100%;">
                                                         <div class="row align-items-center">
                                                             <div class="col-12 text-left">
                                                                 <div class="circle-container">
