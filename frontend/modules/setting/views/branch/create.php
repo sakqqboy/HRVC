@@ -1,7 +1,6 @@
 <?php
 
 use yii\bootstrap5\ActiveForm;
-use common\models\ModelMaster;
 
 $this->title = 'Create Branch';
 ?>
