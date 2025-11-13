@@ -769,6 +769,7 @@ class BranchController extends Controller
 
         $param = ModelMaster::decodeParams($hash);
         $branchId = $param["branchId"];
+        $companyId = $param["companyId"] ?? '';
 
 
         $countries = Api::connectApi(
@@ -874,7 +875,7 @@ class BranchController extends Controller
             "branches" => $branch,
             "departments" => $data,
             "numPage" => $numPage,
-            "countryId" => 0
+            "companyId" => $companyId
         ]);
     }
 
@@ -1059,7 +1060,7 @@ class BranchController extends Controller
     public function actionSaveUpdateBranch()
     {
         $branchId = $_POST["branchId"] - 543;
-
+        $companyId = $_POST["companyId"];
         $branch = Branch::find()->where([
             "companyId" => $_POST["companyId"],
             "branchId" => $branchId
@@ -1138,7 +1139,7 @@ class BranchController extends Controller
                 }
             }
 
-            return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-view/' . ModelMaster::encodeParams(['branchId' =>  $branchId]));
+            return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-view/' . ModelMaster::encodeParams(['branchId' =>  $branchId, 'companyId' => $companyId]));
         }
     }
 
