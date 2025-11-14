@@ -215,9 +215,8 @@ if (Yii::$app->session->hasFlash('error')) {
                 </div>
             </div>
             <div class="col-12 text-end mt-10">
-                <a href="<?= Yii::$app->homeUrl ?>setting/group/create-group" style="text-decoration: none;">
-                    <button type="button" class="btn-cancel-group"
-                        action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
+                <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl . 'setting/team/index' ?>" style="text-decoration: none;">
+                    <button type="button" class="btn-cancel-group">
                         <?= Yii::t('app', 'Cancel') ?>
                     </button>
                 </a>
