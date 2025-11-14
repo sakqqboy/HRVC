@@ -46,18 +46,19 @@ $form = ActiveForm::begin([
                     </div>
                     <div class="start-center">
                         <span class="font-size-20 font-weight-500">
-                            <?= Yii::t('app', 'Thailand consulting') ?>
+                            <?= Yii::t('app', $group['groupName']) ?>
                         </span>
                         <div class="col-12 font-size-14 tokyo-small">
                             <img src="<?= Yii::$app->homeUrl ?>image/hyphen.svg">
-                            <?= Yii::t('app', 'What we give is What we get.') ?>
+                            <?= Yii::t('app', $group['tagLine']) ?>
                         </div>
                     </div>
                 </div>
                 <span class="font-gray font-size-14 font-weight-400" style="line-height: 20px;">
-                    <?= Yii::t('app', 'All the titles created here will be associated with the Tokyo Consulting
-                    Group and it’s subsidiaries
-                    based on departments of each branch') ?>
+                    <!-- All the titles created here will be associated with the Tokyo Consulting Group and it’s subsidiaries  based on departments of each branch -->
+                    <?= mb_strlen(Yii::t('app', $group["about"])) > 100
+                                    ? mb_substr(Yii::t('app', $group["about"]), 0, 100) . '...'
+                                    : Yii::t('app', $group["about"]) ?>
                 </span>
             </div>
             <div class="col-8">
