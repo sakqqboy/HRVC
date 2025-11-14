@@ -34,7 +34,7 @@ $form = ActiveForm::begin([
         <?= Yii::t('app', $namePage . ' Title') ?>
     </div>
 
-    <div class="max-background mt-18 create-form">
+    <div class="max-background mt-18">
         <div class="row">
             <div class="col-4">
                 <span class="font-size-18 font-weight-600 ">
