@@ -61,8 +61,10 @@ if (Yii::$app->session->hasFlash('error')) {
                             </div>
                         </div>
                         <span class="name-full-tokyo" style="font-size: 14px; width: 369px; ">
-                            <?= Yii::t('app', 'Departments are created here will be associated with the Tokyo
-                            Consulting Group') ?>
+                            <!-- Departments are created here will be associated with the Tokyo Consulting Group -->
+                             <?= mb_strlen(Yii::t('app', $group["about"])) > 100
+                                    ? mb_substr(Yii::t('app', $group["about"]), 0, 100) . '...'
+                                    : Yii::t('app', $group["about"]) ?>
                         </span>
                     </div>
 
@@ -166,7 +168,7 @@ if (Yii::$app->session->hasFlash('error')) {
                     <button type="button" class="center-center bg-white"
                         style="padding: 13px 20px; height: 40px; width: 100%; border-radius: 5px; border: 0.5px solid #CBD5E1;"
                         onclick="addDepartmentInput()">
-                        <span class="text-blue mr-6" style="font-weight: 600; font-size: 14px;"> Add More </span>
+                        <span class="text-blue mr-6" style="font-weight: 600; font-size: 14px;"> <?= Yii::t('app', 'Add More') ?> </span>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-blue.svg" alt="LinkedIn"
                             style="width: 20px; height: 20px;">
                     </button>
@@ -177,7 +179,7 @@ if (Yii::$app->session->hasFlash('error')) {
             <div class="d-flex justify-content-end align-items-start gap-2 mt-10" style="width:100%;">
                 <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl . 'setting/department/index' ?>"
                     style="text-decoration: none;">
-                    <button type="button" class="btn-cancel-group-new">Cancel</button>
+                    <button type="button" class="btn-cancel-group-new"><?= Yii::t('app', 'Cancel') ?></button>
                 </a>
 
                 <button type="submit" class="btn-save-group-new">

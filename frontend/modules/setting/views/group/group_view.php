@@ -75,7 +75,7 @@ $this->title = 'Group Profile';
                                 </a>
                             <?php
                             } else { ?>
-                                Not set
+                                <?= Yii::t('app', 'Not set') ?>
                             <?php
                             }
                             ?>
