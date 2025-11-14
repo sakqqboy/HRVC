@@ -533,7 +533,7 @@
     width: 32.25px;
     height: 32.25px;
     border-radius: 100%;
-    border: 1px solid var(--Blocked-Strock, #CBD5E1);
+    border: 1px solid #CBD5E1;
     background: var(--Overall-Blocked, #E74C3C);
     position: relative;
     /* z-index: 1; */
@@ -580,8 +580,8 @@
     align-items: center;
     width: 32.25px;
     height: 32.25px;
-    border-radius: 15.75px;
-    border: 1px solid var(--Blocked-Strock, #CBD5E1);
+    border-radius: 100%;
+    /* border: 1px solid var(--Blocked-Strock, #CBD5E1); */
     background: var(--Overall-Blocked, #2980B9);
     position: relative;
     /* z-index: 1; */

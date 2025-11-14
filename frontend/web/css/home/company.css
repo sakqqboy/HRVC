@@ -38,14 +38,13 @@
 
 
 .name-crad-company {
-    display: -webkit-box;
+    /* display: -webkit-box; */
     -webkit-box-orient: vertical;
     max-width: 400px;
     align-self: stretch;
     overflow: hidden;
     color: var(--HRVC---Text-Black, #30313D);
     text-overflow: ellipsis;
-    font-family: "SF Pro Display";
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -62,13 +61,10 @@
 }
 
 .city-crad-company {
-    display: flex;
-    /* height: 27px; */
-    padding: 4px 8px;
-    /* flex-direction: column; */
-    justify-content: center;
+    padding: 3px 5px;
+    font-size: 14px;
+    font-weight: 400;
     align-items: center;
-    gap: 10px;
     border-radius: 5px;
     background: #F0F1F3;
 }
