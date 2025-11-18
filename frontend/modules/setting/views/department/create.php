@@ -62,9 +62,9 @@ if (Yii::$app->session->hasFlash('error')) {
                         </div>
                         <span class="name-full-tokyo" style="font-size: 14px; width: 369px; ">
                             <!-- Departments are created here will be associated with the Tokyo Consulting Group -->
-                             <?= mb_strlen(Yii::t('app', $group["about"])) > 100
-                                    ? mb_substr(Yii::t('app', $group["about"]), 0, 100) . '...'
-                                    : Yii::t('app', $group["about"]) ?>
+                            <?= mb_strlen(Yii::t('app', $group["about"])) > 100
+                                ? mb_substr(Yii::t('app', $group["about"]), 0, 100) . '...'
+                                : Yii::t('app', $group["about"]) ?>
                         </span>
                     </div>
 

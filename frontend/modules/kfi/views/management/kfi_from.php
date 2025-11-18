@@ -231,7 +231,7 @@ if ($DueBehind < 0) {
                                 }
                                 ?>
                             </select>
-                            <label class="sub-manage-create ml-3" id="department-selected-message">
+                            <label class="sub-manage-create ml-3 <?= $statusform == 'update' ? 'd-none' : '' ?>" id="company-selected-message">
                                 No companies are selected yet
                             </label>
                         </div>
@@ -257,7 +257,6 @@ if ($DueBehind < 0) {
                                 <?php else: ?>
                                     <?= $kfiBranchText; ?>
                                 <?php endif; ?>
-
                             </div>
                             <div class="">
                                 <div class="circle-container pl-15" id="image-branches" data-type="branch">
@@ -441,6 +440,9 @@ if ($DueBehind < 0) {
                                     </span>
                                     <i class="fa fa-angle-down" aria-hidden="true" style="position: absolute;right:0;margin-right:5px;"></i>
                                 </div>
+                                <span class="sub-manage-create mt-5 text-danger invisible" id="due-term-message" style="position:absolute;right:5px;">
+                                    Select Due Term
+                                </span>
 
                             </div>
                             <!-- hidden inputs เพื่อเก็บค่า month และ year -->
@@ -459,7 +461,7 @@ if ($DueBehind < 0) {
                                 <div id="endDatePicker"></div>
                             </div>
                         </div>
-                        <div class="form-group mt-37"
+                        <div class="form-group mt-30"
                             style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
@@ -482,6 +484,9 @@ if ($DueBehind < 0) {
 
                                     <!-- <input type="hidden" id="nextDate" name="nextCheckDate"> -->
                                 </div>
+                                <span class="sub-manage-create mt-5 text-danger invisible" id="last-update-message" style="position:absolute;right:5px;">
+                                    Select The last update Date
+                                </span>
                                 <input type="hidden" id="nextDate" name="nextCheckDate" value="<?= isset($data['nextCheckDate']) ? $data['nextCheckDate'] : '' ?>">
                             </div>
                             <div id="calendar-due-update"
@@ -578,7 +583,7 @@ if ($DueBehind < 0) {
                             style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name" style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
                                 <div style="flex-grow: 1;">
-                                    <span class="text-danger">* </span>
+
                                     Result <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                         data-toggle="tooltip" data-placement="top" class="tootip-icon"
                                         title="View or enter the actual achieved value. This field compares performance against the master target."

@@ -42,6 +42,7 @@ use function PHPUnit\Framework\throwException;
 // header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 // header("Cache-Control: post-check=0, pre-check=0", false);
 // header("Pragma: no-cache");
+
 /**
  * Default controller for the `kfi` module
  */
@@ -120,7 +121,7 @@ class ManagementController extends Controller
 		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$isManager = UserRole::isManager();
 		$part = Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
-
+		// throw new exception('kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 
 
 		$countAllCompany = 0;
