@@ -177,7 +177,7 @@ $page = 'view';
                                         <div class="bodyname-company">
                                             <?php if($title['totalEmployee'] > 0) { ?>
                                             <a class="see-all-company" style="font-size: 10.5px; "
-                                                href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $data['companyId']]) ?>">
+                                                href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => $data['companyId'],'branchId' =>  $data['branchId'],'departmentId' =>  $data['departmentId']]) ?>">
                                                 <?= Yii::t('app', 'Employees') ?>
                                                 <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
                                                     style="cursor: pointer;">

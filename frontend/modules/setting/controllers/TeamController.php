@@ -80,31 +80,33 @@ class TeamController extends Controller
 	public function actionNoTeam($hash)
 	{
         $param = ModelMaster::decodeParams($hash);
-        $departmentId = $param["departmentId"]??0;
+        $companyId = $param["companyId"] ?? 0;
+        $branchId = $param["branchId"] ?? 0;
+        $departmentId = $param["departmentId"] ?? 0;
 
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
-        if (!isset($group) && empty($group)) {
+        if (!isset($group) || empty($group)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/display-group/');
         }
 
         $company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
-        if (!isset($company) && empty($company)) {
+        if (!isset($company) || empty($company)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/company/display-company/');
         }
 
         $branch = Branch::find()->select('branchId')->where(["status" => 1])->asArray()->one();
-        if (!isset($branch) && empty($branch)) {
+        if (!isset($branch) || empty($branch)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/branch/no-branch/'. ModelMaster::encodeParams(["companyId" => '']));
         }
 
         $department = Department::find()->select('departmentId')->where(["status" => 1])->asArray()->one();
-        if (!isset($department) && empty($department)) {
+        if (!isset($department) || empty($department)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/department/no-department/'. ModelMaster::encodeParams(["companyId" => '']));
         }
 
         $team = Team::find()->select('teamId')->where(["status" => 1])->asArray()->one();
         if (isset($team) && !empty($team)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/team/index/');
+            return $this->redirect(Yii::$app->homeUrl . 'setting/team/index-filter/'. ModelMaster::encodeParams(["companyId" => $companyId,"branchId" => $branchId,"departmentId" => $departmentId]));
         }
 
         return $this->render('no_team', [

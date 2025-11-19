@@ -144,7 +144,7 @@ $page = 'view';
                                                 <div class="bodyname-company">
                                                     <?php if ($department['totalTeam'] > 0) { ?>
                                                         <a class="see-all-company" style="font-size: 10.5px; "
-                                                            href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>">
+                                                            href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['companyId' => $company['companyId'],'branchId' =>  $department['branchId'],'departmentId' =>  $department['departmentId']]) ?>">
                                                             <?= Yii::t('app', 'Teams') ?>
                                                             <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
                                                                 style="cursor: pointer;">
@@ -207,7 +207,7 @@ $page = 'view';
                                                 <div class="bodyname-company">
                                                     <?php if ($department['totalEmployee'] > 0) { ?>
                                                         <a class="see-all-company" style="font-size: 10.5px; "
-                                                            href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
+                                                           href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => $company['companyId'],'branchId' =>  $department['branchId'],'departmentId' =>  $department['departmentId']]) ?>">
                                                             <?= Yii::t('app', 'Employees') ?>
                                                             <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
                                                                 style="cursor: pointer;">

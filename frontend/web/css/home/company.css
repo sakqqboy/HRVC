@@ -40,7 +40,7 @@
 .name-crad-company {
     /* display: -webkit-box; */
     -webkit-box-orient: vertical;
-    max-width: 400px;
+    /* max-width: 400px; */
     align-self: stretch;
     overflow: hidden;
     color: var(--HRVC---Text-Black, #30313D);

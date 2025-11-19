@@ -94,23 +94,25 @@ class BranchController extends Controller
     function actionNoBranch($hash)
     {
         $param = ModelMaster::decodeParams($hash);
-        $companyId = $param["companyId"];
+        $companyId = $param["companyId"] ?? 0;
 
-        //throw new exception($companyId);
+        // throw new exception($companyId);
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
-        if (!isset($group) && empty($group)) {
-            // return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
+       if (!isset($group) || empty($group)) {
+            // return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/'); ยังไม่มีและเป็นค่าว่าง
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/display-group/');
         }
 
         $company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
-        if (!isset($company) && empty($company)) {
+        if (!isset($company) || empty($company)) {
+            // ยังไม่มีและเป็นค่าว่าง
             return $this->redirect(Yii::$app->homeUrl . 'setting/company/display-company/');
         }
         if (isset($companyId) && $companyId != '') {
+            //  มีและไม่เป็นค่าว่าง
             $branch = Branch::find()->select('branchId')->where(["companyId" => $companyId, "status" => 1])->asArray()->one();
             if (isset($branch) && !empty($branch)) {
-                return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-grid/' . ModelMaster::encodeParams(["companyId" => $companyId]));
+                return $this->redirect(Yii::$app->homeUrl . 'setting/branch/branch-grid-filter/' . ModelMaster::encodeParams(["companyId" => $companyId]));
             }
         } else {
             $branch = Branch::find()->select('branchId')->where(["status" => 1])->asArray()->one();
@@ -497,10 +499,11 @@ class BranchController extends Controller
     function actionBranchGridFilter($hash)
     {
         $param = ModelMaster::decodeParams($hash);
-        $companyId = $param["companyId"];
-        $countryId = $param["countryId"];
-        $nextPage = $param["nextPage"];
-
+         
+        $companyId = $param["companyId"] ?? '';
+        $countryId = $param["countryId"] ?? '';
+        $nextPage  = $param["nextPage"] ?? 1;
+        // throw new exception(print_r($param, true));
         $totalEmployees = 0;
         $totalTeam = 0;
         $role = UserRole::userRight();

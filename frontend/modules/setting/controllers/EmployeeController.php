@@ -65,36 +65,49 @@ class EmployeeController extends Controller
     public function actionNoEmployee($hash)
     {
         $param = ModelMaster::decodeParams($hash);
-        $departmentId = $param["departmentId"] ?? 0;
-
+        $companyId = $param["companyId"] ?? '';
+        $branchId = $param["branchId"] ?? '';
+        $departmentId = $param["departmentId"] ?? '';
+        $teamId = $param["teamId"] ?? '';
+        // throw new exception($teamId);
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
-        if (!isset($group) && empty($group)) {
+        if (!isset($group) || empty($group)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/display-group/');
         }
 
         $company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
-        if (!isset($company) && empty($company)) {
+        if (!isset($company) || empty($company)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/company/display-company/');
         }
 
         $branch = Branch::find()->select('branchId')->where(["status" => 1])->asArray()->one();
-        if (!isset($branch) && empty($branch)) {
+        if (!isset($branch) || empty($branch)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/branch/no-branch/' . ModelMaster::encodeParams(["companyId" => '']));
         }
 
         $department = Department::find()->select('departmentId')->where(["status" => 1])->asArray()->one();
-        if (!isset($department) && empty($department)) {
+        if (!isset($department) || empty($department)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/department/no-department/' . ModelMaster::encodeParams(["companyId" => '']));
         }
 
         $team = Team::find()->select('teamId')->where(["status" => 1])->asArray()->one();
-        if (!isset($team) && empty($team)) {
+        if (!isset($team) || empty($team)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/team/no-team/' . ModelMaster::encodeParams(["companyId" => '']));
         }
 
         $employee = Employee::find()->select('employeeId')->where(["status" => 1])->asArray()->one();
         if (isset($employee) && !empty($employee)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => '']));
+            return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-result/' . ModelMaster::encodeParams([
+            "companyId" => $companyId,
+            "branchId" => $branchId,
+            "departmentId" => $departmentId,
+            "teamId" => $teamId,
+            "status" => '',
+            "pageType" => 'grid',
+            "perPage" => '15',
+
+        ]));
+            // return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => $companyId,"branchId" => $branchId,"departmentId" => $departmentId]));
         }
 
         return $this->render('no_employee', [
@@ -1064,6 +1077,7 @@ class EmployeeController extends Controller
         $status = $param["status"];
         $pageType = $param["pageType"];
         $perPage = $param["perPage"];
+        // throw new exception($perPage);
 
         if ($pageType == 'grid') {
             $file = 'index';

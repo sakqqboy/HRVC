@@ -83,25 +83,29 @@ class DepartmentController extends Controller
     public function actionNoDepartment($hash)
     {
         $param = ModelMaster::decodeParams($hash);
+        $companyId = $param["companyId"] ?? 0;
+        $branchId = $param["branchId"] ?? 0;
+
+        // throw new exception($companyId);
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
-        if (!isset($group) && empty($group)) {
+        if (!isset($group) || empty($group)) {
             // return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/');
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/display-group/');
         }
 
         $company = Company::find()->select('companyId')->where(["status" => 1])->asArray()->one();
-        if (!isset($company) && empty($company)) {
+        if (!isset($company) || empty($company)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/company/display-company/');
         }
 
         $branch = Branch::find()->select('branchId')->where(["status" => 1])->asArray()->one();
-        if (!isset($branch) && empty($branch)) {
+        if (!isset($branch) || empty($branch)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/branch/no-branch/'. ModelMaster::encodeParams(["companyId" => '']));
         }
 
         $department = Department::find()->select('departmentId')->where(["status" => 1])->asArray()->one();
         if (isset($department) && !empty($department)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/department/index/');
+            return $this->redirect(Yii::$app->homeUrl . 'setting/department/index-filter/'. ModelMaster::encodeParams(["companyId" => $companyId,"branchId" => $branchId]));
         }
         $branchId = $param["branchId"] ?? '';
 
