@@ -229,7 +229,7 @@ $page = "grid"
                                                                         <?php } ?>
                                                                         <?php if ($company['totalDepartment'] > 0) { ?>
                                                                             <a class="text-see-all"
-                                                                                href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['branchId' => '']) ?>">
+                                                                                href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['companyId' => $company['companyId'],'branchId' => '']) ?>">
                                                                                 <?= Yii::t('app', 'see all') ?>
                                                                             </a>
                                                                         <?php } ?>
@@ -283,7 +283,7 @@ $page = "grid"
                                                                         <?php } ?>
                                                                         <?php if ($company['totalTeam'] > 0) { ?>
                                                                             <a class="text-see-all"
-                                                                                href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>">
+                                                                                href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['companyId' => $company['companyId'],'departmentId' => '']) ?>">
                                                                                 <?= Yii::t('app', 'see all') ?>
                                                                             </a>
                                                                         <?php } ?>
@@ -364,8 +364,10 @@ $page = "grid"
                                                                             </a>
                                                                         <?php } ?>
                                                                         <?php if ($company['totalEmployee'] > 0) { ?>
-                                                                            <a class="text-see-all" style="font-size: 10.5px; "
-                                                                                href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>">
+                                                                            <!-- <a class="text-see-all" style="font-size: 10.5px; "
+                                                                                href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"> -->
+                                                                                <a class="text-see-all" style="font-size: 10.5px; "
+                                                                                href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>">
                                                                                 <?= Yii::t('app', 'see all') ?>
                                                                             </a>
                                                                         <?php } ?>

@@ -188,7 +188,7 @@ $this->title = 'Company profile';
                         </div>
                         <div class="row" style="--bs-gutter-x:0px;">
                             <div class="col-lg-4 col-md-6 col-12 mb-20">
-                                <a href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['branchId' => '']) ?>" class="text-decoration-none">
+                                <a href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['companyId' => $company['companyId'],'branchId' => '']) ?>" class="text-decoration-none">
                                     <div class="row align-items-center" style="--bs-gutter-x:0px;">
                                         <div class="col-12 text-left pl-35 d-flex">
                                             <div class="circle-container ">
@@ -217,7 +217,7 @@ $this->title = 'Company profile';
                                 </a>
                             </div>
                             <div class="col-lg-4 col-md-6 col-12  mb-20">
-                                <a href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>" class="text-decoration-none">
+                                <a href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['companyId' => $company['companyId'],'departmentId' => '']) ?>" class="text-decoration-none">
                                     <div class="row align-items-center" style="--bs-gutter-x:0px;">
                                         <div class="col-12 text-left pl-35 d-flex">
                                             <div class="circle-container ">
@@ -246,7 +246,7 @@ $this->title = 'Company profile';
                                 </a>
                             </div>
                             <div class="col-lg-4 col-md-6 col-12 mb-20">
-                                <a href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="text-decoration-none">
+                                <a   href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>" class="text-decoration-none">
                                     <div class="row align-items-center" style="--bs-gutter-x:0px;">
                                         <div class="col-12 text-left pl-35 d-flex">
                                             <div class="circle-container-img">
