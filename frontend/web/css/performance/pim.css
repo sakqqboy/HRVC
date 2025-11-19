@@ -2111,7 +2111,7 @@
 	border-radius: 8px;
 	padding: 10px;
 	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-	z-index: 1;
+	z-index: 2;
 	width: 100%;
 }
 
@@ -2399,18 +2399,26 @@ input:checked+.slider:before {
 
 }
 
+.่่่5ff {
+	text-align: center;
+	cursor: pointer;
+	height: 38px;
+	background-color: white;
+	margin-left: -30px;
+	border-radius: 53px;
+}
+
 .select-form-pim {
 	display: flex;
 	align-items: center;
+	color: #8A8A8A;
 	border: var(--bs-border-width) solid var(--bs-border-color);
 	border-radius: 53px;
 	cursor: pointer;
 	height: 38px;
+	font-size: 14px;
+	margin-left: -35px;
 	background-color: white;
-	border-bottom-left-radius: 53px;
-	border-top-left-radius: 53px;
-	border-bottom-right-radius: 53px;
-	border-top-right-radius: 53px;
 }
 
 .border-left-radius {
@@ -2531,6 +2539,7 @@ input:checked+.slider:before {
 	align-items: center;
 	justify-content: center;
 	cursor: default;
+	gap: 4px;
 }
 
 .calendar-due-image {
@@ -2601,32 +2610,32 @@ input:checked+.slider:before {
 }
 
 
-#multi-mount-year {
+/* #multi-mount-year {
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 20px;
 	color: var(--Helper-Text-Gray, #8A8A8A);
 	text-transform: capitalize;
-}
+} */
 
 
-#multi-due-term {
+/* #multi-due-term {
 	align-content: center;
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 20px;
 	color: var(--Helper-Text-Gray, #8A8A8A);
 	text-transform: capitalize;
-}
+} */
 
 
-#multi-due-update {
+/* #multi-due-update {
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 20px;
 	color: var(--Helper-Text-Gray, #8A8A8A);
 	text-transform: capitalize;
-}
+} */
 
 .assing-icon {
 	width: 25.78px;

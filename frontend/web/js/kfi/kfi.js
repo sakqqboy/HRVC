@@ -927,22 +927,15 @@ document.addEventListener("DOMContentLoaded", function () {
                // console.error("Element with id 'yearSelect' not found.");
           }
 
-          // var month = document.getElementById('hiddenMonth').value;
-          // var year = document.getElementById('hiddenYear').value;
-          var month = $("#hiddenMonth").val();
-          var year = $("#hiddenYear").val();
+          var month = document.getElementById("hiddenMonth").value;
+          var year = document.getElementById("hiddenYear").value;
+          // var month = $("#hiddenMonth").val();
+          // var year = $("#hiddenYear").val();
 
           if (month && year) {
-               // alert(month);
-               document.getElementById("multi-mount-year").innerHTML = `${getMonthName(month)}, ${year} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
-
-               // เปลี่ยนสไตล์ข้อความ
-               $("#multi-mount-year").css({
+               document.getElementById("multi-month-year-text").innerHTML = getMonthName(month) + ", " + year;
+               $("#multi-month-year-text").css({
                     color: "var(--HRVC---Text-Black, #30313D)",
-                    "font-size": "14px",
-                    "font-style": "normal",
-                    "font-weight": "500",
-                    "line-height": "20px",
                });
                // เปลี่ยนแปลงสไตล์ของ <span> input-group-text
                const inputGroupText = document.querySelector(".input-group-text");
@@ -961,18 +954,14 @@ document.addEventListener("DOMContentLoaded", function () {
                const today = new Date();
                const month = String(today.getMonth() + 1).padStart(2, "0"); // แปลงเป็น string และเติม 0 ถ้าจำนวนน้อยกว่า 2 หลัก
                year = today.getFullYear();
-               var multiYear = $("#multi-mount-year").val();
-               if (multiYear) {
-                    document.getElementById("multi-mount-year").innerHTML = `${getMonthName(month)}, ${year} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
-               }
+               //var multiYear = $("#multi-mount-year").val();
+               //if (multiYear) {
+               document.getElementById("multi-month-year-text").innerHTML = `${getMonthName(month)}, ${year}`;
+               //}
 
                // เปลี่ยนสไตล์ข้อความ
-               $("#multi-mount-year").css({
+               $("#multi-month-year-text").css({
                     color: "var(--HRVC---Text-Black, #30313D)",
-                    "font-size": "14px",
-                    "font-style": "normal",
-                    "font-weight": "500",
-                    "line-height": "20px",
                });
                // เปลี่ยนแปลงสไตล์ของ <span> input-group-text
                const inputGroupText = document.querySelector(".input-group-text");
@@ -1003,7 +992,8 @@ document.addEventListener("DOMContentLoaded", function () {
                const images3 = '<img src="' + $url + "image/calendar-blue.svg" + '" alt="from" class="calendar-due-image">';
 
                if (page == "pim") {
-                    document.getElementById("multi-due-term").innerHTML = newText + duterm + icon;
+                    // document.getElementById("multi-due-term-text").innerHTML = newText + duterm + icon;
+                    document.getElementById("multi-due-term-text").innerHTML = duterm;
                     $("#calendar-dueterm").css("backgroundColor", "#D7EBFF");
                     $("#calendar-dueterm").css("border", "0.5px solid #BEDAFF");
                     $("#calendar-dueterm").html(images1 + images2 + images3);
@@ -1013,12 +1003,8 @@ document.addEventListener("DOMContentLoaded", function () {
                }
 
                // เปลี่ยนสไตล์ข้อความ
-               $("#multi-due-term").css({
+               $("#multi-due-term-text").css({
                     color: "var(--HRVC---Text-Black, #30313D)",
-                    "font-size": "14px",
-                    "font-style": "normal",
-                    "font-weight": "500",
-                    "line-height": "20px",
                });
                // อัปเดต hidden inputs
 
@@ -1048,7 +1034,8 @@ document.addEventListener("DOMContentLoaded", function () {
                const images2 = '<img src="' + $url + "image/weld.svg" + '" alt="from" class="calendar-due-image">';
                const images3 = '<img src="' + $url + "image/calendar-blue.svg" + '" alt="from" class="calendar-due-image">';
                if (page == "pim") {
-                    document.getElementById("multi-due-update").innerHTML = newText + nextDate + icon;
+                    // document.getElementById("multi-due-update").innerHTML = newText + nextDate + icon;
+                    document.getElementById("multi-due-update-text").innerHTML = nextDate;
                     $("#calendar-dueterm-update").css("backgroundColor", "#D7EBFF");
                     $("#calendar-dueterm-update").css("border", "0.5px solid #BEDAFF");
                     $("#calendar-dueterm-update").html(images1 + images2 + images3);
@@ -1057,12 +1044,8 @@ document.addEventListener("DOMContentLoaded", function () {
                }
 
                // เปลี่ยนสไตล์ข้อความใน #multi-due-update
-               $("#multi-due-update").css({
+               $("#multi-due-update-text").css({
                     color: "var(--HRVC---Text-Black, #30313D)",
-                    "font-size": "14px",
-                    "font-style": "normal",
-                    "font-weight": "500",
-                    "line-height": "20px",
                });
 
                // เปลี่ยนแปลงสไตล์ของ <span> input-group-text
@@ -1094,15 +1077,11 @@ function closeDatePicker() {
 
      if (month && year) {
           // อัปเดตข้อความใน multi-mount-year
-          document.getElementById("multi-mount-year").innerHTML = `${getMonthName(month)}, ${year} <i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>`;
+          document.getElementById("multi-month-year-text").innerHTML = getMonthName(month) + " - " + year;
 
           // เปลี่ยน style ของ #multi-branch-text
-          $("#multi-mount-year").css({
+          $("#multi-month-year-text").css({
                color: "var(--HRVC---Text-Black, #30313D)",
-               "font-size": "14px",
-               "font-style": "normal",
-               "font-weight": "500",
-               "line-height": "20px",
           });
 
           // อัปเดต hidden inputs
@@ -1238,7 +1217,8 @@ function updateSelectedDates() {
      let icon = '<i class="fa fa-angle-down" aria-hidden="true" style="position: absolute;right:0;margin-right:15px;"></i>';
      var page = $("#page").val();
      if (page == "pim") {
-          document.getElementById("multi-due-term").innerHTML = newText + duterm + icon;
+          // document.getElementById("multi-due-term").innerHTML = newText + duterm + icon;
+          document.getElementById("multi-due-term-text").innerHTML = duterm;
      } else {
           document.getElementById("multi-due-term").innerHTML = duterm + icon;
           document.getElementById("due-term-icon-group").style.backgroundColor = "#D7EBFF";
@@ -1252,7 +1232,7 @@ function updateSelectedDates() {
      const images3 = '<img src="' + $url + "image/calendar-gray.svg" + '" alt="from" class="calendar-due-image">';
      $("#calendar-dueterm").html(images1 + images2 + images3);
      // เปลี่ยน style ของ #multi-branch-text
-     $("#multi-due-term").css({
+     $("#multi-due-term-text").css({
           color: "var(--HRVC---Text-Black, #30313D)",
           "font-weight": "500",
      });
@@ -1304,7 +1284,7 @@ function updateLastUpdateDate(dateStr) {
      let newText = '<span class="calendar-due mr-50" id="calendar-dueterm-update"></span>';
      let icon = '<i class="fa fa-angle-down" aria-hidden="true" style="position: absolute;right:0;margin-right:15px;"></i>';
 
-     document.getElementById("multi-due-update").innerHTML = newText + dateStr + icon;
+     // document.getElementById("multi-due-update").innerHTML = newText + dateStr + icon;
 
      // ซ่อนปฏิทินหลังจากเลือกวันที่
 
@@ -1314,6 +1294,10 @@ function updateLastUpdateDate(dateStr) {
      if (dateStr) {
           var page = $("#page").val();
           if (page == "pim") {
+               $("#multi-due-update-text").css({
+                    color: "var(--HRVC---Text-Black, #30313D)",
+               });
+               document.getElementById("multi-due-update-text").innerHTML = dateStr;
                const images1 = '<img src="' + $url + "image/calendar-blue.svg" + '" alt="from" class="calendar-due-image">';
                const images2 = '<img src="' + $url + "image/weld.svg" + '" alt="from" class="calendar-due-image">';
                const images3 = '<img src="' + $url + "image/calendar-blue.svg" + '" alt="from" class="calendar-due-image">';
@@ -1321,6 +1305,7 @@ function updateLastUpdateDate(dateStr) {
                $("#calendar-dueterm-update").css("border", "0.5px solid #BEDAFF");
                $("#calendar-dueterm-update").html(images1 + images2 + images3);
           } else {
+               document.getElementById("multi-due-update").innerHTML = newText + dateStr + icon;
                const calendarDue = document.querySelector("#multi-due-update #calendar-dueterm-update");
                calendarDue.style.backgroundColor = "#D7EBFF";
                calendarDue.style.border = "0.5px solid #BEDAFF";
