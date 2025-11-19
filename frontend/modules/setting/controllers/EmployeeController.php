@@ -69,7 +69,7 @@ class EmployeeController extends Controller
         $branchId = $param["branchId"] ?? '';
         $departmentId = $param["departmentId"] ?? '';
         $teamId = $param["teamId"] ?? '';
-        // throw new exception($departmentId);
+        // throw new exception($teamId);
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
         if (!isset($group) || empty($group)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/display-group/');
