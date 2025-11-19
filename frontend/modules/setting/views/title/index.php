@@ -51,7 +51,7 @@ $page = "grid";
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 pl-10">
-                                    <div class="row" style="--bs-gutter-x:0px;">
+                                    <div class="row" style="--bs-gutter-x:0px;padding-right: 6px;">
                                         <div class="col-9 name-crad-company text-truncate pr-5">
                                             <?= $department['departmentName'] ?>
                                         </div>
