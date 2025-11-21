@@ -90,7 +90,7 @@ if (Yii::$app->session->hasFlash('error')) {
                                     </div>
                                 <?php } else { ?>
                                     <select class="form-select" id="companySelectId" name="companyId"
-                                        style="appearance: none; background-image: none;">
+                                        style="appearance: none; background-image: none;" data-company-branch="company" required>
                                         <option value=""><?= Yii::t('app', 'Select Company') ?></option>
                                         <?php if (isset($companies) && count($companies) > 0): ?>
                                             <?php foreach ($companies as $c): ?>

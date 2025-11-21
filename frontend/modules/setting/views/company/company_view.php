@@ -114,13 +114,13 @@ $this->title = 'Company profile';
                                 <?= Yii::t('app', 'Founded') ?>
                             </div>
                             <div class="col-lg-8 col-6 name-head0 mt-10 pl-20">
-                                <?= !empty($company["founded"]) ? $company["founded"] : '-' ?>
+                                <?= !empty($company["founded"]) ? Yii::t('app', $company["founded"]) : '-' ?>
                             </div>
                             <div class="col-lg-4 col-6 name-head mt-10">
                                 <?= Yii::t('app', 'Industry') ?>
                             </div>
                             <div class="col-lg-8 col-6 name-head0 mt-10 pl-20">
-                                <?= Yii::t('app', $company["industries"]) ?>
+                                <?= !empty($company["founded"]) ? Yii::t('app', $company["industries"]) : '-' ?>
                             </div>
                         </div>
                         <div class="col-12 Group-Information">
@@ -156,10 +156,10 @@ $this->title = 'Company profile';
                             <div class="col-lg-8 col-6 name-head0 mt-10 pl-20">
                                 <div style="max-width:90%;" class="text-truncate d-inline-block ">
                                     <a href="<?= $company["website"] ?>" class="text-primary address-box0" target="_blank">
-                                        <?= $company["website"] ?>
+                                        <?= !empty($company["founded"]) ? Yii::t('app', $company["website"]) : '-' ?>
                                     </a>
                                 </div>
-                            </div>
+                            </div>  
                         </div>
                     </div>
                     <div class="col-lg-7 col-md-6 col-12 box-about0">

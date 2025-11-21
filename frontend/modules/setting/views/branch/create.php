@@ -65,7 +65,7 @@ $this->title = 'Create Branch';
                             <?= Yii::t('app', 'Branch Name') ?>
                         </label>
                         <input type="text" class="form-control" name="branchName" style="width: 330px;"
-                            placeholder="Write the name of the branch">
+                            placeholder="Write the name of the branch" required>
                         <label class="form-label font-size-12 font-b mt-23">
                             <span class="text-danger">* </span>
                             <?= Yii::t('app', 'Company') ?>
@@ -81,7 +81,7 @@ $this->title = 'Create Branch';
                                 </div>
                             <?php } else { ?>
                                 <select class="form-select" id="company" name="companyId"
-                                    style="appearance: none; background-image: none;">
+                                    style="appearance: none; background-image: none;" required>
                                     <option value=""><?= Yii::t('app', 'Select Company') ?></option>
                                     <?php if (isset($companies) && count($companies) > 0): ?>
                                         <?php foreach ($companies as $c): ?>
@@ -117,11 +117,11 @@ $this->title = 'Create Branch';
                     <div class="d-flex justify-content-end align-items-end gap-2" style="height: 60px;width:100%;">
                         <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl . 'setting/branch/branch-grid' ?>"
                             style="text-decoration: none;">
-                            <button type="button" class="btn-cancel-group-new">Cancel</button>
+                            <button type="button" class="btn-cancel-group-new"><?= Yii::t('app', 'Cancel') ?></button>
                         </a>
 
                         <button type="submit" class="btn-save-group-new">
-                            Create <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="LinkedIn" style="width: 13px; height: 14px;">
+                            <?= Yii::t('app', 'Create') ?>  <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="LinkedIn" style="width: 13px; height: 14px;">
                         </button>
                     </div>
                 </div>
