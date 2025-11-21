@@ -87,8 +87,11 @@ if (Yii::$app->session->hasFlash('error')) {
                                 <?php } else { ?>
 
                                     <select class="form-select" id="companySelectId" name="companyId"
-                                        style="appearance: none; background-image: none;">
-                                        <option value=""><?= Yii::t('app', 'Select Company') ?></option>
+                                        style="appearance: none; background-image: none;"  data-company-branch="company" required >
+                                        <option value="" disabled selected hidden
+                                            style="color: var(--Helper-Text, #8A8A8A); ">
+                                            <?= Yii::t('app', 'Select from a Company') ?>
+                                        </option>
                                         <?php if (isset($companies) && count($companies) > 0): ?>
                                             <?php foreach ($companies as $c): ?>
                                                 <option value="<?= $c['companyId'] ?>" data-img="<?= $c['picture'] ?>">
@@ -128,7 +131,7 @@ if (Yii::$app->session->hasFlash('error')) {
                                         <?= $branchName ?>
                                     </div>
                                 <?php } else { ?>
-                                    <select id="branchSelectId" brancSelect class="form-select"
+                                    <select id="branchSelectId" class="form-select"
                                         style="border-right: none; width: 239px; appearance: none; background-image: none;"
                                         name="branchId" data-company-branch="branch" required disabled>
                                         <option value="" disabled selected hidden
