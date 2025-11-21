@@ -86,7 +86,7 @@ $form = ActiveForm::begin([
                             <div class="input-group">
                                 <?php if ($companyName) { ?>
                                     <input type="hidden" id="companyId" name="companyId" value="<?= $companyId ?>">
-                                    <input type="text" class="form-control mt-12" value="<?= $companyName ?>" disabled>
+                                    <input type="text" class="form-control mt-12" value="<?= $companyName ?>"  disabled>
                                     <span class="input-group-text mt-12"
                                         style="background-color: #e9ecef; border-left: none; gap: 5px;  ">
                                         <div class="cycle-current-gray" style="width: 20px; height: 20px;">
@@ -97,7 +97,7 @@ $form = ActiveForm::begin([
                                     </span>
                                 <?php } else { ?>
                                     <select class="form-select" id="companySelectId" name="companyId"
-                                        style="appearance: none; background-image: none;">
+                                        style="appearance: none; background-image: none;"  data-company-branch="company" required>
                                         <option value=""><?= Yii::t('app', 'Select Company') ?></option>
                                         <?php if (isset($companies) && count($companies) > 0): ?>
                                             <?php foreach ($companies as $c): ?>
