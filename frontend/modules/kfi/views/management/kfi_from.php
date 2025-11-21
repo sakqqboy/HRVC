@@ -2,13 +2,14 @@
 
 use yii\widgets\ActiveForm;
 
-$this->title = 'KFI';
 
 
 if ($statusform == 'update') {
     $parturl = 'kfi/management/save-update-kfi';
+    $this->title = 'Update KFI';
 } else {
     $parturl = 'kfi/management/create-kfi';
+    $this->title = 'Create New KFI';
 }
 ?>
 
@@ -428,7 +429,7 @@ if ($DueBehind < 0) {
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to" class="calendar-due-image">
                                 </div>
                                 <div class="flex-grow-1 pr-5 pl-35 select-form-pim" id="due-term-default">
-                                    <div id="multi-due-term-text" class="text-truncate text-center pr-5" style="width:230px;" title="Select the Due Term Start & End Date">
+                                    <div id="multi-due-term-text" class="text-truncate text-center pr-5" style="width:210px;" title="Select the Due Term Start & End Date">
                                         Select the Due Term Start & End Date
                                     </div>
                                     <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
@@ -473,14 +474,12 @@ if ($DueBehind < 0) {
                                     <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="-" class="calendar-due-image">
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to" class="calendar-due-image">
                                 </div>
-                                <div class="flex-grow-1 pr-5 pl-35 select-form-pim" id="due-update-default">
+                                <div class="flex-grow-1 pr-5 pl-15 select-form-pim" id="due-update-default">
                                     <div id="multi-due-update-text" class="text-truncate text-center pr-5" style="width:230px;" title="Select The Last Update Update Date">
                                         Select The Last Update Date
                                     </div>
                                     <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
                                 </div>
-
-
                                 <input type="hidden" id="nextDate" name="nextCheckDate" value="<?= isset($data['nextCheckDate']) ? $data['nextCheckDate'] : '' ?>">
                             </div>
                             <div id="calendar-due-update"

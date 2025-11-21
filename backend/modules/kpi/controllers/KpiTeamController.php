@@ -728,7 +728,6 @@ class KpiTeamController extends Controller
 
 	public function actionKpiTeamDetail($kpiTeamId, $kpiTeamHistoryId)
 	{
-
 		$data = [];
 		$ratio = 0;
 		if ($kpiTeamHistoryId != 0) {
@@ -757,8 +756,8 @@ class KpiTeamController extends Controller
 		if (!isset($kpiTeamHistory) || empty($kpiTeamHistory)) {
 			$kpiTeamHistory = kpiTeam::find()
 				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.companyId,k.code,kpi_team.target,kpi_team.kpiTeamId,
-		kpi_team.teamId,kpi_team.result,kpi_team.fromDate,kpi_team.toDate,kpi_team.month,kpi_team.year,kpi_team.status,kpi_team.nextCheckDate,
-		k.kpiDetail,k.amountType,kpi_team.remark')
+		kpi_team.teamId,kpi_team.result,kpi_team.fromDate,kpi_team.toDate,kpi_team.month,kpi_team.year,
+		kpi_team.status,kpi_team.nextCheckDate,k.kpiDetail,k.amountType,kpi_team.remark')
 				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
 				->where(["kpi_team.kpiTeamId" => $kpiTeamId, "kpi_team.status" => [1, 2]])
 				->asArray()

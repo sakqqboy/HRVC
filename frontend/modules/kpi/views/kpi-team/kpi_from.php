@@ -443,30 +443,23 @@ if (!$nextCheckDate) {
                                     title="<?= Yii::t('app', 'Select the specific month and year for which youre entering or viewing data. This helps in maintaining chronological records.') ?>"
                                     alt="Help Icon">
                             </label>
-                            <div class="input-group" style="position: relative;">
-                                <span class="input-group-text pb-10 pt-10"
-                                    style="background-color: #C3C3C3;  border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
-                                        style="width: 16px; height: 16px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="LinkedIn"
-                                        style="width: 16px; height: 16px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
-                                        style="width: 16px; height: 16px;">
-                                </span>
-                                <div class="form-control" id="multi-mount-year" name="fromMonthYear"
-                                    style="border-radius: 53px 53px 53px 53px; text-align: center; cursor: pointer; position: absolute; width: 100% ; height: 100%;"
-                                    <?php if ($statusform == 'create') { ?> onclick="openDatePicker()" <?php } ?>>
-                                    Select the Month & Year <i class="fa fa-angle-down pull-right mt-5"
-                                        aria-hidden="true"></i>
+                            <div class="d-flex" style="position: relative;width:100%;">
+                                <div class="input-group-text" style="background-color: #C3C3C3;  border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1; height:38px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn" style="width: 16px; height: 16px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="LinkedIn" style="width: 16px; height: 16px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn" style="width: 16px; height: 16px;">
                                 </div>
-                                <!-- hidden inputs เพื่อเก็บค่า month และ year -->
+                                <div class="flex-grow-1 pr-5 pl-25 select-form-pim" id="multi-mount-year" name="fromMonthYear" onclick="openDatePicker()">
+                                    <div id="multi-month-year-text" class="text-truncate text-center pr-5" style="width:190px;">
+                                        Select the Month & Year
+                                    </div>
+                                    <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
+                                </div>
                                 <input type="hidden" id="hiddenMonth" name="month"
                                     value="<?= htmlspecialchars($data['month'] ?? '') ?>" required>
                                 <input type="hidden" id="hiddenYear" name="year"
                                     value="<?= htmlspecialchars($data['year'] ?? '') ?>" required>
                             </div>
-
-                            <!-- Popup for Month/Year Selection -->
                             <div id="monthYearPicker" class="mount-year">
                                 <select id="monthSelect" class="form-select" onchange="closeDatePicker()" required>
                                     <option value="01">January</option>
@@ -497,21 +490,18 @@ if (!$nextCheckDate) {
                                     title="<?= Yii::t('app', 'Set the start and end dates for the performance measurement period. This defines the timeframe for achieving the target.') ?>"
                                     alt="Help Icon">
                             </label>
-                            <div class="col-12" id="img-due-term">
-                                <div class="select-form-pim" id="multi-due-term" onclick="toggleCalendar()">
-                                    <span class="calendar-due mr-3" id="calendar-dueterm">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="from"
-                                            class="calendar-due-image">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="-"
-                                            class="calendar-due-image">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to"
-                                            class="calendar-due-image">
-                                    </span>
-                                    <span class="d-flex" id="due-term-default">
+                            <div class="d-flex" style="position: relative;width:100%;border-radius:53px;" id="multi-due-term" onclick="toggleCalendar()">
+                                <div class="input-group-text calendar-due" id="calendar-dueterm" style="background-color: #C3C3C3;  border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1; height:38px;">
+                                    <!-- <div class="calendar-due mr-3" id="calendar-dueterm" style="z-index: 1;"> -->
+                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="from" class="calendar-due-image">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="-" class="calendar-due-image">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to" class="calendar-due-image">
+                                </div>
+                                <div class="flex-grow-1 pr-5 pl-35 select-form-pim" id="due-term-default">
+                                    <div id="multi-due-term-text" class="text-truncate text-center pr-5" style="width:210px;" title="Select the Due Term Start & End Date">
                                         Select the Due Term Start & End Date
-                                    </span>
-                                    <i class="fa fa-angle-down" aria-hidden="true"
-                                        style="position: absolute;right:0;margin-right:5px;"></i>
+                                    </div>
+                                    <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
                                 </div>
                             </div>
                             <input type="hidden" id="fromDate" name="fromDate"
@@ -521,7 +511,7 @@ if (!$nextCheckDate) {
                             <input type="hidden" id="page" value="pim">
                             <!-- Calendar picker -->
                             <div class="calendar-container" id="calendar-due-term"
-                                style="display: none; position: absolute; margin-top: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 10px; background: #fff; width: 650px; gap: 3px; z-index: 1;">
+                                style="display: none; position: absolute; margin-top: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 10px; background: #fff; width: 650px; gap: 3px; z-index: 2;">
                                 <!-- ปฏิทินสำหรับวันที่เริ่มต้น -->
                                 <div id="startDatePicker"></div>
                                 <!-- ปฏิทินสำหรับวันที่สิ้นสุด -->
@@ -537,22 +527,17 @@ if (!$nextCheckDate) {
                                     title="<?= Yii::t('app', 'Specify the deadline by which the progress must be updated in the system. This ensures regular performance tracking and accountability.') ?>"
                                     alt="Help Icon">
                             </label>
-                            <div class="col-12" id="img-due-update">
-                                <div class="select-form-pim" id="multi-due-update" onclick="toggleCalendar()">
-                                    <span class="calendar-due mr-3" id="calendar-dueterm-update">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
-                                            style="width: 16px; height: 16px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="LinkedIn"
-                                            style="width: 16px; height: 16px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
-                                            style="width: 16px; height: 16px;">
-                                    </span>
-                                    <span class="d-flex" id="due-update-default">
-                                        Select the Last Update Date
-                                    </span>
-                                    <i class="fa fa-angle-down" aria-hidden="true"
-                                        style="position: absolute;right:0;margin-right:15px;"></i>
-
+                            <div class="d-flex" style="position: relative;width:100%; border-radius:53px;" id="multi-due-update" onclick="toggleCalendar()">
+                                <div class="input-group-text calendar-due" id="calendar-dueterm-update" style="background-color: #C3C3C3;  border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1; height:38px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="from" class="calendar-due-image">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="-" class="calendar-due-image">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to" class="calendar-due-image">
+                                </div>
+                                <div class="flex-grow-1 pr-5 pl-15 select-form-pim" id="due-update-default">
+                                    <div id="multi-due-update-text" class="text-truncate text-center pr-5" style="width:230px;" title="Select The Last Update Update Date">
+                                        Select The Last Update Date
+                                    </div>
+                                    <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
                                 </div>
                             </div>
                             <input type="hidden" id="nextDate" name="nextDate"

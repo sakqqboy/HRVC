@@ -52,90 +52,90 @@ if (!$nextCheckDate) {
 ?>
 
 <style>
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-input[type="number"] {
-    -moz-appearance: textfield;
-    /* สำหรับ Firefox */
-}
+    input[type="number"] {
+        -moz-appearance: textfield;
+        /* สำหรับ Firefox */
+    }
 
-/* เปลี่ยนสีข้อความของ select เมื่อเลือกแล้ว */
-select.form-select {
-    color: var(--Helper-Text-Gray, #8A8A8A);
-}
-
-
-/* เมื่อเลือกแล้วให้ข้อความเป็นสี #30313D */
-select.form-select:not([value=""]) {
-    color: <?=($statusform=='update') ? '#30313D': 'var(--HRVC---Text-Black, #8A8A8A)';
-    ?>;
-}
+    /* เปลี่ยนสีข้อความของ select เมื่อเลือกแล้ว */
+    select.form-select {
+        color: var(--Helper-Text-Gray, #8A8A8A);
+    }
 
 
-/* สไตล์เมื่อไม่ได้เลือก (ข้อความ placeholder) */
-select.form-select {
-    color: var(--Helper-Text-Gray, #8A8A8A);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px;
-    text-transform: capitalize;
-}
+    /* เมื่อเลือกแล้วให้ข้อความเป็นสี #30313D */
+    select.form-select:not([value=""]) {
+        color: <?= ($statusform == 'update') ? '#30313D' : 'var(--HRVC---Text-Black, #8A8A8A)';
+                ?>;
+    }
 
-/* สไตล์เมื่อเลือกตัวเลือกแล้ว */
-select.form-select option:checked {
-    color: var(--HRVC---Text-Black, #30313D);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px;
-}
 
-/* เพิ่มความสวยงามเมื่อตัวเลือกถูกโฟกัส */
-select.form-select:focus {
-    color: var(--HRVC---Text-Black, #30313D);
-    font-weight: 500;
-}
+    /* สไตล์เมื่อไม่ได้เลือก (ข้อความ placeholder) */
+    select.form-select {
+        color: var(--Helper-Text-Gray, #8A8A8A);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        text-transform: capitalize;
+    }
 
-/* เมื่อ option เป็น disabled (กรณีเลือกแล้วจะไม่สามารถเลือกได้) */
-select.form-select option:disabled {
-    color: var(--Helper-Text-Gray, #8A8A8A);
-    font-weight: 500;
-}
+    /* สไตล์เมื่อเลือกตัวเลือกแล้ว */
+    select.form-select option:checked {
+        color: var(--HRVC---Text-Black, #30313D);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+    }
 
-.priority-box {
-    width: 52px;
-    height: 52px;
-    font-size: 12px;
-}
+    /* เพิ่มความสวยงามเมื่อตัวเลือกถูกโฟกัส */
+    select.form-select:focus {
+        color: var(--HRVC---Text-Black, #30313D);
+        font-weight: 500;
+    }
 
-.priority-box-null {
-    width: 52px;
-    height: 52px;
-    font-size: 12px;
-}
+    /* เมื่อ option เป็น disabled (กรณีเลือกแล้วจะไม่สามารถเลือกได้) */
+    select.form-select option:disabled {
+        color: var(--Helper-Text-Gray, #8A8A8A);
+        font-weight: 500;
+    }
 
-.text-priority {
-    font-size: 18px;
-}
+    .priority-box {
+        width: 52px;
+        height: 52px;
+        font-size: 12px;
+    }
 
-.priority-star {
-    width: 52px;
-}
+    .priority-box-null {
+        width: 52px;
+        height: 52px;
+        font-size: 12px;
+    }
 
-.big-star {
-    width: 18px;
-    height: 17px;
-}
+    .text-priority {
+        font-size: 18px;
+    }
 
-.default-star {
-    width: 16px;
-    width: 15px;
-}
+    .priority-star {
+        width: 52px;
+    }
+
+    .big-star {
+        width: 18px;
+        height: 17px;
+    }
+
+    .default-star {
+        width: 16px;
+        width: 15px;
+    }
 </style>
 
 <!-- ลิงก์ไปยัง CSS ของ flatpickr -->
@@ -250,7 +250,7 @@ select.form-select option:disabled {
                                 </span>
 
                                 <?php if (mb_strlen($detail) > $maxLength): ?>
-                                <button type="button" id="see-more" class="see-more">See More</button>
+                                    <button type="button" id="see-more" class="see-more">See More</button>
                                 <?php endif; ?>
                             </p>
                             <div class="form-group start-center mt-40">
@@ -274,21 +274,21 @@ select.form-select option:disabled {
                                 </label>
                                 <div class="circle-container pl-16 mt-14 " style="display: flex;align-items: center;">
                                     <?php if (count($kpiBranch) >= 1) { ?>
-                                    <div class="cycle-current-branch" style="width: 35px; height: 35px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                    </div>
+                                        <div class="cycle-current-branch" style="width: 35px; height: 35px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
+                                        </div>
                                     <?php }
                                     if (count($kpiBranch) >= 2) { ?>
-                                    <div class="cycle-current-branch"
-                                        style="width: 35px; height: 35px;margin-left:-25px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                    </div>
+                                        <div class="cycle-current-branch"
+                                            style="width: 35px; height: 35px;margin-left:-25px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
+                                        </div>
                                     <?php }
                                     if (count($kpiBranch) >= 3) { ?>
-                                    <div class="cycle-current-branch"
-                                        style="width: 35px; height: 35px;margin-left:-25px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
-                                    </div>
+                                        <div class="cycle-current-branch"
+                                            style="width: 35px; height: 35px;margin-left:-25px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon">
+                                        </div>
                                     <?php } ?>
                                     <div class="cycle-current-white"
                                         style="width: 35px; height: 35px; color: #000; right: 5px;">
@@ -319,21 +319,21 @@ select.form-select option:disabled {
                                     }
                                     ?>
                                     <?php if ($totalDepartment >= 1) { ?>
-                                    <div class="cycle-current-department" style="width: 35px; height: 35px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
-                                    </div>
+                                        <div class="cycle-current-department" style="width: 35px; height: 35px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                                        </div>
                                     <?php }
                                     if ($totalDepartment >= 2) { ?>
-                                    <div class="cycle-current-department"
-                                        style="width: 35px; height: 35px;margin-left:-25px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
-                                    </div>
+                                        <div class="cycle-current-department"
+                                            style="width: 35px; height: 35px;margin-left:-25px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                                        </div>
                                     <?php }
                                     if ($totalDepartment >= 3) { ?>
-                                    <div class="cycle-current-department"
-                                        style="width: 35px; height: 35px;margin-left:-25px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
-                                    </div>
+                                        <div class="cycle-current-department"
+                                            style="width: 35px; height: 35px;margin-left:-25px;">
+                                            <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                                        </div>
                                     <?php } ?>
                                     <div class="cycle-current-white"
                                         style="width: 35px; height: 35px; color: #000; right: 5px;">
@@ -383,22 +383,22 @@ select.form-select option:disabled {
                                     <?php
                                     if ($kpi["priority"] == "A" || $kpi["priority"] == "B") {
                                     ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     if ($kpi["priority"] == "A" || $kpi["priority"] == "C") {
                                     ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="big-star">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="big-star">
                                     <?php
                                     }
                                     if ($kpi["priority"] == "B") {
                                     ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     if ($kpi["priority"] == "A") {
                                     ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/star.svg" class="default-star">
                                     <?php
                                     }
                                     ?>
@@ -406,16 +406,16 @@ select.form-select option:disabled {
                                 <?php
                                 if ($kpi["priority"] != '') {
                                 ?>
-                                <div class="priority-box">
-                                    <?= Yii::t('app', 'Priority') ?>
-                                    <span class="text-priority mt-5"><?= $kpi["priority"] ?></span>
-                                </div>
+                                    <div class="priority-box">
+                                        <?= Yii::t('app', 'Priority') ?>
+                                        <span class="text-priority mt-5"><?= $kpi["priority"] ?></span>
+                                    </div>
                                 <?php
                                 } else { ?>
-                                <div class="priority-box-null">
-                                    <?= Yii::t('app', 'Priority') ?>
-                                    <span class="text-priority mt-5">N/A</span>
-                                </div>
+                                    <div class="priority-box-null">
+                                        <?= Yii::t('app', 'Priority') ?>
+                                        <span class="text-priority mt-5">N/A</span>
+                                    </div>
                                 <?php
                                 }
                                 ?>
@@ -440,23 +440,18 @@ select.form-select option:disabled {
                                     title="<?= Yii::t('app', 'Select the specific month and year for which youre entering or viewing data. This helps in maintaining chronological records.') ?>"
                                     alt="Help Icon">
                             </label>
-                            <div class="input-group" style="position: relative;">
-                                <span class="input-group-text pb-10 pt-10"
-                                    style="background-color: #C3C3C3;  border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
-                                        style="width: 16px; height: 16px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="LinkedIn"
-                                        style="width: 16px; height: 16px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
-                                        style="width: 16px; height: 16px;">
-                                </span>
-                                <div class="form-control" id="multi-mount-year" name="fromMonthYear"
-                                    style="border-radius: 53px 53px 53px 53px; text-align: center; cursor: pointer; position: absolute; width: 100% ; height: 100%;"
-                                    <?php if ($statusform == 'create') { ?> onclick="openDatePicker()" <?php } ?>>
-                                    Select the Month & Year <i class="fa fa-angle-down pull-right mt-5"
-                                        aria-hidden="true"></i>
+                            <div class="d-flex" style="position: relative;width:100%;">
+                                <div class="input-group-text" style="background-color: #C3C3C3;  border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1; height:38px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn" style="width: 16px; height: 16px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="LinkedIn" style="width: 16px; height: 16px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn" style="width: 16px; height: 16px;">
                                 </div>
-                                <!-- hidden inputs เพื่อเก็บค่า month และ year -->
+                                <div class="flex-grow-1 pr-5 pl-25 select-form-pim" id="multi-mount-year" name="fromMonthYear" onclick="openDatePicker()">
+                                    <div id="multi-month-year-text" class="text-truncate text-center pr-5" style="width:190px;">
+                                        Select the Month & Year
+                                    </div>
+                                    <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
+                                </div>
                                 <input type="hidden" id="hiddenMonth" name="month"
                                     value="<?= htmlspecialchars($data['month'] ?? '') ?>" required>
                                 <input type="hidden" id="hiddenYear" name="year"
@@ -494,21 +489,18 @@ select.form-select option:disabled {
                                     title="<?= Yii::t('app', 'Set the start and end dates for the performance measurement period. This defines the timeframe for achieving the target.') ?>"
                                     alt="Help Icon">
                             </label>
-                            <div class="col-12" id="img-due-term">
-                                <div class="select-form-pim" id="multi-due-term" onclick="toggleCalendar()">
-                                    <span class="calendar-due mr-3" id="calendar-dueterm">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="from"
-                                            class="calendar-due-image">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="-"
-                                            class="calendar-due-image">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to"
-                                            class="calendar-due-image">
-                                    </span>
-                                    <span class="d-flex" id="due-term-default">
+                            <div class="d-flex" style="position: relative;width:100%;border-radius:53px;" id="multi-due-term" onclick="toggleCalendar()">
+                                <div class="input-group-text calendar-due" id="calendar-dueterm" style="background-color: #C3C3C3;  border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1; height:38px;">
+                                    <!-- <div class="calendar-due mr-3" id="calendar-dueterm" style="z-index: 1;"> -->
+                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="from" class="calendar-due-image">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="-" class="calendar-due-image">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to" class="calendar-due-image">
+                                </div>
+                                <div class="flex-grow-1 pr-5 pl-35 select-form-pim" id="due-term-default">
+                                    <div id="multi-due-term-text" class="text-truncate text-center pr-5" style="width:210px;" title="Select the Due Term Start & End Date">
                                         Select the Due Term Start & End Date
-                                    </span>
-                                    <i class="fa fa-angle-down" aria-hidden="true"
-                                        style="position: absolute;right:0;margin-right:5px;"></i>
+                                    </div>
+                                    <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
                                 </div>
                             </div>
                             <input type="hidden" id="fromDate" name="fromDate"
@@ -518,7 +510,7 @@ select.form-select option:disabled {
                             <input type="hidden" id="page" value="pim">
                             <!-- Calendar picker -->
                             <div class="calendar-container" id="calendar-due-term"
-                                style="display: none; position: absolute; margin-top: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 10px; background: #fff; width: 650px; gap: 3px; z-index: 1;">
+                                style="display: none; position: absolute; margin-top: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 10px; background: #fff; width: 650px; gap: 3px; z-index: 2;">
                                 <!-- ปฏิทินสำหรับวันที่เริ่มต้น -->
                                 <div id="startDatePicker"></div>
                                 <!-- ปฏิทินสำหรับวันที่สิ้นสุด -->
@@ -534,22 +526,17 @@ select.form-select option:disabled {
                                     title="<?= Yii::t('app', 'Specify the deadline by which the progress must be updated in the system. This ensures regular performance tracking and accountability.') ?>"
                                     alt="Help Icon">
                             </label>
-                            <div class="col-12" id="img-due-update">
-                                <div class="select-form-pim" id="multi-due-update" onclick="toggleCalendar()">
-                                    <span class="calendar-due mr-3" id="calendar-dueterm-update">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
-                                            style="width: 16px; height: 16px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="LinkedIn"
-                                            style="width: 16px; height: 16px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn"
-                                            style="width: 16px; height: 16px;">
-                                    </span>
-                                    <span class="d-flex" id="due-update-default">
-                                        Select the Last Update Date
-                                    </span>
-                                    <i class="fa fa-angle-down" aria-hidden="true"
-                                        style="position: absolute;right:0;margin-right:15px;"></i>
-
+                            <div class="d-flex" style="position: relative;width:100%; border-radius:53px;" id="multi-due-update" onclick="toggleCalendar()">
+                                <div class="input-group-text calendar-due" id="calendar-dueterm-update" style="background-color: #C3C3C3;  border:0.5px solid #818181; border-radius: 36px; gap: 4px; z-index: 1; height:38px;">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="from" class="calendar-due-image">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/weld-gray.svg" alt="-" class="calendar-due-image">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to" class="calendar-due-image">
+                                </div>
+                                <div class="flex-grow-1 pr-5 pl-15 select-form-pim" id="due-update-default">
+                                    <div id="multi-due-update-text" class="text-truncate text-center pr-5" style="width:230px;" title="Select The Last Update Update Date">
+                                        Select The Last Update Date
+                                    </div>
+                                    <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
                                 </div>
                             </div>
                             <input type="hidden" id="nextDate" name="nextCheckDate"
@@ -567,19 +554,19 @@ select.form-select option:disabled {
                                     align-items: center;
                                     gap: 5px;">
                                 <?php if (count($kpiTeam) >= 1) { ?>
-                                <div class="cycle-current-team" style="width: 35px; height: 35px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                </div>
+                                    <div class="cycle-current-team" style="width: 35px; height: 35px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                    </div>
                                 <?php }
                                 if (count($kpiTeam) >= 1) { ?>
-                                <div class="cycle-current-team" style="width: 35px; height: 35px;margin-left:-20px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                </div>
+                                    <div class="cycle-current-team" style="width: 35px; height: 35px;margin-left:-20px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                    </div>
                                 <?php }
                                 if (count($kpiTeam) >= 1) { ?>
-                                <div class="cycle-current-team" style="width: 35px; height: 35px;margin-left:-20px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
-                                </div>
+                                    <div class="cycle-current-team" style="width: 35px; height: 35px;margin-left:-20px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/teams.svg" alt="icon">
+                                    </div>
                                 <?php } ?>
                                 <div class="cycle-current-white"
                                     style="width: 35px; height: 35px; color: #000; right: 3px;">
@@ -657,9 +644,9 @@ select.form-select option:disabled {
                                 <span class="input-group-text"
                                     style="background-color:rgb(255, 255, 255); border-left: none; padding-right: 20px; padding-left: 0px;">
                                     <?php if ($data['amountType'] == '%') { ?>
-                                    <span style="font-size: 22px; font-weight: 600;">
-                                        %
-                                    </span>
+                                        <span style="font-size: 22px; font-weight: 600;">
+                                            %
+                                        </span>
                                     <?php } ?>
                                 </span>
                             </div>
@@ -709,9 +696,9 @@ select.form-select option:disabled {
                                 class="textbox-check-<?= (empty($data['status']) || empty($data['nextCheckText'])) ? 'hide' : 'blue' ?>">
                                 <div class="mid-center">
                                     <?php if ($data['status'] != '2') { ?>
-                                    <input type="checkbox" id="check1" name="status" value="1" class="status-checkbox"
-                                        <?= (isset($data['status']) && $data['status'] == '1' && !empty($data['nextCheckText'])) ? '    checked' : '' ?>
-                                        style="width: 20px; height: 20px;">
+                                        <input type="checkbox" id="check1" name="status" value="1" class="status-checkbox"
+                                            <?= (isset($data['status']) && $data['status'] == '1' && !empty($data['nextCheckText'])) ? '    checked' : '' ?>
+                                            style="width: 20px; height: 20px;">
                                     <?php } ?>
                                 </div>
                                 <div class="mid-center">
@@ -751,10 +738,10 @@ select.form-select option:disabled {
                             </div>
                             <div id="textbox-check-warning"
                                 style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
-                                                                        ? 'border: 0.5px solid var(--Progress-Blue, #30313D);'
-                                                                        : ($daysLeft == 'Due Pass'
-                                                                            ? 'border: 0.5px solid var(--Progress-Blue, #E05757);'
-                                                                            : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?> font-size: 14px; font-weight: 600;"
+                                            ? 'border: 0.5px solid var(--Progress-Blue, #30313D);'
+                                            : ($daysLeft == 'Due Pass'
+                                                ? 'border: 0.5px solid var(--Progress-Blue, #E05757);'
+                                                : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?> font-size: 14px; font-weight: 600;"
                                 class="textbox-check-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
                                                             ? 'hide'
                                                             : ($daysLeft == 'Due Pass'
@@ -774,10 +761,10 @@ select.form-select option:disabled {
                                                                                 : ($daysLeft == 'Due Pass'
                                                                                     ? 'red'
                                                                                     : 'orang') ?>" style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
-                                                    ? 'border: 0.5px solid var(--Progress-Blue, #30313D);'
-                                                    : ($daysLeft == 'Due Pass'
-                                                        ? 'border: 0.5px solid var(--Progress-Blue, #E05757);'
-                                                        : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?>"
+                                                                                                                ? 'border: 0.5px solid var(--Progress-Blue, #30313D);'
+                                                                                                                : ($daysLeft == 'Due Pass'
+                                                                                                                    ? 'border: 0.5px solid var(--Progress-Blue, #E05757);'
+                                                                                                                    : 'border: 0.5px solid var(--Progress-Blue, #DD7A01);') ?>"
                                         for="check3">
 
                                         <?= Yii::t('app', "Due Passed") ?>
@@ -789,10 +776,10 @@ select.form-select option:disabled {
                                                             : ($daysLeft == 'Due Pass'
                                                                 ? 'red'
                                                                 : 'orang') ?>" <div class="border-cicle bg-white text-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
-                                                                                ? 'black'
-                                                                                : ($daysLeft == 'Due Pass'
-                                                                                    ? 'red'
-                                                                                    : 'orang') ?>">
+                                                                                                                            ? 'black'
+                                                                                                                            : ($daysLeft == 'Due Pass'
+                                                                                                                                ? 'red'
+                                                                                                                                : 'orang') ?>">
                                         <?= (isset($daysLeft) && $daysLeft == 'Due Pass') ?
                                             Yii::t('app', "The component was overdue and revert back to completed") :
                                             Yii::t('app', "This task component be automatically become due passed within 30 Days, if you
@@ -856,136 +843,136 @@ select.form-select option:disabled {
 <?= $this->render('modal_warning') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
-    $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip(); // เปิดใช้งาน Tooltip
 
-    var acType = document.getElementById('acType').value
-    let isSubmitting = false; // ป้องกัน submit ซ้ำ
-    $("#update-personal-kpi").on("beforeSubmit", function(event) {
-        if (isSubmitting) {
-            return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
-        }
-        isSubmitting = true;
-        // alert(acType);
-        if (!validateFormKpiEmployee(acType)) {
-            isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
-            return false;
-        }
-        return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
+        var acType = document.getElementById('acType').value
+        let isSubmitting = false; // ป้องกัน submit ซ้ำ
+        $("#update-personal-kpi").on("beforeSubmit", function(event) {
+            if (isSubmitting) {
+                return false; // ถ้ากำลัง submit อยู่ ไม่ให้ทำซ้ำ
+            }
+            isSubmitting = true;
+            // alert(acType);
+            if (!validateFormKpiEmployee(acType)) {
+                isSubmitting = false; // ถ้า validation ไม่ผ่าน ให้เปิด submit ใหม่
+                return false;
+            }
+            return true; // ถ้า validation ผ่าน ให้ submit ฟอร์มต่อไป
+        });
     });
-});
-const seeMoreBtn = document.getElementById("see-more");
-const aboutText = document.getElementById("about-text");
+    const seeMoreBtn = document.getElementById("see-more");
+    const aboutText = document.getElementById("about-text");
 
-<?php if (mb_strlen($detail) > 487): ?>
-const fullText = `<?= addslashes($detail) ?>`;
-const shortText = `<?= addslashes(mb_substr($detail, 0, 487)) ?>...`;
+    <?php if (mb_strlen($detail) > 487): ?>
+        const fullText = `<?= addslashes($detail) ?>`;
+        const shortText = `<?= addslashes(mb_substr($detail, 0, 487)) ?>...`;
 
-seeMoreBtn.addEventListener("click", function() {
-    if (aboutText.textContent.includes(shortText)) {
-        aboutText.innerHTML = fullText +
-            `<button id="see-more" class="see-more">See Less</button>`;
-        document.getElementById("see-more").addEventListener("click", toggleText);
-    } else {
-        aboutText.innerHTML = shortText +
-            `<button id="see-more" class="see-more">See More</button>`;
-        document.getElementById("see-more").addEventListener("click", toggleText);
-    }
-});
+        seeMoreBtn.addEventListener("click", function() {
+            if (aboutText.textContent.includes(shortText)) {
+                aboutText.innerHTML = fullText +
+                    `<button id="see-more" class="see-more">See Less</button>`;
+                document.getElementById("see-more").addEventListener("click", toggleText);
+            } else {
+                aboutText.innerHTML = shortText +
+                    `<button id="see-more" class="see-more">See More</button>`;
+                document.getElementById("see-more").addEventListener("click", toggleText);
+            }
+        });
 
-function toggleText() {
-    if (aboutText.innerHTML.includes(shortText)) {
-        aboutText.innerHTML = fullText + `<button id="see-more" class="see-more">See Less</button>`;
-    } else {
-        aboutText.innerHTML = shortText + `<button id="see-more" class="see-more">See More</button>`;
-    }
-    document.getElementById("see-more").addEventListener("click", toggleText);
-}
-<?php endif; ?>
-
-function modalHistory(kpiId) {
-    var url = $url + 'kpi/kpi-personal/modal-history';
-    // alert(kpiId);
-    var percentage = <?= json_encode($percentage) ?>;
-    // dueBehind = dueBehind.toFixed(2); // จำกัดทศนิยมไม่เกิน 2 ตำแหน่ง
-    var result = <?= json_encode($result) ?>;
-    var sumvalue = <?= json_encode($sumvalue) ?>;
-    var targetAmount = <?= json_encode($targetAmount) ?>;
-    var kpiEmployeeId = <?= json_encode($kpiEmployeeId) ?>;
-    var kpiEmployeeHistoryId = <?= json_encode($kpiEmployeeHistoryId) ?>;
-    var month = document.getElementById("hiddenMonth").value;
-    var year = document.getElementById("hiddenYear").value;
-    var fromDateValue = document.getElementById("fromDate").value;
-    var toDateValue = document.getElementById("toDate").value;
-    var fromDate = new Date(fromDateValue);
-    var toDate = toDateValue ? new Date(toDateValue) : null; // ตรวจสอบค่าก่อนแปลง
-    // alert(kpiEmployeeId);
-    // ถ้า fromDate ไม่ถูกต้อง
-    if (isNaN(fromDate)) {
-        // ถ้า fromDate ไม่ถูกต้อง ให้ส่งค่าว่าไม่มีวันที่
-        fromDate = null;
-        formattedRange = "No date"; // กำหนดค่าเป็น "ไม่มีวันที่"
-    } else {
-        var fromDay = fromDate.getDate();
-        var fromMonth = new Intl.DateTimeFormat('en-US', {
-            month: 'long'
-        }).format(fromDate);
-
-        // ถ้า toDate ไม่ได้มีค่า ให้แสดงเฉพาะจาก fromDate
-        var formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth}`;
-
-        if (toDate && !isNaN(toDate)) {
-            var toDay = toDate.getDate();
-            var toMonth = new Intl.DateTimeFormat('en-US', {
-                month: 'long'
-            }).format(toDate);
-            formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth} - ${getOrdinalSuffix(toDay)} ${toMonth}`;
+        function toggleText() {
+            if (aboutText.innerHTML.includes(shortText)) {
+                aboutText.innerHTML = fullText + `<button id="see-more" class="see-more">See Less</button>`;
+            } else {
+                aboutText.innerHTML = shortText + `<button id="see-more" class="see-more">See More</button>`;
+            }
+            document.getElementById("see-more").addEventListener("click", toggleText);
         }
-    }
-    var monthName = getMonthName(parseInt(month)); // แปลงเป็นชื่อเดือน
+    <?php endif; ?>
 
-    $.ajax({
-        type: "POST",
-        dataType: "json", // ✅ รอรับ JSON
-        url: url,
-        data: {
-            percentage: percentage,
-            result: result,
-            sumvalue: sumvalue,
-            targetAmount: targetAmount,
-            kpiId: kpiId,
-            monthName: monthName,
-            month: month,
-            year: year,
-            kpiEmployeeId: kpiEmployeeId,
-            kpiEmployeeHistoryId: kpiEmployeeHistoryId,
-            formattedRange: formattedRange
-        },
-        success: function(data) {
-            var percentage = parseFloat(data.percentage);
-            var dueBehind = 100 - percentage; // ✅ คำนวณส่วนต่าง
-            $("#mont-hyear").text(data.month + " " + data.year);
-            $("#formattedRange").text(data.formattedRange);
-            $("#Target").text(data.targetAmount);
-            $("#Result").text("/" + data.result);
-            $(".percentage").text(percentage + "%");
-            var dashArrayValue = (percentage / 100) * 100;
-            $(".circle").attr("stroke-dasharray", dashArrayValue + ", 100");
-            $("#DueBehind").text(dueBehind + "%");
-            // console.log(data.historyTeam);
-            var historyData = data.history; // ดึงข้อมูล history
-            var historyList = $('#history-list-creater');
-            historyList.empty(); // เคลียร์รายการเก่า
-            var historyArray = Object.values(historyData);
+    function modalHistory(kpiId) {
+        var url = $url + 'kpi/kpi-personal/modal-history';
+        // alert(kpiId);
+        var percentage = <?= json_encode($percentage) ?>;
+        // dueBehind = dueBehind.toFixed(2); // จำกัดทศนิยมไม่เกิน 2 ตำแหน่ง
+        var result = <?= json_encode($result) ?>;
+        var sumvalue = <?= json_encode($sumvalue) ?>;
+        var targetAmount = <?= json_encode($targetAmount) ?>;
+        var kpiEmployeeId = <?= json_encode($kpiEmployeeId) ?>;
+        var kpiEmployeeHistoryId = <?= json_encode($kpiEmployeeHistoryId) ?>;
+        var month = document.getElementById("hiddenMonth").value;
+        var year = document.getElementById("hiddenYear").value;
+        var fromDateValue = document.getElementById("fromDate").value;
+        var toDateValue = document.getElementById("toDate").value;
+        var fromDate = new Date(fromDateValue);
+        var toDate = toDateValue ? new Date(toDateValue) : null; // ตรวจสอบค่าก่อนแปลง
+        // alert(kpiEmployeeId);
+        // ถ้า fromDate ไม่ถูกต้อง
+        if (isNaN(fromDate)) {
+            // ถ้า fromDate ไม่ถูกต้อง ให้ส่งค่าว่าไม่มีวันที่
+            fromDate = null;
+            formattedRange = "No date"; // กำหนดค่าเป็น "ไม่มีวันที่"
+        } else {
+            var fromDay = fromDate.getDate();
+            var fromMonth = new Intl.DateTimeFormat('en-US', {
+                month: 'long'
+            }).format(fromDate);
 
-            var historyTeamData = data.historyTeam; // ดึงข้อมูล history
-            var historyTeamList = $('#history-list-team');
-            historyTeamList.empty(); // เคลียร์รายการเก่า
-            var historyTeamArray = Object.values(historyTeamData);
+            // ถ้า toDate ไม่ได้มีค่า ให้แสดงเฉพาะจาก fromDate
+            var formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth}`;
 
-            if (historyArray.length > 0) {
-                historyArray.forEach(function(item) {
-                    var listItem = `
+            if (toDate && !isNaN(toDate)) {
+                var toDay = toDate.getDate();
+                var toMonth = new Intl.DateTimeFormat('en-US', {
+                    month: 'long'
+                }).format(toDate);
+                formattedRange = `${getOrdinalSuffix(fromDay)} ${fromMonth} - ${getOrdinalSuffix(toDay)} ${toMonth}`;
+            }
+        }
+        var monthName = getMonthName(parseInt(month)); // แปลงเป็นชื่อเดือน
+
+        $.ajax({
+            type: "POST",
+            dataType: "json", // ✅ รอรับ JSON
+            url: url,
+            data: {
+                percentage: percentage,
+                result: result,
+                sumvalue: sumvalue,
+                targetAmount: targetAmount,
+                kpiId: kpiId,
+                monthName: monthName,
+                month: month,
+                year: year,
+                kpiEmployeeId: kpiEmployeeId,
+                kpiEmployeeHistoryId: kpiEmployeeHistoryId,
+                formattedRange: formattedRange
+            },
+            success: function(data) {
+                var percentage = parseFloat(data.percentage);
+                var dueBehind = 100 - percentage; // ✅ คำนวณส่วนต่าง
+                $("#mont-hyear").text(data.month + " " + data.year);
+                $("#formattedRange").text(data.formattedRange);
+                $("#Target").text(data.targetAmount);
+                $("#Result").text("/" + data.result);
+                $(".percentage").text(percentage + "%");
+                var dashArrayValue = (percentage / 100) * 100;
+                $(".circle").attr("stroke-dasharray", dashArrayValue + ", 100");
+                $("#DueBehind").text(dueBehind + "%");
+                // console.log(data.historyTeam);
+                var historyData = data.history; // ดึงข้อมูล history
+                var historyList = $('#history-list-creater');
+                historyList.empty(); // เคลียร์รายการเก่า
+                var historyArray = Object.values(historyData);
+
+                var historyTeamData = data.historyTeam; // ดึงข้อมูล history
+                var historyTeamList = $('#history-list-team');
+                historyTeamList.empty(); // เคลียร์รายการเก่า
+                var historyTeamArray = Object.values(historyTeamData);
+
+                if (historyArray.length > 0) {
+                    historyArray.forEach(function(item) {
+                        var listItem = `
                     <li class="schedule-item mt-5" role="button" tabindex="0">
                             <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                                 <div style="display: flex; gap: 16px; align-items: center;">
@@ -1028,23 +1015,23 @@ function modalHistory(kpiId) {
                             </div>
                         </li>
                 `;
-                    historyList.append(listItem); // เพิ่มข้อมูลลงใน ul
-                });
-            } else {
-                historyList.append(
-                    `<li class="schedule-item mt-5" role="button" tabindex="0">
+                        historyList.append(listItem); // เพิ่มข้อมูลลงใน ul
+                    });
+                } else {
+                    historyList.append(
+                        `<li class="schedule-item mt-5" role="button" tabindex="0">
                             <div class="row pt-10 pb-10"
                                 style="display: flex; justify-content: center; align-items: center; width: 100%; font-size: 18px; ">
                                     No data
                             </div>
                     </li>`
-                )
-            }
+                    )
+                }
 
 
-            if (historyTeamArray > 0) {
-                historyTeamArray.forEach(function(item) {
-                    var listItem = `
+                if (historyTeamArray > 0) {
+                    historyTeamArray.forEach(function(item) {
+                        var listItem = `
                         <li class="schedule-item mt-5" role="button" tabindex="0">
                             <div class="row" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
 
@@ -1091,24 +1078,24 @@ function modalHistory(kpiId) {
                             </div>
                         </li>
                     `;
-                    historyTeamList.append(listItem); // เพิ่มข้อมูลลงใน ul
-                });
-            } else {
-                historyTeamList.append(
-                    `<li class="schedule-item mt-5" role="button" tabindex="0">
+                        historyTeamList.append(listItem); // เพิ่มข้อมูลลงใน ul
+                    });
+                } else {
+                    historyTeamList.append(
+                        `<li class="schedule-item mt-5" role="button" tabindex="0">
                             <div class="row pt-10 pb-10"
                                 style="display: flex; justify-content: center; align-items: center; width: 100%; font-size: 18px; ">
                                     No data
                             </div>
                     </li>`
-                )
-            }
+                    )
+                }
 
-        },
-        error: function(xhr, status, error) {
-            console.log(xhr.responseText); // ดูข้อความผิดพลาดจากเซิร์ฟเวอร์
-            // alert("เกิดข้อผิดพลาดไม่มีข้อมูลในการโหลดข้อมูล");
-        }
-    });
-}
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText); // ดูข้อความผิดพลาดจากเซิร์ฟเวอร์
+                // alert("เกิดข้อผิดพลาดไม่มีข้อมูลในการโหลดข้อมูล");
+            }
+        });
+    }
 </script>

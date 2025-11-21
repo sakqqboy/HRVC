@@ -67,7 +67,7 @@ class ModelMaster extends \yii\db\ActiveRecord
             'Nov',
             'Dec',
         ];
-        if ($date != '') {
+        if ($date != '' && $date != '0000-00-00') {
             $d = explode('-', $date);
             if (count($d) >= 3) {
                 $year = $d[0];
@@ -581,7 +581,7 @@ class ModelMaster extends \yii\db\ActiveRecord
     }
     public static function dateFullFormat($date)
     {
-        if ($date != '') {
+        if ($date != '' && $date != '0000-00-00') {
             $dateArr = explode('-', $date);
             $day = $dateArr[2];
             $month = $dateArr[1];
@@ -605,7 +605,7 @@ class ModelMaster extends \yii\db\ActiveRecord
     }
     public static function dateMonthFullFormatNormal($date)
     {
-        if ($date != '') {
+        if ($date != '' && $date != '0000-00-00') {
             $dateArr = explode('-', $date);
             $day = $dateArr[2];
             $month = $dateArr[1];
@@ -629,7 +629,8 @@ class ModelMaster extends \yii\db\ActiveRecord
     }
     public static function dateDuration($from, $to)
     {
-        if ($from != '' && $to != '') {
+
+        if ($from != '' && $from != '0000-00-00' && $to != '' && $to != '0000-00-00') {
             $fromDate = strtotime($from);
             $toDate = strtotime($to);
             //if ($toDate > $fromDate) {
@@ -684,7 +685,7 @@ class ModelMaster extends \yii\db\ActiveRecord
     }
     public static function isOverthanMonth($date, $month)
     {
-        if ($date != '') {
+        if ($date != '' && $date != '0000-00-00') {
             $givenDate = new DateTime($date);
             $today = new DateTime();
 

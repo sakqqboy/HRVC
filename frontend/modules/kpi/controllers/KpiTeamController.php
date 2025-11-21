@@ -768,6 +768,7 @@ class KpiTeamController extends Controller
 			$countAllCompany = count($allCompany);
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
+		//throw new exception(print_r($kpiTeamDetail, true));
 		return $this->render('kpi_from', [
 			"kpi" => $kpi,
 			"data" => $kpiTeamDetail,
