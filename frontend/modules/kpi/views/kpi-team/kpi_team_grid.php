@@ -58,8 +58,10 @@ $this->title = "Team KPI";
                     <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/company.svg" alt="Company"
                         style="cursor: pointer;"><?= Yii::t('app', 'Company KPI') ?>
                 </a>
-                <a class="pim-type-tab-selected justify-content-center align-items-center">
-                    <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team"><?= Yii::t('app', 'Team KPI') ?>
+                <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid"
+                    class="pim-type-tab-selected justify-content-center align-items-center">
+                    <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/team.svg" alt="Team">
+                    <?= Yii::t('app', 'Team KPI') ?>
                 </a>
                 <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/individual-kpi-grid"
                     class="pim-type-tab justify-content-center align-items-center">
@@ -78,7 +80,7 @@ $this->title = "Team KPI";
                         "status" => isset($status) ? $status : null,
                         "branches" =>  isset($branches) ? $branches : null,
                         "teams" =>  isset($teams) ? $teams : null,
-                        "yearSelected" => isset($yearSelected) ? $branchId : null,
+                        "yearSelected" => isset($yearSelected) ? $yearSelected : null,
                         "role" => $role,
                         "page" => "grid"
 
@@ -124,13 +126,13 @@ $this->title = "Team KPI";
                             }
                         }
                 ?>
-                        <div class="col-12  mb-25 pim-big-box pim-<?= $colorFormat ?>" id="kpi-team-<?= $kpiTeamId ?>">
+                        <div class="col-12 mb-25 pim-big-box pim-<?= $colorFormat ?>" id="kpi-team-<?= $kpiTeamId ?>">
                             <div class="d-flex justify-content-start align-content-start">
                                 <div class="kfi-grid-1" style="min-height:120px;">
                                     <div class="text-truncate pim-name pointer-event" title='<?= $kpi["kpiName"] ?>'><?= $kpi["kpiName"] ?></div>
                                     <div class="mt-20">
                                         <div class="assign-on">
-                                            <?= Yii::t('app', 'Assigned on') ?>
+                                            <?= Yii::t('app', 'Assigned on') ?><?= $kpi["isOver"] ?>
                                         </div>
                                         <div class="d-flex justify-content-start">
                                             <div class="mt-15" style="gap: 10px;display:inline-grid;">

@@ -542,20 +542,16 @@ class KgiTeamController extends Controller
 							sort($selectPic);
 						}
 					}
-					if (strlen($kgiTeam["kgiName"]) > 34) {
-						$kginame = substr($kgiTeam["kgiName"], 0, 34) . '. . .';
-					} else {
-						$kginame = $kgiTeam["kgiName"];
-					}
 					if ($kgiTeam["status"] == 2) {
 						$isOver = 0;
 					} else {
 						if ($kgiTeam["status"] == 1 && $kgiTeam["year"] > $year && $year != '') {
 							$isOver = 0;
 						} else {
-							$isOver = ModelMaster::isOverDuedate($kgiTeam["nextCheckDate"]);
+							$isOver = ModelMaster::isOverDuedate($kgiTeamHistory["nextCheckDate"]);
 						}
 					}
+					$kgiTeamId = $kgiTeam["kgiTeamId"];
 					if ($status == 1 && $isOver == 0 && $kgiTeam["status"] == 1) {
 						$show = 1;
 					} else if ($status == 3 && $isOver == 1) {
@@ -567,10 +563,9 @@ class KgiTeamController extends Controller
 					} elseif ($status == '') {
 						$show = 1;
 					}
-					$kgiTeamId = $kgiTeam["kgiTeamId"];
 					if ($show == 1) {
 						$commonData = [
-							"kgiName" => $kginame,
+							"kgiName" => $kgiTeam["kgiName"],
 							"kgiId" => $kgiTeam["kgiId"],
 							"teamId" => $kgiTeam["teamId"],
 							"companyName" => Company::companyName($kgiTeam["companyId"]),

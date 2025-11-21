@@ -929,8 +929,8 @@ class KpiTeamController extends Controller
 					->one();
 				$ratio = 0;
 				$checkComplete = 0;
-				if (isset($kpiTeamHistory) && !empty($kpiTeamHistory)  && $status == 1) {
-					$checkComplete = KpiTeam::checkComplete($kpiTeamHistory["kpiTeamId"], $month, $year, $kpiTeamHistory["year"]);
+				if ($status == 1) {
+					$checkComplete = KpiTeam::checkComplete($kpiTeam["kpiTeamId"], $month, $year, $kpiTeam["year"]);
 				}
 				if (isset($kpiTeamHistory) && !empty($kpiTeamHistory)  && $checkComplete == 0) {
 					if ($kpiTeamHistory["target"] != '' && $kpiTeamHistory["target"] != 0 && $kpiTeamHistory["target"] != null) {
@@ -964,7 +964,7 @@ class KpiTeamController extends Controller
 						if ($kpiTeam["status"] == 1 && $kpiTeam["year"] > $year && $year != '') {
 							$isOver = 0;
 						} else {
-							$isOver = ModelMaster::isOverDuedate($kpiTeam["nextCheckDate"]);
+							$isOver = ModelMaster::isOverDuedate($kpiTeamHistory["nextCheckDate"]);
 						}
 					}
 					$kpiTeamId = $kpiTeam["kpiTeamId"];

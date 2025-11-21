@@ -352,6 +352,7 @@ function validateFormKgiTeam() {
           $("#multi-due-update").addClass("not-valid");
           return false;
      } else if ($("#check1").prop("checked") == false && $("#check2").prop("checked") == false) {
+          alert("Please select at least one status (In-Progress or Completed)");
           return false;
      } else {
           return true;

@@ -110,7 +110,7 @@ $this->title = 'Company KGI';
                                                             if (isset($kgi['kgiEmployee'][0])) {
                                                                 $userPicture1 = $kgi['kgiEmployee'][0];
                                                             } else {
-                                                                $userPicture1 = 'image/user.svg';
+                                                                $userPicture1 = 'images/employee/status/employee-nopic.svg';
                                                             }
                                                             ?>
                                                             <img src="<?= Yii::$app->homeUrl . $userPicture1 ?>"
@@ -119,7 +119,7 @@ $this->title = 'Company KGI';
                                                             if (isset($kgi['kgiEmployee'][1])) {
                                                                 $userPicture2 = $kgi['kgiEmployee'][1];
                                                             } else {
-                                                                $userPicture2 = 'image/user.svg';
+                                                                $userPicture2 = 'images/employee/status/employee-nopic.svg';
                                                             }
                                                             ?>
                                                             <img src="<?= Yii::$app->homeUrl . $userPicture2 ?>"
@@ -128,7 +128,7 @@ $this->title = 'Company KGI';
                                                             if (isset($kgi['kgiEmployee'][2])) {
                                                                 $userPicture3 = $kgi['kgiEmployee'][2];
                                                             } else {
-                                                                $userPicture3 = 'image/user.svg';
+                                                                $userPicture3 = 'images/employee/status/employee-nopic.svg';
                                                             }
                                                             ?>
                                                             <img src="<?= Yii::$app->homeUrl . $userPicture3 ?>"
