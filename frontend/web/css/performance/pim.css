@@ -2843,15 +2843,15 @@ input:checked+.slider:before {
 		box-sizing: border-box;
 	}
 
-	.company-group-edit {
+	/* .company-group-edit {
 		height: 100%;
 		max-height: 150vh;
-	}
+	} */
 
-	.company-group-body {
+	/* .company-group-body {
 		height: 100%;
 		max-height: 110vh;
-	}
+	} */
 
 	.modal,
 	.modal-backdrop {

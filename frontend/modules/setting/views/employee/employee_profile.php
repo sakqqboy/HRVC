@@ -44,8 +44,8 @@ if (!empty($statusPage) || Yii::$app->request->referrer == '') {
     }
 </style>
 
-<div class="contrainer-body mt-10">
-
+<div class="contrainer-body mt-10" style="max-height: 100vh;"">
+<!-- <div class="mt-10"> -->
     <div class="between-center mt-20" style="width: 100%;">
         <div class="col-8">
             <div class=" d-flex align-items-center gap-2">
@@ -93,10 +93,10 @@ if (!empty($statusPage) || Yii::$app->request->referrer == '') {
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-3 company-group-edit mt-10" style="border-radius: 9.17px 0px 0px 9.17px;
+    <div class="row" style="height: 100%; max-height: 100vh;">
+        <div class="col-3 mt-10" style="border-radius: 9.17px 0px 0px 9.17px;
 		border: 0.5px solid var(--Stroke-Bluish-Gray, #BBCDDE);
-		background: #F9FCFF;">
+		background: #F9FCFF; padding-bottom: 10px;">
             <div class="mid-center mt-53" style="gap: 35px;">
                 <div class="text-center position-relative ">
                     <?php
@@ -214,10 +214,12 @@ if (!empty($statusPage) || Yii::$app->request->referrer == '') {
             </div>
 
         </div>
-        <div class="col-9 company-group-edit mt-10" style="border-radius: 0px 10px 10px 0px;
+        <div class="col-9  mt-10" style="border-radius: 0px 10px 10px 0px;
 		border: 0.5px solid var(--Stroke-Bluish-Gray, #BBCDDE);
-		background: #FFF;" id="menu-profile-detail">
-            <!-- //แสดงผลข้อมูล ตามเมนูที่กด -->
+		background: #FFF;" >
+        <div style="padding: 20px;" id="menu-profile-detail"> 
+                        <!-- //แสดงผลข้อมูล ตามเมนูที่กด -->
+        </div>
         </div>
     </div>
 </div>

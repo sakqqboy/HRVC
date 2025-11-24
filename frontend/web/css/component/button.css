@@ -261,6 +261,27 @@
     border: 0.5px solid #CBD5E1;
     text-decoration: none;
 }
+/* กำหนดค่าทับสำหรับทุกคลาสปุ่มที่คุณระบุ */
+.pim-btn-over:hover, .pim-btn-over:focus, .pim-btn-over:active,
+.pim-btn-inprogress:hover, .pim-btn-inprogress:focus, .pim-btn-inprogress:active,
+.pim-btn-setup:hover, .pim-btn-setup:focus, .pim-btn-setup:active,
+.pim-btn-complete:hover, .pim-btn-complete:focus, .pim-btn-complete:active,
+.pim-btn-disable:hover, .pim-btn-disable:focus, .pim-btn-disable:active,
+.pim-btn-lock:hover, .pim-btn-lock:focus, .pim-btn-lock:active,
+.pim-btn:hover, .pim-btn:focus, .pim-btn:active {
+    
+    /* คงสีพื้นหลังเดิมไว้ เพื่อป้องกันไม่ให้เป็นสีฟ้า */
+    /* คุณต้องกำหนด background-color เดิมของแต่ละคลาสทับลงไปในโค้ดจริงของคุณ */
+
+    /* 1. กำหนดสีข้อความเป็นสีขาวตามที่คุณต้องการ */
+    color: white; 
+    
+    /* 2. ลบเส้นขอบไฮไลท์สีฟ้า/ส้มของเบราว์เซอร์ */
+    outline: none; 
+    
+    /* 3. ตรวจสอบและยกเลิกเส้นใต้ถ้ามี (ถ้าปุ่มเป็นแท็ก <a>) */
+    text-decoration: none;
+}
 
 .pim-btn-delete {
     display: flex;
