@@ -122,9 +122,11 @@
     line-height: 28px;
     /* 175% */
 }
+
 .btn-create-branch:hover {
     text-decoration: none; 
 }
+
 .alert-branch-body {
     background: #FFF;
     border: hsla(0, 0%, 86%, 1);
