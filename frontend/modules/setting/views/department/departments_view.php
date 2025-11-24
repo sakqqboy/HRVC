@@ -69,8 +69,8 @@ $page = 'view';
                         <span class="font-size-16 text-gray-back mt-15 "
                             style="font-weight: 500; display: flex; align-items: center; gap: 12px;height: 27px;">
                             <?= Yii::t('app', 'Branch') ?>
-                            <div class="city-crad-company font-size-14 d-inline-flex pt-0 pb-0"
-                                style="height: 27px;font-weight:400;">
+                            <div class="city-crad-company  text-truncate"
+                                style="display: flex; gap: 5px; height: 27px;font-weight:400;">
                                 <div class="cycle-current-yellow" style="width: 20px; height: 20px;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon"
                                         style="width: 10px; height: 10px;">
@@ -81,8 +81,8 @@ $page = 'view';
                         <span class=" font-size-16 text-gray-back mt-12 "
                             style="font-weight: 500; display: flex; align-items: center; gap: 12px;height: 27px;">
                             <?= Yii::t('app', 'Located in') ?>
-                            <div class="city-crad-company font-size-14 d-inline-flex pt-0 pb-0"
-                                style="height: 27px;font-weight:400;">
+                            <div class="city-crad-company  text-truncate"
+                                style="display: flex; gap: 5px; height: 27px;font-weight:400;">
                                 <img src="
                                 <?= Yii::$app->homeUrl  ?><?= !empty($branches['flag']) ? $branches['flag'] : 'image/e-world.svg' ?>"
                                     class="bangladresh-hrvc">

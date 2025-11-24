@@ -90,7 +90,7 @@ $page = "grid"
                                                     <div class="name-crad-company text-truncate">
                                                         <?= $company['companyName'] ?>
                                                     </div>
-                                                    <div class="city-crad-company flex-grow-1">
+                                                    <div class="city-crad-company  text-truncate" style="display: flex; gap: 5px;">
                                                         <img src="<?= Yii::$app->homeUrl ?><?= $company['flag'] ?>"
                                                             class="bangladresh-hrvc">
                                                         <?= $company['city'] ?>, <?= Yii::t('app', $company['countryName']) ?>

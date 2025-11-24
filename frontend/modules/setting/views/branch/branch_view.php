@@ -63,7 +63,7 @@ $page = 'view';
                         <span class="font-size-16 text-gray-back"
                             style="font-weight: 500; display: flex; align-items: center; gap: 12px;">
                             <?= Yii::t('app', 'Associated Company') ?>
-                            <div class="city-crad-company">
+                            <div class="city-crad-company  text-truncate" style="display: flex; gap: 5px;">
                                 <img src="<?= Yii::$app->homeUrl ?><?= $branches['picture'] ?>"
                                     class="bangladresh-hrvc">
                                 <?= $branches['companyName'] ?>
@@ -72,7 +72,7 @@ $page = 'view';
                         <span class=" font-size-16 text-gray-back mt-10"
                             style="font-weight: 500; display: flex; align-items: center; gap: 12px;">
                             <?= Yii::t('app', 'Located in') ?>
-                            <div class="city-crad-company">
+                            <div class="city-crad-company  text-truncate" style="display: flex; gap: 5px;">
                                 <img src="<?= Yii::$app->homeUrl ?><?= $branches['flag'] ?>" class="bangladresh-hrvc">
                                 <?= $branches['city'] ?>,<?= $branches['countryName'] ?>
                             </div>
