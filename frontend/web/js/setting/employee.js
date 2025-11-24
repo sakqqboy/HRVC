@@ -1131,7 +1131,10 @@ function changeSelectFlag() {
         const selectedOption = this.options[this.selectedIndex];
         const flagUrl = selectedOption.getAttribute('data-flag');
         if (flagUrl) {
+            // alert(flagUrl);
             document.getElementById('flag').src = homeUrl + flagUrl;
+        }else{
+            document.getElementById('flag').src = homeUrl + 'image/e-world.svg';
         }
     });
 
@@ -1141,6 +1144,8 @@ function changeSelectFlag() {
         if (flagUrl) {
             // alert(1);
             document.getElementById('flag-dl').src = homeUrl + flagUrl;
+        }else{
+            document.getElementById('flag-dl').src = homeUrl + 'image/e-world.svg';
         }
     });
 
@@ -1150,6 +1155,8 @@ function changeSelectFlag() {
         const flagUrl = selectedOption.getAttribute('data-flag');
         if (flagUrl) {
             document.getElementById('flag-ml').src = homeUrl + flagUrl;
+        }else{
+            document.getElementById('flag-ml').src = homeUrl + 'image/e-world.svg';
         }
     });
 

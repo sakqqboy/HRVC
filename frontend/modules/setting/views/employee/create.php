@@ -515,7 +515,7 @@ $form = ActiveForm::begin([
                                     // echo $flag ;
                                     ?>
                                     <img class="cycle-current" id="flag"
-                                        src="<?= Yii::$app->homeUrl . htmlspecialchars($flag) ?>" alt="Website"
+                                        src="<?= Yii::$app->homeUrl . htmlspecialchars($flag) ?>"
                                         style="width: 20px; height: 20px; border: none;">
                                 </span>
 
