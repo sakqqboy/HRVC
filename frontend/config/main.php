@@ -177,6 +177,7 @@ return [
                 'kpi/chart/company-chart/<hash>' => 'kpi/chart/company-chart',
                 'kfi/chart/company-chart/<hash>' => 'kfi/chart/company-chart',
                 'kfi/management/grid/<hash>' => 'kfi/management/grid',
+                'kfi/management/index/<hash>' => 'kfi/management/index',
                 'kfi/management/kfi-search-result/<hash>' => 'kfi/management/kfi-search-result',
                 'kfi/management/kfi-kgi/<hash>' => 'kfi/management/kfi-kgi',
                 'kfi/management/assign-kgi/<hash>' => 'kfi/management/assign-kgi',
