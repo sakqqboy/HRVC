@@ -121,7 +121,7 @@ $this->title = 'Create Branch';
                         </a>
 
                         <button type="submit" class="btn-save-group-new">
-                            <?= Yii::t('app', 'Create') ?>  <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="LinkedIn" style="width: 13px; height: 14px;">
+                            <?= Yii::t('app', 'Create') ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg" alt="LinkedIn" style="width: 13px; height: 14px;">
                         </button>
                     </div>
                 </div>
@@ -146,15 +146,10 @@ $this->title = 'Create Branch';
         const selectedValue = this.value;
         const iconDiv = document.getElementById('companyIcon');
         if (selectedValue !== '') {
-            // alert(selectedValue);
-            // iconDiv.classList.remove('cycle-current-gray');
-            // iconDiv.classList.add('cycle-current-blue');
             iconImg.src = homeUrl + selectedImg;
             iconImg.removeAttribute('style');
             iconImg.classList.add('card-tcf');
         } else {
-            // iconDiv.classList.remove('cycle-current-blue');
-            // iconDiv.classList.add('cycle-current-gray');
             iconImg.src = '<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg';
         }
     });

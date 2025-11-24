@@ -104,7 +104,7 @@ $this->title = 'Update Branch';
                     <textarea style="height: 390px; width: 398px;" class="form-control" name="description"
                         id="description" placeholder="Write the description of the Branch"><?= $branches['description'] ?></textarea>
                     <div class="d-flex justify-content-end align-items-end gap-2" style="height: 60px;width:100%;">
-                        <input type="hidden" name="branchId" value="<?= $branches['branchId'] ?>">
+                        <input type="hidden" name="branchId" value="<?= $branches['branchId'] + 543 ?>">
                         <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl . 'setting/branch/branch-grid' ?>"
                             style="text-decoration: none;">
                             <button type="button" class="btn-cancel-group-new">Cancel</button>
