@@ -98,15 +98,15 @@ class EmployeeController extends Controller
         $employee = Employee::find()->select('employeeId')->where(["status" => 1])->asArray()->one();
         if (isset($employee) && !empty($employee)) {
             return $this->redirect(Yii::$app->homeUrl . 'setting/employee/employee-result/' . ModelMaster::encodeParams([
-            "companyId" => $companyId,
-            "branchId" => $branchId,
-            "departmentId" => $departmentId,
-            "teamId" => $teamId,
-            "status" => '',
-            "pageType" => 'grid',
-            "perPage" => '15',
+                "companyId" => $companyId,
+                "branchId" => $branchId,
+                "departmentId" => $departmentId,
+                "teamId" => $teamId,
+                "status" => '',
+                "pageType" => 'grid',
+                "perPage" => '15',
 
-        ]));
+            ]));
             // return $this->redirect(Yii::$app->homeUrl . 'setting/employee/index/' . ModelMaster::encodeParams(["companyId" => $companyId,"branchId" => $branchId,"departmentId" => $departmentId]));
         }
 
@@ -642,7 +642,7 @@ class EmployeeController extends Controller
         $userEmployee   = Api::connectApi(Path::Api() . 'masterdata/employee/user-employee?id=' . $employeeId);
         $userId = $userEmployee['userId'] ?? '';
         $userRole       = Api::connectApi(Path::Api() . 'masterdata/employee/user-role?id=' . $employeeId);
-      
+
         $userAccess     = Api::connectApi(Path::Api() . 'masterdata/employee/user-access?id=' . $employeeId);
         $userCertificate = Api::connectApi(Path::Api() . 'masterdata/employee/user-certificate?id=' . $employeeId);
         $userLanguage   = Api::connectApi(Path::Api() . 'masterdata/employee/user-language?id=' . $employeeId);
@@ -659,7 +659,7 @@ class EmployeeController extends Controller
         $mainLanguage   = Api::connectApi(Path::Api() . 'masterdata/employee/main-language');
         $module         = Api::connectApi(Path::Api() . 'masterdata/employee/module-role');
 
-//   throw new exception(print_r($employee, true));
+        //   throw new exception(print_r($employee, true));
         return $this->render('create', [
             "groupId" => $groupId,
             "employeeId" => $employeeId,
@@ -825,9 +825,9 @@ class EmployeeController extends Controller
                         $user->createDateTime = new Expression('NOW()'); // แค่ตอนสร้างใหม่
                     }
                     $user->username = $_POST["mailId"];
-                    $password = $_POST["password"];
+                    $password = md5($_POST["password"]);
                     if ($password != $user->password_hash) {
-                        $user->password_hash = md5($password);
+                        $user->password_hash = $password;
                     }
                     // if (!empty($password)) {
                     //     // ถ้ายังไม่มี password หรือ validate ไม่ผ่าน ให้ตั้ง password ใหม่
@@ -1009,32 +1009,32 @@ class EmployeeController extends Controller
                         // throw new exception(print_r($_POST['mainLanguage'], true));
                         // if (!empty($_POST['mainLanguage']) && !empty($_POST['lavelLanguage'])) {
 
-                            // UserLanguage
-                            // 1. เตรียมภาษาและระดับที่จับคู่กัน
-                            $languages = [
-                                ['language' =>  isset($_POST['mainLanguage']) ? $_POST['mainLanguage'] : '' , 'level' => isset($_POST['lavelLanguage']) ? $_POST['lavelLanguage'] : ''  ],
-                            ];
-                            // 2. เพิ่มข้อมูลภาษาและระดับอื่น ๆ ถ้ามี
-                            for ($i = 1; $i <= 3; $i++) {
-                                if (!empty($_POST["mainLanguage$i"]) && !empty($_POST["lavelLanguage$i"])) {
-                                    $languages[] = [
-                                        'language' => $_POST["mainLanguage$i"],
-                                        'level' => $_POST["lavelLanguage$i"]
-                                    ];
-                                }
+                        // UserLanguage
+                        // 1. เตรียมภาษาและระดับที่จับคู่กัน
+                        $languages = [
+                            ['language' =>  isset($_POST['mainLanguage']) ? $_POST['mainLanguage'] : '', 'level' => isset($_POST['lavelLanguage']) ? $_POST['lavelLanguage'] : ''],
+                        ];
+                        // 2. เพิ่มข้อมูลภาษาและระดับอื่น ๆ ถ้ามี
+                        for ($i = 1; $i <= 3; $i++) {
+                            if (!empty($_POST["mainLanguage$i"]) && !empty($_POST["lavelLanguage$i"])) {
+                                $languages[] = [
+                                    'language' => $_POST["mainLanguage$i"],
+                                    'level' => $_POST["lavelLanguage$i"]
+                                ];
                             }
-                            // 3. วนลูปบันทึก
-                            UserLanguage::deleteAll(['userId' => $userId]);
+                        }
+                        // 3. วนลูปบันทึก
+                        UserLanguage::deleteAll(['userId' => $userId]);
 
-                            foreach ($languages as $lang) {
-                                $userLang = new UserLanguage();
-                                $userLang->userId = $userId;
-                                $userLang->languageId = $lang['language'];
-                                $userLang->lavel = $lang['level'];
-                                $userLang->createDateTime = new \yii\db\Expression('NOW()');
-                                $userLang->updateDateTime = new \yii\db\Expression('NOW()');
-                                $userLang->save(false);
-                            }
+                        foreach ($languages as $lang) {
+                            $userLang = new UserLanguage();
+                            $userLang->userId = $userId;
+                            $userLang->languageId = $lang['language'];
+                            $userLang->lavel = $lang['level'];
+                            $userLang->createDateTime = new \yii\db\Expression('NOW()');
+                            $userLang->updateDateTime = new \yii\db\Expression('NOW()');
+                            $userLang->save(false);
+                        }
                         // }
                     }
                 }
@@ -2354,6 +2354,4 @@ class EmployeeController extends Controller
         $res["kpiGroup"] = $kpiGroup;
         return json_encode($res);
     }
-
-    
 }

@@ -60,7 +60,6 @@ $page = "grid"
                     $i = 1;
                     foreach ($branches as $branch) :
                         $maxLength = 200;
-                        // $about = substr(Yii::t('app', $branch['about']), 0, $maxLength);
                 ?>
                         <div class="col-lg-6 col-md-5 col-sm-3 col-12" id="branch-<?php echo $branch['branchId'] ?>">
                             <div class="card-comany">
@@ -208,7 +207,7 @@ $page = "grid"
                                                                         <?php } ?>
                                                                         <?php if ($branch['totalDepartment'] > 0) { ?>
                                                                             <a class="text-see-all"
-                                                                                href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'],'branchId' =>  $branch['branchId']]) ?>">
+                                                                                href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'], 'branchId' =>  $branch['branchId']]) ?>">
                                                                                 <?= Yii::t('app', 'see all') ?>
                                                                             </a>
                                                                         <?php } ?>
@@ -262,7 +261,7 @@ $page = "grid"
                                                                         <?php } ?>
                                                                         <?php if ($branch['totalTeam'] > 0) { ?>
                                                                             <a class="text-see-all"
-                                                                                href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'],'branchId' =>  $branch['branchId'],'departmentId' => '']) ?>">
+                                                                                href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'], 'branchId' =>  $branch['branchId'], 'departmentId' => '']) ?>">
                                                                                 <?= Yii::t('app', 'see all') ?>
                                                                             </a>
                                                                         <?php } ?>
@@ -336,8 +335,8 @@ $page = "grid"
                                                                         <?php if ($branch['totalEmployee'] > 0) { ?>
                                                                             <!-- <a class="text-see-all" style="font-size: 10.5px; "
                                                                                 href="<?= Yii::$app->homeUrl ?>setting/employee/index/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId']]) ?>"> -->
-                                                                                  <a class="text-see-all" style="font-size: 10.5px; "
-                                                                                href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'],'branchId' =>  $branch['branchId']]) ?>">
+                                                                            <a class="text-see-all" style="font-size: 10.5px; "
+                                                                                href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => $branch['companyId'], 'branchId' =>  $branch['branchId']]) ?>">
                                                                                 <?= Yii::t('app', 'see all') ?>
                                                                             </a>
                                                                         <?php } ?>

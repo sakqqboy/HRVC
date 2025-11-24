@@ -98,7 +98,7 @@ class BranchController extends Controller
 
         // throw new exception($companyId);
         $group = Group::find()->select('groupId')->where(["status" => 1])->asArray()->one();
-       if (!isset($group) || empty($group)) {
+        if (!isset($group) || empty($group)) {
             // return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group/'); ยังไม่มีและเป็นค่าว่าง
             return $this->redirect(Yii::$app->homeUrl . 'setting/group/display-group/');
         }
@@ -499,7 +499,7 @@ class BranchController extends Controller
     function actionBranchGridFilter($hash)
     {
         $param = ModelMaster::decodeParams($hash);
-         
+
         $companyId = $param["companyId"] ?? '';
         $countryId = $param["countryId"] ?? '';
         $nextPage  = $param["nextPage"] ?? 1;
@@ -1069,7 +1069,7 @@ class BranchController extends Controller
             "branchId" => $branchId
         ])->one();
 
-        if (!$branch) {
+        if (!isset($branch) || empty($branch)) {
             $branch = new Branch();
             $branch->createDateTime = new Expression('NOW()');
         }
