@@ -104,8 +104,8 @@
 
 .btn-create-branch {
     display: flex;
-    width: 131.43;
-    height: 30px;
+    /* width: 131.43; */
+    /* height: 30px; */
     padding: 7px 9px;
     justify-content: center;
     align-items: center;
@@ -123,8 +123,17 @@
     /* 175% */
 }
 
-.btn-create-branch:hover {
-    text-decoration: none; 
+.btn-create-branch:hover,
+.btn-create-branch:active,
+.btn-create-branch:focus {
+    /* ใช้สีพื้นหลังเดิม: #2580D3 */
+    /* background-color: #2580D3 !important;  */
+    
+    /* ใช้สีข้อความเดิม: #FFF */
+    color: #FFF !important; 
+    
+    /* ลบเส้นขอบสีฟ้า/ส้มที่เกิดจากการโฟกัสด้วยแป้นพิมพ์ */
+    outline: none; 
 }
 
 .alert-branch-body {
