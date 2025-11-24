@@ -942,8 +942,7 @@ $form = ActiveForm::begin([
                 <div>
                     <!-- body -->
                     <div class="row">
-                        <div class="col-4 d-flex flex-column" style="gap: 12px;">
-                            <label class="font-size-16 font-weight-500">
+                         <label class="font-size-16 font-weight-500 mb-12">
                                 <!-- <span class="text-danger">*</span> -->
                                 <?= Yii::t('app', 'Employee’s Designation / Position') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
@@ -958,11 +957,10 @@ $form = ActiveForm::begin([
                                         src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
                                         style="cursor: pointer;"></a>
                             </label>
-
-
+                        <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <div class="input-group">
                                 <select id="titleSelectId" class="form-select"
-                                    style="border-right: none; width: 239px; appearance: none; background-image: none;"
+                                    style="border-right: none; appearance: none; background-image: none;"
                                     name="titleId" data-company-branch="title" disabled>
                                     <option value="" disabled selected hidden
                                         style="color: var(--Helper-Text, #8A8A8A);">
