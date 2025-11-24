@@ -60,8 +60,8 @@ $page = "grid";
                                                     style="width:265px;max-width: 265px;">
                                                     <?= $branch['companyName'] ?>
                                                 </div>
-                                                <div class="city-crad-company mt-5  justify-content-start pt-0 pb-0 align-content-center d-inline-flex"
-                                                    style="max-width: 265px;height:27px;">
+                                                <div class="city-crad-company  text-truncate"
+                                                    style="display: flex; gap: 5px; max-width: 265px; height:27px;">
 
                                                     <div class="cycle-current-yellow ms-0" style="width: 20px; height: 20px;">
                                                         <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon"
@@ -72,8 +72,8 @@ $page = "grid";
                                                     </span>
                                                 </div>
                                                 <div>
-                                                    <div class="city-crad-company mt-5 justify-content-start pt-0 pb-0  align-content-center d-inline-flex "
-                                                        style="max-width: 265px;height:27px;">
+                                                    <div class="city-crad-company  text-truncate"
+                                                        style="display: flex; gap: 5px; max-width: 265px; height:27px;">
                                                         <img src=" <?= Yii::$app->homeUrl ?><?= $branch['flag'] ?>"
                                                             class="bangladresh-hrvc">
                                                         <?= $branch['city'] ?>, <?= Yii::t('app', $branch['countryName']) ?>

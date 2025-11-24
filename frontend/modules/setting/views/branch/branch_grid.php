@@ -85,12 +85,12 @@ $page = "grid"
                                                     <div class="name-crad-company text-truncate">
                                                         <?= $branch['branchName'] ?>
                                                     </div>
-                                                    <div class="city-crad-company text-truncate">
+                                                    <div class="city-crad-company  text-truncate" style="display: flex; gap: 5px;">
                                                         <img src="<?= Yii::$app->homeUrl ?><?= $branch['picture'] ?>"
                                                             class="bangladresh-hrvc">
                                                         <?= Yii::t('app', $branch['companyName']) ?>
                                                     </div>
-                                                    <div class="city-crad-company text-truncate">
+                                                    <div class="city-crad-company  text-truncate" style="display: flex; gap: 5px;">
                                                         <img src="<?= Yii::$app->homeUrl ?><?= $branch['flag'] ?>"
                                                             class="bangladresh-hrvc">
                                                         <?= $branch['city'] ?>, <?= Yii::t('app', $branch['countryName']) ?>
