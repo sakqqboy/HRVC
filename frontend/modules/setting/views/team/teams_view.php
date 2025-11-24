@@ -65,7 +65,7 @@ $page = 'view';
                         <span class="font-size-16 text-gray-back"
                             style="font-weight: 500; display: flex; align-items: center; gap: 12px;">
                             <?= Yii::t('app', 'Branch') ?>
-                            <div class="city-crad-company">
+                            <div class="city-crad-company  text-truncate "  style="display: flex; gap: 5px;">
                                 <div class="cycle-current-yellow" style="width: 20px; height: 20px;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" alt="icon"
                                         style="width: 10px; height: 10px;">
@@ -73,10 +73,10 @@ $page = 'view';
                                 <?= $data['branchName'] ?>
                             </div>
                         </span>
-                        <span class="font-size-16 text-gray-back"
+                        <span class="font-size-16 text-gray-back mt-10"
                             style="font-weight: 500; display: flex; align-items: center; gap: 12px;">
                             <?= Yii::t('app', 'Department') ?>
-                            <div class="city-crad-company">
+                            <div class="city-crad-company  text-truncate"  style="display: flex; gap: 5px;">
                                 <div class="cycle-current-red" style="width: 20px; height: 20px;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon"
                                         style="width: 10px; height: 10px;">
@@ -84,10 +84,10 @@ $page = 'view';
                                 <?= $data['departmentName'] ?>
                             </div>
                         </span>
-                        <span class=" font-size-16 text-gray-back"
+                        <span class=" font-size-16 text-gray-back  mt-10"
                             style="font-weight: 500; display: flex; align-items: center; gap: 12px;">
                             <?= Yii::t('app', 'Located in') ?>
-                            <div class="city-crad-company">
+                            <div class="city-crad-company  text-truncate "  style="display: flex; gap: 5px;">
                                 <img src="<?= Yii::$app->homeUrl ?><?= $data['flag'] ?>" class="bangladresh-hrvc">
                                 <?= $data['city'] ?>,<?= $data['countryName'] ?>
                             </div>

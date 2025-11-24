@@ -93,11 +93,11 @@ $page = "grid";
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <div class="city-crad-company  text-truncate" style="display: flex; gap: 5px;">
+                                        <div class="city-crad-company  text-truncate" style="gap: 5px;">
                                             <div>
-                                                <img src="<?= Yii::$app->homeUrl . $department['picture'] ?>" style="width:25px;height:25px;border-radius:100%;">
+                                                <img src="<?= Yii::$app->homeUrl . $department['picture'] ?>" class="mr-5" style="width:25px;height:25px;border-radius:100%;">
                                             </div>
-                                            <div class="text-truncate" style="max-width: 360px;">
+                                            <div class=" text-truncate" style="max-width: 360px;">
                                                 <?= Yii::t('app', $department['companyName']) ?></div>
 
                                         </div>
@@ -119,7 +119,7 @@ $page = "grid";
                                                 </div>
                                             </div>
                                             <div class="pl-5" style="max-width:200px;">
-                                                <div class="city-crad-company  text-truncate" style="display: flex; gap: 5px;">
+                                                <div class="city-crad-company  text-truncate  mt-10" style="display: flex; gap: 5px;">
                                                     <div style="display: flex; align-items: center; gap: 5px;">
                                                         <img src="<?= Yii::$app->homeUrl ?><?= $department['flag'] ?>"
                                                             class="bangladresh-hrvc">

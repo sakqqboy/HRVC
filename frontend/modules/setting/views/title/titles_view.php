@@ -75,7 +75,7 @@ $page = 'view';
                             </div>
                         </span>
 
-                        <span class="font-size-16 text-gray-back"
+                        <span class="font-size-16 text-gray-back mt-10"
                             style="font-weight: 500; display: flex; align-items: center; gap: 12px;">
                             <?= Yii::t('app', 'Branch') ?>
                             <div class="city-crad-company  text-truncate" style="display: flex; gap: 5px;">
@@ -87,7 +87,7 @@ $page = 'view';
                             </div>
                         </span>
 
-                        <span class=" font-size-16 text-gray-back"
+                        <span class=" font-size-16 text-gray-back   mt-10"
                             style="font-weight: 500; display: flex; align-items: center; gap: 12px;">
                             <?= Yii::t('app', 'Located in') ?>
                             <div class="city-crad-company  text-truncate" style="display: flex; gap: 5px;">
