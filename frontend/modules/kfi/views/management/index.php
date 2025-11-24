@@ -28,8 +28,8 @@ $this->title = 'KFI';
         "totalBranch" => $totalBranch,
         "page" => 'list'
     ]) ?>
-    <div class="col-12 mt-20">
-        <div class="bg-white-employee">
+    <div class="col-12 mt-20" id="box-wrapper">
+        <div class="bg-white-employee" id="pim-content">
             <div class="d-flex pl-10 pr-10 justify-content-left align-content-center mt-5">
                 <div class="pim-type-tab-selected rounded-top-left justify-content-center align-items-center">
                     <img class="mr-10" src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/company.svg"
@@ -154,18 +154,23 @@ $this->title = 'KFI';
                                         </td>
                                         <td>
                                             <?php
-                                            $percent = explode('.', $kfi['ratio']);
-                                            if (isset($percent[0]) && $percent[0] == '0') {
-                                                if (isset($percent[1])) {
-                                                    if ($percent[1] == '00') {
-                                                        $showPercent = 0;
-                                                    } else {
-                                                        $showPercent = round($kfi['ratio'], 1);
+                                            // ดึงค่า $kfi['ratio'] มาเก็บในตัวแปรชั่วคราวแล้วแปลงเป็น float ก่อน
+                                                $ratioValue = floatval($kfi['ratio']);
+                                                // หรือใช้ $ratioValue = (float)$kfi['ratio'];
+
+                                                if (isset($percent[0]) && $percent[0] == '0') {
+                                                    if (isset($percent[1])) {
+                                                        if ($percent[1] == '00') {
+                                                            $showPercent = 0;
+                                                        } else {
+                                                            // ใช้ $ratioValue ที่ถูกแปลงแล้ว
+                                                            $showPercent = round($ratioValue, 1); 
+                                                        }
                                                     }
+                                                } else {
+                                                    // ใช้ $ratioValue ที่ถูกแปลงแล้ว
+                                                    $showPercent = round($ratioValue);
                                                 }
-                                            } else {
-                                                $showPercent = round($kfi['ratio']);
-                                            }
                                             ?>
                                             <div id="progress1">
                                                 <div data-num="<?= $showPercent ?>"
@@ -241,8 +246,19 @@ $this->title = 'KFI';
                         </tbody>
                     </table>
                 </div>
+                 </div>
+        <?php
+            echo $this->render('pagination_page', [
+                'totalKfi' => $totalKfi,
+                "currentPage" => $currentPage,
+                'totalPage' => $totalPage,
+                "pagination" => $pagination,
+                "pageType" => "list",
+                "filter" => isset($filter) ? $filter : []
+            ]);
+    ?>
+    <input type="hidden" id="totalPage" value="<?= $totalPage > 1 ? 1 : 0 ?>">
             </div>
-        </div>
     </div>
 </div>
 <input type="hidden" value="create" id="acType">

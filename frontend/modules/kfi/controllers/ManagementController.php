@@ -61,14 +61,14 @@ class ManagementController extends Controller
 		$this->setDefault();
 		return parent::beforeAction($action);
 	}
-	public function actionIndex()
+	public function actionIndex($hash = null)
 	{
 		$groupId = Group::currentGroupId();
+		$role = UserRole::userRight();
+		$session = Yii::$app->session;
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
-		$role = UserRole::userRight();
-		$session = Yii::$app->session;
 		$adminId = '';
 		$gmId = '';
 		$teamLeaderId = '';
@@ -102,7 +102,7 @@ class ManagementController extends Controller
 			$month = isset($filter["month"]) && $filter["month"] != null ? $filter["month"] : null;
 			$status = isset($filter["status"]) && $filter["status"] != null ? $filter["status"] : null;
 			$year = isset($filter["year"]) && $filter["year"] != null ? $filter["year"] : null;
-			$type = "list";
+			$type = "grid";
 			return $this->redirect(Yii::$app->homeUrl . 'kfi/management/kfi-search-result/' . ModelMaster::encodeParams([
 				"companyId" => $companyId,
 				"branchId" => $branchId,
@@ -113,30 +113,62 @@ class ManagementController extends Controller
 				"type" => $type
 			]));
 		}
+		$currentPage = 1;
+		if (!empty($hash)) {
+			$pageArr = explode('page', $hash);
+			$currentPage = $pageArr[1];
+		}
+		$limit = 10;
 
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		//curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
-		$kfis = Api::connectApi(Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		$kfis = Api::connectApi(Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
-		$isManager = UserRole::isManager();
-		$part = Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
-		// throw new exception('kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
-
-
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
 			$countAllCompany = count($allCompany);
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
+
+		// $units = ["1" => "Monthly", "2" => "Weekly", "3" => "QuaterLy", "4" => "Daily"];
+		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
 
-
 		$totalBranch = Branch::totalBranch();
+		// throw new Exception(print_r($kfis, true));
+		$totalKfi = Kfi::totalKfi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
+		$totalPage = ceil($totalKfi / $limit);
+		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
 
-		$months = ModelMaster::monthFull(1);
+		// $companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		// //curl_setopt($api, CURLOPT_URL, Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId);
+		// // $kfis = Api::connectApi(Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		// $kfis = Api::connectApi(Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
+		// $units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
+		// $allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
+		// $isManager = UserRole::isManager();
+		// $part = Path::Api() . 'kfi/management/index?adminId=' . $adminId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&staffId=' . $staffId;
+		// // throw new exception('kfi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 
+
+		// $countAllCompany = 0;
+		// if (count($allCompany) > 0) {
+		// 	$countAllCompany = count($allCompany);
+		// 	$companyPic = Company::randomPic($allCompany, 3);
+		// }
+		// $employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
+		// $employeeCompanyId = $employee["companyId"];
+
+
+		// $totalBranch = Branch::totalBranch();
+
+		// $months = ModelMaster::monthFull(1);
+		// $totalKfi = Kfi::totalKfi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
+		// $totalPage = ceil($totalKfi / $limit);
+		// $pagination = ModelMaster::getPagination($currentPage, $totalPage);
+		
 		return $this->render('index', [
 			"companies" => $companies,
 			"units" => $units,
@@ -149,7 +181,12 @@ class ManagementController extends Controller
 			"allCompany" => $countAllCompany,
 			"companyPic" => $companyPic,
 			"totalBranch" => $totalBranch,
+			"totalKfi" => $totalKfi,
+			"currentPage" => $currentPage,
+			"totalPage" => $totalPage,
+			"pagination" => $pagination,
 		]);
+		
 	}
 	public function actionGrid($hash = null)
 	{

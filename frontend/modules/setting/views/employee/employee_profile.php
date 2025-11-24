@@ -44,7 +44,7 @@ if (!empty($statusPage) || Yii::$app->request->referrer == '') {
     }
 </style>
 
-<div class="contrainer-body mt-10" style="max-height: 100vh;"">
+<div class="contrainer-body mt-10" style="max-height: 100vh;">
 <!-- <div class="mt-10"> -->
     <div class="between-center mt-20" style="width: 100%;">
         <div class="col-8">
