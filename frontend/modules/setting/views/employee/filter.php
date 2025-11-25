@@ -14,7 +14,13 @@
 		<?php
 		}
 		?>
-		<option value=""><?= Yii::t('app', 'Company') ?></option>
+		<option value="" disabled <?= empty($companyIdOld) ? 'selected' : '' ?> hidden
+            style="color: var(--Helper-Text, #8A8A8A);">
+            <?= Yii::t('app', 'Company') ?>
+        </option>
+        <option value="" <?= empty($selectedCountryId) === 'all' ? 'selected' : '' ?>>
+                <?= Yii::t('app', 'All') ?>
+        </option>
 		<?php
 		if (isset($companies) && count($companies) > 0) {
 		?>

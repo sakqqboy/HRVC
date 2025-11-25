@@ -19,7 +19,13 @@ use frontend\models\hrvc\Team;
             $branches = Branch::branchInCompany($companyIdOld);
             }
         ?>
-        <option value=""><?= Yii::t('app', 'Company') ?></option>
+        <option value="" disabled <?= empty($companyIdOld) ? 'selected' : '' ?> hidden
+            style="color: var(--Helper-Text, #8A8A8A);">
+            <?= Yii::t('app', 'Company') ?>
+        </option>
+        <option value="" <?= empty($selectedCountryId) === 'all' ? 'selected' : '' ?>>
+                <?= Yii::t('app', 'All') ?>
+        </option>
         <?php
             if (isset($companies) && count($companies) > 0) {
                 foreach ($companies as $company) : ?>
@@ -40,7 +46,13 @@ use frontend\models\hrvc\Team;
                 $departments = Department::departmentInBranch($branchIdOld);
             }
         ?>
-        <option value=""><?= Yii::t('app', 'Branch') ?></option>
+        <option value="" disabled <?= empty($branchIdOld) ? 'selected' : '' ?> hidden
+            style="color: var(--Helper-Text, #8A8A8A);">
+            <?= Yii::t('app', 'Branch') ?>
+        </option>
+        <option value="" <?= empty($selectedCountryId) === 'all' ? 'selected' : '' ?>>
+                <?= Yii::t('app', 'All') ?>
+        </option>
         <?php
             if (isset($branches) && count($branches) > 0) {
                 foreach ($branches as $branch) : ?>
@@ -57,7 +69,14 @@ use frontend\models\hrvc\Team;
         <option value="<?= $departmentIdOld ?>"><?= Department::departmentName($departmentIdOld) ?></option>
         <?php endif; ?>
 
-        <option value=""><?= Yii::t('app', 'Department') ?></option>
+         <option value="" disabled <?= empty($branchIdOld) ? 'selected' : '' ?> hidden
+            style="color: var(--Helper-Text, #8A8A8A);">
+            <?= Yii::t('app', 'Department') ?>
+        </option>
+        <option value="" <?= empty($selectedCountryId) === 'all' ? 'selected' : '' ?>>
+                <?= Yii::t('app', 'All') ?>
+        </option>   
+
 
         <?php foreach ($departments as $department) : ?>
         <option value="<?= $department['departmentId'] ?>">

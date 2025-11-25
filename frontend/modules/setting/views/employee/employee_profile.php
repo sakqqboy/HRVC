@@ -61,7 +61,7 @@ if (!empty($statusPage) || Yii::$app->request->referrer == '') {
                 </div>
             </div>
         </div>
-        <div class="col-3" style="text-align: right;">
+        <div class="col-4" style="text-align: right;">
             <div class="d-flex align-items-center justify-content-end gap-2">
                 <a class="d-flex align-items-center action-employee-btn justify-content-center"
                     onclick="javascript:copyToClipboard(window.location.href)">
@@ -81,16 +81,15 @@ if (!empty($statusPage) || Yii::$app->request->referrer == '') {
                         style="width: 18px;height:18px;">
                     Print Profile
                 </a>
-            </div>
-        </div>
-        <div class="col-1 pr-0 text-end">
-            <a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>"
+                <a href="<?= Yii::$app->homeUrl ?>setting/employee/update/<?= ModelMaster::encodeParams(['employeeId' => $employeeId]) ?>"
                 class="btn-create no-underline " style="padding: 3px 9px; display: inline-block;">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/edit.svg"
                     style="width:18px; height:18px; margin-top:-3px;">
                 <?= Yii::t('app', 'Edit') ?>
             </a>
+            </div>
         </div>
+
     </div>
 
     <div class="row" style="height: 100%; max-height: 100vh;">

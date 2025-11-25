@@ -163,7 +163,6 @@ return [
                 'kgi/kgi-personal/view-personal-kgi/<hash>' => 'kgi/kgi-personal/view-personal-kgi',
                 'kgi/kgi-personal/kgi-personal-search-result/<hash>' => 'kgi/kgi-personal/kgi-personal-search-result',
                 'kgi/kgi-personal/kgi-employee-history/<hash>' => 'kgi/kgi-personal/kgi-employee-history',
-                // 'kgi/kgi-personal/update-personal-kgi/<hash>' => 'kgi/kgi-personal/update-personal-kgi',
                 'kpi/management/grid/<hash>' => 'kpi/management/grid',
                 'kpi/management/index/<hash>' => 'kpi/management/index',
                 'kgi/management/assign-kpi/<hash>' => 'kgi/management/assign-kpi',

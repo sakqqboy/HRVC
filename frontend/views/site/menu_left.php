@@ -10,13 +10,15 @@ $session = Yii::$app->session;
     <div class="col-12">
         <a href="<?= Yii::$app->homeUrl ?>site/index">
             <div class="col-12">
-                <img src="<?= Yii::$app->homeUrl ?>image/logo-hrvc-text.svg" class="main-logo">
+                <img src="<?= Yii::$app->homeUrl ?>image/HRVC_Logos-New.svg">
+                <!-- <img src="<?= Yii::$app->homeUrl ?>image/logo-hrvc-text.svg" class="main-logo"> -->
+
             </div>
         </a>
     </div>
-    <div class="col-12 text-under-logo text-center">
+    <!-- <div class="col-12 text-under-logo text-center">
         <?= Yii::t('app', 'Enchance Visionary Consulting') ?>
-    </div>
+    </div> -->
     <div class="btn-hrvc-home mt-20 ">
         <a href="<?= Yii::$app->homeUrl ?>site/index" class="text-light" style="text-decoration: none;">
             <span>

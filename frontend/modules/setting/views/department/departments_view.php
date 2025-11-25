@@ -11,8 +11,8 @@ $page = 'view';
 
     <div class="col-12">
         <div class=" d-flex align-items-center gap-2">
-            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/department-detail.svg"
-                style="width: 24px; height: 24px;">
+            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" 
+            style="width: 24px; height: 24px;">
             <div class="pim-name-title">
                 <?= Yii::t('app', 'Department in Details') ?>
             </div>
@@ -20,30 +20,38 @@ $page = 'view';
     </div>
 
     <div class="bg-white-employee mt-20" style="height: 100vh;padding:30px;">
-        <div style="display: flex; align-items: center; gap: 14px;">
-            <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl ?>"
-                style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
-                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg"
-                    style="width:18px; height:18px; margin-top:-3px;">
-                <?= Yii::t('app', 'Back') ?>
-            </a>
+        <div style="display: flex; align-items: end; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+                <a href="<?= Yii::$app->request->referrer ?: Yii::$app->homeUrl ?>"
+                    style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg"
+                        style="width:18px; height:18px; margin-top:-3px;">
+                    <?= Yii::t('app', 'Back') ?>
+                </a>
 
-            <div style="display: flex; align-items: center;">
-                <a class="part-text mr-3" href="<?= Yii::$app->homeUrl ?>setting/group/display-group">
-                    <?= Yii::t('app', 'Group Config') ?>
-                </a>
-                <div class="mid-center" style="width: 20px; height: 20px;">
-                    <text class="squeezer-text mr-3"> / </text>
+                <div style="display: flex; align-items: center;">
+                    <a class="part-text mr-3" href="<?= Yii::$app->homeUrl ?>setting/group/display-group">
+                        <?= Yii::t('app', 'Group Config') ?>
+                    </a>
+                    <div class="mid-center" style="width: 20px; height: 20px;">
+                        <text class="squeezer-text mr-3"> / </text>
+                    </div>
+                    <a class="part-text mr-3"
+                        href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['branchId' => '']) ?>">
+                        <?= Yii::t('app', 'Departments') ?>
+                    </a>
+                    <div class="mid-center" style="width: 20px; height: 20px;">
+                        <text class="squeezer-text mr-3"> / </text>
+                    </div>
+                    <span class="pim-unit-text"><?= $branches['companyName'] ?></span>
                 </div>
-                <a class="part-text mr-3"
-                    href="<?= Yii::$app->homeUrl ?>setting/department/no-department/<?= ModelMaster::encodeParams(['branchId' => '']) ?>">
-                    <?= Yii::t('app', 'Departments') ?>
-                </a>
-                <div class="mid-center" style="width: 20px; height: 20px;">
-                    <text class="squeezer-text mr-3"> / </text>
-                </div>
-                <span class="pim-unit-text"><?= $branches['companyName'] ?></span>
             </div>
+
+            <!-- <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branches['branchId'] + 543]) ?>"
+                style="text-decoration: none; width:66px; height:26px;" class="create-employee-btn">
+                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/edit.svg" style="width:18px; height:18px; margin-top:-3px;">
+                <?= Yii::t('app', 'Edit') ?>
+            </a> -->
         </div>
 
         <div class="row group-details mt-40" style="--bs-gutter-x:0px;">
