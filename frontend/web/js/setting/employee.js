@@ -32,6 +32,16 @@ function filterEmployee() {
      var branchId = $("#branch-team").val();
      var departmentId = $("#department-team").val();
      var teamId = $("#team-department").val();
+     if (!companyId) {
+     branchId = "";
+     departmentId = "";
+     teamId = "";
+     } else if (!branchId) {
+     departmentId = "";
+     teamId = "";
+     } else if (!departmentId) {
+     teamId = "";
+     }
      var status = $("#status").val();
      var pageType = $("#page-type").val();
      var urlRedirect = $("#url-redirect").val();

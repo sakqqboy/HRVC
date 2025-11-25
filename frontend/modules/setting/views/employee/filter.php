@@ -6,6 +6,12 @@
 		use frontend\models\hrvc\Status;
 		use frontend\models\hrvc\Team;
 		// echo $branchId;
+		if (empty($companyId)) {
+			// echo $companyId;
+			$branchId = null;
+			$departmentId = null;
+			$teamId = null;
+		}
 ?>
 <div class="d-flex justify-content-end align-items-center  gap-2">
 	<select class="select-pim form-select" id="company-team" onchange="branchCompany()"> 
@@ -167,21 +173,14 @@ document.addEventListener("DOMContentLoaded", function () {
  	let branchId = "<?= $branchId ?>"; // แปลง PHP เป็น string
  	let departmentId = "<?= $departmentId ?>"; // แปลง PHP เป็น string
 
-	// alert(companyId);
     if (companyId !== "" && companyId !== null) {
 		$("#branch-team").removeAttr("disabled", "true");
-		// alert(companyId);
-        // branchCompany();
     }
 	if (branchId !== "" && branchId !== null) {
 		$("#department-team").removeAttr("disabled", "true");
-		// alert(branchId);
-        // departmentBranch();
     }
 	if (departmentId !== "" && departmentId !== null) {
 		$("#team-department").removeAttr("disabled", "true");
-		// alert(departmentId);
-        // teamDepartment();
     }
 });
 </script>
