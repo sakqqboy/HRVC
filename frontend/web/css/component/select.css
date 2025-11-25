@@ -1,7 +1,8 @@
 .select-pim {
 	padding: 0px 20px 0px 9px;
 	border-radius: 20px;
-	height: 26px;
+	height: 30px;
+    line-height: 30px;
 	font-weight: 400;
 	font-size: 12px;
 	width: 90px;
@@ -12,6 +13,11 @@
 	text-overflow: ellipsis;
 	/* แสดง ... */
 }
+.select-pim option {
+    padding: 1px 1px !important;
+    line-height: 1px !important;
+}
+
 
 .select-pim:focus,
 .select-pim:focus-visible,

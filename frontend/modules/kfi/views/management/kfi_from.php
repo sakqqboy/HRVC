@@ -197,7 +197,7 @@ if ($DueBehind < 0) {
 
             <div class="contrainer-body-detail mt-10">
                 <div class="row" style="--bs-gutter-x:0px;">
-                    <div class="col-lg-4 col-12 pr-30">
+                    <div class="col-lg-4 col-12 pr-20">
                         <div class="" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
@@ -323,7 +323,7 @@ if ($DueBehind < 0) {
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 pr-20  col-12">
+                    <div class="col-lg-4 col-12 pr-20">
                         <div class="" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
@@ -512,7 +512,7 @@ if ($DueBehind < 0) {
                         </div>
 
                         <div class="d-flex mt-30 gap-1" style="--bs-gutter-x:0px;">
-                            <div style="min-width:130px;">
+                            <div class="col-5" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                                 <label class="text-manage-create" for="name">
                                     <span class="text-danger">* </span>
                                     Data Type <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
@@ -529,7 +529,7 @@ if ($DueBehind < 0) {
                             </div>
 
                             <!-- Right side (Success Condition) -->
-                            <div>
+                            <div class="col-7" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                                 <label class="text-manage-create" for="name">
                                     <span class="text-danger">* </span>
                                     Success Condition <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
@@ -552,7 +552,7 @@ if ($DueBehind < 0) {
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-12 pl-20">
+                    <div class="col-lg-4 col-12 pr-20">
                         <div class="form-group" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;height:59px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>

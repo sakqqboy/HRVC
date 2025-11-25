@@ -7,38 +7,50 @@ $page = 'view';
 
 ?>
 
-<div class="col-12 mt-60 pt-20">
+<div class="col-12 mt-70 pt-20 mt-33" style="padding-bottom: 31px; ">
+
     <div class="col-12">
         <div class=" d-flex align-items-center gap-2">
-            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" style="width: 24px; height: 24px;">
-            <div class="pim-name-title ml-10">
+            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" 
+            style="width: 24px; height: 24px;">
+            <div class="pim-name-title">
                 <?= Yii::t('app', 'Branch in Details') ?>
             </div>
         </div>
     </div>
-    <div class="company-group-edit mt-20 mb-3">
-        <div style="display: flex; align-items: end; gap: 14px;">
-            <a href="<?= Yii::$app->homeUrl ?>setting/branch/branch-grid/<?= ModelMaster::encodeParams(['companyId' => $companyId]) ?>"
-                style="text-decoration: none; width:66px; height:26px;" class="create-employee-btn">
-                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" class="mr-3"
-                    style="width:18px; height:18px;">
-                <?= Yii::t('app', 'Back') ?>
-            </a>
 
-            <div style="display: flex; align-items: center;">
-                <a class="part-text mr-3"
-                    href="<?= Yii::$app->homeUrl ?>setting/group/display-group"><?= Yii::t('app', 'Group Config') ?></a>
-                <div class="mid-center" style="width: 20px; height: 20px;">
-                    <text class="squeezer-text mr-3"> / </text>
+    <div class="bg-white-employee mt-20" style="height: 100vh;padding:30px;">
+        <div style="display: flex; align-items: end; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+                <a href="<?= Yii::$app->homeUrl ?>setting/branch/branch-grid/<?= ModelMaster::encodeParams(['companyId' => $companyId]) ?>"
+                    style="text-decoration: none; width:66px; height:26px;" class="create-employee-btn">
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" class="mr-3"
+                        style="width:18px; height:18px;">
+                    <?= Yii::t('app', 'Back') ?>
+                </a>
+
+                <div style="display: flex; align-items: center;">
+                    <a class="part-text mr-3"
+                        href="<?= Yii::$app->homeUrl ?>setting/group/display-group"><?= Yii::t('app', 'Group Config') ?></a>
+                    <div class="mid-center" style="width: 20px; height: 20px;">
+                        <text class="squeezer-text mr-3"> / </text>
+                    </div>
+                    <a class="part-text mr-3"
+                        href="<?= Yii::$app->homeUrl ?>setting/branch/no-branch/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"><?= Yii::t('app', 'Branch') ?></a>
+                    <div class="mid-center" style="width: 20px; height: 20px;">
+                        <text class="squeezer-text mr-3"> / </text>
+                    </div>
+                    <span class="pim-unit-text"><?= $branches['branchName'] ?></span>
                 </div>
-                <a class="part-text mr-3"
-                    href="<?= Yii::$app->homeUrl ?>setting/branch/no-branch/<?= ModelMaster::encodeParams(['companyId' => '']) ?>"><?= Yii::t('app', 'Branch') ?></a>
-                <div class="mid-center" style="width: 20px; height: 20px;">
-                    <text class="squeezer-text mr-3"> / </text>
-                </div>
-                <span class="pim-unit-text"><?= $branches['branchName'] ?></span>
             </div>
+
+            <a href="<?= Yii::$app->homeUrl ?>setting/branch/update-branch/<?= ModelMaster::encodeParams(['branchId' => $branches['branchId']]) ?>"
+                style="text-decoration: none; width:66px; height:26px;" class="create-employee-btn">
+                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/edit.svg" style="width:18px; height:18px; margin-top:-3px;">
+                <?= Yii::t('app', 'Edit') ?>
+            </a>
         </div>
+
 
         <div class="row group-details mt-40">
             <div style="display: flex;

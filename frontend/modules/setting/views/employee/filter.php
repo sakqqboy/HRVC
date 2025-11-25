@@ -1,40 +1,56 @@
-<div class="d-flex justify-content-end align-items-center  gap-2">
-	<select class="select-pim form-select" id="company-team" onchange="javascript:branchCompany()">
-		<?php
-
+<?php
 		use common\models\ModelMaster;
 		use frontend\models\hrvc\Branch;
 		use frontend\models\hrvc\Company;
 		use frontend\models\hrvc\Department;
 		use frontend\models\hrvc\Status;
 		use frontend\models\hrvc\Team;
-
-		if ($companyId != '') { ?>
-			<option value="<?= $companyId ?>"><?= Company::findOne($companyId)->companyName ?></option>
-		<?php
+		// echo $branchId;
+		if (empty($companyId)) {
+			// echo $companyId;
+			$branchId = null;
+			$departmentId = null;
+			$teamId = null;
 		}
-		?>
-		<option value=""><?= Yii::t('app', 'Company') ?></option>
-		<?php
-		if (isset($companies) && count($companies) > 0) {
-		?>
-			<?php
+?>
+<div class="d-flex justify-content-end align-items-center  gap-2">
+	<select class="select-pim form-select" id="company-team" onchange="branchCompany()"> 
+		<?php if ($companyId != '') { ?>
+			<option value="<?= $companyId ?>" selected>
+				<?= Company::findOne($companyId)->companyName ?>
+			</option>
+		<?php } ?>
+
+		<option value="" disabled <?= empty($companyId) ? 'selected' : '' ?> hidden
+			style="color: var(--Helper-Text, #8A8A8A);">
+			<?= Yii::t('app', 'Company') ?>
+		</option>
+
+		<option value="">
+			<?= Yii::t('app', 'All') ?>
+		</option>
+
+		<?php if (isset($companies) && count($companies) > 0) {
 			foreach ($companies as $company) : ?>
 				<option value="<?= $company['companyId'] ?>"><?= $company['companyName'] ?></option>
-			<?php
-			endforeach; ?>
-
-		<?php
-		}
-		?>
+		<?php endforeach;
+		} ?>
 	</select>
+
 	<select class="select-pim form-select" id="branch-team" onchange="javascript:departmentBranch()" <?= $branchId == '' ? 'disabled' : '' ?>>
 		<?php
 		if ($branchId != '') { ?>
 			<option value="<?= $branchId ?>"><?= Branch::findOne($branchId)->branchName ?></option>
 		<?php
 		} ?>
-		<option value=""><?= Yii::t('app', 'Branch') ?></option>
+		<option value="" disabled <?= empty($branchId) ? 'selected' : '' ?> hidden
+			style="color: var(--Helper-Text, #8A8A8A);">
+			<?= Yii::t('app', 'Branch') ?>
+		</option>
+
+		<option value="">
+			<?= Yii::t('app', 'All') ?>
+		</option>
 		<?php
 		if (count($branches) > 0) {
 			foreach ($branches as $branch) : ?>
@@ -51,7 +67,14 @@
 		<?php
 		}
 		?>
-		<option value=""><?= Yii::t('app', 'Department') ?></option>
+		<option value="" disabled <?= empty($departmentId) ? 'selected' : '' ?> hidden
+			style="color: var(--Helper-Text, #8A8A8A);">
+			<?= Yii::t('app', 'Department') ?>
+		</option>
+
+		<option value="">
+			<?= Yii::t('app', 'All') ?>
+		</option>
 		<?php
 		if (count($departments) > 0) {
 			foreach ($departments as $department) : ?>
@@ -68,7 +91,14 @@
 		<?php
 		}
 		?>
-		<option value=""><?= Yii::t('app', 'Team') ?></option>
+		<option value="" disabled <?= empty($teamId) ? 'selected' : '' ?> hidden
+			style="color: var(--Helper-Text, #8A8A8A);">
+			<?= Yii::t('app', 'Team') ?>
+		</option>
+
+		<option value="" >
+			<?= Yii::t('app', 'All') ?>
+		</option>
 		<?php
 		if (count($teams) > 0) {
 			foreach ($teams as $team) : ?>
@@ -136,3 +166,21 @@
 		?>
 	</div>
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // เช็คค่า PHP $companyId
+    let companyId = "<?= $companyId ?>"; // แปลง PHP เป็น string
+ 	let branchId = "<?= $branchId ?>"; // แปลง PHP เป็น string
+ 	let departmentId = "<?= $departmentId ?>"; // แปลง PHP เป็น string
+
+    if (companyId !== "" && companyId !== null) {
+		$("#branch-team").removeAttr("disabled", "true");
+    }
+	if (branchId !== "" && branchId !== null) {
+		$("#department-team").removeAttr("disabled", "true");
+    }
+	if (departmentId !== "" && departmentId !== null) {
+		$("#team-department").removeAttr("disabled", "true");
+    }
+});
+</script>

@@ -537,7 +537,7 @@ if ($DueBehind < 0) {
                         </div>
 
                         <div class="d-flex mt-37 gap-1" style="--bs-gutter-x:0px;">
-                            <div style="min-width:130px;">
+                            <div class="col-5" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                                 <label class="text-manage-create" for="name">
                                     <span class="text-danger">* </span>
                                     Data Type <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
@@ -554,7 +554,7 @@ if ($DueBehind < 0) {
                             </div>
 
                             <!-- Right side (Success Condition) -->
-                            <div>
+                            <div class="col-7" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                                 <label class="text-manage-create" for="name">
                                     <span class="text-danger">* </span>
                                     Success Condition <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"

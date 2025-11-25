@@ -14,6 +14,9 @@ use frontend\models\hrvc\Team;
             style="color: var(--Helper-Text, #8A8A8A);">
             <?= Yii::t('app', 'Country') ?>
         </option>
+        <option value="" <?= empty($selectedCountryId) === 'all' ? 'selected' : '' ?>>
+                <?= Yii::t('app', 'All') ?>
+        </option>
         <?php foreach ($countries as $countryId => $country) : ?>
         <option value="<?= $countryId ?>" <?= $countryIdOld == $countryId ? 'selected' : '' ?>>
             <?= $country ?>
@@ -30,7 +33,13 @@ use frontend\models\hrvc\Team;
             $branches = Branch::branchInCompany($companyIdOld);
         }
         ?>
-        <option value=""><?= Yii::t('app', 'Company') ?></option>
+        <option value="" disabled <?= empty($companyIdOld) ? 'selected' : '' ?> hidden
+            style="color: var(--Helper-Text, #8A8A8A);">
+            <?= Yii::t('app', 'Company') ?>
+        </option>
+        <option value="" <?= empty($selectedCountryId) === 'all' ? 'selected' : '' ?>>
+                <?= Yii::t('app', 'All') ?>
+        </option>
         <?php
         if (isset($companies) && count($companies) > 0) {
             foreach ($companies as $company) : ?>
@@ -51,7 +60,13 @@ use frontend\models\hrvc\Team;
             $teams = Team::teamInBranch($branchIdOld);
         }
         ?>
-        <option value=""><?= Yii::t('app', 'Branch') ?></option>
+        <option value="" disabled <?= empty($branchIdOld) ? 'selected' : '' ?> hidden
+            style="color: var(--Helper-Text, #8A8A8A);">
+            <?= Yii::t('app', 'Branch') ?>
+        </option>
+        <option value="" <?= empty($selectedCountryId) === 'all' ? 'selected' : '' ?>>
+                <?= Yii::t('app', 'All') ?>
+        </option>
         <?php
         if (isset($branches) && count($branches) > 0) {
             foreach ($branches as $branch) : ?>
