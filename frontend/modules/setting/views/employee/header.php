@@ -91,7 +91,7 @@ if (Yii::$app->controller->action->id == 'draft' || Yii::$app->controller->actio
 		</div>
 	</div>
 </div>
-<input type="hidden" id="perPage" value="<?= $actualShow ?>">
+<input type="hidden" id="perPage" value="<?= $limit ?>">
 <input type="hidden" id="action" value="0">
 <input type="hidden" id="action-menu" value="0">
 <?= $this->render('modal_import') ?>

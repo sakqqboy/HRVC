@@ -118,7 +118,7 @@ $form = ActiveForm::begin([
                 <div class="between-center mt-12 border-top pt-20 justify-content-start" style="gap:15px;">
                     <!-- body -->
                     <div>
-                        <div class="avatar-upload" style="margin:0px">
+                        <div class="avatar-upload" style="margin:0px" id="uploadImag">
                             <div class="avatar-preview" style="
                             background-color: white;
                             stroke-width: 1px;
@@ -142,7 +142,7 @@ $form = ActiveForm::begin([
                                         </span>
                                         <br>
                                         <span id="d-up-img2" style="font-size: 13px; color: #666;">
-                                            <?= Yii::t('app', 'Branch Picture here') ?>
+                                            <?= Yii::t('app', 'Picture here') ?>
                                         </span>
                                     <?php
                                     }
@@ -171,8 +171,7 @@ $form = ActiveForm::begin([
                                             style="width: 18px; height: 18px;">
                                     </div>
                                 </div>
-                                <input type="file" name="image" id="imgUpload" class="upload up upload-checklist"
-                                    style="display: none;">
+                                <input type="file" name="image" id="imgUpload" class="upload up upload-checklist" style="display: none;">
                             </div>
                         </div>
                         <div style="text-align: center;">
@@ -1926,18 +1925,18 @@ $form = ActiveForm::begin([
             }
         });
 
-        $(document).on('change', '#imgUpload', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                uploadedCerFile = file;
-                // alert('1');
-                $('#old-image').attr('src', URL.createObjectURL(file));
-                $('#d-up-img1').hide();
-                $('#d-up-img2').hide();
+        // $(document).on('change', '#imgUpload', function(e) {
+        //     const file = e.target.files[0];
+        //     if (file) {
+        //         uploadedCerFile = file;
+        //         // alert('1');
+        //         $('#old-image').attr('src', URL.createObjectURL(file));
+        //         $('#d-up-img1').hide();
+        //         $('#d-up-img2').hide();
 
-                iconBinRe();
-            }
-        });
+        //         iconBinRe();
+        //     }
+        // });
 
 
 

@@ -100,6 +100,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/content.js',
+        'js/upload.js',
         'js/index.js',
         'js/menu.js',
         'js/share.js',

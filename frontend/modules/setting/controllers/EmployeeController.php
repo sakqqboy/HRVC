@@ -152,7 +152,8 @@ class EmployeeController extends Controller
             "totalPage" => $totalPage,
             "currentPage" => $currentPage,
             "pagination" => $pagination,
-            "totalDraft" => $totalDraft
+            "totalDraft" => $totalDraft,
+            "limit" => $limit,
         ]);
     }
     public function actionEmployeeList($hash)
@@ -1174,6 +1175,7 @@ class EmployeeController extends Controller
             "currentPage" => $currentPage,
             "pagination" => $pagination,
             "filter" => $filter,
+            "limit" => $limit,
             "totalDraft" => $totalDraft
         ]);
     }
@@ -1292,6 +1294,7 @@ class EmployeeController extends Controller
             "currentPage" => $currentPage,
             "pagination" => $pagination,
             "filter" => $filter,
+            "limit" => $limit,
             "totalDraft" => $totalDraft
         ]);
     }
