@@ -11,6 +11,7 @@ $('#teamModal').on('hidden.bs.modal', function () {
 
 function branchCompany() {
     var companyId = $("#company-team").val();
+    // alert(companyId);
     var url = $url + 'setting/team/company-branch';
     $.ajax({
         type: "POST",
@@ -40,6 +41,7 @@ function branchCompany2() {
 
 function departmentBranch() {
     var branchId = $("#branch-team").val();
+    // alert(branchId);
     var url = $url + 'setting/team/branch-department';
     $.ajax({
         type: "POST",
@@ -55,6 +57,7 @@ function departmentBranch() {
 
 function teamDepartment() {
     var departmentId = $("#department-team").val();
+    // alert(departmentId);
     var url = $url + 'setting/team/department-team';
     $.ajax({
         type: "POST",

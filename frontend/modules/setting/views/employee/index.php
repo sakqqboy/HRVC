@@ -162,8 +162,6 @@ $statusTexArr = Status::allStatusText();
 
                                 <!-- Divider -->
 
-
-
                                 <!-- Contact & Info -->
                                 <div class="employee-contact-box">
                                     <div class="d-flex align-items-start justify-content-start pb-10 mb-10"
@@ -812,6 +810,7 @@ $showModal = $isFromImport; // หรือ 0
             }
         });
     }
+    
 </script>
 <?php
 $this->registerJs('
@@ -922,3 +921,4 @@ $this->registerJs('
 		
 ', View::POS_END);
 ?>
+
