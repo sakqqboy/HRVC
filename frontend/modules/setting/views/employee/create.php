@@ -10,7 +10,6 @@ if ($statusfrom == 'Create') {
     $isDisabled = '';
     $this->title = 'Create Employee';
     $urlSubmit = 'setting/employee/save-create-employee';
-    
 } else {
     $isDisabled = $statusfrom == 'Update';
     $this->title = 'Update Employee';
@@ -229,7 +228,7 @@ $form = ActiveForm::begin([
                                         <img src="<?= Yii::$app->homeUrl ?>image/e-lock.svg" alt="Website"
                                             style="width: 16px; height: 16px;">
                                     </span>
-
+                                    <input type="hidden" id="password-hash" value="<?= $statusfrom == 'Update' ? $userEmployee['password'] : '' ?>">
                                     <input type="password" class="form-control font-size-14" name="password"
                                         id="password" placeholder="<?= Yii::t('app', 'Register Password here') ?>"
                                         value="<?= $userEmployee['password'] ?? '' ?>"
@@ -942,21 +941,21 @@ $form = ActiveForm::begin([
                 <div>
                     <!-- body -->
                     <div class="row">
-                         <label class="font-size-16 font-weight-500 mb-12">
-                                <!-- <span class="text-danger">*</span> -->
-                                <?= Yii::t('app', 'Employee’s Designation / Position') ?>
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                    data-placement="top" aria-label="<?= Yii::t('app', 'Employee’s Title') ?>"
-                                    data-bs-original-title="<?= Yii::t('app', 'Employee’s Title') ?>"><span
-                                    class="text-gray font-size-13 font-weight-400 mr-12 ml-12">
-                                    <?= Yii::t('app', 'Can’t find the title?') ?></span>
+                        <label class="font-size-16 font-weight-500 mb-12">
+                            <!-- <span class="text-danger">*</span> -->
+                            <?= Yii::t('app', 'Employee’s Designation / Position') ?>
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
+                                data-placement="top" aria-label="<?= Yii::t('app', 'Employee’s Title') ?>"
+                                data-bs-original-title="<?= Yii::t('app', 'Employee’s Title') ?>"><span
+                                class="text-gray font-size-13 font-weight-400 mr-12 ml-12">
+                                <?= Yii::t('app', 'Can’t find the title?') ?></span>
 
-                                <a href="<?= Yii::$app->homeUrl ?>setting/title/create/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>"
-                                    class="text-blue font-size-13 font-weight-500">
-                                    <?= Yii::t('app', 'Register Title Here') ?> <img
-                                        src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
-                                        style="cursor: pointer;"></a>
-                            </label>
+                            <a href="<?= Yii::$app->homeUrl ?>setting/title/create/<?= ModelMaster::encodeParams(['departmentId' => '']) ?>"
+                                class="text-blue font-size-13 font-weight-500">
+                                <?= Yii::t('app', 'Register Title Here') ?> <img
+                                    src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
+                                    style="cursor: pointer;"></a>
+                        </label>
                         <div class="col-4 d-flex flex-column" style="gap: 12px;">
                             <div class="input-group">
                                 <select id="titleSelectId" class="form-select"
@@ -1486,40 +1485,40 @@ $form = ActiveForm::begin([
                                 $selectedLanguageId = isset($userLanguage[0]['lavel']) ? $userLanguage[0]['lavel'] : '';
                                 ?>
                                 <div class="d-flex align-items-center">
-                                <select class="form-select" name="lavelLanguage" id="lavelLanguage">
-                                    <option value="" disabled <?= $selectedLanguageId ? '' : 'selected' ?> hidden
-                                        style="color: var(--Helper-Text, #8A8A8A);">
-                                        <?= Yii::t('app', 'Select') ?>
-                                    </option>
-                                    <option value="1" <?= $selectedLanguageId == '1' ? 'selected' : '' ?>>
-                                        <?= Yii::t('app', 'Beginner') ?>
-                                    </option>
-                                    <option value="2" <?= $selectedLanguageId == '2' ? 'selected' : '' ?>>
-                                        <?= Yii::t('app', 'Elementary') ?>
-                                    </option>
-                                    <option value="3" <?= $selectedLanguageId == '3' ? 'selected' : '' ?>>
-                                        <?= Yii::t('app', 'Intermediate') ?>
-                                    </option>
-                                    <option value="4" <?= $selectedLanguageId == '4' ? 'selected' : '' ?>>
-                                        <?= Yii::t('app', 'Upper
+                                    <select class="form-select" name="lavelLanguage" id="lavelLanguage">
+                                        <option value="" disabled <?= $selectedLanguageId ? '' : 'selected' ?> hidden
+                                            style="color: var(--Helper-Text, #8A8A8A);">
+                                            <?= Yii::t('app', 'Select') ?>
+                                        </option>
+                                        <option value="1" <?= $selectedLanguageId == '1' ? 'selected' : '' ?>>
+                                            <?= Yii::t('app', 'Beginner') ?>
+                                        </option>
+                                        <option value="2" <?= $selectedLanguageId == '2' ? 'selected' : '' ?>>
+                                            <?= Yii::t('app', 'Elementary') ?>
+                                        </option>
+                                        <option value="3" <?= $selectedLanguageId == '3' ? 'selected' : '' ?>>
+                                            <?= Yii::t('app', 'Intermediate') ?>
+                                        </option>
+                                        <option value="4" <?= $selectedLanguageId == '4' ? 'selected' : '' ?>>
+                                            <?= Yii::t('app', 'Upper
                                         Intermediate') ?>
-                                    </option>
-                                    <option value="5" <?= $selectedLanguageId == '5' ? 'selected' : '' ?>>
-                                        <?= Yii::t('app', 'Advanced') ?>
-                                    </option>
-                                    <option value="6" <?= $selectedLanguageId == '6' ? 'selected' : '' ?>>
-                                        <?= Yii::t('app', 'Fluent') ?>
-                                    </option>
-                                    <option value="7" <?= $selectedLanguageId == '7' ? 'selected' : '' ?>>
-                                        <?= Yii::t('app', 'Native') ?>
-                                    </option>
-                                </select>
-                                <img id="deleteLanguageBtn"
-                                src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
-                                class="pim-icon ml-5 mt-5 "
-                                style="width:21px;height:21px; cursor:pointer;"
-                                data-user-id="<?= Yii::$app->user->id ?? '' ?>" />
-                                 
+                                        </option>
+                                        <option value="5" <?= $selectedLanguageId == '5' ? 'selected' : '' ?>>
+                                            <?= Yii::t('app', 'Advanced') ?>
+                                        </option>
+                                        <option value="6" <?= $selectedLanguageId == '6' ? 'selected' : '' ?>>
+                                            <?= Yii::t('app', 'Fluent') ?>
+                                        </option>
+                                        <option value="7" <?= $selectedLanguageId == '7' ? 'selected' : '' ?>>
+                                            <?= Yii::t('app', 'Native') ?>
+                                        </option>
+                                    </select>
+                                    <img id="deleteLanguageBtn"
+                                        src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                        class="pim-icon ml-5 mt-5 "
+                                        style="width:21px;height:21px; cursor:pointer;"
+                                        data-user-id="<?= Yii::$app->user->id ?? '' ?>" />
+
                                 </div>
                             </div>
 
@@ -1563,7 +1562,7 @@ $form = ActiveForm::begin([
                                         <?= Yii::t('app', 'Additional Languages Level') ?>
                                     </span>
 
-                                    <div id="ald"  >
+                                    <div id="ald">
                                         <div class="d-flex align-items-center">
                                             <span id="lockId-1"
                                                 class="input-group-text d-flex justify-content-center align-items-center mt-12"
@@ -1571,13 +1570,13 @@ $form = ActiveForm::begin([
                                                 <?= Yii::t('app', 'Add additional Language First') ?>
                                             </span>
                                             <img id="deleteLanguageBtn-1"
-                                            src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
-                                            class="pim-icon mt-17 ml-5  "
-                                            style="width:21px;height:21px; cursor:pointer;"
-                                            data-user-id="<?= Yii::$app->user->id ?? '' ?>" />
+                                                src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                                class="pim-icon mt-17 ml-5  "
+                                                style="width:21px;height:21px; cursor:pointer;"
+                                                data-user-id="<?= Yii::$app->user->id ?? '' ?>" />
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="col-4 d-flex flex-column" style="gap: 12px;">
                                     <!-- <img src="<?= Yii::$app->homeUrl ?>/images/icons/Settings/bin.svg" class="pim-icon" style="width:16px;height:16px;"> -->
@@ -1601,6 +1600,7 @@ $form = ActiveForm::begin([
 
                     <!-- ✅ ปุ่ม Cancel + Save -->
                     <div class="d-flex justify-content-end align-items-center" style="gap: 10px;">
+                        <input type="hidden" value="<?= $statusfrom ?>" id="status-form">
                         <a href="javascript:history.back()" style="text-decoration: none;">
                             <button type="button" class="btn-cancel-group">
                                 <?= Yii::t('app', 'Cancel') ?>
@@ -1615,7 +1615,7 @@ $form = ActiveForm::begin([
                                     class="pim-icon me-1" style="width: 14px; height: 14px;">
                                 <?= Yii::t('app', 'Delete') ?>
                             </a>
-                            <button type="submit" class="btn-save-group">
+                            <button type="submit" class="btn-save-group" id="update-employee">
                                 <img src="<?= Yii::$app->homeUrl ?>image/refece-whiet.svg" alt="Save Icon"
                                     style="width: 20px; height: 20px;">
                                 <?= Yii::t('app', 'Update') ?>
@@ -1660,7 +1660,7 @@ $form = ActiveForm::begin([
             </div>
         </div>
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="radioHighlight.js"></script>
     <script>
@@ -2619,7 +2619,7 @@ $form = ActiveForm::begin([
             //  alert(additionalLangCount);
             if (additionalLangCount >= maxAdditionalLangs) return;
             // ตรวจสอบ select ก่อนหน้าว่ามีค่าแล้วหรือไม่ (ถ้ามีแล้วไม่เพิ่ม)
-            
+
             if (additionalLangCount > 0) {
                 const previousSelect = document.getElementById(`mainLanguage${additionalLangCount}`);
                 // alert(previousSelect.value);
@@ -2629,7 +2629,7 @@ $form = ActiveForm::begin([
             }
 
             // alert(additionalLangCount);
-            
+
             additionalLangCount++;
 
             const userLanguage = <?= json_encode($userLanguage) ?>;
@@ -2652,22 +2652,22 @@ $form = ActiveForm::begin([
             // console.log("Flag URL:", flag);
 
             // console.log(additionalLangCount);
-            
-            
+
+
             let langHtml = '';
             <?php if ($statusfrom === 'Update'): ?>
-                
+
                 langHtml = `
                     <div class="input-group mt-12">
                         <span class="input-group-text" style="background-color: white; border-right: none;">
                             <img class="cycle-current" id="flag-ml${additionalLangCount}" src="<?= Yii::$app->homeUrl ?>${flag}" alt="Website"
                                 style="width: 20px; height: 20px; border: none;">
-                                <?php echo $LanguageId ; ?>
+                                <?php echo $LanguageId; ?>
                         </span>
                         <select class="form-select" style="border-left: none;"
                             id="mainLanguage${additionalLangCount}" name="mainLanguage${additionalLangCount}"
                             onchange="handleLanguageChange(${additionalLangCount})">
-                            <option value="" disabled hidden><?= Yii::t('app','Select Additional Language') ?></option>
+                            <option value="" disabled hidden><?= Yii::t('app', 'Select Additional Language') ?></option>
                             <?php if (isset($mainLanguage) && count($mainLanguage) > 0): ?>
                                 <?php foreach ($mainLanguage as $lang):
                                     $selected = ($lang['LanguageId'] == $LanguageId) ? 'selected' : '';
@@ -2682,8 +2682,8 @@ $form = ActiveForm::begin([
                         </select>
                     </div>
                 `;
-            // let ddd = <?= json_encode($LanguageId) ?>;
-            // alert(ddd);
+                // let ddd = <?= json_encode($LanguageId) ?>;
+                // alert(ddd);
             <?php else: ?>
                 langHtml = `
                     <div class="input-group mt-12">
@@ -2695,7 +2695,7 @@ $form = ActiveForm::begin([
                             id="mainLanguage${additionalLangCount}" name="mainLanguage${additionalLangCount}"
                             onchange="handleLanguageChange(${additionalLangCount})">
                             <?php if (isset($mainLanguage) && count($mainLanguage) > 0): ?>
-                                <option value="" selected><?= Yii::t('app','Select Additional Language') ?></option>
+                                <option value="" selected><?= Yii::t('app', 'Select Additional Language') ?></option>
                                 <?php foreach ($mainLanguage as $lang):
                                     $selected = ($lang['LanguageId'] == $LanguageId) ? 'selected' : '';
                                 ?>
@@ -2717,13 +2717,13 @@ $form = ActiveForm::begin([
                     document.getElementById('al').insertAdjacentHTML('beforeend', langHtml);
                     const sel = document.getElementById(`mainLanguage${additionalLangCount}`);
                     if (sel) {
-                    if (languageId) sel.value = String(languageId);
-                    else sel.selectedIndex = 0; // placeholder
+                        if (languageId) sel.value = String(languageId);
+                        else sel.selectedIndex = 0; // placeholder
 
-                    const opt = sel.options[sel.selectedIndex];
-                    const flagUrl = opt?.getAttribute('data-flag') || 'image/e-world.svg';
-                    const img = document.getElementById(`flag-ml${additionalLangCount}`);
-                    if (img) img.src = flagUrl.startsWith('http') ? flagUrl : HOME_URL + flagUrl;
+                        const opt = sel.options[sel.selectedIndex];
+                        const flagUrl = opt?.getAttribute('data-flag') || 'image/e-world.svg';
+                        const img = document.getElementById(`flag-ml${additionalLangCount}`);
+                        if (img) img.src = flagUrl.startsWith('http') ? flagUrl : HOME_URL + flagUrl;
                     }
                     // ตั้งค่าที่เลือกให้ select ตัวล่าสุด ถ้ามี
                     // if (selectedValue) {
@@ -2751,7 +2751,7 @@ $form = ActiveForm::begin([
                 const noId = additionalLangCount;
                 if (additionalLangCount >= 2) { //2 3
                     const lockSpan =
-                    `
+                        `
                     <div class="d-flex align-items-center">
                         <span id="lockId-${noId}"
                             class="input-group-text d-flex justify-content-center align-items-center mt-12"
@@ -2764,8 +2764,8 @@ $form = ActiveForm::begin([
                                             style="width:21px;height:21px; cursor:pointer;"
                                             data-user-id="<?= Yii::$app->user->id ?? '' ?>" />
                     </div>
-                    `; 
-            // lockId สร้าง 2 3 เพราะ 1 มีอยุ่แแล้ว แต่ 1 นั้น = 2 ในดาต้า = ต้องสร้างดาต้า ที่ 3 กับ 4 ใน lockId 2 กับ 3  lockId ก้จะมี 1 2 3
+                    `;
+                    // lockId สร้าง 2 3 เพราะ 1 มีอยุ่แแล้ว แต่ 1 นั้น = 2 ในดาต้า = ต้องสร้างดาต้า ที่ 3 กับ 4 ใน lockId 2 กับ 3  lockId ก้จะมี 1 2 3
                     document.getElementById('ald').insertAdjacentHTML('beforeend', lockSpan);
                     // alert('lockId2');
                     // alert(noId); //1,2
@@ -2778,7 +2778,7 @@ $form = ActiveForm::begin([
                     handleLanguageChange(noId);
                 }
             <?php elseif ($statusfrom === 'Create'): ?>
-               
+
                 if (additionalLangCount >= 2) {
                     const lockSpan = `
                     <div class="d-flex align-items-center">
@@ -2796,7 +2796,7 @@ $form = ActiveForm::begin([
                      `;
                     document.getElementById('ald').insertAdjacentHTML('beforeend', lockSpan);
                 }
-                 $('#deleteLanguageBtn-2').hide();
+                $('#deleteLanguageBtn-2').hide();
             <?php endif; ?>
 
             if (additionalLangCount >= maxAdditionalLangs) {
@@ -2865,9 +2865,9 @@ $form = ActiveForm::begin([
                 }
 
             }
-        //    alert(no);
+            //    alert(no);
             if (no === 1) { //additionalLangCount 2
-                if  (!lang1) {
+                if (!lang1) {
                     const val1 = lang1?.value || "";
                     const valsOther = [(lang2?.value || ""), (lang3?.value || "")];
                     if (val1 && isDuplicate(val1, valsOther)) {
@@ -2880,19 +2880,19 @@ $form = ActiveForm::begin([
                 }
             } else if (no === 2) { //additionalLangCount 3
                 // alert(lang2);
-                if  (!lang2) {
+                if (!lang2) {
                     const val2 = lang2?.value || "";
                     const valsOther = [(lang1?.value || ""), (lang3?.value || "")];
                     if (val2 && isDuplicate(val2, valsOther)) {
                         alert('Language Duplicate');
                         lang2.value = "";
-                    } 
+                    }
                 } else {
-                        // alert('โหลดlockId-2');
-                        replaceLockWithLevelSelect('lockId-2', 'lavelLanguage2', 'lavelLanguage2');
+                    // alert('โหลดlockId-2');
+                    replaceLockWithLevelSelect('lockId-2', 'lavelLanguage2', 'lavelLanguage2');
                 }
             } else if (no === 3) {
-                if  (!lang3) {
+                if (!lang3) {
                     const val3 = lang3?.value || "";
                     const valsOther = [(lang1?.value || ""), (lang2?.value || "")];
                     if (val3 && isDuplicate(val3, valsOther)) {
@@ -2901,9 +2901,9 @@ $form = ActiveForm::begin([
                     } else {
                         replaceLockWithLevelSelect('lockId-3', 'lavelLanguage3', 'lavelLanguage3');
                     }
-                }else {
-                        // alert('โหลดlockId-2');
-                        replaceLockWithLevelSelect('lockId-2', 'lavelLanguage2', 'lavelLanguage2');
+                } else {
+                    // alert('โหลดlockId-2');
+                    replaceLockWithLevelSelect('lockId-2', 'lavelLanguage2', 'lavelLanguage2');
                 }
             }
 
@@ -2915,19 +2915,19 @@ $form = ActiveForm::begin([
                 if (selectElement && flagImg) {
                     // console.log(selectElement);
                     // console.log(flagImg);
-                    
+
                     // selectElement.addEventListener('change', function() {
-                        // alert(this.selectedIndex);
-                        // const selectedOption = this.options[this.selectedIndex];
-                        const selectedOption = selectElement.options[selectElement.selectedIndex];
-                        const flagUrl = selectedOption.getAttribute('data-flag');
-                        if (flagUrl) {
-                            // alert('1');
-                            flagImg.src = homeUrl + flagUrl;
-                        } else {
-                            // alert('2');
-                            flagImg.src = homeUrl + 'image/e-world.svg';
-                        }
+                    // alert(this.selectedIndex);
+                    // const selectedOption = this.options[this.selectedIndex];
+                    const selectedOption = selectElement.options[selectElement.selectedIndex];
+                    const flagUrl = selectedOption.getAttribute('data-flag');
+                    if (flagUrl) {
+                        // alert('1');
+                        flagImg.src = homeUrl + flagUrl;
+                    } else {
+                        // alert('2');
+                        flagImg.src = homeUrl + 'image/e-world.svg';
+                    }
                     // });
                 }
             }
@@ -2942,22 +2942,22 @@ $form = ActiveForm::begin([
 
                     // ไม่ต้องใช้ getElementById อีกครั้ง!
                     // selectElement.addEventListener('change', function() {
-                        // const selectedOption = this.options[this.selectedIndex];
-                        const selectedOption = selectElement.options[selectElement.selectedIndex];
-                        const flagUrl = selectedOption.getAttribute('data-flag');
-                        if (flagUrl) {
-                            flagImg.src = homeUrl + flagUrl;
-                        } else {
-                            flagImg.src = homeUrl + 'image/e-world.svg';
-                        }
+                    // const selectedOption = this.options[this.selectedIndex];
+                    const selectedOption = selectElement.options[selectElement.selectedIndex];
+                    const flagUrl = selectedOption.getAttribute('data-flag');
+                    if (flagUrl) {
+                        flagImg.src = homeUrl + flagUrl;
+                    } else {
+                        flagImg.src = homeUrl + 'image/e-world.svg';
+                    }
                     // });
                 }
             }
 
         }
 
-        $(function(){
-            $('#deleteLanguageBtn').on('click', function(e){
+        $(function() {
+            $('#deleteLanguageBtn').on('click', function(e) {
                 e.preventDefault();
                 const userId = $(this).data('user-id') || '';
                 const employeeId = $('#emId').val();
@@ -2970,8 +2970,8 @@ $form = ActiveForm::begin([
 
                 // ส่ง ajax แบบ form-encoded (ง่าย)
                 const postData = {
-                    id: employeeId,           
-                    idlanguage: languageId,   
+                    id: employeeId,
+                    idlanguage: languageId,
                     level: level
                 };
                 // เพิ่ม CSRF ถ้ามี
@@ -2988,12 +2988,12 @@ $form = ActiveForm::begin([
                 //         // ตรวจผลจาก backend
                 //         if (response && response.success) {
                 //             // เคลียร์ select ให้เป็น placeholder / ค่าเริ่มต้น
-                            $('#mainLanguage').prop('selectedIndex', 0);
-                            $('#lavelLanguage').prop('selectedIndex', 0);
+                $('#mainLanguage').prop('selectedIndex', 0);
+                $('#lavelLanguage').prop('selectedIndex', 0);
 
                 //             // ถ้าคุณใช้ select ที่มี placeholder hidden option ให้เรียก trigger change ถ้าจำเป็น
-                            $('#mainLanguage, #lavelLanguage').trigger('change');
-                             toggleDeleteButton();
+                $('#mainLanguage, #lavelLanguage').trigger('change');
+                toggleDeleteButton();
 
                 //             // console.log('Deleted successfully:', response);
                 //             // alert(response.message || 'Deleted successfully');
@@ -3021,7 +3021,7 @@ $form = ActiveForm::begin([
                 // });
             });
 
-            $(document).on('click', '[id^="deleteLanguageBtn-"]', function (e) {
+            $(document).on('click', '[id^="deleteLanguageBtn-"]', function(e) {
                 e.preventDefault();
 
                 const $btn = $(this);
@@ -3051,12 +3051,12 @@ $form = ActiveForm::begin([
                 //         if (response && response.success) {
 
                 //             // ✅ รีเซ็ต select ของชุดนั้น
-                            $('#mainLanguage' + index).prop('selectedIndex', 0);
-                            $('#lavelLanguage' + index).prop('selectedIndex', 0);
-                            $('#mainLanguage' + index + ', #lavelLanguage' + index).trigger('change');
+                $('#mainLanguage' + index).prop('selectedIndex', 0);
+                $('#lavelLanguage' + index).prop('selectedIndex', 0);
+                $('#mainLanguage' + index + ', #lavelLanguage' + index).trigger('change');
 
                 //             // ✅ เปลี่ยนธงของชุดนั้นกลับโลก
-                            $('#flag-ml-' + index).attr('src', '<?= Yii::$app->homeUrl ?>image/e-world.svg');
+                $('#flag-ml-' + index).attr('src', '<?= Yii::$app->homeUrl ?>image/e-world.svg');
 
                 //             // ✅ ซ่อนปุ่มที่กด
                 //             $btn.fadeOut(200);
@@ -3093,7 +3093,7 @@ $form = ActiveForm::begin([
                 $('#deleteLanguageBtn-1').hide();
                 $('#flag-ml1').attr('src', '<?= Yii::$app->homeUrl ?>image/e-world.svg');
             } else {
-                
+
                 $('#deleteLanguageBtn-1').show();
             }
             if (!mainVal2) {
@@ -3105,7 +3105,7 @@ $form = ActiveForm::begin([
         }
 
         // ✅ ตรวจทุกครั้งที่มีการเปลี่ยน select ใด select หนึ่ง
-        $('#mainLanguage, #lavelLanguage').on('change', function () {
+        $('#mainLanguage, #lavelLanguage').on('change', function() {
             toggleDeleteButton();
         });
 
@@ -3117,7 +3117,6 @@ $form = ActiveForm::begin([
             // alert('d');
             document.getElementById('create-employee').submit(); // submit form
         });
-        
     </script>
 
     <?php ActiveForm::end(); ?>
