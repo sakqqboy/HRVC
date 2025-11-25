@@ -22,7 +22,7 @@ $this->title = 'Company KFI History';
     <div class="col-12 mt-20" id="box-wrapper">
         <div class="bg-white-employee">
             <div class="font-size-12 pl-5" style="width: 100%;">
-                <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="mr-5 pim-text-back">
+                <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="mr-5 pim-text-back">
                     <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                     <?= Yii::t('app', 'Back') ?>
                 </a>
