@@ -83,6 +83,10 @@ $("#imageUploadBanner").on("change", function () {
                 iconBinRe();
     }
 });
+function iconBinRe() {
+            $('#bin-file').show();
+            $('#refes-file').show();
+        }
 
 function handleFiles(event) {
     const file = event.target.files[0];
