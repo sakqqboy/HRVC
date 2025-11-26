@@ -33,13 +33,17 @@ $this->title = 'Assign KFI';
     <div class="col-12 mt-20" id="box-wrapper">
         <div class="bg-white-employee" id="pim-content">
             <div class="row" style="--bs-gutter-x:0px;">
-                <div class="col-6 text-truncate pim-name-title">
-                    <a href="<?= $url ?>" class="font-size-12 mr-10" style="text-decoration: none;">
+                <div class="col-6 text-truncate pim-name-title" style="display: flex; align-items: center; gap: 14px;">
+                    <!-- <a href="<?= $url ?>" class="font-size-12 mr-10" style="text-decoration: none;">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg" class="mr-3"
                             style="margin-top: -4px;">
                         <text class="pim-text-back">
                             <?= Yii::t('app', 'Back') ?>
                         </text>
+                    </a> -->
+                    <a href="<?= $url ?>" style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
+                        <?= Yii::t('app', 'Back') ?>        
                     </a>
                     <input type="hidden" id="url" name="url" value="<?= $url ?>">
                     <?= $kfiDetail["kfiName"] ?>

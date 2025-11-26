@@ -162,17 +162,21 @@ if (!$nextCheckDate) {
     <div class="col-12 mt-20">
         <div class="bg-white-pim pr-30 pl-30">
             <div class="row" style="--bs-gutter-x:0px;">
-                <div class="col-6 align-content-center" style="height:55px;">
-                    <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kgi/management/grid' ?>"
+                <div class="col-6 align-content-center">
+                    <!-- <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kgi/management/grid' ?>"
                         class="mr-5 font-size-12" style="text-decoration: none;">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg">
                         <text class="pim-text-back">
                             <?= Yii::t('app', 'Back') ?>
                         </text>
-                    </a>
-                    <text class="pim-name-title">
+                    </a> -->
+                    <div class="pim-name-title" style="display: flex; align-items: center; gap: 14px;">
+                        <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kgi/management/grid' ?>" style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
+                            <?= Yii::t('app', 'Back') ?>        
+                        </a>
                         <?= Yii::t('app', 'Update Team Key Goal Indicator') ?>
-                    </text>
+                    </div>
                 </div>
                 <div class="col-6" style="height: 55px;">
                     <div class="d-flex justify-content-end align-items-center">

@@ -47,12 +47,16 @@ $this->title = 'Assign KGI';
             <div class="row" style="--bs-gutter-x:10px;">
                 <div class="col-lg-5 col-12"><!-- left => select team -->
                     <div class="row" style="--bs-gutter-x:0px;">
-                        <div class="col-lg-9 text-truncate font-size-16 font-weight-600" style="line-height: 21px;align-content:center;">
-                            <a href="<?= $url ?>" class="font-size-12 mr-10 font-weight-600" style="text-decoration: none;">
+                        <div class="col-6 text-truncate pim-name-title" style="display: flex; align-items: center; gap: 14px;">
+                            <!-- <a href="<?= $url ?>" class="font-size-12 mr-10 font-weight-600" style="text-decoration: none;">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg" class="mr-3" style="margin-top: -4px;">
                                 <text class="pim-text-back">
                                     <?= Yii::t('app', 'Back') ?>
                                 </text>
+                            </a> -->
+                            <a href="<?= $url ?>" style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
+                                <?= Yii::t('app', 'Back') ?>        
                             </a>
                             <input type="hidden" id="url" name="url" value="<?= $url ?>">
                             <?= $kgiDetail["kgiName"] ?>

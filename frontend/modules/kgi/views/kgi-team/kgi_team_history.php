@@ -39,12 +39,16 @@ $this->title = 'Team KGI View';
         }
     ?>
         <div class="col-12 mt-10">
-            <div class="alert mt-10 pim-body bg-white">
-                <div class="row">
-                    <div class="col-9 pim-name-title pr-0 pl-5 text-start">
-                        <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : 'kgi-team/team-kgi-grid' ?>" class="mr-5 pim-text-back">
+            <div class="alert mt-20 pim-body bg-white" style="border: 1px solid #BBCDDE;">
+                <div class="row" style="--bs-gutter-x:0px;">
+                    <div class="col-9 pim-name-title" style="display: flex; align-items: center; gap: 14px;">
+                        <!-- <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : 'kgi-team/team-kgi-grid' ?>" class="mr-5 pim-text-back">
                             <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                             <?= Yii::t('app', 'Back') ?>
+                        </a> -->
+                        <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : 'kgi-team/team-kgi-grid' ?>" style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
+                                <?= Yii::t('app', 'Back') ?>        
                         </a>
                         <?= $kgiTeamDetail["kgiName"] ?>
                     </div>
