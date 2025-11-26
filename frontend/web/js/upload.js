@@ -43,6 +43,47 @@ $("#imgUpload").on("change", function () {
                 iconBinRe();
     }
 });
+$("#imageUpload").on("change", function () {
+	 let file = this.files[0];
+     	  if (!file){ return;}
+          if (!['image/jpeg','image/png'].includes(file.type)) {
+        alert('Only JPEG and PNG files are allowed.');
+        event.target.value = '';
+        return;
+          }
+    if (file.size > (2 * 1024 * 1024)) {
+        alert("File size over than 2 MB");
+            $(this).val("");
+        return;
+    }else{
+            uploadedCerFile = file;
+                $('#old-image').attr('src', URL.createObjectURL(file));
+                $('#d-up-img1').hide();
+                $('#d-up-img2').hide();
+                iconBinRe();
+    }
+});
+$("#imageUploadBanner").on("change", function () {
+	 let file = this.files[0];
+     	  if (!file){ return;}
+          if (!['image/jpeg','image/png'].includes(file.type)) {
+        alert('Only JPEG and PNG files are allowed.');
+        event.target.value = '';
+        return;
+          }
+    if (file.size > (2 * 1024 * 1024)) {
+        alert("File size over than 2 MB");
+            $(this).val("");
+        return;
+    }else{
+            uploadedCerFile = file;
+                $('#old-image').attr('src', URL.createObjectURL(file));
+                $('#d-up-img1').hide();
+                $('#d-up-img2').hide();
+                iconBinRe();
+    }
+});
+
 function handleFiles(event) {
     const file = event.target.files[0];
     if (!file) return;
