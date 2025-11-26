@@ -19,12 +19,16 @@ $this->title = 'KGI View';
         "totalBranch" => $totalBranch
     ]) ?>
     <div class="col-12 mt-10">
-        <div class="alert mt-10 pim-body bg-white">
+        <div class="alert mt-20 pim-body bg-white" style="border: 1px solid #BBCDDE;">
             <div class="row" style="--bs-gutter-x:0px;">
-                <div class="col-11 pim-name-title pr-0 pl-5 text-start text-truncate">
-                    <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="mr-5 pim-text-back">
+                <div class="col-11 pim-name-title" style="display: flex; align-items: center; gap: 14px;">
+                    <!-- <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" class="mr-5 pim-text-back">
                         <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                         <?= Yii::t('app', 'Back') ?>
+                    </a> -->
+                    <a href="<?= Yii::$app->homeUrl ?>kgi/management/grid" style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
+                                <?= Yii::t('app', 'Back') ?>        
                     </a>
                     <?= $kgiDetail["kgiName"] ?>
                 </div>
