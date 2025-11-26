@@ -276,19 +276,82 @@ class EmployeeController extends Controller
             $employee->createDateTime = new Expression('NOW()');
             $employee->updateDateTime = new Expression('NOW()');
             // Upload Profile Image
-            $pictureProfile = UploadedFile::getInstanceByName("image");
-            if ($pictureProfile) {
+           $pictureProfile = UploadedFile::getInstanceByName("image");
+            if (isset($pictureProfile) && !empty($pictureProfile)) {
+
+                // โฟลเดอร์เซฟรูป
                 $path = Path::getHost() . 'images/employee/profile/';
                 if (!file_exists($path)) {
                     mkdir($path, 0777, true);
                 }
-                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $pictureProfile->extension;
+
+                // ลบไฟล์เก่าถ้ามี (เฉพาะตอน Update)
+                if (!empty($oldPicture)) {
+                    $oldProfilePic = Path::getHost() . $oldPicture;
+                    if (file_exists($oldProfilePic)) {
+                        unlink($oldProfilePic);
+                    }
+                }
+
+                // เตรียมชื่อไฟล์ใหม่
+                $extension = strtolower($pictureProfile->extension);
+                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $extension;
                 $pathSave = $path . $fileName;
-                $pictureProfile->saveAs($pathSave);
-                $employee->picture = 'images/employee/profile/' . $fileName;
+
+                // โหลดไฟล์ temp
+                $tempPath = $pictureProfile->tempName;
+                list($width, $height) = getimagesize($tempPath);
+
+                // อ่านรูปตามประเภท
+                if ($extension === 'jpg' || $extension === 'jpeg') {
+                    $srcImg = @imagecreatefromjpeg($tempPath);
+                } elseif ($extension === 'png') {
+                    $srcImg = @imagecreatefrompng($tempPath);
+                } elseif ($extension === 'gif') {
+                    $srcImg = @imagecreatefromgif($tempPath);
+                } else {
+                    $srcImg = null;
+                }
+
+                if ($srcImg) {
+
+                    $cropSize = 135; // ขนาดใหม่
+                    $dstImg = imagecreatetruecolor($cropSize, $cropSize);
+
+                    // คำนวณ crop ตรงกลาง
+                    $minSize = min($width, $height);
+                    $srcX = round(($width - $minSize) / 2);
+                    $srcY = round(($height - $minSize) / 2);
+
+                    imagecopyresampled(
+                        $dstImg, $srcImg,
+                        0, 0,
+                        $srcX, $srcY,
+                        $cropSize, $cropSize,
+                        $minSize, $minSize
+                    );
+
+                    // บันทึกรูป
+                    if ($extension === 'jpg' || $extension === 'jpeg') {
+                        imagejpeg($dstImg, $pathSave, 90);
+                    } elseif ($extension === 'png') {
+                        imagepng($dstImg, $pathSave);
+                    } elseif ($extension === 'gif') {
+                        imagegif($dstImg, $pathSave);
+                    }
+
+                    imagedestroy($srcImg);
+                    imagedestroy($dstImg);
+
+                    // เซฟชื่อไฟล์ลง DB
+                    $employee->picture = 'images/employee/profile/' . $fileName;
+
+                }
+
             } else {
-                $employee->picture = 'images/employee/status/employee-no-pic.svg';
+                    $employee->picture = 'images/employee/status/employee-no-pic.svg';
             }
+
 
             // Upload Resume
             $fileResume = UploadedFile::getInstanceByName("resume");
@@ -766,18 +829,71 @@ class EmployeeController extends Controller
                     if (!file_exists($path)) {
                         mkdir($path, 0777, true);
                     }
+
+                    // ลบรูปเก่า
                     $oldProfilePic = Path::getHost() . $oldPicture;
-                    if (file_exists($oldProfilePic) && $oldProfilePic != '' && $oldPicture != '') {
+                    if (file_exists($oldProfilePic) && $oldPicture != '') {
                         unlink($oldProfilePic);
                     }
-                    $file = $pictureProfile->name;
-                    $filenameArray = explode('.', $file);
-                    $countArrayFile = count($filenameArray);
-                    $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
+
+                    // ชื่อไฟล์ใหม่
+                    $ext = strtolower($pictureProfile->getExtension());
+                    $fileName = Yii::$app->security->generateRandomString(10) . '.' . $ext;
                     $pathSave = $path . $fileName;
-                    $pictureProfile->saveAs($pathSave);
-                    $employee->picture = 'images/employee/profile/' . $fileName;
+
+                    // temp file
+                    $tempPath = $pictureProfile->tempName;
+
+                    // อ่านขนาดรูป
+                    list($width, $height) = getimagesize($tempPath);
+
+                    // โหลดรูปแบบปลอด error
+                    if ($ext === 'jpg' || $ext === 'jpeg') {
+                        $srcImg = @imagecreatefromjpeg($tempPath);
+                    } elseif ($ext === 'png') {
+                        $srcImg = @imagecreatefrompng($tempPath);
+                    } elseif ($ext === 'gif') {
+                        $srcImg = @imagecreatefromgif($tempPath);
+                    }
+
+                    // ถ้าโหลดรูปสำเร็จ
+                    if ($srcImg) {
+
+                        $cropSize = 600; // ขนาดสำหรับ employee profile
+                        $dstImg = imagecreatetruecolor($cropSize, $cropSize);
+
+                        // คำนวน crop ตรงกลาง
+                        $minSize = min($width, $height);
+                        $srcX = round(($width - $minSize) / 2);
+                        $srcY = round(($height - $minSize) / 2);
+
+                        // Crop + Resize
+                        imagecopyresampled(
+                            $dstImg, $srcImg,
+                            0, 0,
+                            $srcX, $srcY,
+                            $cropSize, $cropSize,
+                            $minSize, $minSize
+                        );
+
+                        // บันทึกไฟล์ใหม่
+                        if ($ext === 'jpg' || $ext === 'jpeg') {
+                            imagejpeg($dstImg, $pathSave, 90);
+                        } elseif ($ext === 'png') {
+                            imagepng($dstImg, $pathSave);
+                        } elseif ($ext === 'gif') {
+                            imagegif($dstImg, $pathSave);
+                        }
+
+                        // clear memory
+                        imagedestroy($srcImg);
+                        imagedestroy($dstImg);
+
+                        // save path to DB
+                        $employee->picture = 'images/employee/profile/' . $fileName;
+                    }
                 }
+
 
                 $fileResume = UploadedFile::getInstanceByName("resume");
                 if (isset($fileResume) && !empty($fileResume)) {
