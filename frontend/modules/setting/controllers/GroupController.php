@@ -331,15 +331,16 @@ class GroupController extends Controller
                 $srcImg = null;
 
                 if ($extension === 'jpg' || $extension === 'jpeg') {
-                    $srcImg = imagecreatefromjpeg($tempPath);
+                    $srcImg = @imagecreatefromjpeg($tempPath);
                 } elseif ($extension === 'png') {
-                    $srcImg = imagecreatefrompng($tempPath);
+                    $srcImg = @imagecreatefrompng($tempPath);
                 } elseif ($extension === 'gif') {
-                    $srcImg = imagecreatefromgif($tempPath);
+                    $srcImg = @imagecreatefromgif($tempPath);
                 }
 
+
                 if ($srcImg) {
-                    $cropSize = 135;
+                    $cropSize = 600;
                     $dstImg = imagecreatetruecolor($cropSize, $cropSize);
 
                     // คำนวณตำแหน่ง crop ให้อยู่ตรงกลางของรูป
