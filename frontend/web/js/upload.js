@@ -25,34 +25,23 @@
 
 $("#imgUpload").on("change", function () {
 	 let file = this.files[0];
-     var save=1;
      	  if (!file){ return;}
+          if (!['image/jpeg','image/png'].includes(file.type)) {
+        alert('Only JPEG and PNG files are allowed.');
+        event.target.value = '';
+        return;
+          }
     if (file.size > (2 * 1024 * 1024)) {
         alert("File size over than 2 MB");
             $(this).val("");
         return;
     }else{
-	//  let img = new Image();
-    // img.src = URL.createObjectURL(file);
-    // img.onload = function () {
-    //     let w = img.width;
-    //     let h = img.height;
-    //     if (w !== h) {
-    //         alert("รูปต้องเป็นสี่เหลี่ยมจัตุรัส (กว้าง = สูง)");
-    //         $("#imgUpload").val("");
-    //             $(this).val("");
-    //         return;
-    //     }else{
             uploadedCerFile = file;
-                // alert('1');
                 $('#old-image').attr('src', URL.createObjectURL(file));
                 $('#d-up-img1').hide();
                 $('#d-up-img2').hide();
-
                 iconBinRe();
-        //}
-    //}
-}
+    }
 });
 function handleFiles(event) {
     const file = event.target.files[0];
