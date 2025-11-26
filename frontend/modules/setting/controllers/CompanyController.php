@@ -684,15 +684,15 @@ class CompanyController extends Controller
 				// สร้างภาพต้นฉบับจาก temp
 				$srcImg = null;
 				if ($extension === 'jpg' || $extension === 'jpeg') {
-					$srcImg = imagecreatefromjpeg($tempPath);
-				} elseif ($extension === 'png') {
-					$srcImg = imagecreatefrompng($tempPath);
-				} elseif ($extension === 'gif') {
-					$srcImg = imagecreatefromgif($tempPath);
-				}
+                    $srcImg = @imagecreatefromjpeg($tempPath);
+                } elseif ($extension === 'png') {
+                    $srcImg = @imagecreatefrompng($tempPath);
+                } elseif ($extension === 'gif') {
+                    $srcImg = @imagecreatefromgif($tempPath);
+                }
 
 				if ($srcImg) {
-					$cropSize = 131; // ขนาดที่ต้องการ
+					$cropSize = 600; // ขนาดที่ต้องการ
 					$dstImg = imagecreatetruecolor($cropSize, $cropSize);
 
 					// คำนวณขนาดสี่เหลี่ยมจัตุรัสเล็กสุดตรงกลางภาพ

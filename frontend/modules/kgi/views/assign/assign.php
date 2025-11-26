@@ -47,7 +47,7 @@ $this->title = 'Assign KGI';
             <div class="row" style="--bs-gutter-x:10px;">
                 <div class="col-lg-5 col-12"><!-- left => select team -->
                     <div class="row" style="--bs-gutter-x:0px;">
-                        <div class="col-6 text-truncate pim-name-title" style="display: flex; align-items: center; gap: 14px;">
+                        <div class="col-9 text-truncate pim-name-title" style="display: flex; align-items: center; gap: 14px;">
                             <!-- <a href="<?= $url ?>" class="font-size-12 mr-10 font-weight-600" style="text-decoration: none;">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg" class="mr-3" style="margin-top: -4px;">
                                 <text class="pim-text-back">

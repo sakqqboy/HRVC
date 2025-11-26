@@ -32,7 +32,7 @@ $this->title = 'Assign KFI';
     ]); ?>
     <div class="col-12 mt-20" id="box-wrapper">
         <div class="bg-white-employee" id="pim-content">
-            <div class="row" style="--bs-gutter-x:0px;">
+            <div class="row" style="--bs-gutter-x:10px;">
                 <div class="col-6 text-truncate pim-name-title" style="display: flex; align-items: center; gap: 14px;">
                     <!-- <a href="<?= $url ?>" class="font-size-12 mr-10" style="text-decoration: none;">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg" class="mr-3"
