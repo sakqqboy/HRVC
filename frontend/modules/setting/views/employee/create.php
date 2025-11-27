@@ -131,13 +131,15 @@ $form = ActiveForm::begin([
                                     <?php
                                     if (isset($employee) && $employee["image"] != null) { ?>
                                         <img id="old-image" src="<?= Yii::$app->homeUrl . $employee['image'] ?>"
-                                            class="company-group-picture" style="width: 170px; height: 170px;">
+                                            class="company-group-picture" >
+                                        <img id="new-image" src=""
+                                            class="company-group-picture" style="display: none;">
                                     <?php
                                     } else { ?>
-                                        <img id="old-image" src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg" style=" margin-top: 60px;"> 
+                                        <img id="icon-image" src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg" style=" margin-top: 60px;"> 
                                         <br><br>
                                         <img id="new-image" src=""
-                                            class="company-group-picture" style="width: 170px; height: 170px; display: none;">
+                                            class="company-group-picture" style="display: none;">
                                         <span id="d-up-img1">
                                             <?= Yii::t('app', 'Upload') ?> <span style="font-size: 13px; color: #666;">
                                                 <?= Yii::t('app', 'or Drop') ?> </span>
@@ -1958,7 +1960,7 @@ $form = ActiveForm::begin([
             // uploadedCerFile = null;
             // $('#previewImage').hide();
             // $('#old-image').attr('src', '<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg');
-            $('#old-image').show();
+            $('#icon-image').show();
             $('#d-up-img1').show();
             $('#d-up-img2').show();
             $('#new-image').hide();

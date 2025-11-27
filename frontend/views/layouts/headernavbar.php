@@ -10,7 +10,7 @@ use frontend\models\hrvc\User;
     <div class="row pl-0 pr-0  pull-right" style="width: 650px;">
         <div class="header-name mr-14">
             <?= isset(Yii::$app->user->id) ? User::userHeaderName() : 'Login' ?>
-            <div class="header-pepartment text-end">
+            <div class="header-pepartment text-truncate text-end">
                 <?= isset(Yii::$app->user->id) ? User::employeeTitleDepartment() : '' ?>
             </div>
         </div>
