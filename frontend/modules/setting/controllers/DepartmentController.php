@@ -103,10 +103,22 @@ class DepartmentController extends Controller
             return $this->redirect(Yii::$app->homeUrl . 'setting/branch/no-branch/'. ModelMaster::encodeParams(["companyId" => '']));
         }
 
-        $department = Department::find()->select('departmentId')->where(["status" => 1])->asArray()->one();
-        if (isset($department) && !empty($department)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/department/index-filter/'. ModelMaster::encodeParams(["companyId" => $companyId,"branchId" => $branchId]));
+        if (
+            (!empty($branchId) && $branchId != 0) ||
+            (!empty($companyId) && $companyId != 0)
+        ){            //  มีและไม่เป็นค่าว่าง
+            $department = Department::find()->select('departmentId')->where(["status" => 1])->asArray()->one();
+            if (isset($department) && !empty($department)) {
+                return $this->redirect(Yii::$app->homeUrl . 'setting/department/index-filter/'. ModelMaster::encodeParams(["companyId" => $companyId,"branchId" => $branchId]));
+            }
+        } else {
+            $department = Department::find()->select('departmentId')->where(["status" => 1])->asArray()->one();
+            if (isset($department) && !empty($department)) {
+                return $this->redirect(Yii::$app->homeUrl . 'setting/department/index/');
+            }
         }
+
+        
         $branchId = $param["branchId"] ?? '';
 
         return $this->render('no_department', [

@@ -104,9 +104,21 @@ class TeamController extends Controller
             return $this->redirect(Yii::$app->homeUrl . 'setting/department/no-department/'. ModelMaster::encodeParams(["companyId" => '']));
         }
 
-        $team = Team::find()->select('teamId')->where(["status" => 1])->asArray()->one();
-        if (isset($team) && !empty($team)) {
-            return $this->redirect(Yii::$app->homeUrl . 'setting/team/index-filter/'. ModelMaster::encodeParams(["companyId" => $companyId,"branchId" => $branchId,"departmentId" => $departmentId]));
+        
+        if (
+            (!empty($departmentId) && $departmentId != 0) ||
+            (!empty($branchId) && $branchId != 0) ||
+            (!empty($companyId) && $companyId != 0)
+        ){            //  มีและไม่เป็นค่าว่าง
+            $team = Team::find()->select('teamId')->where(["status" => 1])->asArray()->one();
+            if (isset($team) && !empty($team)) {
+                return $this->redirect(Yii::$app->homeUrl . 'setting/team/index-filter/'. ModelMaster::encodeParams(["companyId" => $companyId,"branchId" => $branchId,"departmentId" => $departmentId]));
+            }
+        } else {
+            $department = Department::find()->select('departmentId')->where(["status" => 1])->asArray()->one();
+            if (isset($department) && !empty($department)) {
+                return $this->redirect(Yii::$app->homeUrl . 'setting/team/index/');
+            }
         }
 
         return $this->render('no_team', [
