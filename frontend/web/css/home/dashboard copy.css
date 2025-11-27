@@ -142,7 +142,7 @@
     color: #2F42ED;
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 10px;
     font-style: normal;
     font-weight: 600;
@@ -152,7 +152,7 @@
     color: var(--HRVC---Text-Black, #30313D);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 10px;
     font-style: normal;
     font-weight: 600;
@@ -162,7 +162,7 @@
     color: #FF715B;
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 10px;
     font-style: normal;
     font-weight: 600;
@@ -182,7 +182,7 @@
     color: var(--HRVC---Text-Black, #30313D);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
@@ -442,7 +442,7 @@ h6.dashboard-kpi-title {
     font-weight: 500;
     margin-bottom: 10px;
     line-height: normal;
-    font-family: "SF Pro Display";
+
     color: var(--HRVC---Text-Black, #30313D);
     leading-trim: both;
     text-edge: cap;
@@ -453,7 +453,7 @@ h6.dashboard-kpi-title {
     color: var(--Icon-Gray, #666);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -466,7 +466,7 @@ h6.dashboard-kpi-title {
     color: var(--Icon-Gray, #666);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -480,7 +480,7 @@ h6.dashboard-kpi-title {
     color: var(--HRVC---Text-Black, #30313D);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -520,7 +520,7 @@ h6.dashboard-kpi-title {
     color: #2580D3;
     text-align: center;
     font-feature-settings: 'salt' on, 'liga' off;
-    font-family: "SF Pro Display";
+
     font-size: 14.627px;
     font-style: normal;
     font-weight: 500;

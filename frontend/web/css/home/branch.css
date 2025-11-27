@@ -2,7 +2,7 @@
     color: #3C3D48;
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
@@ -78,7 +78,7 @@
     align-items: center;
     gap: 6px;
     color: var(--HRVC---Text-Black, #30313D);
-    font-family: "SF Pro Display";
+
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
@@ -116,7 +116,7 @@
     background: var(--Primary-Blue---HRVC, #2580D3);
     color: #FFF;
     text-align: center;
-    font-family: "SF Pro Display";
+
     font-size: 14px;
     font-weight: 600;
     line-height: 28px;
@@ -128,12 +128,12 @@
 .btn-create-branch:focus {
     /* ใช้สีพื้นหลังเดิม: #2580D3 */
     /* background-color: #2580D3 !important;  */
-    
+
     /* ใช้สีข้อความเดิม: #FFF */
-    color: #FFF !important; 
-    
+    color: #FFF !important;
+
     /* ลบเส้นขอบสีฟ้า/ส้มที่เกิดจากการโฟกัสด้วยแป้นพิมพ์ */
-    outline: none; 
+    outline: none;
 }
 
 .alert-branch-body {
@@ -167,7 +167,7 @@
     align-items: flex-start;
     gap: 10px;
     color: var(--HRVC---Text-Black, #30313D);
-    font-family: "SF Pro Display";
+
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
@@ -178,7 +178,7 @@
     color: var(--HRVC---Text-Black, #30313D);
     leading-trim: both;
     text-edge: cap;
-    font-family: "SF Pro Display";
+
     font-size: 12px;
     font-style: normal;
     font-weight: 400;

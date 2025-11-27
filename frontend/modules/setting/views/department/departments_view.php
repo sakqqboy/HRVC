@@ -11,8 +11,8 @@ $page = 'view';
 
     <div class="col-12">
         <div class=" d-flex align-items-center gap-2">
-            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg" 
-            style="width: 24px; height: 24px;">
+            <img src="<?= Yii::$app->homeUrl ?>image/branches-black.svg"
+                style="width: 24px; height: 24px;">
             <div class="pim-name-title">
                 <?= Yii::t('app', 'Department in Details') ?>
             </div>
@@ -62,11 +62,11 @@ $page = 'view';
                     " class="">
                 <div class="avatar-preview">
                     <?php if ($branches["picture"] != null) { ?>
-                    <img src="<?= Yii::$app->homeUrl . $branches['picture'] ?>" class="cycle-big-image"
-                        style="max-width: 100px; max-height: 100px;">
+                        <img src="<?= Yii::$app->homeUrl . $branches['picture'] ?>" class="cycle-big-image"
+                            style="max-width: 100px; max-height: 100px;">
                     <?php } else { ?>
-                    <img src="<?= Yii::$app->homeUrl . 'image/no-company.svg' ?>" class="cycle-big-image"
-                        style="max-width: 100px; max-height: 100px;">
+                        <img src="<?= Yii::$app->homeUrl . 'image/no-company.svg' ?>" class="cycle-big-image"
+                            style="max-width: 100px; max-height: 100px;">
                     <?php } ?>
                 </div>
                 <div class=" column">
@@ -91,8 +91,7 @@ $page = 'view';
                             <?= Yii::t('app', 'Located in') ?>
                             <div class="city-crad-company  text-truncate"
                                 style="display: flex; gap: 5px; height: 27px;font-weight:400;">
-                                <img src="
-                                <?= Yii::$app->homeUrl  ?><?= !empty($branches['flag']) ? $branches['flag'] : 'image/e-world.svg' ?>"
+                                <img src="<?= Yii::$app->homeUrl  ?><?= !empty($branches['flag']) ? $branches['flag'] : 'image/e-world.svg' ?>"
                                     class="bangladresh-hrvc">
                                 <?= $branches['city'] ?>,<?= $branches['countryName'] ?>
                             </div>
@@ -134,134 +133,134 @@ $page = 'view';
                                     $countrow++;
                                     $departmentId = $department['branchId'] + 543;
                             ?>
-                            <tr class="tr-font list-table-body" id="department-<?= $department['departmentId'] ?>"
-                                style="height:50px; background-color:#F4F6F9 !important;">
-                                <td>
-                                    <div class="circle-container ml-15">
-                                        <div class="cycle-current-red">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
-                                        </div>
-                                        <?= $department['departmentName'] ?>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="circle-container ml-15">
-                                        <div
-                                            class="cycle-current-<?= $department['totalTeam'] >= 1 ? 'green' : 'gray' ?>">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $department['totalTeam'] >= 1 ? '' : '-black' ?>.svg"
-                                                alt="icon">
-                                        </div>
-                                        <div
-                                            class="cycle-current-<?= $department['totalTeam'] >= 2 ? 'green' : 'gray' ?>">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $department['totalTeam'] >= 2 ? '' : '-black' ?>.svg"
-                                                alt="icon">
-                                        </div>
-                                        <div
-                                            class="cycle-current-<?= $department['totalTeam'] >= 3 ? 'green' : 'gray' ?>">
-                                            <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $department['totalTeam'] >= 3 ? '' : '-black' ?>.svg"
-                                                alt="icon">
-                                        </div>
-                                        <div class="number-current-cycle "><?= $department['totalTeam'] ?>
-                                        </div>
-                                        <div class="bodyname-company">
-                                            <?php if ($department['totalTeam'] > 0) { ?>
-                                            <a class="see-all-company" style="font-size: 10.5px; "
-                                                 href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['companyId' => $company['companyId'],'branchId' =>  $department['branchId'],'departmentId' =>  $department['departmentId']]) ?>">
-                                                <?= Yii::t('app', 'Teams') ?>
-                                                <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
-                                                    style="cursor: pointer;">
-                                                </span>
-                                            </a>
-                                            <?php } ?>
-                                            <?php if ($department['totalTeam'] == 0) { ?>
-                                            <span class="bodyname-crad-company">
-                                                <?= Yii::t('app', 'No Teams Yet') ?>
-                                            </span>
-                                            <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(["companyId" => '', "branchId" => '', "departmentId" => $department['departmentId']]) ?>"
-                                                style="text-decoration: none;">
-                                                <button class="btn-create-small"
-                                                    action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
-                                                        style="width: 12px; height: 12px;">
-                                                    <?= Yii::t('app', 'Create') ?>
-                                                </button>
-                                            </a>
-                                            <?php } ?>
+                                    <tr class="tr-font list-table-body" id="department-<?= $department['departmentId'] ?>"
+                                        style="height:50px; background-color:#F4F6F9 !important;">
+                                        <td>
+                                            <div class="circle-container ml-15">
+                                                <div class="cycle-current-red">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/departments.svg" alt="icon">
+                                                </div>
+                                                <?= $department['departmentName'] ?>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="circle-container ml-15">
+                                                <div
+                                                    class="cycle-current-<?= $department['totalTeam'] >= 1 ? 'green' : 'gray' ?>">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $department['totalTeam'] >= 1 ? '' : '-black' ?>.svg"
+                                                        alt="icon">
+                                                </div>
+                                                <div
+                                                    class="cycle-current-<?= $department['totalTeam'] >= 2 ? 'green' : 'gray' ?>">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $department['totalTeam'] >= 2 ? '' : '-black' ?>.svg"
+                                                        alt="icon">
+                                                </div>
+                                                <div
+                                                    class="cycle-current-<?= $department['totalTeam'] >= 3 ? 'green' : 'gray' ?>">
+                                                    <img src="<?= Yii::$app->homeUrl ?>image/teams<?= $department['totalTeam'] >= 3 ? '' : '-black' ?>.svg"
+                                                        alt="icon">
+                                                </div>
+                                                <div class="number-current-cycle "><?= $department['totalTeam'] ?>
+                                                </div>
+                                                <div class="bodyname-company">
+                                                    <?php if ($department['totalTeam'] > 0) { ?>
+                                                        <a class="see-all-company" style="font-size: 10.5px; "
+                                                            href="<?= Yii::$app->homeUrl ?>setting/team/no-team/<?= ModelMaster::encodeParams(['companyId' => $company['companyId'], 'branchId' =>  $department['branchId'], 'departmentId' =>  $department['departmentId']]) ?>">
+                                                            <?= Yii::t('app', 'Teams') ?>
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
+                                                                style="cursor: pointer;">
+                                                            </span>
+                                                        </a>
+                                                    <?php } ?>
+                                                    <?php if ($department['totalTeam'] == 0) { ?>
+                                                        <span class="bodyname-crad-company">
+                                                            <?= Yii::t('app', 'No Teams Yet') ?>
+                                                        </span>
+                                                        <a href="<?= Yii::$app->homeUrl ?>setting/team/create/<?= ModelMaster::encodeParams(["companyId" => '', "branchId" => '', "departmentId" => $department['departmentId']]) ?>"
+                                                            style="text-decoration: none;">
+                                                            <button class="btn-create-small"
+                                                                action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
+                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
+                                                                    style="width: 12px; height: 12px;">
+                                                                <?= Yii::t('app', 'Create') ?>
+                                                            </button>
+                                                        </a>
+                                                    <?php } ?>
 
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="circle-container ml-15">
-                                        <?php if ($department['totalEmployee'] >= 1 && isset($department['employees'][0])) { ?>
-                                        <div class="cycle-image mr-3">
-                                            <img src="<?= Yii::$app->homeUrl ?><?php echo $department['employees'][0]['picture'] ?>"
-                                                alt="icon">
-                                        </div>
-                                        <?php } else { ?>
-                                        <div class="cycle-current-gray"><img
-                                                src="<?= Yii::$app->homeUrl ?>image/employees-black.svg" alt="icon">
-                                        </div>
-                                        <?php } ?>
-                                        <?php if ($department['totalEmployee'] >= 2 && isset($department['employees'][1])) { ?>
-                                        <div class="cycle-image mr-3">
-                                            <img src="<?= Yii::$app->homeUrl ?><?php echo $department['employees'][1]['picture'] ?>"
-                                                alt="icon">
-                                        </div>
-                                        <?php } else { ?>
-                                        <div class="cycle-current-gray"><img
-                                                src="<?= Yii::$app->homeUrl ?>image/employees-black.svg" alt="icon">
-                                        </div>
-                                        <?php } ?>
-                                        <?php if ($department['totalEmployee'] >= 3 && isset($department['employees'][2])) { ?>
-                                        <div class="cycle-image mr-3">
-                                            <img src="<?= Yii::$app->homeUrl ?><?php echo $department['employees'][2]['picture'] ?>"
-                                                alt="icon">
-                                        </div>
-                                        <?php } else { ?>
-                                        <div class="cycle-current-gray"><img
-                                                src="<?= Yii::$app->homeUrl ?>image/employees-black.svg" alt="icon">
-                                        </div>
-                                        <?php } ?>
-                                        <div class="number-current-cycle ">
-                                            <?= $department['totalEmployee'] ?>
-                                        </div>
-                                        <div class="bodyname-company">
-                                            <?php if ($department['totalEmployee'] > 0) { ?>
-                                            <a class="see-all-company" style="font-size: 10.5px; "
-                                                href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => $company['companyId'],'branchId' =>  $department['branchId'],'departmentId' =>  $department['departmentId']]) ?>">
-                                                <?= Yii::t('app', 'Employees') ?>
-                                                <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
-                                                    style="cursor: pointer;">
-                                                </span>
-                                            </a>
-                                            <?php } ?>
-                                            <?php if ($department['totalEmployee'] == 0) { ?>
-                                            <span class="bodyname-crad-company">
-                                                <?= Yii::t('app', 'No Employees Yet') ?>
-                                            </span>
-                                            <a href="<?= Yii::$app->homeUrl ?>setting/employee/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
-                                                style="text-decoration: none;">
-                                                <button type="button" class="btn-create-small"
-                                                    action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
-                                                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
-                                                        style="width: 12px; height: 12px;">
-                                                    <?= Yii::t('app', 'Create') ?>
-                                                </button>
-                                            </a>
-                                            <?php } ?>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="circle-container ml-15">
+                                                <?php if ($department['totalEmployee'] >= 1 && isset($department['employees'][0])) { ?>
+                                                    <div class="cycle-image mr-3">
+                                                        <img src="<?= Yii::$app->homeUrl ?><?php echo $department['employees'][0]['picture'] ?>"
+                                                            alt="icon">
+                                                    </div>
+                                                <?php } else { ?>
+                                                    <div class="cycle-current-gray"><img
+                                                            src="<?= Yii::$app->homeUrl ?>image/employees-black.svg" alt="icon">
+                                                    </div>
+                                                <?php } ?>
+                                                <?php if ($department['totalEmployee'] >= 2 && isset($department['employees'][1])) { ?>
+                                                    <div class="cycle-image mr-3">
+                                                        <img src="<?= Yii::$app->homeUrl ?><?php echo $department['employees'][1]['picture'] ?>"
+                                                            alt="icon">
+                                                    </div>
+                                                <?php } else { ?>
+                                                    <div class="cycle-current-gray"><img
+                                                            src="<?= Yii::$app->homeUrl ?>image/employees-black.svg" alt="icon">
+                                                    </div>
+                                                <?php } ?>
+                                                <?php if ($department['totalEmployee'] >= 3 && isset($department['employees'][2])) { ?>
+                                                    <div class="cycle-image mr-3">
+                                                        <img src="<?= Yii::$app->homeUrl ?><?php echo $department['employees'][2]['picture'] ?>"
+                                                            alt="icon">
+                                                    </div>
+                                                <?php } else { ?>
+                                                    <div class="cycle-current-gray"><img
+                                                            src="<?= Yii::$app->homeUrl ?>image/employees-black.svg" alt="icon">
+                                                    </div>
+                                                <?php } ?>
+                                                <div class="number-current-cycle ">
+                                                    <?= $department['totalEmployee'] ?>
+                                                </div>
+                                                <div class="bodyname-company">
+                                                    <?php if ($department['totalEmployee'] > 0) { ?>
+                                                        <a class="see-all-company" style="font-size: 10.5px; "
+                                                            href="<?= Yii::$app->homeUrl ?>setting/employee/no-employee/<?= ModelMaster::encodeParams(['companyId' => $company['companyId'], 'branchId' =>  $department['branchId'], 'departmentId' =>  $department['departmentId']]) ?>">
+                                                            <?= Yii::t('app', 'Employees') ?>
+                                                            <img src="<?= Yii::$app->homeUrl ?>image/see-all.svg" alt="icon"
+                                                                style="cursor: pointer;">
+                                                            </span>
+                                                        </a>
+                                                    <?php } ?>
+                                                    <?php if ($department['totalEmployee'] == 0) { ?>
+                                                        <span class="bodyname-crad-company">
+                                                            <?= Yii::t('app', 'No Employees Yet') ?>
+                                                        </span>
+                                                        <a href="<?= Yii::$app->homeUrl ?>setting/employee/create/<?= ModelMaster::encodeParams(['companyId' => $company['companyId']]) ?>"
+                                                            style="text-decoration: none;">
+                                                            <button type="button" class="btn-create-small"
+                                                                action="<?= Yii::$app->homeUrl ?>setting/group/create-group">
+                                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus.svg"
+                                                                    style="width: 12px; height: 12px;">
+                                                                <?= Yii::t('app', 'Create') ?>
+                                                            </button>
+                                                        </a>
+                                                    <?php } ?>
 
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <a onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $department['branchId'], 'departmentId' => $department['departmentId']]) ?>')"
-                                        class="btn btn-bg-white-xs mr-5 p-0" style="width:27px;height:27px;">
-                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
-                                            alt="edit" class="pim-icon" style="width:14px;height:14px;margin-top:3px;">
-                                    </a>
-                                </td>
-                            </tr>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a onclick="openPopupModalDepartment('<?= Yii::$app->homeUrl ?>setting/department/modal-department/<?= ModelMaster::encodeParams(['branchId' => $department['branchId'], 'departmentId' => $department['departmentId']]) ?>')"
+                                                class="btn btn-bg-white-xs mr-5 p-0" style="width:27px;height:27px;">
+                                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/editblack.svg"
+                                                    alt="edit" class="pim-icon" style="width:14px;height:14px;margin-top:3px;">
+                                            </a>
+                                        </td>
+                                    </tr>
                             <?php
                                     $i++;
                                 endforeach;

@@ -1,7 +1,7 @@
 .background-Planning {
     background-color: rgb(244, 246, 247);
     border-radius: 10px;
-    font-family: 'sf pro display';
+
 }
 
 .planning {
@@ -65,7 +65,7 @@
     font-size: 20px;
     font-weight: 600;
     letter-spacing: -0.7px;
-    font-family: 'sf pro display';
+
 }
 
 .Dark_Monthly {
@@ -288,13 +288,13 @@
 #DataDistionaryLabel {
     font-size: 16px;
     letter-spacing: -0.8px;
-    font-family: 'sf pro display';
+
     font-weight: 600;
 }
 
 .modal-DataDistionary {
     margin-top: 90px;
-    font-family: 'sf pro display';
+
     margin-left: -190px;
 }
 
@@ -611,7 +611,7 @@ input[type="checkbox"]:checked+label {
     font-size: 14px;
     font-weight: 800;
     color: #6D6E70;
-    font-family: 'sf pro display';
+
     letter-spacing: -0.9px;
     padding-top: 5px;
 }
