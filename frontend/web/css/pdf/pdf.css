@@ -1,30 +1,46 @@
 .float-left {
     float: left;
 }
+
 .float-right {
     float: right;
 }
 
 .name-header {
-    font-size: 26px;
-    font-weight: 400;
-    letter-spacing: 2px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter';
 }
+
+.text-head {
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.text-detail {
+    font-size: 10px;
+    font-weight: 600;
+}
+
 .image-picture {
-    width: 130px;
-    height: 150px;
-    border-radius: 10px;
+    width: 101px;
+    height: 135px;
+    /* border-radius: 10px; */
 }
-.table-pdf{
+
+.table-pdf {
     border: 0px;
     width: 100%;
-    
+    margin-left: -10px;
+
 }
-td{
+
+td {
     height: 35px;
     letter-spacing: 1px;
 }
-th{
+
+th {
     height: 45px;
     letter-spacing: 1px;
 }

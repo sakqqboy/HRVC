@@ -14,18 +14,23 @@
 	include_once 'css/pdf/font.css';
 	?>
 </style>
-<div class="col-12 container pt-40 pl-40">
+<div class="col-12 pr-0 pl-0">
 	<table class="table-pdf" style="margin-top: -20px;">
+		<tr>
+			<td>
+				<img src="<?= Path::frontendUrl() . 'images/icons/Settings/Config/logo.svg' ?>" alt="Logo" style="width:57px;height:19px;margin-left:10px;" />
+			</td>
+		</tr>
+	</table>
+	<hr style="margin-top:5px;">
+	<table class="table-pdf" style="margin-top: -10px;">
+
 		<tr>
 			<td class="pt-13" rowspan="5" style="width:160px;vertical-align:top;">
 				<?php
 
 				if ($employee['picture'] == "") {
-					if ($employee['gender'] == 1) {
-						$picture = 'image/user.png';
-					} else {
-						$picture = 'image/lady.jpg';
-					}
+					$picture = 'images/employee/status/employee-nopic.svg';
 				} else {
 					$picture = $employee['picture'];
 				}
@@ -42,8 +47,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="width:170px;" class="font-size-16">Employee Number</td>
-			<td style="width:400px;" class="font-size-14"><?= $employee["employeeNumber"] ?></td>
+			<td style="width:170px;" class="text-head">Employee ID</td>
+			<td style="width:400px;" class="text-detail"><?= $employee["employeeNumber"] ?></td>
 		</tr>
 		<tr>
 			<td class="font-size-16">Date of birth</td>
