@@ -127,15 +127,17 @@ $form = ActiveForm::begin([
                             text-align: center;
                             cursor: pointer;">
 
-                                <label id="imgpreview" class="upload-label" style="cursor: pointer;  display: block;">
+                                <label id="imgpreview" class="upload-label" style="cursor: pointer;display: block;width: 200px;height: 200px;">
                                     <?php
                                     if (isset($employee) && $employee["image"] != null) { ?>
                                         <img id="old-image" src="<?= Yii::$app->homeUrl . $employee['image'] ?>"
                                             class="company-group-picture" style="width: 170px; height: 170px;">
                                     <?php
                                     } else { ?>
-                                        <img id="old-image" src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"
-                                            alt="Upload Icon"> <br><br>
+                                        <img id="old-image" src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg" style=" margin-top: 60px;"> 
+                                        <br><br>
+                                        <img id="new-image" src=""
+                                            class="company-group-picture" style="width: 170px; height: 170px; display: none;">
                                         <span id="d-up-img1">
                                             <?= Yii::t('app', 'Upload') ?> <span style="font-size: 13px; color: #666;">
                                                 <?= Yii::t('app', 'or Drop') ?> </span>
@@ -161,7 +163,7 @@ $form = ActiveForm::begin([
                                         id="bin-file">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
                                             alt="Delete"
-                                            style="width: 20px;height: 20px;padding-top: 0px;margin-top: 5px;margin-left: 7px;">
+                                            style="width: 20px;height: 20px; ">
                                     </div>
 
                                     <!-- ปุ่มรีเฟรช -->
@@ -1955,9 +1957,11 @@ $form = ActiveForm::begin([
             $('#imgUpload').val('');
             // uploadedCerFile = null;
             // $('#previewImage').hide();
-            $('#old-image').attr('src', '<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg');
+            // $('#old-image').attr('src', '<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg');
+            $('#old-image').show();
             $('#d-up-img1').show();
             $('#d-up-img2').show();
+            $('#new-image').hide();
             $('#bin-file, #refes-file').hide();
         });
 
