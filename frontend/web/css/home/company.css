@@ -72,7 +72,7 @@
 .detailname-crad-company {
     align-self: stretch;
     color: var(--HRVC---Text-Black, #30313D);
-    font-family: "SF Pro Display";
+
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -82,7 +82,7 @@
 
 .bodyname-crad-company {
     color: var(--HRVC---Text-Black, #30313D);
-    font-family: "SF Pro Display";
+
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
@@ -119,7 +119,7 @@
 .text-create-crad {
     color: var(--HRVC---Text-Black, #30313D);
     text-align: center;
-    font-family: "SF Pro Display";
+
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -194,7 +194,7 @@
     /* overflow: hidden; */
     color: var(--Color-Tokens-Content-Dark-Secondary, #727272);
     text-overflow: ellipsis;
-    font-family: "SF Pro Display";
+
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -206,7 +206,7 @@
     /* overflow: hidden; */
     color: var(--HRVC---Text-Black, #30313D);
     text-overflow: ellipsis;
-    font-family: "SF Pro Display";
+
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -232,7 +232,7 @@
 
 .see-all-company {
     color: var(--Primary-Blue---HRVC, #2580D3);
-    font-family: "SF Pro Display";
+
     font-size: 14px;
     font-style: normal;
     font-weight: 600;

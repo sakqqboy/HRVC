@@ -5,7 +5,7 @@
 .Dasdboard-start {
     font-size: 19px;
     font-weight: 600;
-    font-family: 'sf pro display';
+
     letter-spacing: -0.8px;
     color: black;
 }
@@ -127,7 +127,7 @@
     color: #18b818;
 }
 
-.radio-checked{
+.radio-checked {
     background-color: black;
     color: white;
 }
@@ -174,7 +174,7 @@
     padding-top: 5px;
 }
 
-.radio-checked-black:checked{
+.radio-checked-black:checked {
     background-color: black;
     color: white;
 }
@@ -292,73 +292,84 @@
 .stepper-item:last-child::after {
     content: none;
 }
-.frame-table-header{
+
+.frame-table-header {
     font-size: 10px;
     background-color: lightgray;
 }
-.term-table-header{
+
+.term-table-header {
     font-size: 10px;
     background-color: white;
 }
-.frame-table-tr{
+
+.frame-table-tr {
     background-color: #f4f2f2;
     font-size: 10px;
-    border-bottom:white solid 0px;
+    border-bottom: white solid 0px;
     /* border-spacing: 20px; */
     /* border:white solid 5px; */
 }
-.border-left-primary{
+
+.border-left-primary {
     height: 40px;
-    border-left:7px solid #3399FF;
+    border-left: 7px solid #3399FF;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     margin-top: -8px;
     margin-left: -5px;
 }
-.border-left-warning{
+
+.border-left-warning {
     height: 40px;
-    border-left:7px solid #FFCC00;
+    border-left: 7px solid #FFCC00;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     margin-top: -8px;
     margin-left: -5px;
 }
-.border-left-danger{
+
+.border-left-danger {
     height: 40px;
-    border-left:7px solid #FF3300;
+    border-left: 7px solid #FF3300;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     margin-top: -8px;
     margin-left: -5px;
 }
-.border-left-primary-frame{
+
+.border-left-primary-frame {
     height: 37px;
-    border-left:5px solid #3399FF;
+    border-left: 5px solid #3399FF;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     margin-top: -8px;
     margin-left: -5px;
 }
-.border-left-warning-frame{
+
+.border-left-warning-frame {
     height: 37px;
-    border-left:7px solid #FFCC00;
+    border-left: 7px solid #FFCC00;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     margin-top: -8px;
     margin-left: -5px;
 }
-.border-left-danger-frame{
+
+.border-left-danger-frame {
     height: 30px;
-    border-left:7px solid #FF3300;
+    border-left: 7px solid #FF3300;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     margin-top: -8px;
     margin-left: -5px;
 }
-.td-frame{
+
+.td-frame {
     position: relative;
 }
-.term-progress{
+
+.term-progress {
     background-color: #D1E5F9;
     font-size: 14px;
     color: #4294FF;
@@ -366,29 +377,35 @@
     height: 35px;
     position: relative;
 }
-.term-progress-line{
-    border-top:#4294FF dotted 2px;
+
+.term-progress-line {
+    border-top: #4294FF dotted 2px;
 }
-.date-calendar{
+
+.date-calendar {
     margin-top: -28px;
 }
-.date-calendar-head{
+
+.date-calendar-head {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    background-color:#0099FF ;
+    background-color: #0099FF;
     height: 10px;
 }
-.date-calendar-body{
+
+.date-calendar-body {
     height: 40px;
     background-color: white;
     font-size: 10px;
     font-weight: 500;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-.term-check:checked{
-background-color: #18b818;
-border-color: #18b818;
+
+.term-check:checked {
+    background-color: #18b818;
+    border-color: #18b818;
 }
-.term-head{
+
+.term-head {
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }

@@ -139,7 +139,6 @@
 
 .Currency_Conversion_Rate {
     font-size: 18px;
-    font-family: 'sf pro display';
     letter-spacing: -0.8px;
     color: #1B1D20;
     font-weight: 600;
@@ -172,7 +171,6 @@
 .select_Toplanning {
     font-size: 13px;
     margin-top: 5px;
-    font-family: 'Sf pro display';
 }
 
 .images_random1 {
@@ -183,14 +181,12 @@
 .set_fontFrom {
     font-size: 13px;
     letter-spacing: -0.8px;
-    font-family: 'Sf pro display';
 }
 
 .result_country {
     margin-top: 30px;
     font-size: 13px;
     letter-spacing: -0.5px;
-    font-family: 'Sf pro display';
 }
 
 .btn-convert {

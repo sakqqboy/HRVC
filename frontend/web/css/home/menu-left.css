@@ -2,26 +2,6 @@
     font-family: 'SF Pro Display', 'sans-serif';
     src: url('C:/MAMP/htdocs/HRVC/frontend/web/fonts/sf-pro/SF-Pro.ttf');
   } */
-@font-face {
-    font-family: "SF Pro Display";
-    font-style: normal;
-    font-weight: 300;
-    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Light.ttf");
-}
-
-@font-face {
-    font-family: "SF Pro Display";
-    font-style: normal;
-    font-weight: 100;
-    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Ultralight.ttf");
-}
-
-@font-face {
-    font-family: "SF Pro Display";
-    font-style: normal;
-    font-weight: 200;
-    src: url("https://raw.githubusercontent.com/blaisck/sfwin/master/SFPro/TrueType/SFProDisplay-Thin.ttf");
-}
 
 
 .scroll-container {
