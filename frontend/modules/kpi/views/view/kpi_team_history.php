@@ -20,14 +20,18 @@ $this->title = 'Team KPI History';
     ]) ?>
     <div class="col-12 mt-20" id="box-wrapper">
         <div class="bg-white-employee">
-            <div class="font-size-12 pl-5" style="width: 100%;">
-                <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid" class="mr-5 pim-text-back">
+            <div class="pim-name-title" style="display: flex; align-items: center; gap: 14px;">
+                <!-- <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/team-kpi-grid" class="mr-5 pim-text-back">
                     <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                     <?= Yii::t('app', 'Back') ?>
+                </a> -->
+                <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid' ?>"  style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
+                            <?= Yii::t('app', 'Back') ?>        
                 </a>
-                <span class="pim-name">
+                <!-- <span class="pim-name"> -->
                     <?= $kpiDetail["kpiName"] ?>
-                </span>
+                <!-- </span> -->
             </div>
             <div class="row mt-20" style="--bs-gutter-x:0px;">
                 <?php

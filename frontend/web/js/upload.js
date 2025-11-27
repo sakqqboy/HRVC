@@ -37,9 +37,12 @@ $("#imgUpload").on("change", function () {
         return;
     }else{
             uploadedCerFile = file;
-                $('#old-image').attr('src', URL.createObjectURL(file));
+                // $('#old-image').attr('src', URL.createObjectURL(file));
+                $('#old-image').hide();
                 $('#d-up-img1').hide();
                 $('#d-up-img2').hide();
+                $('#new-image').show();
+                $('#new-image').attr('src', URL.createObjectURL(file));
                 iconBinRe();
     }
 });

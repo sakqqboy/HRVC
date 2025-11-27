@@ -1093,27 +1093,28 @@ class BranchController extends Controller
                 if (!file_exists($path)) {
                     mkdir($path, 0777, true);
                 }
-
-                $filenameArray = explode('.', $fileImage->name);
-                $ext = strtolower(end($filenameArray));
-                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $ext;
+                $file = $fileImage->name;
+                $filenameArray = explode('.', $file);
+                $countArrayFile = count($filenameArray);
+                $extension =  strtolower($filenameArray[$countArrayFile - 1]);
+                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $extension;
                 $pathSave = $path . $fileName;
 
                 // โหลดภาพจาก temp
                 $tempPath = $fileImage->tempName;
                 list($width, $height) = getimagesize($tempPath);
-                $srcImg = null;
 
-                if (in_array($ext, ['jpg', 'jpeg'])) {
-                    $srcImg = imagecreatefromjpeg($tempPath);
-                } elseif ($ext === 'png') {
-                    $srcImg = imagecreatefrompng($tempPath);
-                } elseif ($ext === 'gif') {
-                    $srcImg = imagecreatefromgif($tempPath);
+                $srcImg = null;
+				if ($extension === 'jpg' || $extension === 'jpeg') {
+                    $srcImg = @imagecreatefromjpeg($tempPath);
+                } elseif ($extension === 'png') {
+                    $srcImg = @imagecreatefrompng($tempPath);
+                } elseif ($extension === 'gif') {
+                    $srcImg = @imagecreatefromgif($tempPath);
                 }
 
                 if ($srcImg) {
-                    $cropSize = 100;
+                    $cropSize = 600;
                     $dstImg = imagecreatetruecolor($cropSize, $cropSize);
 
                     // คำนวณจุด crop ตรงกลาง
@@ -1124,14 +1125,14 @@ class BranchController extends Controller
                     // Crop + Resize
                     imagecopyresampled($dstImg, $srcImg, 0, 0, $srcX, $srcY, $cropSize, $cropSize, $minSize, $minSize);
 
-                    // บันทึกภาพ
-                    if (in_array($ext, ['jpg', 'jpeg'])) {
-                        imagejpeg($dstImg, $pathSave, 90);
-                    } elseif ($ext === 'png') {
-                        imagepng($dstImg, $pathSave);
-                    } elseif ($ext === 'gif') {
-                        imagegif($dstImg, $pathSave);
-                    }
+                    // บันทึกไฟล์ภาพที่ถูก crop แล้ว
+					if ($extension === 'jpg' || $extension === 'jpeg') {
+						imagejpeg($dstImg, $pathSave, 90);
+					} elseif ($extension === 'png') {
+						imagepng($dstImg, $pathSave);
+					} elseif ($extension === 'gif') {
+						imagegif($dstImg, $pathSave);
+					}
 
                     imagedestroy($srcImg);
                     imagedestroy($dstImg);
