@@ -52,9 +52,9 @@ $this->title = 'Company profile';
                 <div class="avatar-upload-preview">
                     <div class="avatar-preview">
                         <?php if ($company["picture"] != null && $company["picture"] != 'image/no-company.svg') { ?>
-                            <img src="<?= Yii::$app->homeUrl . $company['picture'] ?>" class="company-group-picture">
+                            <img src="<?= Yii::$app->homeUrl . $company['picture'] ?>" class="company-group-picture rounded-circle">
                         <?php } else { ?>
-                            <img src="<?= Yii::$app->homeUrl . 'image/no-company.svg' ?>" class="company-group-picture" style="min-width:154px;">
+                            <img src="<?= Yii::$app->homeUrl . 'image/no-company.svg' ?>" class="company-group-picture rounded-circle" style="min-width:154px;">
                         <?php } ?>
                     </div>
                 </div>

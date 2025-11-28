@@ -28,21 +28,44 @@ $this->title = 'Create Group';
     <div class="d-flex justify-content-start" style="margin-top: -100px;">
         <div class="ml-35 avatar-upload">
             <div class="avatar-preview" id="imagePreview" style="
-                                background-color: white;
-                            fill: #FFF;
+                            background-color: white;
                             stroke-width: 1px;
                             stroke: var(--Primary-Blue---HRVC, #2580D3);
                             border-radius: 100%;
                             text-align: center;
-                            cursor: pointer;
-                            padding:0px;">
-                <label for="imageUpload" class="upload-label" id="imageUploadIcon" style="cursor: pointer;">
-                    <img src="<?= Yii::$app->homeUrl . 'image/upload-iconimg.svg' ?>" style="width: 37px; height: 37px;" alt="Upload Icon">
-                    <div class="mt-10"><?= Yii::t('app', 'Upload') ?>
-                        <span style="font-size: 13px; color: #838383;"><?= Yii::t('app', 'or Drop') ?></span>
-                    </div>
-                    <span style="font-size: 13px; color: #838383;"><?= Yii::t('app', 'Group Picture here') ?></span>
+                            cursor: pointer;">
+                <label  for="imageUpload" class="upload-label" style="cursor: pointer;">
+                    <img id="icon-image" src="<?= Yii::$app->homeUrl . 'image/upload-iconimg.svg' ?>" style="width: 37px; height: 37px;" alt="Upload Icon">
+                    <span id="d-up-img1" class="mt-10" style=""> <?= Yii::t('app', 'Upload') ?> 
+                    <span style="font-size: 13px; color: #666;"> <?= Yii::t('app', 'or Drop') ?> </span>
+                    </span>     
+                    <br>
+                    <span id="d-up-img2" style="font-size: 13px; color: #666;">
+                         <?= Yii::t('app', 'Group Picture here') ?>
+                    </span>
                 </label>
+                <div class="center-center" id="cer-action-buttons" style="
+                                        position: absolute;
+                                        bottom: 10px;
+                                        left: 50%;
+                                        transform: translateX(-50%);
+                                        gap: 10px;
+                                    ">
+                                    <!-- ปุ่มลบ -->
+                                    <div class="cycle-box-icon" style=" background-color: #fff0f0; display: none;  opacity: 1"
+                                        id="bin-img">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                            alt="Delete"
+                                            style="width: 20px;height: 20px; ">
+                                    </div>
+
+                                    <!-- ปุ่มรีเฟรช -->
+                                    <div class="cycle-box-icon" style=" background-color: #e6f1ff; display: none;  opacity: 1"
+                                        id="refes-img">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg" alt="Refresh"
+                                            style="width: 18px; height: 18px;">
+                                    </div>
+                </div>
             </div>
             <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
                 style="display: none;" />

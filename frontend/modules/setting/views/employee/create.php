@@ -134,12 +134,22 @@ $form = ActiveForm::begin([
                                             class="company-group-picture" >
                                         <img id="new-image" src=""
                                             class="company-group-picture" style="display: none;">
+
+                                        <img id="icon-image" class="mb-10" src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg" style="display: none;"> 
+                                        <span id="d-up-img1" style="display: none;">
+                                            <?= Yii::t('app', 'Upload') ?> <span style="font-size: 13px; color: #666;">
+                                                <?= Yii::t('app', 'or Drop') ?> </span>
+                                        </span>
+                                        <br>
+                                        <span id="d-up-img2" style="display: none; font-size: 13px; color: #666;">
+                                            <?= Yii::t('app', 'Picture here') ?>
+                                        </span>
+
                                     <?php
                                     } else { ?>
-                                        <img id="icon-image" src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"> 
-                                        <br><br>
                                         <img id="new-image" src=""
-                                            class="company-group-picture mb-15" style="display: none;">
+                                            class="company-group-picture mb-10" style="display: none;">
+                                        <img id="icon-image"  class="mb-10" src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"> 
                                         <span id="d-up-img1">
                                             <?= Yii::t('app', 'Upload') ?> <span style="font-size: 13px; color: #666;">
                                                 <?= Yii::t('app', 'or Drop') ?> </span>
@@ -1957,13 +1967,17 @@ $form = ActiveForm::begin([
 
         $(document).on('click', '#bin-file', function() {
             $('#imgUpload').val('');
+            $('#old-image').attr('src', '');   // <-- แก้ตรงนี้
+            $('#new-image').attr('src', '');   // <-- แก้ตรงนี้
             // uploadedCerFile = null;
             // $('#previewImage').hide();
             // $('#old-image').attr('src', '<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg');
+
+            $('#new-image').hide();
+            $('#old-image').hide();
             $('#icon-image').show();
             $('#d-up-img1').show();
             $('#d-up-img2').show();
-            $('#new-image').hide();
             $('#bin-file, #refes-file').hide();
         });
 
