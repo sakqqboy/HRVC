@@ -6,27 +6,45 @@
     float: right;
 }
 
+.header-page {
+    border-bottom: lightgray solid thin;
+}
+
 .name-header {
-    font-size: 14px;
+    font-size: 18px;
+    font-family: 'Inter';
     font-weight: 600;
     font-family: 'Inter';
 }
 
 .text-head {
-    font-size: 10px;
+    font-size: 12px;
+    font-family: 'Inter';
     font-weight: 600;
+    width: 120px;
 }
 
 .text-detail {
-    font-size: 10px;
-    font-weight: 600;
+    font-size: 12px;
+    font-family: 'Inter';
+    font-weight: 400;
+    width: 180px;
 }
 
-.image-picture {
-    width: 101px;
-    height: 135px;
-    /* border-radius: 10px; */
+.text-head2 {
+    font-size: 12px;
+    font-family: 'Inter';
+    font-weight: 600;
+    width: 120px;
 }
+
+.text-detail2 {
+    font-size: 12px;
+    font-family: 'Inter';
+    font-weight: 400;
+    width: 230px;
+}
+
 
 .table-pdf {
     border: 0px;
@@ -35,12 +53,47 @@
 
 }
 
+.title-head {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: -10px;
+}
+
+.subTitle-head {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(48, 49, 61, 1);
+}
+
+.jobDescript-detail {
+    min-height: 20px;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(48, 49, 61, 1);
+}
+
+.print-detail {
+    color: rgba(82, 82, 82, 1);
+    font-size: 10px;
+    letter-spacing: 0.7px;
+}
+
 td {
-    height: 35px;
-    letter-spacing: 1px;
+    height: 22px;
 }
 
 th {
     height: 45px;
     letter-spacing: 1px;
+}
+
+
+
+.personal-infomation {
+    font-family: 'Inter';
+}
+
+.personal-image {
+    width: 101px;
+    height: 135px;
 }

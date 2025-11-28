@@ -276,7 +276,7 @@ class EmployeeController extends Controller
             $employee->createDateTime = new Expression('NOW()');
             $employee->updateDateTime = new Expression('NOW()');
             // Upload Profile Image
-           $pictureProfile = UploadedFile::getInstanceByName("image");
+            $pictureProfile = UploadedFile::getInstanceByName("image");
             if (isset($pictureProfile) && !empty($pictureProfile)) {
 
                 // โฟลเดอร์เซฟรูป
@@ -324,11 +324,16 @@ class EmployeeController extends Controller
                     $srcY = round(($height - $minSize) / 2);
 
                     imagecopyresampled(
-                        $dstImg, $srcImg,
-                        0, 0,
-                        $srcX, $srcY,
-                        $cropSize, $cropSize,
-                        $minSize, $minSize
+                        $dstImg,
+                        $srcImg,
+                        0,
+                        0,
+                        $srcX,
+                        $srcY,
+                        $cropSize,
+                        $cropSize,
+                        $minSize,
+                        $minSize
                     );
 
                     // บันทึกรูป
@@ -345,11 +350,9 @@ class EmployeeController extends Controller
 
                     // เซฟชื่อไฟล์ลง DB
                     $employee->picture = 'images/employee/profile/' . $fileName;
-
                 }
-
             } else {
-                    $employee->picture = 'images/employee/status/employee-no-pic.svg';
+                $employee->picture = 'images/employee/status/employee-no-pic.svg';
             }
 
 
@@ -869,11 +872,16 @@ class EmployeeController extends Controller
 
                         // Crop + Resize
                         imagecopyresampled(
-                            $dstImg, $srcImg,
-                            0, 0,
-                            $srcX, $srcY,
-                            $cropSize, $cropSize,
-                            $minSize, $minSize
+                            $dstImg,
+                            $srcImg,
+                            0,
+                            0,
+                            $srcX,
+                            $srcY,
+                            $cropSize,
+                            $cropSize,
+                            $minSize,
+                            $minSize
                         );
 
                         // บันทึกไฟล์ใหม่
@@ -2063,7 +2071,13 @@ class EmployeeController extends Controller
         $employee["titleName"] = Title::titleName($employee['titleId']);
         $employee["conditionName"] = EmployeeCondition::conditionName($employee['employeeConditionId']);
         $employee["status"] = EmployeeStatus::employeeStatus($employee['employeeId']);
-        $content = $this->renderPartial('export_employee', ["employee" => $employee]);
+        // throw new exception(print_r($employee, true));
+        $date = date('Y-m-d h:i:s');
+        $printedDate = ModelMaster::timeDateNumber($date);
+        $printName = User::employeeNameByuserId(Yii::$app->user->id);
+        $content = $this->renderPartial('export_employee', ["employee" => $employee, "printedDate" => $printedDate, "printName" => $printName]);
+
+        //    return $this->render('test-export', ["content" => $content]);
         $options = new Options();
 
         $options->set('isRemoteEnabled', true);

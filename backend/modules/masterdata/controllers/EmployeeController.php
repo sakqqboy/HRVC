@@ -54,8 +54,8 @@ class EmployeeController extends Controller
 	public function actionEmployeeDetail($id)
 	{
 		$employee = Employee::find()
-			->select('employee.*,c.companyName,c.picture cPicture,co.countryName,co.flag,t.titleName,b.branchName,
-			condition.employeeConditionName,s.statusName,na.nationalityName,c.city,t.shortTag')
+			->select('employee.*,c.companyName,c.picture cPicture,co.countryName,co.flag,t.titleName,b.branchName,t.jobDescription,t.purpose,t.keyResponsibility,
+			condition.employeeConditionName,s.statusName,na.nationalityName,c.city,t.shortTag,c.location')
 			->JOIN("LEFT JOIN", "company c", "c.companyId=employee.companyId")
 			->JOIN("LEFT JOIN", "branch b", "b.branchId=employee.branchId")
 			->JOIN("LEFT JOIN", "title t", "t.titleId=employee.titleId")

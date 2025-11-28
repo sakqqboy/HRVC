@@ -3,7 +3,6 @@
 
 	use common\helpers\Path;
 	use common\models\ModelMaster;
-	use frontend\models\hrvc\Employee;
 
 	include_once 'css/pdf/bootstrap.min.css';
 	//include_once 'css/pdf/bootstrap-grid.css';
@@ -14,19 +13,14 @@
 	include_once 'css/pdf/font.css';
 	?>
 </style>
-<div class="col-12 pr-0 pl-0">
-	<table class="table-pdf" style="margin-top: -20px;">
-		<tr>
-			<td>
-				<img src="<?= Path::frontendUrl() . 'images/icons/Settings/Config/logo.svg' ?>" alt="Logo" style="width:57px;height:19px;margin-left:10px;" />
-			</td>
-		</tr>
-	</table>
-	<hr style="margin-top:5px;">
-	<table class="table-pdf" style="margin-top: -10px;">
-
-		<tr>
-			<td class="pt-13" rowspan="5" style="width:160px;vertical-align:top;">
+<div style="margin-top: -20px;">
+	<img src="<?= Path::frontendUrl() . 'images/icons/Settings/Config/logo.svg' ?>" alt="Logo" style="width:57px;height:19px;" />
+</div>
+<hr style="margin-top:5px;">
+<div class="personal-infomation">
+	<table>
+		<tr style="height: 135px;">
+			<td rowspan="7">
 				<?php
 
 				if ($employee['picture'] == "") {
@@ -35,102 +29,120 @@
 					$picture = $employee['picture'];
 				}
 				?>
-				<img src="<?= Path::frontendUrl() . $picture ?>" alt="Logo" class="image-picture" />
+				<img src="<?= Path::frontendUrl() . $picture ?>" alt="Logo" class="personal-image" style="margin-top:-20px;" />
 			</td>
-			<td class="" colspan="2">
-				<span class="name-header mr-50" style="margin-top: -20px;">
-					<?= $employee["employeeFirstname"] ?>
-				</span>
-				<span class="name-header mr-50">
-					<?= $employee["employeeSurename"] ?>
-				</span>
-			</td>
-		</tr>
-		<tr>
-			<td style="width:170px;" class="text-head">Employee ID</td>
-			<td style="width:400px;" class="text-detail"><?= $employee["employeeNumber"] ?></td>
-		</tr>
-		<tr>
-			<td class="font-size-16">Date of birth</td>
-			<td class="font-size-14"><?= ModelMaster::engDate($employee["birthDate"], 2) ?></td>
-		</tr>
-		<tr>
-			<td class="font-size-16">Age</td>
-			<td class="font-size-14"><?= $employee["age"] ?></td>
-		</tr>
-		<tr>
-			<td class="font-size-16">Gender</td>
-			<td class="font-size-14">
-				<?= $employee['gender'] == 1 ? 'Male' : 'Female' ?>
-			</td>
-		</tr>
-	</table>
-	<hr style="margin-top:10px;">
-	<table>
-		<tr>
-			<td colspan="2" class="font-size-18" style="font-weight:500;"><u>Contact Information</u></td>
-		</tr>
-		<tr>
-			<td style="width:260px;" class="font-size-16">Email</td>
-			<td style="width:400px;" class="font-size-14"><?= $employee["email"] ?></td>
-		</tr>
-		<tr>
-			<td class="font-size-16">Contact number</td>
-			<td class="font-size-14"><?= $employee["telephoneNumber"] ?></td>
-		</tr>
-		<tr>
-			<td class="font-size-16">Emergency Contact Number</td>
-			<td class="font-size-14"><?= $employee["emergencyTel"] ?></td>
-		</tr>
-	</table>
-	<hr style="margin-top: 10px;">
-	<table>
-		<tr>
-			<th colspan="2" class="font-size-18" style="font-weight:500;"><u>Work Information</u></th>
-		</tr>
-		<tr>
-			<td style="width:150px;" class="font-size-16">Company</td>
-			<td style="width:300px;" class="font-size-14"><?= $employee["companyName"] ?></td>
 
+			<td colspan="4" class="name-header pl-10"><?= $employee["employeeFirstname"] ?> <?= $employee["employeeSurename"] ?></td>
+		</tr>
+
+		<tr>
+			<td class="text-head pl-10">Employee ID</td>
+			<td class="text-detail"><?= $employee["employeeNumber"] ?></td>
+			<td class="text-head pl-10">Personal Email</td>
+			<td class="text-detail"><?= $employee["email"] ?></td>
 		</tr>
 		<tr>
-			<td style="width:150px;" class="font-size-16">Branch</td>
-			<td style="width:300px;" class="font-size-14"><?= $employee["branchName"] ?></td>
+			<td class="text-head pl-10">Gender</td>
+			<td class="text-detail"><?= $employee['gender'] == 1 ? 'Male' : $employee['gender'] == 2 ? 'Female' : 'Not set' ?></td>
+			<td class="text-head pl-10">Contact Number</td>
+			<td class="text-detail"><?= $employee["telephoneNumber"] ?></td>
 		</tr>
 		<tr>
-			<td class="font-size-16">Department</td>
-			<td class="font-size-14"><?= $employee["departmentName"] ?></td>
+			<td class="text-head pl-10">Nationality</td>
+			<td class="text-detail"><?= $employee["nationalityName"] ?></td>
+			<td class="text-head pl-10">Emergency Contact</td>
+			<td class="text-detail"><?= $employee["emergencyTel"] ?></td>
 		</tr>
 		<tr>
-			<td class="font-size-16">Team</td>
-			<td class="font-size-14"><?= $employee["teamName"] ?></td>
+			<td class="text-head pl-10">Date of Birth</td>
+			<td class="text-detail"><?= $employee['birthDate'] != '' ? ModelMaster::engDate($employee['birthDate'], 2) : 'Not set' ?></td>
+			<td class="text-head pl-10"></td>
+			<td class="text-detail"></td>
 		</tr>
 		<tr>
-			<td style="width:150px;" class="font-size-16">Title</td>
-			<td style="width:300px;" class="font-size-14"><?= $employee["titleName"] ?></td>
+			<td class="text-head pl-10">Marital Status</td>
+			<td class="text-detail"><?= $employee['maritalStatus'] ?? 'Not set' ?></td>
+			<td class="text-head pl-10">Present Address</td>
+			<td class="text-detail"><?= $employee["address1"] ?? 'Not set' ?></td>
+		</tr>
+
+
+	</table>
+
+
+	<hr style="margin-top:-5px;">
+	<div class="col-12 pl-0 title-head">
+		About Employee
+	</div>
+	<div class="mt-20 pl-0" style="min-height:20px;">
+		<?= $employee["remark"] != '' ? $employee["remark"] : '' ?>
+	</div>
+	<hr style="margin-top:20px;">
+	<div class="mt-10 pl-0  title-head">
+		Work Details
+	</div>
+
+	<table class="mt-10">
+		<tr>
+			<td class="text-head2 ">Company</td>
+			<td class="text-detail2"><?= $employee["companyName"] ?></td>
+			<td class="text-head2 ">Joining Date</td>
+			<td class="text-detail2"><?= $employee['joinDate'] != '' ? ModelMaster::engDate($employee['joinDate'], 2) : 'Not set' ?></td>
 		</tr>
 		<tr>
-			<td class="font-size-16">Condition</td>
-			<td class="font-size-14"><?= $employee["conditionName"] ?></td>
+			<td class="text-head2 ">Branch</td>
+			<td class="text-detail2"><?= $employee["branchName"] ?></td>
+			<td class="text-head2 ">Status</td>
+			<td class="text-detail2"><?= $employee['statusName'] ?></td>
 		</tr>
 		<tr>
-			<td style="width:150px;" class="font-size-16">Join Date</td>
-			<td style="width:300px;" class="font-size-14"><?= ModelMaster::dateNumberDash($employee["joinDate"]) ?></td>
+			<td class="text-head2 ">Department</td>
+			<td class="text-detail2"><?= $employee["departmentName"] ?></td>
+			<td class="text-head2 ">Work Email</td>
+			<td class="text-detail2"><?= $employee['companyEmail'] ?></td>
+		</tr>
+
+		<tr>
+			<td class="text-head2 ">Team</td>
+			<td class="text-detail2"><?= $employee["teamName"] ?></td>
+			<td class="text-head2 ">LinkedIn</td>
+			<td class="text-detail2"><?= $employee['contact'] != '' ? $employee['contact'] : 'Not Set' ?></td>
 		</tr>
 		<tr>
-			<td class="font-size-16">Service Years</td>
-			<td class="font-size-14"><?= Employee::calculateDate($employee['joinDate']) ?></td>
-		</tr>
-		<tr>
-			<td style="width:150px;" class="font-size-16">Status</td>
-			<?php
-			if ($employee["status"]["name"] == "Active") {
-				$class = "text-success";
-			} else {
-				$class = "text-danger";
-			}
-			?>
-			<td style="width:300px;" class="font-size-14 <?= $class ?>"><?= $employee["status"]["name"] ?></td>
+			<td class="text-head2 ">Title/ Position</td>
+			<td class="text-detail2"><?= $employee["titleName"] ?></td>
+			<td class="text-head2 ">Work Address</td>
+			<td class="text-detail2"><?= $employee['location'] ?? 'Not set' ?></td>
 		</tr>
 	</table>
+
+	<hr style="margin-top:20px;">
+	<div class="mt-15 pl-0  title-head">
+		Job Description
+
+	</div>
+	<div class="mt-10 pl-0 subTitle-head">
+		Purpose of the Job
+		<div class="mt-15 jobDescript-detail">
+			<?= $employee['purpose'] != "" ? $employee['purpose'] : 'Not set' ?>
+		</div>
+	</div>
+	<div class="pl-0 subTitle-head mt-20">
+		Core Responsibility
+		<div class="mt-15 jobDescript-detail">
+			<?= $employee['jobDescription'] != "" ? $employee['jobDescription'] : 'Not set'   ?>
+		</div>
+	</div>
+	<div class=" pl-0 subTitle-head mt-20">
+		Key Responsibility
+		<div class="mt-15 jobDescript-detail">
+			<?= $employee['keyResponsibility'] != "" ? $employee['keyResponsibility'] : 'Not set'   ?>
+		</div>
+	</div>
+	<div style="bottom: 0;position:absolute;width:100%;">
+		<hr style="margin-top:20px;">
+		<div class="print-detail" style="margin-top: -10px;">
+			Printed on: <?= $printedDate ?>&nbsp;&nbsp;&nbsp; Printed By <?= $printName ?>
+		</div>
+	</div>
 </div>
