@@ -8,7 +8,7 @@ $this->title = 'KFI';
 <div class="col-12 mt-70 pt-20">
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="pim-head-icon mr-11 mt-2">
-        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
+        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices (PIM)') ?></span>
         <?php
         if ($role >= 3) {
         ?>
@@ -155,22 +155,22 @@ $this->title = 'KFI';
                                         <td>
                                             <?php
                                             // ดึงค่า $kfi['ratio'] มาเก็บในตัวแปรชั่วคราวแล้วแปลงเป็น float ก่อน
-                                                $ratioValue = floatval($kfi['ratio']);
-                                                // หรือใช้ $ratioValue = (float)$kfi['ratio'];
+                                            $ratioValue = floatval($kfi['ratio']);
+                                            // หรือใช้ $ratioValue = (float)$kfi['ratio'];
 
-                                                if (isset($percent[0]) && $percent[0] == '0') {
-                                                    if (isset($percent[1])) {
-                                                        if ($percent[1] == '00') {
-                                                            $showPercent = 0;
-                                                        } else {
-                                                            // ใช้ $ratioValue ที่ถูกแปลงแล้ว
-                                                            $showPercent = round($ratioValue, 1); 
-                                                        }
+                                            if (isset($percent[0]) && $percent[0] == '0') {
+                                                if (isset($percent[1])) {
+                                                    if ($percent[1] == '00') {
+                                                        $showPercent = 0;
+                                                    } else {
+                                                        // ใช้ $ratioValue ที่ถูกแปลงแล้ว
+                                                        $showPercent = round($ratioValue, 1);
                                                     }
-                                                } else {
-                                                    // ใช้ $ratioValue ที่ถูกแปลงแล้ว
-                                                    $showPercent = round($ratioValue);
                                                 }
+                                            } else {
+                                                // ใช้ $ratioValue ที่ถูกแปลงแล้ว
+                                                $showPercent = round($ratioValue);
+                                            }
                                             ?>
                                             <div id="progress1">
                                                 <div data-num="<?= $showPercent ?>"
@@ -246,8 +246,8 @@ $this->title = 'KFI';
                         </tbody>
                     </table>
                 </div>
-                 </div>
-        <?php
+            </div>
+            <?php
             echo $this->render('pagination_page', [
                 'totalKfi' => $totalKfi,
                 "currentPage" => $currentPage,
@@ -256,9 +256,9 @@ $this->title = 'KFI';
                 "pageType" => "list",
                 "filter" => isset($filter) ? $filter : []
             ]);
-    ?>
-    <input type="hidden" id="totalPage" value="<?= $totalPage > 1 ? 1 : 0 ?>">
-            </div>
+            ?>
+            <input type="hidden" id="totalPage" value="<?= $totalPage > 1 ? 1 : 0 ?>">
+        </div>
     </div>
 </div>
 <input type="hidden" value="create" id="acType">

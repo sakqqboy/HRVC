@@ -101,7 +101,7 @@ $DueBehind = $targetAmount -  $result;
 <div class="col-12 mt-70 pt-20">
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="pim-head-icon mr-11 mt-2">
-        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
+        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices (PIM)') ?></span>
     </div>
     <?= $this->render('header_filter', [
         "role" => $role,
@@ -122,9 +122,9 @@ $DueBehind = $targetAmount -  $result;
                         </text>
                     </a> -->
                     <div class="pim-name-title" style="display: flex; align-items: center; gap: 14px;">
-                        <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kgi/management/grid' ?>"  style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+                        <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kgi/management/grid' ?>" style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
-                            <?= Yii::t('app', 'Back') ?>        
+                            <?= Yii::t('app', 'Back') ?>
                         </a>
                         <?php if ($statusform == 'update') { ?>
                             <?= Yii::t('app', 'Update Key Goal Indicator') ?>
@@ -578,7 +578,7 @@ $DueBehind = $targetAmount -  $result;
                         </div>
 
                         <div class="d-flex mt-37 gap-1" style="--bs-gutter-x:0px;">
-                            <div class="col-5" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;" >
+                            <div class="col-5" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                                 <label class="text-manage-create" for="name">
                                     <span class="text-danger">* </span>
                                     Data Type <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"

@@ -10,7 +10,7 @@ $this->title = 'KGI View';
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg"
             class="pim-head-icon mr-11 mt-2">
-        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
+        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices (PIM)') ?></span>
     </div>
     <?= $this->render('kgi_header_filter', [
         "role" => $role,
@@ -27,8 +27,8 @@ $this->title = 'KGI View';
                         <?= Yii::t('app', 'Back') ?>
                     </a> -->
                     <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kgi/management/grid' ?>" style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
-                                <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
-                                <?= Yii::t('app', 'Back') ?>        
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
+                        <?= Yii::t('app', 'Back') ?>
                     </a>
                     <?= $kgiDetail["kgiName"] ?>
                 </div>
