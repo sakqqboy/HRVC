@@ -25,9 +25,9 @@ $this->title = 'Group Profile';
             <div class="avatar-upload-preview">
                 <div class="avatar-preview">
                     <?php if (isset($group["picture"]) && !empty($group["picture"])) { ?>
-                        <img src="<?= Yii::$app->homeUrl . $group['picture'] ?>" class="company-group-picture">
+                        <img src="<?= Yii::$app->homeUrl . $group['picture'] ?>" class="company-group-picture rounded-circle">
                     <?php } else { ?>
-                        <img src="<?= Yii::$app->homeUrl . 'image/groupProfile.jpg' ?>" class="company-group-picture">
+                        <img src="<?= Yii::$app->homeUrl . 'image/groupProfile.jpg' ?>" class="company-group-picture rounded-circle">
                     <?php } ?>
                 </div>
             </div>

@@ -3,7 +3,7 @@ function readURL(input) {
           var reader = new FileReader();
           reader.onload = function (e) {
                $("#old-image").hide();
-               $("#imageUploadIcon").css("opacity", 0);
+               // $("#imageUploadIcon").css("opacity", 0);
                $("#imagePreview").css("background-image", "url(" + e.target.result + ")");
                $("#imagePreview").hide();
                $("#imagePreview").fadeIn(650);
