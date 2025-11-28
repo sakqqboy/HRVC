@@ -218,8 +218,8 @@
 }
 
 .avatar-upload .avatar-preview .upload-label {
-    /* display: flex; */
-    flex-direction: row;
+    display: flex;
+    flex-direction: column;
     /* เปลี่ยนจาก column เป็น row */
     justify-content: center;
     align-items: center;
