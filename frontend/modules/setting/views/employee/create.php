@@ -136,10 +136,10 @@ $form = ActiveForm::begin([
                                             class="company-group-picture" style="display: none;">
                                     <?php
                                     } else { ?>
-                                        <img id="icon-image" src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg" style=" margin-top: 60px;"> 
+                                        <img id="icon-image" src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"> 
                                         <br><br>
                                         <img id="new-image" src=""
-                                            class="company-group-picture" style="display: none;">
+                                            class="company-group-picture mb-15" style="display: none;">
                                         <span id="d-up-img1">
                                             <?= Yii::t('app', 'Upload') ?> <span style="font-size: 13px; color: #666;">
                                                 <?= Yii::t('app', 'or Drop') ?> </span>
