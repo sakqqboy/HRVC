@@ -8,7 +8,7 @@ $this->title = 'KGI Grid View';
 <div class="contrainer-body">
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg" class="pim-icon mr-5" style="margin-top: -3px;">
-        <span class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
+        <span class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices (PIM)') ?></span>
     </div>
     <div class="col-12 mt-10">
         <?= $this->render('header_filter', [

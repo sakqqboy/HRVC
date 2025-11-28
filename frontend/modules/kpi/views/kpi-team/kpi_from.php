@@ -150,7 +150,7 @@ if (!$nextCheckDate) {
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg"
             class="pim-head-icon mr-11 mt-2">
-        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
+        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices (PIM)') ?></span>
     </div>
     <?= $this->render('header_filter', [
         "role" => $role,
@@ -173,7 +173,7 @@ if (!$nextCheckDate) {
                     <div class="pim-name-title" style="display: flex; align-items: center; gap: 14px;">
                         <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kpi/kpi-team/team-kpi-grid' ?>" style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
-                            <?= Yii::t('app', 'Back') ?>        
+                            <?= Yii::t('app', 'Back') ?>
                         </a>
                         <?= Yii::t('app', 'Update Team Key Performance Indicator') ?>
                     </div>

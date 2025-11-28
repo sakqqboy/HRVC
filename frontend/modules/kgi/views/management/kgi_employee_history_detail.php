@@ -10,7 +10,7 @@ $this->title = 'Employee KGI History';
 	<div class="row">
 		<div class="col-8">
 			<i class="fa fa-users font-size-20 mr-5" aria-hidden="true"></i>
-			<span class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
+			<span class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices (PIM)') ?></span>
 		</div>
 		<div class="col-4 text-end pr-15">
 			<a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve" class="btn btn-secondary font-size-12">
