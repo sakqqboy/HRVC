@@ -44,28 +44,28 @@ $this->title = 'Create Group';
                          <?= Yii::t('app', 'Group Picture here') ?>
                     </span>
                 </label>
-                <div class="center-center" id="cer-action-buttons" style="
+            </div>
+            <div class="center-center" id="cer-action-buttons" style="
                                         position: absolute;
-                                        bottom: 10px;
+                                        bottom: 20px;
                                         left: 50%;
                                         transform: translateX(-50%);
-                                        gap: 10px;
+                                        gap: 20px;
                                     ">
                                     <!-- ปุ่มลบ -->
-                                    <div class="cycle-box-icon" style=" background-color: #fff0f0; display: none;  opacity: 1"
+                                    <div class="cycle-box-icon-little" style=" background-color: #fff0f0; display: none;  opacity: 1"
                                         id="bin-img">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
                                             alt="Delete"
-                                            style="width: 20px;height: 20px; ">
+                                            style="width: 14px; height: 14px;">
                                     </div>
 
                                     <!-- ปุ่มรีเฟรช -->
-                                    <div class="cycle-box-icon" style=" background-color: #e6f1ff; display: none;  opacity: 1"
+                                    <div class="cycle-box-icon-little" style=" background-color: #e6f1ff; display: none;  opacity: 1"
                                         id="refes-img">
                                         <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg" alt="Refresh"
-                                            style="width: 18px; height: 18px;">
+                                            style="width: 14px; height: 14px;">
                                     </div>
-                </div>
             </div>
             <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
                 style="display: none;" />

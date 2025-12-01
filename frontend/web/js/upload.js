@@ -99,11 +99,12 @@ $("#imagePreview").on("mouseenter", function () {
     } else {
         statusOldImage = 0; // ไม่มีรูปเลย
     }
-    // alert(statusOldImage);
     if(statusOldImage == 1) {
-        if ($("#bin-img").is(":hidden")) $("#bin-img").fadeIn(300);
-        if ($("#refes-img").is(":hidden")) $("#refes-img").fadeIn(300);
-        // alert(statusOldImage);
+
+    if (!$("#bin-img").is(":visible")) $("#bin-img").fadeIn(200);
+    if (!$("#refes-img").is(":visible")) $("#refes-img").fadeIn(200);
+
+
         if ($("#imagePreview").is(":visible")) {
             $("#imagePreview").css({
                 "filter": "brightness(50%)",
@@ -118,9 +119,29 @@ $("#imagePreview").on("mouseenter", function () {
     }
 });
 
-$("#imagePreview").on("mouseleave", function () {
-    $("#bin-img").fadeOut(300);
-    $("#refes-img").fadeOut(300);
+$("#imagePreview,#bin-img,#refes-img").on("mouseleave", function (e) {
+    const to = e.relatedTarget; // element ที่เมาส์กำลังจะไป
+
+    // ถ้า relatedTarget เป็น null → อย่า hide เลย
+    if (!to) {
+        return;
+    }
+
+    // ถ้ายังอยู่บนปุ่ม หรือ element ลูกของปุ่ม → ไม่ hide
+    if (
+        $(to).closest("#bin-img").length > 0 ||
+        $(to).closest("#refes-img").length > 0 ||
+        $(to).closest("#cer-action-buttons").length > 0 ||
+        $(to).closest("#imagePreview").length > 0
+    ) {
+        console.log("still inside buttons");
+        return;
+    }
+
+    // ออกจากรูป + ปุ่มทั้งหมด → ค่อย hide
+    $("#bin-img").stop(true, true).fadeOut(200);
+    $("#refes-img").stop(true, true).fadeOut(200);
+
     $("#imagePreview").css({
         "filter": "brightness(100%)"
     });
@@ -146,6 +167,7 @@ $("#bin-img").on("click", function () {
     $("#bin-img").hide();
     $("#refes-img").hide();
 });
+
 $("#refes-img").on("click", function () {
     $('#imageUpload').click(); // เปิด file picker
 });

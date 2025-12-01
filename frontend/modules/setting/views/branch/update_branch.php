@@ -39,32 +39,43 @@ $this->title = 'Update Branch';
                             border-radius: 100%;
                             text-align: center;
                             cursor: pointer;
+                            background-image:url(<?= $branches['branchImage'] != null ? Yii::$app->homeUrl . $branches['branchImage'] : "" ?>);
                         ">
-                            <label for="imageUpload" class="upload-label" style="cursor: pointer;  display: block;">
-                                <?php
-                                if ($branches["branchImage"] != null) { ?>
-                                    <img src="<?= Yii::$app->homeUrl . $branches['branchImage'] ?>"
-                                        class="company-group-picture" style="width: 200px; height: 200px;" id="old-image">
-                                <?php
-                                } else { ?>
-                                    <img src="<?= Yii::$app->homeUrl ?>image/upload-iconimg.svg"
-                                        style="width: 50px; height: auto;" alt="Upload Icon"> <br><br>
-                                    <span>
-                                        <?= Yii::t('app', 'Upload') ?>
-                                        <span style="font-size: 13px; color: #666;">
-                                            <?= Yii::t('app', 'or Drop') ?>
-                                        </span>
-                                    </span>
-                                    <br>
-                                    <span
-                                        style="font-size: 13px; color: #666;"><?= Yii::t('app', 'Branch Picture here') ?></span>
-                                <?php
-                                }
-                                ?>
+                            <label  for="imageUpload" class="upload-label" style="cursor: pointer;">
+                                <img id="icon-image" src="<?= Yii::$app->homeUrl . 'image/upload-iconimg.svg' ?>" style="width: 37px; height: 37px;  display: none;" alt="Upload Icon">
+                                <span id="d-up-img1" class="mt-10" style=" display: none;"> <?= Yii::t('app', 'Upload') ?> 
+                                    <span style="font-size: 13px; color: #666;"> <?= Yii::t('app', 'or Drop') ?></span>
+                                </span>     
+                                <br>
+                                <span id="d-up-img2" style="font-size: 13px; color: #666;  display: none;">
+                                   <?= Yii::t('app', 'Branch Picture here') ?>
+                                </span>
                             </label>
-                            <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
-                                style="display: none;">
                         </div>
+                        <div class="center-center" id="cer-action-buttons" style="
+                                        position: absolute;
+                                        bottom: 20px;
+                                        left: 50%;
+                                        transform: translateX(-50%);
+                                        gap: 20px;
+                                    ">
+                                    <!-- ปุ่มลบ -->
+                                    <div class="cycle-box-icon-little" style=" background-color: #fff0f0; display: none;  opacity: 1"
+                                        id="bin-img">
+                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                                            alt="Delete"
+                                            style="width: 14px; height: 14px;">
+                                    </div>
+
+                                    <!-- ปุ่มรีเฟรช -->
+                                    <div class="cycle-box-icon-little" style=" background-color: #e6f1ff; display: none;  opacity: 1"
+                                        id="refes-img">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg" alt="Refresh"
+                                            style="width: 14px; height: 14px;">
+                                    </div>
+                        </div>
+                        <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
+                                style="display: none;">
                     </div>
                     <div class="start-center">
                         <label for="exampleFormControlInput1" class="form-label font-size-12 font-b mt-23">
