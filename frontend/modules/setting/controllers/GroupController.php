@@ -261,6 +261,7 @@ class GroupController extends Controller
     }
     public function actionSaveUpdateGroup()
     {
+        // throw new Exception(print_r($_POST, true));
         if (isset($_POST["groupName"]) && trim($_POST["groupName"]) != '') {
             $group = Group::find()->where(["groupId" => $_POST["groupId"] - 543])->one();
             $oldBanner = $group->banner;

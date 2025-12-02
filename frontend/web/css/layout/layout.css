@@ -3376,3 +3376,33 @@
     cursor: pointer;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
+
+.ellipse-box-icon {
+    width: 85px;
+    height: 25px;
+    padding: 6px 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    gap: 5px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 400;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.ellipse-box-icon img {
+    object-fit: contain;        /* บังคับให้อยู่ในกล่องแบบไม่ล้น */
+}
+
+.cycle-box-icon-little {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
