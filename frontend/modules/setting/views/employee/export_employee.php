@@ -43,7 +43,9 @@
 		</tr>
 		<tr>
 			<td class="text-head pl-10">Gender</td>
-			<td class="text-detail"><?= $employee['gender'] == 1 ? 'Male' : $employee['gender'] == 2 ? 'Female' : 'Not set' ?></td>
+			<td class="text-detail"><?= $gender = $employee['gender'] == 1
+								? 'Male'
+								: ($employee['gender'] == 2 ? 'Female' : 'Not set'); ?></td>
 			<td class="text-head pl-10">Contact Number</td>
 			<td class="text-detail"><?= $employee["telephoneNumber"] ?></td>
 		</tr>
