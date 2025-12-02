@@ -19,11 +19,38 @@ $this->title = 'New Company';
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <div class="col-12 mt-60 pt-10 bg-white">
-    <div class="d-flex banner-uploade" id="imagePreviewBanner">
-        <img src="<?= Yii::$app->homeUrl ?>images/group/banner/group-banner.svg" class="create-group-banner" id="old-banner">
+    <div class="d-flex banner-uploade" id="imagePreviewBanner" style=" filter: brightness(100%); transition: filter 0.3s; position: relative; ">
+        <!-- <img src="<?= Yii::$app->homeUrl ?>images/group/banner/group-banner.svg" class="create-group-banner" id="old-banner"> -->
+        <img src="<?= Yii::$app->homeUrl ?>images/group/banner/group-banner.svg"
+            class="create-group-banner"
+            id="icon-banner">
+        <img src="" class="create-group-banner" id="old-banner" style="display:none;">
     </div>
 
-    <div class="d-flex justify-content-start" style="margin-top: -100px;">
+    <!-- ปุ่มข้างล่าง แต่ดันขึ้นไปทับ -->
+    <div class="center-center" id="banner-action-buttons"
+        style="  position: absolute; left: 50%; transform: translateX(-50%); bottom: 870px;  gap: 10px; "  >
+        <!-- ปุ่มถังขยะ -->
+        <div class="ellipse-box-icon"
+            id="bin-banner"
+            style="background-color:#fff0f0; opacity: 1; display:none;">
+            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/binred.svg"
+                style="width:14px; height:14px;">
+            <span style="color:#BB2020;"><?= Yii::t('app', 'Remove') ?></span>
+        </div>
+
+        <!-- ปุ่มรีเฟรช -->
+        <div class="ellipse-box-icon"
+            id="refes-banner"
+            style="background-color:#e6f1ff; opacity:1; display:none;">
+            <img src="<?= Yii::$app->homeUrl ?>image/refes-blue.svg"
+                style="width:14px; height:14px;">
+            <span style="color:#2580D3;"><?= Yii::t('app', 'Change') ?></span>
+        </div>
+        <input type="file" name="imageUploadBanner" id="imageUploadBanner" style="display:none;">
+    </div>
+
+    <div class="d-flex justify-content-start" style="width: 50px; margin-top: -100px;">
         <div class="ml-35 avatar-upload">
             <div class="avatar-preview" id="imagePreview" style="
                                 background-color: white;
@@ -70,8 +97,7 @@ $this->title = 'New Company';
             <input type="file" name="image" id="imageUpload" class="upload up upload-checklist"
                 style="display: none;" />
         </div>
-        <div class="flex-grow-1 pr-10" style="display: flex;justify-content: end;align-items: center;">
-            <!-- ลบระยะห่างระหว่างรูปและรายละเอียด -->
+        <!-- <div class="flex-grow-1 pr-10" style="display: flex;justify-content: end;align-items: center;">
             <span class="fileUpload btn" style="padding: 0;">
                 <div id="upload" class="create-employee-btn">
                     <img src="<?= Yii::$app->homeUrl ?>image/upload-white.svg" class="mr-3" alt="Upload Icon">
@@ -80,7 +106,7 @@ $this->title = 'New Company';
                 <input type="file" name="imageUploadBanner" id="imageUploadBanner"
                     class="upload up upload-checklist" id="up" />
             </span>
-        </div>
+        </div> -->
     </div>
     <div class="col-12 mt-28">
         <div class="row update-group-body" style="--bs-gutter-x:0px;">

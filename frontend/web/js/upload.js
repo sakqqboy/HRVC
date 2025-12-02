@@ -124,12 +124,17 @@ $("#imagePreviewBanner").on("mouseenter", function () {
         let bgImg = $("#imagePreviewBanner").css("background-image");
         if (bgImg !== 'none'){
             statusOldBanner = 1; // มีรูปอย่างน้อย 1 รูป
+            // alert(statusOldBanner);
         } else {
             statusOldBanner = 0; // ไม่มีรูปเลย
+            // alert(statusOldBanner);
         }
         if(statusOldBanner == 1) {
-            if (!$("#bin-banner").is(":visible")) $("#bin-banner").fadeIn(200);
-            if (!$("#refes-banner").is(":visible")) $("#refes-banner").fadeIn(200);
+            // if (!$("#bin-banner").is(":visible")) $("#bin-banner").fadeIn(200);
+            // if (!$("#refes-banner").is(":visible")) $("#refes-banner").fadeIn(200);
+            $("#bin-banner").show();
+            $("#refes-banner").show();
+
             $("#imagePreviewBanner").css({
                     "filter": "brightness(50%)",
                     "transition": "filter 0.3s"
