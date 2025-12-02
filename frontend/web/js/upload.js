@@ -72,28 +72,6 @@ $("#imageUpload").on("change", function () {
                 statusOldImage = 1;
     }
 });
-// $("#imageUploadBanner").on("change", function () {
-    
-// 	 let file = this.files[0];
-//     //  	  if (!file){ return;}
-//     //       if (!['image/jpeg','image/png'].includes(file.type)) {
-//     //     alert('Only JPEG and PNG files are allowed.');
-//     //     event.target.value = '';
-//     //     return;
-//     //       }
-//     // if (file.size > (2 * 1024 * 1024)) {
-//     //     alert("File size over than 2 MB");
-//     //         $(this).val("");
-//     //     return;
-//     // }else{
-//         alert(file);
-//             uploadedCerFile = file;
-//                 $('#old-banner').attr('src', URL.createObjectURL(file));
-//                 $('#d-up-img1').hide();
-//                 $('#d-up-img2').hide();
-//                 iconBinRe();
-//     // }
-// });
 
 $("#imageUploadBanner").on("change", function () {
 	 let file = this.files[0];
@@ -124,17 +102,12 @@ $("#imagePreviewBanner").on("mouseenter", function () {
         let bgImg = $("#imagePreviewBanner").css("background-image");
         if (bgImg !== 'none'){
             statusOldBanner = 1; // มีรูปอย่างน้อย 1 รูป
-            // alert(statusOldBanner);
         } else {
             statusOldBanner = 0; // ไม่มีรูปเลย
-            // alert(statusOldBanner);
         }
         if(statusOldBanner == 1) {
-            // if (!$("#bin-banner").is(":visible")) $("#bin-banner").fadeIn(200);
-            // if (!$("#refes-banner").is(":visible")) $("#refes-banner").fadeIn(200);
-            $("#bin-banner").show();
-            $("#refes-banner").show();
-
+            if (!$("#bin-banner").is(":visible")) $("#bin-banner").fadeIn(200);
+            if (!$("#refes-banner").is(":visible")) $("#refes-banner").fadeIn(200);
             $("#imagePreviewBanner").css({
                     "filter": "brightness(50%)",
                     "transition": "filter 0.3s"
@@ -194,12 +167,10 @@ $("#imagePreview").on("mouseenter", function () {
 
 $("#imagePreview,#bin-img,#refes-img").on("mouseleave", function (e) {
     const to = e.relatedTarget; // element ที่เมาส์กำลังจะไป
-
     // ถ้า relatedTarget เป็น null → อย่า hide เลย
     if (!to) {
         return;
     }
-
     // ถ้ายังอยู่บนปุ่ม หรือ element ลูกของปุ่ม → ไม่ hide
     if (
         $(to).closest("#bin-img").length > 0 ||
@@ -210,7 +181,6 @@ $("#imagePreview,#bin-img,#refes-img").on("mouseleave", function (e) {
         console.log("still inside buttons");
         return;
     }
-
     // ออกจากรูป + ปุ่มทั้งหมด → ค่อย hide
     $("#bin-img").stop(true, true).fadeOut(200);
     $("#refes-img").stop(true, true).fadeOut(200);
@@ -225,7 +195,6 @@ $("#imagePreview,#bin-img,#refes-img").on("mouseleave", function (e) {
 $("#uploadImag").on("mouseenter", function () {
     let oldImgSrc = $("#old-image").attr("src");
     let newImgSrc = $("#new-image").attr("src");
-
     // ถ้า old หรือ new มีค่าซักอัน → status = 1
     if ((oldImgSrc && oldImgSrc.trim() !== "") ||
         (newImgSrc && newImgSrc.trim() !== "")) {
@@ -234,11 +203,9 @@ $("#uploadImag").on("mouseenter", function () {
     } else {
         statusOldImage = 0; // ไม่มีรูปเลย
     }
-
     if(statusOldImage == 1) {
     if ($("#bin-file").is(":hidden")) $("#bin-file").fadeIn(300);
     if ($("#refes-file").is(":hidden")) $("#refes-file").fadeIn(300);
-
     if ($("#old-image").is(":visible")) {
         $("#old-image").css({
             "filter": "brightness(50%)",
@@ -262,21 +229,16 @@ $("#uploadImag").on("mouseleave", function () {
 });
 
 $("#bin-img").on("click", function () {
-
     // เคลียร์ไฟล์ input
     $("#imageUpload").val('');
-
     // เคลียร์ background image
     $("#imagePreview").css("background-image", "");
-
     // Reset แสง ให้เห็น icon-image ชัด ๆ
     $("#imagePreview").css("filter", "brightness(100%)");
-
     // แสดง UI อัปโหลดกลับมา
     $("#icon-image").show();
     $("#d-up-img1").show();
     $("#d-up-img2").show();
-
     // ซ่อนปุ่มลบและรีเฟรช
     $("#bin-img").hide();
     $("#refes-img").hide();
@@ -286,26 +248,14 @@ $("#refes-img").on("click", function () {
     $('#imageUpload').click(); // เปิด file picker
 });
 
-
-
 $("#bin-banner").on("click", function () {
-
     // เคลียร์ไฟล์ input
     $("#imageUploadBanner").val("");
-
     // เคลียร์ background image
     $("#imagePreviewBanner").css("background-image", "");
     $("#old-banner").attr("src", ""); 
-    
     // Reset แสง ให้เห็น icon-image ชัด ๆ
     $("#old-banner").css("filter", "brightness(100%)");
-
-    // แสดง UI อัปโหลดกลับมา
-    // $("#icon-image").show();
-    // $("#d-up-img1").show();
-    // $("#d-up-img2").show();
-
-
     // ซ่อนปุ่มลบและรีเฟรช
     $("#bin-banner").hide();
     $("#refes-banner").hide();
