@@ -2065,7 +2065,9 @@ class EmployeeController extends Controller
         } else {
             $employee["age"] = '-';
         }
+        $picture = Employee::employeeImage($employee['employeeId']);
         $employee["branchName"] = Branch::branchName($employee['branchId']);
+        $employee["picture"] = $picture;
         $employee["departmentName"] =  Department::departmentName($employee['departmentId']);
         $employee["teamName"] =  Team::teamName($employee['teamId']);
         $employee["titleName"] = Title::titleName($employee['titleId']);
