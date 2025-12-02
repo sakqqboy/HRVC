@@ -49,7 +49,7 @@ $this->title = 'Update Group';
                 style="width:14px; height:14px;">
             <span style="color:#2580D3;"><?= Yii::t('app', 'Change') ?></span>
         </div>
-        <input type="file" id="imageUploadBanner" style="display:none;">
+        <input type="file" name="imageUploadBanner" id="imageUploadBanner" style="display:none;">
     </div>
 
     <div class="d-flex justify-content-start" style="width: 50px; margin-top: -100px;">
