@@ -48,7 +48,11 @@ class Company extends \backend\models\hrvc\master\CompanyMaster
     public static function companyName($companyId)
     {
         $company = Company::find()->select('companyName')->where(["companyId" => $companyId])->asArray()->one();
-        return $company["companyName"];
+        if (isset($company) && !empty($company)) {
+            return $company["companyName"];
+        } else {
+            return null;
+        }
     }
     public static function userCompany($userId)
     {
@@ -75,5 +79,14 @@ class Company extends \backend\models\hrvc\master\CompanyMaster
             $img = 'image/userProfile.png';
         }
         return $img;
+    }
+    public  static function enable($companyId)
+    {
+        $company = Company::find()->where(["companyId" => $companyId, "status" => [1, 2, 4]])->one();
+        if (!isset($company) || empty($company)) {
+            return 0;
+        }
+
+        return 1;
     }
 }

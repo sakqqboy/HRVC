@@ -229,7 +229,7 @@ class KgiTeamController extends Controller
 			$currentPage = $pageArr[1] ?? 1;
 		}
 		$limit = 20;
-
+		// throw new exception('kgi/kgi-team/all-team-kgi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		// ใช้ Api::connectApi() แทน curl
 		$teamKgis = Api::connectApi(Path::Api() . 'kgi/kgi-team/all-team-kgi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');

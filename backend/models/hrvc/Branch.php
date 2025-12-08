@@ -36,8 +36,12 @@ class Branch extends \backend\models\hrvc\master\BranchMaster
     }
     public static function branchName($branchId)
     {
-        $branch = Branch::find()->select('branchName')->where(["branchId" => $branchId])->one();
-        return $branch["branchName"];
+        $branch = Branch::find()->select('branchName')->where(["branchId" => $branchId])->asArray()->one();
+        if (isset($branch) && !empty($branch)) {
+            return $branch["branchName"];
+        } else {
+            return null;
+        }
     }
     public static function kfiBranchName($kfiId)
     {

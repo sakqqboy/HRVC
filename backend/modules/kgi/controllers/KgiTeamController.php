@@ -250,8 +250,10 @@ class KgiTeamController extends Controller
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,kgi_team.month,kgi_team.year,
 			kgi_team.teamId,kgi_team.target,kgi_team.result,kgi_team.updateDateTime,kgi_team.fromDate,kgi_team.toDate,kgi_team.nextCheckDate,kgi_team.status')
 				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
+				->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
 				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->andWhere("t.teamId is not null and k.companyId is not null")
 				->andFilterWhere(["kgi_team.teamId" => $teamId])
 				->orderBy("k.createDateTime DESC,t.teamName ASC")
 				->asArray()
@@ -261,8 +263,10 @@ class KgiTeamController extends Controller
 				->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,kgi_team.month,kgi_team.year,
 			kgi_team.teamId,kgi_team.target,kgi_team.result,kgi_team.updateDateTime,kgi_team.fromDate,kgi_team.toDate,kgi_team.nextCheckDate,kgi_team.status')
 				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
+				->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
 				->where(["kgi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->andWhere("t.teamId is not null and k.companyId is not null")
 				->orderBy("k.createDateTime DESC,t.teamName ASC")
 				->asArray()
 				->all();
@@ -481,9 +485,11 @@ class KgiTeamController extends Controller
 			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_team.kgiTeamId,k.companyId,kgi_team.updateDateTime,kgi_team.month,kgi_team.year,
 			kgi_team.teamId,kgi_team.target,kgi_team.status,kgi_team.fromDate,kgi_team.toDate,kgi_team.nextCheckDate')
 			->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_team.kgiId")
+			->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 			->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=k.kgiId")
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kgi_team.teamId")
 			->where("kgi_team.status!=99 and k.status!=99")
+			->andWhere("t.teamId is not null and k.companyId is not null")
 			->andFilterWhere([
 				"k.companyId" => $companyId,
 				"kb.branchId" => $branchId,

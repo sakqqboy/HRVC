@@ -35,9 +35,11 @@ class Team extends \backend\models\hrvc\master\TeamMaster
     }
     public static function teamName($teamId)
     {
-        if ($teamId != '') {
-            $team = Team::find()->select('teamName')->where(["teamId" => $teamId])->one();
-            return $team["teamName"];
+        if (isset($teamId) && $teamId != '') {
+            $team = Team::find()->select('teamName')->where(["teamId" => $teamId])->asArray()->one();
+            if (isset($team) && !empty($team)) {
+                return $team["teamName"];
+            }
         } else {
             return null;
         }

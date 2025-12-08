@@ -180,7 +180,9 @@ class ManagementController extends Controller
         $limit = 20;
         $companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
+        //throw new exception('kpi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
         $kpis = Api::connectApi(Path::Api() . 'kpi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
+
         $allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
         $countAllCompany = 0;
         if (count($allCompany) > 0) {

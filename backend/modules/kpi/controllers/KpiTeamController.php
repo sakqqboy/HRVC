@@ -146,6 +146,7 @@ class KpiTeamController extends Controller
 			->select('kpi_team.teamId,t.teamName,kpi_team.target,kpi_team.remark,kpi_team.result,kpi_team.kpiTeamId,kpi_team.kpiId,k.code,t.departmentId,
 			kpi_team.month,kpi_team.year,kpi_team.nextCheckDate,kpi_team.status,kpi_team.fromDate,kpi_team.toDate')
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
+			->andWhere("t.teamId!=null")
 			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
 			->where(["kpi_team.status" => [1, 2, 4]])
 			->andWhere(["kpi_team.kpiId" => $kpiId])
@@ -251,8 +252,10 @@ class KpiTeamController extends Controller
 				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,kpi_team.month,kpi_team.year,
 			kpi_team.teamId,kpi_team.target,kpi_team.result,kpi_team.updateDateTime,kpi_team.fromDate,kpi_team.toDate,kpi_team.nextCheckDate,kpi_team.status')
 				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
+				->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
 				->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->andWhere("t.teamId is not null and k.companyId is not null")
 				->andFilterWhere(["kpi_team.teamId" => $teamId])
 				->orderBy("k.createDateTime DESC,t.teamName ASC")
 				->asArray()
@@ -262,8 +265,10 @@ class KpiTeamController extends Controller
 				->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,kpi_team.month,kpi_team.year,
 			kpi_team.teamId,kpi_team.target,kpi_team.result,kpi_team.updateDateTime,kpi_team.fromDate,kpi_team.toDate,kpi_team.nextCheckDate,kpi_team.status')
 				->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
+				->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 				->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
 				->where(["kpi_team.status" => [1, 2, 4], "k.status" => [1, 2, 4]])
+				->andWhere("t.teamId is not null and k.companyId is not null")
 				->orderBy("k.createDateTime DESC,t.teamName ASC")
 				->asArray()
 				->all();
@@ -897,9 +902,11 @@ class KpiTeamController extends Controller
 			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_team.kpiTeamId,k.companyId,kpi_team.updateDateTime,kpi_team.month,kpi_team.year,
 			kpi_team.teamId,kpi_team.target,kpi_team.status,kpi_team.fromDate,kpi_team.toDate,kpi_team.nextCheckDate')
 			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_team.kpiId")
+			->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 			->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=k.kpiId")
 			->JOIN("LEFT JOIN", "team t", "t.teamId=kpi_team.teamId")
 			->where("kpi_team.status!=99 and k.status!=99")
+			->andWhere("t.teamId is not null and k.companyId is not null")
 			->andFilterWhere([
 				"k.companyId" => $companyId,
 				"kb.branchId" => $branchId,

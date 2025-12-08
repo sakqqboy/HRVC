@@ -102,8 +102,10 @@ class KgiPersonalController extends Controller
 			kgi_employee.status,kgi_employee.employeeId,k.unitId,kgi_employee.month,kgi_employee.year,k.kgiId,k.companyId,e.teamId,e.picture,
 			kgi_employee.kgiEmployeeId,e.employeeFirstname,e.employeeSurename,kgi_employee.fromDate,kgi_employee.toDate,kgi_employee.nextCheckDate')
 				->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
+				->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
 				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kgi_employee.employeeId" => $employeeId, "e.status" => [1]])
+				->andWhere("k.companyId is not null")
 				->orderby('k.createDateTime')
 				->asArray()
 				->all();
@@ -114,8 +116,10 @@ class KgiPersonalController extends Controller
 			kgi_employee.status,kgi_employee.employeeId,k.unitId,kgi_employee.month,kgi_employee.year,k.kgiId,k.companyId,e.teamId,e.picture,
 			kgi_employee.kgiEmployeeId,e.employeeFirstname,e.employeeSurename,kgi_employee.fromDate,kgi_employee.toDate,kgi_employee.nextCheckDate')
 				->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
+				->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
 				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "e.teamId" => $teamId, "e.status" => [1]])
+				->andWhere("k.companyId is not null")
 				->orderby('k.createDateTime')
 				->asArray()
 				->all();
@@ -125,8 +129,10 @@ class KgiPersonalController extends Controller
 			kgi_employee.status,kgi_employee.employeeId,k.unitId,kgi_employee.month,kgi_employee.year,k.kgiId,k.companyId,e.teamId,e.picture,
 			kgi_employee.kgiEmployeeId,e.employeeFirstname,e.employeeSurename,kgi_employee.fromDate,kgi_employee.toDate,kgi_employee.nextCheckDate')
 				->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
+				->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
 				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "e.status" => [1]])
+				->andWhere("k.companyId is not null")
 				->orderby('k.createDateTime')
 				->asArray()
 				->all();
@@ -413,9 +419,10 @@ class KgiPersonalController extends Controller
 			->select('k.kgiName,k.kgiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kgi_employee.kgiEmployeeId,k.companyId,kgi_employee.updateDateTime,
 			kgi_employee.employeeId,kgi_employee.target,kgi_employee.month,kgi_employee.year,e.employeeFirstname,e.employeeSurename,e.teamId,e.picture')
 			->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_employee.kgiId")
+			->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 			->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=k.kgiId")
 			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-			->where("kgi_employee.status!=99 and k.status!=99")
+			->where("kgi_employee.status!=99 and k.status!=99 and k.companyId is not null")
 			->andWhere(["e.status" => [1]])
 			->andFilterWhere([
 				"kb.branchId" => $branchId,

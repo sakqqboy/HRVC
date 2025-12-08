@@ -39,13 +39,29 @@ class Country extends \backend\models\hrvc\master\CountryMaster
     public static function countryNameBycompany($companyId)
     {
         $company = Company::find()->select('countryId')->where(["companyId" => $companyId])->asArray()->one();
-        $country = Country::find()->select('countryName')->where(["countryId" => $company["countryId"]])->asArray()->one();
-        return $country["countryName"];
+        if (isset($company) && !empty($company)) {
+            $country = Country::find()->select('countryName')->where(["countryId" => $company["countryId"]])->asArray()->one();
+            if (isset($country) && !empty($country)) {
+                return $country["countryName"];
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
     public static function countryFlagBycompany($companyId)
     {
         $company = Company::find()->select('countryId')->where(["companyId" => $companyId])->asArray()->one();
-        $country = Country::find()->select('flag')->where(["countryId" => $company["countryId"]])->asArray()->one();
-        return $country["flag"];
+        if (isset($company) && !empty($company)) {
+            $country = Country::find()->select('flag')->where(["countryId" => $company["countryId"]])->asArray()->one();
+            if (isset($country) && !empty($country)) {
+                return $country["flag"];
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 }

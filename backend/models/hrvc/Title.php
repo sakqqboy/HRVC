@@ -38,7 +38,9 @@ class Title extends \backend\models\hrvc\master\TitleMaster
         $titleName = "";
         if ($titleId != "") {
             $title = Title::find()->select('titleName')->where(["titleId" => $titleId])->asArray()->one();
-            $titleName = $title["titleName"];
+            if (isset($brdepartmentnch) && !empty($department)) {
+                $titleName = $title["titleName"];
+            }
         }
         return $titleName;
     }
