@@ -185,10 +185,11 @@ class GroupController extends Controller
             endforeach;
         }
         $employees = Employee::find()
-            ->select('picture')
-            ->where(["status" => 1])
-            ->asArray()
-            ->all();
+        ->select('picture')
+        ->where(['status' => 1])
+        ->andWhere(['NOT IN', 'employee_id', [99, 100]])
+        ->asArray()
+        ->all();
 
         // กรองข้อมูลที่ picture ไม่เป็นค่าว่าง
         $selectPic = [];

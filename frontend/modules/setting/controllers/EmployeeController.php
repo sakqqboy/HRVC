@@ -189,7 +189,8 @@ class EmployeeController extends Controller
             "totalPage" => $totalPage,
             "currentPage" => $currentPage,
             "pagination" => $pagination,
-            "totalDraft" => $totalDraft
+            "totalDraft" => $totalDraft,
+            "limit" => $limit
         ]);
     }
     public function actionCreate()

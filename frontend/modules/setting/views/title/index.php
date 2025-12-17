@@ -71,12 +71,12 @@ $page = "grid";
                                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg"
                                                     alt="History" class="pim-icon">
                                             </a>
-                                            <span class="dropdown" href="#" id="dropdownMenuLink-1"
+                                            <!-- <span class="dropdown" href="#" id="dropdownMenuLink-1"
                                                 data-bs-toggle="dropdown" style="align-self: flex-start;">
                                                 <img src="<?= Yii::$app->homeUrl ?>image/3-dot.svg" alt="icon"
                                                     style="cursor: pointer;">
-                                            </span>
-                                            <div class="menu-dot ">
+                                            </span> -->
+                                            <!-- <div class="menu-dot ">
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink-1">
                                                     <li class="pl-4 pr-4" data-bs-toggle="modal"
                                                         data-bs-target="#staticBackdrop4"
@@ -89,7 +89,7 @@ $page = "grid";
                                                             <?= Yii::t('app', 'Delete') ?></a>
                                                     </li>
                                                 </ul>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -119,7 +119,7 @@ $page = "grid";
                                                 </div>
                                             </div>
                                             <div class="pl-5" style="max-width:200px;">
-                                                <div class="city-crad-company  text-truncate  mt-10" style="display: flex; gap: 5px;">
+                                                <div class="city-crad-company  text-truncate" style="display: flex; gap: 5px;">
                                                     <div style="display: flex; align-items: center; gap: 5px;">
                                                         <img src="<?= Yii::$app->homeUrl ?><?= $department['flag'] ?>"
                                                             class="bangladresh-hrvc">

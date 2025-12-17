@@ -153,8 +153,10 @@
     border-radius: 19.5px;
     height: 40px;
     padding-left: 4px;
+    padding-right: 4px;
     padding-top: 3px;
-    width: 94px;
+    min-width: 20%;
+    max-width: 30%;
 }
 
 .bell-noti {

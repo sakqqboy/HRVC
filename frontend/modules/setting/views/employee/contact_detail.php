@@ -14,6 +14,17 @@ if (isset($employee['birthDate'])) {
     // คำนวณจำนวนวัน
     $interval = $today->diff($nextBirthday)->days;
 }
+$contact = trim($employee['contact'] ?? '');
+
+if ($contact === '') {
+    $contactUrl = '#';
+} elseif (filter_var($contact, FILTER_VALIDATE_URL)) {
+    // กรณีเป็น URL เต็ม
+    $contactUrl = $contact;
+} else {
+    // กรณีเป็น username → สร้าง URL LinkedIn
+    $contactUrl = 'https://th.linkedin.com/in/' . urlencode($contact);
+}
 ?>
 
 <div class="d-flex row" style="gap: 40px;">
@@ -333,14 +344,18 @@ if (isset($employee['birthDate'])) {
                 </span>
             </div>
             <div style="flex: 8;  cursor: pointer;">
-                <a href="<?= $employee['contact'] ?? '-' ?>">
+                <a href="<?= $contactUrl ?>" target="_blank" rel="noopener noreferrer">
                     <span class="condition-name badge font-size-16 font-weight-500"
                         style="width: 80px; height: 26px; flex-direction:row; gap: 3px;">
-                        <img src="<?= Yii::$app->homeUrl ?>image/in-image-white.svg" alt="LinkedIn"
+                        <img src="<?= Yii::$app->homeUrl ?>image/in-image-white.svg"
+                            alt="LinkedIn"
                             style="width: 14px; height: 13px;">
+
                         <?= Yii::t('app', 'Visit') ?>
-                        <img src="<?= Yii::$app->homeUrl ?>image/see-all-white.svg" alt="icon"
-                            style="width: 14px; height: 13">
+
+                        <img src="<?= Yii::$app->homeUrl ?>image/see-all-white.svg"
+                            alt="icon"
+                            style="width: 14px; height: 13px;">
                     </span>
                 </a>
             </div>
