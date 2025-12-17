@@ -230,9 +230,10 @@ class EmployeeController extends Controller
     }
     public function actionSaveCreateEmployee()
     {
+        // throw new exception(print_r(Yii::$app->request->post(), true));
         if (!empty($_POST["status"])) {
             $employee = new Employee();
-            $employee->employeeConditionId = $_POST["status"] ?? '';
+            $employee->employeeConditionId = $_POST["status"] ?? "";
             $employee->employeeNumber      = $_POST["employeeId"] ?? '';
             $employee->defaultLanguage     = $_POST["defaultLanguage"] ?? '';
             $employee->salutation          = $_POST["salutation"] ?? '';
@@ -272,7 +273,8 @@ class EmployeeController extends Controller
                 $employee->status = 100;
             } else {
                 //publish
-                $employee->status = 1;
+                // $employee->status = 1;
+                $employee->status = $_POST["status"] ?? '';
             }
             $employee->createDateTime = new Expression('NOW()');
             $employee->updateDateTime = new Expression('NOW()');

@@ -282,7 +282,7 @@ if ($contact === '') {
                 </span>
             </div>
             <div style="flex: 8;">
-                <div class="language-dropdown" style="height: 30px;">
+                <div class="language-label" style="height: 30px;">
                     <?php
                     $flag1 = isset($UserLanguage[0]['flag']) ? $UserLanguage[0]['flag'] : 'image/e-world.svg';
                     ?>
@@ -305,7 +305,7 @@ if ($contact === '') {
                 </span>
             </div>
             <div style="display: flex; flex: 8; align-items: center;">
-                <div class="language-dropdown mr-25" style="height: 30px;">
+                <div class="language-label mr-25" style="height: 30px;">
                     <?php if (!empty($UserLanguage[1]['name'] ?? '')): ?>
                         <?php $flag1 = $UserLanguage[1]['flag'] ?? ''; ?>
                         <span class="font-size-16 font-weight-500">
@@ -319,7 +319,7 @@ if ($contact === '') {
                     <?php endif; ?>
                 </div>
 
-                <div class="language-dropdown mr-25" style="height: 30px;">
+                <div class="language-label mr-25" style="height: 30px;">
                     <?php if (!empty($UserLanguage[2]['name'] ?? '')): ?>
                         <?php $flag2 = $UserLanguage[2]['flag'] ?? ''; ?>
                         <span class="font-size-16 font-weight-500">
