@@ -11,10 +11,10 @@ function changeType() {
      $("#kgiId").val("");
 }
 function companyMultiBrach() {
+     clearEveryShow();
      var acType = $("#acType").val();
      var companyId = acType == "update" ? $("#companyId").val() : $("#companyId").val();
      var kgiId = $("#kgiId").val();
-     // clearEveryShow();
      var url = $url + "kgi/management/company-multi-branch";
      var acType = $("#acType").val();
      $.ajax({
@@ -29,12 +29,10 @@ function companyMultiBrach() {
           success: function (data) {
                if (data.status) {
                     if (acType == "update") {
-                         $("#show-multi-branch").html(data.branchText);
-                         $("#show-multi-branch").removeAttr("disabled", "true");
+                         $("#show-multi-branch-update").html(data.branchText);
                          $("#show-multi-branch-update").show();
                     } else {
                          $("#show-multi-branch").html(data.branchText);
-                         $("#show-multi-branch").removeAttr("disabled", "true");
                          $("#show-multi-branch").show();
                     }
                }
