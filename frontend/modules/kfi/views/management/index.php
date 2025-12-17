@@ -173,8 +173,19 @@ $this->title = 'KFI';
                                             }
                                             ?>
                                             <div id="progress1">
+                                                <?php
+                                                 if($showPercent != 0){
+                                                ?>
                                                 <div data-num="<?= $showPercent ?>"
                                                     class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
+                                                <?php
+                                                 } else {
+                                                ?>
+                                                <div data-num="<?= $showPercent ?>" data-value="<?= $showPercent ?>%" 
+                                                    class="progress-pim-table progress-circle-<?= $colorFormat ?>"><?= $showPercent ?>%</div>
+                                                <?php
+                                                 }
+                                                ?>
                                             </div>
                                         </td>
                                         <td class="text-center"><?= $kfi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?></td>

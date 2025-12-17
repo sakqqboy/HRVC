@@ -219,9 +219,20 @@ $this->title = "Individual KGI";
                                     </td>
                                     <td>
                                         <div id="progress1">
-                                            <div data-num="<?= $kgi["ratio"] == '' ? 0 : $kgi["ratio"] ?>"
+                                                <?php
+                                                 if($showResult != 0){
+                                                ?>
+                                                <div data-num="<?= $kgi["ratio"] == '' ? 0 : $kgi["ratio"] ?>"
                                                 class="progress-pim-table progress-circle-<?= $colorFormat ?>">
-                                            </div>
+                                                </div>
+                                                <?php
+                                                 } else {
+                                                ?>
+                                                <div data-num="<?= $showResult ?>"  data-value="<?= $showResult ?>%" 
+                                                    class="progress-pim-table progress-circle-<?= $colorFormat ?>"><?= $showResult ?>%</div>
+                                                <?php
+                                                 }
+                                                ?>
                                         </div>
                                     </td>
                                     <td><?= Yii::t('app', $kgi["month"]) ?></td>
