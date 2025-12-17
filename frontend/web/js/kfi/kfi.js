@@ -763,11 +763,6 @@ function companyMultiBrachKfi() {
      var acType = $("#acType").val();
      var companyId = acType == "update" ? $("#companyId").val() : $("#companyId").val();
      var kfiId = $("#kfiId").val();
-
-     // var kfiBranchText = JSON.parse(localStorage.getItem("kfiBranchText")) || [];
-
-     // alert(kfiBranchText);
-     // ส่งข้อมูลผ่าน AJAX ไปยังเซิร์ฟเวอร์
      $.ajax({
           type: "POST",
           dataType: "json",
@@ -776,7 +771,6 @@ function companyMultiBrachKfi() {
                companyId: companyId,
                acType: acType,
                kfiId: kfiId,
-               // kfiBranchText: kfiBranchText // ส่งค่า branchIds ที่เลือกไป
           },
           success: function (data) {
                if (data.status) {

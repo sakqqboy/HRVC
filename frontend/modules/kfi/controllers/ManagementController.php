@@ -941,6 +941,7 @@ class ManagementController extends Controller
 	{
 		$companyId = $_POST["companyId"];
 		$acType = $_POST["acType"];
+
 		$branches = Api::connectApi(Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 
 		if ($acType == "create") {
@@ -952,6 +953,7 @@ class ManagementController extends Controller
 				"kfiId" => $kfiId
 			]);
 		}
+		
 		$res["status"] = true;
 		$res["branchText"] = $branchText;
 		return json_encode($res);

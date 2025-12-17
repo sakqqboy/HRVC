@@ -11,19 +11,32 @@ function changeType() {
      $("#kgiId").val("");
 }
 function companyMultiBrach() {
-     var companyId = $("#companyId").val();
-     clearEveryShow();
+     var acType = $("#acType").val();
+     var companyId = acType == "update" ? $("#companyId").val() : $("#companyId").val();
+     var kgiId = $("#kgiId").val();
+     // clearEveryShow();
      var url = $url + "kgi/management/company-multi-branch";
      var acType = $("#acType").val();
      $.ajax({
           type: "POST",
           dataType: "json",
           url: url,
-          data: { companyId: companyId, acType: acType },
+          data: { 
+               companyId: companyId,
+               acType: acType,
+               kgiId: kgiId
+               },
           success: function (data) {
                if (data.status) {
-                    $("#show-multi-branch").html(data.branchText);
-                    // $("#kgi-group-create").html(data.kgiGroup);
+                    if (acType == "update") {
+                         $("#show-multi-branch").html(data.branchText);
+                         $("#show-multi-branch").removeAttr("disabled", "true");
+                         $("#show-multi-branch-update").show();
+                    } else {
+                         $("#show-multi-branch").html(data.branchText);
+                         $("#show-multi-branch").removeAttr("disabled", "true");
+                         $("#show-multi-branch").show();
+                    }
                }
           },
      });

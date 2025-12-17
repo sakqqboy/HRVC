@@ -287,8 +287,9 @@ class ManagementController extends Controller
 	{
 		$companyId = $_POST["companyId"];
 		$acType = $_POST["acType"];
-
+		
 		$branches = Api::connectApi(Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
+
 		if ($acType == "create") {
 			$branchText = $this->renderAjax('multi_branch', ["branches" => $branches]);
 		} else {
