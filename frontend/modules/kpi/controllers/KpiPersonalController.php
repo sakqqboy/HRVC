@@ -269,6 +269,7 @@ class KpiPersonalController extends Controller
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$kpis = Api::connectApi(Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
+		
 		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 
 		$teams = [];
@@ -957,8 +958,16 @@ class KpiPersonalController extends Controller
 		}
 		if ($employeeId != null) $userId = User::userIdByEmployeeId($employeeId);
 		else $userId = $role >= 3 ? null : Yii::$app->user->id;
-
-		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&userId=' . $userId;
+		$groupId = Group::currentGroupId();
+		if ($groupId == null) {
+			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
+		}
+		$currentPage = 1;
+		$limit = 20;
+		if (isset($param["currentPage"])) {
+			$currentPage = $param["currentPage"];
+		}
+		$paramText = 'companyId=' . $companyId . '&&branchId=' . $branchId . '&&teamId=' . $teamId . '&&month=' . $month . '&&status=' . $status . '&&year=' . $year . '&&userId=' . $userId . '&&currentPage=' . $currentPage . '&&limit=' . $limit;
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 
@@ -967,6 +976,7 @@ class KpiPersonalController extends Controller
 
 		$currentPage = isset($param["currentPage"]) ? $param["currentPage"] : 1;
 		$kpis = Api::connectApi(Path::Api() . 'kpi/kpi-personal/kpi-personal-filter?' . $paramText);
+		// throw new Exception(print_r($kpis,true));
 		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve');
 
 		if ($role == 3) {

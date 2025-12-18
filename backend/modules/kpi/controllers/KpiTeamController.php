@@ -303,7 +303,12 @@ class KpiTeamController extends Controller
 					}
 				}
 
-				$isOver = ModelMaster::isOverDuedate($kpiTeam['nextCheckDate']);
+				
+				if ($kpiTeam["status"] == 2) {
+						$isOver = 0;
+					} else {
+						$isOver = ModelMaster::isOverDuedate($kpiTeam['nextCheckDate']);
+					}
 				$kpiTeamId = $kpiTeam["kpiTeamId"];
 				$commonData = [
 					"kpiName" => $kpiTeam["kpiName"],
@@ -981,7 +986,7 @@ class KpiTeamController extends Controller
 						$show = 1;
 					} else if ($status == 4 && $isOver == 2) {
 						$show = 1;
-					} else if ($status == 2 && $kpiTeamHistory["status"] == 2) {
+					} else if ($status == 2 && $kpiTeam["status"] == 2) {
 						$show = 1;
 					} elseif ($status == '') {
 						$show = 1;

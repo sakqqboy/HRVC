@@ -713,7 +713,7 @@ class KpiPersonalController extends Controller
 		$startAt = (($currentPage - 1) * $limit);
 		$employeeId = Employee::employeeId2($userId);
 		$kpiEmployees = KpiEmployee::find()
-			->select('k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_employee.kpiEmployeeId,k.companyId,kpi_employee.updateDateTime,kpi_employee.month,kpi_employee.year,
+			->select('kpi_employee.status,k.kpiName,k.kpiId,k.unitId,k.quantRatio,k.priority,k.amountType,k.code,kpi_employee.kpiEmployeeId,k.companyId,kpi_employee.updateDateTime,kpi_employee.month,kpi_employee.year,
 			kpi_employee.employeeId,kpi_employee.target,kpi_employee.month,e.employeeFirstname,e.employeeSurename,e.teamId,e.picture')
 			->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_employee.kpiId")
 			->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
@@ -799,13 +799,14 @@ class KpiPersonalController extends Controller
 							$isOver = ModelMaster::isOverDuedate($kpiEmployeeHistory["nextCheckDate"]);
 						}
 					}
+					// return json_encode($status);
 					if ($status == 1 && $isOver == 0 && $kpiEmployee["status"] == 1) {
 						$show = 1;
 					} else if ($status == 3 && $isOver == 1) {
 						$show = 1;
 					} else if ($status == 4 && $isOver == 2) {
 						$show = 1;
-					} else if ($status == 2 && $kpiEmployeeHistory["status"] == 2) {
+					} else if ($status == 2 && $kpiEmployee["status"] == 2) {
 						$show = 1;
 					} elseif ($status == '') {
 						$show = 1;

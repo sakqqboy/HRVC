@@ -777,7 +777,6 @@ class ManagementController extends Controller
 		if ($status == 2) {
 			$searchStatus = 2;
 		}
-
 		if (!empty($adminId) || !empty($gmId) || !empty($managerId)) {
 			$kpis = Kpi::find()
 				->select('kpi.*')
@@ -813,10 +812,12 @@ class ManagementController extends Controller
 				->orderBy('kpi.createDateTime DESC')
 				->asArray()
 				->all();
-		}
+		}	
+
 		if (count($kpis) > 0) {
 			foreach ($kpis as $kpi) :
 				$commonData = [];
+				
 				$kpiHistory = KpiHistory::find()
 					->select('kpi_history.*')
 					->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_history.kpiId")
@@ -832,8 +833,11 @@ class ManagementController extends Controller
 				$checkComplete = 0;
 
 				if ($status == 1) {
-					$checkComplete = Kpi::checkComplete($kpi["kpi"], $month, $year, $kpi["year"]);
+					// return json_encode($kpi["year"]);
+					$checkComplete = Kpi::checkComplete($kpi["kpiId"], $month, $year, $kpi["year"]);
+					
 				}
+				
 				$ratio = 0;
 				if (isset($kpiHistory) && !empty($kpiHistory)  && $checkComplete == 0) {
 					$allEmployee = KpiEmployee::kpiEmployee($kpi["kpiId"], $kpiHistory["month"], $kpiHistory["year"]);
@@ -876,19 +880,27 @@ class ManagementController extends Controller
 						}
 					}
 					$kpiId = $kpi["kpiId"];
+					$show = 0;
 					if ($status == 1 && $isOver == 0 && $kpi["status"] == 1) {
 						$show = 1;
 					} else if ($status == 3 && $isOver == 1) {
 						$show = 1;
 					} else if ($status == 4 && $isOver == 2) {
 						$show = 1;
-					} else if ($status == 2 && $kpiHistory["status"] == 2) {
+					} else if ($status == 2 && $kpi["status"] == 2) {
 						$show = 1;
 					} elseif ($status == '') {
 						$show = 1;
 					}
 					if ($show == 1) {
-						// $commonData = ["kpiHistory" => $kpiHistory["kpiHistoryId"], "duedate" => Kpi::nextCheckDate($kpi['kpiId'])];
+						// $commonData = [
+						// 	"filterstatus" => $status, 
+						// 	"kpistatus" => $kpi["status"], 
+						// 	"kpiHistorytatus" => $kpiHistory["status"], 
+						// 	"kpiHistory" => $kpiHistory["kpiHistoryId"], 
+						// 	"duedate" => Kpi::nextCheckDate($kpi['kpiId']),
+						// 	"isOver" => $isOver
+						// ];
 						$commonData = [
 							"kpiName" => $kpiName,
 							"kpiHistoryId" => $kpiHistory["kpiHistoryId"],

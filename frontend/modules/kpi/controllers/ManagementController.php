@@ -873,7 +873,9 @@ class ManagementController extends Controller
             }
         }
         $limit = 20;
+        //  throw new Exception(print_r($paramText,true));
         $kpis = Api::connectApi(Path::Api() . 'kpi/management/kpi-filter?' . $paramText);
+        // throw new Exception(print_r($kpis,true));
         $companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
         $units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
         if ($companyId != "") {
