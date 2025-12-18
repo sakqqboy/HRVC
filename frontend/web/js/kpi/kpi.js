@@ -87,6 +87,7 @@ function viewTabKpi(kpiHistoryId, tabId) {
           });
      }
      if (tabId == 5) {
+          // alert(1);
           var url = $url + "kpi/view/kpi-kgi";
           $.ajax({
                type: "POST",
@@ -521,6 +522,72 @@ document.getElementById("statusForm")?.addEventListener("submit", function (even
           event.preventDefault();
      }
 });
+
+
+function showEditRelateKgi(type, kpiId) {
+     if (type == 1) {
+          
+          $("#editRelateKgi").hide();
+          $("#saveRelateKgi").show();
+          $("#cancelRelateKgi").show();
+          $('input[id="check-relate-kgi"]').each(function () {
+               $(this).show();
+          });
+          // alert(1);
+          var url = $url + "kpi/view/kpi-has-kgi";
+          $.ajax({
+               type: "POST",
+               dataType: "json",
+               url: url,
+               data: { kpiId: kpiId },
+               success: function (data) {
+                    $("#kgi").html("");
+                    $("#kgi").html(data.kgi);
+               },
+          });
+     }
+     if (type == 2) {
+          $("#editRelateKgi").show();
+          $("#saveRelateKgi").hide();
+          $("#cancelRelateKgi").hide();
+          $('input[id="check-relate-kgi"]').each(function () {
+               $(this).hide();
+          });
+          saveSelectedKpi(kpiId);
+          $("#show-content").html("");
+          var url = $url + "kgi/view/kgi-kgi";
+          $.ajax({
+               type: "POST",
+               dataType: "json",
+               url: url,
+               data: { kpiId: kpiId },
+               success: function (data) {
+                    $("#show-content").html(data.kgi);
+                    $(".alert-box").slideDown(500);
+                    setTimeout(function () {
+                         $(".alert-box").fadeOut(300);
+                    }, 1000);
+               },
+          });
+     }
+     if (type == 0) {
+          $("#editRelateKgi").show();
+          $("#saveRelateKgi").hide();
+          $("#cancelRelateKgi").hide();
+          $("#show-content").html("");
+          var url = $url + "kgi/view/kgi-kgi";
+          $.ajax({
+               type: "POST",
+               dataType: "json",
+               url: url,
+               data: { kpiId: kpiId },
+               success: function (data) {
+                    $("#show-content").html("");
+                    $("#show-content").html(data.kpi);
+               },
+          });
+     }
+}
 
 function kpiUpdateHistory(kpiId) {
      var url = $url + "kpi/management/kpi-update-history";

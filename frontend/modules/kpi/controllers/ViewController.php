@@ -620,6 +620,48 @@ class ViewController extends Controller
 		]);
 		return json_encode($res);
 	}
+	
+	public function actionKpiHasKgi()
+	{
+		$role = UserRole::userRight();
+		$adminId = '';
+		$gmId = '';
+		$teamLeaderId = '';
+		$managerId = '';
+		$supervisorId = '';
+		$staffId = '';
+		if ($role == 7) {
+			$adminId = Yii::$app->user->id;
+		}
+		if ($role == 6) {
+			$gmId = Yii::$app->user->id;
+		}
+		if ($role == 5) {
+			$managerId = Yii::$app->user->id;
+		}
+		if ($role == 4) {
+			$supervisorId = Yii::$app->user->id;
+		}
+		if ($role == 3) {
+			$teamLeaderId = Yii::$app->user->id;
+		}
+		if ($role == 1 || $role == 2) {
+			$staffId = Yii::$app->user->id;
+		}
+		$kpiId = $_POST["kpiId"];
+		$kpiHasKgi = Api::connectApi(Path::Api() . 'kpi/management/kpi-has-kgi?kpiId=' . $kpiId);
+		$kpiDetail = Api::connectApi(Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiId . '&&kpiHistoryId=0');
+		$kgis = Api::connectApi(Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
+		$ghp = [];
+		$res["kgi"] = $this->renderAjax('kgi', [
+			"kpiHasKgi" => $kpiHasKgi,
+			"kpiId" => $kpiId,
+			"kpiDetail" => $kpiDetail,
+			"kgis" => $kgis,
+			"ghp" => $ghp
+		]);
+		return json_encode($res);
+	}
 
 	public function actionKgiTeam()
 	{

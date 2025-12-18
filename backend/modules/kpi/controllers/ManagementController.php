@@ -981,6 +981,53 @@ class ManagementController extends Controller
 			->all();
 		return json_encode($kfiHaskgi);
 	}
+
+	public function actionKpiHasKgi($kpiId)
+	{
+		$kgiHasKpi = KgiHasKpi::find()
+			->select('kpi.kpiName,kpi.kpiId,kpi.unitId,kpi.targetAmount,kpi.month,kpi.year,kpi.code,kpi.result')
+			->JOIN("LEFT JOIN", "kpi", "kpi.kpiId=kgi_has_kpi.kpiId")
+			->JOIN("LEFT JOIN", "kgi", "kgi.kgiId=kgi_has_kpi.kgiId")
+			->where([
+				"kgi_has_kpi.kpiId" => $kpiId,
+				"kgi_has_kpi.status" => 1,
+				"kgi.status" => [1, 2, 4],
+				"kpi.status" => [1, 2, 4]
+			])
+			->asArray()
+			->all();
+		$data = [];
+		if (isset($kgiHasKpi) && count($kgiHasKpi) > 0) {
+			foreach ($kgiHasKpi as $kpi):
+				$ratio = 0;
+				if ($kpi["targetAmount"] != '' && $kpi["targetAmount"] != 0 && $kpi["targetAmount"] != null) {
+					if ($kpi["code"] == '<' || $kpi["code"] == '=') {
+						$ratio = ($kpi["result"] / $kpi["targetAmount"]) * 100;
+					} else {
+						if ($kpi["result"] != '' && $kpi["result"] != 0) {
+							$ratio = ($kpi["targetAmount"] / $kpi["result"]) * 100;
+						} else {
+							$ratio = 0;
+						}
+					}
+				}
+				$data[$kpi["kgiId"]] = [
+					"kgiName" => $kpi["kgiName"],
+					"kgiId" => $kpi["kgiId"],
+					"unitId" => $kpi["unitId"],
+					"targetAmount" => number_format($kpi["targetAmount"], 2),
+					"code" => $kpi["code"],
+					"result" => $kpi["result"],
+					"unit" => Unit::unitName($kpi["unitId"]),
+					"month" => ModelMaster::monthEng($kpi['month'], 1),
+					"ratio" => number_format($ratio, 2),
+					"countTeam" => KpiTeam::kpiTeam($kpi["kpiId"], $kpi["month"], $kpi["year"]),
+				];
+			endforeach;
+		}
+
+		return json_encode($data);
+	}
 	public function actionKpiHistorySummarize($kpiId)
 	{
 		$kpiHistory = kpiHistory::find()
