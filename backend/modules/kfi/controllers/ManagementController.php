@@ -111,7 +111,7 @@ class ManagementController extends Controller
 					} else {
 						$kfiname = $kfi["kfiName"];
 					}
-					$isOver = ModelMaster::isOverDuedate(Kfi::nextCheckDate($kfi['kfiId']));
+					$isOver = ModelMaster::isOverDuedate(Kfi::nextCheckDateSimply($kfi['kfiId']));
 					$kfiId = $kfi["kfiId"];
 					// $commonData = [
 					// 	"kfiName" => $kfiname,

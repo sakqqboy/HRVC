@@ -810,7 +810,7 @@ class KpiTeamController extends Controller
 				"ratio" => number_format($ratio, 2),
 				"kpiDetail" => $kpiTeamHistory["kpiDetail"],
 				"remark" => $kpiTeamHistory["remark"],
-				"isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDate($kpiTeamHistory['kpiTeamId'])),
+				"isOver" => ModelMaster::isOverDuedate(KpiTeam::nextCheckDateSimply($kpiTeamHistory['kpiTeamId'])),
 				"detail" => $kpiTeamHistory["kpiDetail"]
 
 			];

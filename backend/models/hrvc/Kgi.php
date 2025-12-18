@@ -59,6 +59,20 @@ class Kgi extends \backend\models\hrvc\master\KgiMaster
         }
         return $date;
     }
+    public static function nextCheckDateSimply($kgiId)
+    {
+        $date = '';
+        $kgiHistory = KgiHistory::find()
+            ->select('nextCheckDate')
+            ->where(["kgiId" => $kgiId, "status" => [1, 2, 4]])
+            ->orderBy('year DESC,month DESC,status DESC,createDateTime DESC')
+            ->asArray()
+            ->one();
+        if (isset($kgiHistory) && !empty($kgiHistory) && $kgiHistory["nextCheckDate"] != '') {
+            $date = $kgiHistory["nextCheckDate"];
+        }
+        return $date;
+    }
     public static function codeDetail($code)
     {
         $detail = '';

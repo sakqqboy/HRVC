@@ -59,6 +59,20 @@ class Kpi extends \backend\models\hrvc\master\KpiMaster
         }
         return $date;
     }
+    public static function nextCheckDateSimply($kpiId)
+    {
+        $date = '';
+        $kpiHistory = KpiHistory::find()
+            ->select('nextCheckDate')
+            ->where(["kpiId" => $kpiId, "status" => [1, 2, 4]])
+            ->orderBy('year DESC,month DESC,status DESC,createDateTime DESC')
+            ->asArray()
+            ->one();
+        if (isset($kpiHistory) && !empty($kpiHistory) && $kpiHistory["nextCheckDate"] != '') {
+            $date = $kpiHistory["nextCheckDate"];
+        }
+        return $date;
+    }
     public static function kpiName($kpiId)
     {
         $kpi = Kpi::find()->select('kpiName')->where(["kpiId" => $kpiId])->asArray()->one();

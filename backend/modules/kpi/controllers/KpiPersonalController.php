@@ -611,7 +611,7 @@ class KpiPersonalController extends Controller
 				"teamName" => Team::teamName($employee["teamId"]),
 				"kpiEmployee" => KpiEmployee::kpiEmployee($kpiId, $kpiEmployee["month"], $kpiEmployee["year"]),
 				// "teamName" => Team::teamName($kpiEmployee["teamId"]),
-				"isOver" => ModelMaster::isOverDuedate(KpiEmployee::nextCheckDate($kpiEmployee['kpiEmployeeId']))
+				"isOver" => ModelMaster::isOverDuedate(KpiEmployee::nextCheckDateSimply($kpiEmployee['kpiEmployeeId']))
 			];
 		}
 		return json_encode($data);

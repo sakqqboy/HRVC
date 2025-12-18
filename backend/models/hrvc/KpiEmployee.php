@@ -236,6 +236,20 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         }
         return $date;
     }
+    public static function nextCheckDateSimply($kpiEmployeeId)
+    {
+        $date = '';
+        $kpiHistory = KpiEmployeeHistory::find()
+            ->select('nextCheckDate')
+            ->where(["kpiEmployeeId" => $kpiEmployeeId, "status" => [1, 4]])
+            ->orderBy('kpiEmployeeHistoryId DESC')
+            ->asArray()
+            ->one();
+        if (isset($kpiHistory) && !empty($kpiHistory) && $kpiHistory["nextCheckDate"] != '') {
+            $date = $kpiHistory["nextCheckDate"];
+        }
+        return $date;
+    }
     public static function countKpiFromEmployee($employeeId)
     {
         $kpiEmployee = KpiEmployee::find()

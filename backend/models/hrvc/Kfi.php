@@ -54,6 +54,20 @@ class Kfi extends \backend\models\hrvc\master\KfiMaster
         }
         return $date;
     }
+    public static function nextCheckDateSimply($kfiId)
+    {
+        $date = '';
+        $kfiHistory = KfiHistory::find()
+            ->select('nextCheckDate')
+            ->where(["kfiId" => $kfiId, "status" => [1, 2, 4]])
+            ->orderBy('year DESC,month DESC,status DESC,createDateTime DESC')
+            ->asArray()
+            ->one();
+        if (isset($kfiHistory) && !empty($kfiHistory) && $kfiHistory["nextCheckDate"] != '') {
+            $date = $kfiHistory["nextCheckDate"];
+        }
+        return $date;
+    }
     public static function checkComplete($kfiId, $month, $year, $currentMonth, $currentYear)
     {
         if ($month != '' && $year != '') {

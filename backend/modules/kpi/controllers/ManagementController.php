@@ -264,7 +264,7 @@ class ManagementController extends Controller
 				"unitText" => Unit::unitName($kpiHistory["unitId"]),
 				"fromDate" => $kpiHistory["fromDate"],
 				"toDate" => $kpiHistory["toDate"],
-				"isOver" => ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpi['kpiId'])),
+				"isOver" => ModelMaster::isOverDuedate(Kpi::nextCheckDateSimply($kpi['kpiId'])),
 				"countTeam" => KpiTeam::kpiTeam($kpi['kpiId'], $kpi["month"], $kpi["year"]),
 				"lastUpdate" =>  ModelMaster::dateNumber($kpiHistory["updateDateTime"]),
 				"issue" => KpiIssue::lastestIssue($kpi["kpiId"])["issue"],
@@ -321,7 +321,7 @@ class ManagementController extends Controller
 				"unitText" => Unit::unitName($kpi["unitId"]),
 				"fromDate" => $kpi["fromDate"],
 				"toDate" => $kpi["toDate"],
-				"isOver" => ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpi['kpiId'])),
+				"isOver" => ModelMaster::isOverDuedate(Kpi::nextCheckDateSimply($kpi['kpiId'])),
 				"kpiEmployee" => KpiEmployee::kpiEmployee($kpi["kpiId"], $kpi["month"], $kpi["year"]),
 				"kpiEmployeeDetail" => KpiEmployee::kpiEmployee($kpi["kpiId"], $kpi["month"], $kpi["year"]),
 				"countTeam" => KpiTeam::kpiTeam($kpi['kpiId'], $kpi["month"], $kpi["year"]),
@@ -403,7 +403,7 @@ class ManagementController extends Controller
 				"unitText" => Unit::unitName($kpiHistory["unitId"]),
 				"fromDate" => $kpiHistory["fromDate"],
 				"toDate" => $kpiHistory["toDate"],
-				"isOver" => ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpi['kpiId'])),
+				"isOver" => ModelMaster::isOverDuedate(Kpi::nextCheckDateSimply($kpi['kpiId'])),
 				"kpiEmployee" => KpiEmployee::kpiEmployee($kpi["kpiId"], $kpi["month"], $kpi["year"]),
 				"kpiEmployeeDetail" => KpiEmployee::kpiEmployeeTeamDetail($kpi["kpiId"], $kpiHistory["teamId"]),
 				"countTeam" => KpiTeam::kpiTeam($kpi['kpiId'], $kpi["month"], $kpi["year"]),
@@ -872,7 +872,7 @@ class ManagementController extends Controller
 						if ($kpi["status"] == 1 && $kpi["year"] > $year && $year != '') {
 							$isOver = 0;
 						} else {
-							$isOver = ModelMaster::isOverDuedate(Kpi::nextCheckDate($kpi['kpiId']));
+							$isOver = ModelMaster::isOverDuedate(Kpi::nextCheckDateSimply($kpi['kpiId']));
 						}
 					}
 					$kpiId = $kpi["kpiId"];
@@ -888,7 +888,7 @@ class ManagementController extends Controller
 						$show = 1;
 					}
 					if ($show == 1) {
-						$commonData = [ "kpiHistory" => $kpiHistory["kpiHistoryId"], "duedate" => Kpi::nextCheckDate($kpi['kpiId']) ];
+						$commonData = ["kpiHistory" => $kpiHistory["kpiHistoryId"], "duedate" => Kpi::nextCheckDate($kpi['kpiId'])];
 						// $commonData = [
 						// 	"kpiName" => $kpiName,
 						// 	"kpiHistoryId" => $kpiHistory["kpiHistoryId"],

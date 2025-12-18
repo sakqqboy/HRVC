@@ -124,7 +124,7 @@ class ManagementController extends Controller
 							sort($selectPic);
 						}
 					}
-					$isOver = ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId']));
+					$isOver = ModelMaster::isOverDuedate(Kgi::nextCheckDateSimply($kgi['kgiId']));
 					$kgiId = $kgi["kgiId"];
 					$commonData = [
 						"kgiName" =>  $kgi["kgiName"],
@@ -259,7 +259,7 @@ class ManagementController extends Controller
 				"lastUpdate" => ModelMaster::dateNumber($kgiHistory["updateDateTime"]),
 				"fromDateDetail" => ModelMaster::engDate($kgiHistory["fromDate"], 2),
 				"toDateDetail" => ModelMaster::engDate($kgiHistory["toDate"], 2),
-				"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
+				"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDateSimply($kgi['kgiId'])),
 
 			];
 		} else {
@@ -318,7 +318,7 @@ class ManagementController extends Controller
 				"fromDateFormat" => ModelMaster::dateMonthFullFormatNormal($kgi["fromDate"]),
 				"toDateFormat" => ModelMaster::dateMonthFullFormatNormal($kgi["toDate"]),
 				"lastUpdate" => '-',
-				"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId'])),
+				"isOver" => ModelMaster::isOverDuedate(Kgi::nextCheckDateSimply($kgi['kgiId'])),
 			];
 		}
 		return json_encode($data);
@@ -643,7 +643,7 @@ class ManagementController extends Controller
 								$isOver = 0;
 							} else {
 								//$isOver = ModelMaster::isOverDuedate($kgiHistory["nextCheckDate"]);
-								$isOver = ModelMaster::isOverDuedate(Kgi::nextCheckDate($kgi['kgiId']));
+								$isOver = ModelMaster::isOverDuedate(Kgi::nextCheckDateSimply($kgi['kgiId']));
 							}
 						}
 						$kgiId = $kgi["kgiId"];

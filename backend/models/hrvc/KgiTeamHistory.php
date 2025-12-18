@@ -49,4 +49,17 @@ class KgiTeamHistory extends \backend\models\hrvc\master\KgiTeamHistoryMaster
         }
         return $date;
     }
+    public static function nextCheckDateSimply($kgiTeamHistoryId)
+    {
+        $date = '';
+        $kgiHistory = KgiTeamHistory::find()
+            ->select('nextCheckDate')
+            ->where(["kgiTeamHistoryId" => $kgiTeamHistoryId, "status" => [1, 2, 4]])
+            ->asArray()
+            ->one();
+        if (isset($kgiHistory) && !empty($kgiHistory) && $kgiHistory["nextCheckDate"] != '') {
+            $date = $kgiHistory["nextCheckDate"];
+        }
+        return $date;
+    }
 }

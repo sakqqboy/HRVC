@@ -168,7 +168,20 @@ class KpiTeam extends \backend\models\hrvc\master\KpiTeamMaster
         }
         return $date;
     }
-
+    public static function nextCheckDateSimply($kpiTeamId)
+    {
+        $date = '';
+        $kpiHistory = KpiTeamHistory::find()
+            ->select('nextCheckDate')
+            ->where(["kpiTeamId" => $kpiTeamId, "status" => [1, 2, 4]])
+            ->orderBy('kpiTeamHistoryId DESC')
+            ->asArray()
+            ->one();
+        if (isset($kpiHistory) && !empty($kpiHistory) && $kpiHistory["nextCheckDate"] != '') {
+            $date = $kpiHistory["nextCheckDate"];
+        }
+        return $date;
+    }
     public static function autoSummalys($kpiId, $month, $year)
     {
         // คำนวณผลรวมของ result ในตาราง kpi_team
