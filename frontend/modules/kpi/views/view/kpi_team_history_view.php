@@ -1,9 +1,9 @@
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script> -->
 <div class="col-12 ligth-gray-box">
     <div class="row pl-15 pr-20">
         <div class="col-9 pl-0 sub-tab-active">
-            <a onclick="javascript:viewTabKpi(0,1)" class="view-back-btn" style="text-decoration: none;cursor:pointer;">
+            <a onclick="javascript:viewTabKpi(<?= $kpiHistoryId ?>,1)" class="view-back-btn" style="text-decoration: none;cursor:pointer;">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/double-back.svg" style="width:16px;height16px;"
                     class="mr-3">
                 <?= Yii::t('app', 'Back') ?>

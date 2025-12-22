@@ -426,15 +426,15 @@ function checkAllKpiTeam(kpiId) {
           },
      });
 }
-function kpiTeamHistoryView(kpiId, teamId) {
+function kpiTeamHistoryView(kpiId, teamId, kpiHistoryId) {
      var viewType = $("#viewType").val();
-     //alert(viewType);
+     // alert(viewType);
      var url = $url + "kpi/view/kpi-team-history-view";
      $.ajax({
           type: "POST",
           dataType: "json",
           url: url,
-          data: { teamId: teamId, kpiId: kpiId, viewType: viewType },
+          data: { teamId: teamId, kpiId: kpiId, viewType: viewType, kpiHistoryId: kpiHistoryId },
           success: function (data) {
                if (data.status) {
                     $("#all").css("display", "none");

@@ -256,13 +256,15 @@ class ViewController extends Controller
 	public function actionKpiTeamEmployee()
 	{
 		$kpiId = $_POST["kpiId"];
+		$kpiHistoryId = $_POST["kpiHistoryId"];
 		$res["kpiEmployeeTeam"] = "";
 		$kpiTeams = Api::connectApi(Path::Api() . 'kpi/kpi-team/kpi-team-summarize?kpiId=' . $kpiId);
 		$kpiDetail = Api::connectApi(Path::Api() . 'kpi/kpi-personal/assigned-kpi-employee?kpiId=' . $kpiId . "&&kpiHistoryId=0");
 		$res["kpiEmployeeTeam"] = $this->renderAjax("kpi_employee_team_all", [
 			"kpiTeams" => $kpiTeams,
 			"kpiDetail" => $kpiDetail,
-			"kpiId" => $kpiId
+			"kpiId" => $kpiId,
+			"kpiHistoryId" => $kpiHistoryId
 		]);
 		return json_encode($res);
 	}
@@ -678,6 +680,7 @@ class ViewController extends Controller
 	{
 		$kpiId = $_POST['kpiId'];
 		$teamId = $_POST['teamId'];
+		$kpiHistoryId = $_POST['kpiHistoryId'];
 		$kpiTeam = KpiTeam::find()->select('kpiTeamId')
 			->where(["teamId" => $teamId, "kpiId" => $kpiId, "status" => [1, 2]])
 			->asArray()
@@ -698,7 +701,8 @@ class ViewController extends Controller
 			"departmentName" => $departnemtName,
 			"code" => $kpi["code"],
 			"kpiId" => $kpi["kpiId"],
-			"viewType" => $_POST['viewType']
+			"viewType" => $_POST['viewType'],
+			"kpiHistoryId" => $kpiHistoryId
 		]);
 		$res["kpiTeam"] = $kpiTeam;
 		$res["history"] = $teamText;

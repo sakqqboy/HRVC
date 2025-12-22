@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                                 <div class="border-left align-content-center pr-0" style="font-weight: 400;width:20%;justify-items: center;">
-                                    <a href="javascript:void(0);" onclick="event.stopPropagation(); kpiTeamHistoryView(<?= $kpiId ?>, <?= $teamId ?>)" class="doubleplay-btn flex-all-center ml-5">
+                                    <a href="javascript:void(0);" onclick="event.stopPropagation(); kpiTeamHistoryView(<?= $kpiId ?>, <?= $teamId ?>, <?= $kpiHistoryId ?>)" class="doubleplay-btn flex-all-center ml-5">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/doubleplay-black.svg" style="width:18px;height:18px;">
                                     </a>
 

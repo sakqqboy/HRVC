@@ -7,9 +7,7 @@ if (window.location.host == "localhost") {
 $url = $baseUrl;
 function viewTabKpi(kpiHistoryId, tabId) {
      var currentTabId = $("#currentTab").val();
-     //alert(currentTabId + '==' + tabId);
      var kpiId = $("#kpiId").val();
-     //alert(kpiId);
      $("#tab-" + currentTabId).removeClass("view-tab-active");
      $("#tab-" + currentTabId).addClass("view-tab");
      $("#tab-" + tabId).removeClass("view-tab");
@@ -87,7 +85,6 @@ function viewTabKpi(kpiHistoryId, tabId) {
           });
      }
      if (tabId == 5) {
-          // alert(1);
           var url = $url + "kpi/view/kpi-kgi";
           $.ajax({
                type: "POST",
