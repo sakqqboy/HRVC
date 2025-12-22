@@ -186,8 +186,7 @@ class GroupController extends Controller
         }
         $employees = Employee::find()
         ->select('picture')
-        ->where(['status' => 1])
-        ->andWhere(['NOT IN', 'employee_id', [99, 100]])
+        ->where(['NOT IN', 'status', [99, 100]])
         ->asArray()
         ->all();
 
