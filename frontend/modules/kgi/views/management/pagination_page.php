@@ -40,7 +40,7 @@
             class="btn-previous<?= ($currentPage == 1 ? '-disable' : '') ?> text-center align-content-center"
             onclick="<?= $currentPage == 1 ? 'return false;' : 'javascript:showLoading()' ?>" style="text-decoration: none;<?= $currentPage == 1 ? 'pointer-events:none;' : '' ?>">
             <img src="<?= Yii::$app->homeUrl ?>image/btn-previous<?= ($currentPage == 1 ? '-disable' : '') ?>.svg" style="width: 4.958px; height: 8.5px;">
-            <span style="margin-left: 5px;"><?= Yii::t('app', 'Previous') ?></span>
+            <span style="margin-left: 5px;"><?= Yii::t('app', 'Previous') ?> </span>
         </a>
         <?php
 

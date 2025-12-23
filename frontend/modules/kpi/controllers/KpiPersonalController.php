@@ -920,6 +920,7 @@ class KpiPersonalController extends Controller
 	{
 		$role = UserRole::userRight();
 		$param = ModelMaster::decodeParams($hash);
+		// throw new Exception(print_r($param,true));
 		$month = $param["month"];
 		$status = $param["status"];
 		$year = $param["year"];
@@ -950,6 +951,17 @@ class KpiPersonalController extends Controller
 
 		$userTeamId = Team::userTeam($userId);
 		$session = Yii::$app->session;
+
+		$filter = [
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			"teamId" => $teamId,
+			"employeeId" => $employeeId,
+			"month" => $month,
+			"year" => $year,
+			"status" => $status,
+			"perPage" => 20,
+		];
 
 		Session::PimEmployeeFilter($companyId, $branchId, $teamId, $employeeId, $month, $year, $status, $type);
 		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
@@ -1029,6 +1041,7 @@ class KpiPersonalController extends Controller
 			"currentPage" => $currentPage,
 			"totalPage" => $totalPage,
 			"pagination" => $pagination,
+			"filter" => $filter
 		]);
 	}
 

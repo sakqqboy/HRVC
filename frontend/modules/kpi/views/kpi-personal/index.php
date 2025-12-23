@@ -336,7 +336,7 @@ $this->title = "Individual KPI";
                 "currentPage" => $currentPage,
                 'totalPage' => $totalPage,
                 "pagination" => $pagination,
-                "pageType" => "grid",
+                "pageType" => "list",
                 "filter" => isset($filter) ? $filter : []
             ]);
             ?>
