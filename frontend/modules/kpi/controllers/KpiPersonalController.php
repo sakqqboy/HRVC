@@ -988,7 +988,7 @@ class KpiPersonalController extends Controller
 
 		$currentPage = isset($param["currentPage"]) ? $param["currentPage"] : 1;
 		$kpis = Api::connectApi(Path::Api() . 'kpi/kpi-personal/kpi-personal-filter?' . $paramText);
-		// throw new Exception(print_r($kpis,true));
+		// throw new Exception(print_r($kpis['total'],true));
 		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve');
 
 		if ($role == 3) {
@@ -1009,9 +1009,19 @@ class KpiPersonalController extends Controller
 		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
-
-		$totalKpi = KpiEmployee::totalKpiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
-		$totalPage = ceil($totalKpi / 20);
+		// throw new Exception(print_r($gmId,true));
+		// $totalKpi = count($kpis['data']);
+		// ปัญหาคือ ถ้าเอาอันนี้มันจะเอามาทั้งหมดโดยไม่ฟิวเตอร์ทำให้หน้าไม่ตรง เพราะหน้ามันแสดงนับรวมทั้งหมดแต่ฟิวเตอร์มันจะทำให้หน้าน้อยลง แต่ถ้าอาหน้ามาจากข้อมูลที่ paramText 
+		// มันฟิวเตอร์แล้วก็จริงแต่มันติด limit มาด้วย เพราะ limit จะทำให้แสดงหน้าตามจำนวนที่กำหนดไว้ แล้วสลับหน้าตาม currentPage ที่ส่งมา ว่าไปหนเาไหน  
+		// ถ้าเอามาใส่แทนมันจะแสดงแค่เท่าลิมิตทำให้ไม่เห็นหน้าอื่น วิธีแก้ไขจำเป็นต้อง แก้ totalKpi ให้สามารถฟิวเตอร์ได้ด้วย
+		if ($adminId != '' || $gmId != '') {
+			$totalKpi = $kpis['total'];
+		}else{
+			$totalKpi = KpiEmployee::totalKpiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
+		}
+		// throw new Exception(print_r($totalKpi,true));
+		$totalPage = ceil($totalKpi / $limit);
+		
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
 
 		return $this->render($file, [
