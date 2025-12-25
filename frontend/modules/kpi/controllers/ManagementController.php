@@ -908,7 +908,8 @@ class ManagementController extends Controller
         ];
         $employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
         $employeeCompanyId = $employee["companyId"];
-        $totalKpi = Kpi::totalKpi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
+        $totalKpi = $kpis['total'];
+        // $totalKpi = Kpi::totalKpi($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId);
         $totalPage = ceil($totalKpi / $limit);
         $pagination = ModelMaster::getPagination($currentPage, $totalPage);
         $totalBranch = Branch::totalBranch();
