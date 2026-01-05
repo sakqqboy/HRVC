@@ -4,7 +4,7 @@ use common\models\ModelMaster;
 <div class="between-start">
     <!-- head modal -->
     <div>
-        <span class=" font-blue font-size-20" style="font-weight: 600;">Add Team</span>
+        <span class=" font-blue font-size-20" style="font-weight: 600;"><?= Yii::t('app', 'Add Team') ?></span>
     </div>
     <div>
         <a href="javascript:void(0);" onclick="$('#teamModal').modal('hide');">
@@ -55,16 +55,16 @@ use common\models\ModelMaster;
         <!-- content -->
         <div class="row d-flex align-items-center gap-2 mb-3">
             <span class="mb-14 font-size-16 " style=" font-weight: 600; padding: 0;">
-                Add Another Team
+                <?= Yii::t('app', 'Add Another Team') ?>
             </span>
 
             <div class="input-group">
-                <input type="text" name="teamName" id="teamName" class="form-control" placeholder="Write team name">
+                <input type="text" name="teamName" id="teamName" class="form-control" placeholder="<?= Yii::t('app', 'Write team name') ?>">
                 <span class="input-group-text" id="enterHint" style="background-color: #ffff; border-left: none;">
                     <div class="city-crad-company" id="hintText">
                         <img src="<?= Yii::$app->homeUrl . 'image/enter-black.svg' ?>"
                             style="width: 24px; height: 24px;">
-                        Enter to Save
+                        <?= Yii::t('app', 'Enter to Save') ?>
                     </div>
                 </span>
             </div>
@@ -73,7 +73,7 @@ use common\models\ModelMaster;
         <div class="row d-flex align-items-center gap-2 mb-3 mt-30" style="gap: 30px;">
             <span class="mb-14 font-size-16 " style=" font-weight: 600; padding: 0;">
                 <!-- นับจำนวน -->
-                Existing Teams (<?= $countTeam ?>)
+                <?= Yii::t('app', 'Existing Teams') ?> (<?= $countTeam ?>)
                 <hr class="hr-group">
             </span>
             <!-- ถ้ามีให้แสดงผล -->
@@ -90,7 +90,7 @@ use common\models\ModelMaster;
                     <img src="<?= Yii::$app->homeUrl ?>image/search.svg" alt="Search"
                         style="width: 20px; height: 20px;">
                 </span>
-                <input class="form-control" type="text" name="Search" id="Search" placeholder="Search Teams"
+                <input class="form-control" type="text" name="Search" id="Search" placeholder="<?= Yii::t('app', 'Search Teams') ?>"
                     style="border: none; box-shadow: none;">
             </div>
 
@@ -112,7 +112,7 @@ use common\models\ModelMaster;
             <!-- ถ้าไม่มี Teams ให้แสดงเป็น 0 -->
             <div class="create-crad-company " id="no-existing" style="background-color: #F9F9F9;">
                 <span class="text-create-crad">
-                    No Existing Teams Yet!
+                    <?= Yii::t('app', 'No Existing Teams Yet!') ?>
                 </span>
             </div>
             <input type="hidden" name="Search" id="Search">

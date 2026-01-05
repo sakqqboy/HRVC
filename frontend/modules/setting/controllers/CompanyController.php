@@ -405,7 +405,7 @@ class CompanyController extends Controller
 				$companyId = $company['companyId'];
 				$employees = Employee::find()
 					->where(["companyId" => $companyId])
-					->andWhere("status!=99")
+					->andWhere(['NOT IN', 'status', [99, 100]])
 					->asArray()
 					->all();
 				$totalEmployee = count($employees);

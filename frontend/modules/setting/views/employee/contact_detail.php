@@ -29,7 +29,7 @@ if ($contact === '') {
 
 <div class="d-flex row" style="gap: 40px;">
     <div class="w-100">
-        <span class="font-size-16 font-weight-600">Contact & Personal Details</span>
+        <span class="font-size-16 font-weight-600"><?= Yii::t('app', 'Contact & Personal Details') ?></span>
         <hr class="hr-group">
     </div>
 

@@ -14,7 +14,8 @@ $statusTexArr = Status::allStatusText();
 		<?= $this->render('header', [
 			"totalEmployee" => $totalEmployee,
 			"actualShow" => count($employees),
-			"totalDraft" => 0
+			"totalDraft" => 0,
+            "limit" => $limit
 		]) ?>
 	</div>
 	<input type="hidden" id="action" value="0">

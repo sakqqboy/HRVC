@@ -147,7 +147,8 @@ class BranchController extends Controller
 
                 $branchId = $branch['branchId'];
                 $employees = Employee::find()
-                    ->where(["branchId" => $branchId, "status" => 1])
+                    ->where(["branchId" => $branchId])
+                    ->andWhere(['NOT IN', 'status', [99, 100]])
                     ->asArray()
                     ->all();
 
@@ -188,11 +189,12 @@ class BranchController extends Controller
                         ->all();
                     if (isset($teams) && count($teams) > 0) {
                         foreach ($teams as $team) :
-                            $employees = Employee::find()
-                                ->where(["status" => 1, "teamId" => $team["teamId"]])
+                            $employeesTeam = Employee::find()
+                                ->where(["teamId" => $team["teamId"]])
+                                ->andWhere(['NOT IN', 'status', [99, 100]])
                                 ->asArray()
                                 ->all();
-                            $totalEmployees += count($employees);
+                            // $totalEmployees += count($employees);
                         endforeach;
                     }
                     $totalTeam += count($teams);
@@ -219,7 +221,7 @@ class BranchController extends Controller
                     $branchPictureUrl = "image/no-company.svg";
                 }
 
-
+                $totalEmployees = count($employees);
 
                 //เก็บค่า
                 $data[$branch["branchId"]] = [
@@ -301,7 +303,8 @@ class BranchController extends Controller
 
                 $branchId = $branch['branchId'];
                 $employees = Employee::find()
-                    ->where(["branchId" => $branchId, "status" => 1])
+                    ->where(["branchId" => $branchId])
+                    ->andWhere(['NOT IN', 'status', [99, 100]])
                     ->asArray()
                     ->all();
                 // กรองเฉพาะที่มี picture
@@ -324,7 +327,8 @@ class BranchController extends Controller
                     if (isset($teams) && count($teams) > 0) {
                         foreach ($teams as $team) :
                             $employees = Employee::find()
-                                ->where(["status" => 1, "teamId" => $team["teamId"]])
+                                ->where(["teamId" => $team["teamId"]])
+                                ->andWhere(['NOT IN', 'status', [99, 100]])
                                 ->asArray()
                                 ->all();
                             $totalEmployees += count($employees);
@@ -410,13 +414,14 @@ class BranchController extends Controller
         }
 
         $data = [];
+
         if (isset($branches) && count($branches) > 0) {
             foreach ($branches as $branch) :
 
                 $branchId = $branch['branchId'];
                 $employees = Employee::find()
                     ->where(["branchId" => $branchId])
-                    ->andWhere("status!=99")
+                    ->andWhere(['NOT IN', 'status', [99, 100]])
                     ->asArray()
                     ->all();
 
@@ -439,11 +444,12 @@ class BranchController extends Controller
                         ->all();
                     if (isset($teams) && count($teams) > 0) {
                         foreach ($teams as $team) :
-                            $employees = Employee::find()
-                                ->where(["status" => 1, "teamId" => $team["teamId"]])
+                            $employeesTeam = Employee::find()
+                                ->where(["teamId" => $team["teamId"]])
+                                ->andWhere(['NOT IN', 'status', [99, 100]])
                                 ->asArray()
                                 ->all();
-                            $totalEmployees += count($employees);
+                            // $totalEmployees += count($employeesTeam);
                         endforeach;
                     }
                     $totalTeam += count($teams);
@@ -458,6 +464,7 @@ class BranchController extends Controller
                     // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
                     $pictureUrl = 'image/no-branch.svg';
                 }
+                $totalEmployees = count($employees);
 
                 $data[$branch["branchId"]] = [
                     "branchId" => $branch["branchId"],
@@ -530,14 +537,14 @@ class BranchController extends Controller
                 . '&companyId=' . $companyId
                 . '&limit=6'
         );
-
         $data = [];
         if (isset($branches) && count($branches) > 0) {
             foreach ($branches as $branch) :
 
                 $branchId = $branch['branchId'];
                 $employees = Employee::find()
-                    ->where(["branchId" => $branchId, "status" => 1])
+                    ->where(["branchId" => $branchId])
+                    ->andWhere(['NOT IN', 'status', [99, 100]])
                     ->asArray()
                     ->all();
                 // กรองเฉพาะที่มี picture
@@ -554,11 +561,12 @@ class BranchController extends Controller
                         ->all();
                     if (isset($teams) && count($teams) > 0) {
                         foreach ($teams as $team) :
-                            $employees = Employee::find()
-                                ->where(["status" => 1, "teamId" => $team["teamId"]])
+                            $employeesTeam = Employee::find()
+                                ->where(["teamId" => $team["teamId"]])
+                                ->andWhere(['NOT IN', 'status', [99, 100]])
                                 ->asArray()
                                 ->all();
-                            $totalEmployees += count($employees);
+                            // $totalEmployees += count($employees);
                         endforeach;
                     }
                     $totalTeam += count($teams);
@@ -574,7 +582,7 @@ class BranchController extends Controller
                     // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
                     $pictureUrl = 'image/no-branch.svg';
                 }
-
+            $totalEmployees = count($employees);
                 //เก็บค่า
                 $data[$branch["branchId"]] = [
                     "branchId" => $branch["branchId"],
@@ -666,7 +674,8 @@ class BranchController extends Controller
                     if (isset($teams) && count($teams) > 0) {
                         foreach ($teams as $team) :
                             $employees = Employee::find()
-                                ->where(["status" => 1, "teamId" => $team["teamId"]])
+                                ->where(["teamId" => $team["teamId"]])
+                                ->andWhere(['NOT IN', 'status', [99, 100]])
                                 ->asArray()
                                 ->all();
                             $totalEmployees += count($employees);
@@ -845,7 +854,7 @@ class BranchController extends Controller
                 // รีเซ็ต index และเลือกแค่ 3 คนแรก
                 $filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
 
-                $totalEmployee = Employee::find()->where(["departmentId" => $departmentId, "status" => 1])->count();
+                $totalEmployee = Employee::find()->where(["departmentId" => $departmentId])->andWhere(['NOT IN', 'status', [99, 100]])->count();
                 $teams = [];
                 if (!empty($department)) {
                     $teams = Team::find()->select('teamId')
@@ -937,7 +946,7 @@ class BranchController extends Controller
                 // รีเซ็ต index และเลือกแค่ 3 คนแรก
                 $filteredEmployees = array_slice(array_values($filteredEmployees), 0, 3);
 
-                $totalEmployee = Employee::find()->where(["departmentId" => $departmentId, "status" => 1])->count();
+                $totalEmployee = Employee::find()->where(["departmentId" => $departmentId])->andWhere(['NOT IN', 'status', [99, 100]])->count();
                 $teams = [];
                 if (!empty($department)) {
                     $teams = Team::find()->select('teamId')

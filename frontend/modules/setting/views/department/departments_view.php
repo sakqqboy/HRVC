@@ -103,7 +103,7 @@ $page = 'view';
                 <div class="col-8 p-0" style="margin-top: -3px;">
                     <div class="font-size-16 text-gray-back  pt-0 border-bottom"
                         style="width:100%;font-weight: 500;height:30px;line-height:15px;">
-                        <?= Yii::t('app', 'Departments (' . count($departments) . ')') ?>
+                        <?= Yii::t('app', 'Departments') ?><?= Yii::t('app', '(' . count($departments) . ')') ?>
                     </div>
                     <table id="myTable" class="align-middle table-spacing">
                         <thead>
