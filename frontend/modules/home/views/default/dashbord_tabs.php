@@ -7,7 +7,7 @@ $currentYear = date('Y'); // ปี เช่น 2024
     <!-- ข้อความทางซ้าย -->
     <div>
         <h5 class="mb-0" id="header-text">
-            <?= Yii::t('app', 'Company of {month} {year}', ['month' => $currentMonth, 'year' => $currentYear]) ?></h5>
+            <?= Yii::t('app', 'Company of') ?> <?= Yii::t('app', $currentMonth) ?> <?= Yii::t('app', $currentYear) ?></h5>
     </div>
     <!-- แท็บทางขวา -->
     <div class="d-flex pl-10  justify-content-left align-content-center mt-5">

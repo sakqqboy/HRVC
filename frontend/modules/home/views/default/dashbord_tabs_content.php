@@ -135,14 +135,14 @@ if ($tab == 'team') {
                             <small class="small-text-tr">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Target.svg" class="pim-iconKFI"
                                     style="margin-top: 1px; margin-right: 3px;">
-                                Target
+                                <?= Yii::t('app', 'Target') ?>
                             </small>
                             <br>
                             <strong class="bold-text" id="KFI-target-0">-</strong>
                         </div>
                         <div class="col-4 text-end">
                             <small class="small-text-tr">
-                                Result
+                                <?= Yii::t('app', 'Result') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/Result.svg" class="pim-iconKFI"
                                     style="margin-top: 1px; margin-left: 3px;">
                             </small>

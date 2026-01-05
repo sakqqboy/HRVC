@@ -7,7 +7,7 @@
                     role="tab" aria-controls="upcoming-schedule" aria-selected="true">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/calendar-time.svg" alt="Company"
                         class="pim-icon" style="width: 14px; height: 14px;">
-                    Upcoming Schedule
+                    <?= Yii::t('app', 'Upcoming Schedule') ?>
                 </a>
             </li>
             <li class="col-6 nav-item text-center">
@@ -15,7 +15,7 @@
                     aria-controls="pending-approvals" aria-selected="false">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/3person.svg" alt="Company" class="pim-icon"
                         style="width: 14px; height: 14px;">
-                    Pending Approvals
+                    <?= Yii::t('app', 'Pending Approvals') ?>
                 </a>
             </li>
         </ul>
@@ -40,5 +40,5 @@
 </div>
 <!-- View All button -->
 <div class="text-ViewAllbutton">
-    <a href="#" class="view-all-link">View All</a>
+    <a href="#" class="view-all-link"><?= Yii::t('app', 'View All') ?> </a>
 </div>
