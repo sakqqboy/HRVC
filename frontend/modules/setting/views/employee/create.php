@@ -1513,8 +1513,7 @@ $form = ActiveForm::begin([
                                             <?= Yii::t('app', 'Intermediate') ?>
                                         </option>
                                         <option value="4" <?= $selectedLanguageId == '4' ? 'selected' : '' ?>>
-                                            <?= Yii::t('app', 'Upper
-                                        Intermediate') ?>
+                                            <?= Yii::t('app', 'Upper Intermediate') ?>
                                         </option>
                                         <option value="5" <?= $selectedLanguageId == '5' ? 'selected' : '' ?>>
                                             <?= Yii::t('app', 'Advanced') ?>

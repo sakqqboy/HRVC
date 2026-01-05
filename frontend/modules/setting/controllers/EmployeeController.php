@@ -785,6 +785,7 @@ class EmployeeController extends Controller
             "totalPage" => $totalPage,
             "currentPage" => $currentPage,
             "pagination" => $pagination,
+            "limit" => $limit
         ]);
     }
     public function actionSaveUpdateEmployee()

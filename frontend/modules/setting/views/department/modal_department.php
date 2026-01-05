@@ -5,7 +5,7 @@ use common\models\ModelMaster;
 <div class="row" style="--bs-gutter-x:0px;">
     <!-- head modal -->
     <div class="col-10 text-start">
-        <span class=" font-blue font-size-20" style="font-weight: 600;">Edit Department</span>
+        <span class=" font-blue font-size-20" style="font-weight: 600;"><?= Yii::t('app', 'Edit Department') ?></span>
     </div>
     <div class="col-2 text-end">
         <a href="javascript:void(0);" onclick="$('#departmentModal').modal('hide');">
@@ -56,33 +56,29 @@ use common\models\ModelMaster;
         <!-- <div class="d-flex align-items-center mb-3 border"> -->
         <div class="row" style="--bs-gutter-x:0px;">
             <div class="col-12 mb-14 font-size-16" style="font-weight: 600; padding: 0;">
-                Add Another Department
+                <?= Yii::t('app', 'Add Another Department') ?>
             </div>
             <div class="col-12">
                 <div class="input-group">
                     <input type="text" name="departmentName" id="departmentName" class="form-control"
-                        placeholder="Write department name">
+                        placeholder="<?= Yii::t('app', 'Write department name') ?>">
                     <span class="input-group-text" id="enterHint" style="background-color: #ffff; border-left: none;">
                         <div class="city-crad-company" id="hintText">
                             <img src="<?= Yii::$app->homeUrl . 'image/enter-black.svg' ?>"
                                 style="width: 24px; height: 24px;">
-                            Enter to Save
+                                <?= Yii::t('app', 'Enter to Save') ?>
+                            
                         </div>
                     </span>
                 </div>
             </div>
         </div>
-        <!-- </div> -->
-        <!-- <div class="row d-flex align-items-center gap-2 mb-3 mt-30" style="gap: 30px;"> -->
         <div class="col-12 pb-14 font-size-16 border-bottom mt-30 pt-0" style=" font-weight: 600;">
             <!-- นับจำนวน -->
-            Existing Departments (<?= count($departments) ?>)
-            <!-- <hr class="hr-group"> -->
+           <?= Yii::t('app', 'Existing Departments') ?>  (<?= count($departments) ?>)
         </div>
         <!-- ถ้ามีให้แสดงผล -->
         <?php
-        // echo $departmentId;
-
         if (isset($departments) && count($departments) > 0) {
             $countrow = 0;
             $i = 1;
@@ -92,7 +88,7 @@ use common\models\ModelMaster;
             <span class="input-group-text" style="background-color: white; border: none;">
                 <img src="<?= Yii::$app->homeUrl ?>image/search.svg" alt="Search" style="width: 20px; height: 20px;">
             </span>
-            <input class="form-control" type="text" name="Search" id="Search" placeholder="Search Departments"
+            <input class="form-control" type="text" name="Search" id="Search" placeholder="<?= Yii::t('app', 'Search Departments') ?>"
                 style="border: none; box-shadow: none;">
         </div>
         <div class="tab-pane fade show active" id="upcoming-schedule" role="tabpanel"
@@ -102,9 +98,6 @@ use common\models\ModelMaster;
                 <?php
                     foreach ($departments as $department) :
                     ?>
-
-
-
                 <?php
                         $i++;
                     endforeach;
@@ -117,7 +110,7 @@ use common\models\ModelMaster;
         <!-- ถ้าไม่มี Departments ให้แสดงเป็น 0 -->
         <div class="create-crad-company " id="no-existing" style="background-color: #F9F9F9;">
             <span class="text-create-crad">
-                No Existing Departments Yet!
+               <?= Yii::t('app', 'No Existing Departments Yet!') ?> 
             </span>
         </div>
         <input type="hidden" name="Search" id="Search">
