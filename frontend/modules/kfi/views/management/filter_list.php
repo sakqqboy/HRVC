@@ -37,7 +37,7 @@ use frontend\models\hrvc\Company;
     <?php
     }
     ?>
-    <option value="">Branch</option>
+    <option value=""><?= Yii::t('app', 'Branch') ?></option>
     <?php
     if (isset($branches) && count($branches) > 0) {
         foreach ($branches as $branch) : ?>
