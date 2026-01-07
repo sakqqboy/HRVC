@@ -43,7 +43,7 @@
                 <text>
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/employee.svg" alt="Company" class="pim-icon mr-5"
                         style="width: 14px; height: 14px;">
-                    Employee ID:
+                    <?= Yii::t('app', 'Employee ID:') ?>
                 </text>
                 <!-- เอาemploye number -->
                 <strong>
@@ -55,7 +55,7 @@
                 <text>
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/calendar.svg" alt="Company" class="pim-icon mr-5"
                         style="width: 14px; height: 14px;">
-                    Employee Since :
+                    <?= Yii::t('app', 'Employee Since :') ?>
                 </text>
                 <strong>
                     <?php

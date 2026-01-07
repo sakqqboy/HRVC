@@ -17,20 +17,20 @@
             style="display:none;">
         <img id="selfImg" src="<?= Yii::$app->homeUrl ?>images/icons/Settings/self.svg" alt="Self Icon" class="chart-icon"
             style="display:none;">
-        <span id="infoSpan">Company</span>
+        <span id="infoSpan"><?= Yii::t('app', 'Company') ?></span>
     </div>
 
     <div class="chart-button-group">
         <div class="chart-button-wrapper">
             <button id="KFI" class="chart-key-button kfi">
-                KFI
+                <?= Yii::t('app', 'KFI') ?>
             </button>
         </div>
         <div class="chart-button-wrapper">
-            <button id="KGI" class="chart-key-button kgi">KGI</button>
+            <button id="KGI" class="chart-key-button kgi"><?= Yii::t('app', 'KGI') ?></button>
         </div>
         <div class="chart-button-wrapper">
-            <button id="KPI" class="chart-key-button kpi">KPI</button>
+            <button id="KPI" class="chart-key-button kpi"><?= Yii::t('app', 'KPI') ?></button>
         </div>
     </div>
 </div>
@@ -166,7 +166,7 @@ $categories = array_map(fn($month) => $month . ' ' . $currentYearShort, $months)
                         },
                         yAxis: {
                             title: {
-                                text: 'Amount',
+                                text: '<?= Yii::t('app', 'Amount') ?>',
                                 style: {
                                     color: '#000', // สีข้อความ
                                     fontWeight: 'bold', // ตัวหนา
@@ -195,7 +195,7 @@ $categories = array_map(fn($month) => $month . ' ' . $currentYearShort, $months)
                             useHTML: true,
                             labelFormatter: function() {
                                 let iconPath = '';
-                                if (this.name == 'Performance') {
+                                if (this.name == '<?= Yii::t('app', 'Performance') ?>') {
                                     if (currentIndex == 0) iconPath =
                                         'KFI-target.svg'; // KFI
                                     else if (currentIndex == 1) iconPath =
@@ -268,7 +268,7 @@ $categories = array_map(fn($month) => $month . ' ' . $currentYearShort, $months)
         const companyImg = document.getElementById('companyImg');
         const teamImg = document.getElementById('teamImg');
         const selfImg = document.getElementById('selfImg');
-        const infoList = ['Company', 'Team', 'Self'];
+        const infoList = ['<?= Yii::t('app', 'Company') ?>', '<?= Yii::t('app', 'Team') ?>', '<?= Yii::t('app', 'Self') ?>'];
 
         const updateInfo = () => {
             infoSpan.textContent = infoList[currentCategory == 'Company' ? 0 : currentCategory == 'Team' ? 1 :
