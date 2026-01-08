@@ -195,7 +195,7 @@ $categories = array_map(fn($month) => $month . ' ' . $currentYearShort, $months)
                             useHTML: true,
                             labelFormatter: function() {
                                 let iconPath = '';
-                                if (this.name == '<?= Yii::t('app', 'Performance') ?>') {
+                                if (this.name == 'Performance') {
                                     if (currentIndex == 0) iconPath =
                                         'KFI-target.svg'; // KFI
                                     else if (currentIndex == 1) iconPath =
