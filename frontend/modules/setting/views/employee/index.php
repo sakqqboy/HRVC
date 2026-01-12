@@ -872,7 +872,7 @@ $this->registerJs('
 				return $(this).val();
 			}).get();
 		} else {
-			selectedEmployees = $("[id^=check-employee-list-]:checked").map(function() {
+			selectedEmployees = $("[id^=check-employee-]:checked").map(function() {
 				return $(this).val();
 			}).get();
 		}

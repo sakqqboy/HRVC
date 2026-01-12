@@ -1592,7 +1592,6 @@ class EmployeeController extends Controller
     }
     public function actionMultiDeleteEmployee()
     {
-
         $employeeIds = $_POST["selectedEmployees"];
         Employee::updateAll(["status" => 99], ["in", "employeeId", $employeeIds]);
         $res["status"] = true;
