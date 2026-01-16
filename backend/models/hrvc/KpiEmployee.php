@@ -313,19 +313,42 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
     }
     public static function countKpiFromTeam($kpiId, $teamId, $month, $year)
     {
+        // $kpiEmployee = KpiEmployee::find()
+        //     ->select('e.picture,e.employeeId,e.gender,kpi_employee.year,kpi_employee.month')
+        //     ->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_employee.kpiId")
+        //     ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
+        //     ->where("kpi_employee.status [1, 2, 4, 5] and e.status!=99 and k.status!=99")
+        //     ->andWhere([
+        //         "kpi_employee.kpiId" => $kpiId,
+        //         "e.teamId" => $teamId,
+        //         "kpi_employee.month" => $month,
+        //         "kpi_employee.year" => $year
+        //     ])
+        //     ->asArray()
+        //     ->all();
         $kpiEmployee = KpiEmployee::find()
-            ->select('e.picture,e.employeeId,e.gender,kpi_employee.year,kpi_employee.month')
-            ->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_employee.kpiId")
-            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
-            ->where("kpi_employee.status!=99 and e.status!=99 and k.status!=99")
-            ->andWhere([
-                "kpi_employee.kpiId" => $kpiId,
-                "e.teamId" => $teamId,
-                "kpi_employee.month" => $month,
-                "kpi_employee.year" => $year
-            ])
-            ->asArray()
-            ->all();
+        ->alias('ke')
+        ->select([
+            'e.picture',
+            'e.employeeId',
+            'e.gender',
+            'ke.year',
+            'ke.month'
+        ])
+        ->leftJoin('kpi k', 'k.kpiId = ke.kpiId')
+        ->leftJoin('employee e', 'e.employeeId = ke.employeeId')
+        ->where(['IN', 'ke.status', [1, 2, 4, 5]])
+        ->andWhere(['!=', 'e.status', 99])
+        ->andWhere(['!=', 'k.status', 99])
+        ->andWhere([
+            'ke.kpiId' => $kpiId,
+            'e.teamId' => $teamId,
+            'ke.month' => $month,
+            'ke.year'  => $year
+        ])
+        ->asArray()
+        ->all();
+
         $employee = [];
         $img = "images/employee/status/employee-nopic.svg";
         if (isset($kpiEmployee) && count($kpiEmployee) > 0) {

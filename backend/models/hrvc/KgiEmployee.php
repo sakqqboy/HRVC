@@ -252,18 +252,37 @@ class KgiEmployee extends \backend\models\hrvc\master\KgiEmployeeMaster
     }
     public static function countKgiFromTeam($kgiId, $teamId, $month, $year)
     {
+        // $kgiEmployee = KgiEmployee::find()
+        //     ->select('e.picture,e.employeeId,e.gender')
+        //     ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+        //     ->where("kgi_employee.status!=99 and e.status!=99")
+        //     ->andWhere([
+        //         "kgi_employee.kgiId" => $kgiId,
+        //         "e.teamId" => $teamId,
+        //         "kgi_employee.month" => $month,
+        //         "kgi_employee.year" => $year
+        //     ])
+        //     ->asArray()
+        //     ->all();
         $kgiEmployee = KgiEmployee::find()
-            ->select('e.picture,e.employeeId,e.gender')
-            ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-            ->where("kgi_employee.status!=99 and e.status!=99")
-            ->andWhere([
-                "kgi_employee.kgiId" => $kgiId,
-                "e.teamId" => $teamId,
-                "kgi_employee.month" => $month,
-                "kgi_employee.year" => $year
-            ])
-            ->asArray()
-            ->all();
+        ->alias('ke')
+        ->select([
+            'e.picture',
+            'e.employeeId',
+            'e.gender'
+        ])
+        ->leftJoin('employee e', 'e.employeeId = ke.employeeId')
+        ->where(['IN', 'ke.status', [1, 2, 4, 5]])
+        ->andWhere(['!=', 'e.status', 99])
+        ->andWhere([
+            'ke.kgiId' => $kgiId,
+            'ke.month' => $month,
+            'ke.year'  => $year,
+            'e.teamId' => $teamId
+        ])
+        ->asArray()
+        ->all();
+
         $employee = [];
         $img = "images/employee/status/employee-nopic.svg";
         if (isset($kgiEmployee) && count($kgiEmployee) > 0) {
