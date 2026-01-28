@@ -1,5 +1,5 @@
 <div class="gap-4" style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center;">
-    <!-- ถ้ามีมากกว่า 7 แุวให้แสดง Page Numbers เริ่มจาก 1  -->
+    <!-- ถ้ามีมากกว่า 6 แุวให้แสดง Page Numbers เริ่มจาก 1  -->
     <?php
 
     use common\models\ModelMaster;

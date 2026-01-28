@@ -1,7 +1,7 @@
 <div style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center; gap: 21px;">
     <!-- ถ้ามีมากกว่า 7 ให้แสดง Page Numbers เริ่มจาก 1  -->
     <?php 
-    if(  $numPage['totalRows'] > 7){
+    if(  $numPage['totalRows'] > 6){
     ?>
     <!-- Previous Button -->
     <button type="button" class="btn-previous<?= ($numPage['nowPage'] == 1 ? '-disable' : '') ?>"
