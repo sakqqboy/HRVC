@@ -96,31 +96,31 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                             <div class="pim-picgroup">
                                                 <?php if ($kfi["countEmployee"] != 0) { ?>
                                                     <?php
-                                                            if (isset($kfi['kfiEmployee'][0])) {
-                                                                $userPicture1 = $kfi['kfiEmployee'][0];
-                                                            } else {
-                                                                $userPicture1 = 'image/user.svg';
-                                                            }
-                                                            ?>
-                                                            <img src="<?= Yii::$app->homeUrl . $userPicture1 ?>"
-                                                                class="pim-pic-gridKFI">
-                                                            <?php
-                                                            if (isset($kfi['kfiEmployee'][1])) {
-                                                                $userPicture2 = $kfi['kfiEmployee'][1];
-                                                            } else {
-                                                                $userPicture2 = 'image/user.svg';
-                                                            }
-                                                            ?>
-                                                            <img src="<?= Yii::$app->homeUrl . $userPicture2 ?>"
-                                                                class="pim-pic-gridKFI pic-afterKFI">
-                                                            <?php
-                                                            if (isset($kfi['kpiEmployee'][2])) {
-                                                                $userPicture3 = $kfi['kpiEmployee'][2];
-                                                            } else {
-                                                                $userPicture3 = 'image/user.svg';
-                                                            }
-                                                            ?>
-                                                            <!-- <img src="<?= Yii::$app->homeUrl . $userPicture3 ?>"
+                                                    if (isset($kfi['kfiEmployee'][0])) {
+                                                        $userPicture1 = $kfi['kfiEmployee'][0];
+                                                    } else {
+                                                        $userPicture1 = 'image/user.svg';
+                                                    }
+                                                    ?>
+                                                    <img src="<?= Yii::$app->homeUrl . $userPicture1 ?>"
+                                                        class="pim-pic-gridKFI">
+                                                    <?php
+                                                    if (isset($kfi['kfiEmployee'][1])) {
+                                                        $userPicture2 = $kfi['kfiEmployee'][1];
+                                                    } else {
+                                                        $userPicture2 = 'image/user.svg';
+                                                    }
+                                                    ?>
+                                                    <img src="<?= Yii::$app->homeUrl . $userPicture2 ?>"
+                                                        class="pim-pic-gridKFI pic-afterKFI">
+                                                    <?php
+                                                    if (isset($kfi['kpiEmployee'][2])) {
+                                                        $userPicture3 = $kfi['kpiEmployee'][2];
+                                                    } else {
+                                                        $userPicture3 = 'image/user.svg';
+                                                    }
+                                                    ?>
+                                                    <!-- <img src="<?= Yii::$app->homeUrl . $userPicture3 ?>"
                                                                 class="pim-pic-gridKFI pic-afterKFI"> -->
 
                                                 <?php } else { ?>
@@ -180,7 +180,7 @@ $this->title = Yii::t('app', 'KFI Grid View');
                                 <div class="pim-center-line-content-KFI pim-<?= $colorFormat ?>"></div>
                                 <div class="d-flex flex-column" style="min-height:120px;">
                                     <div class="status-tag-kfi <?= $colorFormat ?>-tag">
-                                        <?= $statusText ?>
+                                        <?= Yii::t('app', $statusText) ?>
                                     </div>
                                     <div class="d-flex position-relative mx-auto mt-auto mb-auto">
                                         <div class="text-center kfi-grid-2 ">
