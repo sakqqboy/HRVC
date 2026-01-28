@@ -237,16 +237,18 @@ return [
             'class' => 'frontend\components\LanguageSelector',
         ],
         'i18n' => [
+            'class' => 'frontend\components\I18N',
             'translations' => [
                 '*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@frontend/messages',
-                    //                    'sourceLanguage' => 'th-TH',
+                    'class' => 'frontend\components\DbCaseInsensitiveMessageSource',
+                    'sourceLanguage' => 'en-US',
                 ],
                 'app' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'class' => 'yii\i18n\PhpMessageSource',
                     // 'sourceLanguage' => 'jp-JP',
+                    'class' => 'frontend\components\CaseInsensitivePhpMessageSource',
                     'basePath' => '@frontend/messages',
+
                     'fileMap' => [
                         'app' => 'app.php',
                         //'app/error' => 'error.php',
