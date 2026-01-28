@@ -177,7 +177,7 @@ $this->title = "Team KGI";
                                         </td>
                                         <td><?= $kgi["companyName"] ?></td>
                                         <td><img src="<?= Yii::$app->homeUrl . $kgi['flag'] ?>" class="Flag-Turkey">
-                                            <?= $kgi["branch"] ?>, <?= $kgi["countryName"] ?></td>
+                                            <?= $kgi["branch"] ?>, <?= Yii::t('app', $kgi["countryName"]) ?></td>
                                         <td>
                                             <div
                                                 style="width: 24px; height: 24px; flex-shrink: 0; border-radius: 4px; background: #2580D3; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
@@ -241,17 +241,17 @@ $this->title = "Team KGI";
                                         <td>
                                             <div id="progress1">
                                                 <?php
-                                                 if($showResult != 0){
+                                                if ($showResult != 0) {
                                                 ?>
-                                                <div data-num="<?= $kgi["ratio"] == '' ? 0 : $kgi["ratio"] ?>" data-value="<?= $showResult ?>%"
-                                                    class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
+                                                    <div data-num="<?= $kgi["ratio"] == '' ? 0 : $kgi["ratio"] ?>" data-value="<?= $showResult ?>%"
+                                                        class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
                                                 <?php
-                                                 } else {
+                                                } else {
                                                 ?>
-                                                <div data-num="<?= $showResult ?>"  data-value="<?= $showResult ?>%" 
-                                                    class="progress-pim-table progress-circle-<?= $colorFormat ?>"><?= $showResult ?>%</div>
+                                                    <div data-num="<?= $showResult ?>" data-value="<?= $showResult ?>%"
+                                                        class="progress-pim-table progress-circle-<?= $colorFormat ?>"><?= $showResult ?>%</div>
                                                 <?php
-                                                 }
+                                                }
                                                 ?>
                                             </div>
                                         </td>
