@@ -191,7 +191,7 @@ $this->title = 'Company KGI';
                                                             <a href="<?= $url ?>"
                                                                 class="font-<?= $yellow == 1 ? 'black' : $colorFormat ?>"
                                                                 style="<?= (($kgi["countEmployee"] == 0 || $colorFormat == 'disable') && $role <= 4) ? 'pointer-events: none; color: black; text-decoration: none;' : '' ?>">
-                                                                <?= $textAssign ?>
+                                                                <?= Yii::t('app', $textAssign) ?>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -250,7 +250,7 @@ $this->title = 'Company KGI';
                                                             <a href="<?= $url ?>"
                                                                 class="font-<?= $yellow == 1 ? 'black' : $colorFormat ?>"
                                                                 style="<?= (($kgi["countTeam"] == 0 || $colorFormat == 'disable') && $role <= 4) ? 'pointer-events: none; color: black; text-decoration: none;' : '' ?>">
-                                                                <?= $textAssign ?>
+                                                                <?= Yii::t('app', $textAssign) ?>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -292,7 +292,7 @@ $this->title = 'Company KGI';
                                                     ?>
                                                         <div class="priority-box">
                                                             <?= Yii::t('app', 'Priority') ?>
-                                                            <span class="text-priority"><?= $kgi["priority"] ?></span>
+                                                            <span class="text-priority"><?= Yii::t('app', $kgi["priority"]) ?></span>
                                                         </div>
                                                     <?php
                                                     } else { ?>
@@ -311,7 +311,7 @@ $this->title = 'Company KGI';
                                 <div class="pim-center-line-content pim-<?= $colorFormat ?>"></div>
                                 <div class="d-flex flex-column kgi-grid-2">
                                     <div class="status-tag <?= $colorFormat ?>-tag">
-                                        <?= $statusText ?>
+                                        <?= Yii::t('app', $statusText) ?>
                                     </div>
                                     <div class="d-grid  pl-10 pr-10 mt-23" style="gap: 7px;">
                                         <div class="pim-small-text"><?= Yii::t('app', 'Quant Ratio') ?></div>
@@ -340,8 +340,8 @@ $this->title = 'Company KGI';
                                             <?= $kgi['month'] == "" ? Yii::t('app', 'Month') : Yii::t('app', $kgi['month']) ?>
                                         </div>
                                         <div class="term-<?= $colorFormat ?> term-period">
-                                            <?= $kgi['fromDate'] == "" ? Yii::t('app', 'Not set') : $kgi['fromDate'] ?> -
-                                            <?= $kgi['toDate'] == "" ? Yii::t('app', 'Not set') : $kgi['toDate'] ?>
+                                            <?= $kgi['fromDate'] == "" ? Yii::t('app', 'Not Set') : $kgi['fromDate'] ?> -
+                                            <?= $kgi['toDate'] == "" ? Yii::t('app', 'Not Set') : $kgi['toDate'] ?>
                                         </div>
                                     </div>
                                     <div class="row mt-10" style="--bs-gutter-x:0px;">
@@ -425,7 +425,7 @@ $this->title = 'Company KGI';
                                                     <div class="col-12 pim-small-text" style="justify-content: end !important;">
                                                         <?= Yii::t('app', 'Last Updated on') ?></div>
                                                     <div class="col-12 text-end pim-duedate mt-5">
-                                                        <?= $kgi['lastestUpdate'] == "" ? 'Not set' : $kgi['lastestUpdate'] ?>
+                                                        <?= $kgi['lastestUpdate'] == "" ? 'Not Set' : $kgi['lastestUpdate'] ?>
                                                     </div>
                                                 </div>
                                                 <div class="col-4 text-center align-content-center">
@@ -472,7 +472,7 @@ $this->title = 'Company KGI';
                                                     <div class="col-12 text-start pim-small-text font-<?= $colorFormat ?>">
                                                         <?= Yii::t('app', 'Next Update Date') ?></div>
                                                     <div class="col-12 text-start pim-duedate mt-5">
-                                                        <?= $kgi['nextCheck'] == "" ? 'Not set' : $kgi['nextCheck'] ?>
+                                                        <?= $kgi['nextCheck'] == "" ? 'Not Set' : $kgi['nextCheck'] ?>
                                                     </div>
                                                 </div>
                                             </div>

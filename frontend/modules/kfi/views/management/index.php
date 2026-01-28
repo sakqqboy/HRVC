@@ -112,7 +112,7 @@ $this->title = 'KFI';
                                         </td>
                                         <td>
                                             <img src="<?= Yii::$app->homeUrl ?><?= $kfi["flag"] ?>" class="Flag-Turkey mr-3">
-                                            <?= $kfi["branchName"] ?>, <?= $kfi['countryName'] ?>
+                                            <?= $kfi["branchName"] ?>, <?= Yii::t('app', $kfi['countryName']) ?>
                                         </td>
                                         <td class="text-center">
                                             <?= $kfi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
@@ -174,22 +174,22 @@ $this->title = 'KFI';
                                             ?>
                                             <div id="progress1">
                                                 <?php
-                                                 if($showPercent != 0){
+                                                if ($showPercent != 0) {
                                                 ?>
-                                                <div data-num="<?= $showPercent ?>"
-                                                    class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
+                                                    <div data-num="<?= $showPercent ?>"
+                                                        class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
                                                 <?php
-                                                 } else {
+                                                } else {
                                                 ?>
-                                                <div data-num="<?= $showPercent ?>" data-value="<?= $showPercent ?>%" 
-                                                    class="progress-pim-table progress-circle-<?= $colorFormat ?>"><?= $showPercent ?>%</div>
+                                                    <div data-num="<?= $showPercent ?>" data-value="<?= $showPercent ?>%"
+                                                        class="progress-pim-table progress-circle-<?= $colorFormat ?>"><?= $showPercent ?>%</div>
                                                 <?php
-                                                 }
+                                                }
                                                 ?>
                                             </div>
                                         </td>
                                         <td class="text-center"><?= $kfi["quantRatio"] == 1 ? Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?></td>
-                                        <td class="text-center"><?= $kfi["month"] ?></td>
+                                        <td class="text-center"><?= Yii::t('app', $kfi["month"]) ?></td>
                                         <td class="<?= $colorFormat == 'over' ? 'text-danger' : '' ?> text-center font-<?= $colorFormat ?>">
 
                                             <?= $kfi['nextCheck'] == "" ? Yii::t('app', 'Not set') : $kfi['nextCheck'] ?>
