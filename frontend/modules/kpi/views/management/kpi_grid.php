@@ -192,7 +192,7 @@ $this->title = 'Company KPI';
                                                             <a href="<?= $url ?>"
                                                                 class="font-<?= $yellow == 1 ? 'black' : $colorFormat ?>"
                                                                 style="<?= (($kpi["countEmployee"] == 0 || $colorFormat == 'disable') && $role <= 4) ? 'pointer-events: none; color: black; text-decoration: none;' : '' ?>">
-                                                                <?= $textAssign ?>
+                                                                <?= Yii::t('app', $textAssign) ?>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -251,7 +251,7 @@ $this->title = 'Company KPI';
                                                             <a href="<?= $url ?>"
                                                                 class="font-<?= $yellow == 1 ? 'black' : $colorFormat ?>"
                                                                 style="<?= (($kpi["countEmployee"] == 0 || $colorFormat == 'disable') && $role <= 4) ? 'pointer-events: none; color: black; text-decoration: none;' : '' ?>">
-                                                                <?= $textAssign ?>
+                                                                <?= Yii::t('app', $textAssign) ?>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -299,7 +299,7 @@ $this->title = 'Company KPI';
                                                     } else { ?>
                                                         <div class="priority-box-null">
                                                             <?= Yii::t('app', 'Priority') ?>
-                                                            <span class="text-priority">N/A</span>
+                                                            <span class="text-priority"><?= Yii::t('app', 'N/A') ?></span>
                                                         </div>
                                                     <?php
                                                     }
@@ -312,7 +312,7 @@ $this->title = 'Company KPI';
                                 <div class="pim-center-line-content pim-<?= $colorFormat ?>"></div>
                                 <div class="d-flex flex-column kgi-grid-2">
                                     <div class="status-tag <?= $colorFormat ?>-tag">
-                                        <?= $statusText ?>
+                                        <?= Yii::t('app', $statusText) ?>
                                     </div>
                                     <div class="d-grid  pl-10 pr-10 mt-23" style="gap: 7px;">
                                         <div class="pim-small-text"><?= Yii::t('app', 'Quant Ratio') ?></div>
@@ -341,8 +341,8 @@ $this->title = 'Company KPI';
                                             <?= $kpi['month'] == "" ? Yii::t('app', 'Month') : Yii::t('app', $kpi['month']) ?>
                                         </div>
                                         <div class="term-<?= $colorFormat ?> term-period">
-                                            <?= $kpi['fromDate'] == "" ? Yii::t('app', 'Not set') : $kpi['fromDate'] ?> -
-                                            <?= $kpi['toDate'] == "" ? Yii::t('app', 'Not set') : $kpi['toDate'] ?>
+                                            <?= $kpi['fromDate'] == "" ? Yii::t('app', 'Not Set') : $kpi['fromDate'] ?> -
+                                            <?= $kpi['toDate'] == "" ? Yii::t('app', 'Not Set') : $kpi['toDate'] ?>
                                         </div>
                                     </div>
                                     <div class="row mt-10" style="--bs-gutter-x:0px;">
@@ -426,7 +426,7 @@ $this->title = 'Company KPI';
                                                     <div class="col-12 pim-small-text" style="justify-content: end !important;">
                                                         <?= Yii::t('app', 'Last Updated on') ?></div>
                                                     <div class="col-12 text-end pim-duedate mt-5">
-                                                        <?= $kpi['lastestUpdate'] == "" ? 'Not set' : $kpi['lastestUpdate'] ?>
+                                                        <?= $kpi['lastestUpdate'] == "" ? Yii::t('app', 'Not Set') : $kpi['lastestUpdate'] ?>
                                                     </div>
                                                 </div>
                                                 <div class="col-4 text-center align-content-center">
@@ -473,7 +473,7 @@ $this->title = 'Company KPI';
                                                     <div class="col-12 text-start pim-small-text font-<?= $colorFormat ?>">
                                                         <?= Yii::t('app', 'Next Update Date') ?></div>
                                                     <div class="col-12 text-start pim-duedate mt-5">
-                                                        <?= $kpi['nextCheck'] == "" ? 'Not set' : $kpi['nextCheck'] ?></div>
+                                                        <?= $kpi['nextCheck'] == "" ? Yii::t('app', 'Not Set') : $kpi['nextCheck'] ?></div>
                                                 </div>
                                             </div>
                                         </div>
