@@ -1,7 +1,13 @@
 <div style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center; gap: 21px;">
     <!-- ถ้ามีมากกว่า 7 ให้แสดง Page Numbers เริ่มจาก 1  -->
-    <?php 
-    if(  $numPage['totalRows'] > 7){
+    <?php
+    $limit = 0;
+     if($page == 'list'){
+        $limit = 7 ; 
+     }else{
+        $limit = 6 ;
+     }
+    if(  $numPage['totalRows'] > $limit ){
     ?>
     <!-- Previous Button -->
     <button type="button" class="btn-previous<?= ($numPage['nowPage'] == 1 ? '-disable' : '') ?>"
