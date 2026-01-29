@@ -2,7 +2,7 @@
 
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'KPI View';
+$this->title = Yii::t('app', 'KPI View');
 ?>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <div class="col-12">

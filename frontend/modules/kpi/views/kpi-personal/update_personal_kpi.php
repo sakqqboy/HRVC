@@ -3,7 +3,8 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = "Update Individual KPI";
+$this->title = Yii::t('app', 'Update Individual KPI');
+
 $form = ActiveForm::begin([
 	'id' => 'update-personal-kpi',
 	'method' => 'post',
@@ -31,20 +32,20 @@ $form = ActiveForm::begin([
 		<div class="offset-lg-3 col-lg-6 col-12">
 			<div class="alert mt-10 pim-body bg-white">
 				<div class="col-12 mt-10 font-b border-bottom pb-10">
-					KPI : : <?= $kpiEmployeeDetail["kpiName"] ?>
+					<?= Yii::t('app', 'KPI') ?> : : <?= $kpiEmployeeDetail["kpiName"] ?>
 
 				</div>
 				<div class="col-12 mt-10">
-					<label for="" class="form-label font-size-12"></strong>Detail</label>
+					<label for="" class="form-label font-size-12"></strong><?= Yii::t('app', 'Detail') ?></label>
 					<textarea class="form-control" name="detail" style="height: 100px;" required><?= $kpiEmployeeDetail["detail"] ?></textarea>
 				</div>
 				<div class="row">
 					<div class="col-6 mt-10">
-						<label for="exampleFormControl" class="form-label font-size-13">Target</label>
+						<label for="exampleFormControl" class="form-label font-size-13"><?= Yii::t('app', 'Target') ?></label>
 						<input class="form-control text-end" name="target" type="text" value="<?= number_format($kpiEmployeeDetail['target'], 2) ?>">
 					</div>
 					<div class="col-6 mt-10">
-						<label for="exampleFormControl" class="form-label font-size-13">Result</label>
+						<label for="exampleFormControl" class="form-label font-size-13"><?= Yii::t('app', 'Result') ?></label>
 						<input class="form-control text-end" name="result" type="text" value="<?= number_format($kpiEmployeeDetail['result'], 2) ?>">
 					</div>
 					<div class="col-6 pt-10">
@@ -80,7 +81,7 @@ $form = ActiveForm::begin([
 
 							}
 							?>
-							<option value="">Year</option>
+							<option value=""><?= Yii::t('app', 'Year') ?></option>
 							<?php
 							$year = 2020;
 							$thisYear = date('Y');

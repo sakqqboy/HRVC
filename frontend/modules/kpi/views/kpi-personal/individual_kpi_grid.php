@@ -4,7 +4,7 @@ use common\models\ModelMaster;
 use frontend\models\hrvc\KpiEmployee;
 use yii\bootstrap5\ActiveForm;
 // $totalkpi = 0;
-$this->title = "Individual KPI";
+$this->title = Yii::t('app', 'Individual KPI');
 ?>
 <div class="col-12 mt-70 pt-20 pim-content1">
     <div class="d-flex justify-content-start align-items-center  pt-0 pb-0" style="line-height: 30px;">
@@ -298,7 +298,7 @@ $this->title = "Individual KPI";
                                                     } else { ?>
                                                         <div class="priority-box-null">
                                                             <?= Yii::t('app', 'Priority') ?>
-                                                            <span class="text-priority">N/A</span>
+                                                            <span class="text-priority"><?= Yii::t('app', 'N/A') ?></span>
                                                         </div>
                                                     <?php
                                                     }
