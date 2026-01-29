@@ -338,7 +338,7 @@ $this->title = Yii::t('app', "Team KGI");
                                                     } else { ?>
                                                         <div class="priority-box-null">
                                                             <?= Yii::t('app', 'Priority') ?>
-                                                            <span class="text-priority"><?= Yii::t('app', 'N/A') ?></span>
+                                                            <span class="text-priority">N/A</span>
                                                         </div>
                                                     <?php
                                                     }

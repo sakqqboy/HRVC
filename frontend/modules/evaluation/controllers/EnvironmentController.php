@@ -7,6 +7,7 @@ use common\carlendar\Carlendar;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
+use frontend\components\Api;
 use frontend\models\hrvc\Attribute;
 use frontend\models\hrvc\Branch;
 use frontend\models\hrvc\Company;
@@ -51,19 +52,10 @@ class EnvironmentController extends Controller
 		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$companies = curl_exec($api);
-		$companies = json_decode($companies, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/index');
-		$environments = curl_exec($api);
-		$environments = json_decode($environments, true);
-
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/attribute');
-		$attribute = curl_exec($api);
-		$attribute = json_decode($attribute, true);
-
-		curl_close($api);
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$environments = Api::connectApi(Path::Api() . 'evaluation/environment/index');
+		$attribute = Api::connectApi(Path::Api() . 'evaluation/environment/attribute');
 
 		$date = date('Y-m-d');
 		$dateValue = Carlendar::currentMonth($date);

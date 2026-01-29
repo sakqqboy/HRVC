@@ -23,7 +23,7 @@ class FilterController extends Controller
 	{
 		$branches = [];
 		$res = [];
-		$text = "<option value=''>Branch</option>";
+		$text = "<option value=''>" . Yii::t('app', 'Branch') . "</option>";
 		$branches = Api::connectApi(Path::Api() . 'masterdata/branch/company-branch?id=' . $_POST["companyId"]);
 
 		if (isset($branches) && count($branches) > 0) {
@@ -39,7 +39,7 @@ class FilterController extends Controller
 	{
 		$teams = [];
 		$res = [];
-		$text = "<option value=''>Team</option>";
+		$text = "<option value=''>" . Yii::t('app', 'Team') . "</option>";
 		$teams = Api::connectApi(Path::Api() . 'masterdata/branch/branch-team?id=' . $_POST["branchId"]);
 		if (isset($teams) && count($teams) > 0) {
 			foreach ($teams as $team) :
@@ -54,7 +54,7 @@ class FilterController extends Controller
 	{
 		$teams = [];
 		$res = [];
-		$text = "<option value=''>Department</option>";
+		$text = "<option value=''>" . Yii::t('app', 'Department') . "</option>";
 		$departments = Api::connectApi(Path::Api() . 'masterdata/branch/branch-department?id=' . $_POST["branchId"]);
 		if (isset($departments) && count($departments) > 0) {
 			foreach ($departments as $department) :
@@ -68,7 +68,7 @@ class FilterController extends Controller
 	public function actionEmployeeTeam()
 	{
 		$res = [];
-		$text = "<option value=''>Employee</option>";
+		$text = "<option value=''>" . Yii::t('app', 'Employee') . "</option>";
 		$employee = Team::employeeInTeamDetail($_POST["teamId"]);
 		if (isset($employee) && count($employee) > 0) {
 			foreach ($employee as $e) :

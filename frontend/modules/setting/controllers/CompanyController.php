@@ -684,12 +684,12 @@ class CompanyController extends Controller
 				// สร้างภาพต้นฉบับจาก temp
 				$srcImg = null;
 				if ($extension === 'jpg' || $extension === 'jpeg') {
-                    $srcImg = @imagecreatefromjpeg($tempPath);
-                } elseif ($extension === 'png') {
-                    $srcImg = @imagecreatefrompng($tempPath);
-                } elseif ($extension === 'gif') {
-                    $srcImg = @imagecreatefromgif($tempPath);
-                }
+					$srcImg = @imagecreatefromjpeg($tempPath);
+				} elseif ($extension === 'png') {
+					$srcImg = @imagecreatefrompng($tempPath);
+				} elseif ($extension === 'gif') {
+					$srcImg = @imagecreatefromgif($tempPath);
+				}
 
 				if ($srcImg) {
 					$cropSize = 600; // ขนาดที่ต้องการ
@@ -1118,7 +1118,7 @@ class CompanyController extends Controller
 		$departments = Api::connectApi(
 			Path::Api() . 'masterdata/department/company-department?id=' . $companyId
 		);
-		$option = '<option value="">Department</option>';
+		$option = '<option value="">' . Yii::t("app", "Department") . '</option>';
 		$res["status"] = false;
 		$res["department"] = '';
 		if (isset($departments) && count($departments) > 0) {

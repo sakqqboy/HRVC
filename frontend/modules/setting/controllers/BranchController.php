@@ -194,7 +194,7 @@ class BranchController extends Controller
                                 ->andWhere(['NOT IN', 'status', [99, 100]])
                                 ->asArray()
                                 ->all();
-                            // $totalEmployees += count($employees);
+                        // $totalEmployees += count($employees);
                         endforeach;
                     }
                     $totalTeam += count($teams);
@@ -449,7 +449,7 @@ class BranchController extends Controller
                                 ->andWhere(['NOT IN', 'status', [99, 100]])
                                 ->asArray()
                                 ->all();
-                            // $totalEmployees += count($employeesTeam);
+                        // $totalEmployees += count($employeesTeam);
                         endforeach;
                     }
                     $totalTeam += count($teams);
@@ -566,7 +566,7 @@ class BranchController extends Controller
                                 ->andWhere(['NOT IN', 'status', [99, 100]])
                                 ->asArray()
                                 ->all();
-                            // $totalEmployees += count($employees);
+                        // $totalEmployees += count($employees);
                         endforeach;
                     }
                     $totalTeam += count($teams);
@@ -582,7 +582,7 @@ class BranchController extends Controller
                     // ❌ ไม่มีไฟล์ → ใช้รูป default แทน
                     $pictureUrl = 'image/no-branch.svg';
                 }
-            $totalEmployees = count($employees);
+                $totalEmployees = count($employees);
                 //เก็บค่า
                 $data[$branch["branchId"]] = [
                     "branchId" => $branch["branchId"],
@@ -1114,7 +1114,7 @@ class BranchController extends Controller
                 list($width, $height) = getimagesize($tempPath);
 
                 $srcImg = null;
-				if ($extension === 'jpg' || $extension === 'jpeg') {
+                if ($extension === 'jpg' || $extension === 'jpeg') {
                     $srcImg = @imagecreatefromjpeg($tempPath);
                 } elseif ($extension === 'png') {
                     $srcImg = @imagecreatefrompng($tempPath);
@@ -1135,13 +1135,13 @@ class BranchController extends Controller
                     imagecopyresampled($dstImg, $srcImg, 0, 0, $srcX, $srcY, $cropSize, $cropSize, $minSize, $minSize);
 
                     // บันทึกไฟล์ภาพที่ถูก crop แล้ว
-					if ($extension === 'jpg' || $extension === 'jpeg') {
-						imagejpeg($dstImg, $pathSave, 90);
-					} elseif ($extension === 'png') {
-						imagepng($dstImg, $pathSave);
-					} elseif ($extension === 'gif') {
-						imagegif($dstImg, $pathSave);
-					}
+                    if ($extension === 'jpg' || $extension === 'jpeg') {
+                        imagejpeg($dstImg, $pathSave, 90);
+                    } elseif ($extension === 'png') {
+                        imagepng($dstImg, $pathSave);
+                    } elseif ($extension === 'gif') {
+                        imagegif($dstImg, $pathSave);
+                    }
 
                     imagedestroy($srcImg);
                     imagedestroy($dstImg);

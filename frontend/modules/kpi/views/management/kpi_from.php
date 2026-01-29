@@ -76,7 +76,7 @@ if ($DueBehind < 0) {
                         </text>
                     </a> -->
                     <div class="pim-name-title" style="display: flex; align-items: center; gap: 14px;">
-                        <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kpi/management/grid' ?>" style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+                        <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kpi/management/grid' ?>" style="text-decoration: none; width:70px; height:26px;" class="btn-create-branch">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
                             <?= Yii::t('app', 'Back') ?>
                         </a>
@@ -150,13 +150,13 @@ if ($DueBehind < 0) {
                             style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
-                                Name <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                <?= Yii::t('app', 'Name') ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                     data-toggle="tooltip" data-placement="top" class="tootip-icon"
                                     title="<?= Yii::t('app', 'Enter the name of your key Performance indicator. This should be clear and specific, such as Number of customer Visits or Number of Cold calls to client') ?>">
                             </label>
                             <input type="text" class="form-control" id="kpiName" name="kpiName"
                                 value="<?= isset($data['kpiName']) ? htmlspecialchars($data['kpiName']) : '' ?>"
-                                placeholder="Please Write the Name of Component" required>
+                                placeholder="<?= Yii::t('app', 'Please Write the Name of Component') ?>" required>
                         </div>
                         <div class="form-group mt-37"
                             style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
@@ -191,7 +191,7 @@ if ($DueBehind < 0) {
                             style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="my-input">
                                 <span class="text-danger">* </span>
-                                <?= Yii::t('app', 'Select Branch/s ') ?>
+                                <?= Yii::t('app', 'Select Branch/s') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
                                     data-placement="top" class="tootip-icon"
                                     title="<?= Yii::t('app', 'Select the relevant branches where this indicator will be monitored. You can choose multiple branches to track Performance achievement across different locations') ?>"
@@ -234,7 +234,7 @@ if ($DueBehind < 0) {
                             </div>
                         </div>
                         <div class="sub-manage-create mt-5 text-danger invisible" id="branch-message" style="position:absolute;right:30px;letter-spacing:0.5px;">
-                            No Branch Selected
+                            <?= Yii::t('app', 'No Branch Selected') ?>
                         </div>
                         <div class="form-group mt-37"
                             style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
@@ -283,7 +283,7 @@ if ($DueBehind < 0) {
                             </div>
                         </div>
                         <div class="sub-manage-create mt-5 text-danger invisible" id="department-message" style="position:absolute;right:30px;letter-spacing:0.5px;">
-                            No Department Selected
+                            <?= Yii::t('app', 'No Department Selected') ?>
                         </div>
                         <div class="form-group mt-27"
                             style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
@@ -332,7 +332,7 @@ if ($DueBehind < 0) {
                             </div>
                         </div>
                         <div class="sub-manage-create mt-5 text-danger invisible" id="team-message" style="position:absolute;right:30px;letter-spacing:0.5px;">
-                            No Team Selected
+                            <?= Yii::t('app', 'No Team Selected') ?>
                         </div>
                         <div class="form-group mt-27"
                             style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
@@ -358,7 +358,7 @@ if ($DueBehind < 0) {
                             style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
-                                Update Interval <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                <?= Yii::t('app', 'Update Interval') ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                     data-toggle="tooltip" data-placement="top" class="tootip-icon"
                                     title="Select how frequently this indicator should be updated: Monthly, Quarterly, Half Yearly, or Yearly. This determines the reporting cycle."
                                     alt="Help Icon">
@@ -414,7 +414,7 @@ if ($DueBehind < 0) {
                                 </div>
                                 <div class="flex-grow-1 pr-5 pl-25 select-form-pim" id="multi-mount-year" name="fromMonthYear" onclick="openDatePicker()">
                                     <div id="multi-month-year-text" class="text-truncate text-center pr-5" style="width:190px;">
-                                        Select the Month & Year
+                                        <?= Yii::t('app', 'Select the Month & Year') ?>
                                     </div>
                                     <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
                                 </div>
@@ -425,18 +425,18 @@ if ($DueBehind < 0) {
                             </div>
                             <div id="monthYearPicker" class="mount-year">
                                 <select id="monthSelect" class="form-select" onchange="closeDatePicker()" required>
-                                    <option value="01">January</option>
-                                    <option value="02">February</option>
-                                    <option value="03">March</option>
-                                    <option value="04">April</option>
-                                    <option value="05">May</option>
-                                    <option value="06">June</option>
-                                    <option value="07">July</option>
-                                    <option value="08">August</option>
-                                    <option value="09">September</option>
-                                    <option value="10">October</option>
-                                    <option value="11">November</option>
-                                    <option value="12">December</option>
+                                    <option value="01"><?= Yii::t('app', 'January') ?></option>
+                                    <option value="02"><?= Yii::t('app', 'February') ?></option>
+                                    <option value="03"><?= Yii::t('app', 'March') ?></option>
+                                    <option value="04"><?= Yii::t('app', 'April') ?></option>
+                                    <option value="05"><?= Yii::t('app', 'May') ?></option>
+                                    <option value="06"><?= Yii::t('app', 'June') ?></option>
+                                    <option value="07"><?= Yii::t('app', 'July') ?></option>
+                                    <option value="08"><?= Yii::t('app', 'August') ?></option>
+                                    <option value="09"><?= Yii::t('app', 'September') ?></option>
+                                    <option value="10"><?= Yii::t('app', 'October') ?></option>
+                                    <option value="11"><?= Yii::t('app', 'November') ?></option>
+                                    <option value="12"><?= Yii::t('app', 'December') ?></option>
                                 </select>
                                 <select id="yearSelect" class="form-select" style="margin-top: 10px;"
                                     onchange="closeDatePicker()" required>
@@ -463,7 +463,7 @@ if ($DueBehind < 0) {
                                 </div>
                                 <div class="flex-grow-1 pr-5 pl-35 select-form-pim" id="due-term-default">
                                     <div id="multi-due-term-text" class="text-truncate text-center pr-5" style="width:210px;" title="Select the Due Term Start & End Date">
-                                        Select the Due Term Start & End Date
+                                        <?= Yii::t('app', 'Select the Due Term Start & End Date') ?>
                                     </div>
                                     <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
                                 </div>
@@ -485,7 +485,7 @@ if ($DueBehind < 0) {
                             </div>
                         </div>
                         <div class="sub-manage-create mt-5 text-danger invisible" id="due-term-message" style="position:absolute;right:20px;">
-                            Select Due Term
+                            <?= Yii::t('app', 'Select Due Term') ?>
                         </div>
                         <div class="form-group mt-37" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                             <label class="text-manage-create" for="name">
@@ -504,7 +504,7 @@ if ($DueBehind < 0) {
                                 </div>
                                 <div class="flex-grow-1 pr-5 pl-15 select-form-pim" id="due-update-default">
                                     <div id="multi-due-update-text" class="text-truncate text-center pr-5" style="width:230px;" title="Select The Last Update Update Date">
-                                        Select The Last Update Date
+                                        <?= Yii::t('app', 'Select The Last Update Date') ?>
                                     </div>
                                     <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
                                 </div>
@@ -516,7 +516,7 @@ if ($DueBehind < 0) {
                             </div>
                         </div>
                         <span class="sub-manage-create mt-5 text-danger invisible" id="last-update-message" style="position:absolute;right:30px;">
-                            Select The Last Update Date
+                            <?= Yii::t('app', 'Select The Last Update Date') ?>
                         </span>
                         <div class="form-group mt-30"
                             style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
@@ -544,15 +544,15 @@ if ($DueBehind < 0) {
                             <div class="col-5" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                                 <label class="text-manage-create" for="name">
                                     <span class="text-danger">* </span>
-                                    Data Type <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                    <?= Yii::t('app', 'Data Type') ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                         data-toggle="tooltip" data-placement="top" class="tootip-icon"
                                         title="Choose the type of data being tracked (e.g., numbers, percentages, currency) to ensure proper formatting and calculations."
                                         alt="Help Icon">
                                 </label>
                                 <select class="form-select mt-10" id="amountType-create" name="amountType" required>
                                     <option value="">Select</option>
-                                    <option value="1" <?= ($selectedAmountType == '1') ? 'selected' : '' ?>>%</option>
-                                    <option value="2" <?= ($selectedAmountType == '2') ? 'selected' : '' ?>>
+                                    <option value="1" <?= ($selectedAmountType == '1') ? Yii::t('app', 'selected') : '' ?>>%</option>
+                                    <option value="2" <?= ($selectedAmountType == '2') ? Yii::t('app', 'selected') : '' ?>>
                                         <?= Yii::t('app', 'Number') ?></option>
                                 </select>
                             </div>
@@ -561,13 +561,13 @@ if ($DueBehind < 0) {
                             <div class="col-7" style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
                                 <label class="text-manage-create" for="name">
                                     <span class="text-danger">* </span>
-                                    Success Condition <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
+                                    <?= Yii::t('app', 'Success Condition') ?> <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg"
                                         data-toggle="tooltip" data-placement="top"
                                         title="Define the criteria for success (e.g., Greater Than, Less Than, Equal To) to measure achievement against the target."
                                         alt="Help Icon" class="tootip-icon">
                                 </label>
                                 <select class="form-select mt-10" id="code-create" name="code" required>
-                                    <option value="">Select</option>
+                                    <option value=""><?= Yii::t('app', 'Select') ?></option>
                                     <option value="<" <?= ($selectedCode == '<') ? 'selected' : '' ?>>
                                         &nbsp;&nbsp;<?= '<' ?>&nbsp;&nbsp;<?= Yii::t('app', 'Result more than target') ?>
                                     </option>
@@ -599,7 +599,7 @@ if ($DueBehind < 0) {
                                         style="width: 30px; height: 30px;">
                                 </span>
                                 <input type="number" class="form-control text-end" name="amount" step="any"
-                                    placeholder="Enter Target Amount"
+                                    placeholder="<?= Yii::t('app', 'Enter Target Amount') ?>"
                                     value="<?= isset($data['targetAmount']) ? $data['targetAmount'] : '' ?>"
                                     style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
                                     required>
@@ -711,7 +711,7 @@ if ($DueBehind < 0) {
                                 justify-content: center;
                                 ">
                                     <label class="name-last-update">
-                                        Last Updated on
+                                        <?= Yii::t('app', 'Last Updated on') ?>
                                     </label>
                                     <text class="create-last-update">
                                         <?= isset($data['lastUpdate']) ? $data['lastUpdate'] : '' ?>
@@ -724,11 +724,11 @@ if ($DueBehind < 0) {
                                         onchange="javascript:changeStatus('kpi')" required="">
                                         <option value="1"
                                             <?= isset($data['status']) && $data['status'] == 1 ? 'selected' : '' ?>>
-                                            In-Progress
+                                            <?= Yii::t('app', 'In-Progress') ?>
                                         </option>
                                         <option value="2"
                                             <?= isset($data['status']) && $data['status'] == 2 ? 'selected' : '' ?>>
-                                            Completed
+                                            <?= Yii::t('app', 'Completed') ?>
                                         </option>
                                     </select>
 

@@ -38,7 +38,7 @@
         <div class="pim-center-line"></div>
         <div class="pim-head-branch">
             <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/global.svg" class="me-1">
-            <?= $totalBranch ?> Branches, Multiple Countries
+            <?= $totalBranch ?> <?= Yii::t('app', 'Branches') ?>, <?= Yii::t('app', 'Multiple Countries') ?>
         </div>
     </div>
 </div>

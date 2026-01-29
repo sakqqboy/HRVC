@@ -25,8 +25,8 @@
             <?php if (isset($companyPic) && count($companyPic) > 0) {
                 $i = 0;
                 foreach ($companyPic as $picture): ?>
-            <img src="<?= Yii::$app->homeUrl . $picture ?>"
-                class="pim-header-pic <?= $i > 0 ? 'pim-head-pic-after' : '' ?>">
+                    <img src="<?= Yii::$app->homeUrl . $picture ?>"
+                        class="pim-header-pic <?= $i > 0 ? 'pim-head-pic-after' : '' ?>">
             <?php
                     $i++;
                 endforeach;
@@ -38,7 +38,7 @@
         <div class="pim-center-line"></div>
         <div class="pim-head-branch">
             <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/global.svg" class="me-1">
-            <?= $totalBranch ?> Branches, Multiple Countries
+            <?= $totalBranch ?> <?= Yii::t('app', 'Branches') ?>, <?= Yii::t('app', 'Multiple Countries') ?>
         </div>
     </div>
 </div>

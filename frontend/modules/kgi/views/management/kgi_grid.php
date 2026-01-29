@@ -292,13 +292,13 @@ $this->title = 'Company KGI';
                                                     ?>
                                                         <div class="priority-box">
                                                             <?= Yii::t('app', 'Priority') ?>
-                                                            <span class="text-priority"><?= Yii::t('app', $kgi["priority"]) ?></span>
+                                                            <span class="text-priority"><?= $kgi["priority"] ?></span>
                                                         </div>
                                                     <?php
                                                     } else { ?>
                                                         <div class="priority-box-null">
                                                             <?= Yii::t('app', 'Priority') ?>
-                                                            <span class="text-priority"><?= Yii::t('app', 'N/A') ?></span>
+                                                            <span class="text-priority">N/A</span>
                                                         </div>
                                                     <?php
                                                     }

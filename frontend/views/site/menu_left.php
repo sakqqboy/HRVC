@@ -325,7 +325,7 @@ $session = Yii::$app->session;
             <!-- </div> -->
         </div>
     </div>
-    <div class="col-12 mt-17 d-none">
+    <div class="col-12 mt-17">
         <div class="btn-group-menu" onclick="javascript:toggleGroupMenuI('evaluation-system')">
             <div class="row">
                 <div class="col-2 pl-20">
@@ -348,7 +348,7 @@ $session = Yii::$app->session;
             <div class="col-12 first-layer-manu">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/evaluation_system.svg"
                     class="first-layer-icon" style="margin-top: -3px;">
-                <a class="no-underline">
+                <a class="no-underline" href="<?= Yii::$app->homeUrl ?>evaluation/environment/index">
                     <?= Yii::t('app', 'Evaluation Environment') ?>
                 </a>
                 <span style="float: right;">
