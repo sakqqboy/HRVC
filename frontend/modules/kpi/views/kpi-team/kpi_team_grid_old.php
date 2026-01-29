@@ -464,7 +464,7 @@ $this->title = "TEAM KPI";
                                                 } else { ?>
                                                     <div class="col-12 text-center priority-box-null">
                                                         <div class="col-12"><?= Yii::t('app', 'Priority') ?></div>
-                                                        <div class="col-12 text-priority">N/A</div>
+                                                        <div class="col-12 text-priority"><?= Yii::t('app', 'N/A') ?></div>
                                                     </div>
                                                 <?php
                                                 }

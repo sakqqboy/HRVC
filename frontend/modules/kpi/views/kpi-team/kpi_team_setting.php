@@ -18,7 +18,7 @@ $this->title = "KPI Team Setting";
 		</div>
 	</div>
 	<div class="col-12 mt-20 pt-10 pl-10 pb-20" style="border-radius: 10px;border-style:dotted;border-color:grey;">
-		<strong>KPI : <?= $kpiDetail["kpiName"] ?></strong>
+		<strong><?= Yii::t('app', 'KPI') ?> : <?= $kpiDetail["kpiName"] ?></strong>
 		<div class="row">
 			<div class="col-lg-2 col-md-6 col-2 text-center">
 				<div class="col-12 pt-25 pb-25 font-b font-size-20">
