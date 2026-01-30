@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 
-$this->title = 'Waiting for approve KGI';
+$this->title = Yii::t('app', 'Waiting for approve KGI');
 ?>
 <div class="col-12 mt-70 pt-20 pim-content1">
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">

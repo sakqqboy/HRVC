@@ -100,7 +100,7 @@
                                                         <?= $em['employeeName'] ?>
                                                     </div>
                                                     <div class="col-12" style="font-size: 14px !important;font-weight: 400;color:#656565;">
-                                                        <?= $em["title"] == '' ? 'Not set' : $em["title"] ?>
+                                                        <?= $em["title"] == '' ? Yii::t('app', 'Not set') : $em["title"] ?>
                                                     </div>
                                                 </div>
                                             </div>

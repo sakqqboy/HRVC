@@ -67,7 +67,7 @@ if (isset($kpis) && count($kpis) > 0) { ?>
 							<a href="<?= Yii::$app->homeUrl ?>kpi/view/kpi-history/<?= ModelMaster::encodeParams(['kpiId' => $kpiId]) ?>" target="_blank" class="no-underline ">
 								<div class="col-12 pt-4 pb-4" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
 									<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/detail.png" class="icon-table">
-									Detail
+									<?= Yii::t('app', 'Detail') ?>
 								</div>
 							</a>
 						</td>

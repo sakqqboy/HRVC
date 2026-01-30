@@ -20,7 +20,7 @@
                             <label for="input" class="form-label"><strong class="red">*</strong> <?= Yii::t('app', 'Company') ?></label>
                             <select class="form-select companyId" id="companyId-update" required name="companyId"
                                 onchange="javascript:companyMultiBrachUpdate()">
-                                <option value="">Select Company</option>
+                                <option value=""><?= Yii::t('app', 'Select Company') ?></option>
                                 <?php
                                 if (isset($companies) && count($companies) > 0) {
                                     foreach ($companies as $company) : ?>
@@ -79,7 +79,7 @@
                                         <button type="button" id="unit-<?= $unit['unitId'] ?>"
                                             class="btn border col-3 unit-<?= $i ?>  font-size-12 <?= $default ?>"
                                             onclick="javascript:selectUnitUpdate(<?= $unit['unitId'] ?>)" style="<?= $style ?>">
-                                            <?= $unit["unitName"] ?>
+                                            <?= Yii::t('app', $unit["unitName"]) ?>
                                         </button>
                                 <?php
                                         $i++;

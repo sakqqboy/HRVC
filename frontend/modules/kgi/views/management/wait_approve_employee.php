@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 
-$this->title = 'Waiting for approve KGI';
+$this->title =  Yii::t('app', 'Waiting for approve KGI');
 ?>
 <div class="col-12">
     <div class="col-12">

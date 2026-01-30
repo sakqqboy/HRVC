@@ -59,7 +59,7 @@ $this->title = 'KGI KPI';
                                     <?= $kpi["kpiName"] ?>
                                 </div>
                             </td>
-                            <td><?= $kpi["month"] ?></td>
+                            <td><?= Yii::t('app', $kpi["month"]) ?></td>
                             <td><?= Yii::t('app', $kpi["unit"]) ?></td>
                             <td class="text-end"><?= $kpi["targetAmount"] ?></td>
                             <td><?= $kpi["code"] ?></td>

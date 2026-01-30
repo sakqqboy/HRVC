@@ -101,7 +101,7 @@
                             <div class="col-12 small-content bg-white  <?= $i > 0 ? 'mt-10' : '' ?> pt-8 pb-8">
                                 <div class="row">
                                     <div class="col-8 font-size-12 font-b pl-10">
-                                        <?= $detail["month"] ?> <?= $detail["year"] ?>
+                                        <?= Yii::t('app', $detail["month"]) ?> <?= $detail["year"] ?>
                                     </div>
                                     <div class="col-4 font-size-12 text-center">
                                         <?= number_format($detail["target"], 2) ?> /

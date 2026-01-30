@@ -3,7 +3,7 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'KGI Grid View';
+$this->title =  Yii::t('app', 'KGI Grid View');
 ?>
 <div class="contrainer-body">
     <div class="col-12">

@@ -4,7 +4,7 @@ use common\models\ModelMaster;
 use frontend\models\hrvc\Kgi;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = "KGI";
+$this->title =  Yii::t('app', 'KGI') ?>;
 ?>
 <div class="contrainer-body">
     <div class="col-12">

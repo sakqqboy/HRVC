@@ -8,10 +8,10 @@
 					<span class="ml-10" id="kgi-name-view"></span>
 				</div>
 				<div class="modal-title border Completed-Backdrop7 badge rounded-pill bg-warning text-dark" id="status-view"></div>
-				<span class="border border-1 border-deadline-Backdrop7">Deadline <span class="font-size-10 text-dark pr-10"> : <span id="period-date-view"></span></span></span>
+				<span class="border border-1 border-deadline-Backdrop7"><?= Yii::t('app', 'Deadline') ?> <span class="font-size-10 text-dark pr-10"> : <span id="period-date-view"></span></span></span>
 			</div>
 			<div class="text-end">
-				<span class="border border-1 border-next-Backdrop7">Next Update <span class="font-size-10 text-dark pr-10"> : <span id="next-date-view"></span></span></span>
+				<span class="border border-1 border-next-Backdrop7"><?= Yii::t('app', 'Next Update') ?> <span class="font-size-10 text-dark pr-10"> : <span id="next-date-view"></span></span></span>
 			</div>
 			<div class="tk" id="company-name-view"></div>
 			<div class="col-12">
