@@ -2,7 +2,7 @@
 
 use frontend\models\hrvc\User;
 
-$this->title = 'Team kpi History';
+$this->title = Yii::t('app', 'Team kpi History');
 ?>
 <div class="col-12">
 	<div class="row">
@@ -18,7 +18,7 @@ $this->title = 'Team kpi History';
 		</div>
 	</div>
 	<div class="col-12 mt-10 pt-10 pl-10 pb-20 pim-body bg-white" style="border-radius: 10px;border-style:dotted;border-color:grey;">
-		<strong>KPI : <?= $kpiDetail["kpiName"] ?></strong>
+		<strong><?= Yii::t('app', 'KPI') ?> : <?= $kpiDetail["kpiName"] ?></strong>
 		<div class="row">
 			<div class="col-lg-2 col-md-6 col-2 text-center">
 				<div class="col-12 pt-25 pb-25 font-b font-size-20">
@@ -152,7 +152,7 @@ $this->title = 'Team kpi History';
 					<thead>
 						<tr class="bg-body-secondary">
 							<th>#</th>
-							<th>Team</th>
+							<th><?= Yii::t('app', 'Team') ?></th>
 							<th class="text-center"><?= Yii::t('app', 'Target') ?></th>
 							<th class="text-center"><?= Yii::t('app', 'Result') ?></th>
 							<th><?= Yii::t('app', 'Assigned By') ?></th>

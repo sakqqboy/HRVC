@@ -4,7 +4,7 @@ use frontend\models\hrvc\KpiTeam;
 use yii\bootstrap5\ActiveForm;
 use common\models\ModelMaster;
 
-$this->title = "Team KPI";
+$this->title =  Yii::t('app', 'Team KPI');
 ?>
 
 <div class="col-12 mt-70 pt-20 pim-content1">

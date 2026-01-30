@@ -45,7 +45,7 @@ if (isset($kpiHistoryTeam) && count($kpiHistoryTeam) > 0) {
     endforeach;
 } else { ?>
     <li class="schedule-item mb-8" role="button" tabindex="0">
-        <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 45px;">No data</div>
+        <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 45px;"><?= Yii::t('app', 'No data') ?></div>
     </li>
 <?php
 }

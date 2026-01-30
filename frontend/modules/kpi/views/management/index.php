@@ -4,7 +4,7 @@ use common\models\ModelMaster;
 use frontend\models\hrvc\Kpi;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Company KPI';
+$this->title = Yii::t('app', 'Company KPI');
 ?>
 <div class="col-12 mt-70 pt-20 pim-content1">
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
@@ -91,7 +91,7 @@ $this->title = 'Company KPI';
                                 <td class="text-center" style="width:5%"><?= Yii::t('app', 'Ratio') ?></td>
                                 <td class="text-center" style="width:2%"><?= Yii::t('app', 'Month') ?></td>
                                 <td class="text-center" style="width:5%"><?= Yii::t('app', 'Unit') ?></td>
-                                <td class="text-center">Last</td>
+                                <td class="text-center"><?= Yii::t('app', 'Last') ?></td>
                                 <td class="text-center"><?= Yii::t('app', 'Next') ?></td>
                                 <td style="width:5%"></td>
                             </tr>

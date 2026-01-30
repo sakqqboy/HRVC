@@ -3,7 +3,7 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = "TEAM KPI";
+$this->title = Yii::t('app', 'TEAM KPI');
 ?>
 <div class="contrainer-body">
     <div class="col-12">

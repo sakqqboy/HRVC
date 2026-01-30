@@ -3,13 +3,13 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'KPI';
+$this->title = Yii::t('app', 'KPI');
 ?>
 <div class="contrainer-body">
     <div class="col-12">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Vector.svg" class="home-icon mr-5"
             style="margin-top: -3px;">
-        <strong class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</strong>
+        <strong class="pim-head-text"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (<?= Yii::t('app', 'PIM') ?>)</strong>
     </div>
     <div class="col-12 mt-10">
         <?= $this->render('header_filter', [
@@ -115,7 +115,7 @@ $this->title = 'KPI';
                                 <td class="text-center" style="width:5%"><?= Yii::t('app', 'Ratio') ?></td>
                                 <td class="text-center" style="width:2%"><?= Yii::t('app', 'Month') ?></td>
                                 <td class="text-center" style="width:5%"><?= Yii::t('app', 'Unit') ?></td>
-                                <td class="text-center">Last</td>
+                                <td class="text-center"><?= Yii::t('app', 'Last') ?></td>
                                 <td class="text-center"><?= Yii::t('app', 'Next') ?></td>
                                 <td style="width:5%"></td>
                             </tr>

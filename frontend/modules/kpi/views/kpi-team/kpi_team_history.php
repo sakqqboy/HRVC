@@ -3,7 +3,7 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Team KPI View';
+$this->title = Yii::t('app', 'Team KPI View');
 ?>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <div class="col-12 mt-70 pt-20 pim-content1">

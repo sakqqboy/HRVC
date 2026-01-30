@@ -1,12 +1,12 @@
 <?php
 
-$this->title = 'KPI Detail';
+$this->title = Yii::t('app', 'KPI Detail');
 ?>
 <div class="col-12 mt-90">
 	<div class="row">
 		<div class="col-12">
 			<i class="fa fa-flag mr-5" aria-hidden="true"></i>
-			<strong class="font-size-20">KPI : : <?= $kpi["kpiName"] ?></strong>
+			<strong class="font-size-20"><?= Yii::t('app', 'KPI') ?> : : <?= $kpi["kpiName"] ?></strong>
 		</div>
 	</div>
 	<div class="col-12 mt-20 border-bottom pb-15" id="kpi-<?= $kpiId ?>">
@@ -22,7 +22,7 @@ $this->title = 'KPI Detail';
 								<?= $kpi["monthNameFull"] ?>
 							</div>
 							<div class="col-lg-5 col-md-5 col-6 text-end font-size-13 font-b text-dark pt-3">
-								Term : <?= $kpi["fromDateDetail"] ?> - <?= $kpi["toDateDetail"] ?>
+								<?= Yii::t('app', 'Term') ?> : <?= $kpi["fromDateDetail"] ?> - <?= $kpi["toDateDetail"] ?>
 							</div>
 						</div>
 					</div>

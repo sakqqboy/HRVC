@@ -3,7 +3,7 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = "Team KPI";
+$this->title = Yii::t('app', 'Team KPI');
 ?>
 <div class="col-12 mt-70 pt-20 pim-content1">
     <div class="d-flex justify-content-start align-items-center  pt-0 pb-0" style="line-height: 30px;">
