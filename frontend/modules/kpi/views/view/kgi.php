@@ -16,7 +16,7 @@ if (isset($kgis) && count($kgis) > 0) { ?>
 				<th style="width: 10%;"><?= Yii::t('app', 'TEAM') ?></th>
 				<th style="border-top-right-radius: 4px;border-bottom-right-radius: 4px;" class="text-end">
 					<a class="btn-blue-sm font-size-12 text-center no-underline mr-5 pl-10 pr-10" id="saveRelateKgi" href="javascript:showEditRelateKgi(2,<?= $kpiId ?>)">
-						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt="" class="mr-3" style="margin-top: -1px; width: 16px;"> Save
+						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt="" class="mr-3" style="margin-top: -1px; width: 16px;"> <?= Yii::t('app', 'Save') ?>
 					</a>
 					<a class="btn-red-sm font-size-12 text-center no-underline pl-10 pr-10" id="cancelRelateKgi" href="javascript:showEditRelateKgi(0,<?= $kpiId ?>)"><?= Yii::t('app', 'Cancel') ?></a>
 				</th>
@@ -67,7 +67,7 @@ if (isset($kgis) && count($kgis) > 0) { ?>
 							<a href="<?= Yii::$app->homeUrl ?>kgi/view/kgi-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId]) ?>" target="_blank" class="no-underline ">
 								<div class="col-12 pt-4 pb-4" style="background-color: #EDF5FF;color:#003276;cursor:pointer;">
 									<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/detail.png" class="icon-table">
-									Detail
+									<?= Yii::t('app', 'Detail') ?>
 								</div>
 							</a>
 						</td>

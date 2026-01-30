@@ -4,7 +4,7 @@
             <div class="col-5  sub-tab-active pl-5">
                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/warning-full.png" class="pim-icon mr-3"
                     style="margin-top: -6px;">
-                Report New Issus
+                <?= Yii::t('app', 'Report New Issus') ?>
             </div>
             <div class="col-7  sub-tab">
             </div>

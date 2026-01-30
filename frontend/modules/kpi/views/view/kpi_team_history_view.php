@@ -82,7 +82,7 @@
                                     </div>
                                 </div>
                                 <div class="col-3  align-content-center pr-20 ">
-                                    <div class="status-tag <?= $colorFormat ?>-tag text-center"><?= $statusText ?> </div>
+                                    <div class="status-tag <?= $colorFormat ?>-tag text-center"><?= Yii::t('app', $statusText) ?> </div>
                                 </div>
                                 <div class="col-4 text-center text-end   pr-0 pl-0 align-content-center">
                                     <div class="d-flex">

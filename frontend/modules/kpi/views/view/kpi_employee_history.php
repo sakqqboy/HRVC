@@ -3,14 +3,14 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Self KPI History';
+$this->title = Yii::t('app', 'Self KPI History');
 ?>
 
 <div class="col-12 mt-70 pt-20 pim-content1">
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg"
             class="pim-head-icon mr-11 mt-2">
-        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
+        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (<?= Yii::t('app', 'PIM') ?>)</span>
     </div>
     <?= $this->render('header_filter', [
         "role" => $role,
@@ -99,7 +99,7 @@ $this->title = 'Self KPI History';
                         </div>
                         <div class="d-inline-flex mt-10" style="width:100%;">
                             <div class="d-flex justify-content-start pim-name-history">
-                                <div class="month-period month-<?= $colorFormat ?>">Term</div>
+                                <div class="month-period month-<?= $colorFormat ?>"><?= Yii::t('app', 'Term') ?></div>
                                 <div class="term-period term-<?= $colorFormat ?>">
                                     <?= $kpi['fromDate'] == "" ? Yii::t('app', 'Not set') : $kpi['fromDate'] ?> -
                                     <?= $kpi['toDate'] == "" ? Yii::t('app', 'Not set') : $kpi['toDate'] ?>

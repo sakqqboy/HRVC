@@ -14,7 +14,7 @@
                                     <span class="font-size-12 font-b"><?= $kgiTeam["teamName"] ?></span>
                                     <div class="row mt-5" style="--bs-gutter-x:0px;">
                                         <div class="col-8 pim-subheader-font" style="font-size: 12px;"><?= $kgiTeam["departmentName"] ?></div>
-                                        <div class="col-4 text-end pim-subheader-font pr-5" style="font-size: 12px;">Target</div>
+                                        <div class="col-4 text-end pim-subheader-font pr-5" style="font-size: 12px;"><?= Yii::t('app', 'Target') ?></div>
                                     </div>
 
                                 </div>
