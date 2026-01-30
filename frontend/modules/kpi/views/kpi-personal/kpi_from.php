@@ -12,7 +12,7 @@ $form = ActiveForm::begin([
     'action' => Yii::$app->homeUrl . 'kpi/kpi-personal/save-update-personal-kpi'
 
 ]);
-$this->title = "Update Individual KPI";
+$this->title = Yii::t('app', 'Update Individual KPI');
 
 $percentage = isset($data['ratio']) ? round((float)$data['ratio']) : 0;
 $result = $data['result'] ?? 0;
@@ -418,7 +418,7 @@ if (!$nextCheckDate) {
                                 } else { ?>
                                     <div class="priority-box-null">
                                         <?= Yii::t('app', 'Priority') ?>
-                                        <span class="text-priority mt-5">N/A</span>
+                                        <span class="text-priority mt-5"><?= Yii::t('app', 'N/A') ?></span>
                                     </div>
                                 <?php
                                 }
@@ -429,7 +429,7 @@ if (!$nextCheckDate) {
                                     <?= Yii::t('app', 'Target Due Update Date') ?>
                                 </span>
                                 <div class="text-black">
-                                    <label style="font-size: 20px; font-weight: 500;"><?= $daysLeft ?></label><br>
+                                    <label style="font-size: 20px; font-weight: 500;"><?= Yii::t('app', $daysLeft) ?></label><br>
                                     <label
                                         style="font-size: 14px; font-weight: 500;"><?= $data['nextCheckText'] ?></label>
                                 </div>
@@ -452,7 +452,7 @@ if (!$nextCheckDate) {
                                 </div>
                                 <div class="flex-grow-1 pr-5 pl-25 select-form-pim" id="multi-mount-year" name="fromMonthYear" onclick="openDatePicker()">
                                     <div id="multi-month-year-text" class="text-truncate text-center pr-5" style="width:190px;">
-                                        Select the Month & Year
+                                        <?= Yii::t('app', 'Select the Month & Year') ?>
                                     </div>
                                     <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
                                 </div>
@@ -501,10 +501,14 @@ if (!$nextCheckDate) {
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to" class="calendar-due-image">
                                 </div>
                                 <div class="flex-grow-1 pr-5 pl-35 select-form-pim" id="due-term-default">
-                                    <div id="multi-due-term-text" class="text-truncate text-center pr-5" style="width:210px;" title="Select the Due Term Start & End Date">
-                                        <?= Yii::t('app', 'Select the Due Term Start & End Date') ?>
-                                    </div>
-                                    <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
+                                    <<<<<<< HEAD
+                                        <div id="multi-due-term-text" class="text-truncate text-center pr-5" style="width:210px;" title="Select the Due Term Start & End Date">
+                                        =======
+                                        <div id="multi-due-term-text" class="text-truncate text-center pr-5" style="width:210px;" title="<?= Yii::t('app', 'Select the Due Term Start & End Date') ?>">
+                                            >>>>>>> 19fd14844fcde68a7047bcd4cf94e9572e758acd
+                                            <?= Yii::t('app', 'Select the Due Term Start & End Date') ?>
+                                        </div>
+                                        <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
                                 </div>
                             </div>
                             <input type="hidden" id="fromDate" name="fromDate"
@@ -537,7 +541,7 @@ if (!$nextCheckDate) {
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to" class="calendar-due-image">
                                 </div>
                                 <div class="flex-grow-1 pr-5 pl-15 select-form-pim" id="due-update-default">
-                                    <div id="multi-due-update-text" class="text-truncate text-center pr-5" style="width:230px;" title="Select The Last Update Update Date">
+                                    <div id="multi-due-update-text" class="text-truncate text-center pr-5" style="width:230px;" title="<?= Yii::t('app', 'Select The Last Update Date') ?>">
                                         <?= Yii::t('app', 'Select The Last Update Date') ?>
                                     </div>
                                     <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>

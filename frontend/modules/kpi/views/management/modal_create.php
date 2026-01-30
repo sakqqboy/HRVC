@@ -100,7 +100,7 @@
 
                                         <div class="input-group">
                                             <span class="input-group-text font-size-12"><i class="fa fa-calendar-o"
-                                                    aria-hidden="true"></i>&nbsp;From</span>
+                                                    aria-hidden="true"></i>&nbsp;<?= Yii::t('app', 'From') ?></span>
                                             <input type="date" aria-label="" class="form-control font-size-12" required
                                                 name="fromDate" id="from-date">
                                         </div>
@@ -110,7 +110,7 @@
                                     <div class="input-group">
                                         <div class="input-group">
                                             <span class="input-group-text font-size-12"><i class="fa fa-calendar-o"
-                                                    aria-hidden="true"></i> &nbsp;&nbsp;To</span>
+                                                    aria-hidden="true"></i> &nbsp;&nbsp;<?= Yii::t('app', 'To') ?></span>
                                             <input type="date" aria-label="" class="form-control font-size-12" required
                                                 name="toDate" id="to-date">
                                         </div>

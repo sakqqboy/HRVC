@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 
-$this->title = 'Assign KPI';
+$this->title = Yii::t('app', 'Assign KPI');
 ?>
 <div class="col-12 mt-90">
     <div class="col-12">
@@ -66,13 +66,13 @@ $this->title = 'Assign KPI';
                 <table class="table table-striped">
                     <thead class="table table-secondary">
                         <tr class="secondary-setting">
-                            <th><?= Yii::t('app', 'KPI Contents') ?></th>
-                            <th><?= Yii::t('app', 'Branch') ?></th>
+                            <th class="text-center"><?= Yii::t('app', 'KPI Contents') ?></th>
+                            <th class="text-center"><?= Yii::t('app', 'Branch') ?></th>
                             <th class="text-center"><?= Yii::t('app', 'Team') ?></th>
-                            <th><?= Yii::t('app', 'Employee') ?></th>
+                            <th class="text-center"><?= Yii::t('app', 'Employee') ?></th>
                             <th class="text-center"><?= Yii::t('app', 'Target') ?></th>
-                            <th><?= Yii::t('app', 'Month') ?></th>
-                            <th>cccccccccccccccccccccccccKGI') ?></th>
+                            <th class="text-center"><?= Yii::t('app', 'Month') ?></th>
+                            <th class="text-center"><?= Yii::t('app', 'KGI') ?></th>
                             <th class="text-center font-size-14">
                                 <i class="fa fa-cog" aria-hidden="true"></i>
                             </th>

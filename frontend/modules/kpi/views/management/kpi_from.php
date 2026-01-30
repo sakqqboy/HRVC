@@ -16,10 +16,10 @@ use yii\widgets\ActiveForm;
 
 if ($statusform == 'update') {
     $parturl = 'kpi/management/update-kpi';
-    $title = 'Update KPI';
+    $title = Yii::t('app', 'Update KPI');
 } else {
     $parturl = 'kpi/management/create-kpi';
-    $title = 'Create KPI';
+    $title = Yii::t('app', 'Create KPI');
 }
 $this->title = $title;
 $form = ActiveForm::begin([
@@ -462,7 +462,7 @@ if ($DueBehind < 0) {
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to" class="calendar-due-image">
                                 </div>
                                 <div class="flex-grow-1 pr-5 pl-35 select-form-pim" id="due-term-default">
-                                    <div id="multi-due-term-text" class="text-truncate text-center pr-5" style="width:210px;" title="Select the Due Term Start & End Date">
+                                    <div id="multi-due-term-text" class="text-truncate text-center pr-5" style="width:210px;" title="<?= Yii::t('app', 'Select the Due Term Start & End Date') ?>">
                                         <?= Yii::t('app', 'Select the Due Term Start & End Date') ?>
                                     </div>
                                     <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
@@ -503,7 +503,7 @@ if ($DueBehind < 0) {
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to" class="calendar-due-image">
                                 </div>
                                 <div class="flex-grow-1 pr-5 pl-15 select-form-pim" id="due-update-default">
-                                    <div id="multi-due-update-text" class="text-truncate text-center pr-5" style="width:230px;" title="Select The Last Update Update Date">
+                                    <div id="multi-due-update-text" class="text-truncate text-center pr-5" style="width:230px;" title="<?= Yii::t('app', 'Select The Last Update Date') ?>">
                                         <?= Yii::t('app', 'Select The Last Update Date') ?>
                                     </div>
                                     <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
@@ -550,10 +550,16 @@ if ($DueBehind < 0) {
                                         alt="Help Icon">
                                 </label>
                                 <select class="form-select mt-10" id="amountType-create" name="amountType" required>
-                                    <option value="">Select</option>
-                                    <option value="1" <?= ($selectedAmountType == '1') ? Yii::t('app', 'selected') : '' ?>>%</option>
-                                    <option value="2" <?= ($selectedAmountType == '2') ? Yii::t('app', 'selected') : '' ?>>
-                                        <?= Yii::t('app', 'Number') ?></option>
+                                    <<<<<<< HEAD
+                                        <option value="">Select</option>
+                                        <option value="1" <?= ($selectedAmountType == '1') ? Yii::t('app', 'selected') : '' ?>>%</option>
+                                        <option value="2" <?= ($selectedAmountType == '2') ? Yii::t('app', 'selected') : '' ?>>
+                                            =======
+                                        <option value=""><?= Yii::t('app', 'Select') ?></option>
+                                        <option value="1" <?= ($selectedAmountType == '1') ? 'selected' : '' ?>>%</option>
+                                        <option value="2" <?= ($selectedAmountType == '2') ? 'selected' : '' ?>>
+                                            >>>>>>> 19fd14844fcde68a7047bcd4cf94e9572e758acd
+                                            <?= Yii::t('app', 'Number') ?></option>
                                 </select>
                             </div>
 

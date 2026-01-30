@@ -113,10 +113,10 @@
 						<div class="row">
 							<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 								<li class="col-lg-6 col-md-6 col-6 pl-20">
-									<a class="link-3" type="button" role="tab" aria-controls="v-pills-team1" aria-selected="true"> Team</a>
+									<a class="link-3" type="button" role="tab" aria-controls="v-pills-team1" aria-selected="true"> <?= Yii::t('app', 'Team') ?></a>
 								</li>
 								<li class="col-lg-6 col-md-6 col-6">
-									<a class="link-3" type="button" role="tab" aria-controls="v-pills-Assign" aria-selected="true"> Assign Members</a>
+									<a class="link-3" type="button" role="tab" aria-controls="v-pills-Assign" aria-selected="true"> <?= Yii::t('app', 'Assign Members') ?></a>
 								</li>
 							</ul>
 							<hr style="margin-top: -8px;">

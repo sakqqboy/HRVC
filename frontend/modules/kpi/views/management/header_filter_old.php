@@ -31,8 +31,8 @@
         </div>
     </div>
     <div class="d-flex flex-grow-1 pim-head-upderline2 align-items-center justify-content-end">
-        <div class="pim-head-company align-content-center">All Companies</div>
+        <div class="pim-head-company align-content-center"><?= Yii::t('app', 'All Companies') ?></div>
         <div class="pim-center-line"></div>
-        <div class="pim-head-branch align-content-center">39 Branches, Multiple Countries</div>
+        <div class="pim-head-branch align-content-center"><?= $totalBranch ?><?= Yii::t('app', 'Branches, Multiple Countries') ?></div>
     </div>
 </div>

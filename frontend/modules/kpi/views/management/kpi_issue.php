@@ -154,7 +154,7 @@
             <img src="<?= Yii::$app->homeUrl ?><?= $profile['picture'] ?>" class="image-circle1">&nbsp;
             <span class="font-size-16"><?= $profile['employeeFirstname'] ?> <?= $profile['employeeSurename'] ?></span>
             <div class="col-12 font-size-20 text-center text-b text-black-50 ">
-                + Add a new issue.
+                + <?= Yii::t('app', 'Add a new issue') ?>.
             </div>
             <div class="col-12 mt-20">
                 <div class="input-group pr-20">

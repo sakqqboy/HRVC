@@ -5,7 +5,7 @@ use frontend\models\hrvc\Team;
 use frontend\models\hrvc\User;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = "KPI Individual Setting";
+$this->title =  Yii::t('app', 'KPI Individual Setting');
 ?>
 <div class="col-12 mt-90 pd-Performance">
 	<div class="row">

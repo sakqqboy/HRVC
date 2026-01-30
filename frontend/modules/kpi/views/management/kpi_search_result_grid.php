@@ -3,7 +3,7 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'KPI Grid View';
+$this->title = Yii::t('app', 'KPI Grid View');
 ?>
 <div class="col-12 mt-70 pt-20 pim-content1">
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
@@ -190,7 +190,7 @@ $this->title = 'KPI Grid View';
                                                             <a href="<?= $url ?>"
                                                                 class="font-<?= $yellow == 1 ? 'black' : $colorFormat ?>"
                                                                 style="<?= (($kpi["countEmployee"] == 0 || $colorFormat == 'disable') && $role <= 4) ? 'pointer-events: none; color: black; text-decoration: none;' : '' ?>">
-                                                                <?= $textAssign ?>
+                                                                <?= Yii::t('app', $textAssign) ?>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -249,7 +249,7 @@ $this->title = 'KPI Grid View';
                                                             <a href="<?= $url ?>"
                                                                 class="font-<?= $yellow == 1 ? 'black' : $colorFormat ?>"
                                                                 style="<?= (($kpi["countEmployee"] == 0 || $colorFormat == 'disable') && $role <= 4) ? 'pointer-events: none; color: black; text-decoration: none;' : '' ?>">
-                                                                <?= $textAssign ?>
+                                                                <?= Yii::t('app', $textAssign) ?>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -297,7 +297,7 @@ $this->title = 'KPI Grid View';
                                                     } else { ?>
                                                         <div class="priority-box-null">
                                                             <?= Yii::t('app', 'Priority') ?>
-                                                            <span class="text-priority">N/A</span>
+                                                            <span class="text-priority"><?= Yii::t('app', 'N/A') ?></span>
                                                         </div>
                                                     <?php
                                                     }

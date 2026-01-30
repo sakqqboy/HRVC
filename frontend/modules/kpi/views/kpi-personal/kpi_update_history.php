@@ -87,7 +87,7 @@
             <div class="col-12 font-size-12">
                 <div class="row">
                     <div class="col-8"></div>
-                    <div class="col-4 text-center font-b">Target / <span class="font-blue">
+                    <div class="col-4 text-center font-b"><?= Yii::t('app', 'Target') ?> / <span class="font-blue">
                             <?= Yii::t('app', 'Result') ?></span></div>
                 </div>
 

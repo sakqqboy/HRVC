@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 
-$this->title = 'Waiting for approve KPI';
+$this->title = Yii::t('app', 'Waiting for approve KPI');
 ?>
 <div class="col-12 mt-90">
     <div class="row">

@@ -3,7 +3,7 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Team KPI View';
+$this->title = Yii::t('app', 'Team KPI View');
 ?>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <div class="col-12 mt-70 pt-20 pim-content1">
@@ -145,14 +145,14 @@ $this->title = 'Team KPI View';
                                     } else { ?>
                                         <div class="priority-box-null">
                                             <?= Yii::t('app', 'Priority') ?>
-                                            <span class="text-priority mt-5">N/A</span>
+                                            <span class="text-priority mt-5"><?= Yii::t('app', 'N/A') ?></span>
                                         </div>
                                     <?php
                                     }
                                     ?>
                                 </div>
                                 <div class="col-lg-3 pt-10 pim-subheader-font border-right-<?= $colorFormat ?>">
-                                    <div class="col-12 font-size-12">Quant Ratio</div>
+                                    <div class="col-12 font-size-12"><?= Yii::t('app', 'Quant Ratio') ?></div>
                                     <div class="col-12 border-bottom-<?= $colorFormat ?> pb-5 pim-duedate">
                                         <i class="fa fa-diamond" aria-hidden="true"></i>
                                         <?= $kpiTeamDetail["quantRatio"] == 1 ?  Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
