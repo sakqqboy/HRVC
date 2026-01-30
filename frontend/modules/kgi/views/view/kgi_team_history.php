@@ -3,7 +3,7 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Team KGI History';
+$this->title = Yii::t('app', 'Team KGI History');
 ?>
 
 <div class="col-12 mt-70 pt-20 pim-content1">
@@ -26,7 +26,7 @@ $this->title = 'Team KGI History';
                     <?= Yii::t('app', 'Back') ?>
                 </a> -->
                 <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kgi/kgi-team/team-kgi-grid' ?>"
-                    style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+                    style="text-decoration: none; width:70px; height:26px;" class="btn-create-branch">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
                     <?= Yii::t('app', 'Back') ?>
                 </a>

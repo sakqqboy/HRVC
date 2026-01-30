@@ -2,7 +2,7 @@
 
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Assign KGI';
+$this->title = Yii::t('app', 'Assign KGI');
 ?>
 <?php if (Yii::$app->session->hasFlash('alert-kgi')) : ?>
 

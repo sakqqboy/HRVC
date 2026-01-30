@@ -3,7 +3,7 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Company KGI Chart';
+$this->title = Yii::t('app', 'Company KGI Chart');
 ?>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <div class="col-12">
@@ -54,7 +54,7 @@ $this->title = 'Company KGI Chart';
 						},
 						yAxis: {
 							title: {
-								text: 'Amount'
+								text: <?= Yii::t('app', 'Amount') ?>
 							},
 							min: 0
 						},

@@ -3,7 +3,7 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Self KGI History';
+$this->title = Yii::t('app', 'Self KGI History');
 ?>
 
 <div class="col-12 mt-70 pt-20 pim-content1">

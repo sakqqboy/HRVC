@@ -3,7 +3,7 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'KGI View';
+$this->title = Yii::t('app', 'KGI View');
 ?>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <div class="col-12 mt-70 pt-20 pim-content1">
@@ -26,7 +26,7 @@ $this->title = 'KGI View';
                         <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                         <?= Yii::t('app', 'Back') ?>
                     </a> -->
-                    <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kgi/management/grid' ?>" style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+                    <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kgi/management/grid' ?>" style="text-decoration: none; width:70px; height:26px;" class="btn-create-branch">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
                         <?= Yii::t('app', 'Back') ?>
                     </a>
@@ -37,7 +37,7 @@ $this->title = 'KGI View';
                     ?>
                         <a class="btn btn-outline-danger d-flex justify-content-center align-items-center" data-bs-toggle="modal" data-bs-target="#delete-kgi"
                             onclick="javascript:prepareDeleteKgi(<?= $kgiId ?>)"
-                            style="height: 25px;font-size:13px;width:60px;"
+                            style="height: 25px;font-size:13px;width:70px;"
                             onmouseover="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/Settings/binwhite.svg'"
                             onmouseout="this.querySelector('.pim-action-icon').src='<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg'">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/binred.svg" class="pim-action-icon mr-3" style="margin-top: -1px;">
@@ -70,7 +70,7 @@ $this->title = 'KGI View';
                     }
                     ?>
                     <div class="row">
-                        <div class="col-4 pim-name-detail align-items-center ">Description</div>
+                        <div class="col-4 pim-name-detail align-items-center "><?= Yii::t('app', 'Description') ?></div>
                         <div class="col-2">
                             <div class="status-tag <?= $colorFormat ?>-tag text-center">
                                 <?= Yii::t('app', $text) ?>
@@ -141,14 +141,14 @@ $this->title = 'KGI View';
                                 ?>
                             </div>
                             <div class="col-lg-3 pt-10 pim-subheader-font border-right-<?= $colorFormat ?>">
-                                <div class="col-12 font-size-12">Quant Ratio</div>
+                                <div class="col-12 font-size-12"><?= Yii::t('app', 'Quant Ratio') ?></div>
                                 <div class="col-12 border-bottom-<?= $colorFormat ?> pb-5 pim-duedate">
                                     <i class="fa fa-diamond" aria-hidden="true"></i>
                                     <?= $kgiDetail["quantRatio"] == 1 ?  Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>
                                 </div>
                                 <div class="col-12 pr-0 pt-5 pl-0 font-size-12"><?= Yii::t('app', 'update Interval') ?></div>
                                 <div class="col-12  pim-duedate">
-                                    <?= $kgiDetail["unitText"] ?>
+                                    <?= Yii::t('app', $kgiDetail["unitText"]) ?>
                                 </div>
                             </div>
                             <div class="col-lg-7 pim-subheader-font pr-15 pl-15">
