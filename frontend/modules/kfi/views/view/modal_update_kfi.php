@@ -144,7 +144,7 @@
 								</select>
 							</div>
 							<div class="col-lg-6 col-md-6 col-6 pt-10  mt-3">
-								<label for="exampleFormControl" class="form-label font-size-13"><?= Yii::t('app', 'Month<') ?>/label>
+								<label for="exampleFormControl" class="form-label font-size-13"><?= Yii::t('app', 'Month') ?></label>
 									<select class="form-select" required name="month" id="monthName">
 										<option value=""><?= Yii::t('app', 'Select Month') ?></option>
 										<?php

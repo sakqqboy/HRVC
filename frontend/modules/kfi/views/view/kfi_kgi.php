@@ -4,7 +4,7 @@ use common\models\ModelMaster;
 use frontend\models\hrvc\KpiBranch;
 use frontend\models\hrvc\Unit;
 
-$this->title = 'KGI KPI';
+$this->title = Yii::t('app', 'KGI KPI');
 ?>
 
 <?php // $this->render('modal_kpi_view') 
