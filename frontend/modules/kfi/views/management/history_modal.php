@@ -5,17 +5,17 @@
 				<div class="modal-title Modalfirstone" id="staticBackdrop"><i class="fa fa-line-chart mr-5" aria-hidden="true"></i>
 					<span id="kfiNameHistory"></span>
 				</div>
-				<div class="modal-title badge rounded-pill bg-warning text-dark font-size-14" id="statusHistory">Completed</div>
+				<div class="modal-title badge rounded-pill bg-warning text-dark font-size-14" id="statusHistory"><?= Yii::t('app', 'Completed') ?></div>
 			</div>
 			<div class="text-end mr-20">
 				<span class="border border-1 text-dark pr-10 pl-5" style="border-radius: 15px;">
-					<span class="deadline-Backdrop3">Deadline&nbsp;&nbsp;</span>
+					<span class="deadline-Backdrop3"><?= Yii::t('app', 'Deadline') ?>&nbsp;&nbsp;</span>
 					<span class="font-size-11" id="deadlineHistory"></span>
 				</span>
 			</div>
 			<div class="text-end mt-10 mr-20">
 				<span class="border border-1 text-dark pr-10 pl-5" style="border-radius: 15px;">
-					<span class="NextUpdate-Backdrop3">Next Update&nbsp;&nbsp;</span>
+					<span class="NextUpdate-Backdrop3"><?= Yii::t('app', 'Next Update') ?>&nbsp;&nbsp;</span>
 					<span class="font-size-11" id="NextCheckDateHistory"> </span>
 				</span>
 			</div>

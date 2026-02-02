@@ -7,7 +7,7 @@ $this->title = Yii::t('app', 'KFI Detail');
 	<div class="row">
 		<div class="col-12">
 			<i class="fa fa-flag mr-5" aria-hidden="true"></i>
-			<strong class="font-size-20">KFI : : <?= $kfi["kfiName"] ?></strong>
+			<strong class="font-size-20"><?= Yii::t('app', 'KFI') ?> : : <?= $kfi["kfiName"] ?></strong>
 		</div>
 	</div>
 	<div class="col-12 mt-20 border-bottom pb-15" id="kfi-<?= $kfiId ?>">

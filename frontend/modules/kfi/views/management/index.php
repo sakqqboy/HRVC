@@ -3,7 +3,7 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'KFI';
+$this->title = Yii::t('app', 'KFI');;
 ?>
 <div class="col-12 mt-70 pt-20">
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">

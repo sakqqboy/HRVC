@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header" style="height: 90px;">
                 <h5 class="modal-title text-primary" id="staticBackdropLabel" style="margin-top:-20px;">
-                    <i class="fa fa-magic" aria-hidden="true"></i> Create KFI
+                    <i class="fa fa-magic" aria-hidden="true"></i> <?= Yii::t('app', 'Create KFI') ?>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                     style="margin-top:-20px;"></button>
@@ -191,7 +191,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal"><?= Yii::t('app', 'Cancel') ?></button>
                 <button type="submit" class="btn btn-primary"><?= Yii::t('app', 'Create') ?></button>
             </div>
         </div>
