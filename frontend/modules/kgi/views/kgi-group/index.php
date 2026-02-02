@@ -4,18 +4,18 @@ use common\models\ModelMaster;
 use frontend\models\hrvc\Company;
 use frontend\models\hrvc\GroupHasKgi;
 
-$this->title = "KGI GROUP";
+$this->title = Yii::t('app', 'KGI GROUP');
 ?>
 <div class="col-12 mt-90 pd-Performance">
 	<div class="row">
 		<div class="col-10">
 			<i class="fa fa-list-alt font-size-20 mr-10" aria-hidden="true"></i>
-			<strong class="font-size-20"> KGI GROUP</strong>
+			<strong class="font-size-20"> <?= Yii::t('app', 'KGI GROUP') ?></strong>
 		</div>
 		<div class="col-2 text-end">
 			<a href="<?= Yii::$app->homeUrl ?>kgi/kgi-group/create" class="btn btn-primary font-size-12">
 				<i class="fa fa-plus-square mr-5" aria-hidden="true"></i>
-				Create KGI Group
+				<?= Yii::t('app', 'Create KGI Group') ?>
 			</a>
 		</div>
 	</div>
@@ -23,15 +23,15 @@ $this->title = "KGI GROUP";
 		<table class="table table-striped">
 			<thead class="table-secondary">
 				<tr class="font-size-12">
-					<th>No.</th>
-					<th>Group Name</th>
-					<th>Company</th>
-					<th>Detail</th>
-					<th class="text-center">Target</th>
-					<th>Month</th>
-					<th class="text-center">Total KGI</th>
-					<th>Status</th>
-					<th>Action</th>
+					<th><?= Yii::t('app', 'No.') ?></th>
+					<th><?= Yii::t('app', 'Group Name') ?></th>
+					<th><?= Yii::t('app', 'Company') ?></th>
+					<th><?= Yii::t('app', 'Detail') ?></th>
+					<th class="text-center"><?= Yii::t('app', 'Target') ?></th>
+					<th><?= Yii::t('app', 'Month') ?></th>
+					<th class="text-center"><?= Yii::t('app', 'Total KGI') ?></th>
+					<th><?= Yii::t('app', 'Status') ?></th>
+					<th><?= Yii::t('app', 'Action') ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -63,7 +63,7 @@ $this->title = "KGI GROUP";
 					endforeach;
 				} else { ?>
 					<tr>
-						<td colspan="7" class="text-center font-b font-size-12">KGI Group not found.</td>
+						<td colspan="7" class="text-center font-b font-size-12"><?= Yii::t('app', 'KGI Group not found') ?>.</td>
 					</tr>
 				<?php
 

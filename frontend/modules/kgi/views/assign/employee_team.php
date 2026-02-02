@@ -50,7 +50,7 @@ if (isset($kgiTeamEmployee) && count($kgiTeamEmployee) > 0) {
                     <div class="form-switch">
                         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
                     </div>
-                    <label class="label-switch" for="flexSwitchCheckDefault">Set Remark For All</label>
+                    <label class="label-switch" for="flexSwitchCheckDefault"><?= Yii::t('app', 'Set Remark For All') ?></label>
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/blue-down.png" class="ms-auto" style="width:15px;height:17px;cursor:pointer;"
                         onclick="javascript:showEmployeeTeamTarget(<?= $teamId ?>)" id="show-<?= $teamId ?>">
                     <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/blue-up.png" class="ms-auto"
