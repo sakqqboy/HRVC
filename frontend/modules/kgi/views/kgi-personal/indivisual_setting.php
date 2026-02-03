@@ -5,7 +5,7 @@ use frontend\models\hrvc\Team;
 use frontend\models\hrvc\User;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = "KGI Individual Setting";
+$this->title = Yii::t('app', 'KGI Individual Setting');
 ?>
 <div class="col-12 mt-90 pd-Performance">
 	<div class="row">
@@ -23,7 +23,7 @@ $this->title = "KGI Individual Setting";
 		</div>
 	</div>
 	<div class="col-12 mt-20 pt-10 pl-10 pb-20" style="border-radius: 10px;border-style:dotted;border-color:grey;">
-		<strong>KGI : <?= $kgiDetail["kgiName"] ?></strong>
+		<strong><?= Yii::t('app', 'KGI') ?> : <?= $kgiDetail["kgiName"] ?></strong>
 		<div class="row">
 			<div class="col-lg-2 col-md-6 col-2 text-center">
 				<div class="col-12 pt-25 pb-25 font-b font-size-20">

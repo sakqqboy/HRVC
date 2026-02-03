@@ -12,7 +12,7 @@ $form = ActiveForm::begin([
     'action' => Yii::$app->homeUrl . 'kgi/kgi-personal/save-update-personal-kgi'
 
 ]);
-$this->title = "Update Individual KGI";
+$this->title = Yii::t('app', 'Update Individual KGI');
 //throw new Exception(print_r($data, true));
 $percentage = isset($data['ratio']) ? round((float)$data['ratio']) : 0;
 $result = $data['result'] ?? 0;
@@ -254,7 +254,7 @@ if (!$nextCheckDate) {
                                 </span>
 
                                 <?php if (mb_strlen($detail) > $maxLength): ?>
-                                    <button type="button" id="see-more" class="see-more">See More</button>
+                                    <button type="button" id="see-more" class="see-more"><?= Yii::t('app', 'See More') ?></button>
                                 <?php endif; ?>
                             </p>
                             <div class="form-group start-center mt-40">
@@ -522,7 +522,7 @@ if (!$nextCheckDate) {
                             </div>
                         </div>
                         <div class="sub-manage-create mt-5 text-danger invisible" id="due-term-message" style="position:absolute;right:20px;">
-                            Select Due Term
+                            <?= Yii::t('app', 'Select Due Term') ?>
                         </div>
                         <div class="form-group start-center mt-45" style="gap: 14px;">
                             <label class="text-manage-create" for="name">

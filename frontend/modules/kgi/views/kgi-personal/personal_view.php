@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 
-$this->title = "Individual KGI Detail";
+$this->title = Yii::t('app', 'Individual KGI Detail');
 ?>
 <div class="col-12 mt-90 pd-Performance">
 	<div class="row">

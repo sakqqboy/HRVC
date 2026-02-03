@@ -4,7 +4,7 @@ use common\models\ModelMaster;
 use frontend\models\hrvc\KgiEmployee;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = "Individual KGI";
+$this->title = Yii::t('app', 'Individual KGI');
 ?>
 <div class="col-12 mt-70 pt-20 pim-content1">
     <div class="d-flex justify-content-start align-items-center  pt-0 pb-0" style="line-height: 30px;">

@@ -4,7 +4,7 @@ use common\models\ModelMaster;
 use Faker\Core\Number;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = "Update Individual KGI";
+$this->title = Yii::t('app', 'Update Individual KGI');
 $form = ActiveForm::begin([
     'id' => 'update-personal-kgi',
     'method' => 'post',
@@ -33,7 +33,7 @@ $form = ActiveForm::begin([
         <div class="offset-lg-3 col-lg-6 col-12">
             <div class="alert mt-10 pim-body bg-white">
                 <div class="col-12 mt-10 font-b border-bottom pb-10">
-                    KGI : : <?= $kgiEmployeeDetail["kgiName"] ?>
+                    <?= Yii::t('app', 'KGI') ?> : : <?= $kgiEmployeeDetail["kgiName"] ?>
 
                 </div>
                 <div class="col-12 mt-10">

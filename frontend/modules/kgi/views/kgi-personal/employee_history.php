@@ -93,7 +93,7 @@
 													<span style="font-size: 18px !important;font-weight: 700;color:#2580D3;"><?= $history["result"] ?></span>
 												</div>
 												<div class="col-12 text-end" style="font-size: 14px !important;font-weight: 400;color:#656565;">
-													Due Behind <?= $history["dueBehide"] ?>
+													<?= Yii::t('app', 'Due Behind') ?> <?= $history["dueBehide"] ?>
 												</div>
 											</div>
 										</div>
@@ -113,7 +113,7 @@
 				?>
 				<div class="col-12 mb-15">
 					<div class="col-12 small-content-pim bg-white font-size-16 text-center" style="font-weight: 600;color:#656565;">
-						There are no employee assigned in <?= ModelMaster::monthEng($month, 1) ?>, <?= $year ?>
+						<?= Yii::t('app', 'There are no employee assigned in') ?> <?= ModelMaster::monthEng($month, 1) ?>, <?= $year ?>
 					</div>
 				</div>
 		</div><?php
