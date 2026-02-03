@@ -5,7 +5,7 @@ use frontend\models\hrvc\KfiBranch;
 use frontend\models\hrvc\KgiBranch;
 use frontend\models\hrvc\Unit;
 
-$this->title = 'KFI KGI';
+$this->title = Yii::t('app', 'KFI KGI');
 ?>
 <div class="col-12 mt-90">
 	<div class="row">
@@ -22,7 +22,7 @@ $this->title = 'KFI KGI';
 
 	</div>
 	<div class="col-12 mt-20 pt-10 pl-10 pb-10" style="border-radius: 10px;border-style:dotted;border-color:grey;">
-		<strong>KGI : <?= $kgiDetail["kgiName"] ?></strong>
+		<strong><?= Yii::t('app', 'KGI') ?> : <?= $kgiDetail["kgiName"] ?></strong>
 		<div class="row mt-20">
 			<div class="col-lg-2 col-md-6 col-2 text-center">
 				<div class="col-12 pt-25 pb-25 font-b font-size-20">

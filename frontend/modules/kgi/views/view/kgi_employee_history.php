@@ -101,7 +101,7 @@ $this->title = Yii::t('app', 'Self KGI History');
                                     </div>
                                     <div class="d-inline-flex mt-10" style="width:100%;">
                                         <div class="d-flex justify-content-start pim-name-history">
-                                            <div class="month-period month-<?= $colorFormat ?>">Term</div>
+                                            <div class="month-period month-<?= $colorFormat ?>"><?= Yii::t('app', 'Term') ?></div>
                                             <div class="term-period term-<?= $colorFormat ?>">
                                                 <?= $kgi['fromDate'] == "" ? Yii::t('app', 'Not set') : $kgi['fromDate'] ?> -
                                                 <?= $kgi['toDate'] == "" ? Yii::t('app', 'Not set') : $kgi['toDate'] ?>

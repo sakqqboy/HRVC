@@ -4,12 +4,12 @@
         <div class="modal-content">
             <div class="modal-header" style="height: 100px;margin-top:-10px">
                 <h5 class="modal-title text-primary" id="staticBackdropLabel2">
-                    <i class="fa fa-magic" aria-hidden="true"></i> Update <span id="team-name"></span> <?= Yii::t('app', 'KGI') ?>
+                    <i class="fa fa-magic" aria-hidden="true"></i> <?= Yii::t('app', 'Update') ?> <span id="team-name"></span> <?= Yii::t('app', 'KGI') ?>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="col-12 font-b" style="margin-top: -35px; padding-left:20px; font-size: 16px;">
-                <i class="fa fa-flag" aria-hidden="true"></i> KGI : :<span class="ml-10" id="kgi-name"></span>
+                <i class="fa fa-flag" aria-hidden="true"></i> <?= Yii::t('app', 'KGI') ?> : :<span class="ml-10" id="kgi-name"></span>
             </div>
             <div class="modal-body">
                 <div class="col-12">

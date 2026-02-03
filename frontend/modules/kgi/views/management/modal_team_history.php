@@ -58,7 +58,7 @@
 					<div class="row">
 						<div class="col-2">
 							<div class="col-12" style="margin-left:-70px !important; margin-top:-40px;">
-								<p class="Priority1">Priority</p>
+								<p class="Priority1"><?= Yii::t('app', 'Priority') ?></p>
 								<div class="circle-Priority" id="prirority-team"></div>
 							</div>
 						</div>

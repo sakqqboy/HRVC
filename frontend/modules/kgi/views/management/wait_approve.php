@@ -7,7 +7,7 @@ $this->title = Yii::t('app', 'Waiting for approve KGI');
 <div class="col-12 mt-90">
     <div class="row">
         <div class="col-8">
-            <i class="fa fa-clock-o font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> Waiting for
+            <i class="fa fa-clock-o font-size-20" aria-hidden="true"></i> <strong class="font-size-20"> <?= Yii::t('app', 'Waiting for') ?>
                 <?= Yii::t('app', 'approve KGI') ?></strong>
         </div>
         <div class="col-4 text-end pr-15">

@@ -144,7 +144,7 @@
                                         class="red">*</strong> <?= Yii::t('app', 'Quant Ratio') ?></label>
                                 <select class="form-select font-size-13" aria-label="Default select example"
                                     id="quantRatio-update" name="quantRatio">
-                                    <option value=""><?= Yii::t('app', 'Quantity') ?> / <?= Yii::t('app', 'Quality<') ?>/option>
+                                    <option value=""><?= Yii::t('app', 'Quantity') ?> / <?= Yii::t('app', 'Quality<') ?></option>
                                     <option value="1"><?= Yii::t('app', 'Quantity') ?></option>
                                     <option value="2"><?= Yii::t('app', 'Quality') ?></option>
                                 </select>

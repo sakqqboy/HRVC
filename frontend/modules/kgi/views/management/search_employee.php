@@ -7,7 +7,7 @@ use frontend\models\hrvc\KgiEmployee;
 	</i>
 </div>
 <div class="row mb-10 font-size-12 mt-10">
-	<div class="col-5 font-b text-center"><?= Yii::t('app', 'Employee') ?>/div>
+	<div class="col-5 font-b text-center"><?= Yii::t('app', 'Employee') ?></div>
 		<div class="col-3 font-b"><?= Yii::t('app', 'Branch') ?></div>
 		<div class="col-2 font-b"><?= Yii::t('app', 'Title') ?></div>
 		<div class="col-2 font-b"><?= Yii::t('app', 'Team') ?></div>

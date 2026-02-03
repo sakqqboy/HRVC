@@ -14,7 +14,7 @@
 							</div>
 							<span class="company-c"> </span>
 						</div>
-						<div class="col-11 mt-20 Employees-0 pt-5" style="margin-top:-15px;"> Teams</div>
+						<div class="col-11 mt-20 Employees-0 pt-5" style="margin-top:-15px;"> <?= Yii::t('app', 'Teams') ?></div>
 						<div class="col-lg-4 col-12 mt-20">
 							<div class="col-12">
 								<select class="form-select" onchange="javascript:searchKgiTeam()" id="department-search-team">

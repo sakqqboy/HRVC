@@ -4,7 +4,7 @@ use common\models\ModelMaster;
 use frontend\models\hrvc\KpiBranch;
 use frontend\models\hrvc\Unit;
 
-$this->title = 'KGI KPI';
+$this->title = Yii::t('app', 'KGI KPI');
 ?>
 <div class="col-12 mt-90">
 	<div class="row">
@@ -25,7 +25,7 @@ $this->title = 'KGI KPI';
 		</div>
 	</div>
 	<div class="col-12 mt-20 pt-10 pl-10 pb-10" style="border-radius: 10px;border-style:dotted;border-color:grey;">
-		<strong>KGI : <?= $kgiDetail["kgiName"] ?></strong>
+		<strong><?= Yii::t('app', 'KGI') ?> : <?= $kgiDetail["kgiName"] ?></strong>
 		<div class="row mt-20">
 			<div class="col-lg-2 col-md-6 col-2 text-center">
 				<div class="col-12 pt-25 pb-25 font-b font-size-20">

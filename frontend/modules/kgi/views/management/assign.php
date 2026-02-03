@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 
-$this->title = 'Assign KGI';
+$this->title = Yii::t('app', 'Assign KGI');
 ?>
 <div class="col-12 mt-90">
 	<div class="col-12">

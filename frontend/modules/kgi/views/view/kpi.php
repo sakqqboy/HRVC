@@ -16,7 +16,7 @@ if (isset($kpis) && count($kpis) > 0) { ?>
 				<th style="width: 10%;"><?= Yii::t('app', 'TEAM') ?></th>
 				<th style="border-top-right-radius: 4px;border-bottom-right-radius: 4px;" class="text-end">
 					<a class="btn-blue-sm font-size-12 text-center no-underline mr-5 pl-10 pr-10" id="saveRelateKpi" href="javascript:showEditRelateKpi(2,<?= $kgiId ?>)">
-						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt="" class="mr-3" style="margin-top: -1px; width: 16px;"> Save
+						<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt="" class="mr-3" style="margin-top: -1px; width: 16px;"> <?= Yii::t('app', 'Save') ?>
 					</a>
 					<a class="btn-red-sm font-size-12 text-center no-underline pl-10 pr-10" id="cancelRelateKpi" href="javascript:showEditRelateKpi(0,<?= $kgiId ?>)"><?= Yii::t('app', 'Cancel') ?></a>
 				</th>

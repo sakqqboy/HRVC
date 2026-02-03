@@ -56,7 +56,7 @@ if (isset($kgiHistoryEmployee) && count($kgiHistoryEmployee) > 0) {
 	endforeach;
 } else { ?>
 	<li class="schedule-item mb-8" role="button" tabindex="0">
-		<div class="row" style="display: flex; justify-content: center; align-items: center; height:45px;">No data</div>
+		<div class="row" style="display: flex; justify-content: center; align-items: center; height:45px;"><?= Yii::t('app', 'No data') ?></div>
 	</li>
 <?php
 }

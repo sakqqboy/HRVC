@@ -2,7 +2,7 @@
 
 use common\models\ModelMaster;
 
-$this->title = 'Assign KPI';
+$this->title = Yii::t('app', 'Assign KPI');
 ?>
 <div class="col-12 mt-90">
 	<div class="row">

@@ -49,7 +49,7 @@
 							<div class="col-12" id="show-multi-department"></div>
 						</div>
 						<div class="col-12 mt-10">
-							<label for="input" class="form-label"><strong class="red">*</strong> Team</label>
+							<label for="input" class="form-label"><strong class="red">*</strong> <?= Yii::t('app', 'Team') ?></label>
 							<div class="col-12 form-control">
 								<?= Yii::t('app', 'Select Team') ?>
 								<i class="fa fa-angle-down pull-right mt-5" aria-hidden="true"></i>
