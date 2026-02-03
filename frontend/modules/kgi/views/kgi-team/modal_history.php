@@ -27,25 +27,25 @@
                 <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
                     <div class="col-6" style="display: flex; gap: 10px; flex-direction: column;">
                         <text class="text-black" id="month-year" style="font-size: 22px; font-weight: 600;">
-                            month year
+                            <?= Yii::t('app', 'month year') ?>
                         </text>
                         <text class="text-gray" id="formattedRange" style="font-size: 18px; font-weight: 400;">
-                            formattedRange
+                            <?= Yii::t('app', 'formattedRange') ?>
                         </text>
                     </div>
                     <div class="col-6" style="display: flex; justify-content: end; align-items: center; gap: 10px;">
                         <div style="display: flex;flex-direction: column;gap:10px;">
                             <text class="text-gray text-end" style="font-size: 16px; font-weight: 500;">
-                                Total Achievement
+                                <?= Yii::t('app', 'Total Achievement') ?>
                                 <span class="text-black" id="Target" style="font-size: 18px; font-weight: 400;">
-                                    Target
+                                    <?= Yii::t('app', 'Target') ?>
                                 </span>
                                 <span class="text-blue" id="Result" style="font-size: 16px; font-weight: 600;">
-                                    /Result
+                                    /<?= Yii::t('app', 'Result') ?>
                                 </span>
                             </text>
                             <text class="text-gray text-end" style="font-size: 14px; font-weight: 400;">
-                                Due Behind by
+                                <?= Yii::t('app', 'Due Behind by') ?>
                                 <span class="text-black text-end" id="DueBehind"
                                     style="font-size: 14px; font-weight: 500;">
                                     0%
@@ -72,7 +72,7 @@
                         </div>
                         <button type="button" class="btn-accept" data-bs-dismiss="modal">
                             <img src="<?= Yii::$app->homeUrl ?>image/check-box.svg" style="width: 18px; height: 18px;">
-                            Accept As Final Result
+                            <?= Yii::t('app', 'Accept As Final Result') ?>
                         </button>
                     </div>
                 </div>
@@ -81,14 +81,14 @@
                         <div style="display: flex;flex-direction: column;align-items: flex-start;">
                             <div style="display: flex; justify-content: space-between;  width: 100%;">
                                 <span class="text-blue" style="font-size: 16px; font-weight: 500;">
-                                    Total Team Achievement
+                                    <?= Yii::t('app', 'Total Team Achievement') ?>
                                 </span>
                                 <div>
                                     <span class="text-gray" style="font-size: 16px; font-weight: 400;">
-                                        Target
+                                        <?= Yii::t('app', 'Target') ?>
                                     </span>
                                     <span class="text-blue pr-10" style="font-size: 16px; font-weight: 600;">
-                                        / Result
+                                        / <?= Yii::t('app', 'Result') ?>
                                     </span>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                                     <li class="schedule-item mt-5" role="button" tabindex="0">
                                         <div class="row pt-10 pb-10"
                                             style="display: flex; justify-content: center; align-items: center; width: 100%; font-size: 18px; ">
-                                            No data
+                                            <?= Yii::t('app', 'No data') ?>
                                         </div>
                                     </li>
                                 </ul>
@@ -110,14 +110,14 @@
                         <div style="display: flex;flex-direction: column;align-items: flex-start;">
                             <div style="display: flex; justify-content: space-between;  width: 100%;">
                                 <span class="text-blue" style="font-size: 16px; font-weight: 500;">
-                                    Individual Achievement
+                                    <?= Yii::t('app', 'Individual Achievement') ?>
                                 </span>
                                 <div>
                                     <span class="text-gray" style="font-size: 16px; font-weight: 400;">
-                                        Target
+                                        <?= Yii::t('app', 'Target') ?>
                                     </span>
                                     <span class="text-blue pr-10" style="font-size: 16px; font-weight: 600;">
-                                        / Result
+                                        / <?= Yii::t('app', 'Result') ?>
                                     </span>
                                 </div>
                             </div>
@@ -127,7 +127,7 @@
                                 <ul id="history-list-creater" class="list-unstyled small">
                                     <li class="schedule-item mb-8" role="button" tabindex="0">
                                         <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                                            No data
+                                            <?= Yii::t('app', 'No data') ?>
                                         </div>
                                     </li>
                                 </ul>

@@ -21,7 +21,7 @@
 						</div>
 						<div class="col-lg-2 col-md-6 col-3">
 							<div class="col-12 Quant-ratio-Backdrop3">
-								Quant Ratio
+								<?= Yii::t('app', 'Quant Ratio') ?>
 							</div>
 							<div class="col-12 diamond-con-Backdrop3">
 								<i class="fa fa-diamond mr-5" aria-hidden="true"></i> <span id="quantRatio-view"></span>
@@ -53,13 +53,13 @@
 					<div class="row">
 						<div class="col-2">
 							<div class="col-12" style="margin-left:-70px !important; margin-top:-40px;">
-								<p class="Priority1">Priority</p>
+								<p class="Priority1"><?= Yii::t('app', 'Priority') ?></p>
 								<div class="circle-Priority" id="prirority-view"></div>
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-6 col-6">
 							<div class="col-12 padding-update-Backdrop3">
-								Update Interval
+								<?= Yii::t('app', 'Update Interval') ?>
 							</div>
 							<div class="col-12 update-mouth-Backdrop3">
 								<i class="fa fa-calendar mr-7" aria-hidden="true"></i> <span id="unit-view"></span>

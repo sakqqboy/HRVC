@@ -3,14 +3,14 @@
 use common\models\ModelMaster;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Team KGI View';
+$this->title = Yii::t('app', 'Team KGI View');
 ?>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <div class="col-12 mt-70 pt-20 pim-content1">
     <div class="d-flex justify-content-start pt-0 pb-0" style="line-height: 30px;">
         <img src="<?= Yii::$app->homeUrl ?>images/icons/black-icons/FinancialSystem/Group23177.svg"
             class="pim-head-icon mr-11 mt-2">
-        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (PIM)</span>
+        <span class="pim-head-text mr-10"> <?= Yii::t('app', 'Performance Indicator Matrices') ?> (<?= Yii::t('app', 'PIM') ?>)</span>
     </div>
     <?= $this->render('header_filter', [
         "role" => $role,
@@ -80,7 +80,7 @@ $this->title = 'Team KGI View';
                 <div class="row mt-20" style="--bs-gutter-x:0px;">
                     <div class="col-lg-7 col-12 pr-10">
                         <div class="row">
-                            <div class="col-4 pim-name-detail align-items-center ">Description</div>
+                            <div class="col-4 pim-name-detail align-items-center "><?= Yii::t('app', 'Description') ?></div>
                             <div class="col-2">
                                 <div class="status-tag <?= $colorFormat ?>-tag text-center">
                                     <?= Yii::t('app', $text) ?>
@@ -151,7 +151,7 @@ $this->title = 'Team KGI View';
                                     ?>
                                 </div>
                                 <div class="col-lg-3 pt-10 pim-subheader-font border-right-<?= $colorFormat ?>">
-                                    <div class="col-12 font-size-12">Quant Ratio</div>
+                                    <div class="col-12 font-size-12"><?= Yii::t('app', 'Quant Ratio') ?></div>
                                     <div class="col-12 border-bottom-<?= $colorFormat ?> pb-5 pim-duedate">
                                         <i class="fa fa-diamond" aria-hidden="true"></i>
                                         <?= $kgiTeamDetail["quantRatio"] == 1 ?  Yii::t('app', 'Quantity') : Yii::t('app', 'Quality') ?>

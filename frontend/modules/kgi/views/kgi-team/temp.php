@@ -1,3 +1,6 @@
+<?php
+use common\models\ModelMaster;
+?>
 <div class="col-12 mt-10 mb-5 pim-big-box pim-<?= $colorFormat ?> d-none" id="kgi-team-<?= $kgiTeamId ?>">
 	<div class="row">
 		<div class="col-lg-3 col-md-5 col-12 pim-name pr-0">
