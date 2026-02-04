@@ -324,12 +324,7 @@ $form = ActiveForm::begin([
     'action' => Yii::$app->homeUrl . 'kgi/management/update-kgi'
 
 ]); ?>
-<?= $this->render('modal_update_kgi', [
-    "units" => $units,
-    "companies" => $companies,
-    "months" => $months,
-    "isManager" => $isManager
-]) ?>
+
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_delete') ?>
 <?= $this->render('modal_employee_history') ?>
@@ -373,6 +368,7 @@ $form = ActiveForm::begin([
 </style>
 <script>
     window.onload = function() {
+        
         let openTab = <?= $openTab ?>; // PHP value passed to JavaScript
         if (openTab) {
             viewTabKgi(<?= $kgiHistoryId ?>, openTab); // Set the tab based on the PHP value

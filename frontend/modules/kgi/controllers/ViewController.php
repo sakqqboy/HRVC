@@ -202,19 +202,15 @@ class ViewController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$role = UserRole::userRight();
 		$kgiId = $param["kgiId"];
-		$openTab = $param["openTab"] ?? 0;
 		$groupId = Group::currentGroupId();
-
 		if ($groupId === null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
-
 		$kgiHistoryId = $param["kgiHistoryId"] ?? 0;
-
+		$openTab = $param["openTab"] ?? 0;
 		$kgiDetail = Api::connectApi(Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiId . '&&kgiHistoryId=' . $kgiHistoryId);
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
-		$kgiTeams = Api::connectApi(Path::Api() . 'kgi/kgi-team/kgi-team-summarize?kgiId=' . $kgiId);
 		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		//throw new exception(print_r($kgiDetail, true));
 		$countAllCompany = count($allCompany);
@@ -232,7 +228,6 @@ class ViewController extends Controller
 			"isManager" => $isManager,
 			"units" => $units,
 			"companies" => $companies,
-			"kgiTeams" => $kgiTeams,
 			"kgiHistoryId" => $kgiHistoryId,
 			"allCompany" => $countAllCompany,
 			"companyPic" => $companyPic,
@@ -447,16 +442,18 @@ class ViewController extends Controller
 
 	public function actionKgiTeamEmployee()
 	{
+		
 		$kgiId = $_POST["kgiId"];
-		$res = ["kgiEmployeeTeam" => ""];
-
+		$kgiHistoryId = $_POST["kgiHistoryId"];
+		// throw new exception(print_r($kgiHistoryId, true));
+		$res["kpiEmployeeTeam"] = "";
 		$kgiTeams = Api::connectApi(Path::Api() . 'kgi/kgi-team/kgi-team-summarize?kgiId=' . $kgiId);
 		$kgiDetail = Api::connectApi(Path::Api() . 'kgi/kgi-personal/assigned-kgi-employee?kgiId=' . $kgiId . '&&kgiHistoryId=0');
-
 		$res["kgiEmployeeTeam"] = $this->renderAjax("kgi_employee_team_all", [
 			"kgiTeams" => $kgiTeams,
 			"kgiDetail" => $kgiDetail,
-			"kgiId" => $kgiId
+			"kgiId" => $kgiId,
+			"kgiHistoryId" => $kgiHistoryId
 		]);
 
 		return json_encode($res);
@@ -688,11 +685,11 @@ class ViewController extends Controller
 		]);
 		return json_encode($res);
 	}
-
 	public function actionKgiTeamHistoryView()
 	{
 		$kgiId = $_POST['kgiId'];
 		$teamId = $_POST['teamId'];
+		$kgiHistoryId = $_POST['kgiHistoryId'];
 		$kgiTeam = KgiTeam::find()->select('kgiTeamId')
 			->where(["teamId" => $teamId, "kgiId" => $kgiId, "status" => [1, 2]])
 			->asArray()
@@ -713,7 +710,8 @@ class ViewController extends Controller
 			"departmentName" => $departnemtName,
 			"code" => $kgi["code"],
 			"kgiId" => $kgi["kgiId"],
-			"viewType" => $_POST['viewType']
+			"viewType" => $_POST['viewType'],
+			"kgiHistoryId" => $kgiHistoryId
 		]);
 		$res["kgiTeam"] = $kgiTeam;
 		$res["history"] = $teamText;

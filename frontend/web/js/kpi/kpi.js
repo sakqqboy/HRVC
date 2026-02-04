@@ -17,6 +17,7 @@ function viewTabKpi(kpiHistoryId, tabId) {
      $("#tab-" + tabId + "-blue").show();
      $("#tab-" + tabId + "-black").hide();
      $("#currentTab").val(tabId);
+     // alert(kpiHistoryId);
      if (tabId == 1) {
           var url = $url + "kpi/view/kpi-team-employee";
           $.ajax({

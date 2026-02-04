@@ -327,12 +327,7 @@ $form = ActiveForm::begin([
     'action' => Yii::$app->homeUrl . 'kpi/management/update-kpi'
 
 ]); ?>
-<?= $this->render('modal_update_kpi', [
-    "units" => $units,
-    "companies" => $companies,
-    "months" => $months,
-    "isManager" => $isManager
-]) ?>
+
 <?php ActiveForm::end(); ?>
 <?= $this->render('modal_delete') ?>
 <?= $this->render('modal_employee_history') ?>

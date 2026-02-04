@@ -54,7 +54,7 @@ $this->title = Yii::t('app', 'Assign KGI');
                                     <?= Yii::t('app', 'Back') ?>
                                 </text>
                             </a> -->
-                            <a href="<?= $url ?>" style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
+                            <a href="<?= $url ?>" style="text-decoration: none; width:70px; height:26px;" class="btn-create-branch">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
                                 <?= Yii::t('app', 'Back') ?>
                             </a>

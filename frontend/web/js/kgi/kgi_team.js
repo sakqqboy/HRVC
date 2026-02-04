@@ -359,15 +359,15 @@ function validateFormKgiTeam() {
      }
 }
 
-function kgiTeamHistoryView(kgiId, teamId) {
+function kgiTeamHistoryView(kgiId, teamId, kgiHistoryId) {
      var viewType = $("#viewType").val();
-     //alert(viewType);
+     // alert(viewType);
      var url = $url + "kgi/view/kgi-team-history-view";
      $.ajax({
           type: "POST",
           dataType: "json",
           url: url,
-          data: { teamId: teamId, kgiId: kgiId, viewType: viewType },
+          data: { teamId: teamId, kgiId: kgiId, viewType: viewType, kgiHistoryId: kgiHistoryId },
           success: function (data) {
                if (data.status) {
                     $("#all").css("display", "none");

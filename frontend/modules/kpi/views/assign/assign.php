@@ -2,7 +2,7 @@
 
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Assign KPI';
+$this->title = Yii::t('app', 'Assign KPI');;
 ?>
 <?php if (Yii::$app->session->hasFlash('alert-kpi')) : ?>
 

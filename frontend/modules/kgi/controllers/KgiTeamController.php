@@ -785,8 +785,14 @@ class KgiTeamController extends Controller
 	public function actionKgiTeamEmployee()
 	{
 		$kgiId = $_POST["kgiId"];
-		$kgiTeamHistoryId = $_POST["kgiTeamHistoryId"];
-		$kgiTeamId = $_POST["kgiTeamId"];
+		if (isset($_POST["kgiTeamId"])) {
+			$kgiTeamId = $_POST["kgiTeamId"];
+		} else {
+			$kgiEmployeeId = $_POST["kgiEmployeeId"];
+			$kgiTeamId  =  KgiEmployee::employeeKgiTeamId($kgiEmployeeId);
+		}
+		$month = $_POST["month"];
+		$year = $_POST["year"];
 		$res["kgiEmployeeTeam"] = "";
 		$kgiTeams = Api::connectApi(Path::Api() . 'kgi/kgi-team/kgi-team-summarize?kgiId=' . $kgiId);
 		$kgiDetail = Api::connectApi(Path::Api() . 'kgi/kgi-personal/assigned-kgi-employee?kgiId=' . $kgiId . "&&kgiHistoryId=0");
