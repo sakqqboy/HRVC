@@ -649,12 +649,12 @@ if ($DueBehind < 0) {
                                         alt="LinkedIn" style="width: 30px; height: 30px;">
                                 </span>
                                 <input type="number" class="form-control text-end" name="result" id="resultKPI-update"
-                                    value="<?= isset($data['result']) ? $data['result'] : '' ?>"
+                                    value="<?= isset($data['result']) ? $data['result'] : '0' ?>"
                                     style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
                                     required step="any" oninput="updateIcon(this);">
                                 <input type="hidden" id="autoKPI-result" value="" name="autoUpdate">
                                 <input type="hidden" id="previous-result"
-                                    value="<?= isset($data['result']) ? $data['result'] : '' ?>">
+                                    value="<?= isset($data['result']) ? $data['result'] : '0' ?>">
                             </div>
 
 
