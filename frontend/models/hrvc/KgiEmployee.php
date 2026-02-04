@@ -83,6 +83,20 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
         }
         return $canEdit;
     }
+     public static function employeeKgiTeamId($kgiEmployeeId)
+    {
+        $teamId = KgiEmployee::find()
+            ->select('kgi_team.kgiTeamId')
+            ->JOIN("LEFT JOIN", "employee", "employee.employeeId = kgi_employee.employeeId")
+            ->JOIN("LEFT JOIN", "kgi_team", "kgi_team.teamId = employee.teamId")
+            ->where(["kgi_employee.kgiEmployeeId" => $kgiEmployeeId])
+            ->asArray()
+            ->one();
+
+        return $teamId["kgiTeamId"] ?? 0; // ถ้าไม่มีค่าให้คืนค่า 0
+    }
+
+
     public static function nextCheckDate($kgiEmployeeId)
     {
         $date = '';

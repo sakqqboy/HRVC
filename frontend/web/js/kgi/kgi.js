@@ -844,14 +844,17 @@ function viewTabKgi(kgiHistoryId, tabId) {
      $("#tab-" + tabId + "-blue").show();
      $("#tab-" + tabId + "-black").hide();
      $("#currentTab").val(tabId);
+     // alert(kgiHistoryId);
      if (tabId == 1) {
           var url = $url + "kgi/view/kgi-team-employee";
-          var viewType = $("#viewType").val();
           $.ajax({
                type: "POST",
                dataType: "json",
                url: url,
-               data: { kgiId: kgiId },
+               data: { 
+                    kgiId: kgiId, 
+                    kgiHistoryId: kgiHistoryId 
+               },
                success: function (data) {
                     $("#show-content").html(data.kgiEmployeeTeam);
                     if (viewType == "list") {
@@ -870,7 +873,10 @@ function viewTabKgi(kgiHistoryId, tabId) {
                type: "POST",
                dataType: "json",
                url: url,
-               data: { kgiId: kgiId, kgiHistoryId: kgiHistoryId },
+               data: { 
+                    kgiId: kgiId, 
+                    kgiHistoryId: kgiHistoryId 
+               },
                success: function (data) {
                     $("#show-content").html(data.monthlyDetailHistoryText);
                },
@@ -882,7 +888,10 @@ function viewTabKgi(kgiHistoryId, tabId) {
                type: "POST",
                dataType: "json",
                url: url,
-               data: { kgiId: kgiId },
+               data: { 
+                    kgiId: kgiId, 
+                    kgiHistoryId: kgiHistoryId 
+               },
                success: function (data) {
                     $("#show-content").html(data.kgiIssue);
                },
@@ -894,7 +903,10 @@ function viewTabKgi(kgiHistoryId, tabId) {
                type: "POST",
                dataType: "json",
                url: url,
-               data: { kgiId: kgiId, kgiHistoryId: kgiHistoryId },
+               data: { 
+                    kgiId: kgiId, 
+                    kgiHistoryId: kgiHistoryId 
+               },
                success: function (data) {
                     $("#show-content").html(data.kgiChart);
                },
@@ -906,7 +918,10 @@ function viewTabKgi(kgiHistoryId, tabId) {
                type: "POST",
                dataType: "json",
                url: url,
-               data: { kgiId: kgiId },
+               data: { 
+                    kgiId: kgiId, 
+                    kgiHistoryId: kgiHistoryId 
+               },
                success: function (data) {
                     $("#show-content").html(data.kpi);
                },
