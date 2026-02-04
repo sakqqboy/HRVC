@@ -248,6 +248,8 @@ class ManagementController extends Controller
 				if (!empty($_POST["department"])) $this->saveKgiDepartment($_POST["department"], $kgiId);
 				if (!empty($_POST["team"])) $this->saveKgiTeam($_POST["team"], $kgiId, $_POST["month"], $_POST["year"]);
 
+
+
 				return $this->redirect(Yii::$app->homeUrl . 'kgi/assign/assign/' . ModelMaster::encodeParams([
 					"kgiId" => $kgiId,
 					"companyId" => $_POST["companyId"],
@@ -256,6 +258,9 @@ class ManagementController extends Controller
 				]));
 			}
 		} else {
+			if (Yii::$app->request->isGet) {
+				Yii::$app->session->set('backUrl', Yii::$app->request->referrer);
+			}
 			$groupId = Group::currentGroupId();
 			if ($groupId == null) {
 				return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
@@ -287,7 +292,7 @@ class ManagementController extends Controller
 	{
 		$companyId = $_POST["companyId"];
 		$acType = $_POST["acType"];
-		
+
 		$branches = Api::connectApi(Path::Api() . 'masterdata/company/company-branch?id=' . $companyId);
 
 		if ($acType == "create") {
