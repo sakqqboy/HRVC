@@ -275,18 +275,20 @@ class KgiPersonalController extends Controller
 		if ($kgiEmployeeHistoryId != 0) {
 			$kgiEmployee = KgiEmployeeHistory::find()
 				->select('ke.target,kgi_employee_history.result,kgi_employee_history.kgiEmployeeId,ke.employeeId,
-			kgi_employee_history.lastCheckDate,kgi_employee_history.nextCheckDate,kgi_employee_history.detail,kgi_employee_history.kgiEmployeeHistoryId,
+			kgi_employee_history.lastCheckDate,kgi_employee_history.nextCheckDate,k.kgiDetail,kgi_employee_history.kgiEmployeeHistoryId,
 			kgi_employee_history.status,kgi_employee_history.month,kgi_employee_history.year,ke.remark,kgi_employee_history.fromDate,kgi_employee_history.toDate')
 				->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiEmployeeId=kgi_employee_history.kgiEmployeeId")
+				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=ke.kgiId")
 				->where(["kgi_employee_history.kgiEmployeeHistoryId" => $kgiEmployeeHistoryId, "kgi_employee_history.status" => [1, 2]])
 				->asArray()
 				->one();
 		} else {
 			$kgiEmployee = KgiEmployeeHistory::find()
 				->select('ke.target,kgi_employee_history.result,kgi_employee_history.kgiEmployeeId,ke.employeeId,
-			kgi_employee_history.lastCheckDate,kgi_employee_history.nextCheckDate,kgi_employee_history.detail,kgi_employee_history.kgiEmployeeHistoryId,
+			kgi_employee_history.lastCheckDate,kgi_employee_history.nextCheckDate,k.kgiDetail,kgi_employee_history.kgiEmployeeHistoryId,
 			kgi_employee_history.status,kgi_employee_history.month,kgi_employee_history.year,ke.remark,kgi_employee_history.fromDate,kgi_employee_history.toDate')
 				->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiEmployeeId=kgi_employee_history.kgiEmployeeId")
+				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=ke.kgiId")
 				->where(["kgi_employee_history.kgiEmployeeId" => $kgiEmployeeId, "kgi_employee_history.status" => [1, 2]])
 				->orderBy('kgi_employee_history.year DESC, kgi_employee_history.month DESC,kgi_employee_history.createDateTime DESC')
 				->asArray()
@@ -340,7 +342,7 @@ class KgiPersonalController extends Controller
 				"unitText" => Unit::unitName($kgiDetail["unitId"]),
 				"target" => $kgiEmployee["target"],
 				"result" => !empty($kgiEmployee["result"]) ? $kgiEmployee["result"] : 0,
-				"detail" => isset($kgiEmployee["detail"]) ? $kgiEmployee["detail"] : null,
+				"detail" => isset($kgiEmployee["kgiDetail"]) ? $kgiEmployee["kgiDetail"] : null,
 				"nextCheckDate" => isset($kgiEmployee["nextCheckDate"]) ? $kgiEmployee["nextCheckDate"] : null,
 				"nextCheckText" => ModelMaster::engDate($kgiEmployee["nextCheckDate"], 2),
 				"lastCheckDate" => isset($kgiEmployee["lastCheckDate"]) ? $kgiEmployee["lastCheckDate"] : null,

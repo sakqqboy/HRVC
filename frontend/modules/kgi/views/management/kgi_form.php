@@ -196,7 +196,7 @@ $DueBehind = $targetAmount -  $result;
                             </label>
                             <input type="text" class="form-control" id="kgiName" name="kgiName"
                                 value="<?= isset($data['kgiName']) ? htmlspecialchars($data['kgiName']) : '' ?>"
-                                placeholder=<?= Yii::t('app', 'Please Write the Name of Component') ?> required>
+                                placeholder="<?= Yii::t('app', 'Please Write the Name of Component') ?> "required>
                         </div>
                         <div class="form-group mt-37"
                             style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
@@ -625,18 +625,18 @@ $DueBehind = $targetAmount -  $result;
                                 <span class="text-danger">* </span>
                                 <?= Yii::t('app', 'Master Target') ?>
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/help.svg" data-toggle="tooltip"
-                                    data-placement="top" class="tootip-icon"
+                                    data-placement="top" class="tootip-icon" 
                                     title="<?= Yii::t('app', 'Enter the overall target value that needs to be achieved within the specified period.') ?>"
                                     alt="Help Icon">
                             </label>
                             <div class="input-group">
                                 <span class="input-group-text"
                                     style="background-color:rgb(255, 255, 255); border-right: none; padding: 20px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/target-blue.svg" alt="LinkedIn"
+                                    <img src="<?= Yii::$app->homeUrl ?>image/target-blue.svg" alt="LinkedIn"Result 
                                         style="width: 30px; height: 30px;">
                                 </span>
                                 <input type="number" class="form-control text-end" name="amount" step="any"
-                                    placeholder=<?= Yii::t('app', 'Enter Target Amount') ?>
+                                    placeholder="<?= Yii::t('app', 'Enter Target Amount') ?>"
                                     value="<?= isset($data['targetAmount']) ? $data['targetAmount'] : '' ?>"
                                     style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
                                     required>
@@ -679,12 +679,12 @@ $DueBehind = $targetAmount -  $result;
                                         alt="LinkedIn" style="width: 30px; height: 30px;">
                                 </span>
                                 <input type="number" class="form-control text-end" name="result" id="result-update"
-                                    value="<?= isset($data['result']) ? $data['result'] : '' ?>"
+                                    value="<?= isset($data['result']) ? $data['result'] : '0' ?>"
                                     style="border-left: none; font-size: 22px; font-style: normal; font-weight: 600;"
                                     required step="any" oninput="updateIcon(this);">
                                 <input type="hidden" id="auto-result" value="" name="autoUpdate">
                                 <input type="hidden" id="previous-result"
-                                    value="<?= isset($data['result']) ? $data['result'] : '' ?>">
+                                    value="<?= isset($data['result']) ? $data['result'] : '0' ?>">
                             </div>
 
 
