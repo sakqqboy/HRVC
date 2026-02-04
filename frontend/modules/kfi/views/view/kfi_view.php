@@ -21,15 +21,15 @@ $this->title = Yii::t('app', 'Company KFI History');
     ]) ?>
     <div class="col-12 mt-20" id="box-wrapper">
         <div class="bg-white-employee">
-            
+
             <div class="pim-name-title" style="display: flex; align-items: center; gap: 14px;">
                 <!-- <a href="<?= Yii::$app->homeUrl ?>kfi/management/grid" class="mr-5 pim-text-back">
                     <i class="fa fa-caret-left mr-3" aria-hidden="true"></i>
                     <?= Yii::t('app', 'Back') ?>
                 </a> -->
                 <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kfi/management/grid' ?>" style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
-                            <?= Yii::t('app', 'Back') ?>        
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
+                    <?= Yii::t('app', 'Back') ?>
                 </a>
                 <?= $kfiDetail["kfiName"] ?>
             </div>
@@ -279,7 +279,7 @@ $this->title = Yii::t('app', 'Company KFI History');
                                                 $percent = explode('.', $kfi['ratio']);
                                                 if (isset($percent[1])) {
                                                     if ($percent[1] != '00') {
-                                                        $showPercent = $percent[1];
+                                                        $showPercent = number_format($kfi["ratio"], 2);
                                                     } else {
                                                         $showPercent = $percent[0];
                                                     }
