@@ -12,6 +12,7 @@ use frontend\models\hrvc\Title;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
+use frontend\components\Api;
 
 class RankController extends Controller
 {
@@ -30,27 +31,30 @@ class RankController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$termId = $param["termId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		// $api = curl_init();
+		// curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		// curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
-		$terms = curl_exec($api);
-		$terms = json_decode($terms, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
+		$terms = Api::connectApi(Path::Api() .  'evaluation/environment/term-detail?termId=' . $termId);
+		// $terms = curl_exec($api);
+		// $terms = json_decode($terms, true);
 
 		$frameId = $terms["frameId"];
 		$frameName = Frame::frameName($frameId);
 		$environmentId = Frame::getEnvironmentId($frameId);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/environment-detail?environmentId=' . $environmentId);
-		$environmentDetail = curl_exec($api);
-		$environmentDetail = json_decode($environmentDetail, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/environment-detail?environmentId=' . $environmentId);
+		$environmentDetail = Api::connectApi(Path::Api() . 'evaluation/environment/environment-detail?environmentId=' . $environmentId);
+		// $environmentDetail = curl_exec($api);
+		// $environmentDetail = json_decode($environmentDetail, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/rank/index?termId=' . $termId);
-		$ranks = curl_exec($api);
-		$ranks = json_decode($ranks, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/rank/index?termId=' . $termId);
+		$ranks = Api::connectApi(Path::Api() . 'evaluation/rank/index?termId=' . $termId);
+		// $ranks = curl_exec($api);
+		// $ranks = json_decode($ranks, true);
 
-		curl_close($api);
+		// curl_close($api);
 		return $this->render('index', [
 			"terms" => $terms,
 			"environmentDetail" => $environmentDetail,

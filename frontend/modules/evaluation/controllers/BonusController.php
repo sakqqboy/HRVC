@@ -13,6 +13,7 @@ use frontend\models\hrvc\Group;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
+use frontend\components\Api;
 
 class BonusController extends Controller
 {
@@ -31,35 +32,40 @@ class BonusController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$termId = $param["termId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		// $api = curl_init();
+		// curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		// curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
-		$terms = curl_exec($api);
-		$terms = json_decode($terms, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
+		$terms = Api::connectApi(Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
+		// $terms = curl_exec($api);
+		// $terms = json_decode($terms, true);
 
 		$frameId = $terms["frameId"];
 		$frameName = Frame::frameName($frameId);
 		$environmentId = Frame::getEnvironmentId($frameId);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/environment-detail?environmentId=' . $environmentId);
-		$environmentDetail = curl_exec($api);
-		$environmentDetail = json_decode($environmentDetail, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/environment-detail?environmentId=' . $environmentId);
+		$environmentDetail = Api::connectApi(Path::Api() . 'evaluation/environment/environment-detail?environmentId=' . $environmentId);
+		// $environmentDetail = curl_exec($api);
+		// $environmentDetail = json_decode($environmentDetail, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/rank/index?termId=' . $termId);
-		$ranks = curl_exec($api);
-		$ranks = json_decode($ranks, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/rank/index?termId=' . $termId);
+		$ranks = Api::connectApi(Path::Api() . 'evaluation/rank/index?termId=' . $termId);
+		// $ranks = curl_exec($api);
+		// $ranks = json_decode($ranks, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/bonus/bonus-detail?termId=' . $termId . '&&branchId=' . $environmentDetail["branchId"]);
-		$bonusDetail = curl_exec($api);
-		$bonusDetail = json_decode($bonusDetail, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/bonus/bonus-detail?termId=' . $termId . '&&branchId=' . $environmentDetail["branchId"]);
+		$bonusDetail = Api::connectApi(Path::Api() . 'evaluation/bonus/bonus-detail?termId=' . $termId . '&&branchId=' . $environmentDetail["branchId"]);
+		// $bonusDetail = curl_exec($api);
+		// $bonusDetail = json_decode($bonusDetail, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/bonus/bonus-list?termId=' . $termId . '&&branchId=' . $environmentDetail["branchId"]);
-		$employeeList = curl_exec($api);
-		$employeeList = json_decode($employeeList, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/bonus/bonus-list?termId=' . $termId . '&&branchId=' . $environmentDetail["branchId"]);
+		$employeeList = Api::connectApi(Path::Api() . 'evaluation/bonus/bonus-list?termId=' . $termId . '&&branchId=' . $environmentDetail["branchId"]);
+		// $employeeList = curl_exec($api);
+		// $employeeList = json_decode($employeeList, true);
 
-		curl_close($api);
+		// curl_close($api);
 
 		//throw new Exception(print_r($employeeList, true));
 		return $this->render('index', [

@@ -21,6 +21,7 @@ use frontend\models\hrvc\KpiWeight;
 use frontend\models\hrvc\User;
 use Yii;
 use yii\web\Controller;
+use frontend\components\Api;
 
 class EvaController extends Controller
 {
@@ -43,74 +44,89 @@ class EvaController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$termId = $param["termId"];
 		$employeeId = $param["employeeId"];
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		// $api = curl_init();
+		// curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		// curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
-		$terms = curl_exec($api);
-		$terms = json_decode($terms, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
+		$terms = Api::connectApi(Path::Api() . 'evaluation/environment/term-detail?termId=' . $termId);
+		// $terms = curl_exec($api);
+		// $terms = json_decode($terms, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
-		$employee = curl_exec($api);
-		$employee = json_decode($employee, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+		$employee = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
+		// $employee = curl_exec($api);
+		// $employee = json_decode($employee, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/employee-evaluator?employeeId=' . $employeeId . '&&termId=' . $termId);
-		$evaluator = curl_exec($api);
-		$evaluator = json_decode($evaluator, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/employee-evaluator?employeeId=' . $employeeId . '&&termId=' . $termId);
+		$evaluator = Api::connectApi(Path::Api() . 'evaluation/environment/employee-evaluator?employeeId=' . $employeeId . '&&termId=' . $termId);
+		// $evaluator = curl_exec($api);
+		// $evaluator = json_decode($evaluator, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/employee-term-weight?employeeId=' . $employeeId . '&&termId=' . $termId);
-		$employeeTermWeight = curl_exec($api);
-		$employeeTermWeight = json_decode($employeeTermWeight, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/employee-term-weight?employeeId=' . $employeeId . '&&termId=' . $termId);
+		$employeeTermWeight = Api::connectApi(Path::Api() . 'evaluation/environment/employee-term-weight?employeeId=' . $employeeId . '&&termId=' . $termId);
+		// $employeeTermWeight = curl_exec($api);
+		// $employeeTermWeight = json_decode($employeeTermWeight, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/employee-term-kfi?employeeId=' . $employeeId . '&&termId=' . $termId);
-		$employeeTermKfi = curl_exec($api);
-		$employeeTermKfi = json_decode($employeeTermKfi, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/employee-term-kfi?employeeId=' . $employeeId . '&&termId=' . $termId);
+		$employeeTermKfi = Api::connectApi(Path::Api() . 'evaluation/environment/employee-term-kfi?employeeId=' . $employeeId . '&&termId=' . $termId);
+		// $employeeTermKfi = curl_exec($api);
+		// $employeeTermKfi = json_decode($employeeTermKfi, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kgi?termId=' . $termId . '&&employeeId=' . $employeeId);
-		$masterKgiTeam = curl_exec($api);
-		$masterKgiTeam = json_decode($masterKgiTeam, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kgi?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$masterKgiTeam = Api::connectApi(Path::Api() . 'evaluation/environment/master-kgi?termId=' . $termId . '&&employeeId=' . $employeeId);
+		// $masterKgiTeam = curl_exec($api);
+		// $masterKgiTeam = json_decode($masterKgiTeam, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kgi-employee?termId=' . $termId . '&&employeeId=' . $employeeId);
-		$masterKgiEmployee = curl_exec($api);
-		$masterKgiEmployee = json_decode($masterKgiEmployee, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kgi-employee?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$masterKgiEmployee = Api::connectApi(Path::Api() . 'evaluation/environment/master-kgi-employee?termId=' . $termId . '&&employeeId=' . $employeeId);
+		// $masterKgiEmployee = curl_exec($api);
+		// $masterKgiEmployee = json_decode($masterKgiEmployee, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kpi?termId=' . $termId . '&&employeeId=' . $employeeId);
-		$masterKpiEmployee = curl_exec($api);
-		$masterKpiEmployee = json_decode($masterKpiEmployee, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kpi?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$masterKpiEmployee = Api::connectApi(Path::Api() . 'evaluation/environment/master-kpi?termId=' . $termId . '&&employeeId=' . $employeeId);
+		// $masterKpiEmployee = curl_exec($api);
+		// $masterKpiEmployee = json_decode($masterKpiEmployee, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kpi-team?termId=' . $termId . '&&employeeId=' . $employeeId);
-		$masterKpiTeam = curl_exec($api);
-		$masterKpiTeam = json_decode($masterKpiTeam, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/master-kpi-team?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$masterKpiTeam = Api::connectApi(Path::Api() . 'evaluation/environment/master-kpi-team?termId=' . $termId . '&&employeeId=' . $employeeId);
+		// $masterKpiTeam = curl_exec($api);
+		// $masterKpiTeam = json_decode($masterKpiTeam, true);
 
 		$frameId = $terms["frameId"];
 		$frameName = Frame::frameName($frameId);
 		$environmentId = Frame::getEnvironmentId($frameId);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/term-in-frame?frameId=' . $frameId);
-		$allTerms = curl_exec($api);
-		$allTerms = json_decode($allTerms, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/term-in-frame?frameId=' . $frameId);
+		$allTerms = Api::connectApi(Path::Api() . 'evaluation/environment/term-in-frame?frameId=' . $frameId);
+		// $allTerms = curl_exec($api);
+		// $allTerms = json_decode($allTerms, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kfi-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
-		$kfiWeight = curl_exec($api);
-		$kfiWeight = json_decode($kfiWeight, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kfi-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$kfiWeight = Api::connectApi(Path::Api() . 'evaluation/environment/kfi-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
+		// $kfiWeight = curl_exec($api);
+		// $kfiWeight = json_decode($kfiWeight, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kgi-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
-		$kgiTeamWeight = curl_exec($api);
-		$kgiTeamWeight = json_decode($kgiTeamWeight, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kgi-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$kgiTeamWeight = Api::connectApi(Path::Api() . 'evaluation/environment/kgi-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
+		// $kgiTeamWeight = curl_exec($api);
+		// $kgiTeamWeight = json_decode($kgiTeamWeight, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kgi-individual-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
-		$kgiEmployeeWeight = curl_exec($api);
-		$kgiEmployeeWeight = json_decode($kgiEmployeeWeight, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kgi-individual-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$kgiEmployeeWeight = Api::connectApi(Path::Api() . 'evaluation/environment/kgi-individual-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
+		// $kgiEmployeeWeight = curl_exec($api);
+		// $kgiEmployeeWeight = json_decode($kgiEmployeeWeight, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kpi-team-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
-		$kpiTeamWeight = curl_exec($api);
-		$kpiTeamWeight = json_decode($kpiTeamWeight, true);
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kpi-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
-		$kpiEmployeeWeight = curl_exec($api);
-		$kpiEmployeeWeight = json_decode($kpiEmployeeWeight, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kpi-team-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$kpiTeamWeight = Api::connectApi(Path::Api() . 'evaluation/environment/kpi-team-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
+		// $kpiTeamWeight = curl_exec($api);
+		// $kpiTeamWeight = json_decode($kpiTeamWeight, true);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/kpi-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
+		$kpiEmployeeWeight = Api::connectApi(Path::Api() . 'evaluation/environment/kpi-weight?termId=' . $termId . '&&employeeId=' . $employeeId);
+		// $kpiEmployeeWeight = curl_exec($api);
+		// $kpiEmployeeWeight = json_decode($kpiEmployeeWeight, true);
 
-		curl_close($api);
+		// curl_close($api);
 		$totalKgi = count($masterKgiTeam) + count($masterKgiEmployee);
 		$totalKpi = count($masterKpiTeam) + count($masterKpiEmployee);
 
@@ -142,14 +158,15 @@ class EvaController extends Controller
 		$kfiId = $_POST["kfiId"];
 		$kfiWeightId = $_POST["kfiWeightId"];
 		$evaluatorId = User::employeeIdFromUserId();
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		// $api = curl_init();
+		// curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		// curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/individual-kfi-weight?kfiWeightId=' . $kfiWeightId);
-		$kfiWeight = curl_exec($api);
-		$kfiWeight = json_decode($kfiWeight, true);
-		curl_close($api);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/individual-kfi-weight?kfiWeightId=' . $kfiWeightId);
+		$kfiWeight = Api::connectApi(Path::Api() .  'evaluation/environment/individual-kfi-weight?kfiWeightId=' . $kfiWeightId);
+		// $kfiWeight = curl_exec($api);
+		// $kfiWeight = json_decode($kfiWeight, true);
+		// curl_close($api);
 		$res = [];
 		//throw new exception(print_r($kfiWeight, true));
 		$kfi = Kfi::find()->select('kfiName')
@@ -239,14 +256,15 @@ class EvaController extends Controller
 		$evaluatorId = User::employeeIdFromUserId();
 		$kgiEmployeeWeigthId = $_POST["kgiEmployeeWeigthId"];
 
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		// $api = curl_init();
+		// curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		// curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/individual-kgi-weight?kgiEmployeeWeightId=' . $kgiEmployeeWeigthId);
-		$kgiEmployeeWeight = curl_exec($api);
-		$kgiEmployeeWeight = json_decode($kgiEmployeeWeight, true);
-		curl_close($api);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/individual-kgi-weight?kgiEmployeeWeightId=' . $kgiEmployeeWeigthId);
+		$kgiEmployeeWeight = Api::connectApi(Path::Api() .  'evaluation/environment/individual-kgi-weight?kgiEmployeeWeightId=' . $kgiEmployeeWeigthId);
+		// $kgiEmployeeWeight = curl_exec($api);
+		// $kgiEmployeeWeight = json_decode($kgiEmployeeWeight, true);
+		// curl_close($api);
 
 		$kgi = Kgi::find()->select('kgiName')
 			->where(["kgiId" => $kgiId])
@@ -331,14 +349,15 @@ class EvaController extends Controller
 		$evaluatorId = User::employeeIdFromUserId();
 		$kgiTeamWeigthId = $_POST["kgiTeamWeigthId"];
 
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		// $api = curl_init();
+		// curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		// curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/team-kgi-weight?kgiWeightId=' . $kgiTeamWeigthId);
-		$kgiTeamWeight = curl_exec($api);
-		$kgiTeamWeight = json_decode($kgiTeamWeight, true);
-		curl_close($api);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/team-kgi-weight?kgiWeightId=' . $kgiTeamWeigthId);
+		$kgiTeamWeight = Api::connectApi(Path::Api() .  'evaluation/environment/team-kgi-weight?kgiWeightId=' . $kgiTeamWeigthId);
+		// $kgiTeamWeight = curl_exec($api);
+		// $kgiTeamWeight = json_decode($kgiTeamWeight, true);
+		// curl_close($api);
 
 		$kgi = Kgi::find()->select('kgiName')
 			->where(["kgiId" => $kgiId])
@@ -423,14 +442,15 @@ class EvaController extends Controller
 		$evaluatorId = User::employeeIdFromUserId();
 		$kpiTeamWeigthId = $_POST["kpiTeamWeigthId"];
 
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		// $api = curl_init();
+		// curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		// curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/team-kpi-weight?kpiTeamWeightId=' . $kpiTeamWeigthId);
-		$kpiTeamWeight = curl_exec($api);
-		$kpiTeamWeight = json_decode($kpiTeamWeight, true);
-		curl_close($api);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/team-kpi-weight?kpiTeamWeightId=' . $kpiTeamWeigthId);
+		$kpiTeamWeight = Api::connectApi(Path::Api() . 'evaluation/environment/team-kpi-weight?kpiTeamWeightId=' . $kpiTeamWeigthId);
+		// $kpiTeamWeight = curl_exec($api);
+		// $kpiTeamWeight = json_decode($kpiTeamWeight, true);
+		// curl_close($api);
 
 		$kpi = Kpi::find()->select('kpiName')
 			->where(["kpiId" => $kpiId])
@@ -515,14 +535,15 @@ class EvaController extends Controller
 		$evaluatorId = User::employeeIdFromUserId();
 		$kpiEmployeeWeigthId = $_POST["kpiEmployeeWeigthId"];
 
-		$api = curl_init();
-		curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
+		// $api = curl_init();
+		// curl_setopt($api, CURLOPT_SSL_VERIFYPEER, true);
+		// curl_setopt($api, CURLOPT_RETURNTRANSFER, true);
 
-		curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/employee-kpi-weight?kpiEmployeeWeightId=' . $kpiEmployeeWeigthId);
-		$kpiEmployeeWeight = curl_exec($api);
-		$kpiEmployeeWeight = json_decode($kpiEmployeeWeight, true);
-		curl_close($api);
+		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/environment/employee-kpi-weight?kpiEmployeeWeightId=' . $kpiEmployeeWeigthId);
+		$kpiEmployeeWeight = Api::connectApi(Path::Api() . 'evaluation/environment/employee-kpi-weight?kpiEmployeeWeightId=' . $kpiEmployeeWeigthId);
+		// $kpiEmployeeWeight = curl_exec($api);
+		// $kpiEmployeeWeight = json_decode($kpiEmployeeWeight, true);
+		// curl_close($api);
 
 		$kpi = Kpi::find()->select('kpiName')
 			->where(["kpiId" => $kpiId])
