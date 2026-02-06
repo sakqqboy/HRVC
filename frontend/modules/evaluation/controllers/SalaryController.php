@@ -403,6 +403,7 @@ class SalaryController extends Controller
 		$companyId = $param["companyId"];
 		$department = [];
 		$employees = [];
+		$titles = [];
 		$title = [];
 		$company = [];
 		$titleEmployees = [];
@@ -432,31 +433,31 @@ class SalaryController extends Controller
 		if (isset($salary) && !empty($salary)) {
 			$department = Department::find()->where(["departmentId" => $salary["departmentId"]])->asArray()->one();
 			$title = Title::find()->where(["titleId" => $salary["titleId"]])->asArray()->one();
-		// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-department-title-by-department?departmentId=' . $salary['departmentId']);
-		$employees = Api::connectApi(Path::Api() . 'masterdata/employee/employee-department-title-by-department?departmentId=' . $salary['departmentId']);
-		// 	$employees = curl_exec($api);
-		// 	$employees = json_decode($employees, true);
+			// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-department-title-by-department?departmentId=' . $salary['departmentId']);
+			$employees = Api::connectApi(Path::Api() . 'masterdata/employee/employee-department-title-by-department?departmentId=' . $salary['departmentId']);
+			// 	$employees = curl_exec($api);
+			// 	$employees = json_decode($employees, true);
 
-		// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/salary/department-title-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
-		$departmentTitleAllowances = Api::connectApi(Path::Api() . 'evaluation/salary/department-title-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
-		// 	$departmentTitleAllowances = curl_exec($api);
-		// 	$departmentTitleAllowances = json_decode($departmentTitleAllowances, true);
+			// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/salary/department-title-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
+			$departmentTitleAllowances = Api::connectApi(Path::Api() . 'evaluation/salary/department-title-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
+			// 	$departmentTitleAllowances = curl_exec($api);
+			// 	$departmentTitleAllowances = json_decode($departmentTitleAllowances, true);
 
-		// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/salary/title-employee-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
-		$titleEmployees = Api::connectApi(Path::Api() . 'evaluation/salary/title-employee-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
-		// 	$titleEmployees = curl_exec($api);
-		// 	$titleEmployees = json_decode($titleEmployees, true);
+			// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/salary/title-employee-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
+			$titleEmployees = Api::connectApi(Path::Api() . 'evaluation/salary/title-employee-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
+			// 	$titleEmployees = curl_exec($api);
+			// 	$titleEmployees = json_decode($titleEmployees, true);
 
-		// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/salary/quartile?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
-		$quartileArr = Api::connectApi(Path::Api() . 'evaluation/salary/quartile?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
-		// 	$quartileArr = curl_exec($api);
-		// 	$quartileArr = json_decode($quartileArr, true);
+			// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/salary/quartile?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
+			$quartileArr = Api::connectApi(Path::Api() . 'evaluation/salary/quartile?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
+			// 	$quartileArr = curl_exec($api);
+			// 	$quartileArr = json_decode($quartileArr, true);
 			$totalEmployeeSalary = EmployeeSalary::totalEmployeeSalary($salary["departmentId"], $salary["titleId"]);
 			$titleId = $salary['titleId'];
 			$departmentId = $salary['departmentId'];
 			if ($departmentId != null) {
-		// 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-title?id=' . $departmentId);
-		$titles = Api::connectApi(Path::Api() . 'masterdata/department/department-title?id=' . $departmentId);
+				// 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-title?id=' . $departmentId);
+				$titles = Api::connectApi(Path::Api() . 'masterdata/department/department-title?id=' . $departmentId);
 				// $titles = curl_exec($api);
 				// $titles = json_decode($titles, true);
 			}
@@ -570,15 +571,15 @@ class SalaryController extends Controller
 		// $companies = json_decode($companies, true);
 
 		if ($companyId !== null) {
-		// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/company-department?id=' . $companyId);
-		$departments = Api::connectApi(Path::Api() . 'masterdata/department/company-department?id=' . $companyId);
-		// 	$departments = curl_exec($api);
-		// 	$departments = json_decode($departments, true);
+			// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/company-department?id=' . $companyId);
+			$departments = Api::connectApi(Path::Api() . 'masterdata/department/company-department?id=' . $companyId);
+			// 	$departments = curl_exec($api);
+			// 	$departments = json_decode($departments, true);
 			if ($departmentId != null) {
-		// 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-title?id=' . $departmentId);
-		$titles = Api::connectApi(Path::Api() . 'masterdata/department/department-title?id=' . $departmentId);
-		// 		$titles = curl_exec($api);
-		// 		$titles = json_decode($titles, true);
+				// 		curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/department/department-title?id=' . $departmentId);
+				$titles = Api::connectApi(Path::Api() . 'masterdata/department/department-title?id=' . $departmentId);
+				// 		$titles = curl_exec($api);
+				// 		$titles = json_decode($titles, true);
 			}
 		}
 		// curl_close($api);
@@ -655,25 +656,25 @@ class SalaryController extends Controller
 			$department = Department::find()->where(["departmentId" => $salary["departmentId"]])->asArray()->one();
 			$title = Title::find()->where(["titleId" => $salary["titleId"]])->asArray()->one();
 
-		// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-department-title-by-department?departmentId=' . $salary['departmentId']);
-		$employees = Api::connectApi(Path::Api() . 'masterdata/employee/employee-department-title-by-department?departmentId=' . $salary['departmentId']);
-		// 	$employees = curl_exec($api);
-		// 	$employees = json_decode($employees, true);
+			// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'masterdata/employee/employee-department-title-by-department?departmentId=' . $salary['departmentId']);
+			$employees = Api::connectApi(Path::Api() . 'masterdata/employee/employee-department-title-by-department?departmentId=' . $salary['departmentId']);
+			// 	$employees = curl_exec($api);
+			// 	$employees = json_decode($employees, true);
 
-		// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/salary/department-title-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
-		$departmentTitleAllowances = Api::connectApi(Path::Api() . 'evaluation/salary/department-title-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
-		// 	$departmentTitleAllowances = curl_exec($api);
-		// 	$departmentTitleAllowances = json_decode($departmentTitleAllowances, true);
+			// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/salary/department-title-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
+			$departmentTitleAllowances = Api::connectApi(Path::Api() . 'evaluation/salary/department-title-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
+			// 	$departmentTitleAllowances = curl_exec($api);
+			// 	$departmentTitleAllowances = json_decode($departmentTitleAllowances, true);
 
-		// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/salary/title-employee-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
-		$titleEmployees = Api::connectApi(Path::Api() . 'evaluation/salary/title-employee-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
-		// 	$titleEmployees = curl_exec($api);
-		// 	$titleEmployees = json_decode($titleEmployees, true);
+			// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/salary/title-employee-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
+			$titleEmployees = Api::connectApi(Path::Api() . 'evaluation/salary/title-employee-allowance?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
+			// 	$titleEmployees = curl_exec($api);
+			// 	$titleEmployees = json_decode($titleEmployees, true);
 
-		// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/salary/quartile?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
-		$quartileArr = Api::connectApi(Path::Api() . 'evaluation/salary/quartile?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
-		// 	$quartileArr = curl_exec($api);
-		// 	$quartileArr = json_decode($quartileArr, true);
+			// 	curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/salary/quartile?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
+			$quartileArr = Api::connectApi(Path::Api() . 'evaluation/salary/quartile?departmentId=' . $salary['departmentId'] . '&&titleId=' . $salary['titleId']);
+			// 	$quartileArr = curl_exec($api);
+			// 	$quartileArr = json_decode($quartileArr, true);
 			$totalEmployeeSalary = EmployeeSalary::totalEmployeeSalary($salary["departmentId"], $salary["titleId"]);
 		}
 		// curl_setopt($api, CURLOPT_URL, Path::Api() . 'evaluation/salary/allowance');

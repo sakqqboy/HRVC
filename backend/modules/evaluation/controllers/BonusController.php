@@ -16,9 +16,12 @@ use common\models\ModelMaster;
 use backend\models\hrvc\EmployeeEvaluator;
 use backend\models\hrvc\EmployeeSalary;
 use backend\models\hrvc\Rank;
+use common\helpers\Athorize;
 use Exception;
+use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
+use yii\web\Response;
 
 header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
@@ -27,9 +30,22 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 class BonusController extends Controller
 {
-	public function actionIndex()
+	public function beforeAction($action)
 	{
+		$authHeader = Yii::$app->request->getHeaders()->get('TcgHrvcAuthorization');
+		$check = Athorize::CheckRequest($authHeader);
+		if ($check == 0) {
+			Yii::$app->response->format = Response::FORMAT_JSON;
+			Yii::$app->response->statusCode = 401;
+			Yii::$app->response->data = [
+				'status' => 'error',
+				'message' => 'Invalid or missing token.'
+			];
+			return false;
+		}
+		return parent::beforeAction($action);
 	}
+	public function actionIndex() {}
 	public function actionBonusList($termId, $branchId)
 	{
 		$employees = Employee::find()
@@ -98,7 +114,8 @@ class BonusController extends Controller
 					"bonusRate" =>  isset($currentSalary["bonusRate"]) ? $currentSalary["bonusRate"] : $bonusRate,
 					"adjustment" => $adjustment, //
 					"finalAdjustment" => isset($currentSalary["finalAdjustment"]) ? $currentSalary["finalAdjustment"] : 0,
-					"payableBonus" => "", isset($currentSalary["finalAdjustment"]) ? $currentSalary["finalAdjustment"] : 0,
+					"payableBonus" => "",
+					isset($currentSalary["finalAdjustment"]) ? $currentSalary["finalAdjustment"] : 0,
 					"trueRateBonus" => $trueBonusRate
 				];
 			endforeach;
