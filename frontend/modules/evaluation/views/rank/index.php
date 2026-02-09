@@ -141,7 +141,7 @@ $this->title = 'Rank & Increasement';
 										</td>
 										<td class="border-right">
 											<div class="col-12  text-center">
-												<?= number_format($rank["bonus"], 1) ?>
+												<?= number_format($rank["bonus"] ?? 0, 1) ?>
 											</div>
 										</td>
 										<td class="text-center">

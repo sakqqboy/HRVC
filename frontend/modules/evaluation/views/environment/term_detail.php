@@ -77,13 +77,13 @@ $this->title = 'Term Detail';
 					</div>
 					<?php
 					if ($terms["startDate"] !== '') {
-						$startDateArr = explode(' ', $terms["startDate"]);
+						$startDateArr = explode(' ', $terms["startDate"] ?? '');
 					}
 					if ($terms["endDate"] !== '') {
-						$endDate = explode(' ', $terms["endDate"]);
+						$endDate = explode(' ', $terms["endDate"] ?? '');
 					}
 					if ($terms["midDate"] !== '') {
-						$midDateArr = explode(' ', $terms["midDate"]);
+						$midDateArr = explode(' ', $terms["midDate"] ?? '');
 					}
 					?>
 					<div class="col-lg-8 col-12 pr-0 pl-0">
