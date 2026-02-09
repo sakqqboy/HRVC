@@ -174,7 +174,7 @@ class KpiTeamController extends Controller
 		$limit = 20;
 
 		$teamKpis = Api::connectApi(Path::Api() . 'kpi/kpi-team/all-team-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		 throw new Exception(print_r($teamKpis,true));
+		//  throw new Exception(print_r($teamKpis,true));
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-team/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
