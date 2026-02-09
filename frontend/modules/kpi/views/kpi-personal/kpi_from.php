@@ -501,7 +501,6 @@ if (!$nextCheckDate) {
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to" class="calendar-due-image">
                                 </div>
                                 <div class="flex-grow-1 pr-5 pl-35 select-form-pim" id="due-term-default">
-                                        <div id="multi-due-term-text" class="text-truncate text-center pr-5" style="width:210px;" title="Select the Due Term Start & End Date">
                                         <div id="multi-due-term-text" class="text-truncate text-center pr-5" style="width:210px;" title="<?= Yii::t('app', 'Select the Due Term Start & End Date') ?>">
                                             <?= Yii::t('app', 'Select the Due Term Start & End Date') ?>
                                         </div>
@@ -522,7 +521,7 @@ if (!$nextCheckDate) {
                                 <div id="endDatePicker"></div>
                             </div>
                         </div>
-                        <div class=" form-group start-center mt-45" style="gap: 14px;">
+                        <div class="form-group start-center mt-45" style="gap: 14px;">
                             <label class="text-manage-create" for="name">
                                 <span class="text-danger">* </span>
                                 <?= Yii::t('app', 'Target Due Update Date') ?>
@@ -621,7 +620,6 @@ if (!$nextCheckDate) {
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                     <div class="col-lg-4 col-12 pl-30">
                         <div class="form-group start-center" style="  gap: 14px;">

@@ -550,16 +550,9 @@ if ($DueBehind < 0) {
                                         alt="Help Icon">
                                 </label>
                                 <select class="form-select mt-10" id="amountType-create" name="amountType" required>
-                                    <<<<<<< HEAD
-                                        <option value="">Select</option>
+                                        <option value=""><?= Yii::t('app', 'Select') ?></option>
                                         <option value="1" <?= ($selectedAmountType == '1') ? Yii::t('app', 'selected') : '' ?>>%</option>
                                         <option value="2" <?= ($selectedAmountType == '2') ? Yii::t('app', 'selected') : '' ?>>
-                                            =======
-                                        <option value=""><?= Yii::t('app', 'Select') ?></option>
-                                        <option value="1" <?= ($selectedAmountType == '1') ? 'selected' : '' ?>>%</option>
-                                        <option value="2" <?= ($selectedAmountType == '2') ? 'selected' : '' ?>>
-                                            >>>>>>> 19fd14844fcde68a7047bcd4cf94e9572e758acd
-                                            <?= Yii::t('app', 'Number') ?></option>
                                 </select>
                             </div>
 
