@@ -860,11 +860,11 @@ class ManagementController extends Controller
 					$ratio = 0;
 					if ($history["code"] == '<' || $history["code"] == '=') {
 						if ($history["targetAmount"] != 0) {
-							$ratio = ((int)$history['result'] / (int)$history["targetAmount"]) * 100;
+							$ratio = ((int)$history['result'] / $history["targetAmount"]) * 100;
 						}
 					} else {
 						if ($history["result"] != '' && $history["result"] != 0) {
-							$ratio = ((int)$history["targetAmount"] / (int)$history["result"]) * 100;
+							$ratio = ((int)$history["targetAmount"] / $history["result"]) * 100;
 						} else {
 							$ratio = 0;
 						}

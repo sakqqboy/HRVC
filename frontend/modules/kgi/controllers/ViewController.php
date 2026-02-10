@@ -67,7 +67,7 @@ class ViewController extends Controller
 		$totalBranch = Branch::totalBranch();
 		$months = ModelMaster::monthFull(1);
 		$isManager = UserRole::isManager();
-
+		//throw new exception($kgiId);
 		return $this->render('kgi_view', [
 			"role" => $role,
 			"kgiDetail" => $kgiDetail,
@@ -442,7 +442,7 @@ class ViewController extends Controller
 
 	public function actionKgiTeamEmployee()
 	{
-		
+
 		$kgiId = $_POST["kgiId"];
 		$kgiHistoryId = $_POST["kgiHistoryId"];
 		// throw new exception(print_r($kgiHistoryId, true));
