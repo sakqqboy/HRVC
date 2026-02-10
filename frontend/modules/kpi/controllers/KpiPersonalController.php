@@ -896,7 +896,6 @@ class KpiPersonalController extends Controller
 
 	public function actionSearchKpiPersonal()
 	{
-
 		$companyId = isset($_POST["companyId"]) && $_POST["companyId"] != null ? $_POST["companyId"] : null;
 		$branchId = isset($_POST["branchId"]) && $_POST["branchId"] != null ? $_POST["branchId"] : null;
 		$teamId = isset($_POST["teamId"]) && $_POST["teamId"] != null ? $_POST["teamId"] : null;
@@ -928,6 +927,7 @@ class KpiPersonalController extends Controller
 		$employeeId = $param["employeeId"];
 		$branchId = $param["branchId"];
 		$teamId = $param["teamId"];
+		$companyId = $param["companyId"];
 		$employees = [];
 		$teams = [];
 		$userId = Yii::$app->user->id;
@@ -941,7 +941,6 @@ class KpiPersonalController extends Controller
 		$managerId = '';
 		$supervisorId = '';
 		$staffId = '';
-		$companyId = '';
 		if ($role == 7) $adminId = Yii::$app->user->id;
 		if ($role == 6) $gmId = Yii::$app->user->id;
 		if ($role == 5) $managerId = Yii::$app->user->id;
@@ -952,16 +951,7 @@ class KpiPersonalController extends Controller
 		$userTeamId = Team::userTeam($userId);
 		$session = Yii::$app->session;
 
-		$filter = [
-			"companyId" => $companyId,
-			"branchId" => $branchId,
-			"teamId" => $teamId,
-			"employeeId" => $employeeId,
-			"month" => $month,
-			"year" => $year,
-			"status" => $status,
-			"perPage" => 20,
-		];
+		
 
 		Session::PimEmployeeFilter($companyId, $branchId, $teamId, $employeeId, $month, $year, $status, $type);
 		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
@@ -1005,25 +995,24 @@ class KpiPersonalController extends Controller
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
 
-		$months = ModelMaster::monthFull(1);
-		$isManager = UserRole::isManager();
+		
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
-		// throw new Exception(print_r($gmId,true));
-		// $totalKpi = count($kpis['data']);
-		// ปัญหาคือ ถ้าเอาอันนี้มันจะเอามาทั้งหมดโดยไม่ฟิวเตอร์ทำให้หน้าไม่ตรง เพราะหน้ามันแสดงนับรวมทั้งหมดแต่ฟิวเตอร์มันจะทำให้หน้าน้อยลง แต่ถ้าอาหน้ามาจากข้อมูลที่ paramText 
-		// มันฟิวเตอร์แล้วก็จริงแต่มันติด limit มาด้วย เพราะ limit จะทำให้แสดงหน้าตามจำนวนที่กำหนดไว้ แล้วสลับหน้าตาม currentPage ที่ส่งมา ว่าไปหนเาไหน  
-		// ถ้าเอามาใส่แทนมันจะแสดงแค่เท่าลิมิตทำให้ไม่เห็นหน้าอื่น วิธีแก้ไขจำเป็นต้อง แก้ totalKpi ให้สามารถฟิวเตอร์ได้ด้วย
-		// if ($adminId != '' || $gmId != '') {
-			$totalKpi = $kpis['total'];
-		// }else{
-		// 	$totalKpi = KpiEmployee::totalKpiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
-		// }
-		// throw new Exception(print_r($totalKpi,true));
+		$months = ModelMaster::monthFull(1);
+		$isManager = UserRole::isManager();
+		$totalKpi = $kpis['total'];
 		$totalPage = ceil($totalKpi / $limit);
-		
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
-
+		$filter = [
+			"companyId" => $companyId,
+			"branchId" => $branchId,
+			"teamId" => $teamId,
+			"employeeId" => $employeeId,
+			"month" => $month,
+			"year" => $year,
+			"status" => $status,
+			"perPage" => 20,
+		];
 		return $this->render($file, [
 			"companies" => $companies,
 			"teams" => $teams,

@@ -603,6 +603,7 @@ class KpiTeamController extends Controller
 		$companyId = isset($_POST["companyId"]) && $_POST["companyId"] != null ? $_POST["companyId"] : null;
 		$branchId = isset($_POST["branchId"]) && $_POST["branchId"] != null ? $_POST["branchId"] : null;
 		$teamId = isset($_POST["teamId"]) && $_POST["teamId"] != null ? $_POST["teamId"] : null;
+		$employeeId = isset($_POST["employeeId"]) && $_POST["employeeId"] != null ? $_POST["employeeId"] : null;
 		$month = isset($_POST["month"]) && $_POST["month"] != null ? $_POST["month"] : null;
 		$status = isset($_POST["status"]) && $_POST["status"] != null ? $_POST["status"] : null;
 		$year = isset($_POST["year"]) && $_POST["year"] != null ? $_POST["year"] : null;
@@ -610,6 +611,7 @@ class KpiTeamController extends Controller
 		return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-team/kpi-team-search-result/' . ModelMaster::encodeParams([
 			"companyId" => $companyId,
 			"branchId" => $branchId,
+			"employeeId" => $employeeId,
 			"teamId" => $teamId,
 			"month" => $month,
 			"status" => $status,

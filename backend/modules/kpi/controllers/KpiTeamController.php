@@ -1170,14 +1170,14 @@ class KpiTeamController extends Controller
 			foreach ($kpiTeamHistory as $history):
 				$ratio = 0;
 				if ($history["code"] == '<' || $history["code"] == '=') {
-					if ((float)$history["target"] != 0) {
-						$ratio = ((float)$history['result'] / (float)$history["target"]) * 100;
+					if ($history["target"] != 0) {
+						$ratio = ($history['result'] / $history["target"]) * 100;
 					} else {
 						$ratio = 0;
 					}
 				} else {
 					if ($history["result"] != '' && $history["result"] != 0) {
-						$ratio = ((float)$history["target"] / (float)$history["result"]) * 100;
+						$ratio = ($history["target"] / $history["result"]) * 100;
 					} else {
 						$ratio = 0;
 					}
