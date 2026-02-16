@@ -135,13 +135,15 @@ $this->title = Yii::t('app', 'Assign KGI');
                                             <?php
                                             if ($disableTeam == "") {
                                             ?>
-                                                <input type="text" class="assign-target text-end font-size-12 numberOnly teamTarget"
+                                                <input type="text" class="assign-target text-end font-size-12 numberOnly teamTarget" 
+                                                <?= $disabled = ($kgiDetail["status"] == 2) ? 'disabled' : '';?>
                                                     value="<?= $target > 0 ? number_format($target, 2) : '' ?>" onkeyup="javascript:calculateEmployeeTargetValue(event,<?= $team['teamId'] ?>)"
                                                     name="teamTarget[<?= $team['teamId'] ?>]" placeholder="0.00" id="teamTarget-<?= $team['teamId'] ?>">
                                             <?php
                                             } else {
                                             ?>
                                                 <input type="text" placeholder="0.00" class="assign-target text-end font-size-12"
+                                                <?= $disabled = ($kgiDetail["status"] == 2) ? 'disabled' : '';?>
                                                     value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
                                                     name="teamTarget[<?= $team['teamId'] ?>]" <?= $disableTeam ?>>
                                                 <input type="hidden" value="<?= $target > 0 ? number_format($target, 2) : '' ?>"
@@ -241,11 +243,15 @@ $this->title = Yii::t('app', 'Assign KGI');
                             </div>
                         </div>
                         <div class="col-12 pr-0 pl-0 pt-0" id="team-employee-target">
-                            <?= $this->render('employee_team', [
-                                "kgiTeamEmployee" => $kgiTeamEmployee,
-                                "role" => $role,
-                                "userTeamId" => $userTeamId
-                            ]) ?>
+                            <?php
+                            if($kgiDetail["status"] != 2) {
+                            ?>
+                                <?= $this->render('employee_team', [
+                                    "kgiTeamEmployee" => $kgiTeamEmployee,
+                                    "role" => $role,
+                                    "userTeamId" => $userTeamId
+                                ]) ?>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
