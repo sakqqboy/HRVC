@@ -132,7 +132,7 @@ $this->title = Yii::t('app', 'Team KPI');
                                     <div class="text-truncate pim-name pointer-event" title='<?= $kpi["kpiName"] ?>'><?= $kpi["kpiName"] ?></div>
                                     <div class="mt-20">
                                         <div class="assign-on">
-                                            <?= Yii::t('app', 'Assigned on') ?><?= $kpi["isOver"] ?>
+                                            <?= Yii::t('app', 'Assigned on') ?>
                                         </div>
                                         <div class="d-flex justify-content-start">
                                             <div class="mt-15" style="gap: 10px;display:inline-grid;">
