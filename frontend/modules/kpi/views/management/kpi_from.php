@@ -553,6 +553,8 @@ if ($DueBehind < 0) {
                                         <option value=""><?= Yii::t('app', 'Select') ?></option>
                                         <option value="1" <?= ($selectedAmountType == '1') ? Yii::t('app', 'selected') : '' ?>>%</option>
                                         <option value="2" <?= ($selectedAmountType == '2') ? Yii::t('app', 'selected') : '' ?>>
+                                            <?= Yii::t('app', 'Number') ?>
+                                    </option>
                                 </select>
                             </div>
 
