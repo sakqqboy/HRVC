@@ -2,7 +2,6 @@
 
 namespace backend\modules\kpi\controllers;
 
-use backend\models\hrvc\Branch;
 use backend\models\hrvc\Company;
 use backend\models\hrvc\Country;
 use backend\models\hrvc\Department;
@@ -16,19 +15,13 @@ use backend\models\hrvc\Kpi;
 use backend\models\hrvc\KpiDepartment;
 use backend\models\hrvc\KpiHistory;
 use backend\models\hrvc\KpiSolution;
-use common\helpers\Path;
 use backend\models\hrvc\Employee;
 use backend\models\hrvc\KgiHasKpi;
 use backend\models\hrvc\KpiEmployee;
-use backend\models\hrvc\KpiEmployeeHistory;
 use backend\models\hrvc\KpiTeamHistory;
-use backend\models\hrvc\Position;
-use backend\models\hrvc\Role;
 use backend\models\hrvc\Team;
 use backend\models\hrvc\Title;
 use backend\models\hrvc\User;
-use backend\models\hrvc\UserRole;
-use yii\db\Expression;
 use yii\db\Query;
 use yii\web\Controller;
 use Yii;
@@ -812,12 +805,12 @@ class ManagementController extends Controller
 				->orderBy('kpi.createDateTime DESC')
 				->asArray()
 				->all();
-		}	
+		}
 
 		if (count($kpis) > 0) {
 			foreach ($kpis as $kpi) :
 				$commonData = [];
-				
+
 				$kpiHistory = KpiHistory::find()
 					->select('kpi_history.*')
 					->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_history.kpiId")
@@ -835,9 +828,8 @@ class ManagementController extends Controller
 				if ($status == 1) {
 					// return json_encode($kpi["year"]);
 					$checkComplete = Kpi::checkComplete($kpi["kpiId"], $month, $year, $kpi["year"]);
-					
 				}
-				
+
 				$ratio = 0;
 				if (isset($kpiHistory) && !empty($kpiHistory)  && $checkComplete == 0) {
 					$allEmployee = KpiEmployee::kpiEmployee($kpi["kpiId"], $kpiHistory["month"], $kpiHistory["year"]);

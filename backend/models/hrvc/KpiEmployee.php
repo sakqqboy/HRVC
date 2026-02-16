@@ -49,9 +49,6 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         if (isset($kpiEmployee) && count($kpiEmployee) > 0) {
             foreach ($kpiEmployee as $ke) :
                 if ($ke["picture"] != "") {
-                    //    $url = Path::frontendUrl() . $ke["picture"];
-                    //        $headers = @get_headers($url);
-                    //    if ($headers && strpos($headers[0], '200') !== false) {
                     $employee[$ke["employeeId"]] = $ke["picture"];
                     //    }
                 } else {
@@ -327,27 +324,27 @@ class KpiEmployee extends \backend\models\hrvc\master\KpiEmployeeMaster
         //     ->asArray()
         //     ->all();
         $kpiEmployee = KpiEmployee::find()
-        ->alias('ke')
-        ->select([
-            'e.picture',
-            'e.employeeId',
-            'e.gender',
-            'ke.year',
-            'ke.month'
-        ])
-        ->leftJoin('kpi k', 'k.kpiId = ke.kpiId')
-        ->leftJoin('employee e', 'e.employeeId = ke.employeeId')
-        ->where(['IN', 'ke.status', [1, 2, 4, 5]])
-        ->andWhere(['!=', 'e.status', 99])
-        ->andWhere(['!=', 'k.status', 99])
-        ->andWhere([
-            'ke.kpiId' => $kpiId,
-            'e.teamId' => $teamId,
-            'ke.month' => $month,
-            'ke.year'  => $year
-        ])
-        ->asArray()
-        ->all();
+            ->alias('ke')
+            ->select([
+                'e.picture',
+                'e.employeeId',
+                'e.gender',
+                'ke.year',
+                'ke.month'
+            ])
+            ->leftJoin('kpi k', 'k.kpiId = ke.kpiId')
+            ->leftJoin('employee e', 'e.employeeId = ke.employeeId')
+            ->where(['IN', 'ke.status', [1, 2, 4, 5]])
+            ->andWhere(['!=', 'e.status', 99])
+            ->andWhere(['!=', 'k.status', 99])
+            ->andWhere([
+                'ke.kpiId' => $kpiId,
+                'e.teamId' => $teamId,
+                'ke.month' => $month,
+                'ke.year'  => $year
+            ])
+            ->asArray()
+            ->all();
 
         $employee = [];
         $img = "images/employee/status/employee-nopic.svg";
