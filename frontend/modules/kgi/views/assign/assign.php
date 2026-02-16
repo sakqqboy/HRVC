@@ -62,12 +62,14 @@ $this->title = Yii::t('app', 'Assign KGI');
                             <?= $kgiDetail["kgiName"] ?>
                         </div>
                         <div class="col-lg-3 text-end" style="line-height: 21px;align-content:center;">
-                            <button class="btn-create font-size-12 ml-10" style="text-decoration: none;" type="submit">
-                                <div class="ml-7 mr-7" style="gap: 5px;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/save-whiet.svg" style="width:15px;margin-top:-3px;">
-                                    <?= Yii::t('app', 'Save') ?>
-                                </div>
-                            </button>
+                   
+                                <button class="btn-create font-size-12 ml-10 <?= ($kgiDetail["status"] == 2) ? 'd-none' : '' ?>"
+                                style="text-decoration: none;" type="submit">
+                                    <div class="ml-7 mr-7" style="gap: 5px;">
+                                        <img src="<?= Yii::$app->homeUrl ?>image/save-whiet.svg" style="width:15px;margin-top:-3px;">
+                                        <?= Yii::t('app', 'Save') ?>
+                                    </div>
+                                </button>
                         </div>
                         <div class="col-12  ligth-gray-box mt-10 mb-10" style="height: 400px;overflow-y:auto;">
                             <div class="col-12 bg-white pl-8 pr-8 mt-8 mb-10">
