@@ -90,6 +90,7 @@ class AssignController extends Controller
 			$countAllCompany = count($allCompany);
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
+		// throw new Exception(print_r($kgiDetail,true));
 		$totalBranch = Branch::totalBranch();
 		return $this->render('assign', [
 			"role" => $role,

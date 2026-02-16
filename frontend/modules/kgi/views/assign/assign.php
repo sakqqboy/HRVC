@@ -104,9 +104,11 @@ $this->title = Yii::t('app', 'Assign KGI');
                                     <div class="assign-team">
                                         <div class="">
                                             <input type="checkbox" name="team[<?= $team['teamId'] ?>]"
+                                            <?= $disabled = ($kgiDetail["status"] == 2) ? 'disabled' : ''; ?>
                                                 id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check <?= $role <= 3 ? 'd-none' : '' ?>"
                                                 value="<?= $team['teamId'] ?>"
-                                                onclick="javascript:assignKgiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kgiId ?>)">
+                                                onclick="javascript:assignKgiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kgiId ?>)"
+                                                >
                                             <!--kgi_employee-->
                                             <?php
                                             if ($role <= 3 && $checked == "checked") { ?>
