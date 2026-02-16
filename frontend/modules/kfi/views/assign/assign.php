@@ -49,7 +49,7 @@ $this->title = Yii::t('app', 'Assign KFI');
                     <?= $kfiDetail["kfiName"] ?>
                 </div>
                 <div class="col-6 text-end">
-                    <button class="btn-create font-size-12 ml-10" style="text-decoration: none;" type="submit">
+                    <button class="btn-create font-size-12 ml-10 <?= ($kfiDetail["status"] == 2) ? 'd-none' : '' ?>" style="text-decoration: none;" type="submit">
                         <div class="ml-7 mr-7" style="gap: 5px;">
                             <img src="<?= Yii::$app->homeUrl ?>image/save-whiet.svg"
                                 style="width:15px;margin-top:-3px;">
