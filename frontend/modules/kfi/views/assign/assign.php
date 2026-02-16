@@ -65,6 +65,7 @@ $this->title = Yii::t('app', 'Assign KFI');
                 <div class="col-12 pr-0 pl-0" id="team-employee-target">
                     <?= $this->render('employee_team', [
                         "kfiTeamEmployee" => $kfiTeamEmployee,
+                        "kfiDetail" => $kfiDetail
                     ])
                     ?>
                 </div>
