@@ -95,7 +95,7 @@ $this->title = Yii::t('app', 'Assign KPI');;
                                             }
                                         endforeach;
                                     }
-                                    if ($role == 3 && $team["teamId"] != $userTeamId) {
+                                    if (($role == 3 && $team["teamId"] != $userTeamId) || $kpiDetail["status"] == 2) {
                                         $disableTeam = "disabled";
                                     } else {
                                         $disableTeam = "";
