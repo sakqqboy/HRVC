@@ -34,18 +34,18 @@ $this->title = Yii::t('app', 'KGI KPI');
                         <th style="border-top-right-radius: 4px;border-bottom-right-radius: 4px;" class="text-end">
                             <a class="btn-blue-sm font-size-12 text-center no-underline" id="editRelateKgi"
                                 style="padding-left: 10px;padding-right:10px;display:<?= count($kfiHasKgi) == 0 ? 'none' : '' ?>"
-                                href="javascript:showEditRelateKgi(1,<?= $kfiId ?>)">
+                                href="javascript:showEditKfiRelateKgi(1,<?= $kfiId ?>)">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/edit.svg" alt=""
                                     class="create-btn-icon mr-3" style="margin-top: -3px;width:16px;height:16px;"><?= Yii::t('app', 'Add') ?>/<?= Yii::t('app', 'Remove') ?>
                             </a>
                             <a class="btn-blue-sm font-size-12 text-center no-underline  mr-5 pl-10 pr-10"
                                 id="saveRelateKgi" style="display:none;"
-                                href="javascript:showEditRelateKgi(2,<?= $kfiId ?>)">
+                                href="javascript:showEditKfiRelateKgi(2,<?= $kfiId ?>)">
                                 <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt=""
                                     class="pim-icon mr-3" style="margin-top: -1px;"> <?= Yii::t('app', 'Save') ?>
                             </a>
                             <a class="btn-red-sm font-size-12 text-center no-underline pl-10 pr-10" id="cancelRelateKgi"
-                                style="display:none;" href="javascript:showEditRelateKgi(0,<?= $kfiId ?>)"><?= Yii::t('app', 'Cancel') ?></a>
+                                style="display:none;" href="javascript:showEditKfiRelateKgi(0,<?= $kfiId ?>)"><?= Yii::t('app', 'Cancel') ?></a>
                         </th>
                     </tr>
                 </thead>
@@ -126,7 +126,7 @@ $this->title = Yii::t('app', 'KGI KPI');
                 </div>
                 <div class="mt-10">
                     <?php if ($role >= 5) { ?>
-                        <a href="javascript:showEditRelateKgi(1,<?= $kfiId ?>)" class="btn-blue font-size-14 no-underline">
+                        <a href="javascript:showEditKfiRelateKgi(1,<?= $kfiId ?>)" class="btn-blue font-size-14 no-underline">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/plus-circle.svg" class="pim-icon mr-3"
                                 style="margin-top: -1px;">
                             <?= Yii::t('app', 'Add KGI') ?>

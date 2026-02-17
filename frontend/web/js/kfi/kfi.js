@@ -2003,7 +2003,8 @@ function checkAllEmployees(teamId) {
      allEmployeesCheck(teamId);
 }
 
-function showEditRelateKgi(type, kfiId) {
+function showEditKfiRelateKgi(type, kfiId) {
+     
      if (type == 1) {
           $("#editRelateKgi").hide();
           $("#saveRelateKgi").show();
