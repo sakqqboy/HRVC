@@ -62,7 +62,7 @@ $this->title = Yii::t('app', 'Assign KPI');;
                             <?= $kpiDetail["kpiName"] ?>
                         </div>
                         <div class="col-lg-3 text-end" style="line-height: 21px;align-content:center;">
-                            <button class="btn-create font-size-12 ml-10" style="text-decoration: none;" type="submit">
+                            <button class="btn-create font-size-12 ml-10 <?= $kpiDetail["status"] == 2 ? 'd-none' : '' ?>" style="text-decoration: none;" type="submit" <?= $kpiDetail["status"] == 2 ? 'disabled' : '' ?>>
                                 <div class="ml-7 mr-7" style="gap: 5px;">
                                     <img src="<?= Yii::$app->homeUrl ?>image/save-whiet.svg" style="width:15px;margin-top:-3px;">
                                     <?= Yii::t('app', 'Save') ?>
@@ -106,7 +106,7 @@ $this->title = Yii::t('app', 'Assign KPI');;
                                             <input type="checkbox" name="team[<?= $team['teamId'] ?>]"
                                                 id="team-<?= $team['teamId'] ?>" <?= $checked ?> class="from-check <?= $role == 3 ? 'd-none' : '' ?>"
                                                 value="<?= $team['teamId'] ?>"
-                                                onclick="javascript:assignKpiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kpiId ?>)">
+                                                onclick="javascript:assignKpiToEmployeeInTeam(<?= $team['teamId'] ?>,<?= $kpiId ?>)" <?= $disableTeam ?>>
                                             <!--kpi_employee-->
                                             <?php
                                             if ($role <= 3 && $checked == "checked") { ?>
@@ -242,7 +242,8 @@ $this->title = Yii::t('app', 'Assign KPI');;
                             <?= $this->render('employee_team', [
                                 "kpiTeamEmployee" => $kpiTeamEmployee,
                                 "role" => $role,
-                                "userTeamId" => $userTeamId
+                                "userTeamId" => $userTeamId,
+                                "kpiStatus" => $kpiDetail["status"]
                             ]) ?>
                         </div>
                     </div>
