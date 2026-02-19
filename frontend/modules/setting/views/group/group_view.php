@@ -167,26 +167,32 @@ $this->title = 'Group Profile';
                     <div class="col-12 mt-20 text-end pr-15">
                         <?php
                         $socials = [
-                            "socialX" => "icon-x",
-                            "socialLinkin" => "icon-in",
-                            "socialYoutube" => "icon-yt",
-                            "socialFacebook" => "icon-face",
-                            "socialInstargram" => "icon-ig"
+                            "socialX" => ["icon" => "icon-x"],
+                            "socialLinkin" => ["icon" => "icon-in"],
+                            "socialYoutube" => ["icon" => "icon-yt"],
+                            "socialFacebook" => ["icon" => "icon-face"],
+                            "socialInstargram" => ["icon" => "icon-ig"]
                         ];
 
-                        foreach ($socials as $key => $icon) {
-                            $url = !empty($group[$key]) ? $group[$key] : "";
-                            $offClass = empty($group[$key]) ? '-off' : '';
-                            if ($url): ?>
-                                <a class="d-inline-block mr-5" href="<?= $url ?>" target="_blank">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/<?= $icon ?><?= $offClass ?>.svg" style="width:24px;height:24.6px;">
+                        foreach ($socials as $key => $data) {
+
+                            $profileUrl = $group[$key] ?? null;
+                            $isValidUrl = $profileUrl && filter_var($profileUrl, FILTER_VALIDATE_URL);
+
+                            if ($isValidUrl): ?>
+                                <a class="d-inline-block mr-5" href="<?= $profileUrl ?>" target="_blank">
+                                    <img src="<?= Yii::$app->homeUrl ?>image/<?= $data["icon"] ?>.svg"
+                                        style="width:24px;height:24.6px;">
                                 </a>
                             <?php else: ?>
-                                <img src="<?= Yii::$app->homeUrl ?>image/<?= $icon ?><?= $offClass ?>.svg" style="width:24px;height:24.6px;">
-                        <?php endif;
+                                <img src="<?= Yii::$app->homeUrl ?>image/<?= $data["icon"] ?>-off.svg"
+                                    style="width:24px;height:24.6px;opacity:0.5;cursor:default;">
+                            <?php endif;
                         }
                         ?>
                     </div>
+
+
                 </div>
 
                 <!-- Bottom Row -->
