@@ -35,7 +35,7 @@ class CompanyController extends Controller
 			return $this->redirect(Yii::$app->homeUrl . 'site/login');
 		}
 		$role = UserRole::userRight();
-		if ($role <= 3) {
+		if ($role == 1 || $role == 4 || $role == 5) {
 			return  $this->redirect(Yii::$app->request->referrer);
 		}
 		return true; //go to origin request
@@ -1132,7 +1132,7 @@ class CompanyController extends Controller
 	}
 
 	public function actionCompanyBranchList()
-	{
+	{	//ระวังเรื่องสิทะ์เข้าคอนโทรเลอไม่ถึงจะรีเทรอนไม่ได้
 		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
 		// รับ JSON body โดยตรง
@@ -1147,7 +1147,6 @@ class CompanyController extends Controller
 		$branches = Api::connectApi(
 			Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId
 		);
-
 		return $branches;
 	}
 }

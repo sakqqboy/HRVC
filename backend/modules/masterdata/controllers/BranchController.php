@@ -45,10 +45,20 @@ class BranchController extends Controller
 		// return $this->render('index');
 	}
 	public function actionCompanyBranch($id, $page = null, $limit = null) //companyId
-	{
-		$offset = ($page - 1) * $limit;
-		$branch = [];
+	{	$branch = [];
+		if($page == null && $limit == null) {
 		$branch = Branch::find()
+			->select('branch.*,co.countryName,c.companyName,c.picture,co.flag,c.city')
+			->JOIN("LEFT JOIN", "company c", "branch.companyId=c.companyId")
+			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
+			->where(["branch.status" => 1, "branch.companyId" => $id])
+			->orderBy('branch.branchName')
+			->asArray()
+
+			->all();
+		}else{
+			$offset = ($page - 1) * $limit;
+			$branch = Branch::find()
 			->select('branch.*,co.countryName,c.companyName,c.picture,co.flag,c.city')
 			->JOIN("LEFT JOIN", "company c", "branch.companyId=c.companyId")
 			->JOIN("LEFT JOIN", "country co", "co.countryId=c.countryId")
@@ -58,6 +68,7 @@ class BranchController extends Controller
 			->offset($offset)
 			->limit($limit)
 			->all();
+		}
 		return json_encode($branch);
 	}
 
