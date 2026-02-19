@@ -1,11 +1,13 @@
 <?php
 if (isset($kpiTeamEmployee) && count($kpiTeamEmployee) > 0) {
+    $disable = "";
+
     foreach ($kpiTeamEmployee as $teamId => $kpiEmployee):
         $show = 0;
-        if ($role == 3 && $teamId == $userTeamId) {
+        if ($role == 3 && $teamId == $userTeamId && $kpiStatus == 1) {
             $show = 1;
         }
-        if ($role > 3) {
+        if ($role > 3 && $kpiStatus == 1) {
             $show = 1;
         }
         if (isset($kpiEmployee["team"])) {
@@ -63,6 +65,7 @@ if (isset($kpiTeamEmployee) && count($kpiTeamEmployee) > 0) {
         ?>
         <div class="col-12 pr-0 pl-0 mb-10" id="employee-in-team-<?= $teamId ?>" style="display:none;">
             <?php
+
             if (isset($kpiEmployee["employee"]) && count($kpiEmployee["employee"]) > 0) {
                 $i = 0;
                 foreach ($kpiEmployee["employee"] as $employeeId => $employee):
@@ -75,8 +78,7 @@ if (isset($kpiTeamEmployee) && count($kpiTeamEmployee) > 0) {
                                         <?php
                                         if ($show == 1) {
                                         ?>
-                                            <input type="checkbox" id="employee-<?= $employeeId ?>" class="from-check"
-                                                <?= $employee["checked"] ?>>
+                                            <input type="checkbox" id="employee-<?= $employeeId ?>" class="from-check" <?= $employee["checked"] ?>>
                                             <?php
                                         } else {
                                             if ($employee["checked"] == "checked") {
