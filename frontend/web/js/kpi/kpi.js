@@ -531,7 +531,6 @@ function showEditRelateKgi(type, kpiId) {
           $('input[id="check-relate-kgi"]').each(function () {
                $(this).show();
           });
-          // alert(1);
           var url = $url + "kpi/view/kpi-has-kgi";
           $.ajax({
                type: "POST",

@@ -491,7 +491,7 @@ class ViewController extends Controller
 		$kgis = Api::connectApi(Path::Api() . 'kgi/management/index?adminId=' . $adminId . '&&gmId=' . $gmId . '&&managerId=' . $managerId . '&&supervisorId=' . $supervisorId . '&&teamLeaderId=' . $teamLeaderId . '&&staffId=' . $staffId);
 
 		$ghp = [];
-
+		// throw new Exception(print_r($kfiId,true));	
 		$res["kgi"] = $this->renderAjax('kgi', [
 			"kfiHasKgi" => $kfiHasKgi,
 			"kfiId" => $kfiId,

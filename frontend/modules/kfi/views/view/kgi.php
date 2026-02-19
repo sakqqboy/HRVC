@@ -17,12 +17,12 @@ if (isset($kgis["data"]) && count($kgis["data"]) > 0) { ?>
 				<th style="border-top-right-radius: 4px;border-bottom-right-radius: 4px;" class="text-end">
 					<div class="d-flex">
 						<a class="btn-blue-sm font-size-10 text-center no-underline mr-3" style="padding:5px;"
-							id="saveRelateKgi" href="javascript:showEditRelateKgi(2,<?= $kfiId ?>)">
+							id="saveRelateKgi" href="javascript:showEditKfiRelateKgi(2,<?= $kfiId ?>)">
 							<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/save.svg" alt=""
 								class="" style="margin-top: -1px; width:14px;height:14px;"> <?= Yii::t('app', 'Save') ?>
 						</a>
 						<a class="btn-red-sm font-size-10 text-center no-underline pr-5 pl-5" style="padding:5px;"
-							id="cancelRelateKgi" href="javascript:showEditRelateKgi(0,<?= $kfiId ?>)"><?= Yii::t('app', 'Cancel') ?>
+							id="cancelRelateKgi" href="javascript:showEditKfiRelateKgi(0,<?= $kfiId ?>)"><?= Yii::t('app', 'Cancel') ?>
 						</a>
 					</div>
 				</th>

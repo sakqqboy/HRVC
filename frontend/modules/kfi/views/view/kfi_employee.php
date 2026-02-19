@@ -1,3 +1,4 @@
+
 <div class="col-12">
 	<div class="col-12 ligth-gray-box">
 		<div class="row pl-15 pr-20">
@@ -16,8 +17,9 @@
 						<div class="col-3 mb-15">
 							<div class="d-flex">
 								<div class=" mr-3">
-									<img src="<?= Yii::$app->homeUrl . $employee['picture'] ?>" class="image-AssignMembers" style="width:40px;height:40px;">
-								</div>
+									<img src="<?= Yii::$app->homeUrl . (isset($employee['picture']) ? $employee['picture'] : 'images/default.png') ?>"
+										class="image-AssignMembers"
+										style="width:40px;height:40px;">								</div>
 								<div class="flex-flex-grow-1 ">
 									<div class="col-12 font-size-12 pr-0">
 										<strong><?= $employee['name'] ?></strong>
