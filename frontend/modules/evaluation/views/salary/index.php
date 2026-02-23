@@ -160,7 +160,7 @@ $this->title = 'Salary Setting';
 														<td style="width:25%;">
 															<div class="row">
 																<div class="col-6 font-size-12 font-b  text-end ">TOTAL</div>
-																<div class="col-6  font-size-14 font-b text-end"><?= number_format($total, 2) ?> <?= $salary['currency']["code"] ?></div>
+																<div class="col-6  font-size-14 font-b text-end"><?= number_format($total, 2) ?><?= $salary['currency']['code'] ?? '' ?></div>
 																<div class="col-12  mt-3 text-end pt-10">
 																	<a href="<?= Yii::$app->homeUrl ?>evaluation/salary/update-company-salary/<?= ModelMaster::encodeParams(['salaryId' => $salary['salaryId']]) ?>" class="btn btn-warning font-size-12 pr-8 pl-8 pt-4 pb-4 mr-10">
 																		<i class="fa fa-pencil-square-o" aria-hidden="true"></i>

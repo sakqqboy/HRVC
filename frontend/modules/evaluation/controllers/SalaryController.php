@@ -52,7 +52,7 @@ class SalaryController extends Controller
 		// $salaries = curl_exec($api);
 		// $salaries = json_decode($salaries, true);
 
-		// //throw new Exception(print_r($salaries, true));
+		// throw new Exception(print_r($salaries, true));
 		// curl_close($api);
 		return $this->render('index', [
 			"companies" => $companies,
