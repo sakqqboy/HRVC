@@ -399,7 +399,7 @@ class SalaryController extends Controller
 	public function actionRegister($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
-		//throw new exception(print_r($param, true));
+		// throw new exception(print_r($param, true));
 		$companyId = $param["companyId"];
 		$department = [];
 		$employees = [];
