@@ -295,7 +295,8 @@
 
 .frame-table-header {
     font-size: 10px;
-    background-color: lightgray;
+    background-color: color-mix(in oklab, var(--color-gray-50) 80%, transparent);
+
 }
 
 .term-table-header {

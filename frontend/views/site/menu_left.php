@@ -370,10 +370,17 @@ $session = Yii::$app->session;
                     </a>
                 </div>
                 <div class="col-12 second-layer-menu">
-                    <a class="no-underline">
+                    <a href="<?= Yii::$app->homeUrl ?>evaluation/salary/index" class="no-underline">
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/salary.svg"
                             class="first-layer-icon" style="margin-top: -3px;">
                         <?= Yii::t('app', 'Salary Registeration') ?>
+                    </a>
+                </div>
+                <div class="col-12 second-layer-menu">
+                    <a href="<?= Yii::$app->homeUrl ?>evaluation/salary/salary-sheet" class="no-underline">
+                        <img src="<?= Yii::$app->homeUrl ?>images/icons/white-icons/Evaluation/salary.svg"
+                            class="first-layer-icon" style="margin-top: -3px;">
+                        <?= Yii::t('app', 'Salary Sheet') ?>
                     </a>
                 </div>
                 <div class="col-12 second-layer-menu">

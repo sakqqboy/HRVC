@@ -5,83 +5,231 @@ use frontend\models\hrvc\Title;
 
 $this->title = 'Salary Registeration';
 ?>
-<div class="col-12 mt-70 alert-updated pt-10 pr-10 pl-10">
+<!-- <script src="https://cdn.tailwindcss.com"></script> -->
+<style>
+		/* ================= Layout ================= */
+.submain-content {
+    width: 100%;
+    padding: 0 30px;
+    min-height: 100vh;
+    background: #ffffff;
+}
+
+/* ================= Table Card ================= */
+.salary-table-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* ================= Table Base ================= */
+.table-clean {
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+}
+
+/* ================= Header ================= */
+.frame-table-header {
+    background-color: #f3f4f6; /* เทาอ่อน */
+}
+
+.frame-table-header th {
+    background-color: #f3f4f6; /* กันบาง browser ไม่เต็ม */
+    padding: 18px 20px;
+    font-size: 10px;
+    font-weight: 500;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* ================= Rows ================= */
+.frame-table-tr td {
+    padding: 20px;
+    border-top: 1px solid #f3f4f6;
+    font-size: 13px;
+    color: #374151;
+    vertical-align: middle;
+}
+
+.frame-table-tr:hover {
+    background: #f9fafb;
+}
+
+/* ================= Alignment Helpers ================= */
+.text-start { text-align: left; }
+.text-end { text-align: right; }
+.text-center { text-align: center; }
+
+/* ================= Employee Cell ================= */
+.employee-row {
+    display: flex;
+    align-items: center;
+}
+
+.brd_usering {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.employee-info {
+    margin-left: 12px;
+}
+
+.employee-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.employee-sub {
+    font-size: 11px;
+    color: #9ca3af;
+    margin-top: 3px;
+}
+
+/* ================= Numeric / Total ================= */
+.numeric-cell {
+    color: #374151;
+}
+
+.total-cell {
+    font-weight: 600;
+    color: #111827;
+}
+
+/* ================= Action ================= */
+.action-cell i {
+    color: #6b7280;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.action-cell i:hover {
+    color: #111827;
+}
+
+/* ================= Buttons ================= */
+.btn-filter {
+    padding: 6px 12px;
+    background: #ffffff;
+    border: 1px solid #f3f4f6;
+    border-radius: 3px;
+    font-size: 11px;
+    color: #4b5563;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-filter:hover {
+    background: #f9fafb;
+}
+
+.btn-primary-sm {
+    padding: 6px 12px;
+    background: #2580D3;
+    color: #ffffff;
+    border-radius: 3px;
+    font-size: 11px;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    transition: 0.2s;
+}
+
+.btn-primary-sm:hover {
+    background: #1e6bb3;
+}
+
+/* ================= Input ================= */
+.search-wrapper {
+    position: relative;
+    width: 16rem;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    stroke: #9ca3af;
+    pointer-events: none;
+}
+
+.input-clean {
+    width: 100%;
+    padding: 6px 16px 6px 32px;
+    border: 1px solid #f3f4f6;
+    border-radius: 3px;
+    font-size: 12px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.input-clean:focus {
+    border-color: #2580D3;
+}
+
+.btn-orange-soft {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 6px 12px;
+
+    font-size: 12px;
+    font-weight: 400;
+
+    color: #ea580c;
+    background-color: rgba(255, 237, 213, 0.5);
+
+    border: 1px solid #ffedd5;
+    border-radius: 3px;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-orange-soft:hover {
+    background-color: #ffedd5;
+}
+		</style>
+
+<div class="col-12 mt-60 pt-10 bg-white">
 	<div class="row">
 		<div class="col-5">
 			<div class="row">
 				<div class="col-12 updated_registersalary">
 					Salary Registeration
-					<button type="button" class="ADD-register pt-3 pb-3 ml-10 pr-20 pl-20" data-bs-toggle="modal" data-bs-target="#salaryRegistration">
-						<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/register-add.png" class="picregister-add">&nbsp; Add
-					</button>
 				</div>
 			</div>
 		</div>
 		<div class="col-7">
-			<div class="row">
-				<div class="col-3  text-center">
+			<div class="d-flex align-items-center justify-content-end gap-2">
+				<div class="col-3 text-center">
 					<div class="col-12 updated_evaluationQ">
 						Evaluation Q4
 					</div>
 				</div>
-				<div class="col-3  text-center">
-					<span class="badge import_updated pt-10 pb-10 pr-15 pl-15">
-						<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/48px/updatedownload.png" class="pic_updateddownload1"> Import
-					</span>
+				<div class="col-3 text-center">
+					<button class="btn-orange-soft">
+						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload w-3.5 h-3.5">
+						<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4">
+					</path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>Import</button>
 				</div>
-				<div class="col-3">
-					<select class="form-select slec_updated" aria-label="Default select example" id="department" onchange="javascript:departmentTitle()">
-						<?php
-						if (isset($departmentId) && $departmentId !== '') {
-						?>
-							<option value="<?= $departmentId ?>"><?= Department::departmentNAme($departmentId) ?></option>
-						<?php
-						}
-						?>
-						<option value="">Department</option>
-						<?php
-						if (isset($departments) && count($departments) > 0) {
-							foreach ($departments as $dep) :
-						?>
-								<option value="<?= $dep['departmentId'] ?>"><?= $dep['departmentName'] ?></option>
-						<?php
-							endforeach;
-						}
-						?>
-					</select>
-				</div>
-				<div class="col-2 pr-0 pl-0">
-					<select class="form-select slec_updated" aria-label="Default select example" id="title">
-						<?php
-						if (isset($titleId) && $titleId !== '') {
-						?>
-							<option value="<?= $titleId ?>"><?= Title::titleName($titleId) ?></option>
-						<?php
-						}
-						?>
-						<option value="">Title</option>
-						<?php
-						if (isset($titles) && count($titles) > 0) {
-							foreach ($titles as $t) :
-						?>
-								<option value="<?= $t['titleId'] ?>"><?= $t['titleName'] ?></option>
-						<?php
-							endforeach;
-						}
-						?>
-					</select>
-				</div>
-				<!-- <div class="col-2">
-					<select class="form-select slec_updated" aria-label="Default select example">
-						<option selected value="">Currency</option>
-						<option value="1">Human Resource</option>
-						<option value="2">Junior</option>
-						<option value="3">Staff</option>
-					</select>
-				</div> -->
-				<div class="col-1 text-center pt-3">
-					<img src="<?= Yii::$app->homeUrl ?>images/icons/Dark/24px/FilterPlus.png" class="Dark_filterupdated" onclick="javascript:filterSalaryRegister()" style="cursor: pointer;">
-				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -100,137 +248,115 @@ $this->title = 'Salary Registeration';
 	?>
 	<input type="hidden" id="departmentId" value="<?= $departmentId ?>" value="<?= $departmentId ?>">
 	<input type="hidden" id="titleId" value="<?= $titleId ?>" value="<?= $titleId ?>">
-	<div class="col-12 environment  background_updateline pt-15 pr-10 pl-10">
-		<div class="col-12 environment pr-10 pl-10 pb-10 ">
-			<div class="row">
-				<div class="col-lg-2 col-md-6 col-6">
-					<div class="col-12 card pl-10 pr-10 pt-10 border-0">
-						<div class="update_humanresource">
-							<?= $departmentId != '' ? $department["departmentName"] : 'not set' ?>
-						</div>
-						<div class="Assiociate_updated">
-							<?= $titleId != '' ? $title["titleName"] : 'not set' ?>
-						</div>
-						<div class="row mt-25 pb-10">
-							<div class="col-8 pt-15" style="height: 30px;">
-								<div class="progress" style="height: 8px;">
-									<span class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></span>
-								</div>
-							</div>
-							<div class="col-4 font-size-10 pt-13">
-								<span class="font-b">9</span>/15
-							</div>
-						</div>
-					</div>
+	<div class="col-12 environment background_updateline pt-15 pr-10 pl-10">
+		<div class="row align-items-center">
+			<div class="col-6">
+				<div class="search-wrapper">
+					<svg xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						class="search-icon">
+						<circle cx="11" cy="11" r="8"></circle>
+						<path d="m21 21-4.3-4.3"></path>
+					</svg>
+
+					<input type="text"
+						placeholder="Search employees..."
+						class="input-clean">
 				</div>
-				<div class="col-lg-4 col-md-6 col-6">
-					<div class="col-12 card pl-10 pr-10 pt-10 pb-20 border-0">
-						<div class="row">
-							<div class="col-6 update1_totaltitle1">
-								Total Title Salary
-							</div>
-							<div class="col-6 text-end update1_totaltitle2 pr-10">
-								฿ <?= number_format($totalEmployeeSalary) ?>
-							</div>
-						</div>
-						<div class="col-12 pt-5 mt-27">
-							<div class="row">
-								<div class="salary-quartile  pr-7 pl-7 text-center">
-									<div class="Mini_updated1 pr-0 pl-0"> Min
-										<span class="text-primary"> 0%</span>
-									</div>
-									<div class="card badgeUp_dateborder" id="">
-										<?= isset($quartileArr["min"]) ? number_format($quartileArr["min"]) : 0 ?>
-									</div>
-								</div>
-								<div class="salary-quartile  pr-7 pl-7 text-center">
-									<div class="Mini_updated1 pr-0 pl-0"> Low
-										<span class="text-primary"> 25%</span>
-									</div>
-									<div class="card badgeUp_dateborder" id="">
-										<?= isset($quartileArr["q1"]) ? number_format($quartileArr["q1"]) : 0 ?>
-									</div>
-								</div>
-								<div class="salary-quartile brder pr-7 pl-7 text-center">
-									<div class="Mini_updated1 pr-0 pl-0"> Medium
-										<span class="text-primary"> 50%</span>
-									</div>
-									<div class="card badgeUp_dateborder" id="">
-										<?= isset($quartileArr["q2"]) ? number_format($quartileArr["q2"]) : 0 ?>
-									</div>
-								</div>
-								<div class="salary-quartile  pr-7 pl-7 text-center">
-									<div class="Mini_updated1 pr-0 pl-0"> High
-										<span class="text-primary"> 75%</span>
-									</div>
-									<div class="card badgeUp_dateborder" id="">
-										<?= isset($quartileArr["q3"]) ? number_format($quartileArr["q3"]) : 0 ?>
-									</div>
-								</div>
-								<div class="salary-quartile  pr-7 pl-7 text-center">
-									<div class="Mini_updated1 pr-0 pl-0"> Max
-										<span class="text-primary"> 100%</span>
-									</div>
-									<div class="card badgeUp_dateborder" id="">
-										<?= isset($quartileArr["max"]) ? number_format($quartileArr["max"]) : 0 ?>
-									</div>
-								</div>
-							</div>
-							<div class="col-12 Minimum_dash"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-6">
-					<div class="col-12 card border-0 pb-5">
-						<div class="row pl-10 pr-10 ">
-							<div class="col-12 update1_totaltitle1">
-								Allowance
-							</div>
-						</div>
-						<div class="row pr-10 pl-10 mt-8">
-							<?php
-							if (isset($departmentTitleAllowances) && count($departmentTitleAllowances) > 0) {
-								foreach ($departmentTitleAllowances as $structureId => $allowance) :
-							?>
-									<div class="col-4 mb-7 pr-15 pl-15 ">
-										<div class="row" style="border-radius: 2px;background-color:#F6F6F6;">
-											<div class="col-8 pl-3 pr-3 pt-5 pb-5" style="font-size: 9px;">
-												<i class="fa fa-minus-circle text-danger font-size-10" aria-hidden="true" style="cursor: pointer;"></i> &nbsp;<?= $allowance["structureName"] ?>
-											</div>
-											<div class="col-4 font-b pl-3 pr-3 text-end pt-5 pb-5" style="font-size: 9px;">
-												<?= number_format($allowance["defaultValue"]) ?>
-											</div>
-										</div>
-									</div>
-								<?php
-								endforeach;
-							} else { ?>
-								<div class="col-12 text-center pt-10 pb-40 font-size-16 font-b text-danger">Please set up this title salary</div>
-							<?php
-							}
-							?>
-						</div>
-					</div>
+			</div>
+
+			<div class="col-6">
+				<div class="d-flex align-items-center justify-content-end gap-2">
+
+					<!-- Department -->
+					<select class="form-select slec_updated w-auto"
+							id="department"
+							onchange="departmentTitle()">
+						<?php if (!empty($departmentId)): ?>
+							<option value="<?= $departmentId ?>">
+								<?= Department::departmentNAme($departmentId) ?>
+							</option>
+						<?php endif; ?>
+
+						<option value="">Department</option>
+
+						<?php foreach ($departments ?? [] as $dep): ?>
+							<option value="<?= $dep['departmentId'] ?>">
+								<?= $dep['departmentName'] ?>
+							</option>
+						<?php endforeach; ?>
+					</select>
+
+					<!-- Title -->
+					<select class="form-select slec_updated w-auto" id="title">
+						<?php if (!empty($titleId)): ?>
+							<option value="<?= $titleId ?>">
+								<?= Title::titleName($titleId) ?>
+							</option>
+						<?php endif; ?>
+
+						<option value="">Title</option>
+
+						<?php foreach ($titles ?? [] as $t): ?>
+							<option value="<?= $t['titleId'] ?>">
+								<?= $t['titleName'] ?>
+							</option>
+						<?php endforeach; ?>
+					</select>
+
+					<!-- Filter Button -->
+					 <button class="btn-filter" onclick="filterSalaryRegister()">
+						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-funnel w-3 h-3">
+							<path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z">
+							</path>
+						</svg>
+						Filter
+					</button>
+	
+					<button type="button"
+						class="btn-primary-sm"
+						data-bs-toggle="modal"
+						data-bs-target="#salaryRegistration">
+
+						<svg xmlns="http://www.w3.org/2000/svg"
+							width="14"
+							height="14"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							style="margin-bottom: 2px;"
+							>
+							<path d="M5 12h14"></path>
+							<path d="M12 5v14"></path>
+						</svg>
+
+						Add Employee
+					</button>
+
 				</div>
 			</div>
 		</div>
+					
 		<div class="col-12 mt-10">
 			<?php
 			if (isset($departmentTitleAllowances) && count($departmentTitleAllowances) > 0) {
 			?>
-				<table class="table">
+				<table class="table table-clean">
 					<thead>
-						<tr class="frame-table-header">
-							<th class="text-center" style="border-top-left-radius:5px;border-bottom-left-radius:5px;">EMPLOYEES</th>
+						<tr class=" border-b border-gray-100 frame-table-header">
+							<th class="text-start table-header-cell" style="border-top-left-radius:5px;border-bottom-left-radius:5px;">EMPLOYEES</th>
 							<?php
 							foreach ($departmentTitleAllowances as $structureId => $allowance) :
 							?>
-								<th class="text-center font-size-10"><?= $allowance["structureName"] ?></th>
+								<th class="text-end table-header-cell"><?= $allowance["structureName"] ?></th>
 							<?php
 							endforeach;
 							?>
-							<th class="text-center"> TOTAL</th>
-							<th class="text-center" style="border-top-right-radius:5px;border-bottom-right-radius:5px;"> ACTION <i class="fa fa-pencil-square-o font-size-14 ml-10" aria-hidden="true" style="cursor: pointer;"></i></th>
+							<th class="text-end   table-header-cell"> TOTAL</th>
+							<th class="text-center table-header-cell" style="border-top-right-radius:5px;border-bottom-right-radius:5px;"> ACTION </th>
 						</tr>
 					</thead>
 					<tbody>
@@ -241,14 +367,16 @@ $this->title = 'Salary Registeration';
 								<tr style="height: 5px;" id="employee1-<?= $employeeId ?>">
 								</tr>
 								<tr class="frame-table-tr" id="employee2-<?= $employeeId ?>">
-									<td class=" pt-5 pb-5">
-										<div class="row ">
-											<div class="col-2">
-												<img src="<?= Yii::$app->homeUrl ?><?= $allowance['picture'] ?>" class="brd_usering">
-											</div>
-											<div class="col-9">
-												<span class="text_gray_AC font-b"> <?= $allowance["firstname"] ?> <?= $allowance["surename"] ?></span>
-												<div class="text_gray_AC"> <?= $allowance["department"] ?> & <?= $allowance["title"] ?></div>
+									<td>
+										<div class="d-flex align-items-center">
+											<img src="<?= Yii::$app->homeUrl ?><?= $allowance['picture'] ?>" class="brd_usering">
+											<div class="ml-10">
+												<div class="employee-name">
+													<?= $allowance["firstname"] ?> <?= $allowance["surename"] ?>
+												</div>
+												<div class="employee-sub">
+													<?= $allowance["department"] ?> • <?= $allowance["title"] ?>
+												</div>
 											</div>
 										</div>
 									</td>
@@ -258,14 +386,14 @@ $this->title = 'Salary Registeration';
 										foreach ($allowance["allowances"] as $a) :
 											$value = is_numeric($a) ? $a : 0;
 									?>
-											<td class="font-size-10 border-left text-end"><?= is_numeric($a) ? number_format($a) : $a ?></td>
+											<td class="font-size-10  text-end"><?= is_numeric($a) ? number_format($a) : $a ?></td>
 									<?php
 											$total += $value;
 										endforeach;
 									}
 									?>
-									<td class="text-end border-left font-size-11 font-weight-500"><?= number_format($total) ?></td>
-									<td class="text-center border-left font-size-14 font-weight-500">
+									<td class="text-end  font-size-11 font-weight-500"><?= number_format($total) ?></td>
+									<td class="text-center  font-size-14 font-weight-500">
 										<a href="javascript:employeeAllowance(<?= $employeeId ?>)" class="no-underline text-dark">
 											<i class="fa fa-pencil-square-o font-size-13" aria-hidden="true" style="cursor: pointer;"></i>
 										</a>
