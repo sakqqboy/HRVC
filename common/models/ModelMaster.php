@@ -654,7 +654,7 @@ class ModelMaster extends \yii\db\ActiveRecord
         }
         if ($unitName == "Yearly") {
             $nextYear = $year + 1;
-            $nextMonth = $month;
+            $nextMonth = (int)$month;
         }
         if ($unitName == "Half Year") {
             // throw new Exception($unitName);
@@ -676,8 +676,8 @@ class ModelMaster extends \yii\db\ActiveRecord
             }
             // throw new Exception($nextYear);
         }
-        if ($nextMonth < 10) {
-            $nextMonth = '0' . $nextMonth;
+        if ((int)$nextMonth < 10 && substr($nextMonth, 0, 1) !== '0') {
+            $nextMonth = '0' . (int)$nextMonth;
         }
         $data["nextMonth"] = $nextMonth;
         $data["nextYear"] = $nextYear;

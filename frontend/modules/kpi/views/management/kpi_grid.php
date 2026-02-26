@@ -384,7 +384,7 @@ $this->title = Yii::t('app', 'Company KPI');
                                                     if (isset($decimalResult[1])) {
 
                                                         if ($decimalResult[1] == '00') {
-                                                            $showResult = number_format($decimalResult[0]);
+                                                            $showResult = number_format((float)($decimalResult[0] ?? 0));
                                                         } else {
                                                             $showResult = number_format($kpi["result"], 2);
                                                         }

@@ -3,6 +3,7 @@
 namespace frontend\modules\evaluation\controllers;
 
 use Codeception\Stub\StubMarshaler;
+use common\carlendar\Carlendar;
 use common\helpers\Path;
 use common\models\ModelMaster;
 use Exception;
@@ -20,6 +21,7 @@ use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
 use frontend\components\Api;
+use frontend\models\hrvc\Environment;
 
 class SalaryController extends Controller
 {
@@ -57,6 +59,42 @@ class SalaryController extends Controller
 		return $this->render('index', [
 			"companies" => $companies,
 			"salaries" => $salaries
+		]);
+	}
+	public function actionSalarySheet()
+	{
+		$groupId = Group::currentGroupId();
+
+		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
+		$environments = Api::connectApi(Path::Api() . 'evaluation/environment/index');
+		$attribute = Api::connectApi(Path::Api() . 'evaluation/environment/attribute');
+		// throw new Exception(print_r($environments, true));
+
+		$date = date('Y-m-d');
+		$dateValue = Carlendar::currentMonth($date);
+		$thisMonth = ModelMaster::monthEng(date('m'), 1);
+		$thisYear = date('Y');
+
+		if (isset($_POST["companyId"]) && $_POST["companyId"] != '') {
+			$environment = new Environment();
+			$environment->companyId = $_POST["companyId"];
+			$environment->branchId = $_POST["branchId"];
+			$environment->status = 1;
+			$environment->isAllEmployee = isset($_POST["allEmployee"]) ? 1 : 0;
+			$environment->createDateTime = new Expression('NOW()');
+			$environment->updateDateTime = new Expression('NOW()');
+			if ($environment->save(false)) {
+				return $this->redirect($_POST["previousUrl"]);
+			}
+		}
+
+		return $this->render('salary_sheet', [
+			"companies" => $companies,
+			"environments" => $environments,
+			"dateValue" => $dateValue,
+			"thisMonth" => $thisMonth,
+			"thisYear" => $thisYear,
+			"attribute" => $attribute
 		]);
 	}
 	public function actionCreateSalary()
