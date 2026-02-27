@@ -86,8 +86,6 @@ class SalaryController extends Controller
 			}
 		}
 
-		// throw new Exception(print_r($data, true));
-
 		return $this->render('salary_sheet', [
 			"salaries" => $data,
 		]);

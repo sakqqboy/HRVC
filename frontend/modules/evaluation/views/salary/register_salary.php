@@ -199,9 +199,13 @@ $this->title = 'Salary Registeration';
 	<div class="row">
 		<div class="col-5">
 			<div class="row">
-				<div class="col-12 updated_registersalary">
+				<!-- <div class="col-12 updated_registersalary">
 					Salary Registeration
-				</div>
+				</div> -->
+				<div class="font-b font-size-18 pt-5"
+                    style="font-size:20px; font-weight:400; color:#111827; letter-spacing:-0.01em;">
+                   Salary Registeration
+            	</div>
 			</div>
 		</div>
 		<div class="col-7">
@@ -239,17 +243,43 @@ $this->title = 'Salary Registeration';
 	<div class="col-12 environment background_updateline pt-15 pr-10 pl-10">
 		<div class="row align-items-center">
 			<div class="col-6">
-				<div class="search-wrapper">
+				<div style="position:relative;width:256px;">
 					<svg xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
 						viewBox="0 0 24 24"
-						class="search-icon">
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						style="
+								position:absolute;
+								left:10px;
+								top:50%;
+								transform:translateY(-50%);
+								width:14px;
+								height:14px;
+								color:#9ca3af;
+								z-index:2;
+						">
 						<circle cx="11" cy="11" r="8"></circle>
 						<path d="m21 21-4.3-4.3"></path>
 					</svg>
-
 					<input type="text"
 						placeholder="Search employees..."
-						class="input-clean">
+						style="
+								width:100%;
+								padding:6px 16px 6px 32px;
+								background:#ffffff;
+								border:1px solid #f3f4f6;
+								border-radius:3px;
+								font-size:12px;
+								outline:none;
+								transition:all .2s ease;
+						"
+						onfocus="this.style.borderColor='#2580D3'"
+						onblur="this.style.borderColor='#f3f4f6'">
 				</div>
 			</div>
 
