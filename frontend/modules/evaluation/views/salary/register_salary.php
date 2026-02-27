@@ -45,18 +45,6 @@ $this->title = 'Salary Registeration';
     letter-spacing: 0.08em;
 }
 
-/* ================= Rows ================= */
-.frame-table-tr td {
-    padding: 20px;
-    border-top: 1px solid #f3f4f6;
-    font-size: 13px;
-    color: #374151;
-    vertical-align: middle;
-}
-
-.frame-table-tr:hover {
-    background: #f9fafb;
-}
 
 /* ================= Alignment Helpers ================= */
 .text-start { text-align: left; }
@@ -340,23 +328,45 @@ $this->title = 'Salary Registeration';
 			</div>
 		</div>
 					
-		<div class="col-12 mt-10">
+		<div class="table-responsive mt-10">
 			<?php
 			if (isset($departmentTitleAllowances) && count($departmentTitleAllowances) > 0) {
 			?>
-				<table class="table table-clean">
+				<table style="
+					width:100%;
+					border-collapse:separate;
+					border-spacing:0;
+					background:#ffffff;
+					border-radius:8px;
+					overflow:hidden;
+					box-shadow:0 1px 2px rgba(0,0,0,0.05), 
+							0 4px 12px rgba(0,0,0,0.04);
+					border:1px solid #f3f4f6;
+					font-family:Inter,system-ui,-apple-system,sans-serif;
+				">
 					<thead>
-						<tr class=" border-b border-gray-100 frame-table-header">
-							<th class="text-start table-header-cell" style="border-top-left-radius:5px;border-bottom-left-radius:5px;">EMPLOYEES</th>
+						 <tr style="
+							background:rgba(249,250,251,0.8);
+							border-bottom:1px solid #f3f4f6;
+						">
+							<th class="text-start"  style="padding:12px 24px;font-size:10px;font-weight:400;color:#9ca3af;text-transform:uppercase;letter-spacing:0.12em;text-align:left;">
+								EMPLOYEES
+							</th>
 							<?php
 							foreach ($departmentTitleAllowances as $structureId => $allowance) :
 							?>
-								<th class="text-end table-header-cell"><?= $allowance["structureName"] ?></th>
+								<th class="text-end"  style="padding:12px 24px;font-size:10px;font-weight:400;color:#9ca3af;text-transform:uppercase;letter-spacing:0.12em;text-align:left;">
+									<?= $allowance["structureName"] ?>
+								</th>
 							<?php
 							endforeach;
 							?>
-							<th class="text-end   table-header-cell"> TOTAL</th>
-							<th class="text-center table-header-cell" style="border-top-right-radius:5px;border-bottom-right-radius:5px;"> ACTION </th>
+							<th class="text-end"  style="padding:12px 24px;font-size:10px;font-weight:400;color:#9ca3af;text-transform:uppercase;letter-spacing:0.12em;text-align:left;"> 
+								TOTAL
+							</th>
+							<th  class="text-center" style="padding:12px 24px;font-size:10px;font-weight:400;color:#9ca3af;text-transform:uppercase;letter-spacing:0.12em;text-align:left;">
+								ACTION 
+							</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -364,10 +374,15 @@ $this->title = 'Salary Registeration';
 						if (isset($titleEmployees) && count($titleEmployees) > 0) {
 							foreach ($titleEmployees as $employeeId => $allowance) :
 						?>
-								<tr style="height: 5px;" id="employee1-<?= $employeeId ?>">
+						
+								<tr style="border-bottom:1px solid #f9fafb;transition:.2s;"
+									onmouseover="this.style.background='rgba(59,130,246,0.05)'"
+									onmouseout="this.style.background=''" id="employee1-<?= $employeeId ?>">
 								</tr>
-								<tr class="frame-table-tr" id="employee2-<?= $employeeId ?>">
-									<td>
+								<tr style="border-bottom:1px solid #f9fafb;transition:.2s;"
+									onmouseover="this.style.background='rgba(59,130,246,0.05)'"
+									onmouseout="this.style.background=''" id="employee2-<?= $employeeId ?>">
+									<td style="padding:16px 24px;text-align:center;font-size:12px;color:#4b5563;">
 										<div class="d-flex align-items-center">
 											<img src="<?= Yii::$app->homeUrl ?><?= $allowance['picture'] ?>" class="brd_usering">
 											<div class="ml-10">
@@ -392,8 +407,10 @@ $this->title = 'Salary Registeration';
 										endforeach;
 									}
 									?>
-									<td class="text-end  font-size-11 font-weight-500"><?= number_format($total) ?></td>
-									<td class="text-center  font-size-14 font-weight-500">
+									<td class="text-end  font-size-11 font-weight-500" style="padding:16px 24px;text-align:center;font-size:12px;color:#4b5563;">
+										<?= number_format($total) ?>
+									</td>
+									<td class="text-center  font-size-14 font-weight-500" style="padding:16px 24px;text-align:center;font-size:12px;color:#4b5563;">
 										<a href="javascript:employeeAllowance(<?= $employeeId ?>)" class="no-underline text-dark">
 											<i class="fa fa-pencil-square-o font-size-13" aria-hidden="true" style="cursor: pointer;"></i>
 										</a>

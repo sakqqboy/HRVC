@@ -54,6 +54,31 @@ class Company extends \backend\models\hrvc\master\CompanyMaster
             return null;
         }
     }
+    public static function totalEmployeeCompany($companyId)
+    {
+        $employees = Employee::find()->select('employeeId')->where(["companyId" => $companyId])->asArray()->all();
+        return count($employees);
+    }
+    public static function companyImage($id)
+    {
+        $company = Company::find()->where(["companyId" => $id])->asArray()->one();
+        $filePath = Yii::getAlias('@webroot') . '/' . $company['picture'];
+
+        if (isset($company) && !empty($company)) {
+            if (file_exists($filePath)) {
+                return $company['picture'];
+            }else{
+                return 'image/no-company.svg';
+            }
+        } else {
+            return 'images/company/profile/company.svg';
+        }
+        if (!empty($company['picture'])) {
+
+
+        
+    }
+    }
     public static function userCompany($userId)
     {
         $user = User::find()

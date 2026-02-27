@@ -63,38 +63,33 @@ class SalaryController extends Controller
 	}
 	public function actionSalarySheet()
 	{
-		$groupId = Group::currentGroupId();
+		$salaries = Api::connectApi(Path::Api() . 'evaluation/salary/all-company-salary');
+		$data = [];
+		foreach ($salaries as $companyId => $departments) {
 
-		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$environments = Api::connectApi(Path::Api() . 'evaluation/environment/index');
-		$attribute = Api::connectApi(Path::Api() . 'evaluation/environment/attribute');
-		// throw new Exception(print_r($environments, true));
+			foreach ($departments as $departmentId => $titles) {
 
-		$date = date('Y-m-d');
-		$dateValue = Carlendar::currentMonth($date);
-		$thisMonth = ModelMaster::monthEng(date('m'), 1);
-		$thisYear = date('Y');
+				foreach ($titles as $titleId => $salary) {
 
-		if (isset($_POST["companyId"]) && $_POST["companyId"] != '') {
-			$environment = new Environment();
-			$environment->companyId = $_POST["companyId"];
-			$environment->branchId = $_POST["branchId"];
-			$environment->status = 1;
-			$environment->isAllEmployee = isset($_POST["allEmployee"]) ? 1 : 0;
-			$environment->createDateTime = new Expression('NOW()');
-			$environment->updateDateTime = new Expression('NOW()');
-			if ($environment->save(false)) {
-				return $this->redirect($_POST["previousUrl"]);
+					if (!isset($data[$companyId])) {
+						$data[$companyId] = [
+							"companyId" => $salary["companyId"],
+							"picture" => $salary["picture"],
+							"companyName" => $salary["companyName"],
+							"totlaCompany" => $salary["totlaCompany"],
+							"status" => $salary["status"],
+							"code" => $salary["currency"]["code"] ?? "-"
+						];
+					}
+
+				}
 			}
 		}
 
+		// throw new Exception(print_r($data, true));
+
 		return $this->render('salary_sheet', [
-			"companies" => $companies,
-			"environments" => $environments,
-			"dateValue" => $dateValue,
-			"thisMonth" => $thisMonth,
-			"thisYear" => $thisYear,
-			"attribute" => $attribute
+			"salaries" => $data,
 		]);
 	}
 	public function actionCreateSalary()

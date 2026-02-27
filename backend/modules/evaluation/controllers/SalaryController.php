@@ -2,6 +2,7 @@
 
 namespace backend\modules\evaluation\controllers;
 
+use backend\models\hrvc\Company;
 use backend\models\hrvc\Currency;
 use backend\models\hrvc\Department;
 use backend\models\hrvc\Employee;
@@ -57,16 +58,21 @@ class SalaryController extends Controller
 	{
 		$salaryies = Salary::find()
 			->where(["status" => 1])
-			->orderBy('companyId,departmentId,titleId')
+			->orderBy('companyId,departmentId,titleId,currencyId,status')
 			->asArray()
 			->all();
 		$data = [];
 		if (isset($salaryies) && count($salaryies) > 0) {
 			foreach ($salaryies as $salary) :
 				$data[$salary["companyId"]][$salary["departmentId"]][$salary["titleId"]] = [
+					"companyId" => $salary["companyId"],
+					"picture" => Company::companyImage($salary['companyId'] ?? 0),
+					"companyName" => Company::companyName($salary['companyId'] ?? 0),
 					"departmentName" => Department::departmentName($salary["departmentId"]),
 					"titleName" => Title::titleName($salary["titleId"]),
 					"salaryAllowances" => SalaryStructure::salaryStructure($salary["salaryId"]),
+					"totlaCompany" => Company::totalEmployeeCompany($salary['companyId'] ?? 0),
+					"status" => $salary["status"],
 					"salaryId" => $salary["salaryId"],
 					"currency" => Currency::currencyName($salary["currencyId"])
 				];
@@ -74,6 +80,31 @@ class SalaryController extends Controller
 		}
 		return json_encode($data);
 	}
+	// public function actionAllCompanySalary()
+	// {
+	// 	$salaryies = Salary::find()
+	// 		->where(["status" => 1])
+	// 		->orderBy('companyId,departmentId,titleId,currencyId,status')
+	// 		->asArray()
+	// 		->all();
+	// 	$data = [];
+	// 	if (isset($salaryies) && count($salaryies) > 0) {
+	// 		foreach ($salaryies as $salary) :
+	// 			$data[$salary["companyId"]][$salary["departmentId"]][$salary["titleId"]] = [
+	// 				"picture" => Company::companyImage($salary['companyId'] ?? 0),
+	// 				"companyName" => Company::companyName($salary['companyId'] ?? 0),
+	// 				"departmentName" => Department::departmentName($salary["departmentId"]),
+	// 				"titleName" => Title::titleName($salary["titleId"]),
+	// 				"salaryAllowances" => SalaryStructure::salaryStructure($salary["salaryId"]),
+	// 				"totlaCompany" => Company::totalEmployeeCompany($salary['companyId'] ?? 0),
+	// 				"status" => $salary["status"],
+	// 				"salaryId" => $salary["salaryId"],
+	// 				"currency" => Currency::currencyName($salary["currencyId"])
+	// 			];
+	// 		endforeach;
+	// 	}
+	// 	return json_encode($data);
+	// }
 	public function actionSalaryDetail($salaryId)
 	{
 		$salary = Salary::find()
