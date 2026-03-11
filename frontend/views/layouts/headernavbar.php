@@ -58,6 +58,7 @@ use frontend\models\hrvc\User;
         </div>
 
         <?php
+        $language = "en-us";
         $cookie = Yii::$app->request->cookies;
         if (isset($_GET['language'])) {
             $language = $_GET['language'];
@@ -67,12 +68,14 @@ use frontend\models\hrvc\User;
             } else {
                 $language = DefaultLanguage::userDefaultLanguage();
                 if ($language == '') {
-                    $language = "en-US";
+                    $language = "en-us";
                 }
             }
         }
+        $text = 'EN';
+        //    throw new Exception($language);
         switch ($language) {
-            case 'en-US':
+            case 'en-us':
                 $image = 'usa';
                 $text = 'EN';
                 break;
@@ -102,6 +105,7 @@ use frontend\models\hrvc\User;
                 break;
         }
         ?>
+
         <input type="hidden" value="<?= $text ?>">
         <div class="language-dropdown mr-22">
             <div class="row pl-11">
@@ -120,7 +124,7 @@ use frontend\models\hrvc\User;
                         日本語
                     </div>
                 </a>
-                <a href="?language=en-US" style="text-decoration:none;color:#30313D;display:<?= $text == 'EN' ? 'none' : '' ?>">
+                <a href="?language=en-us" style="text-decoration:none;color:#30313D;display:<?= $text == 'EN' ? 'none' : '' ?>">
                     <div class="col-12 head-list-menu">
                         <img src="<?= Yii::$app->homeUrl ?>images/flag/usa.svg" class="mr-12 profile-menu-icon">
                         English
