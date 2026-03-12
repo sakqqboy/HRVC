@@ -814,36 +814,15 @@ class EmployeeController extends Controller
                 $employee->email = $_POST["email"] ?? "";
                 $employee->maritalStatus = $_POST["maritalStatus"] ?? "";
                 $employee->birthDate = Date::normalizeDate($_POST["birthDate"] ?? null);
-                // $employee->birthDate = !empty($_POST["birthDate"]) ? date("d/m/Y", strtotime($_POST["birthDate"])) : "";
-                // if (!empty($_POST["birthDate"])) {
-                //     // throw new exception(print_r($_POST["birthDate"], true));
-                //     // $birthDate = DateTime::createFromFormat('d/m/Y', $_POST["birthDate"]);
-                //     // $employee->birthDate = $birthDate ? $birthDate->format('Y-m-d') : null;
-                //     $employee->birthDate = Date::normalizeDate($_POST["birthDate"]);
-                // }
                 $employee->companyId = $_POST["companyId"] ?? "";
                 $employee->branchId = $_POST["branchId"] ?? "";
                 $employee->departmentId = $_POST["departmentId"] ?? "";
                 $employee->teamId = $_POST["teamId"] ?? "";
                 $employee->companyEmail = $_POST["companyEmail"] ?? "";
                 $employee->hireDate = Date::normalizeDate($_POST["hiringDate"] ?? null);
-                // $employee->hireDate = !empty($_POST["hiringDate"]) ? date("d/m/Y", strtotime($_POST["hiringDate"])) : "";
-                // if (!empty($_POST["hiringDate"])) {
-                //     // throw new exception(print_r($_POST["hiringDate"], true));
-                //     $hiringDate = DateTime::createFromFormat('d/m/Y', $_POST["hiringDate"]);
-                //     $employee->hireDate = $hiringDate ? $hiringDate->format('Y-m-d') : null;
-                // } 
                 $employee->probationStatus = $_POST["overrideProbationEmployee"] ?? "";
                 $employee->probationStart = Date::normalizeDate($_POST["fromDate"] ?? null);
                 $employee->probationEnd = Date::normalizeDate($_POST["toDate"] ?? null);
-                // $employee->probationStart = !empty($_POST["fromDate"]) ? date("Y-m-d", strtotime($_POST["fromDate"])) : "";
-                // $employee->probationEnd = !empty($_POST["toDate"]) ? date("Y-m-d", strtotime($_POST["toDate"])) : "";
-                // if (!empty($_POST["fromDate"]) && !empty($_POST["toDate"])) {
-                //     $fromDate = DateTime::createFromFormat('d/m/Y', $_POST["fromDate"]);
-                //     $employee->probationStart = $fromDate ? $fromDate->format('Y-m-d') : null;
-                //     $toDate = DateTime::createFromFormat('d/m/Y', $_POST["toDate"]);
-                //     $employee->probationEnd = $toDate ? $toDate->format('Y-m-d') : null;
-                // }
                 $employee->titleId = !empty($_POST["titleId"]) ? $_POST["titleId"] : 0;
                 $employee->remark = $_POST["remark"] ?? "";
                 $employee->skills = $_POST["skills"] ?? "";
