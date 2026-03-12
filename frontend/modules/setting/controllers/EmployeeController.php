@@ -258,6 +258,9 @@ class EmployeeController extends Controller
             $employee->hireDate            = !empty($_POST["hiringDate"])
                 ? date("Y-m-d", strtotime($_POST["hiringDate"]))
                 : null;
+            $employee->joinDate            = !empty($_POST["hiringDate"])
+                ? date("Y-m-d", strtotime($_POST["hiringDate"]))
+                : null;
             $employee->probationStatus     = $_POST["overrideProbationEmployee"] ?? '';
             $employee->probationStart      = !empty($_POST["fromDate"])
                 ? date("Y-m-d", strtotime($_POST["fromDate"]))
@@ -819,6 +822,7 @@ class EmployeeController extends Controller
                 $employee->departmentId = $_POST["departmentId"] ?? "";
                 $employee->teamId = $_POST["teamId"] ?? "";
                 $employee->companyEmail = $_POST["companyEmail"] ?? "";
+                $employee->joinDate = Date::normalizeDate($_POST["hiringDate"] ?? null);
                 $employee->hireDate = Date::normalizeDate($_POST["hiringDate"] ?? null);
                 $employee->probationStatus = $_POST["overrideProbationEmployee"] ?? "";
                 $employee->probationStart = Date::normalizeDate($_POST["fromDate"] ?? null);
@@ -830,7 +834,7 @@ class EmployeeController extends Controller
                 $employee->status = $_POST["status"] ?? "";
                 $employee->updateDateTime = new Expression('NOW()');
 
-                throw new exception(print_r($employee->attributes, true));
+                // throw new exception(print_r($employee->attributes, true));
                 $pictureProfile = UploadedFile::getInstanceByName("image");
                 if (isset($pictureProfile) && !empty($pictureProfile)) {
 
