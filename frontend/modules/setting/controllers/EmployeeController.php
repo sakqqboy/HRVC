@@ -961,9 +961,9 @@ class EmployeeController extends Controller
                         $user->createDateTime = new Expression('NOW()'); // แค่ตอนสร้างใหม่
                     }
                     $user->username = $_POST["mailId"];
-                    $password = md5($_POST["password"]);
+                    $password = $_POST["password"];
                     if ($password != $user->password_hash) {
-                        $user->password_hash = $password;
+                        $user->password_hash = md5($password);
                     }
                     // if (!empty($password)) {
                     //     // ถ้ายังไม่มี password หรือ validate ไม่ผ่าน ให้ตั้ง password ใหม่
