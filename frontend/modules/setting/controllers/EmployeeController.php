@@ -62,7 +62,8 @@ class EmployeeController extends Controller
         // throw new exception($action->id);
         $allowedRoles = [2, 7];
         if (!in_array($role, $allowedRoles)) {
-            $allowedActions = ['save-update-employee', 'draft', 'update', 'employee-profile', 'no-employee', 'employee-result'];
+            
+            $allowedActions = ['save-update-employee', 'draft', 'update', 'employee-profile', 'no-employee', 'employee-result', 'contact-detail', 'work-detail', 'attachments', 'certificates', 'performance', 'evaluation', 'salary', 'role'];
             if (!in_array($action->id, $allowedActions)) {
                 return  $this->redirect(Yii::$app->request->referrer);
             }
