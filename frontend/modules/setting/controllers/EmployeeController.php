@@ -552,9 +552,9 @@ class EmployeeController extends Controller
         $udetail = Employee::employeeDetailByUserId($uid);
         $emid = $udetail["employeeId"];
         $role = UserRole::userRight();
-        if ($role == 1 && $emid != $employeeId  ) {
-            return  $this->redirect(Yii::$app->request->referrer);
-        }
+        // if ($role == 1 && $emid != $employeeId  ) {
+        //     return  $this->redirect(Yii::$app->request->referrer);
+        // }
         // throw new \Exception(print_r($employeeId, true));
         $statusPage = isset($param["update"]) ? $param["update"] : '';
         $employee = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
