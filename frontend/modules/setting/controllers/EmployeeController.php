@@ -67,11 +67,10 @@ class EmployeeController extends Controller
             if (!in_array($action->id, $allowedActions)) {
                 return  $this->redirect(Yii::$app->request->referrer);
             }
-        } else {
-            return true;
-        }
+        } 
 
-
+        return true;
+        
         // return true; //go to origin request
     }
 
