@@ -21,7 +21,7 @@ class LanguageSelector implements BootstrapInterface
         // $session = Yii::$app->session;
         // if ($session->has('currentType')) {
         //     $filter = $session->get('currentType');
-        // }
+        // }!
         if ($selectChangeLanguage !== null) {
             $language = $selectChangeLanguage;
         } else {

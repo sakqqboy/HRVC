@@ -1045,7 +1045,6 @@ class EmployeeController extends Controller
 
                                     $targetWidth = 176;
                                     $targetHeight = 176;
-
                                     // โหลดภาพต้นฉบับ
                                     switch ($ext) {
                                         case 'jpg':
