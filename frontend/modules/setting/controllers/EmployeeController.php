@@ -62,15 +62,15 @@ class EmployeeController extends Controller
         // throw new exception($action->id);
         $allowedRoles = [2, 7];
         if (!in_array($role, $allowedRoles)) {
-            $allowedActions = ['save-update-employee', 'draft', 'update', 'employee-profile', 'no-employee', 'employee-result'];
+            
+            $allowedActions = ['save-update-employee', 'draft', 'update', 'employee-profile', 'no-employee', 'employee-result', 'contact-detail', 'work-detail', 'attachments', 'certificates', 'performance', 'evaluation', 'salary', 'role'];
             if (!in_array($action->id, $allowedActions)) {
                 return  $this->redirect(Yii::$app->request->referrer);
             }
-        } else {
-            return true;
-        }
+        } 
 
-
+        return true;
+        
         // return true; //go to origin request
     }
 
@@ -131,9 +131,9 @@ class EmployeeController extends Controller
     public function actionIndex($hash = false)
     {
         $role = UserRole::userRight();
-        if ($role != 2 || $role != 7) {
-            return  $this->redirect(Yii::$app->request->referrer);
-        }
+        // if ($role != 2 || $role != 7) {
+        //     return  $this->redirect(Yii::$app->request->referrer);
+        // }
         $param = ModelMaster::decodeParams($hash);
         $companyId = !empty($param["companyId"]) ? $param["companyId"] : null;
         $isFromImport = isset($param["import"]) ? $param["import"] : 0;
@@ -556,9 +556,9 @@ class EmployeeController extends Controller
         $udetail = Employee::employeeDetailByUserId($uid);
         $emid = $udetail["employeeId"];
         $role = UserRole::userRight();
-        // if ($role == 1 && $emid != $employeeId  ) {
-        //     return  $this->redirect(Yii::$app->request->referrer);
-        // }
+        if ($role == 1 && $emid != $employeeId  ) {
+            return  $this->redirect(Yii::$app->request->referrer);
+        }
         // throw new \Exception(print_r($employeeId, true));
         $statusPage = isset($param["update"]) ? $param["update"] : '';
         $employee = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
