@@ -59,9 +59,14 @@ class EmployeeController extends Controller
         $role = UserRole::userRight();
     // throw new \Exception(print_r($role, true));
         // if ($role == 3 || $role == 1) {
-         if ($role == 3 ) {
-            return  $this->redirect(Yii::$app->request->referrer);
-        }
+        if ($role != 2 && $role != 7 ) {
+            $allowedActions = ['save-update-employee', 'draft', 'update', 'employee-profile'];
+            if (!in_array($action->id, $allowedActions, true)) {
+                // throw new \yii\web\ForbiddenHttpException('Access denied');
+                return  $this->redirect(Yii::$app->request->referrer);
+            }
+        } 
+        
         return true; //go to origin request
     }
 
@@ -121,7 +126,10 @@ class EmployeeController extends Controller
 
     public function actionIndex($hash = false)
     {
-
+        $role = UserRole::userRight();
+        if ($role != 2 || $role != 7  ) {
+            return  $this->redirect(Yii::$app->request->referrer);
+        }
         $param = ModelMaster::decodeParams($hash);
         $companyId = !empty($param["companyId"]) ? $param["companyId"] : null;
         $isFromImport = isset($param["import"]) ? $param["import"] : 0;
