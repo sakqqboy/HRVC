@@ -57,7 +57,9 @@ class EmployeeController extends Controller
             return $this->redirect(Yii::$app->homeUrl . 'site/login');
         }
         $role = UserRole::userRight();
-        if ($role == 3 || $role == 1) {
+    // throw new \Exception(print_r($role, true));
+        // if ($role == 3 || $role == 1) {
+         if ($role == 3 ) {
             return  $this->redirect(Yii::$app->request->referrer);
         }
         return true; //go to origin request
@@ -535,8 +537,17 @@ class EmployeeController extends Controller
 
     public function actionEmployeeProfile($hash)
     {
+        
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
+        $uid = Yii::$app->user->id;
+        $udetail = Employee::employeeDetailByUserId($uid);
+        $emid = $udetail["employeeId"];
+        $role = UserRole::userRight();
+        if ($role == 1 && $emid != $employeeId  ) {
+            return  $this->redirect(Yii::$app->request->referrer);
+        }
+        // throw new \Exception(print_r($employeeId, true));
         $statusPage = isset($param["update"]) ? $param["update"] : '';
         $employee = Api::connectApi(Path::Api() . 'masterdata/employee/employee-detail?id=' . $employeeId);
 
