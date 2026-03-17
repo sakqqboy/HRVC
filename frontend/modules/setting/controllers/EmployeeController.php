@@ -57,17 +57,18 @@ class EmployeeController extends Controller
             return $this->redirect(Yii::$app->homeUrl . 'site/login');
         }
         $role = UserRole::userRight();
-    // throw new \Exception(print_r($role, true));
+        // throw new \Exception(print_r($role, true));
         // if ($role == 3 || $role == 1) {
-        if ($role != 2 && $role != 7 ) {
+        if ($role != 2 && $role != 7) {
             $allowedActions = ['save-update-employee', 'draft', 'update', 'employee-profile'];
             if (!in_array($action->id, $allowedActions, true)) {
                 // throw new \yii\web\ForbiddenHttpException('Access denied');
                 return  $this->redirect(Yii::$app->request->referrer);
             }
-        } 
-        
-        return true; //go to origin request
+        }
+
+        return parent::beforeAction($action);
+        // return true; //go to origin request
     }
 
     public function actionNoEmployee($hash)
@@ -127,7 +128,7 @@ class EmployeeController extends Controller
     public function actionIndex($hash = false)
     {
         $role = UserRole::userRight();
-        if ($role != 2 || $role != 7  ) {
+        if ($role != 2 || $role != 7) {
             return  $this->redirect(Yii::$app->request->referrer);
         }
         $param = ModelMaster::decodeParams($hash);
@@ -545,7 +546,7 @@ class EmployeeController extends Controller
 
     public function actionEmployeeProfile($hash)
     {
-        
+
         $param = ModelMaster::decodeParams($hash);
         $employeeId = $param["employeeId"];
         $uid = Yii::$app->user->id;
