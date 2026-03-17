@@ -111,6 +111,7 @@ $this->title = Yii::t('app', "Team KGI");
                                 if ($role == 2) {
                                     $userTitle = Employee::employeeTitleByUserId();
                                     $allowTitle = ['Assistant Senior', 'Manager', 'Assistant Manager', 'Senior', 'Leader', 'Senior Associate'];
+                                    //throw new exception($userTitle);
                                     if (in_array($userTitle, $allowTitle)) {
                                         $canEdit = 1;
                                     }
@@ -483,7 +484,7 @@ $this->title = Yii::t('app', "Team KGI");
                                                 </div>
                                                 <div class="col-4 text-center align-content-center">
                                                     <?php
-                                                    if (($colorFormat == 'disable' && $role >= 3) && ($canEdit == 1)) {
+                                                    if (($colorFormat == 'disable' && $role >= 2) && ($canEdit == 1)) {
                                                     ?>
                                                         <a href="<?= Yii::$app->homeUrl . 'kgi/kgi-team/prepare-update/' . ModelMaster::encodeParams(['kgiTeamId' => $kgiTeamId]) ?>"
                                                             class="pim-btn-setup">

@@ -482,7 +482,7 @@ $this->title = Yii::t('app', 'Team KPI');
                                                 </div>
                                                 <div class="col-4 text-center align-content-center">
                                                     <?php
-                                                    if (($colorFormat == 'disable' && $role >= 3) && ($canEdit == 1)) {
+                                                    if (($colorFormat == 'disable' && $role >= 2) && ($canEdit == 1)) {
                                                     ?>
                                                         <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-team/prepare-update/<?= ModelMaster::encodeParams(['kpiTeamId' => $kpiTeamId, 'kpiHistoryId' => 0]) ?>"
                                                             class="pim-btn-setup">

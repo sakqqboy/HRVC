@@ -3,6 +3,7 @@
 use frontend\models\hrvc\KpiTeam;
 use yii\bootstrap5\ActiveForm;
 use common\models\ModelMaster;
+use frontend\models\hrvc\Employee;
 
 $this->title =  Yii::t('app', 'Team KPI');
 ?>

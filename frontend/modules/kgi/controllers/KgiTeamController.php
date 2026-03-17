@@ -399,8 +399,15 @@ class KgiTeamController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$kgiTeamId = $param["kgiTeamId"];
 		$role = UserRole::userRight();
-		if ($role < 3) {
-			return $this->redirect(Yii::$app->homeUrl . 'kgi/management/index');
+
+		$employeeTitle = Employee::employeeTitleByUserId();
+		$senior = 0;
+		$allowTitle = ['Assistant Senior', 'Manager', 'Assistant Manager', 'Senior', 'Leader', 'Senior Associate'];
+		if (in_array($employeeTitle, $allowTitle)) {
+			$senior = 1;
+		}
+		if ($role < 3 && $senior == 0) {
+			return $this->redirect(Yii::$app->homeUrl . 'kgi/management/grid');
 		}
 
 		$kgiTeamDetail = Api::connectApi(Path::Api() . 'kgi/kgi-team/kgi-team-detail?kgiTeamId=' . $kgiTeamId . '&&kgiTeamHistoryId=0');
