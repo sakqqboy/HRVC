@@ -76,13 +76,13 @@ if (Yii::$app->controller->action->id == 'draft' || Yii::$app->controller->actio
 
 				<span class="d-flex align-items-center view-employee-gray justify-content-center">
 					<img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" class="me-2" style="width: 18px;height:18px;">
-					<span class="font-size-16 font-weight-600 d-none" id="show-page-fill" style="color:#30313D;">
+					<span class="font-size-16 font-weight-600 d-none" id="show-page-fill" style="color:#30313D; z-index:0;">
 						<input type="number" id="per-page" value=''
-							style="width:25px;height:25px;" class="no-spinner text-center mr-5" onkeyup="javascript:newSearchEmployee(event)">/
+							style="width:25px;height:25px; " class="no-spinner text-center mr-5" onkeyup="javascript:newSearchEmployee(event)">/
 					</span>
 
 					<span class="font-size-16 font-weight-600" id="actualShow"
-						style="color:#30313D;cursor: pointer;z-index:100;" onclick="javascript:showFillPage()"><?= $actualShow ?> /
+						style="color:#30313D;cursor: pointer; z-index:0;" onclick="javascript:showFillPage()"><?= $actualShow ?> /
 					</span>
 					<span class="font-size-16 font-weight-600" style="color:#8A8A8A;"><?= $totalEmployee ?></span>
 
