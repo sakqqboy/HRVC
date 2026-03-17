@@ -59,19 +59,14 @@ class EmployeeController extends Controller
         $role = UserRole::userRight();
         // throw new \Exception(print_r($role, true));
         // if ($role == 3 || $role == 1) {
-        //throw new exception($role);
+        // throw new exception($action->id);
         $allowedRoles = [2, 7];
-        if (!in_array($role, $allowedRoles, true)) {
+        if (!in_array($role, $allowedRoles)) {
             $allowedActions = ['save-update-employee', 'draft', 'update', 'employee-profile', 'no-employee', 'employee-result'];
-            throw new exception(1);
-            if (!in_array($action->id, $allowedActions, true)) {
-                // throw new \yii\web\ForbiddenHttpException('Access denied');
-                throw new exception(2);
+            if (!in_array($action->id, $allowedActions)) {
                 return  $this->redirect(Yii::$app->request->referrer);
             }
         } else {
-            throw new exception(3);
-            // throw new exception($role);
             return true;
         }
 
