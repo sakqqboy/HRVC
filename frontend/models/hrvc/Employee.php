@@ -142,9 +142,9 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
     public static function totalEmployee($companyId)
     {
         $count = Employee::find()
-        ->where(['NOT IN', 'status', [99, 100]])
-        ->andFilterWhere(['companyId' => $companyId])
-        ->count();
+            ->where(['NOT IN', 'status', [99, 100]])
+            ->andFilterWhere(['companyId' => $companyId])
+            ->count();
         return $count;
     }
     public static function totalDraft($companyId)
@@ -253,5 +253,21 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
             }
         }
         return $img;
+    }
+    public static function employeeTitleByUserId()
+    {
+        $user = User::find()->where(["userId" => Yii::$app->user->id])->one();
+        $employee = Employee::find()->select('titleId')
+            ->where(["employeeId" => $user->employeeId])
+            ->asArray()
+            ->one();
+        if ($employee["titleId"] != '') {
+            $title = Title::find()->where(["titleId" => $employee["titleId"]])->asArray()->one();
+            if (isset($title) && !empty($title)) {
+                return $title["titleName"];
+            } else {
+                return '';
+            }
+        }
     }
 }

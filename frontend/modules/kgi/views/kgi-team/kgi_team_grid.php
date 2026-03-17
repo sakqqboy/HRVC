@@ -1,6 +1,7 @@
 <?php
 
 use common\models\ModelMaster;
+use frontend\models\hrvc\Employee;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = Yii::t('app', "Team KGI");
@@ -106,6 +107,14 @@ $this->title = Yii::t('app', "Team KGI");
                         } else {
                             if ($role == 3 && ($kgi["teamId"] == $userTeamId)) {
                                 $canEdit = 1;
+                            } else {
+                                if ($role == 2) {
+                                    $userTitle = Employee::employeeTitleByUserId();
+                                    $allowTitle = ['Assistant Senior', 'Manager', 'Assistant Manager', 'Senior', 'Leader', 'Senior Associate'];
+                                    if (in_array($userTitle, $allowTitle)) {
+                                        $canEdit = 1;
+                                    }
+                                }
                             }
                         }
                         if ($kgi["isOver"] == 1 && $kgi["status"] != 2) {
