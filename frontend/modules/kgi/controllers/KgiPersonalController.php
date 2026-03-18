@@ -160,7 +160,12 @@ class KgiPersonalController extends Controller
 		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 
 
-
+		if ($role == 2) {
+			$isSenior = Employee::isSenior();
+			if ($isSenior == 1) {
+				$role = 3;
+			}
+		}
 		if ($role == 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);
 			if (isset($em) && !empty($em)) {
@@ -251,7 +256,6 @@ class KgiPersonalController extends Controller
 		$isAdmin = UserRole::isAdmin();
 		$userBranchId = User::userBranchId();
 		$teams = [];
-
 		$session = Yii::$app->session;
 		if ($session->has('kgiEmployee')) {
 			$filter = $session->get('kgiEmployee');
@@ -280,13 +284,17 @@ class KgiPersonalController extends Controller
 			$currentPage = $pageArr[1];
 		}
 		$limit = 20;
-
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$kgis = Api::connectApi(Path::Api() . 'kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 
-
+		if ($role == 2) {
+			$isSenior = Employee::isSenior();
+			if ($isSenior == 1) {
+				$role = 3;
+			}
+		}
 		if ($role == 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);
 			if (isset($em) && !empty($em)) {

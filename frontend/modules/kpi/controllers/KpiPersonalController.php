@@ -154,7 +154,12 @@ class KpiPersonalController extends Controller
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$kpis = Api::connectApi(Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve');
-
+		if ($role == 2) {
+			$isSenior = Employee::isSenior();
+			if ($isSenior == 1) {
+				$role = 3;
+			}
+		}
 		if ($role == 3) {
 			$em = Employee::employeeDetailByUserId($userId);
 			if ($em) {
@@ -269,10 +274,16 @@ class KpiPersonalController extends Controller
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$kpis = Api::connectApi(Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		
+
 		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 
 		$teams = [];
+		if ($role == 2) {
+			$isSenior = Employee::isSenior();
+			if ($isSenior == 1) {
+				$role = 3;
+			}
+		}
 		if ($role == 3) {
 			$em = Employee::employeeDetailByUserId($userId);
 			if ($em) {
@@ -951,7 +962,7 @@ class KpiPersonalController extends Controller
 		$userTeamId = Team::userTeam($userId);
 		$session = Yii::$app->session;
 
-		
+
 
 		Session::PimEmployeeFilter($companyId, $branchId, $teamId, $employeeId, $month, $year, $status, $type);
 		if ($companyId == "" && $branchId == "" && $teamId == "" && $month == "" && $status == "" && $year == "") {
@@ -995,7 +1006,7 @@ class KpiPersonalController extends Controller
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
 
-		
+
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
 		$months = ModelMaster::monthFull(1);

@@ -270,4 +270,24 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
             }
         }
     }
+    public static function isSenior()
+    {
+        $user = User::find()->where(["userId" => Yii::$app->user->id])->one();
+        $employee = Employee::find()->select('titleId')
+            ->where(["employeeId" => $user->employeeId])
+            ->asArray()
+            ->one();
+        $senior = 0;
+        if ($employee["titleId"] != '') {
+            $title = Title::find()->where(["titleId" => $employee["titleId"]])->asArray()->one();
+            if (isset($title) && !empty($title)) {
+                $titleName = $title["titleName"];
+                $allowTitle = ['Assistant Senior', 'Manager', 'Assistant Manager', 'Senior', 'Leader', 'Senior Associate'];
+                if (in_array($titleName, $allowTitle)) {
+                    $senior = 1;
+                }
+            }
+        }
+        return $senior;
+    }
 }
