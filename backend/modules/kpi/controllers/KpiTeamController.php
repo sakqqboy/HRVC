@@ -303,12 +303,12 @@ class KpiTeamController extends Controller
 					}
 				}
 
-				
+
 				if ($kpiTeam["status"] == 2) {
-						$isOver = 0;
-					} else {
-						$isOver = ModelMaster::isOverDuedate($kpiTeam['nextCheckDate']);
-					}
+					$isOver = 0;
+				} else {
+					$isOver = ModelMaster::isOverDuedate($kpiTeam['nextCheckDate']);
+				}
 				$kpiTeamId = $kpiTeam["kpiTeamId"];
 				$commonData = [
 					"kpiName" => $kpiTeam["kpiName"],
@@ -1066,7 +1066,7 @@ class KpiTeamController extends Controller
 		if (isset($kpiTeams) && count($kpiTeams) > 0) {
 			foreach ($kpiTeams as $kpiTeam):
 				$employees = Employee::find()
-					->where(["status" => 1, "teamId" => $kpiTeam["teamId"]])
+					->where(["status" => [1, 2], "teamId" => $kpiTeam["teamId"]])
 					->asArray()
 					->orderBy('employeeFirstname')
 					->all();

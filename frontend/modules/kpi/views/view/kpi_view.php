@@ -26,11 +26,11 @@ $this->title = Yii::t('app', 'Company KPI History');
                     <?= Yii::t('app', 'Back') ?>
                 </a> -->
                 <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kpi/management/grid' ?>" style="text-decoration: none; width:66px; height:26px;" class="btn-create-branch">
-                            <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
-                            <?= Yii::t('app', 'Back') ?>        
+                    <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">
+                    <?= Yii::t('app', 'Back') ?>
                 </a>
                 <!-- <span class="pim-name"> -->
-                    <?= $kpiDetail["kpiName"] ?>
+                <?= $kpiDetail["kpiName"] ?>
                 <!-- </span> -->
             </div>
             <div class="row mt-20" style="--bs-gutter-x:0px;">
@@ -317,7 +317,7 @@ $this->title = Yii::t('app', 'Company KPI History');
                                                         }
                                                     }
                                                 } else {
-                                                    $showPercent = round($kpi['ratio']);
+                                                    $showPercent = round(floatval($kpi['ratio']));
                                                 }
                                                 ?>
                                                 <div class="progress">

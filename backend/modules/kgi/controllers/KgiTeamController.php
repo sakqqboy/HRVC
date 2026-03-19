@@ -751,7 +751,7 @@ class KgiTeamController extends Controller
 				if (!isset($team[$kgiTeam["teamId"]])) {
 					$team[$kgiTeam["teamId"]] = true;
 					$employees = Employee::find()
-						->where(["status" => 1, "teamId" => $kgiTeam["teamId"]])
+						->where(["status" => [1, 2], "teamId" => $kgiTeam["teamId"]])
 						->asArray()
 						->orderBy('employeeFirstname')
 						->all();

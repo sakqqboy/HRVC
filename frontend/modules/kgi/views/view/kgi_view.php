@@ -318,7 +318,7 @@ $this->title = Yii::t('app', 'Company KGI History');
                                                         }
                                                     }
                                                 } else {
-                                                    $showPercent = round($kgi['ratio']);
+                                                    $showPercent = round(floatval($kgi['ratio']));
                                                 }
                                                 ?>
                                                 <div class="progress">
