@@ -194,6 +194,7 @@ return [
                 'kpi/kpi-team/team-kpi/<hash>' => 'kpi/kpi-team/team-kpi',
                 'kpi/kpi-personal/view-personal-kpi/<hash>' => 'kpi/kpi-personal/view-personal-kpi',
                 'kpi/kpi-personal/kpi-individual-history/<hash>' => 'kpi/kpi-personal/kpi-individual-history',
+                'kpi/kpi-personal/employee-update-history/<hash>' => 'kpi/kpi-personal/employee-update-history',
                 'kpi/management/approve-kpi-employee/<hash>' => 'kpi/management/approve-kpi-employee',
                 'kpi/management/kpi-detail/<hash>' => 'kpi/management/kpi-detail',
                 'kpi/management/prepare-update/<hash>' => 'kpi/management/prepare-update',

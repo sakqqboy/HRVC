@@ -663,6 +663,7 @@ class KpiPersonalController extends Controller
 		]);
 	}
 
+
 	public function actionSaveUpdatePersonalKpi()
 	{
 		$data = [
@@ -1076,5 +1077,80 @@ class KpiPersonalController extends Controller
 		}
 		// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
 		return $this->redirect(Yii::$app->request->referrer);
+	}
+
+	public function actionEmployeeUpdateHistory($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$role = UserRole::userRight();
+		$kpiEmployeeId = $param["kpiEmployeeId"];
+		$kpiEmployeeHistoryId = $param["kpiEmployeeHistoryId"];
+		$kpiEmployeeDetail = Api::connectApi(Path::Api() . 'kpi/kpi-personal/kpi-employee-detail?kpiEmployeeId=' . $kpiEmployeeId . '&&kpiEmployeeHistoryId=' . $kpiEmployeeHistoryId);
+		$kpi = Api::connectApi(Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiEmployeeDetail['kpiId'] . '&&kpiHistoryId=0');
+		$kpiBranch = Api::connectApi(Path::Api() . 'kpi/management/kpi-branch?id=' . $kpiEmployeeDetail["kpiId"]);
+		$kpiDepartment = Api::connectApi(Path::Api() . 'kpi/management/kpi-department?id=' . $kpiEmployeeDetail['kpiId']);
+		$kpiTeam = Api::connectApi(Path::Api() . 'kpi/management/kpi-team?id=' . $kpiEmployeeDetail['kpiId']);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$companyId = $kpi["companyId"];
+		$company = [
+			"companyId" => $kpi["companyId"],
+			"companyName" => Company::companyName($kpi["companyId"]),
+			"companyImg" => Company::companyImage($kpi["companyId"]),
+		];
+		$unit = Unit::find()->where(["unitId" => $kpi["unitId"]])->asArray()->one();
+		$months = ModelMaster::monthFull(1);
+		return $this->render('employee_update_history', [
+			"kpi" => $kpi,
+			"kpiEmployeeId" => $kpiEmployeeId,
+			"kpiEmployeeHistoryId" => $kpiEmployeeHistoryId,
+			"data" => $kpiEmployeeDetail,
+			"months" => $months,
+			"company" => $company ?? [],
+			"kpiBranch" => $kpiBranch ?? [],
+			"kpiDepartment" => $kpiDepartment ?? [],
+			"kpiTeam" => $kpiTeam ?? [],
+			"role" => $role,
+			"unit"  => $unit,
+			// "statusform" =>  "update",
+			"url" => Yii::$app->request->referrer,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
+		]);
+	}
+
+	public function actionSaveUpdateEmployeeHistory()
+	{
+		$userId = Yii::$app->user->id;
+		$kpiEmployeeId = $_POST["kpiEmployeeId"] ?? null;
+		$kpiEmployeeHistoryId = $_POST["kpiEmployeeHistoryId"] ?? null;
+		$newResult = str_replace(",", "", $_POST["result"] ?? 0);
+		$newTarget = str_replace(",", "", $_POST["amount"] ?? 0);
+
+		if ($kpiEmployeeId && $kpiEmployeeHistoryId) {
+			$oldHistory = KpiEmployeeHistory::findOne($kpiEmployeeHistoryId);
+
+			if ($oldHistory) {
+
+				$status = 0; // 0: Pending สำหรับตาราง Request
+
+
+
+				if ($command->execute()) {
+					Yii::$app->session->setFlash('success', Yii::t('app', 'Request submitted successfully. Waiting for approval.'));
+				} else {
+					Yii::$app->session->setFlash('error', Yii::t('app', 'Failed to save request.'));
+				}
+			}
+		}
+
+		// Redirect กลับไปหน้าเดิม (ใช้ค่า URL จากฟอร์มเหมือนโค้ดเดิม)
+		return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
 	}
 }
