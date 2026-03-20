@@ -440,6 +440,19 @@ if (!$nextCheckDate) {
                                 </span>
                             </div>
                         </div>
+
+
+                        <div class="form-group start-center mt-42" style="  gap: 14px;">
+                            <label class="text-manage-create between-center w-100">
+                                <div><span class="text-danger">* </span><?= Yii::t('app', 'Reason') ?></div>
+                            </label>
+                            <div class="input-group">
+
+                                <input type="text" class="form-control text-start" name="reason" id="reason"
+                                    value="" style="font-size: 22px; font-weight: 600;" required step="any">
+
+                            </div>
+                        </div>
                         <div class="form-group start-center mt-55" style="gap: 20px;">
                             <label class="text-manage-create between-center" for="name" style="width: 100%;">
                                 <div style="flex-grow: 1;">
@@ -493,29 +506,6 @@ if (!$nextCheckDate) {
                                     </text>
                                 </div>
                             </div>
-
-                            <div id="textbox-check-warning"
-                                style="<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText']))
-                                            ? 'border: 0.5px solid #30313D;'
-                                            : ($daysLeft == 'Due Pass' ? 'border: 0.5px solid #E05757;' : 'border: 0.5px solid #DD7A01;') ?> font-size: 14px; font-weight: 600; pointer-events: none;"
-                                class="textbox-check-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) ? 'hide' : ($daysLeft == 'Due Pass' ? 'red' : 'orang') ?>">
-                                <div class="mid-center" style="flex-basis: 5%;">
-                                    <img src="<?= Yii::$app->homeUrl ?>image/warning-<?= (isset($daysLeft) && $daysLeft == 'Due Pass' && empty($data['nextCheckText'])) ? 'black' : ($daysLeft == 'Due Pass' ? 'red' : 'orang') ?>.svg"
-                                        style="width: 20px; height: 20px;">
-                                </div>
-                                <div class="mid-center" style="flex-basis: 25%;">
-                                    <div class="border-cicle bg-white">
-                                        <?= Yii::t('app', "Due Passed") ?>
-                                    </div>
-                                </div>
-                                <div class="font-size-11 align-content-center">
-                                    <text>
-                                        <?= (isset($daysLeft) && $daysLeft == 'Due Pass') ?
-                                            Yii::t('app', "The component was overdue and revert back to completed") :
-                                            Yii::t('app', "This task component be automatically become due passed...") ?>
-                                    </text>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="form-group mt-55 d-flex justify-content-end gap-2">
@@ -531,8 +521,11 @@ if (!$nextCheckDate) {
         </div>
     </div>
 </div>
-
-<input type="hidden" value="<?= $url ?? '' ?>" name="url">
+<?php
+// ดึง URL ปัจจุบันมาเก็บไว้ในตัวแปร
+$referrer = Yii::$app->request->referrer;
+?>
+<input type="hidden" value="<?= $url ?>" name="url">
 <input type="hidden" id="kpiEmployeeId" name="kpiEmployeeId" value="<?= $kpiEmployeeId ?? '' ?>">
 <input type="hidden" id="kpiEmployeeHistoryId" name="kpiEmployeeHistoryId" value="<?= $kpiEmployeeHistoryId ?? '' ?>">
 

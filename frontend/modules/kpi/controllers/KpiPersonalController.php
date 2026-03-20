@@ -1130,21 +1130,35 @@ class KpiPersonalController extends Controller
 		$userId = Yii::$app->user->id;
 		$kpiEmployeeId = $_POST["kpiEmployeeId"] ?? null;
 		$kpiEmployeeHistoryId = $_POST["kpiEmployeeHistoryId"] ?? null;
+		$reason = $_POST["reason"] ?? null;
 		$newResult = str_replace(",", "", $_POST["result"] ?? 0);
 		$newTarget = str_replace(",", "", $_POST["amount"] ?? 0);
-
 		if ($kpiEmployeeId && $kpiEmployeeHistoryId) {
 			$oldHistory = KpiEmployeeHistory::findOne($kpiEmployeeHistoryId);
 
 			if ($oldHistory) {
-
 				$status = 0; // 0: Pending สำหรับตาราง Request
 
-
+				//เชฟดาต้าลงตาราง Request
+				$command = Yii::$app->db->createCommand()->insert('kpi_employee_request', [
+					'kpiEmployeeId' => $kpiEmployeeId,
+					'kpiEmployeeHistoryId' => $kpiEmployeeHistoryId,
+					'userId' => $userId,
+					'old_result' => $oldHistory->result,
+					'new_result' => $newResult,
+					'old_target' => $oldHistory->target,
+					'new_target' => $newTarget,
+					'reason' => $reason,
+					'status' => $status,
+					'created_at' => new Expression('NOW()'),
+					'updated_at' => new Expression('NOW()')
+				]);
 
 				if ($command->execute()) {
+					// throw new Exception(print_r($command->getRawSql(), true));
 					Yii::$app->session->setFlash('success', Yii::t('app', 'Request submitted successfully. Waiting for approval.'));
 				} else {
+					// throw new Exception(print_r($command->getRawSql(), true));
 					Yii::$app->session->setFlash('error', Yii::t('app', 'Failed to save request.'));
 				}
 			}
