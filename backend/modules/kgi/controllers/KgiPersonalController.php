@@ -636,12 +636,29 @@ class KgiPersonalController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionWaitForApprove()
+	public function actionWaitForApprove($branchId, $isAdmin)
 	{
 		$kgiEmployee = KgiEmployeeHistory::find()
 			->where(["status" => 88])
 			->asArray()
 			->all();
+		// if ($isAdmin == 1) {
+		// 	$kgiEmployee = KgiEmployeeHistory::find()
+		// 		->where(["status" => 88])
+		// 		->asArray()
+		// 		->all();
+		// } else {
+		// 	$kgiEmployee = KgiEmployeeHistory::find()
+		// 		->select('k.kgiName,k.kgiId,MAX(kgi_employee_history.kgiEmployeeHistoryId)')
+		// 		->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiEmployeeId=kgi_employee_history.kgiEmployeeId")
+		// 		->JOIN("LEFT JOIN", "kgi k", "k.kgiId=ke.kgiId")
+		// 		->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=k.kgiId")
+		// 		->where(["kgi_employee_history.status" => 88, "kb.branchId" => $branchId])
+		// 		//->orderBy('kgi_employee_history.kgiEmployeeHistoryId DESC')
+		// 		->groupBy('k.kgiId')
+		// 		->asArray()
+		// 		->all();
+		// }
 		$res["totalRequest"] = count($kgiEmployee);
 		return json_encode($res);
 	}

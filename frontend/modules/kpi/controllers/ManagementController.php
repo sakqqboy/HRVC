@@ -29,6 +29,7 @@ use frontend\models\hrvc\Title;
 use frontend\models\hrvc\Unit;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
+use frontend\models\hrvc\KpiEmployeeRequest;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -1601,25 +1602,27 @@ class ManagementController extends Controller
     }
     public function actionWaitApproveKpiPersonal()
     {
+        $isAdmin = UserRole::isAdmin();
         $role = UserRole::userRight();
         $employeeKpis = [];
+        $employeeRequest = [];
         if ($role < 3) {
             return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi');
         }
-        if ($role == 3) { //Team Leader
-            $teamId = User::userTeamId();
-            $kpiEmployees = KpiEmployee::find()
+        if ($role == 3 || $isAdmin == 1) { //Team Leader or Admin
+            $teamId = User::userTeamId();  //Team Leader คนนี้อยู่ทีมอะไร
+            $kpiEmployees = KpiEmployee::find() //เอา Team ไปให้ใน kpiEmployee เพื่อให้รู้ว่า kpiEmployee ของทีมนี้มีใครบ้าง 
                 ->select('kpi_employee.*,k.priority')
                 ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
                 ->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_employee.kpiId")
-                ->where(["e.teamId" => $teamId, "k.status" => [1, 2]])
+                ->where(["e.teamId" => $teamId, "k.status" => [1, 2, 3]])
                 ->asArray()
                 ->orderBy('createDateTime')
                 ->all();
-            //throw new Exception(print_r($kpiEmployees, true));
+            // throw new Exception(print_r($kpiEmployees, true));
             if (isset($kpiEmployees) && count($kpiEmployees) > 0) {
-                foreach ($kpiEmployees as $kpiEmployee) :
-                    $kpiEmployeeHistory = KpiEmployeeHistory::find()
+                foreach ($kpiEmployees as $kpiEmployee) : //วนหลูป  kpiEmployee ของทุกคนออกมา เพื่อเอา  kpiEmployeeId
+                    $kpiEmployeeHistory = KpiEmployeeHistory::find() //หารายคนที่ส่งคำขอใน KpiEmployeeHistory
                         ->where(["kpiEmployeeId" => $kpiEmployee["kpiEmployeeId"], "status" => 88])
                         ->orderBy("createDateTime DESC")
                         ->asArray()
@@ -1640,6 +1643,70 @@ class ManagementController extends Controller
                     }
                 endforeach;
             }
+            // throw new Exception(print_r($employeeKpis, true));
+
+
+            // เปลี่ยนจาก ->one() เป็น ->all() เพื่อให้วนลูปได้
+            if ($isAdmin == 1) {
+                $kpiEmployeeRequest = KpiEmployeeRequest::find()
+                    ->where(["status" => 0])
+                    ->orderBy("created_at DESC")
+                    ->asArray()
+                    ->all(); // แก้จุดนี้จาก one() เป็น all()
+            } else {
+                $kpiEmployeeRequest = KpiEmployeeRequest::find()
+                    ->where(["kpiEmployeeId" => $kpiEmployee["kpiEmployeeId"], "status" => 0])
+                    ->orderBy("created_at DESC")
+                    ->asArray()
+                    ->all(); // แก้จุดนี้จาก one() เป็น all()
+            }
+
+            // ตรวจสอบว่ามีข้อมูลส่งกลับมาเป็น Array หรือไม่
+            if (isset($kpiEmployeeRequest) && is_array($kpiEmployeeRequest) && count($kpiEmployeeRequest) > 0) {
+                foreach ($kpiEmployeeRequest as $kpiRequest) :
+                    $requestId = $kpiRequest["request_id"];
+                    $historyId = $kpiRequest["kpiEmployeeHistoryId"];
+
+                    // 2. ไปหา kpiEmployeeId จาก kpi_employee_history (ตามที่คุณต้องการ)
+                    // หมายเหตุ: จริงๆ ถ้าในตาราง Request มี kpiEmployeeId อยู่แล้วอาจข้ามขั้นตอนนี้ได้
+                    $history = KpiEmployeeHistory::find()
+                        ->select('kpiEmployeeId, month, year')
+                        ->where(['kpiEmployeeHistoryId' => $historyId])
+                        ->asArray()
+                        ->one();
+
+                    if ($history) {
+                        $kpiEmployeeId = $history['kpiEmployeeId'];
+
+                        // 3. ไปหา employeeId และ kpiId จาก kpi_employee
+                        $kpiEmployee = KpiEmployee::find()
+                            ->select('employeeId, kpiId')
+                            ->where(['kpiEmployeeId' => $kpiEmployeeId])
+                            ->asArray()
+                            ->one();
+
+                        if ($kpiEmployee) {
+                            // จัดเตรียม Array สำหรับส่งไปที่ View
+                            $employeeRequest[$requestId] = [
+                                "kpiEmployeeHistoryId" => $historyId,
+                                "kpiEmployeeId" => $kpiEmployeeId,
+                                "kpiName" => Kpi::kpiName($kpiEmployee["kpiId"]), // ใช้ Method เดิมที่คุณมี
+                                "employeeName" => Employee::employeeName($kpiEmployee["employeeId"]), // ใช้ Method เดิมที่คุณมี
+                                "target" => $kpiRequest["old_target"],
+                                "newTarget" => $kpiRequest["new_target"],
+                                "result" => $kpiRequest["old_result"],
+                                "newResult" => $kpiRequest["new_result"],
+                                "reson" => $kpiRequest["reason"],
+                                // "priority" => $history["priority"],
+                                "month" => ModelMaster::fullMonthText($history["month"]), // แปลงตัวเลขเป็นชื่อเดือน
+                                "year" => $history["year"],
+                                "status" => $kpiRequest["status"],
+                            ];
+                        }
+                    }
+                endforeach;
+            }
+            // throw new Exception(print_r($employeeKpis, true));
         }
         $allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
         $totalBranch = Branch::totalBranch();
@@ -1648,9 +1715,11 @@ class ManagementController extends Controller
             $countAllCompany = count($allCompany);
             $companyPic = Company::randomPic($allCompany, 3);
         }
+        // throw new Exception(print_r($employeeKpis, true));
         return $this->render('wait_approve_employee', [
             "role" => $role,
-            "employeeKgis" => $employeeKpis,
+            "employeeKpis" => $employeeKpis,
+            "employeeRequest" => $employeeRequest,
             "allCompany" => $countAllCompany,
             "companyPic" => $companyPic,
             "totalBranch" => $totalBranch

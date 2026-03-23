@@ -102,6 +102,8 @@ class KpiPersonalController extends Controller
 	public function actionIndividualKpi($hash = null)
 	{
 		$groupId = Group::currentGroupId();
+		$isAdmin = UserRole::isAdmin();
+		$userBranchId = User::userBranchId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
@@ -164,7 +166,7 @@ class KpiPersonalController extends Controller
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$kpis = Api::connectApi(Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve');
+		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = 0;

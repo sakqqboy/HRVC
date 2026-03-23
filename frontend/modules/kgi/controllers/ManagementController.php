@@ -32,6 +32,7 @@ use frontend\models\hrvc\Title;
 use frontend\models\hrvc\Unit;
 use frontend\models\hrvc\User;
 use frontend\models\hrvc\UserRole;
+use frontend\models\hrvc\KgiEmployeeRequest;
 use Yii;
 use yii\db\Expression;
 use yii\web\Controller;
@@ -1605,12 +1606,15 @@ class ManagementController extends Controller
 
 	public function actionWaitApproveKgiPersonal()
 	{
+		$isAdmin = UserRole::isAdmin();
 		$role = UserRole::userRight();
 		$employeeKgis = [];
+		$employeeRequest = [];
+
 		if ($role < 3) {
 			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
-		if ($role == 3) { //Team Leader
+		if ($role == 3 || $isAdmin == 1) { //Team Leader or Admin
 			$teamId = User::userTeamId();
 			$kgiEmployees = KgiEmployee::find()
 				->select('kgi_employee.*,k.priority')
@@ -1643,6 +1647,69 @@ class ManagementController extends Controller
 					}
 				endforeach;
 			}
+
+
+			// เปลี่ยนจาก ->one() เป็น ->all() เพื่อให้วนลูปได้
+			if ($isAdmin == 1) {
+				$kgiEmployeeRequest = KgiEmployeeRequest::find()
+					->where(["status" => 0])
+					->orderBy("created_at DESC")
+					->asArray()
+					->all(); // แก้จุดนี้จาก one() เป็น all()
+			} else {
+				$kgiEmployeeRequest = KgiEmployeeRequest::find()
+					->where(["kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"], "status" => 0])
+					->orderBy("created_at DESC")
+					->asArray()
+					->all(); // แก้จุดนี้จาก one() เป็น all()
+			}
+			// throw new Exception(print_r($kgiEmployeeRequest, true));
+
+			// ตรวจสอบว่ามีข้อมูลส่งกลับมาเป็น Array หรือไม่
+			if (isset($kgiEmployeeRequest) && is_array($kgiEmployeeRequest) && count($kgiEmployeeRequest) > 0) {
+				foreach ($kgiEmployeeRequest as $kgiRequest) :
+					$requestId = $kgiRequest["request_id"];
+					$historyId = $kgiRequest["kgiEmployeeHistoryId"];
+
+					// 2. ไปหา kpiEmployeeId จาก kpi_employee_history (ตามที่คุณต้องการ)
+					// หมายเหตุ: จริงๆ ถ้าในตาราง Request มี kpiEmployeeId อยู่แล้วอาจข้ามขั้นตอนนี้ได้
+					$history = KgiEmployeeHistory::find()
+						->select('kgiEmployeeId, month, year')
+						->where(['kgiEmployeeHistoryId' => $historyId])
+						->asArray()
+						->one();
+
+					if ($history) {
+						$kgiEmployeeId = $history['kgiEmployeeId'];
+
+						// 3. ไปหา employeeId และ kgiId จาก kgi_employee
+						$kgiEmployee = KgiEmployee::find()
+							->select('employeeId, kgiId')
+							->where(['kgiEmployeeId' => $kgiEmployeeId])
+							->asArray()
+							->one();
+
+						if ($kgiEmployee) {
+							// จัดเตรียม Array สำหรับส่งไปที่ View
+							$employeeRequest[$requestId] = [
+								"kgiEmployeeHistoryId" => $historyId,
+								"kgiEmployeeId" => $kgiEmployeeId,
+								"kgiName" => Kgi::kgiName($kgiEmployee["kgiId"]), // ใช้ Method เดิมที่คุณมี
+								"employeeName" => Employee::employeeName($kgiEmployee["employeeId"]), // ใช้ Method เดิมที่คุณมี
+								"target" => $kgiRequest["old_target"],
+								"newTarget" => $kgiRequest["new_target"],
+								"result" => $kgiRequest["old_result"],
+								"newResult" => $kgiRequest["new_result"],
+								"reson" => $kgiRequest["reason"],
+								// "priority" => $history["priority"],
+								"month" => ModelMaster::fullMonthText($history["month"]), // แปลงตัวเลขเป็นชื่อเดือน
+								"year" => $history["year"],
+								"status" => $kgiRequest["status"],
+							];
+						}
+					}
+				endforeach;
+			}
 		}
 		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$totalBranch = Branch::totalBranch();
@@ -1651,11 +1718,12 @@ class ManagementController extends Controller
 			$countAllCompany = count($allCompany);
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
-		// throw new Exception(print_r($employeeKgis, true));
+		// throw new Exception(print_r($employeeRequest, true));
 
 		return $this->render('wait_approve_employee', [
 			"role" => $role,
 			"employeeKgis" => $employeeKgis,
+			"employeeRequest" => $employeeRequest,
 			"allCompany" => $countAllCompany,
 			"companyPic" => $companyPic,
 			"totalBranch" => $totalBranch

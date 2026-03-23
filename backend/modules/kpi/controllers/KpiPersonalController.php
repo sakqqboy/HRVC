@@ -925,13 +925,31 @@ class KpiPersonalController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionWaitForApprove()
+	public function actionWaitForApprove($branchId, $isAdmin)
 	{
 		$kpiEmployee = KpiEmployeeHistory::find()
 			->where(["status" => 88])
 			->asArray()
 			->all();
+		// if ($isAdmin == 1) {
+		// 	$kpiEmployee = KpiEmployeeHistory::find()
+		// 		->where(["status" => 88])
+		// 		->asArray()
+		// 		->all();
+		// } else {
+		// 	$kpiEmployee = KpiEmployeeHistory::find()
+		// 		->select('k.kpiName,k.kpiId,MAX(kpi_employee_history.kpiEmployeeHistoryId)')
+		// 		->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=kpi_employee_history.kpiEmployeeId")
+		// 		->JOIN("LEFT JOIN", "kpi k", "k.kpiId=ke.kpiId")
+		// 		->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=k.kpiId")
+		// 		->where(["kpi_employee_history.status" => 88, "kb.branchId" => $branchId])
+		// 		//->orderBy('kpi_employee_history.kpiEmployeeHistoryId DESC')
+		// 		->groupBy('k.kpiId')
+		// 		->asArray()
+		// 		->all();
+		// }
 		$res["totalRequest"] = count($kpiEmployee);
+
 		return json_encode($res);
 	}
 	public function actionSetNextCheckDate()
