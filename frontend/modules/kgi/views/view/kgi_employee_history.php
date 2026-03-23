@@ -85,6 +85,18 @@ $this->title = Yii::t('app', 'Self KGI History');
                                                         class="pim-action-icon">
                                                 </a>
                                                 <?php
+                                                if ($colorFormat == 'complete') {
+                                                ?>
+                                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/employee-update-history/<?= ModelMaster::encodeParams(['kgiId' => $kgiId, 'kgiEmployeeHistoryId' => $kgi["kgiEmployeeHistoryId"], 'kgiEmployeeId' => $kgiEmployeeId]) ?>"
+                                                        class="<?= $colorFormat == 'disable' ? 'pim-btn-disable' : 'pim-btn' ?>"
+                                                        style=" <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
+                                                        <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/screwdriver.svg" alt="Screwdriver"
+                                                            class="pim-action-icon">
+                                                    </a>
+                                                <?php
+                                                }
+                                                ?>
+                                                <?php
                                                 if ($colorFormat == 'disable') {
                                                 ?>
                                                     <a class="btn btn-bg-blue-xs  ml-5"

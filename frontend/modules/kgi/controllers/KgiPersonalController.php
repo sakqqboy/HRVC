@@ -1023,4 +1023,92 @@ class KgiPersonalController extends Controller
 
 		return json_encode($res);
 	}
+	public function actionEmployeeUpdateHistory($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$role = UserRole::userRight();
+		$kgiEmployeeId = $param["kgiEmployeeId"];
+		$kgiEmployeeHistoryId = $param["kgiEmployeeHistoryId"];
+		$kgiEmployeeDetail = Api::connectApi(Path::Api() . 'kgi/kgi-personal/kgi-employee-detail?kgiEmployeeId=' . $kgiEmployeeId . '&&kgiEmployeeHistoryId=' . $kgiEmployeeHistoryId);
+		$kgi = Api::connectApi(Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiEmployeeDetail['kgiId'] . '&&kgiHistoryId=0');
+		$kgiBranch = Api::connectApi(Path::Api() . 'kgi/management/kgi-branch?id=' . $kgiEmployeeDetail["kgiId"]);
+		$kgiDepartment = Api::connectApi(Path::Api() . 'kgi/management/kgi-department?id=' . $kgiEmployeeDetail["kgiId"]);
+		$kgiTeam = Api::connectApi(Path::Api() . 'kgi/management/kgi-team?id=' . $kgiEmployeeDetail["kgiId"]);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$companyId = $kgi["companyId"];
+		$company = [
+			"companyId" => $kgi["companyId"],
+			"companyName" => Company::companyName($kgi["companyId"]),
+			"companyImg" => Company::companyImage($kgi["companyId"]),
+		];
+		$unit = Unit::find()->where(["unitId" => $kgi["unitId"]])->asArray()->one();
+		$months = ModelMaster::monthFull(1);
+		return $this->render('employee_update_history', [
+			"kgi" => $kgi,
+			"kgiEmployeeId" => $kgiEmployeeId,
+			"kgiEmployeeHistoryId" => $kgiEmployeeHistoryId,
+			"data" => $kgiEmployeeDetail,
+			"months" => $months,
+			"company" => $company ?? [],
+			"kgiBranch" => $kgiBranch ?? [],
+			"kgiDepartment" => $kgiDepartment ?? [],
+			"kgiTeam" => $kgiTeam ?? [],
+			"role" => $role,
+			"unit"  => $unit,
+			// "statusform" =>  "update",
+			"url" => Yii::$app->request->referrer,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
+		]);
+	}
+
+	public function actionSaveUpdateEmployeeHistory()
+	{
+		$userId = Yii::$app->user->id;
+		$kgiEmployeeId = $_POST["kgiEmployeeId"] ?? null;
+		$kgiEmployeeHistoryId = $_POST["kgiEmployeeHistoryId"] ?? null;
+		$reason = $_POST["reason"] ?? null;
+		$newResult = str_replace(",", "", $_POST["result"] ?? 0);
+		$newTarget = str_replace(",", "", $_POST["amount"] ?? 0);
+		if ($kgiEmployeeId && $kgiEmployeeHistoryId) {
+			$oldHistory = KgiEmployeeHistory::findOne($kgiEmployeeHistoryId);
+
+			if ($oldHistory) {
+				$status = 0; // 0: Pending สำหรับตาราง Request
+
+				//เชฟดาต้าลงตาราง Request
+				$command = Yii::$app->db->createCommand()->insert('kpi_employee_request', [
+					'kgiEmployeeId' => $kgiEmployeeId,
+					'kgiEmployeeHistoryId' => $kgiEmployeeHistoryId,
+					'userId' => $userId,
+					'old_result' => $oldHistory->result,
+					'new_result' => $newResult,
+					'old_target' => $oldHistory->target,
+					'new_target' => $newTarget,
+					'reason' => $reason,
+					'status' => $status,
+					'created_at' => new Expression('NOW()'),
+					'updated_at' => new Expression('NOW()')
+				]);
+
+				if ($command->execute()) {
+					// throw new Exception(print_r($command->getRawSql(), true));
+					Yii::$app->session->setFlash('success', Yii::t('app', 'Request submitted successfully. Waiting for approval.'));
+				} else {
+					// throw new Exception(print_r($command->getRawSql(), true));
+					Yii::$app->session->setFlash('error', Yii::t('app', 'Failed to save request.'));
+				}
+			}
+		}
+
+		// Redirect กลับไปหน้าเดิม (ใช้ค่า URL จากฟอร์มเหมือนโค้ดเดิม)
+		return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
+	}
 }
