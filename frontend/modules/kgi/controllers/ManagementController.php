@@ -1644,9 +1644,21 @@ class ManagementController extends Controller
 				endforeach;
 			}
 		}
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		// throw new Exception(print_r($employeeKgis, true));
+
 		return $this->render('wait_approve_employee', [
 			"role" => $role,
 			"employeeKgis" => $employeeKgis,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
 		]);
 	}
 

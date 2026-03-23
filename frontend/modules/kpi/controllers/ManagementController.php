@@ -1582,11 +1582,21 @@ class ManagementController extends Controller
                 }
             endforeach;
         }
+        $allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
+        $totalBranch = Branch::totalBranch();
+        $countAllCompany = 0;
+        if (count($allCompany) > 0) {
+            $countAllCompany = count($allCompany);
+            $companyPic = Company::randomPic($allCompany, 3);
+        }
         //throw new exception(print_r($teamKpis, true));
         return $this->render('wait_approve1', [
             "role" => $role,
             "teamKpis" => $teamKpis,
             "employeeKpis" => $employeeKpis,
+            "allCompany" => $countAllCompany,
+            "companyPic" => $companyPic,
+            "totalBranch" => $totalBranch
         ]);
     }
     public function actionWaitApproveKpiPersonal()
@@ -1631,9 +1641,19 @@ class ManagementController extends Controller
                 endforeach;
             }
         }
+        $allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
+        $totalBranch = Branch::totalBranch();
+        $countAllCompany = 0;
+        if (count($allCompany) > 0) {
+            $countAllCompany = count($allCompany);
+            $companyPic = Company::randomPic($allCompany, 3);
+        }
         return $this->render('wait_approve_employee', [
             "role" => $role,
-            "employeeKpis" => $employeeKpis,
+            "employeeKgis" => $employeeKpis,
+            "allCompany" => $countAllCompany,
+            "companyPic" => $companyPic,
+            "totalBranch" => $totalBranch
         ]);
     }
     public function actionApproveKpiTeam($hash)

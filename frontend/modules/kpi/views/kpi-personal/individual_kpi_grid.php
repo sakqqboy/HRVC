@@ -19,8 +19,8 @@ $this->title = Yii::t('app', 'Individual KPI');
                 <?php
                 if ($waitForApprove["totalRequest"] > 0) {
                 ?>
-                    <a href="<?= Yii::$app->homeUrl ?>kpi/management/wait-approve" class="d-flex align-items-center"
-                        style="text-decoration: none; color:#000000;">
+                    <a href="<?= Yii::$app->homeUrl ?>kpi/management/wait-approve-kpi-personal"
+                        class="d-flex align-items-center" style="text-decoration: none; color:#000000;">
                         <span class="approvals-num mr-3"><?= $waitForApprove["totalRequest"] ?></span>
                         <?= Yii::t('app', 'Approvals') ?>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approvals.svg" style="width: 16px;height:16px;"
