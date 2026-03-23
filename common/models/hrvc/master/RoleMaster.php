@@ -32,7 +32,7 @@ return [
             [['roleName'], 'required'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['roleName'], 'string', 'max' => 100],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

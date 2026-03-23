@@ -34,7 +34,7 @@ return [
             [['branchId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['departmentName'], 'string', 'max' => 255],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

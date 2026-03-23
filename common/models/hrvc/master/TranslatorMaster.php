@@ -14,6 +14,7 @@ use Yii;
     * @property string $chinese
     * @property string $vietnam
     * @property string $spanish
+    * @property string $indonesian
     * @property integer $status
 */
 class TranslatorMaster extends \common\models\ModelMaster
@@ -32,8 +33,8 @@ return 'translator';
 public function rules()
 {
 return [
-            [['english', 'thai', 'japanese', 'chinese', 'vietnam', 'spanish'], 'string', 'max' => 100],
-            [['status'], 'string', 'max' => 10],
+            [['english', 'thai', 'japanese', 'chinese', 'vietnam', 'spanish', 'indonesian'], 'string'],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 
@@ -50,6 +51,7 @@ return [
     'chinese' => 'Chinese',
     'vietnam' => 'Vietnam',
     'spanish' => 'Spanish',
+    'indonesian' => 'Indonesian',
     'status' => 'Status',
 ];
 }

@@ -79,7 +79,7 @@ $this->title = Yii::t('app', 'Self KGI History');
                                                         alt="Chats" class="pim-action-icon">
                                                 </a>
                                                 <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiEmployeeHistoryId' => $kgi['kgiEmployeeHistoryId'], 'kgiId' => $kgiId, 'openTab' => 4]) ?>"
-                                                    class="<?= $colorFormat == 'disable' ? 'pim-btn-disable' : 'pim-btn' ?>"
+                                                    class="<?= $colorFormat == 'disable' ? 'pim-btn-disable' : 'pim-btn' ?> mr-5"
                                                     style=" <?= $colorFormat == 'disable' ? 'pointer-events: none; opacity: 0.5;' : '' ?>">
                                                     <img src="<?= Yii::$app->homeUrl ?>images/icons/pim/chart.svg" alt="Chart"
                                                         class="pim-action-icon">

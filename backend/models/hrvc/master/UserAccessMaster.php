@@ -10,7 +10,7 @@ use Yii;
     * @property integer $acessId
     * @property integer $userId
     * @property integer $moduleId
-    * @property integer $status
+    * @property string $status
     * @property string $createDateTime
     * @property string $updateDateTime
 */

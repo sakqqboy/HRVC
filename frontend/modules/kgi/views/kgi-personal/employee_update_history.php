@@ -17,7 +17,7 @@ $this->title = Yii::t('app', 'Update Employee History');
 // การคำนวณพื้นฐาน
 $percentage = isset($data['ratio']) ? round((float)$data['ratio']) : 0;
 $result = $data['result'] ?? 0;
-$targetAmount = $data['targetAmount'] ?? 0;
+$targetAmount = $data['target'] ?? 0;
 $DueBehind = $targetAmount - $result;
 $detail = !empty($data['kgiDetail']) ? $data['kgiDetail'] : 'No details listed';
 $maxLength = 487;
@@ -418,7 +418,7 @@ if (!$nextCheckDate) {
                                     <span style="font-size: 22px; font-weight: 600; padding-left: 20px;"><?= $data['code'] ?? '' ?></span>
                                 </span>
                                 <input type="number" class="form-control text-end border-start-0 border-end-0" name="amount" step="any"
-                                    value="<?= $data['targetAmount'] ?? '' ?>" style="font-size: 22px; font-weight: 600;" required>
+                                    value="<?= $data['target'] ?? '' ?>" style="font-size: 22px; font-weight: 600;" required>
                                 <span class="input-group-text bg-white border-start-0" style="padding-right: 20px;">
                                     <?= ($data['amountType'] == '%') ? '<span style="font-size: 22px; font-weight: 600;">%</span>' : '' ?>
                                 </span>

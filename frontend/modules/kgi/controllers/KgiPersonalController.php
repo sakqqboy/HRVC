@@ -14,6 +14,7 @@ use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\KgiEmployeeHistory;
+use frontend\models\hrvc\KgiEmployeeRequest;
 use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\Unit;
@@ -1049,6 +1050,7 @@ class KgiPersonalController extends Controller
 		];
 		$unit = Unit::find()->where(["unitId" => $kgi["unitId"]])->asArray()->one();
 		$months = ModelMaster::monthFull(1);
+		// throw new Exception(print_r($kgiEmployeeDetail, true));
 		return $this->render('employee_update_history', [
 			"kgi" => $kgi,
 			"kgiEmployeeId" => $kgiEmployeeId,
@@ -1083,32 +1085,29 @@ class KgiPersonalController extends Controller
 			if ($oldHistory) {
 				$status = 0; // 0: Pending สำหรับตาราง Request
 
-				//เชฟดาต้าลงตาราง Request
-				$command = Yii::$app->db->createCommand()->insert('kpi_employee_request', [
-					'kgiEmployeeId' => $kgiEmployeeId,
-					'kgiEmployeeHistoryId' => $kgiEmployeeHistoryId,
-					'userId' => $userId,
-					'old_result' => $oldHistory->result,
-					'new_result' => $newResult,
-					'old_target' => $oldHistory->target,
-					'new_target' => $newTarget,
-					'reason' => $reason,
-					'status' => $status,
-					'created_at' => new Expression('NOW()'),
-					'updated_at' => new Expression('NOW()')
-				]);
+				$kgiRequest = new KgiEmployeeRequest();
+				$kgiRequest->kgiEmployeeId = $kgiEmployeeId;
+				$kgiRequest->kgiEmployeeHistoryId = $kgiEmployeeHistoryId;
+				$kgiRequest->userId = $userId;
+				$kgiRequest->old_result = $oldHistory->result;
+				$kgiRequest->new_result = $newResult;
+				$kgiRequest->old_target = $oldHistory->target;
+				$kgiRequest->new_target = $newTarget;
+				$kgiRequest->reason = $reason;
+				$kgiRequest->status = $status;
+				$kgiRequest->created_at = new Expression('NOW()');
+				$kgiRequest->updated_at = new Expression('NOW()');
 
-				if ($command->execute()) {
-					// throw new Exception(print_r($command->getRawSql(), true));
-					Yii::$app->session->setFlash('success', Yii::t('app', 'Request submitted successfully. Waiting for approval.'));
+				if ($kgiRequest->save(false)) {
+					return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
 				} else {
-					// throw new Exception(print_r($command->getRawSql(), true));
 					Yii::$app->session->setFlash('error', Yii::t('app', 'Failed to save request.'));
+					return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
 				}
 			}
 		}
 
 		// Redirect กลับไปหน้าเดิม (ใช้ค่า URL จากฟอร์มเหมือนโค้ดเดิม)
-		return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
+		// return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
 	}
 }

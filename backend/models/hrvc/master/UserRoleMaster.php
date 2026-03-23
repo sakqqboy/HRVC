@@ -33,7 +33,7 @@ return [
             [['roleId', 'userId'], 'required'],
             [['roleId', 'userId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 20],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

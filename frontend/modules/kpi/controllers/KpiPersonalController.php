@@ -15,6 +15,7 @@ use frontend\components\Api;
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiEmployee;
 use frontend\models\hrvc\KpiEmployeeHistory;
+use frontend\models\hrvc\KpiEmployeeRequest;
 use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\Unit;
@@ -1139,32 +1140,29 @@ class KpiPersonalController extends Controller
 			if ($oldHistory) {
 				$status = 0; // 0: Pending สำหรับตาราง Request
 
-				//เชฟดาต้าลงตาราง Request
-				$command = Yii::$app->db->createCommand()->insert('kpi_employee_request', [
-					'kpiEmployeeId' => $kpiEmployeeId,
-					'kpiEmployeeHistoryId' => $kpiEmployeeHistoryId,
-					'userId' => $userId,
-					'old_result' => $oldHistory->result,
-					'new_result' => $newResult,
-					'old_target' => $oldHistory->target,
-					'new_target' => $newTarget,
-					'reason' => $reason,
-					'status' => $status,
-					'created_at' => new Expression('NOW()'),
-					'updated_at' => new Expression('NOW()')
-				]);
+				$kpiRequest = new KpiEmployeeRequest();
+				$kpiRequest->kpiEmployeeId = $kpiEmployeeId;
+				$kpiRequest->kpiEmployeeHistoryId = $kpiEmployeeHistoryId;
+				$kpiRequest->userId = $userId;
+				$kpiRequest->old_result = $oldHistory->result;
+				$kpiRequest->new_result = $newResult;
+				$kpiRequest->old_target = $oldHistory->target;
+				$kpiRequest->new_target = $newTarget;
+				$kpiRequest->reason = $reason;
+				$kpiRequest->status = $status;
+				$kpiRequest->created_at = new Expression('NOW()');
+				$kpiRequest->updated_at = new Expression('NOW()');
 
-				if ($command->execute()) {
-					// throw new Exception(print_r($command->getRawSql(), true));
-					Yii::$app->session->setFlash('success', Yii::t('app', 'Request submitted successfully. Waiting for approval.'));
+				if ($kpiRequest->save(false)) {
+					return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
 				} else {
-					// throw new Exception(print_r($command->getRawSql(), true));
 					Yii::$app->session->setFlash('error', Yii::t('app', 'Failed to save request.'));
+					return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
 				}
 			}
 		}
 
 		// Redirect กลับไปหน้าเดิม (ใช้ค่า URL จากฟอร์มเหมือนโค้ดเดิม)
-		return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
+		// return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
 	}
 }

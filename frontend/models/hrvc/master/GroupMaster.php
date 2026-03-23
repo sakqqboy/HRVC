@@ -19,7 +19,7 @@ use Yii;
     * @property string $industries
     * @property string $founded
     * @property string $website
-    * @property string $director
+    * @property integer $director
     * @property string $email
     * @property string $contact
     * @property string $specialties
@@ -52,13 +52,13 @@ return 'group';
 public function rules()
 {
 return [
-            [['groupName', 'displayName', 'location', 'industries', 'director', 'email'], 'required'],
+            [['groupName', 'headQuaterName', 'displayName', 'location', 'industries', 'director', 'email'], 'required'],
             [['location', 'specialties', 'socialTag', 'about'], 'string'],
-            [['countryId'], 'integer'],
+            [['countryId', 'director'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['groupName', 'headQuaterName', 'displayName', 'tagLine', 'city', 'industries', 'website', 'picture', 'banner', 'socialInstargram', 'socialFacebook', 'socialYoutube', 'socialLinkin', 'socialX'], 'string', 'max' => 255],
-            [['postalCode', 'founded', 'director', 'email', 'contact'], 'string', 'max' => 100],
-            [['status'], 'string', 'max' => 10],
+            [['postalCode', 'founded', 'email', 'contact'], 'string', 'max' => 100],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

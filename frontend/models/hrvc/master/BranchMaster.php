@@ -11,11 +11,11 @@ use Yii;
     * @property string $branchName
     * @property integer $companyId
     * @property string $description
+    * @property string $financial_description
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
     * @property integer $financial_start_month
-    * @property string $financial_description
     * @property string $branchImage
     * @property string $currency_default
 */
@@ -40,8 +40,9 @@ return [
             [['description', 'financial_description'], 'string'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['branchName'], 'string', 'max' => 255],
-            [['status', 'currency_default'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
             [['branchImage'], 'string', 'max' => 250],
+            [['currency_default'], 'string', 'max' => 10],
         ];
 }
 
@@ -55,11 +56,11 @@ return [
     'branchName' => 'Branch Name',
     'companyId' => 'Company ID',
     'description' => 'Description',
+    'financial_description' => 'Financial Description',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',
     'financial_start_month' => 'Financial Start Month',
-    'financial_description' => 'Financial Description',
     'branchImage' => 'Branch Image',
     'currency_default' => 'Currency Default',
 ];

@@ -11,6 +11,8 @@ use Yii;
     * @property integer $employeeId
     * @property integer $kfiId
     * @property string $target
+    * @property string $year
+    * @property string $month
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -35,6 +37,7 @@ return [
             [['employeeId', 'kfiId'], 'integer'],
             [['target'], 'number'],
             [['createDateTime', 'updateDateTime'], 'safe'],
+            [['year', 'month'], 'string', 'max' => 45],
             [['status'], 'string', 'max' => 4],
         ];
 }
@@ -49,6 +52,8 @@ return [
     'employeeId' => 'Employee ID',
     'kfiId' => 'Kfi ID',
     'target' => 'Target',
+    'year' => 'Year',
+    'month' => 'Month',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',
