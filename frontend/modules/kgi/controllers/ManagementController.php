@@ -1731,6 +1731,49 @@ class ManagementController extends Controller
 		]);
 	}
 
+	public function actionApproveKgiEmployeeRequest()
+	{
+		$kgiEmployeeHistoryId = $_POST["kgiEmployeeHistoryId"];
+		$approve = $_POST["approve"];
+
+		// 1. ค้นหาคำร้องล่าสุดที่รอการอนุมัติ
+		$request = KgiEmployeeRequest::find()
+			->where(["kgiEmployeeHistoryId" => $kgiEmployeeHistoryId, "status" => 0])
+			->orderBy('created_at DESC')
+			->one();
+
+		if ($request) {
+			if ($approve == 1) {
+				// 2. ค้นหาแถวในประวัติหลักที่ต้องการอัปเดต
+				$history = KgiEmployeeHistory::findOne($kgiEmployeeHistoryId);
+
+				if ($history) {
+					// นำค่าใหม่จากตารางคำร้อง ($request) ไปบันทึกทับในตารางประวัติ ($history)
+					$history->target = $request->new_target;
+					$history->result = $request->new_result;
+					$history->updateDateTime = new \yii\db\Expression('NOW()');
+					$history->save(false);
+				}
+
+				$request->status = 1; // Approved
+			} else {
+				$request->status = 99; // Declined / Rejected
+			}
+
+			$request->updated_at = date('Y-m-d H:i:s');
+			$request->approver_id = Yii::$app->user->id; // เก็บไว้ด้วยว่าใครเป็นคนกดอนุมัติ
+			$request->save(false);
+
+			$res["status"] = true;
+			$res["message"] = "Success";
+		} else {
+			$res["status"] = false;
+			$res["message"] = "Request not found";
+		}
+
+		return json_encode($res);
+	}
+
 	public function actionApproveKgiTeam($hash)
 	{
 		$param = ModelMaster::decodeParams($hash);
