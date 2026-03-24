@@ -1064,30 +1064,45 @@ function approveTargetKpiEmployee(kpiEmployeeHistoryId, approve) {
 }
 
 function approveRequestKpiEmployee(kpiEmployeeHistoryId, approve) {
-  alert("This request has been approved!");
-  //   var url = $url + "kpi/management/approve-kpi-employee-request";
-  //   if (approve == 1) {
-  //     var text = "Are you sure to approve this request?";
-  //   } else {
-  //     var text = "Are you sure to reject this request?";
-  //   }
-  //   if (confirm(text)) {
-  //     $.ajax({
-  //       type: "POST",
-  //       dataType: "json",
-  //       url: url,
-  //       data: { kpiEmployeeHistoryId: kpiEmployeeHistoryId, approve: approve },
-  //       success: function (data) {
-  //         if (data.status) {
-  //           var url = $url + "kpi/management/wait-approve-kpi-personal";
-  //           window.location.href = url;
-  //         }
-  //       },
-  //     });
-  //   }
-}
-fun;
+  // กำหนดข้อความตามสถานะการกด
+  var titleText = approve == 1 ? "Approve Request" : "Reject Request";
+  var confirmText =
+    approve == 1
+      ? "Are you sure to approve this request?"
+      : "Are you sure to reject this request?";
+  var buttonColor = approve == 1 ? "#2F42ED" : "#E05757";
 
+  // ใช้ confirm แบบมาตรฐาน (หรือ SweetAlert ถ้าโปรเจคคุณมี)
+  if (confirm(confirmText)) {
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: $url + "kpi/management/approve-kpi-employee-request",
+      data: {
+        kpiEmployeeHistoryId: kpiEmployeeHistoryId,
+        approve: approve,
+        // เพิ่ม CSRF Token เพื่อป้องกัน Error 400/405
+        "_csrf-frontend": $('meta[name="csrf-token"]').attr("content"),
+      },
+      beforeSend: function () {
+        // คุณอาจจะใส่ Loading เพื่อป้องกันการกดซ้ำที่นี่
+      },
+      success: function (data) {
+        if (data.status) {
+          // ใช้ window.location.reload() ถ้าต้องการให้อยู่หน้าเดิม หรือ Redirect ตามโค้ดเดิมของคุณ
+          window.location.href =
+            $url + "kpi/management/wait-approve-kpi-personal";
+        } else {
+          alert(data.message || "Something went wrong!");
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr.responseText);
+        alert("Error: Cannot connect to server.");
+      },
+    });
+  }
+}
 function relatedKgiForKpi() {
   var kpiId = $("#v-kpiId").val();
   $("#modal-kgi").modal("show");

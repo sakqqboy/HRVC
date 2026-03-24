@@ -1826,9 +1826,11 @@ class ManagementController extends Controller
             $history->status = 1;
             $kpiEmployee->target = $history["target"];
             $kpiEmployee->status = 1;
+            $kpiEmployee->updateDateTime = date('Y-m-d H:i:s');
             $kpiEmployee->save(false);
         } else {
             $history->status = 89;
+            $kpiEmployee->updateDateTime = date('Y-m-d H:i:s');
         }
         $history->save(false);
         $res["status"] = true;
@@ -1838,21 +1840,42 @@ class ManagementController extends Controller
     {
         $kpiEmployeeHistoryId = $_POST["kpiEmployeeHistoryId"];
         $approve = $_POST["approve"];
-        // $history = KpiEmployeeHistory::find()
-        //     ->where(["kpiEmployeeHistoryId" => $kpiEmployeeHistoryId, "status" => 88])
-        //     ->orderBy('createDateTime DESC')
-        //     ->one();
-        if ($approve == 1) {
-            // $kpiEmployee = KpiEmployee::find()->where(["kpiEmployeeId" => $history->kpiEmployeeId])->one();
-            // $history->status = 1;
-            // $kpiEmployee->target = $history["target"];
-            // $kpiEmployee->status = 1;
-            // $kpiEmployee->save(false);
+
+        // 1. ค้นหาคำร้องล่าสุดที่รอการอนุมัติ
+        $request = KpiEmployeeRequest::find()
+            ->where(["kpiEmployeeHistoryId" => $kpiEmployeeHistoryId, "status" => 0])
+            ->orderBy('created_at DESC')
+            ->one();
+
+        if ($request) {
+            if ($approve == 1) {
+                // 2. ค้นหาแถวในประวัติหลักที่ต้องการอัปเดต
+                $history = KpiEmployeeHistory::findOne($kpiEmployeeHistoryId);
+
+                if ($history) {
+                    // นำค่าใหม่จากตารางคำร้อง ($request) ไปบันทึกทับในตารางประวัติ ($history)
+                    $history->target = $request->new_target;
+                    $history->result = $request->new_result;
+                    $history->updateDateTime = new \yii\db\Expression('NOW()');
+                    $history->save(false);
+                }
+
+                $request->status = 1; // Approved
+            } else {
+                $request->status = 99; // Declined / Rejected
+            }
+
+            $request->updated_at = date('Y-m-d H:i:s');
+            $request->approver_id = Yii::$app->user->id; // เก็บไว้ด้วยว่าใครเป็นคนกดอนุมัติ
+            $request->save(false);
+
+            $res["status"] = true;
+            $res["message"] = "Success";
         } else {
-            // $history->status = 89;
+            $res["status"] = false;
+            $res["message"] = "Request not found";
         }
-        $history->save(false);
-        $res["status"] = true;
+
         return json_encode($res);
     }
     public function actionRelatedKgi()
