@@ -37,7 +37,7 @@ $this->title =  Yii::t('app', 'Waiting for approve KGI');
             </thead>
             <tbody>
                 <?php
-                if ((isset($employeeKpis) && count($employeeKpis) > 0) || (isset($employeeRequest) && count($employeeRequest) > 0)) {
+                if ((isset($employeeKgis) && count($employeeKgis) > 0) || (isset($employeeRequest) && count($employeeRequest) > 0)) {
 
                     // --- ส่วนที่ 1: แสดงรายการ KGI ที่รอการอนุมัติ (ถ้ามี) ---
                     if (isset($employeeKgis) && count($employeeKgis) > 0) {
@@ -145,18 +145,18 @@ $this->title =  Yii::t('app', 'Waiting for approve KGI');
                                 </td>
                                 <td class="text-center">
                                     <div class="d-flex gap-2 justify-content-center">
-                                        <a href="javascript:approveTargetKpiEmployee(<?= $request_id ?>, 1)" class="approve-btn no-underline">
+                                        <a href="javascript:approveRequestKgiEmployee(<?= $employeeRequestInfo['kgiEmployeeHistoryId'] ?>, 1)" class="approve-btn no-underline">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/circle-check-blue.svg" class="mr-5" style="margin-top: -2px;">
                                             <?= Yii::t('app', 'Approve') ?>
                                         </a>
-                                        <a href="javascript:approveTargetKpiEmployee(<?= $request_id ?>, 0)" class="decline-btn no-underline">
+                                        <a href="javascript:approveRequestKgiEmployee(<?= $employeeRequestInfo['kgiEmployeeHistoryId'] ?>, 0)" class="decline-btn no-underline">
                                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/circle-cancel.svg" class="mr-5" style="margin-top: -2px;">
                                             <?= Yii::t('app', 'Decline') ?>
                                         </a>
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/kpi-individual-history/<?= ModelMaster::encodeParams(['kpiEmployeeHistoryId' => $employeeRequestInfo['kpiEmployeeHistoryId'] ?? 0, 'kpiEmployeeId' => $employeeRequestInfo["kpiEmployeeId"] ?? 0]) ?>" class="btn btn-bg-white-xs">
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiId' => $employeeRequestInfo["kgiId"], 'kgiEmployeeHistoryId' => $employeeRequestInfo["kgiEmployeeHistoryId"], 'kgiEmployeeId' => $employeeRequestInfo["kgiEmployeeId"]]) ?>" class="btn btn-bg-white-xs">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" style="margin-top: -2px;">
                                     </a>
                                 </td>

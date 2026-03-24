@@ -177,7 +177,7 @@ $this->title = Yii::t('app', 'Waiting for approve KPI');
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/kpi-individual-history/<?= ModelMaster::encodeParams(['kpiEmployeeHistoryId' => $employeeRequestInfo['kpiEmployeeHistoryId'] ?? 0, 'kpiEmployeeId' => $employeeRequestInfo["kpiEmployeeId"] ?? 0]) ?>" class="btn btn-bg-white-xs">
+                                    <a href="<?= Yii::$app->homeUrl ?>kpi/kpi-personal/kpi-individual-history/<?= ModelMaster::encodeParams(['kpiId' => $employeeRequestInfo["kpiId"], 'kpiEmployeeHistoryId' => $employeeRequestInfo["kpiEmployeeHistoryId"], 'kpiEmployeeId' => $employeeRequestInfo["kpiEmployeeId"]]) ?>" class="btn btn-bg-white-xs">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" style="margin-top: -2px;">
                                     </a>
                                 </td>

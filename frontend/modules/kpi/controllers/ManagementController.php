@@ -1690,6 +1690,7 @@ class ManagementController extends Controller
                             $employeeRequest[$requestId] = [
                                 "kpiEmployeeHistoryId" => $historyId,
                                 "kpiEmployeeId" => $kpiEmployeeId,
+                                "kpiId" => $kpiEmployee["kpiId"],
                                 "kpiName" => Kpi::kpiName($kpiEmployee["kpiId"]), // ใช้ Method เดิมที่คุณมี
                                 "employeeName" => Employee::employeeName($kpiEmployee["employeeId"]), // ใช้ Method เดิมที่คุณมี
                                 "target" => $kpiRequest["old_target"],

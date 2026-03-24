@@ -1694,6 +1694,7 @@ class ManagementController extends Controller
 							$employeeRequest[$requestId] = [
 								"kgiEmployeeHistoryId" => $historyId,
 								"kgiEmployeeId" => $kgiEmployeeId,
+								"kgiId" => $kgiEmployee["kgiId"],
 								"kgiName" => Kgi::kgiName($kgiEmployee["kgiId"]), // ใช้ Method เดิมที่คุณมี
 								"employeeName" => Employee::employeeName($kgiEmployee["employeeId"]), // ใช้ Method เดิมที่คุณมี
 								"target" => $kgiRequest["old_target"],
