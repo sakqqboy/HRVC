@@ -1834,6 +1834,27 @@ class ManagementController extends Controller
         $res["status"] = true;
         return json_encode($res);
     }
+    public function actionApproveKpiEmployeeRequest()
+    {
+        $kpiEmployeeHistoryId = $_POST["kpiEmployeeHistoryId"];
+        $approve = $_POST["approve"];
+        // $history = KpiEmployeeHistory::find()
+        //     ->where(["kpiEmployeeHistoryId" => $kpiEmployeeHistoryId, "status" => 88])
+        //     ->orderBy('createDateTime DESC')
+        //     ->one();
+        if ($approve == 1) {
+            // $kpiEmployee = KpiEmployee::find()->where(["kpiEmployeeId" => $history->kpiEmployeeId])->one();
+            // $history->status = 1;
+            // $kpiEmployee->target = $history["target"];
+            // $kpiEmployee->status = 1;
+            // $kpiEmployee->save(false);
+        } else {
+            // $history->status = 89;
+        }
+        $history->save(false);
+        $res["status"] = true;
+        return json_encode($res);
+    }
     public function actionRelatedKgi()
     {
         $kpiId = $_POST["kpiId"];
