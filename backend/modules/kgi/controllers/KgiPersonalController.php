@@ -9,6 +9,7 @@ use backend\models\hrvc\Kgi;
 use backend\models\hrvc\KgiBranch;
 use backend\models\hrvc\KgiEmployee;
 use backend\models\hrvc\KgiEmployeeHistory;
+use backend\models\hrvc\KgiEmployeeRequest;
 use backend\models\hrvc\KgiHistory;
 use backend\models\hrvc\KgiIssue;
 use backend\models\hrvc\KgiTeam;
@@ -642,6 +643,11 @@ class KgiPersonalController extends Controller
 			->where(["status" => 88])
 			->asArray()
 			->all();
+
+		$kgiRequest = KgiEmployeeRequest::find()
+			->where(["status" => 0])
+			->asArray()
+			->all();
 		// if ($isAdmin == 1) {
 		// 	$kgiEmployee = KgiEmployeeHistory::find()
 		// 		->where(["status" => 88])
@@ -659,7 +665,7 @@ class KgiPersonalController extends Controller
 		// 		->asArray()
 		// 		->all();
 		// }
-		$res["totalRequest"] = count($kgiEmployee);
+		$res["totalRequest"] = count($kgiEmployee) + count($kgiRequest);
 		return json_encode($res);
 	}
 	public function actionKgiEmployeeHistory2($kgiEmployeeId, $kgiEmployeeHistoryId)

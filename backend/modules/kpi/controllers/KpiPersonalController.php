@@ -13,6 +13,7 @@ use backend\models\hrvc\Kpi;
 use backend\models\hrvc\KpiBranch;
 use backend\models\hrvc\KpiEmployee;
 use backend\models\hrvc\KpiEmployeeHistory;
+use backend\models\hrvc\KpiEmployeeRequest;
 use backend\models\hrvc\KpiHistory;
 use backend\models\hrvc\KpiIssue;
 use backend\models\hrvc\KpiTeam;
@@ -931,6 +932,12 @@ class KpiPersonalController extends Controller
 			->where(["status" => 88])
 			->asArray()
 			->all();
+
+		$kpiRequest = KpiEmployeeRequest::find()
+			->where(["status" => 0])
+			->asArray()
+			->all();
+
 		// if ($isAdmin == 1) {
 		// 	$kpiEmployee = KpiEmployeeHistory::find()
 		// 		->where(["status" => 88])
@@ -948,7 +955,7 @@ class KpiPersonalController extends Controller
 		// 		->asArray()
 		// 		->all();
 		// }
-		$res["totalRequest"] = count($kpiEmployee);
+		$res["totalRequest"] = count($kpiEmployee) + count($kpiRequest);
 
 		return json_encode($res);
 	}
