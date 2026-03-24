@@ -926,37 +926,50 @@ class KpiPersonalController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionWaitForApprove($branchId, $isAdmin)
+	public function actionWaitForApprove($branchId, $isAdmin, $isManager, $userId)
 	{
-		$kpiEmployee = KpiEmployeeHistory::find()
-			->where(["status" => 88])
-			->asArray()
-			->all();
+		// $kpiEmployee = KpiEmployeeHistory::find()
+		// 	->where(["status" => 88])
+		// 	->asArray()
+		// 	->all();
 
-		$kpiRequest = KpiEmployeeRequest::find()
-			->where(["status" => 0])
-			->asArray()
-			->all();
+		// $kpiRequest = KpiEmployeeRequest::find()
+		// 	->where(["status" => 0])
+		// 	->asArray()
+		// 	->all();
 
-		// if ($isAdmin == 1) {
-		// 	$kpiEmployee = KpiEmployeeHistory::find()
-		// 		->where(["status" => 88])
-		// 		->asArray()
-		// 		->all();
-		// } else {
-		// 	$kpiEmployee = KpiEmployeeHistory::find()
-		// 		->select('k.kpiName,k.kpiId,MAX(kpi_employee_history.kpiEmployeeHistoryId)')
-		// 		->JOIN("LEFT JOIN", "kpi_employee ke", "ke.kpiEmployeeId=kpi_employee_history.kpiEmployeeId")
-		// 		->JOIN("LEFT JOIN", "kpi k", "k.kpiId=ke.kpiId")
-		// 		->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=k.kpiId")
-		// 		->where(["kpi_employee_history.status" => 88, "kb.branchId" => $branchId])
-		// 		//->orderBy('kpi_employee_history.kpiEmployeeHistoryId DESC')
-		// 		->groupBy('k.kpiId')
-		// 		->asArray()
-		// 		->all();
-		// }
-		$res["totalRequest"] = count($kpiEmployee) + count($kpiRequest);
+		// $res["totalRequest"] = count($kpiEmployee) + count($kpiRequest);
 
+		$teamId = User::userTeamId($userId);
+		$totalHistory = 0;
+		$totalRequest = 0;
+
+		// ตรวจสอบ query พื้นฐานก่อน
+		$queryHistory = KpiEmployeeHistory::find()
+			->innerJoin('kpi_employee ke', 'ke.kpiEmployeeId = kpi_employee_history.kpiEmployeeId')
+			->innerJoin('employee e', 'e.employeeId = ke.employeeId')
+			->where(['kpi_employee_history.status' => 88]);
+
+		$queryRequest = KpiEmployeeRequest::find()
+			->innerJoin('kpi_employee ke', 'ke.kpiEmployeeId = kpi_employee_request.kpiEmployeeId')
+			->innerJoin('employee e', 'e.employeeId = ke.employeeId')
+			->where(['kpi_employee_request.status' => 0]);
+
+		// เพิ่มเงื่อนไขตามสิทธิ์
+		if ($isAdmin == 1 || $isAdmin == "1") {
+			// ผู้ดูแลระบบสามารถเห็นได้ทั้งหมด ไม่ต้องเพิ่มเงื่อนไข
+		} else if ($isManager == 1 || $isManager == "1") {
+			// $queryHistory->andWhere(['e.branchId' => $branchId]);
+			// $queryRequest->andWhere(['e.branchId' => $branchId]);
+		} else {
+			$queryHistory->andWhere(['e.teamId' => $teamId]);
+			$queryRequest->andWhere(['e.teamId' => $teamId]);
+		}
+
+		$totalHistory = $queryHistory->count();
+		$totalRequest = $queryRequest->count();
+
+		$res["totalRequest"] = (int)$totalHistory + (int)$totalRequest;
 		return json_encode($res);
 	}
 	public function actionSetNextCheckDate()

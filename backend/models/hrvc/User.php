@@ -48,4 +48,18 @@ class User extends \backend\models\hrvc\master\UserMaster
         }
         return '';
     }
+
+    public static function userTeamId($userId)
+    {
+        if ($userId != '') {
+            $user = User::find()->where(["userId" => $userId])->asArray()->one();
+            if (isset($user) && !empty($user)) {
+                $employee = Employee::find()->where(["employeeId" => $user["employeeId"]])->asArray()->one();
+                if (isset($employee) && !empty($employee)) {
+                    return $employee["teamId"];
+                }
+            }
+        }
+        return $userId;
+    }
 }

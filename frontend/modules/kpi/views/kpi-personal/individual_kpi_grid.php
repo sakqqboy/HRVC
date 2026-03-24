@@ -12,7 +12,7 @@ $this->title = Yii::t('app', 'Individual KPI');
             class="pim-head-icon mr-11 mt-2">
         <span class="pim-head-text mr-10"><?= Yii::t('app', 'Team Key Performance Indicators') ?></strong></span>
         <?php
-        if ($role > 3) {
+        if ($role >= 3) {
 
         ?>
             <div class="d-flex <?= $waitForApprove["totalRequest"] > 0 ? 'approval-box' : 'noapproval-box' ?> text-center">

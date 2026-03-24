@@ -166,7 +166,8 @@ class KpiPersonalController extends Controller
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$kpis = Api::connectApi(Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
+		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin . '&&isManager=' . $isManager . '&&userId=' . $userId);
+		// throw new Exception(print_r($waitForApprove, true));
 		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = 0;
@@ -211,13 +212,15 @@ class KpiPersonalController extends Controller
 
 	public function actionIndividualKpiGrid($hash = null)
 	{
+		$userId = Yii::$app->user->id;
 		$role = UserRole::userRight();
+		$isAdmin = UserRole::isAdmin();
+		$isManager = UserRole::isManager();
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
-		$userId = Yii::$app->user->id;
-		$isAdmin = UserRole::isAdmin();
+
 		$userBranchId = User::userBranchId();
 		$session = Yii::$app->session;
 		$adminId = '';
@@ -276,14 +279,13 @@ class KpiPersonalController extends Controller
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$kpis = Api::connectApi(Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
+		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin . '&&isManager=' . $isManager . '&&userId=' . $userId);
 		$teams = [];
 		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = count($allCompany);
 		$companyPic = $countAllCompany > 0 ? Company::randomPic($allCompany, 3) : [];
 		$months = ModelMaster::monthFull(1);
-		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId($userId);
 		$employeeCompanyId = $employee["companyId"];
 		$totalKpi = KpiEmployee::totalKpiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
@@ -975,7 +977,7 @@ class KpiPersonalController extends Controller
 		$currentPage = isset($param["currentPage"]) ? $param["currentPage"] : 1;
 		$kpis = Api::connectApi(Path::Api() . 'kpi/kpi-personal/kpi-personal-filter?' . $paramText);
 		// throw new Exception(print_r($kpis['total'],true));
-		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve');
+		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin . '&&isManager=' . $isManager . '&&userId=' . $userId);
 
 		if ($role == 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);
