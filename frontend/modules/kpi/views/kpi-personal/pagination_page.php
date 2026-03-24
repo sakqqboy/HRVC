@@ -8,7 +8,7 @@
     $urlArr = ModelMaster::urlArr();
 
     $url = Yii::$app->homeUrl . $urlArr["module"] . '/' . $urlArr["controller"] . '/' . $urlArr["action"];
-   
+
     if ($totalPage > 1) {
         if (isset($filter) && !empty($filter)) {
             $PreviousPage = ModelMaster::encodeParams([
@@ -182,7 +182,7 @@ $("#page-jump-form").css("display","inline-flex");
 
 $("#gotoPage").on("submit", function(e) {
         e.preventDefault(); //  ป้องกันไม่ให้ฟอร์ม submit จริง (ถ้าต้องการ)
-        var totalPage = $("#totalPage").val();
+        var totalPage = $("#totalPages").val();
         var inputPage = $("#input-page").val();
 
         if (inputPage > totalPage) {

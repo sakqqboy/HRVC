@@ -418,7 +418,9 @@ if (!$nextCheckDate) {
                                     <span style="font-size: 22px; font-weight: 600; padding-left: 20px;"><?= $data['code'] ?? '' ?></span>
                                 </span>
                                 <input type="number" class="form-control text-end border-start-0 border-end-0" name="amount" step="any"
-                                    value="<?= $data['targetAmount'] ?? '' ?>" style="font-size: 22px; font-weight: 600;" required>
+                                    value="<?= $data['targetAmount'] ?? '' ?>"
+                                    style="font-size: 22px; font-weight: 600;"
+                                    readonly>
                                 <span class="input-group-text bg-white border-start-0" style="padding-right: 20px;">
                                     <?= ($data['amountType'] == '%') ? '<span style="font-size: 22px; font-weight: 600;">%</span>' : '' ?>
                                 </span>
