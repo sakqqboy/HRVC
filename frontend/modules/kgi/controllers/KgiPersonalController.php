@@ -170,7 +170,7 @@ class KgiPersonalController extends Controller
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$kgis = Api::connectApi(Path::Api() . 'kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
+		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin . '&&isManager=' . $isManager . '&&userId=' .  $userId);
 
 
 
@@ -256,6 +256,8 @@ class KgiPersonalController extends Controller
 			$staffId = Yii::$app->user->id;
 		}
 		$isAdmin = UserRole::isAdmin();
+		$isManager = UserRole::isManager();
+		$userId = Yii::$app->user->id;
 		$userBranchId = User::userBranchId();
 		$teams = [];
 		$session = Yii::$app->session;
@@ -301,7 +303,8 @@ class KgiPersonalController extends Controller
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$kgis = Api::connectApi(Path::Api() . 'kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
+		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin . '&&isManager=' . $isManager . '&&userId=' .  $userId);
+		// throw new Exception(print_r($waitForApprove, true));
 		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 
 		$totalBranch = Branch::totalBranch();
@@ -546,6 +549,8 @@ class KgiPersonalController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$isAdmin = UserRole::isAdmin();
+		$isManager = UserRole::isManager();
+		$uId = Yii::$app->user->id;
 		$userBranchId = User::userBranchId();
 		$month = $param["month"];
 		$status = $param["status"];
@@ -591,8 +596,7 @@ class KgiPersonalController extends Controller
 		$kgis = Api::connectApi(Path::Api() . 'kgi/kgi-personal/kgi-personal-filter?' . $paramText);
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
-
+		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin . '&&isManager=' . $isManager . '&&userId=' .  $uId);
 
 		if ($role >= 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);

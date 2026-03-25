@@ -637,35 +637,50 @@ class KgiPersonalController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionWaitForApprove($branchId, $isAdmin)
+	public function actionWaitForApprove($branchId, $isAdmin, $isManager, $userId)
 	{
-		$kgiEmployee = KgiEmployeeHistory::find()
-			->where(["status" => 88])
-			->asArray()
-			->all();
+		// $kgiEmployee = KgiEmployeeHistory::find()
+		// 	->where(["status" => 88])
+		// 	->asArray()
+		// 	->all();
 
-		$kgiRequest = KgiEmployeeRequest::find()
-			->where(["status" => 0])
-			->asArray()
-			->all();
-		// if ($isAdmin == 1) {
-		// 	$kgiEmployee = KgiEmployeeHistory::find()
-		// 		->where(["status" => 88])
-		// 		->asArray()
-		// 		->all();
-		// } else {
-		// 	$kgiEmployee = KgiEmployeeHistory::find()
-		// 		->select('k.kgiName,k.kgiId,MAX(kgi_employee_history.kgiEmployeeHistoryId)')
-		// 		->JOIN("LEFT JOIN", "kgi_employee ke", "ke.kgiEmployeeId=kgi_employee_history.kgiEmployeeId")
-		// 		->JOIN("LEFT JOIN", "kgi k", "k.kgiId=ke.kgiId")
-		// 		->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=k.kgiId")
-		// 		->where(["kgi_employee_history.status" => 88, "kb.branchId" => $branchId])
-		// 		//->orderBy('kgi_employee_history.kgiEmployeeHistoryId DESC')
-		// 		->groupBy('k.kgiId')
-		// 		->asArray()
-		// 		->all();
-		// }
-		$res["totalRequest"] = count($kgiEmployee) + count($kgiRequest);
+		// $kgiRequest = KgiEmployeeRequest::find()
+		// 	->where(["status" => 0])
+		// 	->asArray()
+		// 	->all();
+
+		$teamId = User::userTeamId($userId);
+		$totalHistory = 0;
+		$totalRequest = 0;
+
+		// ตรวจสอบ query พื้นฐานก่อน
+		$queryHistory = KgiEmployeeHistory::find()
+			->innerJoin('kgi_employee ke', 'ke.kgiEmployeeId = kgi_employee_history.kgiEmployeeId')
+			->innerJoin('employee e', 'e.employeeId = ke.employeeId')
+			->where(['kgi_employee_history.status' => 88]);
+
+		$queryRequest = KgiEmployeeRequest::find()
+			->innerJoin('kgi_employee ke', 'ke.kgiEmployeeId = kgi_employee_request.kgiEmployeeId')
+			->innerJoin('employee e', 'e.employeeId = ke.employeeId')
+			->where(['kgi_employee_request.status' => 0]);
+
+		// เพิ่มเงื่อนไขตามสิทธิ์
+		if ($isAdmin == 1 || $isAdmin == "1") {
+			// ผู้ดูแลระบบสามารถเห็นได้ทั้งหมด ไม่ต้องเพิ่มเงื่อนไข
+		} else if ($isManager == 1 || $isManager == "1") {
+			// $queryHistory->andWhere(['e.branchId' => $branchId]);
+			// $queryRequest->andWhere(['e.branchId' => $branchId]);
+		} else {
+			$queryHistory->andWhere(['e.teamId' => $teamId]);
+			$queryRequest->andWhere(['e.teamId' => $teamId]);
+		}
+
+		$totalHistory = $queryHistory->count();
+		$totalRequest = $queryRequest->count();
+
+		$res["totalRequest"] = (int)$totalHistory + (int)$totalRequest;
+
+
 		return json_encode($res);
 	}
 	public function actionKgiEmployeeHistory2($kgiEmployeeId, $kgiEmployeeHistoryId)

@@ -83,7 +83,7 @@ $this->title =  Yii::t('app', 'Waiting for approve KGI');
                                 </td>
                                 <td class="text-center">
 
-                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $kgiEmployeeId, 'kgiEmployeeHistoryId' => $kgi['kgiEmployeeHistoryId'], 'openTab' => 1]) ?>"
+                                    <a href="<?= Yii::$app->homeUrl ?>kgi/kgi-personal/kgi-employee-history/<?= ModelMaster::encodeParams(['kgiEmployeeId' => $employeeKgi['kgiEmployeeId'], 'kgiEmployeeHistoryId' => $kgiEmployeeHistoryId, 'openTab' => 1]) ?>"
                                         class="btn btn-bg-white-xs">
                                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/eye.svg" style="margin-top: -2px;">
                                     </a>

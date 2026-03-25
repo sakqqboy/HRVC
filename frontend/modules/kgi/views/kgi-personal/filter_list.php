@@ -74,7 +74,7 @@ if (isset($teamId) && $teamId != null) {
 } else {
     $disabled = "disabled";
 }
-if ($role >= 3) { ?>
+if ($role > 3) { ?>
     <select class="form-select font-size-12 <?= $employeeId != "" ? 'select-pimselect' : 'select-pim' ?>"
         id="employee-filter" <?= $disabled ?> onchange="applySelectStyle(this)">
         <?php

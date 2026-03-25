@@ -1607,6 +1607,8 @@ class ManagementController extends Controller
 	public function actionWaitApproveKgiPersonal()
 	{
 		$isAdmin = UserRole::isAdmin();
+		$branchId = User::userBranchId();
+		$isManager = UserRole::isManager();
 		$role = UserRole::userRight();
 		$employeeKgis = [];
 		$employeeRequest = [];
@@ -1614,26 +1616,135 @@ class ManagementController extends Controller
 		if ($role < 3) {
 			return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi');
 		}
-		if ($role == 3 || $isAdmin == 1) { //Team Leader or Admin
-			$teamId = User::userTeamId();
-			$kgiEmployees = KgiEmployee::find()
-				->select('kgi_employee.*,k.priority')
-				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-				->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_employee.kgiId")
-				->where(["e.teamId" => $teamId, "k.status" => [1, 2]])
-				->asArray()
-				->orderBy('createDateTime')
-				->all();
+		// if ($role == 3 || $isAdmin == 1 || $isManager == 1) { // Team Leader or Admin or Manager
+		// 	$teamId = User::userTeamId();
+		// 	$kgiEmployees = KgiEmployee::find()
+		// 		->select('kgi_employee.*,k.priority')
+		// 		->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
+		// 		->JOIN("LEFT JOIN", "kgi k", "k.kgiId=kgi_employee.kgiId")
+		// 		->where(["e.teamId" => $teamId, "k.status" => [1, 2]])
+		// 		->asArray()
+		// 		->orderBy('createDateTime')
+		// 		->all();
+		// 	if (isset($kgiEmployees) && count($kgiEmployees) > 0) {
+		// 		foreach ($kgiEmployees as $kgiEmployee) :
+		// 			$kgiEmployeeHistory = KgiEmployeeHistory::find()
+		// 				->where(["kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"], "status" => 88])
+		// 				->orderBy("createDateTime DESC")
+		// 				->asArray()
+		// 				->one();
+		// 			if (isset($kgiEmployeeHistory) && !empty($kgiEmployeeHistory)) {
+		// 				$employeeKgis[$kgiEmployeeHistory["kgiEmployeeHistoryId"]] = [
+		// 					"kgiId" => $kgiEmployee["kgiId"],
+		// 					"kgiName" => Kgi::kgiName($kgiEmployee["kgiId"]),
+		// 					"employeeName" => Employee::employeeName($kgiEmployee["employeeId"]),
+		// 					"target" => $kgiEmployee["target"],
+		// 					"newTarget" => $kgiEmployeeHistory["target"],
+		// 					"reson" => $kgiEmployeeHistory["detail"],
+		// 					"priority" => $kgiEmployee["priority"],
+		// 					"isOver" => ModelMaster::isOverDuedate(KgiEmployee::nextCheckDate($kgiEmployee['kgiEmployeeId'])),
+		// 					"month" => ModelMaster::fullMonthText($kgiEmployeeHistory["month"]),
+		// 					"status" => $kgiEmployee["status"],
+		// 				];
+		// 			}
+		// 		endforeach;
+		// 	}
+
+
+		// 	// เปลี่ยนจาก ->one() เป็น ->all() เพื่อให้วนลูปได้
+		// 	if ($isAdmin == 1) {
+		// 		$kgiEmployeeRequest = KgiEmployeeRequest::find()
+		// 			->where(["status" => 0])
+		// 			->orderBy("created_at DESC")
+		// 			->asArray()
+		// 			->all(); // แก้จุดนี้จาก one() เป็น all()
+		// 	} else {
+		// 		$kgiEmployeeRequest = KgiEmployeeRequest::find()
+		// 			->where(["kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"], "status" => 0])
+		// 			->orderBy("created_at DESC")
+		// 			->asArray()
+		// 			->all(); // แก้จุดนี้จาก one() เป็น all()
+		// 	}
+		// 	// throw new Exception(print_r($kgiEmployeeRequest, true));
+
+		// 	// ตรวจสอบว่ามีข้อมูลส่งกลับมาเป็น Array หรือไม่
+		// 	if (isset($kgiEmployeeRequest) && is_array($kgiEmployeeRequest) && count($kgiEmployeeRequest) > 0) {
+		// 		foreach ($kgiEmployeeRequest as $kgiRequest) :
+		// 			$requestId = $kgiRequest["request_id"];
+		// 			$historyId = $kgiRequest["kgiEmployeeHistoryId"];
+
+		// 			// 2. ไปหา kpiEmployeeId จาก kpi_employee_history (ตามที่คุณต้องการ)
+		// 			// หมายเหตุ: จริงๆ ถ้าในตาราง Request มี kpiEmployeeId อยู่แล้วอาจข้ามขั้นตอนนี้ได้
+		// 			$history = KgiEmployeeHistory::find()
+		// 				->select('kgiEmployeeId, month, year')
+		// 				->where(['kgiEmployeeHistoryId' => $historyId])
+		// 				->asArray()
+		// 				->one();
+
+		// 			if ($history) {
+		// 				$kgiEmployeeId = $history['kgiEmployeeId'];
+
+		// 				// 3. ไปหา employeeId และ kgiId จาก kgi_employee
+		// 				$kgiEmployee = KgiEmployee::find()
+		// 					->select('employeeId, kgiId')
+		// 					->where(['kgiEmployeeId' => $kgiEmployeeId])
+		// 					->asArray()
+		// 					->one();
+
+		// 				if ($kgiEmployee) {
+		// 					// จัดเตรียม Array สำหรับส่งไปที่ View
+		// 					$employeeRequest[$requestId] = [
+		// 						"kgiEmployeeHistoryId" => $historyId,
+		// 						"kgiEmployeeId" => $kgiEmployeeId,
+		// 						"kgiId" => $kgiEmployee["kgiId"],
+		// 						"kgiName" => Kgi::kgiName($kgiEmployee["kgiId"]), // ใช้ Method เดิมที่คุณมี
+		// 						"employeeName" => Employee::employeeName($kgiEmployee["employeeId"]), // ใช้ Method เดิมที่คุณมี
+		// 						"target" => $kgiRequest["old_target"],
+		// 						"newTarget" => $kgiRequest["new_target"],
+		// 						"result" => $kgiRequest["old_result"],
+		// 						"newResult" => $kgiRequest["new_result"],
+		// 						"reson" => $kgiRequest["reason"],
+		// 						// "priority" => $history["priority"],
+		// 						"month" => ModelMaster::fullMonthText($history["month"]), // แปลงตัวเลขเป็นชื่อเดือน
+		// 						"year" => $history["year"],
+		// 						"status" => $kgiRequest["status"],
+		// 					];
+		// 				}
+		// 			}
+		// 		endforeach;
+		// 	}
+		// }
+		if ($role == 3 || $isAdmin == 1 || $isManager == 1) { // Team Leader or Admin or Manager
+			// --- ส่วนที่ 1: ดึงรายการพนักงานและ KGI ตามสิทธิ์ ---
+			$queryKgi = KgiEmployee::find()
+				->select('kgi_employee.*, k.priority')
+				->innerJoin("employee e", "e.employeeId = kgi_employee.employeeId")
+				->innerJoin("kgi k", "k.kgiId = kgi_employee.kgiId")
+				->where(["k.status" => [1, 2, 3]]);
+
+			if ($isManager == 1) {
+				// $branchId = User::userBranchId();
+				// $queryKgi->andWhere(['e.branchId' => $branchId]);
+			} else if ($isAdmin != 1) {
+				$teamId = User::userTeamId();
+				$queryKgi->andWhere(["e.teamId" => $teamId]);
+			}
+
+			$kgiEmployees = $queryKgi->asArray()->all();
+
+			// --- ส่วนที่ 2: ดึงรายการจาก KgiEmployeeHistory (Status 88) ---
 			if (isset($kgiEmployees) && count($kgiEmployees) > 0) {
-				foreach ($kgiEmployees as $kgiEmployee) :
+				foreach ($kgiEmployees as $kgiEmployee) {
 					$kgiEmployeeHistory = KgiEmployeeHistory::find()
 						->where(["kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"], "status" => 88])
 						->orderBy("createDateTime DESC")
 						->asArray()
 						->one();
-					if (isset($kgiEmployeeHistory) && !empty($kgiEmployeeHistory)) {
+
+					if ($kgiEmployeeHistory) {
 						$employeeKgis[$kgiEmployeeHistory["kgiEmployeeHistoryId"]] = [
 							"kgiId" => $kgiEmployee["kgiId"],
+							"kgiEmployeeId" => $kgiEmployee['kgiEmployeeId'],
 							"kgiName" => Kgi::kgiName($kgiEmployee["kgiId"]),
 							"employeeName" => Employee::employeeName($kgiEmployee["employeeId"]),
 							"target" => $kgiEmployee["target"],
@@ -1645,34 +1756,38 @@ class ManagementController extends Controller
 							"status" => $kgiEmployee["status"],
 						];
 					}
-				endforeach;
+				}
 			}
 
+			// --- ส่วนที่ 3: ดึงรายการจาก KgiEmployeeRequest (Status 0) ---
+			$queryRequest = KgiEmployeeRequest::find()
+				// ระบุชื่อตาราง kgi_employee_request นำหน้าคอลัมน์ status
+				->where(["kgi_employee_request.status" => 0])
+				->orderBy("kgi_employee_request.created_at DESC"); // แนะนำให้ใส่หน้า created_at ด้วยเพื่อความปลอดภัย
 
-			// เปลี่ยนจาก ->one() เป็น ->all() เพื่อให้วนลูปได้
-			if ($isAdmin == 1) {
-				$kgiEmployeeRequest = KgiEmployeeRequest::find()
-					->where(["status" => 0])
-					->orderBy("created_at DESC")
-					->asArray()
-					->all(); // แก้จุดนี้จาก one() เป็น all()
-			} else {
-				$kgiEmployeeRequest = KgiEmployeeRequest::find()
-					->where(["kgiEmployeeId" => $kgiEmployee["kgiEmployeeId"], "status" => 0])
-					->orderBy("created_at DESC")
-					->asArray()
-					->all(); // แก้จุดนี้จาก one() เป็น all()
+
+			// ถ้าไม่ใช่ Admin ให้กรองเฉพาะคนในทีม
+			if ($isManager == 1) {
+				// $branchId = User::userBranchId();
+				// $queryRequest->innerJoin('kgi_employee ke', 'ke.kgiEmployeeId = kgi_employee_request.kgiEmployeeId')
+				//     ->innerJoin('employee e', 'e.employeeId = ke.employeeId')
+				//     ->andWhere(['e.branchId' => $branchId]);
+			} elseif ($isAdmin != 1) {
+				// สำหรับ Admin ให้ดึงข้อมูลทั้งหมด
+				$teamId = User::userTeamId();
+				$queryRequest->innerJoin('kgi_employee ke', 'ke.kgiEmployeeId = kgi_employee_request.kgiEmployeeId')
+					->innerJoin('employee e', 'e.employeeId = ke.employeeId')
+					->andWhere(['e.teamId' => $teamId]);
 			}
-			// throw new Exception(print_r($kgiEmployeeRequest, true));
 
-			// ตรวจสอบว่ามีข้อมูลส่งกลับมาเป็น Array หรือไม่
-			if (isset($kgiEmployeeRequest) && is_array($kgiEmployeeRequest) && count($kgiEmployeeRequest) > 0) {
-				foreach ($kgiEmployeeRequest as $kgiRequest) :
+			$allRequests = $queryRequest->asArray()->all();
+
+			if (!empty($allRequests)) {
+				foreach ($allRequests as $kgiRequest) {
 					$requestId = $kgiRequest["request_id"];
 					$historyId = $kgiRequest["kgiEmployeeHistoryId"];
 
-					// 2. ไปหา kpiEmployeeId จาก kpi_employee_history (ตามที่คุณต้องการ)
-					// หมายเหตุ: จริงๆ ถ้าในตาราง Request มี kpiEmployeeId อยู่แล้วอาจข้ามขั้นตอนนี้ได้
+					// หาข้อมูลประกอบจาก History และ Employee
 					$history = KgiEmployeeHistory::find()
 						->select('kgiEmployeeId, month, year')
 						->where(['kgiEmployeeHistoryId' => $historyId])
@@ -1680,36 +1795,32 @@ class ManagementController extends Controller
 						->one();
 
 					if ($history) {
-						$kgiEmployeeId = $history['kgiEmployeeId'];
-
-						// 3. ไปหา employeeId และ kgiId จาก kgi_employee
-						$kgiEmployee = KgiEmployee::find()
+						$kgiEmp = KgiEmployee::find()
 							->select('employeeId, kgiId')
-							->where(['kgiEmployeeId' => $kgiEmployeeId])
+							->where(['kgiEmployeeId' => $history['kgiEmployeeId']])
 							->asArray()
 							->one();
 
-						if ($kgiEmployee) {
-							// จัดเตรียม Array สำหรับส่งไปที่ View
+						if ($kgiEmp) {
 							$employeeRequest[$requestId] = [
 								"kgiEmployeeHistoryId" => $historyId,
-								"kgiEmployeeId" => $kgiEmployeeId,
-								"kgiId" => $kgiEmployee["kgiId"],
-								"kgiName" => Kgi::kgiName($kgiEmployee["kgiId"]), // ใช้ Method เดิมที่คุณมี
-								"employeeName" => Employee::employeeName($kgiEmployee["employeeId"]), // ใช้ Method เดิมที่คุณมี
+								"kgiEmployeeId" => $history['kgiEmployeeId'],
+								"kgiId" => $kgiEmp["kgiId"],
+								"kgiName" => Kgi::kgiName($kgiEmp["kgiId"]),
+								"employeeName" => Employee::employeeName($kgiEmp["employeeId"]),
 								"target" => $kgiRequest["old_target"],
 								"newTarget" => $kgiRequest["new_target"],
 								"result" => $kgiRequest["old_result"],
 								"newResult" => $kgiRequest["new_result"],
 								"reson" => $kgiRequest["reason"],
 								// "priority" => $history["priority"],
-								"month" => ModelMaster::fullMonthText($history["month"]), // แปลงตัวเลขเป็นชื่อเดือน
+								"month" => ModelMaster::fullMonthText($history["month"]),
 								"year" => $history["year"],
 								"status" => $kgiRequest["status"],
 							];
 						}
 					}
-				endforeach;
+				}
 			}
 		}
 		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
@@ -1719,7 +1830,7 @@ class ManagementController extends Controller
 			$countAllCompany = count($allCompany);
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
-		// throw new Exception(print_r($employeeRequest, true));
+		// throw new Exception(print_r($employeeKgis, true));
 
 		return $this->render('wait_approve_employee', [
 			"role" => $role,
