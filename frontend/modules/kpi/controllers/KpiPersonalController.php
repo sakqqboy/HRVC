@@ -290,6 +290,8 @@ class KpiPersonalController extends Controller
 		$employeeCompanyId = $employee["companyId"];
 		$totalKpi = KpiEmployee::totalKpiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
 		$totalPage = ceil($totalKpi / $limit);
+		// throw new Exception("all KPI: " . print_r($kpis, true));
+		// throw new Exception("Total KPI: " . $totalKpi . " Total Page: " . $totalPage);
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
 		return $this->render('individual_kpi_grid', [
 			"units" => $units,
@@ -930,6 +932,7 @@ class KpiPersonalController extends Controller
 		$teams = [];
 		$userId = Yii::$app->user->id;
 		$isAdmin = UserRole::isAdmin();
+		$isManager = UserRole::isManager();
 		$userBranchId = User::userBranchId();
 		$session = Yii::$app->session;
 
@@ -997,7 +1000,6 @@ class KpiPersonalController extends Controller
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
 		$months = ModelMaster::monthFull(1);
-		$isManager = UserRole::isManager();
 		$totalKpi = $kpis['total'];
 		$totalPage = ceil($totalKpi / $limit);
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);

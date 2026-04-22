@@ -154,10 +154,25 @@ class KpiEmployee extends \frontend\models\hrvc\master\KpiEmployeeMaster
         $total = 0;
         if ($adminId != '' || $gmId != '') {
             $kpis = KpiEmployee::find()
-                ->JOIN("LEFT JOIN", "kpi k", "k.kpiId=kpi_employee.kpiId")
-                ->where("kpi_employee.status!=99 and k.status!=99")
-                ->asArray()
-                ->orderBy('updateDateTime DESC')
+                ->select('
+                k.kpiName, k.priority, k.quantRatio, k.amountType, k.code, 
+                kpi_employee.target, kpi_employee.result, kpi_employee.updateDateTime, 
+                kpi_employee.month, kpi_employee.year, kpi_employee.status, 
+                kpi_employee.employeeId, k.unitId, k.kpiId, k.companyId, 
+                e.teamId, e.picture, kpi_employee.kpiEmployeeId, 
+                e.employeeFirstname, e.employeeSurename, 
+                kpi_employee.fromDate, kpi_employee.toDate, kpi_employee.nextCheckDate
+            ')
+                ->join("LEFT JOIN", "kpi k", "k.kpiId = kpi_employee.kpiId")
+                ->join("LEFT JOIN", "employee e", "e.employeeId = kpi_employee.employeeId")
+                // ปรับเงื่อนไข status ให้สอดคล้องกับชุดก่อนหน้า (คือ 1, 2, 4 และไม่ใช่ 99)
+                ->where([
+                    "kpi_employee.status" => [1, 2, 4],
+                    "k.status" => [1, 2, 4],
+                    "e.status" => 1
+                ])
+                ->andWhere("k.companyId IS NOT NULL")
+                ->orderBy('kpi_employee.updateDateTime DESC')
                 ->asArray()
                 ->all();
         }
