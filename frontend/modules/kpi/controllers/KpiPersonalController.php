@@ -103,6 +103,7 @@ class KpiPersonalController extends Controller
 	{
 		$groupId = Group::currentGroupId();
 		$isAdmin = UserRole::isAdmin();
+		$isManager = UserRole::isManager();
 		$userBranchId = User::userBranchId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
@@ -176,7 +177,6 @@ class KpiPersonalController extends Controller
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
 		$months = ModelMaster::monthFull(1);
-		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId($userId);
 		$employeeCompanyId = $employee["companyId"];
 		$totalKpi = KpiEmployee::totalKpiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
