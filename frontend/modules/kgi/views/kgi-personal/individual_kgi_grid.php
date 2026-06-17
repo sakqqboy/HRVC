@@ -15,13 +15,13 @@ $this->title = Yii::t('app', 'Individual KGI');
         if ($role >= 3) {
 
         ?>
-            <div class="d-flex <?= $waitForApprove["totalRequest"] > 0 ? 'approval-box' : 'noapproval-box' ?> text-center">
+            <div class="d-flex <?= $waitForApprove > 0 ? 'approval-box' : 'noapproval-box' ?> text-center">
                 <?php
-                if ($waitForApprove["totalRequest"] > 0) {
+                if ($waitForApprove > 0) {
                 ?>
                     <a href="<?= Yii::$app->homeUrl ?>kgi/management/wait-approve-kgi-personal"
                         class="d-flex align-items-center" style="text-decoration: none; color:#000000;">
-                        <span class="approvals-num mr-3"><?= $waitForApprove["totalRequest"] ?></span>
+                        <span class="approvals-num mr-3"><?= $waitForApprove ?></span>
                         <?= Yii::t('app', 'Approvals') ?>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approvals.svg" style="width: 16px;height:16px;"
                             class="ml-3">
@@ -29,7 +29,7 @@ $this->title = Yii::t('app', 'Individual KGI');
                 <?php
                 } else { ?>
                     <a style=" text-decoration: none;color:#2D7F06;" class="d-flex align-items-center">
-                        <span class="noapprovals-num mr-3"><?= $waitForApprove["totalRequest"] ?></span>
+                        <span class="noapprovals-num mr-3"><?= $waitForApprove ?></span>
                         <?= Yii::t('app', 'No Approvals') ?>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/check.svg" style="width: 16px;height:16px;"
                             class="ml-3">

@@ -454,18 +454,28 @@ if (!$nextCheckDate) {
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="LinkedIn" style="width: 16px; height: 16px;">
                                 </div>
                                 <div class="flex-grow-1 pr-5 pl-25 select-form-pim" id="multi-mount-year" name="fromMonthYear" onclick="openDatePicker()">
-                                    <div id="multi-month-year-text" class="text-truncate text-center pr-5" style="width:190px;">
+                                    <!-- <div id="multi-month-year-text" class="text-truncate text-center pr-5" style="width:190px;">
                                         <?= Yii::t('app', 'Select the Month & Year') ?>
                                     </div>
-                                    <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
+                                    <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i> -->
+                                    <div id="multi-month-year-text" class="text-truncate text-center pr-5" style="width:190px;">
+                                        <?php
+                                        // แสดงชื่อเดือนและปีที่ส่งมาจากหลังบ้านแทนข้อความ "Select..." 
+                                        if (isset($data['month']) && isset($data['year'])) {
+                                            echo ModelMaster::fullMonthText((int)$data['month']) . ' ' . $data['year'];
+                                        } else {
+                                            echo Yii::t('app', 'Select the Month & Year');
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
                                 <input type="hidden" id="hiddenMonth" name="month"
                                     value="<?= htmlspecialchars($data['month'] ?? '') ?>" required>
                                 <input type="hidden" id="hiddenYear" name="year"
                                     value="<?= htmlspecialchars($data['year'] ?? '') ?>" required>
                             </div>
-                            <div id="monthYearPicker" class="mount-year">
-                                <select id="monthSelect" class="form-select" onchange="closeDatePicker()" required>
+                            <div id="monthYearPicker" class="mount-year" style="display: none !important;">
+                                <select id="monthSelect" class="form-select" onchange="closeDatePicker()" required disabled>
                                     <option value="01"><?= Yii::t('app', 'January') ?></option>
                                     <option value="02"><?= Yii::t('app', 'February') ?></option>
                                     <option value="03"><?= Yii::t('app', 'March') ?></option>
@@ -479,9 +489,9 @@ if (!$nextCheckDate) {
                                     <option value="11"><?= Yii::t('app', 'November') ?></option>
                                     <option value="12"><?= Yii::t('app', 'December') ?></option>
                                 </select>
+
                                 <select id="yearSelect" class="form-select" style="margin-top: 10px;"
-                                    onchange="closeDatePicker()" required>
-                                    <!-- ปีที่ถูกสร้างจะถูกเพิ่มที่นี่ -->
+                                    onchange="closeDatePicker()" required disabled>
                                 </select>
                             </div>
                         </div>
