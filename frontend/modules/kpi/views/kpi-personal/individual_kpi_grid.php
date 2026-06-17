@@ -12,15 +12,15 @@ $this->title = Yii::t('app', 'Individual KPI');
             class="pim-head-icon mr-11 mt-2">
         <span class="pim-head-text mr-10"><?= Yii::t('app', 'Team Key Performance Indicators') ?></strong></span>
         <?php
-        if ($role > 3) {
+        if ($role >= 3) {
 
         ?>
             <div class="d-flex <?= $waitForApprove["totalRequest"] > 0 ? 'approval-box' : 'noapproval-box' ?> text-center">
                 <?php
                 if ($waitForApprove["totalRequest"] > 0) {
                 ?>
-                    <a href="<?= Yii::$app->homeUrl ?>kpi/management/wait-approve" class="d-flex align-items-center"
-                        style="text-decoration: none; color:#000000;">
+                    <a href="<?= Yii::$app->homeUrl ?>kpi/management/wait-approve-kpi-personal"
+                        class="d-flex align-items-center" style="text-decoration: none; color:#000000;">
                         <span class="approvals-num mr-3"><?= $waitForApprove["totalRequest"] ?></span>
                         <?= Yii::t('app', 'Approvals') ?>
                         <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/approvals.svg" style="width: 16px;height:16px;"

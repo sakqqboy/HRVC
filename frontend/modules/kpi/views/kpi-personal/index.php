@@ -223,20 +223,20 @@ $this->title = Yii::t('app', 'Individual KPI');
                                         }
                                         ?>
                                         <div id="progress1">
-                                            
-                                                <?php
-                                                 if($showResult != 0){
-                                                ?>
+
+                                            <?php
+                                            if ($showResult != 0) {
+                                            ?>
                                                 <div data-num="<?= $showPercent ?>"
-                                                class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
-                                                <?php
-                                                 } else {
-                                                ?>
-                                                <div data-num="<?= $showPercent ?>"  data-value="<?= $showPercent ?>%" 
+                                                    class="progress-pim-table progress-circle-<?= $colorFormat ?>"></div>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <div data-num="<?= $showPercent ?>" data-value="<?= $showPercent ?>%"
                                                     class="progress-pim-table progress-circle-<?= $colorFormat ?>"><?= $showPercent ?>%</div>
-                                                <?php
-                                                 }
-                                                ?>
+                                            <?php
+                                            }
+                                            ?>
                                         </div>
                                     </td>
                                     <td><?= Yii::t('app', $kpi["month"]) ?></td>

@@ -31,10 +31,12 @@ return 'default_language';
 public function rules()
 {
 return [
-            [['countryId', 'status'], 'integer'],
+            [['countryId'], 'integer'],
+            [['status'], 'required'],
             [['createDatetime', 'updateDatetime'], 'safe'],
             [['language'], 'string', 'max' => 5],
             [['languageName'], 'string', 'max' => 255],
+            [['status'], 'string', 'max' => 10],
         ];
 }
 

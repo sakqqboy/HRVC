@@ -1,3 +1,9 @@
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/highcharts@11.4.1/highcharts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/11.4.1/highcharts.js"></script>
+
 <div class="chart-container">
 
     <div class="chart-prevnext-Button">
@@ -50,7 +56,7 @@ $months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct',
 $categories = array_map(fn($month) => $month . ' ' . $currentYearShort, $months);
 ?>
 
-<script src="https://code.highcharts.com/highcharts.js"></script>
+<!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {

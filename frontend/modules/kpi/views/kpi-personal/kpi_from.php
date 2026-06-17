@@ -501,10 +501,10 @@ if (!$nextCheckDate) {
                                     <img src="<?= Yii::$app->homeUrl ?>image/calendar-gray.svg" alt="to" class="calendar-due-image">
                                 </div>
                                 <div class="flex-grow-1 pr-5 pl-35 select-form-pim" id="due-term-default">
-                                        <div id="multi-due-term-text" class="text-truncate text-center pr-5" style="width:210px;" title="<?= Yii::t('app', 'Select the Due Term Start & End Date') ?>">
-                                            <?= Yii::t('app', 'Select the Due Term Start & End Date') ?>
-                                        </div>
-                                        <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
+                                    <div id="multi-due-term-text" class="text-truncate text-center pr-5" style="width:210px;" title="<?= Yii::t('app', 'Select the Due Term Start & End Date') ?>">
+                                        <?= Yii::t('app', 'Select the Due Term Start & End Date') ?>
+                                    </div>
+                                    <i class="fa fa-angle-down" aria-hidden="true" style="right:15px;position:absolute;"></i>
                                 </div>
                             </div>
                             <input type="hidden" id="fromDate" name="fromDate"

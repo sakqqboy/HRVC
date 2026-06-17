@@ -33,7 +33,7 @@ return [
             [['departmentId', 'titleId'], 'required'],
             [['departmentId', 'titleId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

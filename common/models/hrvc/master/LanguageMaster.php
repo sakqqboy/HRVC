@@ -9,6 +9,8 @@ use Yii;
 *
     * @property integer $LanguageId
     * @property string $name
+    * @property string $symbol
+    * @property integer $countryId
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
@@ -30,8 +32,10 @@ public function rules()
 {
 return [
             [['name'], 'required'],
+            [['countryId'], 'integer'],
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['name'], 'string', 'max' => 255],
+            [['symbol'], 'string', 'max' => 3],
             [['status'], 'string', 'max' => 10],
         ];
 }
@@ -44,6 +48,8 @@ public function attributeLabels()
 return [
     'LanguageId' => 'Language ID',
     'name' => 'Name',
+    'symbol' => 'Symbol',
+    'countryId' => 'Country ID',
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',

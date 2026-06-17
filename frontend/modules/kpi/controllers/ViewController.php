@@ -622,7 +622,7 @@ class ViewController extends Controller
 		]);
 		return json_encode($res);
 	}
-	
+
 	public function actionKpiHasKgi()
 	{
 		$role = UserRole::userRight();

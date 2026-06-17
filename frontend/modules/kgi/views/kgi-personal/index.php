@@ -219,20 +219,20 @@ $this->title = Yii::t('app', 'Individual KGI');
                                     </td>
                                     <td>
                                         <div id="progress1">
-                                                <?php
-                                                 if($showResult != 0){
-                                                ?>
+                                            <?php
+                                            if ($showResult != 0) {
+                                            ?>
                                                 <div data-num="<?= $kgi["ratio"] == '' ? 0 : $kgi["ratio"] ?>"
-                                                class="progress-pim-table progress-circle-<?= $colorFormat ?>">
+                                                    class="progress-pim-table progress-circle-<?= $colorFormat ?>">
                                                 </div>
-                                                <?php
-                                                 } else {
-                                                ?>
-                                                <div data-num="<?= $showResult ?>"  data-value="<?= $showResult ?>%" 
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <div data-num="<?= $showResult ?>" data-value="<?= $showResult ?>%"
                                                     class="progress-pim-table progress-circle-<?= $colorFormat ?>"><?= $showResult ?>%</div>
-                                                <?php
-                                                 }
-                                                ?>
+                                            <?php
+                                            }
+                                            ?>
                                         </div>
                                     </td>
                                     <td><?= Yii::t('app', $kgi["month"]) ?></td>

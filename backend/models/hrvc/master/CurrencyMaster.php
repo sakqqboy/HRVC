@@ -33,7 +33,7 @@ return [
             [['name'], 'string', 'max' => 20],
             [['code'], 'string', 'max' => 3],
             [['symbol'], 'string', 'max' => 5],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 

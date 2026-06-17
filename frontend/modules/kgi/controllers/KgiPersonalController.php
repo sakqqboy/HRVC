@@ -14,6 +14,7 @@ use frontend\models\hrvc\Group;
 use frontend\models\hrvc\Kgi;
 use frontend\models\hrvc\KgiEmployee;
 use frontend\models\hrvc\KgiEmployeeHistory;
+use frontend\models\hrvc\KgiEmployeeRequest;
 use frontend\models\hrvc\KgiTeam;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\Unit;
@@ -169,7 +170,7 @@ class KgiPersonalController extends Controller
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$kgis = Api::connectApi(Path::Api() . 'kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
+		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin . '&&isManager=' . $isManager . '&&userId=' .  $userId);
 
 
 
@@ -255,6 +256,8 @@ class KgiPersonalController extends Controller
 			$staffId = Yii::$app->user->id;
 		}
 		$isAdmin = UserRole::isAdmin();
+		$isManager = UserRole::isManager();
+		$userId = Yii::$app->user->id;
 		$userBranchId = User::userBranchId();
 		$teams = [];
 		$session = Yii::$app->session;
@@ -302,7 +305,8 @@ class KgiPersonalController extends Controller
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$kgis = Api::connectApi(Path::Api() . 'kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
+		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin . '&&isManager=' . $isManager . '&&userId=' .  $userId);
+		// throw new Exception(print_r($waitForApprove, true));
 		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = 0;
@@ -546,6 +550,8 @@ class KgiPersonalController extends Controller
 	{
 		$param = ModelMaster::decodeParams($hash);
 		$isAdmin = UserRole::isAdmin();
+		$isManager = UserRole::isManager();
+		$uId = Yii::$app->user->id;
 		$userBranchId = User::userBranchId();
 		$month = $param["month"];
 		$status = $param["status"];
@@ -591,8 +597,7 @@ class KgiPersonalController extends Controller
 		$kgis = Api::connectApi(Path::Api() . 'kgi/kgi-personal/kgi-personal-filter?' . $paramText);
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
-		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
-
+		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin . '&&isManager=' . $isManager . '&&userId=' .  $uId);
 
 		if ($role >= 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);
@@ -1023,5 +1028,91 @@ class KgiPersonalController extends Controller
 		]);
 
 		return json_encode($res);
+	}
+	public function actionEmployeeUpdateHistory($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$role = UserRole::userRight();
+		$kgiEmployeeId = $param["kgiEmployeeId"];
+		$kgiEmployeeHistoryId = $param["kgiEmployeeHistoryId"];
+		$kgiEmployeeDetail = Api::connectApi(Path::Api() . 'kgi/kgi-personal/kgi-employee-detail?kgiEmployeeId=' . $kgiEmployeeId . '&&kgiEmployeeHistoryId=' . $kgiEmployeeHistoryId);
+		$kgi = Api::connectApi(Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiEmployeeDetail['kgiId'] . '&&kgiHistoryId=0');
+		$kgiBranch = Api::connectApi(Path::Api() . 'kgi/management/kgi-branch?id=' . $kgiEmployeeDetail["kgiId"]);
+		$kgiDepartment = Api::connectApi(Path::Api() . 'kgi/management/kgi-department?id=' . $kgiEmployeeDetail["kgiId"]);
+		$kgiTeam = Api::connectApi(Path::Api() . 'kgi/management/kgi-team?id=' . $kgiEmployeeDetail["kgiId"]);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$companyId = $kgi["companyId"];
+		$company = [
+			"companyId" => $kgi["companyId"],
+			"companyName" => Company::companyName($kgi["companyId"]),
+			"companyImg" => Company::companyImage($kgi["companyId"]),
+		];
+		$unit = Unit::find()->where(["unitId" => $kgi["unitId"]])->asArray()->one();
+		$months = ModelMaster::monthFull(1);
+		// throw new Exception(print_r($kgiEmployeeDetail, true));
+		return $this->render('employee_update_history', [
+			"kgi" => $kgi,
+			"kgiEmployeeId" => $kgiEmployeeId,
+			"kgiEmployeeHistoryId" => $kgiEmployeeHistoryId,
+			"data" => $kgiEmployeeDetail,
+			"months" => $months,
+			"company" => $company ?? [],
+			"kgiBranch" => $kgiBranch ?? [],
+			"kgiDepartment" => $kgiDepartment ?? [],
+			"kgiTeam" => $kgiTeam ?? [],
+			"role" => $role,
+			"unit"  => $unit,
+			// "statusform" =>  "update",
+			"url" => Yii::$app->request->referrer,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
+		]);
+	}
+
+	public function actionSaveUpdateEmployeeHistory()
+	{
+		$userId = Yii::$app->user->id;
+		$kgiEmployeeId = $_POST["kgiEmployeeId"] ?? null;
+		$kgiEmployeeHistoryId = $_POST["kgiEmployeeHistoryId"] ?? null;
+		$reason = $_POST["reason"] ?? null;
+		$newResult = str_replace(",", "", $_POST["result"] ?? 0);
+		$newTarget = str_replace(",", "", $_POST["amount"] ?? 0);
+		if ($kgiEmployeeId && $kgiEmployeeHistoryId) {
+			$oldHistory = KgiEmployeeHistory::findOne($kgiEmployeeHistoryId);
+
+			if ($oldHistory) {
+				$status = 0; // 0: Pending สำหรับตาราง Request
+
+				$kgiRequest = new KgiEmployeeRequest();
+				$kgiRequest->kgiEmployeeId = $kgiEmployeeId;
+				$kgiRequest->kgiEmployeeHistoryId = $kgiEmployeeHistoryId;
+				$kgiRequest->userId = $userId;
+				$kgiRequest->old_result = $oldHistory->result;
+				$kgiRequest->new_result = $newResult;
+				$kgiRequest->old_target = $oldHistory->target;
+				$kgiRequest->new_target = $newTarget;
+				$kgiRequest->reason = $reason;
+				$kgiRequest->status = $status;
+				$kgiRequest->created_at = new Expression('NOW()');
+				$kgiRequest->updated_at = new Expression('NOW()');
+
+				if ($kgiRequest->save(false)) {
+					return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
+				} else {
+					Yii::$app->session->setFlash('error', Yii::t('app', 'Failed to save request.'));
+					return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
+				}
+			}
+		}
+
+		// Redirect กลับไปหน้าเดิม (ใช้ค่า URL จากฟอร์มเหมือนโค้ดเดิม)
+		// return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
 	}
 }

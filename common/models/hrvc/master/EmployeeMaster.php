@@ -12,7 +12,9 @@ use Yii;
     * @property string $employeeFirstname
     * @property string $employeeSurename
     * @property string $employeeNickname
+    * @property string $salutation
     * @property integer $gender
+    * @property string $maritalStatus
     * @property string $birthDate
     * @property string $email
     * @property string $companyEmail
@@ -42,6 +44,11 @@ use Yii;
     * @property integer $status
     * @property string $createDateTime
     * @property string $updateDateTime
+    * @property integer $defaultLanguage
+    * @property string $probationStart
+    * @property string $probationEnd
+    * @property integer $probationStatus
+    * @property string $skills
 */
 class EmployeeMaster extends \common\models\ModelMaster
 {
@@ -60,12 +67,13 @@ public function rules()
 {
 return [
             [['employeeFirstname', 'employeeSurename', 'gender', 'email', 'telephoneNumber', 'companyId', 'branchId', 'departmentId', 'titleId', 'employeeConditionId'], 'required'],
-            [['birthDate', 'joinDate', 'hireDate', 'createDateTime', 'updateDateTime'], 'safe'],
-            [['companyId', 'branchId', 'departmentId', 'titleId', 'teamId', 'teamPositionId', 'countryId', 'employeeConditionId', 'nationalityId', 'workingTime'], 'integer'],
-            [['address1', 'address2', 'spoken', 'socialLink', 'remark'], 'string'],
+            [['salutation', 'maritalStatus', 'address1', 'address2', 'spoken', 'socialLink', 'remark', 'skills'], 'string'],
+            [['birthDate', 'joinDate', 'hireDate', 'createDateTime', 'updateDateTime', 'probationStart', 'probationEnd'], 'safe'],
+            [['companyId', 'branchId', 'departmentId', 'titleId', 'teamId', 'teamPositionId', 'countryId', 'employeeConditionId', 'nationalityId', 'workingTime', 'defaultLanguage'], 'integer'],
             [['employeeNumber', 'employeeFirstname', 'employeeSurename', 'employeeNickname', 'email', 'contact'], 'string', 'max' => 100],
             [['gender', 'status'], 'string', 'max' => 4],
             [['companyEmail', 'telephoneNumber', 'emergencyTel', 'picture', 'resume', 'employeeAgreement'], 'string', 'max' => 255],
+            [['probationStatus'], 'string', 'max' => 10],
         ];
 }
 
@@ -80,7 +88,9 @@ return [
     'employeeFirstname' => 'Employee Firstname',
     'employeeSurename' => 'Employee Surename',
     'employeeNickname' => 'Employee Nickname',
+    'salutation' => 'Salutation',
     'gender' => 'Gender',
+    'maritalStatus' => 'Marital Status',
     'birthDate' => 'Birth Date',
     'email' => 'Email',
     'companyEmail' => 'Company Email',
@@ -110,6 +120,11 @@ return [
     'status' => 'Status',
     'createDateTime' => 'Create Date Time',
     'updateDateTime' => 'Update Date Time',
+    'defaultLanguage' => 'Default Language',
+    'probationStart' => 'Probation Start',
+    'probationEnd' => 'Probation End',
+    'probationStatus' => 'Probation Status',
+    'skills' => 'Skills',
 ];
 }
 }

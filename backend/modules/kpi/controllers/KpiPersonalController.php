@@ -13,6 +13,7 @@ use backend\models\hrvc\Kpi;
 use backend\models\hrvc\KpiBranch;
 use backend\models\hrvc\KpiEmployee;
 use backend\models\hrvc\KpiEmployeeHistory;
+use backend\models\hrvc\KpiEmployeeRequest;
 use backend\models\hrvc\KpiHistory;
 use backend\models\hrvc\KpiIssue;
 use backend\models\hrvc\KpiTeam;
@@ -925,13 +926,50 @@ class KpiPersonalController extends Controller
 		}
 		return json_encode($data);
 	}
-	public function actionWaitForApprove()
+	public function actionWaitForApprove($branchId, $isAdmin, $isManager, $userId)
 	{
-		$kpiEmployee = KpiEmployeeHistory::find()
-			->where(["status" => 88])
-			->asArray()
-			->all();
-		$res["totalRequest"] = count($kpiEmployee);
+		// $kpiEmployee = KpiEmployeeHistory::find()
+		// 	->where(["status" => 88])
+		// 	->asArray()
+		// 	->all();
+
+		// $kpiRequest = KpiEmployeeRequest::find()
+		// 	->where(["status" => 0])
+		// 	->asArray()
+		// 	->all();
+
+		// $res["totalRequest"] = count($kpiEmployee) + count($kpiRequest);
+
+		$teamId = User::userTeamId($userId);
+		$totalHistory = 0;
+		$totalRequest = 0;
+
+		// ตรวจสอบ query พื้นฐานก่อน
+		$queryHistory = KpiEmployeeHistory::find()
+			->innerJoin('kpi_employee ke', 'ke.kpiEmployeeId = kpi_employee_history.kpiEmployeeId')
+			->innerJoin('employee e', 'e.employeeId = ke.employeeId')
+			->where(['kpi_employee_history.status' => 88]);
+
+		$queryRequest = KpiEmployeeRequest::find()
+			->innerJoin('kpi_employee ke', 'ke.kpiEmployeeId = kpi_employee_request.kpiEmployeeId')
+			->innerJoin('employee e', 'e.employeeId = ke.employeeId')
+			->where(['kpi_employee_request.status' => 0]);
+
+		// เพิ่มเงื่อนไขตามสิทธิ์
+		if ($isAdmin == 1 || $isAdmin == "1") {
+			// ผู้ดูแลระบบสามารถเห็นได้ทั้งหมด ไม่ต้องเพิ่มเงื่อนไข
+		} else if ($isManager == 1 || $isManager == "1") {
+			// $queryHistory->andWhere(['e.branchId' => $branchId]);
+			// $queryRequest->andWhere(['e.branchId' => $branchId]);
+		} else {
+			$queryHistory->andWhere(['e.teamId' => $teamId]);
+			$queryRequest->andWhere(['e.teamId' => $teamId]);
+		}
+
+		$totalHistory = $queryHistory->count();
+		$totalRequest = $queryRequest->count();
+
+		$res["totalRequest"] = (int)$totalHistory + (int)$totalRequest;
 		return json_encode($res);
 	}
 	public function actionSetNextCheckDate()

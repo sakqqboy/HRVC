@@ -15,6 +15,7 @@ use frontend\components\Api;
 use frontend\models\hrvc\Kpi;
 use frontend\models\hrvc\KpiEmployee;
 use frontend\models\hrvc\KpiEmployeeHistory;
+use frontend\models\hrvc\KpiEmployeeRequest;
 use frontend\models\hrvc\KpiTeam;
 use frontend\models\hrvc\Team;
 use frontend\models\hrvc\Unit;
@@ -101,6 +102,9 @@ class KpiPersonalController extends Controller
 	public function actionIndividualKpi($hash = null)
 	{
 		$groupId = Group::currentGroupId();
+		$isAdmin = UserRole::isAdmin();
+		$isManager = UserRole::isManager();
+		$userBranchId = User::userBranchId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
@@ -163,7 +167,8 @@ class KpiPersonalController extends Controller
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$kpis = Api::connectApi(Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve');
+		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin . '&&isManager=' . $isManager . '&&userId=' . $userId);
+		// throw new Exception(print_r($waitForApprove, true));
 		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = 0;
@@ -172,7 +177,6 @@ class KpiPersonalController extends Controller
 			$companyPic = Company::randomPic($allCompany, 3);
 		}
 		$months = ModelMaster::monthFull(1);
-		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId($userId);
 		$employeeCompanyId = $employee["companyId"];
 		$totalKpi = KpiEmployee::totalKpiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
@@ -208,13 +212,15 @@ class KpiPersonalController extends Controller
 
 	public function actionIndividualKpiGrid($hash = null)
 	{
+		$userId = Yii::$app->user->id;
 		$role = UserRole::userRight();
+		$isAdmin = UserRole::isAdmin();
+		$isManager = UserRole::isManager();
 		$groupId = Group::currentGroupId();
 		if ($groupId == null) {
 			return $this->redirect(Yii::$app->homeUrl . 'setting/group/create-group');
 		}
-		$userId = Yii::$app->user->id;
-		$isAdmin = UserRole::isAdmin();
+
 		$userBranchId = User::userBranchId();
 		$session = Yii::$app->session;
 		$adminId = '';
@@ -273,18 +279,19 @@ class KpiPersonalController extends Controller
 		$units = Api::connectApi(Path::Api() . 'masterdata/unit/all-unit');
 		$companies = Api::connectApi(Path::Api() . 'masterdata/group/company-group?id=' . $groupId);
 		$kpis = Api::connectApi(Path::Api() . 'kpi/kpi-personal/employee-kpi?userId=' . $userId . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
-		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
+		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin . '&&isManager=' . $isManager . '&&userId=' . $userId);
 		$teams = [];
 		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = count($allCompany);
 		$companyPic = $countAllCompany > 0 ? Company::randomPic($allCompany, 3) : [];
 		$months = ModelMaster::monthFull(1);
-		$isManager = UserRole::isManager();
 		$employee = Employee::employeeDetailByUserId($userId);
 		$employeeCompanyId = $employee["companyId"];
 		$totalKpi = KpiEmployee::totalKpiEmployee($adminId, $gmId, $managerId, $supervisorId, $teamLeaderId, $staffId, $employee["employeeId"]);
 		$totalPage = ceil($totalKpi / $limit);
+		// throw new Exception("all KPI: " . print_r($kpis, true));
+		// throw new Exception("Total KPI: " . $totalKpi . " Total Page: " . $totalPage);
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
 		return $this->render('individual_kpi_grid', [
 			"units" => $units,
@@ -663,6 +670,7 @@ class KpiPersonalController extends Controller
 		]);
 	}
 
+
 	public function actionSaveUpdatePersonalKpi()
 	{
 		$data = [
@@ -924,6 +932,7 @@ class KpiPersonalController extends Controller
 		$teams = [];
 		$userId = Yii::$app->user->id;
 		$isAdmin = UserRole::isAdmin();
+		$isManager = UserRole::isManager();
 		$userBranchId = User::userBranchId();
 		$session = Yii::$app->session;
 
@@ -971,7 +980,7 @@ class KpiPersonalController extends Controller
 		$currentPage = isset($param["currentPage"]) ? $param["currentPage"] : 1;
 		$kpis = Api::connectApi(Path::Api() . 'kpi/kpi-personal/kpi-personal-filter?' . $paramText);
 		// throw new Exception(print_r($kpis['total'],true));
-		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve');
+		$waitForApprove = Api::connectApi(Path::Api() . 'kpi/kpi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin . '&&isManager=' . $isManager . '&&userId=' . $userId);
 
 		if ($role == 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);
@@ -991,7 +1000,6 @@ class KpiPersonalController extends Controller
 		$employee = Employee::employeeDetailByUserId(Yii::$app->user->id);
 		$employeeCompanyId = $employee["companyId"];
 		$months = ModelMaster::monthFull(1);
-		$isManager = UserRole::isManager();
 		$totalKpi = $kpis['total'];
 		$totalPage = ceil($totalKpi / $limit);
 		$pagination = ModelMaster::getPagination($currentPage, $totalPage);
@@ -1076,5 +1084,91 @@ class KpiPersonalController extends Controller
 		}
 		// return $this->redirect(Yii::$app->homeUrl . 'kpi/kpi-personal/individual-kpi-grid');
 		return $this->redirect(Yii::$app->request->referrer);
+	}
+
+	public function actionEmployeeUpdateHistory($hash)
+	{
+		$param = ModelMaster::decodeParams($hash);
+		$role = UserRole::userRight();
+		$kpiEmployeeId = $param["kpiEmployeeId"];
+		$kpiEmployeeHistoryId = $param["kpiEmployeeHistoryId"];
+		$kpiEmployeeDetail = Api::connectApi(Path::Api() . 'kpi/kpi-personal/kpi-employee-detail?kpiEmployeeId=' . $kpiEmployeeId . '&&kpiEmployeeHistoryId=' . $kpiEmployeeHistoryId);
+		$kpi = Api::connectApi(Path::Api() . 'kpi/management/kpi-detail?id=' . $kpiEmployeeDetail['kpiId'] . '&&kpiHistoryId=0');
+		$kpiBranch = Api::connectApi(Path::Api() . 'kpi/management/kpi-branch?id=' . $kpiEmployeeDetail["kpiId"]);
+		$kpiDepartment = Api::connectApi(Path::Api() . 'kpi/management/kpi-department?id=' . $kpiEmployeeDetail['kpiId']);
+		$kpiTeam = Api::connectApi(Path::Api() . 'kpi/management/kpi-team?id=' . $kpiEmployeeDetail['kpiId']);
+		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
+		$totalBranch = Branch::totalBranch();
+		$countAllCompany = 0;
+		if (count($allCompany) > 0) {
+			$countAllCompany = count($allCompany);
+			$companyPic = Company::randomPic($allCompany, 3);
+		}
+		$companyId = $kpi["companyId"];
+		$company = [
+			"companyId" => $kpi["companyId"],
+			"companyName" => Company::companyName($kpi["companyId"]),
+			"companyImg" => Company::companyImage($kpi["companyId"]),
+		];
+		$unit = Unit::find()->where(["unitId" => $kpi["unitId"]])->asArray()->one();
+		$months = ModelMaster::monthFull(1);
+		return $this->render('employee_update_history', [
+			"kpi" => $kpi,
+			"kpiEmployeeId" => $kpiEmployeeId,
+			"kpiEmployeeHistoryId" => $kpiEmployeeHistoryId,
+			"data" => $kpiEmployeeDetail,
+			"months" => $months,
+			"company" => $company ?? [],
+			"kpiBranch" => $kpiBranch ?? [],
+			"kpiDepartment" => $kpiDepartment ?? [],
+			"kpiTeam" => $kpiTeam ?? [],
+			"role" => $role,
+			"unit"  => $unit,
+			// "statusform" =>  "update",
+			"url" => Yii::$app->request->referrer,
+			"allCompany" => $countAllCompany,
+			"companyPic" => $companyPic,
+			"totalBranch" => $totalBranch
+		]);
+	}
+
+	public function actionSaveUpdateEmployeeHistory()
+	{
+		$userId = Yii::$app->user->id;
+		$kpiEmployeeId = $_POST["kpiEmployeeId"] ?? null;
+		$kpiEmployeeHistoryId = $_POST["kpiEmployeeHistoryId"] ?? null;
+		$reason = $_POST["reason"] ?? null;
+		$newResult = str_replace(",", "", $_POST["result"] ?? 0);
+		$newTarget = str_replace(",", "", $_POST["amount"] ?? 0);
+		if ($kpiEmployeeId && $kpiEmployeeHistoryId) {
+			$oldHistory = KpiEmployeeHistory::findOne($kpiEmployeeHistoryId);
+
+			if ($oldHistory) {
+				$status = 0; // 0: Pending สำหรับตาราง Request
+
+				$kpiRequest = new KpiEmployeeRequest();
+				$kpiRequest->kpiEmployeeId = $kpiEmployeeId;
+				$kpiRequest->kpiEmployeeHistoryId = $kpiEmployeeHistoryId;
+				$kpiRequest->userId = $userId;
+				$kpiRequest->old_result = $oldHistory->result;
+				$kpiRequest->new_result = $newResult;
+				$kpiRequest->old_target = $oldHistory->target;
+				$kpiRequest->new_target = $newTarget;
+				$kpiRequest->reason = $reason;
+				$kpiRequest->status = $status;
+				$kpiRequest->created_at = new Expression('NOW()');
+				$kpiRequest->updated_at = new Expression('NOW()');
+
+				if ($kpiRequest->save(false)) {
+					return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
+				} else {
+					Yii::$app->session->setFlash('error', Yii::t('app', 'Failed to save request.'));
+					return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
+				}
+			}
+		}
+
+		// Redirect กลับไปหน้าเดิม (ใช้ค่า URL จากฟอร์มเหมือนโค้ดเดิม)
+		// return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
 	}
 }

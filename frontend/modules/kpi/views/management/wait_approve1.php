@@ -12,7 +12,11 @@ $this->title = Yii::t('app', 'Waiting for approve KPI');
     </div>
     <div class="col-12 mt-10">
         <?= $this->render('header_filter', [
-            "role" => $role
+            "role" => $role,
+            "allCompany" => $allCompany,
+            "companyPic" => $companyPic,
+            "totalBranch" => $totalBranch,
+            "page" => 'grid'
         ]) ?>
     </div>
     <?php

@@ -20,8 +20,8 @@ use Yii;
     * @property string $postalCode
     * @property string $industries
     * @property string $founded
-    * @property integer $directorId
     * @property string $email
+    * @property integer $directorId
     * @property string $contact
     * @property string $specialties
     * @property string $socialTag
@@ -54,7 +54,7 @@ return [
             [['createDateTime', 'updateDateTime'], 'safe'],
             [['companyName', 'website', 'displayName', 'tagLine', 'city', 'banner', 'picture'], 'string', 'max' => 255],
             [['postalCode', 'founded', 'email'], 'string', 'max' => 100],
-            [['status'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 4],
         ];
 }
 
@@ -77,8 +77,8 @@ return [
     'postalCode' => 'Postal Code',
     'industries' => 'Industries',
     'founded' => 'Founded',
-    'directorId' => 'Director ID',
     'email' => 'Email',
+    'directorId' => 'Director ID',
     'contact' => 'Contact',
     'specialties' => 'Specialties',
     'socialTag' => 'Social Tag',
