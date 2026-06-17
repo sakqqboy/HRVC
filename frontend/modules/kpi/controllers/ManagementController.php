@@ -1875,8 +1875,7 @@ class ManagementController extends Controller
                 // โดยกรองคู่กับ employeeId และ kpiId จาก $history เพื่อให้ได้แถวหลักที่ถูกต้อง
                 $kpiEmployee = KpiEmployee::find()
                     ->where([
-                        'employeeId' => $history->employeeId,
-                        'kpiId' => $history->kpiId,
+                        'kpiEmployeeId' => $history->kpiEmployeeId,
                         'month' => $history->month,
                         'year' => $history->year
                     ])
