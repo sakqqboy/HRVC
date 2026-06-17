@@ -1871,6 +1871,24 @@ class ManagementController extends Controller
                     $history->updateDateTime = new \yii\db\Expression('NOW()');
                     $history->save(false);
                 }
+                // 3. ดึง month และ year จาก $history ไปค้นหาข้อมูลแบบเดียวกันในตาราง KpiEmployee
+                // โดยกรองคู่กับ employeeId และ kpiId จาก $history เพื่อให้ได้แถวหลักที่ถูกต้อง
+                $kpiEmployee = KpiEmployee::find()
+                    ->where([
+                        'employeeId' => $history->employeeId,
+                        'kpiId' => $history->kpiId,
+                        'month' => $history->month,
+                        'year' => $history->year
+                    ])
+                    ->one();
+
+                // 4. ถ้าเจอข้อมูลในตาราง kpi_employee ที่ตรงกัน ให้ทำการอัปเดตค่าตามที่ขอมา
+                if ($kpiEmployee) {
+                    $kpiEmployee->target = $request->new_target;
+                    $kpiEmployee->result = $request->new_result;
+                    $kpiEmployee->updateDateTime = new \yii\db\Expression('NOW()');
+                    $kpiEmployee->save(false);
+                }
 
                 $request->status = 1; // Approved
             } else {

@@ -1846,6 +1846,11 @@ class ManagementController extends Controller
 	{
 		$kgiEmployeeHistoryId = $_POST["kgiEmployeeHistoryId"];
 		$approve = $_POST["approve"];
+		// เช็ค เดือนกับปี ของ kgiEmployeeHistoryId
+
+		// เช็ค เดือนกับปี ของ kgiEmployeeId
+
+		// ถ้ามันตรงกันให้อัพเดต result และ result ในตราง
 
 		// 1. ค้นหาคำร้องล่าสุดที่รอการอนุมัติ
 		$request = KgiEmployeeRequest::find()
@@ -1864,6 +1869,25 @@ class ManagementController extends Controller
 					$history->result = $request->new_result;
 					$history->updateDateTime = new \yii\db\Expression('NOW()');
 					$history->save(false);
+				}
+
+				// 3. ดึง month และ year จาก $history ไปค้นหาข้อมูลแบบเดียวกันในตาราง KgiEmployee
+				// โดยกรองคู่กับ employeeId และ kpiId จาก $history เพื่อให้ได้แถวหลักที่ถูกต้อง
+				$kgiEmployee = KgiEmployee::find()
+					->where([
+						'employeeId' => $history->employeeId,
+						'kpiId' => $history->kgiId,
+						'month' => $history->month,
+						'year' => $history->year
+					])
+					->one();
+
+				// 4. ถ้าเจอข้อมูลในตาราง kgi_employee ที่ตรงกัน ให้ทำการอัปเดตค่าตามที่ขอมา
+				if ($kgiEmployee) {
+					$kgiEmployee->target = $request->new_target;
+					$kgiEmployee->result = $request->new_result;
+					$kgiEmployee->updateDateTime = new \yii\db\Expression('NOW()');
+					$kgiEmployee->save(false);
 				}
 
 				$request->status = 1; // Approved
