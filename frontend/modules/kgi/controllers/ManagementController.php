@@ -1994,6 +1994,8 @@ class ManagementController extends Controller
 												$KgiEmployeeHistory->createrId = Yii::$app->user->id;
 												$KgiEmployeeHistory->month = $nextMonth;
 												$KgiEmployeeHistory->year = $nextYear;
+												$KgiEmployeeHistory->target = $empoyee->target;
+												$KgiEmployeeHistory->result = 0.00;
 												$KgiEmployeeHistory->createDateTime = new Expression('NOW()');
 												$KgiEmployeeHistory->updateDateTime = new Expression('NOW()');
 												$KgiEmployeeHistory->detail = "auto set from company kgi";

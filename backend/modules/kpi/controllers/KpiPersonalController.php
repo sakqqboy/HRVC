@@ -107,7 +107,7 @@ class KpiPersonalController extends Controller
 				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
 				->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
-				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kpi_employee.employeeId" => $employeeId, "e.status" => [1]])
+				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kpi_employee.employeeId" => $employeeId, "e.status" =>  [1, 2]])
 				->andWhere("k.companyId is not null")
 				->orderby('k.createDateTime')
 				->asArray()
@@ -121,7 +121,7 @@ class KpiPersonalController extends Controller
 				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
 				->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
-				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "e.teamId" => $teamId, "e.status" => [1]])
+				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "e.teamId" => $teamId, "e.status" =>  [1, 2]])
 				->andWhere("k.companyId is not null")
 				->orderby('k.createDateTime')
 				->asArray()
@@ -134,7 +134,7 @@ class KpiPersonalController extends Controller
 				->JOIN("LEFT JOIN", "kpi k", "kpi_employee.kpiId=k.kpiId")
 				->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
-				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "e.status" => [1]])
+				->where(["kpi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "e.status" =>  [1, 2]])
 				->andWhere("k.companyId is not null")
 				->orderby('k.createDateTime')
 				->asArray()
@@ -720,7 +720,7 @@ class KpiPersonalController extends Controller
 			->JOIN("LEFT JOIN", "kpi_branch kb", "kb.kpiId=k.kpiId")
 			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kpi_employee.employeeId")
 			->where("kpi_employee.status!=99 and k.status!=99 and k.companyId is not null")
-			->andWhere(["e.status" => [1]])
+			->andWhere(["e.status" => [1, 2]])
 			->andFilterWhere([
 				"kb.branchId" => $branchId,
 				"e.teamId" => $teamId,
@@ -1093,7 +1093,7 @@ class KpiPersonalController extends Controller
 			->where([
 				"kpi_employee.status" => [1, 2, 4],
 				"kpi_employee.kpiId" => $kpiId,
-				"e.status" => 1,
+				"e.status" =>  [1, 2],
 				"kpi_employee.month" => $kpi["month"],
 				"kpi_employee.year" => $kpi["year"]
 			])

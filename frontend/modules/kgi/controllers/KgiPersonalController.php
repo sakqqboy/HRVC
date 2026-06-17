@@ -285,12 +285,14 @@ class KgiPersonalController extends Controller
 				$role = 3;
 			}
 		}
+
 		if ($role == 3) {
 			$em = Employee::employeeDetailByUserId(Yii::$app->user->id);
 			if (isset($em) && !empty($em)) {
 				$teams = Api::connectApi(Path::Api() . 'masterdata/branch/branch-team?id=' . $em["branchId"]);
 			}
 		}
+
 		$currentPage = 1;
 		if (isset($hash) && $hash != '') {
 			$pageArr = explode('page', $hash);
@@ -302,7 +304,6 @@ class KgiPersonalController extends Controller
 		$kgis = Api::connectApi(Path::Api() . 'kgi/kgi-personal/employee-kgi?userId=' . Yii::$app->user->id . '&&role=' . $role . '&&currentPage=' . $currentPage . '&&limit=' . $limit);
 		$waitForApprove = Api::connectApi(Path::Api() . 'kgi/kgi-personal/wait-for-approve?branchId=' . $userBranchId . '&&isAdmin=' . $isAdmin);
 		$allCompany = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
-
 		$totalBranch = Branch::totalBranch();
 		$countAllCompany = 0;
 		if (count($allCompany) > 0) {
@@ -347,7 +348,7 @@ class KgiPersonalController extends Controller
 		$param = ModelMaster::decodeParams($hash);
 		$kgiEmployeeId = $param["kgiEmployeeId"];
 		$role = UserRole::userRight();
-
+		//throw new exception(print_r($param, true));
 		$kgiEmployeeDetail = Api::connectApi(Path::Api() . 'kgi/kgi-personal/kgi-employee-detail?kgiEmployeeId=' . $kgiEmployeeId . '&&kgiEmployeeHistoryId=0');
 		$kgi = Api::connectApi(Path::Api() . 'kgi/management/kgi-detail?id=' . $kgiEmployeeDetail['kgiId'] . '&&kgiHistoryId=0');
 		$kgiBranch = Api::connectApi(Path::Api() . 'kgi/management/kgi-branch?id=' . $kgiEmployeeDetail["kgiId"]);
@@ -410,7 +411,7 @@ class KgiPersonalController extends Controller
 					$history->updateDateTime = new Expression('NOW()');
 					// throw new Exception("1");
 				} else {
-					// throw new Exception("3");
+					//throw new Exception($history->target . "=" . $_POST["target"]);
 					if ($history->target != str_replace(",", "", $_POST["target"]) && $history->target != null) {
 						$role = UserRole::userRight();
 						if ($role <= 3) {

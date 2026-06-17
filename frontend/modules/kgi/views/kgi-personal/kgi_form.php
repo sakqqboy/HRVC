@@ -13,7 +13,6 @@ $form = ActiveForm::begin([
 
 ]);
 $this->title = Yii::t('app', 'Update Individual KGI');
-//throw new Exception(print_r($data, true));
 $percentage = isset($data['ratio']) ? round((float)$data['ratio']) : 0;
 $result = $data['result'] ?? 0;
 $value = isset($data['result']) ? $data['result'] : 0;
@@ -30,9 +29,7 @@ $nextCheckDate = !empty($data['nextCheckText'])
 if (!$nextCheckDate) {
     $daysLeft = Yii::t('app', 'Not set');
 } else {
-    // หาวันที่ปัจจุบัน
     $currentDate = new DateTime();
-
     // ตรวจสอบว่า $nextCheckDate เป็น DateTime หรือไม่ ถ้าไม่ใช่ให้พยายามแปลง
     if (!$nextCheckDate instanceof DateTime) {
         $nextCheckDate = DateTime::createFromFormat('Y-m-d', $nextCheckDate);
@@ -161,13 +158,6 @@ if (!$nextCheckDate) {
         <div class="bg-white-pim pr-30 pl-30">
             <div class="row" style="--bs-gutter-x:0px;">
                 <div class="col-6 align-content-center">
-                    <!-- <a href="<?= Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kgi/management/grid' ?>"
-                        class="mr-5 font-size-12" style="text-decoration: none;">
-                        <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back.svg">
-                        <text class="pim-text-back">
-                            <?= Yii::t('app', 'Back') ?>
-                        </text>
-                    </a> -->
                     <div class="pim-name-title" style="display: flex; align-items: center; gap: 14px;">
                         <a href="<?= isset(Yii::$app->request->referrer) ? Yii::$app->request->referrer : Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi-grid' ?>" style="text-decoration: none; width:70px; height:26px;" class="btn-create-branch">
                             <img src="<?= Yii::$app->homeUrl ?>images/icons/Settings/back-white.svg" style="width:18px; height:18px; margin-top:-3px;">

@@ -1847,10 +1847,6 @@ class ManagementController extends Controller
                 foreach ($kpiTeam as $team) :
                     if ($team->month  == $nextMonth && $team->year  == $nextYear) {
                     } else {
-                        // if ($team->status == 1) {
-                        //     $status = 5;
-                        // }
-                        // if ($team->status == 2) {
                         $team->status = 1;
                         $team->month = $nextMonth;
                         $team->year = $nextYear;
@@ -1862,6 +1858,7 @@ class ManagementController extends Controller
                         $kpiTeamHistory = new kpiTeamHistory();
                         $kpiTeamHistory->kpiTeamId = $team->kpiTeamId;
                         $kpiTeamHistory->createrId = Yii::$app->user->id;
+                        $kpiTeamHistory->target = $team->target;
                         $kpiTeamHistory->month = $nextMonth;
                         $kpiTeamHistory->year = $nextYear;
                         $kpiTeamHistory->createDateTime = new Expression('NOW()');
@@ -1876,11 +1873,6 @@ class ManagementController extends Controller
                 foreach ($kpiEmployee as $employee) :
                     if ($employee->month  == $nextMonth && $employee->year  == $nextYear) {
                     } else {
-                        // if ($employee->status == 1) {
-                        //     $statusEmployee = 5;
-                        // }
-                        // if ($employee->status == 2) {
-                        // $statusEmployee = 1;
                         $employee->status = 1;
                         $employee->month = $nextMonth;
                         $employee->year = $nextYear;
@@ -1894,6 +1886,8 @@ class ManagementController extends Controller
                         $kpiEmployeeHistory->createrId = Yii::$app->user->id;
                         $kpiEmployeeHistory->month = $nextMonth;
                         $kpiEmployeeHistory->year = $nextYear;
+                        $kpiEmployeeHistory->target = $employee->target;
+                        $kpiEmployeeHistory->result = 0.00;
                         $kpiEmployeeHistory->createDateTime = new Expression('NOW()');
                         $kpiEmployeeHistory->updateDateTime = new Expression('NOW()');
                         $kpiEmployeeHistory->detail = "auto set from company kpi";

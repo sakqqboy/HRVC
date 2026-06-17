@@ -104,7 +104,7 @@ class KgiPersonalController extends Controller
 				->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
 				->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kgi_employee.employeeId" => $employeeId, "e.status" => [1]])
+				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "kgi_employee.employeeId" => $employeeId, "e.status" =>  [1, 2]])
 				->andWhere("k.companyId is not null")
 				->orderby('k.createDateTime')
 				->asArray()
@@ -118,7 +118,7 @@ class KgiPersonalController extends Controller
 				->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
 				->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "e.teamId" => $teamId, "e.status" => [1]])
+				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "e.teamId" => $teamId, "e.status" => [1, 2]])
 				->andWhere("k.companyId is not null")
 				->orderby('k.createDateTime')
 				->asArray()
@@ -131,7 +131,7 @@ class KgiPersonalController extends Controller
 				->JOIN("LEFT JOIN", "kgi k", "kgi_employee.kgiId=k.kgiId")
 				->JOIN("LEFT JOIN", "company c", "c.companyId=k.companyId")
 				->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
-				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "e.status" => [1]])
+				->where(["kgi_employee.status" => [1, 2, 4], "k.status" => [1, 2, 4], "e.status" => [1, 2]])
 				->andWhere("k.companyId is not null")
 				->orderby('k.createDateTime')
 				->asArray()
@@ -425,7 +425,7 @@ class KgiPersonalController extends Controller
 			->JOIN("LEFT JOIN", "kgi_branch kb", "kb.kgiId=k.kgiId")
 			->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")
 			->where("kgi_employee.status!=99 and k.status!=99 and k.companyId is not null")
-			->andWhere(["e.status" => [1]])
+			->andWhere(["e.status" => [1, 2]])
 			->andFilterWhere([
 				"kb.branchId" => $branchId,
 				"e.branchId" => $branchId,
