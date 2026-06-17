@@ -639,16 +639,6 @@ class KgiPersonalController extends Controller
 	}
 	public function actionWaitForApprove($branchId, $isAdmin, $isManager, $userId)
 	{
-		// $kgiEmployee = KgiEmployeeHistory::find()
-		// 	->where(["status" => 88])
-		// 	->asArray()
-		// 	->all();
-
-		// $kgiRequest = KgiEmployeeRequest::find()
-		// 	->where(["status" => 0])
-		// 	->asArray()
-		// 	->all();
-
 		$teamId = User::userTeamId($userId);
 		$totalHistory = 0;
 		$totalRequest = 0;
@@ -679,8 +669,6 @@ class KgiPersonalController extends Controller
 		$totalRequest = $queryRequest->count();
 
 		$res["totalRequest"] = (int)$totalHistory + (int)$totalRequest;
-
-
 		return json_encode($res);
 	}
 	public function actionKgiEmployeeHistory2($kgiEmployeeId, $kgiEmployeeHistoryId)
