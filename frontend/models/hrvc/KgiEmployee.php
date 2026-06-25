@@ -5,6 +5,7 @@ namespace frontend\models\hrvc;
 use common\models\ModelMaster;
 use Yii;
 use \frontend\models\hrvc\master\KgiEmployeeMaster;
+use frontend\models\hrvc\UserRole;
 
 /**
  * This is the model class for table "kgi_employee".
@@ -56,11 +57,11 @@ class KgiEmployee extends \frontend\models\hrvc\master\KgiEmployeeMaster
     {
         $canEdit = 0;
 
-        if ($role >= 4) {
+        if ($role >= UserRole::SUPERVISOR) {
             $canEdit = 1;
         } else {
             $employeeId = User::employeeIdFromUserId();
-            if ($role == 3) { //Team leader can Edit in their team
+            if ($role == UserRole::TEAM_LEADER) { //Team leader can Edit in their team
                 $kgiEmployee = KgiEmployee::find()
                     ->select('e.teamId')
                     ->JOIN("LEFT JOIN", "employee e", "e.employeeId=kgi_employee.employeeId")

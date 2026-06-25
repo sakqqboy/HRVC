@@ -131,10 +131,10 @@
 						<a href="index.php" class="nav-link text-dark"><img src="../images/icons/Dark/48px/PL-Forecast.png" class="images_performance_PL"> PL Forcast</a>
 					</li>
 					<li class="nav-item" role="presentation">
-						<a href="golden_ratio.php?branch=<?php echo $_GET['branch']; ?>" class="nav-link text-dark"><img src="../images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
+						<a href="golden_ratio.php?branch=<?php echo (int)$_GET['branch']; ?>" class="nav-link text-dark"><img src="../images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
 					</li>
 					<li class="nav-item" role="presentation">
-						<a href="future_account_comparison.php?branch=<?php echo $_GET['branch']; ?>" class="nav-link active"><img src="../images/icons/Light/Light/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
+						<a href="future_account_comparison.php?branch=<?php echo (int)$_GET['branch']; ?>" class="nav-link active"><img src="../images/icons/Light/Light/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
 					</li>
 				</ul>
 			</div>

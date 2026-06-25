@@ -60,16 +60,14 @@ class CompanyController extends Controller
 			$banner = 'image/company.jpg';
 			$picture = 'image/no-company.svg';
 			if ($company["banner"] != '') {
-				$url1 = Path::frontendUrl() . $company["banner"];
-				$headers = @get_headers($url1);
-				if ($headers !== false && strpos($headers[0], '200') !== false) {
+				$bannerPath = Yii::getAlias('@frontend') . '/web/' . ltrim($company["banner"], '/');
+				if (file_exists($bannerPath)) {
 					$banner = $company["banner"];
 				}
 			}
 			if ($company["picture"] != '') {
-				$url2 = Path::frontendUrl() . $company["picture"];
-				$headers2 = @get_headers($url2);
-				if ($headers2 !== false && strpos($headers2[0], '200') !== false) {
+				$picturePath = Yii::getAlias('@frontend') . '/web/' . ltrim($company["picture"], '/');
+				if (file_exists($picturePath)) {
 					$picture = $company["picture"];
 				}
 			}

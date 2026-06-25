@@ -48,7 +48,7 @@ if (checkBranch($_GET['branch'], $_SESSION["__id"]) == 0) {
 			<div class="row">
 				<div class="col-6 planning d-flex">
 					<div>
-						<a href="fs_index.php?branch=<?php echo $_GET['branch']; ?>" class="text-dark text-decoration-none">
+						<a href="fs_index.php?branch=<?php echo (int)$_GET['branch']; ?>" class="text-dark text-decoration-none">
 							< Back </a>
 					</div>
 					<div class="ms-4 fw-bolder" style="cursor: pointer;" onclick="window.location.href='https://bigsara-fordev.com/tokyo_new/new_template/main/index.php'">
@@ -67,10 +67,10 @@ if (checkBranch($_GET['branch'], $_SESSION["__id"]) == 0) {
 							<a href="index.php" class="nav-link active"><img src="../images/icons/Light/Light/48px/PL-Forecast.png" class="images_performance_PL"> PL Forcast</a>
 						</li>
 						<li class="nav-item" role="presentation">
-							<a href="golden_ratio.php?branch=<?php echo $_GET['branch']; ?>" class="nav-link text-dark"><img src="../images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
+							<a href="golden_ratio.php?branch=<?php echo (int)$_GET['branch']; ?>" class="nav-link text-dark"><img src="../images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
 						</li>
 						<li class="nav-item" role="presentation">
-							<a href="future_account_comparison.php?branch=<?php echo $_GET['branch']; ?>" class="nav-link text-dark"><img src="../images/icons/Dark/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
+							<a href="future_account_comparison.php?branch=<?php echo (int)$_GET['branch']; ?>" class="nav-link text-dark"><img src="../images/icons/Dark/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
 						</li>
 					</ul>
 				</div>
@@ -82,7 +82,7 @@ if (checkBranch($_GET['branch'], $_SESSION["__id"]) == 0) {
 							<a class="text-dark text-decoration-none" href="index.php">Dashboard</a>
 						</li>
 						<li class="breadcrumb-item">
-							<a class="text-dark text-decoration-none" href="fs_index.php?branch=<?php echo $_GET['branch']; ?>">PL Portal Summary</a>
+							<a class="text-dark text-decoration-none" href="fs_index.php?branch=<?php echo (int)$_GET['branch']; ?>">PL Portal Summary</a>
 						</li>
 						<li class="breadcrumb-item">
 							<a class="text-dark text-decoration-none">PL Portal Data</a>
@@ -106,7 +106,7 @@ if (checkBranch($_GET['branch'], $_SESSION["__id"]) == 0) {
 						</div>
 						<div class="col-lg-4 col-md-6 col-12 text-end">
 							<button type="button" class="btn btn-light Data" data-bs-toggle="modal" data-bs-target="#DataDistionary"> <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Data Dictionary</button>
-							<a href="annual_graph.php?branch=<?php echo $_GET['branch']; ?>" type="button" class="btn btn-light Data"> <i class="fa fa-line-chart" aria-hidden="true"></i> Annual Charts</a>
+							<a href="annual_graph.php?branch=<?php echo (int)$_GET['branch']; ?>" type="button" class="btn btn-light Data"> <i class="fa fa-line-chart" aria-hidden="true"></i> Annual Charts</a>
 							<button type="button" class="btn btn-light Data" onclick="downloadSample()"> <i class="fa fa-arrow-circle-down" aria-hidden="true"></i> Export</button>
 						</div>
 						<div class="col-lg-2 col-md-6 col-12 select_buttongroup">

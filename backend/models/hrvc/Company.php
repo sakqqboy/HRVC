@@ -95,11 +95,9 @@ class Company extends \backend\models\hrvc\master\CompanyMaster
     public  static function companyPicture($picture)
     {
 
-        $url = Path::frontendUrl() . $picture;
-        $headers = @get_headers($url);
-
-        if ($picture != '' && $headers && strpos($headers[0], '200') !== false) {
-            $img = $picture;
+        if (!empty($picture)) {
+            $path = Yii::getAlias('@frontend') . '/web/' . ltrim($picture, '/');
+            $img = file_exists($path) ? $picture : 'image/userProfile.png';
         } else {
             $img = 'image/userProfile.png';
         }

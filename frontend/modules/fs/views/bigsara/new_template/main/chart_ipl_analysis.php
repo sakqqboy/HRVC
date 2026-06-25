@@ -32,10 +32,10 @@
 							<a href="index.php" class="nav-link active"><img src="../images/icons/Light/Light/48px/PL-Forecast.png" class="images_performance_PL"> PL Forcast</a>
 						</li>
 						<li class="nav-item" role="presentation">
-							<a href="golden_ratio.php?branch=<?php echo $_GET['branch']; ?>" class="nav-link text-dark"><img src="../images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
+							<a href="golden_ratio.php?branch=<?php echo (int)$_GET['branch']; ?>" class="nav-link text-dark"><img src="../images/icons/Dark/48px/Golden-Ratio.png" class="images_performance_PL"> Golden Ratio</a>
 						</li>
 						<li class="nav-item" role="presentation">
-							<a href="future_account_comparison.php?branch=<?php echo $_GET['branch']; ?>" class="nav-link text-dark"><img src="../images/icons/Dark/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
+							<a href="future_account_comparison.php?branch=<?php echo (int)$_GET['branch']; ?>" class="nav-link text-dark"><img src="../images/icons/Dark/48px/Designation-1.png" class="images_performance_PL"> Forecast Accounts</a>
 						</li>
 					</ul>
 				</div>
@@ -58,14 +58,14 @@
 								<i class="fa fa-info-circle" aria-hidden="true"></i> Data Dictionary
 							</button>
 							<div class="btn-group ml-15 " role="group">
-								<a href="annual_graph.php?branch=<?php echo $_GET['branch']; ?>" type="button" class="btn btn-outline-secondary font-size-12" style="border-color:lightgray;">
+								<a href="annual_graph.php?branch=<?php echo (int)$_GET['branch']; ?>" type="button" class="btn btn-outline-secondary font-size-12" style="border-color:lightgray;">
 									<i class="fa fa-bar-chart" aria-hidden="true"></i>
 								</a>
 								<a type="button" class="btn btn-outline-secondary font-size-12" style="border-color:lightgray;">
 									Performance Chart
 								</a>
-								<a href="chart_ipl_analysis.php?branch=<?php echo $_GET['branch']; ?>" type="button" class="btn btn-outline-primary font-size-12" style="border-color:blue;">IPL Analysis</a>
-								<a href="chart_annual_compare.php?branch=<?php echo $_GET['branch']; ?>" type="button" class="btn btn-outline-secondary font-size-12" style="border-left: 0;border-color:lightgray;">PLF Overview</a>
+								<a href="chart_ipl_analysis.php?branch=<?php echo (int)$_GET['branch']; ?>" type="button" class="btn btn-outline-primary font-size-12" style="border-color:blue;">IPL Analysis</a>
+								<a href="chart_annual_compare.php?branch=<?php echo (int)$_GET['branch']; ?>" type="button" class="btn btn-outline-secondary font-size-12" style="border-left: 0;border-color:lightgray;">PLF Overview</a>
 							</div>
 						</div>
 
@@ -130,7 +130,7 @@
 							</div>
 							<div class="row mt-10">
 								<div class="col-lg-3 text-primary">
-									<a href="fs_index.php?branch=<?php echo $_GET['branch']; ?>" class="no-underline-primary font-size-13"> <i class="fa fa-chevron-left" aria-hidden="true"></i> Data Table</a>
+									<a href="fs_index.php?branch=<?php echo (int)$_GET['branch']; ?>" class="no-underline-primary font-size-13"> <i class="fa fa-chevron-left" aria-hidden="true"></i> Data Table</a>
 								</div>
 								<div class="col font-size-16 text-center">
 									<strong> Individual P&L Analysis</strong>

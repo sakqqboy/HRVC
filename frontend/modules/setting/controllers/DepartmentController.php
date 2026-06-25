@@ -773,12 +773,11 @@ class DepartmentController extends Controller
             $department->departmentName = $_POST["departmentName"];
             $department->branchId = $_POST["branchId"];
             if ($department->save(false)) {
-                $titleDepartments = DepartmentTitle::find()
-                    ->select('t.titleName')
-                    ->JOIN("LEFT JOIN", "title t", "t.titleId=department_title.titleId")
-                    ->where(["department_title.departmentId" => $departmentId])
+                $titleDepartments = Title::find()
+                    ->select('titleName')
+                    ->where(["departmentId" => $departmentId, "status" => 1])
+                    ->orderBy('titleId')
                     ->asArray()
-                    ->orderBy('department_title.titleId')
                     ->all();
                 $res["status"] = true;
                 $res["updateDepartment"] = $this->renderAjax('update', [
@@ -833,12 +832,11 @@ class DepartmentController extends Controller
         } else {
             DepartmentTitle::deleteAll(["departmentId" => $departmentId, "titleId" => $titleId]);
         }
-        $titleDepartments = DepartmentTitle::find()
-            ->select('t.titleName')
-            ->JOIN("LEFT JOIN", "title t", "t.titleId=department_title.titleId")
-            ->where(["department_title.departmentId" => $departmentId])
+        $titleDepartments = Title::find()
+            ->select('titleName')
+            ->where(["departmentId" => $departmentId, "status" => 1])
+            ->orderBy('titleId')
             ->asArray()
-            ->orderBy('department_title.titleId')
             ->all();
         $res["departmentTitle"] = $this->renderAjax('title_department', ["titleDepartments" => $titleDepartments]);
         return json_encode($res);
@@ -914,8 +912,7 @@ class DepartmentController extends Controller
 
         $departments = Api::connectApi(
             Path::Api() . 'masterdata/department/branch-department-filter?branchId=' . $branchIdSearch . '&companyId=' . $companyIdSearch . '&page=1&limit=7'
-        );
-
+        ) ?? [];
 
         if (count($departments) > 0) {
             foreach ($departments as $department) :

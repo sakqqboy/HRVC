@@ -209,12 +209,8 @@ class Employee extends \frontend\models\hrvc\master\EmployeeMaster
             ->one();
         $img = "images/employee/status/employee-nopic.svg";
         if (!empty($employee) && !empty($employee["picture"])) {
-            $url = Path::frontendUrl() . $employee["picture"];
-
-            // ดึง headers
-            $headers = @get_headers($url);
-
-            if ($headers !== false && strpos($headers[0], '200') !== false) {
+            $path = Yii::getAlias('@frontend') . '/web/' . ltrim($employee["picture"], '/');
+            if (file_exists($path)) {
                 $img = $employee["picture"];
             }
         }

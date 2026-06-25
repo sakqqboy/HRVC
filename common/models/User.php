@@ -167,10 +167,11 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        if (md5($password) == $this->password_hash) {
-            return true;
+        // Backward compat: existing accounts still have MD5 hashes (32-char hex)
+        if (strlen($this->password_hash) === 32 && ctype_xdigit($this->password_hash)) {
+            return md5($password) === $this->password_hash;
         }
-        // return Yii::$app->security->validatePassword($password, $this->password_hash);
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
     /**

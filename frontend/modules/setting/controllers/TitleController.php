@@ -762,20 +762,26 @@ class TitleController extends Controller
     public function actionUploadImage()
     {
         if (isset($_FILES['upload']['name'])) {
-            $path = Path::urlUpload() . 'images/upload/title/';
-            $url = Yii::$app->homeUrl . 'images/upload/title/';
-            $imagePath = $path . time() . "_" . $_FILES['upload']['name']; // กำหนดชื่อไฟล์
-            $imageUrl = $url . time() . "_" . $_FILES['upload']['name']; // กำหนดชื่อไฟล์
-            if (($_FILES['upload'] == "none") or (empty($_FILES['upload']['name']))) { // ตรวจสอบว่ามีข้อมูลถูกส่งมาหรือป่าว
+            $imageUrl = '';
+            $error = null;
+            if (($_FILES['upload'] == "none") or (empty($_FILES['upload']['name']))) {
                 $error = "No file uploaded.";
             } else {
-                if (!file_exists($path)) {
-                    mkdir($path, 0777, true);
-                }
-                if (!move_uploaded_file($_FILES['upload']['tmp_name'], $imagePath)) {
-                    $error = "Granted Read/Write/Modify permissions.";  // ตรวจสอบว่าโฟลเด้อที่จะบันทึกรูปสามารถเขียนได้หรือป่าว
+                $ext = strtolower(pathinfo($_FILES['upload']['name'], PATHINFO_EXTENSION));
+                $allowedExts = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                if (!in_array($ext, $allowedExts)) {
+                    $error = "Invalid file type. Allowed: jpg, jpeg, png, gif, webp.";
                 } else {
-                    $error = null;
+                    $safeFileName = Yii::$app->security->generateRandomString(12) . '.' . $ext;
+                    $path = Path::urlUpload() . 'images/upload/title/';
+                    $imageUrl = Yii::$app->homeUrl . 'images/upload/title/' . $safeFileName;
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
+                    if (!move_uploaded_file($_FILES['upload']['tmp_name'], $path . $safeFileName)) {
+                        $error = "Granted Read/Write/Modify permissions.";
+                        $imageUrl = '';
+                    }
                 }
             }
             if (isset($_GET["type"])) {
@@ -785,7 +791,7 @@ class TitleController extends Controller
                 ];
                 return json_encode($res);
             } else {
-                $callBack = $_GET['CKEditorFuncNum']; // ใช้งาน javascript callback function
+                $callBack = $_GET['CKEditorFuncNum'];
                 echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($callBack, '$imageUrl', '$error');</script>";
             }
         }

@@ -47,10 +47,11 @@ class KfiEmployee extends \backend\models\hrvc\master\KfiEmployeeMaster
         if (isset($kfiEmployee) && count($kfiEmployee) > 0) {
             foreach ($kfiEmployee as $ke) :
                 if ($ke["picture"] != "") {
-                    $url = Path::frontendUrl() . $ke["picture"];
-                    $headers = @get_headers($url);
-                    if ($headers && strpos($headers[0], '200') !== false) {
+                    $path = Yii::getAlias('@frontend') . '/web/' . ltrim($ke["picture"], '/');
+                    if (file_exists($path)) {
                         $employee[$ke["employeeId"]] = $ke["picture"];
+                    } else {
+                        $employee[$ke["employeeId"]] = $img;
                     }
                 } else {
                     $employee[$ke["employeeId"]] = $img;
@@ -128,10 +129,11 @@ class KfiEmployee extends \backend\models\hrvc\master\KfiEmployeeMaster
         if (isset($kfiEmployee) && count($kfiEmployee) > 0) {
             foreach ($kfiEmployee as $ke) :
                 if ($ke["picture"] != "") {
-                    $url = Path::frontendUrl() . $ke["picture"];
-                    $headers = @get_headers($url);
-                    if ($headers && strpos($headers[0], '200') !== false) {
+                    $path = Yii::getAlias('@frontend') . '/web/' . ltrim($ke["picture"], '/');
+                    if (file_exists($path)) {
                         $employee[$ke["employeeId"]]["picture"] = $ke["picture"];
+                    } else {
+                        $employee[$ke["employeeId"]]["picture"] = $img;
                     }
                 } else {
                     $employee[$ke["employeeId"]]["picture"] = $img;

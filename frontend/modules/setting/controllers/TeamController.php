@@ -371,7 +371,7 @@ class TeamController extends Controller
         $companyId = $_POST["companyId"];
         $branch = Api::connectApi(
             Path::Api() . 'masterdata/branch/company-branch?id=' . $companyId
-        );
+        ) ?? [];
 
         $res = [];
         $textSelect = '<option value="">Select Branch</option>';
@@ -388,7 +388,7 @@ class TeamController extends Controller
         $branchId = $_POST["branchId"];
         $department = Api::connectApi(
             Path::Api() . 'masterdata/department/branch-department?id=' . $branchId
-        );
+        ) ?? [];
 
         $res = [];
         $textSelect = '<option value="">Select Department</option>';
@@ -489,7 +489,7 @@ class TeamController extends Controller
     public function actionDepartmentTeam()
     {
         $departmentId = $_POST["departmentId"];
-        $team = Api::connectApi(Path::Api() . 'masterdata/team/department-team?id=' . $departmentId);
+        $team = Api::connectApi(Path::Api() . 'masterdata/team/department-team?id=' . $departmentId) ?? [];
 
         $res = [];
         $textSelect = '<option value="">Select Team</option>';
@@ -499,7 +499,7 @@ class TeamController extends Controller
             endforeach;
         }
         $textSelectTitle = '<option value="">Select Title</option>';
-        $titles = Api::connectApi(Path::Api() . 'masterdata/title/title-department?departmentId=' . $departmentId);
+        $titles = Api::connectApi(Path::Api() . 'masterdata/title/title-department?departmentId=' . $departmentId) ?? [];
         if (count($titles) > 0) {
             foreach ($titles as $title) :
                 $textSelectTitle .= "<option value='" . $title['titleId'] . "'>" . $title['titleName'] . "</option>";

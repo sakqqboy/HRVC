@@ -247,7 +247,7 @@ class SalaryController extends Controller
 					}
 				}
 				if (isset($_POST["previousUrl"]) && $_POST["previousUrl"] != "") {
-					return $this->redirect($_POST["previousUrl"]);
+					return $this->redirect(Path::safeUrl($_POST["previousUrl"]));
 				} else {
 					return $this->redirect('index');
 				}

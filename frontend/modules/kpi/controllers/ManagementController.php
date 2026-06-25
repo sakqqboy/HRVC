@@ -599,7 +599,7 @@ class ManagementController extends Controller
                 }
             }
         }
-        return $this->redirect($_POST["url"]);
+        return $this->redirect(Path::safeUrl($_POST["url"] ?? ''));
     }
     public function actionHistory()
     {

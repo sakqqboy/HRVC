@@ -44,7 +44,7 @@ if (checkBranch($_GET['branch'], $_SESSION["__id"]) == 0) {
                         <button class="btn btn-primary pt-2 pb-2 font-size-12" onclick="getModalAddPL()"> <i class="fa fa-magic" aria-hidden="true"></i> ADD </button>
                         <button class="btn btn-success pt-2 pb-2 font-size-12" onclick="downloadSample()"> <img src="../images/icons/Dark/48px/download-up.png" class="download-up_png"> Download Sample </button>
                         <button type="button" class="btn btn-purple text-white pb-2 pt-2 font-size-12" onclick="getModalImportPL()"><img src="../images/icons/Dark/48px/import-white.png" class="download-up_png"> <span class="font-size-10"> IMPORT ACCOUNT </span></button>
-                        <a href="fs_index.php?branch=<?php echo $_GET['branch']; ?>" class="btn btn-secondary pb-2 pt-2 font-size-12"> <i class="fa fa-cog" aria-hidden="true"></i> <span class="font-size-10"> INITIAL SETTING </span></a>
+                        <a href="fs_index.php?branch=<?php echo (int)$_GET['branch']; ?>" class="btn btn-secondary pb-2 pt-2 font-size-12"> <i class="fa fa-cog" aria-hidden="true"></i> <span class="font-size-10"> INITIAL SETTING </span></a>
                         <!-- <button type="button" class="btn btn-success pb-2 pt-2 font-size-12" onclick="getModalImportData()"><img src="../images/icons/Dark/48px/import-white.png" class="download-up_png"> <span class="font-size-10"> IMPORT DATA </span></button> -->
                     </div>
                     <!-- <div class="col-2 text-end"> -->

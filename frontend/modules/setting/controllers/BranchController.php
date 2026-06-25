@@ -135,11 +135,10 @@ class BranchController extends Controller
         $totalDepartment = 0;
         $totalTeam = 0;
 
-        $branches = Api::connectApi(Path::Api() . 'masterdata/branch/active-branch?page=1' . '&limit=7');
         $countries = Api::connectApi(Path::Api() . 'masterdata/country/company-country');
         $company = Api::connectApi(Path::Api() . 'masterdata/company/all-company');
         $numPage = Api::connectApi(Path::Api() . 'masterdata/branch/branch-page?page=1' . '&countryId=0' . '&companyId=0' . '&limit=7');
-        $branches = Api::connectApi(Path::Api() . 'masterdata/branch/active-branch?page=1' . '&limit=7');
+        $branches = Api::connectApi(Path::Api() . 'masterdata/branch/active-branch?page=1' . '&limit=7') ?? [];
 
         $data = [];
         if (isset($branches) && count($branches) > 0) {
@@ -792,39 +791,33 @@ class BranchController extends Controller
             Path::Api() . 'masterdata/branch/branch-detail?id=' . $branchId
         );
 
-        if (!empty($branchData)) {
-            // สมมติว่า API คืนข้อมูลแบบเป็น associative array ของ branch เดียว
-            $relativePath = $branchData["branchImage"] ?? '';
-            $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
-
-            if (!empty($relativePath) && file_exists($absolutePath)) {
-                // ✅ ไฟล์มีอยู่จริง
-                $pictureUrl = $relativePath;
-            } else {
-                // ❌ ไม่มีไฟล์ → ใช้รูป default
-                $pictureUrl = 'image/no-branch.svg';
-            }
-
-            // เตรียมข้อมูล branch ที่พร้อมใช้งาน
-            $branch = [
-                'branchId' => $branchData['branchId'],
-                'branchName' => $branchData['branchName'],
-                'companyId' => $branchData['companyId'],
-                'description' => $branchData['description'],
-                'status' => $branchData['status'],
-                'createDateTime' => $branchData['createDateTime'],
-                'updateDateTime' => $branchData['updateDateTime'],
-                'financial_start_month' => $branchData['financial_start_month'],
-                'financial_description' => $branchData['financial_description'],
-                'branchImage' => $pictureUrl,
-                'currency_default' => $branchData['currency_default'],
-                'countryName' => $branchData['countryName'],
-                'companyName' => $branchData['companyName'],
-                "picture" => !empty($branchData["picture"]) ? $branchData["picture"] : "image/no-company.svg",
-                "flag" => !empty($branchData["flag"]) ? $branchData["flag"] : "image/e-world.svg",
-                'city' => $branchData['city'],
-            ];
+        if (empty($branchData)) {
+            Yii::$app->session->setFlash('error', 'Branch not found.');
+            return $this->redirect(['no-branch', 'hash' => ModelMaster::encodeParams(['companyId' => $companyId])]);
         }
+
+        $relativePath = $branchData["branchImage"] ?? '';
+        $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+        $pictureUrl = (!empty($relativePath) && file_exists($absolutePath)) ? $relativePath : 'image/no-branch.svg';
+
+        $branch = [
+            'branchId'              => $branchData['branchId'],
+            'branchName'            => $branchData['branchName'],
+            'companyId'             => $branchData['companyId'],
+            'description'           => $branchData['description'],
+            'status'                => $branchData['status'],
+            'createDateTime'        => $branchData['createDateTime'],
+            'updateDateTime'        => $branchData['updateDateTime'],
+            'financial_start_month' => $branchData['financial_start_month'],
+            'financial_description' => $branchData['financial_description'],
+            'branchImage'           => $pictureUrl,
+            'currency_default'      => $branchData['currency_default'],
+            'countryName'           => $branchData['countryName'],
+            'companyName'           => $branchData['companyName'],
+            'picture'               => !empty($branchData['picture']) ? $branchData['picture'] : 'image/no-company.svg',
+            'flag'                  => !empty($branchData['flag'])    ? $branchData['flag']    : 'image/e-world.svg',
+            'city'                  => $branchData['city'],
+        ];
 
         $numPage = Api::connectApi(
             Path::Api() . 'masterdata/department/department-page?id=' . $branchId
@@ -896,11 +889,11 @@ class BranchController extends Controller
 
         $param = ModelMaster::decodeParams($hash);
 
+        $nextPage = $param['nextPage'] ?? 1;
         if (!empty($param['branchId'])) {
             $branchId = $param['branchId'];
         } else {
             $branchId = $param['countryId'];
-            $nextPage = $param['nextPage'];
         }
 
         // ดึงข้อมูลประเทศ
@@ -975,12 +968,13 @@ class BranchController extends Controller
         );
 
         return $this->render('branch_view', [
-            "company" => $company,
+            "company"   => $company,
             "countries" => $countries,
-            "branches" => $branch,
+            "branches"  => $branch,
             "departments" => $data,
-            "numPage" => $numPage,
-            "countryId" => 0
+            "numPage"   => $numPage,
+            "countryId" => 0,
+            "companyId" => $branch["companyId"] ?? 0,
         ]);
     }
 
@@ -1023,50 +1017,42 @@ class BranchController extends Controller
             Path::Api() . 'masterdata/branch/branch-detail?id=' . $branchId
         );
 
-        if (!empty($branchData)) {
-            // สมมติว่า API คืนข้อมูลแบบเป็น associative array ของ branch เดียว
-            $relativePath = $branchData["branchImage"] ?? '';
-            $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
-
-            if (!empty($relativePath) && file_exists($absolutePath)) {
-                // ✅ ไฟล์มีอยู่จริง
-                $pictureUrl = $relativePath;
-            } else {
-                // ❌ ไม่มีไฟล์ → ใช้รูป default
-                // $pictureUrl = 'image/no-branch.svg';
-                $pictureUrl = '';
-            }
-
-            // เตรียมข้อมูล branch ที่พร้อมใช้งาน
-            $branch = [
-                'branchId' => $branchData['branchId'],
-                'branchName' => $branchData['branchName'],
-                'companyId' => $branchData['companyId'],
-                'description' => $branchData['description'],
-                'status' => $branchData['status'],
-                'createDateTime' => $branchData['createDateTime'],
-                'updateDateTime' => $branchData['updateDateTime'],
-                'financial_start_month' => $branchData['financial_start_month'],
-                'financial_description' => $branchData['financial_description'],
-                'branchImage' => $pictureUrl,
-                'currency_default' => $branchData['currency_default'],
-                'countryName' => $branchData['countryName'],
-                'companyName' => $branchData['companyName'],
-                "picture" => !empty($branchData["picture"]) ? $branchData["picture"] : "image/no-company.svg",
-                "flag" => !empty($branchData["flag"]) ? $branchData["flag"] : "image/e-world.svg",
-                'city' => $branchData['city'],
-            ];
+        if (empty($branchData)) {
+            Yii::$app->session->setFlash('error', 'Branch not found.');
+            return $this->redirect(['branch-view-filter', 'hash' => $hash]);
         }
 
-        // ดึงข้อมูลบริษัทของสาขา
+        $relativePath = $branchData["branchImage"] ?? '';
+        $absolutePath = Yii::getAlias('@webroot') . '/' . ltrim($relativePath, '/');
+        $pictureUrl = (!empty($relativePath) && file_exists($absolutePath)) ? $relativePath : '';
+
+        $branch = [
+            'branchId'              => $branchData['branchId'],
+            'branchName'            => $branchData['branchName'],
+            'companyId'             => $branchData['companyId'],
+            'description'           => $branchData['description'],
+            'status'                => $branchData['status'],
+            'createDateTime'        => $branchData['createDateTime'],
+            'updateDateTime'        => $branchData['updateDateTime'],
+            'financial_start_month' => $branchData['financial_start_month'],
+            'financial_description' => $branchData['financial_description'],
+            'branchImage'           => $pictureUrl,
+            'currency_default'      => $branchData['currency_default'],
+            'countryName'           => $branchData['countryName'],
+            'companyName'           => $branchData['companyName'],
+            'picture'               => !empty($branchData['picture']) ? $branchData['picture'] : 'image/no-company.svg',
+            'flag'                  => !empty($branchData['flag'])    ? $branchData['flag']    : 'image/e-world.svg',
+            'city'                  => $branchData['city'],
+        ];
+
         $company = Api::connectApi(
-            Path::Api() . 'masterdata/company/company-detail?id=' . $branch["companyId"]
+            Path::Api() . 'masterdata/company/company-detail?id=' . $branch['companyId']
         );
 
         return $this->render('update_branch', [
-            "company" => $company,
-            "countries" => $countries,
-            "branches" => $branch
+            'company'   => $company,
+            'countries' => $countries,
+            'branches'  => $branch,
         ]);
     }
     public function actionSaveUpdateBranch()

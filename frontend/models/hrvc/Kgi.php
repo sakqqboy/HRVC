@@ -5,6 +5,7 @@ namespace frontend\models\hrvc;
 use Exception;
 use Yii;
 use \frontend\models\hrvc\master\KgiMaster;
+use frontend\models\hrvc\UserRole;
 
 /**
  * This is the model class for table "kgi".
@@ -53,10 +54,10 @@ class Kgi extends \frontend\models\hrvc\master\KgiMaster
     public static function checkPermission($role, $kgiId, $userId)
     {
         $show = 0;
-        if ($role == 7) {
+        if ($role == UserRole::ADMIN) {
             $show = 1;
         }
-        if ($role == 6) { //GM edit their company KGI
+        if ($role == UserRole::GM) { //GM edit their company KGI
             $companyId = Company::userCompany($userId); //userId
             $branchId = Branch::checkCompanyBranch($companyId);
             $kgiBranch = KgiBranch::find()
@@ -68,7 +69,7 @@ class Kgi extends \frontend\models\hrvc\master\KgiMaster
                 $show = 1;
             }
         }
-        if ($role == 5) { //Manager edit their company KGI
+        if ($role == UserRole::MANAGER) { //Manager edit their company KGI
             $companyId = Company::userCompany($userId); //userId
             $branchId = Branch::checkCompanyBranch($companyId);
             $kgiBranch = KgiBranch::find()
@@ -80,7 +81,7 @@ class Kgi extends \frontend\models\hrvc\master\KgiMaster
                 $show = 1;
             }
         }
-        if ($role == 4) { //Supervisor edit their department KGI
+        if ($role == UserRole::SUPERVISOR) { //Supervisor edit their department KGI
             $departmentId = Department::userDepartmentId($userId);
             $kgiDepartment = KgiDepartment::find()
                 ->where(["kgiId" => $kgiId, "status" => [1, 4], "departmentId" => $departmentId])
@@ -90,7 +91,7 @@ class Kgi extends \frontend\models\hrvc\master\KgiMaster
                 $show = 1;
             }
         }
-        if ($role == 3) { //Team Leader edit their Team
+        if ($role == UserRole::TEAM_LEADER) { //Team Leader edit their Team
             $teamId = Team::userTeam($userId);
             $kgiTeam = KgiTeam::find()
                 ->where(["kgiId" => $kgiId, "status" => [1, 4], "teamId" => $teamId])
@@ -100,7 +101,7 @@ class Kgi extends \frontend\models\hrvc\master\KgiMaster
                 $show = 1;
             }
         }
-        if ($role == 2 || $role == 1) {
+        if ($role == UserRole::HR || $role == UserRole::STAFF) {
             $show = 0;
         }
         return $show;

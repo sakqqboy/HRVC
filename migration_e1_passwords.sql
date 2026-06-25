@@ -1,0 +1,35 @@
+-- ============================================================
+-- E1: Password migration — MD5 → bcrypt (Yii2 standard)
+-- ============================================================
+-- Context:
+--   - 143 users have MD5 hashes (32-char hex)
+--   - 1 user already has bcrypt ($2y$...)
+--   - MD5 is not reversible → can't convert in-place
+--
+-- Strategy:
+--   - DO NOTHING to the DB right now.
+--   - validatePassword() in common/models/User.php now handles BOTH:
+--       MD5 users  → detected by 32-char hex → compare with md5()
+--       bcrypt users → detected by $2y$ prefix → use Yii security
+--   - When a user next logs in and changes their password, it will
+--     be saved as bcrypt automatically.
+--
+-- For TCG migration (when HRVC data imports into TCGWorkspace DB):
+--   TCGWorkspace already sets default password = '1234' (bcrypt)
+--   for bulk-imported employees. HRVC employees will use the same
+--   convention — users reset on first login.
+--
+-- Optional: force-reset all MD5 passwords to bcrypt hash of '1234'
+--   (uncomment only if you want immediate one-time forced reset)
+-- ============================================================
+
+-- [OPTIONAL — uncomment to run]
+-- This forces all MD5 accounts to use password '1234' (bcrypt from PHP)
+-- You must generate the hash in PHP first:
+--   echo Yii::$app->security->generatePasswordHash('1234');
+-- Then replace <BCRYPT_HASH_OF_1234> below:
+--
+-- UPDATE user
+-- SET password_hash = '<BCRYPT_HASH_OF_1234>'
+-- WHERE LENGTH(password_hash) = 32
+--   AND password_hash REGEXP '^[a-f0-9]+$';

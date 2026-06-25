@@ -775,10 +775,10 @@ class KpiPersonalController extends Controller
 					$KpiEmployeeHistory->updateDateTime = new Expression('NOW()');
 					$KpiEmployeeHistory->save(false);
 				}
-				return $this->redirect($_POST["url"]);
+				return $this->redirect(Path::safeUrl($_POST["url"] ?? ''));
 			}
 		} else {
-			return $this->redirect($_POST["url"]);
+			return $this->redirect(Path::safeUrl($_POST["url"] ?? ''));
 		}
 	}
 
@@ -1160,15 +1160,15 @@ class KpiPersonalController extends Controller
 				$kpiRequest->updated_at = new Expression('NOW()');
 
 				if ($kpiRequest->save(false)) {
-					return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
+					return $this->redirect(Path::safeUrl($_POST["url"] ?? ''));
 				} else {
 					Yii::$app->session->setFlash('error', Yii::t('app', 'Failed to save request.'));
-					return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
+					return $this->redirect(Path::safeUrl($_POST["url"] ?? ''));
 				}
 			}
 		}
 
 		// Redirect กลับไปหน้าเดิม (ใช้ค่า URL จากฟอร์มเหมือนโค้ดเดิม)
-		// return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
+		// return $this->redirect(Path::safeUrl($_POST["url"] ?? ''));
 	}
 }

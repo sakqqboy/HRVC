@@ -4,6 +4,7 @@ namespace frontend\models\hrvc;
 
 use Yii;
 use \frontend\models\hrvc\master\DepartmentTitleMaster;
+use frontend\models\hrvc\Title;
 
 /**
  * This is the model class for table "department_title".
@@ -35,14 +36,12 @@ class DepartmentTitle extends \frontend\models\hrvc\master\DepartmentTitleMaster
     }
     public static function departmentTitle($departmentId)
     {
-        $titleDepartments = DepartmentTitle::find()
-            ->select('t.titleName')
-            ->JOIN("LEFT JOIN", "title t", "t.titleId=department_title.titleId")
-            ->JOIN("LEFT JOIN", "department d", "d.departmentId=department_title.departmentId")
-            ->where(["department_title.departmentId" => $departmentId, "t.status" => 1, "d.status" => 1])
-            ->orderBy('department_title.titleId')
+        $titleDepartments = Title::find()
+            ->select('titleName')
+            ->where(["departmentId" => $departmentId, "status" => 1])
+            ->orderBy('titleId')
             ->asArray()
             ->all();
-        return  $titleDepartments;
+        return $titleDepartments;
     }
 }

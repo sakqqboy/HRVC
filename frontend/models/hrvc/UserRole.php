@@ -19,6 +19,16 @@ use \frontend\models\hrvc\master\UserRoleMaster;
 
 class UserRole extends \frontend\models\hrvc\master\UserRoleMaster
 {
+    // Permission levels returned by userRight() — inverted from roleId (Admin=highest)
+    const ADMIN       = 7;
+    const GM          = 6;
+    const MANAGER     = 5;
+    const SUPERVISOR  = 4;
+    const TEAM_LEADER = 3;
+    const HR          = 2;
+    const STAFF       = 1;
+    const GUEST       = 0;
+
     /**
      * @inheritdoc
      */

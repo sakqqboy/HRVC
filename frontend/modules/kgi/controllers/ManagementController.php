@@ -742,7 +742,7 @@ class ManagementController extends Controller
 				}
 				if (isset($_POST["kgiGroup"]) && count($_POST["kgiGroup"]) > 0) {
 				}
-				return $this->redirect($_POST["url"]);
+				return $this->redirect(Path::safeUrl($_POST["url"] ?? ''));
 			}
 		}
 		return $this->redirect('grid');
@@ -1846,11 +1846,6 @@ class ManagementController extends Controller
 	{
 		$kgiEmployeeHistoryId = $_POST["kgiEmployeeHistoryId"];
 		$approve = $_POST["approve"];
-		// เช็ค เดือนกับปี ของ kgiEmployeeHistoryId
-
-		// เช็ค เดือนกับปี ของ kgiEmployeeId
-
-		// ถ้ามันตรงกันให้อัพเดต result และ result ในตราง
 
 		// 1. ค้นหาคำร้องล่าสุดที่รอการอนุมัติ
 		$request = KgiEmployeeRequest::find()
@@ -2015,7 +2010,6 @@ class ManagementController extends Controller
 			->one();
 		if ($approve == 1) {
 			$kgiEmployee = KgiEmployee::find()->where(["kgiEmployeeId" => $history->kgiEmployeeId])->one();
-			//KgiEmployeeHistory::updateAll(["status" => 90], ["status" => [1, 2]]);
 			$history->status = 1;
 			$kgiEmployee->target = $history["target"];
 			$kgiEmployee->status = 1;

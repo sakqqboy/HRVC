@@ -149,11 +149,11 @@ class EmployeeController extends Controller
         }
         $employees = Api::connectApi(
             Path::Api() . 'masterdata/employee/all-employee-detail?companyId=' . $companyId . '&currentPage=' . $currentPage . '&limit=' . $limit
-        );
+        ) ?? [];
 
         $companies = Api::connectApi(
             Path::Api() . 'masterdata/group/company-group?id=' . $groupId
-        );
+        ) ?? [];
 
         $totalEmployee = Employee::totalEmployee($companyId);
         $totalDraft = Employee::totalDraft($companyId);
@@ -187,11 +187,11 @@ class EmployeeController extends Controller
         $companyId = null;
         $employees = Api::connectApi(
             Path::Api() . 'masterdata/employee/all-employee-detail?companyId=' . $companyId . '&currentPage=' . $currentPage . '&limit=' . $limit
-        );
+        ) ?? [];
 
         $companies = Api::connectApi(
             Path::Api() . 'masterdata/group/company-group?id=' . $groupId
-        );
+        ) ?? [];
 
         $totalEmployee = Employee::totalEmployee($companyId);
         $totalDraft = Employee::totalDraft($companyId);
@@ -380,27 +380,37 @@ class EmployeeController extends Controller
             // Upload Resume
             $fileResume = UploadedFile::getInstanceByName("resume");
             if ($fileResume) {
-                $path = Path::getHost() . 'files/resume/';
-                if (!file_exists($path)) {
-                    mkdir($path, 0777, true);
+                $ext = strtolower($fileResume->extension);
+                if (in_array($ext, ['pdf', 'doc', 'docx'])) {
+                    $path = Path::getHost() . 'files/resume/';
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
+                    $fileName = Yii::$app->security->generateRandomString(10) . '.' . $ext;
+                    $fileResume->saveAs($path . $fileName);
+                    $employee->resume = 'files/resume/' . $fileName;
                 }
-                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $fileResume->extension;
-                $pathSave = $path . $fileName;
-                $fileResume->saveAs($pathSave);
-                $employee->resume = 'files/resume/' . $fileName;
             }
 
             // Upload Agreement
             $fileAgreement = UploadedFile::getInstanceByName("agreement");
             if ($fileAgreement) {
-                $path = Path::getHost() . 'files/agreement/';
-                if (!file_exists($path)) {
-                    mkdir($path, 0777, true);
+                $ext = strtolower($fileAgreement->extension);
+                if (in_array($ext, ['pdf', 'doc', 'docx'])) {
+                    $path = Path::getHost() . 'files/agreement/';
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
+                    $fileName = Yii::$app->security->generateRandomString(10) . '.' . $ext;
+                    $fileAgreement->saveAs($path . $fileName);
+                    $employee->employeeAgreement = 'files/agreement/' . $fileName;
                 }
-                $fileName = Yii::$app->security->generateRandomString(10) . '.' . $fileAgreement->extension;
-                $pathSave = $path . $fileName;
-                $fileAgreement->saveAs($pathSave);
-                $employee->employeeAgreement = 'files/agreement/' . $fileName;
+            }
+
+            $password = $_POST["password"] ?? '';
+            if (strlen($password) < Yii::$app->params['user.passwordMinLength']) {
+                echo json_encode(['status' => 'error', 'message' => 'Password must be at least ' . Yii::$app->params['user.passwordMinLength'] . ' characters']);
+                return;
             }
 
             if ($employee->save(false)) {
@@ -408,7 +418,7 @@ class EmployeeController extends Controller
                 $user = new User();
                 $user->employeeId = $employee->employeeId;
                 $user->username =  $_POST["mailId"] ?? '';   // หรือใช้ companyEmail แทน
-                $user->password_hash = md5($_POST["password"]); // เข้ารหัส
+                $user->password_hash = Yii::$app->security->generatePasswordHash($password);
                 $user->createDateTime = new Expression('NOW()');
                 $user->updateDateTime = new Expression('NOW()');
                 if ($user->save(false)) {
@@ -454,28 +464,32 @@ class EmployeeController extends Controller
                             $fileKey = "certificateHidden_{$tmpId}_0";
                             if (isset($_FILES[$fileKey]) && $_FILES[$fileKey]['error'] === 0) {
                                 $file = $_FILES[$fileKey];
-                                $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-                                $fileName = Yii::$app->security->generateRandomString(12) . '.' . $ext;
-                                $path = Path::getHost() . 'files/certificate/';
-                                if (!file_exists($path)) {
-                                    mkdir($path, 0777, true);
+                                $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                                if (in_array($ext, ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'])) {
+                                    $fileName = Yii::$app->security->generateRandomString(12) . '.' . $ext;
+                                    $path = Path::getHost() . 'files/certificate/';
+                                    if (!file_exists($path)) {
+                                        mkdir($path, 0777, true);
+                                    }
+                                    move_uploaded_file($file['tmp_name'], $path . $fileName);
+                                    $certificatePath = 'files/certificate/' . $fileName;
                                 }
-                                move_uploaded_file($file['tmp_name'], $path . $fileName);
-                                $certificatePath = 'files/certificate/' . $fileName;
                             }
 
                             // 🖼️ อัปโหลด cerImage
                             $imageKey = "cerImageHidden_{$tmpId}";
                             if (isset($_FILES[$imageKey]) && $_FILES[$imageKey]['error'] === 0) {
                                 $img = $_FILES[$imageKey];
-                                $ext = pathinfo($img['name'], PATHINFO_EXTENSION);
-                                $imgName = Yii::$app->security->generateRandomString(12) . '.' . $ext;
-                                $path = Path::getHost() . 'images/certificate/';
-                                if (!file_exists($path)) {
-                                    mkdir($path, 0777, true);
+                                $ext = strtolower(pathinfo($img['name'], PATHINFO_EXTENSION));
+                                if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
+                                    $imgName = Yii::$app->security->generateRandomString(12) . '.' . $ext;
+                                    $path = Path::getHost() . 'images/certificate/';
+                                    if (!file_exists($path)) {
+                                        mkdir($path, 0777, true);
+                                    }
+                                    move_uploaded_file($img['tmp_name'], $path . $imgName);
+                                    $cerImagePath = 'images/certificate/' . $imgName;
                                 }
-                                move_uploaded_file($img['tmp_name'], $path . $imgName);
-                                $cerImagePath = 'images/certificate/' . $imgName;
                             }
 
                             // 🔁 บันทึกข้อมูล (Insert ใหม่ หรือ Update ก็ได้)
@@ -716,7 +730,7 @@ class EmployeeController extends Controller
         }
 
         $user->username = $userName;
-        $user->password_hash = md5($email);
+        $user->password_hash = Yii::$app->security->generatePasswordHash($email);
         $user->employeeId = $employeeId;
         $user->updateDateTime = new Expression('NOW()');
         if ($user->save(false)) {
@@ -938,41 +952,38 @@ class EmployeeController extends Controller
 
                 $fileResume = UploadedFile::getInstanceByName("resume");
                 if (isset($fileResume) && !empty($fileResume)) {
-                    $path = Path::getHost() . 'files/resume/';
-                    if (!file_exists($path)) {
-                        mkdir($path, 0777, true);
+                    $ext = strtolower($fileResume->extension);
+                    if (in_array($ext, ['pdf', 'doc', 'docx'])) {
+                        $path = Path::getHost() . 'files/resume/';
+                        if (!file_exists($path)) {
+                            mkdir($path, 0777, true);
+                        }
+                        $oldResu = Path::getHost() . $oldResume;
+                        if (file_exists($oldResu) && $oldResume != '') {
+                            unlink($oldResu);
+                        }
+                        $fileName = Yii::$app->security->generateRandomString(10) . '.' . $ext;
+                        $fileResume->saveAs($path . $fileName);
+                        $employee->resume = 'files/resume/' . $fileName;
                     }
-                    $oldResu = Path::getHost() . $oldResume;
-                    if (file_exists($oldResu) && $oldResume != '') {
-                        unlink($oldResu);
-                    }
-                    $file = $fileResume->name;
-                    $filenameArray = explode('.', $file);
-                    $countArrayFile = count($filenameArray);
-                    $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
-                    $pathSave = $path . $fileName;
-                    $fileResume->saveAs($pathSave);
-                    $employee->resume = 'files/resume/' . $fileName;
                 }
 
                 $fileAgreement = UploadedFile::getInstanceByName("agreement");
                 if (isset($fileAgreement) && !empty($fileAgreement)) {
-                    //throw new exception("1111");
-                    $path = Path::getHost() . 'files/agreement/';
-                    if (!file_exists($path)) {
-                        mkdir($path, 0777, true);
+                    $ext = strtolower($fileAgreement->extension);
+                    if (in_array($ext, ['pdf', 'doc', 'docx'])) {
+                        $path = Path::getHost() . 'files/agreement/';
+                        if (!file_exists($path)) {
+                            mkdir($path, 0777, true);
+                        }
+                        $oldAgree = Path::getHost() . $oldAgreement;
+                        if (file_exists($oldAgree)) {
+                            unlink($oldAgree);
+                        }
+                        $fileName = Yii::$app->security->generateRandomString(10) . '.' . $ext;
+                        $fileAgreement->saveAs($path . $fileName);
+                        $employee->employeeAgreement = 'files/agreement/' . $fileName;
                     }
-                    $oldAgree = Path::getHost() . $oldAgreement;
-                    if (file_exists($oldAgree)) {
-                        unlink($oldAgree);
-                    }
-                    $file = $fileAgreement->name;
-                    $filenameArray = explode('.', $file);
-                    $countArrayFile = count($filenameArray);
-                    $fileName = Yii::$app->security->generateRandomString(10) . '.' . $filenameArray[$countArrayFile - 1];
-                    $pathSave = $path . $fileName;
-                    $fileAgreement->saveAs($pathSave);
-                    $employee->employeeAgreement = 'files/agreement/' . $fileName;
                 }
 
 
@@ -985,14 +996,9 @@ class EmployeeController extends Controller
                     }
                     $user->username = $_POST["mailId"];
                     $password = $_POST["password"];
-                    if ($password != $user->password_hash) {
-                        $user->password_hash = md5($password);
+                    if (!empty($password) && strlen($password) >= Yii::$app->params['user.passwordMinLength'] && !$user->validatePassword($password)) {
+                        $user->password_hash = Yii::$app->security->generatePasswordHash($password);
                     }
-                    // if (!empty($password)) {
-                    //     // ถ้ายังไม่มี password หรือ validate ไม่ผ่าน ให้ตั้ง password ใหม่
-                    //     if (empty($user->password_hash) || !Yii::$app->security->validatePassword($password, $user->password_hash)) {
-                    //         $user->password_hash = Yii::$app->security->generatePasswordHash($password);
-                    //     }
                     // }
                     $user->updateDateTime = new Expression('NOW()');
                     if ($user->save(false)) {
@@ -1042,14 +1048,16 @@ class EmployeeController extends Controller
                                 $fileKey = "certificateHidden_{$tmpId}_0";
                                 if (isset($_FILES[$fileKey]) && $_FILES[$fileKey]['error'] === 0) {
                                     $file = $_FILES[$fileKey];
-                                    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-                                    $fileName = Yii::$app->security->generateRandomString(12) . '.' . $ext;
-                                    $path = Path::getHost() . 'files/certificate/';
-                                    if (!file_exists($path)) {
-                                        mkdir($path, 0777, true);
+                                    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                                    if (in_array($ext, ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'])) {
+                                        $fileName = Yii::$app->security->generateRandomString(12) . '.' . $ext;
+                                        $path = Path::getHost() . 'files/certificate/';
+                                        if (!file_exists($path)) {
+                                            mkdir($path, 0777, true);
+                                        }
+                                        move_uploaded_file($file['tmp_name'], $path . $fileName);
+                                        $certificatePath = 'files/certificate/' . $fileName;
                                     }
-                                    move_uploaded_file($file['tmp_name'], $path . $fileName);
-                                    $certificatePath = 'files/certificate/' . $fileName;
                                 }
 
                                 // 🖼️ อัปโหลด cerImage
@@ -2139,7 +2147,7 @@ class EmployeeController extends Controller
                     $email = $emailArr[0];
                     $newUser = new User();
                     $newUser->username = $employee["companyEmail"];
-                    $newUser->password_hash = md5($email);
+                    $newUser->password_hash = Yii::$app->security->generatePasswordHash($email);
                     $newUser->employeeId = $employee["employeeId"];
                     $newUser->status = 1;
                     $newUser->createDateTime = new Expression('NOW()');
@@ -2216,7 +2224,7 @@ class EmployeeController extends Controller
                 $user = User::find()->where(["status" => 1, "username" => $em["companyEmail"]])->one();
                 if (isset($user) && !empty($user)) {
                     $passwordArr = explode('@', $user->username);
-                    $user->password_hash = md5($passwordArr[0]);
+                    $user->password_hash = Yii::$app->security->generatePasswordHash($passwordArr[0]);
                     $user->save(false);
                 }
             endforeach;

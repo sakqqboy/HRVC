@@ -7,7 +7,7 @@ use Yii;
 /**
 * This is the model class for table "user_access".
 *
-    * @property integer $acessId
+    * @property integer $accessId
     * @property integer $userId
     * @property integer $moduleId
     * @property string $status
@@ -42,7 +42,7 @@ return [
 public function attributeLabels()
 {
 return [
-    'acessId' => 'Acess ID',
+    'accessId' => 'Acess ID',
     'userId' => 'User ID',
     'moduleId' => 'Module ID',
     'status' => 'Status',

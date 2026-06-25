@@ -427,7 +427,7 @@ class EmployeeController extends Controller
 		$employee = Employee::findOne($id);
 		$userId = $employee->user->userId;
 		$userAccess = UserAccess::find()
-			->select(['acessId', 'moduleId', 'userId'])
+			->select(['accessId', 'moduleId', 'userId'])
 			->where(['userId' => $userId])
 			->asArray()
 			->all();

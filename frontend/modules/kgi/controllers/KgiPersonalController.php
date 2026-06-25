@@ -479,7 +479,7 @@ class KgiPersonalController extends Controller
 			$history->createrId = Yii::$app->user->id;
 			if ($history->save(false)) {
 				if ($_POST["url"] != Yii::$app->request->referrer) {
-					return $this->redirect($_POST["url"]);
+					return $this->redirect(Path::safeUrl($_POST["url"]));
 				} else {
 					return $this->redirect(Yii::$app->homeUrl . 'kgi/kgi-personal/individual-kgi-grid');
 				}
@@ -1104,15 +1104,15 @@ class KgiPersonalController extends Controller
 				$kgiRequest->updated_at = new Expression('NOW()');
 
 				if ($kgiRequest->save(false)) {
-					return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
+					return $this->redirect(Path::safeUrl($_POST["url"] ?? ''));
 				} else {
 					Yii::$app->session->setFlash('error', Yii::t('app', 'Failed to save request.'));
-					return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
+					return $this->redirect(Path::safeUrl($_POST["url"] ?? ''));
 				}
 			}
 		}
 
 		// Redirect กลับไปหน้าเดิม (ใช้ค่า URL จากฟอร์มเหมือนโค้ดเดิม)
-		// return $this->redirect($_POST["url"] ?? Yii::$app->homeUrl);
+		// return $this->redirect(Path::safeUrl($_POST["url"] ?? ''));
 	}
 }

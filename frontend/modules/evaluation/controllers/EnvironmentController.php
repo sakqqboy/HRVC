@@ -71,7 +71,7 @@ class EnvironmentController extends Controller
 			$environment->createDateTime = new Expression('NOW()');
 			$environment->updateDateTime = new Expression('NOW()');
 			if ($environment->save(false)) {
-				return $this->redirect($_POST["previousUrl"]);
+				return $this->redirect(Path::safeUrl($_POST["previousUrl"] ?? ''));
 			}
 		}
 		return $this->render('index', [
@@ -146,7 +146,7 @@ class EnvironmentController extends Controller
 				}
 			}
 		}
-		return $this->redirect($_POST["previousUrl"]);
+		return $this->redirect(Path::safeUrl($_POST["previousUrl"] ?? ''));
 	}
 	public function actionEnvironmentFrame()
 	{

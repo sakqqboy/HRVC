@@ -52,4 +52,16 @@ class Path
 		}
 		return $url;
 	}
+
+	public static function safeUrl($url, $fallback = null)
+	{
+		if (empty($url)) {
+			return $fallback ?? Yii::$app->homeUrl;
+		}
+		$parsed = parse_url($url);
+		if (!isset($parsed['host']) || $parsed['host'] === Yii::$app->request->hostName) {
+			return $url;
+		}
+		return $fallback ?? Yii::$app->homeUrl;
+	}
 }

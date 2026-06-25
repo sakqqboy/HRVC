@@ -8,7 +8,7 @@ use \frontend\models\hrvc\master\UserAccessMaster;
 /**
 * This is the model class for table "user_access".
 *
-* @property integer $acessId
+* @property integer $accessId
 * @property integer $userId
 * @property integer $moduleId
 * @property integer $status

@@ -128,6 +128,14 @@ class User extends \frontend\models\hrvc\master\UserMaster
         }
         return '';
     }
+    public function validatePassword($password)
+    {
+        if (strlen($this->password_hash) === 32 && ctype_xdigit($this->password_hash)) {
+            return md5($password) === $this->password_hash;
+        }
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
+    }
+
     public static function userIdByEmployeeId($employeeId)
     {
         $user = User::find()->select('userId')
